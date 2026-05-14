@@ -4,9 +4,23 @@ from sqlalchemy.orm import sessionmaker
 
 from models import Base
 
-engine = create_engine(os.environ["DATABASE_URL"])
-SessionLocal = sessionmaker(bind=engine)
+_engine = None
+_SessionLocal = None
+
+
+def get_engine():
+    global _engine
+    if _engine is None:
+        _engine = create_engine(os.environ["DATABASE_URL"])
+    return _engine
+
+
+def get_session():
+    global _SessionLocal
+    if _SessionLocal is None:
+        _SessionLocal = sessionmaker(bind=get_engine())
+    return _SessionLocal()
 
 
 def init_db():
-    Base.metadata.create_all(engine)
+    Base.metadata.create_all(get_engine())
