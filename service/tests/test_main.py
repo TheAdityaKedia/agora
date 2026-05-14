@@ -80,3 +80,14 @@ def test_save_events_saves_correct_fields(db_session):
     assert event.title == "Test Event"
     assert event.source == "greenapplebooks.com"
     assert event.url == "https://greenapplebooks.com/event/1"
+
+
+def test_save_events_skips_duplicate_title_and_date(db_session):
+    # same event submitted via a different source (e.g. email/screenshot) with a different URL
+    original = _make_raw_event(url="https://greenapplebooks.com/event/1")
+    duplicate = _make_raw_event(url="https://differenturl.com/event/99")
+    save_events([original], source="greenapplebooks.com")
+    saved, skipped = save_events([duplicate], source="email")
+    assert saved == 0
+    assert skipped == 1
+    assert db_session.query(Event).count() == 1

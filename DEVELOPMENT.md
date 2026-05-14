@@ -35,6 +35,24 @@ CDK infrastructure is added incrementally alongside each phase — no big-bang i
 - **AI at the edges.** Bedrock handles unstructured input. Structured sources are parsed directly.
 - **Portable.** Everything containerized, all infra as code, no manual console steps. Moving to a new AWS account means `cdk deploy`.
 
+## Design decisions
+
+**Deduplication strategy**
+Events are deduplicated in two layers:
+1. Exact URL match — catches the same event re-scraped from the same source
+2. Title + start_time match — catches the same event arriving via a different channel (e.g. a screenshot or forwarded email of an event already scraped from the website)
+
+A third layer — fuzzy/semantic title matching — is deferred to Phase 4/5 when Bedrock is available. OCR from flyer images may produce slightly different wording (e.g. truncated titles), and semantic similarity via Bedrock is the right tool for that case.
+
+**Location as a single string**
+Location is stored as a single unstructured string for now (e.g. `"Books on the Park on 9th Avenue, 1231 9th Ave., San Francisco, CA 94122"`). Splitting into `venue_name`, `address`, `city`, etc. is deferred until we have enough real data to know what the right schema is across multiple sources.
+
+**No Celery in Phase 1**
+The scraper runs as a simple Python script (`main.py`) triggered by a scheduler. The `scrape_and_save()` function is deliberately isolated so it can be moved into a Celery task in Phase 3 with minimal changes.
+
+**requests + BeautifulSoup for Green Apple, Playwright deferred to Phase 2**
+Green Apple Books serves server-rendered HTML — no headless browser needed. City Lights (Sucuri WAF) and Black Bird SF (Shopify, JS-rendered) both require Playwright, which adds ~100MB of headless Chromium. Keeping Phase 1 lean by deferring Playwright until Phase 2.
+
 ## Current status
 
 **Phase 0 — Design** ✓
@@ -43,4 +61,4 @@ Repo initialized. Vision and phases agreed. README and development notes written
 
 **Phase 1 — In progress**
 
-Next: write `service/data/sources.txt`, scaffold service skeleton, build Green Apple scraper.
+Scraper, database, and API all working. 11 events scraped from Green Apple Books and served via the API. Deduplication by URL and title+date in place. Next: scheduler.

@@ -14,17 +14,27 @@ def load_sources() -> list[str]:
     return [line.strip() for line in SOURCES_FILE.read_text().splitlines() if line.strip()]
 
 
-def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
-    """Persist raw events to the database, skipping duplicates by URL.
+def _is_duplicate(session, raw: RawEvent) -> bool:
+    # Primary: exact URL match
+    if session.query(Event).filter_by(url=raw.url).first():
+        return True
+    # Secondary: same title + same start_time (catches email/screenshot submissions of known events)
+    if session.query(Event).filter_by(title=raw.title, start_time=raw.start_time).first():
+        return True
+    return False
 
+
+def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
+    """Persist raw events to the database, skipping duplicates.
+
+    Deduplicates by URL first, then by title + start_time.
     Returns (saved, skipped) counts.
     """
     session = get_session()
     saved = skipped = 0
     try:
         for raw in raw_events:
-            exists = session.query(Event).filter_by(url=raw.url).first()
-            if exists:
+            if _is_duplicate(session, raw):
                 skipped += 1
                 continue
             session.add(Event(
