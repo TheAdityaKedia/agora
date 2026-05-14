@@ -27,11 +27,13 @@ def _parse_datetime(date_str: str, time_str: str) -> datetime | None:
         return None
 
 
-def _extract_field(row, label: str) -> str | None:
-    for p in row.find_all("p"):
-        text = p.get_text(strip=True)
-        if text.startswith(label):
-            return text[len(label):].strip()
+def _extract_detail(row, label: str) -> str | None:
+    for item in row.select("div.event-list__details--item"):
+        lbl = item.find("span", class_="event-list__details--label")
+        if lbl and label in lbl.get_text():
+            # remove the label span then return remaining text
+            lbl.extract()
+            return item.get_text(separator=" ", strip=True)
     return None
 
 
@@ -42,7 +44,7 @@ def scrape(url: str) -> list[RawEvent]:
 
     events = []
     for row in soup.select("div.views-row"):
-        title_tag = row.find("h3")
+        title_tag = row.find("h3", class_="event-list__title")
         if not title_tag:
             continue
 
@@ -53,9 +55,14 @@ def scrape(url: str) -> list[RawEvent]:
         title = link.get_text(strip=True)
         event_url = urljoin(BASE_URL, link["href"])
 
-        date_str = _extract_field(row, "Date:")
-        time_str = _extract_field(row, "Time:")
-        location = _extract_field(row, "Place:")
+        date_str = _extract_detail(row, "Date:")
+        time_str = _extract_detail(row, "Time:")
+
+        description_tag = row.find("div", class_="event-list__body")
+        description = description_tag.get_text(strip=True) if description_tag else None
+
+        location_tag = row.find("address")
+        location = location_tag.get_text(separator=", ", strip=True) if location_tag else None
 
         if not date_str or not time_str:
             continue
@@ -69,7 +76,7 @@ def scrape(url: str) -> list[RawEvent]:
             start_time=start_time,
             location=location,
             url=event_url,
-            description=None,
+            description=description,
         ))
 
     return events
