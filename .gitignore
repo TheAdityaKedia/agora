@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+*.env
+.env.*
+
+# CDK
+cdk/cdk.out/
+cdk/.venv/
+cdk/node_modules/
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.pem
+*.key
+credentials.json
+token.json
+
+# Alembic
+*.pyc
+
+# Test
+.pytest_cache/
+.coverage
+htmlcov/
