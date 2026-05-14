@@ -11,8 +11,9 @@ build/
 .venv/
 venv/
 env/
-*.env
-.env.*
+.env
+.env.local
+.env.*.local
 
 # CDK
 cdk/cdk.out/
