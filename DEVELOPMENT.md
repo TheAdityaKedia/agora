@@ -9,7 +9,9 @@ In the long run: any website can be a source, events flow in from scrapers, emai
 ## Phases
 
 **Phase 1 — Green Apple Books, database, API**
-One scraper (Green Apple Books) using `requests` + BeautifulSoup (server-rendered HTML). PostgreSQL database, REST API (FastAPI). Prove the pipeline end to end: fetch page → parse events → store → serve via API.
+One scraper (Green Apple Books) using a headless-browser fetch (Playwright) + BeautifulSoup parsing. PostgreSQL database, REST API (FastAPI). Prove the pipeline end to end: fetch page → parse events → store → serve via API.
+
+> Note: Green Apple was originally plain server-rendered HTML scrapable with `requests`, and Playwright was deferred to Phase 2. As of 2026-09-04 the site moved behind Cloudflare's managed-challenge bot protection (plain `requests` now gets a 403), so Playwright was brought forward into Phase 1 for this source. See the design decision below.
 
 **Phase 2 — Playwright + City Lights + Black Bird SF**
 Introduce Playwright for JS-rendered and WAF-protected sites. Add City Lights Books (WordPress + Sucuri) and Black Bird SF (Shopify).
@@ -50,8 +52,8 @@ Location is stored as a single unstructured string for now (e.g. `"Books on the 
 **No Celery in Phase 1**
 The scraper runs as a simple Python script (`main.py`) triggered by a scheduler. The `scrape_and_save()` function is deliberately isolated so it can be moved into a Celery task in Phase 3 with minimal changes.
 
-**requests + BeautifulSoup for Green Apple, Playwright deferred to Phase 2**
-Green Apple Books serves server-rendered HTML — no headless browser needed. City Lights (Sucuri WAF) and Black Bird SF (Shopify, JS-rendered) both require Playwright, which adds ~100MB of headless Chromium. Keeping Phase 1 lean by deferring Playwright until Phase 2.
+**Playwright for Green Apple (brought forward from Phase 2)**
+Green Apple originally served plain server-rendered HTML, so Phase 1 used `requests` + BeautifulSoup and Playwright was deferred to Phase 2. As of 2026-09-04 the site is behind Cloudflare's managed challenge (`cf-mitigated: challenge`), and `requests` gets a 403. A headless Chromium via Playwright clears the challenge, so the fetch step now uses Playwright while parsing stays plain BeautifulSoup. The scraper is split into `fetch()` (browser, live only) and `parse()` (pure, unit-tested against fixture HTML) so tests don't need the browser. City Lights (Sucuri WAF) and Black Bird SF (Shopify, JS-rendered) will reuse the same headless-fetch approach in Phase 2.
 
 ## Current status
 
@@ -61,4 +63,4 @@ Repo initialized. Vision and phases agreed. README and development notes written
 
 **Phase 1 — In progress**
 
-Scraper, database, and API all working. 11 events scraped from Green Apple Books and served via the API. Deduplication by URL and title+date in place. Next: scheduler.
+Scraper, database, and API all working end to end. Green Apple is fetched via headless Playwright (Cloudflare-protected) and parsed with BeautifulSoup; events are persisted and served via the API. Deduplication by URL and title+start_time in place. `start_time` is stored tz-aware (source-local → UTC); `url` is now nullable (email/flyer submissions have no URL) with a partial unique index enforcing uniqueness only for non-null URLs. Next: scheduler.

@@ -6,6 +6,7 @@ pydantic==2.13.4
 requests==2.34.1
 beautifulsoup4==4.14.3
 httpx==0.28.1
+playwright==1.49.1
 
 # dev / test
 pytest==9.0.3

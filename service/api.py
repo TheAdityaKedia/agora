@@ -15,7 +15,7 @@ class EventResponse(BaseModel):
     title: str
     start_time: datetime
     location: str | None
-    url: str
+    url: str | None
     description: str | None
     source: str
     created_at: datetime

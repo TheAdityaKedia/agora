@@ -42,6 +42,11 @@ Thumbs.db
 credentials.json
 token.json
 
+# Local SQLite (used for running without Postgres)
+*.db
+*.sqlite
+*.sqlite3
+
 # Alembic
 *.pyc
 

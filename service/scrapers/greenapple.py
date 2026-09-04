@@ -1,12 +1,24 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import urljoin
+from zoneinfo import ZoneInfo
 
-import requests
 from bs4 import BeautifulSoup
 
 
 BASE_URL = "https://greenapplebooks.com"
+# Green Apple lists times in local (San Francisco) time with no tz marker.
+SOURCE_TZ = ZoneInfo("America/Los_Angeles")
+
+# Green Apple is behind Cloudflare's managed-challenge bot protection, so a plain
+# requests.get() gets a 403. We drive a headless browser to solve the JS challenge,
+# then hand the rendered HTML to the same BeautifulSoup parser.
+BROWSER_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+)
+# Seconds to let Cloudflare's challenge JS run before reading page content.
+CHALLENGE_WAIT_MS = 6000
 
 
 @dataclass
@@ -22,7 +34,9 @@ def _parse_datetime(date_str: str, time_str: str) -> datetime | None:
     # date_str: "Mon, 5/4/2026"  time_str: "7:00pm"
     try:
         date_part = date_str.split(", ", 1)[-1].strip()  # "5/4/2026"
-        return datetime.strptime(f"{date_part} {time_str.strip()}", "%m/%d/%Y %I:%M%p")
+        naive = datetime.strptime(f"{date_part} {time_str.strip()}", "%m/%d/%Y %I:%M%p")
+        # Interpret as San Francisco local time, store canonical UTC.
+        return naive.replace(tzinfo=SOURCE_TZ).astimezone(timezone.utc)
     except ValueError:
         return None
 
@@ -37,10 +51,36 @@ def _extract_detail(row, label: str) -> str | None:
     return None
 
 
-def scrape(url: str) -> list[RawEvent]:
-    response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.text, "html.parser")
+def fetch(url: str) -> str:
+    """Return the fully rendered HTML for `url`, clearing Cloudflare's challenge.
+
+    Uses a headless Chromium via Playwright. Imported lazily so unit tests that
+    parse fixture HTML don't require the browser to be installed.
+    """
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        try:
+            context = browser.new_context(
+                user_agent=BROWSER_UA,
+                viewport={"width": 1280, "height": 800},
+                locale="en-US",
+            )
+            page = context.new_page()
+            page.goto(url, wait_until="domcontentloaded", timeout=45000)
+            page.wait_for_timeout(CHALLENGE_WAIT_MS)
+            return page.content()
+        finally:
+            browser.close()
+
+
+def parse(html: str) -> list[RawEvent]:
+    """Parse Green Apple's events-page HTML into RawEvents.
+
+    Pure and browser-free so it can be unit-tested against fixture HTML.
+    """
+    soup = BeautifulSoup(html, "html.parser")
 
     events = []
     for row in soup.select("div.views-row"):
@@ -80,3 +120,7 @@ def scrape(url: str) -> list[RawEvent]:
         ))
 
     return events
+
+
+def scrape(url: str) -> list[RawEvent]:
+    return parse(fetch(url))

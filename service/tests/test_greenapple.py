@@ -1,10 +1,10 @@
 from pathlib import Path
 from datetime import datetime
-from unittest.mock import patch, MagicMock
+from zoneinfo import ZoneInfo
 
 import pytest
 
-from scrapers.greenapple import scrape, RawEvent
+from scrapers.greenapple import parse, RawEvent
 
 FIXTURE = Path(__file__).parent / "fixtures" / "greenapple_events.html"
 
@@ -15,13 +15,8 @@ def html():
 
 
 def mock_scrape(html_content):
-    """Helper: run scrape() with HTTP call replaced by fixture HTML."""
-    mock_response = MagicMock()
-    mock_response.text = html_content
-    mock_response.raise_for_status = MagicMock()
-
-    with patch("scrapers.greenapple.requests.get", return_value=mock_response):
-        return scrape("https://greenapplebooks.com/events")
+    """Helper: parse fixture HTML directly, bypassing the browser fetch."""
+    return parse(html_content)
 
 
 def test_scrape_returns_list(html):
@@ -49,7 +44,8 @@ def test_event_title(html):
 
 def test_event_start_time(html):
     events = mock_scrape(html)
-    assert events[0].start_time == datetime(2026, 5, 4, 19, 0)
+    # 7:00pm San Francisco time, stored as tz-aware UTC
+    assert events[0].start_time == datetime(2026, 5, 4, 19, 0, tzinfo=ZoneInfo("America/Los_Angeles"))
 
 
 def test_event_url_is_absolute(html):

@@ -26,11 +26,14 @@ agora/
 
 ## Running locally
 
+Requires a Docker runtime (Docker Desktop, or Colima: `brew install colima docker docker-compose && colima start`).
+
 ```bash
-cd service
-cp .env.example .env   # fill in credentials
-docker compose up
+docker compose up -d db api   # Postgres + API (http://localhost:8000, docs at /docs)
+docker compose run --rm scraper   # run the scraper once
 ```
+
+Stop with `docker compose down` (add `-v` to also wipe the database volume).
 
 ## Deploying to AWS
 
