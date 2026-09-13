@@ -26,7 +26,7 @@ services:
       DATABASE_URL: postgresql://agora:agora@db:5432/agora
       EVENTS_JSON_PATH: /out/events.json
     volumes:
-      - ./out:/out
+      - ./frontend:/out
     depends_on:
       - db
 

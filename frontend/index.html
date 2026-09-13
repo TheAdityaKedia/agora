@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agora — SF Events</title>
+<style>
+  :root {
+    --fg: #1a1a1a;
+    --muted: #666;
+    --accent: #0057b7;
+    --bg: #fafaf7;
+    --border: #e5e5e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #e8e8e8; --muted: #999; --accent: #7ab7ff; --bg: #111; --border: #2a2a2a; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--fg); background: var(--bg);
+    max-width: 720px; margin: 0 auto; padding: 24px;
+    line-height: 1.5;
+  }
+  header { margin-bottom: 24px; }
+  h1 { margin: 0; font-size: 32px; letter-spacing: -0.02em; }
+  .subtitle { color: var(--muted); margin-top: 4px; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 12px; }
+  h2.date {
+    margin: 32px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); font-weight: 600;
+  }
+  .event {
+    display: flex; gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .event:last-child { border-bottom: none; }
+  .time {
+    flex: 0 0 72px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    padding-top: 2px;
+  }
+  .details { flex: 1; min-width: 0; }
+  .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
+  .title a:hover { color: var(--accent); text-decoration: underline; }
+  .location, .source { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .empty, .error {
+    color: var(--muted); text-align: center; padding: 48px 0;
+  }
+  .error { color: #c33; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Agora</h1>
+  <div class="subtitle">SF events, one calendar.</div>
+  <div class="meta" id="meta"></div>
+</header>
+<main id="list"><div class="empty">Loading…</div></main>
+
+<script>
+(async () => {
+  const list = document.getElementById("list");
+  const meta = document.getElementById("meta");
+
+  let data;
+  try {
+    const resp = await fetch("./events.json", { cache: "no-cache" });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    data = await resp.json();
+  } catch (e) {
+    list.innerHTML = '<div class="error">Couldn’t load events.json — ' + escapeHtml(e.message) + "</div>";
+    return;
+  }
+
+  const events = data.events || [];
+  if (events.length === 0) {
+    list.innerHTML = '<div class="empty">No upcoming events.</div>';
+    return;
+  }
+
+  const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+  const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
+
+  meta.textContent = events.length + " upcoming events · updated "
+    + new Date(data.generated_at).toLocaleString();
+
+  // Group by local calendar day
+  const groups = new Map();
+  for (const ev of events) {
+    const d = new Date(ev.start_time);
+    const key = d.toDateString();
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(ev);
+  }
+
+  const parts = [];
+  for (const [key, dayEvents] of groups) {
+    parts.push('<h2 class="date">' + escapeHtml(dateFmt.format(new Date(key))) + "</h2>");
+    for (const ev of dayEvents) {
+      const t = new Date(ev.start_time);
+      const time = escapeHtml(timeFmt.format(t));
+      const title = escapeHtml(ev.title);
+      const titleHtml = ev.url
+        ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
+        : title;
+      const loc = ev.location ? '<div class="location">' + escapeHtml(ev.location) + "</div>" : "";
+      const src = '<div class="source">' + escapeHtml(ev.source) + "</div>";
+      parts.push(
+        '<div class="event">' +
+          '<div class="time">' + time + "</div>" +
+          '<div class="details">' +
+            '<div class="title">' + titleHtml + "</div>" +
+            loc + src +
+          "</div>" +
+        "</div>"
+      );
+    }
+  }
+  list.innerHTML = parts.join("");
+})();
+
+function escapeHtml(s) {
+  return s == null ? "" : String(s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+</script>
+</body>
+</html>
