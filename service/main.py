@@ -1,13 +1,19 @@
-from datetime import datetime, timezone
+import os
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from config import LOOKAHEAD_DAYS
 from db import init_db, get_session
+from exporters.json_export import export_json
 from models import Event
 from scrapers import greenapple
 from scrapers.greenapple import RawEvent
 
 
 SOURCES_FILE = Path(__file__).parent / "data" / "sources.txt"
+# Where the static-site manifest is written after each run. Override with the
+# EVENTS_JSON_PATH env var (e.g. GitHub Actions writes into the frontend dir).
+DEFAULT_EVENTS_JSON = Path(__file__).parent / "data" / "events.json"
 
 
 def load_sources() -> list[str]:
@@ -25,15 +31,21 @@ def _is_duplicate(session, raw: RawEvent) -> bool:
 
 
 def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
-    """Persist raw events to the database, skipping duplicates.
+    """Persist raw events to the database, skipping duplicates and out-of-horizon events.
 
     Deduplicates by URL first, then by title + start_time.
+    Also drops events whose start_time is past `now + LOOKAHEAD_DAYS` — belt
+    and suspenders for scrapers that don't cap their own pagination.
     Returns (saved, skipped) counts.
     """
+    horizon = datetime.now(timezone.utc) + timedelta(days=LOOKAHEAD_DAYS)
     session = get_session()
     saved = skipped = 0
     try:
         for raw in raw_events:
+            if raw.start_time > horizon:
+                skipped += 1
+                continue
             if _is_duplicate(session, raw):
                 skipped += 1
                 continue
@@ -69,6 +81,9 @@ def run():
     init_db()
     for url in load_sources():
         scrape_and_save(url)
+    out = Path(os.environ.get("EVENTS_JSON_PATH", DEFAULT_EVENTS_JSON))
+    count = export_json(out)
+    print(f"[export] wrote {count} upcoming events to {out}")
 
 
 if __name__ == "__main__":

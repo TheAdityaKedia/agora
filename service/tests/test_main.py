@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import patch
 
@@ -6,6 +6,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from config import LOOKAHEAD_DAYS
 from main import load_sources, save_events
 from models import Base, Event
 from scrapers.greenapple import RawEvent
@@ -51,7 +52,7 @@ def test_load_sources_multiple(tmp_path):
 def _make_raw_event(url="https://greenapplebooks.com/event/1") -> RawEvent:
     return RawEvent(
         title="Test Event",
-        start_time=datetime(2026, 6, 1, 19, 0),
+        start_time=datetime(2026, 6, 1, 19, 0, tzinfo=timezone.utc),
         location="1231 9th Ave, San Francisco",
         url=url,
         description=None,
@@ -91,3 +92,17 @@ def test_save_events_skips_duplicate_title_and_date(db_session):
     assert saved == 0
     assert skipped == 1
     assert db_session.query(Event).count() == 1
+
+
+def test_save_events_drops_events_past_horizon(db_session):
+    far_future = datetime.now(timezone.utc) + timedelta(days=LOOKAHEAD_DAYS + 30)
+    within = datetime.now(timezone.utc) + timedelta(days=30)
+    raw_far = RawEvent(title="Far future", start_time=far_future, location=None,
+                       url="https://example.com/far", description=None)
+    raw_near = RawEvent(title="Near", start_time=within, location=None,
+                        url="https://example.com/near", description=None)
+    saved, skipped = save_events([raw_far, raw_near], source="test")
+    assert saved == 1
+    assert skipped == 1
+    titles = [e.title for e in db_session.query(Event).all()]
+    assert titles == ["Near"]

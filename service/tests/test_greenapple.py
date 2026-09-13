@@ -4,7 +4,7 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from scrapers.greenapple import parse, RawEvent
+from scrapers.greenapple import parse, find_next_month_url, _first_of_month_from_url, RawEvent
 
 FIXTURE = Path(__file__).parent / "fixtures" / "greenapple_events.html"
 
@@ -57,3 +57,28 @@ def test_event_url_is_absolute(html):
 def test_event_location(html):
     events = mock_scrape(html)
     assert "1231 9th Ave" in events[0].location
+
+
+def test_find_next_month_url_present():
+    html = '<html><body><a href="/events/2026/10">Next Month</a></body></html>'
+    assert find_next_month_url(html) == "https://greenapplebooks.com/events/2026/10"
+
+
+def test_find_next_month_url_absent():
+    html = '<html><body><a href="/events/2026/08">Previous Month</a></body></html>'
+    assert find_next_month_url(html) is None
+
+
+def test_first_of_month_from_url_parses_absolute():
+    from datetime import date
+    assert _first_of_month_from_url("https://greenapplebooks.com/events/2027/03") == date(2027, 3, 1)
+
+
+def test_first_of_month_from_url_parses_relative():
+    from datetime import date
+    assert _first_of_month_from_url("/events/2026/12/") == date(2026, 12, 1)
+
+
+def test_first_of_month_from_url_rejects_non_month_urls():
+    assert _first_of_month_from_url("https://greenapplebooks.com/events") is None
+    assert _first_of_month_from_url("https://greenapplebooks.com/event/2026-09-10/some-slug") is None
