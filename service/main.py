@@ -6,8 +6,13 @@ from config import LOOKAHEAD_DAYS
 from db import init_db, get_session
 from exporters.json_export import export_json
 from models import Event
-from scrapers import greenapple
-from scrapers.greenapple import RawEvent
+from scrapers import citylights, greenapple
+from scrapers.base import RawEvent
+
+# Each scraper is a strategy module exposing matches(url), scrape(url), SOURCE.
+# Dispatch picks the first whose matches() accepts the URL — add a source by
+# writing its module and appending it here, no conditionals to edit.
+SCRAPERS = [greenapple, citylights]
 
 
 SOURCES_FILE = Path(__file__).parent / "data" / "sources.txt"
@@ -69,12 +74,13 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
 
 
 def scrape_and_save(url: str) -> None:
-    if "greenapplebooks.com" in url:
-        raw_events = greenapple.scrape(url)
-        saved, skipped = save_events(raw_events, source="greenapplebooks.com")
-        print(f"[greenapple] {saved} saved, {skipped} skipped")
-    else:
-        print(f"[warn] no scraper for {url}")
+    for scraper in SCRAPERS:
+        if scraper.matches(url):
+            raw_events = scraper.scrape(url)
+            saved, skipped = save_events(raw_events, source=scraper.SOURCE)
+            print(f"[{scraper.SOURCE}] {saved} saved, {skipped} skipped")
+            return
+    print(f"[warn] no scraper for {url}")
 
 
 def run():

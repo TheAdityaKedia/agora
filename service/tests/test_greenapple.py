@@ -4,7 +4,8 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from scrapers.greenapple import parse, find_next_month_url, _first_of_month_from_url, RawEvent
+from scrapers.base import RawEvent
+from scrapers.greenapple import parse, find_next_month_url, _first_of_month_from_url
 
 FIXTURE = Path(__file__).parent / "fixtures" / "greenapple_events.html"
 

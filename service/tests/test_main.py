@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from config import LOOKAHEAD_DAYS
 from main import load_sources, save_events
 from models import Base, Event
-from scrapers.greenapple import RawEvent
+from scrapers.base import RawEvent
 
 
 @pytest.fixture
