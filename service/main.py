@@ -9,8 +9,8 @@ from exporters.json_export import export_json
 from models import Event
 from scrapers import (
     actsf, atgtickets, berkeleyrep, blackbird, brava, citylights, fillmore,
-    gamh, greatstar, greenapple, independent, magictheatre, nctcsf,
-    presidio, sfjazz, ybca,
+    gamh, greatstar, greenapple, independent, magictheatre, nctcsf, palace,
+    presidio, sfjazz, sfwarmemorial, warfield, ybca,
 )
 from scrapers.base import RawEvent
 
@@ -21,6 +21,7 @@ SCRAPERS = [
     greenapple, citylights, blackbird, atgtickets, actsf,
     berkeleyrep, sfjazz, fillmore, gamh, ybca, independent,
     nctcsf, brava, magictheatre, greatstar, presidio,
+    warfield, palace, sfwarmemorial,
 ]
 
 

@@ -8,7 +8,9 @@ from pathlib import Path
 import pytest
 
 from scrapers.base import RawEvent
-from scrapers import brava, greatstar, magictheatre, nctcsf, presidio
+from scrapers import (
+    brava, greatstar, magictheatre, nctcsf, palace, presidio, sfwarmemorial, warfield,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -18,6 +20,9 @@ CASES = [
     ("magic", magictheatre, "https://magictheatre.org/calendar", "https://nctcsf.org/"),
     ("greatstar", greatstar, "https://www.greatstartheater.org/", "https://magictheatre.org/"),
     ("presidio", presidio, "https://www.presidiotheatre.org/shows", "https://ybca.org/"),
+    ("warfield", warfield, "https://www.thewarfieldtheatre.com/events", "https://gamh.com/"),
+    ("palace", palace, "https://www.palaceoffinearts.org/", "https://ybca.org/"),
+    ("sfwarmemorial", sfwarmemorial, "https://sfwarmemorial.org/calendar/", "https://ybca.org/"),
 ]
 
 
