@@ -49,20 +49,45 @@
     color: var(--muted); font-weight: 600;
     flex: 0 0 60px;
   }
-  .chip {
-    display: inline-flex; align-items: center; gap: 4px;
+  .dropdown { position: relative; }
+  .dropdown > summary {
+    list-style: none; cursor: pointer; user-select: none;
+    display: inline-flex; align-items: center; gap: 6px;
     padding: 4px 10px; border-radius: 999px;
     background: var(--chip-bg); color: var(--fg);
-    font-size: 13px; cursor: pointer; user-select: none;
-    border: 1px solid transparent;
+    font-size: 13px; border: 1px solid var(--border);
   }
-  .chip:hover { border-color: var(--border); }
-  .chip.active {
-    background: var(--accent); color: var(--accent-fg);
-    border-color: var(--accent);
+  .dropdown > summary::-webkit-details-marker { display: none; }
+  .dropdown > summary::after {
+    content: "▾"; font-size: 10px; opacity: 0.6;
   }
-  .chip .count {
-    font-size: 11px; opacity: 0.7;
+  .dropdown[open] > summary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .dropdown-panel {
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 10;
+    min-width: 240px;
+    background: var(--input-bg); color: var(--fg);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px; display: flex; flex-direction: column; gap: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .dropdown-bulk {
+    display: flex; gap: 6px; padding: 4px 4px 8px;
+    border-bottom: 1px solid var(--border); margin-bottom: 4px;
+  }
+  .dropdown-bulk button {
+    padding: 3px 8px; border-radius: 6px;
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+    font-size: 12px; cursor: pointer;
+  }
+  .dropdown-bulk button:hover { color: var(--fg); }
+  .dropdown-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 6px; border-radius: 6px; cursor: pointer;
+    font-size: 13px;
+  }
+  .dropdown-item:hover { background: var(--chip-bg); }
+  .dropdown-item .count {
+    margin-left: auto; font-size: 11px; color: var(--muted);
     font-variant-numeric: tabular-nums;
   }
   .date-input {
@@ -109,7 +134,16 @@
 <section class="filters" id="filters" hidden>
   <div class="filter-row">
     <span class="filter-label">Sources</span>
-    <div id="source-chips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    <details class="dropdown" id="source-dropdown">
+      <summary id="source-summary">Loading…</summary>
+      <div class="dropdown-panel">
+        <div class="dropdown-bulk">
+          <button type="button" id="select-all">Select all</button>
+          <button type="button" id="deselect-all">Deselect all</button>
+        </div>
+        <div id="source-list"></div>
+      </div>
+    </details>
   </div>
   <div class="filter-row">
     <span class="filter-label">Dates</span>
@@ -130,7 +164,10 @@
   const list = document.getElementById("list");
   const meta = document.getElementById("meta");
   const filters = document.getElementById("filters");
-  const chipsEl = document.getElementById("source-chips");
+  const sourceListEl = document.getElementById("source-list");
+  const summaryEl = document.getElementById("source-summary");
+  const selectAllEl = document.getElementById("select-all");
+  const deselectAllEl = document.getElementById("deselect-all");
   const fromEl = document.getElementById("date-from");
   const toEl = document.getElementById("date-to");
   const resetEl = document.getElementById("reset");
@@ -154,27 +191,58 @@
   let dateFrom = null;
   let dateTo = null;
 
-  // Build source chips (with per-source counts computed against unfiltered events)
+  // Build source list (checkbox rows, with per-source counts)
   const sourceCounts = new Map();
   for (const s of allSources) sourceCounts.set(s, events.filter(e => e.source === s).length);
+  const checkboxes = new Map();  // source -> input element
   for (const s of allSources) {
-    const chip = document.createElement("span");
-    chip.className = "chip active";
-    chip.dataset.source = s;
-    chip.innerHTML = escapeHtml(s) + ' <span class="count">' + sourceCounts.get(s) + "</span>";
-    chip.addEventListener("click", () => {
-      if (selected.has(s)) selected.delete(s); else selected.add(s);
-      chip.classList.toggle("active");
+    const label = document.createElement("label");
+    label.className = "dropdown-item";
+    const cb = document.createElement("input");
+    cb.type = "checkbox"; cb.checked = true; cb.dataset.source = s;
+    cb.addEventListener("change", () => {
+      if (cb.checked) selected.add(s); else selected.delete(s);
+      updateSourceSummary();
       render();
     });
-    chipsEl.appendChild(chip);
+    checkboxes.set(s, cb);
+    label.appendChild(cb);
+    const name = document.createElement("span");
+    name.textContent = s;
+    label.appendChild(name);
+    const count = document.createElement("span");
+    count.className = "count";
+    count.textContent = sourceCounts.get(s);
+    label.appendChild(count);
+    sourceListEl.appendChild(label);
   }
+
+  selectAllEl.addEventListener("click", () => {
+    for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
+    updateSourceSummary();
+    render();
+  });
+  deselectAllEl.addEventListener("click", () => {
+    selected.clear();
+    for (const cb of checkboxes.values()) cb.checked = false;
+    updateSourceSummary();
+    render();
+  });
+
+  function updateSourceSummary() {
+    const n = selected.size, total = allSources.length;
+    if (n === total) summaryEl.textContent = "All sources (" + total + ")";
+    else if (n === 0) summaryEl.textContent = "No sources";
+    else if (n === 1) summaryEl.textContent = [...selected][0];
+    else summaryEl.textContent = n + " of " + total + " sources";
+  }
+  updateSourceSummary();
 
   fromEl.addEventListener("input", () => { dateFrom = fromEl.value ? new Date(fromEl.value + "T00:00:00") : null; render(); });
   toEl.addEventListener("input",   () => { dateTo   = toEl.value   ? new Date(toEl.value   + "T23:59:59") : null; render(); });
   resetEl.addEventListener("click", () => {
-    for (const s of allSources) selected.add(s);
-    for (const c of chipsEl.children) c.classList.add("active");
+    for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
+    updateSourceSummary();
     fromEl.value = ""; toEl.value = ""; dateFrom = dateTo = null;
     render();
   });
