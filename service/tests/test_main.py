@@ -94,6 +94,20 @@ def test_save_events_skips_duplicate_title_and_date(db_session):
     assert db_session.query(Event).count() == 1
 
 
+def test_save_events_urlless_events_dont_dedup_against_each_other(db_session):
+    """Regression: filter_by(url=None) matched every prior URL-less event and
+    swallowed 43/44 Black Bird events in a live run. URL-less events should
+    only be deduped by title+start_time.
+    """
+    ev_a = RawEvent(title="Event A", start_time=datetime(2026, 10, 1, 19, 0, tzinfo=timezone.utc),
+                    location=None, url=None, description=None)
+    ev_b = RawEvent(title="Event B", start_time=datetime(2026, 10, 2, 19, 0, tzinfo=timezone.utc),
+                    location=None, url=None, description=None)
+    saved, skipped = save_events([ev_a, ev_b], source="test")
+    assert saved == 2
+    assert skipped == 0
+
+
 def test_save_events_drops_events_past_horizon(db_session):
     far_future = datetime.now(timezone.utc) + timedelta(days=LOOKAHEAD_DAYS + 30)
     within = datetime.now(timezone.utc) + timedelta(days=30)
