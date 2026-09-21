@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, DateTime, Text, Index
+from sqlalchemy import Column, String, DateTime, Text, Index, JSON
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import DeclarativeBase
 
@@ -19,7 +19,13 @@ class Event(Base):
     # nullable: email/flyer/manual submissions have no source URL
     url = Column(String)
     description = Column(Text)
-    source = Column(String, nullable=False)
+    # Multi-source: one physical event can appear in multiple sources' listings
+    # (e.g. A.C.T. presents "Oh, Mary!" which is also listed on ATG's site).
+    # When save_events sees a title+start_time match, it appends the new source
+    # to this list rather than dropping the event, so the source filter shows
+    # the event under either source. Stored as JSON for cross-db compatibility;
+    # Postgres serializes as JSON, SQLite as TEXT.
+    sources = Column(JSON, nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False)
 
     # Enforce URL uniqueness only for events that have one (scraped events).

@@ -32,7 +32,9 @@ def _serialize(event: Event) -> dict:
         "location": event.location,
         "url": event.url,
         "description": event.description,
-        "source": event.source,
+        # sources is a list — a single event may be listed by multiple sources
+        # (e.g. A.C.T. presents a show that ATG also lists).
+        "sources": list(event.sources or []),
     }
 
 

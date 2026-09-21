@@ -219,8 +219,9 @@
   const events = (data.events || []).map(e => ({...e, _start: new Date(e.start_time)}));
   const generatedAt = new Date(data.generated_at);
 
-  // State
-  const allSources = [...new Set(events.map(e => e.source))].sort();
+  // State — events carry a `sources` list (a physical event may be listed by
+  // multiple sources), so counts and filtering consider every entry in that list.
+  const allSources = [...new Set(events.flatMap(e => e.sources || []))].sort();
   const selected = new Set(allSources);  // all on by default
   let dateFrom = null;
   let dateTo = null;
@@ -243,9 +244,12 @@
     if (btn) setLocationFilter(btn.dataset.location);
   });
 
-  // Build source list (checkbox rows, with per-source counts)
+  // Build source list (checkbox rows, with per-source counts). A multi-source
+  // event counts toward each of its sources.
   const sourceCounts = new Map();
-  for (const s of allSources) sourceCounts.set(s, events.filter(e => e.source === s).length);
+  for (const s of allSources) {
+    sourceCounts.set(s, events.filter(e => (e.sources || []).includes(s)).length);
+  }
   const checkboxes = new Map();  // source -> input element
   for (const s of allSources) {
     const label = document.createElement("label");
@@ -309,7 +313,9 @@
 
   function render() {
     const filtered = events.filter(ev => {
-      if (!selected.has(ev.source)) return false;
+      const evSources = ev.sources || [];
+      // Include this event if any of its sources is currently selected.
+      if (!evSources.some(s => selected.has(s))) return false;
       if (dateFrom && ev._start < dateFrom) return false;
       if (dateTo && ev._start > dateTo) return false;
       if (locationFilter && ev.location !== locationFilter) return false;
@@ -350,7 +356,7 @@
               + escapeHtml(ev.location) + '" title="Filter by this location">'
               + escapeHtml(ev.location) + '</button></div>'
           : "";
-        const src = '<div class="source">' + escapeHtml(ev.source) + "</div>";
+        const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
         parts.push(
           '<div class="event">' +
             '<div class="time">' + time + "</div>" +

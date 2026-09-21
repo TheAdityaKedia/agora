@@ -21,14 +21,14 @@ def db_session():
     session.close()
 
 
-def _make_event(title, when, url="https://example.com/x"):
+def _make_event(title, when, url="https://example.com/x", sources=None):
     return Event(
         title=title,
         start_time=when,
         location="somewhere",
         url=url,
         description=None,
-        source="test",
+        sources=sources or ["test"],
         created_at=datetime.now(timezone.utc),
     )
 
@@ -46,6 +46,19 @@ def test_export_writes_manifest_with_metadata(db_session, tmp_path):
     assert "generated_at" in data
     assert len(data["events"]) == 1
     assert data["events"][0]["title"] == "Upcoming"
+    # Manifest emits `sources` as a JSON list.
+    assert data["events"][0]["sources"] == ["test"]
+
+
+def test_export_serializes_multi_source(db_session, tmp_path):
+    future = datetime.now(timezone.utc) + timedelta(days=7)
+    db_session.add(_make_event("Co-presented", future, sources=["atgtickets.com", "act-sf.org"]))
+    db_session.commit()
+
+    out = tmp_path / "events.json"
+    export_json(out)
+    payload = json.loads(out.read_text())["events"][0]
+    assert payload["sources"] == ["atgtickets.com", "act-sf.org"]
 
 
 def test_export_prunes_past_events(db_session, tmp_path):

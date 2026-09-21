@@ -17,7 +17,7 @@ class EventResponse(BaseModel):
     location: str | None
     url: str | None
     description: str | None
-    source: str
+    sources: list[str]
     created_at: datetime
 
     model_config = {"from_attributes": True}
@@ -32,13 +32,16 @@ def list_events(
     session = get_session()
     try:
         q = session.query(Event).order_by(Event.start_time)
-        if source:
-            q = q.filter(Event.source == source)
         if from_date:
             q = q.filter(Event.start_time >= from_date)
         if to_date:
             q = q.filter(Event.start_time <= to_date)
-        return q.all()
+        events = q.all()
+        # `sources` is a JSON column; portable containment across Postgres +
+        # SQLite is easier in Python than in SQL for our small dataset.
+        if source:
+            events = [e for e in events if source in (e.sources or [])]
+        return events
     finally:
         session.close()
 

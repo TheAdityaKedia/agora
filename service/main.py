@@ -25,39 +25,47 @@ def load_sources() -> list[str]:
     return [line.strip() for line in SOURCES_FILE.read_text().splitlines() if line.strip()]
 
 
-def _is_duplicate(session, raw: RawEvent) -> bool:
-    # Primary: exact URL match — only when the incoming event actually has one.
-    # SQLAlchemy translates filter_by(url=None) to `WHERE url IS NULL`, which
-    # would match any prior URL-less event (from email/flyer/no-anchor sources
-    # like Black Bird) and incorrectly reject every one of them as a dup.
+def _find_duplicate(session, raw: RawEvent) -> Event | None:
+    """Return the existing Event that matches `raw`, or None.
+
+    Order:
+      1. Exact URL match (only when raw.url is not None — else `WHERE url IS
+         NULL` would match every prior URL-less event).
+      2. Same title + same start_time.
+    """
     if raw.url is not None:
-        if session.query(Event).filter_by(url=raw.url).first():
-            return True
-    # Secondary: same title + same start_time (catches email/screenshot
-    # submissions of known events and dedupes URL-less sources against themselves).
-    if session.query(Event).filter_by(title=raw.title, start_time=raw.start_time).first():
-        return True
-    return False
+        existing = session.query(Event).filter_by(url=raw.url).first()
+        if existing is not None:
+            return existing
+    return session.query(Event).filter_by(title=raw.title, start_time=raw.start_time).first()
 
 
-def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
-    """Persist raw events to the database, skipping duplicates and out-of-horizon events.
+def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]:
+    """Persist raw events, merging cross-source duplicates. Returns (saved, merged, skipped).
 
-    Deduplicates by URL first, then by title + start_time.
-    Also drops events whose start_time is past `now + LOOKAHEAD_DAYS` — belt
-    and suspenders for scrapers that don't cap their own pagination.
-    Returns (saved, skipped) counts.
+    - saved:   new rows inserted.
+    - merged:  a duplicate matched an existing row and `source` was appended to
+               its sources list (one physical event listed by multiple sources).
+    - skipped: same-source re-scrapes, or events past the look-ahead horizon.
     """
     horizon = datetime.now(timezone.utc) + timedelta(days=LOOKAHEAD_DAYS)
     session = get_session()
-    saved = skipped = 0
+    saved = merged = skipped = 0
     try:
         for raw in raw_events:
             if raw.start_time > horizon:
                 skipped += 1
                 continue
-            if _is_duplicate(session, raw):
-                skipped += 1
+            existing = _find_duplicate(session, raw)
+            if existing is not None:
+                if source in (existing.sources or []):
+                    # Same source re-scraping something it already produced.
+                    skipped += 1
+                    continue
+                # SQLAlchemy's JSON column doesn't track in-place mutations,
+                # so reassign a fresh list to trigger an UPDATE on commit.
+                existing.sources = list(existing.sources) + [source]
+                merged += 1
                 continue
             session.add(Event(
                 title=raw.title,
@@ -65,7 +73,7 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
                 location=raw.location,
                 url=raw.url,
                 description=raw.description,
-                source=source,
+                sources=[source],
                 created_at=datetime.now(timezone.utc),
             ))
             saved += 1
@@ -75,15 +83,15 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int]:
         raise
     finally:
         session.close()
-    return saved, skipped
+    return saved, merged, skipped
 
 
 def scrape_and_save(url: str) -> None:
     for scraper in SCRAPERS:
         if scraper.matches(url):
             raw_events = scraper.scrape(url)
-            saved, skipped = save_events(raw_events, source=scraper.SOURCE)
-            print(f"[{scraper.SOURCE}] {saved} saved, {skipped} skipped")
+            saved, merged, skipped = save_events(raw_events, source=scraper.SOURCE)
+            print(f"[{scraper.SOURCE}] {saved} saved, {merged} merged, {skipped} skipped")
             return
     print(f"[warn] no scraper for {url}")
 

@@ -60,38 +60,46 @@ def _make_raw_event(url="https://greenapplebooks.com/event/1") -> RawEvent:
 
 
 def test_save_events_persists_to_db(db_session):
-    saved, skipped = save_events([_make_raw_event()], source="greenapplebooks.com")
-    assert saved == 1
-    assert skipped == 0
+    saved, merged, skipped = save_events([_make_raw_event()], source="greenapplebooks.com")
+    assert (saved, merged, skipped) == (1, 0, 0)
     assert db_session.query(Event).count() == 1
 
 
-def test_save_events_skips_duplicate_url(db_session):
+def test_save_events_skips_same_source_re_scrape(db_session):
     raw = _make_raw_event()
     save_events([raw], source="greenapplebooks.com")
-    saved, skipped = save_events([raw], source="greenapplebooks.com")
-    assert saved == 0
-    assert skipped == 1
+    saved, merged, skipped = save_events([raw], source="greenapplebooks.com")
+    assert (saved, merged, skipped) == (0, 0, 1)
     assert db_session.query(Event).count() == 1
+    # Source stays a single-item list, not duplicated.
+    assert db_session.query(Event).first().sources == ["greenapplebooks.com"]
 
 
 def test_save_events_saves_correct_fields(db_session):
     save_events([_make_raw_event()], source="greenapplebooks.com")
     event = db_session.query(Event).first()
     assert event.title == "Test Event"
-    assert event.source == "greenapplebooks.com"
+    assert event.sources == ["greenapplebooks.com"]
     assert event.url == "https://greenapplebooks.com/event/1"
 
 
-def test_save_events_skips_duplicate_title_and_date(db_session):
-    # same event submitted via a different source (e.g. email/screenshot) with a different URL
+def test_save_events_merges_sources_on_title_and_date_match(db_session):
+    """One physical event, listed by two different sources: dedup merges the
+    second source into the existing row rather than dropping the event.
+
+    Before this change, filtering by the second source hid the event entirely.
+    """
     original = _make_raw_event(url="https://greenapplebooks.com/event/1")
     duplicate = _make_raw_event(url="https://differenturl.com/event/99")
     save_events([original], source="greenapplebooks.com")
-    saved, skipped = save_events([duplicate], source="email")
-    assert saved == 0
-    assert skipped == 1
+    saved, merged, skipped = save_events([duplicate], source="email")
+    assert (saved, merged, skipped) == (0, 1, 0)
     assert db_session.query(Event).count() == 1
+    event = db_session.query(Event).first()
+    # Both sources are now attached to the single event row.
+    assert event.sources == ["greenapplebooks.com", "email"]
+    # URL is retained from the first save; second URL is not stored.
+    assert event.url == "https://greenapplebooks.com/event/1"
 
 
 def test_save_events_urlless_events_dont_dedup_against_each_other(db_session):
@@ -103,9 +111,8 @@ def test_save_events_urlless_events_dont_dedup_against_each_other(db_session):
                     location=None, url=None, description=None)
     ev_b = RawEvent(title="Event B", start_time=datetime(2026, 10, 2, 19, 0, tzinfo=timezone.utc),
                     location=None, url=None, description=None)
-    saved, skipped = save_events([ev_a, ev_b], source="test")
-    assert saved == 2
-    assert skipped == 0
+    saved, merged, skipped = save_events([ev_a, ev_b], source="test")
+    assert (saved, merged, skipped) == (2, 0, 0)
 
 
 def test_save_events_drops_events_past_horizon(db_session):
@@ -115,8 +122,7 @@ def test_save_events_drops_events_past_horizon(db_session):
                        url="https://example.com/far", description=None)
     raw_near = RawEvent(title="Near", start_time=within, location=None,
                         url="https://example.com/near", description=None)
-    saved, skipped = save_events([raw_far, raw_near], source="test")
-    assert saved == 1
-    assert skipped == 1
+    saved, merged, skipped = save_events([raw_far, raw_near], source="test")
+    assert (saved, merged, skipped) == (1, 0, 1)
     titles = [e.title for e in db_session.query(Event).all()]
     assert titles == ["Near"]
