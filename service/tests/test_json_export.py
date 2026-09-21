@@ -97,3 +97,28 @@ def test_export_respects_back_window(db_session, tmp_path):
     out = tmp_path / "events.json"
     assert export_json(out) == 0  # default 1-day window excludes it
     assert export_json(out, back_window_days=7) == 1  # 7-day window keeps it
+
+
+def test_export_orders_same_time_events_by_id_for_stable_diffs(db_session, tmp_path):
+    """Events sharing a start_time must be ordered by id, so re-exporting the
+    same data yields a byte-identical file (minimal git diffs) instead of
+    reshuffling rows by nondeterministic DB order.
+    """
+    import uuid
+
+    when = datetime.now(timezone.utc) + timedelta(days=5)
+    id_lo = uuid.UUID("00000000-0000-0000-0000-0000000000aa")
+    id_hi = uuid.UUID("00000000-0000-0000-0000-0000000000bb")
+    # Insert hi-id first so DB insertion order is the reverse of id order.
+    e_hi = _make_event("Later-inserted", when, url="https://example.com/2")
+    e_hi.id = id_hi
+    e_lo = _make_event("Earlier-inserted", when, url="https://example.com/1")
+    e_lo.id = id_lo
+    db_session.add(e_hi)
+    db_session.add(e_lo)
+    db_session.commit()
+
+    out = tmp_path / "events.json"
+    export_json(out)
+    ids = [e["id"] for e in json.load(open(out))["events"]]
+    assert ids == [str(id_lo), str(id_hi)]

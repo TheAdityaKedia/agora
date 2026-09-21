@@ -51,7 +51,9 @@ def export_json(path: Path, back_window_days: int = DEFAULT_BACK_WINDOW_DAYS) ->
         events = (
             session.query(Event)
             .filter(Event.start_time >= cutoff)
-            .order_by(Event.start_time)
+            # id is a stable tiebreaker for events sharing a start_time, so
+            # re-exporting the same data is byte-identical (minimal git diffs).
+            .order_by(Event.start_time, Event.id)
             .all()
         )
         payload = [_serialize(e) for e in events]
