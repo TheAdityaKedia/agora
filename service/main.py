@@ -6,13 +6,13 @@ from config import LOOKAHEAD_DAYS
 from db import init_db, get_session
 from exporters.json_export import export_json
 from models import Event
-from scrapers import atgtickets, blackbird, citylights, greenapple
+from scrapers import actsf, atgtickets, blackbird, citylights, greenapple
 from scrapers.base import RawEvent
 
 # Each scraper is a strategy module exposing matches(url), scrape(url), SOURCE.
 # Dispatch picks the first whose matches() accepts the URL — add a source by
 # writing its module and appending it here, no conditionals to edit.
-SCRAPERS = [greenapple, citylights, blackbird, atgtickets]
+SCRAPERS = [greenapple, citylights, blackbird, atgtickets, actsf]
 
 
 SOURCES_FILE = Path(__file__).parent / "data" / "sources.txt"
