@@ -22,6 +22,8 @@
     }
   }
   * { box-sizing: border-box; }
+  /* Ensure the hidden attribute wins over `display: flex` set on filter rows. */
+  [hidden] { display: none !important; }
   body {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--fg); background: var(--bg);
@@ -120,6 +122,28 @@
   .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
   .title a:hover { color: var(--accent); text-decoration: underline; }
   .location, .source { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .location-btn {
+    background: none; border: none; padding: 0; margin: 0;
+    color: inherit; font: inherit; text-align: left;
+    cursor: pointer; text-decoration: none;
+  }
+  .location-btn:hover { color: var(--fg); text-decoration: underline; }
+  .active-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 4px 3px 10px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-fg);
+    font-size: 13px; border: 1px solid var(--accent);
+    max-width: 100%; min-width: 0;
+  }
+  .active-pill .pill-label {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .active-pill .pill-clear {
+    background: transparent; border: 0; color: inherit; cursor: pointer;
+    padding: 0 4px; font-size: 14px; line-height: 1;
+    border-radius: 999px;
+  }
+  .active-pill .pill-clear:hover { background: rgba(255,255,255,0.2); }
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
   .error { color: #c33; }
 </style>
@@ -144,6 +168,13 @@
         <div id="source-list"></div>
       </div>
     </details>
+  </div>
+  <div class="filter-row" id="location-row" hidden>
+    <span class="filter-label">Location</span>
+    <span class="active-pill" id="location-pill">
+      <span class="pill-label" id="location-label"></span>
+      <button type="button" class="pill-clear" id="location-clear" aria-label="Clear location filter">×</button>
+    </span>
   </div>
   <div class="filter-row">
     <span class="filter-label">Dates</span>
@@ -171,6 +202,9 @@
   const fromEl = document.getElementById("date-from");
   const toEl = document.getElementById("date-to");
   const resetEl = document.getElementById("reset");
+  const locationRowEl = document.getElementById("location-row");
+  const locationLabelEl = document.getElementById("location-label");
+  const locationClearEl = document.getElementById("location-clear");
 
   let data;
   try {
@@ -190,6 +224,24 @@
   const selected = new Set(allSources);  // all on by default
   let dateFrom = null;
   let dateTo = null;
+  let locationFilter = null;
+
+  function setLocationFilter(loc) {
+    locationFilter = loc;
+    if (loc) {
+      locationLabelEl.textContent = loc;
+      locationRowEl.hidden = false;
+    } else {
+      locationRowEl.hidden = true;
+    }
+    render();
+  }
+  locationClearEl.addEventListener("click", () => setLocationFilter(null));
+  // Event delegation: any .location-btn click sets the filter to its data-location.
+  list.addEventListener("click", (e) => {
+    const btn = e.target.closest(".location-btn");
+    if (btn) setLocationFilter(btn.dataset.location);
+  });
 
   // Build source list (checkbox rows, with per-source counts)
   const sourceCounts = new Map();
@@ -244,7 +296,7 @@
     for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
     updateSourceSummary();
     fromEl.value = ""; toEl.value = ""; dateFrom = dateTo = null;
-    render();
+    setLocationFilter(null);
   });
 
   if (events.length === 0) {
@@ -260,6 +312,7 @@
       if (!selected.has(ev.source)) return false;
       if (dateFrom && ev._start < dateFrom) return false;
       if (dateTo && ev._start > dateTo) return false;
+      if (locationFilter && ev.location !== locationFilter) return false;
       return true;
     });
 
@@ -292,7 +345,11 @@
         const titleHtml = ev.url
           ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
           : title;
-        const loc = ev.location ? '<div class="location">' + escapeHtml(ev.location) + "</div>" : "";
+        const loc = ev.location
+          ? '<div class="location"><button type="button" class="location-btn" data-location="'
+              + escapeHtml(ev.location) + '" title="Filter by this location">'
+              + escapeHtml(ev.location) + '</button></div>'
+          : "";
         const src = '<div class="source">' + escapeHtml(ev.source) + "</div>";
         parts.push(
           '<div class="event">' +
