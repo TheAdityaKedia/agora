@@ -112,9 +112,12 @@ def scrape_and_save(url: str) -> None:
             # DB, and UI all agree on one canonical string per venue and no
             # frontend translation layer is needed.
             saved, merged, skipped = save_events(raw_events, source=scraper.NAME)
-            print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {skipped} skipped")
+            # flush so per-source progress is visible live during a long run
+            # (the scrapers' own prints flush; without this the completion lines
+            # buffer and the run looks stalled between sources).
+            print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {skipped} skipped", flush=True)
             return
-    print(f"[warn] no scraper for {url}")
+    print(f"[warn] no scraper for {url}", flush=True)
 
 
 def run(source_filters: list[str] | None = None) -> None:
@@ -133,7 +136,7 @@ def run(source_filters: list[str] | None = None) -> None:
         scrape_and_save(url)
     out = Path(os.environ.get("EVENTS_JSON_PATH", DEFAULT_EVENTS_JSON))
     count = export_json(out)
-    print(f"[export] wrote {count} upcoming events to {out}")
+    print(f"[export] wrote {count} upcoming events to {out}", flush=True)
 
 
 def _cli() -> None:
