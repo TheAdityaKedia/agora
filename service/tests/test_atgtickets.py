@@ -7,6 +7,7 @@ import pytest
 from scrapers.base import RawEvent
 from scrapers.atgtickets import (
     parse,
+    parse_performances,
     matches,
     _parse_date_range,
     _parse_day,
@@ -14,6 +15,8 @@ from scrapers.atgtickets import (
 )
 
 FIXTURE = Path(__file__).parent / "fixtures" / "atgtickets_events.html"
+DETAIL_FIXTURE = Path(__file__).parent / "fixtures" / "atg_detail.html"
+UTC = ZoneInfo("UTC")
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
 
@@ -92,3 +95,70 @@ def test_parse_day_uses_fallback_year_when_missing():
 def test_parse_extracts_image_url(html):
     for ev in parse(html):
         assert ev.image_url and ev.image_url.startswith("https://res.cloudinary.com/dwzhqvxaz/")
+
+
+# --- Per-performance parsing (detail page JSON-LD subEvent[]) ---
+
+def _show():
+    return RawEvent(
+        title="Bluey's Big Play",
+        start_time=datetime(2026, 9, 26, 19, tzinfo=PACIFIC),
+        location="Orpheum Theatre",
+        url="https://us.atgtickets.com/events/blueys-big-play/orpheum-theatre/",
+        description="Family · Sat, Sep 26 - Sun, Sep 27, 2026",
+        image_url="https://res.cloudinary.com/dwzhqvxaz/poster.jpg",
+    )
+
+
+@pytest.fixture
+def detail_html():
+    return DETAIL_FIXTURE.read_text()
+
+
+def test_parse_performances_one_event_per_subevent(detail_html):
+    events = parse_performances(detail_html, show=_show())
+    assert len(events) == 3
+    assert all(isinstance(e, RawEvent) for e in events)
+
+
+def test_parse_performances_uses_absolute_startdate(detail_html):
+    """subEvent startDate '2026-09-26T17:00:00.000Z' → exact UTC, no year guessing."""
+    first = parse_performances(detail_html, show=_show())[0]
+    assert first.start_time.astimezone(UTC) == datetime(2026, 9, 26, 17, 0, tzinfo=UTC)
+
+
+def test_parse_performances_uses_per_performance_offer_url(detail_html):
+    urls = [e.url for e in parse_performances(detail_html, show=_show())]
+    assert len(set(urls)) == 3
+    assert all("/tickets/" in u for u in urls)
+
+
+def test_parse_performances_carries_show_title_and_image(detail_html):
+    ev = parse_performances(detail_html, show=_show())[0]
+    assert ev.title == "Bluey's Big Play"
+    assert ev.image_url == "https://res.cloudinary.com/dwzhqvxaz/poster.jpg"
+
+
+def test_parse_performances_location_from_subevent(detail_html):
+    ev = parse_performances(detail_html, show=_show())[0]
+    assert "Orpheum Theatre" in ev.location
+    assert "1192 Market St" in ev.location
+
+
+def test_parse_performances_single_night_uses_toplevel_startdate():
+    """A show with no subEvent[] falls back to the top-level TheaterEvent time."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"TheaterEvent","name":"Laurie Anderson",'
+        '"startDate":"2026-09-26T03:00:00.000Z",'
+        '"location":{"@type":"PerformingArtsTheater","name":"Curran Theatre",'
+        '"address":{"streetAddress":"445 Geary St"}}}'
+        '</script>'
+    )
+    events = parse_performances(html, show=_show())
+    assert len(events) == 1
+    assert events[0].start_time.astimezone(UTC) == datetime(2026, 9, 26, 3, 0, tzinfo=UTC)
+
+
+def test_parse_performances_empty_when_no_theater_event():
+    assert parse_performances("<html><body>no json-ld</body></html>", show=_show()) == []

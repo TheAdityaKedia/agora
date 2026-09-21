@@ -15,6 +15,7 @@ one RawEvent per card, at 7:00 PM SF-local on the range's START day, with the
 full displayed range in the description so users can click through for the
 actual times.
 """
+import json
 import re
 from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urljoin
@@ -24,6 +25,7 @@ from bs4 import BeautifulSoup
 
 from scrapers.base import RawEvent
 from scrapers.browser import RateLimited, browser_context, load_page_html
+from scrapers.performances import expand_shows
 
 
 SOURCE = "atgtickets.com"
@@ -177,12 +179,91 @@ def parse(html: str) -> list[RawEvent]:
     return events
 
 
+def _find_theater_event(html: str) -> dict | None:
+    """Return the show's schema.org TheaterEvent JSON-LD object, or None."""
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        raw = tag.string or tag.get_text()
+        if not raw:
+            continue
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        for obj in data if isinstance(data, list) else [data]:
+            if isinstance(obj, dict) and obj.get("@type") == "TheaterEvent":
+                return obj
+    return None
+
+
+def _parse_iso(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _location_str(node: dict) -> str | None:
+    loc = node.get("location") or {}
+    name = loc.get("name")
+    addr = loc.get("address") or {}
+    parts = [name, addr.get("streetAddress"), addr.get("addressLocality"), addr.get("postalCode")]
+    joined = ", ".join(p for p in parts if p)
+    return joined or None
+
+
+def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
+    """Expand one show's detail page into one RawEvent per performance.
+
+    ATG embeds a schema.org TheaterEvent whose `subEvent[]` lists every
+    performance with an absolute `startDate` (tz-explicit — no year inference)
+    and a per-performance ticket `offers.url`. A single-night show has no
+    `subEvent`, so the top-level event itself is the one performance.
+    """
+    data = _find_theater_event(html)
+    if not data:
+        return []
+    nodes = data.get("subEvent") or [data]
+    events: list[RawEvent] = []
+    for node in nodes:
+        if not isinstance(node, dict):
+            continue
+        start = _parse_iso(node.get("startDate"))
+        if not start:
+            continue
+        url = (node.get("offers") or {}).get("url") or node.get("url") or show.url
+        events.append(RawEvent(
+            title=show.title,
+            start_time=start.astimezone(timezone.utc),
+            location=_location_str(node) or show.location,
+            url=url,
+            description=show.description,
+            image_url=show.image_url,
+        ))
+    return events
+
+
+def _scrape_show_performances(ctx, show: RawEvent) -> list[RawEvent]:
+    """Render one show's detail page and parse its performances."""
+    if not show.url:
+        return []
+    try:
+        html = load_page_html(ctx, show.url, wait_until=WAIT_UNTIL, settle_ms=SETTLE_MS)
+    except RateLimited as e:
+        print(f"[atgtickets] blocked (HTTP {e.status}) at {e.url}, skipping performances", flush=True)
+        return []
+    return parse_performances(html, show=show)
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
-    """Fetch and parse the ATG what's-on page."""
+    """Fetch ATG's what's-on listing, then expand each show to its performances."""
     with browser_context() as context:
         try:
             html = load_page_html(context, url, wait_until=WAIT_UNTIL, settle_ms=SETTLE_MS)
         except RateLimited as e:
             print(f"[atgtickets] blocked (HTTP {e.status}) at {e.url}, skipping", flush=True)
             return []
-    return parse(html)
+    shows = parse(html)
+    return expand_shows(shows, _scrape_show_performances, label="atgtickets")

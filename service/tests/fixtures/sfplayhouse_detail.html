@@ -1,0 +1,30 @@
+<!--
+Trimmed capture of a rendered San Francisco Playhouse detail page
+(https://sfplayhouse.org/2026-2027-season/peter-pan-goes-wrong/).
+
+The page loads a VBO Tickets script (connect.vbotickets.com/googleeventschema/<eid>)
+that injects a <script type="application/ld+json"> whose @graph lists one Event per
+individual performance, each with a local (no-offset) startDate and a unique
+per-performance ticket URL under offers.url. The real graph had 73 Event nodes;
+this fixture keeps 3 (two 8:00 PM evenings and one 2:00 PM matinee) plus the
+page's other (non-Event) JSON-LD blocks, so the parser must select the right one.
+-->
+<html><head>
+  <meta property="og:image" content="https://sfplayhouse.org/wp-content/uploads/2026/03/Peter-Pan-Goes-Wrong.png"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sfplayhouse.org/2026-2027-season/peter-pan-goes-wrong/","name":"Peter Pan Goes Wrong - San Francisco Playhouse Official Site"}]}
+  </script>
+  <script type="application/ld+json">{"@context": "http://schema.org","@graph":[{"@type": "Event","name": "Peter Pan Goes Wrong","performer": "San Francisco Playhouse","startDate": "2026-09-25T20:00","endDate": "2026-09-25T23:00","location": {"@type": "Place","name": "San Francisco Playhouse","address": {"@type": "PostalAddress","streetAddress": "450 Post Street","addressLocality": "San Francisco","postalCode": "94102","addressRegion": "CA","addressCountry": "USA"}},"image": "https://vboblobprod-cdn.example.net/196084_event_md_528.jpg","description": "","offers": {"@type": "Offer","description": "Tickets","url": "https://sfplayhouse.vbotickets.com/eventdate/peter_pan_goes_wrong/695538","price": "0","pricecurrency": "USD","availability": "InStock","validfrom": "2026-06-27T16:00"}},{"@type": "Event","name": "Peter Pan Goes Wrong","performer": "San Francisco Playhouse","startDate": "2026-09-26T20:00","endDate": "2026-09-26T23:00","location": {"@type": "Place","name": "San Francisco Playhouse","address": {"@type": "PostalAddress","streetAddress": "450 Post Street","addressLocality": "San Francisco","postalCode": "94102","addressRegion": "CA","addressCountry": "USA"}},"image": "https://vboblobprod-cdn.example.net/196084_event_md_528.jpg","description": "","offers": {"@type": "Offer","description": "Tickets","url": "https://sfplayhouse.vbotickets.com/eventdate/peter_pan_goes_wrong/695539","price": "0","pricecurrency": "USD","availability": "InStock","validfrom": "2026-06-27T16:00"}},{"@type": "Event","name": "Peter Pan Goes Wrong","performer": "San Francisco Playhouse","startDate": "2026-09-27T14:00","endDate": "2026-09-27T17:00","location": {"@type": "Place","name": "San Francisco Playhouse","address": {"@type": "PostalAddress","streetAddress": "450 Post Street","addressLocality": "San Francisco","postalCode": "94102","addressRegion": "CA","addressCountry": "USA"}},"image": "https://vboblobprod-cdn.example.net/196084_event_md_528.jpg","description": "","offers": {"@type": "Offer","description": "Tickets","url": "https://sfplayhouse.vbotickets.com/eventdate/peter_pan_goes_wrong/695540","price": "0","pricecurrency": "USD","availability": "InStock","validfrom": "2026-06-27T16:00"}}]}</script>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org/","@type": "Product","name": "Peter Pan Goes Wrong Tickets"}
+  </script>
+</head><body>
+  <h1>Peter Pan Goes Wrong</h1>
+  <div class="performance-info">
+    <div class="su-service-content">September 26 – November 28, 2026</div>
+  </div>
+  <div class="calendar-inperson">
+    <div id="MyCalendar"></div>
+    <p style="text-transform: uppercase;">Final performance: November 28, 2026</p>
+  </div>
+</body></html>

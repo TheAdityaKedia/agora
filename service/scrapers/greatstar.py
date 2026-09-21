@@ -1,14 +1,30 @@
 """Great Star Theater events scraper.
 
-Static HTML: `.event-list-item` (an <a>) with:
+The what's-playing listing is plain server-rendered HTML: `.event-list-item`
+(an <a>) with:
   - h3 (title)
   - .event-time ("September 25 - 26, 2026" or "September 25, 2026")
   - .event-image img (may be site-relative)
   - .event-desc for the blurb
 
-Many events on the Great Star page are third-party — links go to
-TicketTailor. That's fine; we hotlink whatever href they provide.
+Each card is a *show/run*, not a single showing: a card's `.event-time` is
+often a short range ("September 25 - 26, 2026", "October 8 - 25, 2026") that
+hides several individual performances (sometimes two per day). The actual
+showtimes live on the ticketing page the card links to — most Great Star events
+are third-party and link to TicketTailor (either `tickettailor.com` or the
+venue's white-labeled `tickets.greatstartheater.org`), with a handful going to
+Eventbrite/Fever/etc.
+
+TicketTailor renders one schema.org `Event` JSON-LD block *per occurrence*, each
+with a tz-explicit `startDate` (no year inference needed). So `scrape()` renders
+each card's ticketing page in a headless browser and emits one RawEvent per
+occurrence (see `parse_performances`). TicketTailor throttles aggressively and
+returns 403 intermittently even to a headless browser, and non-TicketTailor
+pages expose no such JSON-LD; in either case the page yields no performances and
+we fall back to a single run-level event (7 PM SF-local on the range's start
+day) so a show is never dropped.
 """
+import json
 import re
 from datetime import date, datetime, timezone
 from urllib.parse import urljoin
@@ -18,7 +34,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from scrapers.base import RawEvent
-from scrapers.browser import BROWSER_UA
+from scrapers.browser import BROWSER_UA, RateLimited, load_page_html
+from scrapers.performances import expand_shows
 
 
 SOURCE = "greatstartheater.org"
@@ -29,6 +46,10 @@ SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 VENUE = "Great Star Theater, 636 Jackson St, San Francisco, CA 94133"
 DEFAULT_HOUR = 20  # 8 PM — comedy/show default
 REQUEST_TIMEOUT = 25
+
+# TicketTailor is a client-rendered SPA; give it time to paint the JSON-LD.
+PERF_WAIT_UNTIL = "load"
+PERF_SETTLE_MS = 6000
 
 _DASH_RE = re.compile(r"[–—-]")
 
@@ -50,28 +71,38 @@ def _parse_full_date(text: str) -> date | None:
 def _parse_date_range(text: str) -> date | None:
     """Return the START date of a range like 'September 25 - 26, 2026' or a
     single date 'September 25, 2026'.
+
+    The year always lives at the tail of the string. In a range the left side
+    carries month + day but no year ('September 25'); the right side is usually
+    day-only ('26') and unparseable on its own, so we build the start date from
+    the left side plus the tail year.
     """
     text = _DASH_RE.sub("-", " ".join(text.strip().split()))
     # Single date first
     d = _parse_full_date(text)
     if d:
         return d
-    # Range
+    # Range: split off the left (start) side and reattach the tail year.
     parts = [p.strip() for p in text.split("-", 1)]
     if len(parts) != 2:
         return None
-    right = _parse_full_date(parts[1])
-    if not right:
+    m = re.search(r"(\d{4})\s*$", text)
+    if not m:
         return None
-    # Left may be 'September 25' (no year) → prepend right's year via day-only
-    left = _parse_full_date(f"{parts[0]}, {right.year}")
+    year = m.group(1)
+    # Left is normally 'September 25' (month + day, no year).
+    left = _parse_full_date(f"{parts[0]}, {year}")
     if left:
         return left
-    # Or left could be day-only "25" — same month as right
-    try:
-        return date(right.year, right.month, int(parts[0]))
-    except ValueError:
-        return right
+    # Fallback: right side was a full date and left was day-only ('25') sharing
+    # the right side's month.
+    right = _parse_full_date(parts[1])
+    if right:
+        try:
+            return date(right.year, right.month, int(parts[0]))
+        except ValueError:
+            return right
+    return None
 
 
 def _parse_event(el) -> RawEvent | None:
@@ -121,10 +152,108 @@ def parse(html: str) -> list[RawEvent]:
     return [ev for ev in (_parse_event(el) for el in soup.select(".event-list-item")) if ev is not None]
 
 
+def _parse_iso(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _event_ld_nodes(html: str) -> list[dict]:
+    """Return every schema.org `Event` JSON-LD object on the page.
+
+    TicketTailor emits one `Event` block per occurrence (each a top-level object,
+    not a `subEvent[]`), so we collect them all.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    nodes: list[dict] = []
+    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        raw = tag.string or tag.get_text()
+        if not raw:
+            continue
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        for obj in data if isinstance(data, list) else [data]:
+            if isinstance(obj, dict) and obj.get("@type") == "Event":
+                nodes.append(obj)
+    return nodes
+
+
+def _offer_url(node: dict) -> str | None:
+    offers = node.get("offers")
+    if isinstance(offers, dict):
+        offers = [offers]
+    if isinstance(offers, list):
+        for offer in offers:
+            if isinstance(offer, dict) and offer.get("url"):
+                return offer["url"]
+    return node.get("url")
+
+
+def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
+    """Expand one show's ticketing page into one RawEvent per occurrence.
+
+    TicketTailor renders each occurrence as its own schema.org `Event` JSON-LD
+    object with a tz-explicit `startDate`. We keep the clean listing title,
+    venue, description, and image from `show` (the TicketTailor `name`/location
+    are noisier), and hotlink the ticketing URL. Pages without such JSON-LD
+    (Eventbrite/Fever/etc., or a 403 challenge) yield [] so the caller keeps the
+    run-level event.
+    """
+    events: list[RawEvent] = []
+    seen: set[str] = set()
+    for node in _event_ld_nodes(html):
+        raw_start = node.get("startDate")
+        start = _parse_iso(raw_start)
+        if not start:
+            continue
+        if raw_start in seen:
+            continue
+        seen.add(raw_start)
+        events.append(RawEvent(
+            title=show.title,
+            start_time=start.astimezone(timezone.utc),
+            location=show.location,
+            url=_offer_url(node) or show.url,
+            description=show.description,
+            image_url=show.image_url,
+        ))
+    return events
+
+
+def _scrape_show_performances(ctx, show: RawEvent) -> list[RawEvent]:
+    """Render one show's ticketing page and parse its occurrences.
+
+    Returns [] when the show has no URL, the ticketing host blocks us, or the
+    page exposes no per-occurrence JSON-LD — the caller falls back to the
+    run-level event in that case.
+    """
+    if not show.url:
+        return []
+    try:
+        html = load_page_html(ctx, show.url, wait_until=PERF_WAIT_UNTIL, settle_ms=PERF_SETTLE_MS)
+    except RateLimited as e:
+        print(f"[greatstar] blocked (HTTP {e.status}) at {e.url}, skipping performances", flush=True)
+        return []
+    return parse_performances(html, show=show)
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
+    """Fetch Great Star's listing, then expand each show to its performances.
+
+    The listing is plain server-rendered HTML (one card per show/run). Each
+    card's ticketing page (usually TicketTailor) is rendered in a headless
+    browser and expanded into one event per occurrence; shows whose page can't
+    be fetched or exposes no occurrences fall back to the run-level event.
+    """
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
     if resp.status_code in (403, 429):
         print(f"[greatstar] blocked (HTTP {resp.status_code}) at {url}, skipping", flush=True)
         return []
     resp.raise_for_status()
-    return parse(resp.text)
+    shows = parse(resp.text)
+    return expand_shows(shows, _scrape_show_performances, label="greatstar")

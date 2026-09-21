@@ -102,6 +102,23 @@ def test_save_events_merges_sources_on_title_and_date_match(db_session):
     assert event.url == "https://greenapplebooks.com/event/1"
 
 
+def test_save_events_same_url_different_times_are_distinct_performances(db_session):
+    """Per-performance events share a show's detail URL but differ by start_time.
+
+    Sources without per-performance URLs (Berkeley Rep, NCTC) emit many showings
+    under one show URL. Dedup must key on URL *and* start_time, or every showing
+    after the first collapses into one row.
+    """
+    url = "https://berkeleyrep.org/shows/hamlet"
+    night1 = RawEvent(title="Hamlet", start_time=datetime(2026, 10, 1, 2, 0, tzinfo=timezone.utc),
+                      location=None, url=url, description=None)
+    night2 = RawEvent(title="Hamlet", start_time=datetime(2026, 10, 2, 2, 0, tzinfo=timezone.utc),
+                      location=None, url=url, description=None)
+    saved, merged, skipped = save_events([night1, night2], source="test")
+    assert (saved, merged, skipped) == (2, 0, 0)
+    assert db_session.query(Event).count() == 2
+
+
 def test_save_events_urlless_events_dont_dedup_against_each_other(db_session):
     """Regression: filter_by(url=None) matched every prior URL-less event and
     swallowed 43/44 Black Bird events in a live run. URL-less events should

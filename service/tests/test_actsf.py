@@ -7,6 +7,7 @@ import pytest
 from scrapers.base import RawEvent
 from scrapers.actsf import (
     parse,
+    parse_performances,
     matches,
     _parse_date_range,
     _parse_month_day,
@@ -16,12 +17,18 @@ from scrapers.actsf import (
 
 
 FIXTURE = Path(__file__).parent / "fixtures" / "actsf_events.html"
+PERF_FIXTURE = Path(__file__).parent / "fixtures" / "actsf_performances.html"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
 
 @pytest.fixture
 def html():
     return FIXTURE.read_text()
+
+
+@pytest.fixture
+def perf_html():
+    return PERF_FIXTURE.read_text()
 
 
 def test_matches():
@@ -103,3 +110,90 @@ def test_parse_month_day_case_insensitive():
 def test_parse_extracts_image_url(html):
     for ev in parse(html):
         assert ev.image_url and ev.image_url.startswith("https://res.cloudinary.com/a-c-t/")
+
+
+# --- Per-performance parsing (the /performances page) ---
+
+RUN_START = date(2026, 9, 22)
+RUN_END = date(2026, 10, 18)
+
+
+def _perf(perf_html, **overrides):
+    kwargs = dict(
+        title="Alfred Hitchcock's North by Northwest",
+        run_start=RUN_START,
+        run_end=RUN_END,
+        location=VENUE,
+        image_url="https://res.cloudinary.com/a-c-t/poster.jpg",
+    )
+    kwargs.update(overrides)
+    return parse_performances(perf_html, **kwargs)
+
+
+def test_parse_performances_one_event_per_showing(perf_html):
+    events = _perf(perf_html)
+    assert len(events) == 5
+    assert all(isinstance(e, RawEvent) for e in events)
+
+
+def test_parse_performances_extracts_date_and_time(perf_html):
+    """First row: 'Tue Sep 22 at 06:30PM' → Sep 22 2026, 18:30 SF-local."""
+    ev = _perf(perf_html)[0]
+    local = ev.start_time.astimezone(PACIFIC)
+    assert (local.year, local.month, local.day, local.hour, local.minute) == (2026, 9, 22, 18, 30)
+
+
+def test_parse_performances_same_day_two_showings(perf_html):
+    """Sep 26 has a 2:00PM matinee and an 8:00PM evening — two distinct events."""
+    sep26 = [e for e in _perf(perf_html) if e.start_time.astimezone(PACIFIC).day == 26]
+    assert len(sep26) == 2
+    hours = sorted(e.start_time.astimezone(PACIFIC).hour for e in sep26)
+    assert hours == [14, 20]
+
+
+def test_parse_performances_crosses_month_within_run(perf_html):
+    """'Sun Oct 18' resolves to Oct 2026 from the run range, not Sep."""
+    last = _perf(perf_html)[-1]
+    local = last.start_time.astimezone(PACIFIC)
+    assert (local.year, local.month, local.day) == (2026, 10, 18)
+
+
+def test_parse_performances_uses_row_ticket_url(perf_html):
+    ev = _perf(perf_html)[0]
+    assert ev.url == "https://secure.act-sf.org/6434/6456"
+
+
+def test_parse_performances_carries_title_location_image(perf_html):
+    ev = _perf(perf_html)[0]
+    assert ev.title == "Alfred Hitchcock's North by Northwest"
+    assert ev.location == VENUE
+    assert ev.image_url == "https://res.cloudinary.com/a-c-t/poster.jpg"
+
+
+def test_parse_performances_night_content_in_description(perf_html):
+    ev = _perf(perf_html)[0]
+    assert ev.description and "Preview" in ev.description
+
+
+def test_parse_performances_year_wraps_dec_to_jan():
+    """A Jan performance in a Dec→Jan run resolves to the next year."""
+    html = (
+        '<ul class="performance-list">'
+        '<li class="performance-list__item"><a class="performance" href="https://secure.act-sf.org/1/2">'
+        '<h3 class="performance__date-time"><span class="date">Sat Jan 3</span> at '
+        '<span class="time">02:00PM</span></h3></a></li></ul>'
+    )
+    events = parse_performances(
+        html,
+        title="New Year Show",
+        run_start=date(2027, 12, 20),
+        run_end=date(2028, 1, 5),
+        location=VENUE,
+        image_url=None,
+    )
+    local = events[0].start_time.astimezone(PACIFIC)
+    assert (local.year, local.month, local.day) == (2028, 1, 3)
+
+
+def test_parse_performances_empty_when_no_rows():
+    assert _perf("<ul class='performance-list'></ul>") == []

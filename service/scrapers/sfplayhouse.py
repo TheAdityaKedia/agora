@@ -5,8 +5,20 @@ The homepage has 6 season shows linked as
 The show titles and posters are on the homepage; the date ranges live on
 the detail pages as plain text ("September 26 – November 28, 2026"). We
 follow each unique link once — 6 requests plus the homepage — and parse
-the range from the detail page text.
+the range from the detail page text to build one run-level show per link.
+
+Users browse the calendar by day, so we then expand each run into one event
+per individual performance. The detail page loads a VBO Tickets script
+(`connect.vbotickets.com/googleeventschema/<eid>`) that injects a
+`<script type="application/ld+json">` whose `@graph` lists one schema.org
+Event per showing — each with a local (no-offset) `startDate` and a unique
+per-performance ticket URL under `offers.url`. That script only runs in a
+real browser, so `scrape()` renders each detail page in headless Chromium and
+`parse_performances()` reads the injected JSON-LD. When a show exposes no
+performance graph (browser error, or a page without the widget), we fall back
+to the single run-level event so a show is never dropped.
 """
+import json
 import re
 import time
 from datetime import date, datetime, timezone
@@ -17,7 +29,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from scrapers.base import RawEvent
-from scrapers.browser import BROWSER_UA
+from scrapers.browser import BROWSER_UA, RateLimited, load_page_html
+from scrapers.performances import expand_shows
 
 
 SOURCE = "sfplayhouse.org"
@@ -30,6 +43,10 @@ DEFAULT_HOUR = 19
 DEFAULT_MINUTE = 30
 REQUEST_TIMEOUT = 25
 BETWEEN_PAGE_DELAY_S = 0.8
+# The VBO calendar script injects its per-performance JSON-LD after load; give
+# it a moment to fetch and paint.
+PERF_WAIT_UNTIL = "load"
+PERF_SETTLE_MS = 6000
 
 _SHOW_URL_RE = re.compile(r"^https?://(?:www\.)?sfplayhouse\.org/2026-2027-season/([^/]+)/?$")
 # "September 26 - November 28, 2026" (any dash variant), or a single date
@@ -141,6 +158,81 @@ def _parse_detail(html: str, url: str) -> RawEvent | None:
     )
 
 
+def _load_ld_json(raw: str) -> object | None:
+    """Parse an ld+json script body, unwrapping a VBO JS wrapper if present.
+
+    In a rendered page the injected `<script>` body is plain JSON, but a raw
+    fetch of the VBO endpoint wraps it as `script.text = '{...}';` — handle both.
+    """
+    if not raw:
+        return None
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+    m = re.search(r"script\.text\s*=\s*'(.*)'\s*;", raw, re.DOTALL)
+    if m:
+        try:
+            return json.loads(m.group(1))
+        except json.JSONDecodeError:
+            return None
+    return None
+
+
+def _find_event_graph(html: str) -> list[dict]:
+    """Return the list of schema.org Event nodes injected by the VBO widget."""
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        data = _load_ld_json(tag.string or tag.get_text())
+        if not isinstance(data, dict):
+            continue
+        graph = data.get("@graph")
+        if not isinstance(graph, list):
+            continue
+        events = [n for n in graph if isinstance(n, dict) and n.get("@type") == "Event"]
+        if events:
+            return events
+    return []
+
+
+def _parse_local_iso(value: str | None) -> datetime | None:
+    """Parse a VBO local ISO stamp ('2026-09-25T20:00', no tz) as SF-local UTC."""
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(value)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=SOURCE_TZ)
+    return dt.astimezone(timezone.utc)
+
+
+def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
+    """Expand one show's rendered detail page into one RawEvent per performance.
+
+    Reads the VBO-injected schema.org `@graph` of Event nodes; each carries a
+    local `startDate` (interpreted as SF-local) and a per-performance ticket URL
+    under `offers.url`. Returns [] when no Event graph is present so the caller
+    falls back to the run-level event.
+    """
+    events: list[RawEvent] = []
+    for node in _find_event_graph(html):
+        start = _parse_local_iso(node.get("startDate"))
+        if not start:
+            continue
+        url = (node.get("offers") or {}).get("url") or node.get("url") or show.url
+        events.append(RawEvent(
+            title=show.title,
+            start_time=start,
+            location=show.location,
+            url=url,
+            description=show.description,
+            image_url=show.image_url,
+        ))
+    return events
+
+
 def parse(html: str, fetch=None) -> list[RawEvent]:
     """Parse the homepage, then follow each unique season-show URL and parse
     that page. `fetch(url) -> html` lets tests inject stubbed detail pages.
@@ -171,10 +263,29 @@ def _requests_fetch(url: str) -> str:
     return resp.text
 
 
+def _scrape_show_performances(ctx, show: RawEvent) -> list[RawEvent]:
+    """Render one show's detail page and parse its per-performance showings.
+
+    Returns [] when the show has no detail URL or the page exposes no VBO Event
+    graph — the caller falls back to the run-level event in that case.
+    """
+    if not show.url:
+        return []
+    try:
+        html = load_page_html(ctx, show.url, wait_until=PERF_WAIT_UNTIL, settle_ms=PERF_SETTLE_MS)
+    except RateLimited as e:
+        print(f"[sfplayhouse] blocked (HTTP {e.status}) at {e.url}, skipping performances", flush=True)
+        return []
+    return parse_performances(html, show=show)
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
+    """Fetch the homepage, build one run-level show per season link, then expand
+    each into one event per performance via its rendered VBO calendar."""
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
     if resp.status_code in (403, 429):
         print(f"[sfplayhouse] blocked (HTTP {resp.status_code}) at {url}, skipping", flush=True)
         return []
     resp.raise_for_status()
-    return parse(resp.text, fetch=_requests_fetch)
+    shows = parse(resp.text, fetch=_requests_fetch)
+    return expand_shows(shows, _scrape_show_performances, label="sfplayhouse")

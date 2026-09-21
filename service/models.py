@@ -31,12 +31,15 @@ class Event(Base):
     sources = Column(JSON, nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False)
 
-    # Enforce URL uniqueness only for events that have one (scraped events).
-    # NULL urls (email/flyer/manual entries) are exempt so they don't collide.
+    # Enforce uniqueness on (url, start_time) for events that have a URL, not on
+    # url alone: a single show URL legitimately hosts many performances at
+    # different times (Berkeley Rep, NCTC expose no per-performance URL). NULL
+    # urls (email/flyer/manual entries) are exempt so they don't collide.
     __table_args__ = (
         Index(
-            "ix_events_url_unique",
+            "ix_events_url_start_unique",
             "url",
+            "start_time",
             unique=True,
             postgresql_where=url.isnot(None),
             sqlite_where=url.isnot(None),

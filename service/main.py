@@ -39,13 +39,18 @@ def load_sources() -> list[str]:
 def _find_duplicate(session, raw: RawEvent) -> Event | None:
     """Return the existing Event that matches `raw`, or None.
 
+    A duplicate always shares the same start_time — sources that expose no
+    per-performance URL (Berkeley Rep, NCTC, …) list many showings under one
+    show URL, so URL alone can no longer identify an event.
+
     Order:
-      1. Exact URL match (only when raw.url is not None — else `WHERE url IS
-         NULL` would match every prior URL-less event).
-      2. Same title + same start_time.
+      1. Same URL + same start_time (only when raw.url is not None — else
+         `WHERE url IS NULL` would match every prior URL-less event).
+      2. Same title + same start_time (cross-source: one physical show at one
+         time listed by two sources, possibly under different URLs).
     """
     if raw.url is not None:
-        existing = session.query(Event).filter_by(url=raw.url).first()
+        existing = session.query(Event).filter_by(url=raw.url, start_time=raw.start_time).first()
         if existing is not None:
             return existing
     return session.query(Event).filter_by(title=raw.title, start_time=raw.start_time).first()
