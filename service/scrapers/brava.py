@@ -19,6 +19,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "brava.org"
+NAME = "Brava Theater Center"
 BASE_URL = "https://www.brava.org"
 EVENTS_URL = "https://www.brava.org/events"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

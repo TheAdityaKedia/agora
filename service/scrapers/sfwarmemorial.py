@@ -27,6 +27,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "sfwarmemorial.org"
+NAME = "Herbst / Davies (SF War Memorial)"
 BASE_URL = "https://sfwarmemorial.org"
 EVENTS_URL = "https://sfwarmemorial.org/calendar/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

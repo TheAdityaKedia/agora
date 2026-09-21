@@ -23,6 +23,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "gamh.com"
+NAME = "Great American Music Hall"
 EVENTS_URL = "https://gamh.com/calendar/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 VENUE = "Great American Music Hall, 859 O'Farrell St, San Francisco, CA 94109"

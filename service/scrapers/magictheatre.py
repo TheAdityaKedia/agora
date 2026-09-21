@@ -19,6 +19,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "magictheatre.org"
+NAME = "Magic Theatre"
 BASE_URL = "https://magictheatre.org"
 EVENTS_URL = "https://magictheatre.org/calendar"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

@@ -20,6 +20,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "nctcsf.org"
+NAME = "New Conservatory Theatre Center"
 BASE_URL = "https://nctcsf.org"
 EVENTS_URL = "https://nctcsf.org/shows/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

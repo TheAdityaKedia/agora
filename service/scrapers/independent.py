@@ -19,6 +19,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "theindependentsf.com"
+NAME = "The Independent"
 BASE_URL = "https://www.theindependentsf.com"
 EVENTS_URL = "https://www.theindependentsf.com/calendar/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

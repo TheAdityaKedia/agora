@@ -23,6 +23,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "ybca.org"
+NAME = "Yerba Buena Center for the Arts"
 EVENTS_URL = "https://ybca.org/calendar/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 VENUE = "YBCA, 700 Howard St, San Francisco, CA 94103"

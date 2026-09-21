@@ -102,8 +102,12 @@ def scrape_and_save(url: str) -> None:
     for scraper in SCRAPERS:
         if scraper.matches(url):
             raw_events = scraper.scrape(url)
-            saved, merged, skipped = save_events(raw_events, source=scraper.SOURCE)
-            print(f"[{scraper.SOURCE}] {saved} saved, {merged} merged, {skipped} skipped")
+            # NAME is the human-readable label users see on the frontend.
+            # We persist it directly (not the domain SOURCE) so the manifest,
+            # DB, and UI all agree on one canonical string per venue and no
+            # frontend translation layer is needed.
+            saved, merged, skipped = save_events(raw_events, source=scraper.NAME)
+            print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {skipped} skipped")
             return
     print(f"[warn] no scraper for {url}")
 

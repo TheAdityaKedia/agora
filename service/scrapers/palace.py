@@ -18,6 +18,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "palaceoffinearts.org"
+NAME = "Palace of Fine Arts Theatre"
 BASE_URL = "https://www.palaceoffinearts.org"
 EVENTS_URL = "https://www.palaceoffinearts.org/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

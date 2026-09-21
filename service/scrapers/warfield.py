@@ -21,6 +21,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "thewarfieldtheatre.com"
+NAME = "The Warfield"
 BASE_URL = "https://www.thewarfieldtheatre.com"
 EVENTS_URL = "https://www.thewarfieldtheatre.com/events"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

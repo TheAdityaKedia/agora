@@ -66,12 +66,28 @@
   .dropdown[open] > summary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
   .dropdown-panel {
     position: absolute; top: calc(100% + 6px); left: 0; z-index: 10;
-    min-width: 240px;
+    min-width: 280px; max-width: 360px;
+    max-height: min(70vh, 480px);
     background: var(--input-bg); color: var(--fg);
     border: 1px solid var(--border); border-radius: 8px;
     padding: 8px; display: flex; flex-direction: column; gap: 4px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   }
+  .dropdown-scroll {
+    overflow-y: auto;
+    max-height: 100%;
+  }
+  .dropdown-empty { padding: 12px; color: var(--muted); font-size: 13px; text-align: center; }
+  .dropdown-search {
+    padding: 4px 4px 8px;
+  }
+  .dropdown-search input {
+    width: 100%;
+    padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--fg); font: inherit; font-size: 13px;
+    outline: none;
+  }
+  .dropdown-search input:focus { border-color: var(--accent); }
   .dropdown-bulk {
     display: flex; gap: 6px; padding: 4px 4px 8px;
     border-bottom: 1px solid var(--border); margin-bottom: 4px;
@@ -170,11 +186,17 @@
     <details class="dropdown" id="source-dropdown">
       <summary id="source-summary">Loading…</summary>
       <div class="dropdown-panel">
+        <div class="dropdown-search">
+          <input type="search" id="source-search" placeholder="Search sources…" aria-label="Search sources" autocomplete="off">
+        </div>
         <div class="dropdown-bulk">
           <button type="button" id="select-all">Select all</button>
           <button type="button" id="deselect-all">Deselect all</button>
         </div>
-        <div id="source-list"></div>
+        <div class="dropdown-scroll">
+          <div id="source-list"></div>
+          <div class="dropdown-empty" id="source-empty" hidden>No sources match.</div>
+        </div>
       </div>
     </details>
   </div>
@@ -205,6 +227,8 @@
   const meta = document.getElementById("meta");
   const filters = document.getElementById("filters");
   const sourceListEl = document.getElementById("source-list");
+  const sourceEmptyEl = document.getElementById("source-empty");
+  const sourceSearchEl = document.getElementById("source-search");
   const summaryEl = document.getElementById("source-summary");
   const selectAllEl = document.getElementById("select-all");
   const deselectAllEl = document.getElementById("deselect-all");
@@ -214,6 +238,7 @@
   const locationRowEl = document.getElementById("location-row");
   const locationLabelEl = document.getElementById("location-label");
   const locationClearEl = document.getElementById("location-clear");
+  const sourceDropdownEl = document.getElementById("source-dropdown");
 
   let data;
   try {
@@ -230,7 +255,11 @@
 
   // State — events carry a `sources` list (a physical event may be listed by
   // multiple sources), so counts and filtering consider every entry in that list.
-  const allSources = [...new Set(events.flatMap(e => e.sources || []))].sort();
+  // Sources in the manifest are already human-readable names — the backend
+  // translated them at export time — so alphabetical sort is the natural order.
+  const allSources = [...new Set(events.flatMap(e => e.sources || []))].sort(
+    (a, b) => a.localeCompare(b)
+  );
   const selected = new Set(allSources);  // all on by default
   let dateFrom = null;
   let dateTo = null;
@@ -293,6 +322,35 @@
     updateSourceSummary();
     render();
   });
+
+  // Live-filter the source list as the user types. Case-insensitive substring
+  // match against the source name. Nothing else about the state changes.
+  sourceSearchEl.addEventListener("input", () => {
+    const q = sourceSearchEl.value.trim().toLowerCase();
+    let visible = 0;
+    for (const s of allSources) {
+      const label = sourceListEl.querySelector(`label input[data-source="${cssEscape(s)}"]`)?.closest("label");
+      if (!label) continue;
+      const match = !q || s.toLowerCase().includes(q);
+      label.hidden = !match;
+      if (match) visible++;
+    }
+    sourceEmptyEl.hidden = visible > 0;
+  });
+  // Focus the search input each time the dropdown opens.
+  sourceDropdownEl.addEventListener("toggle", () => {
+    if (sourceDropdownEl.open) sourceSearchEl.focus();
+  });
+  // Close the dropdown when clicking outside it (native <details> doesn't do this).
+  document.addEventListener("click", (e) => {
+    if (sourceDropdownEl.open && !sourceDropdownEl.contains(e.target)) {
+      sourceDropdownEl.open = false;
+    }
+  });
+  function cssEscape(v) {
+    return (window.CSS && CSS.escape) ? CSS.escape(v)
+      : String(v).replace(/["\\]/g, "\\$&");
+  }
 
   function updateSourceSummary() {
     const n = selected.size, total = allSources.length;

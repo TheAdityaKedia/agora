@@ -12,6 +12,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "greenapplebooks.com"
+NAME = "Green Apple Books"
 BASE_URL = "https://greenapplebooks.com"
 # Green Apple lists times in local (San Francisco) time with no tz marker.
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

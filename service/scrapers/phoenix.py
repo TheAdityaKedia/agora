@@ -15,6 +15,7 @@ from scrapers.base import RawEvent
 
 
 SOURCE = "phoenixtheater.com"
+NAME = "Phoenix Theater (Petaluma)"
 ORGANIZER_URL = "https://www.eventbrite.com/o/phoenix-theater-26319831111"
 
 

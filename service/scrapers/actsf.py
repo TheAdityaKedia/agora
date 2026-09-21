@@ -32,6 +32,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "act-sf.org"
+NAME = "A.C.T. (American Conservatory Theater)"
 BASE_URL = "https://www.act-sf.org"
 EVENTS_URL = "https://www.act-sf.org/whats-on"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

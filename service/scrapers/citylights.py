@@ -10,6 +10,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "citylights.com"
+NAME = "City Lights Booksellers"
 BASE_URL = "https://citylights.com"
 EVENTS_URL = "https://citylights.com/events/"
 # City Lights lists times in San Francisco local time. The displayed string

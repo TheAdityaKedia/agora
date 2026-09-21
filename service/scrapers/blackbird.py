@@ -23,6 +23,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "blackbirdsf.com"
+NAME = "Black Bird Bookstore"
 BASE_URL = "https://blackbirdsf.com"
 EVENTS_URL = "https://blackbirdsf.com/pages/events"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

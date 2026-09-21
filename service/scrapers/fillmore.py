@@ -18,6 +18,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "thefillmore.com"
+NAME = "The Fillmore"
 EVENTS_URL = "https://www.thefillmore.com/shows"
 
 VENUE = "The Fillmore, 1805 Geary Blvd, San Francisco, CA 94115"

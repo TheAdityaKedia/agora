@@ -27,6 +27,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "atgtickets.com"
+NAME = "ATG (Curran, Orpheum, Golden Gate)"
 BASE_URL = "https://us.atgtickets.com"
 EVENTS_URL = "https://us.atgtickets.com/whats-on/san-francisco/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

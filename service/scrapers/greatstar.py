@@ -22,6 +22,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "greatstartheater.org"
+NAME = "Great Star Theater"
 BASE_URL = "https://www.greatstartheater.org"
 EVENTS_URL = "https://www.greatstartheater.org/whats-playing"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

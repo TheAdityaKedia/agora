@@ -18,6 +18,7 @@ from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "berkeleyrep.org"
+NAME = "Berkeley Repertory Theatre"
 BASE_URL = "https://www.berkeleyrep.org"
 EVENTS_URL = "https://www.berkeleyrep.org/shows"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")

@@ -7,6 +7,7 @@ from scrapers.base import RawEvent
 
 
 SOURCE = "sfneofuturists.org"
+NAME = "SF Neo-Futurists"
 ORGANIZER_URL = "https://www.eventbrite.com/o/san-francisco-neo-futurists-6706701567"
 
 

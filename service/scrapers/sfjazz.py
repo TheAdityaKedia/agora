@@ -21,6 +21,7 @@ from scrapers.browser import RateLimited, browser_context, load_page_html
 
 
 SOURCE = "sfjazz.org"
+NAME = "SFJAZZ Center"
 BASE_URL = "https://www.sfjazz.org"
 EVENTS_URL = "https://www.sfjazz.org/calendar/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
