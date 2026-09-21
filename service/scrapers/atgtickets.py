@@ -99,6 +99,19 @@ def _card_url(card) -> str | None:
     return urljoin(BASE_URL, a["href"]) if a else None
 
 
+def _card_image_url(card) -> str | None:
+    """Return the card's poster image URL, or None.
+
+    ATG cards use a `<picture>` with several `<source srcset>` variants and a
+    fallback `<img src>`. The fallback is a good default (Cloudinary handles
+    responsive sizing anyway) and dodges srcset parsing.
+    """
+    img = card.find("img")
+    if img and img.get("src"):
+        return urljoin(BASE_URL, img["src"])
+    return None
+
+
 def _card_paragraphs(card) -> list[str]:
     return [p.get_text(" ", strip=True) for p in card.find_all("p") if p.get_text(strip=True)]
 
@@ -148,6 +161,7 @@ def _parse_card(card) -> RawEvent | None:
         location=venue,
         url=_card_url(card),
         description=description,
+        image_url=_card_image_url(card),
     )
 
 

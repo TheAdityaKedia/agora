@@ -92,6 +92,9 @@ def parse(html: str) -> list[RawEvent]:
 
         description = _extract_description(block)
 
+        img_tag = block.select_one("img.calendar-list-thumb") or block.find("img")
+        image_url = urljoin(BASE_URL, img_tag["src"]) if img_tag and img_tag.get("src") else None
+
         # "Virtual Event" vs in-store; there's no per-event street address.
         type_tag = block.select_one(".virtual-event-text")
         type_text = type_tag.get_text(" ", strip=True) if type_tag else ""
@@ -103,6 +106,7 @@ def parse(html: str) -> list[RawEvent]:
             location=location,
             url=event_url,
             description=description,
+            image_url=image_url,
         ))
 
     return events

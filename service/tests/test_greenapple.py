@@ -83,3 +83,31 @@ def test_first_of_month_from_url_parses_relative():
 def test_first_of_month_from_url_rejects_non_month_urls():
     assert _first_of_month_from_url("https://greenapplebooks.com/events") is None
     assert _first_of_month_from_url("https://greenapplebooks.com/event/2026-09-10/some-slug") is None
+
+
+def test_parse_extracts_image_url_and_resolves_relative():
+    """Green Apple emits site-relative <img src="/sites/...">; resolve to absolute."""
+    sample = '''
+    <div class="views-row">
+      <img src="/sites/default/files/styles/large/public/image/2026/08/14/2.png?itok=X">
+      <h3 class="event-list__title"><a href="/event/x">A Talk</a></h3>
+      <div class="event-list__details--item"><span class="event-list__details--label">Date:</span>Mon, 10/12/2026</div>
+      <div class="event-list__details--item"><span class="event-list__details--label">Time:</span>7:00pm</div>
+    </div>
+    '''
+    events = parse(sample)
+    assert len(events) == 1
+    assert events[0].image_url == "https://greenapplebooks.com/sites/default/files/styles/large/public/image/2026/08/14/2.png?itok=X"
+
+
+def test_parse_image_url_missing_is_none():
+    sample = '''
+    <div class="views-row">
+      <h3 class="event-list__title"><a href="/event/x">A Talk</a></h3>
+      <div class="event-list__details--item"><span class="event-list__details--label">Date:</span>Mon, 10/12/2026</div>
+      <div class="event-list__details--item"><span class="event-list__details--label">Time:</span>7:00pm</div>
+    </div>
+    '''
+    events = parse(sample)
+    assert len(events) == 1
+    assert events[0].image_url is None

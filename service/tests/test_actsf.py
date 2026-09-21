@@ -98,3 +98,8 @@ def test_parse_month_day_case_insensitive():
     assert _parse_month_day("sep 22") == (9, 22)
     assert _parse_month_day("SEP 22") == (9, 22)
     assert _parse_month_day("Sep 22") == (9, 22)
+
+
+def test_parse_extracts_image_url(html):
+    for ev in parse(html):
+        assert ev.image_url and ev.image_url.startswith("https://res.cloudinary.com/a-c-t/")

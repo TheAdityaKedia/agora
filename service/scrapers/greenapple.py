@@ -74,6 +74,11 @@ def parse(html: str) -> list[RawEvent]:
         description_tag = row.find("div", class_="event-list__body")
         description = description_tag.get_text(strip=True) if description_tag else None
 
+        # Green Apple emits mobile+desktop <img> pairs with the same src; the
+        # first hit is fine. The src is site-relative — resolve to absolute.
+        img_tag = row.find("img")
+        image_url = urljoin(BASE_URL, img_tag["src"]) if img_tag and img_tag.get("src") else None
+
         location_tag = row.find("address")
         location = location_tag.get_text(separator=", ", strip=True) if location_tag else None
 
@@ -90,6 +95,7 @@ def parse(html: str) -> list[RawEvent]:
             location=location,
             url=event_url,
             description=description,
+            image_url=image_url,
         ))
 
     return events

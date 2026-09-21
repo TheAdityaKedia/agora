@@ -78,3 +78,12 @@ def test_parse_default_location_is_store_address(html, frozen_now_2026):
 def test_parse_start_time_is_tz_aware(html, frozen_now_2026):
     for e in parse(html):
         assert e.start_time.tzinfo is not None
+
+
+def test_parse_extracts_image_url(html, frozen_now_2026):
+    """Black Bird's poster is inline `background-image: url(...)`. Real HTML
+    also has a spurious trailing `)` inside the URL that must be stripped.
+    """
+    for e in parse(html):
+        assert e.image_url and e.image_url.startswith("https://mahina.b-cdn.net/media/")
+        assert not e.image_url.endswith(")")

@@ -73,6 +73,7 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]
                 location=raw.location,
                 url=raw.url,
                 description=raw.description,
+                image_url=raw.image_url,
                 sources=[source],
                 created_at=datetime.now(timezone.utc),
             ))

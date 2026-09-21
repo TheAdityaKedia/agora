@@ -11,6 +11,7 @@ year. We infer the year by scanning events in list order (they're already
 sorted ascending) and rolling the year forward whenever the month goes
 backward, starting from the current SF-local year.
 """
+import re
 from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
@@ -39,6 +40,23 @@ LOAD_MORE_WAIT_MS = 2000
 _MONTHS = {m: i for i, m in enumerate(
     ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], start=1
 )}
+
+# `.ma-image` carries the poster as an inline `background-image: url("...")`.
+# Some blocks include a spurious trailing `)` inside the URL (a bug in the
+# source page) — strip it.
+_BG_IMAGE_RE = re.compile(r'url\(\s*["\']([^"\']+)["\']\s*\)')
+
+
+def _extract_image_url(block) -> str | None:
+    img_div = block.select_one(".ma-image")
+    if not img_div:
+        return None
+    style = img_div.get("style") or ""
+    m = _BG_IMAGE_RE.search(style)
+    if not m:
+        return None
+    url = m.group(1).rstrip(")")
+    return url or None
 
 
 def matches(url: str) -> bool:
@@ -80,6 +98,7 @@ def _parse_event(block, current_year: int) -> tuple[RawEvent | None, int, int | 
         location=STORE_ADDRESS,
         url=None,
         description=None,
+        image_url=_extract_image_url(block),
     ), current_year, month_num
 
 

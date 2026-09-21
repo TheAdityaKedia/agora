@@ -55,3 +55,9 @@ def test_parse_datetime_strips_cosmetic_tz():
 
 def test_parse_datetime_rejects_garbage():
     assert _parse_datetime("no date here") is None
+
+
+def test_parse_extracts_image_url(html):
+    events = parse(html)
+    assert all(e.image_url and e.image_url.startswith("https://citylights.com/") for e in events)
+    assert events[0].image_url.endswith(".jpg")

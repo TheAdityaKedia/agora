@@ -118,6 +118,15 @@
     flex: 0 0 72px; color: var(--muted); font-variant-numeric: tabular-nums;
     font-size: 14px; padding-top: 2px;
   }
+  .thumb {
+    flex: 0 0 72px; width: 72px; height: 72px;
+    border-radius: 6px; background: var(--chip-bg);
+    overflow: hidden;
+  }
+  .thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
   .details { flex: 1; min-width: 0; }
   .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
   .title a:hover { color: var(--accent); text-decoration: underline; }
@@ -357,9 +366,16 @@
               + escapeHtml(ev.location) + '</button></div>'
           : "";
         const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
+        // Thumbnail is optional — some sources don't expose one, and we don't
+        // want a broken-image slot. Skip the div entirely if no image_url.
+        const thumb = ev.image_url
+          ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
+              + escapeHtml(ev.image_url) + '"></div>'
+          : "";
         parts.push(
           '<div class="event">' +
             '<div class="time">' + time + "</div>" +
+            thumb +
             '<div class="details">' +
               '<div class="title">' + titleHtml + "</div>" +
               loc + src +

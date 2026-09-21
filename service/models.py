@@ -19,6 +19,9 @@ class Event(Base):
     # nullable: email/flyer/manual submissions have no source URL
     url = Column(String)
     description = Column(Text)
+    # Hotlinked to the source's CDN for now; long-term we'll download at scrape
+    # time and rewrite to point at our own image bucket.
+    image_url = Column(String)
     # Multi-source: one physical event can appear in multiple sources' listings
     # (e.g. A.C.T. presents "Oh, Mary!" which is also listed on ATG's site).
     # When save_events sees a title+start_time match, it appends the new source

@@ -132,6 +132,9 @@ def _parse_event_item(item) -> RawEvent | None:
     href = item.get("href")
     url = urljoin(BASE_URL, href) if href else None
 
+    img_tag = item.select_one("img.event-item__image") or item.find("img")
+    image_url = urljoin(BASE_URL, img_tag["src"]) if img_tag and img_tag.get("src") else None
+
     start_time = datetime(
         start_day.year, start_day.month, start_day.day, DEFAULT_HOUR, 0,
         tzinfo=SOURCE_TZ,
@@ -143,6 +146,7 @@ def _parse_event_item(item) -> RawEvent | None:
         location=VENUE,
         url=url,
         description=date_text,
+        image_url=image_url,
     )
 
 

@@ -87,3 +87,8 @@ def test_parse_date_range_rejects_garbage():
 
 def test_parse_day_uses_fallback_year_when_missing():
     assert _parse_day("Sat, Sep 26", 2028) == date(2028, 9, 26)
+
+
+def test_parse_extracts_image_url(html):
+    for ev in parse(html):
+        assert ev.image_url and ev.image_url.startswith("https://res.cloudinary.com/dwzhqvxaz/")

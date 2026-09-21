@@ -17,6 +17,7 @@ class EventResponse(BaseModel):
     location: str | None
     url: str | None
     description: str | None
+    image_url: str | None
     sources: list[str]
     created_at: datetime
 
