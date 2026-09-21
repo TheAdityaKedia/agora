@@ -16,9 +16,16 @@ import json
 import time
 from datetime import datetime, timezone
 from urllib.parse import urljoin
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
+
+
+# Most Eventbrite listings we scrape are Bay Area — use Pacific for the
+# "advance series to today" fix so DST is applied to today's date, not the
+# original startDate's date (which may be a different DST era).
+_SERIES_ADJUST_TZ = ZoneInfo("America/Los_Angeles")
 
 from scrapers.base import RawEvent
 from scrapers.browser import RateLimited, browser_context, load_page_html
@@ -93,6 +100,12 @@ def _flatten(payload):
 def event_from_json_ld(obj: dict, *, location_override: str | None = None) -> RawEvent | None:
     """Convert a schema.org Event JSON-LD dict to a RawEvent, or None if
     required fields are missing.
+
+    Handles Eventbrite's "ongoing series" pattern: some listings (e.g. a
+    weekly show) have a startDate from years ago and an endDate far in the
+    future. In that case we advance the start_time to today at the original
+    show's time-of-day, so the series appears on the calendar as an upcoming
+    entry instead of getting past-pruned.
     """
     name = obj.get("name")
     start = obj.get("startDate")
@@ -102,6 +115,25 @@ def event_from_json_ld(obj: dict, *, location_override: str | None = None) -> Ra
         start_time = datetime.fromisoformat(start).astimezone(timezone.utc)
     except ValueError:
         return None
+    end = obj.get("endDate")
+    end_time = None
+    if isinstance(end, str):
+        try:
+            end_time = datetime.fromisoformat(end).astimezone(timezone.utc)
+        except ValueError:
+            pass
+    now = datetime.now(timezone.utc)
+    if start_time < now and end_time and end_time > now:
+        # Ongoing series: keep the original time-of-day but move the date to
+        # today. Reattach today's timezone via zoneinfo so DST offsets match
+        # today, not the (possibly stale, different-DST) startDate's tz.
+        original = datetime.fromisoformat(start)
+        today_local = datetime.now(_SERIES_ADJUST_TZ).date()
+        start_time = datetime(
+            today_local.year, today_local.month, today_local.day,
+            original.hour, original.minute, original.second,
+            tzinfo=_SERIES_ADJUST_TZ,
+        ).astimezone(timezone.utc)
 
     image = obj.get("image")
     if isinstance(image, list):

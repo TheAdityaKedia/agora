@@ -84,6 +84,38 @@ def test_event_from_json_ld_yields_full_rawevent():
     assert ev.url.startswith("https://www.eventbrite.com/e/skitzo-")
 
 
+def test_event_from_json_ld_advances_ongoing_series_to_today():
+    """A weekly-series listing has a stale startDate + a future endDate.
+    We advance start_time to today at the show's original time-of-day.
+    """
+    obj = {
+        "@type": "Event",
+        "name": "SF Neo-Futurists' The Infinite Wrench",
+        "startDate": "2023-01-13T21:00:00-08:00",   # 9pm PT, Jan 2023
+        "endDate":   "2099-12-05T22:30:00-08:00",   # far future
+        "url": "https://www.eventbrite.com/e/x",
+    }
+    ev = eventbrite.event_from_json_ld(obj)
+    from datetime import datetime, timezone
+    from zoneinfo import ZoneInfo
+    today_pt = datetime.now(ZoneInfo("America/Los_Angeles")).date()
+    local = ev.start_time.astimezone(ZoneInfo("America/Los_Angeles"))
+    # Same day as "today" in Pacific, same hour+minute (9:00 PM)
+    assert local.date() == today_pt
+    assert (local.hour, local.minute) == (21, 0)
+
+
+def test_event_from_json_ld_leaves_normal_dates_alone():
+    obj = {
+        "@type": "Event",
+        "name": "One-off show",
+        "startDate": "2099-06-01T20:00:00-07:00",
+        "url": "https://www.eventbrite.com/e/x",
+    }
+    ev = eventbrite.event_from_json_ld(obj)
+    assert ev.start_time == datetime(2099, 6, 2, 3, 0, tzinfo=timezone.utc)
+
+
 def test_event_from_json_ld_location_override():
     obj = eventbrite.parse_event_page(EVENT_HTML)
     ev = eventbrite.event_from_json_ld(obj, location_override="Custom Venue Address")
