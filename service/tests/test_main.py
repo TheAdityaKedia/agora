@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from config import LOOKAHEAD_DAYS
-from main import load_sources, save_events
+from main import load_sources, run, save_events
 from models import Base, Event
 from scrapers.base import RawEvent
 
@@ -113,6 +113,46 @@ def test_save_events_urlless_events_dont_dedup_against_each_other(db_session):
                     location=None, url=None, description=None)
     saved, merged, skipped = save_events([ev_a, ev_b], source="test")
     assert (saved, merged, skipped) == (2, 0, 0)
+
+
+def test_run_source_filter_only_scrapes_matching_urls(db_session, tmp_path, monkeypatch):
+    """`run(source_filters=[...])` should only dispatch to sources whose URL
+    contains one of the given substrings.
+    """
+    sources_file = tmp_path / "sources.txt"
+    sources_file.write_text(
+        "https://greenapplebooks.com/events\n"
+        "https://gamh.com/calendar/\n"
+        "https://www.thefillmore.com/shows\n"
+    )
+    monkeypatch.setattr("main.SOURCES_FILE", sources_file)
+    monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
+    monkeypatch.setattr("main.init_db", lambda: None)  # skip real db init
+    dispatched: list[str] = []
+    monkeypatch.setattr("main.scrape_and_save", lambda url: dispatched.append(url))
+    # Don't hit the real DB — patch the exporter to a no-op writer.
+    monkeypatch.setattr("main.export_json", lambda path: 0)
+
+    run(source_filters=["gamh.com", "thefillmore.com"])
+
+    assert dispatched == [
+        "https://gamh.com/calendar/",
+        "https://www.thefillmore.com/shows",
+    ]
+
+
+def test_run_no_filter_scrapes_all(db_session, tmp_path, monkeypatch):
+    sources_file = tmp_path / "sources.txt"
+    sources_file.write_text("https://a.com\nhttps://b.com\n")
+    monkeypatch.setattr("main.SOURCES_FILE", sources_file)
+    monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
+    monkeypatch.setattr("main.init_db", lambda: None)
+    dispatched: list[str] = []
+    monkeypatch.setattr("main.scrape_and_save", lambda url: dispatched.append(url))
+    monkeypatch.setattr("main.export_json", lambda path: 0)
+
+    run(source_filters=None)
+    assert dispatched == ["https://a.com", "https://b.com"]
 
 
 def test_save_events_drops_events_past_horizon(db_session):

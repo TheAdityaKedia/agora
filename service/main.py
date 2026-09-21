@@ -1,3 +1,4 @@
+import argparse
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -103,14 +104,38 @@ def scrape_and_save(url: str) -> None:
     print(f"[warn] no scraper for {url}")
 
 
-def run():
+def run(source_filters: list[str] | None = None) -> None:
+    """Scrape configured sources, then rewrite the JSON manifest.
+
+    If `source_filters` is given, only sources whose URL contains any of the
+    substrings run — the rest are skipped, but the manifest is still rebuilt
+    from the full DB, so a subset run adds to the manifest without dropping
+    events from sources that weren't scraped this time.
+    """
     init_db()
+    filters = source_filters or []
     for url in load_sources():
+        if filters and not any(f in url for f in filters):
+            continue
         scrape_and_save(url)
     out = Path(os.environ.get("EVENTS_JSON_PATH", DEFAULT_EVENTS_JSON))
     count = export_json(out)
     print(f"[export] wrote {count} upcoming events to {out}")
 
 
+def _cli() -> None:
+    parser = argparse.ArgumentParser(
+        description="Scrape configured sources and refresh the JSON manifest.",
+    )
+    parser.add_argument(
+        "--sources", nargs="+", metavar="SUBSTRING", default=None,
+        help="Only scrape sources whose URL contains one of these substrings. "
+             "Match is a plain substring, so 'gamh.com' or 'gamh' both work. "
+             "Runs every source when omitted.",
+    )
+    args = parser.parse_args()
+    run(source_filters=args.sources)
+
+
 if __name__ == "__main__":
-    run()
+    _cli()

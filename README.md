@@ -71,6 +71,11 @@ The live site auto-redeploys on any push to `main` that touches `frontend/` (or 
 
 - **Editing the UI** — change `frontend/index.html`, commit, push. Pages redeploys in ~1 minute.
 - **Refreshing event data** — run `docker compose run --rm scraper` locally to regenerate `frontend/events.json`, then commit and push it.
+- **Testing a single scraper** — pass `--sources` (substring match) to run only a subset:
+  ```bash
+  docker compose run --rm scraper python main.py --sources gamh.com ybca.org
+  ```
+  The manifest is still rebuilt from the full DB, so a subset run adds to the site without dropping events from sources that weren't scraped this time.
 - **Manual redeploy** — Actions tab → *Deploy frontend to Pages* → *Run workflow*.
 
 Deploy status: https://github.com/TheAdityaKedia/agora/actions
