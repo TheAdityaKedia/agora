@@ -1,5 +1,6 @@
 import argparse
 import os
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -103,25 +104,51 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]
     return saved, merged, skipped
 
 
-def scrape_and_save(url: str) -> None:
+# Concurrent scrapes cap. Scrapes are I/O-bound (network + a headless browser
+# subprocess), so threads give a real speedup; the ceiling bounds simultaneous
+# Chromium instances (memory) and per-source rate-limit pressure. Override with
+# the SCRAPER_WORKERS env var.
+DEFAULT_WORKERS = 6
+
+
+def _scrape_one(url: str):
+    """Dispatch `url` to its scraper and return (scraper, raw_events).
+
+    Returns (None, []) when no scraper matches. This is the slow, read-only,
+    independent part of the pipeline — safe to run concurrently across sources.
+    """
     for scraper in SCRAPERS:
         if scraper.matches(url):
-            raw_events = scraper.scrape(url)
-            # NAME is the human-readable label users see on the frontend.
-            # We persist it directly (not the domain SOURCE) so the manifest,
-            # DB, and UI all agree on one canonical string per venue and no
-            # frontend translation layer is needed.
-            saved, merged, skipped = save_events(raw_events, source=scraper.NAME)
-            # flush so per-source progress is visible live during a long run
-            # (the scrapers' own prints flush; without this the completion lines
-            # buffer and the run looks stalled between sources).
-            print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {skipped} skipped", flush=True)
-            return
-    print(f"[warn] no scraper for {url}", flush=True)
+            return scraper, scraper.scrape(url)
+    return None, []
 
 
-def run(source_filters: list[str] | None = None) -> None:
-    """Scrape configured sources, then rewrite the JSON manifest.
+def _save_scraped(scraper, raw_events, url: str) -> None:
+    if scraper is None:
+        print(f"[warn] no scraper for {url}", flush=True)
+        return
+    # NAME is the human-readable label users see on the frontend. We persist it
+    # directly (not the domain SOURCE) so the manifest, DB, and UI all agree on
+    # one canonical string per venue and no frontend translation layer is needed.
+    saved, merged, skipped = save_events(raw_events, source=scraper.NAME)
+    # flush so per-source progress is visible live during a long run.
+    print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {skipped} skipped", flush=True)
+
+
+def scrape_and_save(url: str) -> None:
+    """Scrape one URL and persist it (single-URL, sequential path)."""
+    scraper, raw_events = _scrape_one(url)
+    _save_scraped(scraper, raw_events, url)
+
+
+def run(source_filters: list[str] | None = None, max_workers: int | None = None) -> None:
+    """Scrape configured sources concurrently, then rewrite the JSON manifest.
+
+    Scrapes run in a thread pool (I/O-bound), but events are SAVED serially in
+    sources.txt order: dedup attribution depends on order (the earlier source
+    wins a shared row, later ones merge), so saving in a fixed order keeps
+    results deterministic regardless of which scrape finishes first. DB writes
+    stay on the main thread (SQLAlchemy sessions aren't thread-safe).
 
     If `source_filters` is given, only sources whose URL contains any of the
     substrings run — the rest are skipped, but the manifest is still rebuilt
@@ -130,10 +157,20 @@ def run(source_filters: list[str] | None = None) -> None:
     """
     init_db()
     filters = source_filters or []
-    for url in load_sources():
-        if filters and not any(f in url for f in filters):
-            continue
-        scrape_and_save(url)
+    urls = [u for u in load_sources() if not filters or any(f in u for f in filters)]
+
+    if urls:
+        workers = max_workers or int(os.environ.get("SCRAPER_WORKERS", str(DEFAULT_WORKERS)))
+        workers = max(1, min(workers, len(urls)))
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            # Submit every scrape up front so they run concurrently, then walk
+            # the futures in source order — .result() blocks on each in turn, so
+            # saves happen in order while later scrapes proceed in the pool.
+            futures = [(url, pool.submit(_scrape_one, url)) for url in urls]
+            for url, future in futures:
+                scraper, raw_events = future.result()
+                _save_scraped(scraper, raw_events, url)
+
     out = Path(os.environ.get("EVENTS_JSON_PATH", DEFAULT_EVENTS_JSON))
     count = export_json(out)
     print(f"[export] wrote {count} upcoming events to {out}", flush=True)
@@ -149,8 +186,13 @@ def _cli() -> None:
              "Match is a plain substring, so 'gamh.com' or 'gamh' both work. "
              "Runs every source when omitted.",
     )
+    parser.add_argument(
+        "--workers", type=int, default=None, metavar="N",
+        help=f"Number of sources to scrape concurrently (default "
+             f"SCRAPER_WORKERS env or {DEFAULT_WORKERS}).",
+    )
     args = parser.parse_args()
-    run(source_filters=args.sources)
+    run(source_filters=args.sources, max_workers=args.workers)
 
 
 if __name__ == "__main__":

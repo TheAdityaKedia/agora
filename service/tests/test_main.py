@@ -146,13 +146,15 @@ def test_run_source_filter_only_scrapes_matching_urls(db_session, tmp_path, monk
     monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
     monkeypatch.setattr("main.init_db", lambda: None)  # skip real db init
     dispatched: list[str] = []
-    monkeypatch.setattr("main.scrape_and_save", lambda url: dispatched.append(url))
+    # Scrapes run concurrently now, so record the SET of scraped URLs (order of
+    # scrape dispatch is nondeterministic). (None, []) => run() skips the save.
+    monkeypatch.setattr("main._scrape_one", lambda url: dispatched.append(url) or (None, []))
     # Don't hit the real DB — patch the exporter to a no-op writer.
     monkeypatch.setattr("main.export_json", lambda path: 0)
 
     run(source_filters=["gamh.com", "thefillmore.com"])
 
-    assert dispatched == [
+    assert sorted(dispatched) == [
         "https://gamh.com/calendar/",
         "https://www.thefillmore.com/shows",
     ]
@@ -165,11 +167,49 @@ def test_run_no_filter_scrapes_all(db_session, tmp_path, monkeypatch):
     monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
     monkeypatch.setattr("main.init_db", lambda: None)
     dispatched: list[str] = []
-    monkeypatch.setattr("main.scrape_and_save", lambda url: dispatched.append(url))
+    monkeypatch.setattr("main._scrape_one", lambda url: dispatched.append(url) or (None, []))
     monkeypatch.setattr("main.export_json", lambda path: 0)
 
     run(source_filters=None)
-    assert dispatched == ["https://a.com", "https://b.com"]
+    assert sorted(dispatched) == ["https://a.com", "https://b.com"]
+
+
+def test_run_saves_in_source_order_despite_out_of_order_scrapes(tmp_path, monkeypatch):
+    """Scrapes run concurrently, but saves must stay in sources.txt order so
+    dedup attribution (earlier source wins a shared row) is deterministic.
+    Earlier sources sleep longer so they finish LAST — the save order must
+    still match the file order, not the completion order.
+    """
+    import time
+
+    sources_file = tmp_path / "sources.txt"
+    sources_file.write_text("https://a.com\nhttps://b.com\nhttps://c.com\n")
+    monkeypatch.setattr("main.SOURCES_FILE", sources_file)
+    monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
+    monkeypatch.setattr("main.init_db", lambda: None)
+    monkeypatch.setattr("main.export_json", lambda path: 0)
+
+    delays = {"https://a.com": 0.15, "https://b.com": 0.05, "https://c.com": 0.0}
+
+    class _FakeScraper:
+        def __init__(self, name):
+            self.NAME = name
+
+    def fake_scrape_one(url):
+        time.sleep(delays[url])
+        return _FakeScraper(url), [_make_raw_event(url=url)]
+
+    monkeypatch.setattr("main._scrape_one", fake_scrape_one)
+
+    saved_order: list[str] = []
+    monkeypatch.setattr(
+        "main.save_events",
+        lambda raw, source: (saved_order.append(source), (1, 0, 0))[1],
+    )
+
+    run(max_workers=3)
+
+    assert saved_order == ["https://a.com", "https://b.com", "https://c.com"]
 
 
 def test_save_events_drops_events_past_horizon(db_session):
