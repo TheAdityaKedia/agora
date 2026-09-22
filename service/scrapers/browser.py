@@ -39,6 +39,44 @@ def browser_context():
             browser.close()
 
 
+@contextmanager
+def browser_session():
+    """Yield an object with `.fresh_context()` that opens a new context per call.
+
+    Some sources (SFJAZZ, Cloudflare-fronted) reject consecutive fetches on the
+    same context — even with warmed cookies. But launching a full browser per
+    fetch is slow. This helper amortizes the browser launch and lets callers
+    open a fresh context (its own cookie jar + JS-challenge round) per URL:
+
+        with browser_session() as sess:
+            for url in urls:
+                with sess.fresh_context() as ctx:
+                    html = load_page_html(ctx, url)
+    """
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+
+        class _Session:
+            @contextmanager
+            def fresh_context(self):
+                ctx = browser.new_context(
+                    user_agent=BROWSER_UA,
+                    viewport={"width": 1280, "height": 800},
+                    locale="en-US",
+                )
+                try:
+                    yield ctx
+                finally:
+                    ctx.close()
+
+        try:
+            yield _Session()
+        finally:
+            browser.close()
+
+
 def load_page_html(
     context,
     url: str,

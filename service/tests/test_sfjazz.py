@@ -10,7 +10,7 @@ from datetime import date
 from scrapers import sfjazz
 from scrapers.sfjazz import (
     parse, matches, _parse_month_day, _parse_time, VENUE,
-    _month_calendar_url, _next_month,
+    _month_calendar_url, _next_month, parse_detail_description,
 )
 
 FIXTURE = Path(__file__).parent / "fixtures" / "sfjazz_events.html"
@@ -83,3 +83,37 @@ def test_month_calendar_url_format():
 def test_next_month_wraps_at_year_boundary():
     assert _next_month(date(2026, 11, 1)) == date(2026, 12, 1)
     assert _next_month(date(2026, 12, 1)) == date(2027, 1, 1)
+
+
+def test_parse_detail_description_picks_first_rich_text():
+    """The blurb is the first .rich-text on the page. Later .rich-text blocks
+    are personnel lists, address+phones, cookie banner — skip them.
+    """
+    html = """
+    <html><body>
+      <div class="rich-text">Marcus Miller is a jazz renaissance man. He was
+        instrumental to Miles Davis's resurgence in the 1980s and helps us
+        celebrate Miles's centennial with music from the We Want Miles album.</div>
+      <div class="rich-text">Marcus Miller bass Russell Gunn trumpet</div>
+      <div class="rich-text">SFJAZZ CENTER 201 Franklin Street</div>
+    </body></html>
+    """
+    desc = parse_detail_description(html)
+    assert desc is not None
+    assert desc.startswith("Marcus Miller is a jazz renaissance")
+
+
+def test_parse_detail_description_skips_expired_show():
+    """Past productions show a placeholder — don't use it as the description."""
+    html = """
+    <html><body>
+      <div class="rich-text">All performances for this production have passed.
+        Please visit the calendar to see what else is upcoming at SFJAZZ!</div>
+      <div class="rich-text">SFJAZZ CENTER 201 Franklin Street</div>
+    </body></html>
+    """
+    assert parse_detail_description(html) is None
+
+
+def test_parse_detail_description_none_when_no_rich_text():
+    assert parse_detail_description("<html><body></body></html>") is None
