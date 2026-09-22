@@ -475,6 +475,15 @@
     const day = String(d.getDate()).padStart(2, "0");
     return `${y}-${m}-${day}`;
   };
+  // Full date+time formatter for the search-active flat view. Declared here
+  // (not next to renderFlat) so it's initialized before readStateFromUrl() —
+  // a ?q= shared link triggers a search-active render during page load, which
+  // calls renderFlat; a const declared later would still be in its temporal
+  // dead zone at that point and throw, hanging the page on "Loading…".
+  const flatDateFmt = new Intl.DateTimeFormat(undefined, {
+    weekday: "short", month: "short", day: "numeric",
+    hour: "numeric", minute: "2-digit",
+  });
   // Apply an explicit calendar range (Date objects, both inclusive).
   function setDateRange(from, to) {
     fromEl.value = from ? toISODate(from) : "";
@@ -718,11 +727,9 @@
 
   // Flat ranked rendering — used when a search query is active. No date
   // headers; each row's `.time` shows the full date + time so the reader
-  // always knows *when* the top-of-list result is.
-  const flatDateFmt = new Intl.DateTimeFormat(undefined, {
-    weekday: "short", month: "short", day: "numeric",
-    hour: "numeric", minute: "2-digit",
-  });
+  // always knows *when* the top-of-list result is. (flatDateFmt is declared
+  // near the top of the IIFE so it's initialized before readStateFromUrl,
+  // which can trigger a search-active render during load via a ?q= link.)
   function renderFlat(events) {
     const parts = [];
     for (const ev of events) {
