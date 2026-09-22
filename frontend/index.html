@@ -296,7 +296,27 @@
     return;
   }
 
-  const events = (data.events || []).map(e => ({...e, _start: new Date(e.start_time)}));
+  const events = (data.events || []).map((e, i) => ({
+    ...e,
+    _start: new Date(e.start_time),
+    id: i,
+    sources_text: (e.sources || []).join(" "),
+  }));
+
+  // Build the search index once. See feature-specs/search.md §2.2 for the
+  // config rationale.
+  const miniSearch = new MiniSearch({
+    fields: ["title", "description", "location", "sources_text"],
+    storeFields: ["id"],
+    searchOptions: {
+      boost: {title: 3, description: 1, location: 1, sources_text: 1},
+      prefix: true,
+      fuzzy: 0.2,
+      combineWith: "AND",
+    },
+  });
+  miniSearch.addAll(events);
+
   const generatedAt = new Date(data.generated_at);
 
   // State — events carry a `sources` list (a physical event may be listed by
