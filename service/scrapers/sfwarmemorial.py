@@ -20,10 +20,13 @@ from datetime import date, datetime, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
+import requests
 from bs4 import BeautifulSoup
 
 from scrapers.base import RawEvent
-from scrapers.browser import RateLimited, browser_context, load_page_html
+from scrapers.browser import BROWSER_UA, RateLimited, browser_context, load_page_html
+
+REQUEST_TIMEOUT = 25
 
 
 SOURCE = "sfwarmemorial.org"
@@ -157,6 +160,32 @@ def parse(html: str) -> list[RawEvent]:
     return events
 
 
+def parse_event_description(html: str) -> str | None:
+    """Extract the synopsis from an event-detail page, or None.
+
+    The blurb is `.event-information .event-info` (the `.event-info-header`
+    "Event Information" label sits in a sibling div and is excluded).
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    info = soup.select_one(".event-information .event-info")
+    if info:
+        text = info.get_text(" ", strip=True)
+        if text:
+            return text
+    return None
+
+
+def _fetch_description(url: str) -> str | None:
+    """Fetch an event-detail page and return its synopsis, or None on error."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            return None
+        return parse_event_description(resp.text)
+    except requests.RequestException:
+        return None
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
     with browser_context() as context:
         try:
@@ -164,4 +193,16 @@ def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
         except RateLimited as e:
             print(f"[sfwarmemorial] blocked (HTTP {e.status}) at {e.url}, skipping", flush=True)
             return []
-    return parse(html)
+    events = parse(html)
+    # The calendar gives only the presenter (e.g. "San Francisco Opera"); fetch
+    # each detail page for the real synopsis and prepend the presenter so that
+    # label isn't lost: "San Francisco Opera · <synopsis>".
+    for ev in events:
+        if not ev.url:
+            continue
+        synopsis = _fetch_description(ev.url)
+        if not synopsis:
+            continue
+        presenter = ev.description
+        ev.description = f"{presenter} · {synopsis}" if presenter else synopsis
+    return events
