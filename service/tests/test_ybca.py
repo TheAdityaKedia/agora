@@ -1,53 +1,35 @@
-from datetime import date, datetime
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 import pytest
 
-from scrapers.base import RawEvent
-from scrapers.ybca import parse, matches, _parse_date_range, VENUE, DEFAULT_HOUR
+from scrapers.ybca import parse_event_description, matches
 
-FIXTURE = Path(__file__).parent / "fixtures" / "ybca_events.html"
-PACIFIC = ZoneInfo("America/Los_Angeles")
+
+DETAIL_FIXTURE = Path(__file__).parent / "fixtures" / "ybca_detail.html"
 
 
 @pytest.fixture
-def html():
-    return FIXTURE.read_text()
+def detail_html():
+    return DETAIL_FIXTURE.read_text()
 
 
 def test_matches():
-    assert matches("https://ybca.org/calendar/")
-    assert not matches("https://sfjazz.org/calendar/")
+    assert matches("https://ybca.org/event/x")
+    assert not matches("https://gamh.com/")
 
 
-def test_parse_returns_events(html):
-    events = parse(html)
-    assert len(events) == 2
-    assert all(isinstance(e, RawEvent) for e in events)
+def test_parse_event_description_uses_left_content(detail_html):
+    """The blurb is the .left-content paragraphs; the .section-wrapper funding
+    credits are excluded."""
+    desc = parse_event_description(detail_html)
+    assert desc and desc.startswith("Come and make an impression")
+    assert "Bloomberg Philanthropies" not in desc
 
 
-def test_event_fields(html):
-    ev = parse(html)[0]
-    assert ev.title
-    assert ev.url and ev.url.startswith("https://ybca.org/")
-    assert ev.location == VENUE
-    assert ev.image_url and ev.image_url.startswith("https://")
-    assert ev.description
+def test_parse_event_description_falls_back_to_og():
+    html = '<html><head><meta property="og:description" content="Short summary."></head><body></body></html>'
+    assert parse_event_description(html) == "Short summary."
 
 
-def test_start_time_defaults_to_6pm_local(html):
-    local = parse(html)[0].start_time.astimezone(PACIFIC)
-    assert local.hour == DEFAULT_HOUR
-
-
-def test_parse_date_range_full_month_names():
-    assert _parse_date_range("August 7, 2026–January 3, 2027") == (date(2026, 8, 7), date(2027, 1, 3))
-
-
-def test_parse_date_range_single_day():
-    assert _parse_date_range("August 7, 2026") == (date(2026, 8, 7), None)
-
-
-def test_parse_date_range_rejects_garbage():
-    assert _parse_date_range("Coming soon") == (None, None)
+def test_parse_event_description_none_when_nothing():
+    assert parse_event_description("<html><body><p>x</p></body></html>") is None

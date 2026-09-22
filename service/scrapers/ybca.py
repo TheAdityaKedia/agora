@@ -126,10 +126,49 @@ def parse(html: str) -> list[RawEvent]:
     return [ev for ev in (_parse_card(w) for w in soup.select(".feature-event-wrap")) if ev is not None]
 
 
+def parse_event_description(html: str) -> str | None:
+    """Extract the event blurb from a YBCA `/event/` detail page, or None.
+
+    Prefer the `.left-content` body paragraphs (the full blurb, excluding the
+    `.section-wrapper` funding credits); fall back to the `og:description`
+    one-liner when the body isn't present.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    content = soup.select_one(".left-content")
+    if content:
+        paras = [p.get_text(" ", strip=True) for p in content.find_all("p")]
+        text = "\n\n".join(p for p in paras if p)
+        if text:
+            return text
+    og = soup.find("meta", attrs={"property": "og:description"})
+    if og and og.get("content"):
+        return og["content"].strip() or None
+    return None
+
+
+def _fetch_description(url: str) -> str | None:
+    """Fetch a detail page and return its blurb, or None on any error."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            return None
+        return parse_event_description(resp.text)
+    except requests.RequestException:
+        return None
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
     if resp.status_code in (403, 429):
         print(f"[ybca] blocked (HTTP {resp.status_code}) at {url}, skipping", flush=True)
         return []
     resp.raise_for_status()
-    return parse(resp.text)
+    events = parse(resp.text)
+    # The card only yields category + date; fetch each event's detail page for
+    # the real blurb, keeping the category/date string as a fallback.
+    for ev in events:
+        if ev.url and "/event/" in ev.url:
+            desc = _fetch_description(ev.url)
+            if desc:
+                ev.description = desc
+    return events
