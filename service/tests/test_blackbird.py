@@ -1,39 +1,20 @@
-from datetime import datetime
+import json
+from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from unittest.mock import patch
 
 import pytest
 
 from scrapers.base import RawEvent
-from scrapers import blackbird
-from scrapers.blackbird import matches, parse, STORE_ADDRESS
+from scrapers.blackbird import matches, parse_events, STORE_ADDRESS, EVENTS_URL
 
-FIXTURE = Path(__file__).parent / "fixtures" / "blackbird_events.html"
-PACIFIC = ZoneInfo("America/Los_Angeles")
-
-
-@pytest.fixture
-def html():
-    return FIXTURE.read_text()
+FIXTURE = Path(__file__).parent / "fixtures" / "blackbird_api.json"
+UTC = ZoneInfo("UTC")
 
 
 @pytest.fixture
-def frozen_now_2026():
-    """The fixture has Sep+Oct events; year is inferred from 'today'.
-
-    Freeze the module's `datetime.now(SOURCE_TZ).year` to 2026 so tests are
-    stable regardless of when they're run.
-    """
-    real_datetime = blackbird.datetime
-
-    class FrozenDatetime(real_datetime):
-        @classmethod
-        def now(cls, tz=None):
-            return real_datetime(2026, 9, 22, 12, 0, tzinfo=tz)
-
-    with patch.object(blackbird, "datetime", FrozenDatetime):
-        yield
+def data():
+    return json.loads(FIXTURE.read_text())
 
 
 def test_matches():
@@ -41,49 +22,53 @@ def test_matches():
     assert not matches("https://greenapplebooks.com/events")
 
 
-def test_parse_returns_two_events(html, frozen_now_2026):
-    events = parse(html)
+def test_parse_events_returns_events(data):
+    events = parse_events(data)
     assert len(events) == 2
     assert all(isinstance(e, RawEvent) for e in events)
 
 
-def test_parse_title_and_time(html, frozen_now_2026):
-    events = parse(html)
-    e0 = events[0]
-    assert e0.title  # non-empty
-    # First event is in September 2026 (per fixture)
-    assert e0.start_time.year == 2026
-    assert e0.start_time.month == 9
+def test_parse_events_uses_absolute_startdate(data):
+    """startDate is ISO UTC — no year inference needed."""
+    ev = parse_events(data)[0]
+    assert ev.start_time.astimezone(UTC) == datetime(2026, 9, 23, 2, 0, tzinfo=UTC)
 
 
-def test_parse_rolls_year_forward_on_month_wrap(html, frozen_now_2026):
-    """Fixture is one Sep + one Oct event (both 2026)."""
-    events = parse(html)
-    assert events[0].start_time.month == 9
-    assert events[1].start_time.month == 10
-    assert events[0].start_time.year == 2026
-    assert events[1].start_time.year == 2026
+def test_parse_events_strips_html_description(data):
+    ev = parse_events(data)[0]
+    assert ev.description
+    assert "<p>" not in ev.description and "</h3>" not in ev.description
+    assert ev.description.startswith("Wild Surf Writers is a women")
 
 
-def test_parse_no_per_event_url(html, frozen_now_2026):
-    for e in parse(html):
-        assert e.url is None
+def test_parse_events_builds_event_id_url(data):
+    ev = parse_events(data)[0]
+    assert ev.url == f"{EVENTS_URL}#?event-id=87937"
 
 
-def test_parse_default_location_is_store_address(html, frozen_now_2026):
-    for e in parse(html):
-        assert e.location == STORE_ADDRESS
+def test_parse_events_extracts_image_url(data):
+    ev = parse_events(data)[0]
+    assert ev.image_url == "https://mahina.b-cdn.net/media/September%20_1789599013632.png"
 
 
-def test_parse_start_time_is_tz_aware(html, frozen_now_2026):
-    for e in parse(html):
-        assert e.start_time.tzinfo is not None
+def test_parse_events_location_falls_back_to_store_address(data):
+    """The API's location.name is empty for in-store events → store address."""
+    for ev in parse_events(data):
+        assert ev.location == STORE_ADDRESS
 
 
-def test_parse_extracts_image_url(html, frozen_now_2026):
-    """Black Bird's poster is inline `background-image: url(...)`. Real HTML
-    also has a spurious trailing `)` inside the URL that must be stripped.
-    """
-    for e in parse(html):
-        assert e.image_url and e.image_url.startswith("https://mahina.b-cdn.net/media/")
-        assert not e.image_url.endswith(")")
+def test_parse_events_start_time_tz_aware(data):
+    for ev in parse_events(data):
+        assert ev.start_time.tzinfo is not None
+
+
+def test_parse_events_skips_entries_without_title_or_date():
+    bad = {"events": [
+        {"id": 1, "title": "No date", "startDate": None},
+        {"id": 2, "title": "", "startDate": "2026-10-01T02:00:00.000Z"},
+    ]}
+    assert parse_events(bad) == []
+
+
+def test_parse_events_empty_page():
+    assert parse_events({"events": []}) == []
