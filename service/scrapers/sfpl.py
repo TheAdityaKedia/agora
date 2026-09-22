@@ -37,6 +37,36 @@ REQUEST_TIMEOUT = 25
 BETWEEN_PAGE_DELAY_S = 0.5
 MAX_PAGES = 120  # safety bound; last page is typically ~85
 
+# ~70% of SFPL programming is storytime / early-learning / school-age
+# activities that dwarf the "what's happening tonight" calendar for adults.
+# Skip events whose audiences are exclusively kid-only. Teens, all-ages,
+# families, and adults programming stay.
+_KID_ONLY_AUDIENCES = frozenset({
+    "event--babies-toddlers-or-preschoolers",
+    "event--elementary-school-age",
+    "event--middle-school-age",
+})
+_ADULT_RELEVANT_AUDIENCES = frozenset({
+    "event--adults",
+    "event--teens",
+    "event--all-ages",
+    "event--families",
+})
+
+
+def _is_kid_only(card) -> bool:
+    """True if the article's audience classes are all kid-only.
+
+    Multi-audience events (e.g. one with `event--all-ages` + `event--children`)
+    stay because at least one adult-relevant audience is present.
+    """
+    classes = set(card.get("class") or [])
+    kid = classes & _KID_ONLY_AUDIENCES
+    if not kid:
+        return False
+    adult = classes & _ADULT_RELEVANT_AUDIENCES
+    return not adult
+
 _DATE_RE = re.compile(
     r"^(?P<day>[A-Za-z]+),\s*"
     r"(?P<m>\d{1,2})/(?P<d>\d{1,2})/(?P<y>\d{4}),\s*"
@@ -83,6 +113,9 @@ def _parse_start(date_text: str) -> datetime | None:
 
 
 def _parse_card(card) -> RawEvent | None:
+    # Filter out kid-only audiences at scrape time so they never enter the DB.
+    if _is_kid_only(card):
+        return None
     title_a = card.select_one(".event__title a")
     if not title_a:
         return None

@@ -25,9 +25,12 @@ def test_matches():
 
 
 def test_parse_returns_events(html):
+    # The fixture has 3 cards, one of which is a
+    # babies-toddlers-or-preschoolers early-learning session — filtered out.
     events = parse(html)
-    assert len(events) == 3
+    assert len(events) == 2
     assert all(isinstance(e, RawEvent) for e in events)
+    assert all("Early Learning" not in e.title for e in events)
 
 
 def test_parse_fields(html):
@@ -101,3 +104,52 @@ def test_last_page_number_reads_pagination():
 
 def test_last_page_number_missing_returns_none():
     assert _last_page_number("<html><body>no pager</body></html>") is None
+
+
+# --- kid-only audience filter -------------------------------------------
+
+_SFPL_CARD_TEMPLATE = """
+<article class="event event--teaser {audience_classes} teaser">
+  <div class="event__details"><div class="event__main">
+    <header class="event__header">
+      <div class="event__date"><span class="date-display-range">
+        Tuesday, 9/22/2026, 10:15 - 10:45
+      </span></div>
+      <div class="event__name"><h2 class="event__title">
+        <a href="/events/2026/09/22/test-event">Test Event</a>
+      </h2></div>
+    </header>
+    <div class="event__location">Main</div>
+  </div></div>
+</article>
+"""
+
+
+def _one_card(audience: str) -> str:
+    return f'<div>{_SFPL_CARD_TEMPLATE.format(audience_classes=audience)}</div>'
+
+
+def test_kid_only_audiences_are_skipped():
+    for aud in (
+        "event--babies-toddlers-or-preschoolers",
+        "event--elementary-school-age",
+        "event--middle-school-age",
+    ):
+        assert parse(_one_card(aud)) == [], f"expected skip for {aud}"
+
+
+def test_adult_relevant_audiences_are_kept():
+    for aud in ("event--adults", "event--teens", "event--all-ages", "event--families"):
+        events = parse(_one_card(aud))
+        assert len(events) == 1, f"expected keep for {aud}"
+
+
+def test_mixed_kid_and_adult_audience_is_kept():
+    """A card with both a kid audience and an adult-relevant audience stays.
+
+    Some SFPL programming is co-audience (all-ages + children); we should not
+    drop it just because a kid class is present.
+    """
+    mixed = "event--all-ages event--elementary-school-age"
+    events = parse(_one_card(mixed))
+    assert len(events) == 1
