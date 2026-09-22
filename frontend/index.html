@@ -493,6 +493,25 @@
     updatePresetHighlight();
     render();
   }
+  // "This week" = today through the coming Sunday. Week-anchored, not rolling.
+  function weekSunday() {
+    const today = new Date();
+    const daysToSunday = (7 - today.getDay()) % 7; // 0 = today is Sunday
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() + daysToSunday);
+    return sunday;
+  }
+  // Apply presets. Kept as named functions so both the click handlers and
+  // readStateFromUrl (?dates=today|week) share one definition — the preset
+  // resolves to *today's* calendar day every time it runs, which is the whole
+  // point of bookmarking ?dates=today.
+  function applyTodayPreset() {
+    const today = new Date();
+    setDateRange(today, today);
+  }
+  function applyWeekPreset() {
+    setDateRange(new Date(), weekSunday());
+  }
   // Highlight whichever preset (if any) matches the current from/to values.
   function updatePresetHighlight() {
     presetTodayEl.classList.remove("active");
@@ -503,11 +522,7 @@
       presetTodayEl.classList.add("active");
       return;
     }
-    // "This week" = today through the coming Sunday. Week-anchored, not rolling.
-    const daysToSunday = (7 - today.getDay()) % 7; // 0 = today is Sunday
-    const sunday = new Date(today);
-    sunday.setDate(today.getDate() + daysToSunday);
-    if (fromEl.value === todayStr && toEl.value === toISODate(sunday)) {
+    if (fromEl.value === todayStr && toEl.value === toISODate(weekSunday())) {
       presetWeekEl.classList.add("active");
     }
   }
@@ -526,23 +541,12 @@
   // of re-applying it. `.active` is set by updatePresetHighlight() whenever
   // from/to match the preset's range, so it's the authoritative check.
   presetTodayEl.addEventListener("click", () => {
-    if (presetTodayEl.classList.contains("active")) {
-      setDateRange(null, null);
-      return;
-    }
-    const today = new Date();
-    setDateRange(today, today);
+    if (presetTodayEl.classList.contains("active")) setDateRange(null, null);
+    else applyTodayPreset();
   });
   presetWeekEl.addEventListener("click", () => {
-    if (presetWeekEl.classList.contains("active")) {
-      setDateRange(null, null);
-      return;
-    }
-    const today = new Date();
-    const daysToSunday = (7 - today.getDay()) % 7;
-    const sunday = new Date(today);
-    sunday.setDate(today.getDate() + daysToSunday);
-    setDateRange(today, sunday);
+    if (presetWeekEl.classList.contains("active")) setDateRange(null, null);
+    else applyWeekPreset();
   });
   resetEl.addEventListener("click", () => {
     for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
@@ -564,8 +568,17 @@
     if (selected.size !== allSources.length) {
       p.set("sources", [...selected].join(","));
     }
-    if (fromEl.value) p.set("from", fromEl.value);
-    if (toEl.value) p.set("to", toEl.value);
+    // Encode an active preset as a symbolic value (?dates=today|week) so a
+    // bookmarked link always resolves to the CURRENT day/week, not the frozen
+    // date it was created on. Only a custom range falls back to from/to.
+    if (presetTodayEl.classList.contains("active")) {
+      p.set("dates", "today");
+    } else if (presetWeekEl.classList.contains("active")) {
+      p.set("dates", "week");
+    } else {
+      if (fromEl.value) p.set("from", fromEl.value);
+      if (toEl.value) p.set("to", toEl.value);
+    }
     if (locationFilter) p.set("loc", locationFilter);
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
@@ -592,17 +605,26 @@
       }
       updateSourceSummary();
     }
-    const from = p.get("from");
-    const to = p.get("to");
-    if (from && /^\d{4}-\d{2}-\d{2}$/.test(from)) {
-      fromEl.value = from;
-      dateFrom = new Date(from + "T00:00:00");
+    // Symbolic date presets resolve live against today's date; a raw
+    // from/to range is the fallback. `dates` wins if both are somehow present.
+    const dates = p.get("dates");
+    if (dates === "today") {
+      applyTodayPreset();
+    } else if (dates === "week") {
+      applyWeekPreset();
+    } else {
+      const from = p.get("from");
+      const to = p.get("to");
+      if (from && /^\d{4}-\d{2}-\d{2}$/.test(from)) {
+        fromEl.value = from;
+        dateFrom = new Date(from + "T00:00:00");
+      }
+      if (to && /^\d{4}-\d{2}-\d{2}$/.test(to)) {
+        toEl.value = to;
+        dateTo = new Date(to + "T23:59:59");
+      }
+      if (fromEl.value || toEl.value) updatePresetHighlight();
     }
-    if (to && /^\d{4}-\d{2}-\d{2}$/.test(to)) {
-      toEl.value = to;
-      dateTo = new Date(to + "T23:59:59");
-    }
-    if (fromEl.value || toEl.value) updatePresetHighlight();
     const loc = p.get("loc");
     if (loc) {
       // setLocationFilter shows the pill and calls render() itself.
