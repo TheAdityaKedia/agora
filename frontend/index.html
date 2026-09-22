@@ -561,6 +561,40 @@
     list.innerHTML = flat ? renderFlat(filtered) : renderList(filtered);
   }
 
+  // Build one event's card HTML. `timeHtml` is the pre-formatted, already-escaped
+  // time string to place in the `.time` slot — callers control whether it's a
+  // time-only string ("8:00 PM", grouped view) or a full date+time ("Fri Oct 4 · 8:00 PM",
+  // search-active flat view).
+  function renderEventRow(ev, timeHtml) {
+    const title = escapeHtml(ev.title);
+    const titleHtml = ev.url
+      ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
+      : title;
+    const loc = ev.location
+      ? '<div class="location"><button type="button" class="location-btn" data-location="'
+          + escapeHtml(ev.location) + '" title="Filter by this location">'
+          + escapeHtml(ev.location) + '</button></div>'
+      : "";
+    const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
+    const desc = renderDescription(ev.description);
+    // Thumbnail is optional — some sources don't expose one, and we don't
+    // want a broken-image slot. Skip the div entirely if no image_url.
+    const thumb = ev.image_url
+      ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
+          + escapeHtml(ev.image_url) + '"></div>'
+      : "";
+    return (
+      '<div class="event">' +
+        '<div class="time">' + timeHtml + "</div>" +
+        thumb +
+        '<div class="details">' +
+          '<div class="title">' + titleHtml + "</div>" +
+          loc + src + desc +
+        "</div>" +
+      "</div>"
+    );
+  }
+
   function renderList(events) {
     const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
     const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
@@ -575,33 +609,7 @@
       parts.push('<h2 class="date">' + escapeHtml(dateFmt.format(new Date(key))) + "</h2>");
       for (const ev of dayEvents) {
         const time = escapeHtml(timeFmt.format(ev._start));
-        const title = escapeHtml(ev.title);
-        const titleHtml = ev.url
-          ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
-          : title;
-        const loc = ev.location
-          ? '<div class="location"><button type="button" class="location-btn" data-location="'
-              + escapeHtml(ev.location) + '" title="Filter by this location">'
-              + escapeHtml(ev.location) + '</button></div>'
-          : "";
-        const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
-        const desc = renderDescription(ev.description);
-        // Thumbnail is optional — some sources don't expose one, and we don't
-        // want a broken-image slot. Skip the div entirely if no image_url.
-        const thumb = ev.image_url
-          ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
-              + escapeHtml(ev.image_url) + '"></div>'
-          : "";
-        parts.push(
-          '<div class="event">' +
-            '<div class="time">' + time + "</div>" +
-            thumb +
-            '<div class="details">' +
-              '<div class="title">' + titleHtml + "</div>" +
-              loc + src + desc +
-            "</div>" +
-          "</div>"
-        );
+        parts.push(renderEventRow(ev, time));
       }
     }
     return parts.join("");
@@ -618,31 +626,7 @@
     const parts = [];
     for (const ev of events) {
       const when = escapeHtml(flatDateFmt.format(ev._start));
-      const title = escapeHtml(ev.title);
-      const titleHtml = ev.url
-        ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
-        : title;
-      const loc = ev.location
-        ? '<div class="location"><button type="button" class="location-btn" data-location="'
-            + escapeHtml(ev.location) + '" title="Filter by this location">'
-            + escapeHtml(ev.location) + '</button></div>'
-        : "";
-      const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
-      const desc = renderDescription(ev.description);
-      const thumb = ev.image_url
-        ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
-            + escapeHtml(ev.image_url) + '"></div>'
-        : "";
-      parts.push(
-        '<div class="event">' +
-          '<div class="time">' + when + "</div>" +
-          thumb +
-          '<div class="details">' +
-            '<div class="title">' + titleHtml + "</div>" +
-            loc + src + desc +
-          "</div>" +
-        "</div>"
-      );
+      parts.push(renderEventRow(ev, when));
     }
     return parts.join("");
   }
