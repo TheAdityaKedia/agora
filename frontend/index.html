@@ -120,6 +120,15 @@
     margin-left: auto;
   }
   .reset-btn:hover { color: var(--fg); }
+  .preset-btn {
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--chip-bg); color: var(--fg); border: 1px solid var(--border);
+    font-size: 13px; cursor: pointer;
+  }
+  .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .preset-btn.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
+  }
 
   h2.date {
     margin: 32px 0 8px;
@@ -209,6 +218,8 @@
   </div>
   <div class="filter-row">
     <span class="filter-label">Dates</span>
+    <button type="button" class="preset-btn" id="preset-today">Today</button>
+    <button type="button" class="preset-btn" id="preset-week">This week</button>
     <label style="font-size:13px;color:var(--muted)">From
       <input type="date" id="date-from" class="date-input" aria-label="From date">
     </label>
@@ -235,6 +246,8 @@
   const fromEl = document.getElementById("date-from");
   const toEl = document.getElementById("date-to");
   const resetEl = document.getElementById("reset");
+  const presetTodayEl = document.getElementById("preset-today");
+  const presetWeekEl = document.getElementById("preset-week");
   const locationRowEl = document.getElementById("location-row");
   const locationLabelEl = document.getElementById("location-label");
   const locationClearEl = document.getElementById("location-clear");
@@ -361,12 +374,67 @@
   }
   updateSourceSummary();
 
-  fromEl.addEventListener("input", () => { dateFrom = fromEl.value ? new Date(fromEl.value + "T00:00:00") : null; render(); });
-  toEl.addEventListener("input",   () => { dateTo   = toEl.value   ? new Date(toEl.value   + "T23:59:59") : null; render(); });
+  // Format a Date's local calendar day as YYYY-MM-DD for <input type="date">.
+  const toISODate = (d) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  };
+  // Apply an explicit calendar range (Date objects, both inclusive).
+  function setDateRange(from, to) {
+    fromEl.value = from ? toISODate(from) : "";
+    toEl.value = to ? toISODate(to) : "";
+    dateFrom = from ? new Date(toISODate(from) + "T00:00:00") : null;
+    dateTo   = to   ? new Date(toISODate(to)   + "T23:59:59") : null;
+    updatePresetHighlight();
+    render();
+  }
+  // Highlight whichever preset (if any) matches the current from/to values.
+  function updatePresetHighlight() {
+    presetTodayEl.classList.remove("active");
+    presetWeekEl.classList.remove("active");
+    const today = new Date();
+    const todayStr = toISODate(today);
+    if (fromEl.value === todayStr && toEl.value === todayStr) {
+      presetTodayEl.classList.add("active");
+      return;
+    }
+    // "This week" = today through the coming Sunday. Week-anchored, not rolling.
+    const daysToSunday = (7 - today.getDay()) % 7; // 0 = today is Sunday
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() + daysToSunday);
+    if (fromEl.value === todayStr && toEl.value === toISODate(sunday)) {
+      presetWeekEl.classList.add("active");
+    }
+  }
+
+  fromEl.addEventListener("input", () => {
+    dateFrom = fromEl.value ? new Date(fromEl.value + "T00:00:00") : null;
+    updatePresetHighlight();
+    render();
+  });
+  toEl.addEventListener("input", () => {
+    dateTo = toEl.value ? new Date(toEl.value + "T23:59:59") : null;
+    updatePresetHighlight();
+    render();
+  });
+  presetTodayEl.addEventListener("click", () => {
+    const today = new Date();
+    setDateRange(today, today);
+  });
+  presetWeekEl.addEventListener("click", () => {
+    const today = new Date();
+    const daysToSunday = (7 - today.getDay()) % 7;
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() + daysToSunday);
+    setDateRange(today, sunday);
+  });
   resetEl.addEventListener("click", () => {
     for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
     updateSourceSummary();
     fromEl.value = ""; toEl.value = ""; dateFrom = dateTo = null;
+    updatePresetHighlight();
     setLocationFilter(null);
   });
 
