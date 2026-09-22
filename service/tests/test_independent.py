@@ -5,15 +5,23 @@ from zoneinfo import ZoneInfo
 import pytest
 
 from scrapers.base import RawEvent
-from scrapers.independent import parse, matches, _parse_aria, VENUE
+from scrapers.independent import (
+    parse, parse_event_description, matches, _parse_aria, VENUE,
+)
 
 FIXTURE = Path(__file__).parent / "fixtures" / "independent_events.html"
+DETAIL_FIXTURE = Path(__file__).parent / "fixtures" / "independent_detail.html"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
 
 @pytest.fixture
 def html():
     return FIXTURE.read_text()
+
+
+@pytest.fixture
+def detail_html():
+    return DETAIL_FIXTURE.read_text()
 
 
 def test_matches():
@@ -31,9 +39,26 @@ def test_event_fields(html):
     ev = parse(html)[0]
     assert ev.title
     assert ev.location == VENUE
-    # No public URL from the calendar view
-    assert ev.url is None
     assert ev.image_url and ev.image_url.startswith("https://")
+
+
+def test_detail_url_resolved_from_dialog(html):
+    """The .fc-event href is a modal hash (#tw-event-dialog-N); the matching
+    dialog holds the real /tm-event/ detail link, resolved to an absolute URL."""
+    events = parse(html)
+    assert events[0].url == "https://www.theindependentsf.com/tm-event/sondre-lerche/"
+    # A site-relative dialog link is resolved against the base URL too.
+    assert events[1].url == "https://www.theindependentsf.com/tm-event/dana-and-alden/"
+
+
+def test_parse_event_description_extracts_artist_bio(detail_html):
+    desc = parse_event_description(detail_html)
+    assert desc and desc.startswith("Sondre Lerche has always been a romantic")
+    assert "Do Not Sell" not in desc  # privacy-banner noise excluded
+
+
+def test_parse_event_description_none_when_no_artist_list():
+    assert parse_event_description("<div class='row'><p>no artist list</p></div>") is None
 
 
 def test_start_time_from_aria(html):
