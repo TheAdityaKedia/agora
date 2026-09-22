@@ -134,6 +134,15 @@
     margin-left: auto;
   }
   .reset-btn:hover { color: var(--fg); }
+  .copy-btn {
+    padding: 4px 10px; border-radius: 999px;
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+    font-size: 13px; cursor: pointer;
+  }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .copy-btn.copied {
+    color: var(--accent-fg); background: var(--accent); border-color: var(--accent);
+  }
   .preset-btn {
     padding: 4px 10px; border-radius: 999px;
     background: var(--chip-bg); color: var(--fg); border: 1px solid var(--border);
@@ -261,6 +270,7 @@
       <input type="date" id="date-to" class="date-input" aria-label="To date">
     </label>
     <button id="reset" class="reset-btn">Reset filters</button>
+    <button id="copy-link" class="copy-btn" type="button" aria-label="Copy shareable link to this filtered view">Copy link</button>
   </div>
 </section>
 
@@ -281,6 +291,7 @@
   const fromEl = document.getElementById("date-from");
   const toEl = document.getElementById("date-to");
   const resetEl = document.getElementById("reset");
+  const copyEl = document.getElementById("copy-link");
   const presetTodayEl = document.getElementById("preset-today");
   const presetWeekEl = document.getElementById("preset-week");
   const locationRowEl = document.getElementById("location-row");
@@ -534,15 +545,92 @@
     setLocationFilter(null);
   });
 
+  // --- URL sync: filter state <-> query string ---
+  // Every state mutation ends in render(), so writing the URL from render()
+  // is the single choke point. `replaceState` (not push) keeps the browser's
+  // back button meaningful — users don't want a history entry per keystroke.
+  function writeStateToUrl() {
+    const p = new URLSearchParams();
+    if (searchQuery) p.set("q", searchQuery);
+    if (selected.size !== allSources.length) {
+      p.set("sources", [...selected].join(","));
+    }
+    if (fromEl.value) p.set("from", fromEl.value);
+    if (toEl.value) p.set("to", toEl.value);
+    if (locationFilter) p.set("loc", locationFilter);
+    const qs = p.toString();
+    const url = qs ? `${location.pathname}?${qs}` : location.pathname;
+    if (location.pathname + location.search !== url) {
+      history.replaceState(null, "", url);
+    }
+  }
+
+  // Restore state from ?q=&sources=&from=&to=&loc= on a fresh load. Called
+  // once after DOM refs + filter machinery are set up. Silently ignores
+  // unknown source names and malformed dates so a shared link survives DB
+  // churn.
+  function readStateFromUrl() {
+    const p = new URLSearchParams(location.search);
+    const srcs = p.get("sources");
+    if (srcs !== null) {
+      const wanted = new Set(srcs.split(",").filter(Boolean));
+      selected.clear();
+      for (const s of allSources) {
+        const on = wanted.has(s);
+        if (on) selected.add(s);
+        const cb = checkboxes.get(s);
+        if (cb) cb.checked = on;
+      }
+      updateSourceSummary();
+    }
+    const from = p.get("from");
+    const to = p.get("to");
+    if (from && /^\d{4}-\d{2}-\d{2}$/.test(from)) {
+      fromEl.value = from;
+      dateFrom = new Date(from + "T00:00:00");
+    }
+    if (to && /^\d{4}-\d{2}-\d{2}$/.test(to)) {
+      toEl.value = to;
+      dateTo = new Date(to + "T23:59:59");
+    }
+    if (fromEl.value || toEl.value) updatePresetHighlight();
+    const loc = p.get("loc");
+    if (loc) {
+      // setLocationFilter shows the pill and calls render() itself.
+      setLocationFilter(loc);
+    }
+    const q = p.get("q");
+    if (q) {
+      searchEl.value = q;
+      updateSearch();
+    }
+  }
+
+  copyEl.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      copyEl.textContent = "Copied!";
+      copyEl.classList.add("copied");
+    } catch {
+      copyEl.textContent = "Copy failed";
+    }
+    setTimeout(() => {
+      copyEl.textContent = "Copy link";
+      copyEl.classList.remove("copied");
+    }, 1500);
+  });
+
   if (events.length === 0) {
     list.innerHTML = '<div class="empty">No upcoming events.</div>';
     meta.textContent = "updated " + generatedAt.toLocaleString();
     return;
   }
   filters.hidden = false;
+  readStateFromUrl();
   render();
 
   function render() {
+    writeStateToUrl();
     const otherFiltersPass = (ev) => {
       const evSources = ev.sources || [];
       if (!evSources.some(s => selected.has(s))) return false;
