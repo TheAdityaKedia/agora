@@ -156,6 +156,19 @@
   .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
   .title a:hover { color: var(--accent); text-decoration: underline; }
   .location, .source { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .description {
+    font-size: 13px; color: var(--muted);
+    margin-top: 6px; line-height: 1.45;
+  }
+  .description[role="button"] { cursor: pointer; }
+  .description[role="button"]:hover { color: var(--fg); }
+  .description[role="button"]:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px;
+  }
+  .description .desc-full { display: none; white-space: pre-wrap; }
+  .description.expanded .desc-preview { display: none; }
+  .description.expanded .desc-full { display: inline; }
+  .desc-toggle { color: var(--accent); font-weight: 500; margin-left: 2px; }
   .location-btn {
     background: none; border: none; padding: 0; margin: 0;
     color: inherit; font: inherit; text-align: left;
@@ -289,10 +302,17 @@
     render();
   }
   locationClearEl.addEventListener("click", () => setLocationFilter(null));
-  // Event delegation: any .location-btn click sets the filter to its data-location.
+  // Event delegation for anything inside the event list.
   list.addEventListener("click", (e) => {
-    const btn = e.target.closest(".location-btn");
-    if (btn) setLocationFilter(btn.dataset.location);
+    const locBtn = e.target.closest(".location-btn");
+    if (locBtn) { setLocationFilter(locBtn.dataset.location); return; }
+    const desc = e.target.closest('.description[role="button"]');
+    if (desc) desc.classList.toggle("expanded");
+  });
+  list.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const desc = e.target.closest('.description[role="button"]');
+    if (desc) { e.preventDefault(); desc.classList.toggle("expanded"); }
   });
 
   // Build source list (checkbox rows, with per-source counts). A multi-source
@@ -492,6 +512,7 @@
               + escapeHtml(ev.location) + '</button></div>'
           : "";
         const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
+        const desc = renderDescription(ev.description);
         // Thumbnail is optional — some sources don't expose one, and we don't
         // want a broken-image slot. Skip the div entirely if no image_url.
         const thumb = ev.image_url
@@ -504,7 +525,7 @@
             thumb +
             '<div class="details">' +
               '<div class="title">' + titleHtml + "</div>" +
-              loc + src +
+              loc + src + desc +
             "</div>" +
           "</div>"
         );
@@ -513,6 +534,37 @@
     return parts.join("");
   }
 })();
+
+// Pick the first sentence for the preview. Falls back to a hard char cap so a
+// single run-on sentence still gets truncated. The `\.\s|\!\s|\?\s` lookahead
+// keeps the terminator in the match while requiring real word-boundary
+// whitespace so we don't split on abbreviations at end of string.
+const PREVIEW_MAX = 180;
+function firstSentence(text) {
+  const t = text.replace(/\s+/g, " ").trim();
+  const m = t.match(/^[^.!?]*[.!?](?=\s|$)/);
+  let s = m ? m[0].trim() : t;
+  if (s.length > PREVIEW_MAX) s = s.slice(0, PREVIEW_MAX).replace(/\s+\S*$/, "").trim();
+  return s;
+}
+function renderDescription(text) {
+  if (!text) return "";
+  const full = text.replace(/\s+/g, " ").trim();
+  if (!full) return "";
+  const preview = firstSentence(full);
+  // Nothing to reveal — render as plain (non-interactive) text.
+  if (preview.length >= full.length) {
+    return '<div class="description">' + escapeHtml(full) + "</div>";
+  }
+  return (
+    '<div class="description" role="button" tabindex="0" aria-label="Expand description">' +
+      '<span class="desc-preview">' + escapeHtml(preview) +
+        '<span class="desc-toggle">… more</span></span>' +
+      '<span class="desc-full">' + escapeHtml(full) +
+        ' <span class="desc-toggle">less</span></span>' +
+    "</div>"
+  );
+}
 
 function escapeHtml(s) {
   return s == null ? "" : String(s).replace(/[&<>"']/g, function (c) {
