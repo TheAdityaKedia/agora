@@ -14,12 +14,19 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from db import get_session
 from models import Event
 
+
+# Interpret the past-window in CALENDAR DAYS in the source region, not rolling
+# 24-hour periods. This is Agora's audience region (SF Bay Area), so we anchor
+# to Pacific local time — events that happened earlier today (local) stay in
+# the manifest until midnight PT, not until 24h after they started.
+EXPORT_TZ = ZoneInfo("America/Los_Angeles")
 
 DEFAULT_BACK_WINDOW_DAYS = 1
 
@@ -42,10 +49,18 @@ def _serialize(event: Event) -> dict:
 def export_json(path: Path, back_window_days: int = DEFAULT_BACK_WINDOW_DAYS) -> int:
     """Write upcoming events as a JSON manifest to `path`.
 
-    Includes events with `start_time >= now - back_window_days`. Returns the
-    number of events written.
+    `back_window_days` is measured in **calendar days** in EXPORT_TZ, not
+    rolling 24-hour periods:
+      - 1 (default) → include events whose local day is today or later; an
+        event that started this morning stays visible all day.
+      - 2 → today + yesterday + future.
+      - 0 → tomorrow onward only.
+
+    Returns the number of events written.
     """
-    cutoff = datetime.now(timezone.utc) - timedelta(days=back_window_days)
+    today_local = datetime.now(EXPORT_TZ).date()
+    oldest_day = today_local - timedelta(days=max(0, back_window_days - 1))
+    cutoff = datetime.combine(oldest_day, dtime.min, tzinfo=EXPORT_TZ).astimezone(timezone.utc)
     session = get_session()
     try:
         events = (
@@ -77,7 +92,8 @@ def _cli() -> None:
         "--back-window-days",
         type=int,
         default=DEFAULT_BACK_WINDOW_DAYS,
-        help="Include events whose start_time is within this many days in the past.",
+        help="Include events whose LOCAL calendar day is within this many days "
+             "in the past. 1 (default) = today onward, 2 = today+yesterday, etc.",
     )
     args = parser.parse_args()
     count = export_json(args.out, back_window_days=args.back_window_days)

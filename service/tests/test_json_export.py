@@ -90,13 +90,54 @@ def test_export_orders_by_start_time(db_session, tmp_path):
 
 def test_export_respects_back_window(db_session, tmp_path):
     now = datetime.now(timezone.utc)
-    # 3 days ago — within a 7-day back window, outside the default 1-day window
+    # 3 days ago — outside default 1-day window (today only), inside 7-day window
     db_session.add(_make_event("Recent past", now - timedelta(days=3), url="https://example.com/recent"))
     db_session.commit()
 
     out = tmp_path / "events.json"
     assert export_json(out) == 0  # default 1-day window excludes it
     assert export_json(out, back_window_days=7) == 1  # 7-day window keeps it
+
+
+def test_export_keeps_earlier_today_events(db_session, tmp_path):
+    """An event that already started earlier today (local) must stay in the
+    manifest — the back window is measured in calendar days in EXPORT_TZ, not
+    rolling 24h, so today's 10am shows are still visible at 11pm today.
+    """
+    from zoneinfo import ZoneInfo
+
+    pacific = ZoneInfo("America/Los_Angeles")
+    # A datetime "today at 06:00 local time" — well past for anyone reading
+    # this after mid-morning, but same calendar day → must be kept.
+    today_local = datetime.now(pacific).date()
+    six_am_today = datetime.combine(today_local, datetime.min.time().replace(hour=6), tzinfo=pacific)
+    db_session.add(_make_event("Morning show today", six_am_today.astimezone(timezone.utc),
+                               url="https://example.com/morning"))
+    db_session.commit()
+
+    out = tmp_path / "events.json"
+    assert export_json(out) == 1  # today's earlier-today event still included
+
+
+def test_export_drops_yesterday_events_with_default_window(db_session, tmp_path):
+    """Yesterday's events (any hour) drop out of the default 1-day window,
+    even a yesterday-11pm event that ended <25h ago.
+    """
+    from zoneinfo import ZoneInfo
+
+    pacific = ZoneInfo("America/Los_Angeles")
+    today_local = datetime.now(pacific).date()
+    yesterday_local = today_local - timedelta(days=1)
+    late_yesterday = datetime.combine(
+        yesterday_local, datetime.min.time().replace(hour=23), tzinfo=pacific,
+    )
+    db_session.add(_make_event("Yesterday late", late_yesterday.astimezone(timezone.utc),
+                               url="https://example.com/yesterday"))
+    db_session.commit()
+
+    out = tmp_path / "events.json"
+    assert export_json(out) == 0
+    assert export_json(out, back_window_days=2) == 1  # 2-day window keeps yesterday
 
 
 def test_export_orders_same_time_events_by_id_for_stable_diffs(db_session, tmp_path):
