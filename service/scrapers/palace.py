@@ -99,10 +99,44 @@ def parse(html: str) -> list[RawEvent]:
     return [ev for ev in (_parse_card(c) for c in soup.select(".collection-item.pofa-tpl")) if ev is not None]
 
 
+def parse_event_description(html: str) -> str | None:
+    """Extract the event blurb from a Palace `/event/` detail page, or None.
+
+    The blurb is the first `.w-richtext` block; later `.w-richtext` blocks on
+    the page are directions/parking info, so only the first is used.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    block = soup.select_one(".w-richtext")
+    if block:
+        text = block.get_text(" ", strip=True)
+        if text:
+            return text
+    return None
+
+
+def _fetch_description(url: str) -> str | None:
+    """Fetch a detail page and return its blurb, or None on any error."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            return None
+        return parse_event_description(resp.text)
+    except requests.RequestException:
+        return None
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
     if resp.status_code in (403, 429):
         print(f"[palace] blocked (HTTP {resp.status_code}) at {url}, skipping", flush=True)
         return []
     resp.raise_for_status()
-    return parse(resp.text)
+    events = parse(resp.text)
+    # The listing only has the date; fetch each event's detail page for the
+    # real blurb, keeping the date string as a fallback when there's none.
+    for ev in events:
+        if ev.url and "/event/" in ev.url:
+            desc = _fetch_description(ev.url)
+            if desc:
+                ev.description = desc
+    return events
