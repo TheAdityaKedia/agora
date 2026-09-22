@@ -157,6 +157,9 @@
     flex: 0 0 72px; color: var(--muted); font-variant-numeric: tabular-nums;
     font-size: 14px; padding-top: 2px;
   }
+  .event .time { line-height: 1.3; }
+  /* Search-active flat rows put a full date + time in .time — widen it. */
+  body.searching .time { flex: 0 0 140px; }
   .thumb {
     flex: 0 0 72px; width: 72px; height: 72px;
     border-radius: 6px; background: var(--chip-bg);
@@ -330,6 +333,26 @@
   let dateFrom = null;
   let dateTo = null;
   let locationFilter = null;
+
+  let searchQuery = "";
+  let rankedOrder = null;  // number[] | null — event ids in rank order, null when no search is active
+
+  const SEARCH_SCORE_THRESHOLD = 1.0;  // Drop weak matches — spec §2.4
+
+  function updateSearch() {
+    const q = searchEl.value.trim();
+    searchQuery = q;
+    if (!q) {
+      rankedOrder = null;
+      document.body.classList.remove("searching");
+    } else {
+      const results = miniSearch.search(q).filter(r => r.score >= SEARCH_SCORE_THRESHOLD);
+      rankedOrder = results.map(r => r.id);
+      document.body.classList.add("searching");
+    }
+    render();
+  }
+  searchEl.addEventListener("input", updateSearch);
 
   function setLocationFilter(loc) {
     locationFilter = loc;
@@ -507,15 +530,25 @@
   render();
 
   function render() {
-    const filtered = events.filter(ev => {
+    const otherFiltersPass = (ev) => {
       const evSources = ev.sources || [];
-      // Include this event if any of its sources is currently selected.
       if (!evSources.some(s => selected.has(s))) return false;
       if (dateFrom && ev._start < dateFrom) return false;
       if (dateTo && ev._start > dateTo) return false;
       if (locationFilter && ev.location !== locationFilter) return false;
       return true;
-    });
+    };
+
+    let filtered;
+    let flat = false;
+    if (rankedOrder) {
+      // Search-active branch: apply other filters AFTER ranking (spec §1.3),
+      // preserving MiniSearch's descending-score order.
+      filtered = rankedOrder.map(id => events[id]).filter(otherFiltersPass);
+      flat = true;
+    } else {
+      filtered = events.filter(otherFiltersPass);
+    }
 
     const isFiltered = filtered.length !== events.length;
     meta.textContent = (isFiltered ? filtered.length + " of " + events.length : events.length)
@@ -525,7 +558,7 @@
       list.innerHTML = '<div class="empty">No events match the current filters.</div>';
       return;
     }
-    list.innerHTML = renderList(filtered);
+    list.innerHTML = flat ? renderFlat(filtered) : renderList(filtered);
   }
 
   function renderList(events) {
@@ -570,6 +603,46 @@
           "</div>"
         );
       }
+    }
+    return parts.join("");
+  }
+
+  // Flat ranked rendering — used when a search query is active. No date
+  // headers; each row's `.time` shows the full date + time so the reader
+  // always knows *when* the top-of-list result is.
+  const flatDateFmt = new Intl.DateTimeFormat(undefined, {
+    weekday: "short", month: "short", day: "numeric",
+    hour: "numeric", minute: "2-digit",
+  });
+  function renderFlat(events) {
+    const parts = [];
+    for (const ev of events) {
+      const when = escapeHtml(flatDateFmt.format(ev._start));
+      const title = escapeHtml(ev.title);
+      const titleHtml = ev.url
+        ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
+        : title;
+      const loc = ev.location
+        ? '<div class="location"><button type="button" class="location-btn" data-location="'
+            + escapeHtml(ev.location) + '" title="Filter by this location">'
+            + escapeHtml(ev.location) + '</button></div>'
+        : "";
+      const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
+      const desc = renderDescription(ev.description);
+      const thumb = ev.image_url
+        ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
+            + escapeHtml(ev.image_url) + '"></div>'
+        : "";
+      parts.push(
+        '<div class="event">' +
+          '<div class="time">' + when + "</div>" +
+          thumb +
+          '<div class="details">' +
+            '<div class="title">' + titleHtml + "</div>" +
+            loc + src + desc +
+          "</div>" +
+        "</div>"
+      );
     }
     return parts.join("");
   }
