@@ -3,19 +3,26 @@
 SFJAZZ sits behind Cloudflare with a 403 default for JS-less clients, so we
 drive a headless browser. The "Ace Calendar" widget renders one
 `.ace-cal-list-event` per performance:
-  - .ace-cal-list-day-of-month ("Sep 20") — no year; inferred from current
-    SF-local year and rolled forward at Dec→Jan month wraps.
+  - .ace-cal-list-day-of-month ("Sep 20") — no year; inferred from a base year
+    (the month URL being scraped) and rolled forward at Dec→Jan month wraps.
   - h4 title inside a linked <a> → title + relative detail URL
   - .ace-cal-list-event-time ("3:00 PM | Miner Auditorium")
   - .ace-cal-list-event-image img[src] (relative → resolve)
+
+The default `/calendar/` view shows only a short rolling window (~this week).
+To cover the full season, `scrape()` walks the site's per-month endpoint
+`/calendar/?date=YYYY-MM-01&layout=A` forward from today to the LOOKAHEAD
+horizon, deduping within-run by (title, start_time).
 """
 import re
-from datetime import date, datetime, timezone
+import time
+from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 
+from config import LOOKAHEAD_DAYS
 from scrapers.base import RawEvent
 from scrapers.browser import RateLimited, browser_context, load_page_html
 
@@ -28,6 +35,12 @@ SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 VENUE = "SFJAZZ Center, 201 Franklin St, San Francisco, CA 94102"
 
 NETWORKIDLE_WAIT = "load"  # networkidle can hang on tracker beacons
+# Politeness delay between per-month calendar fetches; SFJAZZ is Cloudflare-
+# fronted and 403s bursty traffic even with a warm context.
+BETWEEN_MONTH_DELAY_S = 5.0
+# Stop walking forward after this many consecutive empty months — SFJAZZ
+# publishes through their season end and past that months are just empty.
+EMPTY_MONTH_STOP = 2
 SETTLE_MS = 4000
 
 _MONTHS = {m: i for i, m in enumerate(
@@ -112,9 +125,16 @@ def _parse_event(el, year: int) -> tuple[RawEvent | None, int | None]:
     ), month
 
 
-def parse(html: str) -> list[RawEvent]:
+def parse(html: str, base_year: int | None = None) -> list[RawEvent]:
+    """Parse an SFJAZZ calendar page into RawEvents.
+
+    `base_year` is the year of the month being scraped — critical when
+    walking `/calendar/?date=YYYY-MM-01` for future months, since day cells
+    only carry short "Sep 20"-style labels with no year. Defaults to the
+    current SF-local year for backwards compatibility.
+    """
     soup = BeautifulSoup(html, "html.parser")
-    year = datetime.now(SOURCE_TZ).year
+    year = base_year if base_year is not None else datetime.now(SOURCE_TZ).year
     prev_month: int | None = None
     events: list[RawEvent] = []
     for el in soup.select(".ace-cal-list-event"):
@@ -131,11 +151,58 @@ def parse(html: str) -> list[RawEvent]:
     return events
 
 
-def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
-    with browser_context() as context:
-        try:
-            html = load_page_html(context, url, wait_until=NETWORKIDLE_WAIT, settle_ms=SETTLE_MS)
-        except RateLimited as e:
-            print(f"[sfjazz] blocked (HTTP {e.status}) at {e.url}, skipping", flush=True)
-            return []
-    return parse(html)
+def _month_calendar_url(month: date) -> str:
+    """Build the SFJAZZ per-month calendar URL for the first of `month`."""
+    return f"{EVENTS_URL}?date={month.isoformat()}&layout=A"
+
+
+def _next_month(d: date) -> date:
+    return date(d.year + 1, 1, 1) if d.month == 12 else date(d.year, d.month + 1, 1)
+
+
+def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]:
+    """Walk SFJAZZ's per-month calendar from today to `horizon`.
+
+    Stops early after `EMPTY_MONTH_STOP` consecutive months with zero events
+    (SFJAZZ's programming has a fixed season end).
+    """
+    if horizon is None:
+        horizon = date.today() + timedelta(days=LOOKAHEAD_DAYS)
+    today = datetime.now(SOURCE_TZ).date()
+    month_cursor = date(today.year, today.month, 1)
+    seen_keys: set[tuple[str, datetime]] = set()
+    events: list[RawEvent] = []
+    empty_streak = 0
+    while month_cursor <= horizon:
+        month_url = _month_calendar_url(month_cursor)
+        # Fresh browser context per month — reusing one context across many
+        # month URLs seems to accumulate friction with Cloudflare, whereas a
+        # cold context with its own JS-challenge round consistently succeeds.
+        with browser_context() as context:
+            try:
+                html = load_page_html(
+                    context, month_url,
+                    wait_until=NETWORKIDLE_WAIT, settle_ms=SETTLE_MS,
+                )
+            except RateLimited as e:
+                print(f"[sfjazz] blocked (HTTP {e.status}) at {e.url}, stopping early",
+                      flush=True)
+                break
+        found = 0
+        for ev in parse(html, base_year=month_cursor.year):
+            key = (ev.title, ev.start_time)
+            if key in seen_keys:
+                continue
+            seen_keys.add(key)
+            events.append(ev)
+            found += 1
+        if found == 0:
+            empty_streak += 1
+            if empty_streak >= EMPTY_MONTH_STOP:
+                break
+        else:
+            empty_streak = 0
+        month_cursor = _next_month(month_cursor)
+        if month_cursor <= horizon:
+            time.sleep(BETWEEN_MONTH_DELAY_S)
+    return events

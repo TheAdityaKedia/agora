@@ -6,8 +6,12 @@ from unittest.mock import patch
 import pytest
 
 from scrapers.base import RawEvent
+from datetime import date
 from scrapers import sfjazz
-from scrapers.sfjazz import parse, matches, _parse_month_day, _parse_time, VENUE
+from scrapers.sfjazz import (
+    parse, matches, _parse_month_day, _parse_time, VENUE,
+    _month_calendar_url, _next_month,
+)
 
 FIXTURE = Path(__file__).parent / "fixtures" / "sfjazz_events.html"
 PACIFIC = ZoneInfo("America/Los_Angeles")
@@ -60,3 +64,22 @@ def test_parse_month_day():
 def test_parse_time_from_mixed_text():
     assert _parse_time("3:00 PM | Miner Auditorium") == (15, 0)
     assert _parse_time("no time here") is None
+
+
+def test_parse_uses_base_year(html):
+    """`base_year=2027` puts the fixture's events in 2027, not "current year"."""
+    events = parse(html, base_year=2027)
+    assert len(events) == 2
+    for ev in events:
+        assert ev.start_time.astimezone(PACIFIC).year == 2027
+
+
+def test_month_calendar_url_format():
+    assert _month_calendar_url(date(2026, 10, 1)) == (
+        "https://www.sfjazz.org/calendar/?date=2026-10-01&layout=A"
+    )
+
+
+def test_next_month_wraps_at_year_boundary():
+    assert _next_month(date(2026, 11, 1)) == date(2026, 12, 1)
+    assert _next_month(date(2026, 12, 1)) == date(2027, 1, 1)
