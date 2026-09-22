@@ -142,7 +142,11 @@ def scrape_and_save(url: str) -> None:
     _save_scraped(scraper, raw_events, url)
 
 
-def run(source_filters: list[str] | None = None, max_workers: int | None = None) -> None:
+def run(
+    source_filters: list[str] | None = None,
+    max_workers: int | None = None,
+    excludes: list[str] | None = None,
+) -> None:
     """Scrape configured sources concurrently, then rewrite the JSON manifest.
 
     Scrapes run in a thread pool (I/O-bound), but events are SAVED serially in
@@ -151,14 +155,21 @@ def run(source_filters: list[str] | None = None, max_workers: int | None = None)
     results deterministic regardless of which scrape finishes first. DB writes
     stay on the main thread (SQLAlchemy sessions aren't thread-safe).
 
-    If `source_filters` is given, only sources whose URL contains any of the
-    substrings run — the rest are skipped, but the manifest is still rebuilt
-    from the full DB, so a subset run adds to the manifest without dropping
-    events from sources that weren't scraped this time.
+    `source_filters` (allowlist) and `excludes` (denylist) are both substring
+    matches against source URLs, and both can be combined: a URL runs when it
+    matches the allowlist (or the allowlist is empty) AND matches none of the
+    excludes. The manifest is still rebuilt from the full DB, so a subset run
+    adds to the manifest without dropping events from sources that weren't
+    scraped this time.
     """
     init_db()
     filters = source_filters or []
-    urls = [u for u in load_sources() if not filters or any(f in u for f in filters)]
+    exclude_terms = excludes or []
+    urls = [
+        u for u in load_sources()
+        if (not filters or any(f in u for f in filters))
+        and not any(x in u for x in exclude_terms)
+    ]
 
     if urls:
         workers = max_workers or int(os.environ.get("SCRAPER_WORKERS", str(DEFAULT_WORKERS)))
@@ -188,12 +199,18 @@ def _cli() -> None:
              "Runs every source when omitted.",
     )
     parser.add_argument(
+        "--exclude", nargs="+", metavar="SUBSTRING", default=None,
+        help="Skip sources whose URL contains any of these substrings. "
+             "Applied after --sources, so both can be combined "
+             "(e.g. --exclude sfjazz sfpl skips the slow/rate-limited sources).",
+    )
+    parser.add_argument(
         "--workers", type=int, default=None, metavar="N",
         help=f"Number of sources to scrape concurrently (default "
              f"SCRAPER_WORKERS env or {DEFAULT_WORKERS}).",
     )
     args = parser.parse_args()
-    run(source_filters=args.sources, max_workers=args.workers)
+    run(source_filters=args.sources, excludes=args.exclude, max_workers=args.workers)
 
 
 if __name__ == "__main__":

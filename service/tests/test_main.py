@@ -160,6 +160,56 @@ def test_run_source_filter_only_scrapes_matching_urls(db_session, tmp_path, monk
     ]
 
 
+def test_run_exclude_skips_matching_urls(db_session, tmp_path, monkeypatch):
+    """`run(excludes=[...])` should skip any source whose URL contains one of
+    the given substrings, running every other source in the file.
+    """
+    sources_file = tmp_path / "sources.txt"
+    sources_file.write_text(
+        "https://greenapplebooks.com/events\n"
+        "https://www.sfjazz.org/calendar/\n"
+        "https://sfpl.org/events\n"
+        "https://www.thefillmore.com/shows\n"
+    )
+    monkeypatch.setattr("main.SOURCES_FILE", sources_file)
+    monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
+    monkeypatch.setattr("main.init_db", lambda: None)
+    dispatched: list[str] = []
+    monkeypatch.setattr("main._scrape_one", lambda url: dispatched.append(url) or (None, []))
+    monkeypatch.setattr("main.export_json", lambda path: 0)
+
+    run(excludes=["sfjazz", "sfpl.org"])
+
+    assert sorted(dispatched) == [
+        "https://greenapplebooks.com/events",
+        "https://www.thefillmore.com/shows",
+    ]
+
+
+def test_run_sources_and_exclude_compose(db_session, tmp_path, monkeypatch):
+    """--sources allowlist and --exclude denylist compose with AND: a URL runs
+    when it matches the allowlist AND matches none of the excludes.
+    """
+    sources_file = tmp_path / "sources.txt"
+    sources_file.write_text(
+        "https://greenapplebooks.com/events\n"
+        "https://www.sfjazz.org/calendar/\n"
+        "https://sfpl.org/events\n"
+        "https://www.thefillmore.com/shows\n"
+    )
+    monkeypatch.setattr("main.SOURCES_FILE", sources_file)
+    monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
+    monkeypatch.setattr("main.init_db", lambda: None)
+    dispatched: list[str] = []
+    monkeypatch.setattr("main._scrape_one", lambda url: dispatched.append(url) or (None, []))
+    monkeypatch.setattr("main.export_json", lambda path: 0)
+
+    # allow any of the three ".com" hosts, then exclude green — leaves fillmore
+    run(source_filters=[".com"], excludes=["green"])
+
+    assert dispatched == ["https://www.thefillmore.com/shows"]
+
+
 def test_run_no_filter_scrapes_all(db_session, tmp_path, monkeypatch):
     sources_file = tmp_path / "sources.txt"
     sources_file.write_text("https://a.com\nhttps://b.com\n")
