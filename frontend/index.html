@@ -502,11 +502,22 @@
     updatePresetHighlight();
     render();
   });
+  // Presets toggle: clicking an active preset clears the date range instead
+  // of re-applying it. `.active` is set by updatePresetHighlight() whenever
+  // from/to match the preset's range, so it's the authoritative check.
   presetTodayEl.addEventListener("click", () => {
+    if (presetTodayEl.classList.contains("active")) {
+      setDateRange(null, null);
+      return;
+    }
     const today = new Date();
     setDateRange(today, today);
   });
   presetWeekEl.addEventListener("click", () => {
+    if (presetWeekEl.classList.contains("active")) {
+      setDateRange(null, null);
+      return;
+    }
     const today = new Date();
     const daysToSunday = (7 - today.getDay()) % 7;
     const sunday = new Date(today);
