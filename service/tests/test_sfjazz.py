@@ -11,6 +11,7 @@ from scrapers import sfjazz
 from scrapers.sfjazz import (
     parse, matches, _parse_month_day, _parse_time, VENUE,
     _month_calendar_url, _next_month, parse_detail_description,
+    _pick_show_link,
 )
 
 FIXTURE = Path(__file__).parent / "fixtures" / "sfjazz_events.html"
@@ -117,3 +118,62 @@ def test_parse_detail_description_skips_expired_show():
 
 def test_parse_detail_description_none_when_no_rich_text():
     assert parse_detail_description("<html><body></body></html>") is None
+
+
+# --- Phase 1 href picking -----------------------------------------------
+
+def _card(body: str):
+    from bs4 import BeautifulSoup
+    return BeautifulSoup(f"<li>{body}</li>", "html.parser").li
+
+
+def test_pick_show_link_prefers_tickets_productions_over_athome():
+    """SFJAZZ's calendar occasionally emits an /athome/… href alongside the
+    real /tickets/productions/… href. Prefer the productions one so the
+    detail-page description fetch hits the live-show page, not the streaming
+    archive.
+    """
+    li = _card('''
+      <div class="ace-cal-list-event-details">
+        <a href="/athome/fridays-live/jazz-at-lincoln-center/">Streaming</a>
+        <a href="/tickets/productions/26-27/jazz-at-lincoln-center/"><h4>Live show</h4></a>
+        <a href="/smartseat/?itemNumber=12345">Buy Tickets</a>
+      </div>
+    ''')
+    a = _pick_show_link(li)
+    assert a is not None
+    assert a.get("href") == "/tickets/productions/26-27/jazz-at-lincoln-center/"
+
+
+def test_pick_show_link_skips_smartseat_and_athome_when_no_productions():
+    """No `/tickets/productions/` present — must still avoid `/smartseat/` and
+    `/athome/` and pick the next best relative link.
+    """
+    li = _card('''
+      <div class="ace-cal-list-event-details">
+        <a href="/smartseat/?itemNumber=1">Buy Tickets</a>
+        <a href="/events/some-other-path/"><h4>Show</h4></a>
+        <a href="/athome/fridays-live/x/">Stream</a>
+      </div>
+    ''')
+    assert _pick_show_link(li).get("href") == "/events/some-other-path/"
+
+
+def test_pick_show_link_falls_back_to_first_when_all_skipped():
+    """If every candidate is a blacklisted path, return the first — better a
+    wrong URL than no URL, so at least the event still shows up.
+    """
+    li = _card('''
+      <div class="ace-cal-list-event-details">
+        <a href="/athome/x/">stream</a>
+        <a href="/smartseat/?itemNumber=9">buy</a>
+      </div>
+    ''')
+    a = _pick_show_link(li)
+    assert a is not None
+    assert a.get("href") == "/athome/x/"
+
+
+def test_pick_show_link_returns_none_when_no_anchors():
+    li = _card('<div class="ace-cal-list-event-details"><h4>No links</h4></div>')
+    assert _pick_show_link(li) is None

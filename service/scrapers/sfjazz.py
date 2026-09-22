@@ -101,6 +101,36 @@ def _parse_time(text: str) -> tuple[int, int] | None:
     return hour, int(m.group(2))
 
 
+def _pick_show_link(el):
+    """Return the `<a>` most likely to be the show's live detail page.
+
+    SFJAZZ occasionally emits an `/athome/…` streaming-archive href alongside
+    (or in place of) the `/tickets/productions/…` live-show href, and every
+    card also has a `/smartseat/?itemNumber=…` "Buy Tickets" link. Picking the
+    first `<a>` yields wrong descriptions (78-char at-home blurb) for those.
+
+    Priority:
+      1. `<a>` whose href starts with `/tickets/productions/` — the canonical
+         live-show detail URL.
+      2. `<a>` whose href is site-relative and not a known non-detail path
+         (`/smartseat/`, `/athome/`, `mailto:`, `tel:`) — safety fallback for
+         future URL shapes we don't know about.
+      3. The first `<a>` found (matches historical behavior for weird cards).
+    """
+    candidates = el.select(".ace-cal-list-event-details a[href]") or el.find_all("a", href=True)
+    if not candidates:
+        return None
+    for a in candidates:
+        if a.get("href", "").startswith("/tickets/productions/"):
+            return a
+    _skip_prefixes = ("/smartseat/", "/athome/", "mailto:", "tel:", "http://", "https://")
+    for a in candidates:
+        href = a.get("href", "")
+        if href and not href.startswith(_skip_prefixes):
+            return a
+    return candidates[0]
+
+
 def _parse_event(el, year: int) -> tuple[RawEvent | None, int | None]:
     day_tag = el.select_one(".ace-cal-list-day-of-month")
     if not day_tag:
@@ -110,7 +140,7 @@ def _parse_event(el, year: int) -> tuple[RawEvent | None, int | None]:
         return None, None
     month, day = md
 
-    title_a = el.select_one(".ace-cal-list-event-details a") or el.find("a", href=True)
+    title_a = _pick_show_link(el)
     title_tag = el.select_one(".ace-cal-list-event-details h4") or (title_a.find(["h3","h4","h5"]) if title_a else None)
     title = title_tag.get_text(strip=True) if title_tag else (title_a.get_text(strip=True) if title_a else None)
     if not title:
