@@ -14,6 +14,7 @@ To cover the full season, `scrape()` walks the site's per-month endpoint
 `/calendar/?date=YYYY-MM-01&layout=A` forward from today to the LOOKAHEAD
 horizon, deduping within-run by (title, start_time).
 """
+import random
 import re
 import time
 from datetime import date, datetime, timedelta, timezone
@@ -48,7 +49,15 @@ EMPTY_MONTH_STOP = 2
 # in the near-term window — farther-out events keep the "time | room" fallback
 # and get real descriptions on later runs as their date approaches.
 DESCRIPTION_WINDOW_DAYS = 60
-BETWEEN_DETAIL_DELAY_S = 2.0
+# Cloudflare 403s a stock headless Chromium after ~4 back-to-back detail
+# fetches even with fresh contexts, and heavy anti-fingerprinting (stealth)
+# tends to hurt rendering more than it helps here — SFJAZZ's own widget uses
+# JS APIs that patched contexts break. So we keep it simple: (a) a fresh
+# BROWSER PROCESS per URL (not just a fresh context) and (b) a randomized
+# 5-10s delay. Partial coverage from local IPs; GitHub Actions runners usually
+# clear more URLs before Cloudflare escalates.
+BETWEEN_DETAIL_DELAY_MIN_S = 5.0
+BETWEEN_DETAIL_DELAY_MAX_S = 10.0
 DETAIL_SETTLE_MS = 2000
 # SFJAZZ's detail page shows this placeholder when a show has passed; skip it.
 _EXPIRED_SHOW_MARKER = "performances for this production have passed"
@@ -220,20 +229,24 @@ def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]
     events: list[RawEvent] = []
     empty_streak = 0
 
-    with browser_session() as session:
-        # --- Phase 1: walk months, collect events ---
+    def _dbg(tag: str):
+        return lambda msg: _log(f"{tag} · {msg}")
+
+    # --- Phase 1: walk months (single browser process, fresh context per URL) ---
+    with browser_session(debug_log=_dbg("session")) as session:
         _log(f"phase 1: walking months from {month_cursor} to horizon {horizon}")
         month_index = 0
         while month_cursor <= horizon:
             month_index += 1
             month_url = _month_calendar_url(month_cursor)
             t0 = time.monotonic()
-            _log(f"month {month_index} {month_cursor}: fetching")
+            _log(f"month {month_index} {month_cursor}: fetching {month_url}")
             try:
                 with session.fresh_context() as ctx:
                     html = load_page_html(
                         ctx, month_url,
                         wait_until=NETWORKIDLE_WAIT, settle_ms=SETTLE_MS,
+                        debug_log=_dbg(f"month {month_index}"),
                     )
             except RateLimited as e:
                 _log(f"month {month_index} {month_cursor}: blocked (HTTP {e.status}), stopping walk")
@@ -258,41 +271,47 @@ def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]
             if month_cursor <= horizon:
                 time.sleep(BETWEEN_MONTH_DELAY_S)
 
-        # --- Phase 2: enrich descriptions for near-term unique URLs ---
-        window_end = datetime.now(timezone.utc) + timedelta(days=DESCRIPTION_WINDOW_DAYS)
-        urls_in_window: set[str] = {
-            ev.url for ev in events
-            if ev.url and ev.start_time <= window_end
-        }
-        unique_urls = sorted(urls_in_window)
-        _log(f"phase 2: enriching descriptions for {len(unique_urls)} unique URLs "
-             f"(events within next {DESCRIPTION_WINDOW_DAYS} days)")
-        descriptions: dict[str, str] = {}
-        for i, detail_url in enumerate(unique_urls, start=1):
-            slug = _url_slug(detail_url)
-            _log(f"detail {i}/{len(unique_urls)} {slug}: fetching")
-            t0 = time.monotonic()
-            try:
-                with session.fresh_context() as ctx:
-                    html = load_page_html(
-                        ctx, detail_url,
-                        wait_until=NETWORKIDLE_WAIT, settle_ms=DETAIL_SETTLE_MS,
-                    )
-            except RateLimited as e:
-                _log(f"detail {i}/{len(unique_urls)} {slug}: blocked (HTTP {e.status}), stopping phase 2")
-                break
-            except Exception as e:
-                _log(f"detail {i}/{len(unique_urls)} {slug}: error {type(e).__name__}: {e}")
-                continue
-            load_s = time.monotonic() - t0
-            desc = parse_detail_description(html)
-            if desc:
-                descriptions[detail_url] = desc
-                _log(f"detail {i}/{len(unique_urls)} {slug}: description {len(desc)} chars ({load_s:.1f}s)")
-            else:
-                _log(f"detail {i}/{len(unique_urls)} {slug}: no description found ({load_s:.1f}s)")
-            if i < len(unique_urls):
-                time.sleep(BETWEEN_DETAIL_DELAY_S)
+    # --- Phase 2: enrich descriptions for near-term unique URLs ---
+    # Uses a FRESH browser process per URL (not just a fresh context) plus
+    # playwright-stealth (in load_page_html) plus a randomized long delay.
+    # Each of those alone was insufficient against Cloudflare on SFJAZZ.
+    window_end = datetime.now(timezone.utc) + timedelta(days=DESCRIPTION_WINDOW_DAYS)
+    urls_in_window: set[str] = {
+        ev.url for ev in events
+        if ev.url and ev.start_time <= window_end
+    }
+    unique_urls = sorted(urls_in_window)
+    _log(f"phase 2: enriching descriptions for {len(unique_urls)} unique URLs "
+         f"(events within next {DESCRIPTION_WINDOW_DAYS} days)")
+    descriptions: dict[str, str] = {}
+    for i, detail_url in enumerate(unique_urls, start=1):
+        slug = _url_slug(detail_url)
+        _log(f"detail {i}/{len(unique_urls)} {slug}: fetching {detail_url}")
+        t0 = time.monotonic()
+        try:
+            with browser_context() as ctx:
+                html = load_page_html(
+                    ctx, detail_url,
+                    wait_until=NETWORKIDLE_WAIT, settle_ms=DETAIL_SETTLE_MS,
+                    debug_log=_dbg(f"detail {i}/{len(unique_urls)} {slug}"),
+                )
+        except RateLimited as e:
+            _log(f"detail {i}/{len(unique_urls)} {slug}: blocked (HTTP {e.status}), stopping phase 2")
+            break
+        except Exception as e:
+            _log(f"detail {i}/{len(unique_urls)} {slug}: error {type(e).__name__}: {e}")
+            continue
+        load_s = time.monotonic() - t0
+        desc = parse_detail_description(html)
+        if desc:
+            descriptions[detail_url] = desc
+            _log(f"detail {i}/{len(unique_urls)} {slug}: description {len(desc)} chars ({load_s:.1f}s)")
+        else:
+            _log(f"detail {i}/{len(unique_urls)} {slug}: no description found ({load_s:.1f}s)")
+        if i < len(unique_urls):
+            delay = random.uniform(BETWEEN_DETAIL_DELAY_MIN_S, BETWEEN_DETAIL_DELAY_MAX_S)
+            _log(f"detail {i}/{len(unique_urls)} {slug}: sleeping {delay:.1f}s before next")
+            time.sleep(delay)
 
     # Apply fetched descriptions in-place, keeping the "time | room" fallback.
     enriched = 0
