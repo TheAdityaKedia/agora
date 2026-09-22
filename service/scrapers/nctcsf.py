@@ -194,6 +194,24 @@ def _location_str(node: dict) -> str | None:
     return joined or None
 
 
+_SYNOPSIS_CUT_RE = re.compile(r"\s*(?:Runtime:|Content Warning:)")
+
+
+def parse_synopsis(html: str) -> str | None:
+    """Extract the show synopsis from a detail page, or None.
+
+    The blurb is the `.vem-single-event-details` block; it's followed by
+    "Runtime:" and "Content Warning:" boilerplate in the same block, so we cut
+    at the first such marker.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    block = soup.select_one(".vem-single-event-details")
+    if not block:
+        return None
+    text = _SYNOPSIS_CUT_RE.split(block.get_text(" ", strip=True), maxsplit=1)[0].strip()
+    return text or None
+
+
 def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     """Expand one show's detail page into one RawEvent per performance.
 
@@ -204,6 +222,9 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     page. Returns [] when the page has no `Event` blocks, so the caller falls
     back to the run-level event.
     """
+    # The synopsis is show-level (same for every performance); the run-level
+    # credits description is the fallback when the detail page has no blurb.
+    description = parse_synopsis(html) or show.description
     events: list[RawEvent] = []
     for node in _iter_event_ld(html):
         start = _parse_iso(node.get("startDate"))
@@ -214,7 +235,7 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
             start_time=start.astimezone(timezone.utc),
             location=_location_str(node) or show.location,
             url=node.get("url") or show.url,
-            description=show.description,
+            description=description,
             image_url=show.image_url,
         ))
     return events

@@ -8,6 +8,7 @@ from scrapers.base import RawEvent
 from scrapers.nctcsf import (
     parse,
     parse_performances,
+    parse_synopsis,
     matches,
     VENUE,
     DEFAULT_HOUR,
@@ -93,11 +94,44 @@ def test_parse_performances_matinee_time(detail_html):
     assert (local.month, local.day, local.hour, local.minute) == (9, 13, 14, 0)
 
 
-def test_parse_performances_carries_title_image_description(detail_html):
+def test_parse_performances_carries_title_image(detail_html):
     ev = parse_performances(detail_html, show=_show())[0]
     assert ev.title == "Little Shop of Horrors"
     assert ev.image_url == "https://nctcsf.org/wp-content/uploads/2026/01/1200-x-630-2.jpg"
+
+
+def test_parse_performances_uses_detail_synopsis(detail_html):
+    """Every performance carries the detail-page synopsis, not the run-level
+    credits description."""
+    ev = parse_performances(detail_html, show=_show())[0]
+    assert ev.description.startswith("The killer classic comes to NCTC")
+    assert "Content Warning" not in ev.description
+    assert "Book & Lyrics" not in ev.description
+
+
+def test_parse_performances_description_falls_back_to_show_when_no_synopsis():
+    """No .vem-single-event-details → keep the run-level description."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"Event","name":"X",'
+        '"startDate":"2026-10-01T20:00:00-07:00"}'
+        '</script>'
+    )
+    ev = parse_performances(html, show=_show())[0]
     assert ev.description == "Runs Sep 12 - Oct 25, 2026"
+
+
+def test_parse_synopsis_extracts_and_trims_markers(detail_html):
+    desc = parse_synopsis(detail_html)
+    assert desc == (
+        "The killer classic comes to NCTC with an even bigger bite. Seymour has "
+        "discovered a new species of plant with an appetite for one thing only: "
+        "human blood."
+    )
+
+
+def test_parse_synopsis_none_when_absent():
+    assert parse_synopsis("<html><body><p>nothing</p></body></html>") is None
 
 
 def test_parse_performances_location_from_jsonld(detail_html):
