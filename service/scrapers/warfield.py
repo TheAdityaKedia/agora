@@ -106,10 +106,44 @@ def parse(html: str) -> list[RawEvent]:
     return [ev for ev in (_parse_entry(e) for e in soup.select(".entry.warfield")) if ev is not None]
 
 
+def parse_detail_description(html: str) -> str | None:
+    """Extract the event blurb from a Warfield detail page, or None.
+
+    The listing has no description; the blurb lives on the detail page in a
+    `div.bio` ("Artist Information") block. Its `<p>` paragraphs are the real
+    copy — the `<h3>` label and the sibling `.description` (ADA/ticketing
+    policy) block are excluded by only reading `.bio p`.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    bio = soup.select_one(".bio")
+    if not bio:
+        return None
+    paras = [p.get_text(" ", strip=True) for p in bio.find_all("p")]
+    text = "\n\n".join(p for p in paras if p)
+    return text or None
+
+
+def _fetch_description(url: str) -> str | None:
+    """Fetch a Warfield detail page and return its blurb, or None on any error."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            return None
+        return parse_detail_description(resp.text)
+    except requests.RequestException:
+        return None
+
+
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
     if resp.status_code in (403, 429):
         print(f"[warfield] blocked (HTTP {resp.status_code}) at {url}, skipping", flush=True)
         return []
     resp.raise_for_status()
-    return parse(resp.text)
+    events = parse(resp.text)
+    # The listing carries no blurb; fetch each event's detail page (the same URL
+    # we link to) for its description.
+    for ev in events:
+        if ev.url and "/events/detail/" in ev.url:
+            ev.description = _fetch_description(ev.url)
+    return events
