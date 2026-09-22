@@ -269,6 +269,34 @@ commit the updated `classifications.json`.
   existing source/date/location filters (AND across facets, OR within). A `cost`
   toggle (free/paid). Events with empty `types` group under "Untagged".
 
+### Shareable filtered links
+
+Filter state lives in the **URL** so a filtered view is shareable — e.g. send a
+friend "all dance events" as a link, and they open the page already filtered,
+no manual steps.
+
+- **Encode active filters in the URL query string**, on the existing static
+  page (GitHub Pages serves the same `index.html` regardless of query, so no
+  routing needed):
+  `?type=performance.dance,social.dance-social&cost=free&from=2026-10-01`
+  - `type`: comma-separated **dot-joined paths** (`performance.dance`); a
+    partial path like `performance` matches that whole branch (all Performance).
+  - reuse the same param scheme for the existing `source` / `from` / `to` /
+    `location` filters, so *any* view is shareable, not just tags.
+- **On load**: parse the query string → apply those filters before first render,
+  so the shared link shows the filtered list immediately.
+- **On any filter change**: rewrite the URL with `history.replaceState` (no
+  reload, no history spam) so the address bar always reflects the current view —
+  copy-link then shares exactly what's on screen.
+- **"Copy link" affordance**: a small share button that copies the current URL,
+  so users don't have to know the address bar carries state.
+- **Robustness**: unknown/removed taxonomy paths in an old link are ignored
+  (fall back to showing everything for that facet) rather than erroring — links
+  shared before a taxonomy change still open gracefully.
+
+This is pure front-end (no backend/manifest change beyond the `types`/`taxonomy`
+already added above); it ships in Phase B with the filter UI.
+
 ## 7. Testing
 
 - `taxonomy.py`: load current file; `valid_paths` includes partial paths;
@@ -282,6 +310,9 @@ commit the updated `classifications.json`.
   calls (cache hit); a taxonomy bump makes calls again (stale).
 - exporter: event joins to its cache entry; manifest carries `types`, `cost`,
   and `taxonomy`.
+- frontend: URL filter round-trip — a query string applies filters on load; a
+  filter change updates the URL; an unknown taxonomy path in a link is ignored
+  gracefully (verified in a headless browser).
 - No live Bedrock calls in tests.
 
 ## 8. Phasing
@@ -290,7 +321,8 @@ commit the updated `classifications.json`.
   module, `classify_show` + Bedrock, `classify_new_shows` in `run()`,
   `reclassify` CLI, exporter join + taxonomy in manifest. Ships tags into
   `events.json`.
-- **B (frontend)**: the tag/cost filter UI.
+- **B (frontend)**: the tag/cost filter UI **+ shareable filtered links**
+  (filter state encoded in the URL, applied on load, "Copy link" button).
 
 Do A first and verify tags land correctly in the manifest before touching the UI.
 
