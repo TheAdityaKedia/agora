@@ -7,6 +7,7 @@ import pytest
 from scrapers.base import RawEvent
 from scrapers.sfpl import (
     parse, matches, _parse_start, _infer_ampm, _last_page_number,
+    parse_event_description,
 )
 
 FIXTURE = Path(__file__).parent / "fixtures" / "sfpl_events.html"
@@ -142,6 +143,28 @@ def test_adult_relevant_audiences_are_kept():
     for aud in ("event--adults", "event--teens", "event--all-ages", "event--families"):
         events = parse(_one_card(aud))
         assert len(events) == 1, f"expected keep for {aud}"
+
+
+def test_parse_event_description_prefers_og():
+    html = """
+    <html><head>
+      <meta name="description" content="Short summary from meta name.">
+      <meta property="og:description" content="Longer OpenGraph description that
+        we want to prefer.">
+    </head><body></body></html>
+    """
+    d = parse_event_description(html)
+    assert d is not None
+    assert d.startswith("Longer OpenGraph")
+
+
+def test_parse_event_description_falls_back_to_meta_name():
+    html = '<html><head><meta name="description" content="Only meta name."></head><body></body></html>'
+    assert parse_event_description(html) == "Only meta name."
+
+
+def test_parse_event_description_none_when_missing():
+    assert parse_event_description("<html><body>no meta</body></html>") is None
 
 
 def test_mixed_kid_and_adult_audience_is_kept():

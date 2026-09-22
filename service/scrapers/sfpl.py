@@ -15,6 +15,7 @@ we've gone past our LOOKAHEAD horizon.
 """
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
@@ -36,6 +37,14 @@ SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 REQUEST_TIMEOUT = 25
 BETWEEN_PAGE_DELAY_S = 0.5
 MAX_PAGES = 120  # safety bound; last page is typically ~85
+# Description enrichment: fetch each event's detail page after the listing walk
+# and lift the real blurb from its `og:description` meta tag. SFPL is fast and
+# unrate-limited, so we fan out with a thread pool for a ~5x speedup over
+# sequential fetches.
+DETAIL_WORKERS = 5
+# Emit progress every N detail fetches (avoid one line per URL — that's 1000+
+# lines for a full SFPL run).
+DETAIL_LOG_EVERY = 50
 
 # ~70% of SFPL programming is storytime / early-learning / school-age
 # activities that dwarf the "what's happening tonight" calendar for adults.
@@ -164,6 +173,37 @@ def parse(html: str) -> list[RawEvent]:
     return [ev for ev in (_parse_card(c) for c in soup.select(".event--teaser")) if ev is not None]
 
 
+def parse_event_description(html: str) -> str | None:
+    """Return the real blurb from an SFPL /events/<slug> detail page.
+
+    SFPL emits the full program description in `<meta property="og:description">`
+    (also mirrored in `<meta name="description">`). Falls back to None so the
+    caller can keep the listing-page metadata as a description.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    for attrs in (
+        {"property": "og:description"},
+        {"name": "description"},
+    ):
+        tag = soup.find("meta", attrs=attrs)
+        if tag and tag.get("content"):
+            text = tag["content"].strip()
+            if text:
+                return text
+    return None
+
+
+def _fetch_description(url: str) -> str | None:
+    """Fetch a detail page and return its og:description, or None on any error."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        if resp.status_code != 200:
+            return None
+        return parse_event_description(resp.text)
+    except requests.RequestException:
+        return None
+
+
 def _last_page_number(html: str) -> int | None:
     """Extract the highest page index from the pagination's 'Last »' link."""
     soup = BeautifulSoup(html, "html.parser")
@@ -230,5 +270,35 @@ def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]
             break
         time.sleep(BETWEEN_PAGE_DELAY_S)
 
-    _log(f"done: {len(events)} events collected")
+    _log(f"listing walk done: {len(events)} events collected")
+
+    # --- Phase 2: enrich descriptions from detail pages ---
+    unique_urls = sorted({ev.url for ev in events if ev.url})
+    _log(f"phase 2: fetching og:description for {len(unique_urls)} detail pages "
+         f"({DETAIL_WORKERS} workers)")
+    descriptions: dict[str, str] = {}
+    t_phase = time.monotonic()
+    completed = 0
+    total = len(unique_urls)
+    with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as pool:
+        futures = {pool.submit(_fetch_description, u): u for u in unique_urls}
+        for fut in as_completed(futures):
+            completed += 1
+            url = futures[fut]
+            desc = fut.result()  # _fetch_description swallows errors
+            if desc:
+                descriptions[url] = desc
+            if completed % DETAIL_LOG_EVERY == 0 or completed == total:
+                _log(f"detail {completed}/{total} fetched "
+                     f"({len(descriptions)} with descriptions, "
+                     f"{time.monotonic() - t_phase:.0f}s elapsed)")
+
+    # Apply — keep the listing metadata as fallback for events we couldn't
+    # enrich (fetch error, 404, missing meta tag).
+    enriched = 0
+    for ev in events:
+        if ev.url and ev.url in descriptions:
+            ev.description = descriptions[ev.url]
+            enriched += 1
+    _log(f"done: {len(events)} events, {enriched} with rich descriptions")
     return events
