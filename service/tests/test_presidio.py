@@ -20,6 +20,16 @@ DETAIL_FIXTURE = FIXTURES / "presidio_detail.html"
 UTC = ZoneInfo("UTC")
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
+SHOW_URL = "https://www.presidiotheatre.org/show-details/paul-taylor-dance-company"
+# The first substantial paragraph of the detail page's `div.text-nrml` prose
+# block (the leading title line and short advisory blurbs are skipped).
+EXPECTED_SYNOPSIS = (
+    "Paul Taylor Dance Company brings its innovative modern dance repertory to "
+    "the Presidio Theatre for a rare three-night San Francisco engagement, "
+    "performing beloved classics alongside bold new works from the company's "
+    "celebrated founder."
+)
+
 
 @pytest.fixture
 def listing_html():
@@ -73,7 +83,7 @@ def _show():
         title="Paul Taylor Dance Company",
         start_time=datetime(2027, 5, 20, DEFAULT_HOUR, DEFAULT_MINUTE, tzinfo=PACIFIC),
         location=VENUE,
-        url="https://www.presidiotheatre.org/show-details/paul-taylor-dance-company",
+        url=SHOW_URL,
         description="DANCE · May 20, 2027 - May 22, 2027",
         image_url="https://www.presidiotheatre.org/storage/poster.webp",
     )
@@ -99,10 +109,15 @@ def test_parse_performances_same_day_two_showtimes(detail_html):
     assert sorted((t.hour, t.minute) for t in may22) == [(14, 0), (19, 30)]
 
 
-def test_parse_performances_uses_per_performance_url(detail_html):
-    urls = [e.url for e in parse_performances(detail_html, show=_show())]
-    assert len(set(urls)) == 4
-    assert all("EventInstanceId=" in u for u in urls)
+def test_parse_performances_use_show_url_not_ticket_link(detail_html):
+    """Every performance links to the show's `/show-details/...` detail page,
+    not the per-seat ticketing deep link (`ticket-path?EventInstanceId=...`),
+    which is not a useful landing page for browsing.
+    """
+    events = parse_performances(detail_html, show=_show())
+    for ev in events:
+        assert ev.url == SHOW_URL
+        assert "EventInstanceId=" not in ev.url
 
 
 def test_parse_performances_carries_show_metadata(detail_html):
@@ -110,6 +125,45 @@ def test_parse_performances_carries_show_metadata(detail_html):
     assert ev.title == "Paul Taylor Dance Company"
     assert ev.location == VENUE
     assert ev.image_url == "https://www.presidiotheatre.org/storage/poster.webp"
+
+
+# --- Descriptions (real synopsis from the detail page) ---
+
+def test_parse_performances_uses_detail_page_synopsis(detail_html):
+    """Description is the real synopsis from the detail page's prose block,
+    not the placeholder 'CATEGORY · date'."""
+    events = parse_performances(detail_html, show=_show())
+    for ev in events:
+        assert ev.description == EXPECTED_SYNOPSIS
+    # The old placeholder must be gone.
+    assert events[0].description != "DANCE · May 20, 2027 - May 22, 2027"
+
+
+def test_parse_performances_synopsis_from_json_ld_description():
+    """When there's no DOM prose block, fall back to the JSON-LD description."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"TheaterEvent","name":"Lúnasa",'
+        '"description":"Ireland\'s finest traditional band returns to the Presidio.",'
+        '"offers":[{"@type":"Offer","validFrom":"2027-03-13T19:30:00-08:00",'
+        '"url":"https://www.presidiotheatre.org/ticket-path?EventInstanceId=79803"}]}'
+        '</script>'
+    )
+    ev = parse_performances(html, show=_show())[0]
+    assert ev.description == "Ireland's finest traditional band returns to the Presidio."
+
+
+def test_parse_performances_synopsis_falls_back_to_show_description():
+    """No synopsis anywhere on the detail page → keep the run-level
+    category/date description so a description is never dropped."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"TheaterEvent","name":"TBD",'
+        '"offers":[{"@type":"Offer","validFrom":"2027-03-13T19:30:00-08:00",'
+        '"url":"https://www.presidiotheatre.org/ticket-path?EventInstanceId=79803"}]}'
+        '</script>'
+    )
+    ev = parse_performances(html, show=_show())[0]
     assert ev.description == "DANCE · May 20, 2027 - May 22, 2027"
 
 

@@ -127,10 +127,26 @@ def test_parse_performances_uses_absolute_startdate(detail_html):
     assert first.start_time.astimezone(UTC) == datetime(2026, 9, 26, 17, 0, tzinfo=UTC)
 
 
-def test_parse_performances_uses_per_performance_offer_url(detail_html):
+def test_parse_performances_uses_show_detail_url_not_ticket_link(detail_html):
+    """Every performance links to the show detail page (from the top-level
+    TheaterEvent JSON-LD `url`), not the per-seat ticketing deep link
+    (…/tickets/<guid>/), which isn't a useful browsing landing page."""
     urls = [e.url for e in parse_performances(detail_html, show=_show())]
-    assert len(set(urls)) == 3
-    assert all("/tickets/" in u for u in urls)
+    assert urls == [
+        "https://us.atgtickets.com/events/blueys-big-play/orpheum-theatre/"
+    ] * 3
+    assert all("/tickets/" not in u for u in urls)
+
+
+def test_parse_performances_uses_jsonld_description(detail_html):
+    """A real synopsis from the detail page's TheaterEvent JSON-LD `description`
+    replaces the thin genre/date listing blurb, with HTML entities decoded."""
+    ev = parse_performances(detail_html, show=_show())[0]
+    assert ev.description.startswith(
+        "Bluey's Big Play comes back to Orpheum Theatre"
+    )
+    assert "&apos;" not in ev.description  # entities decoded
+    assert ev.description != _show().description  # not the listing blurb
 
 
 def test_parse_performances_carries_show_title_and_image(detail_html):
@@ -146,10 +162,13 @@ def test_parse_performances_location_from_subevent(detail_html):
 
 
 def test_parse_performances_single_night_uses_toplevel_startdate():
-    """A show with no subEvent[] falls back to the top-level TheaterEvent time."""
+    """A show with no subEvent[] falls back to the top-level TheaterEvent time,
+    and uses the top-level `url` as its detail page."""
     html = (
         '<script type="application/ld+json">'
         '{"@context":"https://schema.org","@type":"TheaterEvent","name":"Laurie Anderson",'
+        '"url":"https://us.atgtickets.com/events/laurie-anderson/curran-theater/",'
+        '"description":"Laurie Anderson: The Republic of Love with Sexmob comes to Curran Theatre.",'
         '"startDate":"2026-09-26T03:00:00.000Z",'
         '"location":{"@type":"PerformingArtsTheater","name":"Curran Theatre",'
         '"address":{"streetAddress":"445 Geary St"}}}'
@@ -158,6 +177,22 @@ def test_parse_performances_single_night_uses_toplevel_startdate():
     events = parse_performances(html, show=_show())
     assert len(events) == 1
     assert events[0].start_time.astimezone(UTC) == datetime(2026, 9, 26, 3, 0, tzinfo=UTC)
+    assert events[0].url == "https://us.atgtickets.com/events/laurie-anderson/curran-theater/"
+    assert events[0].description.startswith("Laurie Anderson: The Republic of Love")
+
+
+def test_parse_performances_description_and_url_fall_back_to_show():
+    """When the JSON-LD carries no description/url, fall back to the show's own
+    listing blurb and card URL rather than dropping them."""
+    html = (
+        '<script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"TheaterEvent","name":"X",'
+        '"startDate":"2026-09-26T03:00:00.000Z"}'
+        '</script>'
+    )
+    ev = parse_performances(html, show=_show())[0]
+    assert ev.description == _show().description
+    assert ev.url == _show().url
 
 
 def test_parse_performances_empty_when_no_theater_event():

@@ -3,15 +3,21 @@
      A multi-day run (May 20-22, 2027) whose four performances live in the
      schema.org TheaterEvent JSON-LD `offers[]` (May 22 has both a 2pm matinee
      and a 7:30pm evening). No `location` node — performances inherit the show's
-     venue. Each offer carries a unique per-performance ticket URL. -->
+     venue. Each offer carries a unique per-performance ticket URL.
+
+     Mirroring real detail pages, the JSON-LD carries no `description`; the human
+     synopsis lives in the page's `<div class="text-nrml">` prose block. That
+     block leads with a title line and short marketing/advisory blurbs, so the
+     scraper skips those and takes the first substantial paragraph as the
+     synopsis. -->
 <html>
 <head>
+<meta name="description" content="Paul Taylor Dance Company brings its repertory to the Presidio Theatre for a three-night engagement of modern dance classics and bold ne">
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "TheaterEvent",
     "name": "Paul Taylor Dance Company",
-    "description": "Paul Taylor Dance Company brings its innovative modern dance repertory to Presidio Theatre.",
     "organizer": {
         "@type": "Organization",
         "name": "Presidio Theatre",
@@ -63,5 +69,15 @@
 }
 </script>
 </head>
-<body></body>
+<body>
+<div class="show-details">
+  <h1>Paul Taylor Dance Company</h1>
+  <div class="text-nrml">
+    <p>Paul Taylor Dance Company</p>
+    <p>Paul Taylor Dance Company brings its innovative modern dance repertory to the Presidio Theatre for a rare three-night San Francisco engagement, performing beloved classics alongside bold new works from the company's celebrated founder.</p>
+    <p>Content advisory: recommended for all audiences.</p>
+    <p>PAUL TAYLOR was one of the most influential choreographers of the 20th century, founding his company in 1954 and creating over 140 works during his lifetime.</p>
+  </div>
+</div>
+</body>
 </html>

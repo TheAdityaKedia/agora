@@ -8,6 +8,7 @@ from scrapers.base import RawEvent
 from scrapers.actsf import (
     parse,
     parse_performances,
+    parse_show_description,
     matches,
     _parse_date_range,
     _parse_month_day,
@@ -18,6 +19,7 @@ from scrapers.actsf import (
 
 FIXTURE = Path(__file__).parent / "fixtures" / "actsf_events.html"
 PERF_FIXTURE = Path(__file__).parent / "fixtures" / "actsf_performances.html"
+DETAIL_FIXTURE = Path(__file__).parent / "fixtures" / "actsf_detail.html"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
 
@@ -29,6 +31,11 @@ def html():
 @pytest.fixture
 def perf_html():
     return PERF_FIXTURE.read_text()
+
+
+@pytest.fixture
+def detail_html():
+    return DETAIL_FIXTURE.read_text()
 
 
 def test_matches():
@@ -118,12 +125,16 @@ RUN_START = date(2026, 9, 22)
 RUN_END = date(2026, 10, 18)
 
 
+SHOW_URL = "https://www.act-sf.org/whats-on/2026-27-season/north-by-northwest"
+
+
 def _perf(perf_html, **overrides):
     kwargs = dict(
         title="Alfred Hitchcock's North by Northwest",
         run_start=RUN_START,
         run_end=RUN_END,
         location=VENUE,
+        url=SHOW_URL,
         image_url="https://res.cloudinary.com/a-c-t/poster.jpg",
     )
     kwargs.update(overrides)
@@ -158,9 +169,13 @@ def test_parse_performances_crosses_month_within_run(perf_html):
     assert (local.year, local.month, local.day) == (2026, 10, 18)
 
 
-def test_parse_performances_uses_row_ticket_url(perf_html):
-    ev = _perf(perf_html)[0]
-    assert ev.url == "https://secure.act-sf.org/6434/6456"
+def test_parse_performances_use_show_url_not_seat_selection(perf_html):
+    """Every performance links to the show's detail page, not the per-seat
+    ticketing deep link (secure.act-sf.org/...), which is not a useful landing
+    page for browsing.
+    """
+    for ev in _perf(perf_html):
+        assert ev.url == SHOW_URL
 
 
 def test_parse_performances_carries_title_location_image(perf_html):
@@ -189,6 +204,7 @@ def test_parse_performances_year_wraps_dec_to_jan():
         run_start=date(2027, 12, 20),
         run_end=date(2028, 1, 5),
         location=VENUE,
+        url="https://www.act-sf.org/whats-on/new-year-show",
         image_url=None,
     )
     local = events[0].start_time.astimezone(PACIFIC)
@@ -197,3 +213,92 @@ def test_parse_performances_year_wraps_dec_to_jan():
 
 def test_parse_performances_empty_when_no_rows():
     assert _perf("<ul class='performance-list'></ul>") == []
+
+
+# --- Show synopsis parsing (the show detail page, show.url) ---
+
+def test_parse_show_description_returns_synopsis(detail_html):
+    desc = parse_show_description(detail_html)
+    assert desc is not None
+    # Opening line of the real synopsis.
+    assert desc.startswith("Be transported to San Francisco")
+    # All three synopsis paragraphs are joined into one blurb.
+    assert "Harlem of the West" in desc
+    assert "displacement, gentrification" in desc
+    assert "SFBATCO" in desc
+
+
+def test_parse_show_description_skips_credits_and_notices(detail_html):
+    """The credits block (no <p>) and the subscription-notice block precede the
+    synopsis but must not leak into it."""
+    desc = parse_show_description(detail_html)
+    assert "BOOK BY MICHAEL GENE SULLIVAN" not in desc
+    assert "no longer available" not in desc
+    assert "Exchange information" not in desc
+
+
+def test_parse_show_description_strips_trailing_logistics_and_quotes(detail_html):
+    """The trailing block (a director quote + a 'Runs approximately' run-time
+    line) is not the synopsis and must not be returned."""
+    desc = parse_show_description(detail_html)
+    assert "Runs approximately" not in desc
+    assert "the director" not in desc
+
+
+def test_parse_show_description_none_when_absent():
+    assert parse_show_description("<html><body><p>Buy tickets</p></body></html>") is None
+    assert parse_show_description("") is None
+
+
+def test_parse_performances_description_override(perf_html):
+    """When a synopsis is supplied it becomes the description for every
+    performance, replacing the per-row ticketing keywords."""
+    synopsis = "A real show synopsis about the Fillmore District."
+    events = _perf(perf_html, description=synopsis)
+    assert events
+    assert all(e.description == synopsis for e in events)
+
+
+def test_parse_performances_falls_back_to_keywords_without_synopsis(perf_html):
+    """With no synopsis passed (description=None), the existing per-row keyword
+    description is preserved so nothing regresses."""
+    ev = _perf(perf_html)[0]
+    assert ev.description and "Preview" in ev.description
+
+
+# --- Orchestration: run-level fallback keeps the synopsis ---
+
+def _run_level_show():
+    return RawEvent(
+        title="Every Saturday Night",
+        start_time=datetime(2025, 10, 3, 19, tzinfo=PACIFIC),
+        location=VENUE,
+        url="https://www.act-sf.org/whats-on/limited-engagements/every-saturday-night",
+        description="OCT 3–NOV 2, 2025",
+        image_url=None,
+    )
+
+
+def test_scrape_show_no_rows_emits_run_level_event_with_synopsis(monkeypatch):
+    """A show whose /performances page has no rows still gets a single run-level
+    event carrying the synopsis (not the date-range fallback)."""
+    from scrapers import actsf
+
+    monkeypatch.setattr(actsf, "_fetch_show_synopsis", lambda url: "A real synopsis blurb.")
+    monkeypatch.setattr(actsf, "load_page_html", lambda *a, **k: "<ul class='performance-list'></ul>")
+
+    events = actsf._scrape_show_performances(object(), _run_level_show())
+    assert len(events) == 1
+    assert events[0].description == "A real synopsis blurb."
+    assert events[0].url == _run_level_show().url
+
+
+def test_scrape_show_no_rows_no_synopsis_defers_to_caller(monkeypatch):
+    """No rows and no synopsis → return [] so the caller keeps the original
+    run-level (date-range) event; nothing regresses."""
+    from scrapers import actsf
+
+    monkeypatch.setattr(actsf, "_fetch_show_synopsis", lambda url: None)
+    monkeypatch.setattr(actsf, "load_page_html", lambda *a, **k: "<ul class='performance-list'></ul>")
+
+    assert actsf._scrape_show_performances(object(), _run_level_show()) == []

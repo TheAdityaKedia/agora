@@ -86,9 +86,13 @@ def test_parse_performances_extracts_date_and_time(detail_html):
     assert events[0].start_time.astimezone(PACIFIC).hour == 19
 
 
-def test_parse_performances_uses_ticket_url(detail_html):
-    ev = parse_performances(detail_html, show=_show())[0]
-    assert ev.url == "https://www.tickettailor.com/events/nx5theatricalllc/2312766"
+def test_parse_performances_uses_show_level_url_not_offer_deeplink(detail_html):
+    """Every performance shares the card's stable show-level landing URL, not the
+    per-occurrence ticket deep link (offer URLs carry a differing ?date_id=...)."""
+    show = _show()
+    events = parse_performances(detail_html, show=show)
+    assert [e.url for e in events] == [show.url, show.url]
+    assert all("date_id" not in (e.url or "") for e in events)
 
 
 def test_parse_performances_carries_show_fields(detail_html):

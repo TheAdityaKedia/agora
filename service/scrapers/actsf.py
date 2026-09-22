@@ -25,6 +25,7 @@ Rembe Theater (with some at the Strand), which isn't distinguishable from the
 listing markup. We use the primary venue as the location.
 """
 import re
+from dataclasses import replace
 from datetime import date, datetime, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
@@ -68,6 +69,28 @@ _DASH_RE = re.compile(r"[–—-]")
 _YEAR_TAIL_RE = re.compile(r",\s*(\d{4})\s*$")
 # Performance-row clock time, e.g. "06:30PM" (no space) or "2:00 PM".
 _PERF_TIME_RE = re.compile(r"(\d{1,2}):(\d{2})\s*([APap][Mm])")
+
+# The synopsis lives on the show detail page (show.url) in paragraphs under
+# `.s-prose`. That page also carries several other `.s-prose` panels — a credits
+# block (headings, no paragraphs), a subscription/ticketing notice, director
+# quotes, and run-time/logistics lines. We take the first `.s-prose` block whose
+# paragraphs, after dropping those noise lines, read as a real blurb.
+_SYNOPSIS_SELECTOR = ".s-prose"
+# A paragraph is logistics/notice noise (not synopsis prose) if it contains one
+# of these fragments (case-insensitive) or is a pull quote.
+_SYNOPSIS_NOISE = (
+    "no longer available",
+    "exchange information",
+    "educator guide",
+    "get tickets",
+    "walking tour",
+    "ticket price",
+    "runs approximately",
+    "subscription",
+)
+# A block must yield at least this many characters of prose to count as a
+# synopsis (filters out one-line notices that slipped past the fragment list).
+_MIN_SYNOPSIS_LEN = 80
 
 
 def _parse_month_day(text: str) -> tuple[int, int] | None:
@@ -202,6 +225,38 @@ def _infer_perf_year(month: int, day: int, run_start: date, run_end: date) -> in
     return run_start.year
 
 
+def _is_synopsis_noise(text: str) -> bool:
+    """True for logistics/notice paragraphs and pull quotes (not synopsis prose)."""
+    if not text:
+        return True
+    if text[0] in ('"', "“"):  # opening quote → a pull quote, not the blurb
+        return True
+    low = text.lower()
+    return any(fragment in low for fragment in _SYNOPSIS_NOISE)
+
+
+def parse_show_description(html: str) -> str | None:
+    """Extract a show's synopsis from its detail page (show.url), or None.
+
+    The detail page is static HTML with several `.s-prose` panels; the synopsis
+    is the first one whose paragraphs — after dropping credits (no `<p>`),
+    subscription/ticketing notices, director quotes, and run-time logistics —
+    form a real blurb (>= `_MIN_SYNOPSIS_LEN` chars). Its paragraphs are joined
+    with a blank line between them.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    for block in soup.select(_SYNOPSIS_SELECTOR):
+        paragraphs = [
+            " ".join(p.get_text(" ", strip=True).split())
+            for p in block.find_all("p")
+        ]
+        prose = [p for p in paragraphs if p and not _is_synopsis_noise(p)]
+        text = "\n\n".join(prose).strip()
+        if len(text) >= _MIN_SYNOPSIS_LEN:
+            return text
+    return None
+
+
 def parse_performances(
     html: str,
     *,
@@ -209,13 +264,22 @@ def parse_performances(
     run_start: date,
     run_end: date,
     location: str,
+    url: str | None,
     image_url: str | None,
+    description: str | None = None,
 ) -> list[RawEvent]:
     """Parse a show's rendered `/performances` page into one RawEvent per showing.
 
     The page is a Tessitura/Vue widget; each `.performance-list__item` carries a
     `.date` ("Tue Sep 22") and `.time` ("06:30PM") with no year — inferred from
-    the show's run range — plus a unique per-performance ticketing URL.
+    the show's run range. Every performance links to the show's detail page
+    (`url`), not the row's per-seat ticketing deep link (secure.act-sf.org/...),
+    which isn't a useful landing page and is missing entirely for shows not on
+    sale.
+
+    When `description` is given (the show's synopsis, from the detail page) it
+    becomes the description for every performance. Otherwise each performance
+    keeps its own per-row ticketing keywords/note (e.g. "Preview") as a fallback.
     """
     soup = BeautifulSoup(html, "html.parser")
     events: list[RawEvent] = []
@@ -241,21 +305,21 @@ def parse_performances(
         except ValueError:
             continue
 
-        a = item.select_one("a.performance[href]") or item.select_one("a[href]")
-        url = a.get("href") if a else None
-
-        keywords = [k.get_text(strip=True) for k in item.select(".performance__keyword")]
-        note_tag = item.select_one(".performance__night-content")
-        note = note_tag.get_text(strip=True) if note_tag else None
-        desc_parts = [*keywords, *( [note] if note else [] )]
-        description = " · ".join(p for p in desc_parts if p) or None
+        if description is not None:
+            row_description = description
+        else:
+            keywords = [k.get_text(strip=True) for k in item.select(".performance__keyword")]
+            note_tag = item.select_one(".performance__night-content")
+            note = note_tag.get_text(strip=True) if note_tag else None
+            desc_parts = [*keywords, *( [note] if note else [] )]
+            row_description = " · ".join(p for p in desc_parts if p) or None
 
         events.append(RawEvent(
             title=title,
             start_time=start_time,
             location=location,
             url=url,
-            description=description,
+            description=row_description,
             image_url=image_url,
         ))
     return events
@@ -274,8 +338,31 @@ def parse(html: str) -> list[RawEvent]:
     return events
 
 
+def _fetch_show_synopsis(url: str) -> str | None:
+    """Fetch a show's detail page (static HTML) and return its synopsis, or None.
+
+    One extra `requests` GET per show. Network/parse failures degrade to None so
+    the caller falls back to the per-row ticketing description; a show is never
+    dropped over a missing synopsis.
+    """
+    try:
+        resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        if resp.status_code in (403, 429):
+            print(f"[act-sf] blocked (HTTP {resp.status_code}) at {url}, skipping synopsis", flush=True)
+            return None
+        resp.raise_for_status()
+    except requests.RequestException as e:
+        print(f"[act-sf] synopsis fetch failed for {url}: {e}", flush=True)
+        return None
+    return parse_show_description(resp.text)
+
+
 def _scrape_show_performances(ctx, show: RawEvent) -> list[RawEvent]:
     """Render one show's `/performances` page and parse its showings.
+
+    Also fetches the show's detail page (show.url) for its synopsis and stamps it
+    as the description on every performance, falling back to the per-row
+    ticketing description when no synopsis is found.
 
     Returns [] when the show has no detail URL, an unparseable run range, or the
     page renders no performance rows — the caller falls back to the run-level
@@ -287,20 +374,30 @@ def _scrape_show_performances(ctx, show: RawEvent) -> list[RawEvent]:
     if not range_:
         return []
     run_start, run_end = range_
+    synopsis = _fetch_show_synopsis(show.url)
     perf_url = show.url.rstrip("/") + "/performances"
     try:
         html = load_page_html(ctx, perf_url, wait_until="load", settle_ms=PERF_SETTLE_MS)
     except RateLimited as e:
         print(f"[act-sf] blocked (HTTP {e.status}) at {e.url}, skipping performances", flush=True)
         return []
-    return parse_performances(
+    events = parse_performances(
         html,
         title=show.title,
         run_start=run_start,
         run_end=run_end,
         location=show.location,
+        url=show.url,
         image_url=show.image_url,
+        description=synopsis,
     )
+    # Shows with no bookable performance rows (limited engagements, sold-out
+    # runs) still deserve their synopsis: emit a synopsis-stamped run-level event
+    # rather than deferring to the caller's date-range fallback. With no synopsis
+    # we return [] so the caller keeps the original run-level (date-range) event.
+    if not events and synopsis:
+        return [replace(show, description=synopsis)]
+    return events
 
 
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:

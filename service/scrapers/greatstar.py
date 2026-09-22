@@ -183,24 +183,17 @@ def _event_ld_nodes(html: str) -> list[dict]:
     return nodes
 
 
-def _offer_url(node: dict) -> str | None:
-    offers = node.get("offers")
-    if isinstance(offers, dict):
-        offers = [offers]
-    if isinstance(offers, list):
-        for offer in offers:
-            if isinstance(offer, dict) and offer.get("url"):
-                return offer["url"]
-    return node.get("url")
-
-
 def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     """Expand one show's ticketing page into one RawEvent per occurrence.
 
     TicketTailor renders each occurrence as its own schema.org `Event` JSON-LD
     object with a tz-explicit `startDate`. We keep the clean listing title,
-    venue, description, and image from `show` (the TicketTailor `name`/location
-    are noisier), and hotlink the ticketing URL. Pages without such JSON-LD
+    venue, description, and image from `show`, and give every occurrence the
+    same stable show-level landing URL — `show.url`, the listing card's link.
+    We deliberately do NOT use the per-occurrence `offers[].url` deep link: it
+    varies per occurrence and often redirects to a white-labeled host
+    (`tickets.greatstartheater.org/...?date_id=...`), whereas the card URL is
+    one stable info page shared by all performances. Pages without such JSON-LD
     (Eventbrite/Fever/etc., or a 403 challenge) yield [] so the caller keeps the
     run-level event.
     """
@@ -218,7 +211,7 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
             title=show.title,
             start_time=start.astimezone(timezone.utc),
             location=show.location,
-            url=_offer_url(node) or show.url,
+            url=show.url,
             description=show.description,
             image_url=show.image_url,
         ))

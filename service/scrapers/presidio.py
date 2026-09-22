@@ -13,8 +13,10 @@ A card is a *show*, not a single performance: a multi-day run collapses into one
 card, and its individual showtimes live on the show's `/show-details/...` page.
 That detail page is also static HTML and embeds a schema.org `TheaterEvent`
 whose `offers[]` lists every performance with an absolute, tz-explicit datetime
-(`availabilityStarts`/`validFrom`) and a unique per-performance ticket URL
-(`EventInstanceId=...`). A single-night show has exactly one offer.
+(`availabilityStarts`/`validFrom`). A single-night show has exactly one offer.
+Every performance's `url` is the show's `/show-details/...` detail page (not the
+offer's per-seat `ticket-path?EventInstanceId=...` deep link), and its
+description is the synopsis scraped from that detail page's prose block.
 
 So `scrape()` emits one RawEvent per performance (see `parse_performances`). When
 a show's detail page has no parseable performances (missing/blocked page, no
@@ -153,14 +155,80 @@ def _parse_iso(value: str | None) -> datetime | None:
         return None
 
 
+# Paragraphs shorter than this in the prose block are the title line or a short
+# advisory/logistics blurb, not the synopsis; skip them.
+MIN_SYNOPSIS_LEN = 60
+# Cap so a synopsis never drags in the trailing artist bios; truncate on a word
+# boundary with an ellipsis when a single paragraph runs long.
+MAX_SYNOPSIS_LEN = 800
+
+
+def _clean_text(text: str) -> str:
+    # Strip BOM/zero-width marks the CMS injects, then collapse whitespace.
+    return " ".join(text.replace("﻿", "").split())
+
+
+def _truncate(text: str) -> str:
+    if len(text) <= MAX_SYNOPSIS_LEN:
+        return text
+    cut = text[:MAX_SYNOPSIS_LEN].rsplit(" ", 1)[0].rstrip(",.;:")
+    return cut + "…"
+
+
+def _extract_synopsis(html: str, data: dict | None) -> str | None:
+    """Pull a human synopsis from a show's detail page, best source first.
+
+    Presidio's real detail pages carry no JSON-LD `description`; the synopsis
+    lives in a `<div class="text-nrml">` prose block that leads with a title
+    line and short advisory/logistics blurbs, so we take the first *substantial*
+    paragraph. Falls back to the JSON-LD `description` (rare) and then the page
+    meta description. Returns None when nothing usable is found, so the caller
+    keeps the run-level category/date description.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    block = soup.select_one("div.text-nrml")
+    if block:
+        for p in block.find_all("p"):
+            text = _clean_text(p.get_text(" ", strip=True))
+            if len(text) >= MIN_SYNOPSIS_LEN:
+                return _truncate(text)
+
+    if data:
+        desc = data.get("description")
+        if isinstance(desc, str):
+            desc = _clean_text(desc)
+            if desc:
+                return _truncate(desc)
+
+    meta = soup.find("meta", attrs={"name": "description"}) or soup.find(
+        "meta", attrs={"property": "og:description"}
+    )
+    if meta and isinstance(meta.get("content"), str):
+        content = _clean_text(meta["content"])
+        if content:
+            return _truncate(content)
+
+    return None
+
+
 def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     """Expand one show's detail page into one RawEvent per performance.
 
     Presidio embeds a schema.org TheaterEvent whose `offers[]` lists every
     performance with a tz-explicit datetime (`availabilityStarts`, falling back
-    to `validFrom`) and a per-performance ticket `url`. A single-night show has
-    exactly one offer. Returns [] when there's no TheaterEvent or no offers, so
-    the caller falls back to the run-level event.
+    to `validFrom`). A single-night show has exactly one offer. Returns [] when
+    there's no TheaterEvent or no offers, so the caller falls back to the
+    run-level event.
+
+    Every performance links to the show's `/show-details/...` detail page
+    (`show.url`), not the offer's per-seat ticketing deep link
+    (`ticket-path?EventInstanceId=...`), which is not a useful landing page.
+    Distinct start times keep the performances from de-duplicating.
+
+    Description is the real synopsis scraped from the detail page (see
+    `_extract_synopsis`), falling back to the run-level category/date
+    description when the page exposes no synopsis.
     """
     data = _find_theater_event(html)
     if not data:
@@ -168,6 +236,7 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     offers = data.get("offers")
     if not isinstance(offers, list):
         return []
+    description = _extract_synopsis(html, data) or show.description
     events: list[RawEvent] = []
     for offer in offers:
         if not isinstance(offer, dict):
@@ -175,13 +244,12 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
         start = _parse_iso(offer.get("availabilityStarts") or offer.get("validFrom"))
         if not start:
             continue
-        url = offer.get("url") or show.url
         events.append(RawEvent(
             title=show.title,
             start_time=start.astimezone(timezone.utc),
             location=show.location,
-            url=url,
-            description=show.description,
+            url=show.url,
+            description=description,
             image_url=show.image_url,
         ))
     return events

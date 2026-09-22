@@ -17,6 +17,7 @@ actual times.
 """
 import json
 import re
+from html import unescape as _html_unescape
 from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
@@ -214,17 +215,41 @@ def _location_str(node: dict) -> str | None:
     return joined or None
 
 
+def _show_description(data: dict, show: RawEvent) -> str | None:
+    """Prefer the detail page's real synopsis over the thin listing blurb.
+
+    The TheaterEvent JSON-LD carries a `description` — a human synopsis that
+    names the show, venue, and dates (e.g. "Laurie Anderson: The Republic of
+    Love with Sexmob comes to Curran Theatre…"). It's present and consistent
+    across every show type (concert, family, theatrical), unlike the detail
+    DOM's synopsis paragraphs, which only exist for some shows and sit under
+    unstable hashed MUI classnames mixed with cookie/venue/VIP boilerplate.
+    JSON-LD ships raw HTML entities (e.g. `&apos;`), so we unescape. Fall back
+    to the listing's genre/subtitle/date blurb when no synopsis is present.
+    """
+    desc = _html_unescape((data.get("description") or "").strip())
+    return desc or show.description
+
+
 def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     """Expand one show's detail page into one RawEvent per performance.
 
     ATG embeds a schema.org TheaterEvent whose `subEvent[]` lists every
-    performance with an absolute `startDate` (tz-explicit — no year inference)
-    and a per-performance ticket `offers.url`. A single-night show has no
-    `subEvent`, so the top-level event itself is the one performance.
+    performance with an absolute `startDate` (tz-explicit — no year inference).
+    A single-night show has no `subEvent`, so the top-level event itself is the
+    one performance.
+
+    Every performance points at the SHOW DETAIL page (the top-level
+    TheaterEvent `url`, falling back to the listing card's `show.url`), not the
+    per-performance seat/ticket deep link in `subEvent[].offers.url`
+    (…/tickets/<guid>/), which isn't a useful browsing landing page. Distinct
+    `start_time`s keep the per-performance rows unique despite the shared URL.
     """
     data = _find_theater_event(html)
     if not data:
         return []
+    show_url = data.get("url") or show.url
+    description = _show_description(data, show)
     nodes = data.get("subEvent") or [data]
     events: list[RawEvent] = []
     for node in nodes:
@@ -233,13 +258,12 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
         start = _parse_iso(node.get("startDate"))
         if not start:
             continue
-        url = (node.get("offers") or {}).get("url") or node.get("url") or show.url
         events.append(RawEvent(
             title=show.title,
             start_time=start.astimezone(timezone.utc),
             location=_location_str(node) or show.location,
-            url=url,
-            description=show.description,
+            url=show_url,
+            description=description,
             image_url=show.image_url,
         ))
     return events

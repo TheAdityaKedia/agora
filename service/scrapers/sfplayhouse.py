@@ -7,16 +7,21 @@ the detail pages as plain text ("September 26 – November 28, 2026"). We
 follow each unique link once — 6 requests plus the homepage — and parse
 the range from the detail page text to build one run-level show per link.
 
+The detail page also carries the real synopsis in its server-rendered body
+(first `<p>` of `div.entry div.three_fifth.last`), which `_parse_detail` reads
+for each show's description, falling back to the date range when absent.
+
 Users browse the calendar by day, so we then expand each run into one event
 per individual performance. The detail page loads a VBO Tickets script
 (`connect.vbotickets.com/googleeventschema/<eid>`) that injects a
 `<script type="application/ld+json">` whose `@graph` lists one schema.org
-Event per showing — each with a local (no-offset) `startDate` and a unique
-per-performance ticket URL under `offers.url`. That script only runs in a
-real browser, so `scrape()` renders each detail page in headless Chromium and
-`parse_performances()` reads the injected JSON-LD. When a show exposes no
-performance graph (browser error, or a page without the widget), we fall back
-to the single run-level event so a show is never dropped.
+Event per showing — each with a local (no-offset) `startDate`. That script only
+runs in a real browser, so `scrape()` renders each detail page in headless
+Chromium and `parse_performances()` reads the injected JSON-LD. Each performance
+keeps the show's sfplayhouse.org `url` (not the per-seat VBO `offers.url` deep
+link). When a show exposes no performance graph (browser error, or a page
+without the widget), we fall back to the single run-level event so a show is
+never dropped.
 """
 import json
 import re
@@ -117,6 +122,24 @@ def _parse_range(text: str) -> tuple[date, date] | None:
     return start, end
 
 
+def _extract_synopsis(soup) -> str | None:
+    """Return the show's synopsis from the sfplayhouse.org detail page.
+
+    The WordPress body renders the synopsis as the first `<p>` inside
+    `div.entry div.three_fifth.last`; the later `<p>` tags in that block are
+    press pull-quotes/reviews, so we take only the first non-empty paragraph.
+    Returns None when the block is absent (caller falls back to the date range).
+    """
+    block = soup.select_one("div.entry div.three_fifth.last") or soup.select_one("div.three_fifth.last")
+    if block is None:
+        return None
+    for p in block.find_all("p"):
+        text = p.get_text(" ", strip=True)
+        if text:
+            return text
+    return None
+
+
 def _parse_detail(html: str, url: str) -> RawEvent | None:
     soup = BeautifulSoup(html, "html.parser")
     h1 = soup.find("h1")
@@ -143,10 +166,12 @@ def _parse_detail(html: str, url: str) -> RawEvent | None:
         tzinfo=SOURCE_TZ,
     ).astimezone(timezone.utc)
 
-    description = None
-    m = _RANGE_RE.search(soup.get_text(" ", strip=True))
-    if m:
-        description = m.group(0)
+    # Prefer the real synopsis; fall back to the run's date range when absent.
+    description = _extract_synopsis(soup)
+    if not description:
+        m = _RANGE_RE.search(soup.get_text(" ", strip=True))
+        if m:
+            description = m.group(0)
 
     return RawEvent(
         title=title,
@@ -212,21 +237,23 @@ def parse_performances(html: str, *, show: RawEvent) -> list[RawEvent]:
     """Expand one show's rendered detail page into one RawEvent per performance.
 
     Reads the VBO-injected schema.org `@graph` of Event nodes; each carries a
-    local `startDate` (interpreted as SF-local) and a per-performance ticket URL
-    under `offers.url`. Returns [] when no Event graph is present so the caller
-    falls back to the run-level event.
+    local `startDate` (interpreted as SF-local). Every performance links to the
+    show's sfplayhouse.org page (`show.url`), not the per-seat VBO ticketing
+    deep link (`offers.url`, e.g. `.../eventdate/<slug>/695538`), which isn't a
+    useful landing page — distinct `start_time`s keep the showings apart.
+    Returns [] when no Event graph is present so the caller falls back to the
+    run-level event.
     """
     events: list[RawEvent] = []
     for node in _find_event_graph(html):
         start = _parse_local_iso(node.get("startDate"))
         if not start:
             continue
-        url = (node.get("offers") or {}).get("url") or node.get("url") or show.url
         events.append(RawEvent(
             title=show.title,
             start_time=start,
             location=show.location,
-            url=url,
+            url=show.url,
             description=show.description,
             image_url=show.image_url,
         ))
