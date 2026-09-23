@@ -222,3 +222,34 @@ def test_mixed_kid_and_adult_audience_is_kept():
     mixed = "event--all-ages event--elementary-school-age"
     events = parse(_one_card(mixed))
     assert len(events) == 1
+
+
+def test_is_skipped_type_drops_kids_programming():
+    assert _is_skipped_type("Storytime: Pajama Storytime")
+    assert _is_skipped_type("Early Learning: Swing Into Stories")
+
+
+def test_is_skipped_type_drops_career_and_job_help():
+    assert _is_skipped_type("Presentation: A Career in Nuclear Engineering")
+    assert _is_skipped_type("Presentation: Careers in Hospice Nursing and Death Care")
+    assert _is_skipped_type("Workshop: Career Coaching")
+    assert _is_skipped_type("Activity: Job Search Help")
+
+
+def test_is_skipped_type_drops_open_house_and_staff_admin():
+    assert _is_skipped_type("Celebration: North Beach Branch Open House")
+    assert _is_skipped_type("Celebration: ART/WORK 3: Art Created by SFPL Staff Opening Reception")
+
+
+def test_is_skipped_type_keeps_real_cultural_events_with_similar_words():
+    # A genuine arts/community event that merely mentions a keyword-ish word
+    # shouldn't be dropped — we match specific phrases, not bare "career".
+    for keep in (
+        "Workshop: Watercolor Basics",
+        "Activity: Bocce Ball",
+        "Book Club: Excelsior Reads",
+        "Panel: Fiction After Protest",
+        "Presentation: Black Women Speaking Their Truths",
+        "Author: May-lee Chai",
+    ):
+        assert not _is_skipped_type(keep), f"should keep {keep!r}"

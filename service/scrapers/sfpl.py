@@ -87,20 +87,38 @@ def _is_kid_only(card) -> bool:
 #     Librarian) — a service, not a scheduled program.
 #   - Services: drop-in social-worker / benefits / assessment desks.
 #   - Canceled / Postponed: not happening.
+#   - Storytime / Early Learning: child programming (marked all-ages/family so
+#     the audience filter misses it) — off-target for an adult cultural calendar.
 _SKIP_TITLE_PREFIXES = frozenset({
     "tutorial", "services", "canceled", "cancelled", "postponed",
+    "storytime", "early learning",
     # Spanish/Chinese equivalents SFPL uses for the same service categories.
     "教程",   # "tutorial"
 })
 
+# Some non-events aren't distinguishable by prefix (they hide under Presentation/
+# Workshop/Celebration). Match these phrases anywhere in the title instead.
+# Phrases (not bare words) to avoid dropping genuine talks — "A Career in
+# Filmmaking" is vocational, but a bare "career" would over-match.
+#   - career/job help: vocational programming, not cultural events.
+#   - open house / SFPL staff: library operational/admin events.
+_SKIP_TITLE_PHRASES = (
+    "a career in", "careers in", "career coaching", "career fair",
+    "job search", "job help", "job fair", "job readiness",
+    "open house", "sfpl staff",
+)
+
 
 def _is_skipped_type(title: str) -> bool:
-    """True if the title's `Type:` prefix is a non-event category to drop.
+    """True if the title marks a non-event to drop at scrape time.
 
-    Handles bracketed status markers SFPL sometimes prepends, e.g.
-    "(FULL) Tutorial: …" or "FULL Tutorial: …" — we look at the token right
-    before the first colon.
+    Two signals: the `Type:` colon prefix (handles bracketed status markers like
+    "(FULL) Tutorial: …"), and phrase matches anywhere in the title for
+    categories that hide under a legit prefix (career/job help, open houses).
     """
+    low = title.lower()
+    if any(phrase in low for phrase in _SKIP_TITLE_PHRASES):
+        return True
     if ":" not in title:
         return False
     prefix = title.split(":", 1)[0].strip().lower()
@@ -108,7 +126,7 @@ def _is_skipped_type(title: str) -> bool:
     # actual category word.
     last = prefix.replace("(", " ").replace(")", " ").split()
     candidate = last[-1] if last else prefix
-    return candidate in _SKIP_TITLE_PREFIXES or prefix in _SKIP_TITLE_PREFIXES
+    return (candidate in _SKIP_TITLE_PREFIXES or prefix in _SKIP_TITLE_PREFIXES)
 
 _DATE_RE = re.compile(
     r"^(?P<day>[A-Za-z]+),\s*"
