@@ -1,0 +1,110 @@
+[
+  {
+    "date": "2026-09-25",
+    "productions": [
+      {
+        "productionId": 1285198,
+        "name": "King Lear",
+        "supertitle": "Presented by Oakland Theater Project",
+        "subtitle": "",
+        "logoFile": "628302",
+        "hidden": false,
+        "allDayEvent": false,
+        "showtimes": [
+          {
+            "productionId": 1285198,
+            "performanceId": 11849593,
+            "performanceStartTime": "2026-09-25 19:00",
+            "performanceEndTime": "2026-09-25 21:00",
+            "isVisible": true,
+            "isCancelled": false,
+            "isSoldOut": false
+          },
+          {
+            "productionId": 1285198,
+            "performanceId": 11849594,
+            "performanceStartTime": "2026-09-25 22:00",
+            "performanceEndTime": "2026-09-26 00:00",
+            "isVisible": true,
+            "isCancelled": true,
+            "isSoldOut": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-09-27",
+    "productions": [
+      {
+        "productionId": 1285198,
+        "name": "King Lear",
+        "supertitle": "Presented by Oakland Theater Project",
+        "subtitle": "",
+        "logoFile": "628302",
+        "hidden": false,
+        "allDayEvent": false,
+        "showtimes": [
+          {
+            "productionId": 1285198,
+            "performanceId": 11849601,
+            "performanceStartTime": "2026-09-27 14:00",
+            "performanceEndTime": "2026-09-27 16:00",
+            "isVisible": true,
+            "isCancelled": false,
+            "isSoldOut": false
+          },
+          {
+            "productionId": 1285198,
+            "performanceId": 11849602,
+            "performanceStartTime": "2026-09-27 19:00",
+            "performanceEndTime": "2026-09-27 21:00",
+            "isVisible": false,
+            "isCancelled": false,
+            "isSoldOut": false
+          }
+        ]
+      },
+      {
+        "productionId": 1281530,
+        "name": "Assimilation",
+        "supertitle": "A Word for Word and Z Space production",
+        "subtitle": "",
+        "logoFile": "628310",
+        "hidden": false,
+        "allDayEvent": false,
+        "showtimes": [
+          {
+            "productionId": 1281530,
+            "performanceId": 11833356,
+            "performanceStartTime": "2026-09-27 19:00",
+            "performanceEndTime": "2026-09-27 21:00",
+            "isVisible": true,
+            "isCancelled": false,
+            "isSoldOut": false
+          }
+        ]
+      },
+      {
+        "productionId": 1999999,
+        "name": "One-Night Cabaret",
+        "supertitle": "",
+        "subtitle": "",
+        "logoFile": null,
+        "hidden": false,
+        "allDayEvent": false,
+        "showtimes": [
+          {
+            "productionId": 1999999,
+            "performanceId": 12000001,
+            "performanceStartTime": "2026-09-27 20:00",
+            "performanceEndTime": "2026-09-27 22:00",
+            "isVisible": true,
+            "isCancelled": false,
+            "isSoldOut": false
+          }
+        ]
+      }
+    ]
+  }
+]

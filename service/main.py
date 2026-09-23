@@ -12,7 +12,7 @@ from scrapers import (
     actsf, atgtickets, berkeleyrep, bigbrainbay, blackbird, brava, citylights,
     fillmore, gamh, greatstar, greenapple, independent, magictheatre, nctcsf,
     neofuturists, palace, phoenix, presidio, sfjazz, sfpl, sfplayhouse,
-    sfwarmemorial, warfield, ybca,
+    sfwarmemorial, warfield, ybca, zspace,
 )
 from scrapers.base import RawEvent
 
@@ -24,7 +24,7 @@ SCRAPERS = [
     berkeleyrep, sfjazz, fillmore, gamh, ybca, independent,
     nctcsf, brava, magictheatre, greatstar, presidio,
     warfield, palace, sfwarmemorial, sfplayhouse, phoenix, neofuturists,
-    sfpl, bigbrainbay,
+    sfpl, bigbrainbay, zspace,
 ]
 
 
