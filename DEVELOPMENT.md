@@ -25,16 +25,21 @@ A working end-to-end pipeline serving a live public calendar:
 - **~2,600 upcoming events** in the published manifest.
 - **Static-site frontend** on GitHub Pages — a single self-contained
   `index.html` (inline CSS/JS, no build step) that reads `events.json`.
+- **AI tagging** — every show is classified on two axes (**type** = format,
+  **topic** = interest) + cost by an LLM (Amazon Bedrock, Claude Haiku), cached
+  per show in a committed file. The frontend has type/topic filters and
+  tag-aware search. See "AI tagging" under Design decisions.
 - **Client-side search** (vendored MiniSearch): typo-tolerant, ranked, composes
-  with source/date/location filters.
-- **Shareable URLs** — every filter (search query, sources, dates, location)
-  round-trips through the query string; `?dates=today` / `?dates=week` resolve
+  with source/date/location/type/topic filters; also matches tag labels.
+- **Shareable URLs** — every filter (search, sources, dates, location, type,
+  topic) round-trips through the query string; `?dates=today|week|month` resolve
   live so a bookmark always shows current happenings.
 - **Deploys on push to `main`** touching `frontend/` via `deploy-pages.yml`.
 
-Still **planned, not built**: email/flyer ingestion, AI tagging, any
-AWS/Bedrock/CDK infrastructure. The earlier plan to run on AWS with a React
-frontend was superseded by the simpler static-site + Docker approach below.
+Still **planned, not built**: email/flyer ingestion, any CDK/persistent-AWS
+infrastructure. (Bedrock is used for tagging via mounted creds, not deployed
+infra.) The earlier plan to run on AWS with a React frontend was superseded by
+the simpler static-site + Docker approach below.
 
 ## Architecture
 
@@ -151,14 +156,19 @@ naively hits a few walls, in rough priority order:
 
 ## Roadmap
 
+**Shipped:** AI tagging (two-axis type+topic + cost, Claude Haiku, per-show
+cache, frontend type/topic filters + tag search). The as-built design differs
+from the original `feature-specs/tagging.md` draft (that draft is single-axis /
+Nova) — the code is the source of truth: `service/taxonomy.py`, `classify.py`,
+`classifications.py`.
+
 Near-term, in likely order:
 - **Onboard queued sources in tiers** from `future-sources.md`, structured-data
   first; build **platform scrapers** (Veezi, Eventive) where they unlock many
-  venues at once.
+  venues at once. Each source also needs a `source_profiles.json` tagging prior.
 - **Address the frontend payload wall** before the manifest gets large.
-- **AI tagging** — hierarchical type + cost taxonomy, classified once per show
-  and cached, with a tag filter on the frontend. Full design in
-  `feature-specs/tagging.md`.
+- **`reclassify` CLI** — force re-tagging of stale/all shows (today a taxonomy
+  version bump or deleting the cache forces it).
 - **Email / flyer ingestion** — forward an email or flyer screenshot to a
   monitored inbox; parse (LLM for unstructured images) and add to the calendar.
   Also the path for login-gated sources.

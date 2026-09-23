@@ -1,6 +1,18 @@
 # Feature Spec: Event Tagging (AI Classification)
 
-Status: Draft · Owner: Agora · Target phase: Phase 5 (AI tagging)
+Status: **IMPLEMENTED — this draft is superseded; the code is the source of truth.**
+
+> ⚠️ This is the original design draft. The shipped feature diverged from it in
+> two big ways after experimentation:
+> - **Two axes, not one.** Type became a shallow *format* tree; genre/subject
+>   moved to a separate flat, multi-select **topic** vocabulary (poetry, jazz,
+>   theater, …). See `service/data/taxonomy.v1.json` (`axes.type` + `axes.topic`).
+> - **Model: Claude Haiku 4.5 via Bedrock**, not Nova Micro (Haiku was markedly
+>   more accurate in a head-to-head; cost is a one-time ~$1 for the catalog).
+> - Added **`source_profiles.json`** (per-venue prior) for thin descriptions.
+> Live code: `service/taxonomy.py`, `classify.py`, `classifications.py`,
+> `exporters/json_export.py`, and the frontend filters in `frontend/index.html`.
+> The rest of this doc is kept for historical rationale.
 
 ## Goal
 

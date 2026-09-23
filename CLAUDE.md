@@ -6,13 +6,14 @@ other docs don't cover. Read the linked doc for depth; don't duplicate it here.
 
 ## What Agora is (30 seconds)
 
-An SF Bay Area event aggregator. Scrapers pull events from ~24 venue/organizer
-sites into Postgres; an exporter writes `frontend/events.json`; a static
-single-page site on GitHub Pages reads that JSON and renders a searchable,
-filterable, shareable calendar. No live backend serves the site — the committed
+An SF Bay Area event aggregator. Scrapers pull events from ~29 venue/organizer
+sites into Postgres; an LLM tags each show (type + topic + cost); an exporter
+writes `frontend/events.json`; a static single-page site on GitHub Pages reads
+that JSON and renders a searchable, filterable (source/date/type/topic),
+shareable calendar. No live backend serves the site — the committed
 `events.json` is the artifact that ships.
 
-Pipeline: `sources.txt → scrapers (concurrent) → Postgres → events.json → Pages`
+Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cached) → events.json → Pages`
 
 ## Where to read for your task
 
@@ -22,7 +23,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → events.json �
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
 | Frontend search design (MiniSearch, ranking) | `feature-specs/search.md` |
-| AI tagging design (planned, not built) | `feature-specs/tagging.md` |
+| AI tagging (built) — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; ⚠️ `feature-specs/tagging.md` is the ORIGINAL draft and is stale (single-axis / Nova) — the built version is two-axis (type+topic), Claude Haiku, with `source_profiles.json` |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
 
@@ -30,9 +31,13 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → events.json �
 
 - `service/` — Python backend. `scrapers/` (one module per source + shared libs
   `eventbrite.py`, `luma.py`, `performances.py`, `browser.py`), `exporters/`,
-  `main.py` (pipeline entry), `api.py` (read API), `tests/`, `data/sources.txt`.
+  `taxonomy.py` + `classify.py` + `classifications.py` (AI tagging), `main.py`
+  (pipeline entry), `api.py` (read API), `tests/`. `data/` holds `sources.txt`,
+  `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the
+  committed `classifications.json` (tag cache).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
-  `vendor/` (pinned MiniSearch), `events.json` (the manifest).
+  `vendor/` (pinned MiniSearch), `events.json` (the manifest — carries the
+  taxonomy block + per-event `types`/`topics`/`cost`).
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
 
 ## Operating rules for agents
@@ -58,7 +63,13 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → events.json �
   subject, no attribution footer (match `git log`). Commit/push only when asked;
   a push to `main` touching `frontend/` deploys the site.
 - **The DB is ephemeral; the manifest is durable.** Never treat DB state as the
-  source of truth for the site — `events.json` is.
+  source of truth for the site — `events.json` is. Same for tags:
+  `classifications.json` is the durable committed cache, not the DB.
+- **AI tagging (classify step in `run()`):** calls Bedrock (Claude Haiku); needs
+  AWS creds (the compose scraper mounts `~/.aws` — refresh on host first) or it's
+  skipped (`--no-classify` to skip explicitly). Classifies only cache misses
+  (new shows / stale taxonomy version), keyed per `(source, title)`. Adding a
+  source ⇒ also add its `source_profiles.json` line (see `CONTRIBUTING.md`).
 
 ## Sharp edges (things that have actually bitten)
 
@@ -104,6 +115,8 @@ Multiple agents may work this repo at once. To avoid stepping on each other:
 
 ## Current focus
 
-Scaling the source list (~95 candidates queued in `future-sources.md`).
-Per-source failure isolation is done; the next wall is the frontend payload as
-the manifest grows — see `DEVELOPMENT.md` → "Scaling considerations."
+AI tagging shipped (two-axis type+topic, Claude Haiku, cached; frontend
+filters + tag search). Ongoing: scaling the source list (~95 candidates in
+`future-sources.md`) and pruning source noise (e.g. SFPL non-events). The next
+structural wall is the frontend payload as the manifest grows — see
+`DEVELOPMENT.md` → "Scaling considerations."
