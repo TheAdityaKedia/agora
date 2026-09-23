@@ -224,10 +224,13 @@
   /* Type chips are a touch more subdued (format is secondary to topic). */
   .tag-chip.tag-type { font-variant: small-caps; letter-spacing: 0.02em; }
   /* Topic dropdown: grouped list with a color swatch per group. */
+  .dropdown-group-item { margin-top: 4px; }
   .dropdown-group-label {
     font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--muted); font-weight: 600; padding: 8px 6px 2px;
+    color: var(--fg); font-weight: 700;
   }
+  /* Indent child topic rows under their group header. */
+  .dropdown-item[data-topic] { padding-left: 20px; }
   .topic-swatch {
     width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto;
     background: hsl(var(--h) var(--chip-s) var(--chip-l));
@@ -428,6 +431,7 @@
 
   const selectedTypes = new Set();   // dot-paths, e.g. "talk" or "talk.reading"
   const selectedTopics = new Set();  // slugs
+  const selectedGroups = new Set();  // topic group names (match any topic in the group)
 
   // --- Tag filter controls: Type (inline chips, top-levels) + Topic (grouped
   // dropdown). Populated once; `updateTagControls` syncs their active state. ---
@@ -448,7 +452,15 @@
       .join("");
     const parts = [];
     for (const group of groupOrder) {
-      parts.push('<div class="dropdown-group-label">' + escapeHtml(group) + "</div>");
+      // The group header is itself selectable: picking "Music" matches any
+      // event with any Music topic (jazz OR rock OR …).
+      const ghue = GROUP_HUE[group] ?? 0;
+      parts.push(
+        '<label class="dropdown-item dropdown-group-item" data-group="' + escapeHtml(group) + '">'
+        + '<input type="checkbox" data-group-cb="' + escapeHtml(group) + '">'
+        + '<span class="topic-swatch" style="--h:' + ghue + '"></span>'
+        + '<span class="dropdown-group-label">' + escapeHtml(group) + " — all</span></label>"
+      );
       for (const [slug, m] of topicMeta) {
         if (m.group !== group) continue;
         parts.push(
@@ -469,8 +481,12 @@
     for (const cb of topicListEl.querySelectorAll("input[data-topic-cb]")) {
       cb.checked = selectedTopics.has(cb.dataset.topicCb);
     }
-    topicSummaryEl.textContent = selectedTopics.size
-      ? selectedTopics.size + (selectedTopics.size === 1 ? " topic" : " topics")
+    for (const cb of topicListEl.querySelectorAll("input[data-group-cb]")) {
+      cb.checked = selectedGroups.has(cb.dataset.groupCb);
+    }
+    const n = selectedTopics.size + selectedGroups.size;
+    topicSummaryEl.textContent = n
+      ? n + (n === 1 ? " topic" : " topics")
       : "Any topic";
   }
 
@@ -480,8 +496,10 @@
     const btn = e.target.closest(".tag-chip");
     if (btn) toggleTag("type", btn.dataset.tagval);
   });
-  // Topic rows toggle the topic filter (label click flips the checkbox).
+  // Topic/group rows toggle their filter (label click flips the checkbox).
   topicListEl.addEventListener("click", (e) => {
+    const groupLabel = e.target.closest("label[data-group]");
+    if (groupLabel) { e.preventDefault(); toggleTag("group", groupLabel.dataset.group); return; }
     const label = e.target.closest("label[data-topic]");
     if (!label) return;
     e.preventDefault();
@@ -489,6 +507,7 @@
   });
   topicClearEl.addEventListener("click", () => {
     selectedTopics.clear();
+    selectedGroups.clear();
     updateTagControls();
     render();
   });
@@ -500,14 +519,17 @@
       label.hidden = !match;
       if (match) visible++;
     }
-    // Hide a group header when all its items are filtered out.
-    for (const gl of topicListEl.querySelectorAll(".dropdown-group-label")) {
-      let n = gl.nextElementSibling, any = false;
-      while (n && !n.classList.contains("dropdown-group-label")) {
-        if (!n.hidden) { any = true; break; }
+    // A group header shows if its own name matches, or any of its child topic
+    // rows (the following siblings up to the next group header) is visible.
+    for (const g of topicListEl.querySelectorAll(".dropdown-group-item")) {
+      const nameMatch = !q || g.textContent.toLowerCase().includes(q);
+      let n = g.nextElementSibling, childVisible = false;
+      while (n && !n.classList.contains("dropdown-group-item")) {
+        if (!n.hidden) { childVisible = true; break; }
         n = n.nextElementSibling;
       }
-      gl.hidden = !any;
+      g.hidden = !(nameMatch || childVisible);
+      if (!g.hidden && nameMatch) visible++;
     }
     topicEmptyEl.hidden = visible > 0;
   });
@@ -555,7 +577,8 @@
   // Toggle a type/topic tag in its filter set (OR within a facet). Called both
   // by clicking a chip on a card and by the filter controls.
   function toggleTag(kind, val, on) {
-    const set = kind === "type" ? selectedTypes : selectedTopics;
+    const set = kind === "type" ? selectedTypes
+      : kind === "group" ? selectedGroups : selectedTopics;
     const active = on === undefined ? !set.has(val) : on;
     if (active) set.add(val); else set.delete(val);
     updateTagControls();
@@ -758,6 +781,7 @@
     searchEl.value = "";
     selectedTypes.clear();
     selectedTopics.clear();
+    selectedGroups.clear();
     updateTagControls();
     updateSearch();          // clears searchQuery / rankedOrder, removes .searching, and re-renders
     setLocationFilter(null);
@@ -789,6 +813,7 @@
     if (locationFilter) p.set("loc", locationFilter);
     if (selectedTypes.size) p.set("type", [...selectedTypes].join(","));
     if (selectedTopics.size) p.set("topic", [...selectedTopics].join(","));
+    if (selectedGroups.size) p.set("topicgroup", [...selectedGroups].join(","));
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
     if (location.pathname + location.search !== url) {
@@ -855,7 +880,14 @@
         if (topicMeta.has(slug)) selectedTopics.add(slug);
       }
     }
-    if (typeParam || topicParam) updateTagControls();
+    const groupParam = p.get("topicgroup");
+    if (groupParam) {
+      const known = new Set(groupOrder);
+      for (const g of groupParam.split(",").filter(Boolean)) {
+        if (known.has(g)) selectedGroups.add(g);
+      }
+    }
+    if (typeParam || topicParam || groupParam) updateTagControls();
     const q = p.get("q");
     if (q) {
       searchEl.value = q;
@@ -903,9 +935,11 @@
         if (!hit) return false;
       }
       // Topic filter: OR within the facet.
-      if (selectedTopics.size) {
+      if (selectedTopics.size || selectedGroups.size) {
         const evTopics = ev.topics || [];
-        if (![...selectedTopics].some(t => evTopics.includes(t))) return false;
+        const slugHit = [...selectedTopics].some(t => evTopics.includes(t));
+        const groupHit = evTopics.some(t => selectedGroups.has(topicMeta.get(t)?.group));
+        if (!slugHit && !groupHit) return false;
       }
       return true;
     };
