@@ -47,12 +47,33 @@ def _clean_title(raw: str) -> str:
     return _TITLE_SUFFIX_RE.sub("", raw).strip()
 
 
-def _parse_start(date_iso: str | None, time_24h: str | None) -> datetime | None:
-    """Combine an ISO date ('2026-09-22') and a 24h time ('19:00'), SF-local → UTC."""
+def _extract_time(art) -> tuple[str | None, str]:
+    """Return (time_text, strptime_format) for a card's start time.
+
+    Squarespace themes render the start time in one of two classes: a 24-hour
+    ``event-time-24hr-start`` ('19:00') or a localized 12-hour
+    ``event-time-localized-start`` / ``event-time-12hr-start`` ('7:00 PM').
+    """
+    el = art.select_one("time.event-time-24hr-start")
+    if el and el.get_text(strip=True):
+        return el.get_text(strip=True), "%H:%M"
+    el = (art.select_one("time.event-time-localized-start")
+          or art.select_one("time.event-time-12hr-start"))
+    if el and el.get_text(strip=True):
+        return el.get_text(strip=True), "%I:%M %p"
+    return None, ""
+
+
+def _parse_start(date_iso: str | None, time_text: str | None, time_fmt: str) -> datetime | None:
+    """Combine an ISO date ('2026-09-22') with a start time, SF-local → UTC.
+
+    Falls back to midnight when a card exposes no start time."""
     if not date_iso:
         return None
-    fmt = "%Y-%m-%d %H:%M" if time_24h else "%Y-%m-%d"
-    stamp = f"{date_iso} {time_24h}" if time_24h else date_iso
+    if time_text:
+        stamp, fmt = f"{date_iso} {time_text}", f"%Y-%m-%d {time_fmt}"
+    else:
+        stamp, fmt = date_iso, "%Y-%m-%d"
     try:
         naive = datetime.strptime(stamp, fmt)
     except ValueError:
@@ -75,10 +96,10 @@ def parse_events(html: str, *, base_url: str, fallback_location: str | None = No
         title = _clean_title(title_el.get_text(strip=True))
 
         date_el = art.select_one("time.event-date")
-        time_el = art.select_one("time.event-time-24hr-start")
+        time_text, time_fmt = _extract_time(art)
         start_time = _parse_start(
             date_el.get("datetime") if date_el else None,
-            time_el.get_text(strip=True) if time_el else None,
+            time_text, time_fmt,
         )
         if not (title and start_time):
             continue
@@ -87,7 +108,11 @@ def parse_events(html: str, *, base_url: str, fallback_location: str | None = No
         href = link.get("href") if link else None
         url = origin + href if href and href.startswith("/") else href
 
-        img = art.select_one("img.eventlist-thumbnail")
+        # Theme variants: some cards use img.eventlist-thumbnail, others a plain
+        # <img> inside the thumbnail column with only data-src.
+        img = (art.select_one("img.eventlist-thumbnail")
+               or art.select_one(".eventlist-column-thumbnail img")
+               or art.find("img"))
         image_url = (img.get("data-src") or img.get("src")) if img else None
 
         desc_el = art.select_one(".eventlist-description")

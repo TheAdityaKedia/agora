@@ -89,7 +89,6 @@ platform scraper may be the better path for some (noted where relevant).
 - **Booksmith** (Haight) — https://www.booksmith.com/
 - **Book Passage** (Corte Madera + Ferry Building) — https://www.bookpassage.com/
 - **Books Inc.** (local chain) — https://www.booksinc.com/
-- **Bird & Beckett** (Glen Park; jazz + poetry series) — https://birdbeckett.com/
 - **Noe Valley Books** — https://noevalleybooks.com/
 - **Dog Eared Books** (Mission/Castro) — https://www.dogearedbooks.com/
 - **Fabulosa Books** (Castro) — https://www.fabulosabooks.com/
@@ -99,7 +98,6 @@ platform scraper may be the better path for some (noted where relevant).
 - **Omnivore Books** (food/cookbook events) — https://omnivorebooks.myshopify.com/collections/upcoming-events
 - **Mrs. Dalloway's** (Berkeley) — https://www.mrsdalloways.com/
 - **Bookshop West Portal** — https://bookshopwestportal.com/
-- **Medicine for Nightmares** — https://medicinefornightmares.com/
 - **Clio's Books** (Marin) — https://www.cliosbooks.com/
 - **Sansaar Books** — https://sansaarbooks.com/
 - **Silkworm Books** — https://silkwormbooks.com/
@@ -180,6 +178,8 @@ platform scraper may be the better path for some (noted where relevant).
 - Z Space — `zspace.org` (OvationTix client 34231; reusable pattern for other OvationTix venues)
 - Balboa Theatre — `balboamovies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py`)
 - 4-Star Theater — `4-star-movies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py` — reusable for any Squarespace-events venue by calendar URL)
+- Medicine for Nightmares — `medicinefornightmares.com` (Squarespace events collection; shared `scrapers/squarespace_events.py`)
+- Bird & Beckett — `birdbeckett.com` (WordPress "The Events Calendar" REST API; shared `scrapers/tribe_events.py` — reusable for any Tribe/WordPress venue by site base)
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 

@@ -6,7 +6,7 @@ import pytest
 
 from scrapers.base import RawEvent
 from scrapers import squarespace_events as se
-from scrapers import balboa, fourstar
+from scrapers import balboa, fourstar, medicinenightmares
 
 FIXTURE = Path(__file__).parent / "fixtures" / "squarespace_events.html"
 UTC = ZoneInfo("UTC")
@@ -65,11 +65,32 @@ def test_empty_page():
     assert se.parse_events("<html><body>nothing</body></html>", base_url=BASE) == []
 
 
+# Some Squarespace themes render the start time as a localized 12-hour value
+# ("7:00 PM" in time.event-time-localized-start) instead of the 24-hour class.
+_LOCALIZED = """
+<article class="eventlist-event">
+  <h1 class="eventlist-title"><a class="eventlist-title-link" href="/events/molcajete">Molcajete Poets</a></h1>
+  <time class="event-date" datetime="2026-09-23">Wednesday, September 23, 2026</time>
+  <time class="event-time-localized-start" datetime="2026-09-23">7:00 PM</time>
+  <div class="eventlist-description">An open mic night of poetry.</div>
+</article>
+"""
+
+
+def test_localized_12hr_start_time():
+    evs = se.parse_events(_LOCALIZED, base_url="https://medicinefornightmares.com/events")
+    assert len(evs) == 1
+    # 2026-09-23 7:00 PM PDT → 2026-09-24 02:00 UTC
+    assert evs[0].start_time.astimezone(UTC) == datetime(2026, 9, 24, 2, 0, tzinfo=UTC)
+
+
 def test_matches():
     assert balboa.matches("https://www.balboamovies.com/calendar-of-events")
     assert not balboa.matches("https://www.4-star-movies.com/calendar-of-events")
     assert fourstar.matches("https://www.4-star-movies.com/calendar-of-events")
     assert not fourstar.matches("https://www.balboamovies.com/calendar-of-events")
+    assert medicinenightmares.matches("https://medicinefornightmares.com/events")
+    assert not medicinenightmares.matches("https://www.balboamovies.com/calendar-of-events")
 
 
 def test_thin_wrappers_delegate(monkeypatch):
@@ -78,5 +99,7 @@ def test_thin_wrappers_delegate(monkeypatch):
                         lambda url, **kw: calls.append((url, kw)) or [])
     balboa.scrape()
     fourstar.scrape()
+    medicinenightmares.scrape()
     assert calls[0][0] == balboa.CALENDAR_URL
     assert calls[1][0] == fourstar.CALENDAR_URL
+    assert calls[2][0] == medicinenightmares.CALENDAR_URL
