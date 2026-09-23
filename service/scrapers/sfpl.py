@@ -76,6 +76,40 @@ def _is_kid_only(card) -> bool:
     adult = classes & _ADULT_RELEVANT_AUDIENCES
     return not adult
 
+
+# SFPL titles follow a "Type: Name" convention (e.g. "Workshop: Sewing Basics").
+# Some of those types aren't public *happenings* you'd browse a calendar for —
+# they're by-appointment 1:1 services or administrivia. Drop them at scrape
+# time so they never reach the manifest or the classifier (where they only
+# produced garbage tags, since the taxonomy has no home for "book a 1:1 tech
+# appointment"). Matched case-insensitively against the title's colon prefix.
+#   - Tutorial: reserve-a-slot 1:1 help (tech, financial coaching, Book a
+#     Librarian) — a service, not a scheduled program.
+#   - Services: drop-in social-worker / benefits / assessment desks.
+#   - Canceled / Postponed: not happening.
+_SKIP_TITLE_PREFIXES = frozenset({
+    "tutorial", "services", "canceled", "cancelled", "postponed",
+    # Spanish/Chinese equivalents SFPL uses for the same service categories.
+    "教程",   # "tutorial"
+})
+
+
+def _is_skipped_type(title: str) -> bool:
+    """True if the title's `Type:` prefix is a non-event category to drop.
+
+    Handles bracketed status markers SFPL sometimes prepends, e.g.
+    "(FULL) Tutorial: …" or "FULL Tutorial: …" — we look at the token right
+    before the first colon.
+    """
+    if ":" not in title:
+        return False
+    prefix = title.split(":", 1)[0].strip().lower()
+    # Take the last word so "(full) tutorial" / "full workshop" reduce to the
+    # actual category word.
+    last = prefix.replace("(", " ").replace(")", " ").split()
+    candidate = last[-1] if last else prefix
+    return candidate in _SKIP_TITLE_PREFIXES or prefix in _SKIP_TITLE_PREFIXES
+
 _DATE_RE = re.compile(
     r"^(?P<day>[A-Za-z]+),\s*"
     r"(?P<m>\d{1,2})/(?P<d>\d{1,2})/(?P<y>\d{4}),\s*"
@@ -130,6 +164,9 @@ def _parse_card(card) -> RawEvent | None:
         return None
     title = title_a.get_text(" ", strip=True)
     if not title:
+        return None
+    # Drop non-event categories (1:1 service appointments, canceled, …).
+    if _is_skipped_type(title):
         return None
     href = title_a.get("href")
 

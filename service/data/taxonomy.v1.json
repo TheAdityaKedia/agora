@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "tree": {
+    "performance": {
+      "label": "Performance",
+      "children": {
+        "music": {
+          "label": "Music",
+          "children": {
+            "jazz": {"label": "Jazz"},
+            "rock": {"label": "Rock"},
+            "pop-indie": {"label": "Pop / Indie"},
+            "hiphop-rnb": {"label": "Hip-hop / R&B"},
+            "electronic": {"label": "Electronic"},
+            "folk-americana": {"label": "Folk / Americana"},
+            "classical": {"label": "Classical"},
+            "world": {"label": "World / Global"},
+            "other": {"label": "Other"}
+          }
+        },
+        "theater": {
+          "label": "Theater",
+          "children": {
+            "musical-theater": {"label": "Musical theater"},
+            "play": {"label": "Play (drama)"},
+            "opera": {"label": "Opera"},
+            "solo-show": {"label": "Solo / one-person show"},
+            "cabaret-variety": {"label": "Cabaret / variety"},
+            "comedy-farce": {"label": "Comedy / farce"},
+            "experimental": {"label": "Experimental / devised"},
+            "other": {"label": "Other"}
+          }
+        },
+        "dance": {"label": "Dance"},
+        "comedy": {"label": "Comedy"}
+      }
+    },
+    "screening": {
+      "label": "Screening",
+      "children": {
+        "film": {"label": "Film"},
+        "documentary": {"label": "Documentary"},
+        "repertory": {"label": "Repertory / classic"},
+        "series-festival": {"label": "Series / festival"},
+        "other": {"label": "Other"}
+      }
+    },
+    "talk": {
+      "label": "Talk",
+      "children": {
+        "author-reading": {"label": "Author talk / Reading"},
+        "lecture": {"label": "Lecture"},
+        "panel": {"label": "Panel / Discussion"},
+        "podcast": {"label": "Live podcast"},
+        "conversation": {"label": "Conversation / Q&A"}
+      }
+    },
+    "workshop": {
+      "label": "Workshop",
+      "children": {
+        "art-craft": {"label": "Art / Craft"},
+        "writing": {"label": "Writing"},
+        "dance-class": {"label": "Dance class"},
+        "music": {"label": "Music"},
+        "cooking": {"label": "Cooking"},
+        "wellness": {"label": "Wellness / Movement"},
+        "tech": {"label": "Tech / Digital skills"}
+      }
+    },
+    "exhibition": {
+      "label": "Exhibition",
+      "children": {
+        "visual-art": {"label": "Visual art"},
+        "photography": {"label": "Photography"},
+        "installation": {"label": "Installation / New media"},
+        "design-architecture": {"label": "Design / Architecture"},
+        "history-cultural": {"label": "History / Cultural"}
+      }
+    },
+    "social": {
+      "label": "Social",
+      "children": {
+        "dance-social": {
+          "label": "Dance social",
+          "children": {
+            "zouk": {"label": "Zouk"},
+            "bachata": {"label": "Bachata"},
+            "salsa": {"label": "Salsa"},
+            "fusion": {"label": "Fusion"},
+            "tango": {"label": "Tango"},
+            "swing": {"label": "Swing"},
+            "other": {"label": "Other"}
+          }
+        },
+        "party-club": {"label": "Party / Club night"},
+        "gala-fundraiser": {"label": "Gala / Fundraiser"},
+        "mixer-meetup": {"label": "Mixer / Meetup"},
+        "food-drink": {"label": "Food & drink"},
+        "book-club": {"label": "Book club / Reading group"},
+        "language-exchange": {"label": "Language / Conversation group"},
+        "games-hobby": {"label": "Games / Hobby club"}
+      }
+    }
+  }
+}

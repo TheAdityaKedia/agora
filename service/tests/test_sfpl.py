@@ -7,7 +7,7 @@ import pytest
 from scrapers.base import RawEvent
 from scrapers.sfpl import (
     parse, matches, _parse_start, _infer_ampm, _last_page_number,
-    parse_event_description,
+    parse_event_description, _is_skipped_type,
 )
 
 FIXTURE = Path(__file__).parent / "fixtures" / "sfpl_events.html"
@@ -26,17 +26,20 @@ def test_matches():
 
 
 def test_parse_returns_events(html):
-    # The fixture has 3 cards, one of which is a
-    # babies-toddlers-or-preschoolers early-learning session — filtered out.
+    # The fixture has 4 cards; three are filtered out (a kid-only early-learning
+    # session, a "Tutorial:" 1:1 service, and a "Services:" desk), leaving one
+    # real program — "Workshop: Watercolor Basics".
     events = parse(html)
-    assert len(events) == 2
+    assert len(events) == 1
     assert all(isinstance(e, RawEvent) for e in events)
     assert all("Early Learning" not in e.title for e in events)
+    assert all(not e.title.startswith("Tutorial") for e in events)
+    assert all(not e.title.startswith("Services") for e in events)
 
 
 def test_parse_fields(html):
-    ev = parse(html)[0]  # "Tutorial: Meet One-on-One with a Financial Counselor"
-    assert ev.title.startswith("Tutorial")
+    ev = parse(html)[0]  # "Workshop: Watercolor Basics"
+    assert ev.title.startswith("Workshop")
     assert ev.url and ev.url.startswith("https://sfpl.org/events/")
     assert ev.location.startswith("SFPL — ")
     assert ev.image_url and ev.image_url.startswith("https://sfpl.org/")
@@ -143,6 +146,49 @@ def test_adult_relevant_audiences_are_kept():
     for aud in ("event--adults", "event--teens", "event--all-ages", "event--families"):
         events = parse(_one_card(aud))
         assert len(events) == 1, f"expected keep for {aud}"
+
+
+# --- non-event type-prefix filter ---------------------------------------
+
+def test_is_skipped_type_drops_service_categories():
+    assert _is_skipped_type("Tutorial: Basic Tech Help")
+    assert _is_skipped_type("Services: Department of Disability and Aging")
+    assert _is_skipped_type("Canceled: Workshop: Career Coaching")
+    assert _is_skipped_type("Postponed: Author Talk")
+    assert _is_skipped_type("教程: 基本科技協助")
+
+
+def test_is_skipped_type_handles_status_markers_before_type():
+    # SFPL prepends "(FULL)" / "FULL" to the type word sometimes.
+    assert _is_skipped_type("(FULL) Tutorial: Meet a Financial Counselor")
+    assert _is_skipped_type("FULL Tutorial: Tech Drop-In")
+
+
+def test_is_skipped_type_keeps_real_programs():
+    for keep in (
+        "Workshop: Sewing Basics",
+        "Activity: Chess Club",
+        "Book Club: Excelsior Reads",
+        "Social: Knitting Circle",
+        "Film: Some Like It Hot",
+        "Author: May-lee Chai",
+        "An Evening of Jazz",  # no colon prefix at all
+    ):
+        assert not _is_skipped_type(keep), f"should keep {keep!r}"
+
+
+def _titled_card(title: str, audience: str = "event--adults") -> str:
+    body = _SFPL_CARD_TEMPLATE.format(audience_classes=audience).replace(
+        ">Test Event<", f">{title}<"
+    )
+    return f"<div>{body}</div>"
+
+
+def test_parse_drops_skipped_type_cards():
+    assert parse(_titled_card("Tutorial: Basic Tech Help")) == []
+    assert parse(_titled_card("Services: Benefits Desk")) == []
+    # A real program with the same card shape is kept.
+    assert len(parse(_titled_card("Workshop: Sewing Basics"))) == 1
 
 
 def test_parse_event_description_prefers_og():
