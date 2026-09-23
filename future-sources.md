@@ -58,9 +58,7 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Cinemas & film orgs
 
-- **Roxie Theater** — https://roxie.com/calendar/  *(Veezi ticketing)*
-- **Balboa Theatre** — https://www.balboamovies.com/calendar-of-events  *(Veezi)*
-- **4-Star Theater** — https://www.4-star-movies.com/calendar-of-events  *(Veezi)*
+- **Roxie Theater** — https://roxie.com/calendar/  *(⚠️ no longer Veezi — now WordPress-hosted; needs a fresh spike)*
 - **The Castro Theatre** — https://thecastro.com/events
 - **SFFILM** — https://sffilm.org/calendar/
 - **SF Silent Film Festival** — https://silentfilm.org/
@@ -76,7 +74,6 @@ platform scraper may be the better path for some (noted where relevant).
 - **Kronos Quartet** — https://kronosquartet.org/
 - **EnActe Arts** (South Asian theater) — https://enacte.org/
 - **FIPPP** (Formerly Incarcerated People's Performance Project) — https://fippp.org/
-- **Z Space** (Mission theater/performing arts) — https://www.zspace.org/
 - **Yerba Buena Gardens Festival** — https://ybgfestival.org/ *(distinct from YBCA, already a source)*
 
 ## Dance
@@ -180,6 +177,9 @@ platform scraper may be the better path for some (noted where relevant).
 - City Lights — `citylights.com`
 - Green Apple Books — `greenapplebooks.com`
 - Black Bird Bookstore — `blackbirdsf.com`
+- Z Space — `zspace.org` (OvationTix client 34231; reusable pattern for other OvationTix venues)
+- Balboa Theatre — `balboamovies.com` (Veezi; shared `scrapers/veezi.py`)
+- 4-Star Theater — `4-star-movies.com` (Veezi; shared `scrapers/veezi.py` — reusable for any Veezi cinema by site token)
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 
