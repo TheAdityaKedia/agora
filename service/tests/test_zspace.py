@@ -106,3 +106,46 @@ def test_missing_production_falls_back(events):
 def test_empty_inputs():
     assert parse_events([], []) == []
     assert parse_events(None, None) == []
+
+
+# --- venue-homepage image fallback -----------------------------------------
+
+from scrapers.zspace import _parse_homepage_blocks, _match_image, _title_tokens
+
+_HOMEPAGE = """
+<html><body>
+  <a class="sqs-block-image-link" href="https://www.zspace.org/wfw-assimilation">
+    <img data-src="https://images.squarespace-cdn.com/x/assimilation.jpg"/></a>
+  <a class="sqs-block-image-link" href="https://www.zspace.org/sketch-on-speed">
+    <img src="https://images.squarespace-cdn.com/x/sketch.jpg"/></a>
+  <a class="sqs-block-image-link" href="https://www.instagram.com/zspacesf">
+    <img src="https://images.squarespace-cdn.com/x/social.jpg"/></a>
+</body></html>
+"""
+
+
+def test_parse_homepage_blocks_keeps_shows_drops_social():
+    blocks = _parse_homepage_blocks(_HOMEPAGE)
+    hrefs = [h for h, _ in blocks]
+    assert "https://www.zspace.org/wfw-assimilation" in hrefs
+    assert "https://www.zspace.org/sketch-on-speed" in hrefs
+    assert not any("instagram" in h for h in hrefs)
+    assert blocks[0][1] == "https://images.squarespace-cdn.com/x/assimilation.jpg"
+
+
+def test_match_image_by_title_tokens():
+    entries = [
+        (_title_tokens("Assimilation — Z Space"), "assim.jpg"),
+        (_title_tokens("Killing My Lobster: Sketch on Speed — Z Space"), "sketch.jpg"),
+    ]
+    # exact single-word title
+    assert _match_image("Assimilation", entries) == "assim.jpg"
+    # noisy OvationTix title still matches on token overlap
+    assert _match_image(
+        "Killing My Lobster & Z Space Present: Sketch on Speed - DECEMBER Edition", entries
+    ) == "sketch.jpg"
+
+
+def test_match_image_returns_none_below_threshold():
+    entries = [(_title_tokens("Salt & Spirit — Z Space"), "salt.jpg")]
+    assert _match_image("King Lear", entries) is None

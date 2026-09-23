@@ -14,6 +14,11 @@ is a thin SPA over a clean JSON API. Two endpoints give us everything:
 We join the two on production id: the calendar drives which performances exist,
 the catalog supplies the synopsis and venue. Both endpoints need only a
 ``clientId`` header, so no headless browser is required.
+
+Images: OvationTix serves a poster per production that has a logo uploaded
+(``logoFile``), but some don't. For those we fall back to the poster on Z
+Space's own Squarespace homepage — each current show is an image-link block
+linking to its page — matched to the production by title-token overlap.
 """
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
@@ -39,6 +44,16 @@ PRODUCTION_URL = "https://ci.ovationtix.com/34231/production/{id}"
 IMAGE_URL = f"{API_BASE}/ClientFile({{file}})"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 REQUEST_TIMEOUT = 30
+
+# Some productions have no logo uploaded to OvationTix, but Z Space's own
+# Squarespace homepage carries a poster per current show (an image-link block
+# → the show's page). We use those as a fallback image, matched by title.
+HOMEPAGE_URL = "https://www.zspace.org/"
+_TITLE_STOPWORDS = {
+    "the", "a", "an", "and", "of", "z", "space", "present", "presents",
+    "premiere", "edition", "with", "for", "in", "on", "at", "to",
+}
+_IMAGE_MATCH_THRESHOLD = 0.5  # min token-overlap (Jaccard) to trust a match
 
 # The rich HTML shatters into many tiny inline fragments (each <b>/<a> is its
 # own node), so line-level filtering is hopeless — we flatten to one string and
@@ -133,6 +148,72 @@ def parse_events(calendar: list[dict], productions: list[dict]) -> list[RawEvent
     return events
 
 
+def _title_tokens(title: str) -> set[str]:
+    """Significant lowercase word tokens of a title, minus boilerplate."""
+    words = re.findall(r"[a-z0-9]+", (title or "").lower())
+    return {w for w in words if w not in _TITLE_STOPWORDS}
+
+
+def _parse_homepage_blocks(html: str) -> list[tuple[str, str]]:
+    """Return (show_page_href, poster_image_url) for each Z Space show block.
+
+    Pure. Filters the homepage's image-link blocks to internal show pages
+    (dropping social/charity links, which reuse a shared icon)."""
+    soup = BeautifulSoup(html, "html.parser")
+    blocks: list[tuple[str, str]] = []
+    for a in soup.select("a.sqs-block-image-link"):
+        href = a.get("href") or ""
+        if "zspace.org/" not in href or any(
+            s in href for s in ("facebook", "twitter", "instagram", "youtube", "charitynavigator")
+        ):
+            continue
+        img = a.find("img")
+        src = (img.get("data-src") or img.get("src")) if img else None
+        if href and src:
+            blocks.append((href, src))
+    return blocks
+
+
+def _match_image(title: str, entries: list[tuple[set[str], str]]) -> str | None:
+    """Best image whose title tokens overlap `title` above the threshold, else None."""
+    want = _title_tokens(title)
+    if not want:
+        return None
+    best_score, best_img = 0.0, None
+    for tokens, img in entries:
+        union = want | tokens
+        score = len(want & tokens) / len(union) if union else 0.0
+        if score > best_score:
+            best_score, best_img = score, img
+    return best_img if best_score >= _IMAGE_MATCH_THRESHOLD else None
+
+
+def _og_title(html: str) -> str | None:
+    meta = BeautifulSoup(html, "html.parser").find("meta", property="og:title")
+    return meta.get("content") if meta else None
+
+
+def _venue_image_entries(session: requests.Session) -> list[tuple[set[str], str]]:
+    """Fetch the homepage and each show block's page to build (title_tokens, image)."""
+    try:
+        home = session.get(HOMEPAGE_URL, timeout=REQUEST_TIMEOUT)
+        home.raise_for_status()
+    except requests.RequestException as e:
+        print(f"[zspace] homepage fetch failed: {e}", flush=True)
+        return []
+    entries: list[tuple[set[str], str]] = []
+    for href, img in _parse_homepage_blocks(home.text):
+        try:
+            page = session.get(href, timeout=REQUEST_TIMEOUT)
+            title = _og_title(page.text) or ""
+        except requests.RequestException:
+            title = ""
+        tokens = _title_tokens(title)
+        if tokens:
+            entries.append((tokens, img))
+    return entries
+
+
 def _fetch(url: str) -> list:
     resp = requests.get(
         url,
@@ -152,5 +233,25 @@ def scrape(url: str = CALENDAR_URL) -> list[RawEvent]:
         print(f"[zspace] API fetch failed: {e}", flush=True)
         return []
     events = parse_events(calendar, productions)
+
+    # Fill images OvationTix lacks (some productions have no uploaded logo) from
+    # Z Space's own homepage posters, matched by title.
+    if any(e.image_url is None for e in events):
+        session = requests.Session()
+        session.headers.update({"User-Agent": BROWSER_UA})
+        entries = _venue_image_entries(session)
+        if entries:
+            resolved: dict[str, str | None] = {}
+            filled = 0
+            for e in events:
+                if e.image_url is not None:
+                    continue
+                if e.title not in resolved:
+                    resolved[e.title] = _match_image(e.title, entries)
+                if resolved[e.title]:
+                    e.image_url = resolved[e.title]
+                    filled += 1
+            print(f"[zspace] filled {filled} images from venue homepage", flush=True)
+
     print(f"[zspace] done: {len(events)} events from {len(calendar)} calendar days", flush=True)
     return events
