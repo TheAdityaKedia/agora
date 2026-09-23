@@ -178,8 +178,8 @@ platform scraper may be the better path for some (noted where relevant).
 - Green Apple Books — `greenapplebooks.com`
 - Black Bird Bookstore — `blackbirdsf.com`
 - Z Space — `zspace.org` (OvationTix client 34231; reusable pattern for other OvationTix venues)
-- Balboa Theatre — `balboamovies.com` (Veezi; shared `scrapers/veezi.py`)
-- 4-Star Theater — `4-star-movies.com` (Veezi; shared `scrapers/veezi.py` — reusable for any Veezi cinema by site token)
+- Balboa Theatre — `balboamovies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py`)
+- 4-Star Theater — `4-star-movies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py` — reusable for any Squarespace-events venue by calendar URL)
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 
