@@ -45,6 +45,14 @@ Each source is a **strategy module** in `service/scrapers/<name>.py` exposing:
 Register the module in `main.SCRAPERS`, and add the source URL to
 `service/data/sources.txt`. No conditionals to edit — dispatch is by `matches()`.
 
+**Also add a one-line venue profile** to `service/data/source_profiles.json`,
+keyed by the exact `NAME` string. This is the prior the AI tagger leans on when
+an event's description is thin or empty — a film at a rep cinema still tags as
+a screening, a show at a jazz hall as a concert. One sentence: what the venue is
++ what kinds of events it hosts (e.g. `"Roxie Theater": "SF repertory/indie
+movie theater; film screenings (new releases, classics, repertory)."`). Every
+source should have an entry — see the existing ones for tone.
+
 `RawEvent` (see `scrapers/base.py`): `title`, `start_time` (tz-aware, **UTC**),
 `location`, `url`, `description`, `image_url`. Keep `parse*` functions **pure**
 (operate on already-fetched HTML/JSON) so they're testable without the network;
