@@ -18,6 +18,8 @@ from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import taxonomy
+from classifications import Cache
 from db import get_session
 from models import Event
 
@@ -29,9 +31,17 @@ from models import Event
 EXPORT_TZ = ZoneInfo("America/Los_Angeles")
 
 DEFAULT_BACK_WINDOW_DAYS = 1
+DEFAULT_CLASSIFICATIONS = Path(__file__).parent.parent / "data" / "classifications.json"
 
 
-def _serialize(event: Event) -> dict:
+def _serialize(event: Event, cache: Cache) -> dict:
+    # Join each event to its show's classification on (source, title). An event
+    # may carry several sources; use the first that has a cache entry.
+    entry = None
+    for src in event.sources or []:
+        entry = cache.get(src, event.title)
+        if entry is not None:
+            break
     return {
         "id": str(event.id),
         "title": event.title,
@@ -43,10 +53,18 @@ def _serialize(event: Event) -> dict:
         # sources is a list — a single event may be listed by multiple sources
         # (e.g. A.C.T. presents a show that ATG also lists).
         "sources": list(event.sources or []),
+        # Tags, joined from the classification cache (empty when untagged).
+        "types": entry.types if entry else [],
+        "topics": entry.topics if entry else [],
+        "cost": entry.cost if entry else "unknown",
     }
 
 
-def export_json(path: Path, back_window_days: int = DEFAULT_BACK_WINDOW_DAYS) -> int:
+def export_json(
+    path: Path,
+    back_window_days: int = DEFAULT_BACK_WINDOW_DAYS,
+    classifications_path: Path = DEFAULT_CLASSIFICATIONS,
+) -> int:
     """Write upcoming events as a JSON manifest to `path`.
 
     `back_window_days` is measured in **calendar days** in EXPORT_TZ, not
@@ -61,6 +79,7 @@ def export_json(path: Path, back_window_days: int = DEFAULT_BACK_WINDOW_DAYS) ->
     today_local = datetime.now(EXPORT_TZ).date()
     oldest_day = today_local - timedelta(days=max(0, back_window_days - 1))
     cutoff = datetime.combine(oldest_day, dtime.min, tzinfo=EXPORT_TZ).astimezone(timezone.utc)
+    cache = Cache(classifications_path)
     session = get_session()
     try:
         events = (
@@ -71,13 +90,16 @@ def export_json(path: Path, back_window_days: int = DEFAULT_BACK_WINDOW_DAYS) ->
             .order_by(Event.start_time, Event.id)
             .all()
         )
-        payload = [_serialize(e) for e in events]
+        payload = [_serialize(e, cache) for e in events]
     finally:
         session.close()
 
     path.parent.mkdir(parents=True, exist_ok=True)
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        # The taxonomy travels with the manifest so the static frontend builds
+        # its type/topic filters from the same source of truth (no extra fetch).
+        "taxonomy": taxonomy.load_taxonomy(),
         "events": payload,
     }
     with open(path, "w") as f:

@@ -142,10 +142,41 @@ def scrape_and_save(url: str) -> None:
     _save_scraped(scraper, raw_events, url)
 
 
+def classify_upcoming(classifier=None, client=None, cache_path=None, log=print):
+    """Gather distinct upcoming shows from the DB and classify cache misses.
+
+    A show is a distinct (source, title) keyed on the event's first source;
+    many performances collapse to one classification. Returns (classified,
+    cached). Isolated from `run()` so it can be tested with a fake classifier
+    and moved to a scheduler/Celery task later.
+    """
+    import classify as _classify
+    from classifications import Cache
+
+    classifier = classifier or _classify.classify_show
+    cache_path = cache_path or (Path(__file__).parent / "data" / "classifications.json")
+
+    now = datetime.now(timezone.utc)
+    session = get_session()
+    try:
+        rows = [
+            ((e.sources or ["?"])[0], e.title, e.description)
+            for e in session.query(Event).filter(Event.start_time >= now).all()
+        ]
+    finally:
+        session.close()
+
+    shows = _classify.select_shows(rows)
+    cache = Cache(cache_path)
+    return _classify.classify_new_shows(shows, cache, classifier=classifier,
+                                        client=client, log=log)
+
+
 def run(
     source_filters: list[str] | None = None,
     max_workers: int | None = None,
     excludes: list[str] | None = None,
+    classify: bool = True,
 ) -> None:
     """Scrape configured sources concurrently, then rewrite the JSON manifest.
 
@@ -199,6 +230,15 @@ def run(
             print(f"[run] {failures} of {len(urls)} sources failed (see above); "
                   f"manifest rebuilt from all surviving DB rows", flush=True)
 
+    # Classify new shows before export so tags land in the manifest. Guarded:
+    # a classification failure (e.g. no AWS creds locally) must not abort the
+    # export — the manifest still ships, just without fresh tags.
+    if classify:
+        try:
+            classify_upcoming()
+        except Exception as e:
+            print(f"[classify] skipped ({type(e).__name__}: {e})", flush=True)
+
     out = Path(os.environ.get("EVENTS_JSON_PATH", DEFAULT_EVENTS_JSON))
     count = export_json(out)
     print(f"[export] wrote {count} upcoming events to {out}", flush=True)
@@ -225,8 +265,14 @@ def _cli() -> None:
         help=f"Number of sources to scrape concurrently (default "
              f"SCRAPER_WORKERS env or {DEFAULT_WORKERS}).",
     )
+    parser.add_argument(
+        "--no-classify", action="store_true",
+        help="Skip the AI tagging step (no Bedrock calls); still scrapes and "
+             "exports. Use when AWS creds aren't available.",
+    )
     args = parser.parse_args()
-    run(source_filters=args.sources, excludes=args.exclude, max_workers=args.workers)
+    run(source_filters=args.sources, excludes=args.exclude, max_workers=args.workers,
+        classify=not args.no_classify)
 
 
 if __name__ == "__main__":

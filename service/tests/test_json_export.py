@@ -163,3 +163,58 @@ def test_export_orders_same_time_events_by_id_for_stable_diffs(db_session, tmp_p
     export_json(out)
     ids = [e["id"] for e in json.load(open(out))["events"]]
     assert ids == [str(id_lo), str(id_hi)]
+
+
+# --- classification join (tagging) ---------------------------------------
+
+def _seed_classifications(tmp_path, entries):
+    """Write a classifications.json and return its path."""
+    import json as _json
+    path = tmp_path / "classifications.json"
+    path.write_text(_json.dumps({"entries": entries}))
+    return path
+
+
+def test_export_joins_classification_types_topics_cost(db_session, tmp_path):
+    now = datetime.now(timezone.utc)
+    db_session.add(_make_event("Branford Marsalis Quartet", now + timedelta(days=3),
+                               sources=["SFJAZZ Center"]))
+    db_session.commit()
+    cpath = _seed_classifications(tmp_path, {
+        "SFJAZZ Center\x1fBranford Marsalis Quartet": {
+            "title": "Branford Marsalis Quartet", "source": "SFJAZZ Center",
+            "types": [["performance"]], "topics": ["jazz"], "cost": "paid",
+            "model": "m", "taxonomy_version": 1, "classified_at": "2026-09-23T00:00:00+00:00",
+        }
+    })
+    out = tmp_path / "events.json"
+    export_json(out, classifications_path=cpath)
+    data = json.loads(out.read_text())
+    ev = data["events"][0]
+    assert ev["types"] == [["performance"]]
+    assert ev["topics"] == ["jazz"]
+    assert ev["cost"] == "paid"
+
+
+def test_export_untagged_event_gets_empty_tags(db_session, tmp_path):
+    now = datetime.now(timezone.utc)
+    db_session.add(_make_event("Mystery Show", now + timedelta(days=3), sources=["Nowhere"]))
+    db_session.commit()
+    out = tmp_path / "events.json"
+    export_json(out, classifications_path=tmp_path / "none.json")
+    ev = json.loads(out.read_text())["events"][0]
+    assert ev["types"] == []
+    assert ev["topics"] == []
+    assert ev["cost"] == "unknown"
+
+
+def test_export_includes_taxonomy_block(db_session, tmp_path):
+    now = datetime.now(timezone.utc)
+    db_session.add(_make_event("X", now + timedelta(days=3)))
+    db_session.commit()
+    out = tmp_path / "events.json"
+    export_json(out, classifications_path=tmp_path / "none.json")
+    data = json.loads(out.read_text())
+    assert "taxonomy" in data
+    assert "type" in data["taxonomy"]["axes"]
+    assert "topic" in data["taxonomy"]["axes"]

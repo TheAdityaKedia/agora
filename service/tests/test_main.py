@@ -152,7 +152,7 @@ def test_run_source_filter_only_scrapes_matching_urls(db_session, tmp_path, monk
     # Don't hit the real DB — patch the exporter to a no-op writer.
     monkeypatch.setattr("main.export_json", lambda path: 0)
 
-    run(source_filters=["gamh.com", "thefillmore.com"])
+    run(source_filters=["gamh.com", "thefillmore.com"], classify=False)
 
     assert sorted(dispatched) == [
         "https://gamh.com/calendar/",
@@ -178,7 +178,7 @@ def test_run_exclude_skips_matching_urls(db_session, tmp_path, monkeypatch):
     monkeypatch.setattr("main._scrape_one", lambda url: dispatched.append(url) or (None, []))
     monkeypatch.setattr("main.export_json", lambda path: 0)
 
-    run(excludes=["sfjazz", "sfpl.org"])
+    run(excludes=["sfjazz", "sfpl.org"], classify=False)
 
     assert sorted(dispatched) == [
         "https://greenapplebooks.com/events",
@@ -205,7 +205,7 @@ def test_run_sources_and_exclude_compose(db_session, tmp_path, monkeypatch):
     monkeypatch.setattr("main.export_json", lambda path: 0)
 
     # allow any of the three ".com" hosts, then exclude green — leaves fillmore
-    run(source_filters=[".com"], excludes=["green"])
+    run(source_filters=[".com"], excludes=["green"], classify=False)
 
     assert dispatched == ["https://www.thefillmore.com/shows"]
 
@@ -220,7 +220,7 @@ def test_run_no_filter_scrapes_all(db_session, tmp_path, monkeypatch):
     monkeypatch.setattr("main._scrape_one", lambda url: dispatched.append(url) or (None, []))
     monkeypatch.setattr("main.export_json", lambda path: 0)
 
-    run(source_filters=None)
+    run(source_filters=None, classify=False)
     assert sorted(dispatched) == ["https://a.com", "https://b.com"]
 
 
@@ -258,7 +258,7 @@ def test_run_isolates_a_failing_source_and_still_exports(tmp_path, monkeypatch):
     )
 
     # Must not raise despite the bad source.
-    run(max_workers=3)
+    run(max_workers=3, classify=False)
 
     # Both good sources saved; the bad one was skipped.
     assert saved_sources == ["https://good1.com", "https://good2.com"]
@@ -299,7 +299,7 @@ def test_run_saves_in_source_order_despite_out_of_order_scrapes(tmp_path, monkey
         lambda raw, source: (saved_order.append(source), (1, 0, 0))[1],
     )
 
-    run(max_workers=3)
+    run(max_workers=3, classify=False)
 
     assert saved_order == ["https://a.com", "https://b.com", "https://c.com"]
 
@@ -315,3 +315,42 @@ def test_save_events_drops_events_past_horizon(db_session):
     assert (saved, merged, skipped) == (1, 0, 1)
     titles = [e.title for e in db_session.query(Event).all()]
     assert titles == ["Near"]
+
+
+def test_classify_upcoming_classifies_saved_shows(db_session, tmp_path, monkeypatch):
+    """classify_upcoming gathers distinct upcoming shows from the DB and runs
+    the classifier on cache misses, writing the cache file."""
+    import main
+    from classifications import Classification, Cache
+
+    now = datetime.now(timezone.utc)
+    # two performances of one show (same title+source) + a different show
+    for i in range(2):
+        db_session.add(Event(
+            title="Repeat Show", start_time=now + timedelta(days=5 + i),
+            location=None, url=f"https://x/{i}", description="d" * (i + 1),
+            sources=["SFJAZZ Center"], created_at=now,
+        ))
+    db_session.add(Event(
+        title="Solo Talk", start_time=now + timedelta(days=6),
+        location=None, url="https://y", description="talk",
+        sources=["City Lights Booksellers"], created_at=now,
+    ))
+    db_session.commit()
+
+    seen = []
+    def fake_classifier(title, source, description, *, client=None):
+        seen.append((source, title))
+        return Classification(title=title, source=source, types=[["talk"]],
+                              topics=[], cost="unknown", model="m",
+                              taxonomy_version=1, classified_at="2026-09-23T00:00:00+00:00")
+
+    cpath = tmp_path / "classifications.json"
+    classified, cached = main.classify_upcoming(
+        classifier=fake_classifier, cache_path=cpath, log=None)
+
+    # two distinct shows, classified once each (the repeat show deduped)
+    assert (classified, cached) == (2, 0)
+    assert sorted(seen) == [("City Lights Booksellers", "Solo Talk"),
+                            ("SFJAZZ Center", "Repeat Show")]
+    assert Cache(cpath).get("SFJAZZ Center", "Repeat Show") is not None
