@@ -3133,6 +3133,280 @@
         ]
       ]
     },
+    "City Arts & Lectures\u001fAdam Grant": {
+      "classified_at": "2026-09-23T23:46:23.841527+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Adam Grant",
+      "topics": [
+        "business",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fAnand Giridharadas": {
+      "classified_at": "2026-09-23T23:46:19.192903+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Anand Giridharadas",
+      "topics": [
+        "nonfiction",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fAyad Akhtar": {
+      "classified_at": "2026-09-23T23:46:18.023956+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Ayad Akhtar",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fBarbara Kingsolver": {
+      "classified_at": "2026-09-23T23:46:25.012683+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Barbara Kingsolver",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fDavid Byrne": {
+      "classified_at": "2026-09-23T23:46:20.331502+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "David Byrne",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fKristin Hannah": {
+      "classified_at": "2026-09-23T23:46:12.032890+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Kristin Hannah",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fKyle MacLachlan": {
+      "classified_at": "2026-09-23T23:46:15.615318+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Kyle MacLachlan",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fLeïla Slimani": {
+      "classified_at": "2026-09-23T23:46:13.157259+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Leïla Slimani",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fLindy West": {
+      "classified_at": "2026-09-23T23:46:27.693111+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Lindy West",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fMalcolm Gladwell": {
+      "classified_at": "2026-09-23T23:46:16.902581+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Malcolm Gladwell",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fMarlon James": {
+      "classified_at": "2026-09-23T23:46:32.209214+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Marlon James",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fMichael Lewis": {
+      "classified_at": "2026-09-23T23:46:26.231427+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Michael Lewis",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fMichael Moritz": {
+      "classified_at": "2026-09-23T23:46:14.429625+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Michael Moritz",
+      "topics": [
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fSan Francisco Congressional Debate": {
+      "classified_at": "2026-09-23T23:46:21.528415+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "San Francisco Congressional Debate",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fYung Pueblo": {
+      "classified_at": "2026-09-23T23:46:31.047485+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Yung Pueblo",
+      "topics": [
+        "poetry",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "City Arts & Lectures\u001fZadie Smith": {
+      "classified_at": "2026-09-23T23:46:22.651756+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 1,
+      "title": "Zadie Smith",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "City Lights Booksellers\u001fA Celebration of César Vallejo’s Trilce": {
       "classified_at": "2026-09-23T19:51:09.462983+00:00",
       "cost": "unknown",
@@ -3864,6 +4138,984 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001f50 Years of Mother Jones, with Adam Hochschild and Monika Bauerlein": {
+      "classified_at": "2026-09-23T23:46:01.680225+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "50 Years of Mother Jones, with Adam Hochschild and Monika Bauerlein",
+      "topics": [
+        "history",
+        "politics",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fAfter H.R. 1: Medicaid Cuts and the Future of Health-Care Access in San Francisco": {
+      "classified_at": "2026-09-23T23:45:20.697851+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "After H.R. 1: Medicaid Cuts and the Future of Health-Care Access in San Francisco",
+      "topics": [
+        "politics",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fAlchemizing Heritage into a Leadership Superpower": {
+      "classified_at": "2026-09-23T23:45:04.209453+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Alchemizing Heritage into a Leadership Superpower",
+      "topics": [
+        "business",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fAlex Beard: Abstract Naturalism and the Painting of Life": {
+      "classified_at": "2026-09-23T23:45:00.414156+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Alex Beard: Abstract Naturalism and the Painting of Life",
+      "topics": [
+        "visual-art",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fAnnie Jacobsen: Biological War": {
+      "classified_at": "2026-09-23T23:45:14.342580+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Annie Jacobsen: Biological War",
+      "topics": [
+        "science",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fAssessing the Threats to Voting Rights in the Midterm Elections": {
+      "classified_at": "2026-09-23T23:45:01.747602+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Assessing the Threats to Voting Rights in the Midterm Elections",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fBing Gordon and Chloe Gordon: Everybody Wins": {
+      "classified_at": "2026-09-23T23:45:38.686123+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Bing Gordon and Chloe Gordon: Everybody Wins",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fBryant Lin: An Exploration of Living When You Are Dying": {
+      "classified_at": "2026-09-23T23:45:51.708563+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Bryant Lin: An Exploration of Living When You Are Dying",
+      "topics": [
+        "wellness",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fChinese Americans: The Most Litigious, Civilly Disobedient Americans": {
+      "classified_at": "2026-09-23T23:46:09.602954+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Chinese Americans: The Most Litigious, Civilly Disobedient Americans",
+      "topics": [
+        "history",
+        "asian-american",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fDana Bash: The Elections That Changed the World": {
+      "classified_at": "2026-09-23T23:45:03.005498+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Dana Bash: The Elections That Changed the World",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fDistinguished Citizens Awards Annual Gala 2026": {
+      "classified_at": "2026-09-23T23:44:57.764823+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Distinguished Citizens Awards Annual Gala 2026",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fEvan Barker: Nothing Left": {
+      "classified_at": "2026-09-23T23:45:39.899613+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Evan Barker: Nothing Left",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fFed Up: What Evolution Reveals about Food, Diet, Health and Eating Well": {
+      "classified_at": "2026-09-23T23:46:04.683615+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Fed Up: What Evolution Reveals about Food, Diet, Health and Eating Well",
+      "topics": [
+        "science",
+        "food-drink",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fFood Sense: What to Eat and Why": {
+      "classified_at": "2026-09-23T23:45:22.003150+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Food Sense: What to Eat and Why",
+      "topics": [
+        "food-drink",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fGovernor Sarah Huckabee Sanders": {
+      "classified_at": "2026-09-23T23:45:54.030458+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Governor Sarah Huckabee Sanders",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fHow America Looks from Everywhere Else": {
+      "classified_at": "2026-09-23T23:45:32.211484+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "How America Looks from Everywhere Else",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fHumanities West Presents A Veiled History of Masks": {
+      "classified_at": "2026-09-23T23:45:43.805513+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Humanities West Presents A Veiled History of Masks",
+      "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fHumanities West presents the 800th Anniversary of Francis of Assisi’s Death": {
+      "classified_at": "2026-09-23T23:45:15.596978+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Humanities West presents the 800th Anniversary of Francis of Assisi’s Death",
+      "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fImperfect Circles Discussion Group at the Orinda Library": {
+      "classified_at": "2026-09-23T23:45:13.098038+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Imperfect Circles Discussion Group at the Orinda Library",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fJane Wei-Skillern: Building Community through Network Leadership": {
+      "classified_at": "2026-09-23T23:44:59.164541+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Jane Wei-Skillern: Building Community through Network Leadership",
+      "topics": [
+        "politics",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fJessica Marie Alba: The Inner Work of Transforming a Region": {
+      "classified_at": "2026-09-23T23:45:36.312457+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Jessica Marie Alba: The Inner Work of Transforming a Region",
+      "topics": [
+        "politics",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fKathi Zellwegger and Mike Chinoy: Saving Lives in North Korea": {
+      "classified_at": "2026-09-23T23:45:41.197839+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Kathi Zellwegger and Mike Chinoy: Saving Lives in North Korea",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fKatie Sanders: Ortiz’s War": {
+      "classified_at": "2026-09-23T23:45:33.528835+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Katie Sanders: Ortiz’s War",
+      "topics": [
+        "history",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fKevin Roose: Inside the Race to Create an Artificial Superintelligence": {
+      "classified_at": "2026-09-23T23:45:30.949534+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Kevin Roose: Inside the Race to Create an Artificial Superintelligence",
+      "topics": [
+        "tech",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fLittle-Known (and Shocking) Revelations About the Character and Conduct of America’s Presidents": {
+      "classified_at": "2026-09-23T23:46:10.890736+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Little-Known (and Shocking) Revelations About the Character and Conduct of America’s Presidents",
+      "topics": [
+        "history",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fLoubna Mrie: Defiance, a Memoir of Awakening, Rebellion, and Survival in Syria": {
+      "classified_at": "2026-09-23T23:45:27.289348+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Loubna Mrie: Defiance, a Memoir of Awakening, Rebellion, and Survival in Syria",
+      "topics": [
+        "nonfiction",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fMark Shaw: Dorothy Kilgallen and the Enduring Mystery of Amelia Earhart’s Disappearance at Sea in 1937": {
+      "classified_at": "2026-09-23T23:45:11.876756+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Mark Shaw: Dorothy Kilgallen and the Enduring Mystery of Amelia Earhart’s Disappearance at Sea in 1937",
+      "topics": [
+        "history",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fMelissa  King: The Girl Who Became King": {
+      "classified_at": "2026-09-23T23:45:50.518523+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Melissa  King: The Girl Who Became King",
+      "topics": [
+        "books-authors",
+        "food-drink",
+        "lgbtq",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fMichael Shellenberger and Alex Gutentag: The Left's War on Reality": {
+      "classified_at": "2026-09-23T23:46:08.379815+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Michael Shellenberger and Alex Gutentag: The Left's War on Reality",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fMiriam Pawel: The Making and Remaking of the University of California": {
+      "classified_at": "2026-09-23T23:45:19.488088+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Miriam Pawel: The Making and Remaking of the University of California",
+      "topics": [
+        "history",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fNavigating AI, Climate and the Future of Democracy": {
+      "classified_at": "2026-09-23T23:45:06.252968+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Navigating AI, Climate and the Future of Democracy",
+      "topics": [
+        "politics",
+        "tech",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fNicholas Bagley: How Legal Reformers Accidentally Broke America": {
+      "classified_at": "2026-09-23T23:46:02.886771+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Nicholas Bagley: How Legal Reformers Accidentally Broke America",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fOut of the Darkness: Rediscovering Classic Swedish Literature": {
+      "classified_at": "2026-09-23T23:46:05.943584+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Out of the Darkness: Rediscovering Classic Swedish Literature",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fPBS Film Preview: Lynn Novick’s ‘Crime and Punishment in America’": {
+      "classified_at": "2026-09-23T23:44:56.538875+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "PBS Film Preview: Lynn Novick’s ‘Crime and Punishment in America’",
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fPG&E Chief Patti Poppe & State Sen. Scott Wiener on Affordability, Outages, and Returning Power to the People": {
+      "classified_at": "2026-09-23T23:45:28.430536+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "PG&E Chief Patti Poppe & State Sen. Scott Wiener on Affordability, Outages, and Returning Power to the People",
+      "topics": [
+        "politics",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fProposition Mania: Making Sense of Those Confusing Ballots": {
+      "classified_at": "2026-09-23T23:45:23.213039+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Proposition Mania: Making Sense of Those Confusing Ballots",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fReading Californians Book Discussion: ‘Sacrament,’ by Susan Straight": {
+      "classified_at": "2026-09-23T23:45:25.631099+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Reading Californians Book Discussion: ‘Sacrament,’ by Susan Straight",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fRev. Richard Cizik’s Route from the Altar to K Street to Lyft Driver": {
+      "classified_at": "2026-09-23T23:45:34.873139+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Rev. Richard Cizik’s Route from the Altar to K Street to Lyft Driver",
+      "topics": [
+        "documentary",
+        "politics",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fSharon Weinberger: How Big Tech Is Fueling the Future of War": {
+      "classified_at": "2026-09-23T23:45:08.838589+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Sharon Weinberger: How Big Tech Is Fueling the Future of War",
+      "topics": [
+        "tech",
+        "politics",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fSheba Shobashini: How to Resist Adopting a Spiritual Inferiority Complex": {
+      "classified_at": "2026-09-23T23:45:59.127051+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Sheba Shobashini: How to Resist Adopting a Spiritual Inferiority Complex",
+      "topics": [
+        "politics",
+        "women"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fShould Huckleberry Finn Be Banned from Our Schools — For Its Own Good?": {
+      "classified_at": "2026-09-23T23:46:07.241628+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Should Huckleberry Finn Be Banned from Our Schools — For Its Own Good?",
+      "topics": [
+        "books-authors",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Day After Election 2026: A Week to Week Political Roundtable Special": {
+      "classified_at": "2026-09-23T23:45:49.114307+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The Day After Election 2026: A Week to Week Political Roundtable Special",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Future of Public Media, with Paula Kerger and Michael Isip": {
+      "classified_at": "2026-09-23T23:45:52.905494+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The Future of Public Media, with Paula Kerger and Michael Isip",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Intersection of Art Therapy and Spiritual Enlightenment: An Engineer's Perspective!": {
+      "classified_at": "2026-09-23T23:46:00.337111+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The Intersection of Art Therapy and Spiritual Enlightenment: An Engineer's Perspective!",
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Machine-Mediated Economy: When AI Becomes the Interface to Everything": {
+      "classified_at": "2026-09-23T23:45:57.954331+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The Machine-Mediated Economy: When AI Becomes the Interface to Everything",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Shi’a in the Arab World and Iran": {
+      "classified_at": "2026-09-23T23:45:45.010741+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The Shi’a in the Arab World and Iran",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Ten Amendments: Updating America’s Operating System": {
+      "classified_at": "2026-09-23T23:45:10.594422+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The Ten Amendments: Updating America’s Operating System",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe World of Fungi: From Forest to Table": {
+      "classified_at": "2026-09-23T23:45:55.531654+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "The World of Fungi: From Forest to Table",
+      "topics": [
+        "science",
+        "food-drink",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fTom Rosenstiel: How the Press Must Change to Save Democracy": {
+      "classified_at": "2026-09-23T23:45:37.564814+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Tom Rosenstiel: How the Press Must Change to Save Democracy",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fUC Berkeley’s Saira Mohamed on “What a Country Owes Its Soldiers”": {
+      "classified_at": "2026-09-23T23:45:56.761916+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "UC Berkeley’s Saira Mohamed on “What a Country Owes Its Soldiers”",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fUnfiltered Conversation: What Happened to the American Dream": {
+      "classified_at": "2026-09-23T23:45:16.797972+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Unfiltered Conversation: What Happened to the American Dream",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fVenture Philanthropy Leader Jim Bildner: Turning Hope Into Action": {
+      "classified_at": "2026-09-23T23:45:24.413978+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Venture Philanthropy Leader Jim Bildner: Turning Hope Into Action",
+      "topics": [
+        "business",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fWill the U.S. Military Shoot Civilians Protesting Against Election Interference?": {
+      "classified_at": "2026-09-23T23:45:42.364421+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Will the U.S. Military Shoot Civilians Protesting Against Election Interference?",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fWomen Empowering Women #3: Creating Financial Abundance": {
+      "classified_at": "2026-09-23T23:45:07.529587+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Women Empowering Women #3: Creating Financial Abundance",
+      "topics": [
+        "women",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
         ]
       ]
     },
