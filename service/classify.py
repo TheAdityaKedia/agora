@@ -179,3 +179,50 @@ def classify_show(
             classified_at=datetime.now(timezone.utc).isoformat(),
         )
     raise RuntimeError(f"all models failed for {source!r}/{title!r}: {last_err}")
+
+
+def select_shows(rows) -> list[dict]:
+    """Collapse (source, title, description) rows into distinct shows, keeping
+    the richest (longest) description per (source, title). Pure."""
+    best: dict[tuple[str, str], dict] = {}
+    for source, title, description in rows:
+        desc = description or ""
+        key = (source, title)
+        if key not in best or len(desc) > len(best[key]["description"]):
+            best[key] = {"source": source, "title": title, "description": desc}
+    return list(best.values())
+
+
+def _is_fresh(entry: Classification) -> bool:
+    """A cache entry is a hit if it was made under the current taxonomy."""
+    return entry.taxonomy_version == taxonomy.CURRENT_TAXONOMY_VERSION
+
+
+def classify_new_shows(
+    shows: list[dict],
+    cache,
+    *,
+    classifier=classify_show,
+    client=None,
+    log=print,
+) -> tuple[int, int]:
+    """Classify shows not already covered by a fresh cache entry. Returns
+    (classified, cached). Saves the cache once at the end. Steady state (no new
+    shows, same taxonomy) makes zero LLM calls."""
+    classified = cached = 0
+    total = len(shows)
+    for i, show in enumerate(shows, 1):
+        existing = cache.get(show["source"], show["title"])
+        if existing is not None and _is_fresh(existing):
+            cached += 1
+            continue
+        entry = classifier(show["title"], show["source"], show.get("description"),
+                           client=client)
+        cache.put(entry)
+        classified += 1
+        if log and classified % 25 == 0:
+            log(f"[classify] {classified} classified ({i}/{total} seen)")
+    cache.save()
+    if log:
+        log(f"[classify] done: {classified} classified, {cached} cached")
+    return classified, cached
