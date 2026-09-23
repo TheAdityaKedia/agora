@@ -368,43 +368,11 @@
     return;
   }
 
-  const events = (data.events || []).map((e, i) => ({
-    ...e,
-    _start: new Date(e.start_time),
-    id: i,
-    sources_text: (e.sources || []).join(" "),
-  }));
-
-  // Build the search index once. See feature-specs/search.md §2.2 for the
-  // config rationale.
-  const miniSearch = new MiniSearch({
-    fields: ["title", "description", "location", "sources_text"],
-    storeFields: ["id"],
-    searchOptions: {
-      boost: {title: 3, description: 1, location: 1, sources_text: 1},
-      prefix: true,
-      fuzzy: 0.2,
-      combineWith: "AND",
-    },
-  });
-  miniSearch.addAll(events);
-
-  const generatedAt = new Date(data.generated_at);
-
-  // State — events carry a `sources` list (a physical event may be listed by
-  // multiple sources), so counts and filtering consider every entry in that list.
-  // Sources in the manifest are already human-readable names — the backend
-  // translated them at export time — so alphabetical sort is the natural order.
-  const allSources = [...new Set(events.flatMap(e => e.sources || []))].sort(
-    (a, b) => a.localeCompare(b)
-  );
-  const selected = new Set(allSources);  // all on by default
-  let dateFrom = null;
-  let dateTo = null;
-  let locationFilter = null;
-
   // --- Tag axes (type + topic), from the manifest's taxonomy block. ---
-  // Fixed hue per axis/group so chip colors are stable and scannable.
+  // Built before the search index so each event's tag labels can be indexed
+  // (searching "theater" should surface theater-tagged events even when the
+  // word isn't in the title/description). Fixed hue per axis/group so chip
+  // colors are stable and scannable.
   const GROUP_HUE = {
     type: 215, Literary: 270, Music: 350, Stage: 25, Screen: 190,
     "Art & design": 160, Ideas: 130, Life: 320, "Dance styles": 45,
@@ -428,6 +396,60 @@
   const topicHue = (slug) => GROUP_HUE[topicMeta.get(slug)?.group] ?? 0;
   // An event's types are arrays of path-segments; join to dot-paths for matching.
   const evTypePaths = (ev) => (ev.types || []).map(p => p.join("."));
+
+  // Searchable text for an event's tags: type labels (each ancestor level),
+  // topic labels, and topic group names — so "theater", "music", "workshop"
+  // all match via search, not just the tag controls.
+  function tagsText(e) {
+    const words = [];
+    for (const path of e.types || []) {
+      for (let i = 1; i <= path.length; i++) {
+        const label = typeLabels.get(path.slice(0, i).join("."));
+        if (label) words.push(label);
+      }
+    }
+    for (const slug of e.topics || []) {
+      const m = topicMeta.get(slug);
+      if (m) { words.push(m.label); if (m.group) words.push(m.group); }
+    }
+    return words.join(" ");
+  }
+
+  const events = (data.events || []).map((e, i) => ({
+    ...e,
+    _start: new Date(e.start_time),
+    id: i,
+    sources_text: (e.sources || []).join(" "),
+    tags_text: tagsText(e),
+  }));
+
+  // Build the search index once. See feature-specs/search.md §2.2 for the
+  // config rationale.
+  const miniSearch = new MiniSearch({
+    fields: ["title", "description", "location", "sources_text", "tags_text"],
+    storeFields: ["id"],
+    searchOptions: {
+      boost: {title: 3, tags_text: 2, description: 1, location: 1, sources_text: 1},
+      prefix: true,
+      fuzzy: 0.2,
+      combineWith: "AND",
+    },
+  });
+  miniSearch.addAll(events);
+
+  const generatedAt = new Date(data.generated_at);
+
+  // State — events carry a `sources` list (a physical event may be listed by
+  // multiple sources), so counts and filtering consider every entry in that list.
+  // Sources in the manifest are already human-readable names — the backend
+  // translated them at export time — so alphabetical sort is the natural order.
+  const allSources = [...new Set(events.flatMap(e => e.sources || []))].sort(
+    (a, b) => a.localeCompare(b)
+  );
+  const selected = new Set(allSources);  // all on by default
+  let dateFrom = null;
+  let dateTo = null;
+  let locationFilter = null;
 
   const selectedTypes = new Set();   // dot-paths, e.g. "talk" or "talk.reading"
   const selectedTopics = new Set();  // slugs
