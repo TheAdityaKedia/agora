@@ -5,6 +5,14 @@ source (a scraper).** It captures what we've learned so you don't reinvent the
 wheel each time. Read it before writing a scraper — most of the hard-won
 lessons below were paid for once already.
 
+## Changing the tag taxonomy
+
+Adding/renaming/removing a **type** or **topic** has a specific checklist —
+including a coupling that's easy to miss (the frontend `GROUP_HUE` map, and
+whether existing classifications need re-tagging). The authoritative runbook
+lives in the module docstring of **`service/taxonomy.py`** — read it before
+editing `service/data/taxonomy.v*.json`.
+
 ## Larger features: write a spec first
 
 Adding a scraper is a small, well-worn change. Anything bigger — a new

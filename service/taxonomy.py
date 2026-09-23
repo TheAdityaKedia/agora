@@ -12,6 +12,38 @@ The taxonomy has two independent axes (see feature-specs/tagging.md):
 Versioned JSON files (`data/taxonomy.v{N}.json`) keep published versions
 immutable so old classifications stay interpretable. This module is the only
 place that reads them.
+
+CHANGING THE TAXONOMY — the full checklist
+------------------------------------------
+Two kinds of change:
+
+* ADDITIVE (new topic slug, new type sub-format) — edit `taxonomy.v{CURRENT}.json`
+  in place. Existing classifications stay valid (they reference values that still
+  exist); the new value just becomes available. NO version bump.
+* BREAKING (rename / remove / move a slug, restructure a branch) — do NOT mutate
+  the published file. Copy it to `taxonomy.v{N+1}.json`, edit that, and bump
+  `CURRENT_TAXONOMY_VERSION` below. The bump marks every cached classification
+  stale, so the next run re-tags everything.
+
+Then, regardless of kind:
+
+1. If you added/renamed a topic GROUP, add its hue to `GROUP_HUE` in
+   `frontend/index.html` — otherwise that group's chips render with hue 0.
+   (New top-level *types* need nothing; they share the type hue.)
+2. Re-tag so events pick up the change:
+   - a version bump auto-invalidates the cache → next `main.py` run reclassifies
+     all shows (~$1 for the full catalog via Haiku);
+   - an additive in-place edit does NOT invalidate the cache, so existing shows
+     keep their old tags. To apply new values to them, delete
+     `data/classifications.json` (or the affected entries) and re-run, or wait
+     for a future `reclassify` CLI.
+3. Consider updating the classifier's few-shot examples in `classify.py` if the
+   new category needs guidance.
+4. Re-run the pipeline (`main.py`) to reclassify + re-export, then commit BOTH
+   `data/classifications.json` and `frontend/events.json`.
+
+The frontend needs no other change: it reads the taxonomy from the manifest and
+builds the type/topic filter controls dynamically (only `GROUP_HUE` is hard-coded).
 """
 from __future__ import annotations
 
