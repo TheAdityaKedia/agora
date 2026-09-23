@@ -25,8 +25,21 @@ services:
     environment:
       DATABASE_URL: postgresql://agora:agora@db:5432/agora
       EVENTS_JSON_PATH: /out/events.json
+      # Region for Bedrock (AI tagging). Creds come from the mounted ~/.aws
+      # below — refresh them on the host first (e.g. `ada credentials update
+      # --account <acct> --role Admin --provider isengard --once`). Without
+      # valid creds the classify step is skipped and events export untagged.
+      AWS_REGION: "${AWS_REGION:-us-east-1}"
     volumes:
       - ./frontend:/out
+      # Mount the data dir read-write so the classification cache
+      # (data/classifications.json) the classifier writes persists back to the
+      # host and can be committed — otherwise `--rm` discards it and every run
+      # re-classifies from scratch ("classify once, cache forever" needs this).
+      - ./service/data:/app/data
+      # Read-only mount of the host AWS creds/config so the classifier can call
+      # Bedrock. The container runs as root, so they land at /root/.aws.
+      - "${HOME}/.aws:/root/.aws:ro"
     depends_on:
       - db
 

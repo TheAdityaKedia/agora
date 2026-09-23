@@ -354,3 +354,33 @@ def test_classify_upcoming_classifies_saved_shows(db_session, tmp_path, monkeypa
     assert sorted(seen) == [("City Lights Booksellers", "Solo Talk"),
                             ("SFJAZZ Center", "Repeat Show")]
     assert Cache(cpath).get("SFJAZZ Center", "Repeat Show") is not None
+
+
+def test_classify_upcoming_scopes_to_given_source_names(db_session, tmp_path):
+    """With source_names given, only shows from those sources are classified
+    (a subset --sources run shouldn't classify the whole DB)."""
+    import main
+    from classifications import Classification
+
+    now = datetime.now(timezone.utc)
+    db_session.add(Event(title="Jazz Night", start_time=now + timedelta(days=3),
+                         location=None, url="https://j", description="d",
+                         sources=["SFJAZZ Center"], created_at=now))
+    db_session.add(Event(title="Author Talk", start_time=now + timedelta(days=3),
+                         location=None, url="https://c", description="d",
+                         sources=["City Lights Booksellers"], created_at=now))
+    db_session.commit()
+
+    seen = []
+    def fake(title, source, description, *, client=None):
+        seen.append((source, title))
+        return Classification(title=title, source=source, types=[["talk"]], topics=[],
+                              cost="unknown", model="m", taxonomy_version=1,
+                              classified_at="2026-09-23T00:00:00+00:00")
+
+    classified, cached = main.classify_upcoming(
+        classifier=fake, cache_path=tmp_path / "c.json", log=None,
+        source_names={"City Lights Booksellers"})
+
+    assert classified == 1
+    assert seen == [("City Lights Booksellers", "Author Talk")]

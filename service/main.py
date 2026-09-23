@@ -142,13 +142,19 @@ def scrape_and_save(url: str) -> None:
     _save_scraped(scraper, raw_events, url)
 
 
-def classify_upcoming(classifier=None, client=None, cache_path=None, log=print):
+def classify_upcoming(classifier=None, client=None, cache_path=None, log=print,
+                      source_names=None):
     """Gather distinct upcoming shows from the DB and classify cache misses.
 
     A show is a distinct (source, title) keyed on the event's first source;
     many performances collapse to one classification. Returns (classified,
     cached). Isolated from `run()` so it can be tested with a fake classifier
     and moved to a scheduler/Celery task later.
+
+    `source_names` (a set of source NAMEs) scopes classification to events from
+    those sources — so a subset `--sources` run only classifies what it
+    scraped, not the whole DB. None means all upcoming shows (full run /
+    backfill).
     """
     import classify as _classify
     from classifications import Cache
@@ -159,10 +165,12 @@ def classify_upcoming(classifier=None, client=None, cache_path=None, log=print):
     now = datetime.now(timezone.utc)
     session = get_session()
     try:
-        rows = [
-            ((e.sources or ["?"])[0], e.title, e.description)
-            for e in session.query(Event).filter(Event.start_time >= now).all()
-        ]
+        rows = []
+        for e in session.query(Event).filter(Event.start_time >= now).all():
+            srcs = e.sources or ["?"]
+            if source_names is not None and not (set(srcs) & source_names):
+                continue
+            rows.append((srcs[0], e.title, e.description))
     finally:
         session.close()
 
@@ -206,6 +214,7 @@ def run(
         workers = max_workers or int(os.environ.get("SCRAPER_WORKERS", str(DEFAULT_WORKERS)))
         workers = max(1, min(workers, len(urls)))
         failures = 0
+        scraped_names: set[str] = set()
         with ThreadPoolExecutor(max_workers=workers) as pool:
             # Submit every scrape up front so they run concurrently, then walk
             # the futures in source order — .result() blocks on each in turn, so
@@ -223,6 +232,8 @@ def run(
                 try:
                     scraper, raw_events = future.result()
                     _save_scraped(scraper, raw_events, url)
+                    if scraper is not None:
+                        scraped_names.add(scraper.NAME)
                 except Exception as e:
                     failures += 1
                     print(f"[error] {url} failed: {type(e).__name__}: {e}", flush=True)
@@ -233,9 +244,14 @@ def run(
     # Classify new shows before export so tags land in the manifest. Guarded:
     # a classification failure (e.g. no AWS creds locally) must not abort the
     # export — the manifest still ships, just without fresh tags.
+    #
+    # On a SUBSET run (a source allowlist/denylist was given) scope
+    # classification to just the sources actually scraped this run; on a full
+    # run leave it None so every uncached upcoming show gets classified.
     if classify:
+        scope = scraped_names if (source_filters or excludes) else None
         try:
-            classify_upcoming()
+            classify_upcoming(source_names=scope)
         except Exception as e:
             print(f"[classify] skipped ({type(e).__name__}: {e})", flush=True)
 
