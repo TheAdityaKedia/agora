@@ -174,14 +174,30 @@ def run(
     if urls:
         workers = max_workers or int(os.environ.get("SCRAPER_WORKERS", str(DEFAULT_WORKERS)))
         workers = max(1, min(workers, len(urls)))
+        failures = 0
         with ThreadPoolExecutor(max_workers=workers) as pool:
             # Submit every scrape up front so they run concurrently, then walk
             # the futures in source order — .result() blocks on each in turn, so
             # saves happen in order while later scrapes proceed in the pool.
+            #
+            # Each source is isolated: a scraper that raises (markup changed,
+            # site down, WAF block surfacing as an exception) is logged and
+            # skipped, and the run continues. Without this, one bad source
+            # aborts the whole run before the manifest is written — a fragility
+            # that scales badly as the source list grows. The manifest is
+            # rebuilt from the full DB regardless, so a failed source keeps its
+            # last-scraped rows rather than vanishing.
             futures = [(url, pool.submit(_scrape_one, url)) for url in urls]
             for url, future in futures:
-                scraper, raw_events = future.result()
-                _save_scraped(scraper, raw_events, url)
+                try:
+                    scraper, raw_events = future.result()
+                    _save_scraped(scraper, raw_events, url)
+                except Exception as e:
+                    failures += 1
+                    print(f"[error] {url} failed: {type(e).__name__}: {e}", flush=True)
+        if failures:
+            print(f"[run] {failures} of {len(urls)} sources failed (see above); "
+                  f"manifest rebuilt from all surviving DB rows", flush=True)
 
     out = Path(os.environ.get("EVENTS_JSON_PATH", DEFAULT_EVENTS_JSON))
     count = export_json(out)

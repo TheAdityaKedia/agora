@@ -224,6 +224,48 @@ def test_run_no_filter_scrapes_all(db_session, tmp_path, monkeypatch):
     assert sorted(dispatched) == ["https://a.com", "https://b.com"]
 
 
+def test_run_isolates_a_failing_source_and_still_exports(tmp_path, monkeypatch):
+    """One scraper raising must not abort the run: other sources still save
+    and the manifest is still written. Without per-source isolation, a single
+    exception propagates out of future.result() and export never runs.
+    """
+    sources_file = tmp_path / "sources.txt"
+    sources_file.write_text("https://good1.com\nhttps://bad.com\nhttps://good2.com\n")
+    monkeypatch.setattr("main.SOURCES_FILE", sources_file)
+    monkeypatch.setattr("main.DEFAULT_EVENTS_JSON", tmp_path / "events.json")
+    monkeypatch.setattr("main.init_db", lambda: None)
+
+    class _FakeScraper:
+        def __init__(self, name):
+            self.NAME = name
+
+    def fake_scrape_one(url):
+        if "bad" in url:
+            raise RuntimeError("simulated scraper explosion")
+        return _FakeScraper(url), [_make_raw_event(url=url)]
+
+    monkeypatch.setattr("main._scrape_one", fake_scrape_one)
+
+    saved_sources: list[str] = []
+    monkeypatch.setattr(
+        "main.save_events",
+        lambda raw, source: (saved_sources.append(source), (1, 0, 0))[1],
+    )
+    exported = {"called": False}
+    monkeypatch.setattr(
+        "main.export_json",
+        lambda path: (exported.__setitem__("called", True), 0)[1],
+    )
+
+    # Must not raise despite the bad source.
+    run(max_workers=3)
+
+    # Both good sources saved; the bad one was skipped.
+    assert saved_sources == ["https://good1.com", "https://good2.com"]
+    # Export still ran — the manifest is rebuilt regardless of failures.
+    assert exported["called"] is True
+
+
 def test_run_saves_in_source_order_despite_out_of_order_scrapes(tmp_path, monkeypatch):
     """Scrapes run concurrently, but saves must stay in sources.txt order so
     dedup attribution (earlier source wins a shared row) is deterministic.
