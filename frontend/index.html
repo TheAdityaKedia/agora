@@ -154,19 +154,25 @@
   }
 
   h2.date {
-    margin: 32px 0 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--muted); font-weight: 600;
+    margin: 32px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+    font-size: 20px; letter-spacing: -0.01em;
+    color: var(--fg); font-weight: 700;
+    /* Stick to the top while scrolling so the day you're viewing stays visible. */
+    position: sticky; top: 0; background: var(--bg); z-index: 5;
   }
   .event { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .event:last-child { border-bottom: none; }
   .time {
-    flex: 0 0 72px; color: var(--muted); font-variant-numeric: tabular-nums;
+    flex: 0 0 84px; color: var(--muted); font-variant-numeric: tabular-nums;
     font-size: 14px; padding-top: 2px;
   }
   .event .time { line-height: 1.3; }
+  /* Per-row date (grouped view) sits above the time so the day is clear even
+     after scrolling past the heading. */
+  .time .td-date { display: block; font-size: 12px; font-weight: 600; color: var(--fg); }
+  .time .td-time { display: block; }
   /* Search-active flat rows put a full date + time in .time — widen it. */
   body.searching .time { flex: 0 0 140px; }
   .thumb {
@@ -1048,6 +1054,7 @@
   function renderList(events) {
     const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
     const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
+    const rowDateFmt = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
     const groups = new Map();
     for (const ev of events) {
       const key = ev._start.toDateString();
@@ -1058,8 +1065,10 @@
     for (const [key, dayEvents] of groups) {
       parts.push('<h2 class="date">' + escapeHtml(dateFmt.format(new Date(key))) + "</h2>");
       for (const ev of dayEvents) {
-        const time = escapeHtml(timeFmt.format(ev._start));
-        parts.push(renderEventRow(ev, time));
+        // Date above time so the day is clear even after scrolling past the header.
+        const timeHtml = '<span class="td-date">' + escapeHtml(rowDateFmt.format(ev._start))
+          + '</span><span class="td-time">' + escapeHtml(timeFmt.format(ev._start)) + "</span>";
+        parts.push(renderEventRow(ev, timeHtml));
       }
     }
     return parts.join("");
