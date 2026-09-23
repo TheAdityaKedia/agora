@@ -77,6 +77,31 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → events.json �
   rebuilds the manifest from the current DB (e.g. after an exporter change).
 - **Past-pruning is by local calendar day** (today onward), not rolling 24h.
 
+## Working alongside other agents
+
+Multiple agents may work this repo at once. To avoid stepping on each other:
+
+- **Branch per agent/task.** Don't all commit to `main`. Cut a feature branch,
+  push it, open a PR; let the human merge. `main` touching `frontend/` deploys,
+  so uncoordinated pushes to `main` also ship half-finished work.
+- **`events.json` is a conflict magnet.** It's regenerated (thousands of lines)
+  on nearly every data change, so two agents that both re-scrape will conflict
+  hard. Rules: (1) don't regenerate the manifest unless your task is *about* the
+  data; (2) keep it in its own commit; (3) if you hit a conflict on it, don't
+  hand-merge — take one side, then re-run the export
+  (`docker compose run --rm scraper python -m exporters.json_export --out /out/events.json`)
+  to produce a correct manifest from the DB.
+- **One scrape run at a time.** Scrapers share the one Postgres DB and the one
+  `events.json`. Two concurrent runs interleave writes and races on the export.
+  Coordinate who owns a run; others should hold off or use `--sources` to touch
+  only their own source.
+- **Stay in your lane.** A scraper change touches `service/scrapers/<x>.py` + its
+  test + maybe `sources.txt`/`main.py`. A frontend change touches
+  `frontend/index.html`. These rarely conflict — conflicts almost always mean
+  two agents touched shared files (`main.py` SCRAPERS list, `events.json`).
+- **Leave a trail.** Note non-obvious decisions in the commit body or the
+  relevant doc so a parallel agent (or the next session) doesn't re-derive them.
+
 ## Current focus
 
 Scaling the source list (~95 candidates queued in `future-sources.md`).
