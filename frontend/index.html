@@ -316,6 +316,7 @@
     <span class="filter-label">Dates</span>
     <button type="button" class="preset-btn" id="preset-today">Today</button>
     <button type="button" class="preset-btn" id="preset-week">This week</button>
+    <button type="button" class="preset-btn" id="preset-month">This month</button>
     <label style="font-size:13px;color:var(--muted)">From
       <input type="date" id="date-from" class="date-input" aria-label="From date">
     </label>
@@ -347,6 +348,7 @@
   const copyEl = document.getElementById("copy-link");
   const presetTodayEl = document.getElementById("preset-today");
   const presetWeekEl = document.getElementById("preset-week");
+  const presetMonthEl = document.getElementById("preset-month");
   const locationRowEl = document.getElementById("location-row");
   const locationLabelEl = document.getElementById("location-label");
   const locationClearEl = document.getElementById("location-clear");
@@ -698,18 +700,28 @@
   function applyWeekPreset() {
     setDateRange(new Date(), weekSunday());
   }
+  // Last day of the current calendar month (month-anchored, not rolling 30d).
+  function monthEnd() {
+    const t = new Date();
+    return new Date(t.getFullYear(), t.getMonth() + 1, 0);
+  }
+  function applyMonthPreset() {
+    setDateRange(new Date(), monthEnd());
+  }
   // Highlight whichever preset (if any) matches the current from/to values.
   function updatePresetHighlight() {
     presetTodayEl.classList.remove("active");
     presetWeekEl.classList.remove("active");
+    presetMonthEl.classList.remove("active");
     const today = new Date();
     const todayStr = toISODate(today);
-    if (fromEl.value === todayStr && toEl.value === todayStr) {
+    if (fromEl.value !== todayStr) return;  // all presets start today
+    if (toEl.value === todayStr) {
       presetTodayEl.classList.add("active");
-      return;
-    }
-    if (fromEl.value === todayStr && toEl.value === toISODate(weekSunday())) {
+    } else if (toEl.value === toISODate(weekSunday())) {
       presetWeekEl.classList.add("active");
+    } else if (toEl.value === toISODate(monthEnd())) {
+      presetMonthEl.classList.add("active");
     }
   }
 
@@ -733,6 +745,10 @@
   presetWeekEl.addEventListener("click", () => {
     if (presetWeekEl.classList.contains("active")) setDateRange(null, null);
     else applyWeekPreset();
+  });
+  presetMonthEl.addEventListener("click", () => {
+    if (presetMonthEl.classList.contains("active")) setDateRange(null, null);
+    else applyMonthPreset();
   });
   resetEl.addEventListener("click", () => {
     for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
@@ -764,6 +780,8 @@
       p.set("dates", "today");
     } else if (presetWeekEl.classList.contains("active")) {
       p.set("dates", "week");
+    } else if (presetMonthEl.classList.contains("active")) {
+      p.set("dates", "month");
     } else {
       if (fromEl.value) p.set("from", fromEl.value);
       if (toEl.value) p.set("to", toEl.value);
@@ -803,6 +821,8 @@
       applyTodayPreset();
     } else if (dates === "week") {
       applyWeekPreset();
+    } else if (dates === "month") {
+      applyMonthPreset();
     } else {
       const from = p.get("from");
       const to = p.get("to");
