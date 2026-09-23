@@ -201,6 +201,37 @@
     cursor: pointer; text-decoration: none;
   }
   .location-btn:hover { color: var(--fg); text-decoration: underline; }
+  /* --- Tag chips (type + topic), colored by axis/group via a per-chip hue.
+     One --h drives text/border/bg; lightness flips by theme so chips read on
+     both backgrounds. --- */
+  :root { --chip-s: 62%; --chip-l: 36%; }
+  @media (prefers-color-scheme: dark) { :root { --chip-s: 58%; --chip-l: 70%; } }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tag-chip {
+    font: inherit; font-size: 11px; line-height: 1.4;
+    padding: 1px 8px; border-radius: 999px; cursor: pointer;
+    color: hsl(var(--h) var(--chip-s) var(--chip-l));
+    border: 1px solid hsl(var(--h) var(--chip-s) var(--chip-l) / 0.40);
+    background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.10);
+    white-space: nowrap;
+  }
+  .tag-chip:hover { background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.20); }
+  .tag-chip.on {
+    color: var(--accent-fg);
+    background: hsl(var(--h) var(--chip-s) var(--chip-l));
+    border-color: hsl(var(--h) var(--chip-s) var(--chip-l));
+  }
+  /* Type chips are a touch more subdued (format is secondary to topic). */
+  .tag-chip.tag-type { font-variant: small-caps; letter-spacing: 0.02em; }
+  /* Topic dropdown: grouped list with a color swatch per group. */
+  .dropdown-group-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); font-weight: 600; padding: 8px 6px 2px;
+  }
+  .topic-swatch {
+    width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto;
+    background: hsl(var(--h) var(--chip-s) var(--chip-l));
+  }
   .active-pill {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 3px 4px 3px 10px; border-radius: 999px;
@@ -248,6 +279,28 @@
         <div class="dropdown-scroll">
           <div id="source-list"></div>
           <div class="dropdown-empty" id="source-empty" hidden>No sources match.</div>
+        </div>
+      </div>
+    </details>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Type</span>
+    <span id="type-chips"></span>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Topics</span>
+    <details class="dropdown" id="topic-dropdown">
+      <summary id="topic-summary">Any topic</summary>
+      <div class="dropdown-panel">
+        <div class="dropdown-search">
+          <input type="search" id="topic-search" placeholder="Search topics…" aria-label="Search topics" autocomplete="off">
+        </div>
+        <div class="dropdown-bulk">
+          <button type="button" id="topic-clear">Clear topics</button>
+        </div>
+        <div class="dropdown-scroll">
+          <div id="topic-list"></div>
+          <div class="dropdown-empty" id="topic-empty" hidden>No topics match.</div>
         </div>
       </div>
     </details>
@@ -345,6 +398,126 @@
   let dateTo = null;
   let locationFilter = null;
 
+  // --- Tag axes (type + topic), from the manifest's taxonomy block. ---
+  // Fixed hue per axis/group so chip colors are stable and scannable.
+  const GROUP_HUE = {
+    type: 215, Literary: 270, Music: 350, Stage: 25, Screen: 190,
+    "Art & design": 160, Ideas: 130, Life: 320, "Dance styles": 45,
+    Communities: 290,
+  };
+  const taxonomy = data.taxonomy || {axes: {type: {tree: {}}, topic: {values: {}}}};
+  // Flatten the type tree into path→label (dot-joined path, e.g. "talk.reading").
+  const typeLabels = new Map();
+  (function walkTypes(node, prefix) {
+    for (const [slug, child] of Object.entries(node || {})) {
+      const path = prefix ? prefix + "." + slug : slug;
+      typeLabels.set(path, child.label || slug);
+      if (child.children) walkTypes(child.children, path);
+    }
+  })(taxonomy.axes?.type?.tree, "");
+  // topic slug → {label, group}
+  const topicMeta = new Map(
+    Object.entries(taxonomy.axes?.topic?.values || {})
+      .map(([slug, v]) => [slug, {label: v.label || slug, group: v.group || ""}])
+  );
+  const topicHue = (slug) => GROUP_HUE[topicMeta.get(slug)?.group] ?? 0;
+  // An event's types are arrays of path-segments; join to dot-paths for matching.
+  const evTypePaths = (ev) => (ev.types || []).map(p => p.join("."));
+
+  const selectedTypes = new Set();   // dot-paths, e.g. "talk" or "talk.reading"
+  const selectedTopics = new Set();  // slugs
+
+  // --- Tag filter controls: Type (inline chips, top-levels) + Topic (grouped
+  // dropdown). Populated once; `updateTagControls` syncs their active state. ---
+  const typeChipsEl = document.getElementById("type-chips");
+  const topicListEl = document.getElementById("topic-list");
+  const topicSummaryEl = document.getElementById("topic-summary");
+  const topicSearchEl = document.getElementById("topic-search");
+  const topicEmptyEl = document.getElementById("topic-empty");
+  const topicClearEl = document.getElementById("topic-clear");
+  const topicDropdownEl = document.getElementById("topic-dropdown");
+
+  const topLevelTypes = [...typeLabels.keys()].filter(p => !p.includes("."));
+  const groupOrder = [...new Set([...topicMeta.values()].map(m => m.group))];
+
+  function buildTagControls() {
+    typeChipsEl.innerHTML = topLevelTypes
+      .map(p => tagChip("type", p, typeLabels.get(p), GROUP_HUE.type, false))
+      .join("");
+    const parts = [];
+    for (const group of groupOrder) {
+      parts.push('<div class="dropdown-group-label">' + escapeHtml(group) + "</div>");
+      for (const [slug, m] of topicMeta) {
+        if (m.group !== group) continue;
+        parts.push(
+          '<label class="dropdown-item" data-topic="' + escapeHtml(slug) + '">'
+          + '<input type="checkbox" data-topic-cb="' + escapeHtml(slug) + '">'
+          + '<span class="topic-swatch" style="--h:' + topicHue(slug) + '"></span>'
+          + '<span>' + escapeHtml(m.label) + "</span></label>"
+        );
+      }
+    }
+    topicListEl.innerHTML = parts.join("");
+  }
+
+  function updateTagControls() {
+    for (const btn of typeChipsEl.querySelectorAll(".tag-chip")) {
+      btn.classList.toggle("on", selectedTypes.has(btn.dataset.tagval));
+    }
+    for (const cb of topicListEl.querySelectorAll("input[data-topic-cb]")) {
+      cb.checked = selectedTopics.has(cb.dataset.topicCb);
+    }
+    topicSummaryEl.textContent = selectedTopics.size
+      ? selectedTopics.size + (selectedTopics.size === 1 ? " topic" : " topics")
+      : "Any topic";
+  }
+
+  buildTagControls();
+  // Type chips in the control row toggle the type filter.
+  typeChipsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".tag-chip");
+    if (btn) toggleTag("type", btn.dataset.tagval);
+  });
+  // Topic rows toggle the topic filter (label click flips the checkbox).
+  topicListEl.addEventListener("click", (e) => {
+    const label = e.target.closest("label[data-topic]");
+    if (!label) return;
+    e.preventDefault();
+    toggleTag("topic", label.dataset.topic);
+  });
+  topicClearEl.addEventListener("click", () => {
+    selectedTopics.clear();
+    updateTagControls();
+    render();
+  });
+  topicSearchEl.addEventListener("input", () => {
+    const q = topicSearchEl.value.trim().toLowerCase();
+    let visible = 0;
+    for (const label of topicListEl.querySelectorAll("label[data-topic]")) {
+      const match = !q || label.textContent.toLowerCase().includes(q);
+      label.hidden = !match;
+      if (match) visible++;
+    }
+    // Hide a group header when all its items are filtered out.
+    for (const gl of topicListEl.querySelectorAll(".dropdown-group-label")) {
+      let n = gl.nextElementSibling, any = false;
+      while (n && !n.classList.contains("dropdown-group-label")) {
+        if (!n.hidden) { any = true; break; }
+        n = n.nextElementSibling;
+      }
+      gl.hidden = !any;
+    }
+    topicEmptyEl.hidden = visible > 0;
+  });
+  topicDropdownEl.addEventListener("toggle", () => {
+    if (topicDropdownEl.open) topicSearchEl.focus();
+  });
+  document.addEventListener("click", (e) => {
+    if (topicDropdownEl.open && !topicDropdownEl.contains(e.target)) {
+      topicDropdownEl.open = false;
+    }
+  });
+
   let searchQuery = "";
   let rankedOrder = null;  // number[] | null — event ids in rank order, null when no search is active
 
@@ -376,8 +549,21 @@
     render();
   }
   locationClearEl.addEventListener("click", () => setLocationFilter(null));
+
+  // Toggle a type/topic tag in its filter set (OR within a facet). Called both
+  // by clicking a chip on a card and by the filter controls.
+  function toggleTag(kind, val, on) {
+    const set = kind === "type" ? selectedTypes : selectedTopics;
+    const active = on === undefined ? !set.has(val) : on;
+    if (active) set.add(val); else set.delete(val);
+    updateTagControls();
+    render();
+  }
+
   // Event delegation for anything inside the event list.
   list.addEventListener("click", (e) => {
+    const tagBtn = e.target.closest(".tag-chip");
+    if (tagBtn) { toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval); return; }
     const locBtn = e.target.closest(".location-btn");
     if (locBtn) { setLocationFilter(locBtn.dataset.location); return; }
     const desc = e.target.closest('.description[role="button"]');
@@ -554,6 +740,9 @@
     fromEl.value = ""; toEl.value = ""; dateFrom = dateTo = null;
     updatePresetHighlight();
     searchEl.value = "";
+    selectedTypes.clear();
+    selectedTopics.clear();
+    updateTagControls();
     updateSearch();          // clears searchQuery / rankedOrder, removes .searching, and re-renders
     setLocationFilter(null);
   });
@@ -580,6 +769,8 @@
       if (toEl.value) p.set("to", toEl.value);
     }
     if (locationFilter) p.set("loc", locationFilter);
+    if (selectedTypes.size) p.set("type", [...selectedTypes].join(","));
+    if (selectedTopics.size) p.set("topic", [...selectedTopics].join(","));
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
     if (location.pathname + location.search !== url) {
@@ -630,6 +821,21 @@
       // setLocationFilter shows the pill and calls render() itself.
       setLocationFilter(loc);
     }
+    // Tag facets. Unknown paths/slugs (e.g. from an old link after a taxonomy
+    // change) are silently dropped so shared links open gracefully.
+    const typeParam = p.get("type");
+    if (typeParam) {
+      for (const path of typeParam.split(",").filter(Boolean)) {
+        if (typeLabels.has(path)) selectedTypes.add(path);
+      }
+    }
+    const topicParam = p.get("topic");
+    if (topicParam) {
+      for (const slug of topicParam.split(",").filter(Boolean)) {
+        if (topicMeta.has(slug)) selectedTopics.add(slug);
+      }
+    }
+    if (typeParam || topicParam) updateTagControls();
     const q = p.get("q");
     if (q) {
       searchEl.value = q;
@@ -668,6 +874,19 @@
       if (dateFrom && ev._start < dateFrom) return false;
       if (dateTo && ev._start > dateTo) return false;
       if (locationFilter && ev.location !== locationFilter) return false;
+      // Type filter: OR within the facet; a selected partial path (e.g. "talk")
+      // matches any deeper path on the event ("talk.reading") — branch match.
+      if (selectedTypes.size) {
+        const paths = evTypePaths(ev);
+        const hit = [...selectedTypes].some(sel =>
+          paths.some(p => p === sel || p.startsWith(sel + ".")));
+        if (!hit) return false;
+      }
+      // Topic filter: OR within the facet.
+      if (selectedTopics.size) {
+        const evTopics = ev.topics || [];
+        if (![...selectedTopics].some(t => evTopics.includes(t))) return false;
+      }
       return true;
     };
 
@@ -691,6 +910,29 @@
       return;
     }
     list.innerHTML = flat ? renderFlat(filtered) : renderList(filtered);
+  }
+
+  // One tag chip. kind = "type" | "topic"; val is the dot-path or slug.
+  function tagChip(kind, val, label, hue, active) {
+    return '<button type="button" class="tag-chip tag-' + kind + (active ? " on" : "")
+      + '" data-tagkind="' + kind + '" data-tagval="' + escapeHtml(val) + '"'
+      + ' style="--h:' + hue + '" title="Filter by ' + escapeHtml(label) + '">'
+      + escapeHtml(label) + "</button>";
+  }
+
+  // The tag row for an event: its type chips then topic chips (empty → "").
+  function renderTags(ev) {
+    const chips = [];
+    for (const path of evTypePaths(ev)) {
+      chips.push(tagChip("type", path, typeLabels.get(path) || path,
+                         GROUP_HUE.type, selectedTypes.has(path)));
+    }
+    for (const slug of ev.topics || []) {
+      const m = topicMeta.get(slug);
+      if (!m) continue;
+      chips.push(tagChip("topic", slug, m.label, topicHue(slug), selectedTopics.has(slug)));
+    }
+    return chips.length ? '<div class="tags">' + chips.join("") + "</div>" : "";
   }
 
   // Build one event's card HTML. `timeHtml` is the pre-formatted, already-escaped
@@ -721,7 +963,7 @@
         thumb +
         '<div class="details">' +
           '<div class="title">' + titleHtml + "</div>" +
-          loc + src + desc +
+          loc + src + desc + renderTags(ev) +
         "</div>" +
       "</div>"
     );
