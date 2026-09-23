@@ -155,8 +155,6 @@ platform scraper may be the better path for some (noted where relevant).
 - **Counterculture Museum** — https://counterculturemuseum.org/events/
 - **The Third Place** — https://thethirdplace.is/
 - **SF Center for the Book** — https://www.sfcb.org/calendar
-- **Commonwealth Club** — https://www.commonwealthclub.org/events
-- **City Arts & Lectures** (marquee SF talks series) — https://www.cityarts.net/
 - **Chinese Culture Center / Edge on the Square** — https://www.cccsf.us/ · https://edgeonthesquare.org/
 - **Double Union** (feminist makerspace) — https://www.doubleunion.org/
 - **Ruth's Table** (arts org) — https://ruthstable.org/
@@ -180,6 +178,8 @@ platform scraper may be the better path for some (noted where relevant).
 - 4-Star Theater — `4-star-movies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py` — reusable for any Squarespace-events venue by calendar URL)
 - Medicine for Nightmares — `medicinefornightmares.com` (Squarespace events collection; shared `scrapers/squarespace_events.py`)
 - Bird & Beckett — `birdbeckett.com` (WordPress "The Events Calendar" REST API; shared `scrapers/tribe_events.py` — reusable for any Tribe/WordPress venue by site base)
+- Commonwealth Club — `commonwealthclub.org` (Drupal; paginated listing + JSON-LD Event on detail pages; startDate is UTC)
+- City Arts & Lectures — `cityarts.net` (WordPress `/event/` pages; `.date`/`.location` DOM, Pacific-local times)
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 

@@ -10,10 +10,10 @@ from exporters.json_export import export_json
 from models import Event
 from scrapers import (
     actsf, atgtickets, balboa, berkeleyrep, bigbrainbay, birdbeckett, blackbird,
-    brava, citylights, fillmore, fourstar, gamh, greatstar, greenapple,
-    independent, magictheatre, medicinenightmares, nctcsf, neofuturists, palace,
-    phoenix, presidio, sfjazz, sfpl, sfplayhouse, sfwarmemorial, warfield, ybca,
-    zspace,
+    brava, citylights, cityarts, commonwealthclub, fillmore, fourstar, gamh,
+    greatstar, greenapple, independent, magictheatre, medicinenightmares, nctcsf,
+    neofuturists, palace, phoenix, presidio, sfjazz, sfpl, sfplayhouse,
+    sfwarmemorial, warfield, ybca, zspace,
 )
 from scrapers.base import RawEvent
 
@@ -26,6 +26,7 @@ SCRAPERS = [
     nctcsf, brava, magictheatre, greatstar, presidio,
     warfield, palace, sfwarmemorial, sfplayhouse, phoenix, neofuturists,
     sfpl, bigbrainbay, zspace, balboa, fourstar, birdbeckett, medicinenightmares,
+    commonwealthclub, cityarts,
 ]
 
 
