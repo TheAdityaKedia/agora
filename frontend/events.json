@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T23:46:32.281094+00:00",
+  "generated_at": "2026-09-23T23:52:40.124066+00:00",
   "taxonomy": {
     "version": 1,
     "axes": {
@@ -300,9 +300,19 @@
       "sources": [
         "City Lights Booksellers"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
+      "cost": "paid"
     },
     {
       "id": "db8d8923-e692-4630-88b7-6817fe6ab7a9",
