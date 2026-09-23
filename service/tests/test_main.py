@@ -384,3 +384,29 @@ def test_classify_upcoming_scopes_to_given_source_names(db_session, tmp_path):
 
     assert classified == 1
     assert seen == [("City Lights Booksellers", "Author Talk")]
+
+
+def test_classify_upcoming_includes_earlier_today_events(db_session, tmp_path):
+    """An event earlier TODAY (start < now but same local day) is still shown
+    by the exporter, so it must also be classified — classify's cutoff must
+    match the exporter's start-of-today, not a strict `now`."""
+    import main
+    from classifications import Classification
+
+    now = datetime.now(timezone.utc)
+    earlier_today = now - timedelta(hours=3)  # a few hours ago, still today
+    db_session.add(Event(title="Noon Show", start_time=earlier_today,
+                         location=None, url="https://x", description="d",
+                         sources=["City Lights Booksellers"], created_at=now))
+    db_session.commit()
+
+    seen = []
+    def fake(title, source, description, *, client=None):
+        seen.append(title)
+        return Classification(title=title, source=source, types=[["talk"]], topics=[],
+                              cost="unknown", model="m", taxonomy_version=1,
+                              classified_at="2026-09-23T00:00:00+00:00")
+
+    classified, _ = main.classify_upcoming(classifier=fake, cache_path=tmp_path/"c.json", log=None)
+    assert "Noon Show" in seen
+    assert classified == 1

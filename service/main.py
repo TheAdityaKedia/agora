@@ -160,15 +160,20 @@ def classify_upcoming(classifier=None, client=None, cache_path=None, log=print,
     """
     import classify as _classify
     from classifications import Cache
+    from exporters.json_export import EXPORT_TZ
 
     classifier = classifier or _classify.classify_show
     cache_path = cache_path or (Path(__file__).parent / "data" / "classifications.json")
 
-    now = datetime.now(timezone.utc)
+    # Match the exporter's window: it keeps events from the START OF TODAY
+    # (local), so classification must too — otherwise an event earlier today
+    # (past `now` but still shown) exports untagged. Start-of-today Pacific → UTC.
+    today_local = datetime.now(EXPORT_TZ).date()
+    cutoff = datetime.combine(today_local, datetime.min.time(), tzinfo=EXPORT_TZ).astimezone(timezone.utc)
     session = get_session()
     try:
         rows = []
-        for e in session.query(Event).filter(Event.start_time >= now).all():
+        for e in session.query(Event).filter(Event.start_time >= cutoff).all():
             srcs = e.sources or ["?"]
             if source_names is not None and not (set(srcs) & source_names):
                 continue
