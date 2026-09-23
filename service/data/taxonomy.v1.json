@@ -1,104 +1,96 @@
 {
   "version": 1,
-  "tree": {
-    "performance": {
-      "label": "Performance",
-      "children": {
-        "music": {
-          "label": "Music",
+  "axes": {
+    "type": {
+      "label": "Type",
+      "note": "Event FORMAT — what the event physically is. Shallow on purpose; subject/genre lives in `topic`.",
+      "tree": {
+        "performance": {"label": "Performance / Show"},
+        "screening": {"label": "Screening"},
+        "talk": {
+          "label": "Talk",
           "children": {
-            "jazz": {"label": "Jazz"},
-            "rock": {"label": "Rock"},
-            "pop-indie": {"label": "Pop / Indie"},
-            "hiphop-rnb": {"label": "Hip-hop / R&B"},
-            "electronic": {"label": "Electronic"},
-            "folk-americana": {"label": "Folk / Americana"},
-            "classical": {"label": "Classical"},
-            "world": {"label": "World / Global"},
-            "other": {"label": "Other"}
+            "reading": {"label": "Reading / Author talk"},
+            "lecture": {"label": "Lecture"},
+            "panel": {"label": "Panel / Discussion"},
+            "conversation": {"label": "Conversation / Q&A"},
+            "podcast": {"label": "Live podcast"}
           }
         },
-        "theater": {
-          "label": "Theater",
+        "workshop": {"label": "Workshop / Class"},
+        "exhibition": {"label": "Exhibition"},
+        "social": {
+          "label": "Social",
           "children": {
-            "musical-theater": {"label": "Musical theater"},
-            "play": {"label": "Play (drama)"},
-            "opera": {"label": "Opera"},
-            "solo-show": {"label": "Solo / one-person show"},
-            "cabaret-variety": {"label": "Cabaret / variety"},
-            "comedy-farce": {"label": "Comedy / farce"},
-            "experimental": {"label": "Experimental / devised"},
-            "other": {"label": "Other"}
+            "party-club": {"label": "Party / Club night"},
+            "mixer-meetup": {"label": "Mixer / Meetup"},
+            "dance-social": {"label": "Dance social"},
+            "book-club": {"label": "Book club / Reading group"},
+            "language-exchange": {"label": "Language / Conversation group"},
+            "games-hobby": {"label": "Games / Hobby club"},
+            "gala-fundraiser": {"label": "Gala / Fundraiser"},
+            "food-drink": {"label": "Food & drink"}
           }
-        },
-        "dance": {"label": "Dance"},
-        "comedy": {"label": "Comedy"}
+        }
       }
     },
-    "screening": {
-      "label": "Screening",
-      "children": {
-        "film": {"label": "Film"},
-        "documentary": {"label": "Documentary"},
-        "repertory": {"label": "Repertory / classic"},
-        "series-festival": {"label": "Series / festival"},
-        "other": {"label": "Other"}
-      }
-    },
-    "talk": {
-      "label": "Talk",
-      "children": {
-        "author-reading": {"label": "Author talk / Reading"},
-        "lecture": {"label": "Lecture"},
-        "panel": {"label": "Panel / Discussion"},
-        "podcast": {"label": "Live podcast"},
-        "conversation": {"label": "Conversation / Q&A"}
-      }
-    },
-    "workshop": {
-      "label": "Workshop",
-      "children": {
-        "art-craft": {"label": "Art / Craft"},
-        "writing": {"label": "Writing"},
-        "dance-class": {"label": "Dance class"},
-        "music": {"label": "Music"},
-        "cooking": {"label": "Cooking"},
-        "wellness": {"label": "Wellness / Movement"},
-        "tech": {"label": "Tech / Digital skills"}
-      }
-    },
-    "exhibition": {
-      "label": "Exhibition",
-      "children": {
-        "visual-art": {"label": "Visual art"},
-        "photography": {"label": "Photography"},
-        "installation": {"label": "Installation / New media"},
-        "design-architecture": {"label": "Design / Architecture"},
-        "history-cultural": {"label": "History / Cultural"}
-      }
-    },
-    "social": {
-      "label": "Social",
-      "children": {
-        "dance-social": {
-          "label": "Dance social",
-          "children": {
-            "zouk": {"label": "Zouk"},
-            "bachata": {"label": "Bachata"},
-            "salsa": {"label": "Salsa"},
-            "fusion": {"label": "Fusion"},
-            "tango": {"label": "Tango"},
-            "swing": {"label": "Swing"},
-            "other": {"label": "Other"}
-          }
-        },
-        "party-club": {"label": "Party / Club night"},
-        "gala-fundraiser": {"label": "Gala / Fundraiser"},
-        "mixer-meetup": {"label": "Mixer / Meetup"},
-        "food-drink": {"label": "Food & drink"},
-        "book-club": {"label": "Book club / Reading group"},
-        "language-exchange": {"label": "Language / Conversation group"},
-        "games-hobby": {"label": "Games / Hobby club"}
+    "topic": {
+      "label": "Topic",
+      "note": "What the event is ABOUT / the interest it serves. Flat, multi-select (0-3). Cuts across types: `poetry` covers a reading, an open mic, and a workshop.",
+      "values": {
+        "poetry": {"label": "Poetry", "group": "Literary"},
+        "fiction": {"label": "Fiction", "group": "Literary"},
+        "nonfiction": {"label": "Nonfiction", "group": "Literary"},
+        "comics-zines": {"label": "Comics / Zines", "group": "Literary"},
+        "books-authors": {"label": "Books / Authors", "group": "Literary"},
+
+        "jazz": {"label": "Jazz", "group": "Music"},
+        "rock-indie": {"label": "Rock / Indie", "group": "Music"},
+        "pop": {"label": "Pop", "group": "Music"},
+        "hiphop-rnb": {"label": "Hip-hop / R&B", "group": "Music"},
+        "electronic": {"label": "Electronic", "group": "Music"},
+        "classical": {"label": "Classical", "group": "Music"},
+        "folk-americana": {"label": "Folk / Americana", "group": "Music"},
+        "world-music": {"label": "World / Global", "group": "Music"},
+
+        "theater": {"label": "Theater", "group": "Stage"},
+        "musical-theater": {"label": "Musical theater", "group": "Stage"},
+        "opera": {"label": "Opera", "group": "Stage"},
+        "dance": {"label": "Dance", "group": "Stage"},
+        "comedy": {"label": "Comedy", "group": "Stage"},
+        "spoken-word": {"label": "Spoken word", "group": "Stage"},
+
+        "film": {"label": "Film", "group": "Screen"},
+        "documentary": {"label": "Documentary", "group": "Screen"},
+
+        "visual-art": {"label": "Visual art", "group": "Art & design"},
+        "photography": {"label": "Photography", "group": "Art & design"},
+        "design": {"label": "Design", "group": "Art & design"},
+        "architecture": {"label": "Architecture", "group": "Art & design"},
+        "craft": {"label": "Craft / Making", "group": "Art & design"},
+
+        "history": {"label": "History", "group": "Ideas"},
+        "science": {"label": "Science", "group": "Ideas"},
+        "politics": {"label": "Politics / Society", "group": "Ideas"},
+        "tech": {"label": "Tech / Digital", "group": "Ideas"},
+        "business": {"label": "Business / Career", "group": "Ideas"},
+
+        "food-drink": {"label": "Food & drink", "group": "Life"},
+        "wine": {"label": "Wine", "group": "Life"},
+        "wellness": {"label": "Wellness / Movement", "group": "Life"},
+        "nature-outdoors": {"label": "Nature / Outdoors", "group": "Life"},
+
+        "salsa": {"label": "Salsa", "group": "Dance styles"},
+        "bachata": {"label": "Bachata", "group": "Dance styles"},
+        "zouk": {"label": "Zouk", "group": "Dance styles"},
+        "tango": {"label": "Tango", "group": "Dance styles"},
+        "swing": {"label": "Swing", "group": "Dance styles"},
+
+        "lgbtq": {"label": "LGBTQ+", "group": "Communities"},
+        "latino": {"label": "Latino / Latin American", "group": "Communities"},
+        "asian-american": {"label": "Asian American", "group": "Communities"},
+        "black-diaspora": {"label": "Black / African diaspora", "group": "Communities"},
+        "jewish": {"label": "Jewish", "group": "Communities"}
       }
     }
   }
