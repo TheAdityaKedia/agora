@@ -16,6 +16,7 @@ from scrapers import (
     oaklandartmurmur, palace, phoenix, presidio, readingrhythms, riptide,
     sfbarguide, sfjazz, sfpl, sfplayhouse, sfwarmemorial, sunsettrivia, themarsh,
     thecommons, warfield, ybca, zspace,
+    bachdds, biscuitsblues, dawnclub, keysjazz, yoshis,
 )
 from scrapers.base import RawEvent
 
@@ -31,6 +32,7 @@ SCRAPERS = [
     commonwealthclub, cityarts, riptide, sfbarguide, sunsettrivia,
     thecommons, readingrhythms, oaklandartmurmur, elrio, kronos, litquake,
     themarsh, linesballet, factsf,
+    yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
 ]
 
 
