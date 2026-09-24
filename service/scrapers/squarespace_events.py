@@ -16,6 +16,7 @@ every upcoming showing in one page.
 from __future__ import annotations
 
 import re
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
@@ -29,6 +30,9 @@ from scrapers.browser import BROWSER_UA
 
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 REQUEST_TIMEOUT = 25
+DETAIL_WORKERS = 5
+# Button/CTA lines to strip from a detail-page synopsis.
+_CTA_RE = re.compile(r"\b(click here|buy tickets?|get tickets?|tickets|register|rsvp|learn more)\b[.!:]?", re.I)
 # Titles carry a "~ <showtime>" suffix ("Resident Evil ~ 7:30 PM"); the exact
 # time is already in the structured markup, so drop the suffix from the title.
 _TITLE_SUFFIX_RE = re.compile(r"\s*~\s.*$")
@@ -132,8 +136,29 @@ def parse_events(html: str, *, base_url: str, fallback_location: str | None = No
     return events
 
 
-def scrape_collection(calendar_url: str, *, fallback_location: str | None = None) -> list[RawEvent]:
-    """Fetch and parse a venue's Squarespace events-collection page."""
+def parse_detail_description(html: str) -> str | None:
+    """Full synopsis from an event's detail page (``.eventitem-column-content``).
+
+    The date/venue/ICS block lives in a separate ``.eventitem-column-meta``, so
+    this container is just the prose; we strip trailing CTA/button lines."""
+    soup = BeautifulSoup(html, "html.parser")
+    el = soup.select_one(".eventitem-column-content") or soup.select_one(".eventitem-column-content .sqs-block-content")
+    if not el:
+        return None
+    text = re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()
+    text = _CTA_RE.sub("", text).strip(" ·-—")
+    return text or None
+
+
+def scrape_collection(calendar_url: str, *, fallback_location: str | None = None,
+                      enrich_descriptions: bool = False) -> list[RawEvent]:
+    """Fetch and parse a venue's Squarespace events-collection page.
+
+    `enrich_descriptions` fetches each event's detail page for the full synopsis
+    (``.eventitem-column-content``) — use it for venues whose collection cards
+    carry thin/empty descriptions (e.g. FACT/SF). Leave it off for venues with
+    rich cards (Balboa, Medicine for Nightmares) to avoid needless fetches.
+    """
     try:
         resp = requests.get(calendar_url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
         resp.raise_for_status()
@@ -141,5 +166,26 @@ def scrape_collection(calendar_url: str, *, fallback_location: str | None = None
         _log(f"fetch failed for {calendar_url}: {exc}")
         return []
     events = parse_events(resp.text, base_url=calendar_url, fallback_location=fallback_location)
+
+    if enrich_descriptions:
+        _enrich_from_detail_pages(events)
     _log(f"{calendar_url}: {len(events)} events")
     return events
+
+
+def _enrich_from_detail_pages(events: list[RawEvent]) -> None:
+    """Fill each event's description from its detail page, in place."""
+    def fetch(ev: RawEvent) -> str | None:
+        if not ev.url:
+            return None
+        try:
+            r = requests.get(ev.url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+            r.raise_for_status()
+        except requests.RequestException:
+            return None
+        return parse_detail_description(r.text)
+
+    with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as pool:
+        for ev, desc in zip(events, pool.map(fetch, events)):
+            if desc:
+                ev.description = desc

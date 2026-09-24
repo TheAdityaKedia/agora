@@ -19,4 +19,7 @@ def matches(url: str) -> bool:
 
 
 def scrape(url: str = CALENDAR_URL) -> list[RawEvent]:
-    return squarespace_events.scrape_collection(CALENDAR_URL, fallback_location=ADDRESS)
+    # FACT/SF's collection cards carry thin/noisy descriptions, so pull the full
+    # synopsis from each event's detail page.
+    return squarespace_events.scrape_collection(
+        CALENDAR_URL, fallback_location=ADDRESS, enrich_descriptions=True)

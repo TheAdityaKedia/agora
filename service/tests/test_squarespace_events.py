@@ -77,6 +77,31 @@ _LOCALIZED = """
 """
 
 
+def test_parse_detail_description_strips_meta_and_cta():
+    html = (
+        "<html><body>"
+        "<div class='eventitem-column-meta'>Friday, August 14, 2026 7:30 PM ODC Theater Google Calendar ICS</div>"
+        "<div class='eventitem-column-content'><div class='sqs-block-content'>"
+        "<p>A surreal contemporary dance about sound waves. Buy Tickets</p></div></div>"
+        "</body></html>"
+    )
+    desc = se.parse_detail_description(html)
+    assert desc == "A surreal contemporary dance about sound waves."
+    assert "ODC Theater" not in desc and "ICS" not in desc
+
+
+def test_enrich_from_detail_pages_fills_descriptions(monkeypatch):
+    from scrapers.base import RawEvent
+    from datetime import datetime, timezone
+    evs = [RawEvent(title="Show", start_time=datetime(2026, 10, 1, tzinfo=timezone.utc),
+                    location="FACT/SF", url="https://factsf.org/events/show", description=None)]
+    monkeypatch.setattr(se.requests, "get",
+                        lambda *a, **k: type("R", (), {"text": "<div class='eventitem-column-content'>Full synopsis here.</div>",
+                                                        "raise_for_status": lambda self: None})())
+    se._enrich_from_detail_pages(evs)
+    assert evs[0].description == "Full synopsis here."
+
+
 def test_localized_12hr_start_time():
     evs = se.parse_events(_LOCALIZED, base_url="https://medicinefornightmares.com/events")
     assert len(evs) == 1
