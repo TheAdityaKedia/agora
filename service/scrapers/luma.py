@@ -134,7 +134,10 @@ def event_from_api(entry: dict) -> Optional[RawEvent]:
     slug = event.get("url")
     url = f"{BASE_URL}/{slug}" if slug else None
     geo = event.get("geo_address_info") or {}
-    location = geo.get("address") or ("Online" if event.get("location_type") == "online" else None)
+    # Prefer full_address (venue + street + city + state) — `address` alone is
+    # often just the venue name, which hides the city (breaks location filters).
+    location = (geo.get("full_address") or geo.get("address")
+                or ("Online" if event.get("location_type") == "online" else None))
     image = event.get("cover_url")
     return RawEvent(
         title=name,

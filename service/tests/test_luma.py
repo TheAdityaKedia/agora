@@ -248,14 +248,25 @@ def test_event_from_api_maps_fields():
         "url": "commons-retreat",
         "cover_url": "https://images.lumacdn.com/x.png",
         "location_type": "offline",
-        "geo_address_info": {"address": "Willits, CA"},
+        "geo_address_info": {"address": "Willits, CA"},  # manual: no full_address
     }}
     ev = luma.event_from_api(entry)
     assert ev.title == "The Commons Camping Retreat"
     assert ev.start_time.astimezone(timezone.utc) == datetime(2026, 9, 24, 16, 0, tzinfo=timezone.utc)
     assert ev.url == "https://luma.com/commons-retreat"
-    assert ev.location == "Willits, CA"
+    assert ev.location == "Willits, CA"  # falls back to address
     assert ev.image_url == "https://images.lumacdn.com/x.png"
+
+
+def test_event_from_api_prefers_full_address():
+    """`address` is often just the venue name; full_address includes the city."""
+    ev = luma.event_from_api({"event": {
+        "name": "RR SF", "start_at": "2026-10-11T02:00:00.000Z", "url": "rr",
+        "geo_address_info": {
+            "address": "The Love Potion Library",
+            "full_address": "The Love Potion Library, 284 Noe St, San Francisco, CA 94114, USA",
+        }}})
+    assert "San Francisco" in ev.location
 
 
 def test_event_from_api_online_event_location():
