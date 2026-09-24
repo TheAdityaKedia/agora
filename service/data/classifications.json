@@ -17,7 +17,7 @@
       ]
     },
     "4-Star Theater\u001fClosed for a Private Event": {
-      "classified_at": "2026-09-23T20:10:33.430501+00:00",
+      "classified_at": "2026-09-24T21:30:53.951955+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "4-Star Theater",
@@ -963,7 +963,7 @@
       ]
     },
     "ATG (Curran, Orpheum, Golden Gate)\u001fUnscripted: An Evening with Michael Douglas": {
-      "classified_at": "2026-09-23T19:52:14.864299+00:00",
+      "classified_at": "2026-09-24T21:29:30.868813+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "ATG (Curran, Orpheum, Golden Gate)",
@@ -2826,13 +2826,15 @@
       ]
     },
     "Black Bird Bookstore\u001fGame and Pie Night": {
-      "classified_at": "2026-09-23T19:51:58.672186+00:00",
+      "classified_at": "2026-09-24T21:29:29.083909+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Black Bird Bookstore",
       "taxonomy_version": 1,
       "title": "Game and Pie Night",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -3017,7 +3019,7 @@
       ]
     },
     "Brava Theater Center\u001fBrava! Block Party": {
-      "classified_at": "2026-09-23T19:54:27.115113+00:00",
+      "classified_at": "2026-09-24T21:32:48.656207+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Brava Theater Center",
@@ -3025,8 +3027,8 @@
       "title": "Brava! Block Party",
       "topics": [
         "theater",
-        "women",
-        "lgbtq"
+        "lgbtq",
+        "women"
       ],
       "types": [
         [
@@ -3204,13 +3206,15 @@
       ]
     },
     "City Arts & Lectures\u001fDavid Byrne": {
-      "classified_at": "2026-09-23T23:46:20.331502+00:00",
+      "classified_at": "2026-09-24T21:30:58.547887+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "City Arts & Lectures",
       "taxonomy_version": 1,
       "title": "David Byrne",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "talk",
@@ -3236,7 +3240,7 @@
       ]
     },
     "City Arts & Lectures\u001fKyle MacLachlan": {
-      "classified_at": "2026-09-23T23:46:15.615318+00:00",
+      "classified_at": "2026-09-24T21:30:56.240431+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "City Arts & Lectures",
@@ -3503,19 +3507,20 @@
       ]
     },
     "City Lights Booksellers\u001fBen Ehrenreich / Launch Party for “Hold Still”": {
-      "classified_at": "2026-09-23T19:51:11.964750+00:00",
+      "classified_at": "2026-09-24T21:32:41.816641+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "City Lights Booksellers",
       "taxonomy_version": 1,
       "title": "Ben Ehrenreich / Launch Party for “Hold Still”",
       "topics": [
-        "books-authors"
+        "books-authors",
+        "writing"
       ],
       "types": [
         [
           "talk",
-          "conversation"
+          "reading"
         ],
         [
           "social",
@@ -5140,14 +5145,16 @@
       ]
     },
     "El Rio\u001fA FAMILY AFFAIR: A Queer 90s-00s Throwbacks Only Party - EVERY 1st FRIDAY ($5)": {
-      "classified_at": "2026-09-24T18:00:20.346170+00:00",
+      "classified_at": "2026-09-24T21:34:52.293574+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "A FAMILY AFFAIR: A Queer 90s-00s Throwbacks Only Party - EVERY 1st FRIDAY ($5)",
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "types": [
         [
@@ -5214,21 +5221,19 @@
       ]
     },
     "El Rio\u001fAll Systems Live Presents: Hoochie House with DJ Nico, Euphemia, DJ Tink, and ECTO ($5 - $10)": {
-      "classified_at": "2026-09-24T18:00:48.106436+00:00",
+      "classified_at": "2026-09-24T21:35:18.656517+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "All Systems Live Presents: Hoochie House with DJ Nico, Euphemia, DJ Tink, and ECTO ($5 - $10)",
       "topics": [
+        "club-night",
         "electronic",
         "lgbtq",
         "latino"
       ],
       "types": [
-        [
-          "performance"
-        ],
         [
           "social",
           "party-club"
@@ -5236,21 +5241,19 @@
       ]
     },
     "El Rio\u001fBussdown Baddies with Marchante, 4Dhila, Joog, and Jambalaya ($5 Cover)": {
-      "classified_at": "2026-09-24T18:00:36.397885+00:00",
+      "classified_at": "2026-09-24T21:35:12.048455+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Bussdown Baddies with Marchante, 4Dhila, Joog, and Jambalaya ($5 Cover)",
       "topics": [
+        "club-night",
         "hiphop-rnb",
         "lgbtq",
         "latino"
       ],
       "types": [
-        [
-          "performance"
-        ],
         [
           "social",
           "party-club"
@@ -5258,21 +5261,18 @@
       ]
     },
     "El Rio\u001fCLB INTRNCNL with Giselle Peppers, Profesito, Estrella b2b Lythsetty, and GO1M ($10)": {
-      "classified_at": "2026-09-24T18:00:41.637994+00:00",
+      "classified_at": "2026-09-24T21:35:15.951895+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "CLB INTRNCNL with Giselle Peppers, Profesito, Estrella b2b Lythsetty, and GO1M ($10)",
       "topics": [
-        "electronic",
-        "latino",
-        "lgbtq"
+        "club-night",
+        "hiphop-rnb",
+        "latino"
       ],
       "types": [
-        [
-          "performance"
-        ],
         [
           "social",
           "party-club"
@@ -5280,13 +5280,14 @@
       ]
     },
     "El Rio\u001fCrisis Hotline Happy Hour (Free)": {
-      "classified_at": "2026-09-24T18:00:19.032603+00:00",
+      "classified_at": "2026-09-24T21:34:51.073725+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Crisis Hotline Happy Hour (Free)",
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -5314,34 +5315,32 @@
       ]
     },
     "El Rio\u001fFinal Girls Halloween Night with Finishher b2b Source, Freak POV, Parking Structure, and Girls Trip ($10 Cover)": {
-      "classified_at": "2026-09-24T18:00:49.386687+00:00",
+      "classified_at": "2026-09-24T21:35:19.951284+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Final Girls Halloween Night with Finishher b2b Source, Freak POV, Parking Structure, and Girls Trip ($10 Cover)",
       "topics": [
-        "lgbtq",
-        "latino"
+        "club-night",
+        "electronic"
       ],
       "types": [
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ]
     },
     "El Rio\u001fGet Busy! Every First Saturday ($10 Cover)": {
-      "classified_at": "2026-09-24T18:00:21.545381+00:00",
+      "classified_at": "2026-09-24T21:34:53.526940+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Get Busy! Every First Saturday ($10 Cover)",
       "topics": [
+        "club-night",
         "latino",
         "lgbtq"
       ],
@@ -5353,15 +5352,17 @@
       ]
     },
     "El Rio\u001fHappy Hour with DJ NoSilence (FREE)": {
-      "classified_at": "2026-09-24T18:00:44.256370+00:00",
+      "classified_at": "2026-09-24T21:35:17.445731+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Happy Hour with DJ NoSilence (FREE)",
       "topics": [
-        "latino",
-        "lgbtq"
+        "club-night",
+        "electronic",
+        "lgbtq",
+        "latino"
       ],
       "types": [
         [
@@ -5388,13 +5389,14 @@
       ]
     },
     "El Rio\u001fIt's A Function at El Rio: Family Not a Group's 5 Year Anniversary ($12 Presale)": {
-      "classified_at": "2026-09-24T18:00:39.003728+00:00",
+      "classified_at": "2026-09-24T21:35:13.288313+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "It's A Function at El Rio: Family Not a Group's 5 Year Anniversary ($12 Presale)",
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -5406,13 +5408,14 @@
       ]
     },
     "El Rio\u001fIt's a Function at El Rio: Family Not a Group 5 Year Anniversary": {
-      "classified_at": "2026-09-24T18:00:40.341342+00:00",
+      "classified_at": "2026-09-24T21:35:14.589578+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "It's a Function at El Rio: Family Not a Group 5 Year Anniversary",
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -5420,21 +5423,19 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ]
     },
     "El Rio\u001fJUKEWRLD featuring DJ AriB b2b DJ New Juicy, Mars Kasei b2b Tha Nxxt Step, and TwoSeven ($5 Cover)": {
-      "classified_at": "2026-09-24T18:00:11.477426+00:00",
+      "classified_at": "2026-09-24T21:34:47.894170+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "JUKEWRLD featuring DJ AriB b2b DJ New Juicy, Mars Kasei b2b Tha Nxxt Step, and TwoSeven ($5 Cover)",
       "topics": [
-        "hiphop-rnb"
+        "club-night",
+        "electronic"
       ],
       "types": [
         [
@@ -5460,7 +5461,7 @@
       ]
     },
     "El Rio\u001fKARAOKIKI WITH YOUR HOSTS DULCE DE LECHE ++ LAMBERT ++ MOJO CARTER ++ FRISCOPINK (FREE)": {
-      "classified_at": "2026-09-24T18:00:17.801284+00:00",
+      "classified_at": "2026-09-24T21:34:49.100964+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
@@ -5479,7 +5480,7 @@
       ]
     },
     "El Rio\u001fKaraokiki with JoSie (FREE)": {
-      "classified_at": "2026-09-24T18:00:06.001741+00:00",
+      "classified_at": "2026-09-24T21:34:42.988001+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
@@ -5498,14 +5499,14 @@
       ]
     },
     "El Rio\u001fLOS TRAIN WRECK'S ALL STAR JAM EVERY 1ST WED! (FREE)": {
-      "classified_at": "2026-09-24T18:00:25.214579+00:00",
+      "classified_at": "2026-09-24T21:34:55.896471+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "LOS TRAIN WRECK'S ALL STAR JAM EVERY 1ST WED! (FREE)",
       "topics": [
-        "rock-indie",
+        "music",
         "lgbtq",
         "latino"
       ],
@@ -5515,41 +5516,38 @@
         ],
         [
           "social",
-          "party-club"
+          "games-hobby"
         ]
       ]
     },
     "El Rio\u001fMANGO! Every 4th Saturday 2-8pm!": {
-      "classified_at": "2026-09-24T18:00:10.214102+00:00",
+      "classified_at": "2026-09-24T21:34:46.661296+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "MANGO! Every 4th Saturday 2-8pm!",
       "topics": [
+        "club-night",
         "lgbtq",
-        "latino",
-        "women"
+        "latino"
       ],
       "types": [
         [
           "social",
           "party-club"
-        ],
-        [
-          "social",
-          "food-drink"
         ]
       ]
     },
     "El Rio\u001fPinkwash For The Dolls: The Comrades Dance Party & Trans Mutual Aid ($5 - $10)": {
-      "classified_at": "2026-09-24T18:00:32.521119+00:00",
+      "classified_at": "2026-09-24T21:35:08.354720+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Pinkwash For The Dolls: The Comrades Dance Party & Trans Mutual Aid ($5 - $10)",
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -5561,34 +5559,28 @@
       ]
     },
     "El Rio\u001fQueer & All Presents: Pier 80 Party People Precursor A Night of Bay Area EDM ($5 Cover)": {
-      "classified_at": "2026-09-24T18:00:08.774684+00:00",
+      "classified_at": "2026-09-24T21:34:45.353664+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Queer & All Presents: Pier 80 Party People Precursor A Night of Bay Area EDM ($5 Cover)",
       "topics": [
+        "club-night",
         "electronic",
         "lgbtq"
       ],
-      "types": [
-        [
-          "performance"
-        ],
-        [
-          "social",
-          "party-club"
-        ]
-      ]
+      "types": []
     },
     "El Rio\u001fSAPPHORIA, SOULFUL, SEXY, SAPPHIC": {
-      "classified_at": "2026-09-24T18:00:27.695850+00:00",
+      "classified_at": "2026-09-24T21:34:58.500381+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "SAPPHORIA, SOULFUL, SEXY, SAPPHIC",
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -5600,14 +5592,16 @@
       ]
     },
     "El Rio\u001fSAPPHORIA: SOULFUL, SEXY, SAPPHIC": {
-      "classified_at": "2026-09-24T18:00:22.697939+00:00",
+      "classified_at": "2026-09-24T21:34:54.793164+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "SAPPHORIA: SOULFUL, SEXY, SAPPHIC",
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "types": [
         [
@@ -5660,15 +5654,15 @@
       ]
     },
     "El Rio\u001fSuper Perreo: Latin Rave Day Party ($20)": {
-      "classified_at": "2026-09-24T18:00:33.722217+00:00",
+      "classified_at": "2026-09-24T21:35:09.610084+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Super Perreo: Latin Rave Day Party ($20)",
       "topics": [
-        "hiphop-rnb",
-        "latino"
+        "club-night",
+        "hiphop-rnb"
       ],
       "types": [
         [
@@ -5678,13 +5672,15 @@
       ]
     },
     "El Rio\u001fThots Not Cops with DJ ariB b2b GHOSTMiLK, Heart Piece, and Kewpie ($15 - $25 NOTAFLOF)": {
-      "classified_at": "2026-09-24T18:00:31.342083+00:00",
+      "classified_at": "2026-09-24T21:35:07.192638+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "Thots Not Cops with DJ ariB b2b GHOSTMiLK, Heart Piece, and Kewpie ($15 - $25 NOTAFLOF)",
       "topics": [
+        "club-night",
+        "electronic",
         "lgbtq",
         "latino"
       ],
@@ -5734,14 +5730,15 @@
       ]
     },
     "El Rio\u001f[ESC]AVATION with DJ Alice Stribling & DJ Charles Hawthorne (Free)": {
-      "classified_at": "2026-09-24T18:00:07.314899+00:00",
+      "classified_at": "2026-09-24T21:34:44.158535+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "[ESC]AVATION with DJ Alice Stribling & DJ Charles Hawthorne (Free)",
       "topics": [
-        "electronic"
+        "club-night",
+        "music"
       ],
       "types": [
         [
@@ -5751,13 +5748,14 @@
       ]
     },
     "El Rio\u001f`Get Busy! Every First Saturday ($10 cover)": {
-      "classified_at": "2026-09-24T18:00:26.429761+00:00",
+      "classified_at": "2026-09-24T21:34:57.275887+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "El Rio",
       "taxonomy_version": 1,
       "title": "`Get Busy! Every First Saturday ($10 cover)",
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -5914,14 +5912,15 @@
       ]
     },
     "Great American Music Hall\u001fSix Sex": {
-      "classified_at": "2026-09-23T19:53:38.844909+00:00",
-      "cost": "unknown",
+      "classified_at": "2026-09-24T21:32:46.075373+00:00",
+      "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Great American Music Hall",
       "taxonomy_version": 1,
       "title": "Six Sex",
       "topics": [
-        "electronic"
+        "electronic",
+        "club-night"
       ],
       "types": [
         [
@@ -5999,14 +5998,15 @@
       ]
     },
     "Great Star Theater\u001fChampagne Cabaret Holiday Party": {
-      "classified_at": "2026-09-23T19:54:56.827185+00:00",
+      "classified_at": "2026-09-24T21:32:52.572048+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Great Star Theater",
       "taxonomy_version": 1,
       "title": "Champagne Cabaret Holiday Party",
       "topics": [
-        "comedy"
+        "comedy",
+        "theater"
       ],
       "types": [
         [
@@ -6120,23 +6120,20 @@
       ]
     },
     "Great Star Theater\u001fKaraoke Chaos": {
-      "classified_at": "2026-09-23T19:54:36.137931+00:00",
+      "classified_at": "2026-09-24T21:32:51.318857+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Great Star Theater",
       "taxonomy_version": 1,
       "title": "Karaoke Chaos",
       "topics": [
-        "comedy",
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "types": [
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ]
     },
@@ -6240,21 +6237,6 @@
       "types": [
         [
           "performance"
-        ]
-      ]
-    },
-    "Herbst / Davies (SF War Memorial)\u001fCONTROLLER'S ALL STAFF": {
-      "classified_at": "2026-09-23T19:55:53.921314+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "Herbst / Davies (SF War Memorial)",
-      "taxonomy_version": 1,
-      "title": "CONTROLLER'S ALL STAFF",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
         ]
       ]
     },
@@ -6496,7 +6478,7 @@
       ]
     },
     "Litquake\u001fAn Evening Spell: Trans Poetry & Hardware Hang": {
-      "classified_at": "2026-09-24T18:12:05.840232+00:00",
+      "classified_at": "2026-09-24T21:35:25.554940+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Litquake",
@@ -6505,6 +6487,7 @@
       "topics": [
         "poetry",
         "spoken-word",
+        "electronic",
         "lgbtq"
       ],
       "types": [
@@ -6762,7 +6745,7 @@
       ]
     },
     "Litquake\u001fDecentered Arts presents Poolside Poets": {
-      "classified_at": "2026-09-24T18:11:51.727294+00:00",
+      "classified_at": "2026-09-24T21:35:23.104781+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Litquake",
@@ -6771,6 +6754,7 @@
       "topics": [
         "poetry",
         "spoken-word",
+        "music",
         "dance"
       ],
       "types": [
@@ -7385,7 +7369,7 @@
       ]
     },
     "Litquake\u001fLit Crawl Afterparty": {
-      "classified_at": "2026-09-24T18:12:53.093310+00:00",
+      "classified_at": "2026-09-24T21:35:26.753376+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Litquake",
@@ -7679,13 +7663,15 @@
       ]
     },
     "Litquake\u001fPeter King: The Game": {
-      "classified_at": "2026-09-24T18:11:53.953402+00:00",
+      "classified_at": "2026-09-24T21:31:24.807050+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Litquake",
       "taxonomy_version": 1,
       "title": "Peter King: The Game",
-      "topics": [],
+      "topics": [
+        "nonfiction"
+      ],
       "types": [
         [
           "talk",
@@ -7844,7 +7830,7 @@
       ]
     },
     "Litquake\u001fRead the Room: Books Not Bans": {
-      "classified_at": "2026-09-24T18:12:00.652739+00:00",
+      "classified_at": "2026-09-24T21:35:24.385654+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Litquake",
@@ -8110,7 +8096,7 @@
       ]
     },
     "Litquake\u001fWarfield Commons Opening Party (JOIN THE WAITLIST)": {
-      "classified_at": "2026-09-24T18:11:00.829788+00:00",
+      "classified_at": "2026-09-24T21:35:21.232605+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Litquake",
@@ -8355,13 +8341,15 @@
       ]
     },
     "Magic Theatre\u001fCelebrate A New Chapter": {
-      "classified_at": "2026-09-23T19:54:28.212421+00:00",
-      "cost": "free",
+      "classified_at": "2026-09-24T21:32:49.747279+00:00",
+      "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Magic Theatre",
       "taxonomy_version": 1,
       "title": "Celebrate A New Chapter",
-      "topics": [],
+      "topics": [
+        "theater"
+      ],
       "types": [
         [
           "social",
@@ -8587,7 +8575,7 @@
       ]
     },
     "Medicine for Nightmares\u001fCrate To Canvas Closing Night Celebration": {
-      "classified_at": "2026-09-23T23:09:13.753003+00:00",
+      "classified_at": "2026-09-24T21:34:13.015751+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Medicine for Nightmares",
@@ -8595,6 +8583,7 @@
       "title": "Crate To Canvas Closing Night Celebration",
       "topics": [
         "visual-art",
+        "music",
         "latino"
       ],
       "types": [
@@ -9501,7 +9490,7 @@
       ]
     },
     "Oakland Art Murmur\u001fUNTOLD STORIES Opening Reception": {
-      "classified_at": "2026-09-24T15:37:36.713840+00:00",
+      "classified_at": "2026-09-24T21:35:01.819056+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Oakland Art Murmur",
@@ -9510,7 +9499,9 @@
       "topics": [
         "visual-art",
         "black-diaspora",
-        "lgbtq"
+        "lgbtq",
+        "latino",
+        "asian-american"
       ],
       "types": [
         [
@@ -10068,7 +10059,7 @@
       ]
     },
     "Presidio Theatre\u001fRUBBERBAND": {
-      "classified_at": "2026-09-23T19:55:25.540615+00:00",
+      "classified_at": "2026-09-24T21:29:35.395577+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Presidio Theatre",
@@ -10275,13 +10266,15 @@
       ]
     },
     "SF Bar Guide\u001f1984 at Cat Club": {
-      "classified_at": "2026-09-24T05:46:29.627230+00:00",
+      "classified_at": "2026-09-24T21:34:04.629883+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "1984 at Cat Club",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -10290,7 +10283,7 @@
       ]
     },
     "SF Bar Guide\u001f1st Sunday Karaoke at Question Mark Tavern": {
-      "classified_at": "2026-09-24T05:44:51.855514+00:00",
+      "classified_at": "2026-09-24T21:33:28.040087+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10324,14 +10317,14 @@
       ]
     },
     "SF Bar Guide\u001fA Family Affair After Dark at El Rio": {
-      "classified_at": "2026-09-24T05:46:25.598766+00:00",
+      "classified_at": "2026-09-24T21:34:02.297350+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "A Family Affair After Dark at El Rio",
       "topics": [
-        "drag"
+        "club-night"
       ],
       "types": [
         [
@@ -10341,13 +10334,15 @@
       ]
     },
     "SF Bar Guide\u001fAll Ages Day at Detour": {
-      "classified_at": "2026-09-24T05:44:47.069228+00:00",
+      "classified_at": "2026-09-24T21:33:26.858069+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "All Ages Day at Detour",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -10356,7 +10351,7 @@
       ]
     },
     "SF Bar Guide\u001fArcade Karaoke at The Function SF: Comedy Club & Cocktail Lounge": {
-      "classified_at": "2026-09-24T05:45:09.640951+00:00",
+      "classified_at": "2026-09-24T21:33:32.791598+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10389,14 +10384,15 @@
       ]
     },
     "SF Bar Guide\u001fBeauxtorious (Drag Race Afterparty) at Beaux": {
-      "classified_at": "2026-09-24T05:45:32.238685+00:00",
+      "classified_at": "2026-09-24T21:33:45.615017+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Beauxtorious (Drag Race Afterparty) at Beaux",
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "types": [
         [
@@ -10406,7 +10402,7 @@
       ]
     },
     "SF Bar Guide\u001fBeer Bust at Eagle Tavern": {
-      "classified_at": "2026-09-24T05:47:51.438784+00:00",
+      "classified_at": "2026-09-24T21:34:27.866610+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10503,13 +10499,15 @@
       ]
     },
     "SF Bar Guide\u001fBoard Game Night at Detour": {
-      "classified_at": "2026-09-24T05:44:45.882009+00:00",
+      "classified_at": "2026-09-24T21:30:34.715100+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Board Game Night at Detour",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -10518,13 +10516,15 @@
       ]
     },
     "SF Bar Guide\u001fBoard Game Night at The Plough and the Stars": {
-      "classified_at": "2026-09-24T05:46:09.643656+00:00",
+      "classified_at": "2026-09-24T21:30:44.903653+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Board Game Night at The Plough and the Stars",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -10533,13 +10533,14 @@
       ]
     },
     "SF Bar Guide\u001fBoom Boom (Brazilian Dance Party) at Beaux": {
-      "classified_at": "2026-09-24T05:45:29.994509+00:00",
+      "classified_at": "2026-09-24T21:33:43.208929+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Boom Boom (Brazilian Dance Party) at Beaux",
       "topics": [
+        "club-night",
         "world-music"
       ],
       "types": [
@@ -10618,13 +10619,15 @@
       ]
     },
     "SF Bar Guide\u001fCOOL as FUCK! at Make-Out Room": {
-      "classified_at": "2026-09-24T05:48:17.911338+00:00",
+      "classified_at": "2026-09-24T21:34:41.891979+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "COOL as FUCK! at Make-Out Room",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -10649,7 +10652,7 @@
       ]
     },
     "SF Bar Guide\u001fClutch the Pearls at Make-Out Room": {
-      "classified_at": "2026-09-24T05:48:14.449929+00:00",
+      "classified_at": "2026-09-24T21:34:38.531808+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10666,13 +10669,15 @@
       ]
     },
     "SF Bar Guide\u001fCollected Works 4-6PM at Pier 23 Cafe": {
-      "classified_at": "2026-09-24T05:47:45.403867+00:00",
+      "classified_at": "2026-09-24T21:34:23.105334+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Collected Works 4-6PM at Pier 23 Cafe",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "social",
@@ -10697,7 +10702,7 @@
       ]
     },
     "SF Bar Guide\u001fCosmic Comedy Wednesdays at The Orbit Room": {
-      "classified_at": "2026-09-24T05:44:39.179687+00:00",
+      "classified_at": "2026-09-24T21:33:25.711378+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10708,19 +10713,20 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ]
     },
     "SF Bar Guide\u001fCougar Unleashed at Tupelo": {
-      "classified_at": "2026-09-24T05:47:16.183830+00:00",
+      "classified_at": "2026-09-24T21:34:16.933691+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Cougar Unleashed at Tupelo",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -10729,13 +10735,16 @@
       ]
     },
     "SF Bar Guide\u001fDJ / Dancing at The Cafe": {
-      "classified_at": "2026-09-24T05:46:04.862533+00:00",
+      "classified_at": "2026-09-24T21:33:57.872084+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "DJ / Dancing at The Cafe",
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "types": [
         [
           "social",
@@ -10744,13 +10753,16 @@
       ]
     },
     "SF Bar Guide\u001fDJ Chopped Tí at Make-Out Room": {
-      "classified_at": "2026-09-24T05:48:15.588443+00:00",
+      "classified_at": "2026-09-24T21:34:39.694339+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "DJ Chopped Tí at Make-Out Room",
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "types": [
         [
           "social",
@@ -10759,13 +10771,16 @@
       ]
     },
     "SF Bar Guide\u001fDJ Cocoa Leche at Tupelo": {
-      "classified_at": "2026-09-24T05:43:51.703482+00:00",
+      "classified_at": "2026-09-24T21:32:47.280267+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "DJ Cocoa Leche at Tupelo",
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "types": [
         [
           "social",
@@ -10774,13 +10789,16 @@
       ]
     },
     "SF Bar Guide\u001fDJ Kevey Kev & Black Diamond at Tupelo": {
-      "classified_at": "2026-09-24T05:44:32.188122+00:00",
+      "classified_at": "2026-09-24T21:33:14.641810+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "DJ Kevey Kev & Black Diamond at Tupelo",
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "types": [
         [
           "social",
@@ -10789,13 +10807,16 @@
       ]
     },
     "SF Bar Guide\u001fDJ Lotta Notta at Make-Out Room": {
-      "classified_at": "2026-09-24T05:48:13.316129+00:00",
+      "classified_at": "2026-09-24T21:34:37.445347+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "DJ Lotta Notta at Make-Out Room",
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "types": [
         [
           "social",
@@ -10804,7 +10825,7 @@
       ]
     },
     "SF Bar Guide\u001fDJ Purple Karaoke at Tupelo": {
-      "classified_at": "2026-09-24T05:44:35.814974+00:00",
+      "classified_at": "2026-09-24T21:33:24.607314+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10821,13 +10842,15 @@
       ]
     },
     "SF Bar Guide\u001fDJ/Dance Party at Paris 75": {
-      "classified_at": "2026-09-24T05:47:58.754173+00:00",
+      "classified_at": "2026-09-24T21:34:31.503307+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "DJ/Dance Party at Paris 75",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -10854,23 +10877,8 @@
         ]
       ]
     },
-    "SF Bar Guide\u001fDee's Keys Piano Bar (Happy Hour) at Beaux": {
-      "classified_at": "2026-09-24T05:45:23.999860+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Dee's Keys Piano Bar (Happy Hour) at Beaux",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ]
-    },
     "SF Bar Guide\u001fDrag Brunch (Late Show) at Beaux": {
-      "classified_at": "2026-09-24T05:45:31.139328+00:00",
+      "classified_at": "2026-09-24T21:33:44.352854+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10887,7 +10895,7 @@
       ]
     },
     "SF Bar Guide\u001fDrag Brunch at Beaux": {
-      "classified_at": "2026-09-24T05:45:27.479080+00:00",
+      "classified_at": "2026-09-24T21:33:40.780074+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -10904,14 +10912,15 @@
       ]
     },
     "SF Bar Guide\u001fEl SUPERRITMO! at Make-Out Room": {
-      "classified_at": "2026-09-24T05:48:11.836703+00:00",
+      "classified_at": "2026-09-24T21:34:36.365298+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "El SUPERRITMO! at Make-Out Room",
       "topics": [
-        "world-music"
+        "club-night",
+        "music"
       ],
       "types": [
         [
@@ -10953,14 +10962,15 @@
       ]
     },
     "SF Bar Guide\u001fFLOOR21 with Juanita MORE! at Starlite": {
-      "classified_at": "2026-09-24T05:45:35.931276+00:00",
+      "classified_at": "2026-09-24T21:33:48.251385+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "FLOOR21 with Juanita MORE! at Starlite",
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "types": [
         [
@@ -10970,13 +10980,14 @@
       ]
     },
     "SF Bar Guide\u001fFilth at Eagle Tavern": {
-      "classified_at": "2026-09-24T05:47:54.113888+00:00",
+      "classified_at": "2026-09-24T21:34:30.337016+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Filth at Eagle Tavern",
       "topics": [
+        "club-night",
         "drag"
       ],
       "types": [
@@ -10987,7 +10998,7 @@
       ]
     },
     "SF Bar Guide\u001fFree Pool Monday at Columbus Cafe": {
-      "classified_at": "2026-09-24T05:47:06.163900+00:00",
+      "classified_at": "2026-09-24T21:30:55.055701+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11002,13 +11013,15 @@
       ]
     },
     "SF Bar Guide\u001fFree Pool at The Bitter End": {
-      "classified_at": "2026-09-24T05:43:59.063445+00:00",
+      "classified_at": "2026-09-24T21:29:37.859879+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Free Pool at The Bitter End",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -11033,7 +11046,7 @@
       ]
     },
     "SF Bar Guide\u001fFriday Night Open Mic Comedy at Question Mark Tavern": {
-      "classified_at": "2026-09-24T05:45:02.436078+00:00",
+      "classified_at": "2026-09-24T21:33:30.426542+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11053,13 +11066,15 @@
       ]
     },
     "SF Bar Guide\u001fFriday Night at Temple Nightclub San Francisco": {
-      "classified_at": "2026-09-24T05:44:10.135400+00:00",
+      "classified_at": "2026-09-24T21:33:01.354791+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Friday Night at Temple Nightclub San Francisco",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11118,13 +11133,14 @@
       ]
     },
     "SF Bar Guide\u001fGirl Dance at The Stud": {
-      "classified_at": "2026-09-24T05:46:42.062535+00:00",
+      "classified_at": "2026-09-24T21:34:06.893775+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Girl Dance at The Stud",
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "types": [
@@ -11167,13 +11183,15 @@
       ]
     },
     "SF Bar Guide\u001fGym Class at Hi Tops San Francisco": {
-      "classified_at": "2026-09-24T05:43:57.942205+00:00",
+      "classified_at": "2026-09-24T21:32:59.061863+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Gym Class at Hi Tops San Francisco",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11197,81 +11215,6 @@
         ]
       ]
     },
-    "SF Bar Guide\u001fHappy Hour at Bottom's Up": {
-      "classified_at": "2026-09-24T05:43:44.638568+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Happy Hour at Bottom's Up",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "food-drink"
-        ]
-      ]
-    },
-    "SF Bar Guide\u001fHappy Hour at Columbus Cafe": {
-      "classified_at": "2026-09-24T05:47:04.212943+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Happy Hour at Columbus Cafe",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "food-drink"
-        ]
-      ]
-    },
-    "SF Bar Guide\u001fHappy Hour at Muddy Waters Coffee & Lounge": {
-      "classified_at": "2026-09-24T05:45:52.933087+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Happy Hour at Muddy Waters Coffee & Lounge",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "food-drink"
-        ]
-      ]
-    },
-    "SF Bar Guide\u001fHappy Hour at O'Reilly's Pub": {
-      "classified_at": "2026-09-24T05:45:08.459226+00:00",
-      "cost": "free",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Happy Hour at O'Reilly's Pub",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "food-drink"
-        ]
-      ]
-    },
-    "SF Bar Guide\u001fHappy Hour at Question Mark Tavern": {
-      "classified_at": "2026-09-24T05:44:54.037997+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Happy Hour at Question Mark Tavern",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "food-drink"
-        ]
-      ]
-    },
     "SF Bar Guide\u001fHappy Hour at Scopo Divino": {
       "classified_at": "2026-09-24T05:46:38.462569+00:00",
       "cost": "unknown",
@@ -11282,21 +11225,6 @@
       "topics": [
         "food-drink"
       ],
-      "types": [
-        [
-          "social",
-          "food-drink"
-        ]
-      ]
-    },
-    "SF Bar Guide\u001fHappy Hour at The Liberties": {
-      "classified_at": "2026-09-24T05:46:58.545729+00:00",
-      "cost": "unknown",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Happy Hour at The Liberties",
-      "topics": [],
       "types": [
         [
           "social",
@@ -11338,13 +11266,15 @@
       ]
     },
     "SF Bar Guide\u001fHot Einstein at Tupelo": {
-      "classified_at": "2026-09-24T05:47:19.849203+00:00",
+      "classified_at": "2026-09-24T21:34:18.167397+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Hot Einstein at Tupelo",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11406,13 +11336,15 @@
       ]
     },
     "SF Bar Guide\u001fIndustry Night at El Lopo": {
-      "classified_at": "2026-09-24T05:46:03.604008+00:00",
+      "classified_at": "2026-09-24T21:33:56.573303+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Industry Night at El Lopo",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11421,13 +11353,15 @@
       ]
     },
     "SF Bar Guide\u001fInner Richmond Board Game Night at The Plough and the Stars": {
-      "classified_at": "2026-09-24T05:46:14.628100+00:00",
+      "classified_at": "2026-09-24T21:30:46.134487+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Inner Richmond Board Game Night at The Plough and the Stars",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -11436,7 +11370,7 @@
       ]
     },
     "SF Bar Guide\u001fJazz/R&B Brunch with Uncle Los at Mission Bowling Club": {
-      "classified_at": "2026-09-24T05:43:54.182667+00:00",
+      "classified_at": "2026-09-24T21:32:53.928827+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11489,14 +11423,15 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke & Beats at ZOË": {
-      "classified_at": "2026-09-24T05:48:01.206576+00:00",
+      "classified_at": "2026-09-24T21:34:33.991362+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Karaoke & Beats at ZOË",
       "topics": [
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "types": [
         [
@@ -11506,7 +11441,7 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke Lounge at Pandora Karaoke & Bar": {
-      "classified_at": "2026-09-24T05:44:28.574766+00:00",
+      "classified_at": "2026-09-24T21:33:08.649531+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11523,8 +11458,8 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke Night at Bottom's Up": {
-      "classified_at": "2026-09-24T05:47:47.890013+00:00",
-      "cost": "unknown",
+      "classified_at": "2026-09-24T21:34:24.354483+00:00",
+      "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
@@ -11540,7 +11475,7 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke Night at Question Mark Tavern": {
-      "classified_at": "2026-09-24T05:45:03.603915+00:00",
+      "classified_at": "2026-09-24T21:33:31.591788+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11557,7 +11492,7 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke Tuesday at Neck of the Woods": {
-      "classified_at": "2026-09-24T05:47:31.177076+00:00",
+      "classified_at": "2026-09-24T21:34:20.726504+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11574,7 +11509,7 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke at Festa Wine & Cocktail Lounge - Karaoke": {
-      "classified_at": "2026-09-24T05:44:31.069734+00:00",
+      "classified_at": "2026-09-24T21:33:13.451968+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11591,7 +11526,7 @@
       ]
     },
     "SF Bar Guide\u001fKaraoke at Silver Cloud Restaurant & Karaoke Bar": {
-      "classified_at": "2026-09-24T05:47:26.221363+00:00",
+      "classified_at": "2026-09-24T21:34:19.370003+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11608,8 +11543,8 @@
       ]
     },
     "SF Bar Guide\u001fKaraokiki at El Rio": {
-      "classified_at": "2026-09-24T05:46:24.355932+00:00",
-      "cost": "unknown",
+      "classified_at": "2026-09-24T21:34:01.073378+00:00",
+      "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
@@ -11642,7 +11577,7 @@
       ]
     },
     "SF Bar Guide\u001fKrazy for Karaoke at The Knockout": {
-      "classified_at": "2026-09-24T05:45:43.316188+00:00",
+      "classified_at": "2026-09-24T21:33:50.620483+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11659,13 +11594,15 @@
       ]
     },
     "SF Bar Guide\u001fLEISURE at Cat Club": {
-      "classified_at": "2026-09-24T05:46:30.833569+00:00",
+      "classified_at": "2026-09-24T21:34:05.768301+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "LEISURE at Cat Club",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11690,7 +11627,7 @@
       ]
     },
     "SF Bar Guide\u001fLips & Lashes Drag Brunch at Lookout": {
-      "classified_at": "2026-09-24T05:45:57.760463+00:00",
+      "classified_at": "2026-09-24T21:33:53.105460+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11707,7 +11644,7 @@
       ]
     },
     "SF Bar Guide\u001fLips and Lashes Drag Brunch at Lookout": {
-      "classified_at": "2026-09-24T05:45:59.021295+00:00",
+      "classified_at": "2026-09-24T21:33:54.362996+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -11724,13 +11661,15 @@
       ]
     },
     "SF Bar Guide\u001fLive DJ at Lion's Den Lounge and Bar": {
-      "classified_at": "2026-09-24T05:46:49.138817+00:00",
+      "classified_at": "2026-09-24T21:30:50.621940+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Live DJ at Lion's Den Lounge and Bar",
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "types": [
         [
           "performance"
@@ -11738,13 +11677,15 @@
       ]
     },
     "SF Bar Guide\u001fLive DJ at Rick's Bar at Rick & Roxy's": {
-      "classified_at": "2026-09-24T05:47:37.068259+00:00",
+      "classified_at": "2026-09-24T21:34:21.901686+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Live DJ at Rick's Bar at Rick & Roxy's",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11801,13 +11742,15 @@
       ]
     },
     "SF Bar Guide\u001fLive Music at El Lopo": {
-      "classified_at": "2026-09-24T05:46:00.123586+00:00",
+      "classified_at": "2026-09-24T21:30:41.219946+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Live Music at El Lopo",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "performance"
@@ -11815,13 +11758,15 @@
       ]
     },
     "SF Bar Guide\u001fLive Music at Lion's Den Lounge and Bar": {
-      "classified_at": "2026-09-24T05:46:48.057643+00:00",
+      "classified_at": "2026-09-24T21:30:49.540823+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Live Music at Lion's Den Lounge and Bar",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "performance"
@@ -11829,13 +11774,15 @@
       ]
     },
     "SF Bar Guide\u001fLive Music: DJs at Mr. Mahjong's": {
-      "classified_at": "2026-09-24T05:46:50.259469+00:00",
+      "classified_at": "2026-09-24T21:30:51.699336+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Live Music: DJs at Mr. Mahjong's",
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "types": [
         [
           "performance"
@@ -11859,13 +11806,15 @@
       ]
     },
     "SF Bar Guide\u001fLocker Room Thursdays (Oil Wrestling) at Beaux": {
-      "classified_at": "2026-09-24T05:45:22.836062+00:00",
+      "classified_at": "2026-09-24T21:33:38.453834+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Locker Room Thursdays (Oil Wrestling) at Beaux",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -11890,13 +11839,14 @@
       ]
     },
     "SF Bar Guide\u001fLove T.K.O. Disco Dance Party at The Knockout": {
-      "classified_at": "2026-09-24T05:45:44.574999+00:00",
+      "classified_at": "2026-09-24T21:33:51.900436+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Love T.K.O. Disco Dance Party at The Knockout",
       "topics": [
+        "club-night",
         "electronic"
       ],
       "types": [
@@ -11924,13 +11874,15 @@
       ]
     },
     "SF Bar Guide\u001fMahjong Mondays at Pier 23 Cafe": {
-      "classified_at": "2026-09-24T05:47:42.964241+00:00",
+      "classified_at": "2026-09-24T21:31:05.425895+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Mahjong Mondays at Pier 23 Cafe",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -11939,13 +11891,15 @@
       ]
     },
     "SF Bar Guide\u001fMahjong Night at Mr. Mahjong's": {
-      "classified_at": "2026-09-24T05:46:52.615251+00:00",
+      "classified_at": "2026-09-24T21:30:52.860014+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Mahjong Night at Mr. Mahjong's",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -11954,17 +11908,18 @@
       ]
     },
     "SF Bar Guide\u001fMarshall Law at Tupelo": {
-      "classified_at": "2026-09-24T05:47:10.611337+00:00",
+      "classified_at": "2026-09-24T21:31:00.743091+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Marshall Law at Tupelo",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ]
     },
@@ -11985,7 +11940,7 @@
       ]
     },
     "SF Bar Guide\u001fMic Drop Mondays (Karaoke Night) at Beaux": {
-      "classified_at": "2026-09-24T05:45:19.314447+00:00",
+      "classified_at": "2026-09-24T21:33:34.009483+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12002,7 +11957,7 @@
       ]
     },
     "SF Bar Guide\u001fMic Drop Mondays at Beaux": {
-      "classified_at": "2026-09-24T05:45:33.515416+00:00",
+      "classified_at": "2026-09-24T21:33:46.956231+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12037,7 +11992,7 @@
       ]
     },
     "SF Bar Guide\u001fMinty Mondays OG Karaoke at The Mint Karaoke Lounge": {
-      "classified_at": "2026-09-24T05:44:22.919984+00:00",
+      "classified_at": "2026-09-24T21:33:05.036536+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12090,7 +12045,7 @@
       ]
     },
     "SF Bar Guide\u001fNiners Watch Party at Teeth Bar SF": {
-      "classified_at": "2026-09-24T05:44:19.211018+00:00",
+      "classified_at": "2026-09-24T21:33:03.788868+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12105,7 +12060,7 @@
       ]
     },
     "SF Bar Guide\u001fNudie Nubies at The Stud": {
-      "classified_at": "2026-09-24T05:46:45.712850+00:00",
+      "classified_at": "2026-09-24T21:34:09.238787+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12154,13 +12109,14 @@
       ]
     },
     "SF Bar Guide\u001fOpen Decks — Welcome All DJs! at Question Mark Tavern": {
-      "classified_at": "2026-09-24T05:44:58.820088+00:00",
+      "classified_at": "2026-09-24T21:33:29.246077+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Open Decks — Welcome All DJs! at Question Mark Tavern",
       "topics": [
+        "club-night",
         "electronic"
       ],
       "types": [
@@ -12171,33 +12127,16 @@
       ]
     },
     "SF Bar Guide\u001fOpen Mic & Open Deck DJ at Paris 75": {
-      "classified_at": "2026-09-24T05:47:59.971469+00:00",
+      "classified_at": "2026-09-24T21:34:32.672454+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Open Mic & Open Deck DJ at Paris 75",
       "topics": [
+        "music",
         "spoken-word"
       ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ],
-        [
-          "performance"
-        ]
-      ]
-    },
-    "SF Bar Guide\u001fOpen Mic Piano Bar Happy Hour at Martuni's": {
-      "classified_at": "2026-09-24T05:46:08.493624+00:00",
-      "cost": "free",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "SF Bar Guide",
-      "taxonomy_version": 1,
-      "title": "Open Mic Piano Bar Happy Hour at Martuni's",
-      "topics": [],
       "types": [
         [
           "social",
@@ -12229,28 +12168,31 @@
       ]
     },
     "SF Bar Guide\u001fOrbit Room Investigations at The Orbit Room": {
-      "classified_at": "2026-09-24T05:44:40.312930+00:00",
+      "classified_at": "2026-09-24T21:30:33.606148+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Orbit Room Investigations at The Orbit Room",
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "types": [
         [
-          "social"
+          "social",
+          "games-hobby"
         ]
       ]
     },
     "SF Bar Guide\u001fPICANTÉ Thursdays at The Cafe": {
-      "classified_at": "2026-09-24T05:46:06.189931+00:00",
+      "classified_at": "2026-09-24T21:33:59.013175+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "PICANTÉ Thursdays at The Cafe",
       "topics": [
-        "latino"
+        "club-night"
       ],
       "types": [
         [
@@ -12260,14 +12202,14 @@
       ]
     },
     "SF Bar Guide\u001fPLAY-X-LAND at Cat Club": {
-      "classified_at": "2026-09-24T05:46:27.974889+00:00",
+      "classified_at": "2026-09-24T21:34:03.455990+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "PLAY-X-LAND at Cat Club",
       "topics": [
-        "drag"
+        "club-night"
       ],
       "types": [
         [
@@ -12277,14 +12219,15 @@
       ]
     },
     "SF Bar Guide\u001fPUMPS at The Stud": {
-      "classified_at": "2026-09-24T05:46:43.257550+00:00",
+      "classified_at": "2026-09-24T21:34:07.988071+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "PUMPS at The Stud",
       "topics": [
-        "drag"
+        "club-night",
+        "lgbtq"
       ],
       "types": [
         [
@@ -12294,13 +12237,14 @@
       ]
     },
     "SF Bar Guide\u001fPan Dulce Wednesdays (Latin Night) at Beaux": {
-      "classified_at": "2026-09-24T05:45:21.737874+00:00",
-      "cost": "unknown",
+      "classified_at": "2026-09-24T21:33:36.349337+00:00",
+      "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Pan Dulce Wednesdays (Latin Night) at Beaux",
       "topics": [
+        "club-night",
         "world-music"
       ],
       "types": [
@@ -12311,13 +12255,15 @@
       ]
     },
     "SF Bar Guide\u001fParty Night at The Bitter End": {
-      "classified_at": "2026-09-24T05:44:03.833921+00:00",
+      "classified_at": "2026-09-24T21:33:00.209383+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Party Night at The Bitter End",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -12326,14 +12272,14 @@
       ]
     },
     "SF Bar Guide\u001fPiano Bar Singers Night at Martuni's": {
-      "classified_at": "2026-09-24T05:46:07.407427+00:00",
+      "classified_at": "2026-09-24T21:34:00.023136+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Piano Bar Singers Night at Martuni's",
       "topics": [
-        "karaoke"
+        "music"
       ],
       "types": [
         [
@@ -12343,13 +12289,14 @@
       ]
     },
     "SF Bar Guide\u001fPopper Slut Disco (Underwear Dance Party) at Beaux": {
-      "classified_at": "2026-09-24T05:45:28.813555+00:00",
+      "classified_at": "2026-09-24T21:33:42.015224+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Popper Slut Disco (Underwear Dance Party) at Beaux",
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "types": [
@@ -12377,7 +12324,7 @@
       ]
     },
     "SF Bar Guide\u001fQueer Bowling at Mission Bowling Club": {
-      "classified_at": "2026-09-24T05:43:49.215588+00:00",
+      "classified_at": "2026-09-24T21:32:44.786309+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12389,7 +12336,7 @@
       "types": [
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ]
     },
@@ -12443,7 +12390,7 @@
       ]
     },
     "SF Bar Guide\u001fRuPaul's Drag Race Viewing Party at Beaux": {
-      "classified_at": "2026-09-24T05:45:26.333722+00:00",
+      "classified_at": "2026-09-24T21:33:39.677268+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12478,7 +12425,7 @@
       ]
     },
     "SF Bar Guide\u001fSafe Words Comedy & Hot Dogs at Eagle Tavern": {
-      "classified_at": "2026-09-24T05:47:50.266775+00:00",
+      "classified_at": "2026-09-24T21:34:26.623575+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12488,10 +12435,6 @@
         "comedy"
       ],
       "types": [
-        [
-          "social",
-          "party-club"
-        ],
         [
           "performance"
         ]
@@ -12530,13 +12473,15 @@
       ]
     },
     "SF Bar Guide\u001fSaturday Night at Temple Nightclub San Francisco": {
-      "classified_at": "2026-09-24T05:44:11.494394+00:00",
+      "classified_at": "2026-09-24T21:33:02.641137+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Saturday Night at Temple Nightclub San Francisco",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -12614,7 +12559,7 @@
       ]
     },
     "SF Bar Guide\u001fSherry-oke at El Lopo": {
-      "classified_at": "2026-09-24T05:46:01.328136+00:00",
+      "classified_at": "2026-09-24T21:33:55.464777+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12631,7 +12576,7 @@
       ]
     },
     "SF Bar Guide\u001fSlaughter Haus at The Stud": {
-      "classified_at": "2026-09-24T05:46:46.906306+00:00",
+      "classified_at": "2026-09-24T21:34:10.448638+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12712,13 +12657,15 @@
       ]
     },
     "SF Bar Guide\u001fStripped Tuesdays (Underwear Party) at Beaux": {
-      "classified_at": "2026-09-24T05:45:20.506399+00:00",
+      "classified_at": "2026-09-24T21:33:35.220098+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Stripped Tuesdays (Underwear Party) at Beaux",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -12727,13 +12674,15 @@
       ]
     },
     "SF Bar Guide\u001fSunday Artist Series at Tupelo": {
-      "classified_at": "2026-09-24T05:43:46.849090+00:00",
+      "classified_at": "2026-09-24T21:29:31.972000+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Sunday Artist Series at Tupelo",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "performance"
@@ -12790,22 +12739,19 @@
       ]
     },
     "SF Bar Guide\u001fTIMELESS REGGAE DANCEHALL at Make-Out Room": {
-      "classified_at": "2026-09-24T05:48:16.715444+00:00",
+      "classified_at": "2026-09-24T21:34:40.810029+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "TIMELESS REGGAE DANCEHALL at Make-Out Room",
       "topics": [
-        "world-music"
+        "club-night"
       ],
       "types": [
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ]
     },
@@ -12927,7 +12873,7 @@
       ]
     },
     "SF Bar Guide\u001fThe Comedy \"run\" Club at Sports Basement Presidio": {
-      "classified_at": "2026-09-24T05:47:49.062599+00:00",
+      "classified_at": "2026-09-24T21:34:25.535621+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -12944,13 +12890,15 @@
       ]
     },
     "SF Bar Guide\u001fThe Good Bad at Tupelo": {
-      "classified_at": "2026-09-24T05:47:09.453538+00:00",
+      "classified_at": "2026-09-24T21:34:14.173976+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "The Good Bad at Tupelo",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -12959,7 +12907,7 @@
       ]
     },
     "SF Bar Guide\u001fThe Laugh Boat: Local Brews & Free Comedy at Ocean Ale House": {
-      "classified_at": "2026-09-24T05:46:56.256911+00:00",
+      "classified_at": "2026-09-24T21:34:11.692803+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -13011,13 +12959,15 @@
       ]
     },
     "SF Bar Guide\u001fThe Woodchopper's Ball at Verdi Club": {
-      "classified_at": "2026-09-24T05:45:37.119859+00:00",
+      "classified_at": "2026-09-24T21:33:49.468950+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "The Woodchopper's Ball at Verdi Club",
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -13026,7 +12976,7 @@
       ]
     },
     "SF Bar Guide\u001fThursday Night \"Sing Along\" at Rocks Den": {
-      "classified_at": "2026-09-24T05:48:08.171780+00:00",
+      "classified_at": "2026-09-24T21:34:35.180992+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -13413,7 +13363,7 @@
       ]
     },
     "SF Bar Guide\u001fWednesday Big Table at Specs'": {
-      "classified_at": "2026-09-24T05:47:56.486927+00:00",
+      "classified_at": "2026-09-24T21:31:09.082239+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
@@ -13614,13 +13564,15 @@
       ]
     },
     "SF Bar Guide\u001fYoungHearts at Eagle Tavern": {
-      "classified_at": "2026-09-24T05:47:52.919025+00:00",
+      "classified_at": "2026-09-24T21:34:29.124627+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "YoungHearts at Eagle Tavern",
-      "topics": [],
+      "topics": [
+        "lgbtq"
+      ],
       "types": [
         [
           "social",
@@ -15057,13 +15009,15 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Chess Club": {
-      "classified_at": "2026-09-23T19:56:56.244930+00:00",
+      "classified_at": "2026-09-24T21:29:55.994006+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Chess Club",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -15174,20 +15128,22 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Creative Saturday Afternoons / 創意無限周六午": {
-      "classified_at": "2026-09-23T19:57:53.719216+00:00",
+      "classified_at": "2026-09-24T21:29:53.708887+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Creative Saturday Afternoons / 創意無限周六午",
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "types": [
-        [
-          "workshop"
-        ],
         [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ]
     },
@@ -15314,13 +15270,15 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Drop-in Mahjong Meet‑Up": {
-      "classified_at": "2026-09-23T20:07:38.256408+00:00",
+      "classified_at": "2026-09-24T21:30:22.542590+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Drop-in Mahjong Meet‑Up",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -15482,16 +15440,19 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Go 围棋": {
-      "classified_at": "2026-09-23T20:06:37.818423+00:00",
+      "classified_at": "2026-09-24T21:30:19.117811+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Go 围棋",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
-          "workshop"
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -15671,13 +15632,15 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Mahjong for Beginners": {
-      "classified_at": "2026-09-23T19:57:35.380816+00:00",
+      "classified_at": "2026-09-24T21:29:50.047909+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Mahjong for Beginners",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -15686,13 +15649,15 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Mahjong for beginners": {
-      "classified_at": "2026-09-23T20:07:54.270007+00:00",
+      "classified_at": "2026-09-24T21:30:24.987158+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Mahjong for beginners",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "workshop"
@@ -15704,13 +15669,15 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Noe Valley Knitting Circle": {
-      "classified_at": "2026-09-23T19:59:26.988039+00:00",
+      "classified_at": "2026-09-24T21:30:01.730025+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Noe Valley Knitting Circle",
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "types": [
         [
           "social",
@@ -15757,13 +15724,15 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Pinecone Turkey": {
-      "classified_at": "2026-09-23T20:06:48.527559+00:00",
+      "classified_at": "2026-09-24T21:30:20.175016+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Pinecone Turkey",
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "types": [
         [
           "workshop"
@@ -15954,7 +15923,7 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Task Tackling Admin Night": {
-      "classified_at": "2026-09-23T20:02:26.242876+00:00",
+      "classified_at": "2026-09-24T21:30:06.249072+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -16039,7 +16008,7 @@
       ]
     },
     "San Francisco Public Library\u001fActivity: Trinket Trade": {
-      "classified_at": "2026-09-23T19:57:27.399817+00:00",
+      "classified_at": "2026-09-24T21:29:48.913737+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -17315,20 +17284,6 @@
         ]
       ]
     },
-    "San Francisco Public Library\u001fCanceled: Workshop: Recording Studio Orientation": {
-      "classified_at": "2026-09-23T20:03:53.963461+00:00",
-      "cost": "free",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "San Francisco Public Library",
-      "taxonomy_version": 1,
-      "title": "Canceled: Workshop: Recording Studio Orientation",
-      "topics": [],
-      "types": [
-        [
-          "workshop"
-        ]
-      ]
-    },
     "San Francisco Public Library\u001fCelebration: ART/WORK 3: Art Created by SFPL Staff Opening Reception": {
       "classified_at": "2026-09-23T19:59:10.925041+00:00",
       "cost": "free",
@@ -17402,21 +17357,6 @@
       "topics": [
         "books-authors"
       ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ]
-    },
-    "San Francisco Public Library\u001fCelebration: Open House": {
-      "classified_at": "2026-09-23T19:57:33.063764+00:00",
-      "cost": "free",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "San Francisco Public Library",
-      "taxonomy_version": 1,
-      "title": "Celebration: Open House",
-      "topics": [],
       "types": [
         [
           "social",
@@ -17504,21 +17444,6 @@
         ]
       ]
     },
-    "San Francisco Public Library\u001fCelebration: Western Addition Open House": {
-      "classified_at": "2026-09-23T20:04:14.740307+00:00",
-      "cost": "free",
-      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
-      "source": "San Francisco Public Library",
-      "taxonomy_version": 1,
-      "title": "Celebration: Western Addition Open House",
-      "topics": [],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ]
-    },
     "San Francisco Public Library\u001fCelebration: Youth Talented Art Exhibition": {
       "classified_at": "2026-09-23T20:07:13.585223+00:00",
       "cost": "free",
@@ -17540,7 +17465,7 @@
       ]
     },
     "San Francisco Public Library\u001fCelebration: ¡VIVA! Kickoff Party": {
-      "classified_at": "2026-09-23T19:57:41.576638+00:00",
+      "classified_at": "2026-09-24T21:33:06.258636+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -17548,6 +17473,7 @@
       "title": "Celebration: ¡VIVA! Kickoff Party",
       "topics": [
         "latino",
+        "music",
         "visual-art"
       ],
       "types": [
@@ -17638,13 +17564,15 @@
       ]
     },
     "San Francisco Public Library\u001fDialogue: ESL Conversation Club": {
-      "classified_at": "2026-09-23T19:58:35.921912+00:00",
+      "classified_at": "2026-09-24T21:29:58.999257+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Dialogue: ESL Conversation Club",
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "types": [
         [
           "social",
@@ -17653,13 +17581,15 @@
       ]
     },
     "San Francisco Public Library\u001fDialogue: ESL Online Convo Club": {
-      "classified_at": "2026-09-23T19:58:34.688290+00:00",
+      "classified_at": "2026-09-24T21:29:57.028552+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Dialogue: ESL Online Convo Club",
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "types": [
         [
           "social",
@@ -18405,7 +18335,7 @@
       ]
     },
     "San Francisco Public Library\u001fLibrary Commission Meeting": {
-      "classified_at": "2026-09-23T20:02:34.882390+00:00",
+      "classified_at": "2026-09-24T21:30:07.499913+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -18715,24 +18645,22 @@
       ]
     },
     "San Francisco Public Library\u001fPerformance: Bay Beats Launch Party": {
-      "classified_at": "2026-09-23T20:04:39.827888+00:00",
+      "classified_at": "2026-09-24T21:33:11.137305+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Performance: Bay Beats Launch Party",
       "topics": [
-        "rock-indie",
-        "hiphop-rnb",
-        "world-music"
+        "music"
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ],
         [
-          "performance"
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -20480,13 +20408,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: American Sign Language (ASL) Chat": {
-      "classified_at": "2026-09-23T20:00:25.008511+00:00",
+      "classified_at": "2026-09-24T21:30:04.052238+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: American Sign Language (ASL) Chat",
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "types": [
         [
           "social",
@@ -20570,13 +20500,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Bust-A-Move": {
-      "classified_at": "2026-09-23T20:08:07.411452+00:00",
+      "classified_at": "2026-09-24T21:30:26.103018+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Bust-A-Move",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20654,13 +20586,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Family Board Game and LEGO Night": {
-      "classified_at": "2026-09-23T20:02:08.369722+00:00",
+      "classified_at": "2026-09-24T21:30:05.189683+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Family Board Game and LEGO Night",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20669,7 +20603,7 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Family Dance Party": {
-      "classified_at": "2026-09-23T19:54:11.534561+00:00",
+      "classified_at": "2026-09-24T21:33:07.437934+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -20681,18 +20615,20 @@
       "types": [
         [
           "social",
-          "party-club"
+          "dance-social"
         ]
       ]
     },
     "San Francisco Public Library\u001fSocial: Family Game NIght": {
-      "classified_at": "2026-09-23T20:08:19.462754+00:00",
+      "classified_at": "2026-09-24T21:30:30.067822+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Family Game NIght",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20701,13 +20637,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Family Game Night": {
-      "classified_at": "2026-09-23T19:57:58.896838+00:00",
+      "classified_at": "2026-09-24T21:29:54.844289+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Family Game Night",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20716,13 +20654,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Family Game Time": {
-      "classified_at": "2026-09-23T20:03:11.527079+00:00",
+      "classified_at": "2026-09-24T21:30:09.861835+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Family Game Time",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20749,13 +20689,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: French Conversation": {
-      "classified_at": "2026-09-23T19:57:12.670566+00:00",
+      "classified_at": "2026-09-24T21:29:47.645282+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: French Conversation",
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "types": [
         [
           "social",
@@ -20785,13 +20727,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Game Day": {
-      "classified_at": "2026-09-23T20:08:15.806792+00:00",
+      "classified_at": "2026-09-24T21:30:28.986984+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Game Day",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20800,13 +20744,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Gaming Day": {
-      "classified_at": "2026-09-23T19:58:55.057035+00:00",
+      "classified_at": "2026-09-24T21:30:00.531746+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Gaming Day",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20815,13 +20761,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Gaming Hour": {
-      "classified_at": "2026-09-23T20:05:55.693373+00:00",
+      "classified_at": "2026-09-24T21:30:17.931766+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Gaming Hour",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20847,13 +20795,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Halloween Costume Swap": {
-      "classified_at": "2026-09-23T20:02:57.021648+00:00",
+      "classified_at": "2026-09-24T21:30:08.725544+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Halloween Costume Swap",
-      "topics": [],
+      "topics": [
+        "nature-outdoors"
+      ],
       "types": [
         [
           "social",
@@ -20862,7 +20812,7 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Halloween Family Dance Party": {
-      "classified_at": "2026-09-23T20:05:12.149731+00:00",
+      "classified_at": "2026-09-24T21:33:12.303277+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -20879,13 +20829,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Halloween Haunted Hunt": {
-      "classified_at": "2026-09-23T20:05:39.529873+00:00",
+      "classified_at": "2026-09-24T21:30:16.744322+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Halloween Haunted Hunt",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20894,13 +20846,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: JoJo's Bizarre Adventure All-Star Battle R": {
-      "classified_at": "2026-09-23T20:04:54.141532+00:00",
+      "classified_at": "2026-09-24T21:30:12.279285+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: JoJo's Bizarre Adventure All-Star Battle R",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -20926,7 +20880,7 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Karaoke": {
-      "classified_at": "2026-09-23T19:59:56.739460+00:00",
+      "classified_at": "2026-09-24T21:33:09.838035+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -20998,13 +20952,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Mahjong Club": {
-      "classified_at": "2026-09-23T19:57:45.039510+00:00",
+      "classified_at": "2026-09-24T21:29:52.377199+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Mahjong Club",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -21030,17 +20986,19 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Neighborhood Puzzle Swap": {
-      "classified_at": "2026-09-23T20:06:58.695992+00:00",
+      "classified_at": "2026-09-24T21:30:21.373731+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Neighborhood Puzzle Swap",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
-          "games-hobby"
+          "mixer-meetup"
         ]
       ]
     },
@@ -21111,13 +21069,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Puzzle Swap": {
-      "classified_at": "2026-09-23T19:59:49.216402+00:00",
+      "classified_at": "2026-09-24T21:30:02.923620+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Puzzle Swap",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -21160,13 +21120,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Teen Lounge": {
-      "classified_at": "2026-09-23T19:56:29.315024+00:00",
+      "classified_at": "2026-09-24T21:29:46.474152+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Teen Lounge",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "social",
@@ -21175,13 +21137,15 @@
       ]
     },
     "San Francisco Public Library\u001fSocial: Tenderloin Passport": {
-      "classified_at": "2026-09-23T19:57:42.704875+00:00",
+      "classified_at": "2026-09-24T21:29:51.201330+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Tenderloin Passport",
-      "topics": [],
+      "topics": [
+        "food-drink"
+      ],
       "types": [
         [
           "social",
@@ -22074,7 +22038,7 @@
       ]
     },
     "San Francisco Public Library\u001fWorkshop: College Admissions 101 with Study Smart Tutors": {
-      "classified_at": "2026-09-23T20:05:15.530841+00:00",
+      "classified_at": "2026-09-24T21:30:14.509669+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -22634,13 +22598,16 @@
       ]
     },
     "San Francisco Public Library\u001fWorkshop: Introduction to Music Production": {
-      "classified_at": "2026-09-23T20:05:23.983686+00:00",
+      "classified_at": "2026-09-24T21:30:15.564203+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Workshop: Introduction to Music Production",
-      "topics": [],
+      "topics": [
+        "music",
+        "tech"
+      ],
       "types": [
         [
           "workshop"
@@ -22697,13 +22664,15 @@
       ]
     },
     "San Francisco Public Library\u001fWorkshop: Mahjong for Beginners": {
-      "classified_at": "2026-09-23T20:03:50.551878+00:00",
+      "classified_at": "2026-09-24T21:30:11.125496+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Workshop: Mahjong for Beginners",
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "types": [
         [
           "workshop"
@@ -23109,13 +23078,15 @@
       ]
     },
     "San Francisco Public Library\u001fWorkshop: Recording Studio Orientation": {
-      "classified_at": "2026-09-23T19:57:10.503005+00:00",
+      "classified_at": "2026-09-24T21:29:45.382345+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Workshop: Recording Studio Orientation",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "workshop"
@@ -23599,7 +23570,7 @@
       ]
     },
     "San Francisco Public Library\u001fWorkshop: The Fundamentals of Public Speaking": {
-      "classified_at": "2026-09-23T20:04:58.806239+00:00",
+      "classified_at": "2026-09-24T21:30:13.373712+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
@@ -24311,19 +24282,21 @@
       ]
     },
     "The Commons (SF)\u001fCommunity Jam Sesh": {
-      "classified_at": "2026-09-24T07:03:19.762173+00:00",
+      "classified_at": "2026-09-24T21:31:14.985198+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
       "taxonomy_version": 1,
       "title": "Community Jam Sesh",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
-          "performance"
+          "social"
         ],
         [
-          "social"
+          "performance"
         ]
       ]
     },
@@ -24437,7 +24410,7 @@
       ]
     },
     "The Commons (SF)\u001fHalloween Party for Education": {
-      "classified_at": "2026-09-24T07:03:39.125429+00:00",
+      "classified_at": "2026-09-24T21:31:20.163332+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
@@ -24560,7 +24533,7 @@
       ]
     },
     "The Commons (SF)\u001fNocturne: A Romantasy Symposium (Presented by Nightlight Society)": {
-      "classified_at": "2026-09-24T07:03:44.945633+00:00",
+      "classified_at": "2026-09-24T21:31:22.409854+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
@@ -24593,7 +24566,7 @@
       ]
     },
     "The Commons (SF)\u001fPhilosophy Event (HOLD) Details to come!": {
-      "classified_at": "2026-09-24T07:03:42.596195+00:00",
+      "classified_at": "2026-09-24T21:31:21.234166+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
@@ -24829,7 +24802,7 @@
       ]
     },
     "The Commons (SF)\u001fThe Commons Camping Retreat": {
-      "classified_at": "2026-09-24T06:43:18.594960+00:00",
+      "classified_at": "2026-09-24T21:31:18.800358+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
@@ -24838,7 +24811,8 @@
       "topics": [],
       "types": [
         [
-          "social"
+          "social",
+          "mixer-meetup"
         ],
         [
           "workshop"
@@ -24846,7 +24820,7 @@
       ]
     },
     "The Commons (SF)\u001fThe Commons Public Hours ☕": {
-      "classified_at": "2026-09-24T06:43:29.927775+00:00",
+      "classified_at": "2026-09-24T21:31:16.270757+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
@@ -24861,13 +24835,15 @@
       ]
     },
     "The Commons (SF)\u001fThe Commons monthly picnic 🌱": {
-      "classified_at": "2026-09-24T07:03:34.868660+00:00",
+      "classified_at": "2026-09-24T21:31:17.586915+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
       "taxonomy_version": 1,
       "title": "The Commons monthly picnic 🌱",
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "types": [
         [
           "social",
@@ -25716,13 +25692,17 @@
       ]
     },
     "The Marsh\u001fLive Music with Beryl & Nicole": {
-      "classified_at": "2026-09-24T18:25:54.455286+00:00",
+      "classified_at": "2026-09-24T21:31:26.095916+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Marsh",
       "taxonomy_version": 1,
       "title": "Live Music with Beryl & Nicole",
-      "topics": [],
+      "topics": [
+        "rock-indie",
+        "folk-americana",
+        "pop"
+      ],
       "types": [
         [
           "performance"
@@ -26071,13 +26051,14 @@
       ]
     },
     "The Riptide\u001fDJ Damon 80s nite @20thcenturygoth": {
-      "classified_at": "2026-09-24T05:16:55.651455+00:00",
+      "classified_at": "2026-09-24T21:33:20.985193+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "DJ Damon 80s nite @20thcenturygoth",
       "topics": [
+        "club-night",
         "electronic"
       ],
       "types": [
@@ -26105,13 +26086,14 @@
       ]
     },
     "The Riptide\u001fDJ Roby’s On The Catwalk @robyburgos": {
-      "classified_at": "2026-09-24T05:16:40.637563+00:00",
+      "classified_at": "2026-09-24T21:33:17.145555+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "DJ Roby’s On The Catwalk @robyburgos",
       "topics": [
+        "club-night",
         "electronic"
       ],
       "types": [
@@ -26122,13 +26104,14 @@
       ]
     },
     "The Riptide\u001fDJ Veesh Maria's Brazilian Disco": {
-      "classified_at": "2026-09-24T05:16:59.252665+00:00",
+      "classified_at": "2026-09-24T21:33:22.221912+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "DJ Veesh Maria's Brazilian Disco",
       "topics": [
+        "club-night",
         "world-music"
       ],
       "types": [
@@ -26139,15 +26122,15 @@
       ]
     },
     "The Riptide\u001fEileen's Punk Rock and Schlock Karaoke": {
-      "classified_at": "2026-09-24T05:16:46.788434+00:00",
+      "classified_at": "2026-09-24T21:33:18.429641+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "Eileen's Punk Rock and Schlock Karaoke",
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "types": [
         [
@@ -26173,13 +26156,16 @@
       ]
     },
     "The Riptide\u001fLive Evil - Celebrating 20 Years": {
-      "classified_at": "2026-09-24T05:17:03.982708+00:00",
+      "classified_at": "2026-09-24T21:33:23.412461+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "Live Evil - Celebrating 20 Years",
-      "topics": [],
+      "topics": [
+        "music",
+        "club-night"
+      ],
       "types": [
         [
           "social",
@@ -26224,22 +26210,20 @@
       ]
     },
     "The Riptide\u001fNow that's what I Call 90s dance party w/ Scalpel Scalpel @scalpel_scalpel": {
-      "classified_at": "2026-09-24T05:16:48.039950+00:00",
+      "classified_at": "2026-09-24T21:33:19.692157+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "Now that's what I Call 90s dance party w/ Scalpel Scalpel @scalpel_scalpel",
       "topics": [
-        "pop"
+        "club-night",
+        "electronic"
       ],
       "types": [
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ]
     },
@@ -26394,7 +26378,7 @@
       ]
     },
     "The Riptide\u001fThe SBG's": {
-      "classified_at": "2026-09-24T05:17:07.560920+00:00",
+      "classified_at": "2026-09-24T21:30:32.415352+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
@@ -26441,13 +26425,14 @@
       ]
     },
     "The Riptide\u001fThrowback Thursdays with DJ BeatsMe & DJ ChillWill": {
-      "classified_at": "2026-09-24T05:16:39.343271+00:00",
+      "classified_at": "2026-09-24T21:33:15.905639+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "Throwback Thursdays with DJ BeatsMe & DJ ChillWill",
       "topics": [
+        "club-night",
         "hiphop-rnb"
       ],
       "types": [

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T20:11:19.492072+00:00",
+  "generated_at": "2026-09-24T21:35:26.833345+00:00",
   "taxonomy": {
     "version": 1,
     "axes": {
@@ -130,6 +130,10 @@
             "label": "World / Global",
             "group": "Music"
           },
+          "music": {
+            "label": "Music (general)",
+            "group": "Music"
+          },
           "theater": {
             "label": "Theater",
             "group": "Stage"
@@ -202,6 +206,10 @@
             "label": "Business / Career",
             "group": "Ideas"
           },
+          "language": {
+            "label": "Language",
+            "group": "Ideas"
+          },
           "food-drink": {
             "label": "Food & drink",
             "group": "Life"
@@ -254,6 +262,14 @@
             "label": "Drag",
             "group": "Nightlife"
           },
+          "games": {
+            "label": "Games / Tabletop",
+            "group": "Nightlife"
+          },
+          "club-night": {
+            "label": "DJ / Club night",
+            "group": "Nightlife"
+          },
           "women": {
             "label": "Women",
             "group": "Communities"
@@ -296,7 +312,8 @@
       ],
       "types": [
         [
-          "social"
+          "social",
+          "mixer-meetup"
         ],
         [
           "workshop"
@@ -526,7 +543,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -567,7 +586,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -629,7 +650,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -671,7 +694,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -825,7 +849,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -1222,10 +1248,13 @@
       ],
       "types": [
         [
-          "social"
+          "social",
+          "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -1421,6 +1450,8 @@
         ]
       ],
       "topics": [
+        "club-night",
+        "electronic",
         "lgbtq",
         "latino"
       ],
@@ -1593,7 +1624,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -1634,7 +1667,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -1700,7 +1735,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "083228e8-3007-40c9-8d52-06a53d6f64b9",
@@ -1809,7 +1844,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -1830,7 +1867,7 @@
         ]
       ],
       "topics": [
-        "latino"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -1852,6 +1889,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "hiphop-rnb"
       ],
       "cost": "free"
@@ -1873,7 +1911,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -1894,7 +1934,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -1936,7 +1977,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -1959,7 +2002,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "8085d451-c50f-407c-b708-49bfff914fc1",
@@ -1978,7 +2021,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -1997,7 +2042,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -2150,7 +2197,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -2171,7 +2220,8 @@
         ]
       ],
       "topics": [
-        "electronic"
+        "club-night",
+        "music"
       ],
       "cost": "free"
     },
@@ -2851,7 +2901,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -3001,7 +3053,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -3020,7 +3074,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -3098,16 +3154,9 @@
       "sources": [
         "El Rio"
       ],
-      "types": [
-        [
-          "performance"
-        ],
-        [
-          "social",
-          "party-club"
-        ]
-      ],
+      "types": [],
       "topics": [
+        "club-night",
         "electronic",
         "lgbtq"
       ],
@@ -3130,7 +3179,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -3172,7 +3223,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night",
+        "lgbtq"
       ],
       "cost": "unknown"
     },
@@ -3193,7 +3245,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -3214,7 +3269,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -3239,9 +3295,10 @@
         ]
       ],
       "topics": [
-        "electronic"
+        "electronic",
+        "club-night"
       ],
-      "cost": "unknown"
+      "cost": "paid"
     },
     {
       "id": "7806f4cd-82e3-4906-aa32-5eb4cd6f6510",
@@ -3261,6 +3318,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -3303,7 +3361,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -3343,7 +3403,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -3579,7 +3641,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -3781,7 +3845,9 @@
           "mixer-meetup"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "food-drink"
+      ],
       "cost": "free"
     },
     {
@@ -3806,6 +3872,7 @@
       ],
       "topics": [
         "latino",
+        "music",
         "visual-art"
       ],
       "cost": "free"
@@ -4014,7 +4081,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -4118,7 +4187,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -4253,16 +4324,12 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "social",
-          "food-drink"
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
-        "latino",
-        "women"
+        "latino"
       ],
       "cost": "free"
     },
@@ -4279,14 +4346,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -4437,7 +4506,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -4499,7 +4570,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -4563,7 +4636,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -4815,6 +4890,7 @@
       ],
       "topics": [
         "visual-art",
+        "music",
         "latino"
       ],
       "cost": "unknown"
@@ -4941,7 +5017,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -5087,7 +5165,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -5321,7 +5401,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -5384,7 +5467,8 @@
         ]
       ],
       "topics": [
-        "hiphop-rnb"
+        "club-night",
+        "electronic"
       ],
       "cost": "paid"
     },
@@ -5404,7 +5488,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -5489,7 +5575,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -5510,7 +5598,8 @@
         ]
       ],
       "topics": [
-        "world-music"
+        "club-night",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -5551,7 +5640,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -5881,7 +5972,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -5947,7 +6040,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -5966,7 +6061,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -6233,7 +6330,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -6370,6 +6469,7 @@
         ]
       ],
       "topics": [
+        "music",
         "spoken-word"
       ],
       "cost": "free"
@@ -6417,6 +6517,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "cost": "unknown"
@@ -6589,7 +6690,11 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "rock-indie",
+        "folk-americana",
+        "pop"
+      ],
       "cost": "unknown"
     },
     {
@@ -6862,7 +6967,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -7009,7 +7116,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -7159,7 +7269,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -7179,7 +7291,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -7199,7 +7313,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -7285,8 +7401,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
-      "cost": "free"
+      "topics": [
+        "theater"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "b7c61daa-9973-4fcc-9d9e-f0a2e4ef0fe7",
@@ -7855,14 +7973,11 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
-        "comedy",
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -8015,7 +8130,7 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "music"
       ],
       "cost": "unknown"
     },
@@ -8193,7 +8308,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -8233,7 +8350,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -8275,7 +8394,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -8955,7 +9076,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -9281,8 +9404,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -9303,7 +9426,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -9388,7 +9513,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "free"
     },
     {
@@ -9562,7 +9689,7 @@
       "types": [
         [
           "social",
-          "party-club"
+          "dance-social"
         ]
       ],
       "topics": [
@@ -9608,7 +9735,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -10059,6 +10188,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -10665,8 +10795,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ],
       "topics": [
@@ -10690,7 +10819,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -10799,9 +10930,10 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "8ee859aa-8592-41b0-a79e-61bb5efd7c58",
@@ -10865,7 +10997,7 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -10885,7 +11017,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -11054,7 +11188,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -11095,7 +11231,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -11179,7 +11317,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -11265,7 +11404,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -11326,13 +11467,15 @@
       ],
       "types": [
         [
-          "performance"
+          "social"
         ],
         [
-          "social"
+          "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -11768,10 +11911,13 @@
       ],
       "types": [
         [
-          "social"
+          "social",
+          "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -12032,7 +12178,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -12180,7 +12328,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -12244,7 +12394,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -12285,7 +12437,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -12306,7 +12460,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -12330,7 +12485,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "b86f1d6a-ea02-4ca9-98fe-a4acd2d49b2e",
@@ -12349,7 +12504,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -12392,7 +12549,7 @@
         ]
       ],
       "topics": [
-        "latino"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -12411,13 +12568,11 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
-        "pop"
+        "club-night",
+        "electronic"
       ],
       "cost": "free"
     },
@@ -12465,7 +12620,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "ab06f1f4-3033-43a1-90a0-a9ba82e13d67",
@@ -12484,7 +12639,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -12503,7 +12660,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -12791,7 +12950,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -12834,6 +12995,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "cost": "unknown"
@@ -12903,6 +13065,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -13623,7 +13786,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -13841,7 +14006,7 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -13904,7 +14069,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -13945,7 +14113,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -13966,7 +14136,9 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "cost": "paid"
     },
@@ -13988,7 +14160,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -14009,7 +14182,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -14051,7 +14227,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night",
+        "lgbtq"
       ],
       "cost": "unknown"
     },
@@ -14114,7 +14291,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -14154,7 +14333,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -14260,7 +14441,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -14872,7 +15055,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -15003,14 +15188,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -15104,7 +15291,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -15146,7 +15335,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -15167,6 +15358,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -15189,7 +15381,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -15529,7 +15723,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -15762,7 +15958,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -15848,6 +16046,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "latino",
         "lgbtq"
       ],
@@ -15871,6 +16070,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "drag"
       ],
       "cost": "unknown"
@@ -15936,6 +16136,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
       "cost": "unknown"
@@ -15957,7 +16158,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -16018,7 +16222,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -16038,7 +16244,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -16101,7 +16310,8 @@
         ]
       ],
       "topics": [
-        "world-music"
+        "club-night",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -16122,7 +16332,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -16162,7 +16374,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -16528,7 +16742,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -16851,7 +17067,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -16893,7 +17111,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -17030,8 +17250,8 @@
         ]
       ],
       "topics": [
-        "hiphop-rnb",
-        "latino"
+        "club-night",
+        "hiphop-rnb"
       ],
       "cost": "paid"
     },
@@ -17099,6 +17319,7 @@
         ]
       ],
       "topics": [
+        "music",
         "spoken-word"
       ],
       "cost": "free"
@@ -17143,6 +17364,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "cost": "unknown"
@@ -17553,7 +17775,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -17679,7 +17903,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -17832,7 +18059,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -17852,7 +18081,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -17872,7 +18103,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -17982,7 +18215,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -18463,7 +18698,7 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "music"
       ],
       "cost": "unknown"
     },
@@ -18635,7 +18870,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -18727,7 +18964,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -18746,7 +18985,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -18857,7 +19098,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -18992,7 +19236,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -19621,7 +19867,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -19771,8 +20019,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -19837,7 +20085,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -19879,7 +20129,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "free"
     },
     {
@@ -20277,10 +20529,6 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
-        ],
-        [
           "performance"
         ]
       ],
@@ -20589,6 +20837,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -21084,7 +21333,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -21104,11 +21355,11 @@
         ],
         [
           "social",
-          "party-club"
+          "games-hobby"
         ]
       ],
       "topics": [
-        "rock-indie",
+        "music",
         "lgbtq",
         "latino"
       ],
@@ -21257,8 +21508,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ],
       "topics": [
@@ -21305,7 +21555,7 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -21327,9 +21577,10 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "c4996b81-8a4c-48af-be3e-f50003028507",
@@ -21348,7 +21599,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -21411,7 +21665,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -21711,7 +21967,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -21752,7 +22010,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -21794,7 +22054,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -21997,7 +22258,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -22417,10 +22680,13 @@
       ],
       "types": [
         [
-          "social"
+          "social",
+          "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -22790,7 +23056,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -22874,7 +23142,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -23008,7 +23278,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -23028,7 +23300,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -23049,7 +23323,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -23116,7 +23391,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -23139,7 +23416,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "a2217f73-f61f-443e-bf7b-33fa21a16748",
@@ -23203,7 +23480,7 @@
         ]
       ],
       "topics": [
-        "latino"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -23248,7 +23525,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "9e221f4b-4bcf-4c97-94f3-abe73accef07",
@@ -23267,7 +23544,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -23286,7 +23565,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -23525,7 +23806,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -23638,7 +23921,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -24163,7 +24448,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -24377,7 +24664,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -24394,14 +24682,12 @@
       ],
       "types": [
         [
-          "performance"
-        ],
-        [
           "social",
           "party-club"
         ]
       ],
       "topics": [
+        "club-night",
         "hiphop-rnb",
         "lgbtq",
         "latino"
@@ -24424,7 +24710,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -24467,7 +24755,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night",
+        "lgbtq"
       ],
       "cost": "unknown"
     },
@@ -24488,7 +24777,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -24551,6 +24843,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -24568,11 +24861,12 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -24613,7 +24907,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -24653,7 +24949,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -25296,7 +25594,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -25423,14 +25723,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -25495,7 +25797,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -25609,7 +25913,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -25629,7 +25935,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -26152,7 +26460,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -26349,7 +26659,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -26499,7 +26811,9 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "cost": "unknown"
     },
@@ -26604,7 +26918,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -26624,7 +26940,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -26661,11 +26980,12 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -26706,7 +27026,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -26749,7 +27071,8 @@
         ]
       ],
       "topics": [
-        "world-music"
+        "club-night",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -26790,7 +27113,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -27233,7 +27558,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -27322,7 +27649,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -27390,7 +27719,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -27586,6 +27917,7 @@
         ]
       ],
       "topics": [
+        "music",
         "spoken-word"
       ],
       "cost": "free"
@@ -27674,6 +28006,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "cost": "unknown"
@@ -27918,7 +28251,9 @@
           "conversation"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "paid"
     },
     {
@@ -28069,7 +28404,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -28132,7 +28469,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -28172,7 +28512,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -28192,7 +28534,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -28212,7 +28556,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -28679,7 +29025,7 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "music"
       ],
       "cost": "unknown"
     },
@@ -28966,7 +29312,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -29031,7 +29379,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -29141,7 +29491,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -29834,7 +30186,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -30054,8 +30408,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -30141,7 +30495,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "free"
     },
     {
@@ -30161,7 +30517,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -31002,6 +31360,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -31713,7 +32072,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -31773,8 +32134,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ],
       "topics": [
@@ -31821,7 +32181,7 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -31864,9 +32224,10 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "b59fd51e-96f7-4e0f-bc7a-29d93274a045",
@@ -31928,7 +32289,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -32075,7 +32438,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -32095,7 +32460,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -32220,7 +32587,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -32356,7 +32724,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -32680,10 +33050,13 @@
       ],
       "types": [
         [
-          "social"
+          "social",
+          "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -32732,6 +33105,7 @@
       "topics": [
         "poetry",
         "spoken-word",
+        "music",
         "dance"
       ],
       "cost": "paid"
@@ -33175,7 +33549,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -33260,7 +33636,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -33280,7 +33658,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -33323,7 +33703,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -33345,7 +33726,7 @@
         ]
       ],
       "topics": [
-        "latino"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -33366,7 +33747,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -33413,7 +33796,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "9df134a9-a95d-4e5f-ade4-238256ae6b82",
@@ -33454,7 +33837,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -33497,6 +33882,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
       "cost": "free"
@@ -33516,13 +33902,10 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
-        "world-music"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -33543,7 +33926,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -33566,7 +33951,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "bd6639e4-2620-4eb9-8b55-2de4fbb8f83c",
@@ -33584,7 +33969,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -33783,7 +34170,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -33825,7 +34214,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -33845,7 +34236,9 @@
           "conversation"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "nonfiction"
+      ],
       "cost": "free"
     },
     {
@@ -33936,7 +34329,9 @@
       "topics": [
         "visual-art",
         "black-diaspora",
-        "lgbtq"
+        "lgbtq",
+        "latino",
+        "asian-american"
       ],
       "cost": "free"
     },
@@ -34464,7 +34859,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -34597,7 +34994,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night",
+        "lgbtq"
       ],
       "cost": "unknown"
     },
@@ -34662,7 +35060,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -34682,7 +35082,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -34724,6 +35127,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "unknown"
@@ -34744,7 +35148,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -34807,7 +35213,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -34870,7 +35277,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -34910,7 +35319,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -35122,8 +35533,8 @@
       ],
       "topics": [
         "theater",
-        "women",
-        "lgbtq"
+        "lgbtq",
+        "women"
       ],
       "cost": "free"
     },
@@ -35488,7 +35899,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -35615,14 +36028,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -35663,7 +36078,9 @@
           "mixer-meetup"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "nature-outdoors"
+      ],
       "cost": "free"
     },
     {
@@ -35682,7 +36099,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -35700,12 +36119,10 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -35777,6 +36194,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -35863,7 +36281,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -35996,6 +36416,7 @@
       "topics": [
         "poetry",
         "spoken-word",
+        "electronic",
         "lgbtq"
       ],
       "cost": "free"
@@ -36244,7 +36665,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -36353,7 +36776,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -36608,7 +37033,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -36650,7 +37078,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "lgbtq"
+      ],
       "cost": "unknown"
     },
     {
@@ -36690,7 +37120,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -36727,17 +37159,14 @@
       ],
       "types": [
         [
-          "performance"
-        ],
-        [
           "social",
           "party-club"
         ]
       ],
       "topics": [
-        "electronic",
-        "latino",
-        "lgbtq"
+        "club-night",
+        "hiphop-rnb",
+        "latino"
       ],
       "cost": "paid"
     },
@@ -36821,7 +37250,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -36842,7 +37273,8 @@
         ]
       ],
       "topics": [
-        "world-music"
+        "club-night",
+        "music"
       ],
       "cost": "unknown"
     },
@@ -36883,7 +37315,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -37152,7 +37586,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -37194,7 +37630,9 @@
           "mixer-meetup"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "nature-outdoors"
+      ],
       "cost": "free"
     },
     {
@@ -37331,7 +37769,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -37377,7 +37817,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -37443,7 +37885,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -37648,6 +38092,7 @@
         ]
       ],
       "topics": [
+        "music",
         "spoken-word"
       ],
       "cost": "free"
@@ -37670,6 +38115,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq"
       ],
       "cost": "unknown"
@@ -38006,7 +38452,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -38090,7 +38538,10 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -38271,7 +38722,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -38291,7 +38744,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -38311,7 +38766,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -38416,7 +38873,7 @@
       "types": [
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ],
       "topics": [
@@ -38467,7 +38924,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -39021,7 +39480,7 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "music"
       ],
       "cost": "unknown"
     },
@@ -39195,7 +39654,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -39257,7 +39718,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -39276,7 +39739,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -40184,7 +40649,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -40377,8 +40844,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -40421,7 +40888,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "free"
     },
     {
@@ -40506,7 +40975,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -41193,7 +41664,9 @@
           "food-drink"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -41324,6 +41797,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -41797,8 +42271,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ]
       ],
       "topics": [
@@ -41822,7 +42295,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -41999,9 +42474,10 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "486aa95d-d528-4c1a-8a5f-3a308abaf9d3",
@@ -42021,7 +42497,7 @@
         ]
       ],
       "topics": [
-        "drag"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -42240,7 +42716,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -42461,13 +42939,15 @@
       ],
       "types": [
         [
-          "performance"
+          "social"
         ],
         [
-          "social"
+          "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -42672,7 +43152,7 @@
       "types": [
         [
           "talk",
-          "conversation"
+          "reading"
         ],
         [
           "social",
@@ -42680,7 +43160,8 @@
         ]
       ],
       "topics": [
-        "books-authors"
+        "books-authors",
+        "writing"
       ],
       "cost": "unknown"
     },
@@ -42890,6 +43371,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "hiphop-rnb"
       ],
       "cost": "free"
@@ -43045,8 +43527,10 @@
         ]
       ],
       "topics": [
-        "latino",
-        "lgbtq"
+        "club-night",
+        "electronic",
+        "lgbtq",
+        "latino"
       ],
       "cost": "free"
     },
@@ -43611,6 +44095,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -43767,7 +44252,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -43922,7 +44409,9 @@
           "mixer-meetup"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "food-drink"
+      ],
       "cost": "free"
     },
     {
@@ -43945,7 +44434,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -44093,7 +44584,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -44133,16 +44626,12 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "social",
-          "food-drink"
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
-        "latino",
-        "women"
+        "latino"
       ],
       "cost": "free"
     },
@@ -44201,17 +44690,15 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "performance"
         ],
         [
-          "performance"
+          "social",
+          "party-club"
         ]
       ],
       "topics": [
-        "rock-indie",
-        "hiphop-rnb",
-        "world-music"
+        "music"
       ],
       "cost": "free"
     },
@@ -44253,14 +44740,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -44345,7 +44834,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -44383,7 +44874,7 @@
       "types": [
         [
           "social",
-          "party-club"
+          "dance-social"
         ]
       ],
       "topics": [
@@ -44853,7 +45344,10 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music",
+        "club-night"
+      ],
       "cost": "free"
     },
     {
@@ -45024,7 +45518,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -45044,7 +45540,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -45239,7 +45737,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -45285,7 +45785,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -45395,7 +45897,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -46036,7 +46540,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -46121,7 +46627,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -46141,7 +46649,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -46531,8 +47041,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -46909,7 +47419,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -47278,7 +47790,10 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music",
+        "tech"
+      ],
       "cost": "free"
     },
     {
@@ -47297,7 +47812,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -47317,7 +47834,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -48435,14 +48954,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -48458,14 +48979,12 @@
       ],
       "types": [
         [
-          "performance"
-        ],
-        [
           "social",
           "party-club"
         ]
       ],
       "topics": [
+        "club-night",
         "electronic",
         "lgbtq",
         "latino"
@@ -48489,7 +49008,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -48508,7 +49029,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -48788,14 +49311,11 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
-        "lgbtq",
-        "latino"
+        "club-night",
+        "electronic"
       ],
       "cost": "paid"
     },
@@ -48902,7 +49422,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -49568,7 +50090,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -49611,7 +50135,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -49630,7 +50156,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -49736,7 +50264,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -49825,8 +50355,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -50000,7 +50530,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -50531,11 +51063,11 @@
         ],
         [
           "social",
-          "party-club"
+          "games-hobby"
         ]
       ],
       "topics": [
-        "rock-indie",
+        "music",
         "lgbtq",
         "latino"
       ],
@@ -50688,7 +51220,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -51113,13 +51647,11 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
-        "pop"
+        "club-night",
+        "electronic"
       ],
       "cost": "free"
     },
@@ -51704,7 +52236,9 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "cost": "paid"
     },
@@ -52232,14 +52766,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -52258,7 +52794,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -52692,6 +53230,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "latino",
         "lgbtq"
       ],
@@ -52898,7 +53437,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -53072,7 +53613,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -53088,10 +53631,13 @@
       ],
       "types": [
         [
-          "workshop"
+          "social",
+          "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -53790,7 +54336,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -53876,7 +54424,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -53895,7 +54445,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -53981,7 +54533,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -54207,8 +54761,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -54735,7 +55289,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -54755,7 +55311,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -54774,7 +55332,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -55412,10 +55972,12 @@
       "types": [
         [
           "social",
-          "games-hobby"
+          "mixer-meetup"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -55736,6 +56298,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -55978,7 +56541,9 @@
           "mixer-meetup"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "food-drink"
+      ],
       "cost": "free"
     },
     {
@@ -55998,7 +56563,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -56323,14 +56890,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -56349,7 +56918,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -56801,7 +57372,9 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "cost": "unknown"
     },
@@ -56980,7 +57553,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -56999,7 +57574,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -57128,7 +57705,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -57999,7 +58578,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -58148,7 +58729,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -58167,7 +58750,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -58434,8 +59019,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -58649,7 +59234,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -58712,7 +59299,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -58980,7 +59569,9 @@
           "food-drink"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -59328,7 +59919,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -59791,6 +60384,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
       "cost": "free"
@@ -59880,7 +60474,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -60731,14 +61327,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -60800,7 +61398,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -61247,7 +61847,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -61402,7 +62004,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -61467,7 +62071,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -61931,7 +62537,9 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -62104,7 +62712,9 @@
           "language-exchange"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "language"
+      ],
       "cost": "free"
     },
     {
@@ -62123,7 +62733,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -62321,8 +62933,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -62428,7 +63040,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -62511,7 +63125,7 @@
       "types": [
         [
           "social",
-          "party-club"
+          "dance-social"
         ]
       ],
       "topics": [
@@ -62737,6 +63351,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "hiphop-rnb"
       ],
       "cost": "free"
@@ -62933,6 +63548,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -63021,7 +63637,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -63106,7 +63724,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -63233,16 +63853,12 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "social",
-          "food-drink"
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
-        "latino",
-        "women"
+        "latino"
       ],
       "cost": "free"
     },
@@ -63259,14 +63875,16 @@
       ],
       "types": [
         [
-          "workshop"
-        ],
-        [
           "social",
           "games-hobby"
+        ],
+        [
+          "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "craft"
+      ],
       "cost": "free"
     },
     {
@@ -63285,7 +63903,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -63305,7 +63925,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -63699,7 +64321,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -63761,7 +64385,9 @@
           "workshop"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "music"
+      ],
       "cost": "free"
     },
     {
@@ -63781,7 +64407,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "free"
     },
     {
@@ -64298,8 +64926,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -64519,11 +65147,11 @@
         ],
         [
           "social",
-          "party-club"
+          "games-hobby"
         ]
       ],
       "topics": [
-        "rock-indie",
+        "music",
         "lgbtq",
         "latino"
       ],
@@ -64746,13 +65374,11 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
-        "pop"
+        "club-night",
+        "electronic"
       ],
       "cost": "free"
     },
@@ -64951,7 +65577,8 @@
         ]
       ],
       "topics": [
-        "comedy"
+        "comedy",
+        "theater"
       ],
       "cost": "paid"
     },
@@ -64973,7 +65600,9 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "cost": "paid"
     },
@@ -65341,6 +65970,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -65901,8 +66531,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -66370,6 +67000,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "electronic"
       ],
       "cost": "free"
@@ -66673,6 +67304,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
         "latino"
       ],
@@ -67155,8 +67787,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -67204,7 +67836,9 @@
           "food-drink"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "games"
+      ],
       "cost": "unknown"
     },
     {
@@ -67486,6 +68120,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "world-music"
       ],
       "cost": "free"
@@ -68255,8 +68890,8 @@
         ]
       ],
       "topics": [
-        "rock-indie",
-        "karaoke"
+        "karaoke",
+        "rock-indie"
       ],
       "cost": "free"
     },
@@ -68621,16 +69256,12 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "social",
-          "food-drink"
         ]
       ],
       "topics": [
+        "club-night",
         "lgbtq",
-        "latino",
-        "women"
+        "latino"
       ],
       "cost": "free"
     },
@@ -69156,7 +69787,9 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night",
+        "lgbtq",
+        "latino"
       ],
       "cost": "paid"
     },
@@ -69444,11 +70077,11 @@
         ],
         [
           "social",
-          "party-club"
+          "games-hobby"
         ]
       ],
       "topics": [
-        "rock-indie",
+        "music",
         "lgbtq",
         "latino"
       ],
