@@ -22,21 +22,31 @@ def test_parse_show_page_skips_button_images():
     assert "Button-" not in image
 
 
+def _entry(title, slug, url):
+    norms = {n for n in (themarsh._norm(title), themarsh._norm(slug)) if n}
+    return (themarsh._title_tokens(title), norms, {"description": "d", "image_url": "i", "url": url})
+
+
 def test_best_match_by_title_tokens():
     index = [
-        (themarsh._title_tokens("Alicia Dattner – Small Batch, Artisanal Comedy"),
-         {"description": "d", "image_url": "i", "url": "wp"}),
-        (themarsh._title_tokens("Paul Sussman – Tantrum Yoga"),
-         {"description": "d2", "image_url": "i2", "url": "wp2"}),
+        _entry("Alicia Dattner – Small Batch, Artisanal Comedy", "alicia-dattner-small-batch-artisanal-comedy", "wp"),
+        _entry("Paul Sussman – Tantrum Yoga", "paul-sussman-tantrum-yoga", "wp2"),
     ]
     # noisy Ludus title still matches its WP page
     m = themarsh._best_match("Alicia Dattner's Small Batch Artisanal Comedy", index)
     assert m and m["url"] == "wp"
 
 
+def test_best_match_compressed_title_via_normalized_containment():
+    # WP og:title/slug is compressed ("NotJustJazz"); calendar is spaced + year.
+    index = [_entry("NotJustJazz", "notjustjazz", "wp-njj")]
+    m = themarsh._best_match("Not Just Jazz 2026", index)
+    assert m and m["url"] == "wp-njj"
+
+
 def test_best_match_returns_none_below_threshold():
-    index = [(themarsh._title_tokens("Paul Sussman – Tantrum Yoga"), {"url": "wp2"})]
-    assert themarsh._best_match("Completely Unrelated Jazz Night", index) is None
+    index = [_entry("Paul Sussman – Tantrum Yoga", "paul-sussman-tantrum-yoga", "wp2")]
+    assert themarsh._best_match("Completely Unrelated Salsa Night", index) is None
 
 
 def test_matches():

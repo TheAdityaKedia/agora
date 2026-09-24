@@ -46,6 +46,15 @@ def _title_tokens(title: str) -> set[str]:
     return {w for w in words if w not in _STOPWORDS and len(w) > 1}
 
 
+def _norm(title: str) -> str:
+    """Collapse a title to comparable alphanumerics, dropping a trailing year.
+
+    Handles compressed WP titles/slugs ("NotJustJazz" / "notjustjazz") vs the
+    calendar's spaced, year-suffixed form ("Not Just Jazz 2026")."""
+    s = re.sub(r"[^a-z0-9]", "", (title or "").lower())
+    return re.sub(r"(19|20)\d{2}$", "", s)
+
+
 def parse_show_page(html: str) -> tuple[str, str | None, str | None]:
     """Return (title, description, image_url) from a WP show page. Pure."""
     soup = BeautifulSoup(html, "html.parser")
@@ -69,14 +78,19 @@ def parse_show_page(html: str) -> tuple[str, str | None, str | None]:
     return title, description, image_url
 
 
-def _best_match(title: str, index: list[tuple[set[str], dict]]) -> dict | None:
-    want = _title_tokens(title)
-    if not want:
-        return None
+def _best_match(title: str, index: list[tuple[set[str], set[str], dict]]) -> dict | None:
+    """Match a calendar title to a WP show by token overlap, or — for compressed
+    titles/slugs — by normalized-string containment."""
+    want_tokens = _title_tokens(title)
+    want_norm = _norm(title)
     best_score, best = 0.0, None
-    for tokens, payload in index:
-        union = want | tokens
-        score = len(want & tokens) / len(union) if union else 0.0
+    for tokens, norms, payload in index:
+        union = want_tokens | tokens
+        score = len(want_tokens & tokens) / len(union) if union else 0.0
+        # Containment on the normalized form catches spacing/year differences
+        # that zero out token overlap (e.g. "notjustjazz" vs "Not Just Jazz 2026").
+        if want_norm and any(len(n) >= 6 and (n in want_norm or want_norm in n) for n in norms):
+            score = max(score, 1.0)
         if score > best_score:
             best_score, best = score, payload
     return best if best_score >= _MATCH_THRESHOLD else None
@@ -91,23 +105,28 @@ def _fetch(url: str, session: requests.Session) -> str | None:
         return None
 
 
-def _build_wp_index(session: requests.Session) -> list[tuple[set[str], dict]]:
-    """Fetch The Marsh's show pages and index them by title tokens."""
+def _build_wp_index(session: requests.Session) -> list[tuple[set[str], set[str], dict]]:
+    """Fetch The Marsh's show pages and index them by title tokens + normalized
+    keys (from both the page title and its slug)."""
     home = _fetch(HOME_URL, session)
     if not home:
         return []
     slugs = {s for s in _SHOW_URL_RE.findall(home) if not _NON_SHOW.search(s)}
-    urls = [f"https://themarsh.org/shows_and_events/{s}/" for s in slugs]
-    index: list[tuple[set[str], dict]] = []
+    index: list[tuple[set[str], set[str], dict]] = []
     with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as pool:
-        for url, html in zip(urls, pool.map(lambda u: _fetch(u, session), urls)):
+        results = pool.map(lambda s: (s, _fetch(f"https://themarsh.org/shows_and_events/{s}/", session)), slugs)
+        for slug, html in results:
             if not html:
                 continue
             title, desc, image = parse_show_page(html)
-            if title:
-                index.append((_title_tokens(title), {
-                    "description": desc, "image_url": image, "url": url,
-                }))
+            norms = {n for n in (_norm(title), _norm(slug)) if n}
+            tokens = _title_tokens(title)
+            if not (tokens or norms):
+                continue
+            index.append((tokens, norms, {
+                "description": desc, "image_url": image,
+                "url": f"https://themarsh.org/shows_and_events/{slug}/",
+            }))
     return index
 
 
