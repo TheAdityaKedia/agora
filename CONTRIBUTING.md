@@ -167,21 +167,30 @@ Ticketing calendars (Ludus, OvationTix) reliably carry **showtimes** but often
 no synopsis or image; the venue's own site has those on a per-show page. When
 that's the case, scrape the calendar for the schedule, then **match each show
 to its detail page** and enrich (description, poster, a nicer URL). Reference:
-`themarsh.py` (Ludus calendar → WordPress `/shows_and_events/` pages).
+`themarsh.py` (Ludus calendar → WordPress show pages).
 
-Matching titles to pages is the hard part — lessons:
+Matching is the hard part — lessons, best method first:
 
-- **Prefer normalized-string containment** (lowercase, strip non-alphanumerics
-  and a trailing year) over token overlap. It matches `notjustjazz` ↔ "Not Just
-  Jazz 2026" where token overlap is zero.
-- **Token-overlap matching is fuzzy and false-positives** ("LABA's Name Game"
-  wrongly matched "Elissa Strauss **Name Game**"). Only trust it on a small,
-  curated set (e.g. the homepage's featured shows); for a broad index use
-  containment only.
-- **The homepage lists only featured shows; the sitemap lists them all.** Fall
-  back to `…/post-sitemap.xml` for coverage — but exclude stale archive paths
-  (The Marsh's `/marshstream/` livestream pages), and match those broad
-  candidates by containment (precise) so you fetch only the pages you hit.
+- **Join on a shared id, not the title.** If the ticketing platform and the CMS
+  both reference the same ticket id, match on it — it's exact. The Marsh
+  calendar's ticket links carry a Ludus `show_id`, and each WP page embeds a
+  Buy-Tickets link to the same id, so `themarsh.py` joins on it. This dissolves
+  every title-matching failure at once: abbreviated slugs
+  (`unique-derique-fll-whimsical`) and co-presentation aliases — the id proved
+  "LABA's Name Game" *is* "Elissa Strauss's Name Game" (same show), a real match
+  that title heuristics had *wrongly rejected* as a false positive.
+- **Fall back to normalized-string containment** (lowercase, strip
+  non-alphanumerics and a trailing year) for pages that don't expose the id.
+  It matches `notjustjazz` ↔ "Not Just Jazz 2026" where token overlap is zero.
+- **Token-overlap matching is fuzzy and false-positives** — only trust it on a
+  small curated set (e.g. the homepage's featured shows); for a broad index use
+  the id join or containment.
+- **Discover pages from the sitemaps, newest-first.** The homepage lists only
+  featured shows; `…/post-sitemap.xml` + `…/page-sitemap.xml` list them all
+  (shows live both under `/shows_and_events/` and at the root). Order by
+  `<lastmod>` (a current show was just updated) and stop once every calendar
+  show resolves, so you fetch only a handful. Exclude stale archive paths (The
+  Marsh's `/marshstream/` livestream pages).
 
 ## Listing vs. detail page
 
