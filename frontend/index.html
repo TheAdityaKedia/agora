@@ -1055,11 +1055,14 @@
           paths.some(p => p === sel || p.startsWith(sel + ".")));
         if (!hit) return false;
       }
-      // Topic filter (all-on, deselect to narrow): a tagged event needs one of
-      // its topics still selected; untagged events always pass (mirrors how
-      // every event has a source, so all-selected shows everything).
-      const evTopics = ev.topics || [];
-      if (evTopics.length && !evTopics.some(t => selectedTopics.has(t))) return false;
+      // Topic filter (all-on, deselect to narrow). When a strict subset is
+      // selected the filter is ACTIVE: show only events carrying one of the
+      // selected topics — untagged events are hidden. With every topic selected
+      // (the default) the filter is off and everything shows.
+      if (topicFilterActive()) {
+        const evTopics = ev.topics || [];
+        if (!evTopics.some(t => selectedTopics.has(t))) return false;
+      }
       return true;
     };
 
