@@ -253,3 +253,46 @@ def test_is_skipped_type_keeps_real_cultural_events_with_similar_words():
         "Author: May-lee Chai",
     ):
         assert not _is_skipped_type(keep), f"should keep {keep!r}"
+
+
+def _page_html(cards):
+    """Build an SFPL listing page from (title, slug) cards using the real
+    card shape, so parse()/_parse_card see genuine teasers."""
+    body = []
+    for title, slug in cards:
+        c = _SFPL_CARD_TEMPLATE.format(audience_classes="event--adults")
+        c = c.replace(">Test Event<", f">{title}<")
+        c = c.replace("/events/2026/09/22/test-event", f"/events/2026/09/22/{slug}")
+        body.append(c)
+    return f'<div class="sfpl-events">{"".join(body)}</div>'
+
+
+def test_scrape_walks_past_a_fully_culled_page(monkeypatch):
+    """A page whose teasers are ALL culled (e.g. all Tutorials) must not end
+    the walk — only a page with zero teasers does. Regression: the walk used
+    the post-filter count and halted at the first all-culled page."""
+    import scrapers.sfpl as sfpl
+
+    pages = {
+        sfpl.EVENTS_URL: _page_html([("Tutorial: Tech Help", "t1"),
+                                     ("Tutorial: Book a Librarian", "t2")]),   # all culled
+        f"{sfpl.EVENTS_URL}?page=1": _page_html([("Workshop: Watercolor", "w1")]),  # kept
+        f"{sfpl.EVENTS_URL}?page=2": _page_html([("Author: Jane Doe", "a1")]),      # kept
+        f"{sfpl.EVENTS_URL}?page=3": '<div class="sfpl-events"></div>',              # real end
+    }
+
+    class _Resp:
+        status_code = 200
+        def __init__(self, text): self.text = text
+
+    monkeypatch.setattr(sfpl.requests, "get",
+                        lambda u, **k: _Resp(pages.get(u, '<div></div>')))
+    monkeypatch.setattr(sfpl, "_last_page_number", lambda html: None)  # force empty-stop path
+    monkeypatch.setattr(sfpl, "_fetch_description", lambda u: None)    # no phase-2 network
+    monkeypatch.setattr(sfpl.time, "sleep", lambda s: None)
+
+    events = sfpl.scrape()
+    titles = {e.title for e in events}
+    # Reached the kept events on pages 1 and 2 — did NOT stop at the culled page 0.
+    assert "Workshop: Watercolor" in titles
+    assert "Author: Jane Doe" in titles

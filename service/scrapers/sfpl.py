@@ -301,7 +301,14 @@ def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]
             if last_page is not None:
                 _log(f"pagination: last page is {last_page}")
 
-        page_events = parse(resp.text)
+        # Count RAW teasers separately from kept events: a page can be full of
+        # teasers that are all culled (a page of storytimes/tutorials). That's
+        # not the end of the listing — only a page with zero teasers is. Using
+        # the post-filter count here would halt the walk at the first
+        # all-culled page.
+        soup = BeautifulSoup(resp.text, "html.parser")
+        cards = soup.select(".event--teaser")
+        page_events = [ev for ev in (_parse_card(c) for c in cards) if ev is not None]
         new = 0
         past_horizon = 0
         for ev in page_events:
@@ -314,11 +321,12 @@ def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]
                 seen_urls.add(ev.url)
             events.append(ev)
             new += 1
-        _log(f"page {page}: {new} new events, {past_horizon} past horizon "
-             f"({len(page_events)} on page, {time.monotonic() - t0:.1f}s)")
+        _log(f"page {page}: {new} new events, {past_horizon} past horizon, "
+             f"{len(cards) - len(page_events)} culled "
+             f"({len(cards)} teasers, {time.monotonic() - t0:.1f}s)")
 
-        if not page_events:
-            _log(f"page {page}: empty, stopping")
+        if not cards:
+            _log(f"page {page}: no teasers, stopping")
             break
         if last_page is not None and page >= last_page:
             _log(f"page {page}: reached last page, done")
