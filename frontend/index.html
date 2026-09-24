@@ -119,9 +119,19 @@
   }
   .dropdown-item:hover { background: var(--chip-bg); }
   .dropdown-item .count {
-    margin-left: auto; font-size: 11px; color: var(--muted);
-    font-variant-numeric: tabular-nums;
+    margin-left: 6px; font-size: 11px; color: var(--muted);
+    font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: right;
   }
+  /* "Only" isolate affordance — reserved space (visibility, not display) so
+     the count doesn't shift on hover; revealed when hovering the row. */
+  .dropdown-item .only-btn {
+    margin-left: auto; font: inherit; font-size: 11px; line-height: 1.4;
+    padding: 0 6px; border-radius: 5px; cursor: pointer;
+    background: transparent; border: 1px solid var(--border); color: var(--muted);
+    visibility: hidden;
+  }
+  .dropdown-item:hover .only-btn { visibility: visible; }
+  .dropdown-item .only-btn:hover { color: var(--accent); border-color: var(--accent); }
   .date-input {
     padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px;
     background: var(--input-bg); color: var(--fg); font: inherit; font-size: 13px;
@@ -480,6 +490,15 @@
   const topicsByGroup = new Map(
     groupOrder.map(g => [g, [...topicMeta].filter(([, m]) => m.group === g).map(([s]) => s)])
   );
+  // Per-value counts for the dropdown rows (how many events carry each topic /
+  // any topic in each group).
+  const topicCounts = new Map(
+    allTopics.map(s => [s, events.filter(e => (e.topics || []).includes(s)).length])
+  );
+  const groupCounts = new Map(groupOrder.map(g => {
+    const slugs = new Set(topicsByGroup.get(g));
+    return [g, events.filter(e => (e.topics || []).some(t => slugs.has(t))).length];
+  }));
 
   function buildTagControls() {
     typeChipsEl.innerHTML = topLevelTypes
@@ -494,14 +513,18 @@
         '<label class="dropdown-item dropdown-group-item" data-group="' + escapeHtml(group) + '">'
         + '<input type="checkbox" data-group-cb="' + escapeHtml(group) + '">'
         + '<span class="topic-swatch" style="--h:' + ghue + '"></span>'
-        + '<span class="dropdown-group-label">' + escapeHtml(group) + "</span></label>"
+        + '<span class="dropdown-group-label">' + escapeHtml(group) + "</span>"
+        + '<button type="button" class="only-btn" data-only-group="' + escapeHtml(group) + '">Only</button>'
+        + '<span class="count">' + (groupCounts.get(group) || 0) + "</span></label>"
       );
       for (const slug of topicsByGroup.get(group)) {
         parts.push(
           '<label class="dropdown-item" data-topic="' + escapeHtml(slug) + '">'
           + '<input type="checkbox" data-topic-cb="' + escapeHtml(slug) + '">'
           + '<span class="topic-swatch" style="--h:' + topicHue(slug) + '"></span>'
-          + '<span>' + escapeHtml(topicMeta.get(slug).label) + "</span></label>"
+          + '<span>' + escapeHtml(topicMeta.get(slug).label) + "</span>"
+          + '<button type="button" class="only-btn" data-only-topic="' + escapeHtml(slug) + '">Only</button>'
+          + '<span class="count">' + (topicCounts.get(slug) || 0) + "</span></label>"
         );
       }
     }
@@ -541,6 +564,20 @@
   // Drive off the checkbox's native `change` (same pattern as the Sources
   // dropdown). A topic checkbox toggles its own slug; a group checkbox
   // selects/deselects every topic in that group.
+  // "Only" isolates the topic filter to one topic (or one group's topics).
+  topicListEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".only-btn");
+    if (!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    selectedTopics.clear();
+    if (btn.dataset.onlyTopic !== undefined) {
+      selectedTopics.add(btn.dataset.onlyTopic);
+    } else if (btn.dataset.onlyGroup !== undefined) {
+      for (const s of topicsByGroup.get(btn.dataset.onlyGroup) || []) selectedTopics.add(s);
+    }
+    updateTagControls();
+    render();
+  });
   topicListEl.addEventListener("change", (e) => {
     const cb = e.target;
     if (cb.dataset.topicCb !== undefined) {
@@ -674,6 +711,17 @@
     const name = document.createElement("span");
     name.textContent = s;
     label.appendChild(name);
+    // "Only" isolates the filter to this source (deselect all others).
+    const only = document.createElement("button");
+    only.type = "button"; only.className = "only-btn"; only.textContent = "Only";
+    only.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation();
+      selected.clear(); selected.add(s);
+      for (const [name, box] of checkboxes) box.checked = (name === s);
+      updateSourceSummary();
+      render();
+    });
+    label.appendChild(only);
     const count = document.createElement("span");
     count.className = "count";
     count.textContent = sourceCounts.get(s);
