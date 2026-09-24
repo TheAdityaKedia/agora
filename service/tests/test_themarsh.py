@@ -64,11 +64,12 @@ def test_norm_contains_matches_and_rejects():
                                         {themarsh._norm("elissa-strauss-name-game")})
 
 
-def test_sitemap_candidates_excludes_marshstream(monkeypatch):
+def test_sitemap_candidates_include_shows_and_root_pages(monkeypatch):
     xml = (
         "<urlset>"
         "<url><loc><![CDATA[https://themarsh.org/shows_and_events/tellitontuesday/tell-it-on-tuesday-at-the-marsh/]]></loc></url>"
         "<url><loc><![CDATA[https://themarsh.org/shows_and_events/marshstream/monday-night-marshstream-5-25/]]></loc></url>"
+        "<url><loc><![CDATA[https://themarsh.org/our-loving-companions/]]></loc></url>"
         "<url><loc><![CDATA[https://themarsh.org/about/]]></loc></url>"
         "</urlset>"
     )
@@ -76,8 +77,16 @@ def test_sitemap_candidates_excludes_marshstream(monkeypatch):
     cands = themarsh._sitemap_candidates(None)
     urls = [u for _, u in cands]
     assert any("tell-it-on-tuesday" in u for u in urls)
+    # root-level show pages are candidates now (some shows live off /shows_and_events/)
+    assert any("our-loving-companions" in u for u in urls)
     assert not any("marshstream" in u for u in urls)  # livestream archives excluded
-    assert not any("/about/" in u for u in urls)      # non-show pages excluded
+    # /about/ is a harmless candidate but must never match a real show title
+    def norms_for(slug):
+        return next(n for n, u in cands if slug in u)
+    assert not themarsh._norm_contains(themarsh._norm("Our Loving Companions (San Francisco)"),
+                                        norms_for("/about/"))
+    assert themarsh._norm_contains(themarsh._norm("Our Loving Companions (San Francisco)"),
+                                    norms_for("our-loving-companions"))
 
 
 def test_evergreen_truncates_edition_lineup():

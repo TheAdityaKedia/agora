@@ -32,8 +32,11 @@ _SHOW_URL_RE = re.compile(r"https://themarsh\.org/shows_and_events/([a-z0-9-]+)/
 # The homepage only links currently-featured shows; the sitemap lists every
 # show page (incl. recurring series like Tell It On Tuesday and the RISING
 # development series that aren't featured up front).
-_SITEMAP_URL = "https://themarsh.org/post-sitemap.xml"
-_SHOW_PATH_RE = re.compile(r"https://themarsh\.org/shows_and_events/\S*?([a-z0-9-]+)/?$")
+# Shows live in two places: under /shows_and_events/ (post-sitemap) and as
+# root-level pages (page-sitemap, e.g. /our-loving-companions/).
+_SITEMAP_URLS = ("https://themarsh.org/post-sitemap.xml",
+                 "https://themarsh.org/page-sitemap.xml")
+_SLUG_RE = re.compile(r"https://themarsh\.org/(?:\S*/)?([a-z0-9-]+)/?$")
 _LOC_RE = re.compile(r"<loc>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</loc>")
 # Utility / non-show pages under /shows_and_events/ to skip.
 _NON_SHOW = re.compile(r"donate|gift|membership|pass|^class-|marshstream|risings?$|runs$|marsh-rising", re.I)
@@ -158,18 +161,24 @@ def _build_wp_index(session: requests.Session) -> list[tuple[set[str], set[str],
 
 
 def _sitemap_candidates(session: requests.Session) -> list[tuple[set[str], str]]:
-    """(slug-norms, url) for every show page in the sitemap (excl. livestream
-    archives) — matched by containment only, so we fetch just the ones we hit."""
-    xml = _fetch(_SITEMAP_URL, session)
-    if not xml:
-        return []
+    """(slug-norms, url) for candidate show pages across the sitemaps — the
+    /shows_and_events/ pages and root-level pages (some shows, e.g. Our Loving
+    Companions, live at the root). Excludes livestream archives. Matched by
+    containment only, so junk root pages (about, tickets…) won't false-match and
+    we fetch just the ones we hit."""
+    seen: set[str] = set()
     cands: list[tuple[set[str], str]] = []
-    for u in _LOC_RE.findall(xml):
-        if "/shows_and_events/" not in u or "/marshstream/" in u:
+    for sitemap in _SITEMAP_URLS:
+        xml = _fetch(sitemap, session)
+        if not xml:
             continue
-        m = _SHOW_PATH_RE.match(u)
-        if m:
-            cands.append(({_norm(m.group(1))}, u))
+        for u in _LOC_RE.findall(xml):
+            if "/marshstream/" in u or u in seen:
+                continue
+            m = _SLUG_RE.match(u)
+            if m:
+                seen.add(u)
+                cands.append(({_norm(m.group(1))}, u))
     return cands
 
 
