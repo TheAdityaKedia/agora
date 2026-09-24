@@ -33,6 +33,21 @@ def test_parse_bar_events_expands_weekly_occurrences(_now=NOW):
     assert len(trivia) == 4
 
 
+def test_happy_hour_events_are_filtered_out():
+    """Happy Hour is a standing bar promo, not an event worth tracking."""
+    html = """<!doctype html><html><head>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BarOrPub","name":"Abbey Tavern","url":"https://www.sfbarguide.com/bar/abbey-tavern",
+"event":[
+{"@type":"Event","name":"Happy Hour","description":"Daily happy hour, half-off drinks.","eventSchedule":{"repeatFrequency":"P1W"},"startDate":"2026-09-24T17:00:00-07:00"},
+{"@type":"Event","name":"Trivia Night","description":"x","eventSchedule":{"repeatFrequency":"P1W"},"startDate":"2026-09-24T19:30:00-07:00"}
+]}
+</script></head><body></body></html>"""
+    evs = sfbarguide.parse_bar_events(html, now=NOW)
+    assert all("Happy Hour" not in e.title for e in evs)
+    assert any(e.title.startswith("Trivia Night") for e in evs)
+
+
 def test_title_embeds_venue_for_unique_dedup():
     evs = sfbarguide.parse_bar_events(BAR, now=NOW)
     assert any(e.title == "Trivia Night at Abbey Tavern" for e in evs)

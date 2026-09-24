@@ -102,6 +102,9 @@ def parse_bar_events(bar_html: str, now=None) -> list[RawEvent]:
         start = ev.get("startDate")
         if not (name and start):
             continue
+        # Happy hour is a standing drink promo, not an event worth tracking.
+        if "happy hour" in name.lower():
+            continue
         sched = ev.get("eventSchedule") or {}
         freq = sched.get("repeatFrequency")
         for occ in expand_occurrences(start, freq, DEFAULT_HORIZON_DAYS, now=now):
