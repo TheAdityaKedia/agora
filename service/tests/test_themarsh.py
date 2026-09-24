@@ -53,3 +53,19 @@ def test_matches():
     assert themarsh.matches("https://themarsh.org/")
     assert themarsh.matches("https://themarsh.ludus.com/calendar")
     assert not themarsh.matches("https://litquake.org")
+
+
+def test_scrape_skips_monday_night_marsh(monkeypatch):
+    from datetime import datetime, timezone
+    from scrapers import ludus
+    from scrapers.base import RawEvent
+
+    def ev(title):
+        return RawEvent(title=title, start_time=datetime(2026, 10, 1, 2, tzinfo=timezone.utc),
+                        location="San Francisco", url="u", description=None)
+    monkeypatch.setattr(ludus, "scrape_calendar",
+                        lambda u, **kw: [ev("Monday Night Marsh 2026"), ev("Not Just Jazz 2026")])
+    monkeypatch.setattr(themarsh, "_build_wp_index", lambda session: [])
+    titles = [e.title for e in themarsh.scrape()]
+    assert "Monday Night Marsh 2026" not in titles
+    assert "Not Just Jazz 2026" in titles

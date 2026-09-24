@@ -35,6 +35,9 @@ _NON_SHOW = re.compile(r"donate|gift|membership|pass|^class-|marshstream|risings
 _BOILER = re.compile(r"box office|valencia street|boxoffice@|marsh youth|\(415\)|allston", re.I)
 _IMG_BAD = re.compile(r"logo|/button-|click-for-tickets|cropped|-icon|favicon", re.I)
 _STOPWORDS = {"the", "a", "an", "and", "of", "with", "at", "presents", "marsh", "2025", "2026"}
+# Skip these shows entirely — recurring open-stage nights with no per-show page
+# and little value as individual calendar entries.
+_SKIP_RE = re.compile(r"monday night marsh", re.I)
 
 
 def matches(url: str) -> bool:
@@ -131,7 +134,8 @@ def _build_wp_index(session: requests.Session) -> list[tuple[set[str], set[str],
 
 
 def scrape(url: str = CALENDAR_URL) -> list[RawEvent]:
-    events = ludus.scrape_calendar(CALENDAR_URL, fallback_location=FALLBACK_LOCATION)
+    events = [e for e in ludus.scrape_calendar(CALENDAR_URL, fallback_location=FALLBACK_LOCATION)
+              if not _SKIP_RE.search(e.title)]
     if not events:
         return events
 
