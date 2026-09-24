@@ -674,10 +674,31 @@
     render();
   }
 
+  // Topics use an all-on / deselect model, so clicking a topic chip on a card
+  // to "turn it off" would do almost nothing (drop 1 of ~50 selected topics).
+  // Instead a card topic chip ISOLATES the feed to that topic ("only" mode);
+  // clicking the already-isolated topic again restores all topics.
+  function isolateTopic(val) {
+    const onlyThis = selectedTopics.size === 1 && selectedTopics.has(val);
+    selectedTopics.clear();
+    if (onlyThis) { for (const s of allTopics) selectedTopics.add(s); }
+    else { selectedTopics.add(val); }
+    updateTagControls();
+    render();
+  }
+
+  // A topic filter is "active" only when it's a strict subset — with every
+  // topic selected (the default) no topic chip should look filled.
+  const topicFilterActive = () => selectedTopics.size !== allTopics.length;
+
   // Event delegation for anything inside the event list.
   list.addEventListener("click", (e) => {
     const tagBtn = e.target.closest(".tag-chip");
-    if (tagBtn) { toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval); return; }
+    if (tagBtn) {
+      if (tagBtn.dataset.tagkind === "topic") isolateTopic(tagBtn.dataset.tagval);
+      else toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval);
+      return;
+    }
     const locBtn = e.target.closest(".location-btn");
     if (locBtn) { setLocationFilter(locBtn.dataset.location); return; }
     const desc = e.target.closest('.description[role="button"]');
@@ -1066,9 +1087,10 @@
 
   // One tag chip. kind = "type" | "topic"; val is the dot-path or slug.
   function tagChip(kind, val, label, hue, active) {
+    const tip = kind === "topic" ? "Show only " + label : "Filter by " + label;
     return '<button type="button" class="tag-chip tag-' + kind + (active ? " on" : "")
       + '" data-tagkind="' + kind + '" data-tagval="' + escapeHtml(val) + '"'
-      + ' style="--h:' + hue + '" title="Filter by ' + escapeHtml(label) + '">'
+      + ' style="--h:' + hue + '" title="' + escapeHtml(tip) + '">'
       + escapeHtml(label) + "</button>";
   }
 
@@ -1082,7 +1104,8 @@
     for (const slug of ev.topics || []) {
       const m = topicMeta.get(slug);
       if (!m) continue;
-      chips.push(tagChip("topic", slug, m.label, topicHue(slug), selectedTopics.has(slug)));
+      chips.push(tagChip("topic", slug, m.label, topicHue(slug),
+                         topicFilterActive() && selectedTopics.has(slug)));
     }
     return chips.length ? '<div class="tags">' + chips.join("") + "</div>" : "";
   }
