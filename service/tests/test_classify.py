@@ -113,3 +113,20 @@ def test_classify_show_falls_back_when_primary_fails():
     c = classify_show("A Talk", "City Lights Booksellers", "A reading.", client=client)
     assert c.model == FALLBACK_MODEL
     assert client.calls == [PRIMARY_MODEL, FALLBACK_MODEL]
+
+
+def test_keyword_topics_from_title():
+    from classify import keyword_topics
+    assert "trivia" in keyword_topics("Trivia Night at Abbey Tavern")
+    assert "trivia" in keyword_topics("Pub Quiz at The Bar")
+    assert "karaoke" in keyword_topics("Karaoke Tuesdays at X")
+    assert "bingo" in keyword_topics("Drag Bingo at Y") and "drag" in keyword_topics("Drag Bingo at Y")
+    assert keyword_topics("An Evening of Jazz") == []
+
+
+def test_classify_show_always_includes_title_keyword_topics():
+    # Even if the model omits it, a title-guaranteed topic is added.
+    client = _FakeClient('{"types":[["social"]],"topics":[],"cost":"free"}')
+    c = classify_show("Trivia Night at Abbey Tavern", "SF Bar Guide", "Weekly trivia.",
+                      client=client)
+    assert "trivia" in c.topics

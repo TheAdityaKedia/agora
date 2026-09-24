@@ -146,6 +146,29 @@ def make_client():
     )
 
 
+# Unambiguous title keywords → topics the LLM must never miss. The model is
+# inconsistent at emitting these even when the title says so literally (e.g. it
+# tagged only ~30% of "Trivia Night at X" events with `trivia`), so we guarantee
+# them deterministically. Substring match, case-insensitive; each mapped topic
+# is validated against the taxonomy before use.
+_KEYWORD_TOPICS = {
+    "trivia": "trivia", "quiz": "trivia",
+    "karaoke": "karaoke",
+    "bingo": "bingo",
+    "drag": "drag",
+}
+
+
+def keyword_topics(title: str) -> list[str]:
+    """Topics guaranteed by unambiguous words in the title (validated)."""
+    low = (title or "").lower()
+    found: list[str] = []
+    for kw, topic in _KEYWORD_TOPICS.items():
+        if kw in low and topic not in found:
+            found.append(topic)
+    return taxonomy.validate_topics(found)
+
+
 def classify_show(
     title: str,
     source: str,
@@ -155,7 +178,9 @@ def classify_show(
     models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL),
 ) -> Classification:
     """Classify one show. Tries each model in order until one succeeds; the
-    surviving model id is recorded on the Classification."""
+    surviving model id is recorded on the Classification. Title-keyword topics
+    (trivia/karaoke/bingo/drag) are always merged in, since the model misses
+    them even when the title is explicit."""
     if client is None:
         client = make_client()
     system, user = build_prompt(title, source, description)
@@ -168,11 +193,16 @@ def classify_show(
             last_err = e
             continue
         parsed = parse_classification(text)
+        # Merge guaranteed keyword topics (model first, then any it missed).
+        topics = list(parsed["topics"])
+        for t in keyword_topics(title):
+            if t not in topics:
+                topics.append(t)
         return Classification(
             title=title,
             source=source,
             types=parsed["types"],
-            topics=parsed["topics"],
+            topics=topics,
             cost=parsed["cost"],
             model=model_id,
             taxonomy_version=taxonomy.CURRENT_TAXONOMY_VERSION,
