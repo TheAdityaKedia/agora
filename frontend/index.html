@@ -335,6 +335,7 @@
   <div class="filter-row">
     <span class="filter-label">Dates</span>
     <button type="button" class="preset-btn" id="preset-today">Today</button>
+    <button type="button" class="preset-btn" id="preset-tomorrow">Tomorrow</button>
     <button type="button" class="preset-btn" id="preset-week">This week</button>
     <button type="button" class="preset-btn" id="preset-month">This month</button>
     <label style="font-size:13px;color:var(--muted)">From
@@ -367,6 +368,7 @@
   const resetEl = document.getElementById("reset");
   const copyEl = document.getElementById("copy-link");
   const presetTodayEl = document.getElementById("preset-today");
+  const presetTomorrowEl = document.getElementById("preset-tomorrow");
   const presetWeekEl = document.getElementById("preset-week");
   const presetMonthEl = document.getElementById("preset-month");
   const locationRowEl = document.getElementById("location-row");
@@ -841,6 +843,15 @@
     const today = new Date();
     setDateRange(today, today);
   }
+  function tomorrow() {
+    const t = new Date();
+    t.setDate(t.getDate() + 1);
+    return t;
+  }
+  function applyTomorrowPreset() {
+    const t = tomorrow();
+    setDateRange(t, t);
+  }
   function applyWeekPreset() {
     setDateRange(new Date(), weekSunday());
   }
@@ -855,11 +866,17 @@
   // Highlight whichever preset (if any) matches the current from/to values.
   function updatePresetHighlight() {
     presetTodayEl.classList.remove("active");
+    presetTomorrowEl.classList.remove("active");
     presetWeekEl.classList.remove("active");
     presetMonthEl.classList.remove("active");
-    const today = new Date();
-    const todayStr = toISODate(today);
-    if (fromEl.value !== todayStr) return;  // all presets start today
+    const todayStr = toISODate(new Date());
+    // Tomorrow is the one preset that doesn't start today — check it first.
+    const tomorrowStr = toISODate(tomorrow());
+    if (fromEl.value === tomorrowStr && toEl.value === tomorrowStr) {
+      presetTomorrowEl.classList.add("active");
+      return;
+    }
+    if (fromEl.value !== todayStr) return;  // remaining presets all start today
     if (toEl.value === todayStr) {
       presetTodayEl.classList.add("active");
     } else if (toEl.value === toISODate(weekSunday())) {
@@ -885,6 +902,10 @@
   presetTodayEl.addEventListener("click", () => {
     if (presetTodayEl.classList.contains("active")) setDateRange(null, null);
     else applyTodayPreset();
+  });
+  presetTomorrowEl.addEventListener("click", () => {
+    if (presetTomorrowEl.classList.contains("active")) setDateRange(null, null);
+    else applyTomorrowPreset();
   });
   presetWeekEl.addEventListener("click", () => {
     if (presetWeekEl.classList.contains("active")) setDateRange(null, null);
@@ -924,6 +945,8 @@
     // date it was created on. Only a custom range falls back to from/to.
     if (presetTodayEl.classList.contains("active")) {
       p.set("dates", "today");
+    } else if (presetTomorrowEl.classList.contains("active")) {
+      p.set("dates", "tomorrow");
     } else if (presetWeekEl.classList.contains("active")) {
       p.set("dates", "week");
     } else if (presetMonthEl.classList.contains("active")) {
@@ -968,6 +991,8 @@
     const dates = p.get("dates");
     if (dates === "today") {
       applyTodayPreset();
+    } else if (dates === "tomorrow") {
+      applyTomorrowPreset();
     } else if (dates === "week") {
       applyWeekPreset();
     } else if (dates === "month") {
