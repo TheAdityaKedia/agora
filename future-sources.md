@@ -165,6 +165,74 @@ platform scraper may be the better path for some (noted where relevant).
 - **Heath Ceramics** (markets/events) — https://www.heathceramics.com/
 - **Stern Grove Festival** (free summer concerts) — https://www.sterngrove.org/
 
+## Harvested from Bay Area Registry (aggregator mining, 2026-09-24)
+
+Bay Area Registry (bayarearegistry.com) is itself an aggregator, so rather than
+scrape it wholesale (it duplicates venues we already cover) we mined its Events
+Calendar API for the distinct venues behind its listings. Below are the net-new,
+in-Bay-Area, real bookable venues — already-covered venues (SFJAZZ, War Memorial,
+ATG houses, YBCA, ACT, City Arts/Sydney Goldstein…), out-of-area (Sacramento,
+Davis, Monterey, overseas), arenas/stadiums, and non-venues (streets, parks,
+farmers markets, "Virtual") were filtered out. Parenthetical count = events seen
+on BAR (a rough volume signal, not a full inventory).
+
+### Music venues / jazz & blues clubs
+- **Yoshi's** (Oakland) — https://yoshis.com/oakland  *(famous jazz + supper club; 14)*
+- **The UC Theatre** (Berkeley) — https://www.theuctheatre.org/  *(nonprofit music hall; 26)*
+- **Biscuits & Blues** (SF) — https://www.biscuitsandblues.com/  *(Union Sq blues club; 24)*
+- **Mr. Tipple's** (SF) — https://mrtipplessf.com/  *(Hayes Valley jazz club; 23)*
+- **San Jose Jazz / SJZ Break Room** (San Jose) — https://sanjosejazz.org/  *(17)*
+- **Feinstein's at the Nikko** (SF) — https://www.feinsteinssf.com/  *(cabaret/supper club; 13)*
+- **Bach Dancing & Dynamite Society** (Half Moon Bay) — https://bachddsoc.org/  *(coastal jazz concerts; 7)*
+- **Keys Jazz Bistro** (SF) — https://keysjazzbistro.com/  *(North Beach jazz; 3)*
+- **The Dawn Club** (SF) — https://www.dawnclub.com/  *(jazz; 2)*
+- **Black Cat** (SF) — https://blackcatsf.com/  *(Tenderloin jazz supper club; 1)*
+- **The Mountain Winery** (Saratoga) — https://www.mountainwinery.com/  *(summer concert series; 3)*
+
+### Concert-hall presenters (multi-venue programs)
+- **Cal Performances** (UC Berkeley — Zellerbach Hall/Playhouse, Hertz Hall) — https://calperformances.org/  *(major music/dance/theater presenter; ~50 across its halls)*
+- **Stanford Live** (Bing Concert Hall, Frost Amphitheater, Memorial Aud.) — https://live.stanford.edu/  *(~45 across venues; overlaps the Kronos candidate)*
+
+### Suburban performing-arts centers (multi-genre)
+- **Montalvo Arts Center** (Saratoga) — https://montalvoarts.org/  *(35)*
+- **Luther Burbank Center for the Arts** (Santa Rosa, North Bay) — https://lutherburbankcenter.org/  *(27)*
+- **Lesher Center for the Arts** (Walnut Creek) — https://www.lesherartscenter.org/  *(16)*
+- **Bankhead Theater / Livermore Valley PAC** (Livermore) — https://www.livermorearts.org/  *(11)*
+- **Paramount Theatre** (Oakland) — https://www.paramountoakland.org/  *(classic films + concerts; 11)*
+- **Henry J. Kaiser Center for the Arts** (Oakland) — https://www.hjkarts.com/  *(10)*
+- **San Jose Center for the Performing Arts / San Jose Theaters** (San Jose) — https://sanjosetheaters.org/  *(6)*
+- **Mountain View Center for the Performing Arts** (Mountain View) — https://mvcpa.com/  *(TheatreWorks; 2)*
+- **Hillbarn Theatre** (Foster City) — https://hillbarntheatre.org/  *(5)*
+
+### Rock / touring music (bigger; Another Planet / Live Nation — may be harder)
+- **Fox Theater Oakland** (Oakland) — https://thefoxoakland.com/  *(5)*
+- **The Greek Theatre** (Berkeley) — https://thegreekberkeley.com/  *(9)*
+- **The Masonic / SF Masonic Auditorium** (SF) — https://www.sfmasonic.com/  *(7)*
+- **August Hall** (SF) — https://www.augusthallsf.com/  *(2)*
+
+### Comedy (genre gap in our current sources)
+- **Cobb's Comedy Club** (SF) — https://www.cobbscomedy.com/  *(2)*
+- **Punch Line San Francisco** (SF) — https://www.punchlinecomedyclub.com/  *(4)*
+- **FLUID510** (Oakland) — https://fluid510.com/  *(1)*
+
+### Theater
+- **Shotgun Players / Ashby Stage** (Berkeley) — https://shotgunplayers.org/  *(2)*
+- **Oakland Theater Project** (Oakland) — https://www.oaklandtheaterproject.org/  *(2)*
+
+### Museums / arts centers (not already listed)
+- **Oakland Museum of California (OMCA)** (Oakland) — https://museumca.org/  *(1)*
+- **Marin MOCA** (Novato) — https://www.marinmoca.org/  *(5)*
+- **Fort Mason Center for Arts & Culture** (SF) — https://fortmason.org/  *(multi-venue campus: Cowell, Gallery 308…; 3)*
+- **African American Art & Culture Complex (AAACC)** (SF) — https://aaacc.org/  *(4)*
+- **JCCSF (Kanbar Hall)** (SF) — https://www.jccsf.org/  *(talks, music, film; 1)*
+- **Hauser & Wirth Palo Alto** (Palo Alto) — https://www.hauserwirth.com/  *(blue-chip gallery; sparse; 4)*
+
+### Deliberately excluded
+- **Already covered:** Davies Symphony Hall / War Memorial Opera House / Herbst / Taube Atrium (→ War Memorial); Curran/Orpheum/Golden Gate (→ ATG); SFJAZZ; YBCA (+ Blue Shield Theater); Toni Rembe Theater (→ ACT); Sydney Goldstein Theater (→ City Arts & Lectures); The Fillmore; The Warfield; SF Playhouse; NCTC; Berkeley Rep; Magic; Brava; Z Space; Presidio.
+- **Out of area:** Mondavi Center/Jackson Hall, Manetti Shrem (Davis); Golden 1 Center, Cal Expo, Discovery Park (Sacramento); Monterey Fairgrounds; Paris/London.
+- **Arenas/stadiums (mega touring, out of scope):** Chase Center, Oakland Arena, Shoreline Amphitheatre.
+- **Not venues (festival/street locations):** Golden Gate Park, Castro/Folsom Street, Ferry Building/Plaza market, various "Downtown ___"/plazas, "[Virtual]", "Multiple Venues".
+
 ## Already sources (for reference — do not re-add)
 
 - A.C.T. — `act-sf.org`
