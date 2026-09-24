@@ -73,15 +73,12 @@ platform scraper may be the better path for some (noted where relevant).
 - **El Rio** (Mission bar/venue) — https://www.elriosf.com/
 - **Kronos Quartet** — https://kronosquartet.org/
 - **EnActe Arts** (South Asian theater) — https://enacte.org/
-- **FIPPP** (Formerly Incarcerated People's Performance Project) — https://fippp.org/
 - **Yerba Buena Gardens Festival** — https://ybgfestival.org/ *(distinct from YBCA, already a source)*
 
 ## Dance
 
-- **ODC** — https://odc.dance/
-- **Alonzo King LINES Ballet** — https://linesballet.org/
-- **SF Ballet** — https://www.sfballet.org/
-- **FACT/SF** — https://factsf.org/
+- **ODC** — https://odc.dance/  *(Wix — needs a spike)*
+- **SF Ballet** — https://www.sfballet.org/  *(OvationTix — reuse the Z Space pattern)*
 - **Zaccho Dance Theatre** — https://zaccho.org/
 
 ## Bookstores, literary orgs & publishers
@@ -248,6 +245,8 @@ on BAR (a rough volume signal, not a full inventory).
 - Bird & Beckett — `birdbeckett.com` (WordPress "The Events Calendar" REST API; shared `scrapers/tribe_events.py` — reusable for any Tribe/WordPress venue by site base)
 - Commonwealth Club — `commonwealthclub.org` (Drupal; paginated listing + JSON-LD Event on detail pages; startDate is UTC)
 - City Arts & Lectures — `cityarts.net` (WordPress `/event/` pages; `.date`/`.location` DOM, Pacific-local times)
+- Alonzo King LINES Ballet — `linesballet.org` (Tribe/WordPress; `scrapers/tribe_events.py` + Bay Area filter — touring company)
+- FACT/SF — `factsf.org` (Squarespace events collection; `scrapers/squarespace_events.py`)
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 
