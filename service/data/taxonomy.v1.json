@@ -53,6 +53,7 @@
         "classical": {"label": "Classical", "group": "Music"},
         "folk-americana": {"label": "Folk / Americana", "group": "Music"},
         "world-music": {"label": "World / Global", "group": "Music"},
+        "music": {"label": "Music (general)", "group": "Music"},
 
         "theater": {"label": "Theater", "group": "Stage"},
         "musical-theater": {"label": "Musical theater", "group": "Stage"},
@@ -75,6 +76,7 @@
         "politics": {"label": "Politics / Society", "group": "Ideas"},
         "tech": {"label": "Tech / Digital", "group": "Ideas"},
         "business": {"label": "Business / Career", "group": "Ideas"},
+        "language": {"label": "Language", "group": "Ideas"},
 
         "food-drink": {"label": "Food & drink", "group": "Life"},
         "wine": {"label": "Wine", "group": "Life"},
@@ -91,6 +93,8 @@
         "karaoke": {"label": "Karaoke", "group": "Nightlife"},
         "bingo": {"label": "Bingo", "group": "Nightlife"},
         "drag": {"label": "Drag", "group": "Nightlife"},
+        "games": {"label": "Games / Tabletop", "group": "Nightlife"},
+        "club-night": {"label": "DJ / Club night", "group": "Nightlife"},
 
         "women": {"label": "Women", "group": "Communities"},
         "lgbtq": {"label": "LGBTQ+", "group": "Communities"},
