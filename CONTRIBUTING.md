@@ -272,6 +272,15 @@ elementary / middle-school-age with no adult-relevant audience class) at scrape
 time. That's ~70% of SFPL's programming. Multi-audience events (a kid class +
 `all-ages` or `families`) are kept.
 
+**Tag-based filtering happens at export, not scrape time.** When the "off-target"
+judgment depends on the AI tags (which don't exist until after classification),
+filter in the exporter instead. Reference:
+`exporters/json_export.py::_is_food_drink_only` drops events whose *sole* type is
+`social/food-drink` (happy hours, lunch specials, tastings) after tags are
+joined — while keeping events that merely touch food/drink in another format (a
+cooking `workshop`, a food `talk`, a dinner + `performance`). Key on the type
+being the *only* format, not on the topic, so genuine events aren't lost.
+
 ## When to give up
 
 - **Hard bot protection** — if a detail page returns 403 **even to a headless

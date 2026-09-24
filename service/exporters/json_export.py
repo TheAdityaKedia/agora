@@ -33,6 +33,22 @@ EXPORT_TZ = ZoneInfo("America/Los_Angeles")
 DEFAULT_BACK_WINDOW_DAYS = 1
 DEFAULT_CLASSIFICATIONS = Path(__file__).parent.parent / "data" / "classifications.json"
 
+# The one type path that means "this event IS just food & drink" — happy hours,
+# lunch specials, tastings. Events with this as their SOLE format are off-target
+# for the aggregator and dropped at export (see _is_food_drink_only). Keying on
+# the type (not the topic) keeps genuine events that merely touch food/drink in
+# another format: a cooking WORKSHOP, a food TALK, a dinner + PERFORMANCE.
+_FOOD_DRINK_TYPE = ["social", "food-drink"]
+
+
+def _is_food_drink_only(serialized: dict) -> bool:
+    """True when the event's only classified format is social/food-drink.
+
+    Untagged events (empty types) are never food/drink-only, so they're kept.
+    """
+    types = serialized.get("types") or []
+    return bool(types) and all(path == _FOOD_DRINK_TYPE for path in types)
+
 
 def _serialize(event: Event, cache: Cache) -> dict:
     # Join each event to its show's classification on (source, title). An event
@@ -93,6 +109,14 @@ def export_json(
         payload = [_serialize(e, cache) for e in events]
     finally:
         session.close()
+
+    # Drop food/drink-only listings (happy hours, lunch specials, tastings)
+    # after tags are joined — they're off-target for the aggregator.
+    kept = [e for e in payload if not _is_food_drink_only(e)]
+    dropped = len(payload) - len(kept)
+    if dropped:
+        print(f"[export] dropped {dropped} food/drink-only events", flush=True)
+    payload = kept
 
     path.parent.mkdir(parents=True, exist_ok=True)
     manifest = {

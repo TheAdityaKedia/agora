@@ -196,6 +196,57 @@ def test_export_joins_classification_types_topics_cost(db_session, tmp_path):
     assert ev["cost"] == "paid"
 
 
+def test_export_drops_food_drink_only_events(db_session, tmp_path):
+    """An event whose sole type is social/food-drink (happy hour, lunch special,
+    tasting) is filtered out before the manifest is written. Events that merely
+    touch food/drink alongside another format (cooking workshop, food talk,
+    food+performance) are kept."""
+    now = datetime.now(timezone.utc)
+    db_session.add(_make_event("Happy Hour", now + timedelta(days=1),
+                               url="u-hh", sources=["SF Bar Guide"]))
+    db_session.add(_make_event("Wine Tasting", now + timedelta(days=1),
+                               url="u-wine", sources=["SF Bar Guide"]))
+    db_session.add(_make_event("Sourdough Cooking Class", now + timedelta(days=1),
+                               url="u-cook", sources=["SF Bar Guide"]))
+    db_session.add(_make_event("Dinner with Jazz", now + timedelta(days=1),
+                               url="u-jazz", sources=["SF Bar Guide"]))
+    db_session.commit()
+    cpath = _seed_classifications(tmp_path, {
+        "SF Bar Guide\x1fHappy Hour": {
+            "title": "Happy Hour", "source": "SF Bar Guide",
+            "types": [["social", "food-drink"]], "topics": ["food-drink"], "cost": "paid",
+            "model": "m", "taxonomy_version": 1, "classified_at": "2026-09-23T00:00:00+00:00"},
+        "SF Bar Guide\x1fWine Tasting": {
+            "title": "Wine Tasting", "source": "SF Bar Guide",
+            "types": [["social", "food-drink"]], "topics": ["wine"], "cost": "paid",
+            "model": "m", "taxonomy_version": 1, "classified_at": "2026-09-23T00:00:00+00:00"},
+        "SF Bar Guide\x1fSourdough Cooking Class": {
+            "title": "Sourdough Cooking Class", "source": "SF Bar Guide",
+            "types": [["workshop"]], "topics": ["food-drink"], "cost": "paid",
+            "model": "m", "taxonomy_version": 1, "classified_at": "2026-09-23T00:00:00+00:00"},
+        "SF Bar Guide\x1fDinner with Jazz": {
+            "title": "Dinner with Jazz", "source": "SF Bar Guide",
+            "types": [["social", "food-drink"], ["performance"]], "topics": ["jazz"], "cost": "paid",
+            "model": "m", "taxonomy_version": 1, "classified_at": "2026-09-23T00:00:00+00:00"},
+    })
+    out = tmp_path / "events.json"
+    count = export_json(out, classifications_path=cpath)
+    titles = {e["title"] for e in json.loads(out.read_text())["events"]}
+    assert titles == {"Sourdough Cooking Class", "Dinner with Jazz"}
+    assert count == 2
+
+
+def test_export_keeps_untagged_events(db_session, tmp_path):
+    """Untagged events (no classification) are never dropped by the food/drink
+    filter — an empty type list is not 'food/drink only'."""
+    now = datetime.now(timezone.utc)
+    db_session.add(_make_event("Mystery Show", now + timedelta(days=1), sources=["Nowhere"]))
+    db_session.commit()
+    out = tmp_path / "events.json"
+    count = export_json(out, classifications_path=tmp_path / "none.json")
+    assert count == 1
+
+
 def test_export_untagged_event_gets_empty_tags(db_session, tmp_path):
     now = datetime.now(timezone.utc)
     db_session.add(_make_event("Mystery Show", now + timedelta(days=3), sources=["Nowhere"]))
