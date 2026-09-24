@@ -1,52 +1,10 @@
+from datetime import datetime, timezone
 from pathlib import Path
 
-from scrapers import themarsh
+from scrapers import themarsh, ludus
+from scrapers.base import RawEvent
 
 FIXTURE = Path(__file__).parent / "fixtures" / "marsh_show.html"
-
-
-def test_parse_show_page_extracts_title_desc_image():
-    title, desc, image = themarsh.parse_show_page(FIXTURE.read_text())
-    assert title == "Alicia Dattner – Small Batch, Artisanal Comedy"  # " - The Marsh" stripped
-    assert desc and len(desc) > 40
-    assert image == "https://themarsh.org/wp-content/uploads/2026/08/Alicia-Dattner-Web-Banner.png"
-
-
-def test_parse_show_page_drops_boxoffice_boilerplate():
-    _, desc, _ = themarsh.parse_show_page(FIXTURE.read_text())
-    assert "Box Office" not in desc and "Valencia Street" not in desc
-
-
-def test_parse_show_page_skips_button_images():
-    _, _, image = themarsh.parse_show_page(FIXTURE.read_text())
-    assert "Button-" not in image
-
-
-def _entry(title, slug, url):
-    norms = {n for n in (themarsh._norm(title), themarsh._norm(slug)) if n}
-    return (themarsh._title_tokens(title), norms, {"description": "d", "image_url": "i", "url": url})
-
-
-def test_best_match_by_title_tokens():
-    index = [
-        _entry("Alicia Dattner – Small Batch, Artisanal Comedy", "alicia-dattner-small-batch-artisanal-comedy", "wp"),
-        _entry("Paul Sussman – Tantrum Yoga", "paul-sussman-tantrum-yoga", "wp2"),
-    ]
-    # noisy Ludus title still matches its WP page
-    m = themarsh._best_match("Alicia Dattner's Small Batch Artisanal Comedy", index)
-    assert m and m["url"] == "wp"
-
-
-def test_best_match_compressed_title_via_normalized_containment():
-    # WP og:title/slug is compressed ("NotJustJazz"); calendar is spaced + year.
-    index = [_entry("NotJustJazz", "notjustjazz", "wp-njj")]
-    m = themarsh._best_match("Not Just Jazz 2026", index)
-    assert m and m["url"] == "wp-njj"
-
-
-def test_best_match_returns_none_below_threshold():
-    index = [_entry("Paul Sussman – Tantrum Yoga", "paul-sussman-tantrum-yoga", "wp2")]
-    assert themarsh._best_match("Completely Unrelated Salsa Night", index) is None
 
 
 def test_matches():
@@ -55,38 +13,21 @@ def test_matches():
     assert not themarsh.matches("https://litquake.org")
 
 
-def test_norm_contains_matches_and_rejects():
-    # compressed recurring slug contains / is contained by the calendar title
-    assert themarsh._norm_contains(themarsh._norm("Tell It On Tuesday 2026"),
-                                    {themarsh._norm("tell-it-on-tuesday-at-the-marsh")})
-    # different shows sharing only common words must NOT match
-    assert not themarsh._norm_contains(themarsh._norm("LABA's Name Game"),
-                                        {themarsh._norm("elissa-strauss-name-game")})
+def test_show_id_from_both_url_forms():
+    # calendar shareUrl form
+    assert themarsh._show_id("https://themarsh.ludus.com/show_page.php?show_id=200542218") == "200542218"
+    # WP "Buy Tickets" link form
+    assert themarsh._show_id("https://themarsh.ludus.com/200542218") == "200542218"
+    assert themarsh._show_id("https://themarsh.ludus.com/donate.php") is None
+    assert themarsh._show_id(None) is None
 
 
-def test_sitemap_candidates_include_shows_and_root_pages(monkeypatch):
-    xml = (
-        "<urlset>"
-        "<url><loc><![CDATA[https://themarsh.org/shows_and_events/tellitontuesday/tell-it-on-tuesday-at-the-marsh/]]></loc></url>"
-        "<url><loc><![CDATA[https://themarsh.org/shows_and_events/marshstream/monday-night-marshstream-5-25/]]></loc></url>"
-        "<url><loc><![CDATA[https://themarsh.org/our-loving-companions/]]></loc></url>"
-        "<url><loc><![CDATA[https://themarsh.org/about/]]></loc></url>"
-        "</urlset>"
-    )
-    monkeypatch.setattr(themarsh, "_fetch", lambda u, s: xml)
-    cands = themarsh._sitemap_candidates(None)
-    urls = [u for _, u in cands]
-    assert any("tell-it-on-tuesday" in u for u in urls)
-    # root-level show pages are candidates now (some shows live off /shows_and_events/)
-    assert any("our-loving-companions" in u for u in urls)
-    assert not any("marshstream" in u for u in urls)  # livestream archives excluded
-    # /about/ is a harmless candidate but must never match a real show title
-    def norms_for(slug):
-        return next(n for n, u in cands if slug in u)
-    assert not themarsh._norm_contains(themarsh._norm("Our Loving Companions (San Francisco)"),
-                                        norms_for("/about/"))
-    assert themarsh._norm_contains(themarsh._norm("Our Loving Companions (San Francisco)"),
-                                    norms_for("our-loving-companions"))
+def test_parse_show_page_extracts_title_desc_image():
+    title, desc, image = themarsh.parse_show_page(FIXTURE.read_text())
+    assert title == "Alicia Dattner – Small Batch, Artisanal Comedy"
+    assert desc and "Box Office" not in desc and "Valencia Street" not in desc
+    assert image == "https://themarsh.org/wp-content/uploads/2026/08/Alicia-Dattner-Web-Banner.png"
+    assert "Button-" not in image
 
 
 def test_evergreen_truncates_edition_lineup():
@@ -96,44 +37,81 @@ def test_evergreen_truncates_edition_lineup():
     assert "Janel Wagner" not in ever and "Artist Biography" not in ever
 
 
-def test_recurring_show_only_next_occurrence_gets_full_desc(monkeypatch):
-    from datetime import datetime, timezone
-    from scrapers import ludus
-    from scrapers.base import RawEvent
+def test_sitemap_pages_orders_by_lastmod_and_excludes_marshstream(monkeypatch):
+    xml = (
+        "<urlset>"
+        "<url><loc><![CDATA[https://themarsh.org/shows_and_events/old-show/]]></loc>"
+        "<lastmod><![CDATA[2025-01-01T00:00:00+00:00]]></lastmod></url>"
+        "<url><loc><![CDATA[https://themarsh.org/our-loving-companions/]]></loc>"
+        "<lastmod><![CDATA[2026-09-24T00:00:00+00:00]]></lastmod></url>"
+        "<url><loc><![CDATA[https://themarsh.org/shows_and_events/marshstream/jazz-jam/]]></loc>"
+        "<lastmod><![CDATA[2026-09-01T00:00:00+00:00]]></lastmod></url>"
+        "</urlset>"
+    )
+    monkeypatch.setattr(themarsh, "_fetch", lambda u, s: xml if "sitemap" in u else "")
+    pages = themarsh._sitemap_pages(None)
+    assert "https://themarsh.org/our-loving-companions/" in pages
+    assert not any("marshstream" in p for p in pages)      # livestream archives excluded
+    # newest-modified first
+    assert pages.index("https://themarsh.org/our-loving-companions/") < \
+        pages.index("https://themarsh.org/shows_and_events/old-show/")
 
-    def ev(title, day):
-        return RawEvent(title=title, start_time=datetime(2026, 10, day, 2, tzinfo=timezone.utc),
-                        location="SF", url="ludus", description=None)
-    # 3 occurrences, given out of order to check earliest-wins
+
+def test_build_show_index_maps_ids_and_stops_early(monkeypatch):
+    pages = ["https://themarsh.org/a/", "https://themarsh.org/b/", "https://themarsh.org/never/"]
+    bodies = {
+        "https://themarsh.org/a/": "<meta property='og:title' content='A - The Marsh'>"
+                                   "<div class='entry-content'><p>" + "x" * 40 + "</p></div>"
+                                   "<a href='https://themarsh.ludus.com/111'>tix</a>",
+        "https://themarsh.org/b/": "<meta property='og:title' content='B - The Marsh'>"
+                                   "<div class='entry-content'><p>" + "y" * 40 + "</p></div>"
+                                   "<a href='https://themarsh.ludus.com/222'>tix</a>",
+    }
+    fetched = []
+    def fake_fetch(u, s):
+        fetched.append(u)
+        return bodies.get(u, "")
+    monkeypatch.setattr(themarsh, "_sitemap_pages", lambda s: pages)
+    monkeypatch.setattr(themarsh, "_fetch", fake_fetch)
+    monkeypatch.setattr(themarsh, "DETAIL_WORKERS", 1)  # per-page chunks so early-stop is observable
+    id_index, _ = themarsh._scan_show_pages(None, shows=[("111", "A"), ("222", "B")])
+    assert set(id_index) == {"111", "222"}
+    assert id_index["111"]["url"] == "https://themarsh.org/a/"
+    # stopped once both ids resolved — never fetched the third page
+    assert "https://themarsh.org/never/" not in fetched
+
+
+def _ludus_ev(title, day, sid):
+    return RawEvent(title=title, start_time=datetime(2026, 10, day, 2, tzinfo=timezone.utc),
+                    location="SF", url=f"https://themarsh.ludus.com/show_page.php?show_id={sid}",
+                    description=None)
+
+
+def test_scrape_joins_by_show_id_with_next_occurrence(monkeypatch):
+    # two showtimes of one show (same id), out of order
     monkeypatch.setattr(ludus, "scrape_calendar",
-                        lambda u, **kw: [ev("Tell It On Tuesday 2026", 20), ev("Tell It On Tuesday 2026", 6),
-                                          ev("Tell It On Tuesday 2026", 13)])
-    payload = {"description": "Series blurb here. Featuring tonight's guest Jane Doe and her band.",
-               "image_url": "poster.jpg", "url": "wp"}
-    monkeypatch.setattr(themarsh, "_build_wp_index", lambda session: [None])
-    monkeypatch.setattr(themarsh, "_sitemap_candidates", lambda session: [])
-    monkeypatch.setattr(themarsh, "_best_match", lambda title, index: payload)
+                        lambda u, **kw: [_ludus_ev("Tell It On Tuesday", 20, "555"),
+                                          _ludus_ev("Tell It On Tuesday", 6, "555"),
+                                          _ludus_ev("Monday Night Marsh", 7, "999")])
+    payload = {"description": "Series blurb. Featuring guest Jane Doe.",
+               "image_url": "poster.jpg", "url": "https://themarsh.org/tiot/"}
+    monkeypatch.setattr(themarsh, "_scan_show_pages", lambda s, shows: ({"555": payload}, []))
     evs = sorted(themarsh.scrape(), key=lambda e: e.start_time)
-    # all get poster + WP url
-    assert all(e.image_url == "poster.jpg" and e.url == "wp" for e in evs)
-    # earliest (Oct 6) gets full text; later ones get the evergreen blurb
+    # Monday Night Marsh filtered out
+    assert all("Monday Night Marsh" not in e.title for e in evs)
+    # both showtimes get poster + WP url; earliest gets full text, later the blurb
+    assert all(e.image_url == "poster.jpg" and e.url == "https://themarsh.org/tiot/" for e in evs)
     assert "Jane Doe" in evs[0].description
-    assert all("Jane Doe" not in e.description for e in evs[1:])
-    assert evs[1].description.startswith("Series blurb here.")
+    assert "Jane Doe" not in evs[1].description
 
 
-def test_scrape_skips_monday_night_marsh(monkeypatch):
-    from datetime import datetime, timezone
-    from scrapers import ludus
-    from scrapers.base import RawEvent
-
-    def ev(title):
-        return RawEvent(title=title, start_time=datetime(2026, 10, 1, 2, tzinfo=timezone.utc),
-                        location="San Francisco", url="u", description=None)
+def test_scrape_title_fallback_when_no_show_id_link(monkeypatch):
+    # Not Just Jazz: page embeds no Ludus id, so id_index misses it — resolve by
+    # slug/title containment ("notjustjazz" ⊂ "notjustjazz2026").
     monkeypatch.setattr(ludus, "scrape_calendar",
-                        lambda u, **kw: [ev("Monday Night Marsh 2026"), ev("Not Just Jazz 2026")])
-    monkeypatch.setattr(themarsh, "_build_wp_index", lambda session: [])
-    monkeypatch.setattr(themarsh, "_sitemap_candidates", lambda session: [])
-    titles = [e.title for e in themarsh.scrape()]
-    assert "Monday Night Marsh 2026" not in titles
-    assert "Not Just Jazz 2026" in titles
+                        lambda u, **kw: [_ludus_ev("Not Just Jazz 2026", 8, "515467")])
+    njj = {"description": "Weekly jazz.", "image_url": "njj.jpg", "url": "https://themarsh.org/shows_and_events/notjustjazz/"}
+    title_index = [({themarsh._norm("notjustjazz")}, njj)]
+    monkeypatch.setattr(themarsh, "_scan_show_pages", lambda s, shows: ({}, title_index))
+    ev = themarsh.scrape()[0]
+    assert ev.description == "Weekly jazz." and ev.image_url == "njj.jpg"
