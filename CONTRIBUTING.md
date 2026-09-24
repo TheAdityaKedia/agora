@@ -87,9 +87,20 @@ writing a parser, spike the page:
    shell over a JSON API. Render the page in a headless browser and capture XHR
    responses; search them for an event id or `"description"`. This is how we
    found Black Bird's Mahina API, SF Playhouse's VBO `@graph`, and OvationTix's
-   `performance` endpoint. A clean JSON API beats DOM scraping every time.
+   `performance` endpoint. A clean JSON API beats DOM scraping every time — and
+   an embedded JSON blob counts too (Ludus ships every showtime inside an
+   Alpine `x-data="…JSON.parse('…')…"` attribute; the Elfsight widget calls a
+   `/api/events` endpoint). An opaque SPA is usually a *good* sign: the data is
+   structured, you just have to find where it loads.
 4. **ICS feeds** — Squarespace and others expose `?format=ical`; sometimes the
    cleanest per-occurrence source (via `RRULE`).
+5. **Get the *whole* list, and don't trust page HTML for IDs.** Two SPA traps:
+   lazy-loaded calendars serve only the first page in the initial HTML (Luma's
+   JSON-LD had 15 events; the `get-items` API had 97) — confirm the count and
+   page the API, don't ship a truncated calendar. And a site's server-rendered
+   HTML can be *inconsistent* — Luma sometimes returns a bare JS shell with no
+   calendar id or JSON-LD — so resolve identifiers through an API
+   (`api.luma.com/url?url=<slug>`) rather than depending on the page markup.
 
 ### Data-source priority ladder
 
@@ -142,6 +153,35 @@ Two recurring gotchas these libs handle, worth copying:
   collapse repeated titles to the earliest occurrence. Reference:
   `oaklandartmurmur.py::collapse_by_title`. (Contrast: a weekly series like Bird
   & Beckett's jazz nights *should* stay one event per night.)
+- **One page, many editions.** A recurring series (The Marsh's Tell It On
+  Tuesday) has a *single* detail page that updates to the **next** edition's
+  lineup. Don't stamp that edition-specific text on every date — enrich the
+  soonest occurrence with the full page text and give later occurrences only
+  the evergreen series blurb (truncate at edition markers like "Artist
+  Biography" / "Featuring"). Reference: `themarsh.py::_evergreen` and its
+  earliest-occurrence logic.
+
+## Enriching from a second source
+
+Ticketing calendars (Ludus, OvationTix) reliably carry **showtimes** but often
+no synopsis or image; the venue's own site has those on a per-show page. When
+that's the case, scrape the calendar for the schedule, then **match each show
+to its detail page** and enrich (description, poster, a nicer URL). Reference:
+`themarsh.py` (Ludus calendar → WordPress `/shows_and_events/` pages).
+
+Matching titles to pages is the hard part — lessons:
+
+- **Prefer normalized-string containment** (lowercase, strip non-alphanumerics
+  and a trailing year) over token overlap. It matches `notjustjazz` ↔ "Not Just
+  Jazz 2026" where token overlap is zero.
+- **Token-overlap matching is fuzzy and false-positives** ("LABA's Name Game"
+  wrongly matched "Elissa Strauss **Name Game**"). Only trust it on a small,
+  curated set (e.g. the homepage's featured shows); for a broad index use
+  containment only.
+- **The homepage lists only featured shows; the sitemap lists them all.** Fall
+  back to `…/post-sitemap.xml` for coverage — but exclude stale archive paths
+  (The Marsh's `/marshstream/` livestream pages), and match those broad
+  candidates by containment (precise) so you fetch only the pages you hit.
 
 ## Listing vs. detail page
 
@@ -234,9 +274,12 @@ time. That's ~70% of SFPL's programming. Multi-audience events (a kid class +
 
 ## When to give up
 
-- **Hard bot protection** — if a detail page returns 403 even to a headless
-  browser (Fillmore, GAMH's SeeTickets/Eventim), don't fight the anti-bot. Keep
-  the best available data (e.g. lineup + genre from the listing).
+- **Hard bot protection** — if a detail page returns 403 **even to a headless
+  browser** (Fillmore, GAMH's SeeTickets/Eventim), don't fight the anti-bot.
+  Keep the best available data (e.g. lineup + genre from the listing). But
+  first check whether it's only `requests` that's blocked: many sites 403 a
+  bare `requests` call yet render fine in the browser (Ludus's calendar) — use
+  `browser.py` there rather than giving up.
 - **No structured data** — if there's no per-performance structure anywhere,
   don't fabricate it (see "One event per performance").
 
