@@ -71,6 +71,14 @@ put fetching in `scrape()`.
 Ninety percent of a good scraper is finding the *right data source*. Before
 writing a parser, spike the page:
 
+0. **Check if it's a platform we already handle** (see *Reusable platform
+   libraries* below). Most new sources — especially venues that outsource their
+   calendar/ticketing — turn out to run on Eventbrite, Luma, Squarespace,
+   WordPress + The Events Calendar, Elfsight, Ludus, OvationTix, or a plain ICS
+   feed. If so, the scraper is a ~15-line wrapper. Follow the venue's own
+   "tickets"/"calendar"/"schedule" links — the platform often lives on a
+   **different domain** (Litquake's schedule is on `litquake2026.sched.com`, The
+   Marsh's on `themarsh.ludus.com`), so don't stop at sniffing the root domain.
 1. **View source / meta** — `<meta name="description">`, `og:description`.
 2. **JSON-LD** — `<script type="application/ld+json">`. Look for `Event` /
    `TheaterEvent`, a `subEvent[]` array (per-performance!), `offers`, and a
@@ -96,6 +104,44 @@ its full inventory. Walk pages sequentially until the "last page" link says
 stop, or events start landing past your look-ahead horizon. Reference: `sfpl.py`
 reads the highest `?page=` in the pagination footer's `Last »` link and walks
 to it.
+
+## Reusable platform libraries
+
+Many venues outsource their calendar/ticketing to the same handful of
+platforms, so we have **shared libs** — a new source on a known platform is a
+thin wrapper (`SOURCE`, `NAME`, the platform id/URL, `matches()`, and a one-line
+`scrape()` that delegates). Check these first:
+
+| Platform | How to detect | Shared lib → entry point | Example wrappers |
+|----------|---------------|--------------------------|------------------|
+| **Eventbrite** | `eventbrite.com/o/<org>` organizer page (or `/e/…-tickets-<id>` links) | `eventbrite.py` → `scrape_organizer(url)` | `phoenix.py`, `neofuturists.py` |
+| **Luma** | `luma.com/<slug>` / `lu.ma` | `luma.py` → `scrape_calendar(url)` (resolves the calendar api_id via the page or the `/url` endpoint, then pages the `get-items` API) | `bigbrainbay.py`, `thecommons.py`, `readingrhythms.py` |
+| **Squarespace Events Collection** | `article.eventlist-event` in the events page HTML | `squarespace_events.py` → `scrape_collection(url, fallback_location=…)` | `balboa.py`, `fourstar.py`, `medicinenightmares.py` |
+| **WordPress + The Events Calendar (Tribe)** | `GET /wp-json/tribe/events/v1/events` returns JSON | `tribe_events.py` → `scrape_events(site_base, fallback_location=…)` | `birdbeckett.py`, `oaklandartmurmur.py` |
+| **Elfsight Event Calendar** | `elfsight` in page; widget XHR to `widget-data.service.elfsight.com/api/events?source=<id>` | `elfsight_events.py` → `scrape_events(source_id, …)` | `riptide.py` |
+| **iCal / ICS feed** | any `.ics` link (Sched `all.ics`, Squarespace `?format=ical`) | `ics.py` → `scrape_ics(ics_url, fallback_location=…)` | `litquake.py` (Sched) |
+| **Ludus** (ticketing) | `<org>.ludus.com/calendar` (403s plain requests; renders in a browser) | `ludus.py` → `scrape_calendar(url, fallback_location=…)` | `themarsh.py` |
+
+And a few **patterns** we reuse by copying rather than a shared lib:
+
+- **OvationTix / AudienceView** — `ci.ovationtix.com/<clientId>`; hit
+  `web.ovationtix.com/trs/api/rest/…` with a `clientId` header (no browser).
+  Reference: `zspace.py` (joins `CalendarProductions` + `Production`).
+- **VBO (`vbotickets`)** — a schema.org `@graph` in the page JSON-LD.
+  Reference: `sfplayhouse.py`.
+- **Shopify + Mahina events app** — a JSON API behind the storefront widget.
+  Reference: `blackbird.py`.
+
+Two recurring gotchas these libs handle, worth copying:
+
+- **Bound geographically / off-topic** at the wrapper. Statewide Luma calendars
+  mix in LA/San Diego events — filter to the Bay Area on `location` (titles
+  don't reliably encode the city). Reference: `readingrhythms.py`.
+- **Collapse recurring exhibitions.** Gallery/exhibition APIs (Tribe) often
+  repeat one show once per day it's on view (150+ near-identical entries) —
+  collapse repeated titles to the earliest occurrence. Reference:
+  `oaklandartmurmur.py::collapse_by_title`. (Contrast: a weekly series like Bird
+  & Beckett's jazz nights *should* stay one event per night.)
 
 ## Listing vs. detail page
 
