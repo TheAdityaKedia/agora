@@ -14,7 +14,7 @@ from scrapers import (
     gamh, greatstar, greenapple, independent, kronos, litquake, magictheatre,
     medicinenightmares, nctcsf, neofuturists, oaklandartmurmur, palace, phoenix,
     presidio, readingrhythms, riptide, sfbarguide, sfjazz, sfpl, sfplayhouse,
-    sfwarmemorial, sunsettrivia, thecommons, warfield, ybca, zspace,
+    sfwarmemorial, sunsettrivia, themarsh, thecommons, warfield, ybca, zspace,
 )
 from scrapers.base import RawEvent
 
@@ -29,6 +29,7 @@ SCRAPERS = [
     sfpl, bigbrainbay, zspace, balboa, fourstar, birdbeckett, medicinenightmares,
     commonwealthclub, cityarts, riptide, sfbarguide, sunsettrivia,
     thecommons, readingrhythms, oaklandartmurmur, elrio, kronos, litquake,
+    themarsh,
 ]
 
 
