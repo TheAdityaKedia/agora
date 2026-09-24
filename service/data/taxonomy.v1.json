@@ -55,12 +55,12 @@
         "world-music": {"label": "World / Global", "group": "Music"},
         "music": {"label": "Music (other)", "group": "Music"},
 
-        "theater": {"label": "Theater", "group": "Stage"},
-        "musical-theater": {"label": "Musical theater", "group": "Stage"},
-        "opera": {"label": "Opera", "group": "Stage"},
-        "dance": {"label": "Dance", "group": "Stage"},
-        "comedy": {"label": "Comedy", "group": "Stage"},
-        "spoken-word": {"label": "Spoken word", "group": "Stage"},
+        "theater": {"label": "Theater", "group": "Theater / Stage"},
+        "musical-theater": {"label": "Musical theater", "group": "Theater / Stage"},
+        "opera": {"label": "Opera", "group": "Theater / Stage"},
+        "dance": {"label": "Dance", "group": "Theater / Stage"},
+        "comedy": {"label": "Comedy", "group": "Theater / Stage"},
+        "spoken-word": {"label": "Spoken word", "group": "Theater / Stage"},
 
         "film": {"label": "Film", "group": "Screen"},
         "documentary": {"label": "Documentary", "group": "Screen"},
