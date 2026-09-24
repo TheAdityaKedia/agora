@@ -5498,7 +5498,8 @@
       "taxonomy_version": 1,
       "title": "Karaoke Chaos",
       "topics": [
-        "comedy"
+        "comedy",
+        "karaoke"
       ],
       "types": [
         [
@@ -7265,7 +7266,8 @@
       "taxonomy_version": 1,
       "title": "Bar Bingo at Harry’s Bar",
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "types": [
         [
@@ -7315,7 +7317,8 @@
       "taxonomy_version": 1,
       "title": "Bingo Night at Abbey Tavern",
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "types": [
         [
@@ -7363,7 +7366,8 @@
       "taxonomy_version": 1,
       "title": "Bingo at The Green Heron",
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "types": [
         [
@@ -7378,7 +7382,9 @@
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Bingo at The Sycamore",
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "types": [
         [
           "social"
@@ -7810,7 +7816,9 @@
       "source": "SF Bar Guide",
       "taxonomy_version": 1,
       "title": "Elixir Quiz at Elixir",
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "types": [
         [
           "social"
@@ -12431,7 +12439,9 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Activity: Horrified: Dungeons & Dragons",
-      "topics": [],
+      "topics": [
+        "drag"
+      ],
       "types": [
         [
           "social",
@@ -14099,7 +14109,8 @@
       "title": "Canceled: Author: Dom Magwili, Scientific Dragons: The Adventure of Ensun Castle",
       "topics": [
         "fiction",
-        "books-authors"
+        "books-authors",
+        "drag"
       ],
       "types": [
         [
@@ -17399,7 +17410,8 @@
       "taxonomy_version": 1,
       "title": "Social: Bilingual Citizenship Trivia Game (Spanish/English)",
       "topics": [
-        "politics"
+        "politics",
+        "trivia"
       ],
       "types": [
         [
@@ -17520,7 +17532,9 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Dragon Ball: Sparking! Zero",
-      "topics": [],
+      "topics": [
+        "drag"
+      ],
       "types": [
         [
           "social",
@@ -17807,7 +17821,9 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 1,
       "title": "Social: Karaoke",
-      "topics": [],
+      "topics": [
+        "karaoke"
+      ],
       "types": [
         [
           "social",
@@ -20748,6 +20764,314 @@
         ]
       ]
     },
+    "Sunset Trivia\u001fTrivia Night at 11th Hour Coffee (Santa Cruz)": {
+      "classified_at": "2026-09-24T05:58:25.387867+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Almanac Beer Co. (Oakland)": {
+      "classified_at": "2026-09-24T05:58:26.446716+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Almanac Beer Co. (Oakland)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Bel Mateo Bowl (San Mateo)": {
+      "classified_at": "2026-09-24T05:58:27.550025+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Belle Cora (San Francisco)": {
+      "classified_at": "2026-09-24T05:58:29.446976+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Belle Cora (San Francisco)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Blue Moon Bar (San Mateo)": {
+      "classified_at": "2026-09-24T05:58:30.783206+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Blue Moon Bar (San Mateo)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Cordial Cellar and Lounge (Castro Valley)": {
+      "classified_at": "2026-09-24T05:58:31.771829+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Cordial Cellar and Lounge (Castro Valley)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at El Dorado Saloon & Grill (El Dorado Hills)": {
+      "classified_at": "2026-09-24T05:58:32.945701+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at El Dorado Saloon & Grill (El Dorado Hills)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Folsom Hotel (Folsom)": {
+      "classified_at": "2026-09-24T05:58:34.053011+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Folsom Hotel (Folsom)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Makai Island Kitchen & Groggery (Santa Cruz)": {
+      "classified_at": "2026-09-24T05:58:35.172233+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at McGee's (Alameda)": {
+      "classified_at": "2026-09-24T05:58:36.893320+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at McGee's (Alameda)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at O'Neills Irish Pub (San Mateo)": {
+      "classified_at": "2026-09-24T05:58:37.926444+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Pinstripes (San Mateo)": {
+      "classified_at": "2026-09-24T05:58:39.072819+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Pinstripes (San Mateo)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Pitt's Pub (Outer Sunset, San Francisco)": {
+      "classified_at": "2026-09-24T05:58:40.152280+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Pitt's Pub (Outer Sunset, San Francisco)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Sante Adairius Rustic Ales (Capitola)": {
+      "classified_at": "2026-09-24T05:58:43.008138+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Shotski's Alpine Lodge (San Francisco)": {
+      "classified_at": "2026-09-24T05:58:44.155256+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Shotski's Alpine Lodge (San Francisco)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Splash Sports Bar (San Francisco)": {
+      "classified_at": "2026-09-24T05:58:45.307311+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Splash Sports Bar (San Francisco)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Surf City Billiards ": {
+      "classified_at": "2026-09-24T05:58:46.362903+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Surf City Billiards ",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at The Double Standard (Oakland)": {
+      "classified_at": "2026-09-24T05:58:47.480241+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at The Double Standard (Oakland)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at The Fat Lady Restaurant & Bar (Oakland)": {
+      "classified_at": "2026-09-24T05:58:48.657916+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "The Fillmore\u001fAllison Russell": {
       "classified_at": "2026-09-23T19:53:11.803343+00:00",
       "cost": "unknown",
@@ -21272,7 +21596,9 @@
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "Bar Trivia with @SFTrivia",
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "types": [
         [
           "social",
@@ -21356,7 +21682,8 @@
       "taxonomy_version": 1,
       "title": "Eileen's Punk Rock and Schlock Karaoke",
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "types": [
         [
@@ -21459,7 +21786,9 @@
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "O69 BINGO! By the fireplace",
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "types": [
         [
           "social",
@@ -21474,7 +21803,9 @@
       "source": "The Riptide",
       "taxonomy_version": 1,
       "title": "O69 BINGO! By the fireplace with Dr. Bird",
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "types": [
         [
           "social",
