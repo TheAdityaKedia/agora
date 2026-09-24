@@ -524,14 +524,14 @@
     const btn = e.target.closest(".tag-chip");
     if (btn) toggleTag("type", btn.dataset.tagval);
   });
-  // Topic/group rows toggle their filter (label click flips the checkbox).
-  topicListEl.addEventListener("click", (e) => {
-    const groupLabel = e.target.closest("label[data-group]");
-    if (groupLabel) { e.preventDefault(); toggleTag("group", groupLabel.dataset.group); return; }
-    const label = e.target.closest("label[data-topic]");
-    if (!label) return;
-    e.preventDefault();
-    toggleTag("topic", label.dataset.topic);
+  // Drive off the checkbox's native `change` (same pattern as the Sources
+  // dropdown) — the label wraps the input, so clicking the row toggles it
+  // natively and the checkmark always reflects state. (An earlier click+
+  // preventDefault handler fought the native toggle and hid the checkmark.)
+  topicListEl.addEventListener("change", (e) => {
+    const cb = e.target;
+    if (cb.dataset.topicCb !== undefined) toggleTag("topic", cb.dataset.topicCb, cb.checked);
+    else if (cb.dataset.groupCb !== undefined) toggleTag("group", cb.dataset.groupCb, cb.checked);
   });
   topicClearEl.addEventListener("click", () => {
     selectedTopics.clear();
