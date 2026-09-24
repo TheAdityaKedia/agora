@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T21:35:26.833345+00:00",
+  "generated_at": "2026-09-24T21:49:03.181986+00:00",
   "taxonomy": {
     "version": 1,
     "axes": {
@@ -1757,7 +1757,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "26bd4be3-b1da-4e18-88fb-22f1b941a382",
@@ -1935,7 +1935,7 @@
       ],
       "topics": [
         "karaoke",
-        "music"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -2002,7 +2002,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "8085d451-c50f-407c-b708-49bfff914fc1",
@@ -2356,7 +2356,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -2503,10 +2504,6 @@
       "types": [
         [
           "performance"
-        ],
-        [
-          "social",
-          "party-club"
         ]
       ],
       "topics": [
@@ -2946,7 +2943,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -3034,7 +3032,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "3db6c719-8018-4f59-a02d-19adef97dfd3",
@@ -5513,7 +5511,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "dd0c7547-9a96-484b-b795-4891f07dce8c",
@@ -5768,11 +5766,11 @@
       "types": [
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ],
       "topics": [],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "b1e6f7d3-e0e5-430e-a2aa-3b7c7e087196",
@@ -5794,7 +5792,10 @@
           "performance"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "spoken-word",
+        "visual-art"
+      ],
       "cost": "free"
     },
     {
@@ -5897,10 +5898,6 @@
         "SF Bar Guide"
       ],
       "types": [
-        [
-          "social",
-          "party-club"
-        ],
         [
           "performance"
         ]
@@ -6469,10 +6466,10 @@
         ]
       ],
       "topics": [
-        "music",
+        "club-night",
         "spoken-word"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "1d597fa7-2b61-40fa-bace-2a3c629e3275",
@@ -7055,7 +7052,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "647fc3ef-3a22-4fb1-a63b-8bfb9062bd07",
@@ -7976,8 +7973,7 @@
         ]
       ],
       "topics": [
-        "karaoke",
-        "music"
+        "karaoke"
       ],
       "cost": "unknown"
     },
@@ -8021,8 +8017,8 @@
         ]
       ],
       "topics": [
-        "comedy",
-        "spoken-word"
+        "spoken-word",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -8110,7 +8106,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "b78f0bc2-4c60-4a59-a09a-85a1d6e939af",
@@ -8154,7 +8150,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "faf4e59c-0954-49fb-8e06-3bd9ef8b8931",
@@ -9033,7 +9029,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "f5855624-94a4-4e3a-a36e-449361d3ffdd",
@@ -9405,7 +9401,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -9492,7 +9488,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -9538,7 +9535,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "eec9073e-7a6c-4c98-a82d-af9c9090e32a",
@@ -10139,9 +10136,6 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
@@ -10977,7 +10971,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "d9200606-f665-4dda-8c39-f4d914bad3e6",
@@ -12375,7 +12369,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "33a4c82a-5405-4b8a-b4d5-8abfd6991710",
@@ -12461,7 +12455,7 @@
       ],
       "topics": [
         "karaoke",
-        "music"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -12620,7 +12614,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "ab06f1f4-3033-43a1-90a0-a9ba82e13d67",
@@ -13154,7 +13148,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -13417,10 +13412,6 @@
       "types": [
         [
           "performance"
-        ],
-        [
-          "social",
-          "party-club"
         ]
       ],
       "topics": [
@@ -13745,7 +13736,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -14095,7 +14087,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "680f1925-4e41-4eed-b301-f970bd9be140",
@@ -16095,7 +16087,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "8c75ec19-c6e7-4c86-9e73-79fdb7176825",
@@ -16538,11 +16530,11 @@
       "types": [
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ],
       "topics": [],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "299b4275-4f26-46a6-81a0-98d3a2487173",
@@ -16968,8 +16960,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "social"
         ]
       ],
       "topics": [
@@ -17319,10 +17310,10 @@
         ]
       ],
       "topics": [
-        "music",
+        "club-night",
         "spoken-word"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "041ae2ef-1239-44fe-9284-906c3005ac70",
@@ -17863,7 +17854,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "b7448450-0ac3-47bf-840b-cb7d99c633c8",
@@ -18631,8 +18622,8 @@
         ]
       ],
       "topics": [
-        "comedy",
-        "spoken-word"
+        "spoken-word",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -18656,7 +18647,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "41594ebf-ea68-4a9f-bc98-d1a17da0187d",
@@ -18678,7 +18669,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "762a8230-04eb-45d2-b3c4-5153d6e0389e",
@@ -19606,7 +19597,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "bedd5639-4592-4908-9151-5fbff1ad6d15",
@@ -20020,7 +20011,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -20066,7 +20057,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "3639aad8-de2e-496d-9513-a2ba449977a0",
@@ -20108,7 +20099,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -21625,7 +21617,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "db6adbf7-b1c7-4944-9676-1abd10ce86e5",
@@ -23324,7 +23316,7 @@
       ],
       "topics": [
         "karaoke",
-        "music"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -23372,7 +23364,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "96102e1c-de7f-487b-8298-e648d575244e",
@@ -23525,7 +23517,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "9e221f4b-4bcf-4c97-94f3-abe73accef07",
@@ -23759,8 +23751,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "social"
         ]
       ],
       "topics": [
@@ -23856,7 +23847,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -24099,10 +24091,6 @@
       "types": [
         [
           "performance"
-        ],
-        [
-          "social",
-          "party-club"
         ]
       ],
       "topics": [
@@ -24471,7 +24459,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -24735,7 +24724,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "64abd71e-6db6-4a58-a485-57a163516b8f",
@@ -26858,7 +26847,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "7f87508f-4a67-488a-815a-c514a4b37b5c",
@@ -27049,6 +27038,7 @@
         ]
       ],
       "topics": [
+        "club-night",
         "drag"
       ],
       "cost": "unknown"
@@ -27220,11 +27210,11 @@
       "types": [
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ],
       "topics": [],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "69a4ae41-bf8f-4138-9abb-920a3b97fab6",
@@ -27917,10 +27907,10 @@
         ]
       ],
       "topics": [
-        "music",
+        "club-night",
         "spoken-word"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "1f5890d7-e2e7-4289-82b7-889fc2d27158",
@@ -28450,7 +28440,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "bfee8152-4862-449d-83ce-d12990d98464",
@@ -28980,8 +28970,8 @@
         ]
       ],
       "topics": [
-        "comedy",
-        "spoken-word"
+        "spoken-word",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -29070,7 +29060,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "de75cdca-956d-437d-ba54-178e8cb0cb27",
@@ -29114,7 +29104,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "32620792-61b7-48dd-9c4a-51bac1a25a84",
@@ -30009,7 +29999,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "85b4d0f2-441a-4327-87b6-ace9be38724b",
@@ -30409,7 +30399,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -30455,7 +30445,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "54b1e0a6-9193-4577-b0b9-7b969b291151",
@@ -30540,7 +30530,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -31489,9 +31480,6 @@
         [
           "social",
           "party-club"
-        ],
-        [
-          "performance"
         ]
       ],
       "topics": [
@@ -32271,7 +32259,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "3eb6ff7a-fced-4c71-a195-791abd237ffc",
@@ -33704,7 +33692,7 @@
       ],
       "topics": [
         "karaoke",
-        "music"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -33862,7 +33850,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "f7879d26-832c-49f1-88ac-fd9ab15bd0a9",
@@ -33951,7 +33939,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "bd6639e4-2620-4eb9-8b55-2de4fbb8f83c",
@@ -34171,7 +34159,7 @@
         ]
       ],
       "topics": [
-        "music"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -34302,7 +34290,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -34323,7 +34312,7 @@
         ],
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ],
       "topics": [
@@ -34392,10 +34381,6 @@
       "types": [
         [
           "performance"
-        ],
-        [
-          "social",
-          "party-club"
         ]
       ],
       "topics": [
@@ -34904,7 +34889,8 @@
         ]
       ],
       "topics": [
-        "drag"
+        "drag",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -35019,7 +35005,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "4797a19d-e49f-4828-8b88-980dee9635f0",
@@ -35534,7 +35520,7 @@
       "topics": [
         "theater",
         "lgbtq",
-        "women"
+        "visual-art"
       ],
       "cost": "free"
     },
@@ -35648,8 +35634,8 @@
       ],
       "topics": [
         "books-authors",
-        "poetry",
-        "spoken-word"
+        "spoken-word",
+        "poetry"
       ],
       "cost": "free"
     },
@@ -37059,7 +37045,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "946877bc-c6ac-4c19-a8b2-00139d8fef02",
@@ -37079,7 +37065,7 @@
         ]
       ],
       "topics": [
-        "lgbtq"
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -37406,11 +37392,11 @@
       "types": [
         [
           "social",
-          "party-club"
+          "mixer-meetup"
         ]
       ],
       "topics": [],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "92fadb31-ab6f-496f-896c-c34ece3615bd",
@@ -38092,10 +38078,10 @@
         ]
       ],
       "topics": [
-        "music",
+        "club-night",
         "spoken-word"
       ],
-      "cost": "free"
+      "cost": "unknown"
     },
     {
       "id": "1c8a598f-3fad-4182-9f9a-9c095ac82f8d",
@@ -38519,7 +38505,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "4609e989-65e3-4734-bf57-472c488dd2e0",
@@ -39435,8 +39421,8 @@
         ]
       ],
       "topics": [
-        "comedy",
-        "spoken-word"
+        "spoken-word",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -39460,7 +39446,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "65971819-1282-43fc-9742-ca6d95be1b39",
@@ -39526,7 +39512,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "f555af9d-978b-453d-9419-008802e32a29",
@@ -40372,7 +40358,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "b646fc63-fb6c-4502-830b-65bd51114e56",
@@ -40845,7 +40831,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -40932,7 +40918,8 @@
         ]
       ],
       "topics": [
-        "karaoke"
+        "karaoke",
+        "club-night"
       ],
       "cost": "unknown"
     },
@@ -40956,7 +40943,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "f1594a9c-f2f9-4350-bbe9-214a9f868e90",
@@ -42521,7 +42508,7 @@
       "topics": [
         "karaoke"
       ],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "ebc91505-d322-4ea5-8cf2-fef3d4b5583e",
@@ -43152,16 +43139,11 @@
       "types": [
         [
           "talk",
-          "reading"
-        ],
-        [
-          "social",
-          "party-club"
+          "conversation"
         ]
       ],
       "topics": [
-        "books-authors",
-        "writing"
+        "books-authors"
       ],
       "cost": "unknown"
     },
@@ -44691,10 +44673,6 @@
       "types": [
         [
           "performance"
-        ],
-        [
-          "social",
-          "party-club"
         ]
       ],
       "topics": [
@@ -45319,8 +45297,8 @@
         ]
       ],
       "topics": [
-        "books-authors",
-        "spoken-word"
+        "spoken-word",
+        "books-authors"
       ],
       "cost": "paid"
     },
@@ -47042,7 +47020,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -47213,7 +47191,7 @@
       "types": [
         [
           "social",
-          "party-club"
+          "dance-social"
         ]
       ],
       "topics": [
@@ -50356,7 +50334,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -54762,7 +54740,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -55927,8 +55905,7 @@
       ],
       "types": [
         [
-          "social",
-          "party-club"
+          "social"
         ]
       ],
       "topics": [
@@ -59020,7 +58997,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -62934,7 +62911,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -64927,7 +64904,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -65570,10 +65547,6 @@
       "types": [
         [
           "performance"
-        ],
-        [
-          "social",
-          "party-club"
         ]
       ],
       "topics": [
@@ -66532,7 +66505,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -67788,7 +67761,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
@@ -68891,7 +68864,7 @@
       ],
       "topics": [
         "karaoke",
-        "rock-indie"
+        "club-night"
       ],
       "cost": "free"
     },
