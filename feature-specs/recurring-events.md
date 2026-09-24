@@ -128,16 +128,20 @@ venue, tagged) before B.
 - Classifier: a trivia occurrence tags `social`/`games-hobby` + topic `trivia`.
 - No live network in tests; verify `scrape()` live once.
 
-## Open questions / to verify
+## Resolved decisions
 
-- **Horizon:** is 28 days right, or do we want 14 (tighter) / 42? Affects row
-  count and how often we must re-run to keep the window full.
-- **Which topics:** confirm `trivia`/`karaoke`/`bingo`/`drag`; do comedy/live-music
-  nights map to existing `comedy` / music topics, and do we want them at all in
-  v1 or trivia-only first?
-- **Per-bar fetch cost:** does SF Bar Guide's homepage carry day/time for all 304
-  events, or must we fetch each `/bar/<slug>`? (Determines whether Phase A does
-  1 fetch or ~90.)
+- **Horizon: 28 days** (~1,200 occurrences; re-run at least monthly).
+- **Scope: all of SF Bar Guide** — trivia, karaoke, bingo, drag, comedy, live
+  music (the full ~304-event directory), not trivia-only. New topics to add:
+  `trivia`, `karaoke`, `bingo`, `drag`. Comedy maps to the existing `comedy`
+  topic; live-music nights use existing music topics (or none when no genre is
+  given — the classifier decides).
+- **Fetch cost: whatever the data requires** — if the homepage carries day/time
+  for all events, one fetch; if not, fetch each `/bar/<slug>` concurrently (a
+  ThreadPoolExecutor, like SFPL). The build's first step confirms which.
+
+## Still to verify during build
+
 - **Sunset Trivia RSC parsing** stability — the `__next_f` payload shape can
-  change; may need a headless render fallback.
+  change; may need a headless render fallback (Phase B).
 - **Attribution** expectations for SF Bar Guide (a curated third-party directory).
