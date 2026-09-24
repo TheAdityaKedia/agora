@@ -11,7 +11,7 @@ from models import Event
 from scrapers import (
     actsf, atgtickets, balboa, berkeleyrep, bigbrainbay, birdbeckett, blackbird,
     brava, citylights, cityarts, commonwealthclub, elrio, fillmore, fourstar,
-    gamh, greatstar, greenapple, independent, kronos, magictheatre,
+    gamh, greatstar, greenapple, independent, kronos, litquake, magictheatre,
     medicinenightmares, nctcsf, neofuturists, oaklandartmurmur, palace, phoenix,
     presidio, readingrhythms, riptide, sfbarguide, sfjazz, sfpl, sfplayhouse,
     sfwarmemorial, sunsettrivia, thecommons, warfield, ybca, zspace,
@@ -28,7 +28,7 @@ SCRAPERS = [
     warfield, palace, sfwarmemorial, sfplayhouse, phoenix, neofuturists,
     sfpl, bigbrainbay, zspace, balboa, fourstar, birdbeckett, medicinenightmares,
     commonwealthclub, cityarts, riptide, sfbarguide, sunsettrivia,
-    thecommons, readingrhythms, oaklandartmurmur, elrio, kronos,
+    thecommons, readingrhythms, oaklandartmurmur, elrio, kronos, litquake,
 ]
 
 
