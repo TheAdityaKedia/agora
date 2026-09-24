@@ -159,6 +159,13 @@ _KEYWORD_TOPICS = {
 }
 
 
+# Mutually-exclusive "pub game" topics the model confuses (it tags bingo nights
+# as trivia, etc.). When the title names one of these, it is authoritative — the
+# model's OTHER game-topic guesses are dropped. (drag is not in this set — a
+# "Drag Bingo" is legitimately both.)
+_GAME_TOPICS = {"trivia", "karaoke", "bingo"}
+
+
 def keyword_topics(title: str) -> list[str]:
     """Topics guaranteed by unambiguous words in the title (validated)."""
     low = (title or "").lower()
@@ -167,6 +174,21 @@ def keyword_topics(title: str) -> list[str]:
         if kw in low and topic not in found:
             found.append(topic)
     return taxonomy.validate_topics(found)
+
+
+def _merge_topics(model_topics: list[str], title: str) -> list[str]:
+    """Merge model topics with title-keyword topics. Keyword topics are always
+    added; and if the title names a specific pub game, the model's other
+    game-topic guesses (the confusable trivia/karaoke/bingo set) are removed."""
+    kw = keyword_topics(title)
+    kw_games = {t for t in kw if t in _GAME_TOPICS}
+    topics = list(model_topics)
+    if kw_games:
+        topics = [t for t in topics if t not in _GAME_TOPICS or t in kw_games]
+    for t in kw:
+        if t not in topics:
+            topics.append(t)
+    return topics
 
 
 def classify_show(
@@ -193,11 +215,7 @@ def classify_show(
             last_err = e
             continue
         parsed = parse_classification(text)
-        # Merge guaranteed keyword topics (model first, then any it missed).
-        topics = list(parsed["topics"])
-        for t in keyword_topics(title):
-            if t not in topics:
-                topics.append(t)
+        topics = _merge_topics(parsed["topics"], title)
         return Classification(
             title=title,
             source=source,

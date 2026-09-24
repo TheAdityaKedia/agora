@@ -130,3 +130,21 @@ def test_classify_show_always_includes_title_keyword_topics():
     c = classify_show("Trivia Night at Abbey Tavern", "SF Bar Guide", "Weekly trivia.",
                       client=client)
     assert "trivia" in c.topics
+
+
+def test_title_game_keyword_overrides_model_game_topic():
+    # "Bingo at X" — model wrongly says trivia. Title names bingo, so trivia
+    # (a confusable game topic) is dropped; bingo kept.
+    client = _FakeClient('{"types":[["social"]],"topics":["trivia"],"cost":"free"}')
+    c = classify_show("Bingo at The Green Heron", "SF Bar Guide", "Bingo night.",
+                      client=client)
+    assert "bingo" in c.topics
+    assert "trivia" not in c.topics
+
+
+def test_non_game_topics_survive_a_game_keyword():
+    # A drag bingo keeps both (drag isn't in the mutually-exclusive game set).
+    client = _FakeClient('{"types":[["social"]],"topics":["drag","trivia"],"cost":"free"}')
+    c = classify_show("Drag Bingo at Y", "SF Bar Guide", "Drag bingo.", client=client)
+    assert "bingo" in c.topics and "drag" in c.topics
+    assert "trivia" not in c.topics
