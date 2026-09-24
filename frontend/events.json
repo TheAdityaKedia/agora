@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T05:48:17.994249+00:00",
+  "generated_at": "2026-09-24T06:01:16.327956+00:00",
   "taxonomy": {
     "version": 1,
     "axes": {
@@ -480,6 +480,27 @@
       "cost": "free"
     },
     {
+      "id": "b2228549-380b-44a7-9aaf-fbb83b528619",
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "start_time": "2026-09-24T01:00:00+00:00",
+      "location": "103 Kennedy Dr, Capitola, CA 95010",
+      "url": "https://www.rusticales.com/",
+      "description": "Think you're a brainiac? Prove it! Join us for exhilarating Trivia Night every Wednesday at 6:00 PM at Sante Adairius Rustic Ales in Capitola. Assemble your sharpest team, enjoy our acclaimed craft brews, and battle for ultimate bragging rights. Victory (and great beer) awaits!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
+    },
+    {
       "id": "f7b7963c-4332-49b0-9d52-2f9eb842c7b8",
       "title": "Indómitas: Live Podcast",
       "start_time": "2026-09-24T01:00:00+00:00",
@@ -524,6 +545,28 @@
         "politics"
       ],
       "cost": "free"
+    },
+    {
+      "id": "b880e50a-82de-417d-8ed2-3ee312494d22",
+      "title": "Trivia Night at McGee's (Alameda)",
+      "start_time": "2026-09-24T01:30:00+00:00",
+      "location": "1645 Park St, Alameda, CA 94501",
+      "url": "http://www.mcgeesbarandgrill.com/",
+      "description": "Ready to prove you're the smartest in Alameda? Join McGee's (Alameda) Trivia Night every Wednesday at 6:30 PM! Assemble your dream team and battle it out across challenging categories for ultimate bragging rights and fantastic prizes. Fuel your brain with great food and drinks. Conquer the competition and claim your trivia glory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "db723be3-a93d-4a15-bfc6-9744e792dce5",
@@ -610,7 +653,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -638,6 +683,27 @@
         "latino"
       ],
       "cost": "free"
+    },
+    {
+      "id": "8a7d5881-b50a-4349-87f2-5e5f237ac0d9",
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "start_time": "2026-09-24T02:00:00+00:00",
+      "location": "49A Municipal Wharf, Santa Cruz, CA 95060",
+      "url": "https://www.makaisantacruz.com/",
+      "description": "Think youâre a trivia whiz? Challenge your brain at Makai Island Kitchen & Groggery, Santa Cruz, every Wednesday at 7:00 PM! Gather your sharpest crew, flex your knowledge across diverse categories, and compete for ultimate bragging rights. Enjoy delicious island fare and craft drinks while you conquer the competition. Your path to trivia glory starts here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "d00369a4-8dd9-48c2-a7a8-800196522bad",
@@ -789,6 +855,48 @@
         "film"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "df8bffd2-e898-48a6-adb9-1063620ea472",
+      "title": "Trivia Night at Surf City Billiards ",
+      "start_time": "2026-09-24T02:30:00+00:00",
+      "location": "931 Pacific Ave, Santa Cruz, CA 95060",
+      "url": "https://www.surfcitybilliards.com/",
+      "description": "Think you're Santa Cruz's trivia champion? Prove it at Surf City Billiards' ultimate Trivia Night! Every Wednesday at 7:00 PM, gather your sharpest friends to conquer challenging questions across all categories. Fuel your brain with our delicious new menu while battling for ultimate bragging rights. Your quest for knowledge begins here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "e02d32a5-faad-4ed8-a8c1-10e502fc8242",
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "start_time": "2026-09-24T02:30:00+00:00",
+      "location": " 34 S B St, San Mateo, CA 94401",
+      "url": "https://www.yelp.com/biz/o-neills-irish-pub-san-mateo",
+      "description": "Think you're the ultimate trivia master? Prove it at O'Neills Irish Pub in San Mateo! Gather your sharpest team and unleash your inner genius every Wednesday at 7:30 PM. Prepare for a thrilling battle of wits, challenging questions, and the chance to claim ultimate bragging rights. Don't miss out on the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "5e5ecccc-8d61-420c-930a-468e3e80ceda",
@@ -1431,6 +1539,28 @@
       "cost": "unknown"
     },
     {
+      "id": "36ca3cb7-89ad-4438-9d29-40f6d7c0a209",
+      "title": "Trivia Night at Cordial Cellar and Lounge (Castro Valley)",
+      "start_time": "2026-09-25T01:00:00+00:00",
+      "location": " 3295 Castro Valley Blvd B100, Castro Valley, CA 94546",
+      "url": "https://www.cordialbottleshop.com/",
+      "description": "Think you're a genius? Prove it at Trivia Night! Gather your brightest friends and head to Cordial Cellar and Lounge in Castro Valley every Thursday at 6:00 PM. Challenge your wits across diverse categories, compete for bragging rights, and enjoy a fantastic evening out. It's time to put your obscure knowledge to the test!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "41d6a1be-410e-469f-bf1c-9c3d57a1fb0f",
       "title": "Game Night! at Mission Bowling Club",
       "start_time": "2026-09-25T01:00:00+00:00",
@@ -1493,6 +1623,48 @@
         "karaoke"
       ],
       "cost": "unknown"
+    },
+    {
+      "id": "9d74651c-b595-447b-a43c-2c9f604102d5",
+      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
+      "start_time": "2026-09-25T01:30:00+00:00",
+      "location": "1001 Center St, Santa Cruz, CA 95060",
+      "url": "https://www.11thhourcoffee.com/",
+      "description": "Sharpen your wits and gather your team! Join us for Trivia Night at 11th Hour Coffee (Santa Cruz) every Thursday at 6:30 PM. Compete across diverse categories, challenge your knowledge, and earn ultimate bragging rights. Fuel your mind with coffee and dominate the competition in Santa Cruz's favorite weekly trivia showdown!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "f4a71e48-d432-4f6d-b76f-30cc8a50ebf6",
+      "title": "Trivia Night at Almanac Beer Co. (Oakland)",
+      "start_time": "2026-09-25T01:30:00+00:00",
+      "location": "1640 18th St Ste A, Oakland, CA 94607",
+      "url": "https://almanacbeer.com/pages/west-oakland-hours",
+      "description": "Calling all Oakland trivia titans! Sharpen your wits and gather your brainiest crew for Trivia Night at Almanac Beer Co. in Oakland. Every Thursday at 6:30 PM, dive into challenging questions, fierce competition, and delicious craft beers. Prove your smarts, dominate the scoreboard, and claim ultimate victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
     },
     {
       "id": "1268278c-6e15-47e8-8743-09b5bd1a31e9",
@@ -1582,6 +1754,27 @@
       "cost": "unknown"
     },
     {
+      "id": "229003ac-c138-4ab5-8afb-4b02ebf96d75",
+      "title": "Trivia Night at The Double Standard (Oakland)",
+      "start_time": "2026-09-25T02:00:00+00:00",
+      "location": "2424 Telegraph Avenue, Oakland, CA 94612",
+      "url": "http://www.doublestandardbar.com/",
+      "description": "Think you're the smartest in the room? Prove it! The Double Standard (Oakland) hosts fierce trivia every Thursday at 7:00 PM. Assemble your team in Oakland, CA, and prepare for challenging questions, epic wins, and ultimate bragging rights. It's time to unleash your inner trivia champion and dominate the night!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "29150f7c-2f04-4ead-8cb3-69cedf419f8b",
       "title": "Vintage Sex Books: A Reading and Conversation Across the Decades",
       "start_time": "2026-09-25T02:00:00+00:00",
@@ -1605,6 +1798,27 @@
       "topics": [
         "books-authors",
         "history"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "330cdd01-2bd4-492a-9679-aaecd0ea1cf1",
+      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
+      "start_time": "2026-09-25T02:00:00+00:00",
+      "location": "4330 Olympic Ave, San Mateo, CA 94403",
+      "url": "https://belmateobowl.com/",
+      "description": "Ready to prove your genius? Unleash your trivia prowess at Bel Mateo Bowl in San Mateo! Gather your sharpest team for a thrilling Trivia Night every Thursday at 7:00 PM. Challenge your knowledge across diverse categories, compete for bragging rights, and enjoy the ultimate weekly brain workout. Don't miss the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -1719,6 +1933,28 @@
       "topics": [
         "poetry",
         "spoken-word"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "8e49b77a-7379-443d-9bd5-976b3a25d200",
+      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
+      "start_time": "2026-09-25T02:00:00+00:00",
+      "location": "201 Washington St, Oakland, CA 94607",
+      "url": "https://thefatladyrestaurant.com/",
+      "description": "Ready to prove your genius? Gather your brainiest crew for Trivia Night at **The Fat Lady Restaurant & Bar (Oakland)**, every **Thursday at 7:00 PM**! From pop culture to history, test your knowledge, compete for glory, and enjoy delicious food and drinks. Your throne awaits, Oakland!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -1910,7 +2146,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -5221,7 +5458,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -6812,7 +7051,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "drag"
+      ],
       "cost": "free"
     },
     {
@@ -7163,6 +7404,27 @@
         "theater"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "6fbf2731-f5fa-41ae-9d88-4985b2b5906d",
+      "title": "Trivia Night at Blue Moon Bar (San Mateo)",
+      "start_time": "2026-09-28T02:00:00+00:00",
+      "location": "215 S B St, San Mateo, CA 94401",
+      "url": "https://www.instagram.com/bluemoonsanmateo/",
+      "description": "Challenge your brain and claim ultimate bragging rights! Join us at Blue Moon Bar (San Mateo) every Sunday at 7:00 PM for San Mateo's premier trivia night. Gather your sharpest friends, tackle diverse categories, and compete for glory and awesome prizes. Elevate your Sunday with an evening of brain-bending fun and intellectual supremacy!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "17066482-eb56-4c44-a842-59755e03dfc9",
@@ -8011,6 +8273,28 @@
       "cost": "unknown"
     },
     {
+      "id": "f3f546f0-41f9-48c8-8ef7-8be9b2f7645c",
+      "title": "Trivia Night at Splash Sports Bar (San Francisco)",
+      "start_time": "2026-09-29T01:30:00+00:00",
+      "location": "191 Warriors Way, Suite 102, San Francisco, CA 94158",
+      "url": "https://splashsportsbar.com/",
+      "description": "Think you're a trivia titan? Prove it! Join us for an exhilarating Trivia Night at Splash Sports Bar (San Francisco) every Monday at 6:30 PM. Assemble your sharpest team, flex your brainpower across diverse categories, and compete for awesome prizes and ultimate bragging rights. Get ready for challenging questions, great fun, and your chance to dominate the leaderboard!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "00a3b8f8-1ac4-4826-aaeb-4be8a6ea062a",
       "title": "Trivia at Belle Cora",
       "start_time": "2026-09-29T02:00:00+00:00",
@@ -8142,6 +8426,27 @@
       "topics": [
         "books-authors",
         "fiction"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "5f21fc85-cbbb-47e4-9dc6-9b48bd6c7adf",
+      "title": "Trivia Night at Belle Cora (San Francisco)",
+      "start_time": "2026-09-29T02:00:00+00:00",
+      "location": "565 Green St, San Francisco, CA 94133",
+      "url": "http://thebellecora.com/",
+      "description": "Sharpen your wits and dominate the categories! Join us for Belle Cora's engaging trivia night every Monday at 7:00 PM in San Francisco. Gather your team of masterminds and dive into a fun, perfectly challenging evening designed to test your knowledge and crown you the city's smartest. Don't miss the ultimate Monday night brain workout!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -8405,7 +8710,8 @@
         ]
       ],
       "topics": [
-        "comedy"
+        "comedy",
+        "karaoke"
       ],
       "cost": "unknown"
     },
@@ -9129,6 +9435,27 @@
       "cost": "free"
     },
     {
+      "id": "a9886f10-a756-42bd-a8e2-7b86af01f909",
+      "title": "Trivia Night at Pinstripes (San Mateo)",
+      "start_time": "2026-09-30T01:00:00+00:00",
+      "location": "36 Hillsdale Mall, San Mateo, CA 94403",
+      "url": "https://pinstripes.com/",
+      "description": "Think you're a trivia wizard? Prove it at Pinstripes San Mateo's ultimate Trivia Night! Gather your brainiest crew and test your knowledge across challenging categories every Tuesday at 6:00 PM. Compete for ultimate bragging rights and fantastic prizes. Sharpen your wits and join San Mateo's smartest competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "8c16629f-c099-4c12-8fcc-2ced57713e19",
       "title": "The Ten Amendments: Updating America’s Operating System",
       "start_time": "2026-09-30T01:30:00+00:00",
@@ -9148,6 +9475,27 @@
       "topics": [
         "politics",
         "history"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "90fe21cb-de28-4b7f-afc6-bbbf2e6284d3",
+      "title": "Trivia Night at El Dorado Saloon & Grill (El Dorado Hills)",
+      "start_time": "2026-09-30T01:30:00+00:00",
+      "location": "879 Embarcadero Dr, El Dorado Hills, CA 95762",
+      "url": "http://www.eldoradosaloonandgrill.com/",
+      "description": "Think you're a trivia master? Test your smarts and gather your crew for Trivia Night at El Dorado Saloon & Grill in El Dorado Hills! Join us every Tuesday at 6:30 PM for a night of challenging questions, friendly competition, and fantastic food and drinks. Unleash your inner genius and claim your victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -9218,6 +9566,27 @@
       "cost": "unknown"
     },
     {
+      "id": "1f969669-1190-4f58-90d2-52ee77545d5f",
+      "title": "Trivia Night at Pitt's Pub (Outer Sunset, San Francisco)",
+      "start_time": "2026-09-30T02:00:00+00:00",
+      "location": "4207 Judah St, San Francisco, CA 94122",
+      "url": "http://www.pittssf.com/",
+      "description": "Gather your sharpest friends and challenge your grey matter! Join us for an electrifying trivia night at Pitt's Pub in the Outer Sunset every Tuesday at 7:00 PM. Test your knowledge across mind-bending categories, battle other teams for ultimate bragging rights, and prove you're the true champion. Unleash your inner trivia beast!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "2286a188-394e-4ef6-8ea5-82f2acae3dd2",
       "title": "Trivia Night at TimeOut Tavern",
       "start_time": "2026-09-30T02:00:00+00:00",
@@ -9232,6 +9601,27 @@
         [
           "social",
           "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "2685b173-e941-41d5-8627-23cdc77e6739",
+      "title": "Trivia Night at Shotski's Alpine Lodge (San Francisco)",
+      "start_time": "2026-09-30T02:00:00+00:00",
+      "location": "239 Kearny St, San Francisco, CA 94108",
+      "url": "http://shotskislodge.com/",
+      "description": "Test your smarts and dominate at Shotski's Alpine Lodge Trivia Night every Tuesday at 7:00 PM! Assemble your crew and dive into an evening of challenging questions, fierce competition, and fantastic prizes. It's time to prove your knowledge and claim ultimate bragging rights in San Francisco's most engaging trivia showdown. Don't miss out!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
         ]
       ],
       "topics": [
@@ -9283,6 +9673,27 @@
       "cost": "paid"
     },
     {
+      "id": "54ef6fd0-456a-4241-bb23-85716c17a089",
+      "title": "Trivia Night at Folsom Hotel (Folsom)",
+      "start_time": "2026-09-30T02:00:00+00:00",
+      "location": "703 Sutter St, Folsom, CA 95630",
+      "url": "folsomhotelsaloon.com",
+      "description": "Challenge your brain at Folsom Hotel's exciting new trivia night! Every Tuesday at 7:00 PM, gather your sharpest friends in Folsom, CA. Dive into diverse categories, battle for bragging rights, and prove your team's genius. It's the ultimate test of knowledge and fun â don't miss the competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "6b19bab4-8dbc-4f42-8786-458c99ee24a4",
       "title": "Elixir Quiz at Elixir",
       "start_time": "2026-09-30T02:00:00+00:00",
@@ -9298,7 +9709,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -9339,7 +9752,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -9820,7 +10234,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -10436,6 +10851,27 @@
       "cost": "free"
     },
     {
+      "id": "e17eb992-97c0-4209-abf0-90b4841d4484",
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "start_time": "2026-10-01T01:00:00+00:00",
+      "location": "103 Kennedy Dr, Capitola, CA 95010",
+      "url": "https://www.rusticales.com/",
+      "description": "Think you're a brainiac? Prove it! Join us for exhilarating Trivia Night every Wednesday at 6:00 PM at Sante Adairius Rustic Ales in Capitola. Assemble your sharpest team, enjoy our acclaimed craft brews, and battle for ultimate bragging rights. Victory (and great beer) awaits!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
+    },
+    {
       "id": "f54cdb06-44c0-4c37-962f-a278ad097635",
       "title": "Wednesday Trivia at Patriot House Pub",
       "start_time": "2026-10-01T01:00:00+00:00",
@@ -10482,6 +10918,28 @@
         "books-authors"
       ],
       "cost": "free"
+    },
+    {
+      "id": "4ffc5fa8-f8ee-4a7a-9ce6-ac4efbb0d85e",
+      "title": "Trivia Night at McGee's (Alameda)",
+      "start_time": "2026-10-01T01:30:00+00:00",
+      "location": "1645 Park St, Alameda, CA 94501",
+      "url": "http://www.mcgeesbarandgrill.com/",
+      "description": "Ready to prove you're the smartest in Alameda? Join McGee's (Alameda) Trivia Night every Wednesday at 6:30 PM! Assemble your dream team and battle it out across challenging categories for ultimate bragging rights and fantastic prizes. Fuel your brain with great food and drinks. Conquer the competition and claim your trivia glory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "98b4deff-2e9a-4b5d-8104-71aa2680fa91",
@@ -10675,7 +11133,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -10718,7 +11177,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -10761,6 +11222,27 @@
       ],
       "topics": [
         "jazz"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "a67cf995-da9a-4e88-b678-7f0c62e9b25d",
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "start_time": "2026-10-01T02:00:00+00:00",
+      "location": "49A Municipal Wharf, Santa Cruz, CA 95060",
+      "url": "https://www.makaisantacruz.com/",
+      "description": "Think youâre a trivia whiz? Challenge your brain at Makai Island Kitchen & Groggery, Santa Cruz, every Wednesday at 7:00 PM! Gather your sharpest crew, flex your knowledge across diverse categories, and compete for ultimate bragging rights. Enjoy delicious island fare and craft drinks while you conquer the competition. Your path to trivia glory starts here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -10917,6 +11399,27 @@
       "cost": "paid"
     },
     {
+      "id": "4c7600dc-8e32-4d01-9de1-0744f8d33c20",
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "start_time": "2026-10-01T02:30:00+00:00",
+      "location": " 34 S B St, San Mateo, CA 94401",
+      "url": "https://www.yelp.com/biz/o-neills-irish-pub-san-mateo",
+      "description": "Think you're the ultimate trivia master? Prove it at O'Neills Irish Pub in San Mateo! Gather your sharpest team and unleash your inner genius every Wednesday at 7:30 PM. Prepare for a thrilling battle of wits, challenging questions, and the chance to claim ultimate bragging rights. Don't miss out on the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "5d8e1220-0ce4-47fb-b0f9-068e61da4863",
       "title": "Goldenvoice Presents the Experimental Rap Tour JPEGMAFIA with redveil, matt proxy",
       "start_time": "2026-10-01T02:30:00+00:00",
@@ -10934,6 +11437,27 @@
       ],
       "topics": [
         "hiphop-rnb"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "6bca0294-d0fd-4602-8c93-742f856a6d0c",
+      "title": "Trivia Night at Surf City Billiards ",
+      "start_time": "2026-10-01T02:30:00+00:00",
+      "location": "931 Pacific Ave, Santa Cruz, CA 95060",
+      "url": "https://www.surfcitybilliards.com/",
+      "description": "Think you're Santa Cruz's trivia champion? Prove it at Surf City Billiards' ultimate Trivia Night! Every Wednesday at 7:00 PM, gather your sharpest friends to conquer challenging questions across all categories. Fuel your brain with our delicious new menu while battling for ultimate bragging rights. Your quest for knowledge begins here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -11086,7 +11610,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "unknown"
     },
     {
@@ -11914,6 +12440,28 @@
       "cost": "free"
     },
     {
+      "id": "7d47f5a8-3b0f-4515-9fd6-8c33b51bc891",
+      "title": "Trivia Night at Cordial Cellar and Lounge (Castro Valley)",
+      "start_time": "2026-10-02T01:00:00+00:00",
+      "location": " 3295 Castro Valley Blvd B100, Castro Valley, CA 94546",
+      "url": "https://www.cordialbottleshop.com/",
+      "description": "Think you're a genius? Prove it at Trivia Night! Gather your brightest friends and head to Cordial Cellar and Lounge in Castro Valley every Thursday at 6:00 PM. Challenge your wits across diverse categories, compete for bragging rights, and enjoy a fantastic evening out. It's time to put your obscure knowledge to the test!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "327a434d-d516-4696-ba1f-11c7748e72ea",
       "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
       "start_time": "2026-10-02T01:30:00+00:00",
@@ -11934,6 +12482,48 @@
         "karaoke"
       ],
       "cost": "unknown"
+    },
+    {
+      "id": "3c69f458-28f8-4e65-a095-38b667d22195",
+      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
+      "start_time": "2026-10-02T01:30:00+00:00",
+      "location": "1001 Center St, Santa Cruz, CA 95060",
+      "url": "https://www.11thhourcoffee.com/",
+      "description": "Sharpen your wits and gather your team! Join us for Trivia Night at 11th Hour Coffee (Santa Cruz) every Thursday at 6:30 PM. Compete across diverse categories, challenge your knowledge, and earn ultimate bragging rights. Fuel your mind with coffee and dominate the competition in Santa Cruz's favorite weekly trivia showdown!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "e2cf538d-73ee-45ea-93b5-44642933080a",
+      "title": "Trivia Night at Almanac Beer Co. (Oakland)",
+      "start_time": "2026-10-02T01:30:00+00:00",
+      "location": "1640 18th St Ste A, Oakland, CA 94607",
+      "url": "https://almanacbeer.com/pages/west-oakland-hours",
+      "description": "Calling all Oakland trivia titans! Sharpen your wits and gather your brainiest crew for Trivia Night at Almanac Beer Co. in Oakland. Every Thursday at 6:30 PM, dive into challenging questions, fierce competition, and delicious craft beers. Prove your smarts, dominate the scoreboard, and claim ultimate victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
     },
     {
       "id": "e475ae97-9021-49ae-915a-6bc96ffbd1b9",
@@ -11995,6 +12585,27 @@
         [
           "social",
           "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "2d555b3e-150d-4cdd-b0b1-03ca3f6c5245",
+      "title": "Trivia Night at The Double Standard (Oakland)",
+      "start_time": "2026-10-02T02:00:00+00:00",
+      "location": "2424 Telegraph Avenue, Oakland, CA 94612",
+      "url": "http://www.doublestandardbar.com/",
+      "description": "Think you're the smartest in the room? Prove it! The Double Standard (Oakland) hosts fierce trivia every Thursday at 7:00 PM. Assemble your team in Oakland, CA, and prepare for challenging questions, epic wins, and ultimate bragging rights. It's time to unleash your inner trivia champion and dominate the night!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
         ]
       ],
       "topics": [
@@ -12138,6 +12749,27 @@
         "film"
       ],
       "cost": "free"
+    },
+    {
+      "id": "ab2503c4-330e-43b7-8c17-fb06a066d45c",
+      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
+      "start_time": "2026-10-02T02:00:00+00:00",
+      "location": "4330 Olympic Ave, San Mateo, CA 94403",
+      "url": "https://belmateobowl.com/",
+      "description": "Ready to prove your genius? Unleash your trivia prowess at Bel Mateo Bowl in San Mateo! Gather your sharpest team for a thrilling Trivia Night every Thursday at 7:00 PM. Challenge your knowledge across diverse categories, compete for bragging rights, and enjoy the ultimate weekly brain workout. Don't miss the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "ae9b05f3-14ab-4857-9872-252f41d4a5a9",
@@ -12286,6 +12918,28 @@
       ],
       "topics": [
         "comedy"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "feb5e9ac-a82c-4458-92cf-ab557b176a45",
+      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
+      "start_time": "2026-10-02T02:00:00+00:00",
+      "location": "201 Washington St, Oakland, CA 94607",
+      "url": "https://thefatladyrestaurant.com/",
+      "description": "Ready to prove your genius? Gather your brainiest crew for Trivia Night at **The Fat Lady Restaurant & Bar (Oakland)**, every **Thursday at 7:00 PM**! From pop culture to history, test your knowledge, compete for glory, and enjoy delicious food and drinks. Your throne awaits, Oakland!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -12441,7 +13095,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -15589,7 +16244,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -17000,7 +17657,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "karaoke"
+      ],
       "cost": "free"
     },
     {
@@ -17600,6 +18259,27 @@
       ],
       "topics": [
         "drag"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "ec177ac8-74bc-4e86-a1f2-44cfd7aec8ca",
+      "title": "Trivia Night at Blue Moon Bar (San Mateo)",
+      "start_time": "2026-10-05T02:00:00+00:00",
+      "location": "215 S B St, San Mateo, CA 94401",
+      "url": "https://www.instagram.com/bluemoonsanmateo/",
+      "description": "Challenge your brain and claim ultimate bragging rights! Join us at Blue Moon Bar (San Mateo) every Sunday at 7:00 PM for San Mateo's premier trivia night. Gather your sharpest friends, tackle diverse categories, and compete for glory and awesome prizes. Elevate your Sunday with an evening of brain-bending fun and intellectual supremacy!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -18300,6 +18980,28 @@
       "cost": "unknown"
     },
     {
+      "id": "45718af1-c116-455a-a2a1-4aa4bffaa984",
+      "title": "Trivia Night at Splash Sports Bar (San Francisco)",
+      "start_time": "2026-10-06T01:30:00+00:00",
+      "location": "191 Warriors Way, Suite 102, San Francisco, CA 94158",
+      "url": "https://splashsportsbar.com/",
+      "description": "Think you're a trivia titan? Prove it! Join us for an exhilarating Trivia Night at Splash Sports Bar (San Francisco) every Monday at 6:30 PM. Assemble your sharpest team, flex your brainpower across diverse categories, and compete for awesome prizes and ultimate bragging rights. Get ready for challenging questions, great fun, and your chance to dominate the leaderboard!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "5487d4e1-66f8-4945-b87b-d3191191839e",
       "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
       "start_time": "2026-10-06T01:30:00+00:00",
@@ -18384,6 +19086,27 @@
       ],
       "topics": [
         "bingo"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "5f97cb9c-ad04-44f9-8fc6-e6bdeb95ea8e",
+      "title": "Trivia Night at Belle Cora (San Francisco)",
+      "start_time": "2026-10-06T02:00:00+00:00",
+      "location": "565 Green St, San Francisco, CA 94133",
+      "url": "http://thebellecora.com/",
+      "description": "Sharpen your wits and dominate the categories! Join us for Belle Cora's engaging trivia night every Monday at 7:00 PM in San Francisco. Gather your team of masterminds and dive into a fun, perfectly challenging evening designed to test your knowledge and crown you the city's smartest. Don't miss the ultimate Monday night brain workout!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -19368,6 +20091,27 @@
       "cost": "free"
     },
     {
+      "id": "ad191802-2bfd-4c77-a0eb-753ed65f2608",
+      "title": "Trivia Night at Pinstripes (San Mateo)",
+      "start_time": "2026-10-07T01:00:00+00:00",
+      "location": "36 Hillsdale Mall, San Mateo, CA 94403",
+      "url": "https://pinstripes.com/",
+      "description": "Think you're a trivia wizard? Prove it at Pinstripes San Mateo's ultimate Trivia Night! Gather your brainiest crew and test your knowledge across challenging categories every Tuesday at 6:00 PM. Compete for ultimate bragging rights and fantastic prizes. Sharpen your wits and join San Mateo's smartest competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "d8600761-f43f-4a77-b703-0982760e5e55",
       "title": "Social: American Sign Language (ASL) Chat",
       "start_time": "2026-10-07T01:15:00+00:00",
@@ -19386,6 +20130,27 @@
       ],
       "topics": [],
       "cost": "free"
+    },
+    {
+      "id": "261d15ad-cd6d-4dbb-827f-0bbd7eebd82b",
+      "title": "Trivia Night at El Dorado Saloon & Grill (El Dorado Hills)",
+      "start_time": "2026-10-07T01:30:00+00:00",
+      "location": "879 Embarcadero Dr, El Dorado Hills, CA 95762",
+      "url": "http://www.eldoradosaloonandgrill.com/",
+      "description": "Think you're a trivia master? Test your smarts and gather your crew for Trivia Night at El Dorado Saloon & Grill in El Dorado Hills! Join us every Tuesday at 6:30 PM for a night of challenging questions, friendly competition, and fantastic food and drinks. Unleash your inner genius and claim your victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "399606dd-9251-4088-9254-53d16fac5ca1",
@@ -19469,7 +20234,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -19492,6 +20259,27 @@
         "folk-americana"
       ],
       "cost": "free"
+    },
+    {
+      "id": "1e8eb3f6-670d-4e41-ac71-e0b504b89077",
+      "title": "Trivia Night at Pitt's Pub (Outer Sunset, San Francisco)",
+      "start_time": "2026-10-07T02:00:00+00:00",
+      "location": "4207 Judah St, San Francisco, CA 94122",
+      "url": "http://www.pittssf.com/",
+      "description": "Gather your sharpest friends and challenge your grey matter! Join us for an electrifying trivia night at Pitt's Pub in the Outer Sunset every Tuesday at 7:00 PM. Test your knowledge across mind-bending categories, battle other teams for ultimate bragging rights, and prove you're the true champion. Unleash your inner trivia beast!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "2a49ec19-11da-477e-b8c8-9f12b155faf3",
@@ -19575,7 +20363,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -19645,6 +20434,48 @@
         "rock-indie"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "867053cb-dd07-4e4a-987f-9bff8f092d10",
+      "title": "Trivia Night at Shotski's Alpine Lodge (San Francisco)",
+      "start_time": "2026-10-07T02:00:00+00:00",
+      "location": "239 Kearny St, San Francisco, CA 94108",
+      "url": "http://shotskislodge.com/",
+      "description": "Test your smarts and dominate at Shotski's Alpine Lodge Trivia Night every Tuesday at 7:00 PM! Assemble your crew and dive into an evening of challenging questions, fierce competition, and fantastic prizes. It's time to prove your knowledge and claim ultimate bragging rights in San Francisco's most engaging trivia showdown. Don't miss out!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "899dde76-220c-4799-a9b6-4820d0b0cdd2",
+      "title": "Trivia Night at Folsom Hotel (Folsom)",
+      "start_time": "2026-10-07T02:00:00+00:00",
+      "location": "703 Sutter St, Folsom, CA 95630",
+      "url": "folsomhotelsaloon.com",
+      "description": "Challenge your brain at Folsom Hotel's exciting new trivia night! Every Tuesday at 7:00 PM, gather your sharpest friends in Folsom, CA. Dive into diverse categories, battle for bragging rights, and prove your team's genius. It's the ultimate test of knowledge and fun â don't miss the competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "8f447a0d-cfe4-4372-887d-0fae96e98c1c",
@@ -20030,7 +20861,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -20828,6 +21660,27 @@
       "cost": "free"
     },
     {
+      "id": "84483246-9c95-44be-99d6-905e22808d8c",
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "start_time": "2026-10-08T01:00:00+00:00",
+      "location": "103 Kennedy Dr, Capitola, CA 95010",
+      "url": "https://www.rusticales.com/",
+      "description": "Think you're a brainiac? Prove it! Join us for exhilarating Trivia Night every Wednesday at 6:00 PM at Sante Adairius Rustic Ales in Capitola. Assemble your sharpest team, enjoy our acclaimed craft brews, and battle for ultimate bragging rights. Victory (and great beer) awaits!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
+    },
+    {
       "id": "12bac260-5351-499d-a210-de96a7e24d3f",
       "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
       "start_time": "2026-10-08T01:30:00+00:00",
@@ -20846,6 +21699,28 @@
       ],
       "topics": [
         "karaoke"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "71216f96-c432-49d3-b54d-4f77be98d5c6",
+      "title": "Trivia Night at McGee's (Alameda)",
+      "start_time": "2026-10-08T01:30:00+00:00",
+      "location": "1645 Park St, Alameda, CA 94501",
+      "url": "http://www.mcgeesbarandgrill.com/",
+      "description": "Ready to prove you're the smartest in Alameda? Join McGee's (Alameda) Trivia Night every Wednesday at 6:30 PM! Assemble your dream team and battle it out across challenging categories for ultimate bragging rights and fantastic prizes. Fuel your brain with great food and drinks. Conquer the competition and claim your trivia glory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -20908,7 +21783,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -20976,6 +21852,27 @@
         "trivia"
       ],
       "cost": "free"
+    },
+    {
+      "id": "6ba66c3c-7d63-45ff-8570-0bdf89576e6c",
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "start_time": "2026-10-08T02:00:00+00:00",
+      "location": "49A Municipal Wharf, Santa Cruz, CA 95060",
+      "url": "https://www.makaisantacruz.com/",
+      "description": "Think youâre a trivia whiz? Challenge your brain at Makai Island Kitchen & Groggery, Santa Cruz, every Wednesday at 7:00 PM! Gather your sharpest crew, flex your knowledge across diverse categories, and compete for ultimate bragging rights. Enjoy delicious island fare and craft drinks while you conquer the competition. Your path to trivia glory starts here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "7b2afbb7-003f-4d7e-8648-89b4a955196a",
@@ -21059,7 +21956,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -21232,7 +22131,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "unknown"
     },
     {
@@ -21301,6 +22202,27 @@
       "cost": "paid"
     },
     {
+      "id": "6e0af8a8-e9c0-48ea-b0bd-1c0c8b96cc69",
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "start_time": "2026-10-08T02:30:00+00:00",
+      "location": " 34 S B St, San Mateo, CA 94401",
+      "url": "https://www.yelp.com/biz/o-neills-irish-pub-san-mateo",
+      "description": "Think you're the ultimate trivia master? Prove it at O'Neills Irish Pub in San Mateo! Gather your sharpest team and unleash your inner genius every Wednesday at 7:30 PM. Prepare for a thrilling battle of wits, challenging questions, and the chance to claim ultimate bragging rights. Don't miss out on the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "7404cc1c-cde5-4ef4-a00c-47284bdf8c92",
       "title": "Little Shop of Horrors",
       "start_time": "2026-10-08T02:30:00+00:00",
@@ -21340,6 +22262,27 @@
       ],
       "topics": [
         "comedy"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "b1a0f74c-b04a-484e-a008-2413e1a89d7c",
+      "title": "Trivia Night at Surf City Billiards ",
+      "start_time": "2026-10-08T02:30:00+00:00",
+      "location": "931 Pacific Ave, Santa Cruz, CA 95060",
+      "url": "https://www.surfcitybilliards.com/",
+      "description": "Think you're Santa Cruz's trivia champion? Prove it at Surf City Billiards' ultimate Trivia Night! Every Wednesday at 7:00 PM, gather your sharpest friends to conquer challenging questions across all categories. Fuel your brain with our delicious new menu while battling for ultimate bragging rights. Your quest for knowledge begins here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -22424,6 +23367,28 @@
       "cost": "free"
     },
     {
+      "id": "b217fa02-1761-45ea-b644-e8e68a76033f",
+      "title": "Trivia Night at Cordial Cellar and Lounge (Castro Valley)",
+      "start_time": "2026-10-09T01:00:00+00:00",
+      "location": " 3295 Castro Valley Blvd B100, Castro Valley, CA 94546",
+      "url": "https://www.cordialbottleshop.com/",
+      "description": "Think you're a genius? Prove it at Trivia Night! Gather your brightest friends and head to Cordial Cellar and Lounge in Castro Valley every Thursday at 6:00 PM. Challenge your wits across diverse categories, compete for bragging rights, and enjoy a fantastic evening out. It's time to put your obscure knowledge to the test!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "d7c19b4b-5f3f-40dc-a630-b7007e7033d2",
       "title": "Proposition Mania: Making Sense of Those Confusing Ballots",
       "start_time": "2026-10-09T01:00:00+00:00",
@@ -22444,6 +23409,48 @@
         "politics"
       ],
       "cost": "unknown"
+    },
+    {
+      "id": "11a4e38a-465e-45e0-b876-c869ef4a8622",
+      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
+      "start_time": "2026-10-09T01:30:00+00:00",
+      "location": "1001 Center St, Santa Cruz, CA 95060",
+      "url": "https://www.11thhourcoffee.com/",
+      "description": "Sharpen your wits and gather your team! Join us for Trivia Night at 11th Hour Coffee (Santa Cruz) every Thursday at 6:30 PM. Compete across diverse categories, challenge your knowledge, and earn ultimate bragging rights. Fuel your mind with coffee and dominate the competition in Santa Cruz's favorite weekly trivia showdown!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "1d62d29c-c4ef-4550-b675-55f753705381",
+      "title": "Trivia Night at Almanac Beer Co. (Oakland)",
+      "start_time": "2026-10-09T01:30:00+00:00",
+      "location": "1640 18th St Ste A, Oakland, CA 94607",
+      "url": "https://almanacbeer.com/pages/west-oakland-hours",
+      "description": "Calling all Oakland trivia titans! Sharpen your wits and gather your brainiest crew for Trivia Night at Almanac Beer Co. in Oakland. Every Thursday at 6:30 PM, dive into challenging questions, fierce competition, and delicious craft beers. Prove your smarts, dominate the scoreboard, and claim ultimate victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
     },
     {
       "id": "a7d5165a-0b48-46a2-ac73-c8f5cb59ff36",
@@ -22650,6 +23657,27 @@
       "cost": "paid"
     },
     {
+      "id": "7cece0f0-8001-451c-b4e5-80d7a9bd08f7",
+      "title": "Trivia Night at The Double Standard (Oakland)",
+      "start_time": "2026-10-09T02:00:00+00:00",
+      "location": "2424 Telegraph Avenue, Oakland, CA 94612",
+      "url": "http://www.doublestandardbar.com/",
+      "description": "Think you're the smartest in the room? Prove it! The Double Standard (Oakland) hosts fierce trivia every Thursday at 7:00 PM. Assemble your team in Oakland, CA, and prepare for challenging questions, epic wins, and ultimate bragging rights. It's time to unleash your inner trivia champion and dominate the night!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "83adcb26-d1e5-4a67-bcd3-fa68f217e90e",
       "title": "Orbit Room Investigations at The Orbit Room",
       "start_time": "2026-10-09T02:00:00+00:00",
@@ -22692,6 +23720,49 @@
         "poetry",
         "books-authors",
         "nonfiction"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "b2a545b9-f043-4662-82a8-817d14a32286",
+      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
+      "start_time": "2026-10-09T02:00:00+00:00",
+      "location": "201 Washington St, Oakland, CA 94607",
+      "url": "https://thefatladyrestaurant.com/",
+      "description": "Ready to prove your genius? Gather your brainiest crew for Trivia Night at **The Fat Lady Restaurant & Bar (Oakland)**, every **Thursday at 7:00 PM**! From pop culture to history, test your knowledge, compete for glory, and enjoy delicious food and drinks. Your throne awaits, Oakland!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "bed1e52b-bd15-45ba-a9b5-199032084e0a",
+      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
+      "start_time": "2026-10-09T02:00:00+00:00",
+      "location": "4330 Olympic Ave, San Mateo, CA 94403",
+      "url": "https://belmateobowl.com/",
+      "description": "Ready to prove your genius? Unleash your trivia prowess at Bel Mateo Bowl in San Mateo! Gather your sharpest team for a thrilling Trivia Night every Thursday at 7:00 PM. Challenge your knowledge across diverse categories, compete for bragging rights, and enjoy the ultimate weekly brain workout. Don't miss the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -22844,7 +23915,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -23627,7 +24699,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "karaoke"
+      ],
       "cost": "free"
     },
     {
@@ -25757,7 +26831,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -27493,6 +28569,27 @@
       "cost": "unknown"
     },
     {
+      "id": "4bbfd400-6ad5-4860-98fc-87c355bf35f4",
+      "title": "Trivia Night at Blue Moon Bar (San Mateo)",
+      "start_time": "2026-10-12T02:00:00+00:00",
+      "location": "215 S B St, San Mateo, CA 94401",
+      "url": "https://www.instagram.com/bluemoonsanmateo/",
+      "description": "Challenge your brain and claim ultimate bragging rights! Join us at Blue Moon Bar (San Mateo) every Sunday at 7:00 PM for San Mateo's premier trivia night. Gather your sharpest friends, tackle diverse categories, and compete for glory and awesome prizes. Elevate your Sunday with an evening of brain-bending fun and intellectual supremacy!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "51f3c9bd-34f6-41bc-9302-07e20d927b70",
       "title": "Elephant Gym: More Real Than Dreams (with Band Member Q&A)",
       "start_time": "2026-10-12T02:00:00+00:00",
@@ -28042,6 +29139,28 @@
       "cost": "unknown"
     },
     {
+      "id": "7e3e805e-593c-496e-a618-a974f2f5e8d6",
+      "title": "Trivia Night at Splash Sports Bar (San Francisco)",
+      "start_time": "2026-10-13T01:30:00+00:00",
+      "location": "191 Warriors Way, Suite 102, San Francisco, CA 94158",
+      "url": "https://splashsportsbar.com/",
+      "description": "Think you're a trivia titan? Prove it! Join us for an exhilarating Trivia Night at Splash Sports Bar (San Francisco) every Monday at 6:30 PM. Assemble your sharpest team, flex your brainpower across diverse categories, and compete for awesome prizes and ultimate bragging rights. Get ready for challenging questions, great fun, and your chance to dominate the leaderboard!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "cc96606e-f226-4006-8a0b-6bb067dc1487",
       "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
       "start_time": "2026-10-13T01:30:00+00:00",
@@ -28195,6 +29314,27 @@
       ],
       "topics": [
         "karaoke"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "d55430a8-fa95-4f8c-8c79-79489e5774b0",
+      "title": "Trivia Night at Belle Cora (San Francisco)",
+      "start_time": "2026-10-13T02:00:00+00:00",
+      "location": "565 Green St, San Francisco, CA 94133",
+      "url": "http://thebellecora.com/",
+      "description": "Sharpen your wits and dominate the categories! Join us for Belle Cora's engaging trivia night every Monday at 7:00 PM in San Francisco. Gather your team of masterminds and dive into a fun, perfectly challenging evening designed to test your knowledge and crown you the city's smartest. Don't miss the ultimate Monday night brain workout!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -29069,6 +30209,27 @@
       "cost": "free"
     },
     {
+      "id": "96e12ebe-b2d5-48ba-8570-ccdcd0f14e1e",
+      "title": "Trivia Night at Pinstripes (San Mateo)",
+      "start_time": "2026-10-14T01:00:00+00:00",
+      "location": "36 Hillsdale Mall, San Mateo, CA 94403",
+      "url": "https://pinstripes.com/",
+      "description": "Think you're a trivia wizard? Prove it at Pinstripes San Mateo's ultimate Trivia Night! Gather your brainiest crew and test your knowledge across challenging categories every Tuesday at 6:00 PM. Compete for ultimate bragging rights and fantastic prizes. Sharpen your wits and join San Mateo's smartest competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "bc05857b-558b-4301-afa8-3b37e8e0b56c",
       "title": "Performance: On the Page, Off the Page",
       "start_time": "2026-10-14T01:00:00+00:00",
@@ -29138,6 +30299,27 @@
       "cost": "paid"
     },
     {
+      "id": "d7972d2a-eae5-433f-a1de-d8a6ac8049c8",
+      "title": "Trivia Night at El Dorado Saloon & Grill (El Dorado Hills)",
+      "start_time": "2026-10-14T01:30:00+00:00",
+      "location": "879 Embarcadero Dr, El Dorado Hills, CA 95762",
+      "url": "http://www.eldoradosaloonandgrill.com/",
+      "description": "Think you're a trivia master? Test your smarts and gather your crew for Trivia Night at El Dorado Saloon & Grill in El Dorado Hills! Join us every Tuesday at 6:30 PM for a night of challenging questions, friendly competition, and fantastic food and drinks. Unleash your inner genius and claim your victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "013c064f-4059-4b6a-af49-cf46781256f7",
       "title": "Bar Bingo at Harry’s Bar",
       "start_time": "2026-10-14T02:00:00+00:00",
@@ -29147,6 +30329,28 @@
       "image_url": null,
       "sources": [
         "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia",
+        "bingo"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "02b2154d-cb1e-4f20-8e36-3a56ec69b2cd",
+      "title": "Trivia Night at Shotski's Alpine Lodge (San Francisco)",
+      "start_time": "2026-10-14T02:00:00+00:00",
+      "location": "239 Kearny St, San Francisco, CA 94108",
+      "url": "http://shotskislodge.com/",
+      "description": "Test your smarts and dominate at Shotski's Alpine Lodge Trivia Night every Tuesday at 7:00 PM! Assemble your crew and dive into an evening of challenging questions, fierce competition, and fantastic prizes. It's time to prove your knowledge and claim ultimate bragging rights in San Francisco's most engaging trivia showdown. Don't miss out!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
       ],
       "types": [
         [
@@ -29183,6 +30387,27 @@
       "cost": "free"
     },
     {
+      "id": "17931e5c-d644-4c7c-b171-03610f706e21",
+      "title": "Trivia Night at Pitt's Pub (Outer Sunset, San Francisco)",
+      "start_time": "2026-10-14T02:00:00+00:00",
+      "location": "4207 Judah St, San Francisco, CA 94122",
+      "url": "http://www.pittssf.com/",
+      "description": "Gather your sharpest friends and challenge your grey matter! Join us for an electrifying trivia night at Pitt's Pub in the Outer Sunset every Tuesday at 7:00 PM. Test your knowledge across mind-bending categories, battle other teams for ultimate bragging rights, and prove you're the true champion. Unleash your inner trivia beast!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "31865dfe-11e4-4918-baa3-0e9608a2d389",
       "title": "Open Bluegrass Jam at The Hotel Utah Saloon",
       "start_time": "2026-10-14T02:00:00+00:00",
@@ -29202,6 +30427,27 @@
         "folk-americana"
       ],
       "cost": "free"
+    },
+    {
+      "id": "4d51b314-48bb-405e-bc30-6c2a0398fc22",
+      "title": "Trivia Night at Folsom Hotel (Folsom)",
+      "start_time": "2026-10-14T02:00:00+00:00",
+      "location": "703 Sutter St, Folsom, CA 95630",
+      "url": "folsomhotelsaloon.com",
+      "description": "Challenge your brain at Folsom Hotel's exciting new trivia night! Every Tuesday at 7:00 PM, gather your sharpest friends in Folsom, CA. Dive into diverse categories, battle for bragging rights, and prove your team's genius. It's the ultimate test of knowledge and fun â don't miss the competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "4fc59259-6c5f-4bb5-9fc2-da83a1dd6f80",
@@ -29263,7 +30509,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -29678,7 +30926,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -30327,6 +31576,27 @@
       "cost": "unknown"
     },
     {
+      "id": "012200fc-bbbc-4801-9b6e-3999da4e5472",
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "start_time": "2026-10-15T01:00:00+00:00",
+      "location": "103 Kennedy Dr, Capitola, CA 95010",
+      "url": "https://www.rusticales.com/",
+      "description": "Think you're a brainiac? Prove it! Join us for exhilarating Trivia Night every Wednesday at 6:00 PM at Sante Adairius Rustic Ales in Capitola. Assemble your sharpest team, enjoy our acclaimed craft brews, and battle for ultimate bragging rights. Victory (and great beer) awaits!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
+    },
+    {
       "id": "075f4aaa-41b9-4f30-a6f6-4b2d25166399",
       "title": "Workshop: Student Support Session with Study Smart Tutors",
       "start_time": "2026-10-15T01:00:00+00:00",
@@ -30519,7 +31789,8 @@
         ]
       ],
       "topics": [
-        "politics"
+        "politics",
+        "trivia"
       ],
       "cost": "free"
     },
@@ -30585,6 +31856,28 @@
         ]
       ],
       "topics": [],
+      "cost": "unknown"
+    },
+    {
+      "id": "47e5b6ff-3b8d-49f1-baf0-0c1b0e306b68",
+      "title": "Trivia Night at McGee's (Alameda)",
+      "start_time": "2026-10-15T01:30:00+00:00",
+      "location": "1645 Park St, Alameda, CA 94501",
+      "url": "http://www.mcgeesbarandgrill.com/",
+      "description": "Ready to prove you're the smartest in Alameda? Join McGee's (Alameda) Trivia Night every Wednesday at 6:30 PM! Assemble your dream team and battle it out across challenging categories for ultimate bragging rights and fantastic prizes. Fuel your brain with great food and drinks. Conquer the competition and claim your trivia glory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -30806,7 +32099,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -30826,7 +32121,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -30969,6 +32265,27 @@
       "cost": "free"
     },
     {
+      "id": "f8f9684f-a7ce-4ef0-a6ec-375547f7d0ee",
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "start_time": "2026-10-15T02:00:00+00:00",
+      "location": "49A Municipal Wharf, Santa Cruz, CA 95060",
+      "url": "https://www.makaisantacruz.com/",
+      "description": "Think youâre a trivia whiz? Challenge your brain at Makai Island Kitchen & Groggery, Santa Cruz, every Wednesday at 7:00 PM! Gather your sharpest crew, flex your knowledge across diverse categories, and compete for ultimate bragging rights. Enjoy delicious island fare and craft drinks while you conquer the competition. Your path to trivia glory starts here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "0b5498a9-47c8-4d76-ad8e-8e6f0e48c324",
       "title": "Little Shop of Horrors",
       "start_time": "2026-10-15T02:30:00+00:00",
@@ -31026,6 +32343,27 @@
         [
           "social",
           "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "86c60e02-69fa-4bf2-8cea-00bf704c366a",
+      "title": "Trivia Night at Surf City Billiards ",
+      "start_time": "2026-10-15T02:30:00+00:00",
+      "location": "931 Pacific Ave, Santa Cruz, CA 95060",
+      "url": "https://www.surfcitybilliards.com/",
+      "description": "Think you're Santa Cruz's trivia champion? Prove it at Surf City Billiards' ultimate Trivia Night! Every Wednesday at 7:00 PM, gather your sharpest friends to conquer challenging questions across all categories. Fuel your brain with our delicious new menu while battling for ultimate bragging rights. Your quest for knowledge begins here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
         ]
       ],
       "topics": [
@@ -31118,7 +32456,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "unknown"
     },
     {
@@ -31164,6 +32504,27 @@
         "film"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "ffd26f2a-922a-47f5-a3b8-d8ef9c5247b8",
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "start_time": "2026-10-15T02:30:00+00:00",
+      "location": " 34 S B St, San Mateo, CA 94401",
+      "url": "https://www.yelp.com/biz/o-neills-irish-pub-san-mateo",
+      "description": "Think you're the ultimate trivia master? Prove it at O'Neills Irish Pub in San Mateo! Gather your sharpest team and unleash your inner genius every Wednesday at 7:30 PM. Prepare for a thrilling battle of wits, challenging questions, and the chance to claim ultimate bragging rights. Don't miss out on the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "febbbc5a-32ed-4c11-8e15-19eb1c17df14",
@@ -31945,6 +33306,28 @@
       "cost": "free"
     },
     {
+      "id": "774ed946-c6f7-4af8-a074-9e48fb3f43d2",
+      "title": "Trivia Night at Cordial Cellar and Lounge (Castro Valley)",
+      "start_time": "2026-10-16T01:00:00+00:00",
+      "location": " 3295 Castro Valley Blvd B100, Castro Valley, CA 94546",
+      "url": "https://www.cordialbottleshop.com/",
+      "description": "Think you're a genius? Prove it at Trivia Night! Gather your brightest friends and head to Cordial Cellar and Lounge in Castro Valley every Thursday at 6:00 PM. Challenge your wits across diverse categories, compete for bragging rights, and enjoy a fantastic evening out. It's time to put your obscure knowledge to the test!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "da01827b-9e24-494f-a4fd-fe66e393a2d7",
       "title": "Live DJ at Rick's Bar at Rick & Roxy's",
       "start_time": "2026-10-16T01:00:00+00:00",
@@ -32005,6 +33388,69 @@
       ],
       "topics": [
         "karaoke"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "329ae944-4292-4b46-b1a4-31f2ed0d6ef0",
+      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
+      "start_time": "2026-10-16T01:30:00+00:00",
+      "location": "1001 Center St, Santa Cruz, CA 95060",
+      "url": "https://www.11thhourcoffee.com/",
+      "description": "Sharpen your wits and gather your team! Join us for Trivia Night at 11th Hour Coffee (Santa Cruz) every Thursday at 6:30 PM. Compete across diverse categories, challenge your knowledge, and earn ultimate bragging rights. Fuel your mind with coffee and dominate the competition in Santa Cruz's favorite weekly trivia showdown!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "8e0bbad3-d555-4bca-858b-7c391a8c28f4",
+      "title": "Trivia Night at Almanac Beer Co. (Oakland)",
+      "start_time": "2026-10-16T01:30:00+00:00",
+      "location": "1640 18th St Ste A, Oakland, CA 94607",
+      "url": "https://almanacbeer.com/pages/west-oakland-hours",
+      "description": "Calling all Oakland trivia titans! Sharpen your wits and gather your brainiest crew for Trivia Night at Almanac Beer Co. in Oakland. Every Thursday at 6:30 PM, dive into challenging questions, fierce competition, and delicious craft beers. Prove your smarts, dominate the scoreboard, and claim ultimate victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
+    },
+    {
+      "id": "0ccb0a4b-131e-4cdf-bee3-045f98530558",
+      "title": "Trivia Night at The Double Standard (Oakland)",
+      "start_time": "2026-10-16T02:00:00+00:00",
+      "location": "2424 Telegraph Avenue, Oakland, CA 94612",
+      "url": "http://www.doublestandardbar.com/",
+      "description": "Think you're the smartest in the room? Prove it! The Double Standard (Oakland) hosts fierce trivia every Thursday at 7:00 PM. Assemble your team in Oakland, CA, and prepare for challenging questions, epic wins, and ultimate bragging rights. It's time to unleash your inner trivia champion and dominate the night!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -32074,6 +33520,27 @@
       "cost": "unknown"
     },
     {
+      "id": "4438d097-c89e-4520-a62f-ac3d535b132f",
+      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
+      "start_time": "2026-10-16T02:00:00+00:00",
+      "location": "4330 Olympic Ave, San Mateo, CA 94403",
+      "url": "https://belmateobowl.com/",
+      "description": "Ready to prove your genius? Unleash your trivia prowess at Bel Mateo Bowl in San Mateo! Gather your sharpest team for a thrilling Trivia Night every Thursday at 7:00 PM. Challenge your knowledge across diverse categories, compete for bragging rights, and enjoy the ultimate weekly brain workout. Don't miss the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "45c6a318-7d65-49e5-afdd-4b3e715c8d10",
       "title": "Peter Pan Goes Wrong",
       "start_time": "2026-10-16T02:00:00+00:00",
@@ -32135,6 +33602,28 @@
         ]
       ],
       "topics": [],
+      "cost": "unknown"
+    },
+    {
+      "id": "83e81938-28b6-4069-a230-4d99c2c02979",
+      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
+      "start_time": "2026-10-16T02:00:00+00:00",
+      "location": "201 Washington St, Oakland, CA 94607",
+      "url": "https://thefatladyrestaurant.com/",
+      "description": "Ready to prove your genius? Gather your brainiest crew for Trivia Night at **The Fat Lady Restaurant & Bar (Oakland)**, every **Thursday at 7:00 PM**! From pop culture to history, test your knowledge, compete for glory, and enjoy delicious food and drinks. Your throne awaits, Oakland!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -32333,7 +33822,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -35228,7 +36718,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -36979,6 +38471,27 @@
       "cost": "paid"
     },
     {
+      "id": "9965fa6c-4fa3-4d6b-a215-78b62da3a51c",
+      "title": "Trivia Night at Blue Moon Bar (San Mateo)",
+      "start_time": "2026-10-19T02:00:00+00:00",
+      "location": "215 S B St, San Mateo, CA 94401",
+      "url": "https://www.instagram.com/bluemoonsanmateo/",
+      "description": "Challenge your brain and claim ultimate bragging rights! Join us at Blue Moon Bar (San Mateo) every Sunday at 7:00 PM for San Mateo's premier trivia night. Gather your sharpest friends, tackle diverse categories, and compete for glory and awesome prizes. Elevate your Sunday with an evening of brain-bending fun and intellectual supremacy!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "83b1faf4-9dd8-40e5-9420-ed61993fe953",
       "title": "Lila Downs",
       "start_time": "2026-10-19T02:30:00+00:00",
@@ -37792,6 +39305,28 @@
       "cost": "unknown"
     },
     {
+      "id": "e2dd9a8d-93f9-4083-abd4-1a2dca1f8a48",
+      "title": "Trivia Night at Splash Sports Bar (San Francisco)",
+      "start_time": "2026-10-20T01:30:00+00:00",
+      "location": "191 Warriors Way, Suite 102, San Francisco, CA 94158",
+      "url": "https://splashsportsbar.com/",
+      "description": "Think you're a trivia titan? Prove it! Join us for an exhilarating Trivia Night at Splash Sports Bar (San Francisco) every Monday at 6:30 PM. Assemble your sharpest team, flex your brainpower across diverse categories, and compete for awesome prizes and ultimate bragging rights. Get ready for challenging questions, great fun, and your chance to dominate the leaderboard!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "25d494bf-549e-438e-956d-f61a22ccc248",
       "title": "Bingo at Fly Bar",
       "start_time": "2026-10-20T02:00:00+00:00",
@@ -37809,6 +39344,27 @@
       ],
       "topics": [
         "bingo"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "45d51ee5-1fa1-4da9-9196-0f7137162c6e",
+      "title": "Trivia Night at Belle Cora (San Francisco)",
+      "start_time": "2026-10-20T02:00:00+00:00",
+      "location": "565 Green St, San Francisco, CA 94133",
+      "url": "http://thebellecora.com/",
+      "description": "Sharpen your wits and dominate the categories! Join us for Belle Cora's engaging trivia night every Monday at 7:00 PM in San Francisco. Gather your team of masterminds and dive into a fun, perfectly challenging evening designed to test your knowledge and crown you the city's smartest. Don't miss the ultimate Monday night brain workout!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
       ],
       "cost": "unknown"
     },
@@ -38744,6 +40300,27 @@
       "cost": "unknown"
     },
     {
+      "id": "18db3598-1522-4830-978b-c277304dc6ac",
+      "title": "Trivia Night at Pinstripes (San Mateo)",
+      "start_time": "2026-10-21T01:00:00+00:00",
+      "location": "36 Hillsdale Mall, San Mateo, CA 94403",
+      "url": "https://pinstripes.com/",
+      "description": "Think you're a trivia wizard? Prove it at Pinstripes San Mateo's ultimate Trivia Night! Gather your brainiest crew and test your knowledge across challenging categories every Tuesday at 6:00 PM. Compete for ultimate bragging rights and fantastic prizes. Sharpen your wits and join San Mateo's smartest competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "1c326200-4d3c-41b8-8e2e-c358f460e385",
       "title": "Book Club: Rincón Literario",
       "start_time": "2026-10-21T01:00:00+00:00",
@@ -38865,6 +40442,27 @@
       "cost": "free"
     },
     {
+      "id": "4889a46c-0646-46b7-aab6-bfee432362e2",
+      "title": "Trivia Night at El Dorado Saloon & Grill (El Dorado Hills)",
+      "start_time": "2026-10-21T01:30:00+00:00",
+      "location": "879 Embarcadero Dr, El Dorado Hills, CA 95762",
+      "url": "http://www.eldoradosaloonandgrill.com/",
+      "description": "Think you're a trivia master? Test your smarts and gather your crew for Trivia Night at El Dorado Saloon & Grill in El Dorado Hills! Join us every Tuesday at 6:30 PM for a night of challenging questions, friendly competition, and fantastic food and drinks. Unleash your inner genius and claim your victory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "5f796314-797c-424a-8dfc-3271d28b89b9",
       "title": "Presentation: Hidden Meanings in Chinese Art",
       "start_time": "2026-10-21T01:30:00+00:00",
@@ -38955,6 +40553,27 @@
       "cost": "unknown"
     },
     {
+      "id": "19b5b7d0-7779-426c-9c65-f852c8791e4d",
+      "title": "Trivia Night at Pitt's Pub (Outer Sunset, San Francisco)",
+      "start_time": "2026-10-21T02:00:00+00:00",
+      "location": "4207 Judah St, San Francisco, CA 94122",
+      "url": "http://www.pittssf.com/",
+      "description": "Gather your sharpest friends and challenge your grey matter! Join us for an electrifying trivia night at Pitt's Pub in the Outer Sunset every Tuesday at 7:00 PM. Test your knowledge across mind-bending categories, battle other teams for ultimate bragging rights, and prove you're the true champion. Unleash your inner trivia beast!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "1faad66b-111f-4cba-86b8-ee8a0aad5631",
       "title": "Trivia at MOTHERSHIP",
       "start_time": "2026-10-21T02:00:00+00:00",
@@ -39022,6 +40641,27 @@
       "cost": "free"
     },
     {
+      "id": "61ddd06b-68f6-49bc-a20c-f20f31df7597",
+      "title": "Trivia Night at Folsom Hotel (Folsom)",
+      "start_time": "2026-10-21T02:00:00+00:00",
+      "location": "703 Sutter St, Folsom, CA 95630",
+      "url": "folsomhotelsaloon.com",
+      "description": "Challenge your brain at Folsom Hotel's exciting new trivia night! Every Tuesday at 7:00 PM, gather your sharpest friends in Folsom, CA. Dive into diverse categories, battle for bragging rights, and prove your team's genius. It's the ultimate test of knowledge and fun â don't miss the competition!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "6291ddad-09cf-4c8d-a9a2-c140b32a71e3",
       "title": "Trivia Night at Rocks Den",
       "start_time": "2026-10-21T02:00:00+00:00",
@@ -39036,6 +40676,27 @@
         [
           "social",
           "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "6eeaadcb-962f-4975-8fe8-4dc1c0eb31f9",
+      "title": "Trivia Night at Shotski's Alpine Lodge (San Francisco)",
+      "start_time": "2026-10-21T02:00:00+00:00",
+      "location": "239 Kearny St, San Francisco, CA 94108",
+      "url": "http://shotskislodge.com/",
+      "description": "Test your smarts and dominate at Shotski's Alpine Lodge Trivia Night every Tuesday at 7:00 PM! Assemble your crew and dive into an evening of challenging questions, fierce competition, and fantastic prizes. It's time to prove your knowledge and claim ultimate bragging rights in San Francisco's most engaging trivia showdown. Don't miss out!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
         ]
       ],
       "topics": [
@@ -39124,7 +40785,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -39144,7 +40807,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -39451,7 +41115,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -40183,6 +41848,27 @@
       "cost": "free"
     },
     {
+      "id": "c9ebf2b7-4ede-4c41-ad59-16cbe62433e2",
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "start_time": "2026-10-22T01:00:00+00:00",
+      "location": "103 Kennedy Dr, Capitola, CA 95010",
+      "url": "https://www.rusticales.com/",
+      "description": "Think you're a brainiac? Prove it! Join us for exhilarating Trivia Night every Wednesday at 6:00 PM at Sante Adairius Rustic Ales in Capitola. Assemble your sharpest team, enjoy our acclaimed craft brews, and battle for ultimate bragging rights. Victory (and great beer) awaits!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free"
+    },
+    {
       "id": "e6ac5dc5-f8ab-4e25-a1ee-976bdb56473e",
       "title": "Workshop: Yoga with Tendwell Collective",
       "start_time": "2026-10-22T01:00:00+00:00",
@@ -40233,6 +41919,28 @@
       "image_url": null,
       "sources": [
         "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
+      "id": "9ea2ed77-f61c-4b0d-a2c4-fa6a099e963b",
+      "title": "Trivia Night at McGee's (Alameda)",
+      "start_time": "2026-10-22T01:30:00+00:00",
+      "location": "1645 Park St, Alameda, CA 94501",
+      "url": "http://www.mcgeesbarandgrill.com/",
+      "description": "Ready to prove you're the smartest in Alameda? Join McGee's (Alameda) Trivia Night every Wednesday at 6:30 PM! Assemble your dream team and battle it out across challenging categories for ultimate bragging rights and fantastic prizes. Fuel your brain with great food and drinks. Conquer the competition and claim your trivia glory!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
       ],
       "types": [
         [
@@ -40316,6 +42024,27 @@
       "cost": "unknown"
     },
     {
+      "id": "294a4328-1f06-4701-95d1-bee15170fb21",
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "start_time": "2026-10-22T02:00:00+00:00",
+      "location": "49A Municipal Wharf, Santa Cruz, CA 95060",
+      "url": "https://www.makaisantacruz.com/",
+      "description": "Think youâre a trivia whiz? Challenge your brain at Makai Island Kitchen & Groggery, Santa Cruz, every Wednesday at 7:00 PM! Gather your sharpest crew, flex your knowledge across diverse categories, and compete for ultimate bragging rights. Enjoy delicious island fare and craft drinks while you conquer the competition. Your path to trivia glory starts here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "31ed0f25-8fa0-4abe-a590-f5e7b2f2e0b2",
       "title": "Bingo Night at Abbey Tavern",
       "start_time": "2026-10-22T02:00:00+00:00",
@@ -40332,7 +42061,8 @@
         ]
       ],
       "topics": [
-        "trivia"
+        "trivia",
+        "bingo"
       ],
       "cost": "unknown"
     },
@@ -40397,7 +42127,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -40635,7 +42367,9 @@
           "social"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "unknown"
     },
     {
@@ -40682,6 +42416,27 @@
       "cost": "unknown"
     },
     {
+      "id": "fa22f53b-a3ef-4b63-a7f6-5af13a60a667",
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "start_time": "2026-10-22T02:30:00+00:00",
+      "location": " 34 S B St, San Mateo, CA 94401",
+      "url": "https://www.yelp.com/biz/o-neills-irish-pub-san-mateo",
+      "description": "Think you're the ultimate trivia master? Prove it at O'Neills Irish Pub in San Mateo! Gather your sharpest team and unleash your inner genius every Wednesday at 7:30 PM. Prepare for a thrilling battle of wits, challenging questions, and the chance to claim ultimate bragging rights. Don't miss out on the fun!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
+    },
+    {
       "id": "fc139b05-7d31-4e7a-ae5d-269379e5d31d",
       "title": "Adam Grant",
       "start_time": "2026-10-22T02:30:00+00:00",
@@ -40703,6 +42458,27 @@
         "nonfiction"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "fd638c08-0512-4581-976d-e41183053016",
+      "title": "Trivia Night at Surf City Billiards ",
+      "start_time": "2026-10-22T02:30:00+00:00",
+      "location": "931 Pacific Ave, Santa Cruz, CA 95060",
+      "url": "https://www.surfcitybilliards.com/",
+      "description": "Think you're Santa Cruz's trivia champion? Prove it at Surf City Billiards' ultimate Trivia Night! Every Wednesday at 7:00 PM, gather your sharpest friends to conquer challenging questions across all categories. Fuel your brain with our delicious new menu while battling for ultimate bragging rights. Your quest for knowledge begins here!",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "88cd3b35-503b-4061-844a-d60b5edba1d5",
@@ -42835,7 +44611,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -43636,7 +45414,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "drag"
+      ],
       "cost": "free"
     },
     {
@@ -44771,7 +46551,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -45235,7 +47016,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -46631,7 +48414,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -47783,7 +49568,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -48333,7 +50119,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -50042,7 +51830,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -51676,7 +53466,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -51788,7 +53579,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -52746,7 +54539,9 @@
           "party-club"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "karaoke"
+      ],
       "cost": "free"
     },
     {
@@ -53719,7 +55514,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -55518,7 +57315,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -55970,7 +57768,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -57788,7 +59588,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -59109,7 +60911,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -59367,7 +61170,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -59992,7 +61797,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -60754,7 +62561,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -60886,7 +62694,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -61438,7 +63248,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -62007,7 +63819,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -62098,7 +63911,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -62513,7 +64328,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -63026,7 +64843,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
@@ -63115,7 +64933,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "trivia"
+      ],
       "cost": "free"
     },
     {
@@ -63573,7 +65393,9 @@
           "games-hobby"
         ]
       ],
-      "topics": [],
+      "topics": [
+        "bingo"
+      ],
       "cost": "free"
     },
     {
@@ -63962,7 +65784,8 @@
         ]
       ],
       "topics": [
-        "rock-indie"
+        "rock-indie",
+        "karaoke"
       ],
       "cost": "free"
     },
