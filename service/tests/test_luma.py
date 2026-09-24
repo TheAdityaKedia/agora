@@ -208,6 +208,7 @@ def test_scrape_calendar_end_to_end_enriches_descriptions():
         "https://luma.com/Big-Brain-Bay",
         calendar_html_fetch=_cal,
         event_html_fetch=_event,
+        api_id_fetch=lambda slug: None,  # force the JSON-LD fallback path
     )
     assert len(events) == 2
     # Both events had their descriptions enriched from the stub detail fetch.
@@ -230,3 +231,53 @@ def test_scrape_calendar_returns_empty_on_calendar_fetch_error():
         event_html_fetch=lambda u: None,
     )
     assert events == []
+
+
+# --- get-items API path (full calendar, beyond the first ~15) ---------------
+
+def test_find_calendar_api_id_ignores_cal_padding():
+    html = '<div class="cal-padding"></div><script>"cal-ahTi4ptrN9WCYkg"</script>'
+    assert luma.find_calendar_api_id(html) == "cal-ahTi4ptrN9WCYkg"
+    assert luma.find_calendar_api_id("<div class='cal-padding'></div>") is None
+
+
+def test_event_from_api_maps_fields():
+    entry = {"event": {
+        "name": "The Commons Camping Retreat",
+        "start_at": "2026-09-24T16:00:00.000Z",
+        "url": "commons-retreat",
+        "cover_url": "https://images.lumacdn.com/x.png",
+        "location_type": "offline",
+        "geo_address_info": {"address": "Willits, CA"},
+    }}
+    ev = luma.event_from_api(entry)
+    assert ev.title == "The Commons Camping Retreat"
+    assert ev.start_time.astimezone(timezone.utc) == datetime(2026, 9, 24, 16, 0, tzinfo=timezone.utc)
+    assert ev.url == "https://luma.com/commons-retreat"
+    assert ev.location == "Willits, CA"
+    assert ev.image_url == "https://images.lumacdn.com/x.png"
+
+
+def test_event_from_api_online_event_location():
+    ev = luma.event_from_api({"event": {
+        "name": "Virtual talk", "start_at": "2026-10-01T02:00:00.000Z",
+        "url": "v", "location_type": "online", "geo_address_info": None}})
+    assert ev.location == "Online"
+
+
+def test_scrape_calendar_uses_api_when_calendar_id_present():
+    # Calendar HTML carries a real cal- id → API path (not the JSON-LD fallback).
+    cal_html = '<html><body>"cal-ahTi4ptrN9WCYkg"</body></html>'
+    entries = [
+        {"event": {"name": f"Event {i}", "start_at": "2026-10-01T02:00:00.000Z",
+                   "url": f"slug{i}", "location_type": "offline",
+                   "geo_address_info": {"address": "San Francisco"}}}
+        for i in range(30)  # more than the ~15 the JSON-LD page would carry
+    ]
+    events = luma.scrape_calendar(
+        "https://luma.com/thecommons",
+        calendar_html_fetch=lambda u: cal_html,
+        items_fetch=lambda cid: entries,
+        event_html_fetch=lambda u: None,
+    )
+    assert len(events) == 30
