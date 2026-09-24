@@ -38,6 +38,35 @@ def _step_for(repeat_frequency: str | None) -> timedelta | None:
     return timedelta(weeks=n) if unit == "W" else timedelta(days=n)
 
 
+_WEEKDAYS = {
+    "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+    "friday": 4, "saturday": 5, "sunday": 6,
+}
+_TIME_RE = re.compile(r"^\s*(\d{1,2}):(\d{2})\s*([AaPp][Mm])\s*$")
+
+
+def next_weekly_start(day_name: str, time_str: str, now: datetime | None = None,
+                      tz: ZoneInfo = LOCAL_TZ) -> datetime | None:
+    """Compute the next occurrence (on/after today, local) of a weekday + time,
+    as a tz-aware UTC datetime. For sources that give "Thursday, 6:30 PM" but no
+    concrete date. Returns None if the day/time can't be parsed.
+    """
+    if not day_name or not time_str:
+        return None
+    wd = _WEEKDAYS.get(day_name.strip().lower())
+    m = _TIME_RE.match(time_str or "")
+    if wd is None or not m:
+        return None
+    hour, minute, ampm = int(m.group(1)), int(m.group(2)), m.group(3).lower()
+    hour = hour % 12 + (12 if ampm == "pm" else 0)
+    now = now or datetime.now(timezone.utc)
+    today = now.astimezone(tz).date()
+    days_ahead = (wd - today.weekday()) % 7  # 0 = today matches the weekday
+    occ_date = today + timedelta(days=days_ahead)
+    return datetime(occ_date.year, occ_date.month, occ_date.day, hour, minute,
+                    tzinfo=tz).astimezone(timezone.utc)
+
+
 def expand_occurrences(
     first_start,
     repeat_frequency: str | None,
