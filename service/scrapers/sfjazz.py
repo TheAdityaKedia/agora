@@ -1,353 +1,107 @@
 """SFJAZZ Center events scraper.
 
-SFJAZZ sits behind Cloudflare with a 403 default for JS-less clients, so we
-drive a headless browser. The "Ace Calendar" widget renders one
-`.ace-cal-list-event` per performance:
-  - .ace-cal-list-day-of-month ("Sep 20") — no year; inferred from a base year
-    (the month URL being scraped) and rolled forward at Dec→Jan month wraps.
-  - h4 title inside a linked <a> → title + relative detail URL
-  - .ace-cal-list-event-time ("3:00 PM | Miner Auditorium")
-  - .ace-cal-list-event-image img[src] (relative → resolve)
+SFJAZZ's public site (sfjazz.org) is behind Cloudflare that 403s *every*
+document request — even a real headless browser (307→403) — so the calendar
+can't be scraped directly. But the site is an Umbraco build hosted by Adage
+Technologies, and its calendar loads from a clean JSON API on the origin host,
+which is NOT Cloudflare-fronted:
 
-The default `/calendar/` view shows only a short rolling window (~this week).
-To cover the full season, `scrape()` walks the site's per-month endpoint
-`/calendar/?date=YYYY-MM-01&layout=A` forward from today to the LOOKAHEAD
-horizon, deduping within-run by (title, start_time).
+    https://sfjazz-redesign-stage.adagetech.net/ace-api/events/?startDate=…&endDate=…
+
+One call returns the whole season (one item per performance — multi-night runs
+are already split by date), so `scrape()` hits it once, no browser needed.
+
+NOTE: that origin host is a staging URL discovered via robots.txt; if it goes
+away, fall back to a residential-proxy / CF-bypass fetch of the production
+calendar. Image and detail URLs point at production sfjazz.org (stable, and
+they load fine in a user's browser). The API's `eventDate` carries a wrong
+offset (-05:00), so we build the time from the display date + time strings as
+Pacific.
 """
-import random
-import re
-import time
+from __future__ import annotations
+
 from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
-from bs4 import BeautifulSoup
+import requests
 
 from config import LOOKAHEAD_DAYS
 from scrapers.base import RawEvent
-from scrapers.browser import (
-    RateLimited, browser_context, browser_session, load_page_html,
-)
+from scrapers.browser import BROWSER_UA
 
 
 SOURCE = "sfjazz.org"
 NAME = "SFJAZZ Center"
-BASE_URL = "https://www.sfjazz.org"
-EVENTS_URL = "https://www.sfjazz.org/calendar/"
+BASE_URL = "https://www.sfjazz.org"  # for user-facing image + detail URLs
+ACE_API = "https://sfjazz-redesign-stage.adagetech.net/ace-api/events/"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 VENUE = "SFJAZZ Center, 201 Franklin St, San Francisco, CA 94102"
-
-NETWORKIDLE_WAIT = "load"  # networkidle can hang on tracker beacons
-# Politeness delay between per-month calendar fetches; SFJAZZ is Cloudflare-
-# fronted and 403s bursty traffic even with a warm context.
-BETWEEN_MONTH_DELAY_S = 5.0
-# Stop walking forward after this many consecutive empty months — SFJAZZ
-# publishes through their season end and past that months are just empty.
-EMPTY_MONTH_STOP = 2
-# Detail-page fetches are Cloudflare-guarded and need a fresh context per URL
-# (10-20s each including the JS challenge). Only enrich descriptions for events
-# in the near-term window — farther-out events keep the "time | room" fallback
-# and get real descriptions on later runs as their date approaches.
-DESCRIPTION_WINDOW_DAYS = 60
-# Cloudflare 403s a stock headless Chromium after ~4 back-to-back detail
-# fetches even with fresh contexts, and heavy anti-fingerprinting (stealth)
-# tends to hurt rendering more than it helps here — SFJAZZ's own widget uses
-# JS APIs that patched contexts break. So we keep it simple: (a) a fresh
-# BROWSER PROCESS per URL (not just a fresh context) and (b) a randomized
-# 5-10s delay. Partial coverage from local IPs; GitHub Actions runners usually
-# clear more URLs before Cloudflare escalates.
-BETWEEN_DETAIL_DELAY_MIN_S = 5.0
-BETWEEN_DETAIL_DELAY_MAX_S = 10.0
-DETAIL_SETTLE_MS = 2000
-# SFJAZZ's detail page shows this placeholder when a show has passed; skip it.
-_EXPIRED_SHOW_MARKER = "performances for this production have passed"
+REQUEST_TIMEOUT = 30
 
 
 def _log(msg: str) -> None:
     print(f"[sfjazz] {msg}", flush=True)
-SETTLE_MS = 4000
-
-_MONTHS = {m: i for i, m in enumerate(
-    ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], start=1
-)}
-_TIME_RE = re.compile(r"(\d{1,2}):(\d{2})\s*([APap][Mm])")
 
 
 def matches(url: str) -> bool:
     return "sfjazz.org" in url
 
 
-def _parse_month_day(text: str) -> tuple[int, int] | None:
-    text = " ".join(text.strip().split())
-    parts = text.split()
-    if len(parts) != 2:
-        return None
-    month = _MONTHS.get(parts[0][:3].title())
-    if month is None:
+def _parse_start(date_str: str | None, time_str: str | None) -> datetime | None:
+    """Build a UTC start from the API's display date + time (Pacific wall-clock).
+
+    We use `eventDateString` ("10/1/2026") + `eventTimeString` ("9:30 PM") rather
+    than `eventDate`, whose tz offset is wrong (-05:00)."""
+    if not (date_str and time_str):
         return None
     try:
-        return month, int(parts[1])
+        naive = datetime.strptime(f"{date_str} {time_str}", "%m/%d/%Y %I:%M %p")
     except ValueError:
         return None
+    return naive.replace(tzinfo=SOURCE_TZ).astimezone(timezone.utc)
 
 
-def _parse_time(text: str) -> tuple[int, int] | None:
-    m = _TIME_RE.search(text or "")
-    if not m:
-        return None
-    hour = int(m.group(1)) % 12
-    if m.group(3).lower() == "pm":
-        hour += 12
-    return hour, int(m.group(2))
+def _abs_url(path: str | None) -> str | None:
+    return urljoin(BASE_URL, path) if path else None
 
 
-def _pick_show_link(el):
-    """Return the `<a>` most likely to be the show's live detail page.
-
-    SFJAZZ occasionally emits an `/athome/…` streaming-archive href alongside
-    (or in place of) the `/tickets/productions/…` live-show href, and every
-    card also has a `/smartseat/?itemNumber=…` "Buy Tickets" link. Picking the
-    first `<a>` yields wrong descriptions (78-char at-home blurb) for those.
-
-    Priority:
-      1. `<a>` whose href starts with `/tickets/productions/` — the canonical
-         live-show detail URL.
-      2. `<a>` whose href is site-relative and not a known non-detail path
-         (`/smartseat/`, `/athome/`, `mailto:`, `tel:`) — safety fallback for
-         future URL shapes we don't know about.
-      3. The first `<a>` found (matches historical behavior for weird cards).
-    """
-    candidates = el.select(".ace-cal-list-event-details a[href]") or el.find_all("a", href=True)
-    if not candidates:
-        return None
-    for a in candidates:
-        if a.get("href", "").startswith("/tickets/productions/"):
-            return a
-    _skip_prefixes = ("/smartseat/", "/athome/", "mailto:", "tel:", "http://", "https://")
-    for a in candidates:
-        href = a.get("href", "")
-        if href and not href.startswith(_skip_prefixes):
-            return a
-    return candidates[0]
-
-
-def _parse_event(el, year: int) -> tuple[RawEvent | None, int | None]:
-    day_tag = el.select_one(".ace-cal-list-day-of-month")
-    if not day_tag:
-        return None, None
-    md = _parse_month_day(day_tag.get_text(strip=True))
-    if not md:
-        return None, None
-    month, day = md
-
-    title_a = _pick_show_link(el)
-    title_tag = el.select_one(".ace-cal-list-event-details h4") or (title_a.find(["h3","h4","h5"]) if title_a else None)
-    title = title_tag.get_text(strip=True) if title_tag else (title_a.get_text(strip=True) if title_a else None)
-    if not title:
-        return None, month
-    href = title_a.get("href") if title_a else None
-    url = urljoin(BASE_URL, href) if href else None
-
-    time_tag = el.select_one(".ace-cal-list-event-time")
-    time_text = time_tag.get_text(" ", strip=True) if time_tag else ""
-    hm = _parse_time(time_text) or (19, 0)  # 7 PM SFJAZZ default if missing
-    hour, minute = hm
-
-    # Venue detail (Miner Auditorium, Joe Henderson Lab, …) sits after "|"
-    venue_extra = None
-    if time_tag:
-        spans = time_tag.find_all("span")
-        if spans:
-            venue_extra = spans[-1].get_text(" ", strip=True) or None
-    location = f"{VENUE} — {venue_extra}" if venue_extra else VENUE
-
-    img_tag = el.select_one(".ace-cal-list-event-image-img") or el.select_one(".ace-cal-list-event-image img")
-    image_url = urljoin(BASE_URL, img_tag["src"]) if img_tag and img_tag.get("src") else None
-
-    try:
-        start_time = datetime(year, month, day, hour, minute, tzinfo=SOURCE_TZ).astimezone(timezone.utc)
-    except ValueError:
-        return None, month
-
-    return RawEvent(
-        title=title,
-        start_time=start_time,
-        location=location,
-        url=url,
-        description=time_text or None,
-        image_url=image_url,
-    ), month
-
-
-def parse(html: str, base_year: int | None = None) -> list[RawEvent]:
-    """Parse an SFJAZZ calendar page into RawEvents.
-
-    `base_year` is the year of the month being scraped — critical when
-    walking `/calendar/?date=YYYY-MM-01` for future months, since day cells
-    only carry short "Sep 20"-style labels with no year. Defaults to the
-    current SF-local year for backwards compatibility.
-    """
-    soup = BeautifulSoup(html, "html.parser")
-    year = base_year if base_year is not None else datetime.now(SOURCE_TZ).year
-    prev_month: int | None = None
+def parse_events(items: list[dict]) -> list[RawEvent]:
+    """Map ace-api event objects to RawEvents (one per performance). Pure."""
     events: list[RawEvent] = []
-    for el in soup.select(".ace-cal-list-event"):
-        # Peek month for year rollover
-        day_tag = el.select_one(".ace-cal-list-day-of-month")
-        peek = _parse_month_day(day_tag.get_text(strip=True)) if day_tag else None
-        if peek and prev_month is not None and peek[0] < prev_month:
-            year += 1
-        ev, month = _parse_event(el, year)
-        if ev is not None:
-            events.append(ev)
-        if month is not None:
-            prev_month = month
+    for it in items or []:
+        title = (it.get("name") or "").strip()
+        start_time = _parse_start(it.get("eventDateString"), it.get("eventTimeString"))
+        if not (title and start_time):
+            continue
+        room = (it.get("location") or "").strip()
+        location = f"SFJAZZ Center — {room}" if room else VENUE
+        synopsis = (it.get("synopsis") or "").strip() or None
+        events.append(RawEvent(
+            title=title,
+            start_time=start_time,
+            location=location,
+            url=_abs_url(it.get("viewDetailCtaUrl")),
+            description=synopsis,
+            image_url=_abs_url(it.get("thumbnail")),
+        ))
     return events
 
 
-def parse_detail_description(html: str) -> str | None:
-    """Return the show's description blurb from an SFJAZZ detail page, or None.
-
-    SFJAZZ places the descriptive copy in the first `.rich-text` block on the
-    page. Later `.rich-text` blocks are personnel lists, address+phone, cookie
-    banner, etc. For expired shows the first block is a placeholder — skip.
-    """
-    soup = BeautifulSoup(html, "html.parser")
-    for block in soup.select(".rich-text"):
-        text = block.get_text(" ", strip=True)
-        if not text or len(text) < 60:
-            continue
-        if _EXPIRED_SHOW_MARKER in text.lower():
-            continue
-        return text
-    return None
-
-
-def _month_calendar_url(month: date) -> str:
-    """Build the SFJAZZ per-month calendar URL for the first of `month`."""
-    return f"{EVENTS_URL}?date={month.isoformat()}&layout=A"
-
-
-def _next_month(d: date) -> date:
-    return date(d.year + 1, 1, 1) if d.month == 12 else date(d.year, d.month + 1, 1)
-
-
-def _url_slug(u: str) -> str:
-    """Short label for progress logs: strip domain + trailing slash."""
-    tail = u.rsplit("/", 2)
-    return tail[-2] if u.endswith("/") and len(tail) >= 2 else tail[-1]
-
-
-def scrape(url: str = EVENTS_URL, horizon: date | None = None) -> list[RawEvent]:
-    """Walk SFJAZZ's per-month calendar from today to `horizon`, then fetch
-    each near-term event's detail page for the real blurb.
-
-    Description enrichment is bounded to events within DESCRIPTION_WINDOW_DAYS
-    (default 60) — farther-out events keep the "time | room" fallback and get
-    real descriptions on later runs as their date approaches.
-
-    Stops the month walk early after `EMPTY_MONTH_STOP` consecutive empty
-    months. Cloudflare rejects consecutive same-context fetches, so we
-    amortize the browser launch via `browser_session()` and open a fresh
-    context per URL.
-    """
-    if horizon is None:
-        horizon = date.today() + timedelta(days=LOOKAHEAD_DAYS)
-    today = datetime.now(SOURCE_TZ).date()
-    month_cursor = date(today.year, today.month, 1)
-    seen_keys: set[tuple[str, datetime]] = set()
-    events: list[RawEvent] = []
-    empty_streak = 0
-
-    def _dbg(tag: str):
-        return lambda msg: _log(f"{tag} · {msg}")
-
-    # --- Phase 1: walk months (single browser process, fresh context per URL) ---
-    with browser_session(debug_log=_dbg("session")) as session:
-        _log(f"phase 1: walking months from {month_cursor} to horizon {horizon}")
-        month_index = 0
-        while month_cursor <= horizon:
-            month_index += 1
-            month_url = _month_calendar_url(month_cursor)
-            t0 = time.monotonic()
-            _log(f"month {month_index} {month_cursor}: fetching {month_url}")
-            try:
-                with session.fresh_context() as ctx:
-                    html = load_page_html(
-                        ctx, month_url,
-                        wait_until=NETWORKIDLE_WAIT, settle_ms=SETTLE_MS,
-                        debug_log=_dbg(f"month {month_index}"),
-                    )
-            except RateLimited as e:
-                _log(f"month {month_index} {month_cursor}: blocked (HTTP {e.status}), stopping walk")
-                break
-            found = 0
-            for ev in parse(html, base_year=month_cursor.year):
-                key = (ev.title, ev.start_time)
-                if key in seen_keys:
-                    continue
-                seen_keys.add(key)
-                events.append(ev)
-                found += 1
-            _log(f"month {month_index} {month_cursor}: {found} new events in {time.monotonic() - t0:.1f}s")
-            if found == 0:
-                empty_streak += 1
-                if empty_streak >= EMPTY_MONTH_STOP:
-                    _log(f"stopping: {empty_streak} consecutive empty months")
-                    break
-            else:
-                empty_streak = 0
-            month_cursor = _next_month(month_cursor)
-            if month_cursor <= horizon:
-                time.sleep(BETWEEN_MONTH_DELAY_S)
-
-    # --- Phase 2: enrich descriptions for near-term unique URLs ---
-    # Uses a FRESH browser process per URL (not just a fresh context) plus
-    # playwright-stealth (in load_page_html) plus a randomized long delay.
-    # Each of those alone was insufficient against Cloudflare on SFJAZZ.
-    window_end = datetime.now(timezone.utc) + timedelta(days=DESCRIPTION_WINDOW_DAYS)
-    urls_in_window: set[str] = {
-        ev.url for ev in events
-        if ev.url and ev.start_time <= window_end
-    }
-    unique_urls = sorted(urls_in_window)
-    _log(f"phase 2: enriching descriptions for {len(unique_urls)} unique URLs "
-         f"(events within next {DESCRIPTION_WINDOW_DAYS} days)")
-    descriptions: dict[str, str] = {}
-    for i, detail_url in enumerate(unique_urls, start=1):
-        slug = _url_slug(detail_url)
-        _log(f"detail {i}/{len(unique_urls)} {slug}: fetching {detail_url}")
-        t0 = time.monotonic()
-        try:
-            with browser_context() as ctx:
-                html = load_page_html(
-                    ctx, detail_url,
-                    wait_until=NETWORKIDLE_WAIT, settle_ms=DETAIL_SETTLE_MS,
-                    debug_log=_dbg(f"detail {i}/{len(unique_urls)} {slug}"),
-                )
-        except RateLimited as e:
-            _log(f"detail {i}/{len(unique_urls)} {slug}: blocked (HTTP {e.status}), stopping phase 2")
-            break
-        except Exception as e:
-            _log(f"detail {i}/{len(unique_urls)} {slug}: error {type(e).__name__}: {e}")
-            continue
-        load_s = time.monotonic() - t0
-        desc = parse_detail_description(html)
-        if desc:
-            descriptions[detail_url] = desc
-            _log(f"detail {i}/{len(unique_urls)} {slug}: description {len(desc)} chars ({load_s:.1f}s)")
-        else:
-            _log(f"detail {i}/{len(unique_urls)} {slug}: no description found ({load_s:.1f}s)")
-        if i < len(unique_urls):
-            delay = random.uniform(BETWEEN_DETAIL_DELAY_MIN_S, BETWEEN_DETAIL_DELAY_MAX_S)
-            _log(f"detail {i}/{len(unique_urls)} {slug}: sleeping {delay:.1f}s before next")
-            time.sleep(delay)
-
-    # Apply fetched descriptions in-place, keeping the "time | room" fallback.
-    enriched = 0
-    for ev in events:
-        if ev.url and ev.url in descriptions:
-            ev.description = descriptions[ev.url]
-            enriched += 1
-    _log(f"done: {len(events)} events collected, {enriched} enriched with detail-page descriptions")
+def scrape(url: str = ACE_API, horizon: date | None = None) -> list[RawEvent]:
+    """Fetch the full season from the Adage ace-api in one call and parse it."""
+    today = date.today()
+    end = horizon or (today + timedelta(days=LOOKAHEAD_DAYS))
+    params = {"startDate": today.isoformat(), "endDate": end.isoformat()}
+    try:
+        resp = requests.get(ACE_API, params=params,
+                            headers={"User-Agent": BROWSER_UA, "Accept": "application/json"},
+                            timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        items = resp.json()
+    except (requests.RequestException, ValueError) as e:
+        _log(f"ace-api fetch failed: {type(e).__name__}: {e}")
+        return []
+    events = parse_events(items if isinstance(items, list) else [])
+    _log(f"done: {len(events)} events from ace-api")
     return events
