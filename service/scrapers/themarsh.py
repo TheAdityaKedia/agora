@@ -29,6 +29,12 @@ DETAIL_WORKERS = 5
 _MATCH_THRESHOLD = 0.4  # min title-token overlap (Jaccard) to trust a WP match
 
 _SHOW_URL_RE = re.compile(r"https://themarsh\.org/shows_and_events/([a-z0-9-]+)/")
+# The homepage only links currently-featured shows; the sitemap lists every
+# show page (incl. recurring series like Tell It On Tuesday and the RISING
+# development series that aren't featured up front).
+_SITEMAP_URL = "https://themarsh.org/post-sitemap.xml"
+_SHOW_PATH_RE = re.compile(r"https://themarsh\.org/shows_and_events/\S*?([a-z0-9-]+)/?$")
+_LOC_RE = re.compile(r"<loc>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</loc>")
 # Utility / non-show pages under /shows_and_events/ to skip.
 _NON_SHOW = re.compile(r"donate|gift|membership|pass|^class-|marshstream|risings?$|runs$|marsh-rising", re.I)
 # Boilerplate paragraphs (box-office / address blocks) to drop from the blurb.
@@ -38,6 +44,11 @@ _STOPWORDS = {"the", "a", "an", "and", "of", "with", "at", "presents", "marsh", 
 # Skip these shows entirely — recurring open-stage nights with no per-show page
 # and little value as individual calendar entries.
 _SKIP_RE = re.compile(r"monday night marsh", re.I)
+# Marks where a recurring show's page switches from its evergreen series blurb
+# to the *current edition's* lineup — which is only right for the next date.
+_EDITION_RE = re.compile(
+    r"\b(artist bio(graphy)?|featuring|special guest|this (month|week|tuesday)"
+    r"|line ?-?up|tonight|our line up)\b", re.I)
 
 
 def matches(url: str) -> bool:
@@ -81,6 +92,14 @@ def parse_show_page(html: str) -> tuple[str, str | None, str | None]:
     return title, description, image_url
 
 
+def _evergreen(description: str | None) -> str | None:
+    """Drop a recurring show's edition-specific tail, keeping the series blurb."""
+    if not description:
+        return None
+    m = _EDITION_RE.search(description)
+    return (description[:m.start()].strip() or None) if m else description
+
+
 def _best_match(title: str, index: list[tuple[set[str], set[str], dict]]) -> dict | None:
     """Match a calendar title to a WP show by token overlap, or — for compressed
     titles/slugs — by normalized-string containment."""
@@ -92,11 +111,16 @@ def _best_match(title: str, index: list[tuple[set[str], set[str], dict]]) -> dic
         score = len(want_tokens & tokens) / len(union) if union else 0.0
         # Containment on the normalized form catches spacing/year differences
         # that zero out token overlap (e.g. "notjustjazz" vs "Not Just Jazz 2026").
-        if want_norm and any(len(n) >= 6 and (n in want_norm or want_norm in n) for n in norms):
+        if _norm_contains(want_norm, norms):
             score = max(score, 1.0)
         if score > best_score:
             best_score, best = score, payload
     return best if best_score >= _MATCH_THRESHOLD else None
+
+
+def _norm_contains(want_norm: str, norms: set[str]) -> bool:
+    """Precise match: one normalized string contains the other (min length 6)."""
+    return bool(want_norm and any(len(n) >= 6 and (n in want_norm or want_norm in n) for n in norms))
 
 
 def _fetch(url: str, session: requests.Session) -> str | None:
@@ -133,6 +157,22 @@ def _build_wp_index(session: requests.Session) -> list[tuple[set[str], set[str],
     return index
 
 
+def _sitemap_candidates(session: requests.Session) -> list[tuple[set[str], str]]:
+    """(slug-norms, url) for every show page in the sitemap (excl. livestream
+    archives) — matched by containment only, so we fetch just the ones we hit."""
+    xml = _fetch(_SITEMAP_URL, session)
+    if not xml:
+        return []
+    cands: list[tuple[set[str], str]] = []
+    for u in _LOC_RE.findall(xml):
+        if "/shows_and_events/" not in u or "/marshstream/" in u:
+            continue
+        m = _SHOW_PATH_RE.match(u)
+        if m:
+            cands.append(({_norm(m.group(1))}, u))
+    return cands
+
+
 def scrape(url: str = CALENDAR_URL) -> list[RawEvent]:
     events = [e for e in ludus.scrape_calendar(CALENDAR_URL, fallback_location=FALLBACK_LOCATION)
               if not _SKIP_RE.search(e.title)]
@@ -142,20 +182,43 @@ def scrape(url: str = CALENDAR_URL) -> list[RawEvent]:
     session = requests.Session()
     session.headers.update({"User-Agent": BROWSER_UA})
     index = _build_wp_index(session)
-    if not index:
+    candidates = _sitemap_candidates(session)
+    if not (index or candidates):
         print("[themarsh] no WP show pages found; showtimes only", flush=True)
         return events
 
-    matched = {}  # title -> payload (matched once per distinct show)
-    enriched = 0
+    parsed_cache: dict[str, dict] = {}
+
+    def _sitemap_match(title: str) -> dict | None:
+        """Containment-only match against the sitemap, fetching the hit page."""
+        want = _norm(title)
+        url = next((u for norms, u in candidates if _norm_contains(want, norms)), None)
+        if not url:
+            return None
+        if url not in parsed_cache:
+            html = _fetch(url, session)
+            _, desc, image = parse_show_page(html) if html else (None, None, None)
+            parsed_cache[url] = {"description": desc, "image_url": image, "url": url}
+        return parsed_cache[url]
+
+    from collections import defaultdict
+    by_title: dict[str, list[RawEvent]] = defaultdict(list)
     for e in events:
-        if e.title not in matched:
-            matched[e.title] = _best_match(e.title, index)
-        payload = matched[e.title]
-        if payload:
-            e.description = payload["description"]
+        by_title[e.title].append(e)
+
+    enriched = 0
+    for title, group in by_title.items():
+        payload = _best_match(title, index) or _sitemap_match(title)
+        if not payload:
+            continue
+        group.sort(key=lambda e: e.start_time)
+        evergreen = _evergreen(payload["description"])
+        for i, e in enumerate(group):
             e.image_url = payload["image_url"]
             e.url = payload["url"] or e.url
+            # The page's lineup reflects only the next edition, so the soonest
+            # occurrence gets the full text; later ones get the series blurb.
+            e.description = payload["description"] if i == 0 else evergreen
             enriched += 1
     print(f"[themarsh] enriched {enriched}/{len(events)} events from WP show pages", flush=True)
     return events
