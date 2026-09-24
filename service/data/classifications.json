@@ -82,6 +82,27 @@
         ]
       ]
     },
+    "4-Star Theater\u001fFOGCUTTER FILM SERIES: VOLUME 26 - The Buddy Holly Story (Hosted by Chuck Prophet)": {
+      "classified_at": "2026-09-24T22:13:22.071193+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 1,
+      "title": "FOGCUTTER FILM SERIES: VOLUME 26 - The Buddy Holly Story (Hosted by Chuck Prophet)",
+      "topics": [
+        "film",
+        "rock-indie",
+        "music"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fLIVE MUSIC: @ (Presented by THROWIN' BO'S)": {
       "classified_at": "2026-09-23T20:11:01.785368+00:00",
       "cost": "unknown",
@@ -1009,6 +1030,39 @@
         ]
       ]
     },
+    "Alonzo King LINES Ballet\u001fBFA Senior Solo Concert": {
+      "classified_at": "2026-09-24T22:13:26.709865+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Alonzo King LINES Ballet",
+      "taxonomy_version": 1,
+      "title": "BFA Senior Solo Concert",
+      "topics": [
+        "dance"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Alonzo King LINES Ballet\u001fLINES Ballet + San Francisco Symphony: Two World Premieres": {
+      "classified_at": "2026-09-24T22:13:27.898454+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Alonzo King LINES Ballet",
+      "taxonomy_version": 1,
+      "title": "LINES Ballet + San Francisco Symphony: Two World Premieres",
+      "topics": [
+        "dance",
+        "classical"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fA Girl Walks Home Alone at Night": {
       "classified_at": "2026-09-23T20:10:11.483778+00:00",
       "cost": "paid",
@@ -1016,6 +1070,38 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 1,
       "title": "A Girl Walks Home Alone at Night",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fA Nightmare on Elm Street": {
+      "classified_at": "2026-09-24T22:13:07.831343+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "A Nightmare on Elm Street",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fAll That Heaven Allows": {
+      "classified_at": "2026-09-24T22:13:02.191272+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "All That Heaven Allows",
       "topics": [
         "film"
       ],
@@ -1042,6 +1128,39 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fBlood and Black Lace": {
+      "classified_at": "2026-09-24T22:13:05.635369+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Blood and Black Lace",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fClue": {
+      "classified_at": "2026-09-24T22:13:01.056218+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Clue",
+      "topics": [
+        "film",
+        "comedy"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fDigger": {
       "classified_at": "2026-09-23T20:10:05.063209+00:00",
       "cost": "paid",
@@ -1058,6 +1177,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fEdie Arnold Is a Loser": {
+      "classified_at": "2026-09-24T22:12:58.793045+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Edie Arnold Is a Loser",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fEl Vampiro": {
       "classified_at": "2026-09-23T20:10:08.823305+00:00",
       "cost": "paid",
@@ -1065,6 +1200,70 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 1,
       "title": "El Vampiro",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fEvent Horizon": {
+      "classified_at": "2026-09-24T22:13:04.482729+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Event Horizon",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fFallen Angels": {
+      "classified_at": "2026-09-24T22:12:52.005304+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Fallen Angels",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fFrankenhooker": {
+      "classified_at": "2026-09-24T22:13:15.354981+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Frankenhooker",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fGummo": {
+      "classified_at": "2026-09-24T22:13:06.681383+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Gummo",
       "topics": [
         "film"
       ],
@@ -1106,6 +1305,23 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fKiller of Sheep": {
+      "classified_at": "2026-09-24T22:12:56.692826+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Killer of Sheep",
+      "topics": [
+        "film",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fLIVE  MUSIC:  Izaak Opatz, Joe Kaplow": {
       "classified_at": "2026-09-23T20:10:19.565095+00:00",
       "cost": "unknown",
@@ -1119,6 +1335,22 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fLa Belle et la Bête": {
+      "classified_at": "2026-09-24T22:12:57.721614+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "La Belle et la Bête",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -1154,6 +1386,38 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fLonglegs": {
+      "classified_at": "2026-09-24T22:13:03.312283+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Longlegs",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fMad God": {
+      "classified_at": "2026-09-24T22:13:10.010643+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Mad God",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fMean Girls": {
       "classified_at": "2026-09-23T20:10:03.769426+00:00",
       "cost": "paid",
@@ -1161,6 +1425,70 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 1,
       "title": "Mean Girls",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fNight Tide": {
+      "classified_at": "2026-09-24T22:13:16.508855+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Night Tide",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fNight of the Creeps": {
+      "classified_at": "2026-09-24T22:13:18.689089+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Night of the Creeps",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fNight of the Living Dead": {
+      "classified_at": "2026-09-24T22:13:17.603235+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Night of the Living Dead",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fNightbreed": {
+      "classified_at": "2026-09-24T22:12:53.160685+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Nightbreed",
       "topics": [
         "film"
       ],
@@ -1235,6 +1563,87 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fScream": {
+      "classified_at": "2026-09-24T22:13:20.872525+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Scream",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fTHE BIG PICTURE PRESENTS: Halloween & Halloween III: Season of the Witch": {
+      "classified_at": "2026-09-24T22:13:10.965012+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "THE BIG PICTURE PRESENTS: Halloween & Halloween III: Season of the Witch",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fTeen Witch": {
+      "classified_at": "2026-09-24T22:13:12.052380+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Teen Witch",
+      "topics": [
+        "film",
+        "drag"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fThe Exorcist": {
+      "classified_at": "2026-09-24T22:13:19.740397+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "The Exorcist",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fThe Faculty": {
+      "classified_at": "2026-09-24T22:12:59.886868+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "The Faculty",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fThe History of Concrete": {
       "classified_at": "2026-09-23T20:09:59.307984+00:00",
       "cost": "paid",
@@ -1268,6 +1677,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fThe Room @ 11 PM": {
+      "classified_at": "2026-09-24T22:12:54.396804+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "The Room @ 11 PM",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fThe Vourdalak": {
       "classified_at": "2026-09-23T20:10:12.626167+00:00",
       "cost": "paid",
@@ -1275,6 +1700,71 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 1,
       "title": "The Vourdalak",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fThey Live": {
+      "classified_at": "2026-09-24T22:13:14.287588+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "They Live",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fUgetsu": {
+      "classified_at": "2026-09-24T22:12:55.514781+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Ugetsu",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fUp in Smoke": {
+      "classified_at": "2026-09-24T22:13:13.175258+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Up in Smoke",
+      "topics": [
+        "film",
+        "comedy"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fVersus": {
+      "classified_at": "2026-09-24T22:13:08.904310+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "Versus",
       "topics": [
         "film"
       ],
@@ -2721,6 +3211,21 @@
         ]
       ]
     },
+    "Black Bird Bookstore\u001fATTENTION PARENTS! Have a 10 - 12 year old? This event is for you!": {
+      "classified_at": "2026-09-24T22:12:29.390265+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "ATTENTION PARENTS! Have a 10 - 12 year old? This event is for you!",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Black Bird Bookstore\u001fAuthor Storytime: Elsa's Chessboard and Story Power!": {
       "classified_at": "2026-09-23T19:52:01.047994+00:00",
       "cost": "unknown",
@@ -2846,6 +3351,38 @@
         ]
       ]
     },
+    "Black Bird Bookstore\u001fLive Music with “Day Old Material”": {
+      "classified_at": "2026-09-24T22:12:35.734224+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Live Music with “Day Old Material”",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Black Bird Bookstore\u001fLive Music: Alexis Tsamoudakis Trio": {
+      "classified_at": "2026-09-24T22:12:39.242088+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Live Music: Alexis Tsamoudakis Trio",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Black Bird Bookstore\u001fMonthly BIPOC Political Organizing Gathering": {
       "classified_at": "2026-09-23T19:51:54.118277+00:00",
       "cost": "free",
@@ -2886,6 +3423,24 @@
         ]
       ]
     },
+    "Black Bird Bookstore\u001fPop Up: Evil Mizu": {
+      "classified_at": "2026-09-24T22:12:41.642380+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Pop Up: Evil Mizu",
+      "topics": [
+        "visual-art",
+        "design"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Black Bird Bookstore\u001fSame Page x Black Bird Book Club: MEET ME IN THE GARDEN by Nina LaCour": {
       "classified_at": "2026-09-23T19:51:52.907757+00:00",
       "cost": "free",
@@ -2905,6 +3460,63 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Black Bird Bookstore\u001fStorytime with Canine Companions": {
+      "classified_at": "2026-09-24T22:12:40.419451+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Storytime with Canine Companions",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Black Bird Bookstore\u001fStorytime with Kindergarten Teachers": {
+      "classified_at": "2026-09-24T22:12:36.831854+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Storytime with Kindergarten Teachers",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Black Bird Bookstore\u001fStorytime with Michelle Sterling + Carren Jao": {
+      "classified_at": "2026-09-24T22:12:38.092769+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Storytime with Michelle Sterling + Carren Jao",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -2954,6 +3566,27 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Black Bird Bookstore\u001fSupport for Hawaii: Cookies and Prints Pop Up": {
+      "classified_at": "2026-09-24T22:12:34.621109+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Black Bird Bookstore",
+      "taxonomy_version": 1,
+      "title": "Support for Hawaii: Cookies and Prints Pop Up",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -3926,6 +4559,28 @@
         ]
       ]
     },
+    "City Lights Booksellers\u001fOf Poetry & Protest: 10th Anniversary Celebration": {
+      "classified_at": "2026-09-24T22:12:28.260444+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Lights Booksellers",
+      "taxonomy_version": 1,
+      "title": "Of Poetry & Protest: 10th Anniversary Celebration",
+      "topics": [
+        "poetry",
+        "politics",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "City Lights Booksellers\u001fOf Poetry & Protest: 10th Anniversary Celebration (POSTPONED)": {
       "classified_at": "2026-09-23T19:50:55.588588+00:00",
       "cost": "free",
@@ -4792,6 +5447,24 @@
         ]
       ]
     },
+    "Commonwealth Club\u001fPracticing Pediatrics with Kids and Parents in the Age of AI": {
+      "classified_at": "2026-09-24T22:13:23.246745+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Practicing Pediatrics with Kids and Parents in the Age of AI",
+      "topics": [
+        "science",
+        "tech"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "Commonwealth Club\u001fProposition Mania: Making Sense of Those Confusing Ballots": {
       "classified_at": "2026-09-23T23:45:23.213039+00:00",
       "cost": "unknown",
@@ -5273,6 +5946,16 @@
           "party-club"
         ]
       ]
+    },
+    "El Rio\u001fCLOSED FOR A PRIVATE EVENT": {
+      "classified_at": "2026-09-24T22:13:25.597134+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 1,
+      "title": "CLOSED FOR A PRIVATE EVENT",
+      "topics": [],
+      "types": []
     },
     "El Rio\u001fCrisis Hotline Happy Hour (Free)": {
       "classified_at": "2026-09-24T21:34:51.073725+00:00",
@@ -5950,6 +6633,22 @@
       "source": "Great American Music Hall",
       "taxonomy_version": 1,
       "title": "The Menzingers: Everything I Ever Saw North American Tour",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fThinking Fellers Union Local 282": {
+      "classified_at": "2026-09-24T22:12:45.201564+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 1,
+      "title": "Thinking Fellers Union Local 282",
       "topics": [
         "rock-indie"
       ],
@@ -9640,6 +10339,22 @@
         ]
       ]
     },
+    "Phoenix Theater (Petaluma)\u001fPhthalo, Blivet, Kill Mary Kill, Her Machina": {
+      "classified_at": "2026-09-24T22:12:48.680078+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Phoenix Theater (Petaluma)",
+      "taxonomy_version": 1,
+      "title": "Phthalo, Blivet, Kill Mary Kill, Her Machina",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Phoenix Theater (Petaluma)\u001fSKITZO - 45 YEARS OF GUT-WRENCHING THRASH METAL": {
       "classified_at": "2026-09-23T19:56:22.171422+00:00",
       "cost": "unknown",
@@ -9669,6 +10384,26 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Phoenix Theater (Petaluma)\u001fThe 29th Annual Petaluma Poetry Walk: \"Found Poets in the Round\"": {
+      "classified_at": "2026-09-24T22:12:47.550261+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Phoenix Theater (Petaluma)",
+      "taxonomy_version": 1,
+      "title": "The 29th Annual Petaluma Poetry Walk: \"Found Poets in the Round\"",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
         ]
       ]
     },
@@ -13562,6 +14297,23 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Neo-Futurists\u001fSF Neo-Futurists' The Infinite Wrench": {
+      "classified_at": "2026-09-24T22:12:49.826953+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Neo-Futurists",
+      "taxonomy_version": 1,
+      "title": "SF Neo-Futurists' The Infinite Wrench",
+      "topics": [
+        "theater",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -23024,6 +23776,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Print Kwanimals with Arion Press": {
+      "classified_at": "2026-09-24T22:12:50.940531+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 1,
+      "title": "Workshop: Print Kwanimals with Arion Press",
+      "topics": [
+        "visual-art",
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Quilling Flowers": {
       "classified_at": "2026-09-23T20:07:28.253694+00:00",
       "cost": "free",
@@ -24512,6 +25281,23 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fLove Seat": {
+      "classified_at": "2026-09-24T22:13:24.431150+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 1,
+      "title": "Love Seat",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fNocturne: A Romantasy Symposium (Presented by Nightlight Society)": {
       "classified_at": "2026-09-24T21:31:22.409854+00:00",
       "cost": "unknown",
@@ -25329,6 +26115,38 @@
       "source": "The Fillmore",
       "taxonomy_version": 1,
       "title": "The Big Star Quintet",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fThe Mountain Goats - Night Five: Cast of Thousands": {
+      "classified_at": "2026-09-24T22:12:44.054253+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 1,
+      "title": "The Mountain Goats - Night Five: Cast of Thousands",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fThe Mountain Goats - Night Four: Six Long Songs": {
+      "classified_at": "2026-09-24T22:12:42.820182+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 1,
+      "title": "The Mountain Goats - Night Four: Six Long Songs",
       "topics": [
         "rock-indie"
       ],
@@ -26447,6 +27265,22 @@
       "title": "Velvetta (Country)",
       "topics": [
         "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fEventCartel Presents KINO USA TOUR KINO": {
+      "classified_at": "2026-09-24T22:12:46.408522+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 1,
+      "title": "EventCartel Presents KINO USA TOUR KINO",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
