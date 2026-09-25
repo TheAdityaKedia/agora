@@ -25,20 +25,40 @@ class RateLimited(Exception):
 
 
 @contextmanager
-def browser_context():
-    """Yield a configured Playwright browser context, tearing it down after."""
+def browser_context(*, full_chromium: bool = False):
+    """Yield a configured Playwright browser context, tearing it down after.
+
+    `full_chromium=True` launches the full Chromium binary in (new) headless
+    mode instead of Playwright's default `chrome-headless-shell` — a stripped
+    build that Cloudflare's managed challenge detects. On a Mac host the shell
+    happens to pass; inside our Linux container it gets stuck on "Just a
+    moment..." from the second page on. The full binary passes in both, with
+    no fingerprint spoofing. Opt-in per scraper (Green Apple) rather than the
+    default, so sources that work today don't change behavior.
+    """
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        launch_kwargs = {"channel": "chromium"} if full_chromium else {}
+        browser = p.chromium.launch(headless=True, **launch_kwargs)
         try:
-            yield browser.new_context(
-                user_agent=BROWSER_UA,
-                viewport={"width": 1280, "height": 800},
-                locale="en-US",
-            )
+            yield new_browser_context(browser)
         finally:
             browser.close()
+
+
+def new_browser_context(browser):
+    """Open a context on `browser` with our standard UA/viewport/locale.
+
+    Exposed so a scraper can swap in a fresh context (new cookie jar) mid-run —
+    e.g. `context.browser` → `new_browser_context(...)` after a Cloudflare
+    challenge, which scores per session rather than per IP.
+    """
+    return browser.new_context(
+        user_agent=BROWSER_UA,
+        viewport={"width": 1280, "height": 800},
+        locale="en-US",
+    )
 
 
 @contextmanager
