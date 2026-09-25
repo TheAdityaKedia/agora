@@ -106,6 +106,20 @@ so one bad source produced no output at all. This fragility scales badly as the
 source list grows (one flaky source in 100 breaks every run), so it was fixed
 before onboarding more sources.
 
+**Per-source CI runners, single writer.** Scheduled scraping
+(`.github/workflows/scrape.yml`, `service/ci.py`) runs every source on its own
+GitHub runner: the run is as fast as the slowest source, each source gets a
+fresh runner IP (less WAF reputation from one IP hitting every venue), and a
+hung or crashing scraper is cut off by its job timeout without touching the
+others. Only scraping fans out; exactly one merge job writes to the DB, walking
+`sources.txt` order. Parallel writers would make dedup attribution (earlier
+source wins a shared row) nondeterministic and race on the check-then-insert
+`(title, start_time)` dedup, which no constraint enforces. The data PR is
+guarded and merged *in-job* rather than via native auto-merge, because PRs and
+merges made with `GITHUB_TOKEN` trigger neither status checks nor push
+workflows (so the job also dispatches the Pages deploy itself). Neon (free
+tier) persists the DB between runs, so a failed source keeps its last rows.
+
 **Deduplication.** Two layers: `(url, start_time)`, then `(title, start_time)`.
 `start_time` is always in the key so many performances of one show (which often
 share a single show URL) stay distinct. A third, fuzzy/semantic layer is

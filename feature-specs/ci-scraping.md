@@ -1,6 +1,6 @@
 # Feature Spec: Scheduled Scraping on GitHub Actions (one runner per source)
 
-Status: Approved design · Owner: Agora · Target: `.github/workflows/scrape.yml` + `service/ci.py`
+Status: Implemented (branch `ci-scraping`) · Owner: Agora · Target: `.github/workflows/scrape.yml` + `service/ci.py`
 
 ## Goal
 
@@ -28,7 +28,9 @@ The repo is public, so standard runners are free with unlimited minutes.
 - **Fan-out scrape, single-writer save.** Only scraping is parallel. Exactly one
   job writes to the DB, in `sources.txt` order. Parallel writers would make
   dedup attribution nondeterministic (the earlier source wins a shared row) and
-  race on the check-then-insert dedup (no unique constraint enforces it).
+  race on the check-then-insert dedup (a partial unique index covers
+  `(url, start_time)`, but nothing enforces `(title, start_time)`, and a unique
+  violation would abort a source's save).
 - **Scrape jobs are unprivileged.** They get no DB, AWS, or git credentials —
   only `ZYTE_API_KEY`. All privileged work happens in the one merge job.
 - **Failures are data, not red jobs.** A scraper exception is recorded in its

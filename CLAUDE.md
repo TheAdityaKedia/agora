@@ -32,13 +32,17 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 - `service/` — Python backend. `scrapers/` (one module per source + shared libs
   `eventbrite.py`, `luma.py`, `performances.py`, `browser.py`), `exporters/`,
   `taxonomy.py` + `classify.py` + `classifications.py` (AI tagging), `main.py`
-  (pipeline entry), `api.py` (read API), `tests/`. `data/` holds `sources.txt`,
+  (pipeline entry), `ci.py` (GitHub Actions stages: plan/scrape/merge/guard),
+  `api.py` (read API), `tests/`. `data/` holds `sources.txt`,
   `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the
   committed `classifications.json` (tag cache).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
   `vendor/` (pinned MiniSearch), `events.json` (the manifest — carries the
   taxonomy block + per-event `types`/`topics`/`cost`).
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
+- `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
+  source → single merge job (Neon) → guarded auto-merged data PR → deploy.
+  See `feature-specs/ci-scraping.md`.
 
 ## Operating rules for agents
 
@@ -62,9 +66,15 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `events.json` in its **own** commit so code stays reviewable. Imperative
   subject, no attribution footer (match `git log`). Commit/push only when asked;
   a push to `main` touching `frontend/` deploys the site.
-- **The DB is ephemeral; the manifest is durable.** Never treat DB state as the
-  source of truth for the site — `events.json` is. Same for tags:
-  `classifications.json` is the durable committed cache, not the DB.
+- **The manifest is durable; the DB is working state.** Never treat DB state as
+  the source of truth for the site — `events.json` is. Same for tags:
+  `classifications.json` is the durable committed cache, not the DB. The
+  *local* Compose DB is ephemeral; the CI DB (Neon) persists between runs.
+- **Data refreshes ship from CI, not from agents.** `scrape.yml` runs daily and
+  lands `events.json` + `classifications.json` via auto-merged
+  `data/refresh-*` PRs. Don't regenerate/commit the manifest to ship data; a
+  local run is for testing a scraper. To refresh one source now:
+  `gh workflow run scrape.yml -f sources="<substring>"`.
 - **AI tagging (classify step in `run()`):** calls Bedrock (Claude Haiku); needs
   AWS creds (the compose scraper mounts `~/.aws` — refresh on host first) or it's
   skipped (`--no-classify` to skip explicitly). Classifies only cache misses
@@ -72,6 +82,12 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   source ⇒ also add its `source_profiles.json` line (see `CONTRIBUTING.md`).
 
 ## Sharp edges (things that have actually bitten)
+
+- **Stale rows live in Neon too.** Saves never update existing rows, so when a
+  scraper's *output* changes, CI keeps serving the old fields until that
+  source's rows are deleted in Neon (README → "Scheduled scraping" →
+  Operations). Hosted Postgres also drops idle connections — `db.py` uses
+  `pool_pre_ping` for that; keep it.
 
 - **`--exclude`/`--sources` are plain substring matches.** `sfpl` also matches
   `sfplayhouse`; use `sfpl.org`. Check for collisions before trusting a filter.
