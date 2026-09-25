@@ -132,6 +132,9 @@ thin wrapper (`SOURCE`, `NAME`, the platform id/URL, `matches()`, and a one-line
 | **Elfsight Event Calendar** | `elfsight` in page; widget XHR to `widget-data.service.elfsight.com/api/events?source=<id>` | `elfsight_events.py` → `scrape_events(source_id, …)` | `riptide.py` |
 | **iCal / ICS feed** | any `.ics` link (Sched `all.ics`, Squarespace `?format=ical`) | `ics.py` → `scrape_ics(ics_url, fallback_location=…)` | `litquake.py` (Sched) |
 | **Ludus** (ticketing) | `<org>.ludus.com/calendar` (403s plain requests; renders in a browser) | `ludus.py` → `scrape_calendar(url, fallback_location=…)` | `themarsh.py` |
+| **Elfsight (settings mode)** | Elfsight widget whose `/api/events` 404s; the embed's `core.service.elfsight.com/p/boot` response carries `settings.events` | `elfsight_events.py` → `scrape_widget_settings(widget_id, page_url, …)` | `booksinc.py` |
+| **IndieCommerce** (ABA bookstores, Drupal) | `indiecommerce` in page; `/events/YYYY/MM` month listings of `article.event-list` cards | `indiecommerce.py` → `scrape_events(site_base, fallback_location=…)` | `booksmith.py`, `bookpassage.py`, `noevalleybooks.py`, `mrsdalloways.py`, `bookshopwestportal.py` |
+| **BookManager** (bookstore webstore SPA) | "You need to enable JavaScript"; XHRs to `api.bookmanager.com/customer/…` | `bookmanager.py` → `scrape_events(store_id, site_base, …)` | `tallyho.py` |
 
 And a few **patterns** we reuse by copying rather than a shared lib:
 
@@ -142,6 +145,15 @@ And a few **patterns** we reuse by copying rather than a shared lib:
   Reference: `sfplayhouse.py`.
 - **Shopify + Mahina events app** — a JSON API behind the storefront widget.
   Reference: `blackbird.py`.
+- **Shopify "event products"** — events sold as products in a collection;
+  `/collections/<c>/products.json` lists them, the date is only on the product
+  page. Reference: `omnivore.py`.
+- **Eventbrite links embedded on the venue's own site** — when the organizer
+  page renders only a few events, collect `/e/<id>` links from the venue site
+  and hand them to `eventbrite.scrape_event_urls`. Reference: `clios.py`.
+- **Hand-written dates with no year** ("Tuesday, September 29th at 7pm") —
+  `scrapers/datetext.py::parse_weekday_date` picks the year by weekday.
+  References: `omnivore.py`, `fabulosa.py`.
 
 Two recurring gotchas these libs handle, worth copying:
 

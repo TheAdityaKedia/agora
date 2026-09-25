@@ -83,23 +83,12 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Bookstores, literary orgs & publishers
 
-- **Booksmith** (Haight) — https://www.booksmith.com/
-- **Book Passage** (Corte Madera + Ferry Building) — https://www.bookpassage.com/
-- **Books Inc.** (local chain) — https://www.booksinc.com/
-- **Noe Valley Books** — https://noevalleybooks.com/
-- **Dog Eared Books** (Mission/Castro) — https://www.dogearedbooks.com/
-- **Fabulosa Books** (Castro) — https://www.fabulosabooks.com/
-- **Russian Hill Bookstore** — https://russianhillbookstore.com/
-- **Globus Books** (Russian-language) — https://globusbooks.com/
-- **Unexpected Bookstore** — https://unexpectedbookstore.com/
-- **Omnivore Books** (food/cookbook events) — https://omnivorebooks.myshopify.com/collections/upcoming-events
-- **Mrs. Dalloway's** (Berkeley) — https://www.mrsdalloways.com/
-- **Bookshop West Portal** — https://bookshopwestportal.com/
-- **Clio's Books** (Marin) — https://www.cliosbooks.com/
-- **Sansaar Books** — https://sansaarbooks.com/
-- **Silkworm Books** — https://silkwormbooks.com/
-- **William Stout Architectural Books** — https://stoutbooks.com/
-- **Tally Ho Bookstore** — https://tallyhobookstore.com/events
+- **Dog Eared Books** (Mission/Castro) — https://www.dogearedbooks.com/ *(spiked 2026-09: no events calendar on site, only a book-club page)*
+- **Globus Books** (Russian-language) — https://globusbooks.com/ *(spiked 2026-09: has `/events.php`, but WAF 403s the headless shell and 429s full Chromium; robots.txt crawl-delay 10. Retry politely later)*
+- **Unexpected Bookstore** — https://unexpectedbookstore.com/ *(spiked 2026-09: Square Online site, no events page)*
+- **Sansaar Books** — https://sansaarbooks.com/ *(El Cerrito archive/screening room; spiked 2026-09: no calendar on site, events are Instagram-only)*
+- **Silkworm Books** — https://silkwormbooks.com/ *(spiked 2026-09: this URL is Silkworm Books in Chiang Mai, Thailand, not the Bay Area; wrong link or drop)*
+- **William Stout Architectural Books** — https://stoutbooks.com/ *(spiked 2026-09: Shopify "News & Events" blog only, no dated calendar)*
 - **Small Press Traffic** — https://www.smallpresstraffic.org/
 - **The Writers Grotto** (Aloud/Out Loud series) — https://www.writersgrotto.org/
 - **Babylon Salon** (reading series) — https://babylonsalon.com/
