@@ -70,8 +70,6 @@ platform scraper may be the better path for some (noted where relevant).
 
 - **Bimbo's 365 Club** — https://bimbos365club.com/  *(Ticketweb — WAF, may be hard)*
 - **Freight & Salvage** (Berkeley) — https://thefreight.org/
-- **El Rio** (Mission bar/venue) — https://www.elriosf.com/
-- **Kronos Quartet** — https://kronosquartet.org/
 - **EnActe Arts** (South Asian theater) — https://enacte.org/
 - **Yerba Buena Gardens Festival** — https://ybgfestival.org/ *(distinct from YBCA, already a source)*
 
@@ -106,7 +104,6 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Festivals & fairs (mostly seasonal/annual)
 
-- **Litquake** — https://litquake.org/
 - **Bay Area Book Festival** — https://www.baybookfest.org/
 - **SF Art Book Fair** — https://sfartbookfair.com/
 - **SF Art Week** — https://sfartweek.com/
@@ -120,7 +117,6 @@ platform scraper may be the better path for some (noted where relevant).
 - **SF Stationery Fest** — https://sfstationeryfest.com/
 - **SF International Pen Show** — https://sanfranciscopenshow.com/
 - **Cookbook Week** — https://cookbookweek.com/
-- **Oakland Art Murmur** (First Fridays) — https://oaklandartmurmur.org/
 - **Temescal Alley Book Festival** — https://temescaldistrict.org/events/
 - **Night of Ideas** — https://nightofideas.org/
 - **SF Zine Fest** — https://sfzinefest.org/
@@ -163,21 +159,16 @@ farmers markets, "Virtual") were filtered out. Parenthetical count = events seen
 on BAR (a rough volume signal, not a full inventory).
 
 ### Music venues / jazz & blues clubs
-- **Yoshi's** (Oakland) — https://yoshis.com/oakland  *(famous jazz + supper club; 14)*
 - **The UC Theatre** (Berkeley) — https://www.theuctheatre.org/  *(nonprofit music hall; 26)*
-- **Biscuits & Blues** (SF) — https://www.biscuitsandblues.com/  *(Union Sq blues club; 24)*
 - **Mr. Tipple's** (SF) — https://mrtipplessf.com/  *(Hayes Valley jazz club; 23)*
 - **San Jose Jazz / SJZ Break Room** (San Jose) — https://sanjosejazz.org/  *(17)*
 - **Feinstein's at the Nikko** (SF) — https://www.feinsteinssf.com/  *(cabaret/supper club; 13)*
-- **Bach Dancing & Dynamite Society** (Half Moon Bay) — https://bachddsoc.org/  *(coastal jazz concerts; 7)*
-- **Keys Jazz Bistro** (SF) — https://keysjazzbistro.com/  *(North Beach jazz; 3)*
-- **The Dawn Club** (SF) — https://www.dawnclub.com/  *(jazz; 2)*
 - **Black Cat** (SF) — https://blackcatsf.com/  *(Tenderloin jazz supper club; 1)*
 - **The Mountain Winery** (Saratoga) — https://www.mountainwinery.com/  *(summer concert series; 3)*
 
 ### Concert-hall presenters (multi-venue programs)
 - **Cal Performances** (UC Berkeley — Zellerbach Hall/Playhouse, Hertz Hall) — https://calperformances.org/  *(major music/dance/theater presenter; ~50 across its halls)*
-- **Stanford Live** (Bing Concert Hall, Frost Amphitheater, Memorial Aud.) — https://live.stanford.edu/  *(~45 across venues; overlaps the Kronos candidate)*
+- **Stanford Live** (Bing Concert Hall, Frost Amphitheater, Memorial Aud.) — https://live.stanford.edu/  *(~45 across venues; may overlap Kronos Quartet, already a source)*
 
 ### Suburban performing-arts centers (multi-genre)
 - **Montalvo Arts Center** (Saratoga) — https://montalvoarts.org/  *(35)*
@@ -219,23 +210,6 @@ on BAR (a rough volume signal, not a full inventory).
 - **Arenas/stadiums (mega touring, out of scope):** Chase Center, Oakland Arena, Shoreline Amphitheatre.
 - **Not venues (festival/street locations):** Golden Gate Park, Castro/Folsom Street, Ferry Building/Plaza market, various "Downtown ___"/plazas, "[Virtual]", "Multiple Venues".
 
-## Already sources (for reference — do not re-add)
-
-- A.C.T. — `act-sf.org`
-- SF Public Library — `sfpl.org`
-- YBCA — `ybca.org`
-- City Lights — `citylights.com`
-- Green Apple Books — `greenapplebooks.com`
-- Black Bird Bookstore — `blackbirdsf.com`
-- Z Space — `zspace.org` (OvationTix client 34231; reusable pattern for other OvationTix venues)
-- Balboa Theatre — `balboamovies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py`)
-- 4-Star Theater — `4-star-movies.com` (Squarespace events collection; shared `scrapers/squarespace_events.py` — reusable for any Squarespace-events venue by calendar URL)
-- Medicine for Nightmares — `medicinefornightmares.com` (Squarespace events collection; shared `scrapers/squarespace_events.py`)
-- Bird & Beckett — `birdbeckett.com` (WordPress "The Events Calendar" REST API; shared `scrapers/tribe_events.py` — reusable for any Tribe/WordPress venue by site base)
-- Commonwealth Club — `commonwealthclub.org` (Drupal; paginated listing + JSON-LD Event on detail pages; startDate is UTC)
-- City Arts & Lectures — `cityarts.net` (WordPress `/event/` pages; `.date`/`.location` DOM, Pacific-local times)
-- Alonzo King LINES Ballet — `linesballet.org` (Tribe/WordPress; `scrapers/tribe_events.py` + Bay Area filter — touring company)
-- FACT/SF — `factsf.org` (Squarespace events collection; `scrapers/squarespace_events.py`)
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 
