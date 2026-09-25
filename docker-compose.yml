@@ -30,6 +30,11 @@ services:
       # --account <acct> --role Admin --provider isengard --once`). Without
       # valid creds the classify step is skipped and events export untagged.
       AWS_REGION: "${AWS_REGION:-us-east-1}"
+      # Optional Zyte API key: paid hosted fetch, the last resort for
+      # WAF-blocked sources (no scraper uses it today). Compose picks it up
+      # from the gitignored .env; unset is fine. See CONTRIBUTING.md →
+      # "When to give up".
+      ZYTE_API_KEY: "${ZYTE_API_KEY:-}"
     volumes:
       - ./frontend:/out
       # Mount the data dir read-write so the classification cache
