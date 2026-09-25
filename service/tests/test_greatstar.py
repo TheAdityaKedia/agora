@@ -46,6 +46,23 @@ def _show():
 
 # --- Listing (run-level) parsing ---
 
+class _FakeCtx:
+    def __init__(self):
+        self.browser = "browser"
+        self.closed = False
+
+    def close(self):
+        self.closed = True
+
+
+@pytest.fixture(autouse=True)
+def no_sleep(monkeypatch):
+    """PERF_DELAY_S is a real sleep; record it instead of waiting in tests."""
+    sleeps = []
+    monkeypatch.setattr(greatstar.time, "sleep", lambda s: sleeps.append(s))
+    return sleeps
+
+
 def test_matches():
     assert matches("https://www.greatstartheater.org/whats-playing")
     assert not matches("https://magictheatre.org/")
@@ -123,13 +140,84 @@ def test_scrape_show_performances_renders_and_parses(monkeypatch, detail_html):
 
 
 def test_scrape_show_performances_rate_limited_returns_empty(monkeypatch):
+    """Blocked on both the first try and the fresh-context retry → []."""
     def boom(ctx, url, **kw):
         raise RateLimited(url, 403)
     monkeypatch.setattr(greatstar, "load_page_html", boom)
-    assert _scrape_show_performances(object(), _show()) == []
+    monkeypatch.setattr(greatstar, "new_browser_context", lambda browser: _FakeCtx())
+    assert _scrape_show_performances(_FakeCtx(), _show()) == []
 
 
 def test_scrape_show_performances_empty_html_falls_back_to_empty(monkeypatch):
     """A non-TicketTailor page (no Event JSON-LD) yields [] so the caller keeps the run-level show."""
     monkeypatch.setattr(greatstar, "load_page_html", lambda ctx, url, **kw: "<html></html>")
     assert _scrape_show_performances(object(), _show()) == []
+
+
+
+# --- throttling: delay + fresh-context retry --------------------------------
+
+
+def test_scrape_show_performances_waits_before_render(monkeypatch, detail_html, no_sleep):
+    monkeypatch.setattr(greatstar, "load_page_html", lambda ctx, url, **kw: detail_html)
+    _scrape_show_performances(_FakeCtx(), _show())
+    assert no_sleep == [greatstar.PERF_DELAY_S]
+
+
+def test_scrape_show_performances_retries_once_in_fresh_context(monkeypatch, detail_html, no_sleep):
+    from scrapers.browser import RateLimited
+
+    original, fresh = _FakeCtx(), _FakeCtx()
+    seen = []
+
+    def load(ctx, url, **kw):
+        seen.append(ctx)
+        if ctx is original:
+            raise RateLimited(url, 403)
+        return detail_html
+
+    monkeypatch.setattr(greatstar, "load_page_html", load)
+    monkeypatch.setattr(greatstar, "new_browser_context", lambda browser: fresh)
+    events = _scrape_show_performances(original, _show())
+    assert seen == [original, fresh]
+    assert len(events) > 1           # performances parsed from the retry
+    assert fresh.closed              # the retry context doesn't leak
+
+
+def test_scrape_show_performances_persistent_block_falls_back(monkeypatch, no_sleep):
+    from scrapers.browser import RateLimited
+
+    fresh = _FakeCtx()
+
+    def load(ctx, url, **kw):
+        raise RateLimited(url, 403)
+
+    monkeypatch.setattr(greatstar, "load_page_html", load)
+    monkeypatch.setattr(greatstar, "new_browser_context", lambda browser: fresh)
+    assert _scrape_show_performances(_FakeCtx(), _show()) == []
+    assert fresh.closed
+
+
+def test_scrape_uses_full_chromium(monkeypatch):
+    """scrape() hands expand_shows a full-Chromium browser factory."""
+    captured = {}
+
+    class Resp:
+        status_code = 200
+        text = "<html></html>"
+
+        def raise_for_status(self):
+            pass
+
+    monkeypatch.setattr(greatstar.requests, "get", lambda *a, **k: Resp())
+    monkeypatch.setattr(greatstar, "parse", lambda html: [])
+    monkeypatch.setattr(greatstar, "browser_context",
+                        lambda **kw: captured.setdefault("kw", kw))
+
+    def fake_expand(shows, fn, *, label, _browser):
+        _browser()
+        return []
+
+    monkeypatch.setattr(greatstar, "expand_shows", fake_expand)
+    greatstar.scrape()
+    assert captured["kw"] == {"full_chromium": True}

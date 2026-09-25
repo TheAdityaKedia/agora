@@ -26,6 +26,7 @@ day) so a show is never dropped.
 """
 import json
 import re
+import time
 from datetime import date, datetime, timezone
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
@@ -34,7 +35,9 @@ import requests
 from bs4 import BeautifulSoup
 
 from scrapers.base import RawEvent
-from scrapers.browser import BROWSER_UA, RateLimited, load_page_html
+from scrapers.browser import (
+    BROWSER_UA, RateLimited, browser_context, load_page_html, new_browser_context,
+)
 from scrapers.performances import expand_shows
 
 
@@ -50,6 +53,12 @@ REQUEST_TIMEOUT = 25
 # TicketTailor is a client-rendered SPA; give it time to paint the JSON-LD.
 PERF_WAIT_UNTIL = "load"
 PERF_SETTLE_MS = 6000
+# Pause before each ticketing-page render. Plain politeness: TicketTailor's
+# robots.txt sets no crawl-delay, and this delay is NOT what gets us past the
+# 403s. Those hit the same 7 pages (all under the `greatstartheater` TicketTailor
+# account) on the first load in every run, delay or not, and a fresh browser
+# context passes them. The retry in _scrape_show_performances is the fix.
+PERF_DELAY_S = 5
 
 _DASH_RE = re.compile(r"[–—-]")
 
@@ -227,11 +236,22 @@ def _scrape_show_performances(ctx, show: RawEvent) -> list[RawEvent]:
     """
     if not show.url:
         return []
+    time.sleep(PERF_DELAY_S)
     try:
         html = load_page_html(ctx, show.url, wait_until=PERF_WAIT_UNTIL, settle_ms=PERF_SETTLE_MS)
-    except RateLimited as e:
-        print(f"[greatstar] blocked (HTTP {e.status}) at {e.url}, skipping performances", flush=True)
-        return []
+    except RateLimited:
+        # Retry once on a fresh cookie jar (the same fix as greenapple.py); in
+        # practice this clears every challenge. A second 403 falls back to the
+        # run-level event.
+        print(f"[greatstar] challenged at {show.url}; retrying once in a fresh browser context", flush=True)
+        fresh = new_browser_context(ctx.browser)
+        try:
+            html = load_page_html(fresh, show.url, wait_until=PERF_WAIT_UNTIL, settle_ms=PERF_SETTLE_MS)
+        except RateLimited as e:
+            print(f"[greatstar] blocked (HTTP {e.status}) at {e.url}, skipping performances", flush=True)
+            return []
+        finally:
+            fresh.close()
     return parse_performances(html, show=show)
 
 
@@ -249,4 +269,6 @@ def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
         return []
     resp.raise_for_status()
     shows = parse(resp.text)
-    return expand_shows(shows, _scrape_show_performances, label="greatstar")
+    # full_chromium: consistent with greenapple.py; see browser_context().
+    return expand_shows(shows, _scrape_show_performances, label="greatstar",
+                        _browser=lambda: browser_context(full_chromium=True))
