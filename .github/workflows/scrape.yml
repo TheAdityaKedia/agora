@@ -16,12 +16,6 @@ on:
         description: "Only scrape sources whose URL contains one of these space-separated substrings (blank = all)"
         required: false
         default: ""
-  # TEMP (remove before merging): workflow_dispatch only works for workflows
-  # already on the default branch, so test runs on the feature branch are
-  # triggered by pushes that touch this file.
-  push:
-    branches: [ci-scraping]
-    paths: [.github/workflows/scrape.yml]
 
 # One run at a time: runs share the Neon DB and events.json.
 concurrency:
@@ -32,8 +26,7 @@ permissions:
   contents: read
 
 env:
-  # TEMP: push-triggered test runs use a fixed subset ('' = all sources).
-  SOURCES: ${{ github.event_name == 'push' && '' || inputs.sources }}
+  SOURCES: ${{ inputs.sources }}
 
 jobs:
   plan:
