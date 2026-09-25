@@ -1,0 +1,187 @@
+name: Scrape and refresh manifest
+
+# One runner per source (speed, fresh IP, fault isolation), fanned back in to a
+# single DB writer. Design: feature-specs/ci-scraping.md.
+#
+# Runs from main use the production Neon DB, ship to main, and deploy Pages.
+# Runs from any other branch (for testing the workflow itself) use the
+# DATABASE_URL_TEST Neon branch and ship into a throwaway ci-sandbox/<run_id>
+# branch — the full PR → merge path is exercised, but nothing reaches main.
+on:
+  schedule:
+    - cron: "0 10 * * *" # ~3am PT; GitHub may start scheduled runs late
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: "Only scrape sources whose URL contains one of these space-separated substrings (blank = all)"
+        required: false
+        default: ""
+
+# One run at a time: runs share the Neon DB and events.json.
+concurrency:
+  group: scrape-${{ github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  SOURCES: ${{ inputs.sources }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: service/requirements.txt
+      - run: pip install -r service/requirements.txt
+      - id: plan
+        working-directory: service
+        run: |
+          set -f  # user input: split on spaces, but never glob
+          # shellcheck disable=SC2086
+          echo "matrix=$(python ci.py plan --sources $SOURCES)" >> "$GITHUB_OUTPUT"
+
+  scrape:
+    needs: plan
+    if: needs.plan.outputs.matrix != '[]'
+    name: scrape (${{ matrix.source.url }})
+    runs-on: ubuntu-latest
+    # Well above any healthy single-source scrape (a few minutes); a hung
+    # scraper is cut off here and its source counts as "missing".
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        source: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: service/requirements.txt
+      - run: pip install -r service/requirements.txt
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('service/requirements.txt') }}
+      - if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: playwright install --with-deps chromium
+      - if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: playwright install-deps chromium
+      - name: Scrape
+        working-directory: service
+        env:
+          URL: ${{ matrix.source.url }}
+          ZYTE_API_KEY: ${{ secrets.ZYTE_API_KEY }}
+        run: python ci.py scrape --url "$URL" --out result.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: result-${{ matrix.source.index }}
+          path: service/result.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+  merge:
+    needs: [plan, scrape]
+    # Run even when scrape jobs failed — missing results keep their DB rows.
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write   # gh workflow run deploy-pages.yml
+      id-token: write  # AWS OIDC
+    env:
+      IS_MAIN: ${{ github.ref_name == 'main' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: service/requirements.txt
+      - run: pip install -r service/requirements.txt
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: result-*
+          path: results
+      - name: AWS credentials for Bedrock
+        # Missing/broken creds only skip tagging; the manifest still ships.
+        if: env.IS_MAIN == 'true'
+        continue-on-error: true
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Merge into DB, classify, export
+        working-directory: service
+        env:
+          DATABASE_URL: ${{ github.ref_name == 'main' && secrets.DATABASE_URL || secrets.DATABASE_URL_TEST }}
+          EVENTS_JSON_PATH: ${{ github.workspace }}/frontend/events.json
+        run: |
+          set -f
+          # shellcheck disable=SC2086
+          python ci.py merge --dir "$GITHUB_WORKSPACE/results" \
+            --report "$RUNNER_TEMP/report.json" --sources $SOURCES
+      - name: Guard
+        id: guard
+        working-directory: service
+        run: |
+          git show HEAD:frontend/events.json > "$RUNNER_TEMP/base.json" || true
+          python ci.py guard --new "$GITHUB_WORKSPACE/frontend/events.json" \
+            --base "$RUNNER_TEMP/base.json" --report "$RUNNER_TEMP/report.json" \
+            --body "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Ship (PR → merge → deploy)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PASSED: ${{ steps.guard.outputs.passed }}
+          CHANGED: ${{ steps.guard.outputs.changed }}
+          COUNT: ${{ steps.guard.outputs.count }}
+        run: |
+          set -euo pipefail
+          if [ "$CHANGED" != "true" ] && git diff --quiet -- service/data/classifications.json; then
+            echo "No data change; nothing to ship."
+            exit 0
+          fi
+          if [ "$IS_MAIN" = "true" ]; then
+            base=main
+          else
+            # Test run: ship into a throwaway copy of this branch.
+            base="ci-sandbox/${GITHUB_RUN_ID}"
+            git push origin "HEAD:refs/heads/${base}"
+          fi
+          branch="data/refresh-${GITHUB_RUN_ID}"
+          title="Refresh manifest: ${COUNT} events ($(date -u +%F))"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add frontend/events.json service/data/classifications.json
+          git commit -m "$title"
+          git push -u origin "$branch"
+          gh pr create --base "$base" --head "$branch" --title "$title" \
+            --body-file "$RUNNER_TEMP/pr_body.md"
+          if [ "$PASSED" != "true" ]; then
+            gh pr comment "$branch" --body "Guard failed — not auto-merged. Review the report above."
+            exit 1
+          fi
+          gh pr merge "$branch" --squash --delete-branch
+          if [ "$IS_MAIN" = "true" ]; then
+            # Merges made with GITHUB_TOKEN don't trigger push workflows;
+            # workflow_dispatch is the exception.
+            gh workflow run deploy-pages.yml --ref main
+          else
+            git push origin --delete "$base"
+          fi

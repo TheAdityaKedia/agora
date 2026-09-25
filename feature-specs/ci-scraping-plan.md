@@ -1160,3 +1160,22 @@ Expected: one scrape job; guard passes (Neon still holds every source); either "
 ```bash
 cd /Users/kediaadi/workspace/LearningProjects/Agora && git worktree remove ../Agora-ci
 ```
+
+---
+
+## Execution notes (2026-09-25)
+
+- Tasks 0–8 done on branch `ci-scraping` (Task 0's worktree skipped — other
+  agents had stopped, so the branch was cut in the main checkout).
+- Deviations from the plan, all reflected in the spec:
+  - Non-`main` runs use `DATABASE_URL_TEST` (Neon `ci-test` branch) and ship
+    into a throwaway `ci-sandbox/<run_id>` branch; concurrency is per ref.
+  - Actions bumped off Node 20 (checkout/setup-python v7, cache v6,
+    upload-artifact v7, download-artifact v8, configure-aws-credentials v6).
+  - `db.py` got `pool_pre_ping=True` (Neon drops idle connections; found
+    during the seed run).
+- Verified on GitHub from the branch (temporary push trigger, since removed):
+  a 2-source run and a full 59-source run, both merged into sandboxes
+  (PRs #2, #3). Full run: 7.5 min wall, median job 44 s, slowest SFPL 6 min.
+- Known gap: Green Apple, City Arts & Lectures, and The Marsh 403 from GitHub
+  runner IPs (0 events; their seeded rows are kept but go stale).

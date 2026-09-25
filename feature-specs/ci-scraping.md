@@ -1,6 +1,6 @@
 # Feature Spec: Scheduled Scraping on GitHub Actions (one runner per source)
 
-Status: Approved design · Owner: Agora · Target: `.github/workflows/scrape.yml` + `service/ci.py`
+Status: Implemented (branch `ci-scraping`) · Owner: Agora · Target: `.github/workflows/scrape.yml` + `service/ci.py`
 
 ## Goal
 
@@ -28,7 +28,9 @@ The repo is public, so standard runners are free with unlimited minutes.
 - **Fan-out scrape, single-writer save.** Only scraping is parallel. Exactly one
   job writes to the DB, in `sources.txt` order. Parallel writers would make
   dedup attribution nondeterministic (the earlier source wins a shared row) and
-  race on the check-then-insert dedup (no unique constraint enforces it).
+  race on the check-then-insert dedup (a partial unique index covers
+  `(url, start_time)`, but nothing enforces `(title, start_time)`, and a unique
+  violation would abort a source's save).
 - **Scrape jobs are unprivileged.** They get no DB, AWS, or git credentials —
   only `ZYTE_API_KEY`. All privileged work happens in the one merge job.
 - **Failures are data, not red jobs.** A scraper exception is recorded in its
@@ -47,8 +49,8 @@ The repo is public, so standard runners are free with unlimited minutes.
   filter, same semantics as `main.py --sources` (plain substring; mind
   collisions like `sfpl` vs `sfplayhouse`).
 
-**Concurrency:** `group: scrape`, `cancel-in-progress: false` — one run at a
-time (the "one scrape run at a time" rule in `CLAUDE.md`).
+**Concurrency:** `group: scrape-<ref>`, `cancel-in-progress: false` — one run at a
+time per branch (main and test runs use different DBs) (the "one scrape run at a time" rule in `CLAUDE.md`).
 
 **Jobs**
 
@@ -149,6 +151,12 @@ unchanged, exit.
    with `GITHUB_TOKEN` don't trigger other workflows; `workflow_dispatch` is
    the exception.
 
+**Runs from any branch other than `main`** (testing the workflow itself) use
+secret `DATABASE_URL_TEST` (a Neon `ci-test` child branch), skip AWS, and ship
+into a throwaway `ci-sandbox/<run_id>` branch cut from the run's commit — the
+full PR → guard → merge path is exercised, then the sandbox is deleted. They
+never touch `main` or deploy.
+
 **On fail:** open the PR anyway, leave it **unmerged**, and comment which guard
 tripped. Nothing deploys; a human reviews.
 
@@ -183,6 +191,7 @@ create and approve pull requests*.
 | `DATABASE_URL` | merge | Neon connection string (`sslmode=require`) |
 | `AWS_ROLE_ARN` | merge | OIDC role for Bedrock |
 | `AWS_REGION` | merge | Bedrock region |
+| `DATABASE_URL_TEST` | merge (non-`main` runs) | Neon `ci-test` branch |
 | `ZYTE_API_KEY` | scrape | Metered fetch for Green Apple (optional; absent → that scraper returns 0) |
 
 Setup (documented in `README.md`): create Neon project → create AWS OIDC
