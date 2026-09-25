@@ -11,7 +11,10 @@ _SessionLocal = None
 def get_engine():
     global _engine
     if _engine is None:
-        _engine = create_engine(os.environ["DATABASE_URL"])
+        # pool_pre_ping: a hosted DB (Neon) drops idle connections, and a long
+        # scrape can leave a pooled connection idle for many minutes before
+        # the next save. Ping on checkout so a dead one is replaced, not used.
+        _engine = create_engine(os.environ["DATABASE_URL"], pool_pre_ping=True)
     return _engine
 
 
