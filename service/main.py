@@ -124,16 +124,40 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]
 DEFAULT_WORKERS = 6
 
 
+def find_scraper(url: str):
+    """Return the first scraper module whose matches() accepts `url`, or None."""
+    for scraper in SCRAPERS:
+        if scraper.matches(url):
+            return scraper
+    return None
+
+
+def select_urls(urls: list[str], filters: list[str] | None = None,
+                excludes: list[str] | None = None) -> list[str]:
+    """Apply the --sources allowlist and --exclude denylist (plain substrings).
+
+    A URL is kept when it matches the allowlist (or the allowlist is empty) AND
+    matches none of the excludes. Order is preserved — it drives save order.
+    """
+    filters = filters or []
+    excludes = excludes or []
+    return [
+        u for u in urls
+        if (not filters or any(f in u for f in filters))
+        and not any(x in u for x in excludes)
+    ]
+
+
 def _scrape_one(url: str):
     """Dispatch `url` to its scraper and return (scraper, raw_events).
 
     Returns (None, []) when no scraper matches. This is the slow, read-only,
     independent part of the pipeline — safe to run concurrently across sources.
     """
-    for scraper in SCRAPERS:
-        if scraper.matches(url):
-            return scraper, scraper.scrape(url)
-    return None, []
+    scraper = find_scraper(url)
+    if scraper is None:
+        return None, []
+    return scraper, scraper.scrape(url)
 
 
 def _save_scraped(scraper, raw_events, url: str) -> None:
@@ -219,13 +243,7 @@ def run(
     scraped this time.
     """
     init_db()
-    filters = source_filters or []
-    exclude_terms = excludes or []
-    urls = [
-        u for u in load_sources()
-        if (not filters or any(f in u for f in filters))
-        and not any(x in u for x in exclude_terms)
-    ]
+    urls = select_urls(load_sources(), source_filters, excludes)
 
     if urls:
         workers = max_workers or int(os.environ.get("SCRAPER_WORKERS", str(DEFAULT_WORKERS)))
