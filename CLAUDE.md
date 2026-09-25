@@ -82,9 +82,14 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   crawl-delay + a fresh context on challenge. Both are free. Gotcha: a scraper
   can **pass on your Mac and fail in Docker** (Playwright's default headless
   shell gets caught by Cloudflare in the Linux container), so always verify in
-  Docker. GAMH, Fillmore, and Great Star's TicketTailor pages still 403 but
-  haven't been tried with full Chromium yet. Fingerprint/stealth patches were
-  tried and *reverted* (they broke rendering). Don't go there.
+  Docker. Great Star's TicketTailor pages now pass the same way (fresh-context
+  retry). Still blocked, and deliberately left alone: GAMH's Eventim event pages
+  (Cloudflare Turnstile CAPTCHA; we don't get past CAPTCHAs) and Fillmore's
+  Ticketmaster pages (401; the sanctioned route would be Ticketmaster's
+  Discovery API, which needs a key). Fingerprint/stealth patches were tried and
+  *reverted* (they broke rendering). Don't go there. Also: GAMH's calendar is
+  paginated behind "Load more" (`gamh.py`), and the owner OK'd using that
+  endpoint despite robots.txt `Disallow: /*?`.
   `scrapers/zyte.py` (paid, `ZYTE_API_KEY` in `.env`) is the unused last resort.
 - **Frontend JS runs one big IIFE** — mind temporal-dead-zone ordering. A `const`
   referenced during page-load init (e.g. from `readStateFromUrl`) must be

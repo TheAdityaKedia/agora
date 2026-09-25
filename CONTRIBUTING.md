@@ -306,9 +306,13 @@ being the *only* format, not on the topic, so genuine events aren't lost.
      fingerprint spoofing.
   4. **Only then: the Zyte hosted fetch** (`scrapers/zyte.py`, below). Paid,
      last resort.
-  If none of these work (Fillmore, GAMH's SeeTickets/Eventim so far — though
-  they haven't been tried against rung 3 yet), keep the best available listing
-  data and don't fight the anti-bot further.
+  If none of these work, keep the best available listing data and stop. **A
+  CAPTCHA (e.g. Cloudflare Turnstile) is a hard stop**: it's an explicit
+  "prove you're human" check, and we don't try to beat it. GAMH's Eventim event
+  pages and Fillmore's Ticketmaster pages are in this bucket. Before giving up
+  on a source, also check whether the listing is **paginated** ("Load more"
+  buttons, `data-*-total-pages`). GAMH was silently at 12 of ~74 events for
+  that reason, not because of any block.
 - **Read `robots.txt` first, and honor it.** It's the one URL Cloudflare
   sites usually serve to anyone, and it tells you the owner's intent.
   Green Apple's sets `crawl-delay: 10` for all agents *and* bans AI crawlers by
