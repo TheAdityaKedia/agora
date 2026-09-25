@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import datetime
 
 
@@ -17,3 +17,16 @@ class RawEvent:
     url: str | None
     description: str | None
     image_url: str | None = None
+
+    def to_dict(self) -> dict:
+        """JSON-safe form, for handing events between processes (CI scrape → merge)."""
+        d = asdict(self)
+        d["start_time"] = self.start_time.isoformat()
+        return d
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "RawEvent":
+        start = datetime.fromisoformat(d["start_time"])
+        if start.tzinfo is None:
+            raise ValueError(f"start_time must be timezone-aware: {d['start_time']!r}")
+        return cls(**{**d, "start_time": start})
