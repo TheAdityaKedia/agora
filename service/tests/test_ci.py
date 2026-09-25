@@ -210,3 +210,67 @@ def test_merge_cli_writes_report(db_session, pipeline_env):
     report = json.loads(report_path.read_text())
     assert report["sources"][0]["name"] == "First"
     assert report["sources"][0]["saved"] == 1
+
+
+# --- guard ------------------------------------------------------------------
+
+def _manifest(path, n, generated_at="2026-09-24T00:00:00+00:00"):
+    path.write_text(json.dumps({"generated_at": generated_at, "taxonomy": {"version": 1},
+                                "events": [{"id": i} for i in range(n)]}))
+    return path
+
+
+def test_guard_passes_at_threshold(tmp_path):
+    g = ci.check_manifest(_manifest(tmp_path / "new.json", 70), _manifest(tmp_path / "base.json", 100))
+    assert g["passed"] and g["reason"] is None
+
+
+def test_guard_fails_below_threshold(tmp_path):
+    g = ci.check_manifest(_manifest(tmp_path / "new.json", 69), _manifest(tmp_path / "base.json", 100))
+    assert not g["passed"]
+    assert "100 → 69" in g["reason"]
+
+
+def test_guard_fails_on_invalid_manifest(tmp_path):
+    (tmp_path / "new.json").write_text("{not json")
+    g = ci.check_manifest(tmp_path / "new.json", _manifest(tmp_path / "base.json", 10))
+    assert not g["passed"]
+
+
+def test_guard_passes_when_base_has_no_manifest(tmp_path):
+    g = ci.check_manifest(_manifest(tmp_path / "new.json", 5), tmp_path / "missing.json")
+    assert g["passed"] and g["base_count"] == 0
+
+
+def test_guard_ignores_generated_at_for_change_detection(tmp_path):
+    g = ci.check_manifest(
+        _manifest(tmp_path / "new.json", 3, generated_at="2026-09-25T00:00:00+00:00"),
+        _manifest(tmp_path / "base.json", 3))
+    assert g["changed"] is False
+
+
+def test_pr_body_flags_failures_and_zero_event_sources():
+    row = {"merged": 0, "skipped": 0}
+    report = {"exported": 5, "failed": 1, "sources": [
+        {**row, "url": "https://a.com", "name": "A", "status": "ok", "events": 5, "saved": 5, "error": None},
+        {**row, "url": "https://b.com", "name": "B", "status": "ok", "events": 0, "saved": 0, "error": None},
+        {**row, "url": "https://c.com", "name": "C", "status": "error", "events": 0, "saved": 0,
+         "error": "RuntimeError: 403"},
+    ]}
+    guard = {"passed": True, "changed": True, "count": 5, "base_count": 5, "reason": None}
+    body = ci.render_pr_body(report, guard)
+    assert body.startswith("Automated refresh")
+    assert "**Guard:** passed" in body
+    assert "ok (0 events)" in body
+    assert "RuntimeError: 403" in body
+
+
+def test_guard_cli_emits_github_outputs(tmp_path, capsys):
+    report = tmp_path / "report.json"
+    report.write_text(json.dumps({"exported": 3, "failed": 0, "sources": []}))
+    body = tmp_path / "body.md"
+    ci.cli(["guard", "--new", str(_manifest(tmp_path / "new.json", 3)),
+            "--base", str(_manifest(tmp_path / "base.json", 3)),
+            "--report", str(report), "--body", str(body)])
+    assert capsys.readouterr().out.splitlines() == ["passed=true", "changed=false", "count=3"]
+    assert body.read_text().startswith("Automated refresh")

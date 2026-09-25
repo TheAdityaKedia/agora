@@ -115,6 +115,70 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
             "failed": sum(1 for r in rows if r["status"] != "ok")}
 
 
+def _read_events_manifest(path) -> tuple[dict, int]:
+    manifest = json.loads(Path(path).read_text())
+    return manifest, len(manifest["events"])
+
+
+def check_manifest(new_path, base_path, min_ratio: float = 0.7) -> dict:
+    """Guard the new manifest against the base branch's before auto-merging.
+
+    Blocks when the new manifest is unreadable or its event count fell below
+    `min_ratio` of the base's. A missing/unreadable base (first run) passes.
+    """
+    try:
+        new, count = _read_events_manifest(new_path)
+    except (OSError, ValueError, KeyError, TypeError) as e:
+        return {"passed": False, "changed": True, "count": 0, "base_count": 0,
+                "reason": f"new manifest unreadable ({type(e).__name__}: {e})"}
+    try:
+        base, base_count = _read_events_manifest(base_path)
+    except (OSError, ValueError, KeyError, TypeError):
+        base, base_count = {}, 0
+    # generated_at changes every run, so compare content, not bytes.
+    changed = (new.get("events") != base.get("events")
+               or new.get("taxonomy") != base.get("taxonomy"))
+    passed = count >= min_ratio * base_count
+    reason = None if passed else (
+        f"event count dropped {base_count} → {count} (below {min_ratio:.0%} of base)")
+    return {"passed": passed, "changed": changed, "count": count,
+            "base_count": base_count, "reason": reason}
+
+
+_STATUS_ICON = {"ok": "✅", "no_scraper": "⚠️", "error": "❌", "missing": "❌", "save_error": "❌"}
+
+
+def render_pr_body(report: dict, guard: dict) -> str:
+    """Markdown PR body: guard verdict + per-source table, so the merged PR
+    history doubles as a scrape log."""
+    verdict = "passed" if guard["passed"] else f"FAILED — {guard['reason']}"
+    lines = [
+        "Automated refresh from the scheduled scrape workflow.",
+        "",
+        f"**Guard:** {verdict}",
+        f"**Events:** {guard['base_count']} → {guard['count']} · "
+        f"**Failed sources:** {report['failed']} of {len(report['sources'])}",
+        "",
+        "| Source | Status | Scraped | Saved | Merged | Skipped |",
+        "|---|---|---:|---:|---:|---:|",
+    ]
+    for r in report["sources"]:
+        if r["status"] == "ok" and r["events"] == 0:
+            status, icon = "ok (0 events)", "⚠️"
+        else:
+            status, icon = r["status"], _STATUS_ICON.get(r["status"], "❔")
+        lines.append(f"| {r['name'] or r['url']} | {icon} {status} | {r['events']} | "
+                     f"{r['saved']} | {r['merged']} | {r['skipped']} |")
+    errors = [r for r in report["sources"] if r["error"]]
+    if errors:
+        lines += ["", "<details><summary>Errors</summary>", ""]
+        for r in errors:
+            error = r["error"].replace("`", "'").replace("\n", " ")[:500]
+            lines.append(f"- **{r['name'] or r['url']}**: `{error}`")
+        lines += ["", "</details>"]
+    return "\n".join(lines) + "\n"
+
+
 def cli(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Agora CI pipeline stages.")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -134,6 +198,13 @@ def cli(argv: list[str] | None = None) -> None:
     m.add_argument("--exclude", nargs="*", default=[], metavar="SUBSTRING")
     m.add_argument("--no-classify", action="store_true")
 
+    g = sub.add_parser("guard", help="Check the new manifest and render the PR body.")
+    g.add_argument("--new", type=Path, required=True)
+    g.add_argument("--base", type=Path, required=True)
+    g.add_argument("--report", type=Path, required=True)
+    g.add_argument("--body", type=Path, required=True)
+    g.add_argument("--min-ratio", type=float, default=0.7)
+
     args = parser.parse_args(argv)
 
     if args.cmd == "plan":
@@ -148,6 +219,14 @@ def cli(argv: list[str] | None = None) -> None:
         report = merge_results(args.dir, args.sources or None, args.exclude or None,
                                classify=not args.no_classify)
         args.report.write_text(json.dumps(report, indent=2))
+    elif args.cmd == "guard":
+        # stdout is appended to $GITHUB_OUTPUT, so print only key=value lines.
+        guard = check_manifest(args.new, args.base, args.min_ratio)
+        report = json.loads(args.report.read_text())
+        args.body.write_text(render_pr_body(report, guard))
+        print(f"passed={str(guard['passed']).lower()}")
+        print(f"changed={str(guard['changed']).lower()}")
+        print(f"count={guard['count']}")
 
 
 if __name__ == "__main__":
