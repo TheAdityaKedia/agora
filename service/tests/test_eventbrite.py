@@ -2,6 +2,7 @@
 Eventbrite wrappers (like phoenix.py) plug into.
 """
 from datetime import datetime, timezone
+from pathlib import Path
 
 import pytest
 
@@ -69,6 +70,18 @@ def test_parse_event_page_finds_event_type_only():
     assert obj is not None
     assert obj.get("@type") == "Event"
     assert obj["name"].startswith("Skitzo")
+
+
+def test_parse_event_page_accepts_event_subtypes():
+    # Eventbrite tags many listings with a schema.org subtype (Clio's talks
+    # are EducationEvent); the WebPage/BreadcrumbList blocks must still lose.
+    html = (
+        '<script type="application/ld+json">{"@type":"WebPage","name":"page"}</script>'
+        '<script type="application/ld+json">{"@type":"EducationEvent","name":"Talk",'
+        '"startDate":"2026-10-01T19:00:00-07:00"}</script>'
+    )
+    obj = eventbrite.parse_event_page(html)
+    assert obj is not None and obj["name"] == "Talk"
 
 
 def test_event_from_json_ld_yields_full_rawevent():
@@ -146,3 +159,33 @@ def test_phoenix_matches_organizer_and_website():
     assert phoenix.matches("https://www.eventbrite.com/o/phoenix-theater-26319831111")
     assert phoenix.matches("https://phoenixtheater.com/")
     assert not phoenix.matches("https://phoenixtheatresf.org/")
+
+
+# --- full description from the page's __NEXT_DATA__ ---------------------------
+
+STRUCTURED_HTML = (Path(__file__).parent / "fixtures" / "eventbrite_structured.html").read_text()
+
+
+def test_full_description_from_structured_content():
+    desc = eventbrite.full_description(STRUCTURED_HTML)
+    assert desc.startswith("An evening discussion between Pulitzer Prize winning author")
+    assert "<p>" not in desc
+    assert len(desc) > 500
+
+
+def test_full_description_missing_returns_none():
+    assert eventbrite.full_description(EVENT_HTML) is None
+    assert eventbrite.full_description('<script id="__NEXT_DATA__">not json</script>') is None
+
+
+def test_scrape_event_urls_prefers_full_description_keeping_summary():
+    [ev] = eventbrite.scrape_event_urls(["https://www.eventbrite.com/e/1"],
+                                        event_html_fetch=lambda url: STRUCTURED_HTML)
+    # JSON-LD only carries the one-line summary; the full text follows it
+    assert ev.description.startswith("Secret weapons and a government cover-up · An evening discussion")
+
+
+def test_scrape_event_urls_falls_back_to_json_ld_description():
+    [ev] = eventbrite.scrape_event_urls(["https://www.eventbrite.com/e/1"],
+                                        event_html_fetch=lambda url: EVENT_HTML)
+    assert ev.description == eventbrite.parse_event_page(EVENT_HTML).get("description")

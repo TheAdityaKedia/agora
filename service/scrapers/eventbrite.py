@@ -7,12 +7,15 @@ example. This module handles:
   1. Organizer-page fetch (Playwright — the listing is JS-rendered).
   2. Extracting event URLs from that page.
   3. Fetching each event's detail page (plain requests — server-rendered).
-  4. Parsing schema.org Event JSON-LD from the detail page.
+  4. Parsing schema.org Event JSON-LD from the detail page, plus the full
+     description from the page's ``__NEXT_DATA__`` (the JSON-LD
+     ``description`` is only the one-line summary).
   5. Politeness delays between event fetches.
 """
 from __future__ import annotations
 
 import json
+import re
 import time
 from datetime import datetime, timezone
 from urllib.parse import urljoin
@@ -67,7 +70,9 @@ def parse_event_page(html: str) -> dict | None:
     """Return the decoded schema.org Event JSON-LD object, or None.
 
     Eventbrite embeds one <script type="application/ld+json"> per @type
-    on each event page. The interesting one has @type == 'Event'.
+    on each event page. The interesting one is an Event — often a schema.org
+    subtype (EducationEvent, SocialEvent, MusicEvent…), so match any
+    ``*Event`` type, not just 'Event'.
     """
     soup = BeautifulSoup(html, "html.parser")
     for script in soup.find_all("script", type="application/ld+json"):
@@ -79,10 +84,42 @@ def parse_event_page(html: str) -> dict | None:
         except json.JSONDecodeError:
             continue
         for candidate in _flatten(obj):
-            t = candidate.get("@type")
-            if t == "Event" or (isinstance(t, list) and "Event" in t):
+            types = candidate.get("@type")
+            types = types if isinstance(types, list) else [types]
+            if any(isinstance(t, str) and t.endswith("Event") for t in types):
                 return candidate
     return None
+
+
+def full_description(html: str) -> str | None:
+    """The organizer's full "About this event" text, or None.
+
+    It lives in the Next.js page data (``__NEXT_DATA__`` →
+    ``props.pageProps.context.structuredContent.modules[].text``, HTML); the
+    JSON-LD only carries the summary line.
+    """
+    script = BeautifulSoup(html, "html.parser").find("script", id="__NEXT_DATA__")
+    try:
+        data = json.loads(script.string) if script and script.string else None
+        modules = data["props"]["pageProps"]["context"]["structuredContent"]["modules"]
+    except (ValueError, KeyError, TypeError):
+        return None
+    parts = []
+    for module in modules or []:
+        if isinstance(module, dict) and module.get("type") == "text" and module.get("text"):
+            text = BeautifulSoup(module["text"], "html.parser").get_text(" ", strip=True)
+            parts.append(re.sub(r"\s+", " ", text).strip())
+    return " ".join(p for p in parts if p) or None
+
+
+def _with_full_description(ev: RawEvent, full: str | None) -> RawEvent:
+    """Prefer the full text; keep the summary as a lead-in when it isn't
+    already part of it."""
+    if not full:
+        return ev
+    summary = (ev.description or "").strip()
+    ev.description = full if not summary or summary in full else f"{summary} · {full}"
+    return ev
 
 
 def _flatten(payload):
@@ -210,6 +247,20 @@ def scrape_organizer(
         return []
 
     event_urls = find_organizer_event_urls(organizer_html)[:max_events]
+    return scrape_event_urls(event_urls, location_override=location_override,
+                             event_html_fetch=event_html_fetch)
+
+
+def scrape_event_urls(
+    event_urls: list[str],
+    *,
+    location_override: str | None = None,
+    event_html_fetch=None,
+) -> list[RawEvent]:
+    """Fetch + parse a known list of Eventbrite event URLs (e.g. links a venue
+    embeds on its own site when its organizer page lists only a few)."""
+    if event_html_fetch is None:
+        event_html_fetch = fetch_event_html
     events: list[RawEvent] = []
     for i, url in enumerate(event_urls):
         try:
@@ -222,7 +273,7 @@ def scrape_organizer(
             continue
         ev = event_from_json_ld(obj, location_override=location_override)
         if ev is not None:
-            events.append(ev)
+            events.append(_with_full_description(ev, full_description(html)))
         if i < len(event_urls) - 1:
             time.sleep(BETWEEN_EVENT_DELAY_S)
     return events
