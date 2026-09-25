@@ -7541,13 +7541,495 @@
         ]
       ]
     },
-    "Green Apple Books\u001f9th Ave: Diana Kapp with Heather Knight": {
-      "classified_at": "2026-09-23T19:50:51.808554+00:00",
+    "Green Apple Books\u001f9th Ave:  Michelle Phương Hồ": {
+      "classified_at": "2026-09-25T03:03:37.791774+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Green Apple Books",
       "taxonomy_version": 1,
+      "title": "9th Ave:  Michelle Phương Hồ",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Adam Peterson and Colin Winnette": {
+      "classified_at": "2026-09-25T03:03:41.426816+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Adam Peterson and Colin Winnette",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Amanda Holden with Berna Anat": {
+      "classified_at": "2026-09-25T03:03:39.021126+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Amanda Holden with Berna Anat",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Annalee Newitz with M.M. Olivas": {
+      "classified_at": "2026-09-25T03:03:11.710461+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Annalee Newitz with M.M. Olivas",
+      "topics": [
+        "fiction",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Benjamin Gucciardi with Cintia Santana": {
+      "classified_at": "2026-09-25T03:03:17.684361+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Benjamin Gucciardi with Cintia Santana",
+      "topics": [
+        "poetry",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Daisy Fried with Katie Peterson": {
+      "classified_at": "2026-09-25T03:03:26.492833+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Daisy Fried with Katie Peterson",
+      "topics": [
+        "poetry",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Diana Kapp with Heather Knight": {
+      "classified_at": "2026-09-25T03:03:06.668925+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
       "title": "9th Ave: Diana Kapp with Heather Knight",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Douglas Stuart with Matthew Clark Davison": {
+      "classified_at": "2026-09-25T03:03:25.267735+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Douglas Stuart with Matthew Clark Davison",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Fady Joudah": {
+      "classified_at": "2026-09-25T03:03:24.038350+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Fady Joudah",
+      "topics": [
+        "poetry",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: From SF to Gaza feat. Kemi Ashing-Giwa and Sarah Gailey": {
+      "classified_at": "2026-09-25T03:03:34.245045+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: From SF to Gaza feat. Kemi Ashing-Giwa and Sarah Gailey",
+      "topics": [
+        "books-authors",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Jen Siraganian feat. Tongo Eisen-Martin, Nancy Miller Gomez, and Christin Rice": {
+      "classified_at": "2026-09-25T03:03:36.634091+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Jen Siraganian feat. Tongo Eisen-Martin, Nancy Miller Gomez, and Christin Rice",
+      "topics": [
+        "poetry",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Joey Clift": {
+      "classified_at": "2026-09-25T03:03:31.569712+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Joey Clift",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: K-Ming Chang": {
+      "classified_at": "2026-09-25T03:03:21.441518+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: K-Ming Chang",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Kawai Strong Washburn": {
+      "classified_at": "2026-09-25T03:03:18.935897+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Kawai Strong Washburn",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Lester S. Hu": {
+      "classified_at": "2026-09-25T03:03:46.335520+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Lester S. Hu",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Nicholas Russell with Ginger Greene": {
+      "classified_at": "2026-09-25T03:03:20.209539+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Nicholas Russell with Ginger Greene",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Obi Kaufmann with Nina Schuyler": {
+      "classified_at": "2026-09-25T03:03:45.219788+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Obi Kaufmann with Nina Schuyler",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Reed Turchi with Jesse Nathan": {
+      "classified_at": "2026-09-25T03:03:32.881379+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Reed Turchi with Jesse Nathan",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Sarah Bruhn": {
+      "classified_at": "2026-09-25T03:03:40.167827+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Sarah Bruhn",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Scott Lambridis": {
+      "classified_at": "2026-09-25T03:03:30.385790+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Scott Lambridis",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: T.S. Leonard with Mukethe Kawinzi and Maw Shein Win": {
+      "classified_at": "2026-09-25T03:03:10.455561+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: T.S. Leonard with Mukethe Kawinzi and Maw Shein Win",
+      "topics": [
+        "poetry",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Tom Drury with Daniel Handler": {
+      "classified_at": "2026-09-25T03:03:42.804575+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Tom Drury with Daniel Handler",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Tom Molanphy": {
+      "classified_at": "2026-09-25T03:03:44.007341+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Tom Molanphy",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Tomas Moniz with Miah Jeffra": {
+      "classified_at": "2026-09-25T03:03:09.223290+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Tomas Moniz with Miah Jeffra",
+      "topics": [
+        "fiction",
+        "books-authors",
+        "latino"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Wordnight with USF": {
+      "classified_at": "2026-09-25T03:03:07.957087+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "9th Ave: Wordnight with USF",
+      "topics": [
+        "writing",
+        "poetry"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Ayad Akhtar with Karen Russell": {
+      "classified_at": "2026-09-25T03:03:12.929966+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "Offsite: Ayad Akhtar with Karen Russell",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Barbara Kingsolver with Steven Winn": {
+      "classified_at": "2026-09-25T03:03:22.711936+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "Offsite: Barbara Kingsolver with Steven Winn",
+      "topics": [
+        "books-authors",
+        "classical"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Jon Ronson": {
+      "classified_at": "2026-09-25T03:03:15.473253+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "Offsite: Jon Ronson",
       "topics": [
         "books-authors",
         "nonfiction"
@@ -7559,16 +8041,16 @@
         ]
       ]
     },
-    "Green Apple Books\u001f9th Ave: Wordnight with USF": {
-      "classified_at": "2026-09-23T19:50:53.149906+00:00",
+    "Green Apple Books\u001fOffsite: Kirk Lombard": {
+      "classified_at": "2026-09-25T03:03:27.710954+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Green Apple Books",
       "taxonomy_version": 1,
-      "title": "9th Ave: Wordnight with USF",
+      "title": "Offsite: Kirk Lombard",
       "topics": [
-        "writing",
-        "books-authors"
+        "books-authors",
+        "fiction"
       ],
       "types": [
         [
@@ -7577,6 +8059,59 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Lindy West at City Arts & Lectures": {
+      "classified_at": "2026-09-25T03:03:29.061161+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "Offsite: Lindy West at City Arts & Lectures",
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Min Jin Lee with Andrew Sean Greer": {
+      "classified_at": "2026-09-25T03:03:14.145187+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "Offsite: Min Jin Lee with Andrew Sean Greer",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Rebecca Handler": {
+      "classified_at": "2026-09-25T03:03:35.406668+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 1,
+      "title": "Offsite: Rebecca Handler",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
