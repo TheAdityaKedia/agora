@@ -292,14 +292,101 @@ being the *only* format, not on the topic, so genuine events aren't lost.
 
 ## When to give up
 
-- **Hard bot protection** — if a detail page returns 403 **even to a headless
-  browser** (Fillmore, GAMH's SeeTickets/Eventim), don't fight the anti-bot.
-  Keep the best available data (e.g. lineup + genre from the listing). But
-  first check whether it's only `requests` that's blocked: many sites 403 a
-  bare `requests` call yet render fine in the browser (Ludus's calendar) — use
-  `browser.py` there rather than giving up.
+- **Hard bot protection** — if a page returns 403 even to our headless
+  browser, work down this ladder **in order** before giving up. Each rung is
+  cheaper and more durable than the next:
+  1. **Is it only `requests` that's blocked?** Many sites 403 a bare `requests`
+     call yet render fine in the browser (Ludus's calendar) — use `browser.py`.
+  2. **Is there an un-fronted origin or internal API?** The WAF usually guards
+     only the public hostname. Check `robots.txt`, sitemaps, and the XHRs the
+     page makes for a staging/CDN-origin host or a JSON endpoint. `sfjazz.py`
+     went 0 → 227 events this way (Adage `ace-api` on the origin host).
+  3. **Behave like a real, polite browser** — see "Cloudflare managed
+     challenges" below. Green Apple went 0 → 40 events this way, free, with no
+     fingerprint spoofing.
+  4. **Only then: the Zyte hosted fetch** (`scrapers/zyte.py`, below). Paid,
+     last resort.
+  If none of these work (Fillmore, GAMH's SeeTickets/Eventim so far — though
+  they haven't been tried against rung 3 yet), keep the best available listing
+  data and don't fight the anti-bot further.
+- **Read `robots.txt` first, and honor it.** It's the one URL Cloudflare
+  sites usually serve to anyone, and it tells you the owner's intent.
+  Green Apple's sets `crawl-delay: 10` for all agents *and* bans AI crawlers by
+  name. We scrape it with the owner's OK, at the stated crawl-delay. Honor it
+  because it's the owner's rule, not as an anti-bot trick. (We never showed
+  the delay mattered technically; see below.)
 - **No structured data** — if there's no per-performance structure anywhere,
   don't fabricate it (see "One event per performance").
+
+### Cloudflare managed challenges (rung 3)
+
+Symptom: the first page loads (200) and later ones return **403 "Just a
+moment..."**, a Cloudflare managed challenge, which never resolves no matter
+how long you wait on the page. Three things fixed it for Green Apple, all
+opt-in per scraper (reference: `greenapple.py`). #1 is the technical fix;
+#2 is politeness; #3 handles the occasional challenge that still gets through:
+
+1. **Full Chromium, not the headless shell** —
+   `browser_context(full_chromium=True)`. Playwright's default headless mode
+   launches `chrome-headless-shell`, a stripped build Cloudflare detects. The
+   full binary in (new) headless mode passes. This was *the* fix.
+   It explains a confusing symptom: **the same script passed on a Mac host but
+   failed in Docker.** Same IP, same Chromium version. The difference is the
+   machine the browser reports (Docker on a Mac is a small Linux VM: 2 cores,
+   software `SwiftShader` GPU). Spoofing the GPU/platform/cores did **not**
+   help; switching to full Chromium did, without spoofing anything. Don't
+   reach for fingerprint spoofing (earlier stealth patches broke rendering and
+   were reverted).
+2. **Honor the site's crawl-delay** before *every* fetch, detail pages
+   included (`CRAWL_DELAY_S = 10`, from their robots.txt). Careful with the
+   evidence here: the only run blocked at 2.5s used the headless shell in
+   Docker, which is also blocked at 10s. So the delay was never isolated as a
+   cause. Full Chromium at a shorter delay would *probably* work. We keep 10s
+   because it's their stated rule, and we don't test shorter delays against a
+   site that asked for 10s.
+3. **Fresh context on a challenge, retry once** — `_resilient_fetcher`.
+   Cloudflare scores a *session*: one cookie jar gets challenged after ~13
+   requests even at the polite pace, but a new context on the same IP passes at
+   once. `browser.new_browser_context(context.browser)` gives you one. Retry
+   once only; a second 403 propagates as `RateLimited` so the scraper stops.
+
+Verify this **in Docker** (`docker compose run ...`), never only on your Mac:
+the host passes things the pipeline won't.
+
+### Last resort: the Zyte fetch backend (rung 4)
+
+`scrapers/zyte.py` wraps [Zyte API](https://docs.zyte.com/zyte-api/), a hosted
+fetch through rotating proxies plus Zyte's own anti-ban stack. No scraper uses
+it today. It's kept for a source that beats rungs 1–3. It's metered per
+request, so it comes last.
+
+It's an **env-gated seam**, not a new scraper shape. The parser is untouched:
+
+```python
+if zyte.is_configured():                       # ZYTE_API_KEY in the env
+    html = zyte.fetch_html(url, log=_log)
+else:
+    html = load_page_html(context, url)        # existing path, still works
+```
+
+Rules for using it:
+
+- **Use `render=True` (the default)**, which asks for `browserHtml`. The cheap
+  `httpResponseBody` tier does **not** clear a real Cloudflare challenge
+  (Green Apple answered it with a 520 "Website Ban").
+- **`fetch_html` raises `RateLimited`** (the same exception
+  `browser.load_page_html` raises) when Zyte can't get through after retries,
+  so a scraper's existing "blocked, stop early" branch works for either backend.
+- **Still honor robots.txt's crawl-delay.** Zyte rotating IPs is a way around
+  a rate limit, not permission to ignore it.
+- **Bound it.** Each render costs credits and ~20s. Only route
+  genuinely-blocked fetches through it, cap requests per run, and never put a
+  high-volume enrichment loop behind it (SFPL's 800+ detail pages would cost
+  ~37× everything else combined). Measured cost of a Green Apple run was ~15
+  browser renders, i.e. low single-digit dollars a month daily.
+- **Without a key nothing changes**: local runs, CI, and tests never touch the
+  network or spend credits. The key lives in the gitignored `.env` (see
+  `.env.example`); compose passes it to the scraper container.
 
 ## Playwright vs. requests
 

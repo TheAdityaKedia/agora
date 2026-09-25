@@ -75,11 +75,17 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 
 - **`--exclude`/`--sources` are plain substring matches.** `sfpl` also matches
   `sfplayhouse`; use `sfpl.org`. Check for collisions before trusting a filter.
-- **Cloudflare/WAF sources fail from local/CI IPs.** SFJAZZ, GAMH, Fillmore,
-  Green Apple 403 after a few hits regardless of stealth tricks. Keep listing
-  data; don't over-invest in beating the anti-bot (see `CONTRIBUTING.md` →
-  "When to give up"). Stealth patches were tried and *reverted* — they broke
-  rendering.
+- **Cloudflare/WAF sources: work the ladder in `CONTRIBUTING.md` → "When to
+  give up"** before declaring a source dead. Two looked hopeless and are solved:
+  **SFJAZZ** via an un-fronted origin API (`sfjazz.py`), and **Green Apple** via
+  full Chromium (`browser_context(full_chromium=True)`) + its robots.txt
+  crawl-delay + a fresh context on challenge. Both are free. Gotcha: a scraper
+  can **pass on your Mac and fail in Docker** (Playwright's default headless
+  shell gets caught by Cloudflare in the Linux container), so always verify in
+  Docker. GAMH, Fillmore, and Great Star's TicketTailor pages still 403 but
+  haven't been tried with full Chromium yet. Fingerprint/stealth patches were
+  tried and *reverted* (they broke rendering). Don't go there.
+  `scrapers/zyte.py` (paid, `ZYTE_API_KEY` in `.env`) is the unused last resort.
 - **Frontend JS runs one big IIFE** — mind temporal-dead-zone ordering. A `const`
   referenced during page-load init (e.g. from `readStateFromUrl`) must be
   declared before that code runs, or a shared `?q=` link hangs on "Loading…".
