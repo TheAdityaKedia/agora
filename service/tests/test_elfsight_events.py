@@ -69,3 +69,42 @@ def test_wrapper_delegates(monkeypatch):
     riptide.scrape()
     assert calls[0][0] == riptide.SOURCE_ID
     assert calls[0][1]["fallback_url"] == riptide.SITE_URL
+
+
+# --- "settings" mode: events embedded in the widget boot payload ---------------
+
+BOOT_FIXTURE = Path(__file__).parent / "fixtures" / "elfsight_boot.json"
+BOOT_WIDGET = "85b32f03-8a60-406b-8fe1-223ad02c821d"
+
+
+def _boot_events():
+    payload = json.loads(BOOT_FIXTURE.read_text())
+    settings = ef.widget_settings(payload, BOOT_WIDGET)
+    return ef.parse_settings_events(
+        settings, fallback_location="Books Inc.", fallback_url="https://www.booksinc.com/pages/events",
+    )
+
+
+def test_settings_mode_local_date_time_to_utc():
+    ev = _boot_events()[0]
+    assert ev.title == "MARCUS THOMPSON II: GAME CHANGERS"
+    # 2026-11-20 18:30 America/Los_Angeles (PST) -> 02:30 UTC next day
+    assert ev.start_time == datetime(2026, 11, 21, 2, 30, tzinfo=UTC)
+
+
+def test_settings_mode_resolves_location_id_to_name_and_address():
+    assert _boot_events()[0].location == "Books Inc. Alameda, 1344 Park St, Alameda, CA 94501"
+
+
+def test_settings_mode_url_from_primary_action_else_fallback():
+    evs = _boot_events()
+    assert evs[0].url.startswith("https://www.eventbrite.com/e/marcus-thompson-ii-game-changers")
+    assert evs[1].url.startswith("https://www.booksinc.com/pages/events#event-")
+    assert evs[1].url != evs[2].url
+
+
+def test_settings_mode_description_image_and_fallback_location():
+    evs = _boot_events()
+    assert evs[0].description and "<div>" not in evs[0].description
+    assert evs[0].image_url.startswith("https://files.elfsightcdn.com/")
+    assert evs[2].location == "Books Inc."  # no location id

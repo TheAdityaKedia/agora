@@ -1,0 +1,192 @@
+{
+ "status": 1,
+ "data": {
+  "widgets": {
+   "85b32f03-8a60-406b-8fe1-223ad02c821d": {
+    "status": 1,
+    "data": {
+     "app": "event-calendar",
+     "settings": {
+      "events": [
+       {
+        "id": "92ea79fc-18f2-49de-997e-d7858b6682c5",
+        "name": "MARCUS THOMPSON II: GAME CHANGERS",
+        "start": {
+         "type": "datetime",
+         "date": "2026-11-20",
+         "time": "18:30"
+        },
+        "end": {
+         "type": "datetime",
+         "date": "2026-11-20",
+         "time": "18:30"
+        },
+        "timeZone": "America/Los_Angeles",
+        "repeatPeriod": "noRepeat",
+        "repeatFrequency": "daily",
+        "repeatInterval": 1,
+        "repeatWeeklyOnDays": [],
+        "repeatEnds": "never",
+        "repeatEndsDate": null,
+        "repeatEndsOccurrences": 1,
+        "repeatMonthlyOnDay": "sameDay",
+        "exceptions": [],
+        "description": "<div><strong>Meet lead columnist of The Athletic Marcus Thompson II, discussing his new book Game Changers: The GOAT’s Who Revolutionized Basketball!</strong></div><br><div><strong>Warriors and basketball fans, don't miss this event with a Bay Area sports scene star!</strong></div><br><div><strong>About the Book: </strong>Joining the fierce debates every obsessive fan loves to have, acclaimed spor",
+        "images": [],
+        "coverImage": {
+         "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/7f879303-296f-4040-a7c2-e9d774d9d039/Untitled-300-x-400-px-2026-09-24T095221-603.png",
+         "name": "Untitled (300 x 400 px) - 2026-09-24T095221.603.png",
+         "size": 173727,
+         "type": "image/png",
+         "extension": "png",
+         "width": 400,
+         "height": 300,
+         "meta": {
+          "width": 400,
+          "height": 300
+         }
+        },
+        "eventType": [
+         "4c90dc21-c7bb-433f-838f-585d9e12675a"
+        ],
+        "location": [
+         "feeca289-e94a-4c6d-9f2b-5a95cc4e62ac"
+        ],
+        "host": [],
+        "tags": [],
+        "color": "transparent",
+        "actions": [
+         {
+          "type": "link",
+          "text": "RSVP",
+          "link": {
+           "type": "url",
+           "value": "https://www.eventbrite.com/e/marcus-thompson-ii-game-changers-tickets-2002228526421?aff=oddtdtcreator",
+           "rawValue": "https://www.eventbrite.com/e/marcus-thompson-ii-game-changers-tickets-2002228526421?aff=oddtdtcreator",
+           "target": "_blank"
+          },
+          "primary": true,
+          "id": "bfad2b76-5497-42d5-a4c8-3f03324820b1"
+         }
+        ],
+        "actionsCaption": "",
+        "video": null,
+        "file": null,
+        "isAllDay": false
+       },
+       {
+        "id": "5f4ff233-cae2-4130-9b6d-423103f54586",
+        "name": "OUR PARENTS MADE US DO THIS BOOK CLUB: MIDDLE SCHOOL MONSTERS",
+        "start": {
+         "type": "datetime",
+         "date": "2026-10-05",
+         "time": "18:30"
+        },
+        "end": {
+         "type": "datetime",
+         "date": "2026-10-05",
+         "time": "18:30"
+        },
+        "timeZone": "America/Los_Angeles",
+        "repeatPeriod": "noRepeat",
+        "repeatFrequency": "daily",
+        "repeatInterval": 1,
+        "repeatWeeklyOnDays": [],
+        "repeatEnds": "never",
+        "repeatEndsDate": null,
+        "repeatEndsOccurrences": 1,
+        "repeatMonthlyOnDay": "sameDay",
+        "exceptions": [],
+        "description": "<div><strong>Join us this month for Our Parents Made Us Do This Book Club with Violet.</strong></div><br><div><strong>This month we will discussing The Boxcar Children Graphic Novel by Gertrude Chandler Warner.</strong></div><br><div><strong>About the Book: </strong></div><br><div>The first chapter book in the beloved Boxcar Children series is now available as a full-color</div><br><div>graphic no",
+        "images": [],
+        "coverImage": {
+         "url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/eefcb035-9c2c-43f7-bd8c-69d955ac6a64/fc820b01-f094-4662-b563-8fbf890c2d19.png",
+         "name": "fc820b01-f094-4662-b563-8fbf890c2d19.png",
+         "size": 1877010,
+         "type": "image/png",
+         "extension": "png",
+         "width": 900,
+         "height": 1350,
+         "meta": {
+          "width": 900,
+          "height": 1350
+         }
+        },
+        "eventType": [
+         "e233b6e9-fb04-4048-b309-8759ac330d33"
+        ],
+        "location": [
+         "feeca289-e94a-4c6d-9f2b-5a95cc4e62ac"
+        ],
+        "host": [],
+        "tags": [],
+        "color": "transparent",
+        "actions": [],
+        "actionsCaption": "",
+        "video": null,
+        "file": null,
+        "isAllDay": false
+       },
+       {
+        "id": "ade862f4-5513-4920-a2d6-2a2f3b8d40cf",
+        "name": "Romantasy Book Club at Books Inc. Alameda",
+        "start": {
+         "type": "datetime",
+         "date": "2025-10-19",
+         "time": "15:00"
+        },
+        "end": {
+         "type": "datetime",
+         "date": "2025-10-19",
+         "time": "16:00"
+        },
+        "timeZone": "America/Los_Angeles",
+        "repeatPeriod": "nthDayInMonth",
+        "repeatFrequency": "daily",
+        "repeatInterval": 1,
+        "repeatEnds": "never",
+        "repeatEndsDate": null,
+        "repeatEndsOccurrences": 1,
+        "repeatMonthlyOnDay": "sameDay",
+        "description": "",
+        "eventType": [],
+        "location": [],
+        "host": [],
+        "tags": [],
+        "color": "transparent",
+        "video": null,
+        "file": null,
+        "repeatWeeklyOnDays": [
+         "su"
+        ],
+        "visible": false,
+        "exceptions": [],
+        "actions": [],
+        "actionsCaption": "",
+        "images": [],
+        "coverImage": null
+       }
+      ],
+      "locations": [
+       {
+        "id": "feeca289-e94a-4c6d-9f2b-5a95cc4e62ac",
+        "name": "Books Inc. Alameda",
+        "address": "1344 Park St, Alameda, CA 94501",
+        "website": "",
+        "filterID": "books-inc.-alameda"
+       },
+       {
+        "name": "City Arts & Lectures",
+        "address": "Sydney Goldstein Theater",
+        "website": "https://www.cityarts.net/",
+        "id": "5b6cc02a-3471-4c99-bafe-6e4bd0299223",
+        "filterID": "city-arts-&-lectures"
+       }
+      ],
+      "widgetTitle": true
+     }
+    }
+   }
+  }
+ }
+}

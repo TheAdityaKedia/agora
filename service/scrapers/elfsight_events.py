@@ -11,11 +11,19 @@ The API returns up to 100 events from a ``from`` date, so we walk forward by
 date windows, but bound the walk to a near-term horizon: venues here tend to be
 recurring nights (trivia, karaoke, open mic), and projecting a full year of
 weekly repeats would flood the manifest.
+
+Some widgets instead embed their events directly in the widget *settings*
+(served by the ``core.service.elfsight.com/p/boot`` endpoint the embed calls):
+each event has a local ``start.date`` + ``start.time`` and a ``timeZone``, and
+references venues by id into ``settings.locations``. ``scrape_widget_settings``
+handles that mode (see scrapers/booksinc.py). Repeating entries contribute only
+their anchor date — we don't expand monthly cadences (no fabricated dates).
 """
 from __future__ import annotations
 
 import re
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
@@ -25,6 +33,8 @@ from scrapers.browser import BROWSER_UA
 
 
 API_URL = "https://widget-data.service.elfsight.com/api/events"
+BOOT_URL = "https://core.service.elfsight.com/p/boot/"
+DEFAULT_TZ = "America/Los_Angeles"
 REQUEST_TIMEOUT = 25
 DEFAULT_HORIZON_DAYS = 90
 MAX_WINDOWS = 6  # safety bound on pagination
@@ -134,3 +144,88 @@ def scrape_events(source_id: str, *, fallback_location: str | None = None,
 
     _log(f"{source_id}: {len(collected)} events within {horizon_days}d")
     return collected
+
+
+# --- "settings" mode ---------------------------------------------------------
+
+def widget_settings(boot_payload: dict, widget_id: str) -> dict:
+    """Pull one widget's settings out of a /p/boot response."""
+    widget = ((boot_payload.get("data") or {}).get("widgets") or {}).get(widget_id) or {}
+    return (widget.get("data") or {}).get("settings") or {}
+
+
+def _parse_local_start(e: dict) -> datetime | None:
+    start = e.get("start") or {}
+    date = start.get("date")
+    if not date:
+        return None
+    time = "00:00" if e.get("isAllDay") else (start.get("time") or "00:00")
+    try:
+        local = datetime.fromisoformat(f"{date}T{time}")
+        tz = ZoneInfo(e.get("timeZone") or DEFAULT_TZ)
+    except (ValueError, KeyError):
+        return None
+    return local.replace(tzinfo=tz).astimezone(timezone.utc)
+
+
+def _primary_link(e: dict) -> str | None:
+    actions = e.get("actions") or []
+    for action in sorted(actions, key=lambda a: not a.get("primary")):
+        link = (action.get("link") or {}).get("value")
+        if isinstance(link, str) and link.startswith("http"):
+            return link
+    return None
+
+
+def _fragment_url(page_url: str | None, event_id: str | None) -> str | None:
+    """Link-less events share the calendar page URL; a per-event fragment keeps
+    two same-time events (at different stores) from deduping into one."""
+    if page_url and event_id:
+        return f"{page_url}#event-{event_id}"
+    return page_url
+
+
+def parse_settings_events(settings: dict, *, fallback_location: str | None = None,
+                          fallback_url: str | None = None) -> list[RawEvent]:
+    """Map settings-mode events to RawEvents. Pure."""
+    locations = {}
+    for loc in settings.get("locations") or []:
+        parts = [(loc.get(k) or "").strip() for k in ("name", "address")]
+        locations[loc.get("id")] = ", ".join(p for p in parts if p)
+    events: list[RawEvent] = []
+    for e in settings.get("events") or []:
+        name = (e.get("name") or "").strip()
+        start_time = _parse_local_start(e)
+        if not (name and start_time):
+            continue
+        location = next((locations[i] for i in e.get("location") or [] if locations.get(i)), None)
+        cover = e.get("coverImage") or {}
+        events.append(RawEvent(
+            title=name,
+            start_time=start_time,
+            location=location or fallback_location,
+            url=_primary_link(e) or _fragment_url(fallback_url, e.get("id")),
+            description=_clean_html(e.get("description")),
+            image_url=cover.get("url") if isinstance(cover, dict) else None,
+        ))
+    return events
+
+
+def scrape_widget_settings(widget_id: str, page_url: str, *,
+                           fallback_location: str | None = None) -> list[RawEvent]:
+    """Fetch a settings-mode widget via /p/boot; keep events from today on."""
+    try:
+        resp = requests.get(BOOT_URL, params={"page": page_url, "w": widget_id},
+                            headers={"User-Agent": BROWSER_UA, "Accept": "application/json"},
+                            timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        settings = widget_settings(resp.json(), widget_id)
+    except (requests.RequestException, ValueError) as exc:
+        _log(f"boot fetch failed for {widget_id}: {exc}")
+        return []
+    today = datetime.now(ZoneInfo(DEFAULT_TZ)).replace(hour=0, minute=0, second=0, microsecond=0)
+    events = [ev for ev in parse_settings_events(settings, fallback_location=fallback_location,
+                                                 fallback_url=page_url)
+              if ev.start_time >= today]
+    _log(f"{widget_id}: {len(events)} upcoming of {len(settings.get('events') or [])} in settings")
+    return events
