@@ -17,6 +17,8 @@ from scrapers import (
     sfbarguide, sfjazz, sfpl, sfplayhouse, sfwarmemorial, sunsettrivia, themarsh,
     thecommons, warfield, ybca, zspace,
     bachdds, biscuitsblues, dawnclub, keysjazz, yoshis,
+    booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
+    clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
 )
 from scrapers.base import RawEvent
 
@@ -33,6 +35,8 @@ SCRAPERS = [
     thecommons, readingrhythms, oaklandartmurmur, elrio, kronos, litquake,
     themarsh, linesballet, factsf,
     yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
+    booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
+    clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
 ]
 
 
