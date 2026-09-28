@@ -175,10 +175,14 @@ create and approve pull requests*.
 
 - A dedicated (non-Isengard) AWS account for Bedrock.
 - IAM OIDC identity provider for `token.actions.githubusercontent.com`.
-- Role trusted only for `repo:TheAdityaKedia/agora:ref:refs/heads/main`
-  (scheduled and dispatch runs on `main`), policy limited to
-  `bedrock:InvokeModel` on the Claude Haiku model used by `classify.py`
-  (plus model access enabled in the region).
+- Role `AgoraGitHubBedrock` trusted only for OIDC subject
+  `repo:TheAdityaKedia/agora:environment:production` (a job with
+  `environment:` is identified by environment, not ref; `production` accepts
+  only `main`). Inline policy: `bedrock:InvokeModel` on
+  `inference-profile/global.anthropic.claude-haiku-4-5-20251001-v1:0` and the
+  matching `foundation-model` ARNs (any region, since the global profile
+  routes cross-region). `AWS_ROLE_ARN` / `AWS_REGION` live in the `production`
+  environment.
 - Merge job: `aws-actions/configure-aws-credentials` with
   `role-to-assume: ${{ secrets.AWS_ROLE_ARN }}`, `aws-region: ${{ secrets.AWS_REGION }}`.
   No long-lived keys stored.

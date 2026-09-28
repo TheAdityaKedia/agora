@@ -126,9 +126,13 @@ testing workflow changes.
    branch (test runs).
 2. **AWS (Bedrock tagging)** — in the external AWS account: an IAM OIDC provider
    for `token.actions.githubusercontent.com` (audience `sts.amazonaws.com`), and
-   a role trusted only for `repo:TheAdityaKedia/agora:ref:refs/heads/main`
-   allowing `bedrock:InvokeModel` on the Haiku model in `service/classify.py`.
-   Without it, runs still ship — new shows are just untagged.
+   a role (`AgoraGitHubBedrock`, account `978355607698`) trusted only for
+   `repo:TheAdityaKedia/agora:environment:production` — jobs that declare an
+   `environment:` get that OIDC subject instead of `ref:…`, and `production` is
+   main-only — allowing just `bedrock:InvokeModel` on the Haiku 4.5 global
+   inference profile + foundation model used in `service/classify.py`. A $5/mo
+   AWS Budget (`agora-monthly`) emails on 80% actual / 100% forecast.
+   Without the role, runs still ship — new shows are just untagged.
 3. **Secrets, scoped by GitHub Environment** (Settings → Environments):
    - `production` — deployment branches restricted to `main`, so no other
      branch's workflow can read these: `DATABASE_URL` (Neon production, pooled,
