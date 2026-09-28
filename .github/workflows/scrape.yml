@@ -5,7 +5,7 @@ name: Scrape and refresh manifest
 #
 # Runs from main use the production Neon DB, ship to main, and deploy Pages.
 # Runs from any other branch (for testing the workflow itself) use the
-# DATABASE_URL_TEST Neon branch and ship into a throwaway ci-sandbox/<run_id>
+# `ci-test` environment's Neon branch and ship into a throwaway ci-sandbox/<run_id>
 # branch — the full PR → merge path is exercised, but nothing reaches main.
 on:
   schedule:
@@ -103,6 +103,10 @@ jobs:
       pull-requests: write
       actions: write   # gh workflow run deploy-pages.yml
       id-token: write  # AWS OIDC
+    # Secrets live in GitHub Environments, not the repo: `production` (Neon
+    # production, AWS role) only accepts deployments from main, so no other
+    # branch's workflow can read them; `ci-test` holds the test-branch DB URL.
+    environment: ${{ github.ref_name == 'main' && 'production' || 'ci-test' }}
     env:
       IS_MAIN: ${{ github.ref_name == 'main' }}
     steps:
@@ -128,7 +132,7 @@ jobs:
       - name: Merge into DB, classify, export
         working-directory: service
         env:
-          DATABASE_URL: ${{ github.ref_name == 'main' && secrets.DATABASE_URL || secrets.DATABASE_URL_TEST }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # environment-scoped (see above)
           EVENTS_JSON_PATH: ${{ github.workspace }}/frontend/events.json
         run: |
           set -f
