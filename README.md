@@ -151,6 +151,14 @@ testing workflow changes.
 5. **First run on `main` must be a full run** (the drop guard compares against
    `main`'s manifest, so a filtered run against a near-empty DB would be blocked).
 
+**Failure alerts** — if any source hard-fails (error, crashed/timed-out job,
+save error, no scraper) or returns 0 events, the run opens a **Scrape
+failures** issue (or comments on the open one) that @mentions the repo owner —
+GitHub emails you — and the run is marked failed. Data still ships first. A
+clean run closes the issue. Sources in `service/data/local_only_sources.txt`
+are never alerted on. Test runs from other branches use a separate
+`Scrape failures (test run on <branch>)` issue.
+
 **Sources blocked from GitHub** — a few sources fail from GitHub's datacenter
 IPs (listed in `service/data/local_only_sources.txt`; details in
 `future-sources.md` → "Sources that need fixing"). Scrape them from your own

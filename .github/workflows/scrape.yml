@@ -101,6 +101,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write    # failure-alert issue
       actions: write   # gh workflow run deploy-pages.yml
       id-token: write  # AWS OIDC
     # Secrets live in GitHub Environments, not the repo: `production` (Neon
@@ -148,6 +149,14 @@ jobs:
             --base "$RUNNER_TEMP/base.json" --report "$RUNNER_TEMP/report.json" \
             --body "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_OUTPUT"
           cat "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Find failing sources
+        id: alert
+        working-directory: service
+        run: |
+          python ci.py alert --report "$RUNNER_TEMP/report.json" \
+            --body "$RUNNER_TEMP/alert.md" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            --mention "@$GITHUB_REPOSITORY_OWNER" >> "$GITHUB_OUTPUT"
       - name: Ship (PR → merge → deploy)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -189,3 +198,33 @@ jobs:
           else
             git push origin --delete "$base"
           fi
+      # Alerting: hard failures + 0-event sources (known CI-blocked sources
+      # excluded) open or update one "Scrape failures" issue — GitHub emails
+      # the repo owner — and the run is marked failed. A clean run closes it.
+      # Runs after shipping so a failing source never blocks the data refresh.
+      - name: Alert issue
+        if: always() && steps.alert.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COUNT: ${{ steps.alert.outputs.count }}
+          TITLE: ${{ github.ref_name == 'main' && 'Scrape failures' || format('Scrape failures (test run on {0})', github.ref_name) }}
+        run: |
+          set -euo pipefail
+          existing="$(gh issue list --state open --search "\"$TITLE\" in:title" \
+                      --json number,title -q ".[] | select(.title == \"$TITLE\") | .number" | head -1)"
+          if [ "$COUNT" != "0" ]; then
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --body-file "$RUNNER_TEMP/alert.md"
+            else
+              gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/alert.md"
+            fi
+          elif [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "Clean run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          fi
+      - name: Fail run on source failures
+        if: always() && steps.alert.outcome == 'success' && steps.alert.outputs.count != '0'
+        env:
+          COUNT: ${{ steps.alert.outputs.count }}
+        run: |
+          echo "::error::${COUNT} source(s) failed — see the Scrape failures issue"
+          exit 1

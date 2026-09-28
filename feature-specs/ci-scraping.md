@@ -171,6 +171,15 @@ tokens.
 Repo setting required: *Settings → Actions → General → Allow GitHub Actions to
 create and approve pull requests*.
 
+## 4b. Failure alerts
+
+After shipping, `ci.py alert` lists sources with a non-`ok` status or 0
+events, skipping `service/data/local_only_sources.txt`. If any: open (or
+comment on) one open issue titled `Scrape failures` (non-`main` runs:
+`Scrape failures (test run on <ref>)`), @mentioning the repo owner so GitHub
+emails them, then fail the run. A clean run closes the open issue. Drop
+detection against DB row counts (e.g. SF Playhouse 375 → 4) is deferred.
+
 ## 5. AI tagging credentials — external AWS account via OIDC
 
 - A dedicated (non-Isengard) AWS account for Bedrock.

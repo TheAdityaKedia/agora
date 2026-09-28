@@ -78,6 +78,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   Sources that 403 from GitHub runners live in
   `service/data/local_only_sources.txt`; `scripts/scrape-to-neon.sh --blocked`
   scrapes them locally into Neon. Add a source there when CI can't reach it.
+  Failing/0-event sources (except those) open a `Scrape failures` issue and
+  turn the run red — if you see one, that's the to-do list.
 - **AI tagging (classify step in `run()`):** calls Bedrock (Claude Haiku); needs
   AWS creds (the compose scraper mounts `~/.aws` — refresh on host first) or it's
   skipped (`--no-classify` to skip explicitly). Classifies only cache misses
