@@ -1168,8 +1168,10 @@ cd /Users/kediaadi/workspace/LearningProjects/Agora && git worktree remove ../Ag
 - Tasks 0–8 done on branch `ci-scraping` (Task 0's worktree skipped — other
   agents had stopped, so the branch was cut in the main checkout).
 - Deviations from the plan, all reflected in the spec:
-  - Non-`main` runs use `DATABASE_URL_TEST` (Neon `ci-test` branch) and ship
-    into a throwaway `ci-sandbox/<run_id>` branch; concurrency is per ref.
+  - Secrets are GitHub Environment-scoped: `main` runs use `production`
+    (deployable only from main), other branches use `ci-test` (Neon `ci-test`
+    branch) and ship into a throwaway `ci-sandbox/<run_id>` branch;
+    concurrency is per ref.
   - Actions bumped off Node 20 (checkout/setup-python v7, cache v6,
     upload-artifact v7, download-artifact v8, configure-aws-credentials v6).
   - `db.py` got `pool_pre_ping=True` (Neon drops idle connections; found

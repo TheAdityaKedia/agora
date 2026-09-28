@@ -116,7 +116,7 @@ gh workflow run scrape.yml                              # full run
 gh workflow run scrape.yml -f sources="citylights.com"  # one source
 ```
 
-Runs from a branch other than `main` use the `DATABASE_URL_TEST` Neon branch,
+Runs from a branch other than `main` use the Neon `ci-test` branch,
 ship into a throwaway `ci-sandbox/<run_id>` branch, and never deploy — safe for
 testing workflow changes.
 
@@ -129,9 +129,19 @@ testing workflow changes.
    a role trusted only for `repo:TheAdityaKedia/agora:ref:refs/heads/main`
    allowing `bedrock:InvokeModel` on the Haiku model in `service/classify.py`.
    Without it, runs still ship — new shows are just untagged.
-3. **Repo secrets** — `DATABASE_URL` (Neon production, pooled, `sslmode=require`),
-   `DATABASE_URL_TEST` (Neon `ci-test`), `AWS_ROLE_ARN`, `AWS_REGION`,
-   `ZYTE_API_KEY` (optional; Green Apple).
+3. **Secrets, scoped by GitHub Environment** (Settings → Environments):
+   - `production` — deployment branches restricted to `main`, so no other
+     branch's workflow can read these: `DATABASE_URL` (Neon production, pooled,
+     `sslmode=require`), `AWS_ROLE_ARN`, `AWS_REGION`.
+   - `ci-test` — any branch: `DATABASE_URL` (Neon `ci-test` branch, with its
+     own role password — not production's).
+   - Repo-level: `ZYTE_API_KEY` (optional; scrape jobs only).
+
+   ```bash
+   gh secret set DATABASE_URL --env production   # value on stdin
+   gh secret set AWS_ROLE_ARN --env production
+   gh secret set AWS_REGION   --env production --body us-east-1
+   ```
 4. **Repo setting** — Settings → Actions → General → *Allow GitHub Actions to
    create and approve pull requests*.
 5. **First run on `main` must be a full run** (the drop guard compares against

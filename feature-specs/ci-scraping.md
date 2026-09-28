@@ -152,7 +152,8 @@ unchanged, exit.
    the exception.
 
 **Runs from any branch other than `main`** (testing the workflow itself) use
-secret `DATABASE_URL_TEST` (a Neon `ci-test` child branch), skip AWS, and ship
+the `ci-test` environment's `DATABASE_URL` (a Neon `ci-test` child branch),
+skip AWS, and ship
 into a throwaway `ci-sandbox/<run_id>` branch cut from the run's commit — the
 full PR → guard → merge path is exercised, then the sandbox is deleted. They
 never touch `main` or deploy.
@@ -186,13 +187,18 @@ create and approve pull requests*.
 
 ## 6. Secrets & one-time setup checklist
 
-| Secret | Used by | Purpose |
-|--------|---------|---------|
-| `DATABASE_URL` | merge | Neon connection string (`sslmode=require`) |
-| `AWS_ROLE_ARN` | merge | OIDC role for Bedrock |
-| `AWS_REGION` | merge | Bedrock region |
-| `DATABASE_URL_TEST` | merge (non-`main` runs) | Neon `ci-test` branch |
-| `ZYTE_API_KEY` | scrape | Metered fetch for Green Apple (optional; absent → that scraper returns 0) |
+The merge job declares `environment: production` on `main` and `ci-test`
+otherwise. `production` only accepts deployments from `main` (verified: a
+job on another branch requesting it is rejected), so its secrets are
+unreadable from any other branch by construction, not just by the `if`.
+
+| Secret | Scope | Used by | Purpose |
+|--------|-------|---------|---------|
+| `DATABASE_URL` | env `production` | merge on `main` | Neon production (`sslmode=require`) |
+| `AWS_ROLE_ARN` | env `production` | merge on `main` | OIDC role for Bedrock |
+| `AWS_REGION` | env `production` | merge on `main` | Bedrock region |
+| `DATABASE_URL` | env `ci-test` | merge elsewhere | Neon `ci-test` branch (own role password) |
+| `ZYTE_API_KEY` | repo | scrape | Metered fetch (optional; no scraper calls it yet) |
 
 Setup (documented in `README.md`): create Neon project → create AWS OIDC
 provider + role → add secrets → enable "Allow GitHub Actions to create and
