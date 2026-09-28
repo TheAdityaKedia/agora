@@ -1,7 +1,8 @@
 name: Scrape and refresh manifest
 
 # One runner per source (speed, fresh IP, fault isolation), fanned back in to a
-# single DB writer. Design: feature-specs/ci-scraping.md.
+# single DB writer. Stages: service/ci.py; setup + ops: README.md →
+# "Scheduled scraping".
 #
 # Runs from main use the production Neon DB, ship to main, and deploy Pages.
 # Runs from any other branch (for testing the workflow itself) use the

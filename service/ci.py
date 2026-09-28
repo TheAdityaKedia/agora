@@ -1,8 +1,8 @@
 """CI stage entry points for the per-source GitHub Actions pipeline.
 
 `.github/workflows/scrape.yml` fans out one runner per source and fans back in
-to a single DB writer — see feature-specs/ci-scraping.md. Each subcommand is
-one stage:
+to a single DB writer (setup + ops: README.md → "Scheduled scraping"). Each
+subcommand is one stage:
 
   plan   — print the filtered source list as a JSON matrix
   scrape — scrape ONE url into a result file (no DB, no creds; always exits 0)

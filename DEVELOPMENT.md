@@ -136,7 +136,8 @@ per-occurrence structure stays one event; guessing dates produces wrong data.
 
 **Client-side search, client-side everything.** Search runs in the browser over
 the manifest (MiniSearch). No server. The searchable text is already in
-`events.json`, so no precomputed index is shipped — see `feature-specs/search.md`.
+`events.json`, so no precomputed index is shipped (MiniSearch setup lives in
+`frontend/index.html`).
 
 **Past-pruning by calendar day, not rolling 24h.** The exporter keeps events
 whose *local* day is today or later, so a 9am event stays visible all day
@@ -152,8 +153,7 @@ naively hits a few walls, in rough priority order:
    `events.json` and builds the search index on load. At ~2,600 events that's
    fine (<500ms index build); at ~10k it becomes a multi-MB download, a 1–2s
    index build, and huge per-scrape git diffs. When events cross ~5k, ship a
-   prebuilt index and/or paginate/lazy-load the manifest (escalation point noted
-   in `feature-specs/search.md` §4).
+   prebuilt index and/or paginate/lazy-load the manifest.
 3. **Runtime.** Concurrency is fixed at 6 regardless of source count, so wall
    time ≈ total work ÷ 6, bounded by the slowest sources (SFPL's ~1,100 detail
    fetches, WAF-stalled sources like SFJAZZ). More sources → longer runs; the
@@ -171,10 +171,8 @@ naively hits a few walls, in rough priority order:
 ## Roadmap
 
 **Shipped:** AI tagging (two-axis type+topic + cost, Claude Haiku, per-show
-cache, frontend type/topic filters + tag search). The as-built design differs
-from the original `feature-specs/tagging.md` draft (that draft is single-axis /
-Nova) — the code is the source of truth: `service/taxonomy.py`, `classify.py`,
-`classifications.py`.
+cache, frontend type/topic filters + tag search). The code is the source of
+truth: `service/taxonomy.py`, `classify.py`, `classifications.py`.
 
 Near-term, in likely order:
 - **Onboard queued sources in tiers** from `future-sources.md`, structured-data

@@ -1,6 +1,6 @@
 """Two-axis event taxonomy: the single source of truth for tags.
 
-The taxonomy has two independent axes (see feature-specs/tagging.md):
+The taxonomy has two independent axes:
 
   - `type`  — the event FORMAT (performance, screening, talk/reading, workshop,
               exhibition, social/book-club, …). A shallow tree; a classification
