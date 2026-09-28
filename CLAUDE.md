@@ -19,7 +19,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 
 | Task | Read |
 |------|------|
-| Understand the system, decisions, roadmap, scaling | `DEVELOPMENT.md` |
+| What's planned next (features + their specs) | `future-features.md` |
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
 | Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
@@ -154,8 +154,8 @@ Multiple agents may work this repo at once. To avoid stepping on each other:
 
 ## Current focus
 
-AI tagging shipped (two-axis type+topic, Claude Haiku, cached; frontend
-filters + tag search). Ongoing: scaling the source list (~95 candidates in
-`future-sources.md`) and pruning source noise (e.g. SFPL non-events). The next
-structural wall is the frontend payload as the manifest grows — see
-`DEVELOPMENT.md` → "Scaling considerations."
+Shipped: AI tagging and scheduled per-source CI scraping (Neon, auto-merged
+data PRs, failure alerts). Ongoing: scaling the source list (candidates in
+`future-sources.md`) and pruning source noise (e.g. SFPL non-events). Planned
+work, including the frontend payload wall as the manifest grows, is in
+`future-features.md`.

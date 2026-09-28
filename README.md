@@ -45,7 +45,8 @@ agora/
 ├── docker-compose.yml          # Postgres + API + scraper for local runs
 ├── CONTRIBUTING.md             # How to add a source (scraper) + write feature specs
 ├── feature-specs/              # Design specs for features not yet built
-├── DEVELOPMENT.md              # Phasing, design decisions, current status
+├── future-features.md          # Planned features, each linked to its spec
+├── future-sources.md           # Candidate sources + sources that need fixing
 └── README.md
 ```
 
