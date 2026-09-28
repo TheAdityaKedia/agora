@@ -16,7 +16,7 @@ from scrapers import (
     oaklandartmurmur, palace, phoenix, presidio, readingrhythms, riptide,
     sfbarguide, sfjazz, sfpl, sfplayhouse, sfwarmemorial, sunsettrivia, themarsh,
     thecommons, warfield, ybca, zspace,
-    bachdds, biscuitsblues, dawnclub, keysjazz, yoshis,
+    bachdds, biscuitsblues, dawnclub, keysjazz, yoshis, partiful,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
 )
@@ -37,6 +37,7 @@ SCRAPERS = [
     yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
+    partiful,
 ]
 
 
