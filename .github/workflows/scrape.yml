@@ -16,6 +16,8 @@ on:
         description: "Only scrape sources whose URL contains one of these space-separated substrings (blank = all)"
         required: false
         default: ""
+  push:
+    branches: [ci-env-test]
 
 # One run at a time: runs share the Neon DB and events.json.
 concurrency:
@@ -26,7 +28,7 @@ permissions:
   contents: read
 
 env:
-  SOURCES: ${{ inputs.sources }}
+  SOURCES: ${{ github.event_name == 'push' && 'citylights.com' || inputs.sources }}
 
 jobs:
   plan:
@@ -189,3 +191,10 @@ jobs:
           else
             git push origin --delete "$base"
           fi
+
+  prod-secret-probe:
+    # Must be REJECTED: production only accepts deployments from main.
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - run: echo "reached production secrets from ${{ github.ref_name }} (BAD)"
