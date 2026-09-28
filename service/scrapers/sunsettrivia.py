@@ -8,8 +8,7 @@ array, each with name, address, city/zip/region, `dayOfWeek`, `time`,
 
 Unlike SF Bar Guide there's no concrete next-occurrence date — just a weekday +
 time — so we compute the next occurrence (recurrence.next_weekly_start) and
-expand weekly. Scoped to the Bay Area (this is an SF calendar). See
-feature-specs/recurring-events.md.
+expand weekly. Scoped to the Bay Area (this is an SF calendar).
 """
 from __future__ import annotations
 

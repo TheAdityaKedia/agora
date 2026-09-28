@@ -12,7 +12,7 @@ events. Structure (spiked):
 We fetch the homepage, then each bar page concurrently, and expand every event's
 recurrence into concrete dated occurrences within a rolling window (see
 recurrence.py). Titles embed the venue so two bars' "Trivia Night" at the same
-time stay distinct rows. See feature-specs/recurring-events.md.
+time stay distinct rows.
 """
 from __future__ import annotations
 

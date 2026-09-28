@@ -22,8 +22,9 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Understand the system, decisions, roadmap, scaling | `DEVELOPMENT.md` |
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
-| Frontend search design (MiniSearch, ranking) | `feature-specs/search.md` |
-| AI tagging (built) — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; ⚠️ `feature-specs/tagging.md` is the ORIGINAL draft and is stale (single-axis / Nova) — the built version is two-axis (type+topic), Claude Haiku, with `source_profiles.json` |
+| Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
+| AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json` |
+| Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
 
@@ -42,7 +43,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
 - `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
   source → single merge job (Neon) → guarded auto-merged data PR → deploy.
-  See `feature-specs/ci-scraping.md`.
+  Stages in `service/ci.py`; setup + ops in `README.md` → "Scheduled scraping".
 
 ## Operating rules for agents
 

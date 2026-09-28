@@ -36,8 +36,9 @@ A spec should capture:
 - **Testing plan** and **open questions to verify**.
 
 Flow: draft the spec → review it → turn it into an ordered, TDD-able
-implementation plan → build. `feature-specs/tagging.md` is the worked example.
-Keep specs versioned in git alongside the code they describe.
+implementation plan → build. Keep the spec in git while the work is in
+flight; once the feature ships, delete it — the code (and git history) is then
+the source of truth.
 
 ## The scraper contract
 
@@ -266,7 +267,7 @@ Fetch the detail page and extract the real synopsis. Lessons:
 start_time)`. `start_time` is always part of the key, so many performances can
 share one show URL (Berkeley Rep, NCTC). The DB's partial unique index is on
 `(url, start_time)`. (Classification, a separate concern, keys per *show* on
-`(title, source)` — see `feature-specs/tagging.md`.)
+`(title, source)` — see `service/classifications.py`.)
 
 ## Dates & timezones
 

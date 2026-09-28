@@ -44,7 +44,7 @@ agora/
 │   └── deploy-pages.yml        # Publishes frontend/ to GitHub Pages
 ├── docker-compose.yml          # Postgres + API + scraper for local runs
 ├── CONTRIBUTING.md             # How to add a source (scraper) + write feature specs
-├── feature-specs/              # Design specs for larger features (e.g. tagging)
+├── feature-specs/              # Design specs for features not yet built
 ├── DEVELOPMENT.md              # Phasing, design decisions, current status
 └── README.md
 ```
@@ -108,8 +108,8 @@ one merge job then saves all results into Neon Postgres in `sources.txt` order,
 classifies new shows, exports `events.json`, and ships it as a bot PR
 (`data/refresh-<run_id>`) that auto-merges when the guard passes (manifest
 parses; event count ≥ 70% of `main`'s), then triggers the Pages deploy. A
-failed or timed-out source keeps its rows from earlier runs. Design:
-`feature-specs/ci-scraping.md`; stage code: `service/ci.py`.
+failed or timed-out source keeps its rows from earlier runs. Stage code:
+`service/ci.py`.
 
 ```bash
 gh workflow run scrape.yml                              # full run
