@@ -8,6 +8,7 @@ one stage:
   scrape — scrape ONE url into a result file (no DB, no creds; always exits 0)
   merge  — save every result into the DB in sources.txt order, classify, export
   guard  — sanity-check the new manifest vs the base branch's, render the PR body
+  alert  — list failing sources (hard failures, 0 events) for the alert issue
 
 Everything goes through `pipeline.<fn>` (the main module) rather than
 from-imports so tests can monkeypatch "main.<fn>".
@@ -179,6 +180,48 @@ def render_pr_body(report: dict, guard: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+LOCAL_ONLY_FILE = Path(__file__).parent / "data" / "local_only_sources.txt"
+
+
+def load_local_only(path=LOCAL_ONLY_FILE) -> list[str]:
+    """Substrings of sources known to fail from CI (scraped locally instead)."""
+    entries = []
+    for line in Path(path).read_text().splitlines():
+        entry = line.split("#", 1)[0].strip()
+        if entry:
+            entries.append(entry)
+    return entries
+
+
+def find_alerts(report: dict, local_only: list[str]) -> list[dict]:
+    """Sources worth an alert: any non-ok status, or ok with 0 events.
+
+    Known local-only sources are skipped — they fail from CI every day by
+    design, and alerting on them would bury real regressions.
+    """
+    alerts = []
+    for r in report["sources"]:
+        if any(entry in r["url"] for entry in local_only):
+            continue
+        if r["status"] != "ok":
+            alerts.append({**r, "reason": r["status"]})
+        elif r["events"] == 0:
+            alerts.append({**r, "reason": "0 events"})
+    return alerts
+
+
+def render_alert_body(alerts: list[dict], run_url: str, mention: str = "") -> str:
+    """Markdown for the failure issue/comment: one line per failing source."""
+    lines = [f"{len(alerts)} source(s) failed in [this run]({run_url}). {mention}".rstrip(),
+             "", "| Source | Problem | Error |", "|---|---|---|"]
+    for a in alerts:
+        error = (a["error"] or "").replace("`", "'").replace("|", "/").replace("\n", " ")[:300]
+        lines.append(f"| {a['name'] or a['url']} | {a['reason']} | {error} |")
+    lines += ["", "Existing rows for these sources are kept. Known CI-blocked sources "
+                  "(`service/data/local_only_sources.txt`) are not alerted on."]
+    return "\n".join(lines) + "\n"
+
+
 def cli(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Agora CI pipeline stages.")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -205,6 +248,13 @@ def cli(argv: list[str] | None = None) -> None:
     g.add_argument("--body", type=Path, required=True)
     g.add_argument("--min-ratio", type=float, default=0.7)
 
+    a = sub.add_parser("alert", help="List failing sources and render the alert body.")
+    a.add_argument("--report", type=Path, required=True)
+    a.add_argument("--local-only", type=Path, default=LOCAL_ONLY_FILE)
+    a.add_argument("--body", type=Path, required=True)
+    a.add_argument("--run-url", required=True)
+    a.add_argument("--mention", default="")
+
     args = parser.parse_args(argv)
 
     if args.cmd == "plan":
@@ -227,6 +277,12 @@ def cli(argv: list[str] | None = None) -> None:
         print(f"passed={str(guard['passed']).lower()}")
         print(f"changed={str(guard['changed']).lower()}")
         print(f"count={guard['count']}")
+    elif args.cmd == "alert":
+        # stdout is appended to $GITHUB_OUTPUT, so print only key=value lines.
+        report = json.loads(args.report.read_text())
+        alerts = find_alerts(report, load_local_only(args.local_only))
+        args.body.write_text(render_alert_body(alerts, args.run_url, args.mention))
+        print(f"count={len(alerts)}")
 
 
 if __name__ == "__main__":

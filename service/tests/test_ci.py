@@ -274,3 +274,63 @@ def test_guard_cli_emits_github_outputs(tmp_path, capsys):
             "--report", str(report), "--body", str(body)])
     assert capsys.readouterr().out.splitlines() == ["passed=true", "changed=false", "count=3"]
     assert body.read_text().startswith("Automated refresh")
+
+
+# --- alerts -----------------------------------------------------------------
+
+def _row(url, status="ok", events=5, error=None, name=None):
+    return {"url": url, "name": name or url, "status": status, "events": events,
+            "saved": 0, "merged": 0, "skipped": 0, "error": error}
+
+
+def test_find_alerts_flags_hard_failures_and_zero_events():
+    report = {"sources": [
+        _row("https://ok.com"),
+        _row("https://err.com", status="error", events=0, error="RuntimeError: boom"),
+        _row("https://gone.com", status="missing", events=0),
+        _row("https://save.com", status="save_error", error="OperationalError"),
+        _row("https://none.com", status="no_scraper", events=0),
+        _row("https://empty.com", events=0),
+    ]}
+    flagged = {r["url"]: r["reason"] for r in ci.find_alerts(report, local_only=[])}
+    assert "https://ok.com" not in flagged
+    assert flagged["https://err.com"] == "error"
+    assert flagged["https://gone.com"] == "missing"
+    assert flagged["https://save.com"] == "save_error"
+    assert flagged["https://none.com"] == "no_scraper"
+    assert flagged["https://empty.com"] == "0 events"
+
+
+def test_find_alerts_skips_known_local_only_sources():
+    report = {"sources": [_row("https://greenapplebooks.com/events", events=0),
+                          _row("https://www.cityarts.net/events/", status="error", events=0)]}
+    assert ci.find_alerts(report, local_only=["greenapplebooks.com", "cityarts.net"]) == []
+
+
+def test_load_local_only_ignores_comments(tmp_path):
+    f = tmp_path / "local_only_sources.txt"
+    f.write_text("# comment\ngreenapplebooks.com\n\n  themarsh.org  # trailing\n")
+    assert ci.load_local_only(f) == ["greenapplebooks.com", "themarsh.org"]
+
+
+def test_render_alert_body_lists_failures_and_mentions_owner():
+    alerts = [{**_row("https://err.com", status="error", events=0, error="RuntimeError: 403 `x`",
+                      name="Err Venue"), "reason": "error"}]
+    body = ci.render_alert_body(alerts, run_url="https://github.com/o/r/actions/runs/1",
+                                mention="@owner")
+    assert "Err Venue" in body and "RuntimeError: 403 'x'" in body
+    assert "https://github.com/o/r/actions/runs/1" in body
+    assert "@owner" in body
+
+
+def test_alert_cli_emits_count_and_writes_body(tmp_path, capsys):
+    report = tmp_path / "report.json"
+    report.write_text(json.dumps({"exported": 1, "failed": 1, "sources": [
+        _row("https://a.com"), _row("https://b.com", events=0)]}))
+    local_only = tmp_path / "local_only.txt"
+    local_only.write_text("")
+    body = tmp_path / "alert.md"
+    ci.cli(["alert", "--report", str(report), "--local-only", str(local_only),
+            "--body", str(body), "--run-url", "https://x/runs/1", "--mention", "@me"])
+    assert capsys.readouterr().out.splitlines() == ["count=1"]
+    assert "https://b.com" in body.read_text()
