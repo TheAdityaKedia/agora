@@ -4,7 +4,7 @@ wrappers (like bigbrainbay.py) plug into.
 from datetime import datetime, timezone
 
 from scrapers.base import RawEvent
-from scrapers import bigbrainbay, luma, thecommons
+from scrapers import bigbrainbay, frontiertower, luma, thecommons
 
 
 # Minimal calendar page: ItemList JSON-LD with two Event items + one non-Event
@@ -80,6 +80,20 @@ def test_luma_wrappers_match_only_their_own_calendars():
     # each ignores the others' calendars (no substring collisions)
     assert not thecommons.matches("https://luma.com/Big-Brain-Bay")
     assert not bigbrainbay.matches("https://luma.com/thecommons")
+    assert frontiertower.matches("https://luma.com/frontiertower")
+    assert not frontiertower.matches("https://luma.com/thecommons")
+    assert not thecommons.matches("https://luma.com/frontiertower")
+
+
+def test_frontiertower_drops_internal_holds_and_placeholders():
+    for title in ("HOLD - 2nd Floor Private Rental (Comfy)",
+                  "test - Citizens Free · Guests Pay",
+                  "TBA (Hospitality) - Placeholder - Open Registration"):
+        assert frontiertower.is_noise(title), title
+    for title in ("SF CogSci #33: Behave, by Robert Sapolsky",
+                  "Tech Week Hackathon",
+                  "Star Trek Watch Party & Discussion - Members +3"):
+        assert not frontiertower.is_noise(title), title
 
 
 # --- find_calendar_events -------------------------------------------------

@@ -11,8 +11,8 @@ from models import Event
 from scrapers import (
     actsf, atgtickets, balboa, berkeleyrep, bigbrainbay, birdbeckett, blackbird,
     brava, citylights, cityarts, commonwealthclub, elrio, factsf, fillmore,
-    fourstar, gamh, greatstar, greenapple, independent, kronos, linesballet,
-    litquake, magictheatre, medicinenightmares, nctcsf, neofuturists,
+    fourstar, frontiertower, gamh, greatstar, greenapple, independent, kronos,
+    linesballet, litquake, magictheatre, medicinenightmares, nctcsf, neofuturists,
     oaklandartmurmur, palace, phoenix, presidio, readingrhythms, riptide,
     sfbarguide, sfjazz, sfpl, sfplayhouse, sfwarmemorial, sunsettrivia, themarsh,
     thecommons, warfield, ybca, zspace,
@@ -37,7 +37,7 @@ SCRAPERS = [
     yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
-    partiful,
+    partiful, frontiertower,
 ]
 
 
