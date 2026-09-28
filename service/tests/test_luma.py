@@ -4,7 +4,7 @@ wrappers (like bigbrainbay.py) plug into.
 from datetime import datetime, timezone
 
 from scrapers.base import RawEvent
-from scrapers import bigbrainbay, luma, thecommons, readingrhythms
+from scrapers import bigbrainbay, luma, thecommons
 
 
 # Minimal calendar page: ItemList JSON-LD with two Event items + one non-Event
@@ -77,30 +77,9 @@ def test_bigbrainbay_matches_only_its_calendar():
 
 def test_luma_wrappers_match_only_their_own_calendars():
     assert thecommons.matches("https://luma.com/thecommons")
-    assert readingrhythms.matches("https://luma.com/readingrhythms-ca")
     # each ignores the others' calendars (no substring collisions)
-    assert not thecommons.matches("https://luma.com/readingrhythms-ca")
     assert not thecommons.matches("https://luma.com/Big-Brain-Bay")
-    assert not readingrhythms.matches("https://luma.com/thecommons")
     assert not bigbrainbay.matches("https://luma.com/thecommons")
-
-
-def test_reading_rhythms_keeps_only_bay_area():
-    assert readingrhythms._is_bay_area("The Love Potion Library, San Francisco")
-    assert readingrhythms._is_bay_area("Some Cafe, Oakland, California")
-    assert not readingrhythms._is_bay_area("Bodega Wine Bar, Santa Monica, California")
-    assert not readingrhythms._is_bay_area("Moniker General, San Diego, California")
-    assert not readingrhythms._is_bay_area(None)
-
-
-def test_reading_rhythms_scrape_filters_non_bay(monkeypatch):
-    sf = RawEvent(title="RR San Francisco", start_time=datetime(2026, 10, 11, 1, tzinfo=timezone.utc),
-                  location="The Love Potion Library, San Francisco", url="u1", description=None)
-    la = RawEvent(title="RR LA", start_time=datetime(2026, 10, 6, 1, tzinfo=timezone.utc),
-                  location="Bodega Wine Bar, Santa Monica, California", url="u2", description=None)
-    monkeypatch.setattr(luma, "scrape_calendar", lambda url: [sf, la])
-    kept = readingrhythms.scrape()
-    assert [e.title for e in kept] == ["RR San Francisco"]
 
 
 # --- find_calendar_events -------------------------------------------------
