@@ -115,6 +115,20 @@ def test_classify_show_falls_back_when_primary_fails():
     assert client.calls == [PRIMARY_MODEL, FALLBACK_MODEL]
 
 
+def test_classify_show_error_names_every_failed_model():
+    """A fallback's error must not hide the primary's (the real cause)."""
+    import pytest
+    client = _FakeClient("{}", fail_models=[PRIMARY_MODEL, FALLBACK_MODEL])
+    with pytest.raises(RuntimeError) as exc:
+        classify_show("A Talk", "City Lights Booksellers", "A reading.", client=client)
+    assert PRIMARY_MODEL in str(exc.value) and FALLBACK_MODEL in str(exc.value)
+
+
+def test_fallback_is_an_inference_profile():
+    # Haiku 4.5 rejects on-demand calls by bare foundation-model id.
+    assert FALLBACK_MODEL.startswith("us.anthropic.")
+
+
 def test_keyword_topics_from_title():
     from classify import keyword_topics
     assert "trivia" in keyword_topics("Trivia Night at Abbey Tavern")

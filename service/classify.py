@@ -18,10 +18,11 @@ import taxonomy
 from classifications import Classification
 
 # Primary: global cross-region Haiku 4.5 inference profile. Fallback: the
-# direct foundation-model id (same model, no cross-region routing) for when the
-# inference profile is unavailable.
+# US-only inference profile (same model, routed within US regions) for when the
+# global one is unavailable. Haiku 4.5 can't be called on-demand by its bare
+# foundation-model id — Bedrock requires an inference profile.
 PRIMARY_MODEL = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
-FALLBACK_MODEL = "anthropic.claude-haiku-4-5-20251001-v1:0"
+FALLBACK_MODEL = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 
 _VALID_COSTS = {"free", "paid", "unknown"}
 _DATA_DIR = Path(__file__).parent / "data"
@@ -220,12 +221,12 @@ def classify_show(
         client = make_client()
     system, user = build_prompt(title, source, description)
 
-    last_err: Exception | None = None
+    errors: list[str] = []
     for model_id in models:
         try:
             text = _converse(client, model_id, system, user)
         except Exception as e:  # try the next model
-            last_err = e
+            errors.append(f"{model_id}: {type(e).__name__}: {e}")
             continue
         parsed = parse_classification(text)
         topics = _merge_topics(parsed["topics"], title)
@@ -239,7 +240,8 @@ def classify_show(
             taxonomy_version=taxonomy.CURRENT_TAXONOMY_VERSION,
             classified_at=datetime.now(timezone.utc).isoformat(),
         )
-    raise RuntimeError(f"all models failed for {source!r}/{title!r}: {last_err}")
+    # Name every model's error — the primary's is usually the real cause.
+    raise RuntimeError(f"all models failed for {source!r}/{title!r}: " + " | ".join(errors))
 
 
 def select_shows(rows) -> list[dict]:
