@@ -12,6 +12,10 @@ events go stale until fixed.
 | **City Arts & Lectures** | 15 | 0 | Cloudflare 403 on the first plain request | Datacenter-IP block — from a residential IP the same plain request gets 200 |
 | **San Francisco Playhouse** | 375 | 4 | Show detail pages timed out (25 s), then performance expansion crashed (`Page.content: … page is navigating`), falling back to 4 run-level events | Unconfirmed: the mid-load navigation looks like a challenge redirect (likely the same IP issue) |
 
+Stopgap: these four are listed in `service/data/local_only_sources.txt`;
+`scripts/scrape-to-neon.sh --blocked` scrapes them from a residential IP into
+Neon, and the next CI run ships them.
+
 Options to revisit: a residential-IP path for just these fetches (self-hosted
 runner or an occasional local run), the metered Zyte backend
 (`scrapers/zyte.py`), or asking the venue for a feed/allowlist. Not bypassing

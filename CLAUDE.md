@@ -75,6 +75,9 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `data/refresh-*` PRs. Don't regenerate/commit the manifest to ship data; a
   local run is for testing a scraper. To refresh one source now:
   `gh workflow run scrape.yml -f sources="<substring>"`.
+  Sources that 403 from GitHub runners live in
+  `service/data/local_only_sources.txt`; `scripts/scrape-to-neon.sh --blocked`
+  scrapes them locally into Neon. Add a source there when CI can't reach it.
 - **AI tagging (classify step in `run()`):** calls Bedrock (Claude Haiku); needs
   AWS creds (the compose scraper mounts `~/.aws` — refresh on host first) or it's
   skipped (`--no-classify` to skip explicitly). Classifies only cache misses

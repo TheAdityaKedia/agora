@@ -1,0 +1,10 @@
+# Sources that fail from GitHub Actions runners (datacenter IPs) but work from
+# a residential IP. `scripts/scrape-to-neon.sh --blocked` scrapes just these
+# locally into Neon; the next CI run ships them. One --sources substring per
+# line, each must match exactly one URL in sources.txt (enforced by
+# tests/test_local_only_sources.py). Details: future-sources.md →
+# "Sources that need fixing".
+greenapplebooks.com
+sfplayhouse.org
+cityarts.net
+themarsh.org

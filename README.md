@@ -137,6 +137,20 @@ testing workflow changes.
 5. **First run on `main` must be a full run** (the drop guard compares against
    `main`'s manifest, so a filtered run against a near-empty DB would be blocked).
 
+**Sources blocked from GitHub** — a few sources fail from GitHub's datacenter
+IPs (listed in `service/data/local_only_sources.txt`; details in
+`future-sources.md` → "Sources that need fixing"). Scrape them from your own
+machine straight into Neon; the next CI run ships them:
+
+```bash
+scripts/scrape-to-neon.sh --blocked          # the known-trouble sources → Neon
+scripts/scrape-to-neon.sh --blocked --ship   # ...and dispatch a CI run to ship now
+scripts/scrape-to-neon.sh gamh.com           # any sources (substring match)
+```
+
+It refuses to run while a `scrape.yml` run is in progress on `main` (one
+writer at a time) and skips tagging (CI tags new shows).
+
 **Operations** — when a scraper's *output* changes (not just new events), its
 stale rows live on in Neon (saves never update): delete them in the Neon SQL
 editor before the next run, e.g. `DELETE FROM events WHERE sources->>0 = '<NAME>';`.
