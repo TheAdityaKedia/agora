@@ -10,6 +10,7 @@ events go stale until fixed.
 | **Green Apple Books** | 40 | 0 | Cloudflare served a Turnstile challenge (307 → 403 `cf-mitigated: challenge`) that headless Chromium never cleared, even after 10 s and a fresh browser context | Cloudflare bot scoring of GitHub's Microsoft datacenter IPs (AS8075). From a residential IP the same Chromium gets a plain 200 with no challenge (confirmed by a header-level diagnostic run) |
 | **The Marsh** (Ludus) | 91 | 0 | Cloudflare 403 on the Ludus calendar (`themarsh.ludus.com`) | Same Cloudflare datacenter-IP scoring (not yet confirmed with a diagnostic) |
 | **City Arts & Lectures** | 15 | 0 | Cloudflare 403 on the first plain request | Datacenter-IP block — from a residential IP the same plain request gets 200 |
+| **Reading Rhythms** | — | 0 | `luma.com/readingrhythms-ca` returns 404 (found 2026-09-28, alert issue #15) | Moved off Luma to its own site, `readingrhythms.co/events/<city>/…`; needs a new scraper (no SF events listed at the time) |
 | **San Francisco Playhouse** | 375 | 4 | Show detail pages timed out (25 s), then performance expansion crashed (`Page.content: … page is navigating`), falling back to 4 run-level events | Unconfirmed: the mid-load navigation looks like a challenge redirect (likely the same IP issue) |
 
 Stopgap: these four are listed in `service/data/local_only_sources.txt`;
