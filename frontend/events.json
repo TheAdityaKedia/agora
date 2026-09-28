@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T17:40:33.475827+00:00",
+  "generated_at": "2026-09-28T18:17:36.144387+00:00",
   "taxonomy": {
     "version": 1,
     "axes": {
@@ -1555,9 +1555,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "food-drink"
+      ],
+      "cost": "free"
     },
     {
       "id": "9a80ea00-79c3-4245-96ff-d7cbc53b402a",
@@ -2239,8 +2246,15 @@
       "sources": [
         "Sunset Trivia"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -3459,36 +3473,6 @@
       "cost": "free"
     },
     {
-      "id": "130ef0e8-e87f-460b-9dbb-7d4742fb468b",
-      "title": "Bar Belafonte Jamaican Patty Pop-up",
-      "start_time": "2026-10-01T00:00:00+00:00",
-      "location": "991 Oak St, San Francisco, CA 94117",
-      "url": "https://partiful.com/e/1DMXpzI83Co1wjf1KSI5",
-      "description": "Bar Belafonte is so excited to be back at Third Wheel serving Jamaican patties!\n\nOur drink menu will include espresso-based offerings using the delicious Las Pilas blend from Grand Coffee and refreshing mocktails. Join us for an evening of sips, bites, and great hangs. \n\nMenu \n\nBeef Patty\n\nChicken Patty\n\nImpossible Patty (v)\n\nAll varieties contain: wheat, eggs, soy\n\nWe will try to have enough to go around, but come early to make sure you get one!\n\nWhy patties, you ask? Bar Belafonte co-owner Zack’s father immigrated from Jamaica and instilled in him a love of Jamaican flavors. We’re excited to honor that heritage with this pop-up and share a taste of the food Zack grew up loving.",
-      "image_url": "https://partiful.imgix.net/external/user/NwXjFTrMCFZae7CYFYM56MS4qXk2/Gor94kq-l3qfH1Chdy1mY?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
-    },
-    {
-      "id": "29987fa0-0d69-458b-a49d-3cafc43448e0",
-      "title": "Pizza party!",
-      "start_time": "2026-10-01T00:00:00+00:00",
-      "location": "Mosswood Park, 3612 Webster St, Oakland, CA 94609",
-      "url": "https://partiful.com/e/MW1nxJPjjo82lDJfZa2Y",
-      "description": "Let's have a Pizza party and costume exchange in Mosswood Park! \n\n🍕\nThe Chefs and ovens will be ready to fire your personal pizza. Suggested minimum donation of $7 per pie, after costs covered remaining funds will be donated to Trees For Oakland. BYOB toppings, sides, beverages. Dough, sauce, cheese provided.\n💲- https://venmo.com/code?user_id=1296657136222208789&created=1789062799\n\n🌲Org details -\nhttps://www.treesforoakland.org/\n\n🎃 Costume Exchange -\nBring your gently used kid or grown up festive flair \n\n🥁 Introducing Mosswood Neighborhood Whatsapp \n- come to event to join",
-      "image_url": "https://partiful.imgix.net/external/user/alEc1FtF8IaBlQCYfSRO6VYrCws1/YRFA8-TC6gUyeD4Dgi0GY?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
-    },
-    {
       "id": "59e16cef-e687-4180-8443-047e0b77fc86",
       "title": "The History of Concrete",
       "start_time": "2026-10-01T00:00:00+00:00",
@@ -3521,9 +3505,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "black-diaspora",
+        "history"
+      ],
+      "cost": "free"
     },
     {
       "id": "95ff5159-6e53-4724-b10c-d000d2b3a0a5",
@@ -5010,9 +5002,14 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
       "topics": [],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "1fcccfda-72b7-4651-a90c-d2459eb199e8",
@@ -5069,9 +5066,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "wellness",
+        "dance"
+      ],
+      "cost": "paid"
     },
     {
       "id": "b2ec9cdb-b54f-47ec-8b82-91ab097ff434",
@@ -5148,9 +5155,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
+      "cost": "free"
     },
     {
       "id": "96940d38-0531-4da2-a80a-4396afdf37f7",
@@ -5924,8 +5937,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness",
+        "women"
+      ],
       "cost": "unknown"
     },
     {
@@ -6506,9 +6526,19 @@
       "sources": [
         "El Rio"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "electronic",
+        "hiphop-rnb",
+        "lgbtq",
+        "latino"
+      ],
+      "cost": "paid"
     },
     {
       "id": "69a3ac5d-7aa8-4456-8f03-e8c29c392aaa",
@@ -7300,8 +7330,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "black-diaspora"
+      ],
       "cost": "unknown"
     },
     {
@@ -7407,8 +7448,18 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech"
+      ],
       "cost": "unknown"
     },
     {
@@ -7715,8 +7766,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "music",
+        "food-drink"
+      ],
       "cost": "unknown"
     },
     {
@@ -7794,9 +7857,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "theater"
+      ],
+      "cost": "free"
     },
     {
       "id": "b0f81bc3-5d9d-4482-9f56-6254f4015e17",
@@ -8588,9 +8661,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "electronic",
+        "club-night",
+        "dance"
+      ],
+      "cost": "paid"
     },
     {
       "id": "9a83bf34-f68a-443a-88b2-393d2741134b",
@@ -9014,9 +9095,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "ee5ac072-12df-477b-b032-1ce55bf53a16",
@@ -9094,9 +9181,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free"
     },
     {
       "id": "e4e19021-f6ac-45c4-aefb-ede295d5d63c",
@@ -9294,9 +9388,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
+      "cost": "free"
     },
     {
       "id": "dcef70fe-678b-4b4e-8f94-af48a911f234",
@@ -9358,8 +9459,14 @@
       "sources": [
         "Oakland Art Murmur"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
       "cost": "unknown"
     },
     {
@@ -9537,9 +9644,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "architecture",
+        "photography"
+      ],
+      "cost": "free"
     },
     {
       "id": "0e97880f-79d2-4606-8a0a-303654677f49",
@@ -9619,9 +9734,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
+      "cost": "free"
     },
     {
       "id": "41c73c9a-1afd-407e-9646-9ef9d69472e6",
@@ -9820,9 +9941,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
+      "cost": "free"
     },
     {
       "id": "becfe6ab-b4ee-43fa-9488-ba177e4be501",
@@ -10184,8 +10315,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "theater",
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -10334,9 +10472,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "design"
+      ],
+      "cost": "paid"
     },
     {
       "id": "c31de5ab-aa45-4795-b872-f91137ac5417",
@@ -10498,8 +10647,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "folk-americana",
+        "jazz",
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -11439,9 +11600,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors",
+        "asian-american"
+      ],
+      "cost": "free"
     },
     {
       "id": "d51e7b90-de15-4d60-a0a2-778953416abb",
@@ -11519,8 +11687,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -11534,9 +11710,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "f08d93a8-5203-4676-a8d0-7e6f4407013e",
@@ -11596,9 +11778,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free"
     },
     {
       "id": "18f96bb1-fe80-4b46-9c45-06e5228aefe0",
@@ -11663,9 +11852,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "design",
+        "visual-art"
+      ],
+      "cost": "paid"
     },
     {
       "id": "ee943dba-f77d-45e3-a54f-6e2fa9654b3e",
@@ -11703,8 +11899,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana",
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -11718,8 +11921,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "craft",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -11912,9 +12122,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "asian-american"
+      ],
+      "cost": "free"
     },
     {
       "id": "06c473cf-76d3-43ac-9e6a-a4b5bf708dda",
@@ -12735,8 +12952,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ],
+      "topics": [
+        "fiction",
+        "books-authors",
+        "women"
+      ],
       "cost": "unknown"
     },
     {
@@ -12750,9 +12976,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "design",
+        "craft"
+      ],
+      "cost": "paid"
     },
     {
       "id": "68dc6417-991e-472d-8a87-65b3616abcaf",
@@ -12823,21 +13060,6 @@
         "poetry",
         "nonfiction"
       ],
-      "cost": "unknown"
-    },
-    {
-      "id": "cad02449-81f1-4b6f-8513-1e92c93ddb80",
-      "title": "1080 Gallery Presents: Art Prep & Wine",
-      "start_time": "2026-10-05T00:00:00+00:00",
-      "location": "1080 23rd Ave, Oakland, CA 94606",
-      "url": "https://partiful.com/e/cNcnRn78fEQuYglc3uvK",
-      "description": "Hi all, my goal is to give back to my community through art and education, drawing on the last 10 years I’ve spent in this career.\nI’ve started a gallery to create a safe space for all artists.\nCome join us after the Alameda antique fair, we’re just down the way.\n\n1080 gallery is Unit: 207",
-      "image_url": "https://partiful.imgix.net/external/user/VNkEBXS5dSg7aj8rRlBn2R7ocso1/SnOC-NyRUpRUgv99hU3UI?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
       "cost": "unknown"
     },
     {
@@ -14441,9 +14663,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "paid"
     },
     {
       "id": "1dac96a0-ebdb-4ac9-bdd9-047c3f8ca1a0",
@@ -14541,9 +14773,16 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "language"
+      ],
+      "cost": "free"
     },
     {
       "id": "b22e16bb-9e99-46fd-9c94-0aebef70efbc",
@@ -15115,9 +15354,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "games",
+        "lgbtq"
+      ],
+      "cost": "free"
     },
     {
       "id": "1675f714-dd4b-4434-9291-4ea7986060ae",
@@ -15413,8 +15660,15 @@
       "sources": [
         "Sunset Trivia"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -16330,8 +16584,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "food-drink",
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -18455,8 +18720,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -18844,8 +19117,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "business"
+      ],
       "cost": "unknown"
     },
     {
@@ -20259,9 +20540,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "cost": "paid"
     },
     {
       "id": "b8781319-fcca-4344-b5cc-535b4062266c",
@@ -20590,21 +20882,6 @@
         "karaoke"
       ],
       "cost": "free"
-    },
-    {
-      "id": "fa0d585d-937f-4fce-9c37-5a6f6dec3998",
-      "title": "After Dark: Halloween Market",
-      "start_time": "2026-10-09T23:00:00+00:00",
-      "location": "Temescal Brewing, 4115 Telegraph Ave, Oakland, CA 94609",
-      "url": "https://partiful.com/e/7BsDypfK0XlmUiUSrGpd",
-      "description": "👻 AFTER DARK: HALLOWEEN MARKET 👻\n\nSpooky season is officially ON. 🖤\n\nJoin Common Ground Mercadito for an after-dark Halloween market at Temescal Brewing in Oakland!\n\nCome grab a drink, shop local, discover new makers, find some vintage gems, eat something delicious, and soak up the spooky vibes. Costumes encouraged!!\n\nExpect a lineup of:\n\n🕯️ Handmade goods\n👗 Vintage + secondhand finds\n🎨 Local artists + makers\n🍬 Sweets + treats\n🍴 Food\n🍺 Temescal Brewing beer\n🖤 Small businesses + local brands\n\nFriday, October 9th\n4PM–9PM\n\n📍 Temescal Brewing\n4115 Telegraph Ave, Oakland\n\nFREE ENTRY • ALL AGES • PET FRIENDLY\n\nBring your friends, bring your pup, bring your tote bag — and leave room for all the things you absolutely did not plan on buying. 👻\n\nWhether you’re hunting for a one-of-a-kind vintage find, stocking up on handmade goodies, or just looking for something fun to do Friday night, come hang with us AFTER DARK. 🦇",
-      "image_url": "https://partiful.imgix.net/external/user/5KWL75kMzVaqGuhDwOxZqETwYXA2/z997QMfpONqi8suqNhycE?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
     },
     {
       "id": "fa92d3e7-e7b2-4e4c-9214-5e5dbbf0403f",
@@ -21801,9 +22078,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "cost": "free"
     },
     {
       "id": "3d2d5a93-be45-4a5e-af9e-d43ecfcbba71",
@@ -22144,9 +22429,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "547cdd26-4e3f-44f3-850e-f9f8f52f3e6c",
@@ -22291,9 +22582,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "asian-american"
+      ],
+      "cost": "free"
     },
     {
       "id": "77d63528-f395-4d91-9d72-102b0480a583",
@@ -22443,8 +22745,18 @@
       "sources": [
         "Oakland Art Murmur"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
       "cost": "unknown"
     },
     {
@@ -22549,8 +22861,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "women"
+      ],
       "cost": "unknown"
     },
     {
@@ -22700,9 +23019,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
+      "cost": "free"
     },
     {
       "id": "704f94af-4de1-4616-a22b-114ed9899d8e",
@@ -23357,21 +23683,6 @@
       "topics": [
         "jazz"
       ],
-      "cost": "unknown"
-    },
-    {
-      "id": "7e2d88c5-29c5-4c77-801a-9df305c06f9c",
-      "title": "Orris Supper Experience",
-      "start_time": "2026-10-11T01:00:00+00:00",
-      "location": "2300 Chestnut St, San Francisco, CA 94123",
-      "url": "https://partiful.com/e/vqBZ7gaq7OZn8HaWp3cV",
-      "description": "Orris Supper Experience\nOctober 10, 2026\n\nModern Indian food. A shared table.\n\nOrris is about bringing people together around a shared table and building community through food.\n\nA five-course vegetarian tasting menu inspired by the food the host grew up eating, reinterpreted through the lens of Orris.\n\nDoors: 6:00pm — first drink included, cocktail or mocktail\nDinner: 6:45pm\nDinner concludes: around 9:45pm\n\nBar open throughout the evening.\n\n*Price includes all taxes and fees.",
-      "image_url": "https://partiful.imgix.net/external/user/NtD8u9qYls7c2rgdqyDS/SQRt4O2ij38W9inl1I0L-?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
       "cost": "unknown"
     },
     {
@@ -24640,9 +24951,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "a1aedee8-668e-46b0-8e93-37f84fbd8c9f",
@@ -24995,8 +25312,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
       "cost": "unknown"
     },
     {
@@ -25078,9 +25402,22 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ],
+      "topics": [
+        "games",
+        "food-drink",
+        "asian-american"
+      ],
+      "cost": "paid"
     },
     {
       "id": "2f58b1c7-229d-47e4-afbe-43a93351815e",
@@ -25593,9 +25930,17 @@
       "sources": [
         "The Booksmith"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "cost": "free"
     },
     {
       "id": "4bc96ffe-8085-48c9-9277-b4f855d8c160",
@@ -25955,8 +26300,18 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "poetry",
+        "visual-art"
+      ],
       "cost": "unknown"
     },
     {
@@ -26651,9 +27006,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "paid"
     },
     {
       "id": "648270d7-955a-4807-b36a-4114e4862d59",
@@ -27247,9 +27608,16 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "language"
+      ],
+      "cost": "free"
     },
     {
       "id": "1c2fc5e0-d82e-4693-b46b-e01d7a736244",
@@ -28143,8 +28511,15 @@
       "sources": [
         "Sunset Trivia"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -32716,9 +33091,15 @@
       "sources": [
         "El Rio"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid"
     },
     {
       "id": "3c38fbf2-5b3c-4d80-8e03-4939b3a85455",
@@ -33519,8 +33900,14 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
       "cost": "unknown"
     },
     {
@@ -34862,9 +35249,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "5f52fdc8-e838-4433-af8c-3d56005e62a2",
@@ -34937,21 +35330,6 @@
       "cost": "free"
     },
     {
-      "id": "1ccce664-b59d-4353-8181-21d6c8414136",
-      "title": "Oakstead Market",
-      "start_time": "2026-10-17T18:00:00+00:00",
-      "location": "1172 Ocean Ave, Emeryville, CA 94608",
-      "url": "https://partiful.com/e/pqFMKZkh2JtJLsseG5YZ",
-      "description": "Free art market by artists for artists (+you) Featuring emerging makers and experienced creators. Easy street parking, family and pet friendly shopping, unique gifts and made to order pizza. What’s not to love? \n\nJoin us for a sweet fall afternoon and get your holiday shopping done early. No need to procrastinate when it’s all here. \n\nLocated near enough to Berkeley Bowl West and technically in Oakland if you use Google maps. \n\nMore info can be found @oakstead.market on Instagram",
-      "image_url": "https://partiful.imgix.net/external/user/MGCXASxH27hU7pT6VXEWS5FJuOw1/IYMRpOyORZStVkv5WdxQE?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
-    },
-    {
       "id": "6c53179b-66d3-4ea2-b0f9-9b3ad04858bb",
       "title": "Lips & Lashes Drag Brunch at Lookout",
       "start_time": "2026-10-17T18:00:00+00:00",
@@ -34974,21 +35352,6 @@
       "cost": "unknown"
     },
     {
-      "id": "91e7f62b-ac30-4976-8763-1b8c54a40460",
-      "title": "Hey Diva x Dot’s Pizza Popup Pt. 2",
-      "start_time": "2026-10-17T18:00:00+00:00",
-      "location": "Clarion Alley Mural Project, Between 17th & 18th St/ Mission and Valencia St, San Francisco, CA 94110",
-      "url": "https://partiful.com/e/z1t3CpUDXipNMo3O9RSI",
-      "description": "MUNI SL*TS WE ARE GIVING BACK… AGAIN‼️🚋\n\nEvery hat sold at this pop-up will include a $5 donation to Market Street Railway, the nonprofit keeping SF’s vintage streetcars alive and our beloved transit system running!! \n\nALSO my friend Vijay is bringing his sourdough pizza pop-up @dots_pizza so you can leave with a hat AND a full stomach, 🫃💋✨\n\nIn addition to hats, I’ll be selling my block printed clothes and stickers!!\n\nCash, Venmo, and Zelle accepted for Hey Diva 💸\n\nBYOB&B: bring your own bags & beverages 🫶",
-      "image_url": "https://partiful.imgix.net/external/user/Q0xPRhJVNfSDn72IeNEIezc8d4G3/Nkgvjse20P_sZU_hJrBfk?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
-    },
-    {
       "id": "94384a62-605e-4520-8a8c-979e65b60865",
       "title": "Lands End Community Hike",
       "start_time": "2026-10-17T18:00:00+00:00",
@@ -34999,9 +35362,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free"
     },
     {
       "id": "a2a40ebf-fb28-4118-9e64-2baeeeac5029",
@@ -35155,8 +35525,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "world-music",
+        "food-drink",
+        "latino"
+      ],
       "cost": "unknown"
     },
     {
@@ -35653,9 +36035,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "lgbtq"
+      ],
+      "cost": "free"
     },
     {
       "id": "1c05ba7f-0e5d-464a-9b10-506f6843e6f1",
@@ -35713,8 +36102,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "food-drink",
+        "books-authors",
+        "asian-american"
+      ],
       "cost": "unknown"
     },
     {
@@ -37223,8 +37621,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -37238,9 +37644,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "d069338b-7630-4c0e-b3e5-c61a07e23763",
@@ -40026,9 +40438,16 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "language"
+      ],
+      "cost": "free"
     },
     {
       "id": "eafa3d97-927a-448b-bd65-4580032a8f65",
@@ -40582,9 +41001,17 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "design",
+        "tech",
+        "visual-art"
+      ],
+      "cost": "free"
     },
     {
       "id": "e7776bec-1ccf-41a6-956b-4a4f75085ad7",
@@ -40825,9 +41252,19 @@
       "sources": [
         "Bird & Beckett"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "cost": "free"
     },
     {
       "id": "16df4152-34aa-44fb-845e-5b8f906f83ce",
@@ -40994,8 +41431,15 @@
       "sources": [
         "Sunset Trivia"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
       "cost": "unknown"
     },
     {
@@ -44149,21 +44593,6 @@
       "cost": "unknown"
     },
     {
-      "id": "729812a9-c0ea-4c66-8f30-2b7b37f5d2fa",
-      "title": "Ramen Night",
-      "start_time": "2026-10-23T01:00:00+00:00",
-      "location": "Udon Mugizo, 1072 Saratoga Ave, San Jose, CA 95129",
-      "url": "https://partiful.com/e/ErceYIB2Uwx4C6jZK603",
-      "description": "Let’s get together for a cozy night of ramen, good conversation, and community! ✨\nCome join us for a casual dinner, meet some new people, catch up with friends, and enjoy a warm bowl of ramen together. Whether you’re new to the community or have joined us before, everyone is welcome!\n\nEveryone is responsible for paying for their own food and drinks. 🍜",
-      "image_url": "https://partiful.imgix.net/external/user/96zWlHxa9R49qlpyJKO7/TKIhNCNvH0NsXPerU2RZu?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
-    },
-    {
       "id": "7b1d35dd-92b0-4dcc-9b37-ddb6da90575d",
       "title": "Social: Macabre Marvels in the Stacks—Inspiration From SFPL's Hidden Books",
       "start_time": "2026-10-23T01:00:00+00:00",
@@ -45366,8 +45795,18 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -46045,8 +46484,22 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "craft",
+        "music",
+        "food-drink"
+      ],
       "cost": "unknown"
     },
     {
@@ -46060,8 +46513,21 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "games",
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -47738,9 +48204,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "2b87b3d4-3159-4956-8043-c4560ab605a7",
@@ -47915,9 +48387,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
+      "cost": "free"
     },
     {
       "id": "bb531b1f-63bc-43b9-b8b9-94c6bebe3419",
@@ -47930,9 +48412,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free"
     },
     {
       "id": "cd033693-1b33-4cce-a37c-b4695f8f6aff",
@@ -48169,9 +48658,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "food-drink"
+      ],
+      "cost": "free"
     },
     {
       "id": "9a592293-3b00-4f7b-83c9-0bf174ce598f",
@@ -48184,9 +48680,17 @@
       "sources": [
         "Medicine for Nightmares"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "craft",
+        "latino"
+      ],
+      "cost": "free"
     },
     {
       "id": "9c6374d7-23a5-49f9-8f62-faf6aa8af635",
@@ -48199,9 +48703,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free"
     },
     {
       "id": "a92336d5-7a78-42e6-a52f-9f90dc60e9a3",
@@ -48746,9 +49257,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid"
     },
     {
       "id": "ee2d6aea-6d0e-4a57-acf0-928db3697894",
@@ -48787,8 +49304,14 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -49058,8 +49581,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "asian-american",
+        "music",
+        "food-drink"
+      ],
       "cost": "unknown"
     },
     {
@@ -49789,9 +50324,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "6077d833-a5df-44ac-8ccc-5632a83858af",
@@ -49827,8 +50368,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -49884,8 +50433,20 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ],
+      "topics": [
+        "food-drink",
+        "asian-american"
+      ],
       "cost": "unknown"
     },
     {
@@ -50772,9 +51333,15 @@
       "sources": [
         "SF Bar Guide"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "paid"
     },
     {
       "id": "9c7103a7-058a-4881-8cca-0ca3423c58b0",
@@ -51796,9 +52363,16 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "language"
+      ],
+      "cost": "free"
     },
     {
       "id": "ad8e4934-a28f-4329-975f-55e77b81e012",
@@ -52758,9 +53332,14 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
       "topics": [],
-      "cost": "unknown"
+      "cost": "free"
     },
     {
       "id": "c3e1415b-05d2-47fa-b68b-23ef7906619a",
@@ -52773,9 +53352,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "paid"
     },
     {
       "id": "a45df255-3bbe-4b19-b7ff-fbe3d32e10fa",
@@ -55242,8 +55827,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
       "cost": "unknown"
     },
     {
@@ -55409,9 +56002,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "c42cff47-0b5b-47a8-a294-9e1541fa2f23",
@@ -56007,7 +56606,9 @@
         "Great American Music Hall"
       ],
       "types": [],
-      "topics": [],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown"
     },
     {
@@ -56021,9 +56622,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "paid"
     },
     {
       "id": "ecea00f4-72d1-4ddf-b703-2e05ecd97007",
@@ -56119,9 +56727,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free"
     },
     {
       "id": "b0c6e5e1-f128-47be-a711-f178a03869dd",
@@ -56134,8 +56748,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -56644,8 +57266,15 @@
       "sources": [
         "SF Neo-Futurists"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "theater",
+        "politics"
+      ],
       "cost": "unknown"
     },
     {
@@ -60318,9 +60947,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "craft"
+      ],
+      "cost": "free"
     },
     {
       "id": "c0f223dd-1063-411b-a2b4-f85b2b27650d",
@@ -60849,9 +61485,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music",
+        "world-music"
+      ],
+      "cost": "free"
     },
     {
       "id": "c04fb171-be0d-4a15-a858-72fe806f1376",
@@ -61321,8 +61967,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -62004,8 +62658,20 @@
       "sources": [
         "Bird & Beckett"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "poetry",
+        "books-authors",
+        "music"
+      ],
       "cost": "unknown"
     },
     {
@@ -66083,8 +66749,18 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "design",
+        "visual-art"
+      ],
       "cost": "unknown"
     },
     {
@@ -66376,9 +67052,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "cost": "paid"
     },
     {
       "id": "58d12088-4c4f-4ac5-97b9-5e7b0962b8c0",
@@ -66435,9 +67119,16 @@
       "sources": [
         "The Warfield"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop",
+        "electronic"
+      ],
+      "cost": "paid"
     },
     {
       "id": "bb99731a-e862-4b0b-bcec-9ec435466020",
@@ -66645,8 +67336,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -66684,9 +67383,15 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "craft"
+      ],
+      "cost": "paid"
     },
     {
       "id": "70b3dda4-712e-47ee-b7ef-69321a30b4b1",
@@ -66851,6 +67556,29 @@
         "comedy"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "71e2fddb-72c2-4acd-b1e9-08805607bb10",
+      "title": "NEW DATE: Left Coast Writers® LeeAnn Pickrell - Tsunami",
+      "start_time": "2026-11-15T22:00:00+00:00",
+      "location": "Book Passage Corte Madera 51 Tamal Vista Blvd Corte Madera, CA 94925",
+      "url": "https://bookpassage.com/event/left-coast-writers-leeann-pickrell-tsunami",
+      "description": "Please join us for a reading by LeeAnn Pickrell from her new book, Tsunami . This event is organized by the Left Coast Writers and hosted by Book Passage. This story explores the tsunami through a lens of separation, reunion, and the psychic shifts of such an experience. It is a moving account of coming home, letting go of outdated faith, and discovering the connections forged through the stories we tell. On the morning of December 26, 2004, an undersea earthquake struck off the coast of Sumatra in the Indian Ocean. The resulting tsunami killed an estimated 230,000 people across fourteen countries, from Indonesia to Sri Lanka to Thailand to the Maldives to India and all the way to East Africa. Everyone who was there and survived has a story of where they were when the tsunami hit. But there are too many stories that will never be told. This is one woman's story of her experience of that day and its aftermath.LeeAnn Pickrell was in Rai Leh, Thailand, just off the beach drinking coffee that morning when the ocean went away. Everyone ran to the top of the beach to see a wall of white approaching the shore, at first slowly and then picking up speed as boats overturned and they realized the wave wasn't going to stop. It's the story of the tsunami in a particular place, of not understanding what was happening, of separation and reunion. It's also a story of coming home, of not being hurt physically but the psychic shifts of such an experience. It's about letting go of old ideas of faith that no longer make sense and opening to the connections we have to each other through the stories we tell. LeeAnn Pickrell is the author of Tsunami (Unsolicited Press, 2026). Her debut collection, Gathering the Pieces of Days , was published in 2025 by Unsolicited Press. She is also the author of the chapbook Punctuated , published by Bottlecap Press in 2024. She lives in the East Bay with her partner and two fabulous cats. LeeAnn Pickrell - photo courtesy of the author Event details: This event will be hosted by Book Passage at our Corte Madera store. Free Admission / Open Seating There will be a signing line or meet-and-greet following the presentation.",
+      "image_url": "https://bookpassage.com/sites/default/files/image/2026/09/09/left-coast-writersr-leeann-pickrell.png",
+      "sources": [
+        "Book Passage"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "cost": "unknown"
     },
     {
       "id": "7c7ea98c-d9e3-435d-8895-32634efd9474",
@@ -67295,9 +68023,15 @@
       "sources": [
         "The Warfield"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "hiphop-rnb"
+      ],
+      "cost": "paid"
     },
     {
       "id": "cd4510f2-a823-429d-ac3d-76a85a20c294",
@@ -67663,8 +68397,16 @@
       "sources": [
         "Commonwealth Club"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "politics"
+      ],
       "cost": "unknown"
     },
     {
@@ -68546,9 +69288,15 @@
       "sources": [
         "The Warfield"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop"
+      ],
+      "cost": "paid"
     },
     {
       "id": "e8d27b84-a9b0-4102-8bef-302f20ae2419",
@@ -70697,7 +71445,11 @@
       "sources": [
         "Phoenix Theater (Petaluma)"
       ],
-      "types": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
       "topics": [],
       "cost": "unknown"
     },
@@ -71813,9 +72565,15 @@
       "sources": [
         "The Fillmore"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid"
     },
     {
       "id": "8dee874f-a477-405c-9804-e77fc276ed97",
@@ -71975,8 +72733,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -72720,8 +73486,14 @@
       "sources": [
         "The Fillmore"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
       "cost": "unknown"
     },
     {
@@ -74542,9 +75314,15 @@
       "sources": [
         "Phoenix Theater (Petaluma)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid"
     },
     {
       "id": "a8b09341-023a-4a5e-a7a0-16925f4903a7",
@@ -74750,8 +75528,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -76033,8 +76819,17 @@
       "sources": [
         "Omnivore Books on Food"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "food-drink",
+        "books-authors",
+        "writing"
+      ],
       "cost": "unknown"
     },
     {
@@ -76275,9 +77070,15 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater"
+      ],
+      "cost": "paid"
     },
     {
       "id": "0aa7dc70-b708-4c06-87a6-dbb36652a2f0",
@@ -76313,9 +77114,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "cost": "paid"
     },
     {
       "id": "af87ad5e-22bc-42e9-8115-64134fb70b7d",
@@ -76371,9 +77180,16 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater",
+        "lgbtq"
+      ],
+      "cost": "paid"
     },
     {
       "id": "5fd7eab9-e8b6-4c3d-9c48-e1a4eb455f75",
@@ -76408,9 +77224,15 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater"
+      ],
+      "cost": "paid"
     },
     {
       "id": "b122a23e-c090-4239-890b-62b267b78bb6",
@@ -76467,9 +77289,16 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "theater"
+      ],
+      "cost": "paid"
     },
     {
       "id": "8cc4bb45-a57f-43c1-b325-4f0d1c5197a8",
@@ -76657,9 +77486,15 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "craft"
+      ],
+      "cost": "paid"
     },
     {
       "id": "99913346-aaf5-45fa-abc6-dd2567b0fec2",
@@ -76740,9 +77575,15 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater"
+      ],
+      "cost": "paid"
     },
     {
       "id": "cf259e5b-4a75-49a1-8df7-df1aedef022b",
@@ -76779,9 +77620,16 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "theater"
+      ],
+      "cost": "paid"
     },
     {
       "id": "cd829900-e541-4f30-8162-2cc6f9fb497b",
@@ -76838,9 +77686,16 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater",
+        "lgbtq"
+      ],
+      "cost": "paid"
     },
     {
       "id": "967e66fe-37f2-4447-bc1f-3a109690c6bd",
@@ -77026,9 +77881,16 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater",
+        "lgbtq"
+      ],
+      "cost": "paid"
     },
     {
       "id": "c65f4be7-8814-47bd-8bcf-f54947e04dbd",
@@ -77041,9 +77903,16 @@
       "sources": [
         "ATG (Curran, Orpheum, Golden Gate)"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "theater"
+      ],
+      "cost": "paid"
     },
     {
       "id": "d65c9827-4277-4cea-8d61-018616fc8376",
@@ -77299,8 +78168,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -77449,9 +78326,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "design"
+      ],
+      "cost": "free"
     },
     {
       "id": "1213666c-6a3e-4c6b-9391-b65c6e885444",
@@ -78589,6 +79474,27 @@
       "cost": "unknown"
     },
     {
+      "id": "ea577b22-3ed8-4569-970f-35ef540e21fc",
+      "title": "Rent",
+      "start_time": "2026-12-12T03:30:00+00:00",
+      "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
+      "url": "https://sfplayhouse.org/2026-2027-season/rent/",
+      "description": "In New York’s East Village, a group of young artists struggles to build lives, make art, and hold onto each other in the face of uncertainty. Over the course of a single year, friendships are tested, love is complicated, and every moment feels urgent. With an iconic score featuring “Seasons of Love,” “La Vie Bohème,” “Take Me or Leave Me,” and more, Jonathan Larson’s groundbreaking musical captures a generation living under the shadow of HIV/AIDS, where joy and loss exist side by side, and the question is not how long you have, but how you choose to spend it. Winner of the Tony Award for Best Musical and the Pulitzer Prize for Drama, Rent is an electrifying, deeply human story about connection, resilience, and living fully in the present.",
+      "image_url": "https://sfplayhouse.org/wp-content/uploads/2026/03/rent-628.jpg",
+      "sources": [
+        "San Francisco Playhouse"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater"
+      ],
+      "cost": "paid"
+    },
+    {
       "id": "62db1f99-4ee4-45ac-bf96-a318960a82de",
       "title": "Covenant",
       "start_time": "2026-12-12T04:00:00+00:00",
@@ -78797,9 +79703,19 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown"
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "craft",
+        "design"
+      ],
+      "cost": "free"
     },
     {
       "id": "1e90980e-01e9-4dd8-b623-9d611e17db1f",
@@ -79177,8 +80093,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -80886,8 +81810,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "design"
+      ],
       "cost": "unknown"
     },
     {
@@ -86154,6 +87086,27 @@
       "cost": "paid"
     },
     {
+      "id": "d6ca473e-3ce4-40f3-9337-b1f28d334264",
+      "title": "Lizard Boy",
+      "start_time": "2027-02-20T03:30:00+00:00",
+      "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
+      "url": "https://sfplayhouse.org/2026-2027-season/lizard-boy/",
+      "description": "Trevor has spent years hiding from the world. Ever since a childhood encounter left him with green, scaly skin, he’s become something of a local legend in Seattle, more myth than man. But on the night of Monster Fest, he decides to take a risk. A first date with his crush, Cary, pulls him out of isolation and into a city alive with possibility. When an unexpected encounter hints that the past may not be finished with him, Trevor is forced to confront the part of himself he’s tried to keep hidden. With an electrifying indie-rock score, Lizard Boy has become a cult favorite, celebrated for its originality, heart, and genre-bending storytelling. This bold, offbeat musical is a celebration of identity, connection, and the courage it takes to be seen.",
+      "image_url": "https://sfplayhouse.org/wp-content/uploads/2026/03/lizard-boy-628.png",
+      "sources": [
+        "San Francisco Playhouse"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "musical-theater"
+      ],
+      "cost": "paid"
+    },
+    {
       "id": "00fe79fe-65db-467b-badb-82d66ef0aeb4",
       "title": "Lizard Boy",
       "start_time": "2027-02-20T04:00:00+00:00",
@@ -86604,6 +87557,27 @@
       "id": "c211d65c-8c1b-4066-aaa3-5105262ffa92",
       "title": "Perfect Daughter",
       "start_time": "2027-02-26T03:00:00+00:00",
+      "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
+      "url": "https://sfplayhouse.org/2026-2027-season/perfect-daughter/",
+      "description": "A father sets out to build the perfect daughter. With the help of a scientist, he creates an AI version of Claudia, adjusting her life again and again in pursuit of something just right. But each new iteration brings unexpected results. The more he tries to control who she becomes, the more complicated she gets. By turns hilarious and deeply revealing, Chloé Hung’s Perfect Daughter explores the gap between expectation and reality, and the quiet heartbreak of trying to be seen, understood, and loved on your own terms.",
+      "image_url": "https://sfplayhouse.org/wp-content/uploads/2026/06/perfect-daughter-1200.png",
+      "sources": [
+        "San Francisco Playhouse"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "theater"
+      ],
+      "cost": "paid"
+    },
+    {
+      "id": "eb867c96-513e-4d48-a89d-dbd8159da4e8",
+      "title": "Perfect Daughter",
+      "start_time": "2027-02-26T03:30:00+00:00",
       "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
       "url": "https://sfplayhouse.org/2026-2027-season/perfect-daughter/",
       "description": "A father sets out to build the perfect daughter. With the help of a scientist, he creates an AI version of Claudia, adjusting her life again and again in pursuit of something just right. But each new iteration brings unexpected results. The more he tries to control who she becomes, the more complicated she gets. By turns hilarious and deeply revealing, Chloé Hung’s Perfect Daughter explores the gap between expectation and reality, and the quiet heartbreak of trying to be seen, understood, and loved on your own terms.",
@@ -92575,6 +93549,27 @@
       ],
       "topics": [
         "classical"
+      ],
+      "cost": "paid"
+    },
+    {
+      "id": "e5b04a29-c62b-41d1-bcee-dd2ddf09407b",
+      "title": "Life of Pi",
+      "start_time": "2027-04-17T02:30:00+00:00",
+      "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
+      "url": "https://sfplayhouse.org/2026-2027-season/life-of-pi/",
+      "description": "Sixteen-year-old Pi Patel sets out on a journey across the ocean with his family, only to find himself alone after a catastrophic shipwreck. Adrift on a lifeboat in the vast Pacific, he must learn to survive alongside a group of unlikely companions, including a hyena, a zebra, an orangutan, and a Bengal tiger. As the days stretch into weeks, reality and imagination begin to blur. Pi is pushed to his limits, confronting fear, faith, and the stories we tell ourselves to endure the unimaginable. Winner of five Olivier Awards including Best New Play, and hailed by The Guardian as “extraordinary and unmissable,” this breathtaking stage adaptation brings Yann Martel’s beloved novel to life through stunning visuals and groundbreaking puppetry. Life of Pi is a theatrical event about survival, belief, and the power of storytelling.",
+      "image_url": "https://sfplayhouse.org/wp-content/uploads/2026/03/Life-of-Pi.png",
+      "sources": [
+        "San Francisco Playhouse"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "theater"
       ],
       "cost": "paid"
     },
