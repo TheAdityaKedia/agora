@@ -67,6 +67,11 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `events.json` in its **own** commit so code stays reviewable. Imperative
   subject, no attribution footer (match `git log`). Commit/push only when asked;
   a push to `main` touching `frontend/` deploys the site.
+- **Where to commit:** small requests (docs, notes, config tweaks, small fixes)
+  go **straight to `main`** — no branch, no PR. Use a **branch + PR** only for
+  big features that affect the **site** (`frontend/`, the manifest) or the
+  **jobs** (`scrape.yml`, `ci.py`, the scrape/merge pipeline); test job changes
+  from the branch (non-`main` runs use the `ci-test` DB and never deploy).
 - **The manifest is durable; the DB is working state.** Never treat DB state as
   the source of truth for the site — `events.json` is. Same for tags:
   `classifications.json` is the durable committed cache, not the DB. The
@@ -125,9 +130,10 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 
 Multiple agents may work this repo at once. To avoid stepping on each other:
 
-- **Branch per agent/task.** Don't all commit to `main`. Cut a feature branch,
-  push it, open a PR; let the human merge. `main` touching `frontend/` deploys,
-  so uncoordinated pushes to `main` also ship half-finished work.
+- **Branch for big work.** Features touching the site or the jobs go on a
+  feature branch + PR the human merges (see "Where to commit" above) —
+  `main` touching `frontend/` deploys, so half-finished work there ships. Small
+  changes go straight to `main`; pull first to avoid clobbering a parallel agent.
 - **`events.json` is a conflict magnet.** It's regenerated (thousands of lines)
   on nearly every data change, so two agents that both re-scrape will conflict
   hard. Rules: (1) don't regenerate the manifest unless your task is *about* the
