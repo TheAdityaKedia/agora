@@ -1,3 +1,28 @@
+# Sources that need fixing
+
+Existing sources that work locally but not from GitHub Actions runners
+(`scrape.yml`). Found in the first full CI run, 2026-09-25 (run
+`36102742651`). Each keeps its existing DB rows, so nothing is lost — but its
+events go stale until fixed.
+
+| Source | Local | GitHub | What happened | Suspected root cause |
+|---|---|---|---|---|
+| **Green Apple Books** | 40 | 0 | Cloudflare served a Turnstile challenge (307 → 403 `cf-mitigated: challenge`) that headless Chromium never cleared, even after 10 s and a fresh browser context | Cloudflare bot scoring of GitHub's Microsoft datacenter IPs (AS8075). From a residential IP the same Chromium gets a plain 200 with no challenge (confirmed by a header-level diagnostic run) |
+| **The Marsh** (Ludus) | 91 | 0 | Cloudflare 403 on the Ludus calendar (`themarsh.ludus.com`) | Same Cloudflare datacenter-IP scoring (not yet confirmed with a diagnostic) |
+| **City Arts & Lectures** | 15 | 0 | Cloudflare 403 on the first plain request | Datacenter-IP block — from a residential IP the same plain request gets 200 |
+| **San Francisco Playhouse** | 375 | 4 | Show detail pages timed out (25 s), then performance expansion crashed (`Page.content: … page is navigating`), falling back to 4 run-level events | Unconfirmed: the mid-load navigation looks like a challenge redirect (likely the same IP issue) |
+
+Stopgap: these four are listed in `service/data/local_only_sources.txt`;
+`scripts/scrape-to-neon.sh --blocked` scrapes them from a residential IP into
+Neon, and the next CI run ships them.
+
+Options to revisit: a residential-IP path for just these fetches (self-hosted
+runner or an occasional local run), the metered Zyte backend
+(`scrapers/zyte.py`), or asking the venue for a feed/allowlist. Not bypassing
+the bot protection itself. Also: the CI report only flags 0-event sources — a
+sharp drop like SF Playhouse's (375 → 4) shows as "ok"; flag drops against a
+source's current DB row count.
+
 # Future Sources
 
 Candidate event sources to evaluate and (eventually) build scrapers for. Not

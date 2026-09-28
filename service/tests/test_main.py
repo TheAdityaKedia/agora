@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from config import LOOKAHEAD_DAYS
-from main import load_sources, run, save_events
+from main import find_scraper, load_sources, run, save_events, select_urls
 from models import Base, Event
 from scrapers.base import RawEvent
 
@@ -410,3 +410,20 @@ def test_classify_upcoming_includes_earlier_today_events(db_session, tmp_path):
     classified, _ = main.classify_upcoming(classifier=fake, cache_path=tmp_path/"c.json", log=None)
     assert "Noon Show" in seen
     assert classified == 1
+
+
+def test_select_urls_allowlist_and_denylist_compose():
+    urls = ["https://sfpl.org/events", "https://sfplayhouse.org/", "https://gamh.com/calendar/"]
+    # 'sfpl' also matches sfplayhouse (plain substring) — the denylist removes it.
+    assert select_urls(urls, ["sfpl"], ["sfplayhouse"]) == ["https://sfpl.org/events"]
+    assert select_urls(urls) == urls
+    assert select_urls(urls, None, ["gamh"]) == urls[:2]
+
+
+def test_find_scraper_returns_none_for_unknown_url():
+    assert find_scraper("https://no-such-venue.example/") is None
+
+
+def test_find_scraper_matches_known_source():
+    from scrapers import citylights
+    assert find_scraper("https://citylights.com/events/") is citylights

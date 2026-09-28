@@ -86,7 +86,7 @@ valid creds the classify step is **skipped** (events export untagged) — or pas
 The live site auto-redeploys on any push to `main` that touches `frontend/` (or the deploy workflow itself):
 
 - **Editing the UI** — change `frontend/index.html`, commit, push. Pages redeploys in ~1 minute.
-- **Refreshing event data** — run `docker compose run --rm scraper` locally to regenerate `frontend/events.json`, then commit and push it.
+- **Refreshing event data** — happens automatically every day via GitHub Actions (see [Scheduled scraping](#scheduled-scraping-github-actions) below). A local `docker compose run --rm scraper` still regenerates `frontend/events.json` against the local DB — use it to test a scraper, not to ship data.
   > ⚠️ **When a scraper's *output* changes** (URLs, descriptions, times — not just new events), first wipe the DB with `docker compose down -v` and bring it back up, then re-scrape. Saves **skip** rows that already exist and never update them, so stale fields otherwise linger in the manifest.
 - **Running a subset** — filter which sources run (substring match on the URL):
   ```bash
@@ -99,3 +99,72 @@ The live site auto-redeploys on any push to `main` that touches `frontend/` (or 
 - **Manual redeploy** — Actions tab → *Deploy frontend to Pages* → *Run workflow*.
 
 Deploy status: https://github.com/TheAdityaKedia/agora/actions
+
+## Scheduled scraping (GitHub Actions)
+
+`.github/workflows/scrape.yml` runs daily (~3am PT) and on demand. Every source
+scrapes on **its own runner** (speed, a fresh IP per source, fault isolation);
+one merge job then saves all results into Neon Postgres in `sources.txt` order,
+classifies new shows, exports `events.json`, and ships it as a bot PR
+(`data/refresh-<run_id>`) that auto-merges when the guard passes (manifest
+parses; event count ≥ 70% of `main`'s), then triggers the Pages deploy. A
+failed or timed-out source keeps its rows from earlier runs. Design:
+`feature-specs/ci-scraping.md`; stage code: `service/ci.py`.
+
+```bash
+gh workflow run scrape.yml                              # full run
+gh workflow run scrape.yml -f sources="citylights.com"  # one source
+```
+
+Runs from a branch other than `main` use the Neon `ci-test` branch,
+ship into a throwaway `ci-sandbox/<run_id>` branch, and never deploy — safe for
+testing workflow changes.
+
+**One-time setup**
+
+1. **Neon** — a project with a `production` branch (DB) and a `ci-test` child
+   branch (test runs).
+2. **AWS (Bedrock tagging)** — in the external AWS account: an IAM OIDC provider
+   for `token.actions.githubusercontent.com` (audience `sts.amazonaws.com`), and
+   a role (`AgoraGitHubBedrock`, account `978355607698`) trusted only for
+   `repo:TheAdityaKedia/agora:environment:production` — jobs that declare an
+   `environment:` get that OIDC subject instead of `ref:…`, and `production` is
+   main-only — allowing just `bedrock:InvokeModel` on the Haiku 4.5 global
+   inference profile + foundation model used in `service/classify.py`. A $5/mo
+   AWS Budget (`agora-monthly`) emails on 80% actual / 100% forecast.
+   Without the role, runs still ship — new shows are just untagged.
+3. **Secrets, scoped by GitHub Environment** (Settings → Environments):
+   - `production` — deployment branches restricted to `main`, so no other
+     branch's workflow can read these: `DATABASE_URL` (Neon production, pooled,
+     `sslmode=require`), `AWS_ROLE_ARN`, `AWS_REGION`.
+   - `ci-test` — any branch: `DATABASE_URL` (Neon `ci-test` branch, with its
+     own role password — not production's).
+   - Repo-level: `ZYTE_API_KEY` (optional; scrape jobs only).
+
+   ```bash
+   gh secret set DATABASE_URL --env production   # value on stdin
+   gh secret set AWS_ROLE_ARN --env production
+   gh secret set AWS_REGION   --env production --body us-east-1
+   ```
+4. **Repo setting** — Settings → Actions → General → *Allow GitHub Actions to
+   create and approve pull requests*.
+5. **First run on `main` must be a full run** (the drop guard compares against
+   `main`'s manifest, so a filtered run against a near-empty DB would be blocked).
+
+**Sources blocked from GitHub** — a few sources fail from GitHub's datacenter
+IPs (listed in `service/data/local_only_sources.txt`; details in
+`future-sources.md` → "Sources that need fixing"). Scrape them from your own
+machine straight into Neon; the next CI run ships them:
+
+```bash
+scripts/scrape-to-neon.sh --blocked          # the known-trouble sources → Neon
+scripts/scrape-to-neon.sh --blocked --ship   # ...and dispatch a CI run to ship now
+scripts/scrape-to-neon.sh gamh.com           # any sources (substring match)
+```
+
+It refuses to run while a `scrape.yml` run is in progress on `main` (one
+writer at a time) and skips tagging (CI tags new shows).
+
+**Operations** — when a scraper's *output* changes (not just new events), its
+stale rows live on in Neon (saves never update): delete them in the Neon SQL
+editor before the next run, e.g. `DELETE FROM events WHERE sources->>0 = '<NAME>';`.
