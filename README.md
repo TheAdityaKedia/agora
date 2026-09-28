@@ -103,7 +103,9 @@ Deploy status: https://github.com/TheAdityaKedia/agora/actions
 
 ## Scheduled scraping (GitHub Actions)
 
-`.github/workflows/scrape.yml` runs daily (~3am PT) and on demand. Every source
+`.github/workflows/scrape.yml` runs daily (3:23am PT, with a 7:23am backup slot
+that skips if the first run happened — GitHub sometimes drops scheduled runs)
+and on demand. Every source
 scrapes on **its own runner** (speed, a fresh IP per source, fault isolation);
 one merge job then saves all results into Neon Postgres in `sources.txt` order,
 classifies new shows, exports `events.json`, and ships it as a bot PR

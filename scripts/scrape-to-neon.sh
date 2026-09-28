@@ -84,5 +84,5 @@ if [ "$ship" = 1 ]; then
   fi
   echo "Follow it with: gh run watch \$(gh run list --workflow scrape.yml --limit 1 --json databaseId -q '.[0].databaseId')"
 else
-  echo "Done. Rows are in Neon; they ship with the next scrape.yml run (daily ~3am PT, or rerun with --ship)."
+  echo "Done. Rows are in Neon; they ship with the next scrape.yml run (daily ~3:23am PT, or rerun with --ship)."
 fi
