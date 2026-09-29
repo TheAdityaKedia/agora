@@ -1,0 +1,84 @@
+name: Ship manifest
+description: >-
+  Guard the regenerated frontend/events.json against the checked-out base,
+  then open a data PR, squash-merge it and dispatch the Pages deploy — or, off
+  main, ship into a throwaway ci-sandbox/<run_id> branch. Shared by scrape.yml
+  and ingest-email.yml so both ship the same way.
+inputs:
+  report:
+    description: Merge-style report JSON (ci.py merge / ingest.run) for the PR body
+    required: true
+  gh-token:
+    description: GITHUB_TOKEN
+    required: true
+  is-main:
+    description: '"true" when running on main'
+    required: true
+outputs:
+  passed:
+    description: Guard verdict
+    value: ${{ steps.guard.outputs.passed }}
+  changed:
+    description: Whether the manifest content changed
+    value: ${{ steps.guard.outputs.changed }}
+  count:
+    description: Events in the new manifest
+    value: ${{ steps.guard.outputs.count }}
+runs:
+  using: composite
+  steps:
+    - name: Guard
+      id: guard
+      shell: bash
+      working-directory: service
+      env:
+        REPORT: ${{ inputs.report }}
+      run: |
+        git show HEAD:frontend/events.json > "$RUNNER_TEMP/base.json" || true
+        python ci.py guard --new "$GITHUB_WORKSPACE/frontend/events.json" \
+          --base "$RUNNER_TEMP/base.json" --report "$REPORT" \
+          --body "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_OUTPUT"
+        cat "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_STEP_SUMMARY"
+    - name: Ship (PR → merge → deploy)
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.gh-token }}
+        IS_MAIN: ${{ inputs.is-main }}
+        PASSED: ${{ steps.guard.outputs.passed }}
+        CHANGED: ${{ steps.guard.outputs.changed }}
+        COUNT: ${{ steps.guard.outputs.count }}
+      run: |
+            set -euo pipefail
+            if [ "$CHANGED" != "true" ] && git diff --quiet -- service/data/classifications.json; then
+              echo "No data change; nothing to ship."
+              exit 0
+            fi
+            if [ "$IS_MAIN" = "true" ]; then
+              base=main
+            else
+              # Test run: ship into a throwaway copy of this branch.
+              base="ci-sandbox/${GITHUB_RUN_ID}"
+              git push origin "HEAD:refs/heads/${base}"
+            fi
+            branch="data/refresh-${GITHUB_RUN_ID}"
+            title="Refresh manifest: ${COUNT} events ($(date -u +%F))"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git switch -c "$branch"
+            git add frontend/events.json service/data/classifications.json
+            git commit -m "$title"
+            git push -u origin "$branch"
+            gh pr create --base "$base" --head "$branch" --title "$title" \
+              --body-file "$RUNNER_TEMP/pr_body.md"
+            if [ "$PASSED" != "true" ]; then
+              gh pr comment "$branch" --body "Guard failed — not auto-merged. Review the report above."
+              exit 1
+            fi
+            gh pr merge "$branch" --squash --delete-branch
+            if [ "$IS_MAIN" = "true" ]; then
+              # Merges made with GITHUB_TOKEN don't trigger push workflows;
+              # workflow_dispatch is the exception.
+              gh workflow run deploy-pages.yml --ref main
+            else
+              git push origin --delete "$base"
+            fi
