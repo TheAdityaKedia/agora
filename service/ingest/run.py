@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -80,11 +81,19 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
             out.events += sub.events
             out.failures += sub.failures
     elif inc.text.strip():
+        # Long email (a newsletter): known-platform links are exact and cheap,
+        # so resolve those first; their failures are incidental (past sessions,
+        # sold-out pages) and never reported.
+        from_links: list[RawEvent] = []
+        for url in [u for u in inc.links if links_mod.is_known_platform(u)][:MAX_KNOWN_LINKS]:
+            r = links_mod.resolve(url, fetch=fetch, now=now,
+                                  extract_text=lambda t, ctx: extract_fn(text=t, context=ctx))
+            from_links += r.events
         cands = extract_fn(text=inc.text)
         sub = _from_candidates(cands, title_of, now)
-        out.events += sub.events
+        out.events += from_links + _not_already(sub.events, from_links)
         out.failures += sub.failures
-        if not cands and not inc.images:
+        if not cands and not from_links and not inc.images:
             out.failures.append(("Your email", NO_EVENT_TEXT))
     for i, image in enumerate(inc.images, 1):
         cands = extract_fn(image=image)
@@ -101,6 +110,20 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
     if not out.events and not out.failures:
         out.failures.append(("Your email", NO_EVENT_TEXT))
     return out
+
+
+MAX_KNOWN_LINKS = 20
+
+
+def _title_key(title: str) -> str:
+    return " ".join(re.findall(r"[a-z0-9]+", title.lower())[:3])
+
+
+def _not_already(events: list[RawEvent], known: list[RawEvent]) -> list[RawEvent]:
+    """Drop text-extracted events a link already produced (same start, same
+    first three title words) — the link version is exact."""
+    seen = {(e.start_time, _title_key(e.title)) for e in known}
+    return [e for e in events if (e.start_time, _title_key(e.title)) not in seen]
 
 
 def _cap(events: list[RawEvent], n: int) -> list[RawEvent]:

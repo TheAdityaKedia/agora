@@ -115,5 +115,7 @@ def is_link_first(inc: Incoming) -> bool:
 
 def diagnostics(inc: Incoming) -> str:
     """Counts only — safe for public logs."""
-    return (f"body={inc.body_source} text_chars={len(inc.text)} links={len(inc.links)} "
+    from ingest.links import is_known_platform
+    known = sum(1 for u in inc.links if is_known_platform(u))
+    return (f"body={inc.body_source} text_chars={len(inc.text)} links={len(inc.links)} known_links={known} "
             f"images={len(inc.images)} link_first={is_link_first(inc)} auto={inc.auto_generated}")

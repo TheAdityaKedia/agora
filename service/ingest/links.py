@@ -68,6 +68,16 @@ def _page_text(html: str) -> str:
     return re.sub(r"\n\s*\n+", "\n\n", soup.get_text("\n")).strip()[:MAX_PAGE_CHARS]
 
 
+_EVENTBRITE_RE = re.compile(r"https?://(www\.)?eventbrite\.[a-z.]+/e/")
+_LUMA_RE = re.compile(r"https?://(www\.)?(lu\.ma|luma\.com)/[A-Za-z0-9_-]+/?$")
+
+
+def is_known_platform(url: str) -> bool:
+    """Links that resolve to an exact event without the LLM."""
+    return bool(momence.session_id(url) or _PARTIFUL_RE.match(url)
+                or _EVENTBRITE_RE.match(url) or _LUMA_RE.match(url))
+
+
 def _momence(sid: str, *, fetch: Callable[[str], str], now: datetime) -> LinkResult:
     """Momence session pages are empty JS shells; their public JSON API isn't."""
     try:

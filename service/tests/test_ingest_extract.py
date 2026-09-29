@@ -72,3 +72,16 @@ def test_prompt_merges_sub_sessions_and_protects_personal_details():
     system = client.calls[0]["system"][0]["text"]
     assert "ONE event" in system and "classes" in system.lower()
     assert "phone numbers" in system and "email addresses" in system
+
+
+def test_truncated_tool_call_is_reported_not_silently_empty(capsys):
+    class Truncated(FakeClient):
+        def converse(self, **kw):
+            self.calls.append(kw)
+            return {"stopReason": "max_tokens", "output": {"message": {"content": [
+                {"toolUse": {"name": extract.TOOL_NAME, "input": {}}}]}}}
+
+    client = Truncated()
+    assert extract.extract_events(client, text="long newsletter", now=NOW) == []
+    assert "max_tokens" in capsys.readouterr().out
+    assert client.calls[0]["inferenceConfig"]["maxTokens"] >= 8000

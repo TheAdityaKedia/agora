@@ -136,3 +136,23 @@ def test_signature_link_ignored_when_a_screenshot_yields_the_event():
     ex = fake_extract([[], [dict(GOOD)]])  # link page → nothing; screenshot → event
     out = run.process_message(inc, extract_fn=ex, fetch=lambda u: "<p>about me</p>", now=NOW)
     assert len(out.events) == 1 and out.failures == []
+
+
+def test_long_email_also_resolves_known_platform_links(monkeypatch):
+    """A newsletter's text may yield nothing while its Momence/Partiful links
+    point straight at events — resolve those regardless of length."""
+    text = "This week at the Alembic. " * 40 + (
+        " https://momence.com/s/136417618 https://nav.example.com/home")
+    inc = parse(make_email(text=text), uid="1")
+    resolved = []
+
+    def fake_resolve(url, **kw):
+        resolved.append(url)
+        from ingest.links import LinkResult
+        return LinkResult(events=[__import__("scrapers.base", fromlist=["RawEvent"]).RawEvent(
+            "Co-Working", NOW.replace(day=30), "Berkeley, CA", url, None)])
+
+    monkeypatch.setattr(run.links_mod, "resolve", fake_resolve)
+    out = run.process_message(inc, extract_fn=fake_extract([[]]), fetch=lambda u: "", now=NOW)
+    assert resolved == ["https://momence.com/s/136417618"]  # not the nav link
+    assert len(out.events) == 1 and out.failures == []

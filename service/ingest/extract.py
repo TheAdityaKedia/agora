@@ -10,6 +10,9 @@ from classify import FALLBACK_MODEL, PRIMARY_MODEL
 from ingest import LOCAL_TZ, MAX_EVENTS_PER_EMAIL
 
 TOOL_NAME = "record_events"
+# 20 events with descriptions can exceed 2k output tokens; truncation would
+# otherwise read as "no events".
+MAX_OUTPUT_TOKENS = 8000
 BEDROCK_MAX_BYTES = 3_750_000
 BEDROCK_MAX_SIDE = 8000
 DOWNSCALE_SIDE = 4000
@@ -108,11 +111,16 @@ def extract_events(client, *, text: str | None = None, image: tuple[str, bytes] 
                                                     "description": "Record the events found.",
                                                     "inputSchema": {"json": SCHEMA}}}],
                             "toolChoice": {"tool": {"name": TOOL_NAME}}},
-                inferenceConfig={"maxTokens": 2000, "temperature": 0.0},
+                inferenceConfig={"maxTokens": MAX_OUTPUT_TOKENS, "temperature": 0.0},
             )
         except Exception as e:
             errors.append(f"{model_id}: {type(e).__name__}: {e}")
             continue
+        if resp.get("stopReason") == "max_tokens":
+            # A truncated tool call parses as no events — say so instead of
+            # silently reporting "no event found".
+            print(f"[extract] output hit max_tokens ({MAX_OUTPUT_TOKENS}); results may be incomplete",
+                  flush=True)
         for block in resp["output"]["message"]["content"]:
             use = block.get("toolUse")
             if use and use.get("name") == TOOL_NAME:
