@@ -18,6 +18,7 @@ from ingest import links as links_mod
 from ingest import validate
 from ingest.mailbox import compose_failure_reply, should_reply
 from ingest.message import Incoming, is_link_first, parse
+from ingest.message import diagnostics as message_diagnostics
 from scrapers.base import RawEvent
 from scrapers.browser import BROWSER_UA
 
@@ -146,8 +147,8 @@ def run_ingest(mail, *, extract_fn, fetch, now: datetime, secret: bytes, session
             label = ("agora/processed" if kept and not out.failures else
                      "agora/partial" if kept else "agora/failed")
             report[label.split("/")[1]] += 1
-            if out.failures:
-                _log(f"email {report['emails']}: {label} — {failure_summary(out.failures)}")
+            _log(f"email {report['emails']}: {label} ({message_diagnostics(inc)})"
+                 + (f" — {failure_summary(out.failures)}" if out.failures else ""))
             if out.failures and should_reply(inc, mail.address):
                 mail.send(compose_failure_reply(inc, own_address=mail.address, failures=out.failures))
                 report["replies"] += 1

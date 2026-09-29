@@ -48,3 +48,28 @@ def test_is_link_first():
     short = message.parse(make_email(text="check this out https://partiful.com/e/abc"), uid="1")
     long = message.parse(make_email(text="Newsletter " * 80 + " https://x.example.com/e"), uid="2")
     assert message.is_link_first(short) and not message.is_link_first(long)
+
+
+def test_html_body_wins_when_plain_part_is_a_stub():
+    """Newsletters often send a stub plain part and the real content as HTML."""
+    html = "<h2>This week</h2><p>Sound bath, Thu Oct 8, 7pm at The Alembic</p>" * 5
+    raw = make_email(text="View this email in your browser: https://mc.example.com/view", html=html)
+    inc = message.parse(raw, uid="1")
+    assert "Sound bath" in inc.text and inc.body_source == "html"
+
+
+def test_plain_body_kept_when_it_carries_the_content():
+    raw = make_email(text="Poetry Night, Oct 3 7pm at City Lights. " * 5, html="<p>Poetry Night</p>")
+    assert message.parse(raw, uid="1").body_source == "plain"
+
+
+def test_long_text_is_capped_for_the_llm():
+    inc = message.parse(make_email(text="Event listing line. " * 3000), uid="1")
+    assert len(inc.text) <= message.MAX_TEXT_CHARS
+
+
+def test_diagnostics_are_counts_only():
+    inc = message.parse(make_email(text="secret party at my house https://a.example.com"), uid="1")
+    d = message.diagnostics(inc)
+    assert "secret" not in d and "a.example.com" not in d
+    assert "body=plain" in d and "links=1" in d and "images=0" in d
