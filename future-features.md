@@ -33,5 +33,8 @@ here.
 - **Fuzzy / semantic dedup — beyond v1** — v1 shipped (`service/dedup.py`):
   cross-source, same start time, normalized-title containment/overlap, and
   locations must agree. Not yet: doors-vs-show time differences, semantic
-  (embedding/LLM) matching, and cleaning up duplicates saved before v1.
+  (embedding/LLM) matching, and preferring the venue's own listing as the
+  kept row (today the earlier source in `sources.txt` wins, so an aggregator's
+  "Offsite: …" title can win over the venue's). Pre-v1 duplicates were merged
+  on 2026-09-29 with `service/dedupe_existing.py` (29 rows).
   Spec: not written.
