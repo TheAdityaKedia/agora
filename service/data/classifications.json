@@ -32,6 +32,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fCOMEDY: Samson Koletkar (Presented by Ain't No Joke Stand-Up)": {
+      "classified_at": "2026-09-29T16:48:01.428622+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 1,
+      "title": "COMEDY: Samson Koletkar (Presented by Ain't No Joke Stand-Up)",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fCasper": {
       "classified_at": "2026-09-28T18:15:54.813525+00:00",
       "cost": "free",
@@ -844,6 +860,23 @@
       "title": "Laurie Anderson",
       "topics": [
         "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fMannheim Steamroller Christmas": {
+      "classified_at": "2026-09-29T16:47:47.835986+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 1,
+      "title": "Mannheim Steamroller Christmas",
+      "topics": [
+        "music",
+        "classical"
       ],
       "types": [
         [
@@ -2067,6 +2100,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fYou Can See Everything": {
+      "classified_at": "2026-09-29T16:47:46.992826+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 1,
+      "title": "You Can See Everything",
+      "topics": [
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Berkeley Repertory Theatre\u001fCovenant": {
       "classified_at": "2026-09-23T19:53:04.693214+00:00",
       "cost": "paid",
@@ -2182,6 +2231,59 @@
         ]
       ]
     },
+    "Big Brain Lectures — Bay Area\u001fCooperation or Competition? The Future of U.S. x China Relations": {
+      "classified_at": "2026-09-29T16:47:56.505129+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "Cooperation or Competition? The Future of U.S. x China Relations",
+      "topics": [
+        "politics",
+        "tech"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fExploding Stars, Dark Energy, and the Runaway Universe": {
+      "classified_at": "2026-09-29T16:47:51.608836+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "Exploding Stars, Dark Energy, and the Runaway Universe",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fHow Can We Lower Our Risk of Dementia? The Science of Brain Aging": {
+      "classified_at": "2026-09-29T16:47:49.725450+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "How Can We Lower Our Risk of Dementia? The Science of Brain Aging",
+      "topics": [
+        "science",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "Big Brain Lectures — Bay Area\u001fSex, AI and the Future of Human Intimacy": {
       "classified_at": "2026-09-23T19:40:21.896574+00:00",
       "cost": "unknown",
@@ -2200,6 +2302,28 @@
         ]
       ]
     },
+    "Big Brain Lectures — Bay Area\u001fTalking Ourselves Into (and Out of) Connection": {
+      "classified_at": "2026-09-29T16:48:00.563443+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "Talking Ourselves Into (and Out of) Connection",
+      "topics": [
+        "science",
+        "language"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Big Brain Lectures — Bay Area\u001fThe \"Mythological\" Genre: How Hindu Stories Shaped Global Pop Culture": {
       "classified_at": "2026-09-23T19:40:18.304661+00:00",
       "cost": "unknown",
@@ -2211,6 +2335,41 @@
         "film",
         "history",
         "asian-american"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fThe (Deeply Misunderstood) Evolutionary Science of Attraction": {
+      "classified_at": "2026-09-29T16:47:54.377993+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "The (Deeply Misunderstood) Evolutionary Science of Attraction",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fThe Boxes We Put Nature In: Rethinking How We Study the World": {
+      "classified_at": "2026-09-29T16:47:55.395990+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "The Boxes We Put Nature In: Rethinking How We Study the World",
+      "topics": [
+        "science",
+        "nature-outdoors"
       ],
       "types": [
         [
@@ -2237,6 +2396,94 @@
         ]
       ]
     },
+    "Big Brain Lectures — Bay Area\u001fThe Limits of Computer Decision-Making: Where Human Judgment Still Matters": {
+      "classified_at": "2026-09-29T16:47:53.498199+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "The Limits of Computer Decision-Making: Where Human Judgment Still Matters",
+      "topics": [
+        "tech",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fThe Meaning of Dinosaurs": {
+      "classified_at": "2026-09-29T16:47:50.666524+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "The Meaning of Dinosaurs",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fThe Psychology of Climate Change: Why We Struggle to Act": {
+      "classified_at": "2026-09-29T16:47:52.518351+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "The Psychology of Climate Change: Why We Struggle to Act",
+      "topics": [
+        "science",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fThe Psychology of Compassion: How Culture Shapes the Way We Care": {
+      "classified_at": "2026-09-29T16:47:59.543772+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "The Psychology of Compassion: How Culture Shapes the Way We Care",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fTsunami Prediction, Explained": {
+      "classified_at": "2026-09-29T16:47:57.467618+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "Tsunami Prediction, Explained",
+      "topics": [
+        "science",
+        "tech"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "Big Brain Lectures — Bay Area\u001fWhat Poetry Can Teach Us About Being Human": {
       "classified_at": "2026-09-23T19:40:20.713708+00:00",
       "cost": "unknown",
@@ -2246,6 +2493,40 @@
       "title": "What Poetry Can Teach Us About Being Human",
       "topics": [
         "poetry"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fWhat Psychedelics Reveal About How We See the World": {
+      "classified_at": "2026-09-29T16:47:58.542498+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "What Psychedelics Reveal About How We See the World",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Big Brain Lectures — Bay Area\u001fWhy Chimpanzees Can’t Give Lectures: The Evolution of Human Speech": {
+      "classified_at": "2026-09-29T16:47:48.790357+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Big Brain Lectures — Bay Area",
+      "taxonomy_version": 1,
+      "title": "Why Chimpanzees Can’t Give Lectures: The Evolution of Human Speech",
+      "topics": [
+        "science"
       ],
       "types": [
         [
@@ -5233,6 +5514,24 @@
         ]
       ]
     },
+    "Book Passage\u001fDiana Helmuth & Eliza Washington - Lonely Planet Where to Cheat on Your Cat": {
+      "classified_at": "2026-09-29T16:48:11.674615+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Diana Helmuth & Eliza Washington - Lonely Planet Where to Cheat on Your Cat",
+      "topics": [
+        "books-authors",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fDominican University Faculty Lecture Series - From Snake Oil to Social Media": {
       "classified_at": "2026-09-25T06:07:34.294697+00:00",
       "cost": "unknown",
@@ -5530,6 +5829,25 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Book Passage\u001fGreg Gaar with Jay Blakesberg - Greg Gaar’s Streets of San Francisco": {
+      "classified_at": "2026-09-29T16:48:08.910655+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Greg Gaar with Jay Blakesberg - Greg Gaar’s Streets of San Francisco",
+      "topics": [
+        "photography",
+        "history",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -6409,6 +6727,24 @@
         ]
       ]
     },
+    "Book Passage\u001fMona Chalabi - Ten Lives": {
+      "classified_at": "2026-09-29T16:48:12.620584+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Mona Chalabi - Ten Lives",
+      "topics": [
+        "nonfiction",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fNEW DATE: Garrison Lovely - Obsolete": {
       "classified_at": "2026-09-25T06:06:23.708573+00:00",
       "cost": "unknown",
@@ -6418,6 +6754,24 @@
       "title": "NEW DATE: Garrison Lovely - Obsolete",
       "topics": [
         "tech",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Book Passage\u001fNEW DATE: Henry J. Evans - Bombs, Bacon, and Bankruptcy": {
+      "classified_at": "2026-09-29T16:48:09.827865+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "NEW DATE: Henry J. Evans - Bombs, Bacon, and Bankruptcy",
+      "topics": [
+        "business",
         "nonfiction"
       ],
       "types": [
@@ -6671,6 +7025,24 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Book Passage\u001fRebecca Handler with Daniel Handler - In the Round": {
+      "classified_at": "2026-09-29T16:48:13.575469+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Rebecca Handler with Daniel Handler - In the Round",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -7082,6 +7454,40 @@
       "title": "Write Your Heart Out with Britta Stromeyer",
       "topics": [
         "writing"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Book Passage\u001fWriting Into The Next Chapter: Exploring Your Creative Potential in Midlife and Beyond": {
+      "classified_at": "2026-09-29T16:48:14.646772+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Writing Into The Next Chapter: Exploring Your Creative Potential in Midlife and Beyond",
+      "topics": [
+        "writing",
+        "women"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Book Passage\u001fWriting Picture Books: The Rules (and How to Break Them) with Monica Wesolowska": {
+      "classified_at": "2026-09-29T16:48:10.730165+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Writing Picture Books: The Rules (and How to Break Them) with Monica Wesolowska",
+      "topics": [
+        "writing",
+        "books-authors"
       ],
       "types": [
         [
@@ -9563,6 +9969,24 @@
         ]
       ]
     },
+    "Clio's Books\u001fAll the Tiny Beauties": {
+      "classified_at": "2026-09-29T16:48:15.555857+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 1,
+      "title": "All the Tiny Beauties",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Clio's Books\u001fAmericans Without Borders": {
       "classified_at": "2026-09-25T06:10:35.901729+00:00",
       "cost": "unknown",
@@ -10467,6 +10891,25 @@
       "topics": [
         "history",
         "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fNPR’s Emily Feng on How China’s Repression Fueled a Militant Movement…In Syria": {
+      "classified_at": "2026-09-29T16:48:02.429132+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "NPR’s Emily Feng on How China’s Repression Fueled a Militant Movement…In Syria",
+      "topics": [
+        "nonfiction",
+        "politics",
+        "history"
       ],
       "types": [
         [
@@ -11491,6 +11934,27 @@
         ]
       ]
     },
+    "El Rio\u001fThe Hotline Queer Line Dancing": {
+      "classified_at": "2026-09-29T16:48:06.862434+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 1,
+      "title": "The Hotline Queer Line Dancing",
+      "topics": [
+        "dance",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "El Rio\u001fThots Not Cops with DJ ariB b2b GHOSTMiLK, Heart Piece, and Kewpie ($15 - $25 NOTAFLOF)": {
       "classified_at": "2026-09-24T21:35:07.192638+00:00",
       "cost": "paid",
@@ -11673,6 +12137,237 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fA16Z tech week. Embodied AI - Citizens Free · Guests Pay": {
+      "classified_at": "2026-09-29T16:48:31.899288+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "A16Z tech week. Embodied AI - Citizens Free · Guests Pay",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "talk"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fDecentralized Neurosymbolic AI - SF Tech Week": {
+      "classified_at": "2026-09-29T16:48:30.934252+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Decentralized Neurosymbolic AI - SF Tech Week",
+      "topics": [
+        "tech",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fDell x NVIDIA Hackathon": {
+      "classified_at": "2026-09-29T16:48:34.609382+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Dell x NVIDIA Hackathon",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fGarry's List: A Conversation with Matt Dorsey and Stephen Sherrill": {
+      "classified_at": "2026-09-29T16:48:24.193774+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Garry's List: A Conversation with Matt Dorsey and Stephen Sherrill",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fLynkable: The Partnership Pipeline - Members +3": {
+      "classified_at": "2026-09-29T16:48:27.157074+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Lynkable: The Partnership Pipeline - Members +3",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fOpen House - Thursday, Oct. 1st - Open Registration": {
+      "classified_at": "2026-09-29T16:48:25.137383+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Open House - Thursday, Oct. 1st - Open Registration",
+      "topics": [
+        "tech",
+        "science"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fOtherminds Lab Presents: Open Hours - Members +3": {
+      "classified_at": "2026-09-29T16:48:26.157893+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Otherminds Lab Presents: Open Hours - Members +3",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fSF CogSci #33: Behave, by Robert Sapolsky": {
+      "classified_at": "2026-09-29T16:48:33.671008+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "SF CogSci #33: Behave, by Robert Sapolsky",
+      "topics": [
+        "science",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fSF CogSci #34": {
+      "classified_at": "2026-09-29T16:48:35.535571+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "SF CogSci #34",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fSingularityNET - SF Tech Week": {
+      "classified_at": "2026-09-29T16:48:29.985693+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "SingularityNET - SF Tech Week",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "talk"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fStar Trek Watch Party & Discussion - Members +3": {
+      "classified_at": "2026-09-29T16:48:28.079817+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Star Trek Watch Party & Discussion - Members +3",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fTech Week Hackathon": {
+      "classified_at": "2026-09-29T16:48:32.772775+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Tech Week Hackathon",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fWomen in AI Consumer Tech Showcase (SF Tech Week!)": {
+      "classified_at": "2026-09-29T16:48:29.199603+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "Women in AI Consumer Tech Showcase (SF Tech Week!)",
+      "topics": [
+        "tech",
+        "business",
+        "women"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -19267,6 +19962,21 @@
         ]
       ]
     },
+    "Partiful\u001fMake a Friend Picnic": {
+      "classified_at": "2026-09-29T16:48:22.237802+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "Make a Friend Picnic",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fMatcha Society: Halloween Edition🎃🍵": {
       "classified_at": "2026-09-28T18:17:02.585635+00:00",
       "cost": "free",
@@ -19338,6 +20048,24 @@
         [
           "performance"
         ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fNO BASIC": {
+      "classified_at": "2026-09-29T16:48:17.459992+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "NO BASIC",
+      "topics": [
+        "club-night",
+        "music"
+      ],
+      "types": [
         [
           "social",
           "party-club"
@@ -19467,6 +20195,22 @@
       "topics": [
         "wellness",
         "women"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001fPilates at Dolores": {
+      "classified_at": "2026-09-29T16:48:21.394579+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "Pilates at Dolores",
+      "topics": [
+        "wellness"
       ],
       "types": [
         [
@@ -19707,6 +20451,26 @@
         ]
       ]
     },
+    "Partiful\u001fSpooky Yap & Craft": {
+      "classified_at": "2026-09-29T16:48:23.297835+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "Spooky Yap & Craft",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Partiful\u001fStarchild": {
       "classified_at": "2026-09-28T18:17:13.702050+00:00",
       "cost": "unknown",
@@ -19831,6 +20595,44 @@
         ]
       ]
     },
+    "Partiful\u001fWine Bar Crawl": {
+      "classified_at": "2026-09-29T16:48:19.574296+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "Wine Bar Crawl",
+      "topics": [
+        "food-drink",
+        "wine"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fWish-Craft Night at The Wild Side West": {
+      "classified_at": "2026-09-29T16:48:20.542198+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "Wish-Craft Night at The Wild Side West",
+      "topics": [
+        "craft",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Partiful\u001fcine cue a-listers ★:  beetlejuice": {
       "classified_at": "2026-09-28T18:16:53.705486+00:00",
       "cost": "paid",
@@ -19897,6 +20699,27 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fgolden gate bridge picnic & watercolor workshop": {
+      "classified_at": "2026-09-29T16:48:18.548113+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 1,
+      "title": "golden gate bridge picnic & watercolor workshop",
+      "topics": [
+        "design",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -20776,6 +21599,27 @@
         ]
       ]
     },
+    "Reading Rhythms\u001fReading Rhythms San Francisco: Free Copy of the Sense and Sensibility Movie Tie-In Edition": {
+      "classified_at": "2026-09-29T16:48:05.178464+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Reading Rhythms",
+      "taxonomy_version": 1,
+      "title": "Reading Rhythms San Francisco: Free Copy of the Sense and Sensibility Movie Tie-In Edition",
+      "topics": [
+        "books-authors",
+        "film"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
     "Reading Rhythms\u001fReading Rhythms San Francisco: Sense & Sensibility: A Season for Sisters Reading Party": {
       "classified_at": "2026-09-24T06:43:38.551672+00:00",
       "cost": "paid",
@@ -20793,6 +21637,24 @@
         ],
         [
           "screening"
+        ]
+      ]
+    },
+    "Russian Hill Bookstore\u001fPoetry Reading  with Isabelle Correa": {
+      "classified_at": "2026-09-29T16:48:16.519270+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Russian Hill Bookstore",
+      "taxonomy_version": 1,
+      "title": "Poetry Reading  with Isabelle Correa",
+      "topics": [
+        "poetry",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -35888,6 +36750,24 @@
         ]
       ]
     },
+    "The Booksmith\u001fBooksmith presents: Dana Moshoian Walrath / The Book of Genocides": {
+      "classified_at": "2026-09-29T16:48:07.842158+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Booksmith",
+      "taxonomy_version": 1,
+      "title": "Booksmith presents: Dana Moshoian Walrath / The Book of Genocides",
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "The Booksmith\u001fBooksmith presents: Daniel Duane / Yosemite Falls: Reckoning with California History and the Gospel of John Muir": {
       "classified_at": "2026-09-25T06:07:06.855823+00:00",
       "cost": "paid",
@@ -36468,6 +37348,22 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fNew Year, New Alignment: 2027 Astrology Workshop": {
+      "classified_at": "2026-09-29T16:48:04.305789+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 1,
+      "title": "New Year, New Alignment: 2027 Astrology Workshop",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fNocturne: A Romantasy Symposium (Presented by Nightlight Society)": {
       "classified_at": "2026-09-24T21:31:22.409854+00:00",
       "cost": "unknown",
@@ -36823,6 +37719,27 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fThe Hiring Factory: How Great Companies Win the Best Talent — Book Launch + Talk": {
+      "classified_at": "2026-09-29T16:48:03.434489+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 1,
+      "title": "The Hiring Factory: How Great Companies Win the Best Talent — Book Launch + Talk",
+      "topics": [
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -39239,6 +40156,23 @@
       "title": "KALW Presents KALW's 85th Birthday Benefit KALW's 85th Birthday Benefit with Rozzi, DEATHX_XHEAD, DJ Wonway Posibul",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fMonster Energy Outbreak Tour, Goldenvoice, & CMN Present RØZ: SE ESTÁ HACIENDO TARDE SE ESTÁ HACIENDO TARDE RØZ": {
+      "classified_at": "2026-09-29T16:47:46.087286+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 1,
+      "title": "Monster Energy Outbreak Tour, Goldenvoice, & CMN Present RØZ: SE ESTÁ HACIENDO TARDE SE ESTÁ HACIENDO TARDE RØZ",
+      "topics": [
+        "electronic",
+        "music"
       ],
       "types": [
         [
