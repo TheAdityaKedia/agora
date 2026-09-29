@@ -87,3 +87,14 @@ def test_next_weekly_start_bad_input_returns_none():
     from scrapers.recurrence import next_weekly_start
     assert next_weekly_start("Someday", "7:00 PM", now=_now(2026, 9, 23)) is None
     assert next_weekly_start("Monday", "not a time", now=_now(2026, 9, 23)) is None
+
+
+def test_weekly_keeps_local_wall_clock_time_across_dst_end():
+    """7pm Fridays stay 7pm local after DST ends (Nov 1, 2026), not 6pm."""
+    from zoneinfo import ZoneInfo
+    pt = ZoneInfo("America/Los_Angeles")
+    now = datetime(2026, 10, 20, 18, 0, tzinfo=timezone.utc)
+    first = datetime(2026, 10, 23, 19, 0, tzinfo=pt).astimezone(timezone.utc)
+    occ = expand_occurrences(first, "P1W", horizon_days=28, now=now)
+    assert [o.astimezone(pt).strftime("%m-%d %H:%M") for o in occ] == \
+        ["10-23 19:00", "10-30 19:00", "11-06 19:00", "11-13 19:00"]

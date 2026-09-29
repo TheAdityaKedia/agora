@@ -128,3 +128,11 @@ def test_failure_log_line_is_privacy_safe():
     assert "link (priya.example.com): no event found on this page" in line
     assert "an event: this event already happened" in line
     assert "secret" not in line and "/about" not in line
+
+
+def test_signature_link_ignored_when_a_screenshot_yields_the_event():
+    inc = parse(make_email(text="see flyers\nhttps://priya.example.com",
+                           images=[("a.png", "image/png", png_bytes())]), uid="1")
+    ex = fake_extract([[], [dict(GOOD)]])  # link page → nothing; screenshot → event
+    out = run.process_message(inc, extract_fn=ex, fetch=lambda u: "<p>about me</p>", now=NOW)
+    assert len(out.events) == 1 and out.failures == []

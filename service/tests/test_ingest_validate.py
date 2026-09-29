@@ -69,3 +69,12 @@ def test_venue_only_location_is_allowed_but_named_elsewhere_is_rejected():
                                         now=NOW)[0][0].location == "Mucky Duck, 1315 9th Ave SF"
     assert validate.candidate_to_events(cand(venue=None, address="200 Main St, Austin, TX 78701"),
                                         now=NOW)[1] == "not in the Bay Area"
+
+
+def test_urls_get_a_scheme_and_bare_homepages_are_dropped():
+    """A shared homepage ('www.ZoukSF.COM') on several same-time sessions made
+    dedup (url + start) collapse distinct events into one."""
+    assert validate.candidate_to_events(cand(url="www.ZoukSF.COM"), now=NOW)[0][0].url is None
+    assert validate.candidate_to_events(cand(url="https://zouksf.com/"), now=NOW)[0][0].url is None
+    ev = validate.candidate_to_events(cand(url="tickettailor.com/events/nelly/123"), now=NOW)[0][0]
+    assert ev.url == "https://tickettailor.com/events/nelly/123"

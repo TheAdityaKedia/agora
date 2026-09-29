@@ -62,6 +62,18 @@ def _outside_bay_area(location: str | None) -> bool:
     return bool(location) and not is_bay_area(location) and bool(_NAMES_PLACE_RE.search(location))
 
 
+def _event_url(url: str | None) -> str | None:
+    """Add a missing scheme; drop bare homepages. A homepage shared by several
+    same-time events would make dedup (url + start) merge distinct events."""
+    from urllib.parse import urlparse
+    url = (url or "").strip()
+    if not url:
+        return None
+    if not url.lower().startswith(("http://", "https://")):
+        url = "https://" + url
+    return url if urlparse(url).path.strip("/") else None
+
+
 def check_event(e: RawEvent, *, now: datetime) -> str | None:
     if e.start_time < _start_of_today_utc(now):
         return PAST
@@ -99,7 +111,8 @@ def candidate_to_events(c: dict, *, now: datetime, url: str | None = None) -> tu
     if reason:
         return [], reason
     location = _location(c.get("venue"), c.get("address"))
-    events = [RawEvent(title=title, start_time=s, location=location, url=url or c.get("url"),
+    events = [RawEvent(title=title, start_time=s, location=location,
+                       url=_event_url(url or c.get("url")),
                        description=_description(c.get("description"), c.get("cost_text")))
               for s in starts]
     for e in events:
