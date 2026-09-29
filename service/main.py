@@ -9,8 +9,8 @@ from db import init_db, get_session
 from exporters.json_export import export_json
 from models import Event
 from scrapers import (
-    actsf, atgtickets, balboa, berkeleyrep, bigbrainbay, birdbeckett, blackbird,
-    brava, citylights, cityarts, commonwealthclub, elrio, factsf, fillmore,
+    actsf, alembic, atgtickets, balboa, berkeleyrep, bigbrainbay, birdbeckett,
+    blackbird, brava, citylights, cityarts, commonwealthclub, elrio, factsf, fillmore,
     fourstar, frontiertower, gamh, greatstar, greenapple, independent, kronos,
     linesballet, litquake, magictheatre, medicinenightmares, nctcsf, neofuturists,
     oaklandartmurmur, palace, phoenix, presidio, readingrhythms, riptide,
@@ -37,7 +37,7 @@ SCRAPERS = [
     yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
-    partiful, frontiertower,
+    partiful, frontiertower, alembic,
 ]
 
 
