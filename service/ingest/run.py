@@ -36,6 +36,21 @@ def _log(msg: str) -> None:
     print(f"[ingest] {msg}", flush=True)  # never log sender, subject, or body
 
 
+def _safe_label(label: str) -> str:
+    """A failure label fit for public logs: screenshot numbers and the email
+    itself as-is, links reduced to their domain, event titles hidden."""
+    if label.startswith(("Screenshot", "Your email", "Some events")):
+        return label
+    if label.startswith("http"):
+        from urllib.parse import urlparse
+        return f"link ({urlparse(label).netloc})"
+    return "an event"
+
+
+def failure_summary(failures: list[tuple[str, str]]) -> str:
+    return "; ".join(f"{_safe_label(label)}: {reason}" for label, reason in failures)
+
+
 def _from_candidates(cands: list[dict], label_for, now, url=None) -> Outcome:
     out = Outcome()
     for c in cands:
@@ -131,6 +146,8 @@ def run_ingest(mail, *, extract_fn, fetch, now: datetime, secret: bytes, session
             label = ("agora/processed" if kept and not out.failures else
                      "agora/partial" if kept else "agora/failed")
             report[label.split("/")[1]] += 1
+            if out.failures:
+                _log(f"email {report['emails']}: {label} — {failure_summary(out.failures)}")
             if out.failures and should_reply(inc, mail.address):
                 mail.send(compose_failure_reply(inc, own_address=mail.address, failures=out.failures))
                 report["replies"] += 1

@@ -116,3 +116,15 @@ def test_link_failures_reported_when_no_link_yields_an_event():
     inc = parse(make_email(text="https://a.example.com https://b.example.com"), uid="1")
     out = run.process_message(inc, extract_fn=fake_extract([[], []]), fetch=lambda u: "<p>x</p>", now=NOW)
     assert [u for u, _ in out.failures] == ["https://a.example.com", "https://b.example.com"]
+
+
+def test_failure_log_line_is_privacy_safe():
+    failures = [("Screenshot 2", "couldn't find a start time"),
+                ("https://priya.example.com/about?x=1", "no event found on this page"),
+                ('"Priya\'s secret party"', "this event already happened"),
+                ("Your email", "no event found")]
+    line = run.failure_summary(failures)
+    assert "Screenshot 2: couldn't find a start time" in line
+    assert "link (priya.example.com): no event found on this page" in line
+    assert "an event: this event already happened" in line
+    assert "secret" not in line and "/about" not in line
