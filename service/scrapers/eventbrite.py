@@ -19,16 +19,10 @@ import re
 import time
 from datetime import datetime, timezone
 from urllib.parse import urljoin
-from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
 
-
-# Most Eventbrite listings we scrape are Bay Area — use Pacific for the
-# "advance series to today" fix so DST is applied to today's date, not the
-# original startDate's date (which may be a different DST era).
-_SERIES_ADJUST_TZ = ZoneInfo("America/Los_Angeles")
 
 from scrapers.base import RawEvent
 from scrapers.browser import RateLimited, browser_context, load_page_html
@@ -98,11 +92,10 @@ def full_description(html: str) -> str | None:
     ``props.pageProps.context.structuredContent.modules[].text``, HTML); the
     JSON-LD only carries the summary line.
     """
-    script = BeautifulSoup(html, "html.parser").find("script", id="__NEXT_DATA__")
+    ctx = _page_context(html)
     try:
-        data = json.loads(script.string) if script and script.string else None
-        modules = data["props"]["pageProps"]["context"]["structuredContent"]["modules"]
-    except (ValueError, KeyError, TypeError):
+        modules = ctx["structuredContent"]["modules"]
+    except (KeyError, TypeError):
         return None
     parts = []
     for module in modules or []:
@@ -110,6 +103,36 @@ def full_description(html: str) -> str | None:
             text = BeautifulSoup(module["text"], "html.parser").get_text(" ", strip=True)
             parts.append(re.sub(r"\s+", " ", text).strip())
     return " ".join(p for p in parts if p) or None
+
+
+def _page_context(html: str) -> dict | None:
+    script = BeautifulSoup(html, "html.parser").find("script", id="__NEXT_DATA__")
+    try:
+        data = json.loads(script.string) if script and script.string else None
+        return data["props"]["pageProps"]["context"]
+    except (ValueError, KeyError, TypeError):
+        return None
+
+
+def next_session(html: str) -> datetime | None:
+    """For a series page, the next upcoming session's start (UTC), else None.
+
+    Eventbrite's page data flags series (``basicInfo.isSeries``) and names the
+    next bookable date in ``goodToKnow.highlights.nextAvailableSession``, e.g.
+    ``2026-10-03T11:00:00-07`` (hour-only offset).
+    """
+    ctx = _page_context(html)
+    if not ctx or not (ctx.get("basicInfo") or {}).get("isSeries"):
+        return None
+    raw = ((ctx.get("goodToKnow") or {}).get("highlights") or {}).get("nextAvailableSession")
+    if not isinstance(raw, str):
+        return None
+    raw = re.sub(r"([+-]\d{2})$", r"\1:00", raw)
+    try:
+        dt = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    return dt.astimezone(timezone.utc) if dt.tzinfo else None
 
 
 def _with_full_description(ev: RawEvent, full: str | None) -> RawEvent:
@@ -134,15 +157,18 @@ def _flatten(payload):
             yield payload
 
 
-def event_from_json_ld(obj: dict, *, location_override: str | None = None) -> RawEvent | None:
+def event_from_json_ld(obj: dict, *, location_override: str | None = None,
+                       next_session: datetime | None = None) -> RawEvent | None:
     """Convert a schema.org Event JSON-LD dict to a RawEvent, or None if
     required fields are missing.
 
-    Handles Eventbrite's "ongoing series" pattern: some listings (e.g. a
-    weekly show) have a startDate from years ago and an endDate far in the
-    future. In that case we advance the start_time to today at the original
-    show's time-of-day, so the series appears on the calendar as an upcoming
-    entry instead of getting past-pruned.
+    ``startDate`` is used as-is, even when it's past and ``endDate`` is in the
+    future. For a *series* (a weekly show, a multi-week seminar) the JSON-LD
+    spans first-to-last session, so the caller passes ``next_session`` (see
+    ``next_session()``) and that becomes the start. We used to move any such
+    event to "today" at its time of day, which put series on days they don't
+    run and resurrected one-off events with a bogus far ``endDate`` (Petaluma
+    Poetry Walk) every day. That fabricated dates, so it's gone.
     """
     name = obj.get("name")
     start = obj.get("startDate")
@@ -152,25 +178,8 @@ def event_from_json_ld(obj: dict, *, location_override: str | None = None) -> Ra
         start_time = datetime.fromisoformat(start).astimezone(timezone.utc)
     except ValueError:
         return None
-    end = obj.get("endDate")
-    end_time = None
-    if isinstance(end, str):
-        try:
-            end_time = datetime.fromisoformat(end).astimezone(timezone.utc)
-        except ValueError:
-            pass
-    now = datetime.now(timezone.utc)
-    if start_time < now and end_time and end_time > now:
-        # Ongoing series: keep the original time-of-day but move the date to
-        # today. Reattach today's timezone via zoneinfo so DST offsets match
-        # today, not the (possibly stale, different-DST) startDate's tz.
-        original = datetime.fromisoformat(start)
-        today_local = datetime.now(_SERIES_ADJUST_TZ).date()
-        start_time = datetime(
-            today_local.year, today_local.month, today_local.day,
-            original.hour, original.minute, original.second,
-            tzinfo=_SERIES_ADJUST_TZ,
-        ).astimezone(timezone.utc)
+    if next_session is not None:
+        start_time = next_session
 
     image = obj.get("image")
     if isinstance(image, list):
@@ -271,7 +280,8 @@ def scrape_event_urls(
         obj = parse_event_page(html)
         if obj is None:
             continue
-        ev = event_from_json_ld(obj, location_override=location_override)
+        ev = event_from_json_ld(obj, location_override=location_override,
+                                next_session=next_session(html))
         if ev is not None:
             events.append(_with_full_description(ev, full_description(html)))
         if i < len(event_urls) - 1:

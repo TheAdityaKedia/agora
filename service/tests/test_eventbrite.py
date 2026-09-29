@@ -97,25 +97,26 @@ def test_event_from_json_ld_yields_full_rawevent():
     assert ev.url.startswith("https://www.eventbrite.com/e/skitzo-")
 
 
-def test_event_from_json_ld_advances_ongoing_series_to_today():
-    """A weekly-series listing has a stale startDate + a future endDate.
-    We advance start_time to today at the show's original time-of-day.
-    """
+def test_event_from_json_ld_keeps_past_start_despite_future_end_date():
+    """A one-off event with a bogus far endDate (Petaluma Poetry Walk: Sep 20,
+    endDate Oct 10) must keep its real, past start, so it gets pruned, rather
+    than being re-dated to "today" on every scrape."""
     obj = {
         "@type": "Event",
-        "name": "SF Neo-Futurists' The Infinite Wrench",
-        "startDate": "2023-01-13T21:00:00-08:00",   # 9pm PT, Jan 2023
-        "endDate":   "2099-12-05T22:30:00-08:00",   # far future
+        "name": "The 29th Annual Petaluma Poetry Walk",
+        "startDate": "2026-09-20T13:00:00-07:00",
+        "endDate": "2026-10-10T14:00:00-07:00",
         "url": "https://www.eventbrite.com/e/x",
     }
     ev = eventbrite.event_from_json_ld(obj)
-    from datetime import datetime, timezone
-    from zoneinfo import ZoneInfo
-    today_pt = datetime.now(ZoneInfo("America/Los_Angeles")).date()
-    local = ev.start_time.astimezone(ZoneInfo("America/Los_Angeles"))
-    # Same day as "today" in Pacific, same hour+minute (9:00 PM)
-    assert local.date() == today_pt
-    assert (local.hour, local.minute) == (21, 0)
+    assert ev.start_time == datetime(2026, 9, 20, 20, 0, tzinfo=timezone.utc)
+
+
+def test_event_from_json_ld_uses_next_session_when_given():
+    obj = {"@type": "Event", "name": "Series", "startDate": "2023-01-13T21:00:00-08:00",
+           "endDate": "2099-12-05T22:30:00-08:00", "url": "https://www.eventbrite.com/e/x"}
+    nxt = datetime(2026, 10, 3, 4, 0, tzinfo=timezone.utc)
+    assert eventbrite.event_from_json_ld(obj, next_session=nxt).start_time == nxt
 
 
 def test_event_from_json_ld_leaves_normal_dates_alone():
@@ -189,3 +190,25 @@ def test_scrape_event_urls_falls_back_to_json_ld_description():
     [ev] = eventbrite.scrape_event_urls(["https://www.eventbrite.com/e/1"],
                                         event_html_fetch=lambda url: EVENT_HTML)
     assert ev.description == eventbrite.parse_event_page(EVENT_HTML).get("description")
+
+
+# --- series: the next real session, not "today" ------------------------------
+
+SERIES_HTML = (Path(__file__).parent / "fixtures" / "eventbrite_series.html").read_text()
+
+
+def test_next_session_read_from_series_page():
+    # Milton's Paradise Lost: Saturdays Sep 12 - Oct 3; next is Oct 3, 11am PDT
+    assert eventbrite.next_session(SERIES_HTML) == datetime(2026, 10, 3, 18, 0, tzinfo=timezone.utc)
+
+
+def test_next_session_none_for_non_series_pages():
+    assert eventbrite.next_session(STRUCTURED_HTML) is None
+    assert eventbrite.next_session(EVENT_HTML) is None
+
+
+def test_scrape_event_urls_dates_series_at_next_session():
+    [ev] = eventbrite.scrape_event_urls(["https://www.eventbrite.com/e/1"],
+                                        event_html_fetch=lambda url: SERIES_HTML)
+    assert ev.title == "Milton's Paradise Lost"
+    assert ev.start_time == datetime(2026, 10, 3, 18, 0, tzinfo=timezone.utc)
