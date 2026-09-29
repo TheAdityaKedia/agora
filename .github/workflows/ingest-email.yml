@@ -10,7 +10,7 @@ on:
   # TEMP (remove before merging): dispatch only works once this file is on main.
   push:
     branches: [email-submissions]
-    paths: [.github/workflows/ingest-email.yml]
+    paths: [.github/workflows/ingest-email.yml, service/ingest/**]
 
 permissions:
   contents: read

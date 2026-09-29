@@ -51,15 +51,22 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
     out = Outcome()
     title_of = lambda c: f'"{c.get("title") or "an event"}"'
     if is_link_first(inc) and inc.links:
+        not_events = []  # links that aren't event pages (signatures, personal sites…)
         for url in inc.links[:MAX_LINKS_PER_EMAIL]:
             r = links_mod.resolve(url, fetch=fetch, now=now,
                                   extract_text=lambda t, ctx: extract_fn(text=t, context=ctx))
-            if r.error:
+            if r.error in (links_mod.NO_EVENT, links_mod.UNREADABLE):
+                not_events.append((url, r.error))
+            elif r.error:
                 out.failures.append((url, r.error))
             out.events += r.events
             sub = _from_candidates(r.candidates, lambda c: url, now)
             out.events += sub.events
             out.failures += sub.failures
+        # Report non-event links only if nothing in the email was an event —
+        # otherwise they're incidental and a reply would be noise.
+        if not out.events:
+            out.failures += not_events
     elif inc.text.strip():
         cands = extract_fn(text=inc.text)
         sub = _from_candidates(cands, title_of, now)

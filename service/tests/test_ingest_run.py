@@ -32,7 +32,7 @@ def test_link_first_email_resolves_each_link_not_the_text():
     assert [c["context"] for c in ex.calls] == ["Page: https://blog.example.com/a",
                                                 "Page: https://blog.example.com/b"]
     assert len(out.events) == 1
-    assert out.failures == [("https://blog.example.com/b", "no event found on this page")]
+    assert out.failures == []  # b isn't an event page; a was, so b is incidental
 
 
 def test_long_email_uses_text_extraction_once_and_images_each():
@@ -100,3 +100,19 @@ def test_run_enforces_per_sender_daily_cap_and_replies(db):
                             now=NOW, secret=b"k", session_factory=db, save=lambda r, source: (0, 0, 0))
     assert mail.labels == {"1": "agora/failed"} and report["saved"] == 0
     assert "daily limit" in mail.sent[0].get_content()
+
+
+def test_non_event_links_are_ignored_when_another_link_yields_an_event():
+    """A signature link (personal site) in a link-first email must not turn a
+    good submission into a failure reply."""
+    text = "check this out https://blog.example.com/party\n\nPriya\nhttps://priya.example.com"
+    inc = parse(make_email(text=text), uid="1")
+    ex = fake_extract([[dict(GOOD)], []])
+    out = run.process_message(inc, extract_fn=ex, fetch=lambda u: "<p>page</p>", now=NOW)
+    assert len(out.events) == 1 and out.failures == []
+
+
+def test_link_failures_reported_when_no_link_yields_an_event():
+    inc = parse(make_email(text="https://a.example.com https://b.example.com"), uid="1")
+    out = run.process_message(inc, extract_fn=fake_extract([[], []]), fetch=lambda u: "<p>x</p>", now=NOW)
+    assert [u for u, _ in out.failures] == ["https://a.example.com", "https://b.example.com"]
