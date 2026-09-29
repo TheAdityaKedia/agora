@@ -36,6 +36,8 @@ class Event(Base):
     # different times (Berkeley Rep, NCTC expose no per-performance URL). NULL
     # urls (email/flyer/manual entries) are exempt so they don't collide.
     __table_args__ = (
+        # Dedup looks rows up by start_time on every save.
+        Index("ix_events_start_time", "start_time"),
         Index(
             "ix_events_url_start_unique",
             "url",

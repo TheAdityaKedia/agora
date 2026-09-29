@@ -30,6 +30,8 @@ here.
   auto-published as "Community submissions". Also the path for login-gated
   sources. Spec: [`feature-specs/email-submissions.md`](feature-specs/email-submissions.md)
   (approved design).
-- **Fuzzy / semantic dedup** — a third dedup layer beyond `(url, start_time)`
-  and `(title, start_time)`, needed once OCR'd flyer titles arrive (pairs with
-  email/flyer ingestion). Spec: not written.
+- **Fuzzy / semantic dedup — beyond v1** — v1 shipped (`service/dedup.py`):
+  cross-source, same start time, normalized-title containment/overlap, and
+  locations must agree. Not yet: doors-vs-show time differences, semantic
+  (embedding/LLM) matching, and cleaning up duplicates saved before v1.
+  Spec: not written.

@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import dedup
 from config import LOOKAHEAD_DAYS
 from db import init_db, get_session
 from exporters.json_export import export_json
@@ -51,7 +52,7 @@ def load_sources() -> list[str]:
     return [line.strip() for line in SOURCES_FILE.read_text().splitlines() if line.strip()]
 
 
-def _find_duplicate(session, raw: RawEvent) -> Event | None:
+def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event | None:
     """Return the existing Event that matches `raw`, or None.
 
     A duplicate always shares the same start_time — sources that expose no
@@ -63,12 +64,25 @@ def _find_duplicate(session, raw: RawEvent) -> Event | None:
          `WHERE url IS NULL` would match every prior URL-less event).
       2. Same title + same start_time (cross-source: one physical show at one
          time listed by two sources, possibly under different URLs).
+      3. Cross-source fuzzy match (dedup.is_near_duplicate) against rows at
+         the same start_time that `source` isn't already on — "Community
+         Co-Working" vs "Alembic Community Co-Working". Never within one
+         source: one source listing two similar titles at once means two events.
     """
     if raw.url is not None:
         existing = session.query(Event).filter_by(url=raw.url, start_time=raw.start_time).first()
         if existing is not None:
             return existing
-    return session.query(Event).filter_by(title=raw.title, start_time=raw.start_time).first()
+    same_time = session.query(Event).filter_by(start_time=raw.start_time).all()
+    for e in same_time:
+        if e.title == raw.title:
+            return e
+    if source is not None:
+        for e in same_time:
+            if source not in (e.sources or []) and dedup.is_near_duplicate(
+                    raw.title, raw.location, e.title, e.location):
+                return e
+    return None
 
 
 def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]:
@@ -87,7 +101,7 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]
             if raw.start_time > horizon:
                 skipped += 1
                 continue
-            existing = _find_duplicate(session, raw)
+            existing = _find_duplicate(session, raw, source)
             if existing is not None:
                 if source in (existing.sources or []):
                     # Same source re-scraping something it already produced.

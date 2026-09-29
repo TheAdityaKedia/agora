@@ -26,4 +26,10 @@ def get_session():
 
 
 def init_db():
-    Base.metadata.create_all(get_engine())
+    engine = get_engine()
+    Base.metadata.create_all(engine)
+    # create_all only creates missing *tables*; add indexes introduced later to
+    # tables that already exist (e.g. ix_events_start_time).
+    for table in Base.metadata.sorted_tables:
+        for index in table.indexes:
+            index.create(engine, checkfirst=True)
