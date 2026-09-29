@@ -156,3 +156,29 @@ def test_long_email_also_resolves_known_platform_links(monkeypatch):
     out = run.process_message(inc, extract_fn=fake_extract([[]]), fetch=lambda u: "", now=NOW)
     assert resolved == ["https://momence.com/s/136417618"]  # not the nav link
     assert len(out.events) == 1 and out.failures == []
+
+
+def test_link_first_falls_back_to_text_when_links_yield_nothing():
+    """'Poetry night Fri 7pm at City Lights' + a blocked Instagram link: the
+    event is in the text, so read it instead of failing on the link."""
+    inc = parse(make_email(text="Poetry night Fri Oct 16 7:30pm at Borderlands https://instagram.com/p/abc"),
+                uid="1")
+    ex = fake_extract([[dict(GOOD)]])  # only the text call returns an event
+
+    def blocked(url):
+        raise RuntimeError("403")
+
+    out = run.process_message(inc, extract_fn=ex, fetch=blocked, now=NOW)
+    assert len(out.events) == 1 and out.failures == []
+    assert ex.calls == [{"text": inc.text, "image": False, "context": ""}]
+
+
+def test_bare_link_with_no_text_does_not_call_the_llm_on_text():
+    inc = parse(make_email(text="https://instagram.com/p/abc"), uid="1")
+    ex = fake_extract([])
+
+    def blocked(url):
+        raise RuntimeError("403")
+
+    out = run.process_message(inc, extract_fn=ex, fetch=blocked, now=NOW)
+    assert ex.calls == [] and out.failures == [("https://instagram.com/p/abc", "couldn't read this page")]

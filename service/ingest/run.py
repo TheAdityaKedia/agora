@@ -18,7 +18,7 @@ from ingest import (LOCAL_TZ, MAX_EMAILS_PER_RUN, MAX_EVENTS_PER_EMAIL,
 from ingest import links as links_mod
 from ingest import validate
 from ingest.mailbox import compose_failure_reply, should_reply
-from ingest.message import Incoming, is_link_first, parse
+from ingest.message import _URL_RE, Incoming, is_link_first, parse
 from ingest.message import diagnostics as message_diagnostics
 from scrapers.base import RawEvent
 from scrapers.browser import BROWSER_UA
@@ -80,6 +80,12 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
             sub = _from_candidates(r.candidates, lambda c: url, now)
             out.events += sub.events
             out.failures += sub.failures
+        # Links gave nothing (blocked Instagram post, homepage) but the email
+        # also says something — the event may be in the text.
+        if not out.events and len(_URL_RE.sub("", inc.text).strip()) >= MIN_FALLBACK_TEXT_CHARS:
+            sub = _from_candidates(extract_fn(text=inc.text), title_of, now)
+            out.events += sub.events
+            out.failures += sub.failures
     elif inc.text.strip():
         # Long email (a newsletter): known-platform links are exact and cheap,
         # so resolve those first; their failures are incidental (past sessions,
@@ -113,6 +119,7 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
 
 
 MAX_KNOWN_LINKS = 20
+MIN_FALLBACK_TEXT_CHARS = 20  # "Poetry night Fri 7pm" is enough to be worth a read
 
 
 def _title_key(title: str) -> str:
