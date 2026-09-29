@@ -189,7 +189,7 @@ a new submission.
 |---|---|
 | Emails per run | 50 (rest wait for the next run) |
 | Events per email | 20 |
-| Events per sender per day | 20 (tracked in-run from IMAP; overflow gets a reply) |
+| Events per sender per day | 20, counted across runs in a Neon table `submission_counts(sender_key, day, events)` where `sender_key` = HMAC-SHA256 of the lowercased address with secret `SUBMISSION_HASH_KEY` — no address is stored; overflow gets a reply |
 | Image size / count | ≤10 MB, ≤5 per email |
 | Page text sent to LLM | ~15k chars |
 | Kill switch | repo variable `EMAIL_INGEST=off` |
@@ -203,7 +203,8 @@ The repo, its Actions logs, and PRs are public.
 - **Never** log, commit, or put in PR bodies: sender name/address, message
   text, subjects, or images. Logs show counts and published event titles only.
 - The DB and manifest carry only the event and its source "Community
-  submissions".
+  submissions". The per-sender cap stores only a keyed hash (§8), not the
+  address; rows older than 7 days are deleted each run.
 - Gmail keeps the original, labeled — visible only to the account owner.
 
 ## 10. Operations
@@ -235,7 +236,7 @@ add an agent **only for unknown links that §3 failed on**:
    `agora/failed` (or let the job create them).
 3. Secrets in environment `production` (and a separate test inbox in
    `ci-test`, or the same inbox with a `test` label scope): `GMAIL_ADDRESS`,
-   `GMAIL_APP_PASSWORD`.
+   `GMAIL_APP_PASSWORD`, `SUBMISSION_HASH_KEY` (random 32 bytes).
 4. Repo variable `EMAIL_INGEST=on`.
 5. Raise AWS Budget `agora-monthly` to $10.
 6. Add the `source_profiles.json` entry for "Community submissions".

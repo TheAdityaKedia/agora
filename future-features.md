@@ -25,12 +25,11 @@ here.
   today only hard failures and 0-event sources alert. Spec: not written.
 - **`reclassify` CLI** — force re-tagging of stale or all shows (today only a
   taxonomy version bump or deleting the cache does it). Spec: not written.
-- **Email / flyer ingestion** — forward an email or flyer screenshot to a
-  monitored inbox; parse it (LLM for unstructured images) and add the event.
-  Also the path for login-gated sources. A link someone sends us is consent to
-  index it even if the event isn't public — for Partiful links,
-  `scrapers/partiful.py` already has `parse_event_page` +
-  `to_raw_event(require_public=False)`. Spec: not written.
+- **Event submissions by email** — anyone with the address emails event text,
+  links, or screenshots; parsed (platform parsers → JSON-LD → Claude Haiku) and
+  auto-published as "Community submissions". Also the path for login-gated
+  sources. Spec: [`feature-specs/email-submissions.md`](feature-specs/email-submissions.md)
+  (approved design).
 - **Fuzzy / semantic dedup** — a third dedup layer beyond `(url, start_time)`
   and `(title, start_time)`, needed once OCR'd flyer titles arrive (pairs with
   email/flyer ingestion). Spec: not written.
