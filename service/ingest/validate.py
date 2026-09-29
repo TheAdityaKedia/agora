@@ -46,7 +46,7 @@ def _location(venue: str | None, address: str | None) -> str | None:
 
 
 def _description(desc: str | None, cost: str | None) -> str | None:
-    text = (desc or "").strip()
+    text = _scrub(desc or "").strip()
     if cost and cost.strip():
         text = f"{text}\n\nCost: {cost.strip()}".strip()
     return text[:MAX_DESCRIPTION] or None
@@ -63,15 +63,22 @@ def _outside_bay_area(location: str | None) -> bool:
 
 
 def _event_url(url: str | None) -> str | None:
-    """Add a missing scheme; drop bare homepages. A homepage shared by several
-    same-time events would make dedup (url + start) merge distinct events."""
-    from urllib.parse import urlparse
+    """Add a missing scheme (flyers say "WWW.ZoukSF.COM")."""
     url = (url or "").strip()
     if not url:
         return None
-    if not url.lower().startswith(("http://", "https://")):
-        url = "https://" + url
-    return url if urlparse(url).path.strip("/") else None
+    return url if url.lower().startswith(("http://", "https://")) else "https://" + url
+
+
+# Backstop for personal details in screenshots (e.g. a WhatsApp poster's phone
+# number) — the prompt asks the model to leave them out; this doesn't rely on it.
+_PHONE_RE = re.compile(r"(?:\+?1[\s.-]?)?\(?\b\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b")
+_EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
+
+
+def _scrub(text: str) -> str:
+    text = _EMAIL_RE.sub("", _PHONE_RE.sub("", text))
+    return re.sub(r"[ \t]{2,}", " ", text)
 
 
 def check_event(e: RawEvent, *, now: datetime) -> str | None:

@@ -64,3 +64,11 @@ def test_prepare_image_downscales_large_images_under_bedrock_limits():
 
 def test_prepare_image_rejects_garbage():
     assert extract.prepare_image("image/png", b"not an image") is None
+
+
+def test_prompt_merges_sub_sessions_and_protects_personal_details():
+    client = FakeClient([])
+    extract.extract_events(client, text="x", now=NOW)
+    system = client.calls[0]["system"][0]["text"]
+    assert "ONE event" in system and "classes" in system.lower()
+    assert "phone numbers" in system and "email addresses" in system

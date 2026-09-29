@@ -71,10 +71,17 @@ def test_venue_only_location_is_allowed_but_named_elsewhere_is_rejected():
                                         now=NOW)[1] == "not in the Bay Area"
 
 
-def test_urls_get_a_scheme_and_bare_homepages_are_dropped():
-    """A shared homepage ('www.ZoukSF.COM') on several same-time sessions made
-    dedup (url + start) collapse distinct events into one."""
-    assert validate.candidate_to_events(cand(url="www.ZoukSF.COM"), now=NOW)[0][0].url is None
-    assert validate.candidate_to_events(cand(url="https://zouksf.com/"), now=NOW)[0][0].url is None
+def test_urls_get_a_scheme_homepages_kept():
+    ev = validate.candidate_to_events(cand(url="WWW.ZoukSF.COM"), now=NOW)[0][0]
+    assert ev.url == "https://WWW.ZoukSF.COM"
     ev = validate.candidate_to_events(cand(url="tickettailor.com/events/nelly/123"), now=NOW)[0][0]
     assert ev.url == "https://tickettailor.com/events/nelly/123"
+
+
+def test_description_scrubs_phone_numbers_and_emails():
+    d = ("Questions? Text Anna at +1 (734) 645-4205 or 415.555.0199, or email anna.z@gmail.com. "
+         "Classes 7:00–8:30PM, $30 — Class + Party. Oct 16, 2026.")
+    ev = validate.candidate_to_events(cand(description=d, cost_text=None), now=NOW)[0][0]
+    assert "645-4205" not in ev.description and "555.0199" not in ev.description
+    assert "anna.z@gmail.com" not in ev.description
+    assert "7:00–8:30PM" in ev.description and "$30" in ev.description and "Oct 16, 2026" in ev.description
