@@ -61,3 +61,12 @@ def test_structured_event_outside_bay_area_is_an_error():
     page = JSONLD_PAGE.replace("San Francisco, CA", "Los Angeles, CA")
     r = links.resolve("https://venue.example.com/x", fetch=lambda u: page, extract_text=_no_llm, now=NOW)
     assert r.events == [] and r.error == "not in the Bay Area"
+
+
+def test_momence_link_uses_the_session_api():
+    body = (FIX / "momence_session.json").read_text()
+    fetched = []
+    r = links.resolve("https://momence.com/s/136417618",
+                      fetch=lambda u: fetched.append(u) or body, extract_text=_no_llm, now=NOW)
+    assert fetched == ["https://momence.com/_api/readonly/plugin/sessions/136417618"]
+    assert r.error is None and r.events[0].title == "Alembic Community Co-Working"

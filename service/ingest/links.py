@@ -1,5 +1,5 @@
-"""A submitted URL → events: Partiful parser, then any schema.org Event
-JSON-LD, then the LLM over the page's visible text."""
+"""A submitted URL → events: known platforms (Momence, Partiful), then any
+schema.org Event JSON-LD, then the LLM over the page's visible text."""
 from __future__ import annotations
 
 import re
@@ -11,7 +11,9 @@ from bs4 import BeautifulSoup
 
 from ingest import LOCAL_TZ
 from ingest.validate import check_event
-from scrapers import eventbrite, partiful
+import json
+
+from scrapers import eventbrite, momence, partiful
 from scrapers.base import RawEvent
 
 MAX_PAGE_CHARS = 15_000
@@ -66,8 +68,24 @@ def _page_text(html: str) -> str:
     return re.sub(r"\n\s*\n+", "\n\n", soup.get_text("\n")).strip()[:MAX_PAGE_CHARS]
 
 
+def _momence(sid: str, *, fetch: Callable[[str], str], now: datetime) -> LinkResult:
+    """Momence session pages are empty JS shells; their public JSON API isn't."""
+    try:
+        payload = json.loads(fetch(momence.session_api_url(sid)))
+    except Exception:
+        return LinkResult(error=UNREADABLE)
+    raw = momence.event_from_session_detail(payload.get("message") or {})
+    if raw is None:
+        return LinkResult(error=NO_EVENT)
+    reason = check_event(raw, now=now)
+    return LinkResult(error=reason) if reason else LinkResult(events=[raw])
+
+
 def resolve(url: str, *, fetch: Callable[[str], str],
             extract_text: Callable[[str, str], list[dict]], now: datetime) -> LinkResult:
+    sid = momence.session_id(url)
+    if sid:
+        return _momence(sid, fetch=fetch, now=now)
     m = _PARTIFUL_RE.match(url)
     target = f"https://partiful.com/e/{m.group(2)}" if m else url
     try:
