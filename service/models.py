@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, DateTime, Text, Index, JSON
+from sqlalchemy import Column, Date, DateTime, Index, Integer, JSON, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import DeclarativeBase
 
@@ -45,3 +45,16 @@ class Event(Base):
             sqlite_where=url.isnot(None),
         ),
     )
+
+
+class SubmissionCount(Base):
+    """Events accepted per sender per local day, for the email-ingest cap.
+
+    `sender_key` is a keyed HMAC of the address — the address itself is never
+    stored (the repo and its logs are public; see ingest/quota.py).
+    """
+    __tablename__ = "submission_counts"
+
+    sender_key = Column(String, primary_key=True)
+    day = Column(Date, primary_key=True)
+    events = Column(Integer, nullable=False, default=0)
