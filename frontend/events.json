@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T16:44:23.145291+00:00",
+  "generated_at": "2026-09-30T17:26:52.455989+00:00",
   "taxonomy": {
     "version": 1,
     "axes": {
@@ -5784,6 +5784,26 @@
         "film"
       ],
       "cost": "paid"
+    },
+    {
+      "id": "b0d76608-82b6-43d8-9c36-03aef2103c1f",
+      "title": "Kyle MacLachlan",
+      "start_time": "2026-10-03T02:30:00+00:00",
+      "location": "Sydney Goldstein Theater",
+      "url": "https://www.cityarts.net/event/kyle-maclachlan/",
+      "description": "Kyle MacLachlan in conversation with Jesse Hawthorne Ficks",
+      "image_url": null,
+      "sources": [
+        "City Arts & Lectures"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [],
+      "cost": "unknown"
     },
     {
       "id": "bb4fe80f-3041-4cd2-aa50-a9e0508ca407",
@@ -14517,7 +14537,8 @@
       "description": "$53 with code LITQUAKE5 Co-presented with City Arts & Lectures A mysterious accident along a country road sparks an awakening and an investigation in Pulitzer Prize–winning playwright and acclaimed novelist Ayad Akhtar’s most daring work yet—a visionary novel of spiritual transformation in an age of fracture—\"bordering at times on the ineffable\" (Mary Gaitskill). When a hit-and-run shatters more than his body, a writer is caught between revelation and madness as an uncanny pull toward a brilliant campus colleague ensnares him in a scandal that threatens to destroy them both. What begins as a provocative portrait of academic and cultural warfare deepens into erotic entanglement, the exposure of a family secret, and the mystery surrounding the narrator’s accident—both the violence and its aftermath. In conversation with Karen Russell. Doors at 7:00pm.",
       "image_url": null,
       "sources": [
-        "Litquake"
+        "Litquake",
+        "City Arts & Lectures"
       ],
       "types": [
         [
@@ -48783,6 +48804,28 @@
       "cost": "unknown"
     },
     {
+      "id": "04955184-1fde-46c6-898b-4a4d685d0df1",
+      "title": "Barbara Kingsolver",
+      "start_time": "2026-10-24T02:30:00+00:00",
+      "location": "Sydney Goldstein Theater",
+      "url": "https://www.cityarts.net/event/barbara-kingsolver/",
+      "description": "Barbara Kingsolver in conversation with Steven Winn",
+      "image_url": null,
+      "sources": [
+        "City Arts & Lectures"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
+      "cost": "paid"
+    },
+    {
       "id": "3ea7c015-6c3a-4454-9cb2-5a0db831674d",
       "title": "Every Saturday Night",
       "start_time": "2026-10-24T02:30:00+00:00",
@@ -64649,6 +64692,29 @@
       "topics": [
         "books-authors",
         "nonfiction"
+      ],
+      "cost": "paid"
+    },
+    {
+      "id": "91c9013f-c1ea-49b9-ac50-57f46341591b",
+      "title": "Lindy West",
+      "start_time": "2026-11-07T03:30:00+00:00",
+      "location": "Sydney Goldstein Theater",
+      "url": "https://www.cityarts.net/event/lindy-west/",
+      "description": "Lindy West A City Arts & Lectures Salon in conversation with Carvell Wallace",
+      "image_url": null,
+      "sources": [
+        "City Arts & Lectures"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "books-authors"
       ],
       "cost": "paid"
     },
