@@ -52,16 +52,6 @@ def _description(desc: str | None, cost: str | None) -> str | None:
     return text[:MAX_DESCRIPTION] or None
 
 
-# An address "names a place" when it has a comma, a state code or a ZIP — only
-# then can it be judged outside the Bay Area. A bare venue ("Dolores Park")
-# names no city and is allowed.
-_NAMES_PLACE_RE = re.compile(r",|\b[A-Z]{2}\b|\b\d{5}\b")
-
-
-def _outside_bay_area(location: str | None) -> bool:
-    return bool(location) and not is_bay_area(location) and bool(_NAMES_PLACE_RE.search(location))
-
-
 def _event_url(url: str | None) -> str | None:
     """Add a missing scheme (flyers say "WWW.ZoukSF.COM")."""
     url = (url or "").strip()
@@ -79,6 +69,33 @@ _EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
 def _scrub(text: str) -> str:
     text = _EMAIL_RE.sub("", _PHONE_RE.sub("", text))
     return re.sub(r"[ \t]{2,}", " ", text)
+
+
+# Reject a location only when it *positively* names somewhere outside the Bay
+# Area. Venue names ("Salesforce Park Main Plaza", "Dolores Park") name no city
+# and are allowed.
+_US_STATES = {"AL", "AK", "AZ", "AR", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
+              "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH",
+              "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX",
+              "UT", "VT", "VA", "WA", "WV", "WI", "WY", "DC"}
+_STATE_RE = re.compile(r"(?:,\s*|\s)([A-Z]{2})(?=\s+\d{5}|\s*,|\s*$)")
+_ZIP_RE = re.compile(r"\b(\d{5})(?:-\d{4})?\b")
+_BAY_ZIP_PREFIXES = ("94", "950", "951", "954")  # SF/East Bay/Peninsula, South Bay, North Bay
+_ELSEWHERE_CA_RE = re.compile(
+    r"\b(los angeles|san diego|sacramento|fresno|santa monica|long beach|anaheim|pasadena|"
+    r"hollywood|irvine|riverside|bakersfield|santa barbara|palm springs|monterey|lake tahoe|"
+    r"davis|stockton|modesto)\b", re.I)
+
+
+def _outside_bay_area(location: str | None) -> bool:
+    if not location or is_bay_area(location):
+        return False
+    if any(st in _US_STATES for st in _STATE_RE.findall(location)):
+        return True
+    zips = _ZIP_RE.findall(location)
+    if zips and not any(z.startswith(_BAY_ZIP_PREFIXES) for z in zips):
+        return True
+    return bool(_ELSEWHERE_CA_RE.search(location))
 
 
 def check_event(e: RawEvent, *, now: datetime) -> str | None:

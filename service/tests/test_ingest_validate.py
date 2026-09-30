@@ -1,3 +1,4 @@
+import pytest
 from datetime import datetime, timezone
 
 from ingest import validate
@@ -85,3 +86,25 @@ def test_description_scrubs_phone_numbers_and_emails():
     assert "645-4205" not in ev.description and "555.0199" not in ev.description
     assert "anna.z@gmail.com" not in ev.description
     assert "7:00–8:30PM" in ev.description and "$30" in ev.description and "Oct 16, 2026" in ev.description
+
+
+@pytest.mark.parametrize("venue,address", [
+    ("Salesforce Park Main Plaza", "Salesforce Park"),
+    ("Salesforce Park Amphitheater", "Salesforce Park"),
+    ("Dolores Park", None),
+    ("The Chapel", "777 Valencia St, San Francisco, CA 94110"),
+    ("Some Hall", "123 Main St, Walnut Creek, CA 94596"),
+])
+def test_bay_area_or_unplaced_locations_are_allowed(venue, address):
+    assert validate.candidate_to_events(cand(venue=venue, address=address), now=NOW)[1] is None
+
+
+@pytest.mark.parametrize("address", [
+    "1 Main St, Los Angeles",
+    "200 Main St, Austin, TX 78701",
+    "500 Broadway, New York, NY",
+    "1 Capitol Mall, Sacramento, CA 95814",
+    "Pier 1, Santa Monica, CA 90401",
+])
+def test_locations_naming_somewhere_else_are_rejected(address):
+    assert validate.candidate_to_events(cand(venue=None, address=address), now=NOW)[1] == "not in the Bay Area"
