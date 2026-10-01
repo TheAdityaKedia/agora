@@ -54,3 +54,6 @@ token.json
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Claude Code: personal settings stay local (shared ones are in .claude/settings.json)
+.claude/settings.local.json
