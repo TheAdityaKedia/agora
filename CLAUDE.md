@@ -25,6 +25,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
 | AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json` |
 | Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
+| Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
+| Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
 
@@ -34,7 +36,9 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `eventbrite.py`, `luma.py`, `performances.py`, `browser.py`), `exporters/`,
   `taxonomy.py` + `classify.py` + `classifications.py` (AI tagging), `main.py`
   (pipeline entry), `ci.py` (GitHub Actions stages: plan/scrape/merge/guard),
-  `api.py` (read API), `tests/`. `data/` holds `sources.txt`,
+  `dedup.py` (cross-source fuzzy dedup), `ingest/` (email submissions:
+  mailbox, message, extract, validate, links, images, run), `api.py` (read
+  API), `tests/`. `data/` holds `sources.txt`,
   `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the
   committed `classifications.json` (tag cache).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
@@ -44,6 +48,10 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 - `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
   source → single merge job (Neon) → guarded auto-merged data PR → deploy.
   Stages in `service/ci.py`; setup + ops in `README.md` → "Scheduled scraping".
+- `.github/workflows/ingest-email.yml` — hourly: Gmail inbox → events
+  ("Community submissions") → same ship path. `.github/actions/ship-manifest/`
+  is the guard → data PR → merge → deploy step both workflows share; both hold
+  the `neon-writer-<ref>` concurrency lock.
 
 ## Operating rules for agents
 
@@ -94,6 +102,12 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 
 ## Sharp edges (things that have actually bitten)
 
+- **Email submissions publish automatically and replies go to strangers.**
+  Keep sender data (address, subject, body, images) out of logs, PRs, the DB
+  and the manifest; publish an image only if it passes the safety check in
+  `ingest/images.py` (never screenshots). Test ingest changes from a branch —
+  non-`main` runs use the `ci-test` DB but **share the real inbox**, so they
+  label and reply to real mail.
 - **Stale rows live in Neon too.** Saves never update existing rows, so when a
   scraper's *output* changes, CI keeps serving the old fields until that
   source's rows are deleted in Neon (README → "Scheduled scraping" →
@@ -154,8 +168,8 @@ Multiple agents may work this repo at once. To avoid stepping on each other:
 
 ## Current focus
 
-Shipped: AI tagging and scheduled per-source CI scraping (Neon, auto-merged
-data PRs, failure alerts). Ongoing: scaling the source list (candidates in
+Shipped: AI tagging, scheduled per-source CI scraping (Neon, auto-merged data
+PRs, failure alerts), email submissions, and cross-source fuzzy dedup. Ongoing: scaling the source list (candidates in
 `future-sources.md`) and pruning source noise (e.g. SFPL non-events). Planned
 work, including the frontend payload wall as the manifest grows, is in
 `future-features.md`.

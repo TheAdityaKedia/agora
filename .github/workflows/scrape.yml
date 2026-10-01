@@ -140,6 +140,11 @@ jobs:
     # production, AWS role) only accepts deployments from main, so no other
     # branch's workflow can read them; `ci-test` holds the test-branch DB URL.
     environment: ${{ github.ref_name == 'main' && 'production' || 'ci-test' }}
+    # One Neon writer at a time across workflows (ingest-email.yml uses the
+    # same group).
+    concurrency:
+      group: neon-writer-${{ github.ref_name }}
+      cancel-in-progress: false
     env:
       IS_MAIN: ${{ github.ref_name == 'main' }}
     steps:
@@ -172,15 +177,6 @@ jobs:
           # shellcheck disable=SC2086
           python ci.py merge --dir "$GITHUB_WORKSPACE/results" \
             --report "$RUNNER_TEMP/report.json" --sources $SOURCES
-      - name: Guard
-        id: guard
-        working-directory: service
-        run: |
-          git show HEAD:frontend/events.json > "$RUNNER_TEMP/base.json" || true
-          python ci.py guard --new "$GITHUB_WORKSPACE/frontend/events.json" \
-            --base "$RUNNER_TEMP/base.json" --report "$RUNNER_TEMP/report.json" \
-            --body "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_OUTPUT"
-          cat "$RUNNER_TEMP/pr_body.md" >> "$GITHUB_STEP_SUMMARY"
       - name: Find failing sources
         id: alert
         working-directory: service
@@ -189,47 +185,12 @@ jobs:
             --body "$RUNNER_TEMP/alert.md" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
             --mention "@$GITHUB_REPOSITORY_OWNER" >> "$GITHUB_OUTPUT"
-      - name: Ship (PR → merge → deploy)
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PASSED: ${{ steps.guard.outputs.passed }}
-          CHANGED: ${{ steps.guard.outputs.changed }}
-          COUNT: ${{ steps.guard.outputs.count }}
-        run: |
-          set -euo pipefail
-          if [ "$CHANGED" != "true" ] && git diff --quiet -- service/data/classifications.json; then
-            echo "No data change; nothing to ship."
-            exit 0
-          fi
-          if [ "$IS_MAIN" = "true" ]; then
-            base=main
-          else
-            # Test run: ship into a throwaway copy of this branch.
-            base="ci-sandbox/${GITHUB_RUN_ID}"
-            git push origin "HEAD:refs/heads/${base}"
-          fi
-          branch="data/refresh-${GITHUB_RUN_ID}"
-          title="Refresh manifest: ${COUNT} events ($(date -u +%F))"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git switch -c "$branch"
-          git add frontend/events.json service/data/classifications.json
-          git commit -m "$title"
-          git push -u origin "$branch"
-          gh pr create --base "$base" --head "$branch" --title "$title" \
-            --body-file "$RUNNER_TEMP/pr_body.md"
-          if [ "$PASSED" != "true" ]; then
-            gh pr comment "$branch" --body "Guard failed — not auto-merged. Review the report above."
-            exit 1
-          fi
-          gh pr merge "$branch" --squash --delete-branch
-          if [ "$IS_MAIN" = "true" ]; then
-            # Merges made with GITHUB_TOKEN don't trigger push workflows;
-            # workflow_dispatch is the exception.
-            gh workflow run deploy-pages.yml --ref main
-          else
-            git push origin --delete "$base"
-          fi
+      - name: Ship manifest
+        uses: ./.github/actions/ship-manifest
+        with:
+          report: ${{ runner.temp }}/report.json
+          gh-token: ${{ github.token }}
+          is-main: ${{ env.IS_MAIN }}
       # Alerting: hard failures + 0-event sources (known CI-blocked sources
       # excluded) open or update one "Scrape failures" issue — GitHub emails
       # the repo owner — and the run is marked failed. A clean run closes it.

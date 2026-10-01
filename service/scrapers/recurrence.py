@@ -96,12 +96,19 @@ def expand_occurrences(
     if step is None:
         return [first] if floor <= first <= ceil else []
 
-    occ = first
+    # Step in local wall-clock time, not UTC: "7pm Fridays" must stay 7pm local
+    # across a DST change rather than drifting an hour.
+    local = first.astimezone(LOCAL_TZ).replace(tzinfo=None)
+
+    def nth(n: int) -> datetime:
+        return (local + step * n).replace(tzinfo=LOCAL_TZ).astimezone(timezone.utc)
+
+    n = 0
     # Roll a stale anchor forward to the first occurrence within the window.
-    while occ < floor:
-        occ += step
+    while nth(n) < floor:
+        n += 1
     out: list[datetime] = []
-    while occ <= ceil:
-        out.append(occ)
-        occ += step
+    while nth(n) <= ceil:
+        out.append(nth(n))
+        n += 1
     return out

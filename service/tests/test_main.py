@@ -427,3 +427,25 @@ def test_find_scraper_returns_none_for_unknown_url():
 def test_find_scraper_matches_known_source():
     from scrapers import citylights
     assert find_scraper("https://citylights.com/events/") is citylights
+
+
+def test_save_events_fuzzy_merges_cross_source_duplicates(db_session):
+    start = datetime(2026, 10, 1, 21, 0, tzinfo=timezone.utc)
+    loc = "The Berkeley Alembic, 2820 Seventh Street, Berkeley, CA"
+    save_events([RawEvent("Alembic Community Co-Working", start, loc, "https://momence.com/s/1", None)],
+                source="The Berkeley Alembic")
+    saved, merged, skipped = save_events(
+        [RawEvent("Community Co-Working", start, loc, None, None)], source="Community submissions")
+    assert (saved, merged, skipped) == (0, 1, 0)
+    row = db_session.query(Event).one()
+    assert row.title == "Alembic Community Co-Working"  # earlier source keeps the row
+    assert row.sources == ["The Berkeley Alembic", "Community submissions"]
+
+
+def test_save_events_never_fuzzy_merges_within_one_source(db_session):
+    start = datetime(2026, 10, 2, 2, 0, tzinfo=timezone.utc)
+    loc = "Church of Zouk, 345 7th St, San Francisco"
+    saved, merged, skipped = save_events(
+        [RawEvent("Zouk with Anna", start, loc, None, None),
+         RawEvent("Advanced Zouk with Anna", start, loc, None, None)], source="Church of Zouk")
+    assert (saved, merged, skipped) == (2, 0, 0)
