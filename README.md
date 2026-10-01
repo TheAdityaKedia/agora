@@ -234,7 +234,11 @@ into logs, PRs, the DB, or the manifest.
 - **Remove a submission**: in the Neon SQL editor,
   `DELETE FROM events WHERE sources->>0 = 'Community submissions' AND title = '…';`
   (check with a `SELECT` first).
-- **Hard failures** (Gmail login, Bedrock) open an **Email ingest failures** issue.
+- **Alerts**: a crash (Gmail login, Bedrock), or a problem the job works
+  around so data still ships (tagging skipped, image upload error), opens or
+  comments on an **Email ingest failures** issue that @mentions you (GitHub
+  emails you) and turns the run red. The next clean run closes it. Per-email
+  problems (no date, blocked link) aren't alerts — the sender gets a reply.
 
 **Setup** (done; for a rebuild): Gmail account with 2-Step Verification + app
 password; secrets in environments `production` and `ci-test`:

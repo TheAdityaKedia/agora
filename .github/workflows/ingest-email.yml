@@ -66,7 +66,9 @@ jobs:
           SUBMISSION_IMAGE_BUCKET: ${{ secrets.SUBMISSION_IMAGE_BUCKET }}
           SUBMISSION_IMAGE_BASE_URL: ${{ secrets.SUBMISSION_IMAGE_BASE_URL }}
           EVENTS_JSON_PATH: ${{ github.workspace }}/frontend/events.json
-        run: python -m ingest.run --report "$RUNNER_TEMP/report.json" --outputs "$GITHUB_OUTPUT"
+        run: |
+          python -m ingest.run --report "$RUNNER_TEMP/report.json" --outputs "$GITHUB_OUTPUT" \
+            --warnings "$RUNNER_TEMP/warnings.md"
       - if: steps.gate.outputs.go == 'true' && steps.ingest.outputs.saved != '0'
         name: Ship manifest
         uses: ./.github/actions/ship-manifest
@@ -74,12 +76,38 @@ jobs:
           report: ${{ runner.temp }}/report.json
           gh-token: ${{ github.token }}
           is-main: ${{ env.IS_MAIN }}
-      - name: Alert on hard failure
-        if: failure()
+      # Alerting (mirrors scrape.yml): a crash, or failures the job swallows
+      # so data still ships (tagging skipped, image upload errors), open or
+      # comment on one "Email ingest failures" issue that @mentions the owner
+      # (GitHub emails them) and turn the run red. A clean run closes it.
+      # Per-email problems (no date, blocked link) are not alerts — the
+      # sender gets a reply. Runs skipped by the gate don't touch the issue.
+      - name: Alert issue
+        if: always() && steps.gate.outputs.go == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+          WARNINGS: ${{ steps.ingest.outputs.warnings }}
           TITLE: ${{ github.ref_name == 'main' && 'Email ingest failures' || format('Email ingest failures (test run on {0})', github.ref_name) }}
         run: |
-          body="The email ingest job failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID @$GITHUB_REPOSITORY_OWNER"
-          n="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title -q ".[] | select(.title == \"$TITLE\") | .number" | head -1)"
+          set -euo pipefail
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          n="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title \
+                -q ".[] | select(.title == \"$TITLE\") | .number" | head -1)"
+          if [ "$JOB_STATUS" != "success" ]; then
+            body="The email ingest job failed: $run_url @$GITHUB_REPOSITORY_OWNER"
+          elif [ "${WARNINGS:-0}" != "0" ]; then
+            body="$(printf 'The email ingest job hit problems it worked around ([run](%s)) @%s\n\n%s\n\nSubmissions still shipped; affected ones may be untagged or missing their image.' \
+                    "$run_url" "$GITHUB_REPOSITORY_OWNER" "$(cat "$RUNNER_TEMP/warnings.md")")"
+          else
+            if [ -n "$n" ]; then gh issue close "$n" --comment "Clean run: $run_url"; fi
+            exit 0
+          fi
           if [ -n "$n" ]; then gh issue comment "$n" --body "$body"; else gh issue create --title "$TITLE" --body "$body"; fi
+      - name: Fail run on warnings
+        if: steps.gate.outputs.go == 'true' && steps.ingest.outputs.warnings != '0' && steps.ingest.outputs.warnings != ''
+        env:
+          WARNINGS: ${{ steps.ingest.outputs.warnings }}
+        run: |
+          echo "::error::${WARNINGS} problem(s) worked around — see the Email ingest failures issue"
+          exit 1
