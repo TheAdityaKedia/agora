@@ -85,3 +85,34 @@ def test_truncated_tool_call_is_reported_not_silently_empty(capsys):
     assert extract.extract_events(client, text="long newsletter", now=NOW) == []
     assert "max_tokens" in capsys.readouterr().out
     assert client.calls[0]["inferenceConfig"]["maxTokens"] >= 8000
+
+
+class AssessClient(FakeClient):
+    def __init__(self, events, assessment):
+        super().__init__(events)
+        self.assessment = assessment
+
+    def converse(self, **kw):
+        self.calls.append(kw)
+        name = kw["toolConfig"]["tools"][0]["toolSpec"]["name"]
+        payload = {"events": self.events, "image_assessment": self.assessment} \
+            if name == extract.TOOL_NAME else self.assessment
+        return {"output": {"message": {"content": [{"toolUse": {"name": name, "input": payload}}]}}}
+
+
+def test_extract_image_returns_events_and_assessment():
+    a = {"kind": "photo_of_flyer", "personal_info_visible": False, "bystanders_visible": True,
+         "flyer_box": {"left": 0.1, "top": 0.2, "right": 0.9, "bottom": 0.8}}
+    client = AssessClient([{"title": "Harvest Fest"}], a)
+    events, assessment = extract.extract_image(client, ("image/png", png_bytes()), now=NOW)
+    assert events[0]["title"] == "Harvest Fest" and assessment == a
+    props = client.calls[0]["toolConfig"]["tools"][0]["toolSpec"]["inputSchema"]["json"]["properties"]
+    assert "image_assessment" in props
+
+
+def test_assess_image_classifies_only():
+    a = {"kind": "designed_flyer", "personal_info_visible": False, "bystanders_visible": False,
+         "flyer_box": None}
+    client = AssessClient([], a)
+    assert extract.assess_image(client, ("image/png", png_bytes())) == a
+    assert client.calls[0]["toolConfig"]["tools"][0]["toolSpec"]["name"] == extract.ASSESS_TOOL

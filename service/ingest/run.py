@@ -64,7 +64,11 @@ def _from_candidates(cands: list[dict], label_for, now, url=None) -> Outcome:
 
 
 def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str], str],
-                    now: datetime) -> Outcome:
+                    now: datetime, image_fn: Callable | None = None,
+                    publish_fn: Callable | None = None) -> Outcome:
+    """`image_fn(image) -> (candidates, assessment)`; `publish_fn(bytes, assessment) ->
+    url | None` makes a safe image the events' picture (see ingest/images.py)."""
+    image_fn = image_fn or (lambda image: (extract_fn(image=image), None))
     out = Outcome()
     title_of = lambda c: f'"{c.get("title") or "an event"}"'
     not_events = []  # links that aren't event pages (signatures, personal sites…)
@@ -102,11 +106,15 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
         if not cands and not from_links and not inc.images:
             out.failures.append(("Your email", NO_EVENT_TEXT))
     for i, image in enumerate(inc.images, 1):
-        cands = extract_fn(image=image)
+        cands, assessment = image_fn(image)
         if not cands:
             out.failures.append((f"Screenshot {i}", NO_EVENT_IMAGE))
             continue
         sub = _from_candidates(cands, lambda c, i=i: f"Screenshot {i}", now)
+        if sub.events and publish_fn and assessment:
+            url = publish_fn(image[1], assessment)
+            for e in sub.events:
+                e.image_url = e.image_url or url
         out.events += sub.events
         out.failures += sub.failures
     # Report non-event links only if nothing in the whole email (links, text
@@ -146,7 +154,8 @@ def _cap(events: list[RawEvent], n: int) -> list[RawEvent]:
 
 
 def run_ingest(mail, *, extract_fn, fetch, now: datetime, secret: bytes, session_factory,
-               save: Callable, limit: int = MAX_EMAILS_PER_RUN) -> dict:
+               save: Callable, limit: int = MAX_EMAILS_PER_RUN, image_fn: Callable | None = None,
+               publish_fn: Callable | None = None) -> dict:
     report = {"emails": 0, "processed": 0, "partial": 0, "failed": 0, "replies": 0,
               "saved": 0, "merged": 0, "skipped": 0, "titles": []}
     today = now.astimezone(LOCAL_TZ).date()
@@ -158,7 +167,8 @@ def run_ingest(mail, *, extract_fn, fetch, now: datetime, secret: bytes, session
             report["emails"] += 1
             inc = parse(raw, uid=uid)
             out = Outcome() if inc.auto_generated else \
-                process_message(inc, extract_fn=extract_fn, fetch=fetch, now=now)
+                process_message(inc, extract_fn=extract_fn, fetch=fetch, now=now,
+                                image_fn=image_fn, publish_fn=publish_fn)
             if inc.auto_generated:
                 out.failures.append(("Your email", "automatic reply ignored"))
             key = quota.sender_key(inc.sender, secret)
@@ -188,6 +198,34 @@ def run_ingest(mail, *, extract_fn, fetch, now: datetime, secret: bytes, session
     return report
 
 
+def _make_publisher(client):
+    """Publisher for safe images, or None when image hosting isn't configured
+    (SUBMISSION_IMAGE_BUCKET + SUBMISSION_IMAGE_BASE_URL)."""
+    bucket, base_url = os.environ.get("SUBMISSION_IMAGE_BUCKET"), os.environ.get("SUBMISSION_IMAGE_BASE_URL")
+    if not (bucket and base_url):
+        return None
+    import boto3
+    from ingest import extract, images
+    s3 = boto3.client("s3")
+
+    def put(key: str, body: bytes) -> None:
+        s3.put_object(Bucket=bucket, Key=key, Body=body, ContentType="image/jpeg",
+                      CacheControl="public, max-age=31536000, immutable")
+
+    def publish(data: bytes, assessment: dict) -> str | None:
+        try:
+            public = images.public_version(
+                data, assessment, verify=lambda crop: extract.assess_image(client, ("image/jpeg", crop)))
+            if public is None:
+                _log(f"image not published (kind={assessment.get('kind')})")
+                return None
+            return images.upload(public, put=put, base_url=base_url)
+        except Exception as e:  # a failed upload never blocks the event
+            _log(f"image publish failed: {type(e).__name__}: {e}")
+            return None
+    return publish
+
+
 def _fetch(url: str) -> str:
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=25)
     resp.raise_for_status()
@@ -211,10 +249,13 @@ def cli(argv=None) -> None:
     now = datetime.now(timezone.utc)
     extract_fn = lambda text=None, image=None, context="": extract.extract_events(
         client, text=text, image=image, now=now, context=context)
+    image_fn = lambda image: extract.extract_image(client, image, now=now)
+    publish_fn = _make_publisher(client)
     with Gmail(os.environ["GMAIL_ADDRESS"], os.environ["GMAIL_APP_PASSWORD"]) as mail:
         report = run_ingest(mail, extract_fn=extract_fn, fetch=_fetch, now=now,
                             secret=os.environ["SUBMISSION_HASH_KEY"].encode(),
-                            session_factory=get_session, save=pipeline.save_events)
+                            session_factory=get_session, save=pipeline.save_events,
+                            image_fn=image_fn, publish_fn=publish_fn)
     _log(f"{report['emails']} emails: {report['processed']} processed, {report['partial']} partial, "
          f"{report['failed']} failed, {report['replies']} replies; {report['saved']} saved, "
          f"{report['merged']} merged, {report['skipped']} skipped")

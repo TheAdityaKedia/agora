@@ -44,6 +44,36 @@ SCHEMA = {
 }
 
 
+ASSESS_TOOL = "assess_image"
+ASSESSMENT = {
+    "type": "object",
+    "required": ["kind", "personal_info_visible", "bystanders_visible"],
+    "properties": {
+        "kind": {"type": "string",
+                 "enum": ["designed_flyer", "photo_of_flyer", "screenshot", "other"],
+                 "description": "designed_flyer: the event graphic itself, edge to edge. "
+                                "photo_of_flyer: a photo of a physical poster/sign with surroundings. "
+                                "screenshot: a chat, DM, email, social app or web page UI."},
+        "personal_info_visible": {"type": "boolean",
+                                  "description": "a private person's phone number, email address, "
+                                                 "or chat name/avatar is visible. An organization's "
+                                                 "own public contact details printed on its flyer "
+                                                 "(website, social handle, box office number) are "
+                                                 "not personal."},
+        "bystanders_visible": {"type": "boolean",
+                               "description": "people are visible who are not performers "
+                                              "pictured on the flyer itself"},
+        "flyer_box": {"type": ["object", "null"],
+                      "description": "for photo_of_flyer: the tightest box around the flyer's "
+                                     "printed area only (exclude its frame, stand, and "
+                                     "surroundings), as fractions 0-1 of the image width/height",
+                      "properties": {k: {"type": "number"} for k in ("left", "top", "right", "bottom")}},
+    },
+}
+IMAGE_SCHEMA = {**SCHEMA, "required": ["events", "image_assessment"],
+                "properties": {**SCHEMA["properties"], "image_assessment": ASSESSMENT}}
+
+
 def _system(now: datetime) -> str:
     today = now.astimezone(LOCAL_TZ)
     return (
@@ -88,29 +118,19 @@ def _normalize(event: dict) -> dict:
     return {k: (event.get(k) if event.get(k) not in ("", []) else None) for k in _FIELDS}
 
 
-def extract_events(client, *, text: str | None = None, image: tuple[str, bytes] | None = None,
-                   now: datetime, context: str = "",
-                   models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL)) -> list[dict]:
-    content = []
-    if image is not None:
-        prepared = prepare_image(*image)
-        if prepared is None:
-            return []
-        content.append({"image": {"format": prepared[0], "source": {"bytes": prepared[1]}}})
-    if text:
-        content.append({"text": text})
-    content.append({"text": f"Extract the events.{(' Context: ' + context) if context else ''}"})
+def _call(client, content: list, *, system: str, tool: str, description: str, schema: dict,
+          models: tuple[str, ...]) -> dict:
+    """One forced-tool Converse call; returns the tool input ({} if none)."""
     errors = []
     for model_id in models:
         try:
             resp = client.converse(
                 modelId=model_id,
-                system=[{"text": _system(now)}],
+                system=[{"text": system}],
                 messages=[{"role": "user", "content": content}],
-                toolConfig={"tools": [{"toolSpec": {"name": TOOL_NAME,
-                                                    "description": "Record the events found.",
-                                                    "inputSchema": {"json": SCHEMA}}}],
-                            "toolChoice": {"tool": {"name": TOOL_NAME}}},
+                toolConfig={"tools": [{"toolSpec": {"name": tool, "description": description,
+                                                    "inputSchema": {"json": schema}}}],
+                            "toolChoice": {"tool": {"name": tool}}},
                 inferenceConfig={"maxTokens": MAX_OUTPUT_TOKENS, "temperature": 0.0},
             )
         except Exception as e:
@@ -123,8 +143,65 @@ def extract_events(client, *, text: str | None = None, image: tuple[str, bytes] 
                   flush=True)
         for block in resp["output"]["message"]["content"]:
             use = block.get("toolUse")
-            if use and use.get("name") == TOOL_NAME:
-                events = (use.get("input") or {}).get("events") or []
-                return [_normalize(e) for e in events if isinstance(e, dict)][:MAX_EVENTS_PER_EMAIL]
-        return []
+            if use and use.get("name") == tool:
+                return use.get("input") or {}
+        return {}
     raise RuntimeError("event extraction failed: " + " | ".join(errors))
+
+
+def _events(payload: dict) -> list[dict]:
+    events = payload.get("events") or []
+    return [_normalize(e) for e in events if isinstance(e, dict)][:MAX_EVENTS_PER_EMAIL]
+
+
+def _image_block(image: tuple[str, bytes]) -> dict | None:
+    prepared = prepare_image(*image)
+    if prepared is None:
+        return None
+    return {"image": {"format": prepared[0], "source": {"bytes": prepared[1]}}}
+
+
+def extract_events(client, *, text: str | None = None, image: tuple[str, bytes] | None = None,
+                   now: datetime, context: str = "",
+                   models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL)) -> list[dict]:
+    if image is not None:
+        return extract_image(client, image, now=now, models=models)[0]
+    content = [{"text": text or ""},
+               {"text": f"Extract the events.{(' Context: ' + context) if context else ''}"}]
+    return _events(_call(client, content, system=_system(now), tool=TOOL_NAME,
+                         description="Record the events found.", schema=SCHEMA, models=models))
+
+
+def extract_image(client, image: tuple[str, bytes], *, now: datetime,
+                  models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL)) -> tuple[list[dict], dict | None]:
+    """Events in an image plus a privacy assessment of the image itself (same call)."""
+    block = _image_block(image)
+    if block is None:
+        return [], None
+    payload = _call(client, [block, {"text": "Extract the events, and assess the image."}],
+                    system=_system(now), tool=TOOL_NAME, schema=IMAGE_SCHEMA, models=models,
+                    description="Record the events found and assess whether the image is safe to publish.")
+    assessment = payload.get("image_assessment")
+    return _events(payload), assessment if isinstance(assessment, dict) else None
+
+
+# The last check before an image is published uses a stronger model: on real
+# photos Haiku's bystander/personal-info verdicts were inconsistent, and
+# Sonnet 4.5 was the only model tested that caught a partly visible person.
+VERIFY_MODELS = ("global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                 "us.anthropic.claude-sonnet-4-5-20250929-v1:0")
+
+
+def assess_image(client, image: tuple[str, bytes],
+                 models: tuple[str, ...] = VERIFY_MODELS) -> dict | None:
+    """Classify an image only (used to re-check a crop before publishing it)."""
+    block = _image_block(image)
+    if block is None:
+        return None
+    payload = _call(client, [block, {"text": "Assess this image."}],
+                    system="You check images before they are published on a public events website. "
+                           "Be strict: if unsure whether a person, phone number, email address or "
+                           "chat UI is visible, say it is.",
+                    tool=ASSESS_TOOL, description="Record the assessment.", schema=ASSESSMENT,
+                    models=models)
+    return payload or None

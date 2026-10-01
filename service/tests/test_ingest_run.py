@@ -182,3 +182,30 @@ def test_bare_link_with_no_text_does_not_call_the_llm_on_text():
 
     out = run.process_message(inc, extract_fn=ex, fetch=blocked, now=NOW)
     assert ex.calls == [] and out.failures == [("https://instagram.com/p/abc", "couldn't read this page")]
+
+
+def test_screenshot_events_get_the_published_image_url():
+    inc = parse(make_email(text="flyer!", images=[("f.png", "image/png", png_bytes())]), uid="1")
+    ex = fake_extract([[]])  # text call: nothing
+    published = []
+
+    def image_fn(image):
+        return [dict(GOOD)], {"kind": "designed_flyer"}
+
+    def publish_fn(data, assessment):
+        published.append(assessment["kind"])
+        return "https://cdn.example.com/img/abc.jpg"
+
+    out = run.process_message(inc, extract_fn=ex, fetch=lambda u: "", now=NOW,
+                              image_fn=image_fn, publish_fn=publish_fn)
+    assert published == ["designed_flyer"]
+    assert [e.image_url for e in out.events] == ["https://cdn.example.com/img/abc.jpg"]
+
+
+def test_image_not_published_when_it_yields_no_events():
+    inc = parse(make_email(text="", images=[("f.png", "image/png", png_bytes())]), uid="1")
+    calls = []
+    run.process_message(inc, extract_fn=fake_extract([]), fetch=lambda u: "", now=NOW,
+                        image_fn=lambda img: ([], {"kind": "designed_flyer"}),
+                        publish_fn=lambda d, a: calls.append(1) or "u")
+    assert calls == []
