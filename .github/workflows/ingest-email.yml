@@ -67,6 +67,8 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           SUBMISSION_HASH_KEY: ${{ secrets.SUBMISSION_HASH_KEY }}
+          SUBMISSION_IMAGE_BUCKET: ${{ secrets.SUBMISSION_IMAGE_BUCKET }}
+          SUBMISSION_IMAGE_BASE_URL: ${{ secrets.SUBMISSION_IMAGE_BASE_URL }}
           EVENTS_JSON_PATH: ${{ github.workspace }}/frontend/events.json
         run: python -m ingest.run --report "$RUNNER_TEMP/report.json" --outputs "$GITHUB_OUTPUT"
       - if: steps.gate.outputs.go == 'true' && steps.ingest.outputs.saved != '0'
