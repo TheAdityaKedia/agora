@@ -239,6 +239,9 @@ into logs, PRs, the DB, or the manifest.
   comments on an **Email ingest failures** issue that @mentions you (GitHub
   emails you) and turns the run red. The next clean run closes it. Per-email
   problems (no date, blocked link) aren't alerts — the sender gets a reply.
+  A heartbeat in the daily scrape run also alerts (same issue) if the email
+  job hasn't succeeded on `main` in 6 hours — GitHub can silently drop
+  scheduled runs.
 
 **Setup** (done; for a rebuild): Gmail account with 2-Step Verification + app
 password; secrets in environments `production` and `ci-test`:
