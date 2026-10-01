@@ -2,15 +2,11 @@ name: Ingest email submissions
 
 # Hourly: read the submissions Gmail inbox, turn text/links/screenshots into
 # events, save to Neon as "Community submissions", reply on failure, ship.
-# Design: feature-specs/email-submissions.md.
+# Docs: README.md → "Event submissions by email".
 on:
   schedule:
     - cron: "41 * * * *"
   workflow_dispatch:
-  # TEMP (remove before merging): dispatch only works once this file is on main.
-  push:
-    branches: [email-submissions]
-    paths: [.github/workflows/ingest-email.yml, service/ingest/**]
 
 permissions:
   contents: read

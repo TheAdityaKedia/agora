@@ -1,4 +1,4 @@
-"""Event submissions by email — see feature-specs/email-submissions.md."""
+"""Event submissions by email — see README.md → "Event submissions by email"."""
 from zoneinfo import ZoneInfo
 
 SOURCE_NAME = "Community submissions"

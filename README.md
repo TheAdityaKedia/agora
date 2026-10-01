@@ -179,3 +179,66 @@ writer at a time) and skips tagging (CI tags new shows).
 **Operations** — when a scraper's *output* changes (not just new events), its
 stale rows live on in Neon (saves never update): delete them in the Neon SQL
 editor before the next run, e.g. `DELETE FROM events WHERE sources->>0 = '<NAME>';`.
+
+**Duplicates across sources** — saves merge a new event into an existing row
+from a *different* source at the same start time when the titles match after
+normalization and the locations don't disagree (`service/dedup.py`). The
+earlier source in `sources.txt` keeps the row. To merge duplicates already in
+the DB: `python dedupe_existing.py` (dry run) then `--apply`.
+
+## Event submissions by email
+
+Anyone with the address **agora.bayarea@gmail.com** can email events in — the
+address is the gate; submissions publish automatically as source
+**"Community submissions"**. `.github/workflows/ingest-email.yml` runs hourly
+(at :41, and on demand) and calls `python -m ingest.run` (`service/ingest/`).
+
+**What it reads**, per email:
+- **Mostly links** (≤400 chars of other text): each link (≤10) is resolved —
+  Momence session API, Partiful page data (private events allowed: a link sent
+  to us is consent), any page's schema.org `Event` JSON-LD, else the page text
+  through Claude Haiku. If no link yields an event, the email text is read too.
+- **Longer text** (typed details, forwarded newsletters): known-platform links
+  (Momence, Partiful, Eventbrite, Luma; ≤20) are resolved exactly, then one
+  Haiku call over the text (HTML body if the plain part is a stub).
+- **Images** (≤5, ≤10 MB): one Haiku call each, which also classifies the image.
+
+**What gets published**: title + date + start time required; a location that
+names somewhere outside the Bay Area is rejected; past events dropped; weekly
+series expanded 8 weeks (DST-safe); parts of one night (classes then a party)
+are one event; phone numbers and emails are scrubbed from descriptions.
+**Images** become the event picture only if safe: never screenshots (chats,
+DMs, apps); a designed flyer, or a photo of a flyer cropped to the flyer, and
+only after a final Claude Sonnet 4.5 check finds no identifiable person and no
+private contact details. Safe images go to the private S3 bucket
+`agora-submissions-978355607698`, served via CloudFront
+(`d3ao3t7o4qlnbg.cloudfront.net`), EXIF stripped.
+
+**Replies are failure-only**: the sender gets a short list of what couldn't be
+added and why (no date/time, already happened, not Bay Area, couldn't read a
+link). Links that load but aren't events (signatures) are ignored unless
+nothing in the email was an event. Never replies to auto-replies, bounces,
+no-reply addresses, or itself. Each email gets a Gmail label:
+`agora/processed`, `agora/partial` (some failed), or `agora/failed`.
+
+**Limits**: 50 emails/run, 20 events/email, 20 events/sender/day (counted by a
+keyed hash in Neon — addresses are never stored). Nothing about senders goes
+into logs, PRs, the DB, or the manifest.
+
+**Operations**
+- **Pause**: set environment variable `EMAIL_INGEST=off` (Settings →
+  Environments → production).
+- **Block a sender**: a Gmail filter "from X → skip the inbox".
+- **Re-process an email**: remove its `agora/*` label in Gmail (labels show per
+  conversation — use separate emails/subjects when testing).
+- **Remove a submission**: in the Neon SQL editor,
+  `DELETE FROM events WHERE sources->>0 = 'Community submissions' AND title = '…';`
+  (check with a `SELECT` first).
+- **Hard failures** (Gmail login, Bedrock) open an **Email ingest failures** issue.
+
+**Setup** (done; for a rebuild): Gmail account with 2-Step Verification + app
+password; secrets in environments `production` and `ci-test`:
+`GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD`, `SUBMISSION_HASH_KEY`,
+`SUBMISSION_IMAGE_BUCKET`, `SUBMISSION_IMAGE_BASE_URL` (plus the AWS role
+secrets); the Bedrock role allows Haiku 4.5 + Sonnet 4.5 and `s3:PutObject` on
+the bucket's `img/*`; AWS Budget `agora-monthly` is $10.
