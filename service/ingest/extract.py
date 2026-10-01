@@ -61,8 +61,10 @@ ASSESSMENT = {
                                                  "(website, social handle, box office number) are "
                                                  "not personal."},
         "bystanders_visible": {"type": "boolean",
-                               "description": "people are visible who are not performers "
-                                              "pictured on the flyer itself"},
+                               "description": "an identifiable person is visible (a face, or "
+                                              "enough of someone to recognize them) who is not a "
+                                              "performer pictured on the flyer itself. Incidental "
+                                              "partial limbs or feet at the edges don't count."},
         "flyer_box": {"type": ["object", "null"],
                       "description": "for photo_of_flyer: the tightest box around the flyer's "
                                      "printed area only (exclude its frame, stand, and "
@@ -200,8 +202,9 @@ def assess_image(client, image: tuple[str, bytes],
         return None
     payload = _call(client, [block, {"text": "Assess this image."}],
                     system="You check images before they are published on a public events website. "
-                           "Be strict: if unsure whether a person, phone number, email address or "
-                           "chat UI is visible, say it is.",
+                           "Be strict about identifiable people, private phone numbers, email "
+                           "addresses and chat UI: if unsure whether one is visible, say it is. "
+                           "Incidental partial limbs or feet with no face are not identifiable.",
                     tool=ASSESS_TOOL, description="Record the assessment.", schema=ASSESSMENT,
                     models=models)
     return payload or None
