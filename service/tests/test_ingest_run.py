@@ -227,3 +227,49 @@ def test_unreadable_links_are_reported_even_when_another_link_worked():
     out = run.process_message(inc, extract_fn=ex, fetch=fetch, now=NOW)
     assert len(out.events) == 1
     assert out.failures == [("https://blocked.example.com/e/2", "couldn't read this page")]
+
+
+# --- warnings (alerting on swallowed failures) -----------------------------
+
+def test_tagging_failure_becomes_a_warning_and_export_still_runs(tmp_path):
+    warnings = []
+
+    def boom(source_names=None):
+        raise RuntimeError("Bedrock down")
+
+    exported = run.tag_and_export({"saved": 2, "merged": 0}, warnings, classify_fn=boom,
+                                  export_fn=lambda path: 7, out=tmp_path / "e.json")
+    assert exported == 7
+    assert warnings == ["tagging skipped (RuntimeError: Bedrock down)"]
+
+
+def test_nothing_new_means_no_tagging_or_export(tmp_path):
+    calls = []
+    assert run.tag_and_export({"saved": 0, "merged": 0}, [], classify_fn=lambda **k: calls.append(1),
+                              export_fn=lambda p: calls.append(2), out=tmp_path / "e.json") == 0
+    assert calls == []
+
+
+def test_image_upload_error_becomes_a_warning_but_not_a_skip():
+    warnings = []
+
+    def failing_put(key, body):
+        raise RuntimeError("AccessDenied")
+
+    publish = run.make_publisher(verify=lambda crop: {"kind": "designed_flyer", "personal_info_visible": False,
+                                                      "bystanders_visible": False},
+                                 put=failing_put, base_url="https://cdn.example.com", warnings=warnings)
+    safe = {"kind": "designed_flyer", "personal_info_visible": False, "bystanders_visible": False}
+    assert publish(png_bytes(), safe) is None
+    assert warnings == ["image upload failed (RuntimeError: AccessDenied)"]
+    # A deliberate "not safe to publish" decision is not a warning.
+    assert publish(png_bytes(), dict(safe, kind="screenshot")) is None
+    assert len(warnings) == 1
+
+
+def test_write_outputs_reports_saved_and_warning_count(tmp_path):
+    out, body = tmp_path / "out", tmp_path / "w.md"
+    run.write_outputs(out, saved=3, warnings=["tagging skipped (X)", "image upload failed (Y)"],
+                      warnings_path=body)
+    assert out.read_text().splitlines() == ["saved=3", "warnings=2"]
+    assert "- tagging skipped (X)" in body.read_text()

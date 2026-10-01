@@ -204,32 +204,66 @@ def run_ingest(mail, *, extract_fn, fetch, now: datetime, secret: bytes, session
     return report
 
 
-def _make_publisher(client):
+def make_publisher(*, verify: Callable, put: Callable[[str, bytes], None], base_url: str,
+                   warnings: list[str]) -> Callable:
+    """publish(bytes, assessment) -> url | None. A deliberate "not safe" decision
+    returns None quietly; an unexpected error (upload, Bedrock) is a warning."""
+    from ingest import images
+
+    def publish(data: bytes, assessment: dict) -> str | None:
+        try:
+            public = images.public_version(data, assessment, verify=verify)
+            if public is None:
+                _log(f"image not published (kind={assessment.get('kind')})")
+                return None
+            return images.upload(public, put=put, base_url=base_url)
+        except Exception as e:  # a failed upload never blocks the event
+            warnings.append(f"image upload failed ({type(e).__name__}: {str(e)[:200]})")
+            _log(f"image publish failed: {type(e).__name__}: {e}")
+            return None
+    return publish
+
+
+def _s3_publisher(client, warnings: list[str]) -> Callable | None:
     """Publisher for safe images, or None when image hosting isn't configured
     (SUBMISSION_IMAGE_BUCKET + SUBMISSION_IMAGE_BASE_URL)."""
     bucket, base_url = os.environ.get("SUBMISSION_IMAGE_BUCKET"), os.environ.get("SUBMISSION_IMAGE_BASE_URL")
     if not (bucket and base_url):
         return None
     import boto3
-    from ingest import extract, images
+    from ingest import extract
     s3 = boto3.client("s3")
 
     def put(key: str, body: bytes) -> None:
         s3.put_object(Bucket=bucket, Key=key, Body=body, ContentType="image/jpeg",
                       CacheControl="public, max-age=31536000, immutable")
 
-    def publish(data: bytes, assessment: dict) -> str | None:
-        try:
-            public = images.public_version(
-                data, assessment, verify=lambda crop: extract.assess_image(client, ("image/jpeg", crop)))
-            if public is None:
-                _log(f"image not published (kind={assessment.get('kind')})")
-                return None
-            return images.upload(public, put=put, base_url=base_url)
-        except Exception as e:  # a failed upload never blocks the event
-            _log(f"image publish failed: {type(e).__name__}: {e}")
-            return None
-    return publish
+    return make_publisher(verify=lambda crop: extract.assess_image(client, ("image/jpeg", crop)),
+                          put=put, base_url=base_url, warnings=warnings)
+
+
+def tag_and_export(report: dict, warnings: list[str], *, classify_fn: Callable,
+                   export_fn: Callable[[Path], int], out: Path) -> int:
+    """Tag new submissions and rebuild the manifest when anything was saved.
+    Tagging failing doesn't stop the export, but it's a warning."""
+    if not (report["saved"] or report["merged"]):
+        return 0
+    try:
+        classify_fn(source_names={SOURCE_NAME})
+    except Exception as e:
+        warnings.append(f"tagging skipped ({type(e).__name__}: {str(e)[:200]})")
+        _log(f"classify skipped ({type(e).__name__}: {e})")
+    return export_fn(out)
+
+
+def write_outputs(outputs: Path | None, *, saved: int, warnings: list[str],
+                  warnings_path: Path | None) -> None:
+    """GitHub step outputs (saved, warnings) + a markdown warning list for the alert."""
+    if warnings_path:
+        warnings_path.write_text("\n".join(f"- {w}" for w in warnings) + ("\n" if warnings else ""))
+    if outputs:
+        with open(outputs, "a") as f:
+            f.write(f"saved={saved}\nwarnings={len(warnings)}\n")
 
 
 def _fetch(url: str) -> str:
@@ -248,7 +282,10 @@ def cli(argv=None) -> None:
     parser = argparse.ArgumentParser(description="Ingest event submissions from the Gmail inbox.")
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--outputs", type=Path, default=None)
+    parser.add_argument("--warnings", type=Path, default=None,
+                        help="write a markdown list of swallowed failures here")
     args = parser.parse_args(argv)
+    warnings: list[str] = []
 
     pipeline.init_db()
     client = classify.make_client()
@@ -256,7 +293,7 @@ def cli(argv=None) -> None:
     extract_fn = lambda text=None, image=None, context="": extract.extract_events(
         client, text=text, image=image, now=now, context=context)
     image_fn = lambda image: extract.extract_image(client, image, now=now)
-    publish_fn = _make_publisher(client)
+    publish_fn = _s3_publisher(client, warnings)
     with Gmail(os.environ["GMAIL_ADDRESS"], os.environ["GMAIL_APP_PASSWORD"]) as mail:
         report = run_ingest(mail, extract_fn=extract_fn, fetch=_fetch, now=now,
                             secret=os.environ["SUBMISSION_HASH_KEY"].encode(),
@@ -267,21 +304,17 @@ def cli(argv=None) -> None:
          f"{report['merged']} merged, {report['skipped']} skipped")
     for t in report["titles"]:
         _log(f"published: {t}")
-    exported = 0
-    if report["saved"] or report["merged"]:
-        try:
-            pipeline.classify_upcoming(source_names={SOURCE_NAME})
-        except Exception as e:
-            _log(f"classify skipped ({type(e).__name__}: {e})")
-        out = Path(os.environ.get("EVENTS_JSON_PATH", pipeline.DEFAULT_EVENTS_JSON))
-        exported = pipeline.export_json(out)
+    exported = tag_and_export(report, warnings, classify_fn=pipeline.classify_upcoming,
+                              export_fn=pipeline.export_json,
+                              out=Path(os.environ.get("EVENTS_JSON_PATH", pipeline.DEFAULT_EVENTS_JSON)))
+    for w in warnings:
+        _log(f"warning: {w}")
     # Merge-style report so ci.py guard / the ship action can render the PR body.
     args.report.write_text(json.dumps({"exported": exported, "failed": 0, "sources": [{
         "url": "email", "name": SOURCE_NAME, "status": "ok", "events": report["saved"] + report["merged"],
         "saved": report["saved"], "merged": report["merged"], "skipped": report["skipped"], "error": None}]}))
-    if args.outputs:
-        with open(args.outputs, "a") as f:
-            f.write(f"saved={report['saved'] + report['merged']}\n")
+    write_outputs(args.outputs, saved=report["saved"] + report["merged"], warnings=warnings,
+                  warnings_path=args.warnings)
 
 
 if __name__ == "__main__":

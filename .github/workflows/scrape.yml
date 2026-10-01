@@ -221,3 +221,41 @@ jobs:
         run: |
           echo "::error::${COUNT} source(s) failed — see the Scrape failures issue"
           exit 1
+
+  # Heartbeat for the hourly email job, which can't notice its own absence
+  # (GitHub drops scheduled runs; it has dropped this repo's before). If no
+  # ingest-email.yml run on main has succeeded in the last 6 hours, post to the
+  # "Email ingest failures" issue (@mentions the owner) and go red. A paused job
+  # (EMAIL_INGEST=off) still runs and succeeds, so pausing doesn't trigger this.
+  ingest-heartbeat:
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+    steps:
+      - name: Check the email job ran recently
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MAX_AGE_HOURS: "6"
+          TITLE: Email ingest failures
+        run: |
+          set -euo pipefail
+          last="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ingest-email.yml/runs?branch=main&status=success&per_page=1" \
+                  --jq '.workflow_runs[0].created_at // ""')"
+          if [ -n "$last" ]; then
+            age_h=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 3600 ))
+            if [ "$age_h" -lt "$MAX_AGE_HOURS" ]; then
+              echo "Email job last succeeded ${age_h}h ago ($last)."
+              exit 0
+            fi
+            body="The email ingest job hasn't succeeded in ${age_h} hours (last success: $last). GitHub may be dropping its schedule — check https://github.com/$GITHUB_REPOSITORY/actions/workflows/ingest-email.yml @$GITHUB_REPOSITORY_OWNER"
+          else
+            body="The email ingest job has no successful run on main. @$GITHUB_REPOSITORY_OWNER"
+          fi
+          n="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title \
+                -q ".[] | select(.title == \"$TITLE\") | .number" | head -1)"
+          if [ -n "$n" ]; then gh issue comment "$n" --body "$body"; else gh issue create --title "$TITLE" --body "$body"; fi
+          echo "::error::$body"
+          exit 1
