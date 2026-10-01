@@ -23,6 +23,11 @@ SAME = [
      "Alembic Community Co-Working", "The Berkeley Alembic, 2820 Seventh Street, Berkeley, CA"),
     ("Deconstructing Yourself", None, "Deconstructing Yourself with Michael Taft",
      "The Berkeley Alembic, 2820 Seventh Street, Berkeley, CA"),
+    # Street name that starts with a digit ("2781 24th Street").
+    ("Foutenanny! Fou Fou Ha's 25th Anniversary Celebration",
+     "Brava Mainstage, 2781 24th Street, San Francisco, CA, 94110, United States",
+     "Foutenanny!  Fou Fou Ha's 25th Anniversary Celebration",
+     "Brava Theater Center, 2781 24th Street, San Francisco, CA 94110, San Francisco, CA"),
 ]
 
 DIFFERENT = [
@@ -54,3 +59,8 @@ def test_look_alikes_stay_separate(ta, la, tb, lb):
 
 def test_normalization_handles_accents_and_curly_quotes():
     assert dedup.title_tokens("César Vallejo’s Trilce") == dedup.title_tokens("Cesar Vallejo's TRILCE")
+
+
+def test_zip_codes_are_not_street_numbers():
+    assert not dedup.locations_agree("Cafe A, 1 Main St, San Francisco, CA 94110",
+                                     "Bar B, 9 Oak St, San Francisco, CA 94110")

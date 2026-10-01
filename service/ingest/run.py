@@ -76,7 +76,9 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
         for url in inc.links[:MAX_LINKS_PER_EMAIL]:
             r = links_mod.resolve(url, fetch=fetch, now=now,
                                   extract_text=lambda t, ctx: extract_fn(text=t, context=ctx))
-            if r.error in (links_mod.NO_EVENT, links_mod.UNREADABLE):
+            if r.error == links_mod.NO_EVENT:
+                # Loads but isn't an event page (signature, personal site):
+                # incidental unless the email yields nothing at all.
                 not_events.append((url, r.error))
             elif r.error:
                 out.failures.append((url, r.error))
@@ -88,6 +90,10 @@ def process_message(inc: Incoming, *, extract_fn: Callable, fetch: Callable[[str
         # also says something — the event may be in the text.
         if not out.events and len(_URL_RE.sub("", inc.text).strip()) >= MIN_FALLBACK_TEXT_CHARS:
             sub = _from_candidates(extract_fn(text=inc.text), title_of, now)
+            if sub.events:
+                # The text described the event; the unreadable link was most
+                # likely the same event (an Instagram post), so don't report it.
+                out.failures = [f for f in out.failures if f[1] != links_mod.UNREADABLE]
             out.events += sub.events
             out.failures += sub.failures
     elif inc.text.strip():

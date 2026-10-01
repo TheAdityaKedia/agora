@@ -209,3 +209,21 @@ def test_image_not_published_when_it_yields_no_events():
                         image_fn=lambda img: ([], {"kind": "designed_flyer"}),
                         publish_fn=lambda d, a: calls.append(1) or "u")
     assert calls == []
+
+
+def test_unreadable_links_are_reported_even_when_another_link_worked():
+    """A blocked ticket page is a link the sender meant; a signature page that
+    loads but isn't an event is incidental."""
+    text = ("https://good.example.com/e/1\nShow two: https://blocked.example.com/e/2\n\n"
+            "Aditya\nhttps://adikedia.example.com")
+
+    def fetch(url):
+        if "blocked" in url:
+            raise RuntimeError("403")
+        return "<p>page</p>"
+
+    inc = parse(make_email(text=text), uid="1")
+    ex = fake_extract([[dict(GOOD)], []])  # good → event; signature page → nothing
+    out = run.process_message(inc, extract_fn=ex, fetch=fetch, now=NOW)
+    assert len(out.events) == 1
+    assert out.failures == [("https://blocked.example.com/e/2", "couldn't read this page")]

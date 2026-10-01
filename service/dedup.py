@@ -25,7 +25,10 @@ import unicodedata
 
 _STOP = {"the", "a", "an", "with", "at", "and", "of", "in", "on", "for", "presents", "presented",
          "by", "featuring", "feat", "ft", "to", "live", "night", "show", "offsite"}
-_STREET_NUMBER_RE = re.compile(r"\b(\d{1,5})\s+[A-Za-z]")  # "565 Green" — not ZIP codes
+# A street number: digits followed by a street name, which may itself start
+# with a digit ("565 Green", "2781 24th Street"). ZIP codes ("CA 94110") are
+# excluded by not following a two-letter state code.
+_STREET_NUMBER_RE = re.compile(r"(?<![A-Z]{2} )(?<![A-Z]{2}, )\b(\d{1,5})\s+(?=\d{0,3}[A-Za-z])")
 
 
 def _normalize(text: str) -> str:
