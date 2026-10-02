@@ -5,7 +5,9 @@
     npx aws-cdk@2 deploy AgoraCanvasDev       # what CI does on a branch push
 
 Settings come from the environment so CI can inject secrets:
-CANVAS_IP_SALT, CANVAS_BUDGET_EMAIL, CANVAS_RESERVED_CONCURRENCY (default 10),
+CANVAS_IP_SALT, CANVAS_BUDGET_EMAIL, CANVAS_RESERVED_CONCURRENCY (default 0 =
+no cap: this account's Lambda concurrency limit is 10, and AWS refuses any
+reservation that leaves fewer than 10 unreserved),
 CDK_DEFAULT_ACCOUNT / CDK_DEFAULT_REGION (set by the CDK CLI from your creds).
 """
 import os
@@ -28,7 +30,7 @@ for stage in ("dev", "prod"):
         allowed_origins=ORIGINS,
         ip_hash_salt=os.environ.get("CANVAS_IP_SALT", ""),
         manifest_url=MANIFEST_URL,
-        reserved_concurrency=int(os.environ.get("CANVAS_RESERVED_CONCURRENCY") or 10),
+        reserved_concurrency=int(os.environ.get("CANVAS_RESERVED_CONCURRENCY") or 0),
         budget_email=os.environ.get("CANVAS_BUDGET_EMAIL", ""),
         description=f"Agora event canvases API ({stage})",
     )

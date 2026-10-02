@@ -48,8 +48,10 @@ class CanvasApiStack(Stack):
             time_to_live_attribute="ttl",
             point_in_time_recovery_specification=dynamodb.PointInTimeRecoverySpecification(
                 point_in_time_recovery_enabled=prod),
-            # Canvases are kept forever: no stack change may drop the table.
-            removal_policy=RemovalPolicy.RETAIN,
+            # Prod canvases are kept forever: no stack change may drop the table.
+            # Dev data is disposable, and retaining it would orphan the table
+            # (blocking re-creation by name) whenever a first deploy rolls back.
+            removal_policy=RemovalPolicy.RETAIN if prod else RemovalPolicy.DESTROY,
         )
 
         log_group = logs.LogGroup(

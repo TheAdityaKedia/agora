@@ -43,6 +43,12 @@ def test_table_is_retained_on_demand_with_ttl(prod):
     })
 
 
+def test_dev_table_is_disposable(dev):
+    # A retained dev table would be orphaned by a rolled-back first deploy and
+    # block re-creating the stack (the table name is fixed).
+    dev.has_resource("AWS::DynamoDB::Table", {"DeletionPolicy": "Delete"})
+
+
 def test_dev_has_no_pitr_and_allows_localhost(dev):
     dev.has_resource_properties("AWS::DynamoDB::Table", {
         "PointInTimeRecoverySpecification": {"PointInTimeRecoveryEnabled": False}})

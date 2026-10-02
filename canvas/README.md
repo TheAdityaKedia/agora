@@ -74,20 +74,23 @@ Then in GitHub → Settings → Secrets and variables → Actions:
 Re-run the latest "Deploy canvas API" run (or push to `canvas/`). Delete the
 admin credentials used above; nothing needs them again.
 
-If a deploy fails with *"Specified ReservedConcurrentExecutions … decreases
-account's UnreservedConcurrentExecution below its minimum"*, the account's
-concurrency limit is the new-account default of 10: set repo variable
-`CANVAS_RESERVED_CONCURRENCY` to `0` (no cap) and re-run.
+**Concurrency cap:** off by default. This account's Lambda concurrency limit
+is the new-account 10, and AWS rejects any reservation that leaves fewer than
+10 unreserved (the first deploy failed exactly that way). The $5 budget alert
+is the cost guard meanwhile. To cap a flood: request a "Concurrent
+executions" quota increase (Service Quotas → Lambda; usually granted to 1000),
+then set repo variable `CANVAS_RESERVED_CONCURRENCY` to e.g. `10`.
 
 ## Operate
 
 - **Cost:** Lambda + DynamoDB on-demand at friends-scale is ~$0. Prod has an
   AWS Budget for those two services ($5/month; alert at 80% actual or 100%
-  forecast) and reserved concurrency 10 as a flood cap.
+  forecast). No concurrency cap until the account quota is raised (see
+  Deploy).
 - **Logs:** CloudWatch `/aws/lambda/agora-canvas-<stage>`, 14-day retention,
   one line per request (method, route, status, ms). Never log bodies, names,
   client ids or IPs.
 - **A reported canvas:** `python canvas/scripts/admin.py --table
   agora-canvas-prod delete <canvasId>` (hard delete, canvas + log).
-- **Data is durable:** the table has `RemovalPolicy.RETAIN` and prod has
+- **Data is durable:** the prod table has `RemovalPolicy.RETAIN` and prod has
   point-in-time recovery. Deleting the stack leaves the table behind.
