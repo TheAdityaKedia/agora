@@ -364,3 +364,19 @@ def test_thumbnail_tiles_for_missing_and_broken_images(browser, site):
     page.wait_for_function(
         "!document.querySelectorAll('.event')[2].querySelector('.thumb img')")
     assert jazz.locator(".thumb-label").inner_text() == "Performance"
+
+
+def test_day_strip_tracks_scroll_and_stays_visible(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    first = page.locator("#day-strip .day-btn").first
+    page.wait_for_function("document.querySelector('#day-strip .day-btn.current')")
+    assert "current" in first.get_attribute("class")
+    # Scroll the 4th day's section to just under the sticky bar.
+    key = page.locator("section.day").nth(3).get_attribute("data-day")
+    page.locator(f'h2.date[data-day="{key}"]').evaluate("e => e.scrollIntoView()")
+    page.wait_for_function(
+        f"document.querySelector('#day-strip .day-btn.current')?.dataset.day === '{key}'")
+    assert page.get_attribute("#day-strip .day-btn.current", "aria-current") == "date"
+    # The strip is in the sticky bar, so it's still on screen.
+    top = page.locator("#day-strip").bounding_box()["y"]
+    assert 0 <= top < 200

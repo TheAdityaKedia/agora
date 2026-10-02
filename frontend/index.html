@@ -241,9 +241,10 @@
   .active-pill .pill-clear:hover { background: rgba(255,255,255,0.2); }
   .meta { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
   .day-strip {
-    display: flex; gap: 6px; margin: 10px 0 0; padding-bottom: 4px;
-    overflow-x: auto; scrollbar-width: thin;
+    display: flex; gap: 6px; margin: 8px 0 0; padding-bottom: 2px;
+    overflow-x: auto; scrollbar-width: none;
   }
+  .day-strip::-webkit-scrollbar { display: none; }
   .day-btn {
     flex: 0 0 auto; cursor: pointer;
     display: flex; flex-direction: column; align-items: center;
@@ -254,6 +255,10 @@
   .day-btn .dow { font-size: 11px; color: var(--muted); }
   .day-btn .dom { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1; }
   .day-btn:hover { border-color: var(--accent); }
+  /* The day at the top of the list: a position marker, so ink, not the
+     accent that marks active filters. */
+  .day-btn.current { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .day-btn.current .dow { color: var(--bg); }
 
   /* --- Event list --- */
   h2.date {
@@ -262,8 +267,7 @@
     border-bottom: 2px solid var(--fg);
     font-family: var(--font-display); font-size: 28px; line-height: 1.05;
     letter-spacing: 0.01em; color: var(--fg); font-weight: 800;
-    /* Stick just below the search bar so the day you're viewing stays visible. */
-    position: sticky; top: var(--sticky-top); background: var(--bg); z-index: 5;
+    /* Not sticky: the day strip in the sticky bar marks the current day. */
     scroll-margin-top: var(--sticky-top);
   }
   /* Phone: time on its own line, then the title at full width, with the
@@ -465,6 +469,7 @@
     <button type="button" class="preset-btn" id="preset-week">This week</button>
     <button type="button" class="preset-btn" id="preset-month">This month</button>
   </div>
+  <nav class="day-strip" id="day-strip" aria-label="Jump to a day" hidden></nav>
 </div>
 
 <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
@@ -536,7 +541,6 @@
 <main>
   <div class="active-filters" id="active-filters"></div>
   <div class="meta" id="meta"></div>
-  <nav class="day-strip" id="day-strip" aria-label="Jump to a day" hidden></nav>
   <div id="list">
     <div class="skeleton" aria-busy="true">
       <p class="loading-note">Loading events…</p>
@@ -1071,6 +1075,47 @@
   // readStateFromUrl(), for the same TDZ reason as flatDateFmt.
   const CHUNK = 60;
   const DAY_CAP = 10;
+
+  // Day strip follows the scroll: the day whose section is at the top of
+  // the list (just under the sticky bar) is marked in the strip, and the
+  // strip scrolls sideways to keep it in view.
+  const daySections = list.getElementsByClassName("day");  // live, in date order
+  let currentDay = null, dayTick = false;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  function updateCurrentDay() {
+    dayTick = false;
+    if (dayStripEl.hidden || !daySections.length) return;
+    const line = topbarEl.getBoundingClientRect().bottom + 8;
+    // Binary search for the last section starting above the line.
+    let lo = 0, hi = daySections.length - 1, found = 0;
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      if (daySections[mid].getBoundingClientRect().top <= line) { found = mid; lo = mid + 1; }
+      else hi = mid - 1;
+    }
+    const key = daySections[found].dataset.day;
+    if (key === currentDay) return;
+    currentDay = key;
+    for (const b of dayStripEl.querySelectorAll(".day-btn.current")) {
+      b.classList.remove("current");
+      b.removeAttribute("aria-current");
+    }
+    const btn = dayStripEl.querySelector('.day-btn[data-day="' + key + '"]');
+    if (!btn) return;
+    btn.classList.add("current");
+    btn.setAttribute("aria-current", "date");
+    const r = btn.getBoundingClientRect(), strip = dayStripEl.getBoundingClientRect();
+    if (r.left < strip.left || r.right > strip.right) {
+      dayStripEl.scrollBy({
+        left: r.left - strip.left - (strip.width - r.width) / 2,
+        behavior: reduceMotion.matches ? "auto" : "smooth",
+      });
+    }
+  }
+  function scheduleDayUpdate() {
+    if (!dayTick) { dayTick = true; requestAnimationFrame(updateCurrentDay); }
+  }
+  addEventListener("scroll", scheduleDayUpdate, {passive: true});
   let queue = [], queuePos = 0, queueFlat = false, dayCap = DAY_CAP;
   const sentinel = document.createElement("div");
   sentinel.className = "sentinel";
@@ -1449,6 +1494,8 @@
     list.innerHTML = "";
     list.appendChild(sentinel);
     renderMore();
+    currentDay = null;  // the strip was rebuilt
+    scheduleDayUpdate();
   }
 
   // The pills for each active filter, as [clear-key, label, value?].
