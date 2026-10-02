@@ -5921,6 +5921,29 @@
         ]
       ]
     },
+    "Book Passage\u001fFlorencia Ramirez - The Kitchen Activist": {
+      "classified_at": "2026-10-02T16:31:19.206015+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Florencia Ramirez - The Kitchen Activist",
+      "topics": [
+        "books-authors",
+        "food-drink",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Book Passage\u001fFrench Conversation: Beginner with Dominique Bremond: 8 Meetings": {
       "classified_at": "2026-09-25T06:06:44.977552+00:00",
       "cost": "paid",
@@ -7676,6 +7699,24 @@
       "topics": [
         "books-authors",
         "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Book Passage\u001fWalter Stahr - William Howard Taft": {
+      "classified_at": "2026-10-02T16:31:18.009844+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 1,
+      "title": "Walter Stahr - William Howard Taft",
+      "topics": [
+        "books-authors",
+        "history"
       ],
       "types": [
         [
@@ -10640,6 +10681,24 @@
         ]
       ]
     },
+    "Clio's Books\u001fThe Politics of Publishing": {
+      "classified_at": "2026-10-02T16:31:21.011786+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 1,
+      "title": "The Politics of Publishing",
+      "topics": [
+        "books-authors",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Clio's Books\u001fYou Don't Need a Smartphone": {
       "classified_at": "2026-09-25T06:10:19.948707+00:00",
       "cost": "unknown",
@@ -10990,6 +11049,24 @@
       "taxonomy_version": 1,
       "title": "Humanities West Presents A Veiled History of Masks",
       "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fHumanities West Presents Beethoven the Revolutionary": {
+      "classified_at": "2026-10-02T16:30:52.561963+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 1,
+      "title": "Humanities West Presents Beethoven the Revolutionary",
+      "topics": [
+        "classical",
         "history"
       ],
       "types": [
@@ -12537,6 +12614,23 @@
         ]
       ]
     },
+    "El Rio\u001fThe Dandy Lions, Squadda B, Glove Department, and Silverset ($10 Cover)": {
+      "classified_at": "2026-10-02T16:31:12.849031+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 1,
+      "title": "The Dandy Lions, Squadda B, Glove Department, and Silverset ($10 Cover)",
+      "topics": [
+        "rock-indie",
+        "club-night"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "El Rio\u001fThe Hotline Queer Line Dancing": {
       "classified_at": "2026-09-29T16:48:06.862434+00:00",
       "cost": "paid",
@@ -12707,6 +12801,24 @@
         ]
       ]
     },
+    "Fabulosa Books\u001fThe Book of Luke — Lovell Holder": {
+      "classified_at": "2026-10-02T16:31:21.891216+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fabulosa Books",
+      "taxonomy_version": 1,
+      "title": "The Book of Luke — Lovell Holder",
+      "topics": [
+        "fiction",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Fabulosa Books\u001fTricyclist — Joon Oluchi Lee": {
       "classified_at": "2026-09-25T06:12:21.595448+00:00",
       "cost": "unknown",
@@ -12740,6 +12852,27 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Frontier Tower\u001f#SFTW Why Fintech Growth Fails? Slash Your CAC with AI-Powered Growth Engine - Open Registration": {
+      "classified_at": "2026-10-02T16:31:37.568745+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 1,
+      "title": "#SFTW Why Fintech Growth Fails? Slash Your CAC with AI-Powered Growth Engine - Open Registration",
+      "topics": [
+        "business",
+        "tech"
+      ],
+      "types": [
+        [
+          "talk"
+        ],
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -14095,6 +14228,22 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fThe Dresden Dolls": {
+      "classified_at": "2026-10-02T16:30:47.541905+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 1,
+      "title": "The Dresden Dolls",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -19544,6 +19693,23 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fAndrea Brewster: Draft": {
+      "classified_at": "2026-10-02T16:31:11.762585+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Andrea Brewster: Draft",
+      "topics": [
+        "visual-art",
+        "design"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fAngela Johal: Intersecting Colour": {
       "classified_at": "2026-09-24T15:37:17.643424+00:00",
       "cost": "free",
@@ -19555,6 +19721,66 @@
         "visual-art"
       ],
       "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fArtist Talk – Andrea Brewster: Draft": {
+      "classified_at": "2026-10-02T16:31:11.015627+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Artist Talk – Andrea Brewster: Draft",
+      "topics": [
+        "visual-art",
+        "design"
+      ],
+      "types": [
+        [
+          "talk"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fArtist Talk – Jill McLennan: harm_less": {
+      "classified_at": "2026-10-02T16:31:10.100802+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Artist Talk – Jill McLennan: harm_less",
+      "topics": [
+        "visual-art",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fArtist Talk – Leah Korican: DOILoveYou Too": {
+      "classified_at": "2026-10-02T16:31:08.655242+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Artist Talk – Leah Korican: DOILoveYou Too",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
         [
           "exhibition"
         ]
@@ -19791,6 +20017,39 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fJill McLennan: harm_less": {
+      "classified_at": "2026-10-02T16:31:00.350216+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Jill McLennan: harm_less",
+      "topics": [
+        "visual-art",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fLeah Korican: DOILoveYou Too": {
+      "classified_at": "2026-10-02T16:30:59.456854+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Leah Korican: DOILoveYou Too",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fLive at inStudio": {
       "classified_at": "2026-09-24T15:37:28.220337+00:00",
       "cost": "free",
@@ -19903,6 +20162,23 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fOpening Reception – Andrea Brewster: Draft": {
+      "classified_at": "2026-10-02T16:31:07.710968+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Opening Reception – Andrea Brewster: Draft",
+      "topics": [
+        "visual-art",
+        "design"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fOpening Reception – Ellen Bepp: The Ghosts We Carry": {
       "classified_at": "2026-09-24T15:37:25.791180+00:00",
       "cost": "free",
@@ -19917,6 +20193,55 @@
         [
           "social"
         ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fOpening Reception – Jill McLennan: harm_less": {
+      "classified_at": "2026-10-02T16:31:06.918973+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Opening Reception – Jill McLennan: harm_less",
+      "topics": [
+        "visual-art",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fOpening Reception – Leah Korican: DOILoveYou Too": {
+      "classified_at": "2026-10-02T16:31:05.297325+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Opening Reception – Leah Korican: DOILoveYou Too",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fOpening Reception – Pat O’Connor, K.C. Rosenberg, Emily Shepard: Material Messages": {
+      "classified_at": "2026-10-02T16:31:04.491763+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Opening Reception – Pat O’Connor, K.C. Rosenberg, Emily Shepard: Material Messages",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
         [
           "exhibition"
         ]
@@ -19940,6 +20265,22 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fPat O’Connor, K.C. Rosenberg, Emily Shepard: Material Messages": {
+      "classified_at": "2026-10-02T16:31:03.623159+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 1,
+      "title": "Pat O’Connor, K.C. Rosenberg, Emily Shepard: Material Messages",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -22379,6 +22720,22 @@
         ]
       ]
     },
+    "Presidio Theatre\u001fGary Gulman: 7th Hour": {
+      "classified_at": "2026-10-02T16:30:48.330518+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Presidio Theatre",
+      "taxonomy_version": 1,
+      "title": "Gary Gulman: 7th Hour",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Presidio Theatre\u001fGilles Vonsattel Piano Recital": {
       "classified_at": "2026-09-23T19:55:26.793267+00:00",
       "cost": "paid",
@@ -22796,6 +23153,27 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Reading Rhythms\u001fReading Rhythms San Francisco + Free Book: Sense and Sensibility (Movie Tie-In Special)": {
+      "classified_at": "2026-10-02T16:30:58.651235+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Reading Rhythms",
+      "taxonomy_version": 1,
+      "title": "Reading Rhythms San Francisco + Free Book: Sense and Sensibility (Movie Tie-In Special)",
+      "topics": [
+        "books-authors",
+        "film"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "screening"
         ]
       ]
     },
@@ -23380,6 +23758,22 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fCoit Comedy: Stand Up Comedy at Columbus Cafe": {
+      "classified_at": "2026-10-02T16:30:53.355269+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 1,
+      "title": "Coit Comedy: Stand Up Comedy at Columbus Cafe",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -32396,6 +32790,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fFULL: Workshop: Flower Arrangement with Fiona Huang": {
+      "classified_at": "2026-10-02T16:30:50.854633+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 1,
+      "title": "FULL: Workshop: Flower Arrangement with Fiona Huang",
+      "topics": [
+        "design",
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fFULL: Workshop: Guaguas de Pan": {
       "classified_at": "2026-10-01T17:26:33.435833+00:00",
       "cost": "free",
@@ -35000,6 +35411,40 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fService: Bookmobile at the Shipyards  Hunters Point": {
+      "classified_at": "2026-10-02T16:30:51.679739+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 1,
+      "title": "Service: Bookmobile at the Shipyards  Hunters Point",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fService: Bookmobile at the Shipyards Hunters Point": {
+      "classified_at": "2026-10-02T16:30:50.033570+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 1,
+      "title": "Service: Bookmobile at the Shipyards Hunters Point",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -38735,6 +39180,22 @@
         ]
       ]
     },
+    "Sunset Trivia\u001fTrivia Night at Bay Grape (Oakland)": {
+      "classified_at": "2026-10-02T16:30:54.134316+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Bay Grape (Oakland)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
     "Sunset Trivia\u001fTrivia Night at Bel Mateo Bowl (San Mateo)": {
       "classified_at": "2026-09-24T05:58:27.550025+00:00",
       "cost": "unknown",
@@ -38953,6 +39414,22 @@
       "source": "Sunset Trivia",
       "taxonomy_version": 1,
       "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "Sunset Trivia\u001fTrivia Night at Shell's Bar & Grill (Fairfield)": {
+      "classified_at": "2026-10-02T16:30:54.932649+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 1,
+      "title": "Trivia Night at Shell's Bar & Grill (Fairfield)",
       "topics": [
         "trivia"
       ],
@@ -40365,6 +40842,26 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fFounder Group Coaching and Peer Support": {
+      "classified_at": "2026-10-02T16:30:55.884136+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 1,
+      "title": "Founder Group Coaching and Peer Support",
+      "topics": [
+        "business"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fFrom Pain to Resource: Embodied Awareness, Posture & Movement": {
       "classified_at": "2026-09-24T06:43:33.661007+00:00",
       "cost": "unknown",
@@ -41152,6 +41649,23 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fdecentralised cybersecurity [placeholder name]": {
+      "classified_at": "2026-10-02T16:30:56.896458+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 1,
+      "title": "decentralised cybersecurity [placeholder name]",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "The Commons (SF)\u001f🌙✍️ Monthly Reflection Jam [public]": {
       "classified_at": "2026-09-24T07:03:05.507729+00:00",
       "cost": "unknown",
@@ -41695,6 +42209,333 @@
       "topics": [
         "jazz",
         "swing"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fBlond in Car": {
+      "classified_at": "2026-10-02T16:31:32.719505+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Blond in Car",
+      "topics": [
+        "rock-indie",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fBlue Lemonade - Live @ The Faight": {
+      "classified_at": "2026-10-02T16:31:22.635749+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Blue Lemonade - Live @ The Faight",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fFeels in the Club": {
+      "classified_at": "2026-10-02T16:31:24.808721+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Feels in the Club",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fFenwick & the Futures LIVE in San Francisco": {
+      "classified_at": "2026-10-02T16:31:36.023306+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Fenwick & the Futures LIVE in San Francisco",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fHalloween Extravaganza: Turtle Club w/ Circuit Split & Often Easy": {
+      "classified_at": "2026-10-02T16:31:30.958384+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Halloween Extravaganza: Turtle Club w/ Circuit Split & Often Easy",
+      "topics": [
+        "music",
+        "club-night"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fHardly Strictly Stellas: Stella & the Jetz Fall Concert": {
+      "classified_at": "2026-10-02T16:31:26.697343+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Hardly Strictly Stellas: Stella & the Jetz Fall Concert",
+      "topics": [
+        "music",
+        "women"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fJady Headline Show": {
+      "classified_at": "2026-10-02T16:31:33.547737+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Jady Headline Show",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fJaime French @ The Faight": {
+      "classified_at": "2026-10-02T16:30:57.725051+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Jaime French @ The Faight",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fJake Thistle Live @ The Faight": {
+      "classified_at": "2026-10-02T16:31:25.720834+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Jake Thistle Live @ The Faight",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fLucia Dostal: Music in the Mountains": {
+      "classified_at": "2026-10-02T16:31:29.191418+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Lucia Dostal: Music in the Mountains",
+      "topics": [
+        "music",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fMoon Panda: Satellite Tour": {
+      "classified_at": "2026-10-02T16:31:34.372978+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Moon Panda: Satellite Tour",
+      "topics": [
+        "electronic"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fOpen Mic": {
+      "classified_at": "2026-10-02T16:31:02.847931+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Open Mic",
+      "topics": [
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fOrange Cinema Band Debut": {
+      "classified_at": "2026-10-02T16:31:28.342844+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Orange Cinema Band Debut",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fRachel Bochner - The \"Sorry If It's Selfish\" Tour | The Faight": {
+      "classified_at": "2026-10-02T16:31:01.194985+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Rachel Bochner - The \"Sorry If It's Selfish\" Tour | The Faight",
+      "topics": [
+        "pop",
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fSchwartzy: Release Party": {
+      "classified_at": "2026-10-02T16:31:27.589968+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Schwartzy: Release Party",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fTake Two (Dating Show)": {
+      "classified_at": "2026-10-02T16:31:13.659292+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Take Two (Dating Show)",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fThe Last Wild Buffalo": {
+      "classified_at": "2026-10-02T16:31:31.832480+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "The Last Wild Buffalo",
+      "topics": [
+        "folk-americana",
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fTurning Jane (Alt Rock/Pop)": {
+      "classified_at": "2026-10-02T16:31:35.231422+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "Turning Jane (Alt Rock/Pop)",
+      "topics": [
+        "rock-indie",
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fVALÉ Headline Show": {
+      "classified_at": "2026-10-02T16:31:02.042255+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 1,
+      "title": "VALÉ Headline Show",
+      "topics": [
+        "music"
       ],
       "types": [
         [
@@ -43624,6 +44465,22 @@
         ]
       ]
     },
+    "The Warfield\u001fZamora Live Presents USA TOUR ROA": {
+      "classified_at": "2026-10-02T16:30:49.178117+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 1,
+      "title": "Zamora Live Presents USA TOUR ROA",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Yerba Buena Center for the Arts\u001fDread Scott: The Body Politic": {
       "classified_at": "2026-09-23T19:53:53.084113+00:00",
       "cost": "unknown",
@@ -43719,6 +44576,22 @@
       "source": "Yoshi's",
       "taxonomy_version": 1,
       "title": "ANA POPOVIC",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fANDY MCKEE": {
+      "classified_at": "2026-10-02T16:31:17.115174+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 1,
+      "title": "ANDY MCKEE",
       "topics": [
         "jazz"
       ],
@@ -43834,6 +44707,22 @@
       "title": "CLAY AIKEN",
       "topics": [
         "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fCOCO MONTOYA": {
+      "classified_at": "2026-10-02T16:31:15.496397+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 1,
+      "title": "COCO MONTOYA",
+      "topics": [
+        "jazz"
       ],
       "types": [
         [
@@ -44356,6 +45245,24 @@
         ]
       ]
     },
+    "Yoshi's\u001fMELBA'S KITCHEN": {
+      "classified_at": "2026-10-02T16:31:14.653567+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 1,
+      "title": "MELBA'S KITCHEN",
+      "topics": [
+        "jazz",
+        "women",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Yoshi's\u001fMIKE STERN BAND": {
       "classified_at": "2026-09-24T22:58:35.665992+00:00",
       "cost": "paid",
@@ -44612,6 +45519,22 @@
       "source": "Yoshi's",
       "taxonomy_version": 1,
       "title": "SPYRO GYRA",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fSTEVE TURRE QUARTET": {
+      "classified_at": "2026-10-02T16:31:16.343348+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 1,
+      "title": "STEVE TURRE QUARTET",
       "topics": [
         "jazz"
       ],
