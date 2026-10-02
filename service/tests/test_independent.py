@@ -81,3 +81,42 @@ def test_parse_aria_rejects_garbage():
     assert _parse_aria("Sondre Lerche") is None
     assert _parse_aria("") is None
     assert _parse_aria(None) is None
+
+
+class _FakePage:
+    def __init__(self, appear=True):
+        self.appear, self.calls = appear, []
+
+    def goto(self, url, **kw): self.calls.append(("goto", url)); return None
+    def wait_for_timeout(self, ms): self.calls.append(("sleep", ms))
+    def wait_for_selector(self, sel, timeout=None):
+        self.calls.append(("wait_for", sel, timeout))
+        if not self.appear:
+            from playwright.sync_api import TimeoutError as PWTimeoutError
+            raise PWTimeoutError("timed out")
+    def content(self): return "<html>ok</html>"
+    def close(self): pass
+
+
+class _FakeContext:
+    def __init__(self, page): self.page = page
+    def new_page(self): return self.page
+
+
+def test_load_page_html_waits_for_a_selector_when_given():
+    from scrapers.browser import load_page_html
+    page = _FakePage()
+    assert load_page_html(_FakeContext(page), "https://x", wait_for=".fc-event", wait_for_timeout_ms=1234) == "<html>ok</html>"
+    assert ("wait_for", ".fc-event", 1234) in page.calls
+
+
+def test_load_page_html_returns_what_loaded_if_the_selector_never_appears():
+    from scrapers.browser import load_page_html
+    assert load_page_html(_FakeContext(_FakePage(appear=False)), "https://x", wait_for=".fc-event") == "<html>ok</html>"
+
+
+def test_independent_waits_for_calendar_events():
+    """The calendar loads its events via a separate AJAX call that can take
+    longer than a fixed settle; a fixed 4s wait captured 0 events in CI."""
+    from scrapers import independent
+    assert independent.EVENT_SELECTOR == '.fc-event[aria-label*="|"]'

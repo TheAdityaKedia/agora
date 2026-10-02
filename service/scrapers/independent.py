@@ -27,7 +27,10 @@ SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 VENUE = "The Independent, 628 Divisadero St, San Francisco, CA 94117"
 
 WAIT_UNTIL = "load"
-SETTLE_MS = 4000
+SETTLE_MS = 1500
+# The calendar fills in via a separate admin-ajax call whose timing varies; a
+# fixed 4s settle sometimes captured an empty calendar (0 events in CI).
+EVENT_SELECTOR = '.fc-event[aria-label*="|"]'
 REQUEST_TIMEOUT = 25
 
 # "Sondre Lerche|2026-09-21|8:00 PM"
@@ -133,7 +136,8 @@ def _fetch_description(url: str) -> str | None:
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
     with browser_context() as context:
         try:
-            html = load_page_html(context, url, wait_until=WAIT_UNTIL, settle_ms=SETTLE_MS)
+            html = load_page_html(context, url, wait_until=WAIT_UNTIL, settle_ms=SETTLE_MS,
+                                  wait_for=EVENT_SELECTOR)
         except RateLimited as e:
             print(f"[independent] blocked (HTTP {e.status}) at {e.url}, skipping", flush=True)
             return []

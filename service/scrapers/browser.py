@@ -126,12 +126,17 @@ def load_page_html(
     timeout: int = PAGE_READY_TIMEOUT_MS,
     settle_ms: int = 0,
     debug_log: Optional[Callable[[str], None]] = None,
+    wait_for: Optional[str] = None,
+    wait_for_timeout_ms: int = 20000,
 ) -> str:
     """Load `url` in a fresh page and return its HTML.
 
     `wait_until` picks the navigation completion signal ("load" for
     server-rendered pages, "networkidle" for JS/React-rendered ones).
     `settle_ms` adds a fixed pause after navigation for late-rendering content.
+    `wait_for` (a CSS selector) waits until that element appears — use it when
+    content arrives via a separate request whose timing varies; if it never
+    appears within `wait_for_timeout_ms`, we return whatever loaded.
     Raises RateLimited on a 403/429 so callers can back off gracefully.
     On a navigation timeout we still return whatever loaded.
 
@@ -174,6 +179,11 @@ def load_page_html(
             log(f"page: goto timed out after {time.monotonic() - g0:.2f}s ({type(e).__name__})")
         if response is not None and response.status in (403, 429):
             raise RateLimited(url, response.status)
+        if wait_for:
+            try:
+                page.wait_for_selector(wait_for, timeout=wait_for_timeout_ms)
+            except PWTimeoutError:
+                log(f"page: {wait_for!r} didn't appear within {wait_for_timeout_ms}ms")
         if settle_ms:
             log(f"page: settle {settle_ms}ms")
             s0 = time.monotonic()
