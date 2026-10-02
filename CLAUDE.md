@@ -36,7 +36,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `eventbrite.py`, `luma.py`, `performances.py`, `browser.py`), `exporters/`,
   `taxonomy.py` + `classify.py` + `classifications.py` (AI tagging), `main.py`
   (pipeline entry), `ci.py` (GitHub Actions stages: plan/scrape/merge/guard),
-  `dedup.py` (cross-source fuzzy dedup), `ingest/` (email submissions:
+  `dedup.py` (cross-source fuzzy dedup), `places/` (venue resolution — see
+  `feature-specs/venues.md`), `ingest/` (email submissions:
   mailbox, message, extract, validate, links, images, run), `api.py` (read
   API), `tests/`. `data/` holds `sources.txt`,
   `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the

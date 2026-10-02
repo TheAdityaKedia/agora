@@ -6,6 +6,11 @@ Planned work that isn't built yet. Each entry links to its spec in
 code is then the source of truth. New *sources* go in `future-sources.md`, not
 here.
 
+- **Venues and the Area filter** — a committed venue list resolved from
+  location strings (OpenStreetMap + evidence rules + a review queue), then a
+  region filter; later venue-based dedup, maps and "near me".
+  Spec: [`feature-specs/venues.md`](feature-specs/venues.md) (design agreed;
+  phase 1 next).
 - **Adaptive / self-healing scrapers** — detect when a source's markup or
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)
