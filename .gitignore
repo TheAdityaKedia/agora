@@ -58,5 +58,5 @@ htmlcov/
 # Claude Code: personal settings stay local (shared ones are in .claude/settings.json)
 .claude/settings.local.json
 
-# Canvas API (SAM build output)
-canvas/.aws-sam/
+# Canvas API (CDK synth output)
+canvas/infra/cdk.out/

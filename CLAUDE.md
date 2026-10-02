@@ -43,7 +43,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the
   committed `classifications.json` (tag cache).
 - `canvas/` — event canvases API: the only live backend. One Lambda + one
-  DynamoDB table (AWS SAM, `template.yaml`), independent of `service/` and
+  DynamoDB table (AWS CDK in `canvas/infra/`), independent of `service/` and
   Neon. Deployed by `.github/workflows/deploy-canvas-api.yml` (branch → dev
   stack, `main` → prod).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),

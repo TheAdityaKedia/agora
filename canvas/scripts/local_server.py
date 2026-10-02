@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "canvas" / "api"))
 
 
 def create_table(client, name):
-    """The table template.yaml defines, for moto / local use."""
+    """The table canvas/infra/stacks.py defines, for moto / local use."""
     client.create_table(
         TableName=name,
         BillingMode="PAY_PER_REQUEST",

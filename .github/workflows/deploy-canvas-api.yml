@@ -1,9 +1,11 @@
 name: Deploy canvas API
 
-# Event canvases backend (canvas/). Tests on every push that touches it; then
-# deploys with SAM: a branch → stack agora-canvas-dev, main → agora-canvas-prod.
-# The deploy job is skipped until the one-time AWS setup in canvas/README.md
-# has set the CANVAS_DEPLOY_ROLE_ARN repo variable.
+# Event canvases backend (canvas/), infrastructure as code with CDK
+# (canvas/infra). Every push that touches canvas/ runs the tests and a synth;
+# then `cdk deploy`: a branch → AgoraCanvasDev (smoke-tested),
+# main → AgoraCanvasProd + AgoraCanvasCi (the deploy role itself).
+# The deploy job is skipped until the one-time bootstrap in canvas/README.md
+# has created the role and set the CANVAS_DEPLOY_ROLE_ARN repo variable.
 
 on:
   push:
@@ -15,6 +17,9 @@ on:
 permissions:
   contents: read
 
+env:
+  CDK_CLI: aws-cdk@2.1144.0
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,11 +29,15 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: canvas/requirements-dev.txt
-      - run: pip install -r canvas/requirements-dev.txt cfn-lint
+          cache-dependency-path: |
+            canvas/requirements-dev.txt
+            canvas/infra/requirements.txt
+      - run: pip install -r canvas/requirements-dev.txt
       - run: python -m pytest -q
         working-directory: canvas
-      - run: cfn-lint canvas/template.yaml canvas/bootstrap.yaml
+      - name: CDK synth
+        working-directory: canvas/infra
+        run: npx -y "$CDK_CLI" synth --quiet
 
   deploy:
     needs: test
@@ -38,7 +47,7 @@ jobs:
       contents: read
       id-token: write  # AWS OIDC
     env:
-      STAGE: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+      STAGE: ${{ github.ref == 'refs/heads/main' && 'Prod' || 'Dev' }}
     concurrency:
       group: canvas-api-${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
       cancel-in-progress: false
@@ -47,42 +56,30 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      - uses: aws-actions/setup-sam@v2
-        with:
-          use-installer: true
+          cache: pip
+          cache-dependency-path: canvas/infra/requirements.txt
+      - run: pip install -r canvas/infra/requirements.txt
       - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.CANVAS_DEPLOY_ROLE_ARN }}
           # Not secrets.AWS_REGION: that one is scoped to the `production`
           # environment (main-only), which this job deliberately doesn't use.
-          aws-region: ${{ vars.CANVAS_AWS_REGION || 'us-east-1' }}
-      - name: Build
-        working-directory: canvas
-        run: sam build
-      - name: Deploy
-        working-directory: canvas
+          aws-region: us-east-1
+      - name: CDK deploy
+        working-directory: canvas/infra
         env:
-          IP_SALT: ${{ secrets.CANVAS_IP_SALT }}
-          BUDGET_EMAIL: ${{ vars.CANVAS_BUDGET_EMAIL }}
+          CANVAS_IP_SALT: ${{ secrets.CANVAS_IP_SALT }}
+          CANVAS_BUDGET_EMAIL: ${{ vars.CANVAS_BUDGET_EMAIL }}
+          CANVAS_RESERVED_CONCURRENCY: ${{ vars.CANVAS_RESERVED_CONCURRENCY }}
         run: |
-          localhost=false
-          [ "$STAGE" = dev ] && localhost=true
-          sam deploy \
-            --stack-name "agora-canvas-$STAGE" \
-            --s3-bucket "${{ vars.CANVAS_ARTIFACT_BUCKET }}" \
-            --s3-prefix "agora-canvas-$STAGE" \
-            --capabilities CAPABILITY_IAM \
-            --no-confirm-changeset --no-fail-on-empty-changeset \
-            --parameter-overrides \
-              "Stage=$STAGE" \
-              "AllowLocalhost=$localhost" \
-              "IpHashSalt=$IP_SALT" \
-              "BudgetEmail=$BUDGET_EMAIL" \
-              "ReservedConcurrency=${{ vars.CANVAS_RESERVED_CONCURRENCY || '10' }}"
-          url=$(aws cloudformation describe-stacks --stack-name "agora-canvas-$STAGE" \
-            --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" --output text)
+          stacks="AgoraCanvas$STAGE"
+          [ "$STAGE" = Prod ] && stacks="$stacks AgoraCanvasCi"
+          # shellcheck disable=SC2086
+          npx -y "$CDK_CLI" deploy $stacks --require-approval never \
+            --outputs-file "$RUNNER_TEMP/outputs.json"
+          url=$(jq -r ".AgoraCanvas$STAGE.ApiUrl" "$RUNNER_TEMP/outputs.json")
           echo "API_URL=${url%/}" >> "$GITHUB_ENV"
           echo "Canvas API ($STAGE): $url" >> "$GITHUB_STEP_SUMMARY"
       - name: Smoke test (dev only)
-        if: env.STAGE == 'dev'
+        if: env.STAGE == 'Dev'
         run: python canvas/scripts/smoke.py "$API_URL"

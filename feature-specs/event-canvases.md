@@ -218,8 +218,7 @@ winner item clears `winner_item_id`.
 canvas/                     # new; independent of service/ (no scraper deps)
   api/handler.py            # routing, validation, DynamoDB access
   api/snapshot.py           # events.json fetch/cache → snapshot
-  template.yaml             # AWS SAM: function + URL, table, TTL, budget, log group
-  bootstrap.yaml            # one-time: GitHub OIDC deploy role + artifact bucket
+  infra/                    # AWS CDK (Python): API stacks (dev/prod) + CI deploy-role stack
   scripts/local_server.py   # run the API locally (moto or a real table)
   scripts/smoke.py          # post-deploy create → add → vote → read
   scripts/admin.py          # operator delete / inspect
@@ -233,15 +232,19 @@ Shared client code (client id, name prompt, API wrapper, my-canvases) is
 small enough to duplicate inline in both pages rather than introduce a build
 step; keep the two copies identical and note it in a comment.
 
-**Deploy:** `deploy-canvas-api.yml` runs `sam deploy` on pushes touching
-`canvas/` — branch → `dev` stack, `main` → `prod` stack. AWS auth via GitHub
-OIDC → an IAM role scoped to the two stacks (no long-lived keys). The prod
+**Deploy:** infrastructure is code (AWS CDK, Python, `canvas/infra/`), so an
+infra change ships like any other change. `deploy-canvas-api.yml` runs
+`cdk deploy` on pushes touching `canvas/` — branch → `AgoraCanvasDev`,
+`main` → `AgoraCanvasProd` + `AgoraCanvasCi` (the deploy role itself). AWS
+auth via GitHub OIDC (no long-lived keys); the only manual step ever is the
+one-time `cdk bootstrap` + first `cdk deploy AgoraCanvasCi` (CDK chosen over
+SAM YAML + a hand-uploaded bootstrap template at the owner's request). The prod
 Function URL is a constant in both pages; on `localhost` an `?api=` override
 points at dev or a local server.
 
 ## Phases
 
-1. **Backend** — `canvas/` handler + SAM template + moto tests; deploy the
+1. **Backend** — `canvas/` handler + CDK stacks + moto tests; deploy the
    `dev` stack from the branch; smoke-test with curl.
 2. **Canvas page** — `canvas.html`: view, vote, comments, note, winner +
    calendar, custom items, remove/restore, activity, polling.
