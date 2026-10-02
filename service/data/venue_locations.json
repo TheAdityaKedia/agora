@@ -13,8 +13,7 @@
       "venue": "1070-bryant-st"
     },
     "110 yacht rd, san francisco, ca": {
-      "place": "region",
-      "region": "sf"
+      "venue": "110-yacht-rd"
     },
     "1250 thomas ave, san francisco, ca": {
       "venue": "1250-thomas-ave"
@@ -532,8 +531,7 @@
       "venue": "grace-cathedral"
     },
     "grace cathedral, 1100 california st, san francisco": {
-      "place": "region",
-      "region": "sf"
+      "venue": "grace-cathedral"
     },
     "gray area theater, 2665 mission st, san francisco": {
       "venue": "gray-area"
@@ -551,8 +549,7 @@
       "venue": "green-apple-books-on-the-park"
     },
     "guildhouse, 420 first st, san jose, ca": {
-      "place": "region",
-      "region": "southbay"
+      "venue": "guildhouse"
     },
     "harry's bar, 2020 fillmore st, san francisco, ca": {
       "venue": "harrys-bar"
@@ -625,15 +622,7 @@
       "venue": "lost-marbles"
     },
     "lost marbles brewpub, 2202 de la vina street, san francisco, ca": {
-      "pending": {
-        "events": 4,
-        "first_seen": "2026-10-02",
-        "last_tried": "2026-10-02",
-        "reason": "no map result in the Bay Area",
-        "sources": [
-          "SF Bar Guide"
-        ]
-      }
+      "venue": "lost-marbles-brewpub"
     },
     "madrone art bar, 500 divisadero st, san francisco, ca": {
       "venue": "madrone-art-bar"
@@ -803,8 +792,7 @@
       "venue": "paris-75"
     },
     "patriot house pub, 2 embarcadero center, san francisco, 94111, san francisco, ca": {
-      "place": "region",
-      "region": "sf"
+      "venue": "patriot-house-pub"
     },
     "pegasus books, 2349 shattuck ave, berkeley, ca": {
       "venue": "pegasus-books"
@@ -813,8 +801,7 @@
       "venue": "pier-23-cafe"
     },
     "potrero del sol park (la raza), portrero avenue and 25th street, san francisco, ca": {
-      "place": "region",
-      "region": "sf"
+      "venue": "potrero-del-sol-park"
     },
     "presidio theatre, 99 moraga ave, san francisco, ca": {
       "venue": "presidio-theatre"
@@ -1178,8 +1165,7 @@
       "venue": "the-green-heron"
     },
     "the green room, san francisco, ca": {
-      "place": "region",
-      "region": "sf"
+      "venue": "the-green-room"
     },
     "the hotel utah saloon, 500 4th street, san francisco, 94107, san francisco, ca": {
       "venue": "hotel-utah-saloon"
@@ -1304,8 +1290,7 @@
       "venue": "war-memorial-opera-house"
     },
     "washington square park, filbert & stockton st, san francisco, ca": {
-      "place": "region",
-      "region": "sf"
+      "venue": "washington-square-park"
     },
     "werkshack, 481 25th street, oakland": {
       "venue": "werkshack"
