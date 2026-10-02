@@ -613,13 +613,20 @@
     return words.join(" ");
   }
 
-  const events = (data.events || []).map((e, i) => ({
-    ...e,
-    _start: new Date(e.start_time),
-    id: i,
-    sources_text: (e.sources || []).join(" "),
-    tags_text: tagsText(e),
-  }));
+  // Never show events that have already started. The manifest is pruned by
+  // calendar day, so it still carries today's earlier events; drop them here
+  // (before indexing, so counts and search agree) and again at each render
+  // for a page left open.
+  const loadedAt = Date.now();
+  const events = (data.events || [])
+    .filter(e => !(new Date(e.start_time) < loadedAt))
+    .map((e, i) => ({
+      ...e,
+      _start: new Date(e.start_time),
+      id: i,
+      sources_text: (e.sources || []).join(" "),
+      tags_text: tagsText(e),
+    }));
 
   // The search index. Indexing ~5k descriptions blocks a phone for seconds,
   // so it's filled in chunks after the first render (buildIndex), not here.
@@ -1369,7 +1376,9 @@
 
   function render() {
     writeStateToUrl();
+    const now = new Date();
     const otherFiltersPass = (ev) => {
+      if (ev._start < now) return false;
       const evSources = ev.sources || [];
       if (!evSources.some(s => selected.has(s))) return false;
       if (dateFrom && ev._start < dateFrom) return false;

@@ -68,6 +68,11 @@ def _events(n=N_EVENTS):
         out.append({**out[0], "id": f"busy{i}", "title": f"Busy day show {i}",
                     "url": f"https://example.com/busy/{i}",
                     "start_time": (busy_start + timedelta(minutes=10 * i)).isoformat()})
+    # Started an hour ago: still in the manifest (it's pruned by calendar day)
+    # but must never show.
+    out.append({**out[0], "id": "started", "title": "Already started",
+                "url": "https://example.com/started",
+                "start_time": (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()})
     out.sort(key=lambda e: e["start_time"])
     # Unbreakable strings that used to widen the page past a phone screen.
     out[0]["title"] = "BATIASHVILI/CAPUÇON/THIBAUDET/TRIO/" * 3
@@ -281,3 +286,12 @@ def test_single_day_results_are_not_capped(browser, site):
     page = _open(browser, site, DESKTOP, query=f"?from={key}&to={key}")
     assert _rendered(page) == 4 + BUSY
     assert page.locator(".day-more").count() == 0
+
+
+def test_started_events_never_show(browser, site):
+    page = _open(browser, site, DESKTOP)
+    assert page.locator(".event", has_text="Already started").count() == 0
+    assert f"{TOTAL:,} upcoming events" in page.inner_text("#meta")
+    page.fill("#search-input", "already started")
+    page.wait_for_timeout(600)
+    assert page.locator(".event", has_text="Already started").count() == 0
