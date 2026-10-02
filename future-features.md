@@ -10,6 +10,10 @@ here.
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)
   (early design; open decisions to settle first).
+- **Event canvases** — make a shareable shortlist of events for a hangout;
+  anyone with the link adds events, votes 👍 by name, comments, and picks a
+  winner. Agora's first live backend (AWS Lambda + DynamoDB).
+  Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md).
 - **Frontend payload scaling** — the browser downloads all of `events.json` and
   builds the search index on load; past ~5k events ship a prebuilt index and/or
   paginate / lazy-load the manifest. Spec: not written.
