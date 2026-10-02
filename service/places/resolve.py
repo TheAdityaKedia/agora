@@ -128,11 +128,23 @@ class Resolver:
         seg = city_segment(location)
         outside_city = seg if seg and not city else None
         reasons = []
+        coarse = []  # street/city-level matches: a fallback, never a first answer
         for query, expect in self._queries(location, vp, home):
             for place in self.geo.search(query):
-                out = self._judge(location, vp, room, expect, place, city, home, reasons)
+                out = self._judge(location, vp, room, expect, place, city, home, reasons, coarse)
                 if out:
                     return out
+        if coarse:
+            # No building-level match from any query ("Guildhouse, 420 First
+            # St" first hit an office park; the name query found the building).
+            place, region, evidence = coarse[0]
+            if _is_specific(vp):
+                # A named place or a street address whose building OpenStreetMap
+                # doesn't have: still a venue, just without a precise pin.
+                return self._rough_venue(location, vp, room, place, region, evidence)
+            # An intersection or a neighbourhood: the region is all we know.
+            return Outcome(location, "region", {"place": "region", "region": region},
+                           evidence=evidence)
         if outside_city and any(r.startswith("outside:") for r in reasons):
             # The text names a city outside the Bay Area and the map agrees.
             return Outcome(location, "outside", {"place": "outside"},
@@ -173,7 +185,7 @@ class Resolver:
                 uniq.append((q, e))
         return uniq
 
-    def _judge(self, location, vp, room, expect, place: Place, city, home, reasons) -> Outcome | None:
+    def _judge(self, location, vp, room, expect, place: Place, city, home, reasons, coarse) -> Outcome | None:
         """Apply the evidence rules to one map result; None (with a reason
         appended) when it isn't good enough."""
         county = county_at(place.lat, place.lng)
@@ -198,10 +210,10 @@ class Resolver:
             evidence.append(f"source home: {home}")
 
         if place.precision != "building":
-            if city:
-                return Outcome(location, "region", {"place": "region", "region": region},
-                               evidence=evidence)
-            reasons.append(f"only a {place.precision}-level map match ({label!r}) and no city in the text")
+            if not city:
+                reasons.append(f"only a {place.precision}-level map match ({label!r}) and no city in the text")
+            else:
+                coarse.append((place, region, evidence))
             return None
 
         name_ok = place.is_poi and names_match(expect, place.name)
@@ -243,7 +255,7 @@ class Resolver:
         nearby = [vid for _, vid in self.store.near(place.lat, place.lng, 250)]
         fields = {
             "name": name,
-            "address": place.street_address(),
+            "address": _best_address(location, place),
             "lat": round(place.lat, 6), "lng": round(place.lng, 6),
             "precision": "building",
             "region": region,
@@ -255,3 +267,47 @@ class Resolver:
             fields["possible_duplicates"] = nearby
         vid = self.store.add_venue(fields)
         return Outcome(location, "new", {"venue": vid, **entry_extra}, evidence=evidence)
+
+    def _rough_venue(self, location, vp, room, place, region, evidence) -> Outcome:
+        """A venue from a street- or city-level match: coordinates only when
+        they're at least on the right street, never a city centroid."""
+        fields = {
+            "name": vp,
+            "address": _text_address(location) or "",
+            "precision": place.precision,
+            "region": region,
+            "status": "auto",
+            "evidence": evidence,
+        }
+        if place.precision == "street":
+            fields.update(lat=round(place.lat, 6), lng=round(place.lng, 6))
+        vid = self.store.add_venue(fields)
+        entry = {"venue": vid, **({"room": room} if room else {})}
+        return Outcome(location, "new", entry, evidence=evidence)
+
+
+def _text_address(location: str) -> str | None:
+    """The street address as the source wrote it ("770 West Grand Ave.,
+    Suite A, Oakland"), or None."""
+    m = _ADDRESS.search(location)
+    return re.sub(r"(,\s*(USA|United States))+$", "", m.group(1).strip(), flags=re.I) if m else None
+
+
+def _best_address(location: str, place: Place) -> str:
+    """OpenStreetMap's address when it has the house number; otherwise the
+    source's own street address (OSM often pins a venue on a street without
+    a number: "West Grand Avenue" for 770 West Grand Ave)."""
+    if place.address.get("house_number"):
+        return place.street_address()
+    return _text_address(location) or place.street_address()
+
+
+def _is_specific(vp: str) -> bool:
+    """A name or a street address — not an intersection ("Montana St &
+    Fruitvale Ave") or a bare street."""
+    if re.search(r"\s(&|and|at)\s", vp, re.I) and re.search(r"\b(st|ave|blvd|rd|street|avenue)\b", vp, re.I):
+        return False
+    if re.match(r"^\d", vp):
+        return True  # "110 Yacht Rd"
+    return bool(re.search(r"[A-Za-z]", vp)) and not re.fullmatch(
+        r"[\w\s.'-]*\b(st|ave|blvd|rd|way|street|avenue|boulevard|road|drive|dr)\.?", vp, re.I)

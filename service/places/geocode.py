@@ -20,6 +20,10 @@ USER_AGENT = "Agora-event-aggregator/1.0 (+https://github.com/TheAdityaKedia/ago
 BAY_AREA_VIEWBOX = "-123.65,38.87,-121.20,36.89"
 
 
+_POI_CATEGORIES = {"amenity", "leisure", "tourism", "shop", "historic", "building",
+                   "office", "club", "craft"}
+
+
 @dataclass
 class Place:
     """One Nominatim result, reduced to what resolution needs."""
@@ -48,13 +52,17 @@ class Place:
         """building (a POI or house number) · street · city (area centroid)."""
         if self.place_rank >= 28 or self.address.get("house_number"):
             return "building"
+        # A named park, museum, bar…: OSM ranks parks below buildings, but
+        # the point is the place itself, not an area around it.
+        if self.name and self.place_rank >= 22 and self.category in _POI_CATEGORIES:
+            return "building"
         if self.place_rank >= 26:
             return "street"
         return "city"
 
     @property
     def is_poi(self) -> bool:
-        return bool(self.name) and self.place_rank >= 28 and self.category not in ("place", "boundary", "highway")
+        return bool(self.name) and self.precision == "building" and self.category not in ("place", "boundary", "highway", "landuse")
 
     def street_address(self) -> str:
         a = self.address

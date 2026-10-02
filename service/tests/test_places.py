@@ -186,12 +186,47 @@ def test_street_number_plus_source_home_is_accepted(store):
     assert "street number matches" in out.evidence and "source home: sf" in out.evidence
 
 
-def test_city_level_match_gives_region_only_when_text_agrees(store):
-    q1, q2 = "Somewhere, Oakland, CA", "Somewhere vague"
+def test_city_level_match_needs_a_city_in_the_text(store):
+    q = "Somewhere vague"
     city_result = nominatim("Oakland", *MIGHTY, rank=16, category="place", type_="city", city="Oakland")
-    r = resolver(store, {q1: [city_result], q2: [city_result]})
-    assert r.resolve(q1).entry == {"place": "region", "region": "eastbay"}
-    assert r.resolve(q2).action == "pending"
+    assert resolver(store, {q: [city_result]}).resolve(q).action == "pending"
+
+
+def test_intersection_with_street_level_match_is_region_only(store):
+    q = "Montana St & Fruitvale Ave, Oakland, CA"
+    street = nominatim("Montana Street", *MIGHTY, rank=26, category="highway", type_="residential", city="Oakland")
+    assert resolver(store, {q: [street]}).resolve(q).entry == {"place": "region", "region": "eastbay"}
+
+
+def test_named_place_with_street_level_match_is_a_rough_venue(store):
+    q = "Washington Square Park, Filbert & Stockton St, San Francisco, CA 94133"
+    street = nominatim("Filbert Street", *SPECS, rank=26, category="highway", type_="residential")
+    out = resolver(store, {q: [street]}).resolve(q, ["Partiful"])
+    v = store.venues[out.entry["venue"]]
+    assert v["name"] == "Washington Square Park" and v["precision"] == "street" and v["region"] == "sf"
+    assert "lat" in v
+    # A city-level match: a venue, but no coordinates (a city centroid is no pin).
+    q2 = "The Green Room, San Francisco, CA"
+    city = nominatim("San Francisco", *SFJAZZ, rank=16, category="place", type_="city")
+    out2 = resolver(store, {q2: [city]}).resolve(q2, ["Herbst / Davies (SF War Memorial)"])
+    v2 = store.venues[out2.entry["venue"]]
+    assert v2["name"] == "The Green Room" and v2["precision"] == "city" and "lat" not in v2
+    assert store.validate() == []
+
+
+def test_address_only_with_street_level_match_is_a_venue(store):
+    q = "110 Yacht Rd, San Francisco, CA 94123"
+    street = nominatim("Yacht Road", 37.8070, -122.4450, rank=26, category="highway", type_="service")
+    out = resolver(store, {q: [street]}).resolve(q, ["Partiful"])
+    assert out.action == "new" and store.venues[out.entry["venue"]]["name"] == "110 Yacht Rd"
+
+
+def test_address_comes_from_the_text_when_osm_has_no_house_number(store):
+    q = "Transmission Gallery, 770 West Grand Ave., Suite A, Oakland"
+    poi = nominatim("Transmission Gallery", *MIGHTY, category="tourism", type_="gallery",
+                    road="West Grand Avenue", city="Oakland")
+    out = resolver(store, {q: [poi]}).resolve(q, ["Oakland Art Murmur"])
+    assert store.venues[out.entry["venue"]]["address"] == "770 West Grand Ave., Suite A, Oakland"
 
 
 def test_room_of_known_venue_needs_no_lookup(store):
@@ -353,3 +388,25 @@ def test_name_in_another_script_uses_the_map_name(store):
     out = resolver(store, resp).resolve(q, ["Partiful"])
     assert out.entry["venue"] == "san-francisco-ferry-building"
     assert store.venues["san-francisco-ferry-building"]["name"] == "San Francisco Ferry Building"
+
+
+def test_coarse_match_waits_for_a_building_level_one(store):
+    q = "Guildhouse, 420 First St, San Jose, CA 95113, USA"
+    office = nominatim("North First Street Office Center", 37.38312, -121.92372, rank=20,
+                       category="place", type_="neighbourhood", city="San Jose")
+    poi = nominatim("Guildhouse", 37.32969, -121.88549, category="amenity", type_="bar",
+                    house="420", road="South 1st Street", city="San Jose")
+    resp = {q: [office], "420 First St, San Jose, CA 95113": [office], "Guildhouse": [poi]}
+    out = resolver(store, resp).resolve(q, ["Big Brain Lectures — Bay Area"])
+    assert out.action == "new"
+    v = store.venues[out.entry["venue"]]
+    assert v["name"] == "Guildhouse" and v["precision"] == "building" and v["region"] == "southbay"
+
+
+def test_named_park_counts_as_a_precise_place():
+    park = Place.from_json(nominatim("Washington Square Park", *SPECS, rank=24,
+                                     category="leisure", type_="park"))
+    assert park.precision == "building" and park.is_poi
+    area = Place.from_json(nominatim("Embarcadero Center 2", *SPECS, rank=24,
+                                     category="landuse", type_="commercial"))
+    assert area.precision != "building"
