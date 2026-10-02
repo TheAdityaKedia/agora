@@ -227,3 +227,19 @@ def test_location_click_filters_with_pill(browser, site):
     assert "261 Columbus Ave" in page.inner_text("#active-filters")
     assert "loc=" in page.url
     assert all("Poetry" in t for t in page.locator(".event .title").all_inner_texts())
+
+
+def test_desktop_shows_filters_as_sidebar(browser, site):
+    page = _open(browser, site, DESKTOP)
+    assert page.locator("#filters").is_visible()
+    assert not page.locator("#filters-btn").is_visible()
+    sidebar = page.locator("#filters").bounding_box()
+    first = page.locator(".event").first.bounding_box()
+    assert sidebar["x"] + sidebar["width"] <= first["x"]
+
+
+def test_slash_focuses_search_and_meta_is_relative(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.keyboard.press("/")
+    assert page.evaluate("document.activeElement.id") == "search-input"
+    assert "Updated" in page.inner_text("#meta")

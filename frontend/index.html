@@ -335,6 +335,41 @@
     .dropdown-item .only-btn { padding: 4px 10px; }
   }
 
+  /* --- Wide screens: the filter panel is a sticky sidebar, not a sheet. --- */
+  @media (min-width: 1024px) {
+    body {
+      max-width: 1120px; padding: 0 32px 64px;
+      display: grid; grid-template-columns: 260px minmax(0, 1fr);
+      column-gap: 48px; align-items: start;
+    }
+    header.masthead { grid-column: 1 / -1; padding: 28px 0 12px; }
+    .topbar { grid-column: 2; grid-row: 2; }
+    main { grid-column: 2; grid-row: 3; }
+    .filters, .filters.open {
+      grid-column: 1; grid-row: 2 / span 2;
+      position: sticky; top: 0; z-index: auto;
+      max-height: 100vh; overflow-y: auto;
+      transform: none; visibility: visible; transition: none;
+      border-radius: 0; box-shadow: none; padding: 0 4px 24px 0;
+      background: transparent;
+    }
+    .sheet-head { background: var(--bg); padding-top: 8px; }
+    .filters-btn, .sheet-foot, .sheet-backdrop { display: none !important; }
+    body.sheet-open { overflow: visible; }
+    .dropdown-scroll { max-height: 40vh; }
+    .date-fields { grid-template-columns: 1fr; }
+  }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #search-input:focus-visible, .dropdown-search input:focus-visible { outline: none; }
+  kbd {
+    font: inherit; font-size: 12px; padding: 0 5px;
+    border: 1px solid var(--border); border-radius: 4px; color: var(--muted);
+  }
+  .shortcut-hint { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+  @media (pointer: coarse) { .shortcut-hint { display: none; } }
+  .meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
+
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
   .error { color: #c33; }
   /* Placeholder rows while events.json downloads and parses. */
@@ -355,7 +390,7 @@
 
 <div class="topbar" id="topbar">
   <div class="search-line">
-    <input type="search" id="search-input" placeholder="Search events" aria-label="Search events" autocomplete="off" enterkeyhint="search">
+    <input type="search" id="search-input" placeholder="Search events, venues, topics" aria-label="Search events" autocomplete="off" enterkeyhint="search">
     <button type="button" class="filters-btn" id="filters-btn" aria-controls="filters" aria-expanded="false">Filters<span class="badge" id="filters-count" hidden></span></button>
   </div>
   <div class="presets" role="group" aria-label="Dates">
@@ -425,6 +460,7 @@
     <div class="filter-actions">
       <button id="copy-link" class="copy-btn" type="button">Copy link to this view</button>
     </div>
+    <p class="shortcut-hint" id="shortcut-hint">Press <kbd>/</kbd> to search.</p>
   </div>
   <div class="sheet-foot">
     <button type="button" class="done-btn" id="filters-done">Show events</button>
@@ -481,7 +517,8 @@
     if (!resp.ok) throw new Error("HTTP " + resp.status);
     data = await resp.json();
   } catch (e) {
-    list.innerHTML = '<div class="error">Couldn’t load events.json — ' + escapeHtml(e.message) + "</div>";
+    list.innerHTML = '<div class="error">Events didn’t load (' + escapeHtml(e.message)
+      + "). Check your connection and reload the page.</div>";
     return;
   }
 
@@ -563,6 +600,17 @@
   }
 
   const generatedAt = new Date(data.generated_at);
+  // "Updated 3 hours ago", with the exact time on hover.
+  const updatedHtml = (() => {
+    const mins = Math.round((Date.now() - generatedAt) / 60000);
+    if (!isFinite(mins)) return "";
+    const rtf = new Intl.RelativeTimeFormat(undefined, {numeric: "auto"});
+    const ago = mins < 60 ? rtf.format(-mins, "minute")
+      : mins < 48 * 60 ? rtf.format(-Math.round(mins / 60), "hour")
+      : rtf.format(-Math.round(mins / 1440), "day");
+    return '<span title="' + escapeHtml(generatedAt.toLocaleString()) + '">Updated '
+      + escapeHtml(ago) + "</span>";
+  })();
 
   // State — events carry a `sources` list (a physical event may be listed by
   // multiple sources), so counts and filtering consider every entry in that list.
@@ -1214,6 +1262,13 @@
   backdropEl.addEventListener("click", closeSheet);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeSheet();
+    // "/" jumps to search, unless you're already typing somewhere.
+    const typing = e.target.closest?.("input, textarea, select, [contenteditable]");
+    if (e.key === "/" && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      e.preventDefault();
+      searchEl.focus();
+      searchEl.select();
+    }
   });
 
   // Day headings stick just below the sticky search bar, whatever its height.
@@ -1246,7 +1301,7 @@
 
   if (events.length === 0) {
     list.innerHTML = '<div class="empty">No upcoming events.</div>';
-    meta.textContent = "updated " + generatedAt.toLocaleString();
+    meta.innerHTML = updatedHtml;
     return;
   }
   filters.hidden = false;
@@ -1294,8 +1349,9 @@
     }
 
     const isFiltered = filtered.length !== events.length;
-    meta.textContent = (isFiltered ? filtered.length + " of " + events.length : events.length)
-      + " upcoming events · updated " + generatedAt.toLocaleString();
+    const n = (x) => x.toLocaleString();
+    meta.innerHTML = "<span>" + (isFiltered ? n(filtered.length) + " of " + n(events.length)
+      : n(events.length)) + " upcoming events</span>" + updatedHtml;
     renderChrome(filtered, flat);
 
     if (filtered.length === 0) {
