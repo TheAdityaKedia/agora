@@ -3,41 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agora — SF Events</title>
+<title>Agora — Bay Area events</title>
+<meta name="description" content="Concerts, readings, screenings, talks and more around the Bay, in one calendar.">
+<meta name="theme-color" content="#eef1f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1822" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="./vendor/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Self-hosted (SIL OFL; licenses alongside). Latin subsets: other scripts
+     fall back to the system font via unicode-range. */
+  @font-face {
+    font-family: "Big Shoulders Display"; font-style: normal; font-weight: 100 900;
+    font-display: swap;
+    src: url(./vendor/fonts/big-shoulders-display-latin.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700;
+    font-display: swap;
+    src: url(./vendor/fonts/instrument-sans-latin.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* Palette: Bay fog, bay-navy ink, and International Orange (the Golden
+     Gate's paint) as the one accent. Times and day headings are set in a
+     condensed signage face, like a marquee; everything else stays quiet. */
   :root {
-    --fg: #1a1a1a;
-    --muted: #666;
-    --accent: #0057b7;
+    --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --fg: #13212e;
+    --muted: #55646e;
+    --accent: #c0362c;
     --accent-fg: #ffffff;
-    --bg: #fafaf7;
-    --chip-bg: #eeeeea;
-    --border: #e5e5e5;
-    --input-bg: #ffffff;
-    --sheet-shadow: 0 -8px 32px rgba(0,0,0,0.18);
+    --bg: #eef1f2;
+    --chip-bg: #dfe5e8;
+    --border: #d2dade;
+    --input-bg: #fafbfb;
+    --error: #a3281f;
+    --sheet-shadow: 0 -8px 32px rgba(19,33,46,0.22);
     /* Height of the sticky search bar; set from JS so day headings stick below it. */
     --sticky-top: 0px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --fg: #e8e8e8; --muted: #999; --accent: #7ab7ff; --accent-fg: #0a1a2a;
-      --bg: #111; --chip-bg: #222; --border: #2a2a2a; --input-bg: #1a1a1a;
+      --fg: #e4e9ec; --muted: #93a3ae; --accent: #f26b4a; --accent-fg: #0e1822;
+      --bg: #0e1822; --chip-bg: #1b2a37; --border: #243644; --input-bg: #15222e;
+      --error: #ff8a75; --sheet-shadow: 0 -8px 32px rgba(0,0,0,0.5);
     }
   }
   * { box-sizing: border-box; }
   /* Ensure the hidden attribute wins over `display: flex` set on filter rows. */
   [hidden] { display: none !important; }
   body {
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family: var(--font-body);
     color: var(--fg); background: var(--bg);
     max-width: 720px; margin: 0 auto; padding: 0 16px 48px;
     line-height: 1.5;
   }
   body.sheet-open { overflow: hidden; }
   button { font: inherit; }
-  header.masthead { padding: 20px 0 8px; }
-  h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; line-height: 1.1; }
-  .subtitle { color: var(--muted); margin-top: 2px; }
+  header.masthead { padding: 20px 0 6px; }
+  h1 {
+    margin: 0; font-family: var(--font-display); font-weight: 800;
+    font-size: 46px; line-height: 0.9; letter-spacing: 0.01em;
+  }
+  .subtitle { color: var(--muted); margin-top: 6px; }
 
   /* --- Sticky search bar: search + Filters button, then date presets. --- */
   .topbar {
@@ -224,16 +252,16 @@
     line-height: 1.15;
   }
   .day-btn .dow { font-size: 11px; color: var(--muted); }
-  .day-btn .dom { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .day-btn .dom { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1; }
   .day-btn:hover { border-color: var(--accent); }
 
   /* --- Event list --- */
   h2.date {
     margin: 28px 0 4px;
     padding: 8px 0 6px;
-    border-bottom: 2px solid var(--border);
-    font-size: 19px; letter-spacing: -0.01em;
-    color: var(--fg); font-weight: 700;
+    border-bottom: 2px solid var(--fg);
+    font-family: var(--font-display); font-size: 28px; line-height: 1.05;
+    letter-spacing: 0.01em; color: var(--fg); font-weight: 800;
     /* Stick just below the search bar so the day you're viewing stays visible. */
     position: sticky; top: var(--sticky-top); background: var(--bg); z-index: 5;
     scroll-margin-top: var(--sticky-top);
@@ -247,11 +275,17 @@
   }
   .event:last-child { border-bottom: none; }
   .event.no-thumb { grid-template-columns: minmax(0, 1fr); }
+  /* The marquee: times in the signage face, read before anything else. */
   .time {
-    grid-column: 1; color: var(--muted); font-variant-numeric: tabular-nums;
-    font-size: 14px; line-height: 1.3;
+    grid-column: 1; color: var(--fg);
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 22px; line-height: 1.1; letter-spacing: 0.01em;
   }
-  .time .td-date { font-weight: 600; color: var(--fg); margin-right: 6px; }
+  .time .ampm { font-size: 0.6em; margin-left: 0.15em; color: var(--muted); }
+  .time .td-date {
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    color: var(--muted); margin-right: 8px; letter-spacing: 0;
+  }
   .thumb {
     grid-column: 2; grid-row: 1 / span 2;
     width: 64px; height: 64px;
@@ -262,7 +296,7 @@
   /* overflow-wrap: long URLs and slash-joined titles otherwise widen the page
      past a phone screen (it then zooms out or scrolls sideways). */
   .details { grid-column: 1; min-width: 0; overflow-wrap: anywhere; }
-  .title { font-size: 17px; line-height: 1.3; margin-top: 2px; }
+  .title { font-size: 17px; line-height: 1.3; margin-top: 4px; }
   .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
   .title a:hover { color: var(--accent); text-decoration: underline; }
   .where { font-size: 14px; color: var(--muted); margin-top: 2px; }
@@ -289,8 +323,10 @@
   .location-btn:hover { color: var(--fg); text-decoration: underline; }
   @media (min-width: 600px) {
     .event, .event.no-thumb { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
-    .time { grid-column: 1; grid-row: 1 / span 2; padding-top: 3px; }
-    .time .td-date { display: block; margin: 0; }
+    .time { grid-column: 1; grid-row: 1 / span 2; font-size: 32px; line-height: 0.95; }
+    .time .ampm { display: block; margin: 2px 0 0; font-size: 14px; }
+    .time .td-date { display: block; margin: 0 0 2px; }
+    .title { margin-top: 0; }
     .details { grid-column: 2; grid-row: 1 / span 2; }
     .thumb { grid-column: 3; width: 80px; height: 80px; }
     body.searching .event { grid-template-columns: 120px minmax(0, 1fr) 80px; }
@@ -299,8 +335,8 @@
   /* --- Tag chips (type + topic), colored by axis/group via a per-chip hue.
      One --h drives text/border/bg; lightness flips by theme so chips read on
      both backgrounds. --- */
-  :root { --chip-s: 62%; --chip-l: 36%; }
-  @media (prefers-color-scheme: dark) { :root { --chip-s: 58%; --chip-l: 70%; } }
+  :root { --chip-s: 50%; --chip-l: 34%; }
+  @media (prefers-color-scheme: dark) { :root { --chip-s: 52%; --chip-l: 72%; } }
   .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
   .tag-chip {
     font: inherit; font-size: 12px; line-height: 1.4;
@@ -342,7 +378,8 @@
       display: grid; grid-template-columns: 260px minmax(0, 1fr);
       column-gap: 48px; align-items: start;
     }
-    header.masthead { grid-column: 1 / -1; padding: 28px 0 12px; }
+    header.masthead { grid-column: 1 / -1; padding: 32px 0 16px; }
+    h1 { font-size: 64px; }
     .topbar { grid-column: 2; grid-row: 2; }
     main { grid-column: 2; grid-row: 3; }
     .filters, .filters.open {
@@ -371,7 +408,7 @@
   .meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
 
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
-  .error { color: #c33; }
+  .error { color: var(--error); }
   /* Placeholder rows while events.json downloads and parses. */
   .skeleton { padding: 24px 0; }
   .skeleton-row { display: flex; gap: 16px; padding: 14px 0; }
@@ -385,7 +422,7 @@
 <body>
 <header class="masthead">
   <h1>Agora</h1>
-  <div class="subtitle">SF events, one calendar.</div>
+  <div class="subtitle">Events around the Bay, in one calendar.</div>
 </header>
 
 <div class="topbar" id="topbar">
@@ -957,14 +994,13 @@
     const day = String(d.getDate()).padStart(2, "0");
     return `${y}-${m}-${day}`;
   };
-  // Full date+time formatter for the search-active flat view. Declared here
+  // Date formatter for the search-active flat view. Declared here
   // (not next to renderFlat) so it's initialized before readStateFromUrl() —
   // a ?q= shared link triggers a search-active render during page load, which
   // calls renderFlat; a const declared later would still be in its temporal
   // dead zone at that point and throw, hanging the page on "Loading…".
   const flatDateFmt = new Intl.DateTimeFormat(undefined, {
     weekday: "short", month: "short", day: "numeric",
-    hour: "numeric", minute: "2-digit",
   });
   const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
   const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
@@ -1496,8 +1532,7 @@
         lastDayKey = key;
       }
       // The sticky day heading carries the date, so rows show only the time.
-      parts.push(renderEventRow(ev, '<span class="td-time">'
-        + escapeHtml(timeFmt.format(ev._start)) + "</span>"));
+      parts.push(renderEventRow(ev, timeHtml(ev._start)));
     }
     return parts.join("");
   }
@@ -1510,10 +1545,23 @@
   function renderFlat(events) {
     const parts = [];
     for (const ev of events) {
-      const when = escapeHtml(flatDateFmt.format(ev._start));
+      const when = '<span class="td-date">' + escapeHtml(flatDateFmt.format(ev._start))
+        + "</span>" + timeHtml(ev._start);
       parts.push(renderEventRow(ev, when));
     }
     return parts.join("");
+  }
+
+  // "7:30" with its "PM" in a separate span so it can be set smaller.
+  function timeHtml(d) {
+    let main = "", period = "";
+    for (const part of timeFmt.formatToParts(d)) {
+      if (part.type === "dayPeriod") period += part.value;
+      else main += part.value;
+    }
+    return '<span class="td-time">' + escapeHtml(main.trim())
+      + (period ? '<span class="ampm">' + escapeHtml(period.trim()) + "</span>" : "")
+      + "</span>";
   }
 })();
 
