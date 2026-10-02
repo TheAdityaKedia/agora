@@ -22,6 +22,10 @@ PHONE = {"width": 390, "height": 844}
 DESKTOP = {"width": 1440, "height": 900}
 TZ = "America/Los_Angeles"
 N_EVENTS = 400
+# One busy day (day 5) gets BUSY extra events, so it has 4 + BUSY.
+BUSY = 15
+DAY_CAP = 10
+TOTAL = N_EVENTS + BUSY
 
 TAXONOMY = {
     "version": 1,
@@ -59,6 +63,12 @@ def _events(n=N_EVENTS):
             "topics": ["jazz"] if jazz else ["poetry"],
             "cost": "unknown",
         })
+    busy_start = base + timedelta(days=5, hours=4)
+    for i in range(BUSY):
+        out.append({**out[0], "id": f"busy{i}", "title": f"Busy day show {i}",
+                    "url": f"https://example.com/busy/{i}",
+                    "start_time": (busy_start + timedelta(minutes=10 * i)).isoformat()})
+    out.sort(key=lambda e: e["start_time"])
     # Unbreakable strings that used to widen the page past a phone screen.
     out[0]["title"] = "BATIASHVILI/CAPUÇON/THIBAUDET/TRIO/" * 3
     out[1]["description"] = (
@@ -137,13 +147,15 @@ def test_no_horizontal_overflow_on_phone(browser, site):
 def test_renders_incrementally_and_loads_more_on_scroll(browser, site):
     page = _open(browser, site, DESKTOP)
     first = _rendered(page)
-    assert 0 < first < N_EVENTS
+    # Every row except the busy day's overflow, which waits for "Show more".
+    expected = TOTAL - (4 + BUSY - DAY_CAP)
+    assert 0 < first < expected
     for _ in range(40):
         page.mouse.wheel(0, 20000)
         page.wait_for_timeout(50)
-        if _rendered(page) == N_EVENTS:
+        if _rendered(page) == expected:
             break
-    assert _rendered(page) == N_EVENTS
+    assert _rendered(page) == expected
 
 
 def test_search_filters_and_ranks(browser, site):
@@ -177,7 +189,7 @@ def test_filter_sheet_opens_and_closes_on_phone(browser, site):
     assert not sheet.is_visible()
     page.click("#filters-btn")
     page.wait_for_selector("#filters.open")
-    assert "Show 400 events" in page.inner_text("#filters-done")
+    assert f"Show {TOTAL} events" in page.inner_text("#filters-done")
     page.click("#filters-done")
     page.wait_for_selector("#filters:not(.open)", state="attached")
     page.click("#filters-btn")
@@ -243,3 +255,29 @@ def test_slash_focuses_search_and_meta_is_relative(browser, site):
     page.keyboard.press("/")
     assert page.evaluate("document.activeElement.id") == "search-input"
     assert "Updated" in page.inner_text("#meta")
+
+
+def _busy_day(page):
+    return page.locator("section.day", has_text="Busy day show 0")
+
+
+def test_day_capped_with_show_more(browser, site):
+    page = _open(browser, site, DESKTOP)
+    day = _busy_day(page)
+    day.scroll_into_view_if_needed()
+    assert day.locator(".event").count() == DAY_CAP
+    more = day.locator(".day-more")
+    assert more.inner_text().startswith(f"Show {4 + BUSY - DAY_CAP} more on ")
+    more.click()
+    assert day.locator(".event").count() == 4 + BUSY
+    assert day.locator(".day-more").count() == 0
+    # Other days are unaffected.
+    assert page.locator("section.day").first.locator(".event").count() == 4
+
+
+def test_single_day_results_are_not_capped(browser, site):
+    page = _open(browser, site, DESKTOP)
+    key = _busy_day(page).get_attribute("data-day")
+    page = _open(browser, site, DESKTOP, query=f"?from={key}&to={key}")
+    assert _rendered(page) == 4 + BUSY
+    assert page.locator(".day-more").count() == 0

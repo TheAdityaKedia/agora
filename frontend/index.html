@@ -273,7 +273,14 @@
     column-gap: 12px;
     padding: 14px 0; border-bottom: 1px solid var(--border);
   }
-  .event:last-child { border-bottom: none; }
+  .day .event:last-of-type { border-bottom: none; }
+  .day-more {
+    display: block; width: 100%; margin: 4px 0 8px; padding: 10px 14px;
+    border-radius: 8px; cursor: pointer;
+    background: transparent; color: var(--accent);
+    border: 1px solid var(--border); font-weight: 600;
+  }
+  .day-more:hover { border-color: var(--accent); }
   .event.no-thumb { grid-template-columns: minmax(0, 1fr); }
   /* The marquee: times in the signage face, read before anything else. */
   .time {
@@ -1008,24 +1015,38 @@
   const stripDowFmt = new Intl.DateTimeFormat(undefined, { weekday: "short" });
   const stripMonthFmt = new Intl.DateTimeFormat(undefined, { month: "short" });
   const DAY_STRIP_MAX = 90;
+  const dowFmt = new Intl.DateTimeFormat(undefined, { weekday: "long" });
 
-  // Incremental rendering: render() hands the filtered events to a queue and
-  // rows are built CHUNK at a time as the sentinel nears the viewport.
+  // Incremental rendering: render() hands the results to a queue and about
+  // CHUNK rows are built at a time as the sentinel nears the viewport.
   // Rendering all ~5k rows (~100k nodes) took seconds per filter change on a
-  // phone. Declared here, before readStateFromUrl(), for the same TDZ reason
-  // as flatDateFmt.
+  // phone. In the grouped view the queue holds days ({key, date, events}),
+  // each showing at most DAY_CAP rows until its "Show more" is pressed; in
+  // the search view it holds events. Declared here, before
+  // readStateFromUrl(), for the same TDZ reason as flatDateFmt.
   const CHUNK = 60;
-  let queue = [], queuePos = 0, queueFlat = false, lastDayKey = null;
+  const DAY_CAP = 10;
+  let queue = [], queuePos = 0, queueFlat = false, dayCap = DAY_CAP;
   const sentinel = document.createElement("div");
   sentinel.className = "sentinel";
   const io = new IntersectionObserver((entries) => {
     if (entries.some(e => e.isIntersecting)) renderMore();
   }, {rootMargin: "0px 0px 1500px 0px"});
   function renderMore() {
-    const end = Math.min(queuePos + CHUNK, queue.length);
-    const slice = queue.slice(queuePos, end);
-    sentinel.insertAdjacentHTML("beforebegin", queueFlat ? renderFlat(slice) : renderList(slice));
-    queuePos = end;
+    let html = "";
+    if (queueFlat) {
+      const end = Math.min(queuePos + CHUNK, queue.length);
+      html = renderFlat(queue.slice(queuePos, end));
+      queuePos = end;
+    } else {
+      let rows = 0;
+      while (queuePos < queue.length && rows < CHUNK) {
+        const day = queue[queuePos++];
+        html += renderDay(day);
+        rows += Math.min(day.events.length, dayCap);
+      }
+    }
+    sentinel.insertAdjacentHTML("beforebegin", html);
     // Re-observing delivers a fresh intersection check, so this keeps
     // filling until the sentinel is a screen and a half below the fold.
     io.unobserve(sentinel);
@@ -1328,7 +1349,7 @@
   dayStripEl.addEventListener("click", (e) => {
     const btn = e.target.closest(".day-btn");
     if (!btn) return;
-    const idx = queue.findIndex(ev => toISODate(ev._start) === btn.dataset.day);
+    const idx = queue.findIndex(day => day.key === btn.dataset.day);
     if (idx < 0) return;
     while (queuePos <= idx) renderMore();
     list.querySelector('h2.date[data-day="' + btn.dataset.day + '"]')
@@ -1394,7 +1415,11 @@
       list.innerHTML = '<div class="empty">No events match. Remove a filter or try a different search.</div>';
       return;
     }
-    queue = filtered; queuePos = 0; queueFlat = flat; lastDayKey = null;
+    queuePos = 0; queueFlat = flat;
+    queue = flat ? filtered : groupByDay(filtered);
+    // A single day's results (Today, Tomorrow, a one-day range) show in full:
+    // the reader already chose that day.
+    dayCap = !flat && queue.length === 1 ? Infinity : DAY_CAP;
     list.innerHTML = "";
     list.appendChild(sentinel);
     renderMore();
@@ -1519,23 +1544,53 @@
     );
   }
 
-  // One chunk of the grouped-by-day view. A day heading is emitted whenever
-  // the day changes — lastDayKey carries across chunks so a day split
-  // between two chunks gets one heading.
-  function renderList(chunk) {
-    const parts = [];
-    for (const ev of chunk) {
+  // Time-sorted events → [{key, date, events}] per local calendar day.
+  function groupByDay(evs) {
+    const days = [];
+    for (const ev of evs) {
       const key = toISODate(ev._start);
-      if (key !== lastDayKey) {
-        parts.push('<h2 class="date" data-day="' + key + '">'
-          + escapeHtml(dateFmt.format(ev._start)) + "</h2>");
-        lastDayKey = key;
-      }
-      // The sticky day heading carries the date, so rows show only the time.
-      parts.push(renderEventRow(ev, timeHtml(ev._start)));
+      const last = days[days.length - 1];
+      if (last && last.key === key) last.events.push(ev);
+      else days.push({key, date: ev._start, events: [ev]});
     }
-    return parts.join("");
+    return days;
   }
+
+  // The sticky day heading carries the date, so rows show only the time.
+  // (A function declaration, not a const: render() runs during
+  // readStateFromUrl(), before this line, and a const would still be in its
+  // temporal dead zone.)
+  function dayRows(evs) {
+    return evs.map(ev => renderEventRow(ev, timeHtml(ev._start))).join("");
+  }
+
+  // One day of the grouped view: heading, its first dayCap rows, and a
+  // button for the rest.
+  function renderDay(day) {
+    const rest = day.events.length - dayCap;
+    return '<section class="day" data-day="' + day.key + '">'
+      + '<h2 class="date" data-day="' + day.key + '">' + escapeHtml(dateFmt.format(day.date)) + "</h2>"
+      + dayRows(day.events.slice(0, dayCap))
+      + (rest > 0
+        ? '<button type="button" class="day-more" data-day="' + day.key + '">Show ' + rest
+          + " more on " + escapeHtml(dowFmt.format(day.date)) + "</button>"
+        : "")
+      + "</section>";
+  }
+
+  // "Show N more" expands that day in place.
+  list.addEventListener("click", (e) => {
+    const btn = e.target.closest(".day-more");
+    if (!btn) return;
+    const day = queue.find(d => d.key === btn.dataset.day);
+    if (!day) return;
+    btn.insertAdjacentHTML("beforebegin", dayRows(day.events.slice(dayCap)));
+    // Keep keyboard focus in the list: move it to the first revealed event.
+    const section = btn.closest(".day");
+    btn.remove();
+    section.querySelectorAll(".event")[dayCap]?.querySelector("a, button")
+      ?.focus({preventScroll: true});
+  });
 
   // Flat ranked rendering — used when a search query is active. No date
   // headers; each row's `.time` shows the full date + time so the reader
