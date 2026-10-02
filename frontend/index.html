@@ -1528,11 +1528,11 @@
           + escapeHtml(ev.location) + '" title="Show only events here">'
           + escapeHtml(ev.location) + "</button>"
       : "";
-    // Name a source only when the location doesn't already ("The Dawn Club,
-    // San Francisco" listed by "The Dawn Club" says it once).
-    const locLower = (ev.location || "").toLowerCase();
-    const extra = (ev.sources || []).filter(s => !locLower.includes(s.toLowerCase()));
-    const src = extra.length ? '<span class="source">' + escapeHtml(extra.join(", ")) + "</span>" : "";
+    // Always name the source(s), even when the location repeats it: hiding it
+    // only when the location text contained the name was inconsistent
+    // ("Berkeley Rep" vs "Berkeley Repertory Theatre").
+    const srcs = ev.sources || [];
+    const src = srcs.length ? '<span class="source">' + escapeHtml(srcs.join(", ")) + "</span>" : "";
     const where = loc || src ? '<div class="where">' + loc + src + "</div>" : "";
     const desc = renderDescription(ev.description);
     // Thumbnail is optional — some sources don't expose one, and we don't

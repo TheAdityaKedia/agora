@@ -229,11 +229,12 @@ def test_day_strip_jumps_past_rendered_rows(browser, site):
     assert 0 <= top < 300
 
 
-def test_source_hidden_when_location_names_it(browser, site):
+def test_source_always_shown(browser, site):
     page = _open(browser, site, DESKTOP)
     jazz, poetry = page.locator(".event").nth(2), page.locator(".event").nth(3)
     assert "Jazz night 2" in jazz.inner_text()
-    assert jazz.locator(".source").count() == 0  # "The Dawn Club, San Francisco"
+    # Shown even though the location ("The Dawn Club, San Francisco") names it.
+    assert jazz.locator(".source").inner_text() == "The Dawn Club"
     assert "Poetry reading 3" in poetry.inner_text()
     assert poetry.locator(".source").inner_text() == "City Lights"
 
