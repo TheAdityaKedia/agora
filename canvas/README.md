@@ -41,15 +41,21 @@ printed in the run's summary.
 
 ### One-time AWS setup (owner, ~5 min)
 
-Uses the AWS account and region the Bedrock role already uses; that role's
-GitHub OIDC provider is reused.
+Uses the AWS account (`978355607698`) and region (`us-east-1`) the Bedrock
+role already uses; that role's GitHub OIDC provider is reused. The deploy
+role trusts `repo:TheAdityaKedia/agora:ref:refs/heads/*` (the deploy job
+declares no GitHub environment, so that's its OIDC subject).
 
-1. Deploy the bootstrap stack from a machine with admin credentials:
+1. Deploy the bootstrap stack as an admin. Easiest, no local creds: AWS
+   console → CloudFormation (us-east-1) → Create stack → *Upload a template
+   file* → `canvas/bootstrap.yaml` → name `agora-canvas-bootstrap` → tick the
+   IAM acknowledgement → Submit; the values are on the **Outputs** tab. Or,
+   with admin CLI credentials:
    ```bash
-   aws cloudformation deploy --region <AWS_REGION> \
+   aws cloudformation deploy --region us-east-1 \
      --template-file canvas/bootstrap.yaml --stack-name agora-canvas-bootstrap \
      --capabilities CAPABILITY_NAMED_IAM
-   aws cloudformation describe-stacks --region <AWS_REGION> \
+   aws cloudformation describe-stacks --region us-east-1 \
      --stack-name agora-canvas-bootstrap --query 'Stacks[0].Outputs'
    ```
 2. In GitHub → Settings → Secrets and variables → Actions:
@@ -57,7 +63,9 @@ GitHub OIDC provider is reused.
    - variable `CANVAS_ARTIFACT_BUCKET` = the `ArtifactBucket` output
    - variable `CANVAS_BUDGET_EMAIL` = where the $5/month budget alert goes
    - secret `CANVAS_IP_SALT` = any long random string (`openssl rand -hex 32`)
-   - (`AWS_REGION` secret already exists)
+   - variable `CANVAS_AWS_REGION` only if not `us-east-1` (the default; the
+     existing `AWS_REGION` secret is `production`-environment-only, so the
+     deploy job can't read it)
 3. Re-run the latest "Deploy canvas API" workflow (or push to `canvas/`).
 
 If the deploy fails with *"Specified ReservedConcurrentExecutions … decreases

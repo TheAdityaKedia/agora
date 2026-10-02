@@ -53,7 +53,9 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.CANVAS_DEPLOY_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          # Not secrets.AWS_REGION: that one is scoped to the `production`
+          # environment (main-only), which this job deliberately doesn't use.
+          aws-region: ${{ vars.CANVAS_AWS_REGION || 'us-east-1' }}
       - name: Build
         working-directory: canvas
         run: sam build
