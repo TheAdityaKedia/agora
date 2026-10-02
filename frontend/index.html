@@ -132,6 +132,15 @@
   }
   .dropdown-item:hover .only-btn { visibility: visible; }
   .dropdown-item .only-btn:hover { color: var(--accent); border-color: var(--accent); }
+  /* Touch screens have no hover, so "Only" must always be showing there. */
+  @media (hover: none) { .dropdown-item .only-btn { visibility: visible; } }
+  /* Finger-sized targets on touch screens. */
+  @media (pointer: coarse) {
+    .tag-chip { font-size: 13px; padding: 4px 10px; }
+    .preset-btn, .reset-btn, .copy-btn, .dropdown > summary { padding: 8px 14px; }
+    .dropdown-item { padding: 10px 6px; }
+    .dropdown-item .only-btn { padding: 4px 10px; }
+  }
   .date-input {
     padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px;
     background: var(--input-bg); color: var(--fg); font: inherit; font-size: 13px;
@@ -194,7 +203,9 @@
     width: 100%; height: 100%; object-fit: cover;
     display: block;
   }
-  .details { flex: 1; min-width: 0; }
+  /* overflow-wrap: long URLs and slash-joined titles otherwise widen the page
+     past a phone screen (it then zooms out or scrolls sideways). */
+  .details { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
   .title a:hover { color: var(--accent); text-decoration: underline; }
   .location, .source { font-size: 13px; color: var(--muted); margin-top: 2px; }
@@ -229,7 +240,7 @@
     color: hsl(var(--h) var(--chip-s) var(--chip-l));
     border: 1px solid hsl(var(--h) var(--chip-s) var(--chip-l) / 0.40);
     background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.10);
-    white-space: nowrap;
+    max-width: 100%;
   }
   .tag-chip:hover { background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.20); }
   .tag-chip.on {
@@ -268,6 +279,14 @@
   }
   .active-pill .pill-clear:hover { background: rgba(255,255,255,0.2); }
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
+  /* Placeholder rows while events.json downloads and parses. */
+  .skeleton { padding: 24px 0; }
+  .skeleton-row { display: flex; gap: 16px; padding: 14px 0; }
+  .skeleton-row span { background: var(--chip-bg); border-radius: 6px; height: 14px; }
+  .skeleton-row .s-time { flex: 0 0 60px; }
+  .skeleton-row .s-body { flex: 1; height: 48px; }
+  .loading-note { color: var(--muted); font-size: 14px; }
+  .sentinel { height: 1px; }
   .error { color: #c33; }
 </style>
 </head>
@@ -349,7 +368,14 @@
   </div>
 </section>
 
-<main id="list"><div class="empty">Loading…</div></main>
+<main id="list">
+  <div class="skeleton" aria-busy="true">
+    <p class="loading-note">Loading events…</p>
+    <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+    <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+    <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+  </div>
+</main>
 
 <script src="./vendor/minisearch-6.3.0.min.js"></script>
 <script>
@@ -442,8 +468,8 @@
     tags_text: tagsText(e),
   }));
 
-  // Build the search index once. See feature-specs/search.md §2.2 for the
-  // config rationale.
+  // The search index. Indexing ~5k descriptions blocks a phone for seconds,
+  // so it's filled in chunks after the first render (buildIndex), not here.
   const miniSearch = new MiniSearch({
     fields: ["title", "description", "location", "sources_text", "tags_text"],
     storeFields: ["id"],
@@ -454,7 +480,15 @@
       combineWith: "AND",
     },
   });
-  miniSearch.addAll(events);
+  let indexReady = null;
+  let indexed = false;
+  function buildIndex() {
+    if (!indexReady) {
+      indexReady = miniSearch.addAllAsync(events, {chunkSize: 250})
+        .then(() => { indexed = true; });
+    }
+    return indexReady;
+  }
 
   const generatedAt = new Date(data.generated_at);
 
@@ -645,6 +679,10 @@
     if (!q) {
       rankedOrder = null;
       document.body.classList.remove("searching");
+    } else if (!indexed) {
+      // Searched before the index finished: run once it has.
+      buildIndex().then(updateSearch);
+      return;
     } else {
       const results = miniSearch.search(q).filter(r => r.score >= SEARCH_SCORE_THRESHOLD);
       rankedOrder = results.map(r => r.id);
@@ -652,7 +690,13 @@
     }
     render();
   }
-  searchEl.addEventListener("input", updateSearch);
+  // Debounced: each search re-filters every event.
+  let searchTimer = null;
+  searchEl.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(updateSearch, 150);
+  });
+  searchEl.addEventListener("focus", buildIndex);
 
   function setLocationFilter(loc) {
     locationFilter = loc;
@@ -818,6 +862,32 @@
     weekday: "short", month: "short", day: "numeric",
     hour: "numeric", minute: "2-digit",
   });
+  const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+  const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
+  const rowDateFmt = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
+
+  // Incremental rendering: render() hands the filtered events to a queue and
+  // rows are built CHUNK at a time as the sentinel nears the viewport.
+  // Rendering all ~5k rows (~100k nodes) took seconds per filter change on a
+  // phone. Declared here, before readStateFromUrl(), for the same TDZ reason
+  // as flatDateFmt.
+  const CHUNK = 60;
+  let queue = [], queuePos = 0, queueFlat = false, lastDayKey = null;
+  const sentinel = document.createElement("div");
+  sentinel.className = "sentinel";
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some(e => e.isIntersecting)) renderMore();
+  }, {rootMargin: "0px 0px 1500px 0px"});
+  function renderMore() {
+    const end = Math.min(queuePos + CHUNK, queue.length);
+    const slice = queue.slice(queuePos, end);
+    sentinel.insertAdjacentHTML("beforebegin", queueFlat ? renderFlat(slice) : renderList(slice));
+    queuePos = end;
+    // Re-observing delivers a fresh intersection check, so this keeps
+    // filling until the sentinel is a screen and a half below the fold.
+    io.unobserve(sentinel);
+    if (queuePos < queue.length) io.observe(sentinel);
+  }
   // Apply an explicit calendar range (Date objects, both inclusive).
   function setDateRange(from, to) {
     fromEl.value = from ? toISODate(from) : "";
@@ -1063,6 +1133,8 @@
   filters.hidden = false;
   readStateFromUrl();
   render();
+  // Fill the search index once the first rows are on screen.
+  setTimeout(buildIndex, 300);
 
   function render() {
     writeStateToUrl();
@@ -1110,7 +1182,10 @@
       list.innerHTML = '<div class="empty">No events match the current filters.</div>';
       return;
     }
-    list.innerHTML = flat ? renderFlat(filtered) : renderList(filtered);
+    queue = filtered; queuePos = 0; queueFlat = flat; lastDayKey = null;
+    list.innerHTML = "";
+    list.appendChild(sentinel);
+    renderMore();
   }
 
   // One tag chip. kind = "type" | "topic"; val is the dot-path or slug.
@@ -1172,25 +1247,21 @@
     );
   }
 
-  function renderList(events) {
-    const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
-    const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
-    const rowDateFmt = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
-    const groups = new Map();
-    for (const ev of events) {
-      const key = ev._start.toDateString();
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key).push(ev);
-    }
+  // One chunk of the grouped-by-day view. A day heading is emitted whenever
+  // the day changes — lastDayKey carries across chunks so a day split
+  // between two chunks gets one heading.
+  function renderList(chunk) {
     const parts = [];
-    for (const [key, dayEvents] of groups) {
-      parts.push('<h2 class="date">' + escapeHtml(dateFmt.format(new Date(key))) + "</h2>");
-      for (const ev of dayEvents) {
-        // Date above time so the day is clear even after scrolling past the header.
-        const timeHtml = '<span class="td-date">' + escapeHtml(rowDateFmt.format(ev._start))
-          + '</span><span class="td-time">' + escapeHtml(timeFmt.format(ev._start)) + "</span>";
-        parts.push(renderEventRow(ev, timeHtml));
+    for (const ev of chunk) {
+      const key = ev._start.toDateString();
+      if (key !== lastDayKey) {
+        parts.push('<h2 class="date">' + escapeHtml(dateFmt.format(ev._start)) + "</h2>");
+        lastDayKey = key;
       }
+      // Date above time so the day is clear even after scrolling past the header.
+      const timeHtml = '<span class="td-date">' + escapeHtml(rowDateFmt.format(ev._start))
+        + '</span><span class="td-time">' + escapeHtml(timeFmt.format(ev._start)) + "</span>";
+      parts.push(renderEventRow(ev, timeHtml));
     }
     return parts.join("");
   }
