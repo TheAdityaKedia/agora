@@ -20,6 +20,7 @@ from urllib.parse import urlsplit, urlunsplit
 
 import requests
 
+from scrapers import eventbrite
 from scrapers.base import RawEvent
 from scrapers.browser import BROWSER_UA
 
@@ -27,7 +28,12 @@ SOURCE = "thefaight.com"
 NAME = "The Faight Collective"
 EVENTS_URL = "https://www.thefaight.com/events"
 LOCATION = "The Faight Collective, 475 Haight St, San Francisco, CA 94117"
-SANITY_IMAGE = "https://cdn.sanity.io/images/3l1powkg/production/{name}.{ext}"
+# Full-size posters run 157 KB–2.7 MB; Sanity's CDN resizes on request and
+# auto-serves WebP, which the frontend's small cards don't need more than.
+SANITY_IMAGE = "https://cdn.sanity.io/images/3l1powkg/production/{name}.{ext}?w=800&fit=max&auto=format"
+# Many of the venue's own blurbs are one placeholder line ("Live at the
+# Faight!"); below this we prefer the ticket page's fuller text.
+THIN_DESCRIPTION_CHARS = 200
 REQUEST_TIMEOUT = 25
 STARTED_GRACE = timedelta(hours=6)
 
@@ -115,9 +121,36 @@ def parse(html: str, *, now: datetime | None = None) -> list[RawEvent]:
     return sorted(events, key=lambda e: e.start_time)
 
 
-def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
+def _get(url: str) -> str:
     resp = requests.get(url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
-    events = parse(resp.text)
+    return resp.text
+
+
+def enrich(events: list[RawEvent], *, fetch=_get) -> list[RawEvent]:
+    """Replace thin descriptions with the Eventbrite page's full text.
+
+    Only for events whose own blurb is shorter than THIN_DESCRIPTION_CHARS and
+    whose url is an Eventbrite event page. A failing page leaves the event as-is.
+    """
+    enriched = 0
+    for e in events:
+        if len(e.description or "") >= THIN_DESCRIPTION_CHARS or "eventbrite." not in (e.url or ""):
+            continue
+        try:
+            full = eventbrite.full_description(fetch(e.url))
+        except Exception as ex:
+            _log(f"ticket page failed {e.url}: {type(ex).__name__}: {ex}")
+            continue
+        if full and len(full) > len(e.description or ""):
+            e.description = full
+            enriched += 1
+    if enriched:
+        _log(f"enriched {enriched} descriptions from ticket pages")
+    return events
+
+
+def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
+    events = enrich(parse(_get(url)))
     _log(f"done: {len(events)} events")
     return events
