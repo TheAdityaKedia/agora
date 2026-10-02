@@ -207,10 +207,12 @@ address is the gate; submissions publish automatically as source
 names somewhere outside the Bay Area is rejected; past events dropped; weekly
 series expanded 8 weeks (DST-safe); parts of one night (classes then a party)
 are one event; phone numbers and emails are scrubbed from descriptions.
-**Images** become the event picture only if safe: never screenshots (chats,
-DMs, apps); a designed flyer, or a photo of a flyer cropped to the flyer, and
-only after a final Claude Sonnet 4.5 check finds no identifiable person and no
-private contact details. Safe images go to the private S3 bucket
+**Images** become the event picture only if safe: a designed flyer, a photo of
+a flyer cropped to the flyer, or the flyer embedded in a screenshot (an
+Instagram post) cropped out — snapped to the post image's straight edges — and
+only after a final Claude Sonnet 4.5 check finds a clean flyer with no app UI,
+identifiable person, or private contact details. A screenshot itself (chat,
+DM, app UI) is never published. Safe images go to the private S3 bucket
 `agora-submissions-978355607698`, served via CloudFront
 (`d3ao3t7o4qlnbg.cloudfront.net`), EXIF stripped.
 

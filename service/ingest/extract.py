@@ -65,6 +65,13 @@ ASSESSMENT = {
                                               "enough of someone to recognize them) who is not a "
                                               "performer pictured on the flyer itself. Incidental "
                                               "partial limbs or feet at the edges don't count."},
+        "embedded_flyer_box": {"type": ["object", "null"],
+                               "description": "for screenshot: if it shows an event flyer or "
+                                              "event graphic (e.g. the image in an Instagram "
+                                              "post), the tightest box around just that graphic, "
+                                              "excluding app UI, captions and avatars, as "
+                                              "fractions 0-1; null if there is none",
+                               "properties": {k: {"type": "number"} for k in ("left", "top", "right", "bottom")}},
         "flyer_box": {"type": ["object", "null"],
                       "description": "for photo_of_flyer: the tightest box around the flyer's "
                                      "printed area only (exclude its frame, stand, and "
