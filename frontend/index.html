@@ -322,12 +322,12 @@
   .description.expanded .desc-preview { display: none; }
   .description.expanded .desc-full { display: inline; }
   .desc-toggle { color: var(--accent); font-weight: 500; margin-left: 2px; }
-  .location-btn {
+  .location-btn, .source-btn {
     background: none; border: none; padding: 0; margin: 0;
     color: inherit; font: inherit; text-align: left;
     cursor: pointer; text-decoration: none;
   }
-  .location-btn:hover { color: var(--fg); text-decoration: underline; }
+  .location-btn:hover, .source-btn:hover { color: var(--fg); text-decoration: underline; }
   @media (min-width: 600px) {
     .event, .event.no-thumb { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
     .time { grid-column: 1; grid-row: 1 / span 2; font-size: 32px; line-height: 0.95; }
@@ -907,6 +907,8 @@
       else toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval);
       return;
     }
+    const srcBtn = e.target.closest(".source-btn");
+    if (srcBtn) { isolateSource(srcBtn.dataset.source, true); return; }
     const locBtn = e.target.closest(".location-btn");
     if (locBtn) { setLocationFilter(locBtn.dataset.location); return; }
     const desc = e.target.closest('.description[role="button"]');
@@ -945,10 +947,7 @@
     only.type = "button"; only.className = "only-btn"; only.textContent = "Only";
     only.addEventListener("click", (e) => {
       e.preventDefault(); e.stopPropagation();
-      selected.clear(); selected.add(s);
-      for (const [name, box] of checkboxes) box.checked = (name === s);
-      updateSourceSummary();
-      render();
+      isolateSource(s);
     });
     label.appendChild(only);
     const count = document.createElement("span");
@@ -956,6 +955,19 @@
     count.textContent = sourceCounts.get(s);
     label.appendChild(count);
     sourceListEl.appendChild(label);
+  }
+
+  // Show only events listed by `s` ("Only" in the list, or a "Listed by"
+  // name on an event). From an event, clicking the already-isolated source
+  // again restores all sources, like topic chips.
+  function isolateSource(s, toggle = false) {
+    const onlyThis = selected.size === 1 && selected.has(s);
+    selected.clear();
+    if (toggle && onlyThis) for (const x of allSources) selected.add(x);
+    else selected.add(s);
+    for (const [name, box] of checkboxes) box.checked = selected.has(name);
+    updateSourceSummary();
+    render();
   }
 
   selectAllEl.addEventListener("click", () => {
@@ -1532,7 +1544,10 @@
     // only when the location text contained the name was inconsistent
     // ("Berkeley Rep" vs "Berkeley Repertory Theatre").
     const srcs = ev.sources || [];
-    const src = srcs.length ? '<span class="source">' + escapeHtml(srcs.join(", ")) + "</span>" : "";
+    const src = srcs.length ? '<span class="source">' + srcs.map(s =>
+      '<button type="button" class="source-btn" data-source="' + escapeHtml(s)
+      + '" title="Show only events listed by ' + escapeHtml(s) + '">' + escapeHtml(s) + "</button>"
+    ).join(", ") + "</span>" : "";
     const where = loc || src ? '<div class="where">' + loc + src + "</div>" : "";
     const desc = renderDescription(ev.description);
     // Thumbnail is optional — some sources don't expose one, and we don't

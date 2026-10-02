@@ -296,3 +296,15 @@ def test_started_events_never_show(browser, site):
     page.fill("#search-input", "already started")
     page.wait_for_timeout(600)
     assert page.locator(".event", has_text="Already started").count() == 0
+
+
+def test_source_click_filters_and_toggles_back(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.locator(".event").nth(3).locator(".source-btn").click()
+    assert "City Lights" in page.inner_text("#active-filters")
+    assert "sources=City+Lights" in page.url or "sources=City%20Lights" in page.url
+    titles = page.locator(".event .title").all_inner_texts()
+    assert titles and all("Poetry" in t for t in titles)
+    page.locator(".event").first.locator(".source-btn").click()
+    assert page.locator("#active-filters .active-pill").count() == 0
+    assert "sources=" not in page.url
