@@ -241,9 +241,10 @@
   .active-pill .pill-clear:hover { background: rgba(255,255,255,0.2); }
   .meta { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
   .day-strip {
-    display: flex; gap: 6px; margin: 10px 0 0; padding-bottom: 4px;
-    overflow-x: auto; scrollbar-width: thin;
+    display: flex; gap: 6px; margin: 8px 0 0; padding-bottom: 2px;
+    overflow-x: auto; scrollbar-width: none;
   }
+  .day-strip::-webkit-scrollbar { display: none; }
   .day-btn {
     flex: 0 0 auto; cursor: pointer;
     display: flex; flex-direction: column; align-items: center;
@@ -254,6 +255,10 @@
   .day-btn .dow { font-size: 11px; color: var(--muted); }
   .day-btn .dom { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1; }
   .day-btn:hover { border-color: var(--accent); }
+  /* The day at the top of the list: a position marker, so ink, not the
+     accent that marks active filters. */
+  .day-btn.current { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .day-btn.current .dow { color: var(--bg); }
 
   /* --- Event list --- */
   h2.date {
@@ -262,8 +267,7 @@
     border-bottom: 2px solid var(--fg);
     font-family: var(--font-display); font-size: 28px; line-height: 1.05;
     letter-spacing: 0.01em; color: var(--fg); font-weight: 800;
-    /* Stick just below the search bar so the day you're viewing stays visible. */
-    position: sticky; top: var(--sticky-top); background: var(--bg); z-index: 5;
+    /* Not sticky: the day strip in the sticky bar marks the current day. */
     scroll-margin-top: var(--sticky-top);
   }
   /* Phone: time on its own line, then the title at full width, with the
@@ -281,7 +285,6 @@
     border: 1px solid var(--border); font-weight: 600;
   }
   .day-more:hover { border-color: var(--accent); }
-  .event.no-thumb { grid-template-columns: minmax(0, 1fr); }
   /* The marquee: times in the signage face, read before anything else. */
   .time {
     grid-column: 1; color: var(--fg);
@@ -293,13 +296,26 @@
     font-family: var(--font-body); font-size: 14px; font-weight: 600;
     color: var(--muted); margin-right: 8px; letter-spacing: 0;
   }
+  /* Every row has a thumbnail slot. Without an image (or when it fails to
+     load) the slot is a tile tinted with the event's topic color, labelled
+     with its type in the signage face; a real image covers the tile. */
   .thumb {
     grid-column: 2; grid-row: 1 / span 2;
-    width: 64px; height: 64px;
-    border-radius: 6px; background: var(--chip-bg);
-    overflow: hidden;
+    width: 64px; height: 64px; position: relative;
+    display: grid; place-items: center; overflow: hidden;
+    border-radius: 6px;
+    background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.14);
+    color: hsl(var(--h) var(--chip-s) var(--chip-l));
   }
-  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb-label {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 14px; line-height: 1; letter-spacing: 0.02em;
+    text-align: center; padding: 0 4px;
+  }
+  .thumb img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
   /* overflow-wrap: long URLs and slash-joined titles otherwise widen the page
      past a phone screen (it then zooms out or scrolls sideways). */
   .details { grid-column: 1; min-width: 0; overflow-wrap: anywhere; }
@@ -329,13 +345,14 @@
   }
   .location-btn:hover, .source-btn:hover { color: var(--fg); text-decoration: underline; }
   @media (min-width: 600px) {
-    .event, .event.no-thumb { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
+    .event { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
     .time { grid-column: 1; grid-row: 1 / span 2; font-size: 32px; line-height: 0.95; }
     .time .ampm { display: block; margin: 2px 0 0; font-size: 14px; }
     .time .td-date { display: block; margin: 0 0 2px; }
     .title { margin-top: 0; }
     .details { grid-column: 2; grid-row: 1 / span 2; }
     .thumb { grid-column: 3; width: 80px; height: 80px; }
+    .thumb-label { font-size: 16px; }
     body.searching .event { grid-template-columns: 120px minmax(0, 1fr) 80px; }
   }
 
@@ -344,7 +361,31 @@
      both backgrounds. --- */
   :root { --chip-s: 50%; --chip-l: 34%; }
   @media (prefers-color-scheme: dark) { :root { --chip-s: 52%; --chip-l: 72%; } }
-  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  /* Tags, then "Add to calendar" pushed to the right edge. */
+  .row-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 8px; }
+  /* "Add to calendar" opens a small menu: Google Calendar (a link that
+     opens a pre-filled event) or an .ics file for Apple / Outlook. */
+  .cal { position: relative; margin-left: auto; }
+  .cal-btn {
+    list-style: none; padding: 2px 0; cursor: pointer;
+    color: var(--muted); font-size: 13px;
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+  .cal-btn::-webkit-details-marker { display: none; }
+  .cal-btn:hover, .cal[open] > .cal-btn { color: var(--accent); }
+  .cal-menu {
+    position: absolute; right: 0; top: calc(100% + 4px); z-index: 6;
+    display: flex; flex-direction: column; min-width: 200px; padding: 4px;
+    background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(19,33,46,0.16);
+  }
+  .cal-item {
+    display: block; padding: 8px 10px; border-radius: 6px; cursor: pointer;
+    background: none; border: 0; text-align: left;
+    color: var(--fg); font-size: 14px; text-decoration: none;
+  }
+  .cal-item:hover { background: var(--chip-bg); }
   .tag-chip {
     font: inherit; font-size: 12px; line-height: 1.4;
     padding: 2px 9px; border-radius: 999px; cursor: pointer;
@@ -440,9 +481,11 @@
   <div class="presets" role="group" aria-label="Dates">
     <button type="button" class="preset-btn" id="preset-today">Today</button>
     <button type="button" class="preset-btn" id="preset-tomorrow">Tomorrow</button>
+    <button type="button" class="preset-btn" id="preset-weekend">This weekend</button>
     <button type="button" class="preset-btn" id="preset-week">This week</button>
     <button type="button" class="preset-btn" id="preset-month">This month</button>
   </div>
+  <nav class="day-strip" id="day-strip" aria-label="Jump to a day" hidden></nav>
 </div>
 
 <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
@@ -514,7 +557,6 @@
 <main>
   <div class="active-filters" id="active-filters"></div>
   <div class="meta" id="meta"></div>
-  <nav class="day-strip" id="day-strip" aria-label="Jump to a day" hidden></nav>
   <div id="list">
     <div class="skeleton" aria-busy="true">
       <p class="loading-note">Loading events…</p>
@@ -543,6 +585,7 @@
   const copyEl = document.getElementById("copy-link");
   const presetTodayEl = document.getElementById("preset-today");
   const presetTomorrowEl = document.getElementById("preset-tomorrow");
+  const presetWeekendEl = document.getElementById("preset-weekend");
   const presetWeekEl = document.getElementById("preset-week");
   const presetMonthEl = document.getElementById("preset-month");
   const topbarEl = document.getElementById("topbar");
@@ -623,6 +666,7 @@
     .map((e, i) => ({
       ...e,
       _start: new Date(e.start_time),
+      _uid: e.id,
       id: i,
       sources_text: (e.sources || []).join(" "),
       tags_text: tagsText(e),
@@ -907,6 +951,18 @@
       else toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval);
       return;
     }
+    const ics = e.target.closest(".cal-ics");
+    if (ics) { downloadIcs(events[+ics.dataset.id]); closeCalMenus(); return; }
+    if (e.target.closest("a.cal-item")) { closeCalMenus(); return; }
+    const calSummary = e.target.closest(".cal-btn");
+    if (calSummary) {
+      // One menu open at a time; build the Google link when it's first opened.
+      const cal = calSummary.parentNode;
+      closeCalMenus(cal);
+      const g = cal.querySelector("a.cal-google");
+      if (!g.href) g.href = googleCalUrl(events[+cal.dataset.id]);
+      return;
+    }
     const srcBtn = e.target.closest(".source-btn");
     if (srcBtn) { isolateSource(srcBtn.dataset.source, true); return; }
     const locBtn = e.target.closest(".location-btn");
@@ -1045,6 +1101,47 @@
   // readStateFromUrl(), for the same TDZ reason as flatDateFmt.
   const CHUNK = 60;
   const DAY_CAP = 10;
+
+  // Day strip follows the scroll: the day whose section is at the top of
+  // the list (just under the sticky bar) is marked in the strip, and the
+  // strip scrolls sideways to keep it in view.
+  const daySections = list.getElementsByClassName("day");  // live, in date order
+  let currentDay = null, dayTick = false;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  function updateCurrentDay() {
+    dayTick = false;
+    if (dayStripEl.hidden || !daySections.length) return;
+    const line = topbarEl.getBoundingClientRect().bottom + 8;
+    // Binary search for the last section starting above the line.
+    let lo = 0, hi = daySections.length - 1, found = 0;
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      if (daySections[mid].getBoundingClientRect().top <= line) { found = mid; lo = mid + 1; }
+      else hi = mid - 1;
+    }
+    const key = daySections[found].dataset.day;
+    if (key === currentDay) return;
+    currentDay = key;
+    for (const b of dayStripEl.querySelectorAll(".day-btn.current")) {
+      b.classList.remove("current");
+      b.removeAttribute("aria-current");
+    }
+    const btn = dayStripEl.querySelector('.day-btn[data-day="' + key + '"]');
+    if (!btn) return;
+    btn.classList.add("current");
+    btn.setAttribute("aria-current", "date");
+    const r = btn.getBoundingClientRect(), strip = dayStripEl.getBoundingClientRect();
+    if (r.left < strip.left || r.right > strip.right) {
+      dayStripEl.scrollBy({
+        left: r.left - strip.left - (strip.width - r.width) / 2,
+        behavior: reduceMotion.matches ? "auto" : "smooth",
+      });
+    }
+  }
+  function scheduleDayUpdate() {
+    if (!dayTick) { dayTick = true; requestAnimationFrame(updateCurrentDay); }
+  }
+  addEventListener("scroll", scheduleDayUpdate, {passive: true});
   let queue = [], queuePos = 0, queueFlat = false, dayCap = DAY_CAP;
   const sentinel = document.createElement("div");
   sentinel.className = "sentinel";
@@ -1072,11 +1169,15 @@
     if (queuePos < queue.length) io.observe(sentinel);
   }
   // Apply an explicit calendar range (Date objects, both inclusive).
-  function setDateRange(from, to) {
+  // `preset` names the preset that produced it (null for a custom range);
+  // `fromHour` starts the range later than midnight (the weekend's Friday).
+  function setDateRange(from, to, preset = null, fromHour = 0) {
     fromEl.value = from ? toISODate(from) : "";
     toEl.value = to ? toISODate(to) : "";
     dateFrom = from ? new Date(toISODate(from) + "T00:00:00") : null;
+    if (dateFrom && fromHour) dateFrom.setHours(fromHour);
     dateTo   = to   ? new Date(toISODate(to)   + "T23:59:59") : null;
+    activePreset = preset;
     updatePresetHighlight();
     render();
   }
@@ -1088,90 +1189,78 @@
     sunday.setDate(today.getDate() + daysToSunday);
     return sunday;
   }
-  // Apply presets. Kept as named functions so both the click handlers and
-  // readStateFromUrl (?dates=today|week) share one definition — the preset
-  // resolves to *today's* calendar day every time it runs, which is the whole
-  // point of bookmarking ?dates=today.
-  function applyTodayPreset() {
-    const today = new Date();
-    setDateRange(today, today);
-  }
   function tomorrow() {
     const t = new Date();
     t.setDate(t.getDate() + 1);
     return t;
-  }
-  function applyTomorrowPreset() {
-    const t = tomorrow();
-    setDateRange(t, t);
-  }
-  function applyWeekPreset() {
-    setDateRange(new Date(), weekSunday());
   }
   // Last day of the current calendar month (month-anchored, not rolling 30d).
   function monthEnd() {
     const t = new Date();
     return new Date(t.getFullYear(), t.getMonth() + 1, 0);
   }
-  function applyMonthPreset() {
-    setDateRange(new Date(), monthEnd());
+  // "This weekend" = Friday 5pm through Sunday (Friday daytime listings are
+  // mostly weekday fare); on a Saturday or Sunday, today through Sunday.
+  function weekendRange() {
+    const today = new Date();
+    const dow = today.getDay();  // 0 = Sunday … 6 = Saturday
+    if (dow === 6 || dow === 0) return [today, weekSunday(), 0];
+    const friday = new Date(today);
+    friday.setDate(today.getDate() + (5 - dow));
+    return [friday, weekSunday(), 17];
   }
-  // Highlight whichever preset (if any) matches the current from/to values.
+  // Date presets, each [from, to, fromHour?]. They resolve against *today*
+  // every time they run — the point of bookmarking ?dates=weekend is that
+  // it always means the coming weekend. Shared by the buttons and
+  // readStateFromUrl.
+  const PRESETS = {
+    today: () => [new Date(), new Date()],
+    tomorrow: () => [tomorrow(), tomorrow()],
+    weekend: weekendRange,
+    week: () => [new Date(), weekSunday()],
+    month: () => [new Date(), monthEnd()],
+  };
+  const presetEls = {
+    today: presetTodayEl, tomorrow: presetTomorrowEl, weekend: presetWeekendEl,
+    week: presetWeekEl, month: presetMonthEl,
+  };
+  // The preset in effect, tracked explicitly: two presets can cover the same
+  // dates (on a Friday, "This week" and "This weekend" both end Sunday).
+  let activePreset = null;
+  function applyPreset(name) {
+    const [from, to, fromHour = 0] = PRESETS[name]();
+    setDateRange(from, to, name, fromHour);
+  }
   function updatePresetHighlight() {
-    presetTodayEl.classList.remove("active");
-    presetTomorrowEl.classList.remove("active");
-    presetWeekEl.classList.remove("active");
-    presetMonthEl.classList.remove("active");
-    const todayStr = toISODate(new Date());
-    // Tomorrow is the one preset that doesn't start today — check it first.
-    const tomorrowStr = toISODate(tomorrow());
-    if (fromEl.value === tomorrowStr && toEl.value === tomorrowStr) {
-      presetTomorrowEl.classList.add("active");
-      return;
-    }
-    if (fromEl.value !== todayStr) return;  // remaining presets all start today
-    if (toEl.value === todayStr) {
-      presetTodayEl.classList.add("active");
-    } else if (toEl.value === toISODate(weekSunday())) {
-      presetWeekEl.classList.add("active");
-    } else if (toEl.value === toISODate(monthEnd())) {
-      presetMonthEl.classList.add("active");
+    for (const [name, el] of Object.entries(presetEls)) {
+      el.classList.toggle("active", name === activePreset);
     }
   }
 
   fromEl.addEventListener("input", () => {
     dateFrom = fromEl.value ? new Date(fromEl.value + "T00:00:00") : null;
+    activePreset = null;
     updatePresetHighlight();
     render();
   });
   toEl.addEventListener("input", () => {
     dateTo = toEl.value ? new Date(toEl.value + "T23:59:59") : null;
+    activePreset = null;
     updatePresetHighlight();
     render();
   });
-  // Presets toggle: clicking an active preset clears the date range instead
-  // of re-applying it. `.active` is set by updatePresetHighlight() whenever
-  // from/to match the preset's range, so it's the authoritative check.
-  presetTodayEl.addEventListener("click", () => {
-    if (presetTodayEl.classList.contains("active")) setDateRange(null, null);
-    else applyTodayPreset();
-  });
-  presetTomorrowEl.addEventListener("click", () => {
-    if (presetTomorrowEl.classList.contains("active")) setDateRange(null, null);
-    else applyTomorrowPreset();
-  });
-  presetWeekEl.addEventListener("click", () => {
-    if (presetWeekEl.classList.contains("active")) setDateRange(null, null);
-    else applyWeekPreset();
-  });
-  presetMonthEl.addEventListener("click", () => {
-    if (presetMonthEl.classList.contains("active")) setDateRange(null, null);
-    else applyMonthPreset();
-  });
+  // Presets toggle: clicking the active preset clears the date range.
+  for (const [name, el] of Object.entries(presetEls)) {
+    el.addEventListener("click", () => {
+      if (activePreset === name) setDateRange(null, null);
+      else applyPreset(name);
+    });
+  }
   resetEl.addEventListener("click", () => {
     for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
     updateSourceSummary();
     fromEl.value = ""; toEl.value = ""; dateFrom = dateTo = null;
+    activePreset = null;
     updatePresetHighlight();
     searchEl.value = "";
     selectedTypes.clear();
@@ -1193,17 +1282,11 @@
     if (selected.size !== allSources.length) {
       p.set("sources", [...selected].join(","));
     }
-    // Encode an active preset as a symbolic value (?dates=today|week) so a
-    // bookmarked link always resolves to the CURRENT day/week, not the frozen
-    // date it was created on. Only a custom range falls back to from/to.
-    if (presetTodayEl.classList.contains("active")) {
-      p.set("dates", "today");
-    } else if (presetTomorrowEl.classList.contains("active")) {
-      p.set("dates", "tomorrow");
-    } else if (presetWeekEl.classList.contains("active")) {
-      p.set("dates", "week");
-    } else if (presetMonthEl.classList.contains("active")) {
-      p.set("dates", "month");
+    // Encode an active preset as a symbolic value (?dates=today|weekend|…)
+    // so a bookmarked link always resolves to the CURRENT day/week, not the
+    // frozen date it was created on. Only a custom range falls back to from/to.
+    if (activePreset) {
+      p.set("dates", activePreset);
     } else {
       if (fromEl.value) p.set("from", fromEl.value);
       if (toEl.value) p.set("to", toEl.value);
@@ -1242,14 +1325,8 @@
     // Symbolic date presets resolve live against today's date; a raw
     // from/to range is the fallback. `dates` wins if both are somehow present.
     const dates = p.get("dates");
-    if (dates === "today") {
-      applyTodayPreset();
-    } else if (dates === "tomorrow") {
-      applyTomorrowPreset();
-    } else if (dates === "week") {
-      applyWeekPreset();
-    } else if (dates === "month") {
-      applyMonthPreset();
+    if (Object.hasOwn(PRESETS, dates || "")) {
+      applyPreset(dates);
     } else {
       const from = p.get("from");
       const to = p.get("to");
@@ -1261,7 +1338,6 @@
         toEl.value = to;
         dateTo = new Date(to + "T23:59:59");
       }
-      if (fromEl.value || toEl.value) updatePresetHighlight();
     }
     const loc = p.get("loc");
     if (loc) {
@@ -1444,6 +1520,8 @@
     list.innerHTML = "";
     list.appendChild(sentinel);
     renderMore();
+    currentDay = null;  // the strip was rebuilt
+    scheduleDayUpdate();
   }
 
   // The pills for each active filter, as [clear-key, label, value?].
@@ -1526,6 +1604,81 @@
     return chips.length ? '<div class="tags">' + chips.join("") + "</div>" : "";
   }
 
+  // --- Add to calendar: a Google Calendar link, or a one-event .ics file
+  // (Apple Calendar, Outlook) built in the browser. Events carry only a
+  // start time, so the calendar entry runs CAL_HOURS. ---
+  const CAL_HOURS = 2;
+  const calStamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const calEnd = (ev) => new Date(ev._start.getTime() + CAL_HOURS * 3600e3);
+  const calNotes = (ev, maxDesc = Infinity) => [
+    ev.description && ev.description.length > maxDesc
+      ? ev.description.slice(0, maxDesc).replace(/\s+\S*$/, "") + "…" : ev.description,
+    ev.url,
+    "Listed by " + (ev.sources || []).join(", ") + " on Agora",
+  ].filter(Boolean).join("\n\n");
+  // Google Calendar's "add event" link: opens a pre-filled event on the web,
+  // or in the Google Calendar app on a phone. The description is trimmed to
+  // keep the URL well under browser and Google length limits.
+  function googleCalUrl(ev) {
+    const p = new URLSearchParams({
+      action: "TEMPLATE",
+      text: ev.title,
+      dates: calStamp(ev._start) + "/" + calStamp(calEnd(ev)),
+      details: calNotes(ev, 800),
+    });
+    if (ev.location) p.set("location", ev.location);
+    return "https://calendar.google.com/calendar/render?" + p.toString();
+  }
+  function closeCalMenus(except) {
+    for (const d of list.querySelectorAll("details.cal[open]")) if (d !== except) d.open = false;
+  }
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("details.cal")) closeCalMenus();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeCalMenus(); });
+  function icsText(ev) {
+    // RFC 5545 text escaping: backslash, semicolon, comma, newline.
+    const esc = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&")
+      .replace(/\r?\n/g, "\\n");
+    const stamp = calStamp, end = calEnd(ev), notes = calNotes(ev);
+    const lines = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Bay Area events//EN",
+      "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT",
+      "UID:" + (ev._uid || ev.id) + "@agora",
+      "DTSTAMP:" + stamp(new Date()),
+      "DTSTART:" + stamp(ev._start),
+      "DTEND:" + stamp(end),
+      "SUMMARY:" + esc(ev.title),
+    ];
+    if (ev.location) lines.push("LOCATION:" + esc(ev.location));
+    lines.push("DESCRIPTION:" + esc(notes));
+    if (ev.url) lines.push("URL:" + ev.url);
+    lines.push("END:VEVENT", "END:VCALENDAR");
+    return lines.map(foldIcsLine).join("\r\n") + "\r\n";
+  }
+  // Lines longer than 75 bytes continue on the next line after one space.
+  function foldIcsLine(line) {
+    const enc = new TextEncoder();
+    let out = "", cur = "", bytes = 0;
+    for (const ch of line) {
+      const n = enc.encode(ch).length;
+      if (bytes + n > 74) { out += cur + "\r\n "; cur = ""; bytes = 1; }
+      cur += ch; bytes += n;
+    }
+    return out + cur;
+  }
+  function downloadIcs(ev) {
+    const blob = new Blob([icsText(ev)], {type: "text/calendar;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (ev.title.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60)
+      || "event") + ".ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  }
+
   // Build one event's card HTML. `timeHtml` is the pre-formatted, already-escaped
   // time string to place in the `.time` slot — callers control whether it's a
   // time-only string ("8:00 PM", grouped view) or a full date+time ("Fri Oct 4 · 8:00 PM",
@@ -1550,18 +1703,35 @@
     ).join(", ") + "</span>" : "";
     const where = loc || src ? '<div class="where">' + loc + src + "</div>" : "";
     const desc = renderDescription(ev.description);
-    // Thumbnail is optional — some sources don't expose one, and we don't
-    // want a broken-image slot. Skip the div entirely if no image_url.
-    const thumb = ev.image_url
-      ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
-          + escapeHtml(ev.image_url) + '"></div>'
-      : "";
+    // A tile tinted by the first topic's group and labelled with the type
+    // ("Talk", "Screening"); the image, if any, covers it — and removes
+    // itself if it fails to load, so a dead link shows the tile too.
+    // The shorter half of a two-part type ("Performance / Show" → "Show")
+    // so the label fits a phone-sized tile.
+    const typeLabel = (typeLabels.get((ev.types || [])[0]?.[0]) || "").split(" / ")
+      .reduce((a, b) => (b.length < a.length ? b : a));
+    const hue = ev.topics?.length ? topicHue(ev.topics[0]) : GROUP_HUE.type;
+    const thumb = '<div class="thumb" style="--h:' + hue + '">'
+      + (typeLabel ? '<span class="thumb-label">' + escapeHtml(typeLabel) + "</span>" : "")
+      + (ev.image_url
+        ? '<img loading="lazy" decoding="async" alt="" src="' + escapeHtml(ev.image_url)
+          + '" onerror="this.remove()">'
+        : "")
+      + "</div>";
     return (
-      '<article class="event' + (thumb ? "" : " no-thumb") + '">' +
+      '<article class="event" data-start="'
+        + escapeHtml(ev.start_time) + '">' +
         '<div class="time">' + timeHtml + "</div>" +
         '<div class="details">' +
           '<div class="title">' + titleHtml + "</div>" +
-          where + desc + renderTags(ev) +
+          where + desc +
+          '<div class="row-foot">' + renderTags(ev)
+            + '<details class="cal" data-id="' + ev.id + '">'
+            + '<summary class="cal-btn" aria-label="Add ' + title + ' to your calendar">Add to calendar</summary>'
+            + '<div class="cal-menu">'
+            + '<a class="cal-item cal-google" target="_blank" rel="noopener">Google Calendar</a>'
+            + '<button type="button" class="cal-item cal-ics" data-id="' + ev.id + '">Apple or Outlook (.ics)</button>'
+            + "</div></details></div>" +
         "</div>" +
         thumb +
       "</article>"

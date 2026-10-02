@@ -74,6 +74,10 @@ def _events(n=N_EVENTS):
                 "url": "https://example.com/started",
                 "start_time": (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()})
     out.sort(key=lambda e: e["start_time"])
+    # Event index 2 has an image that fails to load (nothing listens on port 9).
+    for e in out:
+        if e["id"] == "ev2":
+            e["image_url"] = "http://127.0.0.1:9/missing.png"
     # Unbreakable strings that used to widen the page past a phone screen.
     out[0]["title"] = "BATIASHVILI/CAPUÇON/THIBAUDET/TRIO/" * 3
     out[1]["description"] = (
@@ -308,3 +312,103 @@ def test_source_click_filters_and_toggles_back(browser, site):
     page.locator(".event").first.locator(".source-btn").click()
     assert page.locator("#active-filters .active-pill").count() == 0
     assert "sources=" not in page.url
+
+
+def test_weekend_preset(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.click("#preset-weekend")
+    assert "dates=weekend" in page.url
+    assert "active" in page.get_attribute("#preset-weekend", "class")
+    assert _rendered(page) > 0
+    # Friday from 5pm, Saturday, Sunday — and nothing else.
+    assert page.evaluate("""[...document.querySelectorAll('.event')].every(e => {
+        const d = new Date(e.dataset.start), w = d.getDay();
+        return w === 6 || w === 0 || (w === 5 && d.getHours() >= 17);
+    })""")
+    page.click("#preset-weekend")
+    assert "dates=" not in page.url
+    # Survives a reload as the symbolic preset.
+    page = _open(browser, site, DESKTOP, query="?dates=weekend")
+    assert "active" in page.get_attribute("#preset-weekend", "class")
+    assert "This weekend" in page.inner_text("#active-filters")
+
+
+def test_add_to_calendar_downloads_ics(browser, site):
+    page = _open(browser, site, DESKTOP)
+    row = page.locator(".event").nth(3)  # "Poetry reading 3"
+    row.locator(".cal-btn").click()
+    with page.expect_download() as dl:
+        row.locator(".cal-ics").click()
+    download = dl.value
+    assert download.suggested_filename == "Poetry-reading-3.ics"
+    ics = open(download.path(), encoding="utf-8", newline="").read()
+    assert ics.startswith("BEGIN:VCALENDAR\r\n") and ics.endswith("END:VCALENDAR\r\n")
+    assert "SUMMARY:Poetry reading 3\r\n" in ics
+    assert "LOCATION:261 Columbus Ave\r\n" in ics
+    start = row.get_attribute("data-start")
+    want = datetime.fromisoformat(start).astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    assert f"DTSTART:{want}\r\n" in ics
+    assert "URL:https://example.com/e/3\r\n" in ics
+    # Every physical line is at most 75 bytes (RFC 5545 folding).
+    assert all(len(line.encode()) <= 75 for line in ics.split("\r\n"))
+
+
+def test_thumbnail_tiles_for_missing_and_broken_images(browser, site):
+    page = _open(browser, site, DESKTOP)
+    rows = page.locator(".event")
+    assert page.locator(".event .thumb").count() == rows.count()
+    jazz, poetry = rows.nth(2), rows.nth(3)
+    # No image: a tile labelled with the event's type.
+    assert poetry.locator(".thumb-label").inner_text() == "Talk"
+    assert poetry.locator(".thumb img").count() == 0
+    # Broken image: removed on error, leaving the tile.
+    page.wait_for_function(
+        "!document.querySelectorAll('.event')[2].querySelector('.thumb img')")
+    assert jazz.locator(".thumb-label").inner_text() == "Show"  # of "Performance / Show"
+
+
+def test_day_strip_tracks_scroll_and_stays_visible(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    first = page.locator("#day-strip .day-btn").first
+    page.wait_for_function("document.querySelector('#day-strip .day-btn.current')")
+    assert "current" in first.get_attribute("class")
+    # Scroll the 4th day's section to just under the sticky bar.
+    key = page.locator("section.day").nth(3).get_attribute("data-day")
+    page.locator(f'h2.date[data-day="{key}"]').evaluate("e => e.scrollIntoView()")
+    page.wait_for_function(
+        f"document.querySelector('#day-strip .day-btn.current')?.dataset.day === '{key}'")
+    assert page.get_attribute("#day-strip .day-btn.current", "aria-current") == "date"
+    # The strip is in the sticky bar, so it's still on screen.
+    top = page.locator("#day-strip").bounding_box()["y"]
+    assert 0 <= top < 200
+
+
+def test_add_to_google_calendar_link(browser, site):
+    from urllib.parse import parse_qs, urlparse
+    page = _open(browser, site, DESKTOP)
+    row = page.locator(".event").nth(3)  # "Poetry reading 3"
+    row.locator(".cal-btn").click()
+    link = row.locator("a.cal-google")
+    assert link.is_visible()
+    assert link.get_attribute("target") == "_blank"
+    url = urlparse(link.get_attribute("href"))
+    assert url.netloc == "calendar.google.com"
+    q = parse_qs(url.query)
+    assert q["action"] == ["TEMPLATE"]
+    assert q["text"] == ["Poetry reading 3"]
+    assert q["location"] == ["261 Columbus Ave"]
+    start = datetime.fromisoformat(row.get_attribute("data-start")).astimezone(timezone.utc)
+    fmt = "%Y%m%dT%H%M%SZ"
+    assert q["dates"] == [f"{start:{fmt}}/{start + timedelta(hours=2):{fmt}}"]
+    assert "https://example.com/e/3" in q["details"][0]
+    # One menu at a time; a click elsewhere closes it.
+    page.locator(".event").nth(2).locator(".cal-btn").click()
+    assert not link.is_visible()
+    page.click("h1")
+    assert page.locator("details.cal[open]").count() == 0
+
+
+def test_thumbnail_labels_fit_their_tiles(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    assert page.evaluate("""[...document.querySelectorAll('.thumb-label')]
+        .every(l => l.scrollWidth <= l.parentNode.clientWidth)""")
