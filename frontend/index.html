@@ -14,6 +14,9 @@
     --chip-bg: #eeeeea;
     --border: #e5e5e5;
     --input-bg: #ffffff;
+    --sheet-shadow: 0 -8px 32px rgba(0,0,0,0.18);
+    /* Height of the sticky search bar; set from JS so day headings stick below it. */
+    --sticky-top: 0px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -27,78 +30,127 @@
   body {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--fg); background: var(--bg);
-    max-width: 720px; margin: 0 auto; padding: 24px;
+    max-width: 720px; margin: 0 auto; padding: 0 16px 48px;
     line-height: 1.5;
   }
-  header { margin-bottom: 20px; }
-  h1 { margin: 0; font-size: 32px; letter-spacing: -0.02em; }
-  .subtitle { color: var(--muted); margin-top: 4px; }
-  .meta { color: var(--muted); font-size: 13px; margin-top: 12px; }
+  body.sheet-open { overflow: hidden; }
+  button { font: inherit; }
+  header.masthead { padding: 20px 0 8px; }
+  h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; line-height: 1.1; }
+  .subtitle { color: var(--muted); margin-top: 2px; }
 
-  .filters {
-    display: flex; flex-direction: column; gap: 12px;
-    padding: 12px 0 4px;
-    margin-bottom: 8px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+  /* --- Sticky search bar: search + Filters button, then date presets. --- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bg);
+    padding: 8px 0;
   }
-  .filter-row {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-    padding: 6px 0;
-  }
-  .filter-row.search-row {
-    gap: 12px;
-  }
-  .filter-row.search-row input[type="search"] {
-    flex: 1;
-    padding: 6px 10px;
-    border: 1px solid var(--border); border-radius: 6px;
+  .search-line { display: flex; gap: 8px; }
+  #search-input {
+    flex: 1; min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: 8px;
     background: var(--input-bg); color: var(--fg);
-    font: inherit; font-size: 14px;
+    font: inherit; font-size: 16px;  /* 16px keeps iOS from zooming on focus */
     outline: none;
   }
-  .filter-row.search-row input[type="search"]:focus {
-    border-color: var(--accent);
+  #search-input:focus { border-color: var(--accent); }
+  .filters-btn {
+    flex: 0 0 auto;
+    padding: 8px 14px; border-radius: 8px; cursor: pointer;
+    background: var(--input-bg); color: var(--fg); border: 1px solid var(--border);
   }
-  .filter-label {
-    font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--muted); font-weight: 600;
-    flex: 0 0 60px;
+  .filters-btn .badge {
+    display: inline-block; min-width: 1.5em; margin-left: 4px; padding: 0 5px;
+    border-radius: 999px; background: var(--accent); color: var(--accent-fg);
+    font-size: 12px; text-align: center;
   }
-  .dropdown { position: relative; }
+  /* Presets scroll sideways on a phone instead of wrapping onto three lines. */
+  .presets {
+    display: flex; gap: 8px; margin-top: 8px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .presets::-webkit-scrollbar { display: none; }
+  .preset-btn {
+    flex: 0 0 auto;
+    padding: 4px 12px; border-radius: 999px;
+    background: var(--chip-bg); color: var(--fg); border: 1px solid var(--border);
+    font-size: 14px; cursor: pointer; white-space: nowrap;
+  }
+  .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .preset-btn.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
+  }
+
+  /* --- Filters: a bottom sheet on phones (opened by the Filters button). --- */
+  .sheet-backdrop {
+    position: fixed; inset: 0; z-index: 30;
+    background: rgba(0,0,0,0.35);
+  }
+  .filters {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 31;
+    max-height: 88vh; overflow-y: auto; overscroll-behavior: contain;
+    background: var(--bg);
+    border-radius: 16px 16px 0 0; box-shadow: var(--sheet-shadow);
+    padding: 0 16px 16px;
+    transform: translateY(105%); visibility: hidden;
+    transition: transform 0.22s ease-out, visibility 0s linear 0.22s;
+  }
+  .filters.open {
+    transform: none; visibility: visible;
+    transition: transform 0.22s ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .filters, .filters.open { transition: none; }
+  }
+  .sheet-head {
+    position: sticky; top: 0; z-index: 1; background: var(--bg);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0 10px; border-bottom: 1px solid var(--border);
+  }
+  .sheet-head h2 { margin: 0; font-size: 18px; }
+  .sheet-foot {
+    position: sticky; bottom: -16px; background: var(--bg);
+    padding: 12px 0 16px; margin-top: 8px; border-top: 1px solid var(--border);
+  }
+  .done-btn {
+    width: 100%; padding: 12px; border-radius: 10px; cursor: pointer;
+    background: var(--accent); color: var(--accent-fg); border: 0;
+    font-weight: 600;
+  }
+  .filter-group { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .filter-group.last { border-bottom: 0; }
+  .filter-group > h3 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+  .filter-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .date-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .date-fields label { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--muted); min-width: 0; }
+  .date-fields .date-input { width: 100%; min-width: 0; }
+
+  /* Sources / Topics: disclosure lists that expand in place. */
   .dropdown > summary {
     list-style: none; cursor: pointer; user-select: none;
     display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px; border-radius: 999px;
+    padding: 6px 12px; border-radius: 999px;
     background: var(--chip-bg); color: var(--fg);
-    font-size: 13px; border: 1px solid var(--border);
+    font-size: 14px; border: 1px solid var(--border);
   }
   .dropdown > summary::-webkit-details-marker { display: none; }
-  .dropdown > summary::after {
-    content: "▾"; font-size: 10px; opacity: 0.6;
-  }
-  .dropdown[open] > summary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
+  .dropdown[open] > summary::after { content: "▴"; }
   .dropdown-panel {
-    position: absolute; top: calc(100% + 6px); left: 0; z-index: 10;
-    min-width: 280px; max-width: 360px;
-    max-height: min(70vh, 480px);
+    margin-top: 8px;
     background: var(--input-bg); color: var(--fg);
     border: 1px solid var(--border); border-radius: 8px;
     padding: 8px; display: flex; flex-direction: column; gap: 4px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   }
-  .dropdown-scroll {
-    overflow-y: auto;
-    max-height: 100%;
-  }
+  .dropdown-scroll { overflow-y: auto; max-height: 50vh; }
   .dropdown-empty { padding: 12px; color: var(--muted); font-size: 13px; text-align: center; }
-  .dropdown-search {
-    padding: 4px 4px 8px;
-  }
+  .dropdown-search { padding: 4px 4px 8px; }
   .dropdown-search input {
     width: 100%;
-    padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
-    background: var(--bg); color: var(--fg); font: inherit; font-size: 13px;
+    padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--fg); font: inherit; font-size: 16px;
     outline: none;
   }
   .dropdown-search input:focus { border-color: var(--accent); }
@@ -106,111 +158,118 @@
     display: flex; gap: 6px; padding: 4px 4px 8px;
     border-bottom: 1px solid var(--border); margin-bottom: 4px;
   }
-  .dropdown-bulk button {
-    padding: 3px 8px; border-radius: 6px;
+  .dropdown-bulk button, .reset-btn, .copy-btn {
+    padding: 4px 10px; border-radius: 999px;
     background: transparent; color: var(--muted); border: 1px solid var(--border);
-    font-size: 12px; cursor: pointer;
+    font-size: 13px; cursor: pointer;
   }
-  .dropdown-bulk button:hover { color: var(--fg); }
+  .dropdown-bulk button:hover, .reset-btn:hover { color: var(--fg); }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .copy-btn.copied { color: var(--accent-fg); background: var(--accent); border-color: var(--accent); }
   .dropdown-item {
     display: flex; align-items: center; gap: 8px;
     padding: 6px 6px; border-radius: 6px; cursor: pointer;
-    font-size: 13px;
+    font-size: 14px; overflow-wrap: anywhere;
   }
   .dropdown-item:hover { background: var(--chip-bg); }
   .dropdown-item .count {
-    margin-left: 6px; font-size: 11px; color: var(--muted);
+    margin-left: 6px; font-size: 12px; color: var(--muted);
     font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: right;
   }
   /* "Only" isolate affordance — reserved space (visibility, not display) so
      the count doesn't shift on hover; revealed when hovering the row. */
   .dropdown-item .only-btn {
-    margin-left: auto; font: inherit; font-size: 11px; line-height: 1.4;
+    margin-left: auto; font: inherit; font-size: 12px; line-height: 1.4;
     padding: 0 6px; border-radius: 5px; cursor: pointer;
     background: transparent; border: 1px solid var(--border); color: var(--muted);
     visibility: hidden;
   }
-  .dropdown-item:hover .only-btn { visibility: visible; }
+  .dropdown-item:hover .only-btn, .dropdown-item:focus-within .only-btn { visibility: visible; }
   .dropdown-item .only-btn:hover { color: var(--accent); border-color: var(--accent); }
   /* Touch screens have no hover, so "Only" must always be showing there. */
   @media (hover: none) { .dropdown-item .only-btn { visibility: visible; } }
-  /* Finger-sized targets on touch screens. */
-  @media (pointer: coarse) {
-    .tag-chip { font-size: 13px; padding: 4px 10px; }
-    .preset-btn, .reset-btn, .copy-btn, .dropdown > summary { padding: 8px 14px; }
-    .dropdown-item { padding: 10px 6px; }
-    .dropdown-item .only-btn { padding: 4px 10px; }
-  }
   .date-input {
-    padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px;
-    background: var(--input-bg); color: var(--fg); font: inherit; font-size: 13px;
+    padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--input-bg); color: var(--fg); font: inherit; font-size: 16px;
     color-scheme: light dark;
   }
-  .reset-btn {
-    padding: 4px 10px; border-radius: 999px;
-    background: transparent; color: var(--muted); border: 1px solid var(--border);
-    font-size: 13px; cursor: pointer;
-    margin-left: auto;
-  }
-  .reset-btn:hover { color: var(--fg); }
-  .copy-btn {
-    padding: 4px 10px; border-radius: 999px;
-    background: transparent; color: var(--muted); border: 1px solid var(--border);
-    font-size: 13px; cursor: pointer;
-  }
-  .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
-  .copy-btn.copied {
-    color: var(--accent-fg); background: var(--accent); border-color: var(--accent);
-  }
-  .preset-btn {
-    padding: 4px 10px; border-radius: 999px;
-    background: var(--chip-bg); color: var(--fg); border: 1px solid var(--border);
-    font-size: 13px; cursor: pointer;
-  }
-  .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .preset-btn.active {
-    background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
-  }
 
+  /* --- Above the list: active-filter pills, counts, day strip. --- */
+  .active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+  .active-filters:empty { display: none; }
+  .active-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 4px 3px 10px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-fg);
+    font-size: 13px; border: 1px solid var(--accent);
+    max-width: 100%; min-width: 0;
+  }
+  .active-pill .pill-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .active-pill .pill-clear {
+    background: transparent; border: 0; color: inherit; cursor: pointer;
+    padding: 0 6px; font-size: 16px; line-height: 1;
+    border-radius: 999px;
+  }
+  .active-pill .pill-clear:hover { background: rgba(255,255,255,0.2); }
+  .meta { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
+  .day-strip {
+    display: flex; gap: 6px; margin: 10px 0 0; padding-bottom: 4px;
+    overflow-x: auto; scrollbar-width: thin;
+  }
+  .day-btn {
+    flex: 0 0 auto; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center;
+    min-width: 46px; padding: 4px 6px; border-radius: 8px;
+    background: transparent; color: var(--fg); border: 1px solid var(--border);
+    line-height: 1.15;
+  }
+  .day-btn .dow { font-size: 11px; color: var(--muted); }
+  .day-btn .dom { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .day-btn:hover { border-color: var(--accent); }
+
+  /* --- Event list --- */
   h2.date {
-    margin: 32px 0 10px;
-    padding-bottom: 6px;
+    margin: 28px 0 4px;
+    padding: 8px 0 6px;
     border-bottom: 2px solid var(--border);
-    font-size: 20px; letter-spacing: -0.01em;
+    font-size: 19px; letter-spacing: -0.01em;
     color: var(--fg); font-weight: 700;
-    /* Stick to the top while scrolling so the day you're viewing stays visible. */
-    position: sticky; top: 0; background: var(--bg); z-index: 5;
+    /* Stick just below the search bar so the day you're viewing stays visible. */
+    position: sticky; top: var(--sticky-top); background: var(--bg); z-index: 5;
+    scroll-margin-top: var(--sticky-top);
   }
-  .event { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  /* Phone: time on its own line, then the title at full width, with the
+     thumbnail to the right. Wider screens put the time in its own column. */
+  .event {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
   .event:last-child { border-bottom: none; }
+  .event.no-thumb { grid-template-columns: minmax(0, 1fr); }
   .time {
-    flex: 0 0 84px; color: var(--muted); font-variant-numeric: tabular-nums;
-    font-size: 14px; padding-top: 2px;
+    grid-column: 1; color: var(--muted); font-variant-numeric: tabular-nums;
+    font-size: 14px; line-height: 1.3;
   }
-  .event .time { line-height: 1.3; }
-  /* Per-row date (grouped view) sits above the time so the day is clear even
-     after scrolling past the heading. */
-  .time .td-date { display: block; font-size: 12px; font-weight: 600; color: var(--fg); }
-  .time .td-time { display: block; }
-  /* Search-active flat rows put a full date + time in .time — widen it. */
-  body.searching .time { flex: 0 0 140px; }
+  .time .td-date { font-weight: 600; color: var(--fg); margin-right: 6px; }
   .thumb {
-    flex: 0 0 72px; width: 72px; height: 72px;
+    grid-column: 2; grid-row: 1 / span 2;
+    width: 64px; height: 64px;
     border-radius: 6px; background: var(--chip-bg);
     overflow: hidden;
   }
-  .thumb img {
-    width: 100%; height: 100%; object-fit: cover;
-    display: block;
-  }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   /* overflow-wrap: long URLs and slash-joined titles otherwise widen the page
      past a phone screen (it then zooms out or scrolls sideways). */
-  .details { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .details { grid-column: 1; min-width: 0; overflow-wrap: anywhere; }
+  .title { font-size: 17px; line-height: 1.3; margin-top: 2px; }
   .title a { color: var(--fg); font-weight: 600; text-decoration: none; }
   .title a:hover { color: var(--accent); text-decoration: underline; }
-  .location, .source { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .where { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .where .source { display: block; font-size: 13px; }
+  .where .source::before { content: "Listed by "; }
   .description {
-    font-size: 13px; color: var(--muted);
+    font-size: 14px; color: var(--muted);
     margin-top: 6px; line-height: 1.45;
   }
   .description[role="button"] { cursor: pointer; }
@@ -228,6 +287,15 @@
     cursor: pointer; text-decoration: none;
   }
   .location-btn:hover { color: var(--fg); text-decoration: underline; }
+  @media (min-width: 600px) {
+    .event, .event.no-thumb { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
+    .time { grid-column: 1; grid-row: 1 / span 2; padding-top: 3px; }
+    .time .td-date { display: block; margin: 0; }
+    .details { grid-column: 2; grid-row: 1 / span 2; }
+    .thumb { grid-column: 3; width: 80px; height: 80px; }
+    body.searching .event { grid-template-columns: 120px minmax(0, 1fr) 80px; }
+  }
+
   /* --- Tag chips (type + topic), colored by axis/group via a per-chip hue.
      One --h drives text/border/bg; lightness flips by theme so chips read on
      both backgrounds. --- */
@@ -235,8 +303,8 @@
   @media (prefers-color-scheme: dark) { :root { --chip-s: 58%; --chip-l: 70%; } }
   .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
   .tag-chip {
-    font: inherit; font-size: 11px; line-height: 1.4;
-    padding: 1px 8px; border-radius: 999px; cursor: pointer;
+    font: inherit; font-size: 12px; line-height: 1.4;
+    padding: 2px 9px; border-radius: 999px; cursor: pointer;
     color: hsl(var(--h) var(--chip-s) var(--chip-l));
     border: 1px solid hsl(var(--h) var(--chip-s) var(--chip-l) / 0.40);
     background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.10);
@@ -248,37 +316,27 @@
     background: hsl(var(--h) var(--chip-s) var(--chip-l));
     border-color: hsl(var(--h) var(--chip-s) var(--chip-l));
   }
-  /* Type chips are a touch more subdued (format is secondary to topic). */
-  .tag-chip.tag-type { font-variant: small-caps; letter-spacing: 0.02em; }
   /* Topic dropdown: grouped list with a color swatch per group. */
   .dropdown-group-item { margin-top: 4px; }
-  .dropdown-group-label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--fg); font-weight: 700;
-  }
+  .dropdown-group-label { color: var(--fg); font-weight: 700; }
   /* Indent child topic rows under their group header. */
   .dropdown-item[data-topic] { padding-left: 20px; }
   .topic-swatch {
     width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto;
     background: hsl(var(--h) var(--chip-s) var(--chip-l));
   }
-  .active-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 3px 4px 3px 10px; border-radius: 999px;
-    background: var(--accent); color: var(--accent-fg);
-    font-size: 13px; border: 1px solid var(--accent);
-    max-width: 100%; min-width: 0;
+  /* Finger-sized targets on touch screens. */
+  @media (pointer: coarse) {
+    .tag-chip { font-size: 13px; padding: 4px 10px; }
+    .preset-btn { padding: 7px 14px; }
+    .dropdown-bulk button, .reset-btn, .copy-btn { padding: 8px 14px; }
+    .dropdown > summary { padding: 8px 14px; }
+    .dropdown-item { padding: 10px 6px; }
+    .dropdown-item .only-btn { padding: 4px 10px; }
   }
-  .active-pill .pill-label {
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .active-pill .pill-clear {
-    background: transparent; border: 0; color: inherit; cursor: pointer;
-    padding: 0 4px; font-size: 14px; line-height: 1;
-    border-radius: 999px;
-  }
-  .active-pill .pill-clear:hover { background: rgba(255,255,255,0.2); }
+
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
+  .error { color: #c33; }
   /* Placeholder rows while events.json downloads and parses. */
   .skeleton { padding: 24px 0; }
   .skeleton-row { display: flex; gap: 16px; padding: 14px 0; }
@@ -287,51 +345,51 @@
   .skeleton-row .s-body { flex: 1; height: 48px; }
   .loading-note { color: var(--muted); font-size: 14px; }
   .sentinel { height: 1px; }
-  .error { color: #c33; }
 </style>
 </head>
 <body>
-<header>
+<header class="masthead">
   <h1>Agora</h1>
   <div class="subtitle">SF events, one calendar.</div>
-  <div class="meta" id="meta"></div>
 </header>
 
-<section class="filters" id="filters" hidden>
-  <div class="filter-row search-row">
-    <span class="filter-label">Search</span>
-    <input type="search" id="search-input" placeholder="Search events…" aria-label="Search events" autocomplete="off">
+<div class="topbar" id="topbar">
+  <div class="search-line">
+    <input type="search" id="search-input" placeholder="Search events" aria-label="Search events" autocomplete="off" enterkeyhint="search">
+    <button type="button" class="filters-btn" id="filters-btn" aria-controls="filters" aria-expanded="false">Filters<span class="badge" id="filters-count" hidden></span></button>
   </div>
-  <div class="filter-row">
-    <span class="filter-label">Sources</span>
-    <details class="dropdown" id="source-dropdown">
-      <summary id="source-summary">Loading…</summary>
-      <div class="dropdown-panel">
-        <div class="dropdown-search">
-          <input type="search" id="source-search" placeholder="Search sources…" aria-label="Search sources" autocomplete="off">
-        </div>
-        <div class="dropdown-bulk">
-          <button type="button" id="select-all">Select all</button>
-          <button type="button" id="deselect-all">Deselect all</button>
-        </div>
-        <div class="dropdown-scroll">
-          <div id="source-list"></div>
-          <div class="dropdown-empty" id="source-empty" hidden>No sources match.</div>
-        </div>
-      </div>
-    </details>
+  <div class="presets" role="group" aria-label="Dates">
+    <button type="button" class="preset-btn" id="preset-today">Today</button>
+    <button type="button" class="preset-btn" id="preset-tomorrow">Tomorrow</button>
+    <button type="button" class="preset-btn" id="preset-week">This week</button>
+    <button type="button" class="preset-btn" id="preset-month">This month</button>
   </div>
-  <div class="filter-row">
-    <span class="filter-label">Type</span>
-    <span id="type-chips"></span>
+</div>
+
+<div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+<aside class="filters" id="filters" aria-label="Filters" hidden>
+  <div class="sheet-head">
+    <h2>Filters</h2>
+    <button type="button" class="reset-btn" id="reset">Reset all</button>
   </div>
-  <div class="filter-row">
-    <span class="filter-label">Topics</span>
+  <div class="filter-group">
+    <h3>Dates</h3>
+    <div class="date-fields">
+      <label>From <input type="date" id="date-from" class="date-input"></label>
+      <label>To <input type="date" id="date-to" class="date-input"></label>
+    </div>
+  </div>
+  <div class="filter-group">
+    <h3>Type</h3>
+    <div class="chip-row" id="type-chips"></div>
+  </div>
+  <div class="filter-group">
+    <h3>Topics</h3>
     <details class="dropdown" id="topic-dropdown">
       <summary id="topic-summary">Any topic</summary>
       <div class="dropdown-panel">
         <div class="dropdown-search">
-          <input type="search" id="topic-search" placeholder="Search topics…" aria-label="Search topics" autocomplete="off">
+          <input type="search" id="topic-search" placeholder="Search topics" aria-label="Search topics" autocomplete="off">
         </div>
         <div class="dropdown-bulk">
           <button type="button" id="topic-select-all">Select all</button>
@@ -344,36 +402,46 @@
       </div>
     </details>
   </div>
-  <div class="filter-row" id="location-row" hidden>
-    <span class="filter-label">Location</span>
-    <span class="active-pill" id="location-pill">
-      <span class="pill-label" id="location-label"></span>
-      <button type="button" class="pill-clear" id="location-clear" aria-label="Clear location filter">×</button>
-    </span>
+  <div class="filter-group">
+    <h3>Venues and organizers</h3>
+    <details class="dropdown" id="source-dropdown">
+      <summary id="source-summary">Loading…</summary>
+      <div class="dropdown-panel">
+        <div class="dropdown-search">
+          <input type="search" id="source-search" placeholder="Search venues" aria-label="Search venues and organizers" autocomplete="off">
+        </div>
+        <div class="dropdown-bulk">
+          <button type="button" id="select-all">Select all</button>
+          <button type="button" id="deselect-all">Deselect all</button>
+        </div>
+        <div class="dropdown-scroll">
+          <div id="source-list"></div>
+          <div class="dropdown-empty" id="source-empty" hidden>No venues match.</div>
+        </div>
+      </div>
+    </details>
   </div>
-  <div class="filter-row">
-    <span class="filter-label">Dates</span>
-    <button type="button" class="preset-btn" id="preset-today">Today</button>
-    <button type="button" class="preset-btn" id="preset-tomorrow">Tomorrow</button>
-    <button type="button" class="preset-btn" id="preset-week">This week</button>
-    <button type="button" class="preset-btn" id="preset-month">This month</button>
-    <label style="font-size:13px;color:var(--muted)">From
-      <input type="date" id="date-from" class="date-input" aria-label="From date">
-    </label>
-    <label style="font-size:13px;color:var(--muted)">To
-      <input type="date" id="date-to" class="date-input" aria-label="To date">
-    </label>
-    <button id="reset" class="reset-btn">Reset filters</button>
-    <button id="copy-link" class="copy-btn" type="button" aria-label="Copy shareable link to this filtered view">Copy link</button>
+  <div class="filter-group last">
+    <div class="filter-actions">
+      <button id="copy-link" class="copy-btn" type="button">Copy link to this view</button>
+    </div>
   </div>
-</section>
+  <div class="sheet-foot">
+    <button type="button" class="done-btn" id="filters-done">Show events</button>
+  </div>
+</aside>
 
-<main id="list">
-  <div class="skeleton" aria-busy="true">
-    <p class="loading-note">Loading events…</p>
-    <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
-    <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
-    <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+<main>
+  <div class="active-filters" id="active-filters"></div>
+  <div class="meta" id="meta"></div>
+  <nav class="day-strip" id="day-strip" aria-label="Jump to a day" hidden></nav>
+  <div id="list">
+    <div class="skeleton" aria-busy="true">
+      <p class="loading-note">Loading events…</p>
+      <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+      <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+      <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
+    </div>
   </div>
 </main>
 
@@ -397,9 +465,13 @@
   const presetTomorrowEl = document.getElementById("preset-tomorrow");
   const presetWeekEl = document.getElementById("preset-week");
   const presetMonthEl = document.getElementById("preset-month");
-  const locationRowEl = document.getElementById("location-row");
-  const locationLabelEl = document.getElementById("location-label");
-  const locationClearEl = document.getElementById("location-clear");
+  const topbarEl = document.getElementById("topbar");
+  const filtersBtnEl = document.getElementById("filters-btn");
+  const filtersCountEl = document.getElementById("filters-count");
+  const filtersDoneEl = document.getElementById("filters-done");
+  const backdropEl = document.getElementById("sheet-backdrop");
+  const activeFiltersEl = document.getElementById("active-filters");
+  const dayStripEl = document.getElementById("day-strip");
   const sourceDropdownEl = document.getElementById("source-dropdown");
   const searchEl = document.getElementById("search-input");
 
@@ -584,7 +656,7 @@
     }
     const n = selectedTopics.size, total = allTopics.length;
     topicSummaryEl.textContent =
-      n === total ? "All topics (" + total + ")"
+      n === total ? "All " + total + " topics"
       : n === 0 ? "No topics"
       : n === 1 ? topicMeta.get([...selectedTopics][0]).label
       : n + " of " + total + " topics";
@@ -659,13 +731,11 @@
     }
     topicEmptyEl.hidden = visible > 0;
   });
+  // Focus the list's search box on open — but not on touch screens, where
+  // focusing pops the keyboard over the list being opened.
+  const finePointer = matchMedia("(pointer: fine)");
   topicDropdownEl.addEventListener("toggle", () => {
-    if (topicDropdownEl.open) topicSearchEl.focus();
-  });
-  document.addEventListener("click", (e) => {
-    if (topicDropdownEl.open && !topicDropdownEl.contains(e.target)) {
-      topicDropdownEl.open = false;
-    }
+    if (topicDropdownEl.open && finePointer.matches) topicSearchEl.focus();
   });
 
   let searchQuery = "";
@@ -700,15 +770,8 @@
 
   function setLocationFilter(loc) {
     locationFilter = loc;
-    if (loc) {
-      locationLabelEl.textContent = loc;
-      locationRowEl.hidden = false;
-    } else {
-      locationRowEl.hidden = true;
-    }
     render();
   }
-  locationClearEl.addEventListener("click", () => setLocationFilter(null));
 
   // Toggle a type/topic tag in its filter set (OR within a facet). Called both
   // by clicking a chip on a card and by the filter controls.
@@ -822,15 +885,8 @@
     }
     sourceEmptyEl.hidden = visible > 0;
   });
-  // Focus the search input each time the dropdown opens.
   sourceDropdownEl.addEventListener("toggle", () => {
-    if (sourceDropdownEl.open) sourceSearchEl.focus();
-  });
-  // Close the dropdown when clicking outside it (native <details> doesn't do this).
-  document.addEventListener("click", (e) => {
-    if (sourceDropdownEl.open && !sourceDropdownEl.contains(e.target)) {
-      sourceDropdownEl.open = false;
-    }
+    if (sourceDropdownEl.open && finePointer.matches) sourceSearchEl.focus();
   });
   function cssEscape(v) {
     return (window.CSS && CSS.escape) ? CSS.escape(v)
@@ -839,10 +895,10 @@
 
   function updateSourceSummary() {
     const n = selected.size, total = allSources.length;
-    if (n === total) summaryEl.textContent = "All sources (" + total + ")";
-    else if (n === 0) summaryEl.textContent = "No sources";
+    if (n === total) summaryEl.textContent = "All " + total + " venues";
+    else if (n === 0) summaryEl.textContent = "None selected";
     else if (n === 1) summaryEl.textContent = [...selected][0];
-    else summaryEl.textContent = n + " of " + total + " sources";
+    else summaryEl.textContent = n + " of " + total + " venues";
   }
   updateSourceSummary();
 
@@ -865,6 +921,9 @@
   const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
   const dateFmt = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" });
   const rowDateFmt = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
+  const stripDowFmt = new Intl.DateTimeFormat(undefined, { weekday: "short" });
+  const stripMonthFmt = new Intl.DateTimeFormat(undefined, { month: "short" });
+  const DAY_STRIP_MAX = 90;
 
   // Incremental rendering: render() hands the filtered events to a queue and
   // rows are built CHUNK at a time as the sentinel nears the viewport.
@@ -1111,18 +1170,78 @@
     }
   }
 
+  // Phones get the system share sheet; elsewhere the link is copied.
+  const canShare = !!navigator.share && matchMedia("(pointer: coarse)").matches;
+  const copyLabel = canShare ? "Share this view" : "Copy link to this view";
+  copyEl.textContent = copyLabel;
   copyEl.addEventListener("click", async () => {
+    if (canShare) {
+      try { await navigator.share({title: document.title, url: location.href}); } catch {}
+      return;
+    }
     try {
       await navigator.clipboard.writeText(location.href);
-      copyEl.textContent = "Copied!";
+      copyEl.textContent = "Link copied";
       copyEl.classList.add("copied");
     } catch {
-      copyEl.textContent = "Copy failed";
+      copyEl.textContent = "Couldn't copy. Copy the address bar instead.";
     }
     setTimeout(() => {
-      copyEl.textContent = "Copy link";
+      copyEl.textContent = copyLabel;
       copyEl.classList.remove("copied");
-    }, 1500);
+    }, 2000);
+  });
+
+  // --- Filter sheet (phones). On wide screens the panel is a sidebar and
+  // these are no-ops visually. ---
+  function openSheet() {
+    filters.classList.add("open");
+    backdropEl.hidden = false;
+    document.body.classList.add("sheet-open");
+    filtersBtnEl.setAttribute("aria-expanded", "true");
+    filtersDoneEl.focus({preventScroll: true});
+  }
+  function closeSheet() {
+    if (!filters.classList.contains("open")) return;
+    filters.classList.remove("open");
+    backdropEl.hidden = true;
+    document.body.classList.remove("sheet-open");
+    filtersBtnEl.setAttribute("aria-expanded", "false");
+    filtersBtnEl.focus({preventScroll: true});
+  }
+  filtersBtnEl.addEventListener("click", openSheet);
+  filtersDoneEl.addEventListener("click", closeSheet);
+  backdropEl.addEventListener("click", closeSheet);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSheet();
+  });
+
+  // Day headings stick just below the sticky search bar, whatever its height.
+  new ResizeObserver(() => {
+    document.documentElement.style.setProperty("--sticky-top", topbarEl.offsetHeight + "px");
+  }).observe(topbarEl);
+
+  // Active-filter pills above the list; each × clears that one filter.
+  activeFiltersEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".pill-clear");
+    if (!btn) return;
+    const {clear, val} = btn.dataset;
+    if (clear === "sources") selectAllEl.click();
+    else if (clear === "topics") topicSelectAllEl.click();
+    else if (clear === "type") toggleTag("type", val, false);
+    else if (clear === "dates") setDateRange(null, null);
+    else if (clear === "location") setLocationFilter(null);
+  });
+
+  // Day strip: jump to a day, rendering rows up to it first if needed.
+  dayStripEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".day-btn");
+    if (!btn) return;
+    const idx = queue.findIndex(ev => toISODate(ev._start) === btn.dataset.day);
+    if (idx < 0) return;
+    while (queuePos <= idx) renderMore();
+    list.querySelector('h2.date[data-day="' + btn.dataset.day + '"]')
+      ?.scrollIntoView({block: "start"});
   });
 
   if (events.length === 0) {
@@ -1177,15 +1296,71 @@
     const isFiltered = filtered.length !== events.length;
     meta.textContent = (isFiltered ? filtered.length + " of " + events.length : events.length)
       + " upcoming events · updated " + generatedAt.toLocaleString();
+    renderChrome(filtered, flat);
 
     if (filtered.length === 0) {
-      list.innerHTML = '<div class="empty">No events match the current filters.</div>';
+      list.innerHTML = '<div class="empty">No events match. Remove a filter or try a different search.</div>';
       return;
     }
     queue = filtered; queuePos = 0; queueFlat = flat; lastDayKey = null;
     list.innerHTML = "";
     list.appendChild(sentinel);
     renderMore();
+  }
+
+  // The pills for each active filter, as [clear-key, label, value?].
+  function activeFilterList() {
+    const out = [];
+    if (selected.size !== allSources.length) out.push(["sources", summaryEl.textContent]);
+    for (const path of selectedTypes) out.push(["type", typeLabels.get(path) || path, path]);
+    if (topicFilterActive()) out.push(["topics", topicSummaryEl.textContent]);
+    if (dateFrom || dateTo) {
+      const preset = document.querySelector(".presets .preset-btn.active");
+      const fmt = (d) => rowDateFmt.format(d);
+      out.push(["dates", preset ? preset.textContent
+        : dateFrom && dateTo ? fmt(dateFrom) + " to " + fmt(dateTo)
+        : dateFrom ? "From " + fmt(dateFrom) : "Until " + fmt(dateTo)]);
+    }
+    if (locationFilter) out.push(["location", locationFilter]);
+    return out;
+  }
+
+  // Everything around the list that depends on the current results: active
+  // filter pills, the Filters badge, the sheet's Show button, the day strip.
+  function renderChrome(filtered, flat) {
+    const active = activeFilterList();
+    activeFiltersEl.innerHTML = active.map(([key, label, val]) =>
+      '<span class="active-pill"><span class="pill-label">' + escapeHtml(label) + "</span>"
+      + '<button type="button" class="pill-clear" data-clear="' + key + '"'
+      + (val ? ' data-val="' + escapeHtml(val) + '"' : "")
+      + ' aria-label="Remove filter: ' + escapeHtml(label) + '">×</button></span>'
+    ).join("");
+    filtersCountEl.hidden = active.length === 0;
+    filtersCountEl.textContent = active.length;
+    filtersDoneEl.textContent = filtered.length === 0 ? "No events match"
+      : "Show " + filtered.length.toLocaleString() + (filtered.length === 1 ? " event" : " events");
+
+    // Day strip: the first DAY_STRIP_MAX days that have results (grouped view only).
+    const days = [];
+    if (!flat) {
+      for (const ev of filtered) {
+        const key = toISODate(ev._start);
+        if (days.length && days[days.length - 1][0] === key) continue;
+        days.push([key, ev._start]);
+        if (days.length >= DAY_STRIP_MAX) break;
+      }
+    }
+    dayStripEl.hidden = days.length < 2;
+    let prevMonth = null;
+    dayStripEl.innerHTML = days.map(([key, d]) => {
+      // The first day of each month in the strip shows the month instead of the weekday.
+      const month = d.getMonth();
+      const top = prevMonth !== null && month !== prevMonth ? stripMonthFmt.format(d) : stripDowFmt.format(d);
+      prevMonth = month;
+      return '<button type="button" class="day-btn" data-day="' + key + '" aria-label="'
+        + escapeHtml(dateFmt.format(d)) + '"><span class="dow">' + escapeHtml(top)
+        + '</span><span class="dom">' + d.getDate() + "</span></button>";
+    }).join("");
   }
 
   // One tag chip. kind = "type" | "topic"; val is the dot-path or slug.
@@ -1223,11 +1398,16 @@
       ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
       : title;
     const loc = ev.location
-      ? '<div class="location"><button type="button" class="location-btn" data-location="'
-          + escapeHtml(ev.location) + '" title="Filter by this location">'
-          + escapeHtml(ev.location) + '</button></div>'
+      ? '<button type="button" class="location-btn" data-location="'
+          + escapeHtml(ev.location) + '" title="Show only events here">'
+          + escapeHtml(ev.location) + "</button>"
       : "";
-    const src = '<div class="source">' + escapeHtml((ev.sources || []).join(" · ")) + "</div>";
+    // Name a source only when the location doesn't already ("The Dawn Club,
+    // San Francisco" listed by "The Dawn Club" says it once).
+    const locLower = (ev.location || "").toLowerCase();
+    const extra = (ev.sources || []).filter(s => !locLower.includes(s.toLowerCase()));
+    const src = extra.length ? '<span class="source">' + escapeHtml(extra.join(", ")) + "</span>" : "";
+    const where = loc || src ? '<div class="where">' + loc + src + "</div>" : "";
     const desc = renderDescription(ev.description);
     // Thumbnail is optional — some sources don't expose one, and we don't
     // want a broken-image slot. Skip the div entirely if no image_url.
@@ -1236,14 +1416,14 @@
           + escapeHtml(ev.image_url) + '"></div>'
       : "";
     return (
-      '<div class="event">' +
+      '<article class="event' + (thumb ? "" : " no-thumb") + '">' +
         '<div class="time">' + timeHtml + "</div>" +
-        thumb +
         '<div class="details">' +
           '<div class="title">' + titleHtml + "</div>" +
-          loc + src + desc + renderTags(ev) +
+          where + desc + renderTags(ev) +
         "</div>" +
-      "</div>"
+        thumb +
+      "</article>"
     );
   }
 
@@ -1253,15 +1433,15 @@
   function renderList(chunk) {
     const parts = [];
     for (const ev of chunk) {
-      const key = ev._start.toDateString();
+      const key = toISODate(ev._start);
       if (key !== lastDayKey) {
-        parts.push('<h2 class="date">' + escapeHtml(dateFmt.format(ev._start)) + "</h2>");
+        parts.push('<h2 class="date" data-day="' + key + '">'
+          + escapeHtml(dateFmt.format(ev._start)) + "</h2>");
         lastDayKey = key;
       }
-      // Date above time so the day is clear even after scrolling past the header.
-      const timeHtml = '<span class="td-date">' + escapeHtml(rowDateFmt.format(ev._start))
-        + '</span><span class="td-time">' + escapeHtml(timeFmt.format(ev._start)) + "</span>";
-      parts.push(renderEventRow(ev, timeHtml));
+      // The sticky day heading carries the date, so rows show only the time.
+      parts.push(renderEventRow(ev, '<span class="td-time">'
+        + escapeHtml(timeFmt.format(ev._start)) + "</span>"));
     }
     return parts.join("");
   }

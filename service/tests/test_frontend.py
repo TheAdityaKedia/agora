@@ -50,7 +50,7 @@ def _events(n=N_EVENTS):
             "id": f"ev{i}",
             "title": f"Jazz night {i}" if jazz else f"Poetry reading {i}",
             "start_time": (base + timedelta(days=i // 4, hours=i % 4)).isoformat(),
-            "location": "The Dawn Club, San Francisco" if jazz else "City Lights Books",
+            "location": "The Dawn Club, San Francisco" if jazz else "261 Columbus Ave",
             "url": f"https://example.com/e/{i}",
             "description": "Doors at seven. Bring a friend and stay late.",
             "image_url": None,
@@ -169,3 +169,61 @@ def test_only_buttons_visible_on_touch(browser, site):
     page.evaluate("document.querySelectorAll('details').forEach(d => d.open = true)")
     only = page.locator("#source-list .only-btn").first
     assert only.evaluate("e => getComputedStyle(e).visibility") == "visible"
+
+
+def test_filter_sheet_opens_and_closes_on_phone(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    sheet = page.locator("#filters")
+    assert not sheet.is_visible()
+    page.click("#filters-btn")
+    page.wait_for_selector("#filters.open")
+    assert "Show 400 events" in page.inner_text("#filters-done")
+    page.click("#filters-done")
+    page.wait_for_selector("#filters:not(.open)", state="attached")
+    page.click("#filters-btn")
+    page.keyboard.press("Escape")
+    page.wait_for_selector("#filters:not(.open)", state="attached")
+
+
+def test_active_filter_pill_shows_and_clears(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    page.click("#preset-tomorrow")
+    pill = page.locator("#active-filters .active-pill")
+    assert pill.count() == 1 and "Tomorrow" in pill.inner_text()
+    assert page.inner_text("#filters-count") == "1"
+    assert _rendered(page) == 4
+    page.click("#active-filters .pill-clear")
+    assert page.locator("#active-filters .active-pill").count() == 0
+    assert "dates=" not in page.url
+
+
+def test_day_strip_jumps_past_rendered_rows(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    days = page.locator("#day-strip .day-btn")
+    assert days.count() > 20
+    before = _rendered(page)
+    target = days.nth(days.count() - 1)
+    day = target.get_attribute("data-day")
+    target.click()
+    heading = page.locator(f'h2.date[data-day="{day}"]')
+    assert heading.count() == 1
+    assert _rendered(page) > before
+    top = heading.evaluate("e => e.getBoundingClientRect().top")
+    assert 0 <= top < 300
+
+
+def test_source_hidden_when_location_names_it(browser, site):
+    page = _open(browser, site, DESKTOP)
+    jazz, poetry = page.locator(".event").nth(2), page.locator(".event").nth(3)
+    assert "Jazz night 2" in jazz.inner_text()
+    assert jazz.locator(".source").count() == 0  # "The Dawn Club, San Francisco"
+    assert "Poetry reading 3" in poetry.inner_text()
+    assert poetry.locator(".source").inner_text() == "City Lights"
+
+
+def test_location_click_filters_with_pill(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.locator(".event").nth(3).locator(".location-btn").click()
+    assert "261 Columbus Ave" in page.inner_text("#active-filters")
+    assert "loc=" in page.url
+    assert all("Poetry" in t for t in page.locator(".event .title").all_inner_texts())
