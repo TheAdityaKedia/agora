@@ -149,6 +149,11 @@ jobs:
       IS_MAIN: ${{ github.ref_name == 'main' }}
     steps:
       - uses: actions/checkout@v7
+        # The branch tip at job start, not the trigger commit: this job waits on
+        # the neon-writer lock, and the other writer may merge a data PR meanwhile
+        # (a stale base conflicts and misses its new tags).
+        with:
+          ref: ${{ github.ref_name }}
       - uses: actions/setup-python@v7
         with:
           python-version: "3.13"

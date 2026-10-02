@@ -40,6 +40,11 @@ jobs:
           echo "go=true" >> "$GITHUB_OUTPUT"
       - if: steps.gate.outputs.go == 'true'
         uses: actions/checkout@v7
+        # The branch tip at job start, not the trigger commit: this job waits on
+        # the neon-writer lock, and the other writer may merge a data PR meanwhile
+        # (a stale base conflicts and misses its new tags).
+        with:
+          ref: ${{ github.ref_name }}
       - if: steps.gate.outputs.go == 'true'
         uses: actions/setup-python@v7
         with:
