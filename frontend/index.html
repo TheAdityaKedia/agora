@@ -344,7 +344,15 @@
      both backgrounds. --- */
   :root { --chip-s: 50%; --chip-l: 34%; }
   @media (prefers-color-scheme: dark) { :root { --chip-s: 52%; --chip-l: 72%; } }
-  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  /* Tags, then "Add to calendar" pushed to the right edge. */
+  .row-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 8px; }
+  .cal-btn {
+    margin-left: auto; padding: 2px 0; cursor: pointer;
+    background: none; border: 0; color: var(--muted);
+    font-size: 13px; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .cal-btn:hover { color: var(--accent); }
   .tag-chip {
     font: inherit; font-size: 12px; line-height: 1.4;
     padding: 2px 9px; border-radius: 999px; cursor: pointer;
@@ -625,6 +633,7 @@
     .map((e, i) => ({
       ...e,
       _start: new Date(e.start_time),
+      _uid: e.id,
       id: i,
       sources_text: (e.sources || []).join(" "),
       tags_text: tagsText(e),
@@ -909,6 +918,8 @@
       else toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval);
       return;
     }
+    const calBtn = e.target.closest(".cal-btn");
+    if (calBtn) { downloadIcs(events[+calBtn.dataset.id]); return; }
     const srcBtn = e.target.closest(".source-btn");
     if (srcBtn) { isolateSource(srcBtn.dataset.source, true); return; }
     const locBtn = e.target.closest(".location-btn");
@@ -1507,6 +1518,55 @@
     return chips.length ? '<div class="tags">' + chips.join("") + "</div>" : "";
   }
 
+  // --- Add to calendar: a one-event .ics file, built in the browser. ---
+  // Events carry only a start time, so the calendar entry runs ICS_HOURS.
+  const ICS_HOURS = 2;
+  function icsText(ev) {
+    const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    // RFC 5545 text escaping: backslash, semicolon, comma, newline.
+    const esc = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&")
+      .replace(/\r?\n/g, "\\n");
+    const end = new Date(ev._start.getTime() + ICS_HOURS * 3600e3);
+    const notes = [ev.description, ev.url, "Listed by " + (ev.sources || []).join(", ") + " on Agora"]
+      .filter(Boolean).join("\n\n");
+    const lines = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Bay Area events//EN",
+      "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT",
+      "UID:" + (ev._uid || ev.id) + "@agora",
+      "DTSTAMP:" + stamp(new Date()),
+      "DTSTART:" + stamp(ev._start),
+      "DTEND:" + stamp(end),
+      "SUMMARY:" + esc(ev.title),
+    ];
+    if (ev.location) lines.push("LOCATION:" + esc(ev.location));
+    lines.push("DESCRIPTION:" + esc(notes));
+    if (ev.url) lines.push("URL:" + ev.url);
+    lines.push("END:VEVENT", "END:VCALENDAR");
+    return lines.map(foldIcsLine).join("\r\n") + "\r\n";
+  }
+  // Lines longer than 75 bytes continue on the next line after one space.
+  function foldIcsLine(line) {
+    const enc = new TextEncoder();
+    let out = "", cur = "", bytes = 0;
+    for (const ch of line) {
+      const n = enc.encode(ch).length;
+      if (bytes + n > 74) { out += cur + "\r\n "; cur = ""; bytes = 1; }
+      cur += ch; bytes += n;
+    }
+    return out + cur;
+  }
+  function downloadIcs(ev) {
+    const blob = new Blob([icsText(ev)], {type: "text/calendar;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (ev.title.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60)
+      || "event") + ".ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  }
+
   // Build one event's card HTML. `timeHtml` is the pre-formatted, already-escaped
   // time string to place in the `.time` slot — callers control whether it's a
   // time-only string ("8:00 PM", grouped view) or a full date+time ("Fri Oct 4 · 8:00 PM",
@@ -1543,7 +1603,10 @@
         '<div class="time">' + timeHtml + "</div>" +
         '<div class="details">' +
           '<div class="title">' + titleHtml + "</div>" +
-          where + desc + renderTags(ev) +
+          where + desc +
+          '<div class="row-foot">' + renderTags(ev)
+            + '<button type="button" class="cal-btn" data-id="' + ev.id
+            + '" aria-label="Add ' + title + ' to your calendar">Add to calendar</button></div>' +
         "</div>" +
         thumb +
       "</article>"

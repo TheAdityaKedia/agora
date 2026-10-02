@@ -327,3 +327,22 @@ def test_weekend_preset(browser, site):
     page = _open(browser, site, DESKTOP, query="?dates=weekend")
     assert "active" in page.get_attribute("#preset-weekend", "class")
     assert "This weekend" in page.inner_text("#active-filters")
+
+
+def test_add_to_calendar_downloads_ics(browser, site):
+    page = _open(browser, site, DESKTOP)
+    row = page.locator(".event").nth(3)  # "Poetry reading 3"
+    with page.expect_download() as dl:
+        row.locator(".cal-btn").click()
+    download = dl.value
+    assert download.suggested_filename == "Poetry-reading-3.ics"
+    ics = open(download.path(), encoding="utf-8", newline="").read()
+    assert ics.startswith("BEGIN:VCALENDAR\r\n") and ics.endswith("END:VCALENDAR\r\n")
+    assert "SUMMARY:Poetry reading 3\r\n" in ics
+    assert "LOCATION:261 Columbus Ave\r\n" in ics
+    start = row.get_attribute("data-start")
+    want = datetime.fromisoformat(start).astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    assert f"DTSTART:{want}\r\n" in ics
+    assert "URL:https://example.com/e/3\r\n" in ics
+    # Every physical line is at most 75 bytes (RFC 5545 folding).
+    assert all(len(line.encode()) <= 75 for line in ics.split("\r\n"))
