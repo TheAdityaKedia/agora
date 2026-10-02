@@ -13,9 +13,9 @@ from scrapers import (
     actsf, alembic, atgtickets, balboa, berkeleyrep, bigbrainbay, birdbeckett,
     blackbird, brava, citylights, cityarts, commonwealthclub, elrio, factsf, fillmore,
     fourstar, frontiertower, gamh, greatstar, greenapple, independent, kronos,
-    linesballet, litquake, magictheatre, medicinenightmares, nctcsf, neofuturists,
-    oaklandartmurmur, palace, phoenix, presidio, readingrhythms, riptide,
-    sfbarguide, sfjazz, sfpl, sfplayhouse, sfwarmemorial, sunsettrivia, themarsh,
+    linesballet, litquake, magictheatre, medicinenightmares, missionfusion, nctcsf,
+    neofuturists, oaklandartmurmur, palace, phoenix, presidio, readingrhythms,
+    riptide, sfbarguide, sfjazz, sfpl, sfplayhouse, sfwarmemorial, sunsettrivia, themarsh,
     thecommons, warfield, ybca, zspace,
     bachdds, biscuitsblues, dawnclub, keysjazz, yoshis, partiful,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
@@ -38,7 +38,7 @@ SCRAPERS = [
     yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
-    partiful, frontiertower, alembic, faight,
+    partiful, frontiertower, alembic, faight, missionfusion,
 ]
 
 
