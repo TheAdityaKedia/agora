@@ -71,8 +71,9 @@ _MISSING = {"status": "missing", "source_name": None,
 
 
 def merge_results(results_dir, source_filters=None, excludes=None, classify=True,
-                  events_json_path=None) -> dict:
-    """The single writer: save results in sources.txt order, classify, export.
+                  events_json_path=None, resolve_places=True) -> dict:
+    """The single writer: save results in sources.txt order, classify, resolve
+    venues, export.
 
     Order matters — dedup attribution gives a shared row to the earlier source —
     so we walk sources.txt, not the artifacts. A source whose result is missing
@@ -109,11 +110,20 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
         except Exception as e:
             print(f"[classify] skipped ({type(e).__name__}: {e})", flush=True)
 
+    # Venue resolution: never stops the export (see main.resolve_places).
+    places = None
+    if resolve_places:
+        try:
+            places = pipeline.resolve_places()
+        except Exception as e:
+            places = {"error": f"{type(e).__name__}: {e}"}
+            print(f"[places] skipped ({places['error']})", flush=True)
+
     out = Path(events_json_path or os.environ.get("EVENTS_JSON_PATH", pipeline.DEFAULT_EVENTS_JSON))
     exported = pipeline.export_json(out)
     print(f"[export] wrote {exported} upcoming events to {out}", flush=True)
     return {"sources": rows, "exported": exported,
-            "failed": sum(1 for r in rows if r["status"] != "ok")}
+            "failed": sum(1 for r in rows if r["status"] != "ok"), "places": places}
 
 
 def _read_events_manifest(path) -> tuple[dict, int]:
@@ -240,6 +250,7 @@ def cli(argv: list[str] | None = None) -> None:
     m.add_argument("--sources", nargs="*", default=[], metavar="SUBSTRING")
     m.add_argument("--exclude", nargs="*", default=[], metavar="SUBSTRING")
     m.add_argument("--no-classify", action="store_true")
+    m.add_argument("--no-places", action="store_true")
 
     g = sub.add_parser("guard", help="Check the new manifest and render the PR body.")
     g.add_argument("--new", type=Path, required=True)
@@ -267,7 +278,8 @@ def cli(argv: list[str] | None = None) -> None:
               f"{len(result['events'])} events{note}", flush=True)
     elif args.cmd == "merge":
         report = merge_results(args.dir, args.sources or None, args.exclude or None,
-                               classify=not args.no_classify)
+                               classify=not args.no_classify,
+                               resolve_places=not args.no_places)
         args.report.write_text(json.dumps(report, indent=2))
     elif args.cmd == "guard":
         # stdout is appended to $GITHUB_OUTPUT, so print only key=value lines.

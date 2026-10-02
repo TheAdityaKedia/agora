@@ -20,6 +20,8 @@ from zoneinfo import ZoneInfo
 
 import taxonomy
 from classifications import Cache
+from places.regions import REGIONS
+from places.store import DATA_DIR as VENUES_DIR, Store as VenueStore
 from db import get_session
 from models import Event
 
@@ -50,7 +52,7 @@ def _is_food_drink_only(serialized: dict) -> bool:
     return bool(types) and all(path == _FOOD_DRINK_TYPE for path in types)
 
 
-def _serialize(event: Event, cache: Cache) -> dict:
+def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> dict:
     # Join each event to its show's classification on (source, title). An event
     # may carry several sources; use the first that has a cache entry.
     entry = None
@@ -73,13 +75,36 @@ def _serialize(event: Event, cache: Cache) -> dict:
         "types": entry.types if entry else [],
         "topics": entry.topics if entry else [],
         "cost": entry.cost if entry else "unknown",
+        # Where it is, joined from the committed venue files (feature-specs/
+        # venues.md) — null when unknown, pending, or not a single place.
+        "venue": _venue_id(event.location, venues),
+        "region": venues.region_of(event.location) if venues else None,
     }
+
+
+def _venue_id(location: str | None, venues: VenueStore | None) -> str | None:
+    entry = venues.entry(location) if venues else None
+    return entry.get("venue") if entry else None
+
+
+def _load_venues(venues_dir: Path) -> VenueStore | None:
+    """The venue files, or None when they don't validate — a broken hand
+    edit must not ship wrong areas, so the manifest goes without them
+    (and the merge job's places check alerts)."""
+    store = VenueStore(venues_dir)
+    errors = store.validate()
+    if errors:
+        print(f"[export] venue files invalid ({len(errors)} problem(s)); exporting without areas",
+              flush=True)
+        return None
+    return store
 
 
 def export_json(
     path: Path,
     back_window_days: int = DEFAULT_BACK_WINDOW_DAYS,
     classifications_path: Path = DEFAULT_CLASSIFICATIONS,
+    venues_dir: Path = VENUES_DIR,
 ) -> int:
     """Write upcoming events as a JSON manifest to `path`.
 
@@ -96,6 +121,7 @@ def export_json(
     oldest_day = today_local - timedelta(days=max(0, back_window_days - 1))
     cutoff = datetime.combine(oldest_day, dtime.min, tzinfo=EXPORT_TZ).astimezone(timezone.utc)
     cache = Cache(classifications_path)
+    venues = _load_venues(venues_dir)
     session = get_session()
     try:
         events = (
@@ -106,7 +132,7 @@ def export_json(
             .order_by(Event.start_time, Event.id)
             .all()
         )
-        payload = [_serialize(e, cache) for e in events]
+        payload = [_serialize(e, cache, venues) for e in events]
     finally:
         session.close()
 
@@ -124,6 +150,11 @@ def export_json(
         # The taxonomy travels with the manifest so the static frontend builds
         # its type/topic filters from the same source of truth (no extra fetch).
         "taxonomy": taxonomy.load_taxonomy(),
+        # Area filter: the regions in display order, and the venues events
+        # point at (stored once, not per event).
+        "regions": [{"id": r, "label": label} for r, label in REGIONS.items()],
+        "venues": {vid: {"name": venues.venues[vid]["name"], "region": venues.venues[vid]["region"]}
+                   for vid in sorted({e["venue"] for e in payload if e["venue"]})} if venues else {},
         "events": payload,
     }
     with open(path, "w") as f:

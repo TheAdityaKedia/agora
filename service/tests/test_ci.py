@@ -106,6 +106,14 @@ def test_plan_cli_prints_compact_json(tmp_path, monkeypatch, capsys):
 
 # --- merge ------------------------------------------------------------------
 
+
+@pytest.fixture(autouse=True)
+def no_venue_resolution(monkeypatch):
+    """run()/merge resolve venues against OpenStreetMap and save the committed
+    venue files; never from these tests."""
+    monkeypatch.setattr("main.resolve_places", lambda **kw: None)
+
+
 @pytest.fixture
 def db_session():
     engine = create_engine("sqlite:///:memory:")

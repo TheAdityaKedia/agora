@@ -269,3 +269,48 @@ def test_export_includes_taxonomy_block(db_session, tmp_path):
     assert "taxonomy" in data
     assert "type" in data["taxonomy"]["axes"]
     assert "topic" in data["taxonomy"]["axes"]
+
+
+def _venue_files(tmp_path, region="sf"):
+    d = tmp_path / "venuedata"
+    d.mkdir()
+    (d / "venues.json").write_text(json.dumps({"version": 1, "source_homes": {}, "venues": {
+        "specs-bar": {"name": "Specs Bar", "region": region, "status": "verified",
+                      "precision": "building", "lat": 37.7979, "lng": -122.40652}}}))
+    (d / "venue_locations.json").write_text(json.dumps({"version": 1, "locations": {
+        "somewhere": {"venue": "specs-bar"},
+        "zoom": {"place": "online"},
+        "mystery": {"pending": {"reason": "no map result"}}}}))
+    return d
+
+
+def test_export_joins_venue_and_region(db_session, tmp_path):
+    future = datetime.now(timezone.utc) + timedelta(days=7)
+    db_session.add(_make_event("At Specs", future, url="https://e.com/1"))
+    online = _make_event("Online talk", future, url="https://e.com/2")
+    online.location = "Zoom"
+    pending = _make_event("Somewhere new", future, url="https://e.com/3")
+    pending.location = "Mystery"
+    db_session.add_all([online, pending])
+    db_session.commit()
+
+    out = tmp_path / "events.json"
+    export_json(out, venues_dir=_venue_files(tmp_path))
+    data = json.loads(out.read_text())
+    by_title = {e["title"]: e for e in data["events"]}
+    assert by_title["At Specs"]["venue"] == "specs-bar" and by_title["At Specs"]["region"] == "sf"
+    assert by_title["Online talk"]["venue"] is None and by_title["Online talk"]["region"] == "online"
+    assert by_title["Somewhere new"]["region"] is None
+    assert data["venues"] == {"specs-bar": {"name": "Specs Bar", "region": "sf"}}
+    assert [r["id"] for r in data["regions"]][:2] == ["sf", "eastbay"]
+
+
+def test_export_skips_areas_when_venue_files_are_invalid(db_session, tmp_path):
+    future = datetime.now(timezone.utc) + timedelta(days=7)
+    db_session.add(_make_event("At Specs", future))
+    db_session.commit()
+    out = tmp_path / "events.json"
+    # Coordinates in SF but region says East Bay: a broken hand edit.
+    export_json(out, venues_dir=_venue_files(tmp_path, region="eastbay"))
+    data = json.loads(out.read_text())
+    assert data["events"][0]["region"] is None and data["venues"] == {}
