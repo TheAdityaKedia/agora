@@ -281,7 +281,6 @@
     border: 1px solid var(--border); font-weight: 600;
   }
   .day-more:hover { border-color: var(--accent); }
-  .event.no-thumb { grid-template-columns: minmax(0, 1fr); }
   /* The marquee: times in the signage face, read before anything else. */
   .time {
     grid-column: 1; color: var(--fg);
@@ -293,13 +292,26 @@
     font-family: var(--font-body); font-size: 14px; font-weight: 600;
     color: var(--muted); margin-right: 8px; letter-spacing: 0;
   }
+  /* Every row has a thumbnail slot. Without an image (or when it fails to
+     load) the slot is a tile tinted with the event's topic color, labelled
+     with its type in the signage face; a real image covers the tile. */
   .thumb {
     grid-column: 2; grid-row: 1 / span 2;
-    width: 64px; height: 64px;
-    border-radius: 6px; background: var(--chip-bg);
-    overflow: hidden;
+    width: 64px; height: 64px; position: relative;
+    display: grid; place-items: center; overflow: hidden;
+    border-radius: 6px;
+    background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.14);
+    color: hsl(var(--h) var(--chip-s) var(--chip-l));
   }
-  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb-label {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 14px; line-height: 1; letter-spacing: 0.02em;
+    text-align: center; padding: 0 4px;
+  }
+  .thumb img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
   /* overflow-wrap: long URLs and slash-joined titles otherwise widen the page
      past a phone screen (it then zooms out or scrolls sideways). */
   .details { grid-column: 1; min-width: 0; overflow-wrap: anywhere; }
@@ -329,13 +341,14 @@
   }
   .location-btn:hover, .source-btn:hover { color: var(--fg); text-decoration: underline; }
   @media (min-width: 600px) {
-    .event, .event.no-thumb { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
+    .event { grid-template-columns: 88px minmax(0, 1fr) 80px; column-gap: 16px; }
     .time { grid-column: 1; grid-row: 1 / span 2; font-size: 32px; line-height: 0.95; }
     .time .ampm { display: block; margin: 2px 0 0; font-size: 14px; }
     .time .td-date { display: block; margin: 0 0 2px; }
     .title { margin-top: 0; }
     .details { grid-column: 2; grid-row: 1 / span 2; }
     .thumb { grid-column: 3; width: 80px; height: 80px; }
+    .thumb-label { font-size: 16px; }
     body.searching .event { grid-template-columns: 120px minmax(0, 1fr) 80px; }
   }
 
@@ -1591,14 +1604,20 @@
     ).join(", ") + "</span>" : "";
     const where = loc || src ? '<div class="where">' + loc + src + "</div>" : "";
     const desc = renderDescription(ev.description);
-    // Thumbnail is optional — some sources don't expose one, and we don't
-    // want a broken-image slot. Skip the div entirely if no image_url.
-    const thumb = ev.image_url
-      ? '<div class="thumb"><img loading="lazy" decoding="async" alt="" src="'
-          + escapeHtml(ev.image_url) + '"></div>'
-      : "";
+    // A tile tinted by the first topic's group and labelled with the type
+    // ("Talk", "Screening"); the image, if any, covers it — and removes
+    // itself if it fails to load, so a dead link shows the tile too.
+    const typeLabel = (typeLabels.get((ev.types || [])[0]?.[0]) || "").split(" / ")[0];
+    const hue = ev.topics?.length ? topicHue(ev.topics[0]) : GROUP_HUE.type;
+    const thumb = '<div class="thumb" style="--h:' + hue + '">'
+      + (typeLabel ? '<span class="thumb-label">' + escapeHtml(typeLabel) + "</span>" : "")
+      + (ev.image_url
+        ? '<img loading="lazy" decoding="async" alt="" src="' + escapeHtml(ev.image_url)
+          + '" onerror="this.remove()">'
+        : "")
+      + "</div>";
     return (
-      '<article class="event' + (thumb ? "" : " no-thumb") + '" data-start="'
+      '<article class="event" data-start="'
         + escapeHtml(ev.start_time) + '">' +
         '<div class="time">' + timeHtml + "</div>" +
         '<div class="details">' +

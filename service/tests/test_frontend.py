@@ -74,6 +74,10 @@ def _events(n=N_EVENTS):
                 "url": "https://example.com/started",
                 "start_time": (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()})
     out.sort(key=lambda e: e["start_time"])
+    # Event index 2 has an image that fails to load (nothing listens on port 9).
+    for e in out:
+        if e["id"] == "ev2":
+            e["image_url"] = "http://127.0.0.1:9/missing.png"
     # Unbreakable strings that used to widen the page past a phone screen.
     out[0]["title"] = "BATIASHVILI/CAPUÇON/THIBAUDET/TRIO/" * 3
     out[1]["description"] = (
@@ -346,3 +350,17 @@ def test_add_to_calendar_downloads_ics(browser, site):
     assert "URL:https://example.com/e/3\r\n" in ics
     # Every physical line is at most 75 bytes (RFC 5545 folding).
     assert all(len(line.encode()) <= 75 for line in ics.split("\r\n"))
+
+
+def test_thumbnail_tiles_for_missing_and_broken_images(browser, site):
+    page = _open(browser, site, DESKTOP)
+    rows = page.locator(".event")
+    assert page.locator(".event .thumb").count() == rows.count()
+    jazz, poetry = rows.nth(2), rows.nth(3)
+    # No image: a tile labelled with the event's type.
+    assert poetry.locator(".thumb-label").inner_text() == "Talk"
+    assert poetry.locator(".thumb img").count() == 0
+    # Broken image: removed on error, leaving the tile.
+    page.wait_for_function(
+        "!document.querySelectorAll('.event')[2].querySelector('.thumb img')")
+    assert jazz.locator(".thumb-label").inner_text() == "Performance"
