@@ -9,6 +9,7 @@ httpx==0.28.1
 playwright==1.49.1
 boto3==1.43.100
 pillow==12.3.0
+numpy==2.5.3
 
 # dev / test
 pytest==9.0.3
