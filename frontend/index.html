@@ -440,6 +440,7 @@
   <div class="presets" role="group" aria-label="Dates">
     <button type="button" class="preset-btn" id="preset-today">Today</button>
     <button type="button" class="preset-btn" id="preset-tomorrow">Tomorrow</button>
+    <button type="button" class="preset-btn" id="preset-weekend">This weekend</button>
     <button type="button" class="preset-btn" id="preset-week">This week</button>
     <button type="button" class="preset-btn" id="preset-month">This month</button>
   </div>
@@ -543,6 +544,7 @@
   const copyEl = document.getElementById("copy-link");
   const presetTodayEl = document.getElementById("preset-today");
   const presetTomorrowEl = document.getElementById("preset-tomorrow");
+  const presetWeekendEl = document.getElementById("preset-weekend");
   const presetWeekEl = document.getElementById("preset-week");
   const presetMonthEl = document.getElementById("preset-month");
   const topbarEl = document.getElementById("topbar");
@@ -1072,11 +1074,15 @@
     if (queuePos < queue.length) io.observe(sentinel);
   }
   // Apply an explicit calendar range (Date objects, both inclusive).
-  function setDateRange(from, to) {
+  // `preset` names the preset that produced it (null for a custom range);
+  // `fromHour` starts the range later than midnight (the weekend's Friday).
+  function setDateRange(from, to, preset = null, fromHour = 0) {
     fromEl.value = from ? toISODate(from) : "";
     toEl.value = to ? toISODate(to) : "";
     dateFrom = from ? new Date(toISODate(from) + "T00:00:00") : null;
+    if (dateFrom && fromHour) dateFrom.setHours(fromHour);
     dateTo   = to   ? new Date(toISODate(to)   + "T23:59:59") : null;
+    activePreset = preset;
     updatePresetHighlight();
     render();
   }
@@ -1088,90 +1094,78 @@
     sunday.setDate(today.getDate() + daysToSunday);
     return sunday;
   }
-  // Apply presets. Kept as named functions so both the click handlers and
-  // readStateFromUrl (?dates=today|week) share one definition — the preset
-  // resolves to *today's* calendar day every time it runs, which is the whole
-  // point of bookmarking ?dates=today.
-  function applyTodayPreset() {
-    const today = new Date();
-    setDateRange(today, today);
-  }
   function tomorrow() {
     const t = new Date();
     t.setDate(t.getDate() + 1);
     return t;
-  }
-  function applyTomorrowPreset() {
-    const t = tomorrow();
-    setDateRange(t, t);
-  }
-  function applyWeekPreset() {
-    setDateRange(new Date(), weekSunday());
   }
   // Last day of the current calendar month (month-anchored, not rolling 30d).
   function monthEnd() {
     const t = new Date();
     return new Date(t.getFullYear(), t.getMonth() + 1, 0);
   }
-  function applyMonthPreset() {
-    setDateRange(new Date(), monthEnd());
+  // "This weekend" = Friday 5pm through Sunday (Friday daytime listings are
+  // mostly weekday fare); on a Saturday or Sunday, today through Sunday.
+  function weekendRange() {
+    const today = new Date();
+    const dow = today.getDay();  // 0 = Sunday … 6 = Saturday
+    if (dow === 6 || dow === 0) return [today, weekSunday(), 0];
+    const friday = new Date(today);
+    friday.setDate(today.getDate() + (5 - dow));
+    return [friday, weekSunday(), 17];
   }
-  // Highlight whichever preset (if any) matches the current from/to values.
+  // Date presets, each [from, to, fromHour?]. They resolve against *today*
+  // every time they run — the point of bookmarking ?dates=weekend is that
+  // it always means the coming weekend. Shared by the buttons and
+  // readStateFromUrl.
+  const PRESETS = {
+    today: () => [new Date(), new Date()],
+    tomorrow: () => [tomorrow(), tomorrow()],
+    weekend: weekendRange,
+    week: () => [new Date(), weekSunday()],
+    month: () => [new Date(), monthEnd()],
+  };
+  const presetEls = {
+    today: presetTodayEl, tomorrow: presetTomorrowEl, weekend: presetWeekendEl,
+    week: presetWeekEl, month: presetMonthEl,
+  };
+  // The preset in effect, tracked explicitly: two presets can cover the same
+  // dates (on a Friday, "This week" and "This weekend" both end Sunday).
+  let activePreset = null;
+  function applyPreset(name) {
+    const [from, to, fromHour = 0] = PRESETS[name]();
+    setDateRange(from, to, name, fromHour);
+  }
   function updatePresetHighlight() {
-    presetTodayEl.classList.remove("active");
-    presetTomorrowEl.classList.remove("active");
-    presetWeekEl.classList.remove("active");
-    presetMonthEl.classList.remove("active");
-    const todayStr = toISODate(new Date());
-    // Tomorrow is the one preset that doesn't start today — check it first.
-    const tomorrowStr = toISODate(tomorrow());
-    if (fromEl.value === tomorrowStr && toEl.value === tomorrowStr) {
-      presetTomorrowEl.classList.add("active");
-      return;
-    }
-    if (fromEl.value !== todayStr) return;  // remaining presets all start today
-    if (toEl.value === todayStr) {
-      presetTodayEl.classList.add("active");
-    } else if (toEl.value === toISODate(weekSunday())) {
-      presetWeekEl.classList.add("active");
-    } else if (toEl.value === toISODate(monthEnd())) {
-      presetMonthEl.classList.add("active");
+    for (const [name, el] of Object.entries(presetEls)) {
+      el.classList.toggle("active", name === activePreset);
     }
   }
 
   fromEl.addEventListener("input", () => {
     dateFrom = fromEl.value ? new Date(fromEl.value + "T00:00:00") : null;
+    activePreset = null;
     updatePresetHighlight();
     render();
   });
   toEl.addEventListener("input", () => {
     dateTo = toEl.value ? new Date(toEl.value + "T23:59:59") : null;
+    activePreset = null;
     updatePresetHighlight();
     render();
   });
-  // Presets toggle: clicking an active preset clears the date range instead
-  // of re-applying it. `.active` is set by updatePresetHighlight() whenever
-  // from/to match the preset's range, so it's the authoritative check.
-  presetTodayEl.addEventListener("click", () => {
-    if (presetTodayEl.classList.contains("active")) setDateRange(null, null);
-    else applyTodayPreset();
-  });
-  presetTomorrowEl.addEventListener("click", () => {
-    if (presetTomorrowEl.classList.contains("active")) setDateRange(null, null);
-    else applyTomorrowPreset();
-  });
-  presetWeekEl.addEventListener("click", () => {
-    if (presetWeekEl.classList.contains("active")) setDateRange(null, null);
-    else applyWeekPreset();
-  });
-  presetMonthEl.addEventListener("click", () => {
-    if (presetMonthEl.classList.contains("active")) setDateRange(null, null);
-    else applyMonthPreset();
-  });
+  // Presets toggle: clicking the active preset clears the date range.
+  for (const [name, el] of Object.entries(presetEls)) {
+    el.addEventListener("click", () => {
+      if (activePreset === name) setDateRange(null, null);
+      else applyPreset(name);
+    });
+  }
   resetEl.addEventListener("click", () => {
     for (const s of allSources) { selected.add(s); checkboxes.get(s).checked = true; }
     updateSourceSummary();
     fromEl.value = ""; toEl.value = ""; dateFrom = dateTo = null;
+    activePreset = null;
     updatePresetHighlight();
     searchEl.value = "";
     selectedTypes.clear();
@@ -1193,17 +1187,11 @@
     if (selected.size !== allSources.length) {
       p.set("sources", [...selected].join(","));
     }
-    // Encode an active preset as a symbolic value (?dates=today|week) so a
-    // bookmarked link always resolves to the CURRENT day/week, not the frozen
-    // date it was created on. Only a custom range falls back to from/to.
-    if (presetTodayEl.classList.contains("active")) {
-      p.set("dates", "today");
-    } else if (presetTomorrowEl.classList.contains("active")) {
-      p.set("dates", "tomorrow");
-    } else if (presetWeekEl.classList.contains("active")) {
-      p.set("dates", "week");
-    } else if (presetMonthEl.classList.contains("active")) {
-      p.set("dates", "month");
+    // Encode an active preset as a symbolic value (?dates=today|weekend|…)
+    // so a bookmarked link always resolves to the CURRENT day/week, not the
+    // frozen date it was created on. Only a custom range falls back to from/to.
+    if (activePreset) {
+      p.set("dates", activePreset);
     } else {
       if (fromEl.value) p.set("from", fromEl.value);
       if (toEl.value) p.set("to", toEl.value);
@@ -1242,14 +1230,8 @@
     // Symbolic date presets resolve live against today's date; a raw
     // from/to range is the fallback. `dates` wins if both are somehow present.
     const dates = p.get("dates");
-    if (dates === "today") {
-      applyTodayPreset();
-    } else if (dates === "tomorrow") {
-      applyTomorrowPreset();
-    } else if (dates === "week") {
-      applyWeekPreset();
-    } else if (dates === "month") {
-      applyMonthPreset();
+    if (Object.hasOwn(PRESETS, dates || "")) {
+      applyPreset(dates);
     } else {
       const from = p.get("from");
       const to = p.get("to");
@@ -1261,7 +1243,6 @@
         toEl.value = to;
         dateTo = new Date(to + "T23:59:59");
       }
-      if (fromEl.value || toEl.value) updatePresetHighlight();
     }
     const loc = p.get("loc");
     if (loc) {
@@ -1557,7 +1538,8 @@
           + escapeHtml(ev.image_url) + '"></div>'
       : "";
     return (
-      '<article class="event' + (thumb ? "" : " no-thumb") + '">' +
+      '<article class="event' + (thumb ? "" : " no-thumb") + '" data-start="'
+        + escapeHtml(ev.start_time) + '">' +
         '<div class="time">' + timeHtml + "</div>" +
         '<div class="details">' +
           '<div class="title">' + titleHtml + "</div>" +

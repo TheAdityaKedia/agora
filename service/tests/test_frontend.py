@@ -308,3 +308,22 @@ def test_source_click_filters_and_toggles_back(browser, site):
     page.locator(".event").first.locator(".source-btn").click()
     assert page.locator("#active-filters .active-pill").count() == 0
     assert "sources=" not in page.url
+
+
+def test_weekend_preset(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.click("#preset-weekend")
+    assert "dates=weekend" in page.url
+    assert "active" in page.get_attribute("#preset-weekend", "class")
+    assert _rendered(page) > 0
+    # Friday from 5pm, Saturday, Sunday — and nothing else.
+    assert page.evaluate("""[...document.querySelectorAll('.event')].every(e => {
+        const d = new Date(e.dataset.start), w = d.getDay();
+        return w === 6 || w === 0 || (w === 5 && d.getHours() >= 17);
+    })""")
+    page.click("#preset-weekend")
+    assert "dates=" not in page.url
+    # Survives a reload as the symbolic preset.
+    page = _open(browser, site, DESKTOP, query="?dates=weekend")
+    assert "active" in page.get_attribute("#preset-weekend", "class")
+    assert "This weekend" in page.inner_text("#active-filters")
