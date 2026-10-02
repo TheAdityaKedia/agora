@@ -49,7 +49,9 @@ runs:
         COUNT: ${{ steps.guard.outputs.count }}
       run: |
             set -euo pipefail
-            if [ "$CHANGED" != "true" ] && git diff --quiet -- service/data/classifications.json; then
+            data_files="service/data/classifications.json service/data/venues.json service/data/venue_locations.json"
+            # shellcheck disable=SC2086
+            if [ "$CHANGED" != "true" ] && git diff --quiet -- $data_files; then
               echo "No data change; nothing to ship."
               exit 0
             fi
@@ -65,7 +67,8 @@ runs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git switch -c "$branch"
-            git add frontend/events.json service/data/classifications.json
+            # shellcheck disable=SC2086
+            git add frontend/events.json $data_files
             git commit -m "$title"
             git push -u origin "$branch"
             gh pr create --base "$base" --head "$branch" --title "$title" \

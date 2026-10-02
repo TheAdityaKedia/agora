@@ -27,6 +27,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
 | Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
 | Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
+| Venues, areas, the Area filter, "Places to review" | `feature-specs/venues.md`; `README.md` → "Venues and areas"; code: `service/places/`, data: `service/data/venues.json` + `venue_locations.json` |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
 
