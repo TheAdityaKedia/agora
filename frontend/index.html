@@ -364,12 +364,28 @@
   .tags { display: flex; flex-wrap: wrap; gap: 5px; }
   /* Tags, then "Add to calendar" pushed to the right edge. */
   .row-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 8px; }
+  /* "Add to calendar" opens a small menu: Google Calendar (a link that
+     opens a pre-filled event) or an .ics file for Apple / Outlook. */
+  .cal { position: relative; margin-left: auto; }
   .cal-btn {
-    margin-left: auto; padding: 2px 0; cursor: pointer;
-    background: none; border: 0; color: var(--muted);
-    font-size: 13px; text-decoration: underline; text-underline-offset: 2px;
+    list-style: none; padding: 2px 0; cursor: pointer;
+    color: var(--muted); font-size: 13px;
+    text-decoration: underline; text-underline-offset: 2px;
   }
-  .cal-btn:hover { color: var(--accent); }
+  .cal-btn::-webkit-details-marker { display: none; }
+  .cal-btn:hover, .cal[open] > .cal-btn { color: var(--accent); }
+  .cal-menu {
+    position: absolute; right: 0; top: calc(100% + 4px); z-index: 6;
+    display: flex; flex-direction: column; min-width: 200px; padding: 4px;
+    background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(19,33,46,0.16);
+  }
+  .cal-item {
+    display: block; padding: 8px 10px; border-radius: 6px; cursor: pointer;
+    background: none; border: 0; text-align: left;
+    color: var(--fg); font-size: 14px; text-decoration: none;
+  }
+  .cal-item:hover { background: var(--chip-bg); }
   .tag-chip {
     font: inherit; font-size: 12px; line-height: 1.4;
     padding: 2px 9px; border-radius: 999px; cursor: pointer;
@@ -935,8 +951,18 @@
       else toggleTag(tagBtn.dataset.tagkind, tagBtn.dataset.tagval);
       return;
     }
-    const calBtn = e.target.closest(".cal-btn");
-    if (calBtn) { downloadIcs(events[+calBtn.dataset.id]); return; }
+    const ics = e.target.closest(".cal-ics");
+    if (ics) { downloadIcs(events[+ics.dataset.id]); closeCalMenus(); return; }
+    if (e.target.closest("a.cal-item")) { closeCalMenus(); return; }
+    const calSummary = e.target.closest(".cal-btn");
+    if (calSummary) {
+      // One menu open at a time; build the Google link when it's first opened.
+      const cal = calSummary.parentNode;
+      closeCalMenus(cal);
+      const g = cal.querySelector("a.cal-google");
+      if (!g.href) g.href = googleCalUrl(events[+cal.dataset.id]);
+      return;
+    }
     const srcBtn = e.target.closest(".source-btn");
     if (srcBtn) { isolateSource(srcBtn.dataset.source, true); return; }
     const locBtn = e.target.closest(".location-btn");
@@ -1578,17 +1604,43 @@
     return chips.length ? '<div class="tags">' + chips.join("") + "</div>" : "";
   }
 
-  // --- Add to calendar: a one-event .ics file, built in the browser. ---
-  // Events carry only a start time, so the calendar entry runs ICS_HOURS.
-  const ICS_HOURS = 2;
+  // --- Add to calendar: a Google Calendar link, or a one-event .ics file
+  // (Apple Calendar, Outlook) built in the browser. Events carry only a
+  // start time, so the calendar entry runs CAL_HOURS. ---
+  const CAL_HOURS = 2;
+  const calStamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const calEnd = (ev) => new Date(ev._start.getTime() + CAL_HOURS * 3600e3);
+  const calNotes = (ev, maxDesc = Infinity) => [
+    ev.description && ev.description.length > maxDesc
+      ? ev.description.slice(0, maxDesc).replace(/\s+\S*$/, "") + "…" : ev.description,
+    ev.url,
+    "Listed by " + (ev.sources || []).join(", ") + " on Agora",
+  ].filter(Boolean).join("\n\n");
+  // Google Calendar's "add event" link: opens a pre-filled event on the web,
+  // or in the Google Calendar app on a phone. The description is trimmed to
+  // keep the URL well under browser and Google length limits.
+  function googleCalUrl(ev) {
+    const p = new URLSearchParams({
+      action: "TEMPLATE",
+      text: ev.title,
+      dates: calStamp(ev._start) + "/" + calStamp(calEnd(ev)),
+      details: calNotes(ev, 800),
+    });
+    if (ev.location) p.set("location", ev.location);
+    return "https://calendar.google.com/calendar/render?" + p.toString();
+  }
+  function closeCalMenus(except) {
+    for (const d of list.querySelectorAll("details.cal[open]")) if (d !== except) d.open = false;
+  }
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("details.cal")) closeCalMenus();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeCalMenus(); });
   function icsText(ev) {
-    const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     // RFC 5545 text escaping: backslash, semicolon, comma, newline.
     const esc = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&")
       .replace(/\r?\n/g, "\\n");
-    const end = new Date(ev._start.getTime() + ICS_HOURS * 3600e3);
-    const notes = [ev.description, ev.url, "Listed by " + (ev.sources || []).join(", ") + " on Agora"]
-      .filter(Boolean).join("\n\n");
+    const stamp = calStamp, end = calEnd(ev), notes = calNotes(ev);
     const lines = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Bay Area events//EN",
       "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT",
@@ -1654,7 +1706,10 @@
     // A tile tinted by the first topic's group and labelled with the type
     // ("Talk", "Screening"); the image, if any, covers it — and removes
     // itself if it fails to load, so a dead link shows the tile too.
-    const typeLabel = (typeLabels.get((ev.types || [])[0]?.[0]) || "").split(" / ")[0];
+    // The shorter half of a two-part type ("Performance / Show" → "Show")
+    // so the label fits a phone-sized tile.
+    const typeLabel = (typeLabels.get((ev.types || [])[0]?.[0]) || "").split(" / ")
+      .reduce((a, b) => (b.length < a.length ? b : a));
     const hue = ev.topics?.length ? topicHue(ev.topics[0]) : GROUP_HUE.type;
     const thumb = '<div class="thumb" style="--h:' + hue + '">'
       + (typeLabel ? '<span class="thumb-label">' + escapeHtml(typeLabel) + "</span>" : "")
@@ -1671,8 +1726,12 @@
           '<div class="title">' + titleHtml + "</div>" +
           where + desc +
           '<div class="row-foot">' + renderTags(ev)
-            + '<button type="button" class="cal-btn" data-id="' + ev.id
-            + '" aria-label="Add ' + title + ' to your calendar">Add to calendar</button></div>' +
+            + '<details class="cal" data-id="' + ev.id + '">'
+            + '<summary class="cal-btn" aria-label="Add ' + title + ' to your calendar">Add to calendar</summary>'
+            + '<div class="cal-menu">'
+            + '<a class="cal-item cal-google" target="_blank" rel="noopener">Google Calendar</a>'
+            + '<button type="button" class="cal-item cal-ics" data-id="' + ev.id + '">Apple or Outlook (.ics)</button>'
+            + "</div></details></div>" +
         "</div>" +
         thumb +
       "</article>"

@@ -336,8 +336,9 @@ def test_weekend_preset(browser, site):
 def test_add_to_calendar_downloads_ics(browser, site):
     page = _open(browser, site, DESKTOP)
     row = page.locator(".event").nth(3)  # "Poetry reading 3"
+    row.locator(".cal-btn").click()
     with page.expect_download() as dl:
-        row.locator(".cal-btn").click()
+        row.locator(".cal-ics").click()
     download = dl.value
     assert download.suggested_filename == "Poetry-reading-3.ics"
     ics = open(download.path(), encoding="utf-8", newline="").read()
@@ -363,7 +364,7 @@ def test_thumbnail_tiles_for_missing_and_broken_images(browser, site):
     # Broken image: removed on error, leaving the tile.
     page.wait_for_function(
         "!document.querySelectorAll('.event')[2].querySelector('.thumb img')")
-    assert jazz.locator(".thumb-label").inner_text() == "Performance"
+    assert jazz.locator(".thumb-label").inner_text() == "Show"  # of "Performance / Show"
 
 
 def test_day_strip_tracks_scroll_and_stays_visible(browser, site):
@@ -380,3 +381,34 @@ def test_day_strip_tracks_scroll_and_stays_visible(browser, site):
     # The strip is in the sticky bar, so it's still on screen.
     top = page.locator("#day-strip").bounding_box()["y"]
     assert 0 <= top < 200
+
+
+def test_add_to_google_calendar_link(browser, site):
+    from urllib.parse import parse_qs, urlparse
+    page = _open(browser, site, DESKTOP)
+    row = page.locator(".event").nth(3)  # "Poetry reading 3"
+    row.locator(".cal-btn").click()
+    link = row.locator("a.cal-google")
+    assert link.is_visible()
+    assert link.get_attribute("target") == "_blank"
+    url = urlparse(link.get_attribute("href"))
+    assert url.netloc == "calendar.google.com"
+    q = parse_qs(url.query)
+    assert q["action"] == ["TEMPLATE"]
+    assert q["text"] == ["Poetry reading 3"]
+    assert q["location"] == ["261 Columbus Ave"]
+    start = datetime.fromisoformat(row.get_attribute("data-start")).astimezone(timezone.utc)
+    fmt = "%Y%m%dT%H%M%SZ"
+    assert q["dates"] == [f"{start:{fmt}}/{start + timedelta(hours=2):{fmt}}"]
+    assert "https://example.com/e/3" in q["details"][0]
+    # One menu at a time; a click elsewhere closes it.
+    page.locator(".event").nth(2).locator(".cal-btn").click()
+    assert not link.is_visible()
+    page.click("h1")
+    assert page.locator("details.cal[open]").count() == 0
+
+
+def test_thumbnail_labels_fit_their_tiles(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    assert page.evaluate("""[...document.querySelectorAll('.thumb-label')]
+        .every(l => l.scrollWidth <= l.parentNode.clientWidth)""")
