@@ -62,6 +62,13 @@ a screening, a show at a jazz hall as a concert. One sentence: what the venue is
 movie theater; film screenings (new releases, classics, repertory)."`). Every
 source should have an entry — see the existing ones for tone.
 
+**If almost all of a source's events are at one venue, add its home region**
+to `source_homes` in `service/data/venues.json` (`"sf"`, `"eastbay"`,
+`"peninsula"`, `"southbay"`, `"northbay"`), keyed by the same `NAME`. Venue
+resolution uses it as a weak signal and to reject far-away map matches; leave
+it out for sources that list events all over (Partiful, Litquake). Then run
+`python -m places validate`. See `feature-specs/venues.md`.
+
 `RawEvent` (see `scrapers/base.py`): `title`, `start_time` (tz-aware, **UTC**),
 `location`, `url`, `description`, `image_url`. Keep `parse*` functions **pure**
 (operate on already-fetched HTML/JSON) so they're testable without the network;
