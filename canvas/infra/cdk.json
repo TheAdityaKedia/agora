@@ -1,0 +1,7 @@
+{
+  "app": "python3 app.py",
+  "watch": {"include": ["**/*.py", "../api/**/*.py"]},
+  "context": {
+    "@aws-cdk/core:checkSecretUsage": true
+  }
+}

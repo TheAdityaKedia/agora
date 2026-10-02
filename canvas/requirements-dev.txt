@@ -1,0 +1,4 @@
+-r infra/requirements.txt
+boto3
+moto[dynamodb]>=5
+pytest

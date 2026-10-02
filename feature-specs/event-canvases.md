@@ -1,6 +1,7 @@
 # Event canvases — plan a hangout with friends
 
-**Status: designed, not built.** Decisions below were settled with the owner
+**Status: phase 1 (backend) built in `canvas/` — see `canvas/README.md`;
+phases 2–4 not built.** Decisions below were settled with the owner
 (2026-10-02). Open items are small and listed at the end.
 
 ## The problem
@@ -143,8 +144,9 @@ versions so an unchanged canvas costs one tiny read.
 - Rate limits per salted IP hash: 10 canvas creates / hour; 120 writes /
   10 min. Limit counters are short-lived DynamoDB rows with TTL.
 - Size caps: canvas name ≤ 80 chars, note ≤ 1,000, display name ≤ 40, comment
-  ≤ 500, custom item title ≤ 120; ≤ 100 live items, ≤ 1,000 comments, ≤ 2,000
-  log entries per canvas (oldest log entries trimmed).
+  ≤ 500, custom item title ≤ 120; ≤ 100 live items, ≤ 1,000 comments per
+  canvas. The activity log lives in its own partition and only the latest 50
+  entries are ever read, so it needs no cap (rate limits bound its growth).
 - Lambda reserved concurrency capped (e.g. 10) so a flood can't run up cost.
 - AWS Budgets alert at $5/month to the owner's email.
 - Operator script `canvas/scripts/admin.py delete <id>` hard-deletes a canvas
@@ -160,47 +162,55 @@ then; it backfills automatically). Nothing in v1 has to be migrated.
 
 ## Data model — one DynamoDB table `agora-canvas-<stage>`
 
-Single-table design; one `Query` on `PK` returns the whole canvas.
+Single-table design; one `Query` on `C#<id>` returns the whole canvas, one
+more (newest 50) on `L#<id>` returns the log.
 
 | PK | SK | Attributes |
 |----|----|-----------|
 | `C#<canvasId>` | `META` | `name, note, date_from, date_to, winner_item_id, version, created_at, created_by_client, created_by_name, updated_at` |
 | `C#<canvasId>` | `ITEM#<itemId>` | `kind` (`event`\|`custom`), `snapshot` (event) or `title, url, start_time, note` (custom), `added_by_name, added_by_client, added_at, removed_at?, removed_by_name?` |
 | `C#<canvasId>` | `VOTE#<itemId>#<clientId>` | `name, at` |
-| `C#<canvasId>` | `CMT#<itemId>#<ts>#<rand>` | `name, client_id, text, at, removed_at?` |
-| `C#<canvasId>` | `LOG#<ts>#<rand>` | `actor_name, action, item_title?` |
-| `RL#<ipHash>#<bucket>` | `RL` | `count, ttl` (TTL-expired) |
+| `C#<canvasId>` | `CMT#<itemId>#<commentId>` | `name, client_id, text, at, removed_at?` |
+| `L#<canvasId>` | `<ms>#<rand>` | `actor_name, action, item_id?, item_title?, fields?, at` |
+| `RL#<ipHash>#<kind>#<bucket>` | `RL` | `count, ttl` (TTL-expired) |
 
-`itemId` is random (8 bytes base64url). An event can appear once per canvas:
-adding an already-present `event_id` returns the existing item (and restores
-it if soft-deleted).
+Event items have the deterministic id `ev_<event_id>`, so an event can
+appear once per canvas: adding an already-present `event_id` returns the
+existing item (and restores it if soft-deleted). Custom items get
+`c_<random>`. `META` also carries `item_count` / `comment_count` for the caps.
 
-Capacity: provisioned 10 RCU / 10 WCU (inside the always-free 25/25) for
-`prod`; on-demand for `dev`. If prod ever throttles, switch to on-demand
-(pennies at this scale).
+Capacity: on-demand for both stages. (Provisioned capacity inside the
+always-free 25 RCU/WCU was considered, but a strongly-consistent read of a
+large canvas can burst past 10 RCU and throttle; on-demand at this scale is
+pennies a month and never throttles.)
 
 ## API (Lambda Function URL, JSON)
 
-All requests send `X-Agora-Client`. CORS allows only
-`https://theadityakedia.github.io` and `http://localhost:*`.
+Writes must send `X-Agora-Client` (reads may, to get `mine` / `you_voted`
+flags). Responses never include anyone's client id — that would make it
+trivial to delete other people's votes. CORS allows
+`https://theadityakedia.github.io`, plus `http://localhost:*` on the dev stack
+only.
 
 | Method & path | Body | Result |
 |---|---|---|
-| `POST /canvases` | `{name, name_of_creator, note?, date_from?, date_to?}` | `201 {canvas}` |
-| `GET /canvases/{id}` | — | `{canvas, items[] (with votes[], comments[]), removed[], log[], version}` |
-| `GET /canvases/{id}?if_version=N` | — | `304` if unchanged (reads only `META`) |
+| `POST /canvases` | `{name, actor_name, note?, date_from?, date_to?}` | `201 {canvas, items:[], …}` |
+| `GET /canvases/{id}` | — | `{canvas (incl. version), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
+| `GET /canvases/{id}?if_version=N` | — | `200 {unchanged:true, version}` if unchanged (reads only `META`); else the full view. Not a `304`: browsers handle an unsolicited 304 inconsistently in `fetch`. |
 | `PATCH /canvases/{id}` | any of `{name, note, date_from, date_to, winner_item_id}` + `actor_name` | `{canvas}` |
-| `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?}}` + `actor_name` | `201 {item}` |
+| `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?}}` + `actor_name` | `201 {item, created:true}`; `200 {item, created:false}` if the event was already there |
 | `DELETE /canvases/{id}/items/{itemId}` | `{actor_name}` | soft delete |
 | `POST /canvases/{id}/items/{itemId}/restore` | `{actor_name}` | restore |
 | `PUT /canvases/{id}/items/{itemId}/vote` | `{name}` | upsert this client's vote |
 | `DELETE /canvases/{id}/items/{itemId}/vote` | — | remove this client's vote |
 | `POST /canvases/{id}/items/{itemId}/comments` | `{name, text}` | `201 {comment}` |
-| `DELETE /canvases/{id}/comments/{commentSk}` | `{actor_name}` | soft delete (any editor) |
+| `DELETE /canvases/{id}/items/{itemId}/comments/{commentId}` | `{actor_name}` | soft delete (any editor) |
 
 Errors: `400` validation, `404` unknown canvas/item/event, `409` item cap,
-`429` rate limit (with `Retry-After`). Every write is one
-`TransactWriteItems`: the change + `META.version += 1` + a `LOG#` row.
+`413` body over 16 KB, `429` rate limit (with `Retry-After`), `503` manifest
+unreachable. Every write is one `TransactWriteItems`: the change +
+`META.version += 1` + a log row (un-voting writes no log row). Removing the
+winner item clears `winner_item_id`.
 
 ## Code layout
 
@@ -208,7 +218,9 @@ Errors: `400` validation, `404` unknown canvas/item/event, `409` item cap,
 canvas/                     # new; independent of service/ (no scraper deps)
   api/handler.py            # routing, validation, DynamoDB access
   api/snapshot.py           # events.json fetch/cache → snapshot
-  template.yaml             # AWS SAM: function + URL, table, TTL, budget, log group
+  infra/                    # AWS CDK (Python): API stacks (dev/prod) + CI deploy-role stack
+  scripts/local_server.py   # run the API locally (moto or a real table)
+  scripts/smoke.py          # post-deploy create → add → vote → read
   scripts/admin.py          # operator delete / inspect
   tests/                    # pytest + moto
 frontend/canvas.html        # new page (inline CSS/JS, no build, like index.html)
@@ -220,15 +232,19 @@ Shared client code (client id, name prompt, API wrapper, my-canvases) is
 small enough to duplicate inline in both pages rather than introduce a build
 step; keep the two copies identical and note it in a comment.
 
-**Deploy:** `deploy-canvas-api.yml` runs `sam deploy` on pushes touching
-`canvas/` — branch → `dev` stack, `main` → `prod` stack. AWS auth via GitHub
-OIDC → an IAM role scoped to the two stacks (no long-lived keys). The prod
+**Deploy:** infrastructure is code (AWS CDK, Python, `canvas/infra/`), so an
+infra change ships like any other change. `deploy-canvas-api.yml` runs
+`cdk deploy` on pushes touching `canvas/` — branch → `AgoraCanvasDev`,
+`main` → `AgoraCanvasProd` + `AgoraCanvasCi` (the deploy role itself). AWS
+auth via GitHub OIDC (no long-lived keys); the only manual step ever is the
+one-time `cdk bootstrap` + first `cdk deploy AgoraCanvasCi` (CDK chosen over
+SAM YAML + a hand-uploaded bootstrap template at the owner's request). The prod
 Function URL is a constant in both pages; on `localhost` an `?api=` override
 points at dev or a local server.
 
 ## Phases
 
-1. **Backend** — `canvas/` handler + SAM template + moto tests; deploy the
+1. **Backend** — `canvas/` handler + CDK stacks + moto tests; deploy the
    `dev` stack from the branch; smoke-test with curl.
 2. **Canvas page** — `canvas.html`: view, vote, comments, note, winner +
    calendar, custom items, remove/restore, activity, polling.
@@ -244,7 +260,7 @@ first since nothing calls it.
 ## Testing plan
 
 - **Handler unit tests (pytest + moto):** validation and caps; canvas id
-  shape; version bumps on every write and `304` on `if_version`; idempotent
+  shape; version bumps on every write and `unchanged` on `if_version`; idempotent
   event add + restore-on-re-add; soft delete/restore; one vote per client,
   un-vote; comment soft delete; rate-limit `429`; CORS origin allow/deny;
   snapshot built from a trimmed `events.json` fixture, unknown `event_id` →
@@ -263,6 +279,5 @@ first since nothing calls it.
 
 - Custom domain for the API (e.g. `api.<domain>`) vs the raw Function URL.
   Raw URL is fine until Agora has its own domain.
-- Whether removing the *winner* clears it (proposed: yes, and log it).
 - Whether `canvas.html` should later offer "suggested events" from the
   canvas's date range (needs a slice of the manifest; out of v1).
