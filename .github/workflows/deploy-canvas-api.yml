@@ -1,0 +1,86 @@
+name: Deploy canvas API
+
+# Event canvases backend (canvas/). Tests on every push that touches it; then
+# deploys with SAM: a branch → stack agora-canvas-dev, main → agora-canvas-prod.
+# The deploy job is skipped until the one-time AWS setup in canvas/README.md
+# has set the CANVAS_DEPLOY_ROLE_ARN repo variable.
+
+on:
+  push:
+    paths:
+      - 'canvas/**'
+      - '.github/workflows/deploy-canvas-api.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: canvas/requirements-dev.txt
+      - run: pip install -r canvas/requirements-dev.txt cfn-lint
+      - run: python -m pytest -q
+        working-directory: canvas
+      - run: cfn-lint canvas/template.yaml canvas/bootstrap.yaml
+
+  deploy:
+    needs: test
+    if: vars.CANVAS_DEPLOY_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # AWS OIDC
+    env:
+      STAGE: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+    concurrency:
+      group: canvas-api-${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.CANVAS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Build
+        working-directory: canvas
+        run: sam build
+      - name: Deploy
+        working-directory: canvas
+        env:
+          IP_SALT: ${{ secrets.CANVAS_IP_SALT }}
+          BUDGET_EMAIL: ${{ vars.CANVAS_BUDGET_EMAIL }}
+        run: |
+          localhost=false
+          [ "$STAGE" = dev ] && localhost=true
+          sam deploy \
+            --stack-name "agora-canvas-$STAGE" \
+            --s3-bucket "${{ vars.CANVAS_ARTIFACT_BUCKET }}" \
+            --s3-prefix "agora-canvas-$STAGE" \
+            --capabilities CAPABILITY_IAM \
+            --no-confirm-changeset --no-fail-on-empty-changeset \
+            --parameter-overrides \
+              "Stage=$STAGE" \
+              "AllowLocalhost=$localhost" \
+              "IpHashSalt=$IP_SALT" \
+              "BudgetEmail=$BUDGET_EMAIL" \
+              "ReservedConcurrency=${{ vars.CANVAS_RESERVED_CONCURRENCY || '10' }}"
+          url=$(aws cloudformation describe-stacks --stack-name "agora-canvas-$STAGE" \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" --output text)
+          echo "API_URL=${url%/}" >> "$GITHUB_ENV"
+          echo "Canvas API ($STAGE): $url" >> "$GITHUB_STEP_SUMMARY"
+      - name: Smoke test (dev only)
+        if: env.STAGE == 'dev'
+        run: python canvas/scripts/smoke.py "$API_URL"

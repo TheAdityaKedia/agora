@@ -1,0 +1,139 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Agora event canvases API: one Lambda behind a Function URL + one DynamoDB
+  table. Design: feature-specs/event-canvases.md. Deployed by
+  .github/workflows/deploy-canvas-api.yml as stack agora-canvas-<stage>.
+
+Parameters:
+  Stage:
+    Type: String
+    AllowedValues: [dev, prod]
+  AllowedOrigins:
+    Type: String
+    Default: https://theadityakedia.github.io
+    Description: Comma-separated browser origins allowed by CORS.
+  AllowLocalhost:
+    Type: String
+    AllowedValues: ["true", "false"]
+    Default: "false"
+  IpHashSalt:
+    Type: String
+    NoEcho: true
+    Default: ""
+    Description: Salt for hashing client IPs in rate-limit rows (raw IPs are never stored).
+  ManifestUrl:
+    Type: String
+    Default: https://theadityakedia.github.io/agora/events.json
+  ReservedConcurrency:
+    Type: Number
+    Default: 10
+    Description: >
+      Caps parallel invocations (and so cost) under a flood. 0 = no cap. New
+      AWS accounts with a 10-execution account limit can't reserve any; use 0.
+  BudgetEmail:
+    Type: String
+    Default: ""
+    Description: If set (prod), email a monthly Lambda+DynamoDB budget alert at $5.
+
+Conditions:
+  CapConcurrency: !Not [!Equals [!Ref ReservedConcurrency, 0]]
+  WantBudget: !And
+    - !Equals [!Ref Stage, prod]
+    - !Not [!Equals [!Ref BudgetEmail, ""]]
+  IsProd: !Equals [!Ref Stage, prod]
+
+Resources:
+  CanvasTable:
+    Type: AWS::DynamoDB::Table
+    # Canvases are kept forever: never let a stack change drop the table.
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      TableName: !Sub agora-canvas-${Stage}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - { AttributeName: PK, AttributeType: S }
+        - { AttributeName: SK, AttributeType: S }
+      KeySchema:
+        - { AttributeName: PK, KeyType: HASH }
+        - { AttributeName: SK, KeyType: RANGE }
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: !If [IsProd, true, false]
+
+  CanvasFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub agora-canvas-${Stage}
+      CodeUri: api/
+      Handler: handler.lambda_handler
+      Runtime: python3.12
+      Architectures: [arm64]
+      MemorySize: 512   # the ~7 MB manifest parse is the heaviest step
+      Timeout: 15
+      ReservedConcurrentExecutions: !If [CapConcurrency, !Ref ReservedConcurrency, !Ref AWS::NoValue]
+      LoggingConfig:
+        LogGroup: !Ref CanvasLogs
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CanvasTable
+          ALLOWED_ORIGINS: !Ref AllowedOrigins
+          ALLOW_LOCALHOST: !Ref AllowLocalhost
+          IP_HASH_SALT: !Ref IpHashSalt
+          MANIFEST_URL: !Ref ManifestUrl
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CanvasTable
+      FunctionUrlConfig:
+        AuthType: NONE   # public API; CORS is handled in handler.py
+
+  # Function URLs created since Oct 2025 need lambda:InvokeFunction as well as
+  # the lambda:InvokeFunctionUrl grant SAM adds; restricted to URL calls.
+  CanvasUrlInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref CanvasFunction
+      Action: lambda:InvokeFunction
+      Principal: "*"
+      InvokedViaFunctionUrl: true
+
+  CanvasLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/agora-canvas-${Stage}
+      RetentionInDays: 14
+
+  CanvasBudget:
+    Type: AWS::Budgets::Budget
+    Condition: WantBudget
+    Properties:
+      Budget:
+        BudgetName: agora-canvas-monthly
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit: { Amount: 5, Unit: USD }
+        CostFilters:
+          Service: [AWS Lambda, Amazon DynamoDB]
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 80
+          Subscribers:
+            - { SubscriptionType: EMAIL, Address: !Ref BudgetEmail }
+        - Notification:
+            NotificationType: FORECASTED
+            ComparisonOperator: GREATER_THAN
+            Threshold: 100
+          Subscribers:
+            - { SubscriptionType: EMAIL, Address: !Ref BudgetEmail }
+
+Outputs:
+  ApiUrl:
+    Description: Base URL of the canvas API (put this in the frontend).
+    Value: !GetAtt CanvasFunctionUrl.FunctionUrl
+  TableName:
+    Value: !Ref CanvasTable
