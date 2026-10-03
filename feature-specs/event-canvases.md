@@ -40,10 +40,21 @@ uses with one model:
   "Added by" names are kept as provenance.
 - **Your collections** (`canvas.html` without `?c=`, linked from the main
   page header and every collection): every collection this browser has
-  started or opened, in two sections, **Started by you** and **Shared with
-  you** (from `canvas.yours` when it was last opened), newest first, up to
-  100; copies you made to share are marked. It's per browser until accounts
-  exist; Hide only removes the entry from the list.
+  started or opened, in two sections, **Yours** and **Shared with you** (from
+  `canvas.yours` when it was last opened), newest first, up to 100; the
+  default is pinned first; copies you made to share are marked. Per browser
+  until accounts exist; Hide only removes the entry from the list.
+- **This is mine** (multi-device, added 2026-10-03): a collection started on
+  your phone is "Shared with you" on your PC. Tapping **This is mine** (on the
+  collection, or its row) adds that browser to `META.owner_clients` (a string
+  set, ≤ 20): `yours` becomes true there, and all owner devices count as
+  **one** person in `people`, so adding from both keeps it a personal list.
+  **Not mine** undoes it (the creating browser can't be removed). Anyone with
+  the link could claim; it changes only how the collection is shown, never
+  what anyone can do. Accounts / "link this device" would replace this.
+- **Make this my default** (per browser, `localStorage`): the collection
+  ☆ Save will add to; pick the same one on each device. Marked "★ Your
+  default" on the collection and pinned in Your collections.
 - Wording: "Start a collection" (tooltip: "Save events that interest you,
   or plan with friends"), "Your collections", canvas-mode tray "Adding to
   <name> · N items".
@@ -245,6 +256,7 @@ only.
 | Method & path | Body | Result |
 |---|---|---|
 | `POST /canvases` | `{name, actor_name?, note?, date_from?, date_to?}` | `201 {canvas, items:[], …}` |
+| `POST` / `DELETE /canvases/{id}/claim` | — | count / stop counting this browser as an owner device; the full view (`canvas.yours`, `canvas.claimed`) |
 | `POST /canvases/{id}/duplicate` | `{name?, actor_name?}` | `201` the new canvas's full view (counts against the create rate limit) |
 | `GET /canvases/{id}` | — | `{canvas (incl. version, yours, people), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
 | `GET /canvases/{id}?if_version=N` | — | `200 {unchanged:true, version}` if unchanged (reads only `META`); else the full view. Not a `304`: browsers handle an unsolicited 304 inconsistently in `fetch`. |
