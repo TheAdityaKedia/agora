@@ -186,6 +186,26 @@ normalization and the locations don't disagree (`service/dedup.py`). The
 earlier source in `sources.txt` keeps the row. To merge duplicates already in
 the DB: `python dedupe_existing.py` (dry run) then `--apply`.
 
+**Venues and areas** — the merge job resolves every upcoming event's
+location to a venue in `service/data/venues.json` (via
+`venue_locations.json`), looking new ones up on OpenStreetMap (≤50 per run),
+and the export joins `region`/`venue` onto each event for the site's Area
+filter. A location is assigned only when independent signals agree. For a
+string the rules can't place, Claude Haiku (≤20 calls per run) proposes a
+name and address to look up; the map result must still match the source's
+own text, so the model can find a place but never decides one alone. Anything
+else waits in the **Places to review** issue, with the model's suggestion if
+it had one (updated each run, closed when
+empty; a comment @mentions you only when something new is waiting). To
+resolve one, edit `service/data/venue_locations.json` in GitHub's editor:
+replace its `pending` entry with `{"venue": "<id>"}`, `{"place": "none"}`
+or `{"place": "online"}`, or add a venue to `venues.json` and point the
+string at it; `cd service && python -m places validate` checks an edit, and
+the next run applies it. The run goes red (after shipping) if more than 3% of
+upcoming events have an unresolved location, more than 20 strings go pending
+at once, or the venue files fail validation (that run ships no areas rather
+than wrong ones). Design: `feature-specs/venues.md`.
+
 ## Event submissions by email
 
 Anyone with the address **agora.bayarea@gmail.com** can email events in — the

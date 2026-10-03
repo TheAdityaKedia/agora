@@ -9,6 +9,7 @@ subcommand is one stage:
   merge  — save every result into the DB in sources.txt order, classify, export
   guard  — sanity-check the new manifest vs the base branch's, render the PR body
   alert  — list failing sources (hard failures, 0 events) for the alert issue
+  places — venue coverage + the places waiting for review, for the review issue
 
 Everything goes through `pipeline.<fn>` (the main module) rather than
 from-imports so tests can monkeypatch "main.<fn>".
@@ -17,6 +18,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+from urllib.parse import quote_plus
 
 import main as pipeline
 from scrapers.base import RawEvent
@@ -71,8 +73,9 @@ _MISSING = {"status": "missing", "source_name": None,
 
 
 def merge_results(results_dir, source_filters=None, excludes=None, classify=True,
-                  events_json_path=None) -> dict:
-    """The single writer: save results in sources.txt order, classify, export.
+                  events_json_path=None, resolve_places=True) -> dict:
+    """The single writer: save results in sources.txt order, classify, resolve
+    venues, export.
 
     Order matters — dedup attribution gives a shared row to the earlier source —
     so we walk sources.txt, not the artifacts. A source whose result is missing
@@ -109,11 +112,20 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
         except Exception as e:
             print(f"[classify] skipped ({type(e).__name__}: {e})", flush=True)
 
+    # Venue resolution: never stops the export (see main.resolve_places).
+    places = None
+    if resolve_places:
+        try:
+            places = pipeline.resolve_places()
+        except Exception as e:
+            places = {"error": f"{type(e).__name__}: {e}"}
+            print(f"[places] skipped ({places['error']})", flush=True)
+
     out = Path(events_json_path or os.environ.get("EVENTS_JSON_PATH", pipeline.DEFAULT_EVENTS_JSON))
     exported = pipeline.export_json(out)
     print(f"[export] wrote {exported} upcoming events to {out}", flush=True)
     return {"sources": rows, "exported": exported,
-            "failed": sum(1 for r in rows if r["status"] != "ok")}
+            "failed": sum(1 for r in rows if r["status"] != "ok"), "places": places}
 
 
 def _read_events_manifest(path) -> tuple[dict, int]:
@@ -170,6 +182,12 @@ def render_pr_body(report: dict, guard: dict) -> str:
             status, icon = r["status"], _STATUS_ICON.get(r["status"], "❔")
         lines.append(f"| {r['name'] or r['url']} | {icon} {status} | {r['events']} | "
                      f"{r['saved']} | {r['merged']} | {r['skipped']} |")
+    places = report.get("places") or {}
+    if "actions" in places:
+        lines += ["", f"**Venues:** {len(places['new_venues'])} new · "
+                      f"{len(places['pending'])} waiting for review · "
+                      f"{places['unresolved_events']} of {places['events_with_location']} "
+                      f"events without a resolved location"]
     errors = [r for r in report["sources"] if r["error"]]
     if errors:
         lines += ["", "<details><summary>Errors</summary>", ""]
@@ -222,6 +240,94 @@ def render_alert_body(alerts: list[dict], run_url: str, mention: str = "") -> st
     return "\n".join(lines) + "\n"
 
 
+# The places check goes red (after data ships) when more than this share of
+# upcoming events have an unresolved location, or more than MAX_NEW_PENDING
+# strings go pending in one run (usually a source changed its location format).
+UNRESOLVED_THRESHOLD = 0.03
+MAX_NEW_PENDING = 20
+
+
+def check_places(report: dict, store, threshold: float = UNRESOLVED_THRESHOLD,
+                 max_new_pending: int = MAX_NEW_PENDING) -> dict:
+    """Coverage and review-queue verdict from the merge report's "places"."""
+    places = report.get("places")
+    pending = {k: e["pending"] for k, e in store.locations.items() if "pending" in e}
+    out = {"pending": pending, "new_pending": [], "problems": [], "alert": False,
+           "share": None, "new_venues": []}
+    if places is None:
+        return out  # resolution not run (--no-places)
+    if "error" in places:
+        out["problems"].append(f"Venue resolution crashed: `{places['error'][:300]}`")
+    elif "invalid" in places:
+        out["problems"].append("The venue files don't validate, so this run shipped no areas:")
+        out["problems"] += [f"  - {e}" for e in places["invalid"][:30]]
+    else:
+        out["new_pending"] = places["new_pending"]
+        out["new_venues"] = places["new_venues"]
+        total = places["events_with_location"]
+        out["share"] = places["unresolved_events"] / total if total else 0.0
+        if out["share"] > threshold:
+            out["problems"].append(
+                f"{places['unresolved_events']} of {total} upcoming events "
+                f"({100 * out['share']:.1f}%) have an unresolved location (alert above "
+                f"{100 * threshold:.0f}%).")
+        if len(out["new_pending"]) > max_new_pending:
+            out["problems"].append(
+                f"{len(out['new_pending'])} location strings went pending in this run — "
+                "usually a source changed how it writes locations.")
+    out["alert"] = bool(out["problems"])
+    return out
+
+
+def render_places_body(check: dict, store, run_url: str) -> str:
+    """Markdown for the "Places to review" issue."""
+    lines = []
+    if check["problems"]:
+        lines += ["**Needs attention:**", ""] + [p if p.startswith("  ") else f"- {p}"
+                                                  for p in check["problems"]] + [""]
+    pending = sorted(check["pending"].items(), key=lambda kv: -kv[1].get("events", 0))
+    share = "" if check["share"] is None else f" · {100 * (1 - check['share']):.1f}% of upcoming events have an area"
+    lines.append(f"**{len(pending)} place(s) waiting for a decision**{share} · "
+                 f"updated by [this run]({run_url})")
+    if pending:
+        lines += ["", "| Location text | Events | Sources | Why it's waiting | Since |", "|---|---:|---|---|---|"]
+        for key, p in pending:
+            text = key.replace("|", "/")
+            link = f"[{text}](https://www.openstreetmap.org/search?query={quote_plus(key)})"
+            reason = (p.get("reason") or "").replace("|", "/")
+            if p.get("suggestion"):
+                reason += " · " + _suggestion_text(p["suggestion"]).replace("|", "/")
+            sources = ", ".join(p.get("sources") or []).replace("|", "/")
+            lines.append(f"| {link} | {p.get('events', 0)} | {sources} | {reason} | {p.get('first_seen', '')} |")
+        lines += ["", "**To resolve one**, edit `service/data/venue_locations.json` in GitHub's editor and "
+                      "replace the string's `pending` entry with `{\"venue\": \"<id from venues.json>\"}` "
+                      "(optionally with `\"room\"`), `{\"place\": \"none\"}` or `{\"place\": \"online\"}` — "
+                      "or add a venue to `service/data/venues.json` and point the string at it. "
+                      "`python -m places validate` checks an edit; the next run applies it."]
+    if check["new_venues"]:
+        lines += ["", f"<details><summary>{len(check['new_venues'])} venue(s) added automatically in this run</summary>", ""]
+        for vid in check["new_venues"]:
+            v = store.venues.get(vid, {})
+            where = (f" — [map](https://www.openstreetmap.org/?mlat={v['lat']}&mlon={v['lng']}"
+                     f"#map=18/{v['lat']}/{v['lng']})" if v.get("lat") is not None else "")
+            lines.append(f"- **{v.get('name', vid)}** ({v.get('region')}), {v.get('address', '')}{where}")
+        lines += ["", "</details>"]
+    return "\n".join(lines) + "\n"
+
+
+def _suggestion_text(s: dict) -> str:
+    """The AI step's proposal for a pending place, for the review issue."""
+    if s.get("kind") != "venue":
+        return f"AI: {s.get('kind', 'unknown').replace('_', ' ')}"
+    what = ", ".join(x for x in (s.get("name"), s.get("street_address"), s.get("city")) if x)
+    out = f"AI suggests **{what}**"
+    m = s.get("map")
+    if m:
+        out += (f" — map found [{m.get('label')}](https://www.openstreetmap.org/?mlat={m['lat']}"
+                f"&mlon={m['lng']}#map=18/{m['lat']}/{m['lng']}) (`{m.get('osm')}`)")
+    return out
+
+
 def cli(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Agora CI pipeline stages.")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -240,6 +346,7 @@ def cli(argv: list[str] | None = None) -> None:
     m.add_argument("--sources", nargs="*", default=[], metavar="SUBSTRING")
     m.add_argument("--exclude", nargs="*", default=[], metavar="SUBSTRING")
     m.add_argument("--no-classify", action="store_true")
+    m.add_argument("--no-places", action="store_true")
 
     g = sub.add_parser("guard", help="Check the new manifest and render the PR body.")
     g.add_argument("--new", type=Path, required=True)
@@ -255,6 +362,12 @@ def cli(argv: list[str] | None = None) -> None:
     a.add_argument("--run-url", required=True)
     a.add_argument("--mention", default="")
 
+    pl = sub.add_parser("places", help="Venue coverage and the review queue for the places issue.")
+    pl.add_argument("--report", type=Path, required=True)
+    pl.add_argument("--body", type=Path, required=True)
+    pl.add_argument("--run-url", required=True)
+    pl.add_argument("--data-dir", type=Path, default=None)
+
     args = parser.parse_args(argv)
 
     if args.cmd == "plan":
@@ -267,7 +380,8 @@ def cli(argv: list[str] | None = None) -> None:
               f"{len(result['events'])} events{note}", flush=True)
     elif args.cmd == "merge":
         report = merge_results(args.dir, args.sources or None, args.exclude or None,
-                               classify=not args.no_classify)
+                               classify=not args.no_classify,
+                               resolve_places=not args.no_places)
         args.report.write_text(json.dumps(report, indent=2))
     elif args.cmd == "guard":
         # stdout is appended to $GITHUB_OUTPUT, so print only key=value lines.
@@ -283,6 +397,16 @@ def cli(argv: list[str] | None = None) -> None:
         alerts = find_alerts(report, load_local_only(args.local_only))
         args.body.write_text(render_alert_body(alerts, args.run_url, args.mention))
         print(f"count={len(alerts)}")
+    elif args.cmd == "places":
+        # stdout is appended to $GITHUB_OUTPUT, so print only key=value lines.
+        from places.store import DATA_DIR, Store
+        store = Store(args.data_dir or DATA_DIR)
+        report = json.loads(args.report.read_text())
+        check = check_places(report, store)
+        args.body.write_text(render_places_body(check, store, args.run_url))
+        print(f"pending={len(check['pending'])}")
+        print(f"new_pending={len(check['new_pending'])}")
+        print(f"alert={str(check['alert']).lower()}")
 
 
 if __name__ == "__main__":

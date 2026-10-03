@@ -29,7 +29,7 @@ def _rank(event: Event, order: list[str]) -> int:
     return order.index(first) if first in order else len(order)
 
 
-def plan(session, source_order: list[str]) -> list[Merge]:
+def plan(session, source_order: list[str], venue_of=None) -> list[Merge]:
     by_start: dict = {}
     for e in session.query(Event).order_by(Event.start_time, Event.id).all():
         by_start.setdefault(e.start_time, []).append(e)
@@ -49,7 +49,7 @@ def plan(session, source_order: list[str]) -> list[Merge]:
             for b in events[i + 1:]:
                 if set(a.sources or []) & set(b.sources or []):
                     continue  # same source: two listings mean two events
-                if dedup.is_near_duplicate(a.title, a.location, b.title, b.location):
+                if dedup.is_near_duplicate(a.title, a.location, b.title, b.location, venue_of):
                     parent[find(a.id)] = find(b.id)
         clusters: dict = {}
         for e in events:
@@ -93,7 +93,8 @@ def cli(argv=None) -> None:
     args = parser.parse_args(argv)
     session = get_session()
     try:
-        merges = plan(session, _source_order())
+        from places.store import Store
+        merges = plan(session, _source_order(), dedup.venue_lookup(Store()))
         for m in merges:
             print(f"{m.keep.start_time:%Y-%m-%d %H:%M}Z  keep [{m.keep.sources[0]}] {m.keep.title[:60]!r}")
             for d in m.drop:

@@ -1,8 +1,10 @@
 # Venues and the Area filter
 
-**Status: design agreed (2026-10-02), not built.** Decisions settled with the
-owner: OpenStreetMap (Nominatim) for geocoding; build the venue list now rather
-than a location→area lookup only; nobody reviews the auto-merged data PRs, so
+**Status: phases 1–2 shipped (#54: resolver + owner-reviewed venue list;
+#56: pipeline, review issue, Area filter); phase 3 in progress (see
+"Phase 3 design").** Decisions settled with the owner: OpenStreetMap
+(Nominatim) for geocoding; build the venue list now rather than a
+location→area lookup only; nobody reviews the auto-merged data PRs, so
 the pipeline must verify new places itself and route only real doubts to a
 person.
 
@@ -276,6 +278,61 @@ first. That PR is the only time every place is checked by a person; the
 4. **Maps** — coordinates in the manifest, map view, "near me" (browser
    geolocation, client-side only), SF neighbourhoods (DataSF Analysis
    Neighborhoods).
+
+## Phase 3 design
+
+Four parts, each usable on its own.
+
+### AI-assisted resolution (step 5)
+
+- **When:** only for a string the rule-based steps would leave `pending`
+  (not for `outside`), and at most **20 model calls per run** (the rest wait
+  for the next run, like the lookup cap). Skipped without Bedrock credentials.
+  Pending strings are retried weekly, so a string costs at most one call a week.
+- **Ask:** Haiku (the classifier's model and client), given the string, its
+  sources and their `source_profiles.json` lines, returns JSON
+  `{"kind": "venue" | "not_a_place" | "unknown", "name", "street_address", "city"}`.
+- **Check:** the proposal only adds map queries (`name, city`;
+  `street_address, city`). A result is accepted only by the *existing* evidence
+  rules, judged against the **source's own text**, not the model's: a POI must
+  match the name in the string (N), a house number must appear in the string,
+  a city in the string must agree, the source home must agree. So the model can
+  find "Sydney Goldstein Theater" at 275 Hayes St, but can't by itself make a
+  venue of it: a model-only address never counts as a signal.
+- **Otherwise** the string stays `pending`, now with the model's proposal
+  (`pending.suggestion`: name, address, city, and the map result it led to, if
+  any) shown in the "Places to review" issue, so a review becomes "confirm or
+  correct". `not_a_place` is a suggestion too, never applied automatically.
+- Evidence on venues it helped find records `ai: proposed <name>, <address>`.
+
+### Venue-aware dedup
+
+Save-time dedup (`dedup.locations_agree`) first asks the committed files: when
+**both** strings map to venues, they agree iff the venue ids match (and, when
+both name a room, the rooms match). Otherwise the text rules apply as today.
+So "Bottom's Up, 4704 Mission St." and "Bottom's Up Bar" agree, and two SFPL
+branches never do. Known entries only — dedup never triggers a lookup. A
+string first seen in this run is unresolved at save time (resolution runs in
+the merge job, after saving) and falls back to text.
+
+### Canonical venue names on rows
+
+- Export adds `room` per event (when the string names one) and `address` to the
+  manifest's `venues` map.
+- A row with a venue shows **`<venue name> · <room>`** instead of the source's
+  text; the source's text and the address are the button's tooltip. Rows
+  without a venue (region-only, unknown) show the text as today.
+- Search indexes the venue name as well as the source's text.
+- Add to calendar / Google Calendar use `<name>, <address>` when known.
+- The footer gains "Venue data © OpenStreetMap contributors" (ODbL), now that
+  addresses are shown.
+
+### Venue links ("everything at this venue")
+
+Clicking a venue name filters to that **venue** — every spelling and room —
+not just that exact string. URL `?venue=<id>` (bookmarkable; an unknown id is
+ignored); the pill reads the venue's name. Rows without a venue keep today's
+exact-text filter (`?loc=`). Dedicated venue pages wait for phase 4 (maps).
 
 ## Testing plan
 

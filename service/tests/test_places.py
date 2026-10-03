@@ -5,6 +5,7 @@ from datetime import date, timedelta
 
 import pytest
 
+from places.assist import Assistant, parse_proposal, queries
 from places.geocode import BudgetExhausted, Place
 from places.normalize import names_match, normalize_key, venue_part
 from places.regions import city_in_text, county_at, region_at, whole_string_city
@@ -229,6 +230,32 @@ def test_address_comes_from_the_text_when_osm_has_no_house_number(store):
     assert store.venues[out.entry["venue"]]["address"] == "770 West Grand Ave., Suite A, Oakland"
 
 
+def test_room_drops_a_trailing_address(store):
+    q = "Frontier Tower @ Spaceship 995 Market Street, San Francisco"
+    resp = {q: [nominatim("Frontier Tower", 37.7826, -122.4087, house="995", road="Market Street")]}
+    out = resolver(store, resp).resolve(q, ["Luma"])
+    assert out.action == "new" and out.entry["room"] == "Spaceship"
+
+
+def test_room_naming_the_venue_itself_is_dropped(store):
+    q = "Dominican University - Angelico Hall 20 Olive Ave San Rafael, CA"
+    resp = {"Angelico Hall, San Rafael": [nominatim("Angelico Hall", *SAN_RAFAEL, city="San Rafael")]}
+    out = resolver(store, resp).resolve(q, ["Commonwealth Club"])
+    assert out.action == "new" and "room" not in out.entry
+    assert store.venues[out.entry["venue"]]["name"] == "Angelico Hall"
+
+
+def test_room_of_known_venue_in_another_city_is_looked_up(store):
+    sfjazz = resolver(store, {"SFJAZZ Center": [nominatim("SFJAZZ Center", *SFJAZZ, osm="way/77")]})
+    sfjazz.resolve("SFJAZZ Center", ["SFJAZZ Center"])
+    q = "SFJAZZ Center — Paramount Theatre, Oakland"
+    resp = {"Paramount Theatre, Oakland": [nominatim("Paramount Theatre", *MIGHTY, osm="way/9",
+                                                     city="Oakland")]}
+    out = resolver(store, resp).resolve(q, ["SFJAZZ Center"])
+    assert out.action == "new" and out.entry == {"venue": "paramount-theatre"}
+    assert store.region_of(q) == "eastbay"
+
+
 def test_room_of_known_venue_needs_no_lookup(store):
     q = "SFJAZZ Center — Miner Auditorium"
     resp = {"SFJAZZ Center": [nominatim("SFJAZZ Center", *SFJAZZ, osm="way/77")]}
@@ -354,6 +381,21 @@ def test_joined_house_numbers_match(store):
     assert resolver(store, resp).resolve(q, ["SF Bar Guide"]).action == "new"
 
 
+def test_joined_house_numbers_take_the_text_address(store):
+    q = "2300 Chestnut St, San Francisco, CA 94123"
+    resp = {q: [nominatim("", 37.8003, -122.4405, category="building", type_="yes",
+                          house="2300;2310;2314;2320", road="Chestnut Street",
+                          city="San Francisco")]}
+    out = resolver(store, resp).resolve(q, ["Partiful"])
+    assert store.venues[out.entry["venue"]]["address"] == "2300 Chestnut St, San Francisco, CA 94123"
+
+
+def test_street_address_keeps_the_first_of_joined_numbers():
+    place = Place.from_json(nominatim("", 37.8003, -122.4405, house="2300;2310", road="Chestnut Street",
+                                      city="San Francisco"))
+    assert place.street_address().startswith("2300 Chestnut Street, San Francisco")
+
+
 def test_named_city_outside_bay_area_is_outside_not_pending(store):
     q = "1001 Center St, Santa Cruz, CA"
     resp = {q: [nominatim("Food Lounge", 36.9741, -122.0308, city="Santa Cruz")]}
@@ -410,3 +452,164 @@ def test_named_park_counts_as_a_precise_place():
     area = Place.from_json(nominatim("Embarcadero Center 2", *SPECS, rank=24,
                                      category="landuse", type_="commercial"))
     assert area.precision != "building"
+
+
+# --- the pipeline step ----------------------------------------------------------
+
+def test_resolve_locations_summary(store):
+    from places.pipeline import collect_locations, resolve_locations
+    q = "Specs', 12 Saroyan Place, San Francisco, CA"
+    locs = collect_locations([
+        {"location": q, "sources": ["SF Bar Guide"]},
+        {"location": q, "sources": ["SF Bar Guide"]},
+        {"location": "Online via Zoom", "sources": ["City Lights"]},
+        {"location": "Mystery Spot", "sources": ["Partiful"]},
+        {"location": "", "sources": ["Partiful"]},
+    ])
+    geo = FakeGeocoder({q: [nominatim("Specs Bar", *SPECS, house="12", road="Saroyan Place")]})
+    summary = resolve_locations(locs, store, geo, today=date(2026, 10, 3))
+    assert summary["actions"] == {"new": 1, "online": 1, "pending": 1}
+    assert summary["new_venues"] == ["specs-bar"]
+    assert summary["new_pending"] == ["mystery spot"] and summary["pending"] == ["mystery spot"]
+    assert summary["events_with_location"] == 4 and summary["unresolved_events"] == 1
+    # A second run: nothing new, nothing looked up again.
+    again = resolve_locations(locs, store, geo, today=date(2026, 10, 3))
+    assert again["new_pending"] == [] and again["new_venues"] == []
+    assert again["actions"] == {"known": 3}
+
+
+def test_resolve_locations_refuses_invalid_files(store):
+    from places.pipeline import resolve_locations
+    store.locations["ghost"] = {"venue": "nope"}
+    geo = FakeGeocoder()
+    summary = resolve_locations({"x": {"text": "x", "events": 1, "sources": []}}, store, geo)
+    assert "invalid" in summary and geo.queries == []
+
+
+def test_main_resolve_places_reads_upcoming_events_and_saves(tmp_path, monkeypatch):
+    from datetime import datetime, timezone
+    from unittest.mock import patch
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    import main
+    from models import Base, Event
+    engine = create_engine("sqlite:///:memory:")
+    Base.metadata.create_all(engine)
+    session = sessionmaker(bind=engine)()
+    now = datetime.now(timezone.utc)
+    for i, (when, loc) in enumerate([(now + timedelta(days=2), "Online via Zoom"),
+                                     (now - timedelta(days=3), "Long Gone Hall, Oakland")]):
+        session.add(Event(title=f"e{i}", start_time=when, location=loc, url=f"https://e/{i}",
+                          sources=["Src"], created_at=now))
+    session.commit()
+    with patch("main.get_session", return_value=session):
+        summary = main.resolve_places(geocoder=FakeGeocoder(), data_dir=tmp_path, log=lambda *a: None,
+                                     assistant=None)
+    assert summary["actions"] == {"online": 1}           # the past event isn't looked at
+    saved = json.loads((tmp_path / "venue_locations.json").read_text())["locations"]
+    assert saved == {"online via zoom": {"place": "online"}}
+
+
+# --- AI-assisted resolution (step 6): the model is a stub ----------------------
+
+GOLDSTEIN = (37.77810, -122.42090)
+
+
+def stub(reply):
+    calls = []
+
+    def ask(system, user):
+        calls.append(user)
+        if isinstance(reply, Exception):
+            raise reply
+        return reply if isinstance(reply, str) else json.dumps(reply)
+    return ask, calls
+
+
+def resolve(tmp_path, location, responses, reply, sources=("Black Bird Bookstore",)):
+    store = Store(tmp_path)
+    ask, calls = stub(reply)
+    r = Resolver(store, FakeGeocoder(responses), today=date(2026, 10, 3),
+                 assistant=Assistant(ask, profiles={"Black Bird Bookstore": "A bookstore in SF."}))
+    return r.resolve(location, list(sources), events=3), store, calls
+
+
+PROPOSAL = {"kind": "venue", "name": "Sydney Goldstein Theater",
+            "street_address": "275 Hayes St", "city": "San Francisco"}
+
+
+def test_parse_proposal():
+    assert parse_proposal('Sure: {"kind": "venue", "name": " Z Space ", "city": "SF"}') == \
+        {"kind": "venue", "name": "Z Space", "street_address": "", "city": "SF"}
+    assert parse_proposal('{"kind": "maybe"}') is None
+    assert parse_proposal("no json") is None
+    assert parse_proposal('{"kind": "venue", "name": 3}')["name"] == ""
+
+
+def test_queries_by_name_then_address():
+    assert queries(PROPOSAL) == ["Sydney Goldstein Theater, San Francisco", "275 Hayes St, San Francisco"]
+    assert queries({"kind": "not_a_place"}) == []
+
+
+def test_assistant_budget_and_errors():
+    ask, calls = stub(PROPOSAL)
+    a = Assistant(ask, max_calls=2)
+    assert a.propose("x", []) and a.propose("y", []) and a.propose("z", []) is None
+    assert len(calls) == 2
+    ask, calls = stub(RuntimeError("no credentials"))
+    a = Assistant(ask)
+    for _ in range(5):
+        assert a.propose("x", []) is None
+    assert len(calls) == 3  # gives up on an unreachable model
+
+
+def test_prompt_carries_sources_and_profiles(tmp_path):
+    _, _, calls = resolve(tmp_path, "Goldstein Hall", {}, {"kind": "unknown"})
+    assert "Location text: Goldstein Hall" in calls[0]
+    assert "Black Bird Bookstore — A bookstore in SF." in calls[0]
+
+
+def test_proposal_found_and_matching_the_text_makes_a_venue(tmp_path):
+    q = "Sydney Goldstein Theater, San Francisco"
+    poi = nominatim("Sydney Goldstein Theater", *GOLDSTEIN, house="275", road="Hayes Street")
+    out, store, _ = resolve(tmp_path, "Sydney Goldstein", {q: [poi]}, PROPOSAL)
+    assert out.action == "new"
+    v = store.venues[out.entry["venue"]]
+    assert v["region"] == "sf" and v["status"] == "auto"
+    assert any(e.startswith("ai: proposed Sydney Goldstein Theater") for e in v["evidence"])
+
+
+def test_model_only_address_is_never_enough(tmp_path):
+    # The model's address finds a building, but neither its name nor its
+    # number is in the source's text: pending, with the suggestion kept.
+    q = "275 Hayes St, San Francisco"
+    building = nominatim("", *GOLDSTEIN, category="building", type_="yes", house="275", road="Hayes Street")
+    out, store, _ = resolve(tmp_path, "The Big Room", {q: [building]},
+                            {**PROPOSAL, "name": "Nourse Theater"})
+    assert out.action == "pending" and not store.venues
+    p = store.locations["the big room"]["pending"]
+    assert p["suggestion"]["name"] == "Nourse Theater"
+    assert p["suggestion"]["street_address"] == "275 Hayes St"
+    assert p["suggestion"]["map"]["lat"] == GOLDSTEIN[0]
+
+
+def test_not_a_place_is_only_a_suggestion(tmp_path):
+    out, store, _ = resolve(tmp_path, "Meet at the big tree", {}, {"kind": "not_a_place"})
+    assert out.action == "pending"
+    assert store.locations["meet at the big tree"]["pending"]["suggestion"] == {"kind": "not_a_place"}
+
+
+def test_proposal_still_needs_the_text_city_to_agree(tmp_path):
+    q = "Sydney Goldstein Theater, San Francisco"
+    poi = nominatim("Sydney Goldstein Theater", *GOLDSTEIN)
+    out, _, _ = resolve(tmp_path, "Sydney Goldstein, Oakland", {q: [poi]}, PROPOSAL)
+    assert out.action == "pending"
+
+
+def test_model_is_asked_only_for_what_the_rules_leave_pending(tmp_path):
+    q = "Mighty Mighty Studio, Oakland"
+    out, _, calls = resolve(tmp_path, q, {q: [nominatim("Mighty Mighty Studio", *MIGHTY, city="Oakland")]},
+                            PROPOSAL)
+    assert out.action == "new" and calls == []
+    _, _, calls = resolve(tmp_path, "Online via Zoom", {}, PROPOSAL)
+    assert calls == []

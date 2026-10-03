@@ -12,6 +12,14 @@ from models import Base, Event
 from scrapers.base import RawEvent
 
 
+
+@pytest.fixture(autouse=True)
+def no_venue_resolution(monkeypatch):
+    """run()/merge resolve venues against OpenStreetMap and save the committed
+    venue files; never from these tests."""
+    monkeypatch.setattr("main.resolve_places", lambda **kw: None)
+
+
 @pytest.fixture
 def db_session():
     engine = create_engine("sqlite:///:memory:")

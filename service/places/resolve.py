@@ -7,7 +7,9 @@ Steps, in order (feature-specs/venues.md → "Resolving a new location string"):
 3. Just a city — "San Francisco, CA" → region only.
 4. A room of a known venue — "SFJAZZ Center — Miner Auditorium".
 5. Geocode with Nominatim and apply the evidence rules.
-6. Otherwise pending, with the reason.
+6. AI-assisted: the model proposes a name/address to look up; the result
+   must pass the same rules against the source's text (assist.py).
+7. Otherwise pending, with the reason (and the model's suggestion).
 
 Unknown beats wrong: nothing is assigned unless independent signals agree.
 """
@@ -17,6 +19,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 
+from . import assist
 from .geocode import BudgetExhausted, Place
 from .normalize import names_match, normalize_key, venue_part
 from .regions import REGION_OF_COUNTY, city_in_text, city_segment, county_at, whole_string_city
@@ -55,13 +58,15 @@ class Outcome:
     entry: dict | None
     reason: str | None = None
     evidence: list[str] = field(default_factory=list)
+    suggestion: dict | None = None
 
 
 class Resolver:
     def __init__(self, store: Store, geocoder, today: date | None = None,
-                 retry_pending: bool = False):
+                 retry_pending: bool = False, assistant: assist.Assistant | None = None):
         self.store = store
         self.geo = geocoder
+        self.assistant = assistant
         self.today = today or date.today()
         self.retry_pending = retry_pending
 
@@ -88,6 +93,7 @@ class Resolver:
                 "last_tried": self.today.isoformat(),
                 "events": events,
                 "sources": sorted(set(sources)),
+                **({"suggestion": out.suggestion} if out.suggestion else {}),
             }}
         self.store.locations[key] = out.entry
         return out
@@ -113,11 +119,14 @@ class Resolver:
                            evidence=[f"text: just a city ({whole[0]})"])
 
         vp, room = venue_part(location)
-        # "Sydney Goldstein Theater 275 Hayes St San Francisco" → the name part.
-        m = _ADDRESS.search(vp)
-        if m and m.start() > 0:
-            vp = vp[:m.start()].strip(" -—,")
+        # "Sydney Goldstein Theater 275 Hayes St San Francisco" → the name part;
+        # likewise a room: "Spaceship 995 Market Street" → "Spaceship".
+        vp, room = _drop_address(vp), room and _drop_address(room)
         known = self._known_venue(vp)
+        if known and city and REGION_OF_COUNTY[city[1]] != self.store.venues[known]["region"]:
+            # "SFJAZZ Center — Paramount Theatre, Oakland": the presenter's
+            # venue is in SF, the event isn't. Look the place up instead.
+            known = None
         if known and normalize_key(vp) != normalize_key(location):
             entry = {"venue": known}
             if room:
@@ -151,7 +160,32 @@ class Resolver:
                            evidence=[f"text: {outside_city.title()}", "map: outside the Bay Area"])
         reasons = [r for r in reasons if not r.startswith("outside:")] or \
             [r.split(":", 1)[1] for r in reasons] or ["no map result in the Bay Area"]
-        return Outcome(location, "pending", None, reason=reasons[0])
+        out = Outcome(location, "pending", None, reason=reasons[0])
+        proposal = self.assistant.propose(location, sources) if self.assistant else None
+        if proposal:
+            accepted, seen = self._try_proposal(location, vp, room, proposal, city, home)
+            if accepted:
+                return accepted
+            out.suggestion = _suggestion(proposal, seen)
+        return out
+
+    def _try_proposal(self, location, vp, room, proposal, city, home) -> tuple[Outcome | None, Place | None]:
+        """Look up what the model proposed; accept only what the evidence
+        rules accept against the source's own text (`vp`, `location`), so a
+        model-only address or name is never a signal. Also returns the first
+        Bay Area map result, for the reviewer."""
+        seen = None
+        for query in assist.queries(proposal):
+            for place in self.geo.search(query):
+                if seen is None and county_at(place.lat, place.lng):
+                    seen = place
+                # Street/city-level matches stay unused: they'd rest on the
+                # model's address alone.
+                out = self._judge(location, vp, room, vp, place, city, home, [], [])
+                if out:
+                    out.evidence.append(f"ai: proposed {assist.summary(proposal)}")
+                    return out, seen
+        return None, seen
 
     def _known_venue(self, vp: str) -> str | None:
         k = normalize_key(vp)
@@ -178,6 +212,12 @@ class Resolver:
             out.append((vp, vp))
         if home in _HOME_CITY and not city_in_text(location):
             out.append((f"{vp}, {_HOME_CITY[home]}", vp))
+        _, room = venue_part(location)
+        city = city_in_text(location)
+        if room and city:
+            # "Presenter — Venue, City": the room part may be the place.
+            room = _drop_address(room)
+            out.append((f"{room}, {city[0].title()}", room))
         seen, uniq = set(), []
         for q, e in out:
             if q not in seen:
@@ -242,6 +282,8 @@ class Resolver:
             same = next((vid for _, vid in self.store.near(place.lat, place.lng, 100)
                          if names_match(name, self.store.venues[vid]["name"])), None)
         if same:
+            if room and names_match(room, self.store.venues[same]["name"]):
+                entry_extra = {}
             return Outcome(location, "alias", {"venue": same, **entry_extra}, evidence=evidence)
 
         if name_ok:
@@ -265,6 +307,8 @@ class Resolver:
         }
         if nearby:
             fields["possible_duplicates"] = nearby
+        if room and names_match(room, name):
+            entry_extra = {}  # "Dominican University — Angelico Hall" is Angelico Hall
         vid = self.store.add_venue(fields)
         return Outcome(location, "new", {"venue": vid, **entry_extra}, evidence=evidence)
 
@@ -286,6 +330,22 @@ class Resolver:
         return Outcome(location, "new", entry, evidence=evidence)
 
 
+def _suggestion(proposal: dict, place: Place | None) -> dict:
+    """The model's proposal (and what the map made of it) for a pending entry."""
+    s = {"kind": proposal["kind"]}
+    s.update({k: proposal[k] for k in ("name", "street_address", "city") if proposal.get(k)})
+    if place is not None:
+        s["map"] = {"label": place.name or place.display_name.split(",")[0],
+                    "osm": place.osm, "lat": round(place.lat, 6), "lng": round(place.lng, 6)}
+    return s
+
+
+def _drop_address(part: str) -> str:
+    """"Angelico Hall 20 Olive Ave San Rafael" → "Angelico Hall"."""
+    m = _ADDRESS.search(part)
+    return part[:m.start()].strip(" -—,") if m and m.start() > 0 else part
+
+
 def _text_address(location: str) -> str | None:
     """The street address as the source wrote it ("770 West Grand Ave.,
     Suite A, Oakland"), or None."""
@@ -296,8 +356,11 @@ def _text_address(location: str) -> str | None:
 def _best_address(location: str, place: Place) -> str:
     """OpenStreetMap's address when it has the house number; otherwise the
     source's own street address (OSM often pins a venue on a street without
-    a number: "West Grand Avenue" for 770 West Grand Ave)."""
-    if place.address.get("house_number"):
+    a number: "West Grand Avenue" for 770 West Grand Ave). A building with
+    several numbers ("2300;2310;2314") also defers to the source, which
+    names the one it uses."""
+    number = place.address.get("house_number") or ""
+    if number and ";" not in number:
         return place.street_address()
     return _text_address(location) or place.street_address()
 
