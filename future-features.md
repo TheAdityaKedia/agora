@@ -8,10 +8,15 @@ here.
 
 - **Venues and the Area filter** — a committed venue list resolved from
   location strings (OpenStreetMap + evidence rules + a review queue), then a
-  region filter, venue names and links, venue-aware dedup; next: maps,
-  "near me", SF neighbourhoods (phase 4).
-  Spec: [`feature-specs/venues.md`](feature-specs/venues.md) (phases 1–3
-  shipped).
+  region filter, venue names and links, venue-aware dedup, a map view and
+  an SF neighbourhood filter. Phases 1–3 have shipped. Phase 4 (map +
+  neighbourhoods) is built on the `venues-phase4-map` PR; it goes live
+  once that merges and the next CI export adds coordinates to the manifest.
+  Left after that:
+  - **"Near me"** — deferred until the owner wants a location-permission
+    prompt (browser geolocation, client-side only).
+  - **Venue pages.**
+  Spec: [`feature-specs/venues.md`](feature-specs/venues.md).
 - **Adaptive / self-healing scrapers** — detect when a source's markup or
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)

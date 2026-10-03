@@ -50,8 +50,12 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   stack, `main` → prod).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
   `canvas.html` + `canvas-client.js` (collections; talk to `canvas/`'s API),
-  `vendor/` (pinned MiniSearch), `events.json` (the manifest — carries the
-  taxonomy block + per-event `types`/`topics`/`cost`).
+  `vendor/` (pinned MiniSearch; MapLibre GL, imported only when the map
+  opens), `events.json` (the manifest — carries the taxonomy block +
+  per-event `types`/`topics`/`cost`; venue coordinates + SF neighborhoods).
+- `scripts/` — `preview_site.py` (scratch real-data site outside the repo),
+  `measure_load.py` (first-load timing; numbers in
+  `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`.
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
 - `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
   source → single merge job (Neon) → guarded auto-merged data PR → deploy.

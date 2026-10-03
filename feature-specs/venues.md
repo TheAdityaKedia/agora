@@ -3,8 +3,9 @@
 **Status: phases 1–3 shipped (#54: resolver + owner-reviewed venue list;
 #56: pipeline, review issue, Area filter; #60: AI-assisted resolution,
 venue-aware dedup, venue names and links — see "Phase 3 design"). Phase 4
-(map view + SF neighbourhoods, minus "near me") is designed below — see
-"Phase 4 design".** Decisions settled with the owner: OpenStreetMap
+(map view + SF neighbourhoods, minus "near me") is built — see
+"Phase 4 design". "Near me" is deferred until the owner wants a
+location-permission prompt.** Decisions settled with the owner: OpenStreetMap
 (Nominatim) for geocoding; build the venue list now rather than a
 location→area lookup only; nobody reviews the auto-merged data PRs, so
 the pipeline must verify new places itself and route only real doubts to a
@@ -395,6 +396,8 @@ They get no neighbourhood, because a street can cross a boundary.
 
 ### Neighbourhood filter
 
+- **Spelling:** the UI says "neighborhood". The site's readers are in SF,
+  and the manifest key is `neighborhood`.
 - **Placement:** nested in the Area group, under the area chips, as a
   "San Francisco neighbourhoods" dropdown: a checkbox list with event
   counts and a search box, like Topics. Chips don't scale to 41 names.
@@ -414,18 +417,25 @@ They get no neighbourhood, because a street can cross a boundary.
 
 ### Map view
 
-- **Library: MapLibre GL JS 6.11.2** (BSD-3), vendored as
-  `frontend/vendor/maplibre-gl-6.11.2.{js,css}` with its licence. The
-  script and CSS are injected only on the first Map open. The list-only
-  first load fetches nothing new. The page records `performance` marks
-  (`agora:first-row`, `agora:index-ready`, `agora:map-pins`) so
-  `scripts/measure_load.py` can time it. (Leaflet was the fallback. It
-  wasn't needed.)
+- **Library: MapLibre GL JS 6.11.2** (BSD-3), vendored unmodified in
+  `frontend/vendor/maplibre-gl-6.11.2/`.
+  - Version 6 ships only ES modules: `maplibre-gl.mjs`, its
+    `-shared.mjs` and its `-worker.mjs`, plus the CSS and licence.
+  - The page loads it with a dynamic `import()` and injects the CSS link
+    on the first Map open. A list-only visit fetches none of it (about
+    300 KB gzipped).
+  - The page sets one `performance` mark, `agora:map-pins` (the first
+    frame with pins), for `scripts/measure_load.py`. The harness gets the
+    other timings from outside the page.
+  - Leaflet was the fallback and wasn't needed. MapLibre's GeoJSON
+    clustering, WebGL rendering and vector tiles all worked, including in
+    headless Chromium for the tests.
 - **Tiles:** OpenFreeMap. The `positron` style is used in light mode
   because it's quiet and the orange pins stand out; `dark` is used when
   the system is in dark mode. Free, no key. tile.openstreetmap.org is not
-  used. Attribution: "OpenFreeMap © OpenMapTiles Data from OpenStreetMap",
-  from the style plus our own entry.
+  used. The attribution control shows "OpenFreeMap © OpenMapTiles Data
+  from OpenStreetMap". It comes from the tiles' TileJSON, so the page
+  doesn't add its own (an extra entry only duplicated it).
 - **When the tiles can't load:** the style JSON is fetched first. If it
   fails or takes more than 8 s, the map uses a blank background style.
   The pins still work, and a note says the base map is unavailable.
@@ -456,6 +466,17 @@ They get no neighbourhood, because a street can cross a boundary.
   then fits the current pins, which is also the first-open default.
 - **In map view the list isn't built.** `render()` updates the pins and
   the chrome, and the list is rebuilt when you switch back.
+
+### Result (2026-10-03 data, M3 Pro, `scripts/measure_load.py`, median of 5)
+
+| | first row before → after | search ready before → after | Map tap → pins |
+|---|---:|---:|---:|
+| Slow 4G phone | 4.9 → 4.9 s | 6.4 → 6.4 s | 6.0 s |
+| Fast 4G phone | 1.2 → 1.2 s | 2.7 → 2.7 s | 1.0 s |
+| Desktop | 0.1 → 0.1 s | 1.5 → 1.6 s (noise) | 0.2 s |
+
+Blocking time didn't change: 0.2 / 0.2 / 0.0 s. The manifest grew by
+4.5 KB gzipped.
 
 ### Testing
 

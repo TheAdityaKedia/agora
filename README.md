@@ -38,7 +38,7 @@ agora/
 │   └── requirements.txt
 ├── frontend/                   # Static site served by GitHub Pages
 │   ├── index.html              # Self-contained page (inline CSS/JS, no build)
-│   ├── vendor/                 # Vendored client libs (MiniSearch, pinned)
+│   ├── vendor/                 # Vendored client libs (MiniSearch, MapLibre GL; pinned)
 │   └── events.json             # Manifest the scraper writes, the page reads
 ├── .github/workflows/          # CI
 │   └── deploy-pages.yml        # Publishes frontend/ to GitHub Pages
