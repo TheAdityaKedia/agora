@@ -12,6 +12,7 @@ import shutil
 import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -45,8 +46,9 @@ TAXONOMY = {
 
 def _events(n=N_EVENTS):
     """`n` events, four a day from tomorrow on, alternating jazz / poetry."""
-    base = (datetime.now(timezone.utc) + timedelta(days=1)).replace(
-        hour=19, minute=0, second=0, microsecond=0)
+    # "Tomorrow" in the page's timezone, not UTC: they differ for 7h a day.
+    base = (datetime.now(ZoneInfo(TZ)) + timedelta(days=1)).replace(
+        hour=12, minute=0, second=0, microsecond=0)
     out = []
     for i in range(n):
         jazz = i % 2 == 0
