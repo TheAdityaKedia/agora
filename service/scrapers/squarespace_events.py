@@ -18,7 +18,7 @@ from __future__ import annotations
 import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
-from urllib.parse import urlsplit
+from urllib.parse import unquote_plus, urlsplit
 from zoneinfo import ZoneInfo
 
 import requests
@@ -85,8 +85,35 @@ def _parse_start(date_iso: str | None, time_text: str | None, time_fmt: str) -> 
     return naive.replace(tzinfo=SOURCE_TZ).astimezone(timezone.utc)
 
 
-def parse_events(html: str, *, base_url: str, fallback_location: str | None = None) -> list[RawEvent]:
+def _card_address(art) -> str | None:
+    """'<venue name>, <street address>' from a card's address line, or None.
+
+    The line is the venue name followed by a Google Maps link whose ``q=``
+    carries the street address ("4127 18th Street San Francisco United States").
+    """
+    li = art.select_one(".eventlist-meta-address")
+    if not li:
+        return None
+    link = li.select_one("a.eventlist-meta-address-maplink")
+    street = None
+    if link and "q=" in (link.get("href") or ""):
+        street = unquote_plus(link["href"].split("q=", 1)[1])
+        street = re.sub(r"\s*United States\s*$", "", street).strip() or None
+        link.extract()
+    name = re.sub(r"\s+", " ", li.get_text(" ", strip=True)).strip() or None
+    if name and street and street.lower().startswith(name.lower()):
+        name = None  # the maps query repeats the name ("USS Pampanito … Pier 45")
+    parts = [p for p in (name, street) if p]
+    return ", ".join(parts) or None
+
+
+def parse_events(html: str, *, base_url: str, fallback_location: str | None = None,
+                 card_address: bool = False) -> list[RawEvent]:
     """Parse a Squarespace events-collection page into RawEvents (one per showing).
+
+    `card_address` takes each card's own address line (venue name + street)
+    over `fallback_location` — opt in for sources whose events aren't all at
+    one place (GLBT Historical Society).
 
     Pure — no network — so it's testable against a captured page.
     """
@@ -125,10 +152,11 @@ def parse_events(html: str, *, base_url: str, fallback_location: str | None = No
             text = desc_el.get_text(" ", strip=True)
             description = re.sub(r"\s+", " ", text).strip() or None
 
+        location = (_card_address(art) if card_address else None) or fallback_location
         events.append(RawEvent(
             title=title,
             start_time=start_time,
-            location=fallback_location,
+            location=location,
             url=url,
             description=description,
             image_url=image_url,
@@ -151,13 +179,19 @@ def parse_detail_description(html: str) -> str | None:
 
 
 def scrape_collection(calendar_url: str, *, fallback_location: str | None = None,
-                      enrich_descriptions: bool = False) -> list[RawEvent]:
+                      enrich_descriptions: bool = False,
+                      card_address: bool = False,
+                      upcoming_only: bool = False) -> list[RawEvent]:
     """Fetch and parse a venue's Squarespace events-collection page.
 
     `enrich_descriptions` fetches each event's detail page for the full synopsis
     (``.eventitem-column-content``) — use it for venues whose collection cards
     carry thin/empty descriptions (e.g. FACT/SF). Leave it off for venues with
     rich cards (Balboa, Medicine for Nightmares) to avoid needless fetches.
+
+    `upcoming_only` drops showings that started before today (Pacific), before
+    any detail fetch — for collections that keep years of past events on the
+    same page (GLBT Historical Society, SF Center for the Book).
     """
     try:
         resp = requests.get(calendar_url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
@@ -165,7 +199,11 @@ def scrape_collection(calendar_url: str, *, fallback_location: str | None = None
     except requests.RequestException as exc:
         _log(f"fetch failed for {calendar_url}: {exc}")
         return []
-    events = parse_events(resp.text, base_url=calendar_url, fallback_location=fallback_location)
+    events = parse_events(resp.text, base_url=calendar_url, fallback_location=fallback_location,
+                          card_address=card_address)
+    if upcoming_only:
+        today = datetime.now(SOURCE_TZ).replace(hour=0, minute=0, second=0, microsecond=0)
+        events = [e for e in events if e.start_time >= today]
 
     if enrich_descriptions:
         _enrich_from_detail_pages(events)
