@@ -4,8 +4,8 @@ Reads persisted events from the database and writes the manifest for the
 static frontend (GitHub Pages). Prunes past events so the files stay small.
 
 Two files (feature-specs/frontend-payload.md):
-    events.json        {"generated_at", "taxonomy", "regions", "venues",
-                        "events": [ {...event, "summary", "more"?}, ... ]}
+    events.json        {"generated_at", "taxonomy", "regions", "neighborhoods",
+                        "venues", "events": [ {...event, "summary", "more"?}, ... ]}
     descriptions.json  {"<event id>": "<full description>", ...}
 
 Events carry the description's first sentence as `summary` (what a row shows
@@ -23,7 +23,7 @@ from zoneinfo import ZoneInfo
 
 import taxonomy
 from classifications import Cache
-from places.regions import REGIONS
+from places.regions import REGIONS, neighborhood_at, neighborhoods
 from places.store import DATA_DIR as VENUES_DIR, Store as VenueStore
 from db import get_session
 from models import Event
@@ -124,11 +124,43 @@ def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> 
     return out
 
 
+# Map pins (feature-specs/venues.md, phase 4): which precisions get
+# coordinates in the manifest. Never `city` — no pin at a city centroid.
+# `street` pins are drawn hollow ("approximate").
+PIN_PRECISIONS = {"building", "street"}
+COORD_DECIMALS = 5  # ~1 m
+
+
 def _venue_summary(v: dict) -> dict:
     out = {"name": v["name"], "region": v["region"]}
     if v.get("address"):
         out["address"] = v["address"]
+    if v.get("precision") in PIN_PRECISIONS and v.get("lat") is not None:
+        lat, lng = round(v["lat"], COORD_DECIMALS), round(v["lng"], COORD_DECIMALS)
+        out["lat"], out["lng"] = lat, lng
+        if v["precision"] != "building":
+            out["approx"] = True
+        # SF neighbourhood from the coordinates, at export time, never stored:
+        # building precision only (a street can cross a boundary).
+        elif v["region"] == "sf":
+            hood = neighborhood_at(lat, lng)
+            if hood:
+                out["neighborhood"] = hood
     return out
+
+
+def venues_block(venues: VenueStore | None, payload: list[dict]) -> dict:
+    """The manifest's `venues`: the venues events point at, stored once."""
+    if not venues:
+        return {}
+    return {vid: _venue_summary(venues.venues[vid])
+            for vid in sorted({e["venue"] for e in payload if e.get("venue")})
+            if vid in venues.venues}
+
+
+def neighborhoods_block() -> list[dict]:
+    """The manifest's `neighborhoods`: every SF neighbourhood, by label."""
+    return [{"id": n, "label": label} for n, label in neighborhoods().items()]
 
 
 def _load_venues(venues_dir: Path) -> VenueStore | None:
@@ -195,11 +227,11 @@ def export_json(
         # The taxonomy travels with the manifest so the static frontend builds
         # its type/topic filters from the same source of truth (no extra fetch).
         "taxonomy": taxonomy.load_taxonomy(),
-        # Area filter: the regions in display order, and the venues events
-        # point at (stored once, not per event).
+        # Area filter: the regions in display order, SF neighbourhoods, and
+        # the venues events point at (stored once, not per event).
         "regions": [{"id": r, "label": label} for r, label in REGIONS.items()],
-        "venues": {vid: _venue_summary(venues.venues[vid])
-                   for vid in sorted({e["venue"] for e in payload if e["venue"]})} if venues else {},
+        "neighborhoods": neighborhoods_block(),
+        "venues": venues_block(venues, payload),
         "events": payload,
     }
     with open(path, "w") as f:

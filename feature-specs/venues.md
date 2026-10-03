@@ -355,8 +355,9 @@ directions.
   label. The page shows only the ones that have events.
 - A `city`-precision venue never gets coordinates, so nothing is pinned
   at a city centroid.
-- Budget: under ~20 KB gzipped added to `events.json` (measured in the
-  PR).
+- Budget: under ~20 KB gzipped added to `events.json`. On the
+  2026-10-03 data it measured **+4.5 KB gzipped** (+27 KB raw): 317 of
+  318 venues get a pin.
 
 **Street-level pins: included, drawn differently.** Two venues are
 `street` today: Alamo Square (a park, where "the street" is the park) and
@@ -373,7 +374,7 @@ They get no neighbourhood, because a street can cross a boundary.
   checked 2026-10-03. The portal moved from data.sfgov.org to data.sf.gov.
 - **Stored as** `service/data/geo/sf_neighborhoods.geojson`, simplified
   server-side (`simplify_preserve_topology`, 0.0001° ≈ 10 m) and rounded
-  to 5 decimals: 122 KB. The command to regenerate it is in
+  to 5 decimals: 70 KB. The command to regenerate it is in
   `places/regions.py`. On the full-resolution shapes and the simplified
   ones, all 242 SF building venues land in the same neighbourhood. At
   0.0002° one venue moved (the Palace of Fine Arts, from Marina to
@@ -387,6 +388,10 @@ They get no neighbourhood, because a street can cross a boundary.
   `venues.json` and never hand-edited, so fixing a venue's coordinates
   fixes its neighbourhood. A validation test checks that every SF
   `building` venue gets one.
+- **Quirk:** the boundaries are DataSF's, and they follow census tracts.
+  So DataSF's "Mission" takes in western SoMa around 11th and 12th St
+  (Oasis, the Eagle). We keep the dataset as published rather than
+  hand-editing boundaries.
 
 ### Neighbourhood filter
 

@@ -10,6 +10,16 @@ Shapes: data/geo/bay_area_counties.geojson, from US Census TIGERweb
 
 County polygons include their water, so a pier or island venue still lands
 in a county.
+
+SF neighbourhoods: data/geo/sf_neighborhoods.geojson, DataSF "Analysis
+Neighborhoods" (dataset j2bu-swwd, PDDL), regenerated with:
+
+  curl -LG https://data.sf.gov/resource/j2bu-swwd.geojson --data-urlencode '$limit=100' \\
+    --data-urlencode '$select=nhood, simplify_preserve_topology(the_geom, 0.0001) as the_geom'
+
+then coordinates rounded to 5 decimals and each feature given an `id` (a
+slug of `nhood`; South of Market is `soma`) and a `label` (slashes spaced;
+"SoMa"). One feature per line. See feature-specs/venues.md, phase 4.
 """
 from __future__ import annotations
 
@@ -21,6 +31,7 @@ from pathlib import Path
 from .normalize import normalize_key
 
 GEO_FILE = Path(__file__).parent.parent / "data" / "geo" / "bay_area_counties.geojson"
+NEIGHBORHOODS_FILE = Path(__file__).parent.parent / "data" / "geo" / "sf_neighborhoods.geojson"
 
 # id → label, in display order. "online" has no counties.
 REGIONS = {
@@ -131,6 +142,23 @@ def _counties(path: str = str(GEO_FILE)) -> list[tuple[str, list]]:
     return out
 
 
+@lru_cache(maxsize=1)
+def _neighborhoods(path: str = str(NEIGHBORHOODS_FILE)) -> list[tuple[str, str, list]]:
+    data = json.loads(Path(path).read_text())
+    return [(f["properties"]["id"], f["properties"]["label"], f["geometry"]["coordinates"])
+            for f in data["features"]]
+
+
+def neighborhoods() -> dict[str, str]:
+    """SF neighbourhood id → label, sorted by label."""
+    return dict(sorted(((nid, label) for nid, label, _ in _neighborhoods()), key=lambda x: x[1]))
+
+
+def _in_polys(lng: float, lat: float, polys: list) -> bool:
+    return any(_in_ring(lng, lat, poly[0]) and not any(_in_ring(lng, lat, h) for h in poly[1:])
+               for poly in polys)
+
+
 def _in_ring(lng: float, lat: float, ring: list) -> bool:
     inside = False
     j = len(ring) - 1
@@ -146,12 +174,20 @@ def _in_ring(lng: float, lat: float, ring: list) -> bool:
 def county_at(lat: float, lng: float) -> str | None:
     """The Bay Area county containing the point, or None outside the nine."""
     for county, polys in _counties():
-        for poly in polys:
-            if _in_ring(lng, lat, poly[0]) and not any(_in_ring(lng, lat, h) for h in poly[1:]):
-                return county
+        if _in_polys(lng, lat, polys):
+            return county
     return None
 
 
 def region_at(lat: float, lng: float) -> str | None:
     county = county_at(lat, lng)
     return REGION_OF_COUNTY.get(county) if county else None
+
+
+def neighborhood_at(lat: float, lng: float) -> str | None:
+    """The SF neighbourhood id containing the point, or None (outside SF,
+    or in the bay between the shapes)."""
+    for nid, _label, polys in _neighborhoods():
+        if _in_polys(lng, lat, polys):
+            return nid
+    return None
