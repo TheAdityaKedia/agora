@@ -928,3 +928,16 @@ def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
     page.context.grant_permissions(["clipboard-read", "clipboard-write"])
     page.click("#copy-link")
     assert page.evaluate("navigator.clipboard.readText()") == map_site + "?type=talk"
+
+
+def test_day_strip_shows_the_month_on_every_day(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    btns = page.locator("#day-strip .day-btn")
+    keys = [btns.nth(i).get_attribute("data-day") for i in range(btns.count())]
+    mons = page.locator("#day-strip .day-btn .mon").all_inner_texts()
+    assert len(mons) == len(keys) and all(m.strip() for m in mons)
+    # The first day of each new month (after the strip's first) is marked.
+    changes = [k for prev, k in zip(keys, keys[1:]) if prev[:7] != k[:7]]
+    marked = [btns.nth(i).get_attribute("data-day") for i in range(btns.count())
+              if "new-month" in btns.nth(i).get_attribute("class")]
+    assert marked == changes

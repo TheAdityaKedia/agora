@@ -284,11 +284,18 @@
   }
   .day-btn .dow { font-size: 11px; color: var(--muted); }
   .day-btn .dom { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1; }
+  /* Every day names its month, so a scrolled strip never loses it; the
+     first day of a month marks the change. */
+  .day-btn .mon {
+    font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em;
+    margin-top: 1px;
+  }
+  .day-btn.new-month .mon { color: var(--accent); font-weight: 700; }
   .day-btn:hover { border-color: var(--accent); }
   /* The day at the top of the list: a position marker, so ink, not the
      accent that marks active filters. */
   .day-btn.current { background: var(--fg); border-color: var(--fg); color: var(--bg); }
-  .day-btn.current .dow { color: var(--bg); }
+  .day-btn.current .dow, .day-btn.current .mon { color: var(--bg); }
 
   /* --- Event list --- */
   h2.date {
@@ -2335,13 +2342,15 @@
     dayStripEl.hidden = days.length < 2;
     let prevMonth = null;
     dayStripEl.innerHTML = days.map(([key, d]) => {
-      // The first day of each month in the strip shows the month instead of the weekday.
+      // Weekday, date, month on every button; the first day of a new month
+      // after the strip's start gets the month highlighted.
       const month = d.getMonth();
-      const top = prevMonth !== null && month !== prevMonth ? stripMonthFmt.format(d) : stripDowFmt.format(d);
+      const newMonth = prevMonth !== null && month !== prevMonth;
       prevMonth = month;
-      return '<button type="button" class="day-btn" data-day="' + key + '" aria-label="'
-        + escapeHtml(dateFmt.format(d)) + '"><span class="dow">' + escapeHtml(top)
-        + '</span><span class="dom">' + d.getDate() + "</span></button>";
+      return '<button type="button" class="day-btn' + (newMonth ? " new-month" : "") + '" data-day="'
+        + key + '" aria-label="' + escapeHtml(dateFmt.format(d)) + '"><span class="dow">'
+        + escapeHtml(stripDowFmt.format(d)) + '</span><span class="dom">' + d.getDate()
+        + '</span><span class="mon">' + escapeHtml(stripMonthFmt.format(d)) + "</span></button>";
     }).join("");
   }
 
