@@ -230,6 +230,32 @@ def test_address_comes_from_the_text_when_osm_has_no_house_number(store):
     assert store.venues[out.entry["venue"]]["address"] == "770 West Grand Ave., Suite A, Oakland"
 
 
+def test_room_drops_a_trailing_address(store):
+    q = "Frontier Tower @ Spaceship 995 Market Street, San Francisco"
+    resp = {q: [nominatim("Frontier Tower", 37.7826, -122.4087, house="995", road="Market Street")]}
+    out = resolver(store, resp).resolve(q, ["Luma"])
+    assert out.action == "new" and out.entry["room"] == "Spaceship"
+
+
+def test_room_naming_the_venue_itself_is_dropped(store):
+    q = "Dominican University - Angelico Hall 20 Olive Ave San Rafael, CA"
+    resp = {"Angelico Hall, San Rafael": [nominatim("Angelico Hall", *SAN_RAFAEL, city="San Rafael")]}
+    out = resolver(store, resp).resolve(q, ["Commonwealth Club"])
+    assert out.action == "new" and "room" not in out.entry
+    assert store.venues[out.entry["venue"]]["name"] == "Angelico Hall"
+
+
+def test_room_of_known_venue_in_another_city_is_looked_up(store):
+    sfjazz = resolver(store, {"SFJAZZ Center": [nominatim("SFJAZZ Center", *SFJAZZ, osm="way/77")]})
+    sfjazz.resolve("SFJAZZ Center", ["SFJAZZ Center"])
+    q = "SFJAZZ Center — Paramount Theatre, Oakland"
+    resp = {"Paramount Theatre, Oakland": [nominatim("Paramount Theatre", *MIGHTY, osm="way/9",
+                                                     city="Oakland")]}
+    out = resolver(store, resp).resolve(q, ["SFJAZZ Center"])
+    assert out.action == "new" and out.entry == {"venue": "paramount-theatre"}
+    assert store.region_of(q) == "eastbay"
+
+
 def test_room_of_known_venue_needs_no_lookup(store):
     q = "SFJAZZ Center — Miner Auditorium"
     resp = {"SFJAZZ Center": [nominatim("SFJAZZ Center", *SFJAZZ, osm="way/77")]}

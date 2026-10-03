@@ -119,11 +119,14 @@ class Resolver:
                            evidence=[f"text: just a city ({whole[0]})"])
 
         vp, room = venue_part(location)
-        # "Sydney Goldstein Theater 275 Hayes St San Francisco" → the name part.
-        m = _ADDRESS.search(vp)
-        if m and m.start() > 0:
-            vp = vp[:m.start()].strip(" -—,")
+        # "Sydney Goldstein Theater 275 Hayes St San Francisco" → the name part;
+        # likewise a room: "Spaceship 995 Market Street" → "Spaceship".
+        vp, room = _drop_address(vp), room and _drop_address(room)
         known = self._known_venue(vp)
+        if known and city and REGION_OF_COUNTY[city[1]] != self.store.venues[known]["region"]:
+            # "SFJAZZ Center — Paramount Theatre, Oakland": the presenter's
+            # venue is in SF, the event isn't. Look the place up instead.
+            known = None
         if known and normalize_key(vp) != normalize_key(location):
             entry = {"venue": known}
             if room:
@@ -209,6 +212,12 @@ class Resolver:
             out.append((vp, vp))
         if home in _HOME_CITY and not city_in_text(location):
             out.append((f"{vp}, {_HOME_CITY[home]}", vp))
+        _, room = venue_part(location)
+        city = city_in_text(location)
+        if room and city:
+            # "Presenter — Venue, City": the room part may be the place.
+            room = _drop_address(room)
+            out.append((f"{room}, {city[0].title()}", room))
         seen, uniq = set(), []
         for q, e in out:
             if q not in seen:
@@ -273,6 +282,8 @@ class Resolver:
             same = next((vid for _, vid in self.store.near(place.lat, place.lng, 100)
                          if names_match(name, self.store.venues[vid]["name"])), None)
         if same:
+            if room and names_match(room, self.store.venues[same]["name"]):
+                entry_extra = {}
             return Outcome(location, "alias", {"venue": same, **entry_extra}, evidence=evidence)
 
         if name_ok:
@@ -296,6 +307,8 @@ class Resolver:
         }
         if nearby:
             fields["possible_duplicates"] = nearby
+        if room and names_match(room, name):
+            entry_extra = {}  # "Dominican University — Angelico Hall" is Angelico Hall
         vid = self.store.add_venue(fields)
         return Outcome(location, "new", {"venue": vid, **entry_extra}, evidence=evidence)
 
@@ -325,6 +338,12 @@ def _suggestion(proposal: dict, place: Place | None) -> dict:
         s["map"] = {"label": place.name or place.display_name.split(",")[0],
                     "osm": place.osm, "lat": round(place.lat, 6), "lng": round(place.lng, 6)}
     return s
+
+
+def _drop_address(part: str) -> str:
+    """"Angelico Hall 20 Olive Ave San Rafael" → "Angelico Hall"."""
+    m = _ADDRESS.search(part)
+    return part[:m.start()].strip(" -—,") if m and m.start() > 0 else part
 
 
 def _text_address(location: str) -> str | None:
