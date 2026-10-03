@@ -55,6 +55,15 @@ uses with one model:
 - **Make this my default** (per browser, `localStorage`): the collection
   ☆ Save will add to; pick the same one on each device. Marked "★ Your
   default" on the collection and pinned in Your collections.
+- **Private beta** (added 2026-10-03): collections launch behind
+  `BETA_GATE` in `canvas-client.js`. `frontend/beta/index.html` and
+  `frontend/beta/canvas.html` set a per-browser flag and redirect to the real
+  page (`?beta=1`); without the flag the main page shows no collections UI
+  and `canvas.html` shows a "private beta" notice. Links made during the beta
+  use `…/beta/canvas.html?c=`, so recipients get in. Launch = flip the
+  constant; the `/beta/` pages stay forever as redirects so beta-era links
+  keep working (checked by flipping it in a scratch copy). See
+  `canvas/README.md` → "Private beta".
 - Wording: "Start a collection" (tooltip: "Save events that interest you,
   or plan with friends"), "Your collections", canvas-mode tray "Adding to
   <name> · N items".

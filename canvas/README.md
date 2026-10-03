@@ -22,6 +22,23 @@ scripts/admin.py          operator show / hard-delete a canvas
 tests/              pytest + moto (API) and CDK assertions (infra)
 ```
 
+## Private beta (collections are gated)
+
+Collections ship behind a soft gate: `BETA_GATE = true` in
+`frontend/canvas-client.js`. With it on:
+
+- **Invite link:** `https://theadityakedia.github.io/agora/beta/`. Opening it
+  marks that browser as in the beta and lands on the normal site, where
+  Start a collection / Your collections now appear.
+- **Shared collections** get links like `…/agora/beta/canvas.html?c=<id>`, so
+  whoever opens one is let into the beta too. Without the flag, the site shows
+  no collections UI and `canvas.html` says "Collections are in private beta".
+- It hides UI only; the API itself is open (nothing secret depends on it).
+
+**To launch:** set `BETA_GATE = false` (one line) and merge. Everyone sees
+collections, new links drop `/beta/`, and **keep `frontend/beta/`**: those
+pages keep redirecting, so every link shared during the beta still opens.
+
 ## Frontend
 
 `frontend/canvas.html` (a canvas, or "Your canvases" without `?c=`) and
