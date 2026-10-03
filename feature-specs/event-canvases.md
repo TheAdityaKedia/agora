@@ -111,7 +111,9 @@ versions so an unchanged canvas costs one tiny read.
   optional dates) and **Browse events to add** on `canvas.html`, which links
   to `index.html?canvas=<id>`.
 - While active (URL `?canvas=<id>`, mirrored to `localStorage` so it survives
-  navigation): each event card shows **+ Add** / **✓ Added**; a sticky bottom
+  navigation; the remembered canvas switches off 24 hours after it was last
+  used, so a later visit to browse isn't still adding to an old plan — a
+  `?canvas=` link always turns it back on): each event card shows **+ Add** / **✓ Added**; a sticky bottom
   tray shows "Adi & Sam hangout · 4 · View · Done". If the canvas has a date
   range, activation applies it as the date filter (user can still change it).
 - "Added" is matched by `event_id`, falling back to `(title, start_time)` so

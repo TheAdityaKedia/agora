@@ -104,14 +104,24 @@
     save(K.mine, myCanvases().filter(x => x.id !== id));
   }
 
-  // --- The canvas the main page is adding to ("canvas mode"). ---
+  // --- The canvas the main page is adding to ("canvas mode"). It switches
+  // itself off a day after it was last used, so someone who comes back to
+  // browse isn't still adding to last week's plan. (A ?canvas= link always
+  // turns it back on.) ---
+  const ACTIVE_TTL_MS = 24 * 3600e3;
   function activeCanvas() {
     const a = load(K.active, null);
-    return a && typeof a.id === "string" ? a : null;
+    if (!a || typeof a.id !== "string") return null;
+    if (!(Date.now() - (a.used_at || 0) < ACTIVE_TTL_MS)) {
+      save(K.active, null);
+      return null;
+    }
+    return a;
   }
+  // Every load or change on the main page re-saves it, renewing the day.
   function setActiveCanvas(c) {
     save(K.active, c ? {id: c.id, name: c.name, date_from: c.date_from || null,
-                        date_to: c.date_to || null} : null);
+                        date_to: c.date_to || null, used_at: Date.now()} : null);
   }
 
   const canvasPath = (id) => "canvas.html?c=" + encodeURIComponent(id);

@@ -162,6 +162,20 @@ def run(shots):
         expect(a.locator("#canvas-tray")).to_contain_text("Adding to")
         expect(a.locator(".event").first).to_be_visible()
 
+        # A day after it was last used, canvas mode switches itself off...
+        a.evaluate("""() => {
+            const k = "agora.canvas.active", v = JSON.parse(localStorage.getItem(k));
+            v.used_at = Date.now() - 25 * 3600e3;
+            localStorage.setItem(k, JSON.stringify(v));
+        }""")
+        a.goto(f"{WEB}/")
+        expect(a.locator(".event").first).to_be_visible()
+        expect(a.locator("#canvas-tray")).to_be_hidden()
+        expect(a.locator(".canvas-add")).to_have_count(0)
+        # ...and a canvas's "Add events" link turns it back on.
+        a.goto(f"{WEB}/?canvas=" + canvas_url.split("c=")[1].split("&")[0])
+        expect(a.locator("#canvas-tray")).to_contain_text("Adding to")
+
         # "Your canvases" lists it; Done ends canvas mode.
         a.goto(f"{WEB}/canvas.html")
         expect(a.locator(".mine li")).to_contain_text("Adi & Sam hangout")
