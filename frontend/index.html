@@ -60,7 +60,20 @@
   }
   body.sheet-open { overflow: hidden; }
   button { font: inherit; }
-  header.masthead { padding: 20px 0 6px; }
+  header.masthead {
+    padding: 20px 0 6px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+  }
+  /* "Start a collection" (a canvas, canvas.html): save events for yourself
+     or plan with friends. */
+  .plan { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: 0 0 auto; }
+  .plan-btn {
+    padding: 7px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+    background: var(--input-bg); color: var(--fg); border: 1px solid var(--border); font-size: 14px;
+  }
+  .plan-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .plan a { font-size: 12px; color: var(--muted); }
+  .plan a:hover { color: var(--accent); }
   h1 {
     margin: 0; font-family: var(--font-display); font-weight: 800;
     font-size: 46px; line-height: 0.9; letter-spacing: 0.01em;
@@ -371,6 +384,28 @@
   /* "Add to calendar" opens a small menu: Google Calendar (a link that
      opens a pre-filled event) or an .ics file for Apple / Outlook. */
   .cal { position: relative; margin-left: auto; }
+  /* Canvas mode: "+ Add" on each row, and a tray naming the canvas. */
+  .canvas-add {
+    padding: 3px 12px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 600;
+    background: var(--input-bg); color: var(--accent); border: 1px solid var(--accent);
+  }
+  .canvas-add[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); }
+  .canvas-add:disabled { opacity: 0.6; cursor: progress; }
+  .canvas-tray {
+    position: fixed; left: 50%; bottom: 12px; z-index: 25; transform: translateX(-50%);
+    width: min(688px, calc(100vw - 24px));
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 16px;
+    border-radius: 14px; background: var(--fg); color: var(--bg);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28); font-size: 14px;
+  }
+  .canvas-tray .tray-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .canvas-tray a, .canvas-tray button {
+    flex: 0 0 auto; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid currentColor;
+    background: transparent; color: inherit;
+  }
+  .canvas-tray a { background: var(--bg); color: var(--fg); border-color: var(--bg); }
+  body.canvas-mode { padding-bottom: 96px; }
   .cal-btn {
     list-style: none; padding: 2px 0; cursor: pointer;
     color: var(--muted); font-size: 13px;
@@ -431,6 +466,7 @@
       column-gap: 48px; align-items: start;
     }
     header.masthead { grid-column: 1 / -1; padding: 32px 0 16px; }
+    .canvas-tray { left: auto; right: 32px; transform: none; width: 520px; }
     h1 { font-size: 64px; }
     .topbar { grid-column: 2; grid-row: 2; }
     main { grid-column: 2; grid-row: 3; }
@@ -474,8 +510,15 @@
 </head>
 <body>
 <header class="masthead">
-  <h1>Agora</h1>
-  <div class="subtitle">Events around the Bay, in one calendar.</div>
+  <div>
+    <h1>Agora</h1>
+    <div class="subtitle">Events around the Bay, in one calendar.</div>
+  </div>
+  <div class="plan" id="plan" hidden>
+    <button type="button" class="plan-btn" id="plan-btn"
+            title="Save events that interest you, or plan with friends">Start a collection</button>
+    <a href="./canvas.html">Your collections</a>
+  </div>
 </header>
 
 <div class="topbar" id="topbar">
@@ -577,8 +620,10 @@
   <footer class="credits">Venue data © <a href="https://www.openstreetmap.org/copyright"
     target="_blank" rel="noopener">OpenStreetMap</a> contributors</footer>
 </main>
+<div class="canvas-tray" id="canvas-tray" role="region" aria-label="Collection you're adding to" hidden></div>
 
 <script src="./vendor/minisearch-6.3.0.min.js"></script>
+<script src="./canvas-client.js"></script>
 <script>
 (async () => {
   const list = document.getElementById("list");
@@ -608,6 +653,12 @@
   const dayStripEl = document.getElementById("day-strip");
   const sourceDropdownEl = document.getElementById("source-dropdown");
   const searchEl = document.getElementById("search-input");
+  const planEl = document.getElementById("plan");
+  const planBtnEl = document.getElementById("plan-btn");
+  const trayEl = document.getElementById("canvas-tray");
+  // Event canvases (canvas-client.js). Absent if that script failed to load;
+  // then the page simply has no canvas features.
+  const AC = window.AgoraCanvas || null;
 
   let data;
   try {
@@ -747,6 +798,15 @@
   let dateTo = null;
   let locationFilter = null;   // exact location text (events with no venue)
   let venueFilter = null;      // a venue id: every spelling and room of it
+  // "Canvas mode": the canvas this page is adding events to, or null. Set by
+  // ?canvas=<id> (from a canvas's "Add events") or the remembered active
+  // canvas; loaded after the first render. {id, name, count, items: Map of
+  // event uid or "title|start" → canvas item id}. Declared here, before
+  // readStateFromUrl(), for the TDZ reason noted at flatDateFmt.
+  let canvasMode = null;
+  // Collections are behind a private-beta gate (BETA_GATE, canvas-client.js).
+  const canvasParam = AC && AC.betaEnabled() ? new URLSearchParams(location.search).get("canvas") : null;
+  let canvasPending = canvasParam;  // ?canvas= id not loaded yet
 
   const selectedTypes = new Set();   // dot-paths, e.g. "talk" or "talk.reading"
   // Area filter (feature-specs/venues.md): each event carries a region id or
@@ -1008,6 +1068,8 @@
 
   // Event delegation for anything inside the event list.
   list.addEventListener("click", (e) => {
+    const addBtn = e.target.closest(".canvas-add");
+    if (addBtn) { toggleInCanvas(events[+addBtn.dataset.id], addBtn); return; }
     const tagBtn = e.target.closest(".tag-chip");
     if (tagBtn) {
       if (tagBtn.dataset.tagkind === "topic") isolateTopic(tagBtn.dataset.tagval);
@@ -1368,6 +1430,10 @@
     if (selectedTopics.size !== allTopics.length) {
       p.set("topic", [...selectedTopics].join(","));
     }
+    // Keep ?canvas= until canvas mode is loaded (or ended), so the first
+    // render doesn't strip it.
+    const canvasId = canvasMode ? canvasMode.id : canvasPending;
+    if (canvasId) p.set("canvas", canvasId);
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
     if (location.pathname + location.search !== url) {
@@ -1542,6 +1608,7 @@
   render();
   // Fill the search index once the first rows are on screen.
   setTimeout(buildIndex, 300);
+  initCanvasMode();
 
   function render() {
     writeStateToUrl();
@@ -1828,7 +1895,7 @@
         '<div class="details">' +
           '<div class="title">' + titleHtml + "</div>" +
           where + desc +
-          '<div class="row-foot">' + renderTags(ev)
+          '<div class="row-foot">' + renderTags(ev) + canvasAddHtml(ev)
             + '<details class="cal" data-id="' + ev.id + '">'
             + '<summary class="cal-btn" aria-label="Add ' + title + ' to your calendar">Add to calendar</summary>'
             + '<div class="cal-menu">'
@@ -1914,6 +1981,112 @@
     return '<span class="td-time">' + escapeHtml(main.trim())
       + (period ? '<span class="ampm">' + escapeHtml(period.trim()) + "</span>" : "")
       + "</span>";
+  }
+
+  // --- Canvas mode: "+ Add" on every row puts the event on the active
+  // canvas (canvas.html); a tray names the canvas. The canvas's own page is
+  // where friends vote; this page only adds and removes. ---
+  function canvasAddHtml(ev) {
+    if (!canvasMode) return "";
+    const on = canvasItemId(ev) !== null;
+    return '<button type="button" class="canvas-add" data-id="' + ev.id + '" aria-pressed="' + on
+      + '" aria-label="' + (on ? "Remove from " : "Add to ") + escapeHtml(canvasMode.name) + '">'
+      + (on ? "✓ Added" : "+ Add") + "</button>";
+  }
+  // The canvas item for this event: by event id, or by title + start time
+  // when the id changed after a re-scrape.
+  function canvasItemId(ev) {
+    return canvasMode.items.get(ev._uid) ?? canvasMode.items.get(ev.title + "|" + ev.start_time) ?? null;
+  }
+  function loadCanvasView(v) {
+    const items = new Map();
+    for (const it of v.items) {
+      if (!it.event) continue;
+      items.set(it.event.id, it.id);
+      items.set(it.event.title + "|" + it.event.start_time, it.id);
+    }
+    canvasMode = {id: v.canvas.id, name: v.canvas.name, count: v.items.length, items};
+    AC.setActiveCanvas(v.canvas);
+    AC.rememberCanvas(v.canvas);
+  }
+  const canvasApiPath = (sub) => "/canvases/" + encodeURIComponent(canvasMode.id) + (sub || "");
+
+  async function initCanvasMode() {
+    if (!AC || !AC.betaEnabled()) return;
+    planEl.hidden = false;
+    planBtnEl.addEventListener("click", startCanvas);
+    trayEl.addEventListener("click", (e) => {
+      if (e.target.closest("[data-tray-done]")) endCanvasMode();
+    });
+    const id = canvasParam || AC.activeCanvas()?.id;
+    if (!id) return;
+    try {
+      loadCanvasView(await AC.api("GET", "/canvases/" + encodeURIComponent(id)));
+    } catch (e) {
+      if (e.status === 404) AC.setActiveCanvas(null);
+      AC.toast(e.status === 404 ? "That canvas doesn't exist any more." : e.message);
+      canvasMode = null;
+    }
+    canvasPending = null;
+    updateCanvasUi();
+  }
+  // Re-read the canvas after a change (also picks up friends' edits).
+  async function syncCanvas() {
+    try { loadCanvasView(await AC.api("GET", canvasApiPath())); } catch {}
+  }
+  async function startCanvas() {
+    let c;
+    try { c = await AC.createCanvasDialog(); } catch (e) { AC.toast(e.message); return; }
+    if (!c) return;
+    canvasMode = {id: c.id, name: c.name, count: 0, items: new Map()};
+    AC.setActiveCanvas(c);
+    updateCanvasUi();
+    // A canvas with dates narrows the list to them (still changeable).
+    if (c.date_from || c.date_to) {
+      setDateRange(c.date_from ? new Date(c.date_from + "T00:00:00") : null,
+                   c.date_to ? new Date(c.date_to + "T00:00:00") : null);
+    }
+    AC.toast("Collection started. Tap + Add on events that interest you.");
+  }
+  function endCanvasMode() {
+    canvasMode = null;
+    canvasPending = null;
+    AC.setActiveCanvas(null);
+    updateCanvasUi();
+  }
+  async function toggleInCanvas(ev, btn) {
+    if (!canvasMode || !ev) return;
+    const who = AC.currentName();  // no prompt: adding is curating
+    const itemId = canvasItemId(ev);
+    btn.disabled = true;
+    try {
+      if (itemId) {
+        await AC.api("DELETE", canvasApiPath("/items/" + encodeURIComponent(itemId)), {actor_name: who});
+        AC.toast("Removed from " + canvasMode.name);
+      } else {
+        await AC.api("POST", canvasApiPath("/items"), {event_id: ev._uid, actor_name: who});
+      }
+    } catch (e) {
+      AC.toast(e.message);
+    }
+    await syncCanvas();
+    updateCanvasUi();
+  }
+  // Tray, the "+ Add" buttons on rendered rows, and the URL's ?canvas=.
+  function updateCanvasUi() {
+    document.body.classList.toggle("canvas-mode", !!canvasMode);
+    trayEl.hidden = !canvasMode;
+    trayEl.innerHTML = canvasMode
+      ? '<span class="tray-label">Adding to <b>' + escapeHtml(canvasMode.name) + "</b> · "
+        + canvasMode.count + (canvasMode.count === 1 ? " item" : " items") + "</span>"
+        + '<a href="' + escapeHtml(AC.canvasPath(canvasMode.id)) + '">View</a>'
+        + '<button type="button" data-tray-done>Done</button>'
+      : "";
+    for (const cal of list.querySelectorAll("details.cal[data-id]")) {
+      cal.parentNode.querySelector(".canvas-add")?.remove();
+      if (canvasMode) cal.insertAdjacentHTML("beforebegin", canvasAddHtml(events[+cal.dataset.id]));
+    }
+    writeStateToUrl();
   }
 })();
 

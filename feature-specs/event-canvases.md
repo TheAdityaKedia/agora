@@ -1,8 +1,72 @@
-# Event canvases — plan a hangout with friends
+# Collections (event canvases) — save events, or plan with friends
 
-**Status: phase 1 (backend) built in `canvas/` — see `canvas/README.md`;
-phases 2–4 not built.** Decisions below were settled with the owner
+> **Naming:** users see **collections** ("Start a collection", "Your
+> collections"); the code, API and table still say **canvas**. This spec
+> started as "plan a hangout with friends" and was widened (2026-10-03, with
+> the owner) to also cover saving events for yourself — see
+> "Collections for yourself" below.
+
+**Status: phase 1 (backend) shipped in `canvas/` (prod + dev live — see
+`canvas/README.md`); phases 2–3 (the pages) built on a branch; phase 4 docs
+partly done.** Decisions below were settled with the owner
 (2026-10-02). Open items are small and listed at the end.
+
+## Collections for yourself (added 2026-10-03)
+
+A collection is just a named list of events with a link, so it serves two
+uses with one model:
+
+- **Social parts appear only once a collection is shared.** A collection you
+  started and nobody else has touched is a plain list (events, Remove,
+  Duplicate). Votes, comments, "Make this the plan", "Added by" and the plan
+  box appear when any of: you opened someone else's link (`canvas.yours` is
+  false), more than one browser has done something on it (`canvas.people >
+  1`, counted server-side from creator / item adders / voters / commenters —
+  ids never leave the server), or you chose **Share this collection** in this
+  browser (a local flag). No new stored state.
+- **Names only when others will see them.** `actor_name` is optional on every
+  write; curating never prompts. The name prompt comes with sharing as-is,
+  voting and commenting (`vote.name` and `comment.name` stay required).
+  Unnamed log rows read "You" on your own collection, "Someone" elsewhere.
+- **Share** on a collection only you have used asks: **Share this
+  collection** (friends add / vote / comment on it) or **Share a copy** (a
+  duplicate for them; yours stays as it is). Already-shared collections go
+  straight to the share sheet. The copy's link is shared from a second tap
+  ("Your copy is ready"), because browsers only open the share sheet right
+  after a tap.
+- **Duplicate** (any collection): a new collection with the same name (or a
+  new one), note, dates and live items; no votes, comments, plan or log.
+  Event items keep their `ev_<event_id>` ids; custom items get new ids;
+  "Added by" names are kept as provenance.
+- **Your collections** (`canvas.html` without `?c=`, linked from the main
+  page header and every collection): every collection this browser has
+  started or opened, in two sections, **Yours** and **Shared with you** (from
+  `canvas.yours` when it was last opened), newest first, up to 100; the
+  default is pinned first; copies you made to share are marked. Per browser
+  until accounts exist; Hide only removes the entry from the list.
+- **This is mine** (multi-device, added 2026-10-03): a collection started on
+  your phone is "Shared with you" on your PC. Tapping **This is mine** (on the
+  collection, or its row) adds that browser to `META.owner_clients` (a string
+  set, ≤ 20): `yours` becomes true there, and all owner devices count as
+  **one** person in `people`, so adding from both keeps it a personal list.
+  **Not mine** undoes it (the creating browser can't be removed). Anyone with
+  the link could claim; it changes only how the collection is shown, never
+  what anyone can do. Accounts / "link this device" would replace this.
+- **Make this my default** (per browser, `localStorage`): the collection
+  ☆ Save will add to; pick the same one on each device. Marked "★ Your
+  default" on the collection and pinned in Your collections.
+- **Private beta** (added 2026-10-03): collections launch behind
+  `BETA_GATE` in `canvas-client.js`. `frontend/beta/index.html` and
+  `frontend/beta/canvas.html` set a per-browser flag and redirect to the real
+  page (`?beta=1`); without the flag the main page shows no collections UI
+  and `canvas.html` shows a "private beta" notice. Links made during the beta
+  use `…/beta/canvas.html?c=`, so recipients get in. Launch = flip the
+  constant; the `/beta/` pages stay forever as redirects so beta-era links
+  keep working (checked by flipping it in a scratch copy). See
+  `canvas/README.md` → "Private beta".
+- Wording: "Start a collection" (tooltip: "Save events that interest you,
+  or plan with friends"), "Your collections", canvas-mode tray "Adding to
+  <name> · N items".
 
 ## The problem
 
@@ -110,7 +174,9 @@ versions so an unchanged canvas costs one tiny read.
   optional dates) and **Browse events to add** on `canvas.html`, which links
   to `index.html?canvas=<id>`.
 - While active (URL `?canvas=<id>`, mirrored to `localStorage` so it survives
-  navigation): each event card shows **+ Add** / **✓ Added**; a sticky bottom
+  navigation; the remembered canvas switches off 24 hours after it was last
+  used, so a later visit to browse isn't still adding to an old plan — a
+  `?canvas=` link always turns it back on): each event card shows **+ Add** / **✓ Added**; a sticky bottom
   tray shows "Adi & Sam hangout · 4 · View · Done". If the canvas has a date
   range, activation applies it as the date filter (user can still change it).
 - "Added" is matched by `event_id`, falling back to `(title, start_time)` so
@@ -135,8 +201,12 @@ versions so an unchanged canvas costs one tiny read.
 - Polling: every 30s while the tab is visible, slowing to every 2 min after
   10 min of no interaction, paused when hidden; immediate refetch after your
   own write.
-- All user text is escaped; custom-item and comment links are linkified only
-  for `http(s)` with `rel="noopener nofollow ugc"`.
+- All user text is escaped. Item links (event URLs, custom-item links) are
+  rendered only for `http(s)`, with `rel="noopener nofollow ugc"`; comments
+  stay plain text (no linkifying) in v1.
+- The custom item's link field is plain text with a URL keyboard, not
+  `type=url` (the browser silently refuses "nopasf.com"); a missing scheme
+  becomes `https://`.
 - Static Agora `og:` tags only (no per-canvas previews, per non-goals).
 
 ### 8. Abuse and cost guard rails (no moderation)
@@ -194,8 +264,10 @@ only.
 
 | Method & path | Body | Result |
 |---|---|---|
-| `POST /canvases` | `{name, actor_name, note?, date_from?, date_to?}` | `201 {canvas, items:[], …}` |
-| `GET /canvases/{id}` | — | `{canvas (incl. version), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
+| `POST /canvases` | `{name, actor_name?, note?, date_from?, date_to?}` | `201 {canvas, items:[], …}` |
+| `POST` / `DELETE /canvases/{id}/claim` | — | count / stop counting this browser as an owner device; the full view (`canvas.yours`, `canvas.claimed`) |
+| `POST /canvases/{id}/duplicate` | `{name?, actor_name?}` | `201` the new canvas's full view (counts against the create rate limit) |
+| `GET /canvases/{id}` | — | `{canvas (incl. version, yours, people), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
 | `GET /canvases/{id}?if_version=N` | — | `200 {unchanged:true, version}` if unchanged (reads only `META`); else the full view. Not a `304`: browsers handle an unsolicited 304 inconsistently in `fetch`. |
 | `PATCH /canvases/{id}` | any of `{name, note, date_from, date_to, winner_item_id}` + `actor_name` | `{canvas}` |
 | `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?}}` + `actor_name` | `201 {item, created:true}`; `200 {item, created:false}` if the event was already there |
@@ -205,6 +277,8 @@ only.
 | `DELETE /canvases/{id}/items/{itemId}/vote` | — | remove this client's vote |
 | `POST /canvases/{id}/items/{itemId}/comments` | `{name, text}` | `201 {comment}` |
 | `DELETE /canvases/{id}/items/{itemId}/comments/{commentId}` | `{actor_name}` | soft delete (any editor) |
+
+`actor_name` is optional everywhere (see "Collections for yourself").
 
 Errors: `400` validation, `404` unknown canvas/item/event, `409` item cap,
 `413` body over 16 KB, `429` rate limit (with `Retry-After`), `503` manifest
@@ -223,14 +297,18 @@ canvas/                     # new; independent of service/ (no scraper deps)
   scripts/smoke.py          # post-deploy create → add → vote → read
   scripts/admin.py          # operator delete / inspect
   tests/                    # pytest + moto
-frontend/canvas.html        # new page (inline CSS/JS, no build, like index.html)
-frontend/index.html         # canvas mode, create flow, my-canvases menu
+frontend/canvas.html        # the canvas (?c=<id>), or "Your canvases" without ?c
+frontend/canvas-client.js   # shared by both pages: API, client id, name, dialogs, toast
+frontend/index.html         # canvas mode (+ Add, tray), "Plan with friends"
+canvas/scripts/e2e_frontend.py  # headless-Chromium run of the whole flow
 .github/workflows/deploy-canvas-api.yml
 ```
 
-Shared client code (client id, name prompt, API wrapper, my-canvases) is
-small enough to duplicate inline in both pages rather than introduce a build
-step; keep the two copies identical and note it in a comment.
+Shared client code (client id, name prompt, API wrapper, my-canvases,
+dialogs, toast) lives in one plain script, `frontend/canvas-client.js`, that
+both pages load — still no build step, and no copies to keep in step. It
+holds the prod and dev API URLs; pages on `localhost` use dev (or
+`?api=<url>`, remembered).
 
 **Deploy:** infrastructure is code (AWS CDK, Python, `canvas/infra/`), so an
 infra change ships like any other change. `deploy-canvas-api.yml` runs

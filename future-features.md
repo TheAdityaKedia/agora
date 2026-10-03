@@ -15,9 +15,10 @@ here.
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)
   (early design; open decisions to settle first).
-- **Event canvases** — make a shareable shortlist of events for a hangout;
-  anyone with the link adds events, votes 👍 by name, comments, and picks a
-  winner. Agora's first live backend (AWS Lambda + DynamoDB).
+- **Collections (event canvases)** — save events for yourself, or share a
+  collection so friends add events, vote 👍 by name, comment and pick a plan;
+  duplicate / share a copy. Agora's first live backend (AWS Lambda +
+  DynamoDB). Next: a one-tap ☆ Save on every event card.
   Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md).
 - **Frontend payload scaling** — the browser downloads all of `events.json` and
   builds the search index on load; past ~5k events ship a prebuilt index and/or

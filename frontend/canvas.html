@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collection — Agora</title>
+<!-- Every collection link shares this generic card (no per-collection
+     previews: the site stays static). Internally a collection is a "canvas". -->
+<meta name="description" content="A collection of Bay Area events on Agora. Save the ones that interest you, or plan something together.">
+<meta property="og:title" content="A collection of events on Agora">
+<meta property="og:description" content="A collection of Bay Area events on Agora. Save the ones that interest you, or plan something together.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#eef1f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1822" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="./vendor/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Same type and palette as index.html (keep the two in step). */
+  @font-face {
+    font-family: "Big Shoulders Display"; font-style: normal; font-weight: 100 900;
+    font-display: swap;
+    src: url(./vendor/fonts/big-shoulders-display-latin.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700;
+    font-display: swap;
+    src: url(./vendor/fonts/instrument-sans-latin.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  :root {
+    --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --fg: #13212e; --muted: #55646e; --accent: #c0362c; --accent-fg: #ffffff;
+    --bg: #eef1f2; --chip-bg: #dfe5e8; --border: #d2dade; --input-bg: #fafbfb;
+    --error: #a3281f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg: #e4e9ec; --muted: #93a3ae; --accent: #f26b4a; --accent-fg: #0e1822;
+      --bg: #0e1822; --chip-bg: #1b2a37; --border: #243644; --input-bg: #15222e;
+      --error: #ff8a75;
+    }
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    font-family: var(--font-body); color: var(--fg); background: var(--bg);
+    max-width: 720px; margin: 0 auto; padding: 0 16px 64px; line-height: 1.5;
+  }
+  button { font: inherit; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .masthead { display: flex; align-items: baseline; justify-content: space-between; padding: 18px 0 4px; }
+  .brand {
+    font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 0.9;
+    text-decoration: none;
+  }
+  .masthead nav a { color: var(--muted); font-size: 14px; }
+  .masthead nav a:hover { color: var(--accent); }
+
+  .loading, .problem { color: var(--muted); padding: 48px 0; text-align: center; }
+  .problem { color: var(--error); }
+
+  /* --- Canvas header: name, dates, note, actions --- */
+  .cv-kicker { margin: 18px 0 2px; color: var(--muted); font-size: 13px; letter-spacing: 0.02em; }
+  .cv-name {
+    margin: 0; font-family: var(--font-display); font-weight: 800;
+    font-size: 40px; line-height: 0.95; overflow-wrap: anywhere;
+  }
+  .editable { cursor: pointer; border-radius: 6px; }
+  .editable:hover { background: var(--chip-bg); }
+  .cv-dates { margin-top: 8px; color: var(--muted); font-size: 15px; }
+  .linkish {
+    background: none; border: 0; padding: 0; color: var(--muted); cursor: pointer;
+    text-decoration: underline; text-underline-offset: 2px; font-size: inherit;
+  }
+  .linkish:hover { color: var(--accent); }
+  .cv-note {
+    margin-top: 10px; padding: 8px 10px; border: 1px dashed var(--border); border-radius: 8px;
+    white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px;
+  }
+  .cv-note.empty { color: var(--muted); }
+  /* Three equal buttons on one row, even on a 360px phone. */
+  .cv-actions { display: flex; gap: 8px; margin: 14px 0 6px; }
+  .cv-actions .btn { flex: 1 1 0; justify-content: center; white-space: nowrap; padding: 9px 8px; font-size: 14px; }
+  @media (max-width: 340px) { .cv-actions { flex-wrap: wrap; } }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 14px; border-radius: 10px; cursor: pointer; text-decoration: none;
+    background: var(--input-bg); color: var(--fg); border: 1px solid var(--border);
+    font-size: 15px;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; }
+
+  /* --- The pick ("we're going to this one") --- */
+  .winner {
+    margin: 18px 0 4px; padding: 14px; border-radius: 12px;
+    border: 2px solid var(--accent); background: var(--input-bg);
+  }
+  .winner-label {
+    font-family: var(--font-display); font-weight: 800; font-size: 18px;
+    letter-spacing: 0.03em; color: var(--accent); text-transform: uppercase;
+  }
+  .winner-title { font-size: 18px; font-weight: 600; margin-top: 2px; overflow-wrap: anywhere; }
+  .winner-when { color: var(--muted); font-size: 14px; }
+  .winner-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; align-items: center; }
+
+  /* --- Items --- */
+  .section-h {
+    margin: 26px 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--fg);
+    font-family: var(--font-display); font-size: 26px; font-weight: 800; line-height: 1.05;
+  }
+  .empty-items { color: var(--muted); padding: 24px 0; }
+  .item {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .item.past { opacity: 0.6; }
+  .item .main { min-width: 0; overflow-wrap: anywhere; }
+  .when { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1.1; }
+  .when .badge {
+    font-family: var(--font-body); font-size: 12px; font-weight: 600; vertical-align: middle;
+    margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+    background: var(--chip-bg); color: var(--muted);
+  }
+  .it-title { font-size: 17px; line-height: 1.3; margin-top: 4px; font-weight: 600; }
+  .it-title a { text-decoration: none; }
+  .it-title a:hover { color: var(--accent); text-decoration: underline; }
+  .it-where, .it-meta { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .it-note { font-size: 14px; margin-top: 4px; white-space: pre-wrap; }
+  .thumb { width: 64px; height: 64px; border-radius: 6px; overflow: hidden; background: var(--chip-bg); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .votes { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 10px; }
+  .vote {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    padding: 6px 12px; border-radius: 999px; font-size: 14px;
+    background: var(--input-bg); color: var(--fg); border: 1px solid var(--border);
+  }
+  .vote:hover { border-color: var(--accent); }
+  .vote[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .vote .n { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .voters { font-size: 14px; color: var(--muted); }
+  .it-foot { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-size: 13px; }
+
+  .cmts { margin-top: 10px; padding-left: 10px; border-left: 2px solid var(--border); }
+  .cmt { font-size: 14px; padding: 3px 0; overflow-wrap: anywhere; }
+  .cmt b { font-weight: 600; }
+  .cmt .txt { white-space: pre-wrap; }
+  /* Time and Delete stay together: they wrap as one, never apart. */
+  .cmt .meta { white-space: nowrap; margin-left: 6px; color: var(--muted); font-size: 12px; }
+  .cmt .del { margin-left: 6px; font-size: 12px; }
+  .cmt-form { display: flex; gap: 6px; margin-top: 6px; }
+  .cmt-form input {
+    flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 7px 10px;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg); color: var(--fg);
+  }
+  .cmt-form input:focus { outline: none; border-color: var(--accent); }
+
+  details.fold { margin-top: 22px; }
+  details.fold > summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+  details.fold ul { list-style: none; padding: 0; margin: 8px 0 0; }
+  details.fold li { font-size: 14px; padding: 4px 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+  details.fold li .t { color: var(--muted); font-size: 12px; margin-left: 6px; }
+  .owner-actions {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+    margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--border);
+    font-size: 14px; color: var(--muted);
+  }
+  .you { margin-top: 10px; font-size: 13px; color: var(--muted); }
+
+  /* --- "Your canvases" (canvas.html with no ?c=) --- */
+  .home h1 { font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 0.95; margin: 18px 0 6px; }
+  .home p { color: var(--muted); margin: 0 0 14px; }
+  .mine { list-style: none; padding: 0; margin: 16px 0 0; }
+  .mine li { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+  .mine a { flex: 1; padding: 12px 0; text-decoration: none; font-weight: 600; overflow-wrap: anywhere; }
+  .mine a:hover { color: var(--accent); }
+  .mine .sub { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+  .mine-h {
+    margin: 28px 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--fg);
+    font-family: var(--font-display); font-size: 24px; font-weight: 800; line-height: 1.05;
+  }
+  .mine-empty, .mine-note { color: var(--muted); font-size: 14px; }
+  .mine .row-acts { display: flex; gap: 14px; flex: 0 0 auto; }
+  .mine-note { margin-top: 24px; }
+
+  @media (min-width: 600px) {
+    .cv-name { font-size: 52px; }
+    .thumb { width: 80px; height: 80px; }
+  }
+  @media (pointer: coarse) { .linkish { padding: 4px 0; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <a class="brand" href="./">Agora</a>
+  <nav><a href="./canvas.html">Your collections</a></nav>
+</header>
+<main id="app"><p class="loading">Loading…</p></main>
+
+<script src="./canvas-client.js"></script>
+<script>
+(() => {
+  "use strict";
+  const AC = window.AgoraCanvas;
+  const app = document.getElementById("app");
+  const cid = new URLSearchParams(location.search).get("c");
+  // Private beta (see BETA_GATE in canvas-client.js).
+  if (!AC.betaEnabled()) {
+    document.title = "Collections — Agora";
+    app.innerHTML = '<section class="home"><h1>Collections are in private beta</h1>'
+      + "<p>If someone sent you a collection, ask them for the link again: it starts with …/agora/beta/.</p>"
+      + '<a class="btn primary" href="./">Browse events on Agora</a></section>';
+    return;
+  }
+
+  const esc = (s) => s == null ? "" : String(s).replace(/[&<>"']/g, c =>
+    ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+  const whenFmt = new Intl.DateTimeFormat(undefined, {weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit"});
+  const dayFmt = new Intl.DateTimeFormat(undefined, {weekday: "short", month: "short", day: "numeric"});
+  const rtf = new Intl.RelativeTimeFormat(undefined, {numeric: "auto"});
+  function ago(iso) {
+    const mins = Math.round((Date.now() - new Date(iso)) / 60000);
+    if (!isFinite(mins)) return "";
+    if (mins < 1) return "just now";
+    if (mins < 60) return rtf.format(-mins, "minute");
+    if (mins < 48 * 60) return rtf.format(-Math.round(mins / 60), "hour");
+    return rtf.format(-Math.round(mins / 1440), "day");
+  }
+  const dateOnly = (s) => s ? new Date(s + "T00:00:00") : null;
+  function datesText(c) {
+    const f = dateOnly(c.date_from), t = dateOnly(c.date_to);
+    if (f && t) return f.getTime() === t.getTime() ? dayFmt.format(f) : dayFmt.format(f) + " – " + dayFmt.format(t);
+    if (f) return "From " + dayFmt.format(f);
+    if (t) return "Until " + dayFmt.format(t);
+    return "";
+  }
+  const safeUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u) ? u : null;
+
+  if (!cid) { initHome(); return; }
+
+  // ======================= the collection =======================
+  // Votes, comments and "the plan" show once a collection involves other
+  // people: you opened someone else's link, more than one browser has done
+  // something on it, or you shared it as-is from this browser. A collection
+  // you're curating for yourself is just a list.
+  const isSocial = (c) => !c.yours || c.people > 1 || AC.isShared(c.id);
+  // The name on a write. "" is fine: curating never asks who you are.
+  const me = () => AC.currentName();
+  let view = null;               // last full GET response
+  let pendingRender = false;     // a poll arrived while someone was typing
+  const openComments = new Set();  // item ids with their comment thread open
+  let lastInteraction = Date.now();
+
+  load();
+
+  async function load() {
+    try {
+      apply(await AC.api("GET", "/canvases/" + encodeURIComponent(cid)));
+    } catch (e) {
+      if (e.status === 404) AC.forgetCanvas(cid);
+      app.innerHTML = '<p class="problem">' + esc(e.status === 404
+        ? "This collection doesn't exist. Check that the link was copied in full."
+        : e.message) + '</p><p class="loading"><a href="./">Browse events on Agora</a></p>';
+    }
+  }
+
+  function apply(v) {
+    view = v;
+    AC.rememberCanvas(v.canvas);
+    document.title = v.canvas.name + " — Agora";
+    render();
+  }
+
+  // Don't redraw under someone's cursor: a poll that lands while a comment
+  // is being typed waits until the field loses focus.
+  function render() {
+    const typing = document.activeElement && app.contains(document.activeElement)
+      && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+    if (typing) { pendingRender = true; return; }
+    pendingRender = false;
+    const scroll = window.scrollY;
+    app.innerHTML = canvasHtml(view);
+    window.scrollTo(0, scroll);
+  }
+  app.addEventListener("focusout", () => setTimeout(() => { if (pendingRender) render(); }, 0));
+
+  function canvasHtml(v) {
+    const c = v.canvas;
+    const dates = datesText(c);
+    const winner = c.winner_item_id ? v.items.find(i => i.id === c.winner_item_id) : null;
+    const name = AC.currentName();
+    const social = isSocial(c);
+    const isDefault = AC.defaultCanvasId() === c.id;
+    return '<p class="cv-kicker">Collection' + (isDefault ? " · ★ Your default" : "") + "</p>"
+      + '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
+      + '<div class="cv-dates">' + (dates ? esc(dates) + " · " : "")
+      + '<button type="button" class="linkish" data-act="edit-dates">' + (dates ? "Change dates" : "Set dates") + "</button></div>"
+      + (c.note
+        ? '<div class="cv-note editable" data-act="edit-note" title="Edit note">' + esc(c.note) + "</div>"
+        : '<div class="cv-note empty editable" data-act="edit-note">Add a note' + (social ? ", like “dinner first, then a show?”" : "") + "</div>")
+      + '<div class="cv-actions">'
+      + '<button type="button" class="btn primary" data-act="share">Share</button>'
+      + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
+      + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
+      + "</div>"
+      + (social && winner ? winnerHtml(winner) : "")
+      + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
+      + (v.items.length ? v.items.map(itemHtml).join("")
+        : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
+      + (v.removed.length ? '<details class="fold"><summary>Removed (' + v.removed.length + ")</summary><ul>"
+        + v.removed.map(r => "<li>" + esc(titleOf(r)) + ' <span class="t">removed'
+          + (social && r.removed_by_name ? " by " + esc(r.removed_by_name) : "")
+          + " " + esc(ago(r.removed_at)) + '</span> <button type="button" class="linkish" data-act="restore" data-id="'
+          + esc(r.id) + '">Restore</button></li>').join("") + "</ul></details>" : "")
+      + (v.log.length ? '<details class="fold"><summary>Activity</summary><ul>'
+        + v.log.map(e => "<li>" + esc(logText(e)) + ' <span class="t">' + esc(ago(e.at)) + "</span></li>").join("")
+        + "</ul></details>" : "")
+      // Ownership and default: "This is mine" counts this browser as one of
+      // the owner's devices (for a collection started on another phone or
+      // computer); the default is where ☆ Save adds events, per browser.
+      + '<p class="owner-actions">'
+      + (isDefault
+        ? '<span>★ Your default collection</span><button type="button" class="linkish" data-act="unset-default">Unset</button>'
+        : '<button type="button" class="linkish" data-act="set-default">Make this my default</button>')
+      + (!c.yours
+        ? '<button type="button" class="linkish" data-act="claim" title="Started this on another phone or computer? Mark it as yours here too.">This is mine</button>'
+        : c.claimed ? '<button type="button" class="linkish" data-act="unclaim">Not mine</button>' : "")
+      + '<button type="button" class="linkish" data-act="duplicate">Duplicate this collection</button>'
+      + "</p>"
+      + '<p class="you">'
+      + (social
+        ? (name ? "You’re <b>" + esc(name) + "</b> here. " : "")
+          + '<button type="button" class="linkish" data-act="rename-me">' + (name ? "Change your name" : "Set your name") + "</button>"
+          + " · Anyone with the link can see and edit this collection."
+        : "Only people you send the link to can see it.")
+      + "</p>";
+  }
+
+  const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
+  const startOf = (it) => it.start_time ? new Date(it.start_time) : null;
+  const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
+
+  function itemHtml(it) {
+    const start = startOf(it);
+    const past = start && start < new Date();
+    const url = linkOf(it);
+    const title = url
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
+      : esc(titleOf(it));
+    let where = "";
+    if (it.event) {
+      const bits = [it.event.location, (it.event.sources || []).length ? "Listed by " + it.event.sources.join(", ") : ""].filter(Boolean);
+      where = bits.length ? '<div class="it-where">' + esc(bits.join(" · ")) + "</div>" : "";
+    }
+    const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
+    const img = it.event && safeUrl(it.event.image_url)
+      ? '<div class="thumb"><img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()"></div>' : "";
+    const voters = it.votes.map(v => v.name);
+    const social = isSocial(view.canvas);
+    const cmtOpen = social && openComments.has(it.id);
+    const isWinner = social && view.canvas.winner_item_id === it.id;
+    return '<article class="item' + (past ? " past" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
+      + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
+      + (past ? '<span class="badge">Past</span>' : "") + (isWinner ? '<span class="badge">The plan</span>' : "") + "</div>"
+      + '<div class="it-title">' + title + "</div>" + where + note
+      + (social && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
+      + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
+      + '" aria-label="' + (it.you_voted ? "You’re in. Tap to undo" : "I’m in") + '">👍 <span>' + (it.you_voted ? "You’re in" : "I’m in")
+      + '</span><span class="n">' + voters.length + "</span></button>"
+      + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
+      + '<div class="it-foot">'
+      + (social ? '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
+        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
+        + (isWinner ? '<button type="button" class="linkish" data-act="unpick">Unpick</button>'
+          : '<button type="button" class="linkish" data-act="pick">Make this the plan</button>') : "")
+      + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
+      + (cmtOpen ? commentsHtml(it) : "")
+      + "</div>" + img + "</article>";
+  }
+
+  function commentsHtml(it) {
+    return '<div class="cmts">' + it.comments.map(c =>
+      '<div class="cmt"><b>' + esc(c.name) + '</b> <span class="txt">' + esc(c.text) + "</span>"
+      + '<span class="meta">' + esc(ago(c.at))
+      + '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button></span></div>'
+    ).join("")
+      + '<form class="cmt-form" data-act="comment"><input name="text" maxlength="500" placeholder="Add a comment" aria-label="Add a comment" autocomplete="off">'
+      + '<button type="submit" class="btn">Post</button></form></div>';
+  }
+
+  function winnerHtml(it) {
+    const start = startOf(it);
+    return '<section class="winner" aria-label="The plan"><div class="winner-label">The plan</div>'
+      + '<div class="winner-title">' + esc(titleOf(it)) + "</div>"
+      + '<div class="winner-when">' + esc([start ? whenFmt.format(start) : "", it.event && it.event.location].filter(Boolean).join(" · ")) + "</div>"
+      + '<div class="winner-actions">'
+      + (start ? '<a class="btn primary" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Add to Google Calendar</a>'
+        + '<button type="button" class="linkish" data-act="ics" data-id="' + esc(it.id) + '">Apple or Outlook (.ics)</button>' : "")
+      + (linkOf(it) ? '<a class="linkish" target="_blank" rel="noopener nofollow ugc" href="' + esc(linkOf(it)) + '">Details and tickets</a>' : "")
+      + "</div></section>";
+  }
+
+  function logText(e) {
+    // Unnamed writes (made before a name was set): on your own collection
+    // they're almost certainly yours; to anyone else, "Someone".
+    const a = e.actor_name || (view.canvas.yours ? "You" : "Someone");
+    const t = e.item_title ? "“" + e.item_title + "”" : "an item";
+    switch (e.action) {
+      case "created": return a + " started this collection";
+      case "duplicated": return a + " made this as a copy of “" + (e.name || "a collection") + "”";
+      case "added": return a + " added " + t;
+      case "removed": return a + " removed " + t;
+      case "restored": return a + " restored " + t;
+      case "voted": return a + " is in for " + t;
+      case "commented": return a + " commented on " + t;
+      case "deleted_comment": return a + " deleted a comment on " + t;
+      case "picked_winner": return a + " made " + t + " the plan";
+      case "cleared_winner": return a + " cleared the plan";
+      case "renamed": return a + " renamed the collection" + (e.name ? " to “" + e.name + "”" : "");
+      case "edited_note": return a + " edited the note";
+      case "set_dates": return a + " changed the dates";
+      default: return a + " made a change";
+    }
+  }
+
+  // --- calendar export for the plan (events carry only a start time) ---
+  const CAL_HOURS = 2;
+  const calStamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  function calNotes(it) {
+    return [AC.canvasUrl(cid), linkOf(it)].filter(Boolean).join("\n\n");
+  }
+  function googleCalUrl(it) {
+    const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
+    const p = new URLSearchParams({action: "TEMPLATE", text: titleOf(it),
+      dates: calStamp(s) + "/" + calStamp(e), details: calNotes(it)});
+    if (it.event && it.event.location) p.set("location", it.event.location);
+    return "https://calendar.google.com/calendar/render?" + p;
+  }
+  function downloadIcs(it) {
+    const x = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&").replace(/\r?\n/g, "\\n");
+    const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Canvas//EN", "BEGIN:VEVENT",
+      "UID:" + cid + "-" + it.id + "@agora", "DTSTAMP:" + calStamp(new Date()),
+      "DTSTART:" + calStamp(s), "DTEND:" + calStamp(e), "SUMMARY:" + x(titleOf(it))];
+    if (it.event && it.event.location) lines.push("LOCATION:" + x(it.event.location));
+    lines.push("DESCRIPTION:" + x(calNotes(it)), "END:VEVENT", "END:VCALENDAR");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([lines.join("\r\n") + "\r\n"], {type: "text/calendar;charset=utf-8"}));
+    a.download = (titleOf(it).replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60) || "plan") + ".ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  }
+
+  // --- actions ---
+  const P = (sub) => "/canvases/" + encodeURIComponent(cid) + (sub || "");
+  const itemP = (id, sub) => P("/items/" + encodeURIComponent(id) + (sub || ""));
+
+  // Run a write, then refresh. Errors become a toast; the view refreshes
+  // either way so it never shows a state the server doesn't have.
+  async function act(fn, okMsg) {
+    lastInteraction = Date.now();
+    try {
+      await fn();
+      if (okMsg) AC.toast(okMsg);
+    } catch (e) {
+      AC.toast(e.message);
+    }
+    await refresh();
+  }
+  async function refresh() {
+    try { apply(await AC.api("GET", P())); } catch {}
+  }
+  async function named() {
+    const n = await AC.ensureName();
+    return n || null;
+  }
+
+  // Share: a collection already shared goes straight to the share sheet.
+  // One you've been curating alone asks first: share it as-is (friends add
+  // and vote on it), or share a copy (theirs to change; yours stays yours).
+  async function shareFlow() {
+    const c = view.canvas;
+    if (isSocial(c)) return AC.share(AC.canvasUrl(c.id), c.name);
+    const how = await AC.choiceDialog({
+      title: "Share “" + c.name + "”",
+      options: [
+        {value: "this", label: "Share this collection",
+         desc: "Friends can add events, 👍 the ones they’re up for and comment. Good for making plans together."},
+        {value: "copy", label: "Share a copy",
+         desc: "They get their own copy to change. Yours stays just as it is."},
+      ]});
+    if (how === "this") {
+      if (!await named()) return;  // friends will see who's who
+      AC.markShared(c.id);
+      render();
+      return AC.share(AC.canvasUrl(c.id), c.name);
+    }
+    if (how !== "copy") return;
+    let copy;
+    try {
+      copy = (await AC.api("POST", P("/duplicate"), {actor_name: me()})).canvas;
+    } catch (e) {
+      return AC.toast(e.message);
+    }
+    AC.rememberCanvas(copy, {sent_copy: true});
+    // Browsers only open the share sheet straight after a tap, so ask for one.
+    const go = await AC.choiceDialog({
+      title: "Your copy is ready",
+      text: "Send this link. Whatever happens on the copy won’t touch your collection.",
+      options: [{value: "share", label: "Share the copy’s link"}],
+      cancel: "Close"});
+    if (go) AC.share(AC.canvasUrl(copy.id), copy.name);
+  }
+
+  app.addEventListener("click", async (e) => {
+    const el = e.target.closest("[data-act]");
+    if (!el || el.tagName === "FORM") return;
+    lastInteraction = Date.now();
+    const art = el.closest(".item");
+    const id = el.dataset.id || (art && art.dataset.id);
+    const it = view && view.items.find(i => i.id === id);
+    switch (el.dataset.act) {
+      case "share":
+        return shareFlow();
+      case "duplicate": {
+        const out = await AC.formDialog({title: "Duplicate",
+          text: "A new collection with the same events, dates and note, and no votes or comments.",
+          fields: [{name: "name", label: "Name", value: ("Copy of " + view.canvas.name).slice(0, 80),
+                    required: true, max: 80}],
+          submit: "Duplicate"});
+        if (!out) return;
+        try {
+          const r = await AC.api("POST", P("/duplicate"), {name: out.name, actor_name: me()});
+          AC.rememberCanvas(r.canvas);
+          location.href = AC.canvasPath(r.canvas.id);
+        } catch (err) { AC.toast(err.message); }
+        return;
+      }
+      case "edit-name": {
+        const out = await AC.formDialog({title: "Rename collection", fields: [
+          {name: "name", label: "Name", value: view.canvas.name, required: true, max: 80}]});
+        if (!out || out.name === view.canvas.name) return;
+        const who = me();
+        return act(() => AC.api("PATCH", P(), {name: out.name, actor_name: who}));
+      }
+      case "edit-note": {
+        const out = await AC.formDialog({title: "Note", fields: [
+          {name: "note", label: "Note", type: "textarea", value: view.canvas.note, max: 1000}]});
+        if (!out || out.note === (view.canvas.note || "")) return;
+        const who = me();
+        return act(() => AC.api("PATCH", P(), {note: out.note, actor_name: who}));
+      }
+      case "edit-dates": {
+        const out = await AC.formDialog({title: "Dates", text: "Leave both empty for any time.", fields: [
+          {name: "date_from", label: "From", type: "date", value: view.canvas.date_from},
+          {name: "date_to", label: "To", type: "date", value: view.canvas.date_to}],
+          validate: (v) => v.date_from && v.date_to && v.date_from > v.date_to ? "The end date is before the start date." : ""});
+        if (!out) return;
+        const who = me();
+        return act(() => AC.api("PATCH", P(), {date_from: out.date_from || null,
+          date_to: out.date_to || null, actor_name: who}));
+      }
+      case "add-custom": {
+        const out = await AC.formDialog({title: "Add your own",
+          text: "Anything that isn’t on Agora: dinner, a park, a friend’s show.",
+          fields: [
+            {name: "title", label: "What", required: true, max: 120, placeholder: "Dinner at Nopa"},
+            {name: "start", label: "When (optional)", type: "datetime-local"},
+            // Text, not type=url: the browser would silently refuse "nopasf.com".
+            {name: "url", label: "Link (optional)", inputmode: "url", placeholder: "nopasf.com", max: 500,
+             autocomplete: "url"},
+            {name: "note", label: "Note (optional)", type: "textarea", max: 500}],
+          submit: "Add",
+          validate: (v) => v.url && !/^https?:\/\/\S+\.\S+/i.test(v.url) && !/^\S+\.\S+$/.test(v.url)
+            ? "That link doesn’t look right." : ""});
+        if (!out) return;
+        const who = me();
+        const custom = {title: out.title};
+        if (out.start) custom.start_time = new Date(out.start).toISOString();
+        if (out.url) custom.url = /^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url;
+        if (out.note) custom.note = out.note;
+        return act(() => AC.api("POST", P("/items"), {custom, actor_name: who}));
+      }
+      case "vote": {
+        if (!it) return;
+        if (it.you_voted) return act(() => AC.api("DELETE", itemP(id, "/vote")));
+        const who = await named(); if (!who) return;
+        el.setAttribute("aria-pressed", "true");  // instant feedback; refresh confirms
+        return act(() => AC.api("PUT", itemP(id, "/vote"), {name: who}));
+      }
+      case "comments":
+        if (openComments.has(id)) openComments.delete(id); else openComments.add(id);
+        render();
+        if (openComments.has(id)) app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input')?.focus();
+        return;
+      case "del-comment": {
+        const who = me();
+        return act(() => AC.api("DELETE", itemP(id, "/comments/" + encodeURIComponent(el.dataset.cmid)), {actor_name: who}));
+      }
+      case "pick": case "unpick": {
+        const who = me();
+        return act(() => AC.api("PATCH", P(), {winner_item_id: el.dataset.act === "pick" ? id : null, actor_name: who}));
+      }
+      case "remove": {
+        if (!it) return;
+        const who = me();
+        await act(() => AC.api("DELETE", itemP(id), {actor_name: who}));
+        AC.toast("Removed “" + titleOf(it) + "”", {label: "Undo",
+          run: () => act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}))});
+        return;
+      }
+      case "restore": {
+        const who = me();
+        return act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}));
+      }
+      case "ics":
+        if (it) downloadIcs(it);
+        return;
+      case "set-default":
+        AC.setDefaultCanvas(cid);
+        AC.toast("Saved events will go to “" + view.canvas.name + "” on this device.");
+        return render();
+      case "unset-default":
+        AC.setDefaultCanvas(null);
+        return render();
+      case "claim": case "unclaim":
+        try {
+          apply(await AC.claimCanvas(cid, el.dataset.act === "claim"));
+          AC.toast(el.dataset.act === "claim"
+            ? "It’s under Yours on this device now." : "Moved to Shared with you on this device.");
+        } catch (err) { AC.toast(err.message); }
+        return;
+      case "rename-me":
+        await AC.ensureName(true);
+        return render();
+    }
+  });
+
+  app.addEventListener("submit", async (e) => {
+    const form = e.target.closest('form[data-act="comment"]');
+    if (!form) return;
+    e.preventDefault();
+    const input = form.elements.text;
+    const text = input.value.trim();
+    if (!text) return;
+    const id = form.closest(".item").dataset.id;
+    const who = await named(); if (!who) return;
+    input.disabled = true;
+    try {
+      await AC.api("POST", itemP(id, "/comments"), {name: who, text});
+      input.value = "";
+    } catch (err) {
+      AC.toast(err.message);
+    }
+    input.disabled = false;
+    input.blur();
+    await refresh();
+  });
+
+  // --- polling: every 30s while visible, every 2 min after 10 idle minutes,
+  // paused while the tab is hidden. ?if_version= makes an unchanged canvas
+  // one tiny read. ---
+  let lastPoll = Date.now();
+  async function poll() {
+    if (document.hidden || !view) return;
+    lastPoll = Date.now();
+    try {
+      const r = await AC.api("GET", P() + "?if_version=" + view.canvas.version);
+      if (!r.unchanged) apply(r);
+    } catch {}
+  }
+  setInterval(() => {
+    const idle = Date.now() - lastInteraction > 10 * 60e3;
+    if (Date.now() - lastPoll >= (idle ? 120e3 : 30e3)) poll();
+  }, 5000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(); });
+  for (const ev of ["pointerdown", "keydown", "scroll"]) {
+    addEventListener(ev, () => { lastInteraction = Date.now(); }, {passive: true});
+  }
+
+  // ======================= "Your collections" =======================
+  // Every collection this browser has started or opened (a shared link
+  // counts the moment it's opened), so nobody has to dig the link back out.
+  function renderHome() {
+    const mine = AC.myCanvases();
+    const dflt = AC.defaultCanvasId();
+    // Entries saved before `yours` was tracked count as yours. The default
+    // collection is pinned first.
+    const yours = mine.filter(c => c.yours !== false)
+      .sort((a, b) => (b.id === dflt) - (a.id === dflt));
+    const shared = mine.filter(c => c.yours === false);
+    const row = (c) => {
+      const sub = [c.id === dflt ? "★ Default" : "", datesText(c),
+                   c.sent_copy ? "Copy you shared" : "",
+                   c.opened_at ? "Opened " + ago(c.opened_at) : ""].filter(Boolean).join(" · ");
+      // Move between the sections: claim it as yours (started on another
+      // device), or undo a claim. Collections created here can't be unclaimed.
+      const move = c.yours === false
+        ? '<button type="button" class="linkish" data-claim="' + esc(c.id) + '">This is mine</button>'
+        : c.claimed ? '<button type="button" class="linkish" data-unclaim="' + esc(c.id) + '">Not mine</button>' : "";
+      return '<li><a href="' + esc(AC.canvasPath(c.id)) + '">' + esc(c.name)
+        + (sub ? '<span class="sub">' + esc(sub) + "</span>" : "") + "</a>"
+        + '<span class="row-acts">' + move
+        + '<button type="button" class="linkish" data-forget="' + esc(c.id) + '" aria-label="Hide '
+        + esc(c.name) + ' from this list">Hide</button></span></li>';
+    };
+    const section = (title, list, empty) => '<h2 class="mine-h">' + title
+      + (list.length ? " (" + list.length + ")" : "") + "</h2>"
+      + (list.length ? '<ul class="mine">' + list.map(row).join("") + "</ul>"
+        : '<p class="mine-empty">' + empty + "</p>");
+    document.title = "Your collections — Agora";
+    app.innerHTML = '<section class="home"><h1>Your collections</h1>'
+      + "<p>Save events that interest you, or plan something with friends: add events to a collection, then share its link if you like.</p>"
+      + '<button type="button" class="btn primary" id="new-canvas">Start a collection</button>'
+      + section("Yours", yours, "Collections you start show up here. Started one on another device? Open its link here and tap “This is mine”.")
+      + section("Shared with you", shared, "When someone sends you a collection link, it shows up here once you open it.")
+      + '<p class="mine-note">This list lives in this browser. On another phone or computer, open a collection’s link once and it’s added there too; tap “This is mine” to file it under Yours there. Hide only removes it from this list; the collection itself stays.</p>'
+      + "</section>";
+  }
+  function initHome() {
+    app.addEventListener("click", async (e) => {
+      if (e.target.closest("#new-canvas")) {
+        try {
+          const c = await AC.createCanvasDialog();
+          if (c) location.href = AC.canvasPath(c.id);
+        } catch (err) { AC.toast(err.message); }
+        return;
+      }
+      const claim = e.target.closest("[data-claim], [data-unclaim]");
+      if (claim) {
+        const on = "claim" in claim.dataset;
+        try {
+          await AC.claimCanvas(on ? claim.dataset.claim : claim.dataset.unclaim, on);
+        } catch (err) {
+          if (err.status === 404) AC.forgetCanvas(claim.dataset.claim || claim.dataset.unclaim);
+          AC.toast(err.message);
+        }
+        return renderHome();
+      }
+      const b = e.target.closest("[data-forget]");
+      if (!b) return;
+      AC.forgetCanvas(b.dataset.forget);
+      if (AC.defaultCanvasId() === b.dataset.forget) AC.setDefaultCanvas(null);
+      renderHome();
+    });
+    renderHome();
+  }
+})();
+</script>
+</body>
+</html>
