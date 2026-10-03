@@ -7,7 +7,13 @@ events. Structure (spiked):
     `/bar/<slug>` URL.
   - Each `/bar/<slug>` page carries a JSON-LD `BarOrPub` with an `event[]` array;
     every event has `name`, `description`, a next-occurrence `startDate`
-    (tz-aware), and `eventSchedule.repeatFrequency` (e.g. "P1W").
+    (tz-aware), `eventSchedule.repeatFrequency` (e.g. "P1W"), and sometimes an
+    `offers.price`.
+  - The JSON-LD `description` is auto-generated boilerplate ("X at Y. Fridays at
+    5 PM."). The human-written blurb ("Femme forward dance & pop party, FREE
+    admission") lives only in the page's embedded Next.js flight payload, keyed
+    by event name — we pull it from there and append it to the description so
+    the tagger sees it.
 
 We fetch the homepage, then each bar page concurrently, and expand every event's
 recurrence into concrete dated occurrences within a rolling window (see
@@ -17,6 +23,7 @@ time stay distinct rows.
 from __future__ import annotations
 
 import json
+import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -69,6 +76,42 @@ def find_bar_urls(home_html: str) -> list[str]:
     return []
 
 
+# A Next.js flight chunk: self.__next_f.push([1,"<JSON-escaped string>"])
+_FLIGHT_RE = re.compile(r'self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)')
+# A listing component's props inside the decoded payload: {"event":{...}}
+_EVENT_OBJ_RE = re.compile(r'\{"event":(\{.*?\})\}')
+
+
+def parse_event_notes(html: str) -> dict[str, str]:
+    """Map event name → human-written notes from the Next.js flight payload."""
+    decoded: list[str] = []
+    for m in _FLIGHT_RE.finditer(html):
+        try:
+            decoded.append(json.loads(m.group(1)))
+        except json.JSONDecodeError:
+            continue
+    notes: dict[str, str] = {}
+    for m in _EVENT_OBJ_RE.finditer("".join(decoded)):
+        try:
+            ev = json.loads(m.group(1))
+        except json.JSONDecodeError:
+            continue
+        name, note = ev.get("name"), ev.get("notes")
+        if name and note and name not in notes:
+            notes[name] = note
+    return notes
+
+
+def _admission(offers) -> str | None:
+    """Render JSON-LD offers.price as text the cost classifier can read."""
+    price = (offers or {}).get("price") if isinstance(offers, dict) else None
+    try:
+        value = float(price)
+    except (TypeError, ValueError):
+        return None
+    return "Free admission." if value == 0 else f"Admission ${price}."
+
+
 def _format_address(addr) -> str | None:
     if isinstance(addr, str):
         return addr
@@ -93,6 +136,7 @@ def parse_bar_events(bar_html: str, now=None) -> list[RawEvent]:
     venue_addr = _format_address(bar.get("address"))
     location = f"{venue}, {venue_addr}" if venue_addr else venue
     bar_url = bar.get("url")
+    notes_by_name = parse_event_notes(bar_html)
 
     events: list[RawEvent] = []
     for ev in bar.get("event") or []:
@@ -107,6 +151,13 @@ def parse_bar_events(bar_html: str, now=None) -> list[RawEvent]:
             continue
         sched = ev.get("eventSchedule") or {}
         freq = sched.get("repeatFrequency")
+        parts = [ev.get("description"), notes_by_name.get(name)]
+        base = " ".join(p.strip() for p in parts if p and p.strip())
+        adm = _admission(ev.get("offers"))
+        # Notes often already say "FREE admission" — don't repeat it.
+        if adm and adm.rstrip(".").lower() not in base.lower():
+            base = f"{base} {adm}".strip()
+        description = base or None
         for occ in expand_occurrences(start, freq, DEFAULT_HORIZON_DAYS, now=now):
             events.append(RawEvent(
                 # Venue in the title so (title, start_time) dedup stays unique
@@ -115,7 +166,7 @@ def parse_bar_events(bar_html: str, now=None) -> list[RawEvent]:
                 start_time=occ,
                 location=location,
                 url=bar_url,
-                description=ev.get("description"),
+                description=description,
                 image_url=None,
             ))
     return events

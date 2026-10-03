@@ -63,6 +63,31 @@ def test_event_fields_populated():
     assert ev.description and "Trivia" in ev.description
 
 
+def test_parse_event_notes_from_flight_payload():
+    notes = sfbarguide.parse_event_notes(BAR)
+    assert notes == {"Trivia Night": "Hosted by Quiz Marx; prizes for the top three teams"}
+
+
+def test_description_enriched_with_notes_and_admission():
+    """The flight-payload notes and offers.price feed the tagger — the JSON-LD
+    description alone is boilerplate."""
+    trivia = next(e for e in sfbarguide.parse_bar_events(BAR, now=NOW)
+                  if e.title.startswith("Trivia"))
+    assert "Hosted by Quiz Marx" in trivia.description
+    assert "Free admission." in trivia.description
+    # Bingo has no notes and no offers — plain JSON-LD description survives.
+    bingo = next(e for e in sfbarguide.parse_bar_events(BAR, now=NOW)
+                 if e.title.startswith("Bingo"))
+    assert bingo.description == "Bingo Night at Abbey Tavern. Wednesdays at 7:00 PM."
+
+
+def test_admission_renders_free_paid_and_garbage():
+    assert sfbarguide._admission({"price": "0"}) == "Free admission."
+    assert sfbarguide._admission({"price": "15"}) == "Admission $15."
+    assert sfbarguide._admission({"price": "n/a"}) is None
+    assert sfbarguide._admission(None) is None
+
+
 def test_scrape_walks_homepage_then_bar_pages(monkeypatch):
     # Stub the two fetchers: homepage → HOME, any bar url → BAR.
     monkeypatch.setattr(sfbarguide, "_fetch", lambda url: HOME if url.rstrip("/").endswith("sfbarguide.com") else BAR)
