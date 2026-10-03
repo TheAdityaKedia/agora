@@ -375,6 +375,16 @@ def test_neighborhoods_are_only_in_sf():
     assert neighborhood_at(37.8236, -122.3706) == "treasure-island"
 
 
+def test_pier_venues_snap_to_the_nearest_neighborhood():
+    # DataSF's shapes stop at the shoreline; piers are just outside them.
+    from places.regions import neighborhood_at, _in_polys, _neighborhoods
+    for lat, lng in [(37.8075, -122.4320), (37.8095, -122.4215)]:  # Fort Mason pier, Hyde St Pier
+        assert not any(_in_polys(lng, lat, polys) for _, _, polys in _neighborhoods())
+    assert neighborhood_at(37.8075, -122.4320) == "marina"
+    assert neighborhood_at(37.8095, -122.4215) == "russian-hill"
+    assert neighborhood_at(37.80, -122.36) is None    # out in the bay
+
+
 def test_name_plus_address_falls_back_to_the_address(store):
     q = "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA"
     resp = {"57 Wentworth Place, San Francisco, CA": [

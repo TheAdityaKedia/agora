@@ -20,10 +20,13 @@ Neighborhoods" (dataset j2bu-swwd, PDDL), regenerated with:
 then coordinates rounded to 5 decimals and each feature given an `id` (a
 slug of `nhood`; South of Market is `soma`) and a `label` (slashes spaced;
 "SoMa"). One feature per line. See feature-specs/venues.md, phase 4.
+These shapes stop at the shoreline, so neighborhood_at snaps a point just
+offshore (a pier) to the nearest one.
 """
 from __future__ import annotations
 
 import json
+import math
 import re
 from functools import lru_cache
 from pathlib import Path
@@ -184,10 +187,32 @@ def region_at(lat: float, lng: float) -> str | None:
     return REGION_OF_COUNTY.get(county) if county else None
 
 
+# DataSF's neighbourhoods stop at the shoreline (unlike the county shapes,
+# which include their water), so a pier venue (Fort Mason's, Hyde St) lands
+# in no polygon. Within this distance of one, it takes the nearest.
+SHORE_SNAP_M = 300
+
+
+def _metres_to_ring(lng: float, lat: float, ring: list) -> float:
+    """Distance from the point to the ring's edges (equirectangular: fine
+    at city scale)."""
+    kx, ky = 111_320 * math.cos(math.radians(lat)), 110_540
+    best = math.inf
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:]):
+        ax, ay = (x1 - lng) * kx, (y1 - lat) * ky
+        bx, by = (x2 - lng) * kx, (y2 - lat) * ky
+        dx, dy = bx - ax, by - ay
+        t = 0.0 if dx == dy == 0 else max(0.0, min(1.0, -(ax * dx + ay * dy) / (dx * dx + dy * dy)))
+        best = min(best, math.hypot(ax + t * dx, ay + t * dy))
+    return best
+
+
 def neighborhood_at(lat: float, lng: float) -> str | None:
-    """The SF neighbourhood id containing the point, or None (outside SF,
-    or in the bay between the shapes)."""
+    """The SF neighbourhood id containing the point, else the nearest one
+    within SHORE_SNAP_M (piers), else None (outside SF, or out in the bay)."""
     for nid, _label, polys in _neighborhoods():
         if _in_polys(lng, lat, polys):
             return nid
-    return None
+    dist, nid = min((min(_metres_to_ring(lng, lat, poly[0]) for poly in polys), nid)
+                    for nid, _label, polys in _neighborhoods())
+    return nid if dist <= SHORE_SNAP_M else None
