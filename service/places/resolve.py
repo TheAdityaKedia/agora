@@ -7,7 +7,9 @@ Steps, in order (feature-specs/venues.md → "Resolving a new location string"):
 3. Just a city — "San Francisco, CA" → region only.
 4. A room of a known venue — "SFJAZZ Center — Miner Auditorium".
 5. Geocode with Nominatim and apply the evidence rules.
-6. Otherwise pending, with the reason.
+6. AI-assisted: the model proposes a name/address to look up; the result
+   must pass the same rules against the source's text (assist.py).
+7. Otherwise pending, with the reason (and the model's suggestion).
 
 Unknown beats wrong: nothing is assigned unless independent signals agree.
 """
@@ -17,6 +19,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 
+from . import assist
 from .geocode import BudgetExhausted, Place
 from .normalize import names_match, normalize_key, venue_part
 from .regions import REGION_OF_COUNTY, city_in_text, city_segment, county_at, whole_string_city
@@ -55,13 +58,15 @@ class Outcome:
     entry: dict | None
     reason: str | None = None
     evidence: list[str] = field(default_factory=list)
+    suggestion: dict | None = None
 
 
 class Resolver:
     def __init__(self, store: Store, geocoder, today: date | None = None,
-                 retry_pending: bool = False):
+                 retry_pending: bool = False, assistant: assist.Assistant | None = None):
         self.store = store
         self.geo = geocoder
+        self.assistant = assistant
         self.today = today or date.today()
         self.retry_pending = retry_pending
 
@@ -88,6 +93,7 @@ class Resolver:
                 "last_tried": self.today.isoformat(),
                 "events": events,
                 "sources": sorted(set(sources)),
+                **({"suggestion": out.suggestion} if out.suggestion else {}),
             }}
         self.store.locations[key] = out.entry
         return out
@@ -151,7 +157,32 @@ class Resolver:
                            evidence=[f"text: {outside_city.title()}", "map: outside the Bay Area"])
         reasons = [r for r in reasons if not r.startswith("outside:")] or \
             [r.split(":", 1)[1] for r in reasons] or ["no map result in the Bay Area"]
-        return Outcome(location, "pending", None, reason=reasons[0])
+        out = Outcome(location, "pending", None, reason=reasons[0])
+        proposal = self.assistant.propose(location, sources) if self.assistant else None
+        if proposal:
+            accepted, seen = self._try_proposal(location, vp, room, proposal, city, home)
+            if accepted:
+                return accepted
+            out.suggestion = _suggestion(proposal, seen)
+        return out
+
+    def _try_proposal(self, location, vp, room, proposal, city, home) -> tuple[Outcome | None, Place | None]:
+        """Look up what the model proposed; accept only what the evidence
+        rules accept against the source's own text (`vp`, `location`), so a
+        model-only address or name is never a signal. Also returns the first
+        Bay Area map result, for the reviewer."""
+        seen = None
+        for query in assist.queries(proposal):
+            for place in self.geo.search(query):
+                if seen is None and county_at(place.lat, place.lng):
+                    seen = place
+                # Street/city-level matches stay unused: they'd rest on the
+                # model's address alone.
+                out = self._judge(location, vp, room, vp, place, city, home, [], [])
+                if out:
+                    out.evidence.append(f"ai: proposed {assist.summary(proposal)}")
+                    return out, seen
+        return None, seen
 
     def _known_venue(self, vp: str) -> str | None:
         k = normalize_key(vp)
@@ -284,6 +315,16 @@ class Resolver:
         vid = self.store.add_venue(fields)
         entry = {"venue": vid, **({"room": room} if room else {})}
         return Outcome(location, "new", entry, evidence=evidence)
+
+
+def _suggestion(proposal: dict, place: Place | None) -> dict:
+    """The model's proposal (and what the map made of it) for a pending entry."""
+    s = {"kind": proposal["kind"]}
+    s.update({k: proposal[k] for k in ("name", "street_address", "city") if proposal.get(k)})
+    if place is not None:
+        s["map"] = {"label": place.name or place.display_name.split(",")[0],
+                    "osm": place.osm, "lat": round(place.lat, 6), "lng": round(place.lng, 6)}
+    return s
 
 
 def _text_address(location: str) -> str | None:
