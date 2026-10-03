@@ -354,6 +354,21 @@ def test_joined_house_numbers_match(store):
     assert resolver(store, resp).resolve(q, ["SF Bar Guide"]).action == "new"
 
 
+def test_joined_house_numbers_take_the_text_address(store):
+    q = "2300 Chestnut St, San Francisco, CA 94123"
+    resp = {q: [nominatim("", 37.8003, -122.4405, category="building", type_="yes",
+                          house="2300;2310;2314;2320", road="Chestnut Street",
+                          city="San Francisco")]}
+    out = resolver(store, resp).resolve(q, ["Partiful"])
+    assert store.venues[out.entry["venue"]]["address"] == "2300 Chestnut St, San Francisco, CA 94123"
+
+
+def test_street_address_keeps_the_first_of_joined_numbers():
+    place = Place.from_json(nominatim("", 37.8003, -122.4405, house="2300;2310", road="Chestnut Street",
+                                      city="San Francisco"))
+    assert place.street_address().startswith("2300 Chestnut Street, San Francisco")
+
+
 def test_named_city_outside_bay_area_is_outside_not_pending(store):
     q = "1001 Center St, Santa Cruz, CA"
     resp = {q: [nominatim("Food Lounge", 36.9741, -122.0308, city="Santa Cruz")]}

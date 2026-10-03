@@ -66,7 +66,9 @@ class Place:
 
     def street_address(self) -> str:
         a = self.address
-        street = " ".join(x for x in (a.get("house_number"), a.get("road")) if x)
+        # A building spanning several numbers is "2300;2310;2314": keep the first.
+        number = (a.get("house_number") or "").split(";")[0].strip()
+        street = " ".join(x for x in (number, a.get("road")) if x)
         city = a.get("city") or a.get("town") or a.get("village") or a.get("hamlet") or ""
         tail = " ".join(x for x in ("CA", a.get("postcode")) if x)
         return ", ".join(x for x in (street, city, tail) if x)
