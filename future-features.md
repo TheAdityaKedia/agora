@@ -62,3 +62,99 @@ here.
   "Offsite: …" title can win over the venue's). Pre-v1 duplicates were merged
   on 2026-09-29 with `service/dedupe_existing.py` (29 rows).
   Spec: not written.
+
+## Ideas — better social life in SF (not yet planned)
+
+Brainstormed 2026-10-03. Not committed work: pick one, write its spec in
+`feature-specs/`, then move it up into the list above. Roughly smallest first.
+
+- **"Meet people" filter** — most events are sit-and-watch; trivia, run
+  clubs, classes, mixers, open mics and volunteer shifts are for meeting
+  people. Add a tagging dimension (sit-and-watch / some mingling / built for
+  meeting people, plus solo-friendly) via a prompt change and a `retag.yml`
+  run; a "Meet people" filter or preset and a "Going alone?" hint on rows.
+  Small, mostly a tagging problem.
+- **Subscribable calendar feeds** — any filtered view as a live calendar
+  subscription (`webcal://…/feeds/<view>.ics`) so events land in Google/Apple
+  Calendar without opening the site. The export writes static ICS feeds for
+  common views (each area, topic, series) plus a "Subscribe" button for the
+  current filters. Stays static (no backend). Small–medium.
+- **"Become a regular"** — repeated exposure is what turns strangers into
+  friends; weekly trivia, run clubs, monthly book clubs and standing open
+  mics provide it. Detect recurring series (same source/venue/title pattern
+  on a weekly or monthly rhythm, across sources that format titles
+  differently), show a "Regulars" view grouped by series ("Every Tue · Trivia
+  at Bottom's Up"), and let people follow a series. Medium; the series
+  detection is the hard part.
+- **Collections → actual plans** — collections already gather events and
+  votes; add a "which nights work?" availability poll, "lock in" (the winning
+  event becomes calendar invites for everyone) and day-before reminders to
+  whoever's going. Builds on the live collections backend. Medium.
+- **Weekly "Your weekend" email** — a Thursday email with 5–8 picks matched
+  to saved interests and areas, plus anything new from followed series.
+  Needs subscriptions (collections backend), sending (SES), unsubscribe and a
+  ranking step (Haiku for blurbs). Builds a weekly habit. Medium–large.
+- **Lower the bar for small organizers** — the most social events
+  (neighbourhood potlucks, small clubs, community classes) rarely use
+  ticketing platforms. A web submission form next to the email path, a
+  "recurring" option, and an organizer page to keep their series current.
+  Medium.
+- **Agora Tables** — monthly matching of small groups of strangers (5–6) by
+  interest, sent to an event together, with dinner after (Timeleft's model,
+  built around events). Needs sign-ups, matching, deposits against no-shows,
+  safety/moderation, likely venue partners. The big bet: most impact, most
+  work and responsibility.
+
+Suggested order: "Meet people" + calendar feeds first (small, change how the
+site is used, no backend), then "Become a regular".
+
+## Ideas — monetization and revenue (not yet planned)
+
+Brainstormed 2026-10-03. The asset is trust ("a free, honest guide to
+what's on"), so every option keeps to these **guardrails**: paid placement
+is always labelled and never touches ranking, filters or search; no selling
+user data (collections, submissions, any future accounts stay private);
+anything commercial built on scraped listings credits and links the source,
+and reselling content needs opt-in or a partnership.
+
+Near-term (little product work):
+- **Ticket affiliate commissions** — referral codes on outbound ticket links
+  where a platform has a programme (Eventbrite, Ticketmaster, Tixr, DICE, …).
+  Check each platform's terms; commission never affects ordering.
+- **Newsletter sponsorship** — once the weekly "Your weekend" email exists,
+  one clearly labelled sponsor slot per issue (local SF newsletters prove
+  the model).
+- **Supporter membership ("Friends of Agora")** — a few dollars a month:
+  early access to Tables, perks negotiated with venues, a supporter badge.
+  Revenue aligned with the mission.
+
+Medium (needs the organizer path from the social-life ideas):
+- **Featured listings** — organizers pay for a marked "Featured" slot,
+  capped per day, separate from organic results; Stripe on the web
+  submission form.
+- **"Claim your venue" pro tools** — a venue/organizer subscription: views,
+  clicks, saves and calendar adds for their events; fix details and manage
+  recurring series; priority submission review. Builds on stable venue ids.
+  Most durable business-to-business revenue.
+- **Restaurant/bar referrals around events** — "dinner before the show" near
+  the venue via OpenTable/Resy partner links or direct deals; uses venue
+  coordinates from the maps work.
+
+Bigger bets:
+- **Agora Tables (paid seats)** — a per-seat fee ($15–25) or a cut of a
+  set-price dinner on matched small-group outings. Highest margin and most
+  aligned with the social-life goal; also the most operations (matching,
+  safety, refunds, venue partners).
+- **Group-booking deals** — when a collection settles on an event, offer a
+  negotiated group ticket for a commission. Builds on collections → plans.
+- **Business data feed and embeds** — a clean, deduplicated, tagged,
+  geocoded Bay Area events feed or a "What's on near here" widget for
+  apartment buildings, hotels/concierge apps, offices and tourism sites.
+  Best per-customer revenue, but **needs a legal review first**: event facts
+  are generally shareable, but descriptions and images belong to the sources
+  and many sources' terms limit commercial reuse — likely facts + links only,
+  or opt-in sources.
+
+Suggested order: ticket affiliate links now; newsletter sponsorship and
+membership once the weekly email ships; then claim-your-venue pro tools;
+Tables as the long-term bet.
