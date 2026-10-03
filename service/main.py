@@ -210,7 +210,7 @@ def scrape_and_save(url: str) -> None:
 
 
 def classify_upcoming(classifier=None, client=None, cache_path=None, log=print,
-                      source_names=None):
+                      source_names=None, time_budget_s=None, stats=None):
     """Gather distinct upcoming shows from the DB and classify cache misses.
 
     A show is a distinct (source, title) keyed on the event's first source;
@@ -248,8 +248,9 @@ def classify_upcoming(classifier=None, client=None, cache_path=None, log=print,
 
     shows = _classify.select_shows(rows)
     cache = Cache(cache_path)
+    budget = {} if time_budget_s is None else {"time_budget_s": time_budget_s}
     return _classify.classify_new_shows(shows, cache, classifier=classifier,
-                                        client=client, log=log)
+                                        client=client, log=log, stats=stats, **budget)
 
 
 def _places_assistant():

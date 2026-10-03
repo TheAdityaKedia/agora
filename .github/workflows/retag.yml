@@ -1,0 +1,71 @@
+name: Re-tag events
+
+# On demand: re-tag stale or missing classifications (after a taxonomy bump,
+# or when a throttled scrape left some for later) and ship the manifest —
+# without re-running any scraper. Tags upcoming events already in Neon, then
+# exports and ships through the same guard → data PR → deploy path as the
+# scrape. Stages: service/ci.py retag; docs: README.md → "Scheduled scraping".
+#
+# Off main it uses the ci-test DB and ships into a throwaway sandbox branch,
+# like the scrape.
+on:
+  workflow_dispatch:
+    inputs:
+      budget_minutes:
+        description: "Minutes to spend tagging (max 55); what's left waits for the next run"
+        required: false
+        default: "40"
+
+permissions:
+  contents: read
+
+jobs:
+  retag:
+    runs-on: ubuntu-latest
+    # Tagging budget (≤55 min) + export + ship.
+    timeout-minutes: 70
+    environment: ${{ github.ref_name == 'main' && 'production' || 'ci-test' }}
+    # One Neon writer at a time: waits for a running scrape merge or ingest,
+    # and they wait for it.
+    concurrency:
+      group: neon-writer-${{ github.ref_name }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write   # gh workflow run deploy-pages.yml
+      id-token: write  # AWS OIDC
+    env:
+      IS_MAIN: ${{ github.ref_name == 'main' }}
+    steps:
+      - uses: actions/checkout@v7
+        # The branch tip at job start: another writer may have merged a data PR
+        # while this job waited on the lock.
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: service/requirements.txt
+      - run: pip install -r service/requirements.txt
+      # Unlike the scrape, tagging is the whole point: no credentials, no run.
+      - name: AWS credentials for Bedrock
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Re-tag and export
+        working-directory: service
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          EVENTS_JSON_PATH: ${{ github.workspace }}/frontend/events.json
+          BUDGET: ${{ inputs.budget_minutes }}
+        run: |
+          python ci.py retag --report "$RUNNER_TEMP/report.json" --budget-minutes "${BUDGET:-40}"
+      - name: Ship manifest
+        uses: ./.github/actions/ship-manifest
+        with:
+          report: ${{ runner.temp }}/report.json
+          gh-token: ${{ github.token }}
+          is-main: ${{ env.IS_MAIN }}
