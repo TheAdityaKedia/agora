@@ -52,6 +52,22 @@ def load_sources() -> list[str]:
     return [line.strip() for line in SOURCES_FILE.read_text().splitlines() if line.strip()]
 
 
+_VENUE_OF = []
+
+
+def _venue_of():
+    """dedup's venue lookup from the committed venue files, loaded once per
+    process (save time reads; only the merge job's resolve step writes)."""
+    if not _VENUE_OF:
+        try:
+            from places.store import Store
+            _VENUE_OF.append(dedup.venue_lookup(Store()))
+        except Exception as e:  # unreadable files: text rules only
+            print(f"[dedup] venue files not used ({type(e).__name__})", flush=True)
+            _VENUE_OF.append(None)
+    return _VENUE_OF[0]
+
+
 def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event | None:
     """Return the existing Event that matches `raw`, or None.
 
@@ -80,7 +96,7 @@ def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event 
     if source is not None:
         for e in same_time:
             if source not in (e.sources or []) and dedup.is_near_duplicate(
-                    raw.title, raw.location, e.title, e.location):
+                    raw.title, raw.location, e.title, e.location, _venue_of()):
                 return e
     return None
 
