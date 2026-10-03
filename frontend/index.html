@@ -340,7 +340,7 @@
     grid-column: 2; grid-row: 1 / span 2;
     width: 64px; height: 64px; position: relative;
     display: grid; place-items: center; overflow: hidden;
-    border-radius: 6px;
+    border-radius: 6px; text-decoration: none;
     background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.14);
     color: hsl(var(--h) var(--chip-s) var(--chip-l));
   }
@@ -2496,13 +2496,17 @@
     const typeLabel = (typeLabels.get((ev.types || [])[0]?.[0]) || "").split(" / ")
       .reduce((a, b) => (b.length < a.length ? b : a));
     const hue = ev.topics?.length ? topicHue(ev.topics[0]) : GROUP_HUE.type;
-    const thumb = '<div class="thumb" style="--h:' + hue + '">'
+    // The tile links to the event too (a bigger target than the title on a
+    // phone); hidden from keyboards and screen readers, which have the title.
+    const thumbTag = ev.url ? "a" : "div";
+    const thumb = "<" + thumbTag + ' class="thumb" style="--h:' + hue + '"'
+      + (ev.url ? ' href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"' : "") + ">"
       + (typeLabel ? '<span class="thumb-label">' + escapeHtml(typeLabel) + "</span>" : "")
       + (ev.image_url
         ? '<img loading="lazy" decoding="async" alt="" src="' + escapeHtml(ev.image_url)
           + '" onerror="this.remove()">'
         : "")
-      + "</div>";
+      + "</" + thumbTag + ">";
     return (
       '<article class="event" data-start="' + escapeHtml(ev.start_time)
         + '" data-region="' + escapeHtml(ev.region || "") + '">' +
