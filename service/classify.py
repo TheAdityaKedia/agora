@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import json
 import re
+import time
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
@@ -283,6 +285,17 @@ def _is_fresh(entry: Classification) -> bool:
     return entry.taxonomy_version == taxonomy.CURRENT_TAXONOMY_VERSION
 
 
+# Concurrent model calls, and how long one run may spend tagging. A taxonomy
+# bump re-tags the whole catalog (~2,300 shows): one at a time that outran
+# the merge job's 30-minute timeout and, since the cache saved only at the
+# end, lost everything. Within the budget a run tags what it can and saves;
+# the next run picks up the rest (stale tags keep showing until then).
+WORKERS = 8
+TIME_BUDGET_S = 15 * 60
+# Stop early when the model is unreachable (no credentials, wrong region).
+GIVE_UP_AFTER_FAILURES = 20
+
+
 def classify_new_shows(
     shows: list[dict],
     cache,
@@ -290,24 +303,62 @@ def classify_new_shows(
     classifier=classify_show,
     client=None,
     log=print,
+    workers: int = WORKERS,
+    time_budget_s: float = TIME_BUDGET_S,
+    clock=time.monotonic,
 ) -> tuple[int, int]:
     """Classify shows not already covered by a fresh cache entry. Returns
-    (classified, cached). Saves the cache once at the end. Steady state (no new
-    shows, same taxonomy) makes zero LLM calls."""
-    classified = cached = 0
-    total = len(shows)
-    for i, show in enumerate(shows, 1):
+    (classified, cached). Calls run `workers` at a time; no new call starts
+    after `time_budget_s`. A show whose models all fail is skipped (retried
+    next run). Saves the cache once at the end, whatever happened. Steady
+    state (no new shows, same taxonomy) makes zero LLM calls."""
+    todo, cached = [], 0
+    for show in shows:
         existing = cache.get(show["source"], show["title"])
         if existing is not None and _is_fresh(existing):
             cached += 1
-            continue
-        entry = classifier(show["title"], show["source"], show.get("description"),
-                           client=client)
-        cache.put(entry)
-        classified += 1
-        if log and classified % 25 == 0:
-            log(f"[classify] {classified} classified ({i}/{total} seen)")
+        else:
+            todo.append(show)
+    if todo and client is None and classifier is classify_show:
+        client = make_client()  # one shared client (thread-safe), not one per call
+
+    deadline = clock() + time_budget_s
+    classified = failed = 0
+    queue = iter(todo)
+    in_flight = set()
+
+    def unreachable():
+        return classified == 0 and failed >= GIVE_UP_AFTER_FAILURES
+
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        def fill():
+            while len(in_flight) < 2 * max(1, workers) and clock() < deadline and not unreachable():
+                show = next(queue, None)
+                if show is None:
+                    return
+                in_flight.add(pool.submit(classifier, show["title"], show["source"],
+                                          show.get("description"), client=client))
+        fill()
+        while in_flight:
+            done, _ = wait(in_flight, return_when=FIRST_COMPLETED)
+            for f in done:
+                in_flight.discard(f)
+                try:
+                    cache.put(f.result())
+                except Exception as e:  # skip it; the next run retries
+                    failed += 1
+                    if log and failed <= 3:
+                        log(f"[classify] failed: {e}")
+                    continue
+                classified += 1
+                if log and classified % 100 == 0:
+                    log(f"[classify] {classified}/{len(todo)} classified")
+            fill()
     cache.save()
+    left = len(todo) - classified - failed
     if log:
-        log(f"[classify] done: {classified} classified, {cached} cached")
+        log(f"[classify] done: {classified} classified, {cached} cached, {failed} failed"
+            + (f", {left} left for the next run (time budget)" if left and not unreachable() else ""))
+    if unreachable():
+        raise RuntimeError(f"model unreachable: first {failed} calls failed")
     return classified, cached
