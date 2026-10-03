@@ -78,6 +78,10 @@
     margin: 0; font-family: var(--font-display); font-weight: 800;
     font-size: 46px; line-height: 0.9; letter-spacing: 0.01em;
   }
+  .brand { display: flex; align-items: baseline; gap: 8px; }
+  .byline { color: var(--muted); font-size: 14px; }
+  .byline a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .byline a:hover { color: var(--accent); }
   .subtitle { color: var(--muted); margin-top: 6px; }
 
   /* --- Sticky search bar: search + Filters button, then date presets. --- */
@@ -307,10 +311,10 @@
   .day-more {
     display: block; width: 100%; margin: 4px 0 8px; padding: 10px 14px;
     border-radius: 8px; cursor: pointer;
-    background: transparent; color: var(--accent);
-    border: 1px solid var(--border); font-weight: 600;
+    background: var(--accent); color: var(--accent-fg);
+    border: 1px solid var(--accent); font-weight: 600;
   }
-  .day-more:hover { border-color: var(--accent); }
+  .day-more:hover { filter: brightness(1.08); }
   /* The marquee: times in the signage face, read before anything else. */
   .time {
     grid-column: 1; color: var(--fg);
@@ -591,7 +595,7 @@
 <body>
 <header class="masthead">
   <div>
-    <h1>Agora</h1>
+    <div class="brand"><h1>Agora</h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
     <div class="subtitle">Events around the Bay, in one calendar.</div>
   </div>
   <div class="plan" id="plan" hidden>
