@@ -637,7 +637,8 @@ def map_site(tmp_path_factory):
 
 
 def _map_page(browser, site, viewport=DESKTOP, query="", touch=False):
-    """A page with the map's tile server unreachable (as in CI: no network)."""
+    """A page with the map's tile server unreachable (as in CI: no network),
+    so the map falls back to pins on a blank background."""
     ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, timezone_id=TZ)
     ctx.route("https://tiles.openfreemap.org/**", lambda route: route.abort())
     page = ctx.new_page()
@@ -650,11 +651,154 @@ def _map_page(browser, site, viewport=DESKTOP, query="", touch=False):
     return page
 
 
+def _wait_for_pins(page):
+    page.wait_for_function("performance.getEntriesByName('agora:map-pins').length > 0", timeout=20000)
 
 
+def _pins(page):
+    """{venue id: event count} as the map's source has it."""
+    return page.evaluate("""(async () => {
+        const data = await agoraMap.getSource('venues').getData();
+        return Object.fromEntries(data.features.map(f => [f.properties.venue, f.properties.events]));
+    })()""")
 
 
-def test_neighborhood_filter(browser, map_site):
+def _click_lnglat(page, lnglat):
+    pt = page.evaluate("(ll) => { const p = agoraMap.project(ll); return [p.x, p.y]; }", list(lnglat))
+    box = page.locator("#map").bounding_box()
+    page.mouse.click(box["x"] + pt[0], box["y"] + pt[1])
+
+
+def _settle(page):
+    page.wait_for_function("agoraMap.loaded() && !agoraMap.isMoving()", timeout=10000)
+
+
+def test_map_ui_only_with_coordinates(browser, site, legacy_site, map_site):
+    # Today's manifest (venues without coordinates or neighborhoods), and an
+    # older one: no toggle, no neighborhood filter, and ?view=map is ignored.
+    for s in (site, legacy_site):
+        page = _map_page(browser, s, query="?view=map&at=37.77,-122.42,13&hood=mission")
+        assert page.locator("#view-toggle").is_hidden()
+        assert page.locator("#hood-dropdown").is_hidden()
+        assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0
+        assert "view=" not in page.url and "hood=" not in page.url
+        assert not any("maplibre" in u for u in page._agora_requests)
+        assert page._agora_errors == []
+    page = _map_page(browser, map_site)
+    assert page.locator("#view-toggle").is_visible() and page.locator("#hood-dropdown").is_visible()
+
+
+def test_map_library_loads_only_when_the_map_opens(browser, map_site):
+    page = _map_page(browser, map_site, viewport=PHONE, touch=True)
+    page.wait_for_timeout(800)  # past the first render and the index build
+    assert not any("maplibre" in u for u in page._agora_requests)
+    page.click('[data-view="map"]')
+    _wait_for_pins(page)
+    loaded = [u.rsplit("/", 1)[1] for u in page._agora_requests if "maplibre" in u]
+    assert "maplibre-gl.mjs" in loaded and "maplibre-gl.css" in loaded
+    assert "view=map" in page.url and page.locator("#list").is_hidden()
+    assert page.get_attribute('[data-view="map"]', "aria-pressed") == "true"
+    # Tiles unreachable: pins on a blank background, and the map says so.
+    assert "Base map unavailable" in page.inner_text("#map-status")
+    assert page._agora_errors == []
+    # Back to the list.
+    page.click('[data-view="list"]')
+    assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0 and "view=" not in page.url
+
+
+def test_pins_are_per_venue_and_follow_the_filters(browser, map_site):
+    events = [e for e in _map_events() if e["id"] != "started"]
+    want = {}
+    for e in events:
+        if e["venue"]:
+            want[e["venue"]] = want.get(e["venue"], 0) + 1
+    page = _map_page(browser, map_site, query="?view=map")
+    _wait_for_pins(page)
+    assert _pins(page) == want
+    no_venue = sum(1 for e in events if not e["venue"])
+    assert f"{no_venue} events have no map location" in page.inner_text("#meta")
+    # Type: talks are the poetry readings, none of which has a venue.
+    page.click('#type-chips [data-tagval="talk"]')
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '0'")
+    assert _pins(page) == {}
+    assert "No events here have a map location" in page.inner_text("#map-status")
+    page.click('#type-chips [data-tagval="talk"]')
+    # Search narrows the pins too.
+    page.fill("#search-input", "Busy day")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '1'")
+    assert _pins(page) == {"dawn-club": BUSY}
+    page.fill("#search-input", "")
+    # The venue filter: one pin.
+    page = _map_page(browser, map_site, query="?view=map&venue=roxie")
+    _wait_for_pins(page)
+    assert list(_pins(page)) == ["roxie"]
+
+
+def test_clicking_a_pin_lists_its_events(browser, map_site):
+    roxie = sum(1 for e in _map_events() if e["venue"] == "roxie")
+    page = _map_page(browser, map_site, query="?view=map&at=37.7649,-122.4226,15.5")
+    _wait_for_pins(page)
+    _settle(page)
+    _click_lnglat(page, ROXIE)
+    page.wait_for_selector("#map-panel:not([hidden]) .event")
+    head = page.inner_text("#map-panel .panel-head")
+    assert "Roxie Theater" in head and f"{roxie} events" in head
+    rows = page.locator("#map-panel .event")
+    assert rows.count() == min(roxie, 30)
+    assert set(rows.locator(".location-btn").all_inner_texts()) == {"Roxie Theater"}
+    # Rows open the event like the list's (title links out; dates shown).
+    assert rows.first.locator(".title a").get_attribute("href").startswith("https://example.com/e/")
+    assert rows.first.locator(".td-date").count() == 1
+    page.click("#map-panel [data-panel-all]")
+    assert page.locator("#map-panel .event").count() == roxie
+    # "Show in list": the venue filter, in the list.
+    page.click("#map-panel [data-panel-list]")
+    assert "venue=roxie" in page.url and "view=" not in page.url
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"Roxie Theater"}
+
+
+def test_clicking_a_cluster_zooms_in(browser, map_site):
+    page = _map_page(browser, map_site, query="?view=map&at=37.7750,-122.4200,9")
+    _wait_for_pins(page)
+    _settle(page)
+    clusters = page.evaluate("agoraMap.queryRenderedFeatures({layers: ['clusters']}).length")
+    assert clusters >= 1
+    center = page.evaluate("agoraMap.queryRenderedFeatures({layers: ['clusters']})[0].geometry.coordinates")
+    _click_lnglat(page, center)
+    page.wait_for_function("agoraMap.getZoom() > 9.5", timeout=10000)
+
+
+def test_approximate_pin_is_labelled(browser, map_site):
+    page = _map_page(browser, map_site, query="?view=map&at=37.7764,-122.4347,16")
+    _wait_for_pins(page)
+    _settle(page)
+    _click_lnglat(page, ALAMO)
+    page.wait_for_selector("#map-panel:not([hidden]) .event")
+    assert "Approximate location" in page.inner_text("#map-panel .panel-head")
+
+
+def test_map_view_and_position_restore_from_the_url(browser, map_site):
+    page = _map_page(browser, map_site, viewport=PHONE, touch=True,
+                     query="?view=map&at=37.7650,-122.4200,14.5")
+    _wait_for_pins(page)
+    c = page.evaluate("[agoraMap.getCenter().lat, agoraMap.getCenter().lng, agoraMap.getZoom()]")
+    assert abs(c[0] - 37.765) < 1e-3 and abs(c[1] + 122.42) < 1e-3 and abs(c[2] - 14.5) < 1e-6
+    assert page.get_attribute('[data-view="map"]', "aria-pressed") == "true"
+    # Moving the map rewrites ?at=.
+    page.evaluate("agoraMap.jumpTo({center: [-122.41, 37.78], zoom: 13})")
+    page.wait_for_function("decodeURIComponent(location.search).includes('at=37.7800,-122.4100,13')")
+    # Garbled or out-of-area positions are ignored: the map fits the pins.
+    for bad in ("at=nonsense", "at=48.85,2.35,12", "at=37.77,-122.42,99"):
+        page = _map_page(browser, map_site, query="?view=map&" + bad)
+        _wait_for_pins(page)
+        assert page._agora_errors == []
+        z = page.evaluate("agoraMap.getZoom()")
+        assert 9 < z <= 14
+        lng, lat = page.evaluate("[agoraMap.getCenter().lng, agoraMap.getCenter().lat]")
+        assert -122.45 < lng < -122.39 and 37.76 < lat < 37.79
+
+
+def test_neighborhood_filter_in_list_and_map(browser, map_site):
     events = [e for e in _map_events() if e["id"] != "started"]
     roxie = sum(1 for e in events if e["venue"] == "roxie")
     page = _map_page(browser, map_site)
@@ -680,11 +824,17 @@ def test_neighborhood_filter(browser, map_site):
     regions = set(page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)"))
     assert regions == {"sf", "eastbay"}
     page.click('#area-chips [data-area="eastbay"]')
-    # The badge counts it; the pill's × clears it.
+    # The map shows the same: one pin, the Roxie.
+    page.click('[data-view="map"]')
+    _wait_for_pins(page)
+    assert _pins(page) == {"roxie": roxie}
+    assert "view=map" in page.url and "hood=mission" in page.url
+    # Pill × clears it (and the badge counts it while it's on).
     page.set_viewport_size(PHONE)
     assert page.inner_text("#filters-count") == "1"
     page.click('#active-filters [data-clear="hood"]')
-    assert "hood=" not in page.url and not page.is_checked('#hood-list [data-hood="mission"]')
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '3'")
+    assert "hood=" not in page.url
     page.set_viewport_size(DESKTOP)
     # A shared link restores it; Reset clears it.
     page = _map_page(browser, map_site, query="?hood=mission,soma,nowhere")

@@ -106,11 +106,24 @@
     border-radius: 999px; background: var(--accent); color: var(--accent-fg);
     font-size: 12px; text-align: center;
   }
-  /* Presets scroll sideways on a phone instead of wrapping onto three lines. */
+  /* Presets scroll sideways on a phone instead of wrapping onto three lines;
+     the List | Map toggle stays pinned at the end of the row. */
+  .view-line { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
   .presets {
-    display: flex; gap: 8px; margin-top: 8px;
+    display: flex; gap: 8px; flex: 1; min-width: 0;
     overflow-x: auto; scrollbar-width: none;
   }
+  /* A view, not a filter: ink when on, like the day strip's current day. */
+  .view-toggle {
+    flex: 0 0 auto; display: flex; padding: 2px; gap: 2px;
+    border: 1px solid var(--border); border-radius: 999px; background: var(--input-bg);
+  }
+  .view-btn {
+    padding: 3px 12px; border-radius: 999px; cursor: pointer; font-size: 14px;
+    background: transparent; color: var(--muted); border: 0;
+  }
+  .view-btn:hover { color: var(--fg); }
+  .view-btn[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
   .presets::-webkit-scrollbar { display: none; }
   .preset-btn {
     flex: 0 0 auto;
@@ -501,6 +514,68 @@
   .hood-dropdown { margin-top: 10px; }
   .hood-dropdown .dropdown-item .count { margin-left: auto; }
 
+  /* --- Map view (feature-specs/venues.md, phase 4). The map fills the
+     screen below the sticky bar; its height is set from JS. --- */
+  .map-wrap {
+    position: relative; margin-top: 8px; height: 60vh; min-height: 300px;
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    background: var(--chip-bg);
+  }
+  /* (More specific than MapLibre's .maplibregl-map { position: relative }.) */
+  .map-wrap > .map { position: absolute; inset: 0; }
+  .map-status {
+    position: absolute; z-index: 2; top: 10px; left: 50%; transform: translateX(-50%);
+    max-width: calc(100% - 100px); padding: 5px 12px; border-radius: 999px;
+    background: var(--bg); color: var(--fg); font-size: 13px; text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .map-status button {
+    font: inherit; color: var(--accent); background: none; border: 0; padding: 0 0 0 4px;
+    cursor: pointer; text-decoration: underline;
+  }
+  /* Events at a venue: a bottom sheet on phones, a side panel on desktop. */
+  .map-panel {
+    position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; max-height: 62%;
+    overflow-y: auto; overscroll-behavior: contain;
+    background: var(--bg); border-radius: 14px 14px 0 0; box-shadow: var(--sheet-shadow);
+    padding: 0 14px 12px;
+  }
+  .panel-head {
+    position: sticky; top: 0; z-index: 1; background: var(--bg);
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 12px 0 8px; border-bottom: 1px solid var(--border);
+  }
+  .panel-head .panel-title { flex: 1; min-width: 0; }
+  .panel-head h2 { margin: 0; font-size: 17px; line-height: 1.25; overflow-wrap: anywhere; }
+  .panel-head .panel-sub { font-size: 13px; color: var(--muted); }
+  .panel-close {
+    flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; cursor: pointer;
+    background: var(--chip-bg); color: var(--fg); border: 0; font-size: 18px; line-height: 1;
+  }
+  .panel-actions { display: flex; gap: 8px; margin-top: 6px; }
+  .panel-more { margin-top: 8px; }
+  /* Rows in the panel keep the phone layout at every width. */
+  .map-panel .event { grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; }
+  .map-panel .time { grid-column: 1; grid-row: auto; font-size: 20px; line-height: 1.1; }
+  .map-panel .time .ampm { display: inline; margin: 0 0 0 0.15em; font-size: 0.6em; }
+  .map-panel .time .td-date { display: inline; margin: 0 8px 0 0; }
+  .map-panel .details { grid-column: 1; grid-row: auto; }
+  .map-panel .title { margin-top: 4px; }
+  .map-panel .thumb { grid-column: 2; grid-row: 1 / span 2; width: 56px; height: 56px; }
+  .map-panel .event:last-of-type { border-bottom: none; }
+  .maplibregl-ctrl-attrib { font-size: 11px; }
+  @media (prefers-color-scheme: dark) {
+    .map-wrap .maplibregl-ctrl-attrib, .map-wrap .maplibregl-ctrl-attrib-button { background-color: rgba(14,24,34,0.85); }
+    .map-wrap .maplibregl-ctrl-attrib, .map-wrap .maplibregl-ctrl-attrib a { color: var(--muted); }
+  }
+  @media (min-width: 1024px) {
+    .map-panel {
+      left: auto; top: 0; width: 380px; max-height: none;
+      border-radius: 0; box-shadow: -8px 0 24px rgba(0,0,0,0.18);
+    }
+  }
+  body.map-view .day-strip { display: none !important; }
+
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
   .error { color: var(--error); }
   /* Placeholder rows while events.json downloads and parses. */
@@ -531,12 +606,18 @@
     <input type="search" id="search-input" placeholder="Search events, venues, topics" aria-label="Search events" autocomplete="off" enterkeyhint="search">
     <button type="button" class="filters-btn" id="filters-btn" aria-controls="filters" aria-expanded="false">Filters<span class="badge" id="filters-count" hidden></span></button>
   </div>
+  <div class="view-line">
   <div class="presets" role="group" aria-label="Dates">
     <button type="button" class="preset-btn" id="preset-today">Today</button>
     <button type="button" class="preset-btn" id="preset-tomorrow">Tomorrow</button>
     <button type="button" class="preset-btn" id="preset-weekend">This weekend</button>
     <button type="button" class="preset-btn" id="preset-week">This week</button>
     <button type="button" class="preset-btn" id="preset-month">This month</button>
+  </div>
+  <div class="view-toggle" id="view-toggle" role="group" aria-label="View" hidden>
+    <button type="button" class="view-btn" data-view="list" aria-pressed="true">List</button>
+    <button type="button" class="view-btn" data-view="map" aria-pressed="false">Map</button>
+  </div>
   </div>
   <nav class="day-strip" id="day-strip" aria-label="Jump to a day" hidden></nav>
 </div>
@@ -629,6 +710,11 @@
 <main>
   <div class="active-filters" id="active-filters"></div>
   <div class="meta" id="meta"></div>
+  <div class="map-wrap" id="map-wrap" hidden>
+    <div class="map" id="map" role="region" aria-label="Map of the events in the list"></div>
+    <div class="map-status" id="map-status" role="status" hidden></div>
+    <aside class="map-panel" id="map-panel" aria-label="Events at this place" hidden></aside>
+  </div>
   <div id="list">
     <div class="skeleton" aria-busy="true">
       <p class="loading-note">Loading events…</p>
@@ -1193,8 +1279,11 @@
   // topic selected (the default) no topic chip should look filled.
   const topicFilterActive = () => selectedTopics.size !== allTopics.length;
 
-  // Event delegation for anything inside the event list.
-  list.addEventListener("click", (e) => {
+  // Event delegation for anything inside the event list (and the map's
+  // venue panel, which shows the same rows).
+  list.addEventListener("click", onRowClick);
+  list.addEventListener("keydown", onRowKeydown);
+  function onRowClick(e) {
     const addBtn = e.target.closest(".canvas-add");
     if (addBtn) { toggleInCanvas(events[+addBtn.dataset.id], addBtn); return; }
     const tagBtn = e.target.closest(".tag-chip");
@@ -1225,12 +1314,12 @@
     }
     const desc = e.target.closest('.description[role="button"]');
     if (desc) toggleDescription(desc);
-  });
-  list.addEventListener("keydown", (e) => {
+  }
+  function onRowKeydown(e) {
     if (e.key !== "Enter" && e.key !== " ") return;
     const desc = e.target.closest('.description[role="button"]');
     if (desc) { e.preventDefault(); toggleDescription(desc); }
-  });
+  }
   // "more": the full text comes from descriptions.json, fetched on the first
   // tap (the row shows it's loading); later taps are instant.
   function toggleDescription(desc) {
@@ -1580,6 +1669,10 @@
     }
     // Keep ?canvas= until canvas mode is loaded (or ended), so the first
     // render doesn't strip it.
+    if (view === "map") {
+      p.set("view", "map");
+      if (mapAt) p.set("at", formatAt(mapAt));
+    }
     const canvasId = canvasMode ? canvasMode.id : canvasPending;
     if (canvasId) p.set("canvas", canvasId);
     const qs = p.toString();
@@ -1666,6 +1759,8 @@
       searchEl.value = q;
       updateSearch();
     }
+    mapAt = parseAt(p.get("at"));
+    if (p.get("view") === "map") setView("map");
   }
 
   // Phones get the system share sheet; elsewhere the link is copied.
@@ -1724,6 +1819,7 @@
   // Day headings stick just below the sticky search bar, whatever its height.
   new ResizeObserver(() => {
     document.documentElement.style.setProperty("--sticky-top", topbarEl.offsetHeight + "px");
+    sizeMap();
   }).observe(topbarEl);
 
   // Active-filter pills above the list; each × clears that one filter.
@@ -1751,6 +1847,312 @@
     list.querySelector('h2.date[data-day="' + btn.dataset.day + '"]')
       ?.scrollIntoView({block: "start"});
   });
+
+  // --- Map view (feature-specs/venues.md, phase 4): the current results as
+  // one pin per venue. MapLibre (vendored) is loaded on the first open, so a
+  // list-only visit fetches nothing extra. Declared before readStateFromUrl()
+  // for the TDZ reason noted at flatDateFmt. ---
+  const MAPLIBRE_DIR = "./vendor/maplibre-gl-6.11.2/";
+  const MAP_STYLE_URL = "https://tiles.openfreemap.org/styles/"
+    + (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "positron");
+  const MAP_GLYPHS = "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf";
+  const MAP_STYLE_TIMEOUT = 8000;  // then pins on a blank background
+  // The map stays around the Bay; an ?at= outside this box is ignored.
+  const MAP_BOUNDS = [[-124, 36], [-120.5, 39.5]];  // [[west, south], [east, north]]
+  const MAP_MIN_ZOOM = 6, MAP_MAX_ZOOM = 18;
+  const CLUSTER_MAX_ZOOM = 15;
+  const PANEL_CAP = 30;  // rows in the venue panel before "Show all"
+  const hasPins = Object.values(venueInfo).some(v => v.lat != null && v.lng != null);
+  const viewToggleEl = document.getElementById("view-toggle");
+  const mapWrapEl = document.getElementById("map-wrap");
+  const mapEl = document.getElementById("map");
+  const mapStatusEl = document.getElementById("map-status");
+  const mapPanelEl = document.getElementById("map-panel");
+  const mainEl = document.querySelector("main");
+  viewToggleEl.hidden = !hasPins;
+  let view = "list";
+  let mapAt = null;        // [lat, lng, zoom]: from ?at=, then wherever the map is
+  let map = null, mapReady = false, mapLoading = null, mapError = null, mapBlank = false;
+  let mapPins = {type: "FeatureCollection", features: []};
+  let mapResults = [];     // the events the pins were built from
+  let panelVenues = null;  // venue ids listed in the panel, or null when closed
+  let panelAll = false;
+
+  viewToggleEl.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-view]");
+    if (b) setView(b.dataset.view);
+  });
+  function setView(v) {
+    if (v === "map" && !hasPins) v = "list";
+    if (v === view) return;
+    view = v;
+    document.body.classList.toggle("map-view", v === "map");
+    for (const b of viewToggleEl.querySelectorAll("[data-view]")) {
+      b.setAttribute("aria-pressed", b.dataset.view === v);
+    }
+    list.hidden = v === "map";
+    mapWrapEl.hidden = v !== "map";
+    if (v === "map") openMap(); else closePanel();
+    render();
+    // Bring the map up under the sticky bar, filling the rest of the screen.
+    scrollTo({top: Math.max(0, mainEl.getBoundingClientRect().top + scrollY - topbarEl.offsetHeight)});
+    sizeMap();
+  }
+  function sizeMap() {
+    if (view !== "map") return;
+    const above = topbarEl.offsetHeight
+      + mapWrapEl.getBoundingClientRect().top - mainEl.getBoundingClientRect().top;
+    mapWrapEl.style.height = Math.max(300, innerHeight - above - 12) + "px";
+    map?.resize();
+  }
+  addEventListener("resize", sizeMap);
+
+  // ?at=lat,lng,zoom — anything garbled or outside the map's box is ignored.
+  function parseAt(v) {
+    const m = /^(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?),(\d+(?:\.\d+)?)$/.exec(v || "");
+    if (!m) return null;
+    const [lat, lng, zoom] = m.slice(1).map(Number);
+    const [[west, south], [east, north]] = MAP_BOUNDS;
+    return lat >= south && lat <= north && lng >= west && lng <= east
+      && zoom >= MAP_MIN_ZOOM && zoom <= MAP_MAX_ZOOM ? [lat, lng, zoom] : null;
+  }
+  const formatAt = ([lat, lng, zoom]) => lat.toFixed(4) + "," + lng.toFixed(4) + "," + +zoom.toFixed(2);
+
+  // One feature per venue with coordinates among `evs`; `unmapped` counts the
+  // events that can't be placed (no venue, or a venue without a pin).
+  function buildPins(evs) {
+    const counts = new Map();
+    let unmapped = 0;
+    for (const ev of evs) {
+      const v = ev.venue && venueInfo[ev.venue];
+      if (v && v.lat != null && v.lng != null) counts.set(ev.venue, (counts.get(ev.venue) || 0) + 1);
+      else unmapped++;
+    }
+    const features = [...counts].map(([id, n], i) => ({
+      type: "Feature", id: i,
+      properties: {venue: id, events: n, approx: !!venueInfo[id].approx},
+      geometry: {type: "Point", coordinates: [venueInfo[id].lng, venueInfo[id].lat]},
+    }));
+    return {features, unmapped};
+  }
+  function updateMap(evs, features) {
+    mapResults = evs;
+    mapPins = {type: "FeatureCollection", features};
+    // Counts on the container: what's pinned, readable without the canvas.
+    mapWrapEl.dataset.venues = features.length;
+    mapWrapEl.dataset.events = features.reduce((a, f) => a + f.properties.events, 0);
+    if (mapReady) map.getSource("venues").setData(mapPins);
+    renderPanel();
+    updateMapStatus();
+    sizeMap();
+  }
+  function pinBounds() {
+    const fs = mapPins.features;
+    if (!fs.length) return null;
+    const lngs = fs.map(f => f.geometry.coordinates[0]), lats = fs.map(f => f.geometry.coordinates[1]);
+    return [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]];
+  }
+
+  function updateMapStatus() {
+    const html = mapError
+      ? "The map didn’t load (" + escapeHtml(mapError) + ').<button type="button" data-map-retry>Try again</button>'
+      : !mapReady ? "Loading map…"
+      : !mapPins.features.length ? "No events here have a map location."
+      : mapBlank ? "Base map unavailable. Showing venues only."
+      : "";
+    mapStatusEl.innerHTML = html;
+    mapStatusEl.hidden = !html;
+  }
+  mapStatusEl.addEventListener("click", (e) => {
+    if (e.target.closest("[data-map-retry]")) openMap();
+  });
+
+  function openMap() {
+    if (!mapLoading) {
+      mapError = null;
+      updateMapStatus();
+      mapLoading = loadMap().catch((e) => {
+        mapLoading = null;
+        mapError = e.message || String(e);
+        updateMapStatus();
+      });
+    }
+    return mapLoading;
+  }
+  function loadMapLibre() {
+    if (!document.querySelector("link[data-maplibre]")) {
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = MAPLIBRE_DIR + "maplibre-gl.css";
+      css.dataset.maplibre = "";
+      document.head.appendChild(css);
+    }
+    return import(MAPLIBRE_DIR + "maplibre-gl.mjs");
+  }
+  // OpenFreeMap's style, or null when it can't be reached in time.
+  async function loadStyle() {
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), MAP_STYLE_TIMEOUT);
+    try {
+      const r = await fetch(MAP_STYLE_URL, {signal: ctl.signal});
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return await r.json();
+    } catch {
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  async function loadMap() {
+    const [ml, style] = await Promise.all([loadMapLibre(), loadStyle()]);
+    if (mapReady) return;
+    const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const accent = cssVar("--accent"), onAccent = cssVar("--accent-fg"), paper = cssVar("--bg");
+    mapBlank = !style;
+    const bounds = pinBounds();
+    map = new ml.Map({
+      container: mapEl,
+      style: style || {version: 8, glyphs: MAP_GLYPHS, sources: {}, layers: [
+        {id: "background", type: "background", paint: {"background-color": cssVar("--chip-bg")}}]},
+      ...(mapAt ? {center: [mapAt[1], mapAt[0]], zoom: mapAt[2]}
+        : bounds ? {bounds, fitBoundsOptions: {padding: 48, maxZoom: 14}}
+        : {center: [-122.43, 37.77], zoom: 11}),
+      minZoom: MAP_MIN_ZOOM, maxZoom: MAP_MAX_ZOOM, maxBounds: MAP_BOUNDS,
+      attributionControl: false, dragRotate: false, pitchWithRotate: false, touchPitch: false,
+    });
+    window.agoraMap = map;  // for tests and debugging
+    map.touchZoomRotate.disableRotation();
+    map.keyboard.disableRotation();
+    map.addControl(new ml.NavigationControl({showCompass: false}), "top-right");
+    // OpenFreeMap's tiles carry their attribution (OpenFreeMap, OpenMapTiles,
+    // OpenStreetMap); the control shows it.
+    map.addControl(new ml.AttributionControl(), "bottom-right");
+    // Tiles or glyphs that fail (offline, blocked) are logged; the pins still work.
+    map.on("error", (e) => console.warn("map:", e.error?.message || e));
+    if (!map.isStyleLoaded()) await new Promise((resolve) => map.once("style.load", resolve));
+
+    // Clusters count events, not venues (clusterProperties sums them).
+    map.addSource("venues", {
+      type: "geojson", data: mapPins, cluster: true, clusterMaxZoom: CLUSTER_MAX_ZOOM,
+      clusterRadius: 40, clusterProperties: {events: ["+", ["get", "events"]]},
+    });
+    const isCluster = ["has", "point_count"];
+    const label = (size, color) => ({
+      layout: {"text-field": ["to-string", ["get", "events"]], "text-font": ["Noto Sans Bold"],
+               "text-size": size, "text-allow-overlap": true, "text-ignore-placement": true},
+      paint: {"text-color": color},
+    });
+    // Clusters get a soft halo; single venues a crisp ring.
+    map.addLayer({id: "clusters", type: "circle", source: "venues", filter: isCluster, paint: {
+      "circle-color": accent, "circle-stroke-color": accent, "circle-stroke-width": 6,
+      "circle-stroke-opacity": 0.3,
+      "circle-radius": ["step", ["get", "events"], 15, 25, 19, 100, 24, 500, 30],
+    }});
+    map.addLayer({id: "cluster-count", type: "symbol", source: "venues", filter: isCluster,
+                  ...label(12, onAccent)});
+    // A street-precision venue is a hollow pin: "around here", not "here".
+    const approx = ["get", "approx"];
+    map.addLayer({id: "venues", type: "circle", source: "venues", filter: ["!", isCluster], paint: {
+      "circle-color": ["case", approx, paper, accent],
+      "circle-stroke-color": ["case", approx, accent, paper],
+      "circle-stroke-width": ["case", approx, 2.5, 2],
+      "circle-radius": ["step", ["get", "events"], 11, 10, 13, 50, 16],
+    }});
+    map.addLayer({id: "venue-count", type: "symbol", source: "venues", filter: ["!", isCluster],
+                  ...label(11, ["case", approx, accent, onAccent])});
+
+    map.on("click", "clusters", async (e) => {
+      const f = e.features[0];
+      const src = map.getSource("venues");
+      const id = f.properties.cluster_id;
+      const zoom = await src.getClusterExpansionZoom(id);
+      if (zoom <= CLUSTER_MAX_ZOOM) {
+        map.easeTo({center: f.geometry.coordinates, zoom});
+      } else {
+        // Venues this close only separate once clustering stops: list them together.
+        const leaves = await src.getClusterLeaves(id, 1000, 0);
+        openPanel(leaves.map(l => l.properties.venue), f.geometry.coordinates);
+      }
+    });
+    map.on("click", "venues", (e) => openPanel([e.features[0].properties.venue], e.features[0].geometry.coordinates));
+    map.on("click", (e) => {
+      if (!map.queryRenderedFeatures(e.point, {layers: ["clusters", "venues"]}).length) closePanel();
+    });
+    for (const layer of ["clusters", "venues"]) {
+      map.on("mouseenter", layer, () => { map.getCanvas().style.cursor = "pointer"; });
+      map.on("mouseleave", layer, () => { map.getCanvas().style.cursor = ""; });
+    }
+    map.on("moveend", () => {
+      const c = map.getCenter();
+      mapAt = [c.lat, c.lng, map.getZoom()];
+      writeStateToUrl();
+    });
+    // For scripts/measure_load.py: the first frame with the pins drawn.
+    map.on("render", function pinsDrawn() {
+      if (!map.isSourceLoaded("venues")) return;
+      performance.mark("agora:map-pins");
+      map.off("render", pinsDrawn);
+    });
+    mapReady = true;
+    map.getSource("venues").setData(mapPins);  // the results may have changed while loading
+    updateMapStatus();
+  }
+
+  // The panel: a venue's events (or several venues', from a tight cluster)
+  // in the current results, as list rows.
+  function openPanel(ids, at) {
+    panelVenues = ids;
+    panelAll = false;
+    renderPanel();
+    mapPanelEl.scrollTop = 0;
+    if (at && !mapPanelEl.hidden) revealPin(at);
+  }
+  // Pan a pin out from under the panel (a bottom sheet on phones, a side
+  // panel on desktop), into the middle of the map that's still visible.
+  function revealPin(lngLat) {
+    const m = mapEl.getBoundingClientRect(), p = mapPanelEl.getBoundingClientRect();
+    const pt = map.project(lngLat);
+    const x = m.left + pt.x, y = m.top + pt.y;
+    if (x < p.left || x > p.right || y < p.top || y > p.bottom) return;
+    const side = p.top <= m.top + 1;  // full-height panel on the right
+    map.easeTo({center: lngLat, offset: side ? [-(p.width / 2), 0] : [0, -(p.height / 2)]});
+  }
+  function closePanel() {
+    panelVenues = null;
+    mapPanelEl.hidden = true;
+    mapPanelEl.innerHTML = "";
+  }
+  function renderPanel() {
+    if (!panelVenues) return;
+    const wanted = new Set(panelVenues);
+    const evs = mapResults.filter(ev => wanted.has(ev.venue));
+    if (!evs.length) { closePanel(); return; }  // filtered out
+    const ids = panelVenues.filter(id => evs.some(ev => ev.venue === id));
+    const one = ids.length === 1 ? venueInfo[ids[0]] : null;
+    const count = evs.length.toLocaleString() + (evs.length === 1 ? " event" : " events");
+    const sub = one ? [one.address, one.approx ? "Approximate location" : "", count]
+      : [ids.length + " venues", count];
+    const shown = panelAll ? evs : evs.slice(0, PANEL_CAP);
+    mapPanelEl.innerHTML = '<div class="panel-head"><div class="panel-title"><h2>'
+      + escapeHtml(one ? one.name : ids.map(id => venueInfo[id].name).join(" · ")) + "</h2>"
+      + '<div class="panel-sub">' + escapeHtml(sub.filter(Boolean).join(" · ")) + "</div>"
+      + (one ? '<div class="panel-actions"><button type="button" class="copy-btn" data-panel-list="'
+        + escapeHtml(ids[0]) + '">Show in list</button></div>' : "")
+      + '</div><button type="button" class="panel-close" data-panel-close aria-label="Close">×</button></div>'
+      + renderFlat(shown)
+      + (shown.length < evs.length
+        ? '<button type="button" class="day-more panel-more" data-panel-all>Show all ' + count + "</button>" : "");
+    mapPanelEl.hidden = false;
+  }
+  mapPanelEl.addEventListener("click", (e) => {
+    if (e.target.closest("[data-panel-close]")) { closePanel(); return; }
+    if (e.target.closest("[data-panel-all]")) { panelAll = true; renderPanel(); return; }
+    const toList = e.target.closest("[data-panel-list]");
+    if (toList) { setView("list"); setVenueFilter(toList.dataset.panelList); return; }
+    onRowClick(e);
+  });
+  mapPanelEl.addEventListener("keydown", onRowKeydown);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePanel(); });
 
   if (events.length === 0) {
     list.innerHTML = '<div class="empty">No upcoming events.</div>';
@@ -1820,9 +2222,19 @@
         + (selectedHoods.size ? " no known area or neighborhood and " : " no known area and ")
         + (noArea === 1 ? "isn’t" : "aren’t") + " shown.</span>";
     }
+    // The map shows the same results; say how many it can't place.
+    const pins = view === "map" ? buildPins(filtered) : null;
+    const noMapHtml = pins && pins.unmapped ? '<span class="no-area">' + n(pins.unmapped)
+      + (pins.unmapped === 1 ? " event has" : " events have") + " no map location and "
+      + (pins.unmapped === 1 ? "isn’t" : "aren’t") + " shown.</span>" : "";
     meta.innerHTML = "<span>" + (isFiltered ? n(filtered.length) + " of " + n(events.length)
-      : n(events.length)) + " upcoming events</span>" + updatedHtml + noAreaHtml;
+      : n(events.length)) + " upcoming events</span>" + updatedHtml + noAreaHtml + noMapHtml;
     renderChrome(filtered, flat);
+    if (pins) {
+      // The list is rebuilt when you switch back.
+      updateMap(filtered, pins.features);
+      return;
+    }
 
     if (filtered.length === 0) {
       list.innerHTML = '<div class="empty">No events match. Remove a filter or try a different search.</div>';
@@ -1877,7 +2289,7 @@
 
     // Day strip: the first DAY_STRIP_MAX days that have results (grouped view only).
     const days = [];
-    if (!flat) {
+    if (!flat && view === "list") {
       for (const ev of filtered) {
         const key = toISODate(ev._start);
         if (days.length && days[days.length - 1][0] === key) continue;
@@ -1950,7 +2362,7 @@
     return "https://calendar.google.com/calendar/render?" + p.toString();
   }
   function closeCalMenus(except) {
-    for (const d of list.querySelectorAll("details.cal[open]")) if (d !== except) d.open = false;
+    for (const d of document.querySelectorAll("details.cal[open]")) if (d !== except) d.open = false;
   }
   document.addEventListener("click", (e) => {
     if (!e.target.closest("details.cal")) closeCalMenus();
@@ -2241,7 +2653,7 @@
         + '<a href="' + escapeHtml(AC.canvasPath(canvasMode.id)) + '">View</a>'
         + '<button type="button" data-tray-done>Done</button>'
       : "";
-    for (const cal of list.querySelectorAll("details.cal[data-id]")) {
+    for (const cal of document.querySelectorAll("details.cal[data-id]")) {
       cal.parentNode.querySelector(".canvas-add")?.remove();
       if (canvasMode) cal.insertAdjacentHTML("beforebegin", canvasAddHtml(events[+cal.dataset.id]));
     }
