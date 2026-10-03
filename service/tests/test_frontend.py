@@ -587,3 +587,118 @@ def test_legacy_manifest_with_inline_descriptions(browser, legacy_site):
     page.fill("#search-input", "zanzibar")
     page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
     assert reqs == [] and errors == []
+
+
+# --- map view + SF neighborhoods (feature-specs/venues.md, phase 4) -----------
+
+DAWN = (-122.4013, 37.7876)    # 20 Annie St (lng, lat)
+ROXIE = (-122.42257, 37.76493)
+ALAMO = (-122.4347, 37.77636)
+
+
+def _map_events():
+    """The usual events, with some jazz nights at the Roxie (Mission), one at
+    Alamo Square (a street-precision, approximate pin) — and the poetry
+    readings, which have no venue, so no map location."""
+    out = _events()
+    for e in out:
+        n = int(e["id"][2:]) if e["id"].startswith("ev") else -1
+        if n % 8 == 4:
+            e.update(venue="roxie", location="Roxie Theater", region="sf")
+        elif n == 6:
+            e.update(venue="alamo-square", location="Alamo Square", region="sf")
+    return out
+
+
+def _map_manifest(events):
+    m = _manifest(events)
+    m["venues"] = {
+        "dawn-club": {**m["venues"]["dawn-club"], "lng": DAWN[0], "lat": DAWN[1], "neighborhood": "soma"},
+        "roxie": {"name": "Roxie Theater", "region": "sf", "address": "3117 16th St, San Francisco, CA",
+                  "lng": ROXIE[0], "lat": ROXIE[1], "neighborhood": "mission"},
+        "alamo-square": {"name": "Alamo Square", "region": "sf", "address": "San Francisco, CA 94117",
+                         "lng": ALAMO[0], "lat": ALAMO[1], "approx": True},
+    }
+    m["neighborhoods"] = [{"id": "haight-ashbury", "label": "Haight Ashbury"},
+                          {"id": "mission", "label": "Mission"}, {"id": "soma", "label": "SoMa"}]
+    return m
+
+
+@pytest.fixture(scope="module")
+def map_site(tmp_path_factory):
+    from exporters.json_export import split_descriptions
+    root = tmp_path_factory.mktemp("mapsite")
+    events = _map_events()
+    (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
+    (root / "events.json").write_text(json.dumps(_map_manifest(events)))
+    server = _serve(root)
+    yield f"http://127.0.0.1:{server.server_port}/"
+    server.shutdown()
+
+
+def _map_page(browser, site, viewport=DESKTOP, query="", touch=False):
+    """A page with the map's tile server unreachable (as in CI: no network)."""
+    ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, timezone_id=TZ)
+    ctx.route("https://tiles.openfreemap.org/**", lambda route: route.abort())
+    page = ctx.new_page()
+    page._agora_errors = []
+    page._agora_requests = []
+    page.on("pageerror", lambda e: page._agora_errors.append(str(e)))
+    page.on("request", lambda r: page._agora_requests.append(r.url))
+    page.goto(site + query)
+    page.wait_for_selector(".event, #map-wrap:not([hidden])", timeout=15000)
+    return page
+
+
+
+
+
+
+def test_neighborhood_filter(browser, map_site):
+    events = [e for e in _map_events() if e["id"] != "started"]
+    roxie = sum(1 for e in events if e["venue"] == "roxie")
+    page = _map_page(browser, map_site)
+    # Only neighborhoods with events, with counts.
+    rows = page.locator("#hood-list label")
+    assert rows.locator("span:not(.count)").all_text_contents() == ["Mission", "SoMa"]
+    assert rows.locator(".count").all_text_contents() == [str(roxie), str(sum(
+        1 for e in events if e["venue"] == "dawn-club"))]
+    page.click("#hood-summary")
+    page.check('#hood-list [data-hood="mission"]')
+    assert "hood=mission" in page.url
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"Roxie Theater"}
+    assert "Mission" in page.inner_text("#active-filters")
+    assert page.inner_text("#hood-summary") == "Mission"
+    # Alamo Square is SF but has no neighborhood: counted as unknown.
+    assert "no known area or neighborhood" in page.inner_text("#meta")
+    # OR with another neighborhood; with an area, neighborhoods narrow SF only.
+    page.check('#hood-list [data-hood="soma"]')
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {
+        "Roxie Theater", "The Dawn Club", "The Dawn Club · Back Bar"}
+    page.uncheck('#hood-list [data-hood="soma"]')
+    page.click('#area-chips [data-area="eastbay"]')
+    regions = set(page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)"))
+    assert regions == {"sf", "eastbay"}
+    page.click('#area-chips [data-area="eastbay"]')
+    # The badge counts it; the pill's × clears it.
+    page.set_viewport_size(PHONE)
+    assert page.inner_text("#filters-count") == "1"
+    page.click('#active-filters [data-clear="hood"]')
+    assert "hood=" not in page.url and not page.is_checked('#hood-list [data-hood="mission"]')
+    page.set_viewport_size(DESKTOP)
+    # A shared link restores it; Reset clears it.
+    page = _map_page(browser, map_site, query="?hood=mission,soma,nowhere")
+    assert page.is_checked('#hood-list [data-hood="mission"]') and page.is_checked('#hood-list [data-hood="soma"]')
+    assert page.inner_text("#hood-summary") == "2 SF neighborhoods"
+    assert len(page.locator("#active-filters .active-pill").all()) == 2
+    page.click("#reset")
+    assert "hood=" not in page.url and not page.is_checked('#hood-list [data-hood="mission"]')
+    assert page.inner_text("#active-filters").strip() == ""
+    assert page._agora_errors == []
+
+
+def test_no_neighborhood_ui_without_neighborhoods(browser, site, legacy_site):
+    for s in (site, legacy_site):
+        page = _map_page(browser, s, query="?hood=mission")
+        assert page.locator("#hood-dropdown").is_hidden() and "hood=" not in page.url
+        assert page._agora_errors == []

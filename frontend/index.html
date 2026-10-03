@@ -497,6 +497,10 @@
   .meta .no-area { flex-basis: 100%; }
   .meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
 
+  /* SF neighborhoods: a dropdown nested under the Area chips. */
+  .hood-dropdown { margin-top: 10px; }
+  .hood-dropdown .dropdown-item .count { margin-left: auto; }
+
   .empty, .error { color: var(--muted); text-align: center; padding: 48px 0; }
   .error { color: var(--error); }
   /* Placeholder rows while events.json downloads and parses. */
@@ -553,6 +557,21 @@
   <div class="filter-group" id="area-group" hidden>
     <h3>Area</h3>
     <div class="chip-row" id="area-chips" role="group" aria-label="Area"></div>
+    <details class="dropdown hood-dropdown" id="hood-dropdown" hidden>
+      <summary id="hood-summary">SF neighborhoods</summary>
+      <div class="dropdown-panel">
+        <div class="dropdown-search">
+          <input type="search" id="hood-search" placeholder="Search neighborhoods" aria-label="Search San Francisco neighborhoods" autocomplete="off">
+        </div>
+        <div class="dropdown-bulk">
+          <button type="button" id="hood-clear">Clear</button>
+        </div>
+        <div class="dropdown-scroll">
+          <div id="hood-list"></div>
+          <div class="dropdown-empty" id="hood-empty" hidden>No neighborhoods match.</div>
+        </div>
+      </div>
+    </details>
   </div>
   <div class="filter-group">
     <h3>Type</h3>
@@ -779,6 +798,8 @@
       // Search finds an event by its venue's name too, not only the
       // source's spelling ("Sydney Goldstein" for "City Arts — Goldstein").
       where_text: venueLabel(e) || "",
+      // SF neighborhood id (from the venue; building-precision SF venues only).
+      _hood: (e.venue && venueInfo[e.venue]?.neighborhood) || null,
     }));
 
   // The search index, filled in small chunks after the first render
@@ -888,6 +909,58 @@
     const b = e.target.closest("[data-area]");
     if (b) toggleArea(b.dataset.area);
   });
+  // SF neighborhoods (phase 4): a dropdown under the Area chips. They narrow
+  // San Francisco: with any selected, an SF event must be in one of them
+  // (see inPlace). Only neighborhoods that have events are listed.
+  const hoodLabels = new Map((data.neighborhoods || []).map(h => [h.id, h.label]));
+  const hoodCounts = new Map();
+  for (const e of events) if (e._hood) hoodCounts.set(e._hood, (hoodCounts.get(e._hood) || 0) + 1);
+  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id));
+  const selectedHoods = new Set();
+  const hoodDropdownEl = document.getElementById("hood-dropdown");
+  const hoodListEl = document.getElementById("hood-list");
+  const hoodSummaryEl = document.getElementById("hood-summary");
+  const hoodSearchEl = document.getElementById("hood-search");
+  hoodDropdownEl.hidden = hoodIds.length === 0;
+  hoodListEl.innerHTML = hoodIds.map(id =>
+    '<label class="dropdown-item"><input type="checkbox" data-hood="' + escapeHtml(id) + '">'
+    + "<span>" + escapeHtml(hoodLabels.get(id)) + '</span><span class="count">'
+    + hoodCounts.get(id) + "</span></label>").join("");
+  function updateHoodControls() {
+    for (const cb of hoodListEl.querySelectorAll("input[data-hood]")) cb.checked = selectedHoods.has(cb.dataset.hood);
+    const n = selectedHoods.size;
+    hoodSummaryEl.textContent = n === 0 ? "SF neighborhoods"
+      : n === 1 ? hoodLabels.get([...selectedHoods][0]) : n + " SF neighborhoods";
+  }
+  function toggleHood(id, on) {
+    const active = on === undefined ? !selectedHoods.has(id) : on;
+    if (active) selectedHoods.add(id); else selectedHoods.delete(id);
+    updateHoodControls();
+    render();
+  }
+  hoodListEl.addEventListener("change", (e) => {
+    if (e.target.dataset.hood !== undefined) toggleHood(e.target.dataset.hood, e.target.checked);
+  });
+  document.getElementById("hood-clear").addEventListener("click", () => {
+    selectedHoods.clear();
+    updateHoodControls();
+    render();
+  });
+  hoodSearchEl.addEventListener("input", () => {
+    const q = hoodSearchEl.value.trim().toLowerCase();
+    let visible = 0;
+    for (const label of hoodListEl.querySelectorAll("label")) {
+      label.hidden = !!q && !label.textContent.toLowerCase().includes(q);
+      if (!label.hidden) visible++;
+    }
+    document.getElementById("hood-empty").hidden = visible > 0;
+  });
+  // The location facet: OR across the chosen areas and neighborhoods, where
+  // chosen neighborhoods stand in for San Francisco as a whole.
+  function inPlace(ev) {
+    if (selectedHoods.size && ev.region === "sf") return selectedHoods.has(ev._hood);
+    return selectedAreas.has(ev.region);
+  }
   // Topics use the same model as Sources: all selected by default, deselect to
   // narrow. (Untagged events always pass the topic filter — see render.)
   const allTopics = [...topicMeta.keys()];
@@ -1467,6 +1540,8 @@
     selectedTypes.clear();
     selectedAreas.clear();
     updateAreaChips();
+    selectedHoods.clear();
+    updateHoodControls();
     // Topics default to all-selected (deselect to narrow), like Sources.
     selectedTopics.clear();
     for (const s of allTopics) selectedTopics.add(s);
@@ -1498,6 +1573,7 @@
     if (venueFilter) p.set("venue", venueFilter);
     if (selectedTypes.size) p.set("type", [...selectedTypes].join(","));
     if (selectedAreas.size) p.set("area", [...selectedAreas].join(","));
+    if (selectedHoods.size) p.set("hood", [...selectedHoods].join(","));
     // Like sources: emit the topic list only when it's a subset (absent = all).
     if (selectedTopics.size !== allTopics.length) {
       p.set("topic", [...selectedTopics].join(","));
@@ -1562,6 +1638,11 @@
     if (areaParam) {
       for (const id of areaParam.split(",")) if (areaIds.includes(id)) selectedAreas.add(id);
       updateAreaChips();
+    }
+    const hoodParam = p.get("hood");
+    if (hoodParam) {
+      for (const id of hoodParam.split(",")) if (hoodIds.includes(id)) selectedHoods.add(id);
+      updateHoodControls();
     }
     const typeParam = p.get("type");
     if (typeParam) {
@@ -1654,6 +1735,7 @@
     else if (clear === "topics") topicSelectAllEl.click();
     else if (clear === "type") toggleTag("type", val, false);
     else if (clear === "area") toggleArea(val, false);
+    else if (clear === "hood") toggleHood(val, false);
     else if (clear === "dates") setDateRange(null, null);
     else if (clear === "location") setLocationFilter(null);
     else if (clear === "venue") setVenueFilter(null);
@@ -1687,7 +1769,7 @@
     const now = new Date();
     const otherFiltersPass = (ev, ignoreArea = false) => {
       if (ev._start < now) return false;
-      if (selectedAreas.size && !ignoreArea && !selectedAreas.has(ev.region)) return false;
+      if ((selectedAreas.size || selectedHoods.size) && !ignoreArea && !inPlace(ev)) return false;
       const evSources = ev.sources || [];
       if (!evSources.some(s => selected.has(s))) return false;
       if (dateFrom && ev._start < dateFrom) return false;
@@ -1727,13 +1809,16 @@
     const isFiltered = filtered.length !== events.length;
     const n = (x) => x.toLocaleString();
     // With an area chosen, say how many otherwise-matching events have no
-    // known area (unknown or pending venue) and so aren't shown.
+    // known area (unknown or pending venue) and so aren't shown — with a
+    // neighborhood chosen, also SF events whose venue has none.
     let noAreaHtml = "";
-    if (selectedAreas.size) {
+    if (selectedAreas.size || selectedHoods.size) {
       const pool = rankedOrder ? rankedOrder.map(id => events[id]) : events;
-      const noArea = pool.filter(ev => ev.region == null && otherFiltersPass(ev, true)).length;
+      const unknown = (ev) => ev.region == null || (selectedHoods.size && ev.region === "sf" && !ev._hood);
+      const noArea = pool.filter(ev => unknown(ev) && otherFiltersPass(ev, true)).length;
       if (noArea) noAreaHtml = '<span class="no-area">' + n(noArea) + (noArea === 1 ? " event has" : " events have")
-        + " no known area and " + (noArea === 1 ? "isn’t" : "aren’t") + " shown.</span>";
+        + (selectedHoods.size ? " no known area or neighborhood and " : " no known area and ")
+        + (noArea === 1 ? "isn’t" : "aren’t") + " shown.</span>";
     }
     meta.innerHTML = "<span>" + (isFiltered ? n(filtered.length) + " of " + n(events.length)
       : n(events.length)) + " upcoming events</span>" + updatedHtml + noAreaHtml;
@@ -1760,6 +1845,7 @@
     const out = [];
     if (selected.size !== allSources.length) out.push(["sources", summaryEl.textContent]);
     for (const id of selectedAreas) out.push(["area", regionLabels.get(id) || id, id]);
+    for (const id of selectedHoods) out.push(["hood", hoodLabels.get(id) || id, id]);
     for (const path of selectedTypes) out.push(["type", typeLabels.get(path) || path, path]);
     if (topicFilterActive()) out.push(["topics", topicSummaryEl.textContent]);
     if (dateFrom || dateTo) {
