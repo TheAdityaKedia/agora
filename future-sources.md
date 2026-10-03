@@ -39,18 +39,17 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Museums & art institutions
 
-- **BAMPFA** (Berkeley Art Museum / Pacific Film Archive) — https://bampfa.org/events
-- **FAMSF** (de Young + Legion of Honor) — https://www.famsf.org/calendar
+- **BAMPFA** (Berkeley Art Museum / Pacific Film Archive) — https://bampfa.org/events *(spiked 2026-10: 403 to datacenter IPs)*
+- **FAMSF** (de Young + Legion of Honor) — https://www.famsf.org/calendar *(spiked 2026-10: 403 to datacenter IPs)*
 - **SFMOMA** — https://www.sfmoma.org/events/
 - **Asian Art Museum** — https://calendar.asianart.org/
 - **ICA SF** (Institute of Contemporary Art) — https://icasf.org/
 - **Museum of the African Diaspora (MoAD)** — https://www.moadsf.org/ *(Nexus Black Art Week: nexus-sfbay.com)*
 - **Contemporary Jewish Museum** — https://www.thecjm.org/
-- **Tenderloin Museum** — https://www.tenderloinmuseum.org/
+- **Tenderloin Museum** — https://www.tenderloinmuseum.org/ *(spiked 2026-10: Squarespace, but programs are plain pages — no events collection)*
 - **7th Street Museum** (Oakland) — https://7thstreetmuseum.org/
 - **Letterform Archive** — https://letterformarchive.org/
 - **Exploratorium** (After Dark, etc.) — https://www.exploratorium.edu/visit/calendar
-- **SF Maritime NPS / Maritime.org** — https://maritime.org/
 - **CCA Wattis Institute** — https://www.wattis.org/calendar
 
 ## Galleries & art spaces
@@ -66,20 +65,19 @@ platform scraper may be the better path for some (noted where relevant).
 - **Anthony Meier** — https://anthonymeier.com/
 - **Scott Richards Contemporary Art** — https://srcart.com/
 - **Crown Point Press** — https://crownpoint.com/
-- **Root Division** — https://rootdivision.org/events
+- **Root Division** — https://rootdivision.org/events *(spiked 2026-10: Tribe API answers but lists 0 events)*
 - **500 Capp Street** (David Ireland House) — https://500cappstreet.org/
 - **Drawing Room** — https://drawingroominc.org/
 - **Lost Arts Salon** — https://lostartsalon.com/
 - **Revolver Warhol Gallery** — https://revolverwarholgallery.com/
 - **Strike-Slip Gallery** — https://strike-slipgallery.com/
-- **111 Minna Gallery** — https://111minnagallery.com/events/
+- **111 Minna Gallery** — https://111minnagallery.com/events/ *(spiked 2026-10: Tribe API works, but ~95% is recurring Happy Hour / coffee listings; low value)*
 - **Park Life** (shop + gallery) — https://parklifestore.com/
 - **Rare Device** (shop + gallery) — https://raredevice.net/
 - **Accion Latina / Juan R. Fuentes Gallery** — https://accionlatina.org/
 - **O2 Artisans Aggregate** (Oakland) — https://o2aa.com/
 - **SF Camerawork** — https://sfcamerawork.org/upcoming *(⚠️ reportedly closing — verify)*
 - **Harvey Milk Photo Center** — https://www.harveymilkphotocenter.org/exhibits/
-- **Artists' Television Access (ATA)** — https://atasite.org/
 
 ## Cinemas & film orgs
 
@@ -94,9 +92,8 @@ platform scraper may be the better path for some (noted where relevant).
 ## Music & performance venues
 
 - **Bimbo's 365 Club** — https://bimbos365club.com/  *(Ticketweb — WAF, may be hard)*
-- **Freight & Salvage** (Berkeley) — https://thefreight.org/
+- **Freight & Salvage** (Berkeley) — https://thefreight.org/ *(spiked 2026-10: Cloudflare 403 to datacenter IPs)*
 - **EnActe Arts** (South Asian theater) — https://enacte.org/
-- **Yerba Buena Gardens Festival** — https://ybgfestival.org/ *(distinct from YBCA, already a source)*
 
 ## Dance
 
@@ -118,14 +115,13 @@ platform scraper may be the better path for some (noted where relevant).
 - **Golden Sardine** (First Friday Poetry) — https://goldensardinesf.com/
 - **Sea Level** (literary events) — https://sealevelsf.com/
 - **Arion Press** — https://arionpress.com/events/
-- **Heyday Books** (publisher) — https://www.heydaybooks.com/
+- **Heyday Books** (publisher) — https://www.heydaybooks.com/ *(spiked 2026-10: Tribe API, 18 events, but no venue data — events are at other bookstores/libraries; mostly duplicates)*
 - **Transit Books** (publisher w/ events) — https://transitbooks.org/
 - **X Artists' Books** — https://xartistsbooks.com/
 - **Starshaped Press** (letterpress) — https://starshaped.com/
 - **Two Lines Press / Center for the Art of Translation** — https://www.catranslation.org/events
 - **Zyzzyva** (literary magazine) — https://www.zyzzyva.org/
 - **SFSU Poetry Center** — https://lca.sfsu.edu/poetry-center
-- **Mechanics' Institute** — https://www.milibrary.org/events
 
 ## Festivals & fairs (mostly seasonal/annual)
 
@@ -151,9 +147,7 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Cultural & community orgs
 
-- **Gray Area** — https://grayarea.org/events/
-- **Fort Mason Center** — https://fortmason.org/events/
-- **GLBT Historical Society** — https://www.glbthistory.org/events
+- **Gray Area** — https://grayarea.org/events/ *(spiked 2026-10: Cloudflare 403 to datacenter IPs)*
 - **Bay Area Lesbian Archives** — https://www.bayarealesbianarchives.org/
 - **GAPA** (Gay Asian Pacific Alliance) — https://gapa.org/
 - **Sentro Filipino** — https://sentrofilipino.com/
@@ -161,9 +155,8 @@ platform scraper may be the better path for some (noted where relevant).
 - **Diaspora Arts Connection** — https://www.diasporaartsconnection.org/
 - **Counterculture Museum** — https://counterculturemuseum.org/events/
 - **The Third Place** — https://thethirdplace.is/
-- **SF Center for the Book** — https://www.sfcb.org/calendar
 - **Chinese Culture Center / Edge on the Square** — https://www.cccsf.us/ · https://edgeonthesquare.org/
-- **Double Union** (feminist makerspace) — https://www.doubleunion.org/
+- **Double Union** (feminist makerspace) — https://www.doubleunion.org/ *(Eventbrite organizer 4669919199 — needs a browser run to verify)*
 - **Ruth's Table** (arts org) — https://ruthstable.org/
 - **The East Cut** (Words & Stories series) — https://theeastcut.org/
 - **Villa Albertine** (French cultural inst.) — https://villa-albertine.org/
@@ -201,7 +194,6 @@ on BAR (a rough volume signal, not a full inventory).
 - **Lesher Center for the Arts** (Walnut Creek) — https://www.lesherartscenter.org/  *(16)*
 - **Bankhead Theater / Livermore Valley PAC** (Livermore) — https://www.livermorearts.org/  *(11)*
 - **Paramount Theatre** (Oakland) — https://www.paramountoakland.org/  *(classic films + concerts; 11)*
-- **Henry J. Kaiser Center for the Arts** (Oakland) — https://www.hjkarts.com/  *(10)*
 - **San Jose Center for the Performing Arts / San Jose Theaters** (San Jose) — https://sanjosetheaters.org/  *(6)*
 - **Mountain View Center for the Performing Arts** (Mountain View) — https://mvcpa.com/  *(TheatreWorks; 2)*
 - **Hillbarn Theatre** (Foster City) — https://hillbarntheatre.org/  *(5)*
@@ -209,24 +201,17 @@ on BAR (a rough volume signal, not a full inventory).
 ### Rock / touring music (bigger; Another Planet / Live Nation — may be harder)
 - **Fox Theater Oakland** (Oakland) — https://thefoxoakland.com/  *(5)*
 - **The Greek Theatre** (Berkeley) — https://thegreekberkeley.com/  *(9)*
-- **The Masonic / SF Masonic Auditorium** (SF) — https://www.sfmasonic.com/  *(7)*
 - **August Hall** (SF) — https://www.augusthallsf.com/  *(2)*
 
 ### Comedy (genre gap in our current sources)
-- **Cobb's Comedy Club** (SF) — https://www.cobbscomedy.com/  *(2)*
-- **Punch Line San Francisco** (SF) — https://www.punchlinecomedyclub.com/  *(4)*
 - **FLUID510** (Oakland) — https://fluid510.com/  *(1)*
 
 ### Theater
 - **Shotgun Players / Ashby Stage** (Berkeley) — https://shotgunplayers.org/  *(2)*
-- **Oakland Theater Project** (Oakland) — https://www.oaklandtheaterproject.org/  *(2)*
 
 ### Museums / arts centers (not already listed)
-- **Oakland Museum of California (OMCA)** (Oakland) — https://museumca.org/  *(1)*
 - **Marin MOCA** (Novato) — https://www.marinmoca.org/  *(5)*
-- **Fort Mason Center for Arts & Culture** (SF) — https://fortmason.org/  *(multi-venue campus: Cowell, Gallery 308…; 3)*
-- **African American Art & Culture Complex (AAACC)** (SF) — https://aaacc.org/  *(4)*
-- **JCCSF (Kanbar Hall)** (SF) — https://www.jccsf.org/  *(talks, music, film; 1)*
+- **African American Art & Culture Complex (AAACC)** (SF) — https://aaacc.org/ *(spiked 2026-10: Eventbrite organizer `african-american-art-culture-complex-19986020637` — needs a browser run to verify)*  *(4)*
 - **Hauser & Wirth Palo Alto** (Palo Alto) — https://www.hauserwirth.com/  *(blue-chip gallery; sparse; 4)*
 
 ### Deliberately excluded
@@ -235,6 +220,19 @@ on BAR (a rough volume signal, not a full inventory).
 - **Arenas/stadiums (mega touring, out of scope):** Chase Center, Oakland Arena, Shoreline Amphitheatre.
 - **Not venues (festival/street locations):** Golden Gate Park, Castro/Folsom Street, Ferry Building/Plaza market, various "Downtown ___"/plazas, "[Virtual]", "Multiple Venues".
 
+
+## Sprint spike notes (2026-10)
+
+Platform signatures found but not yet built (each should be a thin wrapper):
+- **Live Nation JSON-LD** (`scrapers/livenation.py`): none left; Fox Oakland,
+  Greek Theatre, Paramount use other templates (Ticketmaster widgets, no JSON-LD).
+- **Squarespace events collections** to locate (no `eventlist` on the obvious
+  pages yet): GAPA, Diaspora Arts Connection, Ruth's Table, afikra, O2 Artisans,
+  Marin MOCA, Babylon Salon.
+- **JSON-LD Event** on the homepage: Montalvo Arts Center (10 + EventSeries),
+  EnActe Arts (EventON plugin).
+- Datacenter-IP 403s (likely to fail on CI too): BAMPFA, FAMSF, Freight &
+  Salvage, Gray Area, SFFILM, SFIAF, Lesher Center.
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 

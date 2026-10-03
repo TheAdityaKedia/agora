@@ -143,13 +143,12 @@ thin wrapper (`SOURCE`, `NAME`, the platform id/URL, `matches()`, and a one-line
 | **Elfsight (settings mode)** | Elfsight widget whose `/api/events` 404s; the embed's `core.service.elfsight.com/p/boot` response carries `settings.events` | `elfsight_events.py` → `scrape_widget_settings(widget_id, page_url, …)` | `booksinc.py` |
 | **IndieCommerce** (ABA bookstores, Drupal) | `indiecommerce` in page; `/events/YYYY/MM` month listings of `article.event-list` cards | `indiecommerce.py` → `scrape_events(site_base, fallback_location=…)` | `booksmith.py`, `bookpassage.py`, `noevalleybooks.py`, `mrsdalloways.py`, `bookshopwestportal.py` |
 | **BookManager** (bookstore webstore SPA) | "You need to enable JavaScript"; XHRs to `api.bookmanager.com/customer/…` | `bookmanager.py` → `scrape_events(store_id, site_base, …)` | `tallyho.py` |
+| **Live Nation venue site** | `MusicEvent` JSON-LD blocks on `<venue>.com/shows` (Chakra UI SPA) | `livenation.py` → `scrape_shows(url, venue=…)` | `sfmasonic.py`, `cobbs.py`, `punchline.py` (`fillmore.py` keeps its own copy) |
+| **OvationTix** (AudienceView) | `ci.ovationtix.com/<clientId>` links | `ovationtix.py` → `scrape_client(client_id, fallback_location=…)` (joins `CalendarProductions` + `Production`; collapses timed-entry slots) | `oaklandtheaterproject.py`, `henryj.py` (`zspace.py` keeps its own copy) |
 | **Facebook Page events** | `facebook.com/<page>/events`. Loads logged out but needs browser headers (a bare UA gets 400); robots.txt disallows all, owner OK'd it for Pages that post events only there | `facebook.py` → `scrape_page(page)` (reads the Relay JSON embedded in the listing and event pages; goes through Zyte's cheap non-browser tier when `ZYTE_API_KEY` is set, as on CI, otherwise a direct fetch; keeps Bay Area events only; no images because fbcdn URLs expire) | `missionfusion.py` |
 
 And a few **patterns** we reuse by copying rather than a shared lib:
 
-- **OvationTix / AudienceView** — `ci.ovationtix.com/<clientId>`; hit
-  `web.ovationtix.com/trs/api/rest/…` with a `clientId` header (no browser).
-  Reference: `zspace.py` (joins `CalendarProductions` + `Production`).
 - **VBO (`vbotickets`)** — a schema.org `@graph` in the page JSON-LD.
   Reference: `sfplayhouse.py`.
 - **Shopify + Mahina events app** — a JSON API behind the storefront widget.
