@@ -502,6 +502,25 @@
   async function refresh() {
     try { apply(await AC.api("GET", P())); } catch {}
   }
+  // Removing is one tap (with Undo) unless it would take away other
+  // people's input or the plan: then say what goes with it and ask first.
+  const listFmt = new Intl.ListFormat(undefined, {type: "conjunction"});
+  async function confirmRemove(it) {
+    const isPlan = view.canvas.winner_item_id === it.id;
+    const voters = (it.votes || []).filter(v => !v.mine).map(v => v.name);
+    const nComments = (it.comments || []).filter(c => !c.mine).length;
+    if (!isPlan && !voters.length && !nComments) return true;
+    const lines = [];
+    if (isPlan) lines.push("It’s the plan right now. Removing it clears the plan for everyone.");
+    if (voters.length) lines.push(listFmt.format(voters) + (voters.length === 1 ? " is" : " are") + " in on this.");
+    if (nComments) lines.push("It has " + nComments + (nComments === 1 ? " comment" : " comments") + " from others.");
+    return await AC.choiceDialog({
+      title: "Remove “" + titleOf(it) + "”?",
+      text: lines.join(" "),
+      options: [{value: "remove", label: "Remove it"}],
+      cancel: "Keep it"}) === "remove";
+  }
+
   async function named() {
     const n = await AC.ensureName();
     return n || null;
@@ -635,6 +654,7 @@
       }
       case "remove": {
         if (!it) return;
+        if (!await confirmRemove(it)) return;
         // Removing from a shared collection says who did it, so ask for a name.
         const who = isSocial(view.canvas) ? await named() : me();
         if (isSocial(view.canvas) && !who) return;

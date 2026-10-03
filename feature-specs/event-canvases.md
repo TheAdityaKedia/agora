@@ -194,7 +194,10 @@ versions so an unchanged canvas costs one tiny read.
   card, **👍 N** with names ("Adi, Sam"), comment count (expands), overflow
   menu (Mark as winner, Remove).
 - Remove = soft delete with an "Undo" toast. On a shared collection it asks
-  for your name first (once), so others see who removed what.
+  for your name first (once), so others see who removed what. Removing the
+  plan, or an item others have 👍'd or commented on, asks to confirm first
+  ("It’s the plan right now…", "Sam and Jo are in on this."); your own
+  votes and comments alone don't.
 - Collapsed "Activity · N removed" list (last 50 entries), which also holds
   removals: the latest removal of a still-removed item carries **Restore**
   (removals older than the 50 are appended from the removed items, so

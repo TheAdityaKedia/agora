@@ -201,6 +201,25 @@ def run(shots):
         expect(a.locator("details.fold summary")).to_have_text("Activity")
         expect(a.locator("details.fold li").first).to_contain_text(f"You restored “{gone_title}”")
 
+        # Removing the plan, or what others are in on, asks first.
+        s.reload()
+        plan = s.locator(".item").first
+        plan.locator('[data-act="remove"]').click()
+        dlg = s.locator("dialog[open]")
+        expect(dlg).to_contain_text("It’s the plan right now")
+        expect(dlg).to_contain_text("Adi is in on this.")
+        dlg.locator("button", has_text="Keep it").click()
+        expect(s.locator(".item")).to_have_count(3)
+        # Your own vote and comments alone don't: a one-tap remove with Undo.
+        nopa = s.locator(".item", has_text="Dinner at Nopa")
+        nopa.locator('[data-act="vote"]').click()
+        expect(nopa.locator(".voters")).to_have_text("Sam")
+        nopa.locator('[data-act="remove"]').click()
+        expect(s.locator(".item")).to_have_count(2)
+        expect(s.locator("dialog[open]")).to_have_count(0)
+        s.locator(".ac-toast button", has_text="Undo").click()
+        expect(s.locator(".item")).to_have_count(3)
+
         # --- Duplicate: a new, personal collection with the same items.
         a.click('[data-act="duplicate"]')
         answer_dialog(a, name="Adi's weekend ideas")
