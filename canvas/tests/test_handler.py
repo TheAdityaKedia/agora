@@ -452,3 +452,62 @@ def test_duplicate_custom_items_get_new_ids(api, canvas):
 
 def test_duplicate_unknown_404(api):
     assert api("POST", "/canvases/" + "a" * 22 + "/duplicate", {})["statusCode"] == 404
+
+
+# --- "This is mine": claiming from another device ---
+
+def test_claim_makes_it_yours_and_one_person(api, canvas):
+    pc = Api(client="client-adi-pc-01", ip="1.2.3.4")  # Adi's other device
+    v = view(pc, canvas)["canvas"]
+    assert not v["yours"] and not v["claimed"]
+    r = pc("POST", f"/canvases/{canvas}/claim")
+    assert r["statusCode"] == 200
+    assert r["json"]["canvas"]["yours"] and r["json"]["canvas"]["claimed"]
+    # Adding from both devices is still one person: the list stays personal.
+    add_event(api, canvas, E1)
+    add_event(pc, canvas, E2)
+    assert view(api, canvas)["canvas"]["people"] == 1
+    assert view(pc, canvas)["canvas"]["people"] == 1
+    # The creator's own view is unchanged ("created", not "claimed").
+    assert view(api, canvas)["canvas"]["yours"] and not view(api, canvas)["canvas"]["claimed"]
+    # Someone else still counts as a second person.
+    sam = Api(client="client-sam-0001", ip="5.6.7.8")
+    sam("PUT", f"/canvases/{canvas}/items/ev_{E1}/vote", {"name": "Sam"})
+    assert view(api, canvas)["canvas"]["people"] == 2
+
+
+def test_unclaim(api, canvas):
+    pc = Api(client="client-adi-pc-01")
+    pc("POST", f"/canvases/{canvas}/claim")
+    add_event(pc, canvas, E1)
+    r = pc("DELETE", f"/canvases/{canvas}/claim")
+    assert r["statusCode"] == 200 and not r["json"]["canvas"]["yours"]
+    assert view(api, canvas)["canvas"]["people"] == 2  # pc is a separate person again
+
+
+def test_claim_is_idempotent_and_creator_noop(api, canvas):
+    v1 = view(api, canvas)["canvas"]["version"]
+    r = api("POST", f"/canvases/{canvas}/claim")  # the creator: nothing to do
+    assert r["statusCode"] == 200 and r["json"]["canvas"]["version"] == v1
+    pc = Api(client="client-adi-pc-01")
+    for _ in range(2):
+        assert pc("POST", f"/canvases/{canvas}/claim")["json"]["canvas"]["claimed"]
+
+
+def test_claim_cap_and_404(api, canvas, monkeypatch):
+    import store
+    monkeypatch.setattr(store, "OWNER_CAP", 1)
+    assert Api(client="client-dev-00001")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 200
+    assert Api(client="client-dev-00002")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 409
+    assert api("POST", "/canvases/" + "a" * 22 + "/claim")["statusCode"] == 404
+
+
+def test_claim_needs_client(canvas):
+    assert Api(client=None)("POST", f"/canvases/{canvas}/claim")["statusCode"] == 400
+
+
+def test_duplicate_does_not_copy_owners(api, canvas):
+    pc = Api(client="client-adi-pc-01")
+    pc("POST", f"/canvases/{canvas}/claim")
+    copy = api("POST", f"/canvases/{canvas}/duplicate", {})["json"]["canvas"]["id"]
+    assert not view(pc, copy)["canvas"]["yours"]

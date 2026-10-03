@@ -56,7 +56,12 @@ class Conflict(Exception):
 
 
 def new_canvas_id():
-    return secrets.token_urlsafe(16)  # 128 bits → 22 base64url chars
+    """128 bits → 22 base64url chars. Never starting with "-": such ids read
+    as flags on a command line (scripts/admin.py)."""
+    while True:
+        cid = secrets.token_urlsafe(16)
+        if not cid.startswith("-"):
+            return cid
 
 
 def now_iso():
@@ -217,6 +222,27 @@ def duplicate_canvas(source_rows, fields, actor_name, client_id, source_name):
         _put(_log_row(cid, actor_name, "duplicated", name=source_name)),
     ])
     return meta
+
+
+OWNER_CAP = 20
+
+
+def set_owner(cid, client_id, on):
+    """Add or remove a claimed owner device (META.owner_clients, a string
+    set). Bumps the version so open pages re-read who's who."""
+    if on:
+        bump = _bump(cid, extra_add="owner_clients :c",
+                     condition="attribute_not_exists(owner_clients) OR size(owner_clients) < :cap",
+                     values={":c": {client_id}, ":cap": OWNER_CAP})
+    else:
+        bump = _bump(cid, values={":c": {client_id}})
+        bump["Update"]["UpdateExpression"] += " DELETE owner_clients :c"
+    try:
+        _transact([bump])
+    except _TxFailed:
+        if get_meta(cid) is None:
+            raise NotFound("canvas") from None
+        raise CapReached(f"a collection can have at most {OWNER_CAP} owner devices") from None
 
 
 def update_canvas(cid, fields, actor_name, winner_title=None):

@@ -3,6 +3,9 @@
     python canvas/scripts/admin.py --table agora-canvas-prod show <canvasId>
     python canvas/scripts/admin.py --table agora-canvas-prod delete <canvasId>
 
+Ids made before Oct 2026 can start with "-"; put `--` before such an id
+(`... delete -- -AbC...`) so it isn't read as an option.
+
 `delete` is a hard delete of the canvas and its activity log — use it when a
 canvas is reported. Uses AWS credentials/region from the environment. Prints
 counts, not contents, so names and comments don't end up in your terminal

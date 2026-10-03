@@ -161,9 +161,16 @@ def _canvas_out(meta, client=""):
                                     "winner_item_id", "created_at", "updated_at",
                                     "created_by_name")}
     out["version"] = int(meta["version"])
-    # Whether this browser made it (never the creator's id itself).
-    out["yours"] = bool(client) and meta.get("created_by_client") == client
+    # Whether this browser made it or claimed it ("This is mine" on another
+    # device). Never returns the ids themselves.
+    claimed = bool(client) and client in (meta.get("owner_clients") or set())
+    out["yours"] = bool(client) and (meta.get("created_by_client") == client or claimed)
+    out["claimed"] = claimed
     return out
+
+
+def _owners(meta):
+    return {meta.get("created_by_client")} | set(meta.get("owner_clients") or ())
 
 
 def _item_out(row):
@@ -188,7 +195,9 @@ def _view(cid, client):
     items, votes, comments = [], defaultdict(list), defaultdict(list)
     # Browsers that have done anything here: the page shows votes, comments
     # and "the plan" only once a collection involves more than one person.
-    people = {meta.get("created_by_client")}
+    # The owner's devices (creator + claimed) count as one person.
+    owners = _owners(meta)
+    people = {"owner"}
     for r in rows:
         kind, rest = r["SK"].split("#", 1)
         if kind == "ITEM":
@@ -220,6 +229,7 @@ def _view(cid, client):
                                       "fields", "name", "at") if e.get(k) is not None}
                for e in log]
     people.discard(None)
+    people = {"owner" if p in owners else p for p in people}
     canvas = _canvas_out(meta, client)
     canvas["people"] = len(people)
     return {"canvas": canvas, "items": live, "removed": removed, "log": log_out}
@@ -243,6 +253,25 @@ def create_canvas(req):
     meta = store.create_canvas(fields, actor, client)
     return 201, {"canvas": dict(_canvas_out(meta, client), people=1),
                  "items": [], "removed": [], "log": []}
+
+
+def claim_canvas(req, cid):
+    """ "This is mine": count this browser as one of the owner's devices, so
+    a collection started on your phone is yours on your PC too (listed under
+    Yours, and your additions don't make it look shared). DELETE undoes it.
+    Anyone with the link could claim; it changes only how the collection
+    is displayed, not what anyone can do."""
+    client = _require_client(req)
+    _rate_limit(req, WRITE_LIMIT)
+    meta = _meta_or_404(cid)
+    if req["method"] == "DELETE":
+        store.set_owner(cid, client, False)
+    elif meta.get("created_by_client") != client:
+        try:
+            store.set_owner(cid, client, True)
+        except store.CapReached as e:
+            raise ApiError(409, str(e)) from None
+    return 200, _view(cid, client)
 
 
 def duplicate_canvas(req, cid):
@@ -431,6 +460,7 @@ ROUTES = [
     (re.compile(r"^/canvases$"), {"POST": create_canvas}),
     (re.compile(rf"^/canvases/{CID}$"), {"GET": get_canvas, "PATCH": patch_canvas}),
     (re.compile(rf"^/canvases/{CID}/duplicate$"), {"POST": duplicate_canvas}),
+    (re.compile(rf"^/canvases/{CID}/claim$"), {"POST": claim_canvas, "DELETE": claim_canvas}),
     (re.compile(rf"^/canvases/{CID}/items$"), {"POST": add_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"DELETE": remove_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/restore$"), {"POST": restore_item}),
@@ -505,6 +535,7 @@ def _dispatch(method, path, event, headers):
             "body": _parse_body(event) if method != "GET" else {},
             "query": event.get("queryStringParameters") or {},
             "client": client if CLIENT_RE.fullmatch(client) else "",
+            "method": method,
             "ip": event.get("requestContext", {}).get("http", {}).get("sourceIp", ""),
         }
         return fn.__name__, fn(req, **m.groupdict())
