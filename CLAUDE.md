@@ -23,10 +23,10 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
 | Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
-| AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json` |
+| AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json`; re-tag without scraping: `retag.yml` (README → "Tagging budget and re-tagging") |
 | Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
 | Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
-| Event canvases API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |
+| Collections ("event canvases") API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |
 | Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
 | Venues, areas, the Area filter, "Places to review" | `feature-specs/venues.md`; `README.md` → "Venues and areas"; code: `service/places/`, data: `service/data/venues.json` + `venue_locations.json` |
 | Candidate sources to onboard next | `future-sources.md` |
@@ -44,13 +44,18 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   API), `tests/`. `data/` holds `sources.txt`,
   `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the
   committed `classifications.json` (tag cache).
-- `canvas/` — event canvases API: the only live backend. One Lambda + one
+- `canvas/` — collections API ("canvases" in code): the only live backend. One Lambda + one
   DynamoDB table (AWS CDK in `canvas/infra/`), independent of `service/` and
   Neon. Deployed by `.github/workflows/deploy-canvas-api.yml` (branch → dev
   stack, `main` → prod).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
-  `vendor/` (pinned MiniSearch), `events.json` (the manifest — carries the
-  taxonomy block + per-event `types`/`topics`/`cost`).
+  `canvas.html` + `canvas-client.js` (collections; talk to `canvas/`'s API),
+  `vendor/` (pinned MiniSearch; MapLibre GL, imported only when the map
+  opens), `events.json` (the manifest — carries the taxonomy block +
+  per-event `types`/`topics`/`cost`; venue coordinates + SF neighborhoods).
+- `scripts/` — `preview_site.py` (scratch real-data site outside the repo),
+  `measure_load.py` (first-load timing; numbers in
+  `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`.
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
 - `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
   source → single merge job (Neon) → guarded auto-merged data PR → deploy.

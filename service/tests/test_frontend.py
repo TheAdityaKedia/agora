@@ -60,7 +60,10 @@ def _events(n=N_EVENTS):
             "location": ("20 Annie St — Back Bar" if i % 4 == 2 else "The Dawn Club, San Francisco")
                         if jazz else "261 Columbus Ave",
             "url": f"https://example.com/e/{i}",
-            "description": "Doors at seven. Bring a friend and stay late.",
+            # Only "Doors at seven." shows until "more"; the rest (and the
+            # word "zanzibar" in event 5) is in descriptions.json.
+            "description": "Doors at seven. Bring a friend and stay late."
+                           + (" The Zanzibar quartet plays." if i == 5 else ""),
             "image_url": None,
             "sources": ["The Dawn Club"] if jazz else ["City Lights"],
             "types": [["performance", "concert"]] if jazz else [["talk"]],
@@ -93,23 +96,47 @@ def _events(n=N_EVENTS):
     return out
 
 
-@pytest.fixture(scope="module")
-def site(tmp_path_factory):
-    root = tmp_path_factory.mktemp("site")
-    shutil.copy(FRONTEND / "index.html", root / "index.html")
-    shutil.copytree(FRONTEND / "vendor", root / "vendor")
-    (root / "events.json").write_text(json.dumps({
+def _manifest(events):
+    return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "taxonomy": TAXONOMY,
         "regions": [{"id": "sf", "label": "San Francisco"}, {"id": "eastbay", "label": "East Bay"},
                     {"id": "northbay", "label": "North Bay"}],
         "venues": {"dawn-club": {"name": "The Dawn Club", "region": "sf",
                                  "address": "20 Annie St, San Francisco, CA 94105"}},
-        "events": _events(),
-    }))
+        "events": events,
+    }
+
+
+def _serve(root):
+    shutil.copy(FRONTEND / "index.html", root / "index.html")
+    shutil.copytree(FRONTEND / "vendor", root / "vendor")
     handler = functools.partial(_QuietHandler, directory=str(root))
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
+    return server
+
+
+@pytest.fixture(scope="module")
+def site(tmp_path_factory):
+    """The manifest as the exporter writes it: summaries in events.json, full
+    descriptions in descriptions.json (feature-specs/frontend-payload.md)."""
+    from exporters.json_export import split_descriptions
+    root = tmp_path_factory.mktemp("site")
+    events = _events()
+    (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
+    (root / "events.json").write_text(json.dumps(_manifest(events)))
+    server = _serve(root)
+    yield f"http://127.0.0.1:{server.server_port}/"
+    server.shutdown()
+
+
+@pytest.fixture(scope="module")
+def legacy_site(tmp_path_factory):
+    """An older manifest with descriptions inline and no descriptions.json."""
+    root = tmp_path_factory.mktemp("legacy")
+    (root / "events.json").write_text(json.dumps(_manifest(_events())))
+    server = _serve(root)
     yield f"http://127.0.0.1:{server.server_port}/"
     server.shutdown()
 
@@ -502,3 +529,402 @@ def test_calendar_uses_venue_name_and_address(browser, site):
     row.locator(".cal-btn").click()
     q = parse_qs(urlparse(row.locator("a.cal-google").get_attribute("href")).query)
     assert q["location"] == ["The Dawn Club · Back Bar, 20 Annie St, San Francisco, CA 94105"]
+
+
+# --- descriptions on demand (feature-specs/frontend-payload.md) ----------------
+
+def _desc_requests(page):
+    reqs = []
+    page.on("request", lambda r: reqs.append(r.url) if r.url.endswith("descriptions.json") else None)
+    return reqs
+
+
+def test_descriptions_load_only_on_more(browser, site):
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ)
+    page = ctx.new_page()
+    reqs = _desc_requests(page)
+    page.goto(site)
+    page.wait_for_selector(".event")
+    page.wait_for_timeout(500)
+    assert reqs == []  # not fetched for the first render
+    desc = page.locator(".event").nth(3).locator(".description")
+    assert desc.inner_text().startswith("Doors at seven.") and "Bring a friend" not in desc.inner_text()
+    desc.click()
+    page.wait_for_selector(".event:nth-child(4) .description.expanded, .description.expanded")
+    assert "Bring a friend and stay late." in page.locator(".description.expanded").first.inner_text()
+    assert len(reqs) == 1
+    # Collapsing and expanding another needs no new request.
+    page.locator(".description.expanded").first.click()
+    page.locator(".event").nth(5).locator(".description").click()
+    page.wait_for_selector(".description.expanded")
+    assert len(reqs) == 1
+
+
+def test_search_reaches_full_descriptions(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.fill("#search-input", "zanzibar")
+    page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
+    assert "Jazz night" in page.locator(".event .title").inner_text() or \
+        "Poetry" in page.locator(".event .title").inner_text()
+    assert page._agora_errors == []
+
+
+def test_shared_search_link_reaches_full_descriptions(browser, site):
+    page = _open(browser, site, DESKTOP, "?q=zanzibar")
+    page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
+
+
+def test_legacy_manifest_with_inline_descriptions(browser, legacy_site):
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ)
+    page = ctx.new_page()
+    reqs = _desc_requests(page)
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    page.goto(legacy_site)
+    page.wait_for_selector(".event")
+    page.locator(".event").nth(3).locator(".description").click()
+    page.wait_for_selector(".description.expanded")
+    page.fill("#search-input", "zanzibar")
+    page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
+    assert reqs == [] and errors == []
+
+
+# --- map view + SF neighborhoods (feature-specs/venues.md, phase 4) -----------
+
+DAWN = (-122.4013, 37.7876)    # 20 Annie St (lng, lat)
+ROXIE = (-122.42257, 37.76493)
+ALAMO = (-122.4347, 37.77636)
+
+
+def _map_events():
+    """The usual events, with some jazz nights at the Roxie (Mission), one at
+    Alamo Square (a street-precision, approximate pin) — and the poetry
+    readings, which have no venue, so no map location."""
+    out = _events()
+    for e in out:
+        n = int(e["id"][2:]) if e["id"].startswith("ev") else -1
+        if n % 8 == 4:
+            e.update(venue="roxie", location="Roxie Theater", region="sf")
+        elif n == 6:
+            e.update(venue="alamo-square", location="Alamo Square", region="sf")
+    return out
+
+
+def _map_manifest(events):
+    m = _manifest(events)
+    m["venues"] = {
+        "dawn-club": {**m["venues"]["dawn-club"], "lng": DAWN[0], "lat": DAWN[1], "neighborhood": "soma"},
+        "roxie": {"name": "Roxie Theater", "region": "sf", "address": "3117 16th St, San Francisco, CA",
+                  "lng": ROXIE[0], "lat": ROXIE[1], "neighborhood": "mission"},
+        "alamo-square": {"name": "Alamo Square", "region": "sf", "address": "San Francisco, CA 94117",
+                         "lng": ALAMO[0], "lat": ALAMO[1], "approx": True},
+    }
+    m["neighborhoods"] = [{"id": "haight-ashbury", "label": "Haight Ashbury"},
+                          {"id": "mission", "label": "Mission"}, {"id": "soma", "label": "SoMa"}]
+    return m
+
+
+@pytest.fixture(scope="module")
+def map_site(tmp_path_factory):
+    from exporters.json_export import split_descriptions
+    root = tmp_path_factory.mktemp("mapsite")
+    events = _map_events()
+    (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
+    (root / "events.json").write_text(json.dumps(_map_manifest(events)))
+    server = _serve(root)
+    yield f"http://127.0.0.1:{server.server_port}/"
+    server.shutdown()
+
+
+def _map_page(browser, site, viewport=DESKTOP, query="", touch=False, beta=True):
+    """A page with the map's tile server unreachable (as in CI: no network),
+    so the map falls back to pins on a blank background. `beta`: the browser
+    is in the private beta (the flag frontend/beta/ sets)."""
+    ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, timezone_id=TZ)
+    if beta:
+        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
+    ctx.route("https://tiles.openfreemap.org/**", lambda route: route.abort())
+    page = ctx.new_page()
+    page._agora_errors = []
+    page._agora_requests = []
+    page.on("pageerror", lambda e: page._agora_errors.append(str(e)))
+    page.on("request", lambda r: page._agora_requests.append(r.url))
+    page.goto(site + query)
+    page.wait_for_selector(".event, #map-wrap:not([hidden])", timeout=15000)
+    return page
+
+
+def _wait_for_pins(page):
+    page.wait_for_function("performance.getEntriesByName('agora:map-pins').length > 0", timeout=20000)
+
+
+def _pins(page):
+    """{venue id: event count} as the map's source has it."""
+    return page.evaluate("""(async () => {
+        const data = await agoraMap.getSource('venues').getData();
+        return Object.fromEntries(data.features.map(f => [f.properties.venue, f.properties.events]));
+    })()""")
+
+
+def _click_lnglat(page, lnglat):
+    pt = page.evaluate("(ll) => { const p = agoraMap.project(ll); return [p.x, p.y]; }", list(lnglat))
+    box = page.locator("#map").bounding_box()
+    page.mouse.click(box["x"] + pt[0], box["y"] + pt[1])
+
+
+def _settle(page):
+    page.wait_for_function("agoraMap.loaded() && !agoraMap.isMoving()", timeout=10000)
+
+
+def test_map_ui_only_with_coordinates(browser, site, legacy_site, map_site):
+    # Today's manifest (venues without coordinates or neighborhoods), and an
+    # older one: no toggle, no neighborhood filter, and ?view=map is ignored.
+    for s in (site, legacy_site):
+        page = _map_page(browser, s, query="?view=map&at=37.77,-122.42,13&hood=mission")
+        assert page.locator("#view-toggle").is_hidden()
+        assert page.locator("#hood-dropdown").is_hidden()
+        assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0
+        assert "view=" not in page.url and "hood=" not in page.url
+        assert not any("maplibre" in u for u in page._agora_requests)
+        assert page._agora_errors == []
+    page = _map_page(browser, map_site)
+    assert page.locator("#view-toggle").is_visible() and page.locator("#hood-dropdown").is_visible()
+
+
+def test_map_library_loads_only_when_the_map_opens(browser, map_site):
+    page = _map_page(browser, map_site, viewport=PHONE, touch=True)
+    page.wait_for_timeout(800)  # past the first render and the index build
+    assert not any("maplibre" in u for u in page._agora_requests)
+    page.click('[data-view="map"]')
+    _wait_for_pins(page)
+    loaded = [u.rsplit("/", 1)[1] for u in page._agora_requests if "maplibre" in u]
+    assert "maplibre-gl.mjs" in loaded and "maplibre-gl.css" in loaded
+    assert "view=map" in page.url and page.locator("#list").is_hidden()
+    assert page.get_attribute('[data-view="map"]', "aria-pressed") == "true"
+    # Tiles unreachable: pins on a blank background, and the map says so.
+    assert "Base map unavailable" in page.inner_text("#map-status")
+    assert page._agora_errors == []
+    # Back to the list.
+    page.click('[data-view="list"]')
+    assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0 and "view=" not in page.url
+
+
+def test_pins_are_per_venue_and_follow_the_filters(browser, map_site):
+    events = [e for e in _map_events() if e["id"] != "started"]
+    want = {}
+    for e in events:
+        if e["venue"]:
+            want[e["venue"]] = want.get(e["venue"], 0) + 1
+    page = _map_page(browser, map_site, query="?view=map")
+    _wait_for_pins(page)
+    assert _pins(page) == want
+    no_venue = sum(1 for e in events if not e["venue"])
+    assert f"{no_venue} events have no map location" in page.inner_text("#meta")
+    # Type: talks are the poetry readings, none of which has a venue.
+    page.click('#type-chips [data-tagval="talk"]')
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '0'")
+    assert _pins(page) == {}
+    assert "No events here have a map location" in page.inner_text("#map-status")
+    page.click('#type-chips [data-tagval="talk"]')
+    # Search narrows the pins too.
+    page.fill("#search-input", "Busy day")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '1'")
+    assert _pins(page) == {"dawn-club": BUSY}
+    page.fill("#search-input", "")
+    # The venue filter: one pin.
+    page = _map_page(browser, map_site, query="?view=map&venue=roxie")
+    _wait_for_pins(page)
+    assert list(_pins(page)) == ["roxie"]
+
+
+def test_clicking_a_pin_lists_its_events(browser, map_site):
+    roxie = sum(1 for e in _map_events() if e["venue"] == "roxie")
+    page = _map_page(browser, map_site, query="?view=map&at=37.7649,-122.4226,15.5")
+    _wait_for_pins(page)
+    _settle(page)
+    _click_lnglat(page, ROXIE)
+    page.wait_for_selector("#map-panel:not([hidden]) .event")
+    head = page.inner_text("#map-panel .panel-head")
+    assert "Roxie Theater" in head and f"{roxie} events" in head
+    rows = page.locator("#map-panel .event")
+    assert rows.count() == min(roxie, 30)
+    assert set(rows.locator(".location-btn").all_inner_texts()) == {"Roxie Theater"}
+    # Rows open the event like the list's (title links out; dates shown).
+    assert rows.first.locator(".title a").get_attribute("href").startswith("https://example.com/e/")
+    assert rows.first.locator(".td-date").count() == 1
+    page.click("#map-panel [data-panel-all]")
+    assert page.locator("#map-panel .event").count() == roxie
+    # "Show in list": the venue filter, in the list.
+    page.click("#map-panel [data-panel-list]")
+    assert "venue=roxie" in page.url and "view=" not in page.url
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"Roxie Theater"}
+
+
+def test_clicking_a_cluster_zooms_in(browser, map_site):
+    page = _map_page(browser, map_site, query="?view=map&at=37.7750,-122.4200,9")
+    _wait_for_pins(page)
+    _settle(page)
+    clusters = page.evaluate("agoraMap.queryRenderedFeatures({layers: ['clusters']}).length")
+    assert clusters >= 1
+    center = page.evaluate("agoraMap.queryRenderedFeatures({layers: ['clusters']})[0].geometry.coordinates")
+    _click_lnglat(page, center)
+    page.wait_for_function("agoraMap.getZoom() > 9.5", timeout=10000)
+
+
+def test_approximate_pin_is_labelled(browser, map_site):
+    page = _map_page(browser, map_site, query="?view=map&at=37.7764,-122.4347,16")
+    _wait_for_pins(page)
+    _settle(page)
+    _click_lnglat(page, ALAMO)
+    page.wait_for_selector("#map-panel:not([hidden]) .event")
+    assert "Approximate location" in page.inner_text("#map-panel .panel-head")
+
+
+def test_map_view_and_position_restore_from_the_url(browser, map_site):
+    page = _map_page(browser, map_site, viewport=PHONE, touch=True,
+                     query="?view=map&at=37.7650,-122.4200,14.5")
+    _wait_for_pins(page)
+    c = page.evaluate("[agoraMap.getCenter().lat, agoraMap.getCenter().lng, agoraMap.getZoom()]")
+    assert abs(c[0] - 37.765) < 1e-3 and abs(c[1] + 122.42) < 1e-3 and abs(c[2] - 14.5) < 1e-6
+    assert page.get_attribute('[data-view="map"]', "aria-pressed") == "true"
+    # Moving the map rewrites ?at=.
+    page.evaluate("agoraMap.jumpTo({center: [-122.41, 37.78], zoom: 13})")
+    page.wait_for_function("decodeURIComponent(location.search).includes('at=37.7800,-122.4100,13')")
+    # Garbled or out-of-area positions are ignored: the map fits the pins.
+    for bad in ("at=nonsense", "at=48.85,2.35,12", "at=37.77,-122.42,99"):
+        page = _map_page(browser, map_site, query="?view=map&" + bad)
+        _wait_for_pins(page)
+        assert page._agora_errors == []
+        z = page.evaluate("agoraMap.getZoom()")
+        assert 9 < z <= 14
+        lng, lat = page.evaluate("[agoraMap.getCenter().lng, agoraMap.getCenter().lat]")
+        assert -122.45 < lng < -122.39 and 37.76 < lat < 37.79
+
+
+def test_neighborhood_filter_in_list_and_map(browser, map_site):
+    events = [e for e in _map_events() if e["id"] != "started"]
+    roxie = sum(1 for e in events if e["venue"] == "roxie")
+    page = _map_page(browser, map_site)
+    # Only neighborhoods with events, with counts.
+    rows = page.locator("#hood-list label")
+    assert rows.locator("span:not(.count)").all_text_contents() == ["Mission", "SoMa"]
+    assert rows.locator(".count").all_text_contents() == [str(roxie), str(sum(
+        1 for e in events if e["venue"] == "dawn-club"))]
+    page.click("#hood-summary")
+    page.check('#hood-list [data-hood="mission"]')
+    assert "hood=mission" in page.url
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"Roxie Theater"}
+    assert "Mission" in page.inner_text("#active-filters")
+    assert page.inner_text("#hood-summary") == "Mission"
+    # Alamo Square is SF but has no neighborhood: counted as unknown.
+    assert "no known area or neighborhood" in page.inner_text("#meta")
+    # OR with another neighborhood; with an area, neighborhoods narrow SF only.
+    page.check('#hood-list [data-hood="soma"]')
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {
+        "Roxie Theater", "The Dawn Club", "The Dawn Club · Back Bar"}
+    page.uncheck('#hood-list [data-hood="soma"]')
+    page.click('#area-chips [data-area="eastbay"]')
+    regions = set(page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)"))
+    assert regions == {"sf", "eastbay"}
+    page.click('#area-chips [data-area="eastbay"]')
+    # The map shows the same: one pin, the Roxie.
+    page.click('[data-view="map"]')
+    _wait_for_pins(page)
+    assert _pins(page) == {"roxie": roxie}
+    assert "view=map" in page.url and "hood=mission" in page.url
+    # Pill × clears it (and the badge counts it while it's on).
+    page.set_viewport_size(PHONE)
+    assert page.inner_text("#filters-count") == "1"
+    page.click('#active-filters [data-clear="hood"]')
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '3'")
+    assert "hood=" not in page.url
+    page.set_viewport_size(DESKTOP)
+    # A shared link restores it; Reset clears it.
+    page = _map_page(browser, map_site, query="?hood=mission,soma,nowhere")
+    assert page.is_checked('#hood-list [data-hood="mission"]') and page.is_checked('#hood-list [data-hood="soma"]')
+    assert page.inner_text("#hood-summary") == "2 SF neighborhoods"
+    assert len(page.locator("#active-filters .active-pill").all()) == 2
+    page.click("#reset")
+    assert "hood=" not in page.url and not page.is_checked('#hood-list [data-hood="mission"]')
+    assert page.inner_text("#active-filters").strip() == ""
+    assert page._agora_errors == []
+
+
+def test_no_neighborhood_ui_without_neighborhoods(browser, site, legacy_site):
+    for s in (site, legacy_site):
+        page = _map_page(browser, s, query="?hood=mission")
+        assert page.locator("#hood-dropdown").is_hidden() and "hood=" not in page.url
+        assert page._agora_errors == []
+
+
+def test_sf_chip_and_neighborhoods_replace_each_other(browser, map_site):
+    # Neighborhoods narrow SF, so the SF chip and a neighborhood are never
+    # both on: the chip would claim "all of SF" while the list shows less.
+    page = _map_page(browser, map_site)
+    page.click('#area-chips [data-area="sf"]')
+    page.click("#hood-summary")
+    page.check('#hood-list [data-hood="mission"]')
+    assert page.get_attribute('#area-chips [data-area="sf"]', "aria-pressed") == "false"
+    assert "hood=mission" in page.url and "area=" not in page.url
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"Roxie Theater"}
+    page.click('#area-chips [data-area="sf"]')
+    assert not page.is_checked('#hood-list [data-hood="mission"]') and "hood=" not in page.url
+    assert page.inner_text("#hood-summary") == "SF neighborhoods"
+    # A hand-made link with both: the neighborhoods win; other areas stay.
+    page = _map_page(browser, map_site, query="?area=sf,eastbay&hood=mission")
+    assert page.get_attribute('#area-chips [data-area="sf"]', "aria-pressed") == "false"
+    assert page.get_attribute('#area-chips [data-area="eastbay"]', "aria-pressed") == "true"
+    assert "area=eastbay" in page.url and "hood=mission" in page.url
+    assert page._agora_errors == []
+
+
+def test_map_goes_to_the_results_when_none_are_in_view(browser, map_site):
+    # Opened over Berkeley (no pins there): kept, since the link asked for it.
+    page = _map_page(browser, map_site, query="?view=map&at=37.8700,-122.2600,15")
+    _wait_for_pins(page)
+    _settle(page)
+    assert abs(page.evaluate("agoraMap.getCenter().lat") - 37.87) < 1e-3
+    # A filter change that leaves nothing in view: the map fits the results.
+    page.fill("#search-input", "Busy day")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '1'")
+    page.wait_for_function("Math.abs(agoraMap.getCenter().lng - (%f)) < 0.01" % DAWN[0], timeout=10000)
+    # One that leaves a result in view keeps the position.
+    _settle(page)
+    page.evaluate("agoraMap.jumpTo({center: [-122.415, 37.775], zoom: 12})")
+    page.fill("#search-input", "")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '3'")
+    page.wait_for_timeout(300)
+    c = page.evaluate("[agoraMap.getCenter().lng, agoraMap.getZoom()]")
+    assert abs(c[0] + 122.415) < 1e-6 and c[1] == 12
+    # Nothing matches at all: say so (not "no map location").
+    page.fill("#search-input", "zzzqqqxx")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '0'")
+    assert "No events match" in page.inner_text("#map-status")
+    assert page._agora_errors == []
+
+
+def test_map_and_neighborhoods_are_beta_only(browser, map_site):
+    # Outside the beta: no toggle, no neighborhood filter, links ignored,
+    # MapLibre never requested.
+    page = _map_page(browser, map_site, query="?view=map&at=37.77,-122.42,13&hood=mission", beta=False)
+    assert page.locator("#view-toggle").is_hidden() and page.locator("#hood-dropdown").is_hidden()
+    assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0
+    assert "view=" not in page.url and "hood=" not in page.url
+    assert not any("maplibre" in u for u in page._agora_requests)
+    assert page._agora_errors == []
+    # ?beta=1 (where frontend/beta/ redirects) lets the browser in.
+    page = _map_page(browser, map_site, query="?beta=1&view=map", beta=False)
+    _wait_for_pins(page)
+    assert page.locator("#view-toggle").is_visible() and page.locator("#hood-dropdown").is_visible()
+
+
+def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
+    page = _map_page(browser, map_site, query="?hood=mission")
+    page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+    page.click("#copy-link")
+    link = page.evaluate("navigator.clipboard.readText()")
+    assert link == map_site + "beta/?hood=mission"
+    page = _map_page(browser, map_site, query="?type=talk")
+    page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+    page.click("#copy-link")
+    assert page.evaluate("navigator.clipboard.readText()") == map_site + "?type=talk"

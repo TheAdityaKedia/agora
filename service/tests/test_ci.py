@@ -193,7 +193,7 @@ def test_merge_exports_to_given_path(db_session, pipeline_env, monkeypatch):
 def test_merge_scopes_classification_on_filtered_run(db_session, pipeline_env, monkeypatch):
     seen = {}
     monkeypatch.setattr("main.classify_upcoming",
-                        lambda source_names=None: seen.setdefault("scope", source_names))
+                        lambda source_names=None, **kw: seen.setdefault("scope", source_names))
     results = pipeline_env / "results"
     _write_result(results, "result-0", "https://first.com", source_name="First", events=[_raw()])
     ci.merge_results(results, source_filters=["first.com"])
@@ -201,12 +201,57 @@ def test_merge_scopes_classification_on_filtered_run(db_session, pipeline_env, m
 
 
 def test_merge_survives_classification_failure(db_session, pipeline_env, monkeypatch):
-    def boom(source_names=None):
+    def boom(source_names=None, **kw):
         raise RuntimeError("no AWS creds")
 
     monkeypatch.setattr("main.classify_upcoming", boom)
     report = ci.merge_results(pipeline_env / "results")  # must not raise
     assert report["exported"] == 0
+    assert report["classify"] == {"error": "RuntimeError: no AWS creds"}
+
+
+def _tagging(stats):
+    def fake(source_names=None, stats=None, time_budget_s=None):
+        fake.budget = time_budget_s
+        stats.update({"classified": 800, "cached": 10, "failed": 1, "left": 1500,
+                      "throttled": 4242, "seconds": 900})
+        return 800, 10
+    return fake
+
+
+def test_merge_report_carries_tagging_stats(db_session, pipeline_env, monkeypatch):
+    monkeypatch.setattr("main.classify_upcoming", _tagging({}))
+    report = ci.merge_results(pipeline_env / "results")
+    assert report["classify"]["throttled"] == 4242
+    guard = {"passed": True, "base_count": 1, "count": 1}
+    body = ci.render_pr_body(report, guard)
+    assert "**Tagging:** 800 tagged in 900s · 1 failed · 1500 left for the next run · " \
+           "4242 throttled retries" in body
+    assert "| Source | Status |" in body
+
+
+def test_retag_cli_tags_and_exports_without_scraping(db_session, pipeline_env, monkeypatch):
+    fake = _tagging({})
+    monkeypatch.setattr("main.classify_upcoming", fake)
+    report_path = pipeline_env / "report.json"
+    ci.cli(["retag", "--report", str(report_path), "--budget-minutes", "500"])
+    report = json.loads(report_path.read_text())
+    assert report["kind"] == "retag" and report["sources"] == [] and report["exported"] == 0
+    assert fake.budget == ci.MAX_RETAG_MINUTES * 60  # capped to fit the job's timeout
+    body = ci.render_pr_body(report, {"passed": True, "base_count": 5, "count": 5})
+    assert body.startswith("Automated re-tag (no scraping)")
+    assert "| Source |" not in body and "Failed sources" not in body
+    assert "4242 throttled retries" in body
+
+
+def test_retag_fails_when_tagging_fails(db_session, pipeline_env, monkeypatch):
+    import pytest
+
+    def down(**kw):
+        raise RuntimeError("model unreachable")
+    monkeypatch.setattr("main.classify_upcoming", down)
+    with pytest.raises(RuntimeError):
+        ci.retag_and_export(10)
 
 
 def test_merge_cli_writes_report(db_session, pipeline_env):

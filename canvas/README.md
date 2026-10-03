@@ -1,6 +1,7 @@
 # Canvas API
 
-Backend for **event canvases** (shareable hangout shortlists). One Python
+Backend for **collections** (called canvases in the code): named lists of
+events you keep for yourself or share so friends can add, vote and comment. One Python
 Lambda behind a Lambda Function URL plus one DynamoDB table, with the
 infrastructure defined in code (AWS CDK, Python) in `infra/`. Design and
 rationale: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md).
@@ -20,6 +21,44 @@ scripts/smoke.py          create → add → vote → read against a deployed UR
 scripts/admin.py          operator show / hard-delete a canvas
 tests/              pytest + moto (API) and CDK assertions (infra)
 ```
+
+## Private beta (collections are gated)
+
+Collections ship behind a soft gate: `BETA_GATE = true` in
+`frontend/canvas-client.js`. With it on:
+
+- **Invite link:** `https://theadityakedia.github.io/agora/beta/`. Opening it
+  marks that browser as in the beta and lands on the normal site, where
+  Start a collection / Your collections now appear.
+- **Shared collections** get links like `…/agora/beta/canvas.html?c=<id>`, so
+  whoever opens one is let into the beta too. Without the flag, the site shows
+  no collections UI and `canvas.html` says "Collections are in private beta".
+- It hides UI only; the API itself is open (nothing secret depends on it).
+- The same invite also unlocks the **map view and SF neighborhood filter**,
+  gated separately by `MAP_BETA_GATE` in `frontend/index.html` (same
+  per-browser flag, so each feature launches on its own).
+
+**To launch:** set `BETA_GATE = false` (one line) and merge. Everyone sees
+collections, new links drop `/beta/`, and **keep `frontend/beta/`**: those
+pages keep redirecting, so every link shared during the beta still opens.
+
+## Frontend
+
+`frontend/canvas.html` (a canvas, or "Your canvases" without `?c=`) and
+canvas mode on `frontend/index.html`, sharing `frontend/canvas-client.js`,
+which holds the prod and dev API URLs. Pages served from `localhost` talk to
+dev, or to `?api=<url>` (remembered in the browser):
+
+```bash
+.venv/bin/python canvas/scripts/local_server.py --moto      # API on :8787
+python3 -m http.server -d frontend 8000
+# open http://localhost:8000/?api=http://localhost:8787
+```
+
+`canvas/scripts/e2e_frontend.py` plays the whole flow in headless Chromium
+(two friends: create, add in canvas mode, vote, comment, remove + undo, pick,
+custom item) against those two servers and fails on any page error. Needs
+`pip install playwright` and a Chromium (`CHROMIUM_PATH=` to reuse one).
 
 ## Develop
 

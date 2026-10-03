@@ -56,7 +56,12 @@ class Conflict(Exception):
 
 
 def new_canvas_id():
-    return secrets.token_urlsafe(16)  # 128 bits → 22 base64url chars
+    """128 bits → 22 base64url chars. Never starting with "-": such ids read
+    as flags on a command line (scripts/admin.py)."""
+    while True:
+        cid = secrets.token_urlsafe(16)
+        if not cid.startswith("-"):
+            return cid
 
 
 def now_iso():
@@ -184,6 +189,60 @@ def create_canvas(fields, actor_name, client_id):
         _put(_log_row(cid, actor_name, "created")),
     ])
     return meta
+
+
+def duplicate_canvas(source_rows, fields, actor_name, client_id, source_name):
+    """Copy a canvas's live items into a new canvas (no votes, comments, plan
+    or log). Items are written first and META last, so a failure part-way
+    leaves only unreachable rows, never a half-copied canvas."""
+    cid = new_canvas_id()
+    now = now_iso()
+    live = [r for r in source_rows
+            if r["SK"].startswith("ITEM#") and "removed_at" not in r][:LIVE_ITEM_CAP]
+    with table().batch_writer() as batch:
+        for r in live:
+            item_id = r["id"] if r["kind"] == "event" else "c_" + secrets.token_urlsafe(6)
+            row = {k: v for k, v in r.items() if k not in ("removed_at", "removed_by_name")}
+            # Keep who added it (provenance); the copy's maker is its client.
+            row.update(PK=_pk(cid), SK=f"ITEM#{item_id}", id=item_id,
+                       added_by_client=client_id, added_at=now)
+            batch.put_item(Item=row)
+    meta = {
+        "PK": _pk(cid), "SK": "META", "id": cid,
+        "name": fields["name"], "note": fields.get("note") or "",
+        "version": 1, "item_count": len(live), "comment_count": 0,
+        "created_at": now, "updated_at": now,
+        "created_by_name": actor_name, "created_by_client": client_id,
+    }
+    for k in ("date_from", "date_to"):
+        if fields.get(k):
+            meta[k] = fields[k]
+    _transact([
+        _put(meta, "attribute_not_exists(PK)"),
+        _put(_log_row(cid, actor_name, "duplicated", name=source_name)),
+    ])
+    return meta
+
+
+OWNER_CAP = 20
+
+
+def set_owner(cid, client_id, on):
+    """Add or remove a claimed owner device (META.owner_clients, a string
+    set). Bumps the version so open pages re-read who's who."""
+    if on:
+        bump = _bump(cid, extra_add="owner_clients :c",
+                     condition="attribute_not_exists(owner_clients) OR size(owner_clients) < :cap",
+                     values={":c": {client_id}, ":cap": OWNER_CAP})
+    else:
+        bump = _bump(cid, values={":c": {client_id}})
+        bump["Update"]["UpdateExpression"] += " DELETE owner_clients :c"
+    try:
+        _transact([bump])
+    except _TxFailed:
+        if get_meta(cid) is None:
+            raise NotFound("canvas") from None
+        raise CapReached(f"a collection can have at most {OWNER_CAP} owner devices") from None
 
 
 def update_canvas(cid, fields, actor_name, winner_title=None):

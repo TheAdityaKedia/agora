@@ -1,26 +1,29 @@
 """JSON exporter for the static-site path.
 
-Reads persisted events from the database and writes a single JSON manifest
-suitable for a static frontend (e.g. served from GitHub Pages / S3). Prunes
-past events so the file stays small.
+Reads persisted events from the database and writes the manifest for the
+static frontend (GitHub Pages). Prunes past events so the files stay small.
 
-Output shape:
-    {
-      "generated_at": "2026-09-11T18:04:00+00:00",
-      "events": [ { ...event... }, ... ]
-    }
+Two files (feature-specs/frontend-payload.md):
+    events.json        {"generated_at", "taxonomy", "regions", "neighborhoods",
+                        "venues", "events": [ {...event, "summary", "more"?}, ... ]}
+    descriptions.json  {"<event id>": "<full description>", ...}
+
+Events carry the description's first sentence as `summary` (what a row shows
+collapsed) and `more: true` when there is more; the full text lives in
+descriptions.json, which the page fetches only on "more" or search.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import taxonomy
 from classifications import Cache
-from places.regions import REGIONS
+from places.regions import REGIONS, neighborhood_at, neighborhoods
 from places.store import DATA_DIR as VENUES_DIR, Store as VenueStore
 from db import get_session
 from models import Event
@@ -41,6 +44,41 @@ DEFAULT_CLASSIFICATIONS = Path(__file__).parent.parent / "data" / "classificatio
 # the type (not the topic) keeps genuine events that merely touch food/drink in
 # another format: a cooking WORKSHOP, a food TALK, a dinner + PERFORMANCE.
 _FOOD_DRINK_TYPE = ["social", "food-drink"]
+
+
+# Must match the page's PREVIEW_MAX / firstSentence() in frontend/index.html:
+# the summary is exactly what a collapsed row shows.
+SUMMARY_MAX = 180
+DESCRIPTIONS_FILE = "descriptions.json"
+
+
+def summarize(text: str | None) -> tuple[str, bool]:
+    """(first sentence, whether the full text is longer) — a port of the
+    page's firstSentence(): whitespace collapsed, up to the first . ! or ?
+    followed by a space or the end, cut to SUMMARY_MAX at a word boundary."""
+    full = re.sub(r"\s+", " ", text or "").strip()
+    if not full:
+        return "", False
+    m = re.match(r"^[^.!?]*[.!?](?=\s|$)", full)
+    s = m.group(0).strip() if m else full
+    if len(s) > SUMMARY_MAX:
+        s = re.sub(r"\s+\S*$", "", s[:SUMMARY_MAX]).strip()
+    return s, len(s) < len(full)
+
+
+def split_descriptions(payload: list[dict]) -> dict[str, str]:
+    """Replace each event's `description` with `summary` (+ `more`), in
+    place; return {id: full description} for the events with more."""
+    full = {}
+    for e in payload:
+        text = e.pop("description", None)
+        summary, more = summarize(text)
+        if summary:
+            e["summary"] = summary
+        if more:
+            e["more"] = True
+            full[e["id"]] = re.sub(r"\s+", " ", text).strip()
+    return full
 
 
 def _is_food_drink_only(serialized: dict) -> bool:
@@ -86,11 +124,43 @@ def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> 
     return out
 
 
+# Map pins (feature-specs/venues.md, phase 4): which precisions get
+# coordinates in the manifest. Never `city` — no pin at a city centroid.
+# `street` pins are drawn hollow ("approximate").
+PIN_PRECISIONS = {"building", "street"}
+COORD_DECIMALS = 5  # ~1 m
+
+
 def _venue_summary(v: dict) -> dict:
     out = {"name": v["name"], "region": v["region"]}
     if v.get("address"):
         out["address"] = v["address"]
+    if v.get("precision") in PIN_PRECISIONS and v.get("lat") is not None:
+        lat, lng = round(v["lat"], COORD_DECIMALS), round(v["lng"], COORD_DECIMALS)
+        out["lat"], out["lng"] = lat, lng
+        if v["precision"] != "building":
+            out["approx"] = True
+        # SF neighbourhood from the coordinates, at export time, never stored:
+        # building precision only (a street can cross a boundary).
+        elif v["region"] == "sf":
+            hood = neighborhood_at(lat, lng)
+            if hood:
+                out["neighborhood"] = hood
     return out
+
+
+def venues_block(venues: VenueStore | None, payload: list[dict]) -> dict:
+    """The manifest's `venues`: the venues events point at, stored once."""
+    if not venues:
+        return {}
+    return {vid: _venue_summary(venues.venues[vid])
+            for vid in sorted({e["venue"] for e in payload if e.get("venue")})
+            if vid in venues.venues}
+
+
+def neighborhoods_block() -> list[dict]:
+    """The manifest's `neighborhoods`: every SF neighbourhood, by label."""
+    return [{"id": n, "label": label} for n, label in neighborhoods().items()]
 
 
 def _load_venues(venues_dir: Path) -> VenueStore | None:
@@ -150,21 +220,26 @@ def export_json(
         print(f"[export] dropped {dropped} food/drink-only events", flush=True)
     payload = kept
 
+    descriptions = split_descriptions(payload)
     path.parent.mkdir(parents=True, exist_ok=True)
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         # The taxonomy travels with the manifest so the static frontend builds
         # its type/topic filters from the same source of truth (no extra fetch).
         "taxonomy": taxonomy.load_taxonomy(),
-        # Area filter: the regions in display order, and the venues events
-        # point at (stored once, not per event).
+        # Area filter: the regions in display order, SF neighbourhoods, and
+        # the venues events point at (stored once, not per event).
         "regions": [{"id": r, "label": label} for r, label in REGIONS.items()],
-        "venues": {vid: _venue_summary(venues.venues[vid])
-                   for vid in sorted({e["venue"] for e in payload if e["venue"]})} if venues else {},
+        "neighborhoods": neighborhoods_block(),
+        "venues": venues_block(venues, payload),
         "events": payload,
     }
     with open(path, "w") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
+    # Beside events.json; one event per line (in event order) keeps the
+    # data PR diffs line-based like the manifest's.
+    with open(path.with_name(DESCRIPTIONS_FILE), "w") as f:
+        json.dump(descriptions, f, indent=0, ensure_ascii=False)
     return len(payload)
 
 

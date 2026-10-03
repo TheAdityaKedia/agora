@@ -38,7 +38,7 @@ agora/
 │   └── requirements.txt
 ├── frontend/                   # Static site served by GitHub Pages
 │   ├── index.html              # Self-contained page (inline CSS/JS, no build)
-│   ├── vendor/                 # Vendored client libs (MiniSearch, pinned)
+│   ├── vendor/                 # Vendored client libs (MiniSearch, MapLibre GL; pinned)
 │   └── events.json             # Manifest the scraper writes, the page reads
 ├── .github/workflows/          # CI
 │   └── deploy-pages.yml        # Publishes frontend/ to GitHub Pages
@@ -179,6 +179,17 @@ writer at a time) and skips tagging (CI tags new shows).
 **Operations** — when a scraper's *output* changes (not just new events), its
 stale rows live on in Neon (saves never update): delete them in the Neon SQL
 editor before the next run, e.g. `DELETE FROM events WHERE sources->>0 = '<NAME>';`.
+
+**Tagging budget and re-tagging** — the merge job tags new or stale shows
+8 at a time for at most 15 minutes, then saves what it has; the rest wait for
+the next run and keep their old tags meanwhile. The log and the data PR show
+how many were tagged, failed, left, and how many calls Bedrock **throttled**
+(botocore retries those quietly, so a throttled run otherwise just looks
+slow). To catch up without scraping (after a taxonomy bump, or a throttled
+run), run **Re-tag events** (`retag.yml`; `gh workflow run retag.yml -f
+budget_minutes=40`): it tags upcoming events already in Neon for up to 55
+minutes, re-exports and ships through the same data PR path. Run it again
+until its PR says 0 left.
 
 **Duplicates across sources** — saves merge a new event into an existing row
 from a *different* source at the same start time when the titles match after

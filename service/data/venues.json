@@ -87,6 +87,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "1080-23rd-ave": {
+      "added": "2026-10-03",
+      "address": "1080 23rd Avenue, Oakland, CA 94606",
+      "evidence": [
+        "map: 1080 in Alameda County (building, way/28336479)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.781095,
+      "lng": -122.237092,
+      "name": "1080 23rd Ave",
+      "osm": "way/28336479",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "110-yacht-rd": {
       "added": "2026-10-02",
       "address": "110 Yacht Rd, San Francisco, CA 94123",
@@ -100,6 +116,41 @@
       "precision": "street",
       "region": "sf",
       "status": "verified"
+    },
+    "1172-ocean-ave": {
+      "added": "2026-10-03",
+      "address": "1172 Ocean Avenue, Oakland, CA 94608",
+      "evidence": [
+        "map: 1172 in Alameda County (building, way/467189696)",
+        "text: Emeryville",
+        "street number matches"
+      ],
+      "lat": 37.846913,
+      "lng": -122.286828,
+      "name": "1172 Ocean Ave",
+      "osm": "way/467189696",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "123-main-st": {
+      "added": "2026-10-03",
+      "address": "123 Main Street, San Francisco, CA 94105",
+      "evidence": [
+        "map: 123 in San Francisco County (building, way/680402688)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.791576,
+      "lng": -122.394462,
+      "name": "123 Main St",
+      "osm": "way/680402688",
+      "possible_duplicates": [
+        "the-commonwealth-club-of-california"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "1250-thomas-ave": {
       "added": "2026-10-02",
@@ -219,6 +270,25 @@
       "precision": "building",
       "region": "peninsula",
       "status": "verified"
+    },
+    "2300-chestnut-st": {
+      "added": "2026-10-03",
+      "address": "2300 Chestnut St, San Francisco, CA 94123",
+      "evidence": [
+        "map: 2300;2310;2314;2320 in San Francisco County (building, way/272700939)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.800343,
+      "lng": -122.441507,
+      "name": "2300 Chestnut St",
+      "osm": "way/272700939",
+      "possible_duplicates": [
+        "books-inc-in-the-marina"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "2428-whipple-rd": {
       "added": "2026-10-02",
@@ -1334,6 +1404,30 @@
       "region": "sf",
       "status": "verified"
     },
+    "clarion-alley-mural-project": {
+      "added": "2026-10-03",
+      "address": "Clarion Alley, San Francisco, CA 94143",
+      "evidence": [
+        "map: Clarion Alley Mural Project in San Francisco County (building, way/1377955129)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.762987,
+      "lng": -122.420598,
+      "name": "Clarion Alley Mural Project",
+      "osm": "way/1377955129",
+      "possible_duplicates": [
+        "the-sycamore",
+        "the-drawing-room-annex",
+        "muddy-waters-coffee-lounge",
+        "the-secret-alley",
+        "lore-speakeasy-and-escape-room",
+        "roxie-theater"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "clios-books": {
       "added": "2026-10-02",
       "address": "353 Grand Avenue, Oakland, CA 94612",
@@ -2400,6 +2494,31 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "johansson-projects": {
+      "added": "2026-10-03",
+      "address": "2300 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: 2300 in Alameda County (building, way/416149494)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.812675,
+      "lng": -122.26865,
+      "name": "Johansson Projects",
+      "osm": "way/416149494",
+      "possible_duplicates": [
+        "mighty-mighty-studio",
+        "new-parkway-theater",
+        "the-double-standard",
+        "werkshack",
+        "instudio-with-empowerment-avenue",
+        "manna-gallery",
+        "mercury-20-gallery"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "jollibee": {
       "added": "2026-10-02",
@@ -4058,6 +4177,23 @@
       "region": "northbay",
       "status": "verified"
     },
+    "scopo-divino": {
+      "added": "2026-10-03",
+      "address": "2800 California Street, San Francisco, CA 94115",
+      "evidence": [
+        "map: Scopo Divino in San Francisco County (building, node/3875122060)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.788147,
+      "lng": -122.440791,
+      "name": "Scopo Divino",
+      "osm": "node/3875122060",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "sfjazz-center": {
       "added": "2026-10-02",
       "address": "201 Franklin Street, San Francisco, CA 94102",
@@ -4381,6 +4517,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "temescal-brewing": {
+      "added": "2026-10-03",
+      "address": "4115 Telegraph Avenue, Oakland, CA 94609",
+      "evidence": [
+        "map: 4115 in Alameda County (building, way/107014160)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.830207,
+      "lng": -122.264374,
+      "name": "Temescal Brewing",
+      "osm": "way/107014160",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "temple-nightclub-san-francisco": {
       "added": "2026-10-02",
@@ -4941,6 +5093,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-liberties": {
+      "added": "2026-10-03",
+      "address": "998 Guerrero Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: The Liberties in San Francisco County (building, node/2069104070)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.755254,
+      "lng": -122.423357,
+      "name": "The Liberties",
+      "osm": "node/2069104070",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "the-lost-church": {
       "added": "2026-10-02",
       "address": "988 Columbus Avenue, San Francisco, CA 94133",
@@ -5361,6 +5530,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "udon-mugizo": {
+      "added": "2026-10-03",
+      "address": "1072 Saratoga Avenue, San Jose, CA 95117",
+      "evidence": [
+        "map: 1072 in Santa Clara County (building, way/104920111)",
+        "text: San Jose",
+        "street number matches"
+      ],
+      "lat": 37.306571,
+      "lng": -121.977623,
+      "name": "Udon Mugizo",
+      "osm": "way/104920111",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "underdogs-tres": {
       "added": "2026-10-02",
