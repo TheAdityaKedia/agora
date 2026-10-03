@@ -42,7 +42,6 @@ def test_client_id_never_leaks(api, canvas):
 @pytest.mark.parametrize("body,msg", [
     ({"actor_name": "Adi"}, "name is required"),
     ({"name": "x" * 81, "actor_name": "Adi"}, "longer than 80"),
-    ({"name": "ok"}, "actor_name is required"),
     ({"name": "ok", "actor_name": "Adi", "date_from": "10/10/2026"}, "YYYY-MM-DD"),
     ({"name": "ok", "actor_name": "Adi", "date_from": "2026-10-12", "date_to": "2026-10-10"},
      "after"),
@@ -379,3 +378,77 @@ def test_internal_errors_are_500_without_detail(api, canvas, monkeypatch):
     monkeypatch.setattr(store, "load_canvas", boom)
     r = api("GET", f"/canvases/{canvas}")
     assert r["statusCode"] == 500 and "secret" not in r["body"]
+
+
+# --- collections for yourself: optional names, yours/people ---
+
+def test_names_are_optional_for_curating(canvas):
+    me = Api(client="client-solo-0001")
+    r = me("POST", "/canvases", {"name": "Weekend ideas"})
+    assert r["statusCode"] == 201
+    cid = r["json"]["canvas"]["id"]
+    assert r["json"]["canvas"]["yours"] and r["json"]["canvas"]["people"] == 1
+    item = me("POST", f"/canvases/{cid}/items", {"event_id": E1})["json"]["item"]
+    assert item["added_by_name"] == ""
+    assert me("DELETE", f"/canvases/{cid}/items/{item['id']}")["statusCode"] == 200
+    assert me("PATCH", f"/canvases/{cid}", {"note": "x"})["statusCode"] == 200
+    # votes and comments are seen by others, so they still need a name
+    me("POST", f"/canvases/{cid}/items/{item['id']}/restore")
+    assert me("PUT", f"/canvases/{cid}/items/{item['id']}/vote", {})["statusCode"] == 400
+    r = me("POST", f"/canvases/{cid}/items/{item['id']}/comments", {"text": "hi"})
+    assert r["statusCode"] == 400
+
+
+def test_yours_and_people(api, canvas):
+    sam = Api(client="client-sam-0001", ip="5.6.7.8")
+    v = view(api, canvas)["canvas"]
+    assert v["yours"] and v["people"] == 1
+    assert not view(sam, canvas)["canvas"]["yours"]
+    assert not Api(client=None)("GET", f"/canvases/{canvas}")["json"]["canvas"]["yours"]
+    item_id = add_event(api, canvas, E1)["json"]["item"]["id"]
+    assert view(api, canvas)["canvas"]["people"] == 1  # still just me
+    sam("PUT", f"/canvases/{canvas}/items/{item_id}/vote", {"name": "Sam"})
+    assert view(api, canvas)["canvas"]["people"] == 2
+    assert "created_by_client" not in api("GET", f"/canvases/{canvas}")["body"]
+
+
+# --- duplicate ---
+
+def test_duplicate_copies_live_items_only(api, canvas):
+    e1 = add_event(api, canvas, E1)["json"]["item"]["id"]
+    e2 = add_event(api, canvas, E2)["json"]["item"]["id"]
+    api("POST", f"/canvases/{canvas}/items", {"actor_name": "Adi", "custom": {"title": "Tacos"}})
+    api("DELETE", f"/canvases/{canvas}/items/{e2}", {"actor_name": "Adi"})
+    api("PUT", f"/canvases/{canvas}/items/{e1}/vote", {"name": "Adi"})
+    api("POST", f"/canvases/{canvas}/items/{e1}/comments", {"name": "Adi", "text": "yes"})
+    api("PATCH", f"/canvases/{canvas}", {"winner_item_id": e1, "note": "n", "actor_name": "Adi"})
+    sam = Api(client="client-sam-0001", ip="5.6.7.8")
+    r = sam("POST", f"/canvases/{canvas}/duplicate", {})
+    assert r["statusCode"] == 201
+    copy = r["json"]
+    assert copy["canvas"]["id"] != canvas
+    assert copy["canvas"]["name"] == "Adi & Sam hangout"
+    assert copy["canvas"]["note"] == "n" and copy["canvas"]["date_from"] == "2026-10-10"
+    assert copy["canvas"]["yours"] and copy["canvas"]["people"] == 1
+    assert copy["canvas"]["winner_item_id"] is None
+    titles = sorted(i.get("event", {}).get("title") or i["custom"]["title"] for i in copy["items"])
+    assert len(titles) == 2 and "Tacos" in titles
+    assert all(i["votes"] == [] and i["comments"] == [] for i in copy["items"])
+    assert copy["removed"] == []
+    assert copy["log"][0]["action"] == "duplicated"
+    # The original is untouched, and the copy evolves on its own.
+    cc = copy["canvas"]["id"]
+    sam("POST", f"/canvases/{cc}/items", {"event_id": E3})
+    assert len(view(api, canvas)["items"]) == 2
+    assert len(view(sam, cc)["items"]) == 3
+
+
+def test_duplicate_custom_items_get_new_ids(api, canvas):
+    cid = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Tacos"}})["json"]["item"]["id"]
+    copy = api("POST", f"/canvases/{canvas}/duplicate", {"name": "Mine"})["json"]
+    assert copy["canvas"]["name"] == "Mine"
+    assert copy["items"][0]["id"] != cid and copy["items"][0]["id"].startswith("c_")
+
+
+def test_duplicate_unknown_404(api):
+    assert api("POST", "/canvases/" + "a" * 22 + "/duplicate", {})["statusCode"] == 404

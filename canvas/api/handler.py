@@ -102,6 +102,13 @@ def _url(value, field):
     return value
 
 
+def _actor(body):
+    """The display name on a write. Optional: curating a collection for
+    yourself never asks for a name; the page asks once others will see it
+    (sharing, votes, comments). Empty shows as "Someone"."""
+    return _clean(body.get("actor_name"), "actor_name", LIMITS["name"], required=False)
+
+
 def _check_dates(date_from, date_to):
     if date_from and date_to and date_from > date_to:
         raise ApiError(400, "date_from is after date_to")
@@ -149,11 +156,13 @@ def _item_start(row):
     return (row.get("event") or {}).get("start_time") or row.get("start_time")
 
 
-def _canvas_out(meta):
+def _canvas_out(meta, client=""):
     out = {k: meta.get(k) for k in ("id", "name", "note", "date_from", "date_to",
                                     "winner_item_id", "created_at", "updated_at",
                                     "created_by_name")}
     out["version"] = int(meta["version"])
+    # Whether this browser made it (never the creator's id itself).
+    out["yours"] = bool(client) and meta.get("created_by_client") == client
     return out
 
 
@@ -177,14 +186,20 @@ def _view(cid, client):
         raise ApiError(404, "canvas not found")
     meta, rows, log = loaded
     items, votes, comments = [], defaultdict(list), defaultdict(list)
+    # Browsers that have done anything here: the page shows votes, comments
+    # and "the plan" only once a collection involves more than one person.
+    people = {meta.get("created_by_client")}
     for r in rows:
         kind, rest = r["SK"].split("#", 1)
         if kind == "ITEM":
             items.append(r)
+            people.add(r.get("added_by_client"))
         elif kind == "VOTE":
             iid, voter = rest.split("#", 1)
+            people.add(voter)
             votes[iid].append({"name": r["name"], "at": r["at"], "mine": voter == client})
         elif kind == "CMT" and "removed_at" not in r:
+            people.add(r.get("client_id"))
             iid = rest.split("#", 1)[0]
             comments[iid].append({"id": r["id"], "name": r["name"], "text": r["text"],
                                   "at": r["at"], "mine": r.get("client_id") == client})
@@ -204,7 +219,10 @@ def _view(cid, client):
     log_out = [{k: e.get(k) for k in ("actor_name", "action", "item_id", "item_title",
                                       "fields", "name", "at") if e.get(k) is not None}
                for e in log]
-    return {"canvas": _canvas_out(meta), "items": live, "removed": removed, "log": log_out}
+    people.discard(None)
+    canvas = _canvas_out(meta, client)
+    canvas["people"] = len(people)
+    return {"canvas": canvas, "items": live, "removed": removed, "log": log_out}
 
 
 # --- route handlers: (req, **path params) -> (status, body) ---
@@ -221,9 +239,29 @@ def create_canvas(req):
         "date_to": _date(b.get("date_to"), "date_to"),
     }
     _check_dates(fields["date_from"], fields["date_to"])
-    actor = _clean(b.get("actor_name"), "actor_name", LIMITS["name"])
+    actor = _actor(b)
     meta = store.create_canvas(fields, actor, client)
-    return 201, {"canvas": _canvas_out(meta), "items": [], "removed": [], "log": []}
+    return 201, {"canvas": dict(_canvas_out(meta, client), people=1),
+                 "items": [], "removed": [], "log": []}
+
+
+def duplicate_canvas(req, cid):
+    """A new collection with the same name (or `name`), note, dates and live
+    items; no votes, comments or plan. "Share a copy" uses it so a friend
+    can add to their own copy without touching yours."""
+    client = _require_client(req)
+    b = req["body"]
+    _rate_limit(req, CREATE_LIMIT)
+    _rate_limit(req, WRITE_LIMIT)
+    loaded = store.load_canvas(cid)
+    if loaded is None:
+        raise ApiError(404, "canvas not found")
+    meta, rows, _ = loaded
+    name = _clean(b.get("name"), "name", LIMITS["canvas_name"], required=False) or meta["name"]
+    fields = {"name": name, "note": meta.get("note") or "",
+              "date_from": meta.get("date_from"), "date_to": meta.get("date_to")}
+    new = store.duplicate_canvas(rows, fields, _actor(b), client, meta["name"])
+    return 201, _view(new["id"], client)
 
 
 def get_canvas(req, cid):
@@ -239,7 +277,7 @@ def patch_canvas(req, cid):
     _require_client(req)
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
-    actor = _clean(b.get("actor_name"), "actor_name", LIMITS["name"])
+    actor = _actor(b)
     fields, winner_title = {}, None
     if "name" in b:
         fields["name"] = _clean(b["name"], "name", LIMITS["canvas_name"])
@@ -266,14 +304,14 @@ def patch_canvas(req, cid):
         store.update_canvas(cid, fields, actor, winner_title)
     except store.NotFound as e:
         raise ApiError(404, f"{e} not found") from None
-    return 200, {"canvas": _canvas_out(_meta_or_404(cid))}
+    return 200, {"canvas": _canvas_out(_meta_or_404(cid), req["client"])}
 
 
 def add_item(req, cid):
     client = _require_client(req)
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
-    actor = _clean(b.get("actor_name"), "actor_name", LIMITS["name"])
+    actor = _actor(b)
     if ("event_id" in b) == ("custom" in b):
         raise ApiError(400, "send exactly one of event_id or custom")
     if "event_id" in b:
@@ -317,7 +355,7 @@ def add_item(req, cid):
 def remove_item(req, cid, iid):
     _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
-    actor = _clean(req["body"].get("actor_name"), "actor_name", LIMITS["name"])
+    actor = _actor(req["body"])
     meta = _meta_or_404(cid)
     row = _item_or_404(cid, iid, live=False)
     store.remove_item(cid, iid, actor, _item_title(row),
@@ -328,7 +366,7 @@ def remove_item(req, cid, iid):
 def restore_item(req, cid, iid):
     _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
-    actor = _clean(req["body"].get("actor_name"), "actor_name", LIMITS["name"])
+    actor = _actor(req["body"])
     row = _item_or_404(cid, iid, live=False)
     try:
         store.restore_item(cid, iid, actor, _item_title(row))
@@ -380,7 +418,7 @@ def add_comment(req, cid, iid):
 def delete_comment(req, cid, iid, cmid):
     _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
-    actor = _clean(req["body"].get("actor_name"), "actor_name", LIMITS["name"])
+    actor = _actor(req["body"])
     row = _item_or_404(cid, iid, live=False)
     try:
         store.delete_comment(cid, iid, cmid, actor, _item_title(row))
@@ -392,6 +430,7 @@ def delete_comment(req, cid, iid, cmid):
 ROUTES = [
     (re.compile(r"^/canvases$"), {"POST": create_canvas}),
     (re.compile(rf"^/canvases/{CID}$"), {"GET": get_canvas, "PATCH": patch_canvas}),
+    (re.compile(rf"^/canvases/{CID}/duplicate$"), {"POST": duplicate_canvas}),
     (re.compile(rf"^/canvases/{CID}/items$"), {"POST": add_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"DELETE": remove_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/restore$"), {"POST": restore_item}),
