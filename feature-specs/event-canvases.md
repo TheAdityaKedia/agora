@@ -1,9 +1,46 @@
-# Event canvases — plan a hangout with friends
+# Collections (event canvases) — save events, or plan with friends
+
+> **Naming:** users see **collections** ("Start a collection", "Your
+> collections"); the code, API and table still say **canvas**. This spec
+> started as "plan a hangout with friends" and was widened (2026-10-03, with
+> the owner) to also cover saving events for yourself — see
+> "Collections for yourself" below.
 
 **Status: phase 1 (backend) shipped in `canvas/` (prod + dev live — see
 `canvas/README.md`); phases 2–3 (the pages) built on a branch; phase 4 docs
 partly done.** Decisions below were settled with the owner
 (2026-10-02). Open items are small and listed at the end.
+
+## Collections for yourself (added 2026-10-03)
+
+A collection is just a named list of events with a link, so it serves two
+uses with one model:
+
+- **Social parts appear only once a collection is shared.** A collection you
+  started and nobody else has touched is a plain list (events, Remove,
+  Duplicate). Votes, comments, "Make this the plan", "Added by" and the plan
+  box appear when any of: you opened someone else's link (`canvas.yours` is
+  false), more than one browser has done something on it (`canvas.people >
+  1`, counted server-side from creator / item adders / voters / commenters —
+  ids never leave the server), or you chose **Share this collection** in this
+  browser (a local flag). No new stored state.
+- **Names only when others will see them.** `actor_name` is optional on every
+  write; curating never prompts. The name prompt comes with sharing as-is,
+  voting and commenting (`vote.name` and `comment.name` stay required).
+  Unnamed log rows read "You" on your own collection, "Someone" elsewhere.
+- **Share** on a collection only you have used asks: **Share this
+  collection** (friends add / vote / comment on it) or **Share a copy** (a
+  duplicate for them; yours stays as it is). Already-shared collections go
+  straight to the share sheet. The copy's link is shared from a second tap
+  ("Your copy is ready"), because browsers only open the share sheet right
+  after a tap.
+- **Duplicate** (any collection): a new collection with the same name (or a
+  new one), note, dates and live items; no votes, comments, plan or log.
+  Event items keep their `ev_<event_id>` ids; custom items get new ids;
+  "Added by" names are kept as provenance.
+- Wording: "Start a collection" (tooltip: "Save events that interest you,
+  or plan with friends"), "Your collections", canvas-mode tray "Adding to
+  <name> · N items".
 
 ## The problem
 
@@ -201,8 +238,9 @@ only.
 
 | Method & path | Body | Result |
 |---|---|---|
-| `POST /canvases` | `{name, actor_name, note?, date_from?, date_to?}` | `201 {canvas, items:[], …}` |
-| `GET /canvases/{id}` | — | `{canvas (incl. version), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
+| `POST /canvases` | `{name, actor_name?, note?, date_from?, date_to?}` | `201 {canvas, items:[], …}` |
+| `POST /canvases/{id}/duplicate` | `{name?, actor_name?}` | `201` the new canvas's full view (counts against the create rate limit) |
+| `GET /canvases/{id}` | — | `{canvas (incl. version, yours, people), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
 | `GET /canvases/{id}?if_version=N` | — | `200 {unchanged:true, version}` if unchanged (reads only `META`); else the full view. Not a `304`: browsers handle an unsolicited 304 inconsistently in `fetch`. |
 | `PATCH /canvases/{id}` | any of `{name, note, date_from, date_to, winner_item_id}` + `actor_name` | `{canvas}` |
 | `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?}}` + `actor_name` | `201 {item, created:true}`; `200 {item, created:false}` if the event was already there |
@@ -212,6 +250,8 @@ only.
 | `DELETE /canvases/{id}/items/{itemId}/vote` | — | remove this client's vote |
 | `POST /canvases/{id}/items/{itemId}/comments` | `{name, text}` | `201 {comment}` |
 | `DELETE /canvases/{id}/items/{itemId}/comments/{commentId}` | `{actor_name}` | soft delete (any editor) |
+
+`actor_name` is optional everywhere (see "Collections for yourself").
 
 Errors: `400` validation, `404` unknown canvas/item/event, `409` item cap,
 `413` body over 16 KB, `429` rate limit (with `Retry-After`), `503` manifest

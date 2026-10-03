@@ -1,6 +1,7 @@
 # Canvas API
 
-Backend for **event canvases** (shareable hangout shortlists). One Python
+Backend for **collections** (called canvases in the code): named lists of
+events you keep for yourself or share so friends can add, vote and comment. One Python
 Lambda behind a Lambda Function URL plus one DynamoDB table, with the
 infrastructure defined in code (AWS CDK, Python) in `infra/`. Design and
 rationale: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md).

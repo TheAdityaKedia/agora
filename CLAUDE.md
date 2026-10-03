@@ -26,7 +26,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json` |
 | Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
 | Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
-| Event canvases API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |
+| Collections ("event canvases") API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |
 | Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
@@ -43,12 +43,12 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   API), `tests/`. `data/` holds `sources.txt`,
   `taxonomy.v1.json`, `source_profiles.json` (tagging venue priors), and the
   committed `classifications.json` (tag cache).
-- `canvas/` — event canvases API: the only live backend. One Lambda + one
+- `canvas/` — collections API ("canvases" in code): the only live backend. One Lambda + one
   DynamoDB table (AWS CDK in `canvas/infra/`), independent of `service/` and
   Neon. Deployed by `.github/workflows/deploy-canvas-api.yml` (branch → dev
   stack, `main` → prod).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
-  `canvas.html` + `canvas-client.js` (event canvases; talk to `canvas/`'s API),
+  `canvas.html` + `canvas-client.js` (collections; talk to `canvas/`'s API),
   `vendor/` (pinned MiniSearch), `events.json` (the manifest — carries the
   taxonomy block + per-event `types`/`topics`/`cost`).
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
