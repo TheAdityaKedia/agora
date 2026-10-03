@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+import threading
 import time
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime, timezone
@@ -294,6 +295,41 @@ WORKERS = 8
 TIME_BUDGET_S = 15 * 60
 # Stop early when the model is unreachable (no credentials, wrong region).
 GIVE_UP_AFTER_FAILURES = 20
+# Bedrock's "slow down" answers. botocore retries them quietly (adaptive
+# mode), so without a count a throttled run just looks slow.
+THROTTLE_CODES = {"ThrottlingException", "TooManyRequestsException", "ServiceQuotaExceededException"}
+
+
+class ThrottleCounter:
+    """Counts throttled Bedrock attempts (each one is retried by botocore).
+
+    Hooks the client's `needs-retry` event, which botocore emits after every
+    attempt; the handler only looks, it never changes the retry decision."""
+
+    def __init__(self):
+        self.count = 0
+        self._lock = threading.Lock()
+
+    def attach(self, client) -> "ThrottleCounter":
+        events = getattr(getattr(client, "meta", None), "events", None)
+        if events is not None:
+            events.register("needs-retry.bedrock-runtime", self._on_attempt)
+        return self
+
+    def _on_attempt(self, response=None, **kwargs):
+        if is_throttle(response):
+            with self._lock:
+                self.count += 1
+        return None  # leave the retry decision to botocore
+
+
+def is_throttle(response) -> bool:
+    """`response` is botocore's (http_response, parsed) for an attempt."""
+    if not response:
+        return False
+    http, parsed = response
+    code = (parsed or {}).get("Error", {}).get("Code")
+    return code in THROTTLE_CODES or getattr(http, "status_code", None) == 429
 
 
 def classify_new_shows(
@@ -306,12 +342,14 @@ def classify_new_shows(
     workers: int = WORKERS,
     time_budget_s: float = TIME_BUDGET_S,
     clock=time.monotonic,
+    stats: dict | None = None,
 ) -> tuple[int, int]:
     """Classify shows not already covered by a fresh cache entry. Returns
     (classified, cached). Calls run `workers` at a time; no new call starts
     after `time_budget_s`. A show whose models all fail is skipped (retried
     next run). Saves the cache once at the end, whatever happened. Steady
-    state (no new shows, same taxonomy) makes zero LLM calls."""
+    state (no new shows, same taxonomy) makes zero LLM calls. `stats`, if
+    given, is filled with the run's numbers (for the run report)."""
     todo, cached = [], 0
     for show in shows:
         existing = cache.get(show["source"], show["title"])
@@ -321,6 +359,8 @@ def classify_new_shows(
             todo.append(show)
     if todo and client is None and classifier is classify_show:
         client = make_client()  # one shared client (thread-safe), not one per call
+    throttles = ThrottleCounter().attach(client)
+    started = clock()
 
     deadline = clock() + time_budget_s
     classified = failed = 0
@@ -352,12 +392,19 @@ def classify_new_shows(
                     continue
                 classified += 1
                 if log and classified % 100 == 0:
-                    log(f"[classify] {classified}/{len(todo)} classified")
+                    log(f"[classify] {classified}/{len(todo)} classified, "
+                        f"{throttles.count} throttled retries so far")
             fill()
     cache.save()
     left = len(todo) - classified - failed
+    seconds = round(clock() - started)
+    if stats is not None:
+        stats.update(classified=classified, cached=cached, failed=failed, left=left,
+                     throttled=throttles.count, seconds=seconds)
     if log:
-        log(f"[classify] done: {classified} classified, {cached} cached, {failed} failed"
+        rate = f" ({classified / seconds:.1f}/s)" if seconds and classified else ""
+        log(f"[classify] done in {seconds}s: {classified} classified{rate}, {cached} cached, "
+            f"{failed} failed, {throttles.count} throttled retries"
             + (f", {left} left for the next run (time budget)" if left and not unreachable() else ""))
     if unreachable():
         raise RuntimeError(f"model unreachable: first {failed} calls failed")
