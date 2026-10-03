@@ -81,7 +81,10 @@
     white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px;
   }
   .cv-note.empty { color: var(--muted); }
-  .cv-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
+  /* Three equal buttons on one row, even on a 360px phone. */
+  .cv-actions { display: flex; gap: 8px; margin: 14px 0 6px; }
+  .cv-actions .btn { flex: 1 1 0; justify-content: center; white-space: nowrap; padding: 9px 8px; font-size: 14px; }
+  @media (max-width: 340px) { .cv-actions { flex-wrap: wrap; } }
   .btn {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 9px 14px; border-radius: 10px; cursor: pointer; text-decoration: none;
@@ -143,10 +146,12 @@
   .it-foot { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-size: 13px; }
 
   .cmts { margin-top: 10px; padding-left: 10px; border-left: 2px solid var(--border); }
-  .cmt { font-size: 14px; padding: 3px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .cmt { font-size: 14px; padding: 3px 0; overflow-wrap: anywhere; }
   .cmt b { font-weight: 600; }
-  .cmt .t { color: var(--muted); font-size: 12px; margin-left: 4px; }
-  .cmt .del { margin-left: 4px; font-size: 12px; }
+  .cmt .txt { white-space: pre-wrap; }
+  /* Time and Delete stay together: they wrap as one, never apart. */
+  .cmt .meta { white-space: nowrap; margin-left: 6px; color: var(--muted); font-size: 12px; }
+  .cmt .del { margin-left: 6px; font-size: 12px; }
   .cmt-form { display: flex; gap: 6px; margin-top: 6px; }
   .cmt-form input {
     flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 7px 10px;
@@ -270,13 +275,13 @@
         : '<div class="cv-note empty editable" data-act="edit-note">Add a note, like “dinner first, then a show?”</div>')
       + '<div class="cv-actions">'
       + '<button type="button" class="btn primary" data-act="share">Share link</button>'
-      + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">+ Add events</a>'
-      + '<button type="button" class="btn" data-act="add-custom">+ Add your own</button>'
+      + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
+      + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
       + "</div>"
       + (winner ? winnerHtml(winner) : "")
       + '<h2 class="section-h">Options' + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
-        : '<p class="empty-items">Nothing here yet. Use <b>+ Add events</b> to pick from what’s on, or <b>+ Add your own</b> for anything else.</p>')
+        : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
       + (v.removed.length ? '<details class="fold"><summary>Removed (' + v.removed.length + ")</summary><ul>"
         + v.removed.map(r => "<li>" + esc(titleOf(r)) + ' <span class="t">removed by ' + esc(r.removed_by_name || "someone")
           + " " + esc(ago(r.removed_at)) + '</span> <button type="button" class="linkish" data-act="restore" data-id="'
@@ -332,8 +337,9 @@
 
   function commentsHtml(it) {
     return '<div class="cmts">' + it.comments.map(c =>
-      '<div class="cmt"><b>' + esc(c.name) + "</b> " + esc(c.text) + '<span class="t">' + esc(ago(c.at)) + "</span>"
-      + '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button></div>'
+      '<div class="cmt"><b>' + esc(c.name) + '</b> <span class="txt">' + esc(c.text) + "</span>"
+      + '<span class="meta">' + esc(ago(c.at))
+      + '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button></span></div>'
     ).join("")
       + '<form class="cmt-form" data-act="comment"><input name="text" maxlength="500" placeholder="Add a comment" aria-label="Add a comment" autocomplete="off">'
       + '<button type="submit" class="btn">Post</button></form></div>';
