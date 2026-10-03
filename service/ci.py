@@ -105,12 +105,14 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
 
     # Same guard and scoping as main.run(): a classify failure (e.g. no AWS
     # creds) must not stop the export; a filtered run only tags what it scraped.
+    tagging = {}
     if classify:
         scope = scraped_names if (source_filters or excludes) else None
         try:
-            pipeline.classify_upcoming(source_names=scope)
+            pipeline.classify_upcoming(source_names=scope, stats=tagging)
         except Exception as e:
-            print(f"[classify] skipped ({type(e).__name__}: {e})", flush=True)
+            tagging["error"] = f"{type(e).__name__}: {e}"
+            print(f"[classify] skipped ({tagging['error']})", flush=True)
 
     # Venue resolution: never stops the export (see main.resolve_places).
     places = None
@@ -125,7 +127,32 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
     exported = pipeline.export_json(out)
     print(f"[export] wrote {exported} upcoming events to {out}", flush=True)
     return {"sources": rows, "exported": exported,
-            "failed": sum(1 for r in rows if r["status"] != "ok"), "places": places}
+            "failed": sum(1 for r in rows if r["status"] != "ok"), "places": places,
+            "classify": tagging or None}
+
+
+# A re-tag run has the whole job to itself (no scraping), so it may tag for
+# longer than the merge job's 15 minutes; retag.yml's timeout leaves room.
+MAX_RETAG_MINUTES = 55
+
+
+def retag_and_export(budget_minutes: float = 40, events_json_path=None) -> dict:
+    """Re-tag stale or missing classifications, then export — no scraping.
+
+    For catching up after a taxonomy bump (or a throttled run) without
+    re-running every scraper. Reads upcoming events from the DB, tags within
+    the budget, and re-exports with the committed venue files. A tagging
+    failure (model unreachable) fails the run: unlike the scrape, there is
+    nothing else to ship."""
+    pipeline.init_db()
+    minutes = max(1.0, min(float(budget_minutes), MAX_RETAG_MINUTES))
+    tagging = {}
+    pipeline.classify_upcoming(time_budget_s=minutes * 60, stats=tagging)
+    out = Path(events_json_path or os.environ.get("EVENTS_JSON_PATH", pipeline.DEFAULT_EVENTS_JSON))
+    exported = pipeline.export_json(out)
+    print(f"[export] wrote {exported} upcoming events to {out}", flush=True)
+    return {"kind": "retag", "sources": [], "exported": exported, "failed": 0,
+            "places": None, "classify": tagging}
 
 
 def _read_events_manifest(path) -> tuple[dict, int]:
@@ -165,16 +192,25 @@ def render_pr_body(report: dict, guard: dict) -> str:
     """Markdown PR body: guard verdict + per-source table, so the merged PR
     history doubles as a scrape log."""
     verdict = "passed" if guard["passed"] else f"FAILED — {guard['reason']}"
+    retag = report.get("kind") == "retag"
     lines = [
-        "Automated refresh from the scheduled scrape workflow.",
+        "Automated re-tag (no scraping) from the retag workflow." if retag
+        else "Automated refresh from the scheduled scrape workflow.",
         "",
         f"**Guard:** {verdict}",
-        f"**Events:** {guard['base_count']} → {guard['count']} · "
-        f"**Failed sources:** {report['failed']} of {len(report['sources'])}",
-        "",
-        "| Source | Status | Scraped | Saved | Merged | Skipped |",
-        "|---|---|---:|---:|---:|---:|",
+        f"**Events:** {guard['base_count']} → {guard['count']}"
+        + ("" if retag else f" · **Failed sources:** {report['failed']} of {len(report['sources'])}"),
     ]
+    tagging = report.get("classify") or {}
+    if "error" in tagging:
+        lines.append(f"**Tagging:** skipped ({tagging['error'][:200]})")
+    elif "classified" in tagging:
+        lines.append(f"**Tagging:** {tagging['classified']} tagged in {tagging['seconds']}s · "
+                     f"{tagging['failed']} failed · {tagging['left']} left for the next run · "
+                     f"{tagging['throttled']} throttled retries")
+    if not retag:
+        lines += ["", "| Source | Status | Scraped | Saved | Merged | Skipped |",
+                  "|---|---|---:|---:|---:|---:|"]
     for r in report["sources"]:
         if r["status"] == "ok" and r["events"] == 0:
             status, icon = "ok (0 events)", "⚠️"
@@ -348,6 +384,10 @@ def cli(argv: list[str] | None = None) -> None:
     m.add_argument("--no-classify", action="store_true")
     m.add_argument("--no-places", action="store_true")
 
+    rt = sub.add_parser("retag", help="Re-tag stale/missing classifications and export (no scraping).")
+    rt.add_argument("--report", type=Path, required=True)
+    rt.add_argument("--budget-minutes", type=float, default=40)
+
     g = sub.add_parser("guard", help="Check the new manifest and render the PR body.")
     g.add_argument("--new", type=Path, required=True)
     g.add_argument("--base", type=Path, required=True)
@@ -382,6 +422,9 @@ def cli(argv: list[str] | None = None) -> None:
         report = merge_results(args.dir, args.sources or None, args.exclude or None,
                                classify=not args.no_classify,
                                resolve_places=not args.no_places)
+        args.report.write_text(json.dumps(report, indent=2))
+    elif args.cmd == "retag":
+        report = retag_and_export(args.budget_minutes)
         args.report.write_text(json.dumps(report, indent=2))
     elif args.cmd == "guard":
         # stdout is appended to $GITHUB_OUTPUT, so print only key=value lines.

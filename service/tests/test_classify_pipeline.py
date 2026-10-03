@@ -144,3 +144,56 @@ def test_unreachable_model_gives_up_early(tmp_path):
     with pytest.raises(RuntimeError, match="unreachable"):
         classify_new_shows(_shows(500), Cache(tmp_path / "c.json"), classifier=down, workers=4, log=None)
     assert len(calls) < 40
+
+
+# --- throttling: botocore retries 429s quietly; the run reports how many ----------
+
+def _throttled_client(retries=1):
+    """A real Bedrock client whose every attempt is answered 429 Throttling."""
+    import boto3
+    from botocore.awsrequest import AWSResponse
+    from botocore.config import Config
+
+    class _Raw:
+        def stream(self, **kw):
+            yield b'{"message":"Too many requests, please wait before trying again."}'
+
+    def throttled(request, **kw):
+        return AWSResponse(request.url, 429, {"x-amzn-ErrorType": "ThrottlingException:x",
+                                              "Content-Type": "application/json"}, _Raw())
+
+    client = boto3.client("bedrock-runtime", region_name="us-west-2", aws_access_key_id="x",
+                          aws_secret_access_key="y",
+                          config=Config(retries={"max_attempts": retries, "mode": "standard"}))
+    client.meta.events.register("before-send.bedrock-runtime", throttled)
+    return client
+
+
+def test_throttle_counter_counts_every_throttled_attempt():
+    import pytest
+    client = _throttled_client(retries=1)
+    counter = classify.ThrottleCounter().attach(client)
+    with pytest.raises(Exception, match="ThrottlingException"):
+        classify._converse(client, PRIMARY_MODEL, "s", "u")
+    assert counter.count == 2  # the first attempt and its one retry
+
+
+def test_is_throttle():
+    class Http:
+        status_code = 400
+    assert classify.is_throttle((Http(), {"Error": {"Code": "ThrottlingException"}}))
+    assert not classify.is_throttle((Http(), {"Error": {"Code": "ValidationException"}}))
+    assert not classify.is_throttle(None)
+
+
+def test_run_stats_report_throttled_retries(tmp_path):
+    client = _throttled_client(retries=1)
+
+    def via_client(title, source, description, *, client=None):
+        classify._converse(client, PRIMARY_MODEL, "s", title)
+
+    stats, logs = {}, []
+    classify_new_shows(_shows(2), Cache(tmp_path / "c.json"), classifier=via_client, client=client,
+                       workers=2, stats=stats, log=logs.append)
+    assert stats["failed"] == 2 and stats["throttled"] == 4 and stats["left"] == 0
+    assert "4 throttled retries" in logs[-1]
