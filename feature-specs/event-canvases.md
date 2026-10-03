@@ -38,6 +38,12 @@ uses with one model:
   new one), note, dates and live items; no votes, comments, plan or log.
   Event items keep their `ev_<event_id>` ids; custom items get new ids;
   "Added by" names are kept as provenance.
+- **Your collections** (`canvas.html` without `?c=`, linked from the main
+  page header and every collection): every collection this browser has
+  started or opened, in two sections, **Started by you** and **Shared with
+  you** (from `canvas.yours` when it was last opened), newest first, up to
+  100; copies you made to share are marked. It's per browser until accounts
+  exist; Hide only removes the entry from the list.
 - Wording: "Start a collection" (tooltip: "Save events that interest you,
   or plan with friends"), "Your collections", canvas-mode tray "Adding to
   <name> · N items".

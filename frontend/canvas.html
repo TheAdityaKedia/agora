@@ -174,6 +174,12 @@
   .mine a { flex: 1; padding: 12px 0; text-decoration: none; font-weight: 600; overflow-wrap: anywhere; }
   .mine a:hover { color: var(--accent); }
   .mine .sub { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+  .mine-h {
+    margin: 28px 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--fg);
+    font-family: var(--font-display); font-size: 24px; font-weight: 800; line-height: 1.05;
+  }
+  .mine-empty, .mine-note { color: var(--muted); font-size: 14px; }
+  .mine-note { margin-top: 24px; }
 
   @media (min-width: 600px) {
     .cv-name { font-size: 52px; }
@@ -220,7 +226,7 @@
   }
   const safeUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u) ? u : null;
 
-  if (!cid) { renderHome(); return; }
+  if (!cid) { initHome(); return; }
 
   // ======================= the collection =======================
   // Votes, comments and "the plan" show once a collection involves other
@@ -473,7 +479,7 @@
     } catch (e) {
       return AC.toast(e.message);
     }
-    AC.rememberCanvas(Object.assign({}, copy, {name: copy.name + " (shared copy)"}));
+    AC.rememberCanvas(copy, {sent_copy: true});
     // Browsers only open the share sheet straight after a tap, so ask for one.
     const go = await AC.choiceDialog({
       title: "Your copy is ready",
@@ -636,30 +642,49 @@
   }
 
   // ======================= "Your collections" =======================
+  // Every collection this browser has started or opened (a shared link
+  // counts the moment it's opened), so nobody has to dig the link back out.
   function renderHome() {
     const mine = AC.myCanvases();
+    // Entries saved before `yours` was tracked count as started here.
+    const started = mine.filter(c => c.yours !== false);
+    const shared = mine.filter(c => c.yours === false);
+    const row = (c) => {
+      const sub = [datesText(c), c.sent_copy ? "Copy you shared" : "",
+                   c.opened_at ? "Opened " + ago(c.opened_at) : ""].filter(Boolean).join(" · ");
+      return '<li><a href="' + esc(AC.canvasPath(c.id)) + '">' + esc(c.name)
+        + (sub ? '<span class="sub">' + esc(sub) + "</span>" : "") + "</a>"
+        + '<button type="button" class="linkish" data-forget="' + esc(c.id) + '" aria-label="Hide '
+        + esc(c.name) + ' from this list">Hide</button></li>';
+    };
+    const section = (title, list, empty) => '<h2 class="mine-h">' + title
+      + (list.length ? " (" + list.length + ")" : "") + "</h2>"
+      + (list.length ? '<ul class="mine">' + list.map(row).join("") + "</ul>"
+        : '<p class="mine-empty">' + empty + "</p>");
     document.title = "Your collections — Agora";
     app.innerHTML = '<section class="home"><h1>Your collections</h1>'
       + "<p>Save events that interest you, or plan something with friends: add events to a collection, then share its link if you like.</p>"
       + '<button type="button" class="btn primary" id="new-canvas">Start a collection</button>'
-      + (mine.length
-        ? '<ul class="mine">' + mine.map(c => '<li><a href="' + esc(AC.canvasPath(c.id)) + '">' + esc(c.name)
-          + (datesText(c) ? '<span class="sub">' + esc(datesText(c)) + "</span>" : "") + "</a>"
-          + '<button type="button" class="linkish" data-forget="' + esc(c.id) + '">Hide</button></li>').join("") + "</ul>"
-        : '<p style="margin-top:18px">Collections you start or open on this device show up here.</p>')
+      + section("Started by you", started, "Collections you start show up here.")
+      + section("Shared with you", shared, "When someone sends you a collection link, it shows up here once you open it.")
+      + '<p class="mine-note">This list lives in this browser. On another phone or computer, open a collection’s link once and it’s added there too. Hide only removes it from this list; the collection itself stays.</p>'
       + "</section>";
-    document.getElementById("new-canvas").addEventListener("click", async () => {
-      try {
-        const c = await AC.createCanvasDialog();
-        if (c) location.href = AC.canvasPath(c.id);
-      } catch (e) { AC.toast(e.message); }
-    });
-    app.addEventListener("click", (e) => {
+  }
+  function initHome() {
+    app.addEventListener("click", async (e) => {
+      if (e.target.closest("#new-canvas")) {
+        try {
+          const c = await AC.createCanvasDialog();
+          if (c) location.href = AC.canvasPath(c.id);
+        } catch (err) { AC.toast(err.message); }
+        return;
+      }
       const b = e.target.closest("[data-forget]");
       if (!b) return;
       AC.forgetCanvas(b.dataset.forget);
       renderHome();
-    }, {once: true});
+    });
+    renderHome();
   }
 })();
 </script>

@@ -23,7 +23,7 @@
     shared: "agora.canvas.shared",
     api: "agora.canvas.api",
   };
-  const MINE_MAX = 30;
+  const MINE_MAX = 100;
 
   const memory = {};  // fallback when storage is unavailable
   function load(key, fallback) {
@@ -96,10 +96,18 @@
     const list = load(K.mine, []);
     return Array.isArray(list) ? list.filter(c => c && typeof c.id === "string") : [];
   }
-  function rememberCanvas(c) {
-    const rest = myCanvases().filter(x => x.id !== c.id);
-    rest.unshift({id: c.id, name: c.name, date_from: c.date_from || null,
-                  date_to: c.date_to || null, opened_at: Date.now()});
+  // Every collection opened or started here, newest first, for "Your
+  // collections". `yours`: started in this browser (vs shared with you);
+  // `sent_copy`: a copy you made to share. Flags from earlier visits are
+  // kept when a later view doesn't carry them.
+  function rememberCanvas(c, extra) {
+    const all = myCanvases();
+    const prev = all.find(x => x.id === c.id) || {};
+    const rest = all.filter(x => x.id !== c.id);
+    rest.unshift(Object.assign({}, prev, {
+      id: c.id, name: c.name, date_from: c.date_from || null,
+      date_to: c.date_to || null, opened_at: Date.now(),
+    }, typeof c.yours === "boolean" ? {yours: c.yours} : {}, extra || {}));
     save(K.mine, rest.slice(0, MINE_MAX));
   }
   function forgetCanvas(id) {

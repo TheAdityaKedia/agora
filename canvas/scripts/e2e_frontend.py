@@ -213,8 +213,20 @@ def run(shots):
 
         # "Your collections" lists them all; Done ends canvas mode.
         a.goto(f"{WEB}/canvas.html")
-        expect(a.locator(".mine li", has_text="Adi & Sam hangout")).to_have_count(1)
-        expect(a.locator(".mine li", has_text="Adi's weekend ideas")).to_have_count(2)  # + shared copy
+        started = a.locator("h2.mine-h", has_text="Started by you").locator("xpath=following-sibling::ul[1]")
+        expect(started.locator("li", has_text="Adi & Sam hangout")).to_have_count(1)
+        expect(started.locator("li", has_text="Adi's weekend ideas")).to_have_count(2)  # + the copy
+        expect(started.locator("li", has_text="Copy you shared")).to_have_count(1)
+        expect(a.locator(".mine-empty", has_text="When someone sends you")).to_have_count(1)
+        # Sam opened two links; both are "Shared with you", nothing started.
+        s.goto(f"{WEB}/canvas.html")
+        shared = s.locator("h2.mine-h", has_text="Shared with you").locator("xpath=following-sibling::ul[1]")
+        expect(shared.locator("li")).to_have_count(2)
+        expect(shared).to_contain_text("Adi & Sam hangout")
+        expect(s.locator(".mine-empty", has_text="Collections you start")).to_have_count(1)
+        # Hide takes one off the list (the collection itself stays).
+        shared.locator("li", has_text="Adi & Sam hangout").locator("[data-forget]").click()
+        expect(shared.locator("li")).to_have_count(1)
         a.goto(f"{WEB}/")
         a.locator("#canvas-tray [data-tray-done]").click()
         expect(a.locator("#canvas-tray")).to_be_hidden()
