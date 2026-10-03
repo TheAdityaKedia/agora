@@ -3,7 +3,8 @@
 **Status: phases 1–3 shipped (#54: resolver + owner-reviewed venue list;
 #56: pipeline, review issue, Area filter; #60: AI-assisted resolution,
 venue-aware dedup, venue names and links — see "Phase 3 design"). Phase 4
-(maps) is next.** Decisions settled with the owner: OpenStreetMap
+(map view + SF neighbourhoods, minus "near me") is designed below — see
+"Phase 4 design".** Decisions settled with the owner: OpenStreetMap
 (Nominatim) for geocoding; build the venue list now rather than a
 location→area lookup only; nobody reviews the auto-merged data PRs, so
 the pipeline must verify new places itself and route only real doubts to a
@@ -334,6 +335,144 @@ Clicking a venue name filters to that **venue** — every spelling and room —
 not just that exact string. URL `?venue=<id>` (bookmarkable; an unknown id is
 ignored); the pill reads the venue's name. Rows without a venue keep today's
 exact-text filter (`?loc=`). Dedicated venue pages wait for phase 4 (maps).
+
+## Phase 4 design (map + neighbourhoods)
+
+Two features on the same data: a **map view** of the current results and
+an **SF neighbourhood filter**. Out of scope: "near me" (no
+location-permission prompt until the owner wants one), venue pages,
+directions.
+
+### Manifest
+
+- The `venues` map (still only venues that events point at) gains, per
+  venue:
+  - `lat`, `lng`, rounded to 5 decimals (~1 m), for precision `building`
+    **and** `street`;
+  - `approx: true` for `street`;
+  - `neighborhood` (an id), for SF `building` venues only.
+- A top-level `neighborhoods: [{id, label}]` lists all 41, sorted by
+  label. The page shows only the ones that have events.
+- A `city`-precision venue never gets coordinates, so nothing is pinned
+  at a city centroid.
+- Budget: under ~20 KB gzipped added to `events.json` (measured in the
+  PR).
+
+**Street-level pins: included, drawn differently.** Two venues are
+`street` today: Alamo Square (a park, where "the street" is the park) and
+110 Yacht Rd. A Nominatim road match is on the named street, usually
+within a few hundred metres. Dropping these would hide real events, and
+drawing them like building pins would overstate how precise they are. So
+they get a hollow pin, and the venue panel says "Approximate location".
+They get no neighbourhood, because a street can cross a boundary.
+
+### Neighbourhoods
+
+- **Data:** DataSF "Analysis Neighborhoods" (dataset `j2bu-swwd`, 41
+  polygons). The licence is the ODC Public Domain Dedication (PDDL),
+  checked 2026-10-03. The portal moved from data.sfgov.org to data.sf.gov.
+- **Stored as** `service/data/geo/sf_neighborhoods.geojson`, simplified
+  server-side (`simplify_preserve_topology`, 0.0001° ≈ 10 m) and rounded
+  to 5 decimals: 122 KB. The command to regenerate it is in
+  `places/regions.py`. On the full-resolution shapes and the simplified
+  ones, all 242 SF building venues land in the same neighbourhood. At
+  0.0002° one venue moved (the Palace of Fine Arts, from Marina to
+  Presidio), so 0.0001° is the coarsest safe tolerance.
+- **Ids and labels:** the id is a slug of DataSF's name (`mission`,
+  `castro-upper-market`). The one exception is South of Market, which is
+  `soma` / "SoMa", the name people use. In labels, slashes get spaces
+  ("Castro / Upper Market").
+- **Assigned at export time from coordinates** (`regions.neighborhood_at`,
+  the same point-in-polygon code as counties). It's never stored in
+  `venues.json` and never hand-edited, so fixing a venue's coordinates
+  fixes its neighbourhood. A validation test checks that every SF
+  `building` venue gets one.
+
+### Neighbourhood filter
+
+- **Placement:** nested in the Area group, under the area chips, as a
+  "San Francisco neighbourhoods" dropdown: a checkbox list with event
+  counts and a search box, like Topics. Chips don't scale to 41 names.
+- **Semantics:** neighbourhoods narrow San Francisco. The location facet
+  is OR across the selected areas and neighbourhoods. When any
+  neighbourhood is selected, it replaces San Francisco as a whole, so:
+  - "Mission" alone shows Mission events;
+  - "East Bay + Mission" shows both;
+  - "San Francisco + Mission" shows Mission.
+- One pill per neighbourhood. Neighbourhoods count in the Filters badge,
+  Reset clears them, and `?hood=mission,soma` restores them (unknown ids
+  are dropped).
+- With a neighbourhood selected, the "no known area" line also counts SF
+  events whose venue has no neighbourhood, because they might be in it.
+- Works the same in list and map views, because both views read
+  `render()`'s results.
+
+### Map view
+
+- **Library: MapLibre GL JS 6.11.2** (BSD-3), vendored as
+  `frontend/vendor/maplibre-gl-6.11.2.{js,css}` with its licence. The
+  script and CSS are injected only on the first Map open. The list-only
+  first load fetches nothing new. The page records `performance` marks
+  (`agora:first-row`, `agora:index-ready`, `agora:map-pins`) so
+  `scripts/measure_load.py` can time it. (Leaflet was the fallback. It
+  wasn't needed.)
+- **Tiles:** OpenFreeMap. The `positron` style is used in light mode
+  because it's quiet and the orange pins stand out; `dark` is used when
+  the system is in dark mode. Free, no key. tile.openstreetmap.org is not
+  used. Attribution: "OpenFreeMap © OpenMapTiles Data from OpenStreetMap",
+  from the style plus our own entry.
+- **When the tiles can't load:** the style JSON is fetched first. If it
+  fails or takes more than 8 s, the map uses a blank background style.
+  The pins still work, and a note says the base map is unavailable.
+- **Toggle:** a List | Map segmented control at the end of the date-preset
+  row in the sticky bar, on phone and desktop. It appears only when some
+  venue has coordinates, so an old manifest shows no map UI, the way the
+  Area filter behaves.
+- **Pins are per venue:**
+  - one GeoJSON feature per venue in the current results, labelled with
+    its event count;
+  - MapLibre source clustering (`clusterMaxZoom` 15, radius 40), with
+    `clusterProperties` summing event counts, so a cluster shows events,
+    not venues.
+- **Tapping a cluster** zooms to where it splits. Venues that never split
+  (several venues in one building) list together.
+- **Tapping a venue** opens a panel with that venue's events in the
+  current results. The panel is a bottom sheet on phones and a side panel
+  on desktop.
+  - The rows are the list's rows (date + time, link, tags, add to
+    calendar), so each event opens as it does in the list.
+  - "Show in list" sets the venue filter and switches to the list.
+  - The panel follows filter changes. It closes if the venue drops out.
+- **Same results as the list:** every filter changes the pins. A note on
+  the map says "N events have no map location and aren't shown": events
+  with no venue, or a venue without coordinates.
+- **URL:** `?view=map` and `&at=lat,lng,zoom` (written on `moveend`, 4
+  decimals / zoom 2). Out-of-range or garbled values are ignored. The map
+  then fits the current pins, which is also the first-open default.
+- **In map view the list isn't built.** `render()` updates the pins and
+  the chrome, and the list is rebuilt when you switch back.
+
+### Testing
+
+- **Exporter:**
+  - coordinates only for `building`/`street`;
+  - `approx` on `street`;
+  - rounding;
+  - neighbourhoods (a Mission point, a SoMa point, an Oakland venue gets
+    none, a street venue gets none);
+  - the `neighborhoods` list.
+- **Validation:** the committed GeoJSON loads (41 named polygons, unique
+  ids), and every SF building venue in `venues.json` gets a neighbourhood.
+- **Headless Chromium:**
+  - the toggle appears only with coordinates;
+  - MapLibre isn't requested until Map is opened;
+  - filters change the pins (source features);
+  - clicking a pin lists its events;
+  - `?view=map&at=…` restores the view;
+  - the neighbourhood filter works in both views (pills, Reset, URL);
+  - an old manifest shows no map or neighbourhood UI and no errors.
+- **Tiles in tests:** tile and style requests are aborted in tests, so
+  assertions are on DOM and data, never pixels.
 
 ## Testing plan
 
