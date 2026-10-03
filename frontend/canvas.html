@@ -208,6 +208,14 @@
   const AC = window.AgoraCanvas;
   const app = document.getElementById("app");
   const cid = new URLSearchParams(location.search).get("c");
+  // Private beta (see BETA_GATE in canvas-client.js).
+  if (!AC.betaEnabled()) {
+    document.title = "Collections — Agora";
+    app.innerHTML = '<section class="home"><h1>Collections are in private beta</h1>'
+      + "<p>If someone sent you a collection, ask them for the link again: it starts with …/agora/beta/.</p>"
+      + '<a class="btn primary" href="./">Browse events on Agora</a></section>';
+    return;
+  }
 
   const esc = (s) => s == null ? "" : String(s).replace(/[&<>"']/g, c =>
     ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
@@ -423,7 +431,7 @@
   const CAL_HOURS = 2;
   const calStamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   function calNotes(it) {
-    return [location.href, linkOf(it)].filter(Boolean).join("\n\n");
+    return [AC.canvasUrl(cid), linkOf(it)].filter(Boolean).join("\n\n");
   }
   function googleCalUrl(it) {
     const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
@@ -476,7 +484,7 @@
   // and vote on it), or share a copy (theirs to change; yours stays yours).
   async function shareFlow() {
     const c = view.canvas;
-    if (isSocial(c)) return AC.share(location.href, c.name);
+    if (isSocial(c)) return AC.share(AC.canvasUrl(c.id), c.name);
     const how = await AC.choiceDialog({
       title: "Share “" + c.name + "”",
       options: [
@@ -489,7 +497,7 @@
       if (!await named()) return;  // friends will see who's who
       AC.markShared(c.id);
       render();
-      return AC.share(location.href, c.name);
+      return AC.share(AC.canvasUrl(c.id), c.name);
     }
     if (how !== "copy") return;
     let copy;

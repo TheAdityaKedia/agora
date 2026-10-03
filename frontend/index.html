@@ -804,7 +804,8 @@
   // event uid or "title|start" → canvas item id}. Declared here, before
   // readStateFromUrl(), for the TDZ reason noted at flatDateFmt.
   let canvasMode = null;
-  const canvasParam = AC ? new URLSearchParams(location.search).get("canvas") : null;
+  // Collections are behind a private-beta gate (BETA_GATE, canvas-client.js).
+  const canvasParam = AC && AC.betaEnabled() ? new URLSearchParams(location.search).get("canvas") : null;
   let canvasPending = canvasParam;  // ?canvas= id not loaded yet
 
   const selectedTypes = new Set();   // dot-paths, e.g. "talk" or "talk.reading"
@@ -2011,7 +2012,7 @@
   const canvasApiPath = (sub) => "/canvases/" + encodeURIComponent(canvasMode.id) + (sub || "");
 
   async function initCanvasMode() {
-    if (!AC) return;
+    if (!AC || !AC.betaEnabled()) return;
     planEl.hidden = false;
     planBtnEl.addEventListener("click", startCanvas);
     trayEl.addEventListener("click", (e) => {

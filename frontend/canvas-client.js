@@ -23,6 +23,7 @@
     shared: "agora.canvas.shared",
     dflt: "agora.canvas.default",
     api: "agora.canvas.api",
+    beta: "agora.canvas.beta",
   };
   const MINE_MAX = 100;
 
@@ -41,6 +42,20 @@
       else localStorage.setItem(key, JSON.stringify(value));
     } catch {}
   }
+
+  // --- Private beta gate ---------------------------------------------------
+  // While BETA_GATE is true, collections are visible only in browsers that
+  // came in through a /beta/ link: the invite (…/agora/beta/) or a shared
+  // collection (…/agora/beta/canvas.html?c=…). Those pages (frontend/beta/)
+  // set the flag and redirect here with ?beta=1. Every collection link made
+  // meanwhile goes through /beta/, so whoever opens it is let in too.
+  //
+  // LAUNCH: set BETA_GATE = false. Collections show for everyone, new links
+  // drop /beta/, and the /beta/ pages keep redirecting, so links shared during
+  // the beta still open. A soft gate: it hides UI, it doesn't secure the API.
+  const BETA_GATE = true;
+  if (new URLSearchParams(location.search).get("beta") === "1") save(K.beta, true);
+  const betaEnabled = () => !BETA_GATE || load(K.beta, false) === true;
 
   const isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   // Read ?api= now: index.html rewrites its URL on the first render.
@@ -150,7 +165,10 @@
   }
 
   const canvasPath = (id) => "canvas.html?c=" + encodeURIComponent(id);
-  function canvasUrl(id) { return new URL(canvasPath(id), location.href).href; }
+  // The link to share. Both pages live at the site root (…/agora/).
+  function canvasUrl(id) {
+    return new URL((BETA_GATE ? "beta/" : "") + canvasPath(id), new URL("./", location.href)).href;
+  }
   // The main page in canvas mode, filtered to the canvas's dates if it has any.
   function browseUrl(c) {
     const p = new URLSearchParams({canvas: c.id});
@@ -441,6 +459,6 @@
     api, ApiError, clientId, ensureName, currentName, myCanvases, rememberCanvas,
     forgetCanvas, activeCanvas, setActiveCanvas, canvasUrl, canvasPath, browseUrl,
     toast, formDialog, choiceDialog, createCanvasDialog, share, isShared, markShared,
-    defaultCanvasId, setDefaultCanvas, claimCanvas,
+    defaultCanvasId, setDefaultCanvas, claimCanvas, betaEnabled, BETA_GATE,
   };
 })();

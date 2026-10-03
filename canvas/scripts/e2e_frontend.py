@@ -93,8 +93,16 @@ def run(shots):
         adi = hermetic(browser.new_context(**phone))
         a = adi.new_page()
         watch(a, errors)
+        # Private beta: without the flag, no collections UI anywhere...
         a.goto(f"{WEB}/?api={API}")
         expect(a.locator(".event").first).to_be_visible()
+        expect(a.locator("#plan-btn")).to_be_hidden()
+        a.goto(f"{WEB}/canvas.html")
+        expect(a.locator("h1")).to_have_text("Collections are in private beta")
+        # ...and the /beta/ invite link lets this browser in.
+        a.goto(f"{WEB}/beta/?api={API}")
+        expect(a.locator(".event").first).to_be_visible()
+        expect(a.locator("#plan-btn")).to_be_visible()
         a.click("#plan-btn")
         answer_dialog(a, name="Adi & Sam hangout")
         expect(a.locator("#canvas-tray")).to_contain_text("Adding to Adi & Sam hangout")
@@ -131,7 +139,14 @@ def run(shots):
         sam = hermetic(browser.new_context(**phone))
         s = sam.new_page()
         watch(s, errors)
+        # Links made during the beta go through /beta/, which lets Sam in;
+        # the bare page link would show the beta notice instead.
+        cid0 = canvas_url.split("c=")[1].split("&")[0]
+        share_url = a.evaluate(f"AgoraCanvas.canvasUrl('{cid0}')")
+        assert "/beta/canvas.html?c=" in share_url, share_url
         s.goto(canvas_url + f"&api={API}")
+        expect(s.locator("h1")).to_have_text("Collections are in private beta")
+        s.goto(share_url + f"&api={API}")
         expect(s.locator(".item")).to_have_count(2)
         expect(s.locator(".cv-name")).to_have_text("Adi & Sam hangout")
         s.locator(".item").first.locator('[data-act="vote"]').click()
@@ -230,7 +245,7 @@ def run(shots):
         pc = hermetic(browser.new_context(viewport={"width": 1280, "height": 900}))
         c2 = pc.new_page()
         watch(c2, errors)
-        c2.goto(dup_url + f"&api={API}")
+        c2.goto(f"{WEB}/beta/canvas.html?c=" + dup_url.split("c=")[1].split("&")[0] + f"&api={API}")
         expect(c2.locator('[data-act="claim"]')).to_be_visible()
         expect(c2.locator('[data-act="vote"]')).to_have_count(3)  # looks shared until claimed
         c2.click('[data-act="claim"]')

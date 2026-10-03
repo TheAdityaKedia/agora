@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Agora</title>
+<!--
+  Private-beta entry for collections (see BETA_GATE in ../canvas-client.js):
+  remember that this browser is in the beta, then go to the real page with
+  the same query (?c=, ?canvas=, …) plus beta=1. Keep this file after the
+  launch: links shared during the beta point here and must keep working.
+-->
+<script>
+  try { localStorage.setItem("agora.canvas.beta", "true"); } catch (e) {}
+  var q = new URLSearchParams(location.search);
+  q.set("beta", "1");
+  location.replace("../?" + q.toString() + location.hash);
+</script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 24px">
+  <p><a href="../">Continue to Agora</a></p>
+</body>
+</html>
