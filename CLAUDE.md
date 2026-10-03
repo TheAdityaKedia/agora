@@ -23,7 +23,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
 | Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
-| AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json` |
+| AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json`; re-tag without scraping: `retag.yml` (README → "Tagging budget and re-tagging") |
 | Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
 | Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
 | Collections ("event canvases") API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |

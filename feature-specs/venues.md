@@ -1,8 +1,9 @@
 # Venues and the Area filter
 
-**Status: phases 1–2 shipped (#54: resolver + owner-reviewed venue list;
-#56: pipeline, review issue, Area filter); phase 3 in progress (see
-"Phase 3 design").** Decisions settled with the owner: OpenStreetMap
+**Status: phases 1–3 shipped (#54: resolver + owner-reviewed venue list;
+#56: pipeline, review issue, Area filter; #60: AI-assisted resolution,
+venue-aware dedup, venue names and links — see "Phase 3 design"). Phase 4
+(maps) is next.** Decisions settled with the owner: OpenStreetMap
 (Nominatim) for geocoding; build the venue list now rather than a
 location→area lookup only; nobody reviews the auto-merged data PRs, so
 the pipeline must verify new places itself and route only real doubts to a

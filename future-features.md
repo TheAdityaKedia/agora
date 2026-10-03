@@ -8,9 +8,10 @@ here.
 
 - **Venues and the Area filter** — a committed venue list resolved from
   location strings (OpenStreetMap + evidence rules + a review queue), then a
-  region filter; later venue-based dedup, maps and "near me".
-  Spec: [`feature-specs/venues.md`](feature-specs/venues.md) (phases 1–2
-  shipped; phase 3 in progress).
+  region filter, venue names and links, venue-aware dedup; next: maps,
+  "near me", SF neighbourhoods (phase 4).
+  Spec: [`feature-specs/venues.md`](feature-specs/venues.md) (phases 1–3
+  shipped).
 - **Adaptive / self-healing scrapers** — detect when a source's markup or
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)
@@ -21,8 +22,10 @@ here.
   DynamoDB). Next: a one-tap ☆ Save on every event card.
   Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md).
 - **Frontend payload scaling** — the browser downloads all of `events.json` and
-  builds the search index on load; past ~5k events ship a prebuilt index and/or
-  paginate / lazy-load the manifest. Spec: not written.
+  indexes every description on load (16 s to the first row on a slow phone at
+  5k events). Lean manifest + descriptions on demand.
+  Spec: [`feature-specs/frontend-payload.md`](feature-specs/frontend-payload.md)
+  (in progress).
 - **Platform scrapers** — one scraper per shared ticketing backend (Veezi for
   indie cinemas, Eventive for film fests, VBO, Tixr) unlocks many venues at
   once, the way Eventbrite / Luma already do. Spec: not written.
@@ -33,8 +36,10 @@ here.
 - **Drop detection in failure alerts** — also alert when a source's count falls
   sharply vs its current DB rows (would have caught SF Playhouse 375 → 4);
   today only hard failures and 0-event sources alert. Spec: not written.
-- **`reclassify` CLI** — force re-tagging of stale or all shows (today only a
-  taxonomy version bump or deleting the cache does it). Spec: not written.
+- **Forced re-tagging** — re-tag *all* shows (or one source) on demand, e.g.
+  after a prompt change without a taxonomy bump. The **Re-tag events**
+  workflow (`retag.yml`) already catches up stale/missing tags without
+  scraping; this would add a `--force` scope. Spec: not written.
 - **Email submissions — follow-ups** (v1 shipped; see README → "Event
   submissions by email"):
   - *Probe agent for hard links*: venue homepages / JS pages / "tickets" pages
