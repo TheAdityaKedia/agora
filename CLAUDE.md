@@ -48,6 +48,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   Neon. Deployed by `.github/workflows/deploy-canvas-api.yml` (branch → dev
   stack, `main` → prod).
 - `frontend/` — `index.html` (self-contained, inline CSS/JS, no build),
+  `canvas.html` + `canvas-client.js` (event canvases; talk to `canvas/`'s API),
   `vendor/` (pinned MiniSearch), `events.json` (the manifest — carries the
   taxonomy block + per-event `types`/`topics`/`cost`).
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.

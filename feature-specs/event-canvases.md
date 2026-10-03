@@ -1,7 +1,8 @@
 # Event canvases — plan a hangout with friends
 
-**Status: phase 1 (backend) built in `canvas/` — see `canvas/README.md`;
-phases 2–4 not built.** Decisions below were settled with the owner
+**Status: phase 1 (backend) shipped in `canvas/` (prod + dev live — see
+`canvas/README.md`); phases 2–3 (the pages) built on a branch; phase 4 docs
+partly done.** Decisions below were settled with the owner
 (2026-10-02). Open items are small and listed at the end.
 
 ## The problem
@@ -135,8 +136,12 @@ versions so an unchanged canvas costs one tiny read.
 - Polling: every 30s while the tab is visible, slowing to every 2 min after
   10 min of no interaction, paused when hidden; immediate refetch after your
   own write.
-- All user text is escaped; custom-item and comment links are linkified only
-  for `http(s)` with `rel="noopener nofollow ugc"`.
+- All user text is escaped. Item links (event URLs, custom-item links) are
+  rendered only for `http(s)`, with `rel="noopener nofollow ugc"`; comments
+  stay plain text (no linkifying) in v1.
+- The custom item's link field is plain text with a URL keyboard, not
+  `type=url` (the browser silently refuses "nopasf.com"); a missing scheme
+  becomes `https://`.
 - Static Agora `og:` tags only (no per-canvas previews, per non-goals).
 
 ### 8. Abuse and cost guard rails (no moderation)
@@ -223,14 +228,18 @@ canvas/                     # new; independent of service/ (no scraper deps)
   scripts/smoke.py          # post-deploy create → add → vote → read
   scripts/admin.py          # operator delete / inspect
   tests/                    # pytest + moto
-frontend/canvas.html        # new page (inline CSS/JS, no build, like index.html)
-frontend/index.html         # canvas mode, create flow, my-canvases menu
+frontend/canvas.html        # the canvas (?c=<id>), or "Your canvases" without ?c
+frontend/canvas-client.js   # shared by both pages: API, client id, name, dialogs, toast
+frontend/index.html         # canvas mode (+ Add, tray), "Plan with friends"
+canvas/scripts/e2e_frontend.py  # headless-Chromium run of the whole flow
 .github/workflows/deploy-canvas-api.yml
 ```
 
-Shared client code (client id, name prompt, API wrapper, my-canvases) is
-small enough to duplicate inline in both pages rather than introduce a build
-step; keep the two copies identical and note it in a comment.
+Shared client code (client id, name prompt, API wrapper, my-canvases,
+dialogs, toast) lives in one plain script, `frontend/canvas-client.js`, that
+both pages load — still no build step, and no copies to keep in step. It
+holds the prod and dev API URLs; pages on `localhost` use dev (or
+`?api=<url>`, remembered).
 
 **Deploy:** infrastructure is code (AWS CDK, Python, `canvas/infra/`), so an
 infra change ships like any other change. `deploy-canvas-api.yml` runs

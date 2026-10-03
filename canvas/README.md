@@ -21,6 +21,24 @@ scripts/admin.py          operator show / hard-delete a canvas
 tests/              pytest + moto (API) and CDK assertions (infra)
 ```
 
+## Frontend
+
+`frontend/canvas.html` (a canvas, or "Your canvases" without `?c=`) and
+canvas mode on `frontend/index.html`, sharing `frontend/canvas-client.js`,
+which holds the prod and dev API URLs. Pages served from `localhost` talk to
+dev, or to `?api=<url>` (remembered in the browser):
+
+```bash
+.venv/bin/python canvas/scripts/local_server.py --moto      # API on :8787
+python3 -m http.server -d frontend 8000
+# open http://localhost:8000/?api=http://localhost:8787
+```
+
+`canvas/scripts/e2e_frontend.py` plays the whole flow in headless Chromium
+(two friends: create, add in canvas mode, vote, comment, remove + undo, pick,
+custom item) against those two servers and fails on any page error. Needs
+`pip install playwright` and a Chromium (`CHROMIUM_PATH=` to reuse one).
+
 ## Develop
 
 ```bash
