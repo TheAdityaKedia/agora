@@ -9,8 +9,8 @@ here.
 - **Venues and the Area filter** — a committed venue list resolved from
   location strings (OpenStreetMap + evidence rules + a review queue), then a
   region filter; later venue-based dedup, maps and "near me".
-  Spec: [`feature-specs/venues.md`](feature-specs/venues.md) (phase 1
-  shipped; phase 2 in progress).
+  Spec: [`feature-specs/venues.md`](feature-specs/venues.md) (phases 1–2
+  shipped; phase 3 in progress).
 - **Adaptive / self-healing scrapers** — detect when a source's markup or
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)

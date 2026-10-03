@@ -52,6 +52,22 @@ def load_sources() -> list[str]:
     return [line.strip() for line in SOURCES_FILE.read_text().splitlines() if line.strip()]
 
 
+_VENUE_OF = []
+
+
+def _venue_of():
+    """dedup's venue lookup from the committed venue files, loaded once per
+    process (save time reads; only the merge job's resolve step writes)."""
+    if not _VENUE_OF:
+        try:
+            from places.store import Store
+            _VENUE_OF.append(dedup.venue_lookup(Store()))
+        except Exception as e:  # unreadable files: text rules only
+            print(f"[dedup] venue files not used ({type(e).__name__})", flush=True)
+            _VENUE_OF.append(None)
+    return _VENUE_OF[0]
+
+
 def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event | None:
     """Return the existing Event that matches `raw`, or None.
 
@@ -80,7 +96,7 @@ def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event 
     if source is not None:
         for e in same_time:
             if source not in (e.sources or []) and dedup.is_near_duplicate(
-                    raw.title, raw.location, e.title, e.location):
+                    raw.title, raw.location, e.title, e.location, _venue_of()):
                 return e
     return None
 
@@ -236,7 +252,27 @@ def classify_upcoming(classifier=None, client=None, cache_path=None, log=print,
                                         client=client, log=log)
 
 
-def resolve_places(geocoder=None, data_dir=None, max_lookups=None, log=print) -> dict:
+def _places_assistant():
+    """The AI-assisted resolution step's model (classify's Haiku via Bedrock)."""
+    import classify as _classify
+    from places.assist import Assistant
+
+    client = _classify.make_client()
+
+    def ask(system: str, user: str) -> str:
+        errors = []
+        for model_id in (_classify.PRIMARY_MODEL, _classify.FALLBACK_MODEL):
+            try:
+                return _classify._converse(client, model_id, system, user)
+            except Exception as e:  # try the next model
+                errors.append(f"{model_id}: {type(e).__name__}")
+        raise RuntimeError("; ".join(errors))
+
+    return Assistant(ask, profiles=_classify._source_profiles())
+
+
+def resolve_places(geocoder=None, data_dir=None, max_lookups=None, log=print,
+                   assistant="auto") -> dict:
     """Resolve upcoming events' location strings to venues (places/).
 
     Runs after classify, before export, over every upcoming event (not just
@@ -259,12 +295,19 @@ def resolve_places(geocoder=None, data_dir=None, max_lookups=None, log=print) ->
         session.close()
     store = Store(data_dir or DATA_DIR)
     geocoder = geocoder or Nominatim(max_calls=max_lookups or MAX_LOOKUPS)
-    summary = resolve_locations(collect_locations(rows), store, geocoder, today=today_local)
+    if assistant == "auto":
+        try:
+            assistant = _places_assistant()
+        except Exception as e:  # no boto3 / AWS config: resolve without it
+            log(f"[places] AI step off ({type(e).__name__})")
+            assistant = None
+    summary = resolve_locations(collect_locations(rows), store, geocoder, today=today_local,
+                                assistant=assistant)
     if "invalid" in summary:
         log(f"[places] skipped: venue files are invalid ({len(summary['invalid'])} problem(s))")
         return summary
     store.save()
-    log(f"[places] {summary['actions']}, {summary['lookups']} lookups, "
+    log(f"[places] {summary['actions']}, {summary['lookups']} lookups, {summary['ai_calls']} AI calls, "
         f"{len(summary['new_venues'])} new venue(s), {len(summary['pending'])} pending, "
         f"{summary['unresolved_events']}/{summary['events_with_location']} events unresolved")
     return summary

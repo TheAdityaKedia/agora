@@ -60,7 +60,8 @@ def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> 
         entry = cache.get(src, event.title)
         if entry is not None:
             break
-    return {
+    place = venues.entry(event.location) if venues else None
+    out = {
         "id": str(event.id),
         "title": event.title,
         "start_time": event.start_time.isoformat(),
@@ -77,14 +78,19 @@ def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> 
         "cost": entry.cost if entry else "unknown",
         # Where it is, joined from the committed venue files (feature-specs/
         # venues.md) — null when unknown, pending, or not a single place.
-        "venue": _venue_id(event.location, venues),
+        "venue": place.get("venue") if place else None,
         "region": venues.region_of(event.location) if venues else None,
     }
+    if place and place.get("venue") and place.get("room"):
+        out["room"] = place["room"]  # only when named: most events have none
+    return out
 
 
-def _venue_id(location: str | None, venues: VenueStore | None) -> str | None:
-    entry = venues.entry(location) if venues else None
-    return entry.get("venue") if entry else None
+def _venue_summary(v: dict) -> dict:
+    out = {"name": v["name"], "region": v["region"]}
+    if v.get("address"):
+        out["address"] = v["address"]
+    return out
 
 
 def _load_venues(venues_dir: Path) -> VenueStore | None:
@@ -153,7 +159,7 @@ def export_json(
         # Area filter: the regions in display order, and the venues events
         # point at (stored once, not per event).
         "regions": [{"id": r, "label": label} for r, label in REGIONS.items()],
-        "venues": {vid: {"name": venues.venues[vid]["name"], "region": venues.venues[vid]["region"]}
+        "venues": {vid: _venue_summary(venues.venues[vid])
                    for vid in sorted({e["venue"] for e in payload if e["venue"]})} if venues else {},
         "events": payload,
     }

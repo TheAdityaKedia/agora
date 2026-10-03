@@ -295,6 +295,8 @@ def render_places_body(check: dict, store, run_url: str) -> str:
             text = key.replace("|", "/")
             link = f"[{text}](https://www.openstreetmap.org/search?query={quote_plus(key)})"
             reason = (p.get("reason") or "").replace("|", "/")
+            if p.get("suggestion"):
+                reason += " · " + _suggestion_text(p["suggestion"]).replace("|", "/")
             sources = ", ".join(p.get("sources") or []).replace("|", "/")
             lines.append(f"| {link} | {p.get('events', 0)} | {sources} | {reason} | {p.get('first_seen', '')} |")
         lines += ["", "**To resolve one**, edit `service/data/venue_locations.json` in GitHub's editor and "
@@ -311,6 +313,19 @@ def render_places_body(check: dict, store, run_url: str) -> str:
             lines.append(f"- **{v.get('name', vid)}** ({v.get('region')}), {v.get('address', '')}{where}")
         lines += ["", "</details>"]
     return "\n".join(lines) + "\n"
+
+
+def _suggestion_text(s: dict) -> str:
+    """The AI step's proposal for a pending place, for the review issue."""
+    if s.get("kind") != "venue":
+        return f"AI: {s.get('kind', 'unknown').replace('_', ' ')}"
+    what = ", ".join(x for x in (s.get("name"), s.get("street_address"), s.get("city")) if x)
+    out = f"AI suggests **{what}**"
+    m = s.get("map")
+    if m:
+        out += (f" — map found [{m.get('label')}](https://www.openstreetmap.org/?mlat={m['lat']}"
+                f"&mlon={m['lng']}#map=18/{m['lat']}/{m['lng']}) (`{m.get('osm')}`)")
+    return out
 
 
 def cli(argv: list[str] | None = None) -> None:

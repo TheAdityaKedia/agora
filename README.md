@@ -190,8 +190,12 @@ the DB: `python dedupe_existing.py` (dry run) then `--apply`.
 location to a venue in `service/data/venues.json` (via
 `venue_locations.json`), looking new ones up on OpenStreetMap (≤50 per run),
 and the export joins `region`/`venue` onto each event for the site's Area
-filter. A location is assigned only when independent signals agree; anything
-else waits in the **Places to review** issue (updated each run, closed when
+filter. A location is assigned only when independent signals agree. For a
+string the rules can't place, Claude Haiku (≤20 calls per run) proposes a
+name and address to look up; the map result must still match the source's
+own text, so the model can find a place but never decides one alone. Anything
+else waits in the **Places to review** issue, with the model's suggestion if
+it had one (updated each run, closed when
 empty; a comment @mentions you only when something new is waiting). To
 resolve one, edit `service/data/venue_locations.json` in GitHub's editor:
 replace its `pending` entry with `{"venue": "<id>"}`, `{"place": "none"}`

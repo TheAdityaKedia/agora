@@ -382,6 +382,21 @@ def test_places_check_alerts_on_low_coverage_and_lists_pending(tmp_path):
     assert "venue_locations.json" in body and "Specs Bar" in body and "mlat=37.7979" in body
 
 
+def test_places_body_shows_the_ai_suggestion(tmp_path):
+    pend = {"the big room": {"reason": "no map result", "events": 2, "sources": ["X"],
+                             "suggestion": {"kind": "venue", "name": "Nourse Theater",
+                                            "street_address": "275 Hayes St", "city": "San Francisco",
+                                            "map": {"label": "Nourse", "osm": "way/9",
+                                                    "lat": 37.7781, "lng": -122.4209}}},
+            "somewhere": {"reason": "no map result", "events": 1, "sources": ["X"],
+                          "suggestion": {"kind": "not_a_place"}}}
+    store = _store(tmp_path, pend)
+    body = ci.render_places_body(ci.check_places(_places_report(), store), store, "https://run")
+    assert "no map result · AI suggests **Nourse Theater, 275 Hayes St, San Francisco** — map found " \
+           "[Nourse](https://www.openstreetmap.org/?mlat=37.7781&mlon=-122.4209" in body
+    assert "no map result · AI: not a place |" in body
+
+
 def test_places_check_alerts_on_many_new_pending_and_invalid_files(tmp_path):
     many = [f"s{i}" for i in range(21)]
     assert ci.check_places(_places_report(new_pending=many), _store(tmp_path))["alert"]

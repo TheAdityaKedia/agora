@@ -36,7 +36,7 @@ def collect_locations(events) -> dict[str, dict]:
 
 
 def resolve_locations(locations: dict[str, dict], store: Store, geocoder,
-                      today: date | None = None) -> dict:
+                      today: date | None = None, assistant=None) -> dict:
     """Resolve every string not yet known (and pending ones due a retry).
 
     Mutates `store` (the caller saves it). Returns a summary for the run
@@ -47,7 +47,7 @@ def resolve_locations(locations: dict[str, dict], store: Store, geocoder,
     errors = store.validate()
     if errors:
         return {"invalid": errors}
-    resolver = Resolver(store, geocoder, today=today)
+    resolver = Resolver(store, geocoder, today=today, assistant=assistant)
     pending_before = {k for k, e in store.locations.items() if "pending" in e}
     venues_before = set(store.venues)
     actions = Counter()
@@ -65,6 +65,7 @@ def resolve_locations(locations: dict[str, dict], store: Store, geocoder,
     return {
         "actions": dict(actions),
         "lookups": getattr(geocoder, "calls", 0),
+        "ai_calls": getattr(assistant, "calls", 0),
         "new_venues": sorted(set(store.venues) - venues_before),
         "new_pending": new_pending,
         "pending": sorted(k for k in locations if "pending" in store.locations.get(k, {})),

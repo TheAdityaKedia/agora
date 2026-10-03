@@ -3583,6 +3583,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "paramount-theater": {
+      "added": "2026-10-03",
+      "address": "2025 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "map: Paramount Theater in Alameda County (building, way/666976181)",
+        "text: Oakland",
+        "name matches"
+      ],
+      "lat": 37.809868,
+      "lng": -122.268667,
+      "name": "Paramount Theater",
+      "osm": "way/666976181",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "paris-75": {
       "added": "2026-10-02",
       "address": "Broadway, San Francisco, CA 94113",
