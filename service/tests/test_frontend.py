@@ -852,3 +852,49 @@ def test_no_neighborhood_ui_without_neighborhoods(browser, site, legacy_site):
         page = _map_page(browser, s, query="?hood=mission")
         assert page.locator("#hood-dropdown").is_hidden() and "hood=" not in page.url
         assert page._agora_errors == []
+
+
+def test_sf_chip_and_neighborhoods_replace_each_other(browser, map_site):
+    # Neighborhoods narrow SF, so the SF chip and a neighborhood are never
+    # both on: the chip would claim "all of SF" while the list shows less.
+    page = _map_page(browser, map_site)
+    page.click('#area-chips [data-area="sf"]')
+    page.click("#hood-summary")
+    page.check('#hood-list [data-hood="mission"]')
+    assert page.get_attribute('#area-chips [data-area="sf"]', "aria-pressed") == "false"
+    assert "hood=mission" in page.url and "area=" not in page.url
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"Roxie Theater"}
+    page.click('#area-chips [data-area="sf"]')
+    assert not page.is_checked('#hood-list [data-hood="mission"]') and "hood=" not in page.url
+    assert page.inner_text("#hood-summary") == "SF neighborhoods"
+    # A hand-made link with both: the neighborhoods win; other areas stay.
+    page = _map_page(browser, map_site, query="?area=sf,eastbay&hood=mission")
+    assert page.get_attribute('#area-chips [data-area="sf"]', "aria-pressed") == "false"
+    assert page.get_attribute('#area-chips [data-area="eastbay"]', "aria-pressed") == "true"
+    assert "area=eastbay" in page.url and "hood=mission" in page.url
+    assert page._agora_errors == []
+
+
+def test_map_goes_to_the_results_when_none_are_in_view(browser, map_site):
+    # Opened over Berkeley (no pins there): kept, since the link asked for it.
+    page = _map_page(browser, map_site, query="?view=map&at=37.8700,-122.2600,15")
+    _wait_for_pins(page)
+    _settle(page)
+    assert abs(page.evaluate("agoraMap.getCenter().lat") - 37.87) < 1e-3
+    # A filter change that leaves nothing in view: the map fits the results.
+    page.fill("#search-input", "Busy day")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '1'")
+    page.wait_for_function("Math.abs(agoraMap.getCenter().lng - (%f)) < 0.01" % DAWN[0], timeout=10000)
+    # One that leaves a result in view keeps the position.
+    _settle(page)
+    page.evaluate("agoraMap.jumpTo({center: [-122.415, 37.775], zoom: 12})")
+    page.fill("#search-input", "")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '3'")
+    page.wait_for_timeout(300)
+    c = page.evaluate("[agoraMap.getCenter().lng, agoraMap.getZoom()]")
+    assert abs(c[0] + 122.415) < 1e-6 and c[1] == 12
+    # Nothing matches at all: say so (not "no map location").
+    page.fill("#search-input", "zzzqqqxx")
+    page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '0'")
+    assert "No events match" in page.inner_text("#map-status")
+    assert page._agora_errors == []

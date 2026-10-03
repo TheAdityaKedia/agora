@@ -988,6 +988,8 @@
   function toggleArea(id, on) {
     const active = on === undefined ? !selectedAreas.has(id) : on;
     if (active) selectedAreas.add(id); else selectedAreas.delete(id);
+    // All of San Francisco replaces any chosen neighborhoods (see toggleHood).
+    if (active && id === "sf" && selectedHoods.size) { selectedHoods.clear(); updateHoodControls(); }
     updateAreaChips();
     render();
   }
@@ -996,8 +998,9 @@
     if (b) toggleArea(b.dataset.area);
   });
   // SF neighborhoods (phase 4): a dropdown under the Area chips. They narrow
-  // San Francisco: with any selected, an SF event must be in one of them
-  // (see inPlace). Only neighborhoods that have events are listed.
+  // San Francisco, so the SF chip and neighborhoods never both stay on:
+  // picking a neighborhood turns the chip off, picking the chip clears the
+  // neighborhoods. Only neighborhoods that have events are listed.
   const hoodLabels = new Map((data.neighborhoods || []).map(h => [h.id, h.label]));
   const hoodCounts = new Map();
   for (const e of events) if (e._hood) hoodCounts.set(e._hood, (hoodCounts.get(e._hood) || 0) + 1);
@@ -1021,6 +1024,7 @@
   function toggleHood(id, on) {
     const active = on === undefined ? !selectedHoods.has(id) : on;
     if (active) selectedHoods.add(id); else selectedHoods.delete(id);
+    if (active && selectedAreas.delete("sf")) updateAreaChips();
     updateHoodControls();
     render();
   }
@@ -1041,12 +1045,8 @@
     }
     document.getElementById("hood-empty").hidden = visible > 0;
   });
-  // The location facet: OR across the chosen areas and neighborhoods, where
-  // chosen neighborhoods stand in for San Francisco as a whole.
-  function inPlace(ev) {
-    if (selectedHoods.size && ev.region === "sf") return selectedHoods.has(ev._hood);
-    return selectedAreas.has(ev.region);
-  }
+  // The location facet: OR across the chosen areas and neighborhoods.
+  const inPlace = (ev) => selectedAreas.has(ev.region) || selectedHoods.has(ev._hood);
   // Topics use the same model as Sources: all selected by default, deselect to
   // narrow. (Untagged events always pass the topic filter — see render.)
   const allTopics = [...topicMeta.keys()];
@@ -1735,6 +1735,8 @@
     const hoodParam = p.get("hood");
     if (hoodParam) {
       for (const id of hoodParam.split(",")) if (hoodIds.includes(id)) selectedHoods.add(id);
+      // ?area=sf&hood=mission (hand-made, or an older link): the neighborhoods win.
+      if (selectedHoods.size && selectedAreas.delete("sf")) updateAreaChips();
       updateHoodControls();
     }
     const typeParam = p.get("type");
@@ -1941,7 +1943,10 @@
     // Counts on the container: what's pinned, readable without the canvas.
     mapWrapEl.dataset.venues = features.length;
     mapWrapEl.dataset.events = features.reduce((a, f) => a + f.properties.events, 0);
-    if (mapReady) map.getSource("venues").setData(mapPins);
+    if (mapReady) {
+      map.getSource("venues").setData(mapPins);
+      fitIfNoneInView();
+    }
     renderPanel();
     updateMapStatus();
     sizeMap();
@@ -1953,10 +1958,21 @@
     return [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]];
   }
 
+  // A filter change keeps the reader's position while any result is in
+  // view; when it leaves none there, the map goes to where the results are.
+  function fitIfNoneInView() {
+    const b = pinBounds();
+    if (!b) return;
+    const inView = map.getBounds();
+    if (mapPins.features.some(f => inView.contains(f.geometry.coordinates))) return;
+    map.fitBounds(b, {padding: 48, maxZoom: 14});
+  }
+
   function updateMapStatus() {
     const html = mapError
       ? "The map didn’t load (" + escapeHtml(mapError) + ').<button type="button" data-map-retry>Try again</button>'
       : !mapReady ? "Loading map…"
+      : !mapResults.length ? "No events match. Remove a filter or try a different search."
       : !mapPins.features.length ? "No events here have a map location."
       : mapBlank ? "Base map unavailable. Showing venues only."
       : "";
