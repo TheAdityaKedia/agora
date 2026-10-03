@@ -62,3 +62,48 @@ here.
   "Offsite: …" title can win over the venue's). Pre-v1 duplicates were merged
   on 2026-09-29 with `service/dedupe_existing.py` (29 rows).
   Spec: not written.
+
+## Ideas — better social life in SF (not yet planned)
+
+Brainstormed 2026-10-03. Not committed work: pick one, write its spec in
+`feature-specs/`, then move it up into the list above. Roughly smallest first.
+
+- **"Meet people" filter** — most events are sit-and-watch; trivia, run
+  clubs, classes, mixers, open mics and volunteer shifts are for meeting
+  people. Add a tagging dimension (sit-and-watch / some mingling / built for
+  meeting people, plus solo-friendly) via a prompt change and a `retag.yml`
+  run; a "Meet people" filter or preset and a "Going alone?" hint on rows.
+  Small, mostly a tagging problem.
+- **Subscribable calendar feeds** — any filtered view as a live calendar
+  subscription (`webcal://…/feeds/<view>.ics`) so events land in Google/Apple
+  Calendar without opening the site. The export writes static ICS feeds for
+  common views (each area, topic, series) plus a "Subscribe" button for the
+  current filters. Stays static (no backend). Small–medium.
+- **"Become a regular"** — repeated exposure is what turns strangers into
+  friends; weekly trivia, run clubs, monthly book clubs and standing open
+  mics provide it. Detect recurring series (same source/venue/title pattern
+  on a weekly or monthly rhythm, across sources that format titles
+  differently), show a "Regulars" view grouped by series ("Every Tue · Trivia
+  at Bottom's Up"), and let people follow a series. Medium; the series
+  detection is the hard part.
+- **Collections → actual plans** — collections already gather events and
+  votes; add a "which nights work?" availability poll, "lock in" (the winning
+  event becomes calendar invites for everyone) and day-before reminders to
+  whoever's going. Builds on the live collections backend. Medium.
+- **Weekly "Your weekend" email** — a Thursday email with 5–8 picks matched
+  to saved interests and areas, plus anything new from followed series.
+  Needs subscriptions (collections backend), sending (SES), unsubscribe and a
+  ranking step (Haiku for blurbs). Builds a weekly habit. Medium–large.
+- **Lower the bar for small organizers** — the most social events
+  (neighbourhood potlucks, small clubs, community classes) rarely use
+  ticketing platforms. A web submission form next to the email path, a
+  "recurring" option, and an organizer page to keep their series current.
+  Medium.
+- **Agora Tables** — monthly matching of small groups of strangers (5–6) by
+  interest, sent to an event together, with dinner after (Timeleft's model,
+  built around events). Needs sign-ups, matching, deposits against no-shows,
+  safety/moderation, likely venue partners. The big bet: most impact, most
+  work and responsibility.
+
+Suggested order: "Meet people" + calendar feeds first (small, change how the
+site is used, no backend), then "Become a regular".
