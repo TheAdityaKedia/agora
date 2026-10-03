@@ -1,6 +1,6 @@
 # Frontend payload: lean manifest, descriptions on demand
 
-**Status: in progress.**
+**Status: built (PR pending).**
 
 ## The problem
 
@@ -52,14 +52,31 @@ built in the background in small chunks and swapped in; the active query
 re-runs. Search keeps one index and AND semantics across all fields, so a
 query matching words in the title and the description still matches.
 
-**Indexing in small chunks.** `addAllAsync` chunks of 50 (was 250) keep each
+**Indexing in small chunks.** `addAllAsync` chunks of 25 (was 250) keep each
 task near or under 50 ms on a slowed phone, so typing stays responsive while
-the full index builds.
+the full index builds (chunks of 50 measured 0.9 s of blocking during the
+full-index build on a Fast 4G phone; 25 measured 0.2 s, for ~0.5 s longer).
 
 **Old cached page + new manifest.** Pages caches for ~10 minutes; a page
 loaded just before a deploy reads the new `events.json` and finds no
 `description`. It then shows rows without descriptions until reload —
 harmless, and gone within minutes.
+
+## Result
+
+Same harness, same 5,060 events, the exporter's actual split
+(`events.json` 0.79 MB gzipped, `descriptions.json` 1.31 MB, fetched only
+on demand):
+
+| | first row | search ready | blocked |
+|---|---:|---:|---:|
+| Slow 4G phone | 16.1 → **6.3 s** | 20.5 → 8.2 s | 6.1 → **0.3 s** |
+| Fast 4G phone | 6.6 → **2.1 s** | 10.7 → 4.5 s | 5.7 → **0.2 s** |
+| Desktop | 1.9 → **0.6 s** | 2.5 → 2.0 s | 0.1 → 0.0 s |
+
+After typing a search on the Fast 4G phone, the full-text index is swapped
+in ~7.7 s later (download + background indexing) with 0.2 s of blocking;
+until then results come from titles, summaries, venues and tags.
 
 ## Not now (if numbers grow)
 

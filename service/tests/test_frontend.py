@@ -60,7 +60,10 @@ def _events(n=N_EVENTS):
             "location": ("20 Annie St — Back Bar" if i % 4 == 2 else "The Dawn Club, San Francisco")
                         if jazz else "261 Columbus Ave",
             "url": f"https://example.com/e/{i}",
-            "description": "Doors at seven. Bring a friend and stay late.",
+            # Only "Doors at seven." shows until "more"; the rest (and the
+            # word "zanzibar" in event 5) is in descriptions.json.
+            "description": "Doors at seven. Bring a friend and stay late."
+                           + (" The Zanzibar quartet plays." if i == 5 else ""),
             "image_url": None,
             "sources": ["The Dawn Club"] if jazz else ["City Lights"],
             "types": [["performance", "concert"]] if jazz else [["talk"]],
@@ -93,23 +96,47 @@ def _events(n=N_EVENTS):
     return out
 
 
-@pytest.fixture(scope="module")
-def site(tmp_path_factory):
-    root = tmp_path_factory.mktemp("site")
-    shutil.copy(FRONTEND / "index.html", root / "index.html")
-    shutil.copytree(FRONTEND / "vendor", root / "vendor")
-    (root / "events.json").write_text(json.dumps({
+def _manifest(events):
+    return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "taxonomy": TAXONOMY,
         "regions": [{"id": "sf", "label": "San Francisco"}, {"id": "eastbay", "label": "East Bay"},
                     {"id": "northbay", "label": "North Bay"}],
         "venues": {"dawn-club": {"name": "The Dawn Club", "region": "sf",
                                  "address": "20 Annie St, San Francisco, CA 94105"}},
-        "events": _events(),
-    }))
+        "events": events,
+    }
+
+
+def _serve(root):
+    shutil.copy(FRONTEND / "index.html", root / "index.html")
+    shutil.copytree(FRONTEND / "vendor", root / "vendor")
     handler = functools.partial(_QuietHandler, directory=str(root))
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
+    return server
+
+
+@pytest.fixture(scope="module")
+def site(tmp_path_factory):
+    """The manifest as the exporter writes it: summaries in events.json, full
+    descriptions in descriptions.json (feature-specs/frontend-payload.md)."""
+    from exporters.json_export import split_descriptions
+    root = tmp_path_factory.mktemp("site")
+    events = _events()
+    (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
+    (root / "events.json").write_text(json.dumps(_manifest(events)))
+    server = _serve(root)
+    yield f"http://127.0.0.1:{server.server_port}/"
+    server.shutdown()
+
+
+@pytest.fixture(scope="module")
+def legacy_site(tmp_path_factory):
+    """An older manifest with descriptions inline and no descriptions.json."""
+    root = tmp_path_factory.mktemp("legacy")
+    (root / "events.json").write_text(json.dumps(_manifest(_events())))
+    server = _serve(root)
     yield f"http://127.0.0.1:{server.server_port}/"
     server.shutdown()
 
@@ -502,3 +529,61 @@ def test_calendar_uses_venue_name_and_address(browser, site):
     row.locator(".cal-btn").click()
     q = parse_qs(urlparse(row.locator("a.cal-google").get_attribute("href")).query)
     assert q["location"] == ["The Dawn Club · Back Bar, 20 Annie St, San Francisco, CA 94105"]
+
+
+# --- descriptions on demand (feature-specs/frontend-payload.md) ----------------
+
+def _desc_requests(page):
+    reqs = []
+    page.on("request", lambda r: reqs.append(r.url) if r.url.endswith("descriptions.json") else None)
+    return reqs
+
+
+def test_descriptions_load_only_on_more(browser, site):
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ)
+    page = ctx.new_page()
+    reqs = _desc_requests(page)
+    page.goto(site)
+    page.wait_for_selector(".event")
+    page.wait_for_timeout(500)
+    assert reqs == []  # not fetched for the first render
+    desc = page.locator(".event").nth(3).locator(".description")
+    assert desc.inner_text().startswith("Doors at seven.") and "Bring a friend" not in desc.inner_text()
+    desc.click()
+    page.wait_for_selector(".event:nth-child(4) .description.expanded, .description.expanded")
+    assert "Bring a friend and stay late." in page.locator(".description.expanded").first.inner_text()
+    assert len(reqs) == 1
+    # Collapsing and expanding another needs no new request.
+    page.locator(".description.expanded").first.click()
+    page.locator(".event").nth(5).locator(".description").click()
+    page.wait_for_selector(".description.expanded")
+    assert len(reqs) == 1
+
+
+def test_search_reaches_full_descriptions(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.fill("#search-input", "zanzibar")
+    page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
+    assert "Jazz night" in page.locator(".event .title").inner_text() or \
+        "Poetry" in page.locator(".event .title").inner_text()
+    assert page._agora_errors == []
+
+
+def test_shared_search_link_reaches_full_descriptions(browser, site):
+    page = _open(browser, site, DESKTOP, "?q=zanzibar")
+    page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
+
+
+def test_legacy_manifest_with_inline_descriptions(browser, legacy_site):
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ)
+    page = ctx.new_page()
+    reqs = _desc_requests(page)
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    page.goto(legacy_site)
+    page.wait_for_selector(".event")
+    page.locator(".event").nth(3).locator(".description").click()
+    page.wait_for_selector(".description.expanded")
+    page.fill("#search-input", "zanzibar")
+    page.wait_for_function("document.querySelectorAll('.event').length === 1", timeout=15000)
+    assert reqs == [] and errors == []
