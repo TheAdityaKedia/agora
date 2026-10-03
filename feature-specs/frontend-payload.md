@@ -78,6 +78,24 @@ After typing a search on the Fast 4G phone, the full-text index is swapped
 in ~7.7 s later (download + background indexing) with 0.2 s of blocking;
 until then results come from titles, summaries, venues and tags.
 
+## Measuring
+
+`scripts/measure_load.py` is the harness, committed with venues phase 4. It
+serves a site directory gzipped and drives Playwright Chromium over CDP on
+the profiles above, then reports medians for manifest download, first
+row, search ready and blocking time. With `--map` it also times tapping
+Map to pins on screen. Build a real-data site with
+`scripts/preview_site.py` (`--keep-venues --page <old index.html>` gives
+the "before" side). Its absolute numbers depend on the machine, so compare
+before and after on the same one. On an M3 Pro (2026-10-03, 5,060 events,
+median of 5):
+
+| | first row | search ready | blocked |
+|---|---:|---:|---:|
+| Slow 4G phone | 4.9 s | 6.4 s | 0.2 s |
+| Fast 4G phone | 1.2 s | 2.7 s | 0.2 s |
+| Desktop | 0.1 s | 1.5 s | 0.0 s |
+
 ## Not now (if numbers grow)
 
 - **Time window**: a first file with only the next 14 days (~0.25 MB
