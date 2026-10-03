@@ -17,6 +17,11 @@ here.
     prompt (browser geolocation, client-side only).
   - **Venue pages.**
   Spec: [`feature-specs/venues.md`](feature-specs/venues.md).
+- **Product analytics** — cookieless, first-party usage analytics: visits and
+  geography, what people search, filter and click (events, tags, sources,
+  venues, areas, normalized by supply), engagement funnel, and later CTR,
+  real-visitor performance and errors; private weekly digest email.
+  Spec: [`feature-specs/analytics.md`](feature-specs/analytics.md) (draft).
 - **Adaptive / self-healing scrapers** — detect when a source's markup or
   endpoint changes and adapt instead of silently returning `[]`.
   Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)
