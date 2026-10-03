@@ -1,6 +1,7 @@
 """Venue resolution (service/places). No network: geocoder responses are
 hand-built in the shape Nominatim returns (format=jsonv2, addressdetails=1)."""
 import json
+import re
 from datetime import date, timedelta
 
 import pytest
@@ -345,6 +346,43 @@ def test_save_round_trips_byte_identically(store, tmp_path):
 def test_committed_venue_files_are_valid():
     errs = Store().validate()
     assert errs == [], "\n".join(errs)
+
+
+def test_committed_neighborhood_file_loads():
+    from places.regions import NEIGHBORHOODS_FILE, neighborhoods
+    feats = json.loads(NEIGHBORHOODS_FILE.read_text())["features"]
+    ids = [f["properties"]["id"] for f in feats]
+    assert len(feats) == 41 and len(set(ids)) == 41
+    assert all(re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", i) for i in ids)
+    assert all(f["properties"]["label"] and f["geometry"]["type"] == "MultiPolygon" for f in feats)
+    assert neighborhoods()["soma"] == "SoMa" and neighborhoods()["mission"] == "Mission"
+
+
+def test_every_sf_building_venue_gets_a_neighborhood():
+    """Phase 4: neighbourhoods come from coordinates at export time, so a
+    venue outside every polygon would silently drop out of the filter."""
+    from places.regions import neighborhood_at
+    missing = [vid for vid, v in Store().venues.items()
+               if v["region"] == "sf" and v["precision"] == "building"
+               and neighborhood_at(v["lat"], v["lng"]) is None]
+    assert missing == [], f"SF venues with no neighbourhood: {missing}"
+
+
+def test_neighborhoods_are_only_in_sf():
+    from places.regions import neighborhood_at
+    assert neighborhood_at(37.80809, -122.27024) is None   # Oakland
+    assert neighborhood_at(37.8199, -122.4783) is None     # mid Golden Gate Bridge
+    assert neighborhood_at(37.8236, -122.3706) == "treasure-island"
+
+
+def test_pier_venues_snap_to_the_nearest_neighborhood():
+    # DataSF's shapes stop at the shoreline; piers are just outside them.
+    from places.regions import neighborhood_at, _in_polys, _neighborhoods
+    for lat, lng in [(37.8075, -122.4320), (37.8095, -122.4215)]:  # Fort Mason pier, Hyde St Pier
+        assert not any(_in_polys(lng, lat, polys) for _, _, polys in _neighborhoods())
+    assert neighborhood_at(37.8075, -122.4320) == "marina"
+    assert neighborhood_at(37.8095, -122.4215) == "russian-hill"
+    assert neighborhood_at(37.80, -122.36) is None    # out in the bay
 
 
 def test_name_plus_address_falls_back_to_the_address(store):
