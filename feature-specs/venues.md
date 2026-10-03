@@ -389,6 +389,12 @@ They get no neighbourhood, because a street can cross a boundary.
   `venues.json` and never hand-edited, so fixing a venue's coordinates
   fixes its neighbourhood. A validation test checks that every SF
   `building` venue gets one.
+- **Piers snap to the shore.** Unlike the county shapes, DataSF's stop at
+  the shoreline, so a pier venue (Fort Mason's piers, Hyde St Pier) lands
+  in no polygon. A point outside every polygon takes the nearest one
+  within 300 m (`SHORE_SNAP_M`); farther out (mid-bay, the Golden Gate
+  Bridge) it gets none. Without this, CI adding a pier venue would turn
+  the validation test red on an unrelated data PR.
 - **Quirk:** the boundaries are DataSF's, and they follow census tracts.
   So DataSF's "Mission" takes in western SoMa around 11th and 12th St
   (Oasis, the Eagle). We keep the dataset as published rather than
@@ -402,11 +408,15 @@ They get no neighbourhood, because a street can cross a boundary.
   "San Francisco neighbourhoods" dropdown: a checkbox list with event
   counts and a search box, like Topics. Chips don't scale to 41 names.
 - **Semantics:** neighbourhoods narrow San Francisco. The location facet
-  is OR across the selected areas and neighbourhoods. When any
-  neighbourhood is selected, it replaces San Francisco as a whole, so:
+  is a plain OR across the selected areas and neighbourhoods, and the SF
+  chip and neighbourhoods are never both on: picking a neighbourhood turns
+  the SF chip off, and picking the SF chip clears the neighbourhoods. So:
   - "Mission" alone shows Mission events;
   - "East Bay + Mission" shows both;
-  - "San Francisco + Mission" shows Mission.
+  - a link with `?area=sf&hood=mission` loads as Mission alone.
+  (The first cut let "San Francisco + Mission" stand, showing Mission
+  only, with the SF chip still lit, which claimed more than the list
+  showed.)
 - One pill per neighbourhood. Neighbourhoods count in the Filters badge,
   Reset clears them, and `?hood=mission,soma` restores them (unknown ids
   are dropped).
@@ -461,6 +471,10 @@ They get no neighbourhood, because a street can cross a boundary.
 - **Same results as the list:** every filter changes the pins. A note on
   the map says "N events have no map location and aren't shown": events
   with no venue, or a venue without coordinates.
+- **Position on filter change:** kept while any result is still in view,
+  so narrowing doesn't yank the map. When a change leaves no result in
+  view, the map fits the results; otherwise the reader would stare at an
+  empty map with no hint of where things went.
 - **URL:** `?view=map` and `&at=lat,lng,zoom` (written on `moveend`, 4
   decimals / zoom 2). Out-of-range or garbled values are ignored. The map
   then fits the current pins, which is also the first-open default.
