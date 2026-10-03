@@ -56,7 +56,9 @@ def _events(n=N_EVENTS):
             "id": f"ev{i}",
             "title": f"Jazz night {i}" if jazz else f"Poetry reading {i}",
             "start_time": (base + timedelta(days=i // 4, hours=i % 4)).isoformat(),
-            "location": "The Dawn Club, San Francisco" if jazz else "261 Columbus Ave",
+            # Jazz: one venue written two ways (the second with a room).
+            "location": ("20 Annie St — Back Bar" if i % 4 == 2 else "The Dawn Club, San Francisco")
+                        if jazz else "261 Columbus Ave",
             "url": f"https://example.com/e/{i}",
             "description": "Doors at seven. Bring a friend and stay late.",
             "image_url": None,
@@ -66,7 +68,8 @@ def _events(n=N_EVENTS):
             "cost": "unknown",
             # Every 10th event has no known area.
             "region": None if i % 10 == 9 else ("sf" if jazz else "eastbay"),
-            "venue": None,
+            "venue": "dawn-club" if jazz else None,
+            **({"room": "Back Bar"} if jazz and i % 4 == 2 else {}),
         })
     busy_start = base + timedelta(days=5, hours=4)
     for i in range(BUSY):
@@ -100,7 +103,8 @@ def site(tmp_path_factory):
         "taxonomy": TAXONOMY,
         "regions": [{"id": "sf", "label": "San Francisco"}, {"id": "eastbay", "label": "East Bay"},
                     {"id": "northbay", "label": "North Bay"}],
-        "venues": {},
+        "venues": {"dawn-club": {"name": "The Dawn Club", "region": "sf",
+                                 "address": "20 Annie St, San Francisco, CA 94105"}},
         "events": _events(),
     }))
     handler = functools.partial(_QuietHandler, directory=str(root))
@@ -245,7 +249,7 @@ def test_source_always_shown(browser, site):
     page = _open(browser, site, DESKTOP)
     jazz, poetry = page.locator(".event").nth(2), page.locator(".event").nth(3)
     assert "Jazz night 2" in jazz.inner_text()
-    # Shown even though the location ("The Dawn Club, San Francisco") names it.
+    # Shown even though the venue has the same name.
     assert jazz.locator(".source").inner_text() == "The Dawn Club"
     assert "Poetry reading 3" in poetry.inner_text()
     assert poetry.locator(".source").inner_text() == "City Lights"
@@ -444,3 +448,52 @@ def test_area_filter(browser, site):
     page = _open(browser, site, DESKTOP, query="?area=sf")
     assert set(page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)")) == {"sf"}
     assert page.get_attribute('#area-chips [data-area="sf"]', "aria-pressed") == "true"
+
+
+def test_rows_show_the_venue_name_and_room(browser, site):
+    page = _open(browser, site, DESKTOP)
+    rows = page.locator(".event")
+    plain, room, poetry = (rows.nth(i).locator(".location-btn") for i in (0, 2, 3))
+    assert plain.inner_text() == "The Dawn Club"
+    assert room.inner_text() == "The Dawn Club · Back Bar"
+    tip = room.get_attribute("title")
+    assert "20 Annie St — Back Bar" in tip and "20 Annie St, San Francisco, CA 94105" in tip
+    assert poetry.inner_text() == "261 Columbus Ave"  # no venue: the source's text
+    assert "OpenStreetMap" in page.inner_text(".credits")
+
+
+def test_venue_click_shows_every_spelling_with_pill_and_link(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.locator(".event").nth(2).locator(".location-btn").click()
+    assert "venue=dawn-club" in page.url and "loc=" not in page.url
+    assert "The Dawn Club" in page.inner_text("#active-filters")
+    titles = page.locator(".event .title").all_inner_texts()
+    assert titles and all("Jazz" in t or "Busy" in t or "BATIASHVILI" in t for t in titles)
+    texts = page.locator(".event .location-btn").all_inner_texts()
+    assert "The Dawn Club" in texts and "The Dawn Club · Back Bar" in texts
+    # A text filter replaces it (and vice versa).
+    page.click("#reset")
+    page.locator(".event").nth(3).locator(".location-btn").click()
+    assert "loc=" in page.url and "venue=" not in page.url
+    # The link survives a reload; an unknown id is ignored.
+    page = _open(browser, site, DESKTOP, "?venue=dawn-club")
+    assert all("Poetry" not in t for t in page.locator(".event .title").all_inner_texts())
+    page = _open(browser, site, DESKTOP, "?venue=gone")
+    assert page.inner_text("#active-filters").strip() == "" and page._agora_errors == []
+
+
+def test_search_finds_events_by_venue_name(browser, site):
+    page = _open(browser, site, DESKTOP)
+    page.fill("#search-input", "Dawn Club Back Bar")
+    page.wait_for_function("document.querySelector('.event .location-btn')?.textContent"
+                           " === 'The Dawn Club · Back Bar'")
+    assert set(page.locator(".event .location-btn").all_inner_texts()) == {"The Dawn Club · Back Bar"}
+
+
+def test_calendar_uses_venue_name_and_address(browser, site):
+    from urllib.parse import parse_qs, urlparse
+    page = _open(browser, site, DESKTOP)
+    row = page.locator(".event").nth(2)
+    row.locator(".cal-btn").click()
+    q = parse_qs(urlparse(row.locator("a.cal-google").get_attribute("href")).query)
+    assert q["location"] == ["The Dawn Club · Back Bar, 20 Annie St, San Francisco, CA 94105"]

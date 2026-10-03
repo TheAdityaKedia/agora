@@ -338,6 +338,10 @@
   .description.expanded .desc-preview { display: none; }
   .description.expanded .desc-full { display: inline; }
   .desc-toggle { color: var(--accent); font-weight: 500; margin-left: 2px; }
+  .credits {
+    margin: 32px 0 8px; text-align: center; font-size: 12px; color: var(--muted);
+  }
+  .credits a { color: inherit; }
   .location-btn, .source-btn {
     background: none; border: none; padding: 0; margin: 0;
     color: inherit; font: inherit; text-align: left;
@@ -570,6 +574,8 @@
       <div class="skeleton-row"><span class="s-time"></span><span class="s-body"></span></div>
     </div>
   </div>
+  <footer class="credits">Venue data © <a href="https://www.openstreetmap.org/copyright"
+    target="_blank" rel="noopener">OpenStreetMap</a> contributors</footer>
 </main>
 
 <script src="./vendor/minisearch-6.3.0.min.js"></script>
@@ -661,6 +667,20 @@
     return words.join(" ");
   }
 
+  // Venues (feature-specs/venues.md): id → {name, region, address}. A row
+  // with a venue shows "<venue> · <room>" instead of the source's text.
+  const venueInfo = data.venues || {};
+  function venueLabel(e) {
+    const v = e.venue && venueInfo[e.venue];
+    if (!v) return null;
+    return e.room ? v.name + " · " + e.room : v.name;
+  }
+  // Where, for a calendar entry: the venue's name and address when known.
+  function calLocation(e) {
+    const v = e.venue && venueInfo[e.venue];
+    return v && v.address ? venueLabel(e) + ", " + v.address : (e.location || "");
+  }
+
   // Never show events that have already started. The manifest is pruned by
   // calendar day, so it still carries today's earlier events; drop them here
   // (before indexing, so counts and search agree) and again at each render
@@ -675,15 +695,18 @@
       id: i,
       sources_text: (e.sources || []).join(" "),
       tags_text: tagsText(e),
+      // Search finds an event by its venue's name too, not only the
+      // source's spelling ("Sydney Goldstein" for "City Arts — Goldstein").
+      where_text: venueLabel(e) || "",
     }));
 
   // The search index. Indexing ~5k descriptions blocks a phone for seconds,
   // so it's filled in chunks after the first render (buildIndex), not here.
   const miniSearch = new MiniSearch({
-    fields: ["title", "description", "location", "sources_text", "tags_text"],
+    fields: ["title", "description", "location", "where_text", "sources_text", "tags_text"],
     storeFields: ["id"],
     searchOptions: {
-      boost: {title: 3, tags_text: 2, description: 1, location: 1, sources_text: 1},
+      boost: {title: 3, tags_text: 2, description: 1, location: 1, where_text: 1, sources_text: 1},
       prefix: true,
       fuzzy: 0.2,
       combineWith: "AND",
@@ -722,7 +745,8 @@
   const selected = new Set(allSources);  // all on by default
   let dateFrom = null;
   let dateTo = null;
-  let locationFilter = null;
+  let locationFilter = null;   // exact location text (events with no venue)
+  let venueFilter = null;      // a venue id: every spelling and room of it
 
   const selectedTypes = new Set();   // dot-paths, e.g. "talk" or "talk.reading"
   // Area filter (feature-specs/venues.md): each event carries a region id or
@@ -943,8 +967,15 @@
   });
   searchEl.addEventListener("focus", buildIndex);
 
+  // The two "only events here" filters replace each other.
   function setLocationFilter(loc) {
     locationFilter = loc;
+    venueFilter = null;
+    render();
+  }
+  function setVenueFilter(id) {
+    venueFilter = id;
+    locationFilter = null;
     render();
   }
 
@@ -998,7 +1029,11 @@
     const srcBtn = e.target.closest(".source-btn");
     if (srcBtn) { isolateSource(srcBtn.dataset.source, true); return; }
     const locBtn = e.target.closest(".location-btn");
-    if (locBtn) { setLocationFilter(locBtn.dataset.location); return; }
+    if (locBtn) {
+      if (locBtn.dataset.venue) setVenueFilter(locBtn.dataset.venue);
+      else setLocationFilter(locBtn.dataset.location);
+      return;
+    }
     const desc = e.target.closest('.description[role="button"]');
     if (desc) desc.classList.toggle("expanded");
   });
@@ -1326,6 +1361,7 @@
       if (toEl.value) p.set("to", toEl.value);
     }
     if (locationFilter) p.set("loc", locationFilter);
+    if (venueFilter) p.set("venue", venueFilter);
     if (selectedTypes.size) p.set("type", [...selectedTypes].join(","));
     if (selectedAreas.size) p.set("area", [...selectedAreas].join(","));
     // Like sources: emit the topic list only when it's a subset (absent = all).
@@ -1379,6 +1415,9 @@
       // setLocationFilter shows the pill and calls render() itself.
       setLocationFilter(loc);
     }
+    // An unknown venue id (renamed or gone) is ignored, like unknown sources.
+    const venueParam = p.get("venue");
+    if (venueParam && Object.hasOwn(venueInfo, venueParam)) setVenueFilter(venueParam);
     // Tag facets. Unknown paths/slugs (e.g. from an old link after a taxonomy
     // change) are silently dropped so shared links open gracefully.
     const areaParam = p.get("area");
@@ -1479,6 +1518,7 @@
     else if (clear === "area") toggleArea(val, false);
     else if (clear === "dates") setDateRange(null, null);
     else if (clear === "location") setLocationFilter(null);
+    else if (clear === "venue") setVenueFilter(null);
   });
 
   // Day strip: jump to a day, rendering rows up to it first if needed.
@@ -1514,6 +1554,7 @@
       if (dateFrom && ev._start < dateFrom) return false;
       if (dateTo && ev._start > dateTo) return false;
       if (locationFilter && ev.location !== locationFilter) return false;
+      if (venueFilter && ev.venue !== venueFilter) return false;
       // Type filter: OR within the facet; a selected partial path (e.g. "talk")
       // matches any deeper path on the event ("talk.reading") — branch match.
       if (selectedTypes.size) {
@@ -1590,6 +1631,7 @@
         : dateFrom ? "From " + fmt(dateFrom) : "Until " + fmt(dateTo)]);
     }
     if (locationFilter) out.push(["location", locationFilter]);
+    if (venueFilter) out.push(["venue", venueInfo[venueFilter].name]);
     return out;
   }
 
@@ -1678,7 +1720,7 @@
       dates: calStamp(ev._start) + "/" + calStamp(calEnd(ev)),
       details: calNotes(ev, 800),
     });
-    if (ev.location) p.set("location", ev.location);
+    if (calLocation(ev)) p.set("location", calLocation(ev));
     return "https://calendar.google.com/calendar/render?" + p.toString();
   }
   function closeCalMenus(except) {
@@ -1702,7 +1744,7 @@
       "DTEND:" + stamp(end),
       "SUMMARY:" + esc(ev.title),
     ];
-    if (ev.location) lines.push("LOCATION:" + esc(ev.location));
+    if (calLocation(ev)) lines.push("LOCATION:" + esc(calLocation(ev)));
     lines.push("DESCRIPTION:" + esc(notes));
     if (ev.url) lines.push("URL:" + ev.url);
     lines.push("END:VEVENT", "END:VCALENDAR");
@@ -1740,7 +1782,16 @@
     const titleHtml = ev.url
       ? '<a href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener">' + title + "</a>"
       : title;
-    const loc = ev.location
+    // A known venue shows its name (and room); the source's own text and
+    // the address go in the tooltip. Clicking filters to the whole venue.
+    const vLabel = venueLabel(ev);
+    const vAddr = vLabel && venueInfo[ev.venue].address;
+    const loc = vLabel
+      ? '<button type="button" class="location-btn" data-venue="' + escapeHtml(ev.venue)
+          + '" title="' + escapeHtml([ev.location, vAddr].filter(t => t && t !== vLabel)
+            .concat("Show only events at " + venueInfo[ev.venue].name).join("\n")) + '">'
+          + escapeHtml(vLabel) + "</button>"
+      : ev.location
       ? '<button type="button" class="location-btn" data-location="'
           + escapeHtml(ev.location) + '" title="Show only events here">'
           + escapeHtml(ev.location) + "</button>"

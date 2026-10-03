@@ -276,9 +276,11 @@ def _venue_files(tmp_path, region="sf"):
     d.mkdir()
     (d / "venues.json").write_text(json.dumps({"version": 1, "source_homes": {}, "venues": {
         "specs-bar": {"name": "Specs Bar", "region": region, "status": "verified",
-                      "precision": "building", "lat": 37.7979, "lng": -122.40652}}}))
+                      "precision": "building", "lat": 37.7979, "lng": -122.40652,
+                      "address": "12 William Saroyan Pl, San Francisco, CA 94133"}}}))
     (d / "venue_locations.json").write_text(json.dumps({"version": 1, "locations": {
         "somewhere": {"venue": "specs-bar"},
+        "specs bar — back room": {"venue": "specs-bar", "room": "Back Room"},
         "zoom": {"place": "online"},
         "mystery": {"pending": {"reason": "no map result"}}}}))
     return d
@@ -291,7 +293,9 @@ def test_export_joins_venue_and_region(db_session, tmp_path):
     online.location = "Zoom"
     pending = _make_event("Somewhere new", future, url="https://e.com/3")
     pending.location = "Mystery"
-    db_session.add_all([online, pending])
+    room = _make_event("In the back", future, url="https://e.com/4")
+    room.location = "Specs Bar — Back Room"
+    db_session.add_all([online, pending, room])
     db_session.commit()
 
     out = tmp_path / "events.json"
@@ -301,7 +305,10 @@ def test_export_joins_venue_and_region(db_session, tmp_path):
     assert by_title["At Specs"]["venue"] == "specs-bar" and by_title["At Specs"]["region"] == "sf"
     assert by_title["Online talk"]["venue"] is None and by_title["Online talk"]["region"] == "online"
     assert by_title["Somewhere new"]["region"] is None
-    assert data["venues"] == {"specs-bar": {"name": "Specs Bar", "region": "sf"}}
+    assert "room" not in by_title["At Specs"]
+    assert by_title["In the back"]["venue"] == "specs-bar" and by_title["In the back"]["room"] == "Back Room"
+    assert data["venues"] == {"specs-bar": {"name": "Specs Bar", "region": "sf",
+                                            "address": "12 William Saroyan Pl, San Francisco, CA 94133"}}
     assert [r["id"] for r in data["regions"]][:2] == ["sf", "eastbay"]
 
 
