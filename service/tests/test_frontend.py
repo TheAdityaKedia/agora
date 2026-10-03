@@ -270,6 +270,11 @@ def test_desktop_shows_filters_as_sidebar(browser, site):
     sidebar = page.locator("#filters").bounding_box()
     first = page.locator(".event").first.bounding_box()
     assert sidebar["x"] + sidebar["width"] <= first["x"]
+    # A tall sidebar must not ride up over the masthead (the phone sheet's
+    # `bottom: 0` once pulled it up under the sticky rules).
+    short = _open(browser, site, {"width": 1440, "height": 500})
+    h1 = short.locator("h1").bounding_box()
+    assert short.locator("#filters").bounding_box()["y"] >= h1["y"] + h1["height"]
 
 
 def test_slash_focuses_search_and_meta_is_relative(browser, site):
