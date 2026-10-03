@@ -11,6 +11,7 @@ repo; never touches frontend/events.json (data ships from CI).
     service/.venv/bin/python scripts/preview_site.py /tmp/agora-old --keep-venues \\
         --page <(git show origin/main:frontend/index.html)
     python3 -m http.server -d /tmp/agora-preview 8000
+    # then open http://localhost:8000/?beta=1 (the map is in private beta)
 
 --keep-venues keeps the manifest's own `venues` block (no re-join): the
 "before" side of a comparison.

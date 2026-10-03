@@ -765,6 +765,16 @@
   // Event canvases (canvas-client.js). Absent if that script failed to load;
   // then the page simply has no canvas features.
   const AC = window.AgoraCanvas || null;
+  // Private beta for the map view and SF neighborhoods, like collections
+  // (BETA_GATE in canvas-client.js): shown only in browsers let in through a
+  // /beta/ link, which sets the same per-browser flag. Read here rather than
+  // through AC, so the map doesn't depend on canvas-client.js loading.
+  // LAUNCH: set MAP_BETA_GATE = false.
+  const MAP_BETA_GATE = true;
+  const mapBeta = !MAP_BETA_GATE || (() => {
+    if (new URLSearchParams(location.search).get("beta") === "1") return true;
+    try { return localStorage.getItem("agora.canvas.beta") === "true"; } catch { return false; }
+  })();
 
   let data;
   try {
@@ -1004,7 +1014,7 @@
   const hoodLabels = new Map((data.neighborhoods || []).map(h => [h.id, h.label]));
   const hoodCounts = new Map();
   for (const e of events) if (e._hood) hoodCounts.set(e._hood, (hoodCounts.get(e._hood) || 0) + 1);
-  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id));
+  const hoodIds = mapBeta ? [...hoodLabels.keys()].filter(id => hoodCounts.has(id)) : [];
   const selectedHoods = new Set();
   const hoodDropdownEl = document.getElementById("hood-dropdown");
   const hoodListEl = document.getElementById("hood-list");
@@ -1769,13 +1779,18 @@
   const canShare = !!navigator.share && matchMedia("(pointer: coarse)").matches;
   const copyLabel = canShare ? "Share this view" : "Copy link to this view";
   copyEl.textContent = copyLabel;
+  // A view that uses the map or neighborhoods goes through /beta/ while
+  // they're gated (like collection links), so whoever opens it is let in.
+  const shareUrl = () => MAP_BETA_GATE && (view === "map" || selectedHoods.size)
+    ? new URL("beta/" + location.search + location.hash, new URL("./", location.href)).href
+    : location.href;
   copyEl.addEventListener("click", async () => {
     if (canShare) {
-      try { await navigator.share({title: document.title, url: location.href}); } catch {}
+      try { await navigator.share({title: document.title, url: shareUrl()}); } catch {}
       return;
     }
     try {
-      await navigator.clipboard.writeText(location.href);
+      await navigator.clipboard.writeText(shareUrl());
       copyEl.textContent = "Link copied";
       copyEl.classList.add("copied");
     } catch {
@@ -1864,7 +1879,7 @@
   const MAP_MIN_ZOOM = 6, MAP_MAX_ZOOM = 18;
   const CLUSTER_MAX_ZOOM = 15;
   const PANEL_CAP = 30;  // rows in the venue panel before "Show all"
-  const hasPins = Object.values(venueInfo).some(v => v.lat != null && v.lng != null);
+  const hasPins = mapBeta && Object.values(venueInfo).some(v => v.lat != null && v.lng != null);
   const viewToggleEl = document.getElementById("view-toggle");
   const mapWrapEl = document.getElementById("map-wrap");
   const mapEl = document.getElementById("map");

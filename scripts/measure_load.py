@@ -58,6 +58,8 @@ PROFILES = {
 # first finished search index, and a long-task log.
 PROBE = """
 (() => {
+  // The map is in private beta (MAP_BETA_GATE): measure as a beta browser.
+  try { localStorage.setItem("agora.canvas.beta", "true"); } catch (e) {}
   window.__agora = {firstRow: null, indexReady: null, longTasks: []};
   new PerformanceObserver((list) => {
     for (const e of list.getEntries()) __agora.longTasks.push([e.startTime, e.duration]);

@@ -636,10 +636,13 @@ def map_site(tmp_path_factory):
     server.shutdown()
 
 
-def _map_page(browser, site, viewport=DESKTOP, query="", touch=False):
+def _map_page(browser, site, viewport=DESKTOP, query="", touch=False, beta=True):
     """A page with the map's tile server unreachable (as in CI: no network),
-    so the map falls back to pins on a blank background."""
+    so the map falls back to pins on a blank background. `beta`: the browser
+    is in the private beta (the flag frontend/beta/ sets)."""
     ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, timezone_id=TZ)
+    if beta:
+        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
     ctx.route("https://tiles.openfreemap.org/**", lambda route: route.abort())
     page = ctx.new_page()
     page._agora_errors = []
@@ -898,3 +901,30 @@ def test_map_goes_to_the_results_when_none_are_in_view(browser, map_site):
     page.wait_for_function("document.getElementById('map-wrap').dataset.venues === '0'")
     assert "No events match" in page.inner_text("#map-status")
     assert page._agora_errors == []
+
+
+def test_map_and_neighborhoods_are_beta_only(browser, map_site):
+    # Outside the beta: no toggle, no neighborhood filter, links ignored,
+    # MapLibre never requested.
+    page = _map_page(browser, map_site, query="?view=map&at=37.77,-122.42,13&hood=mission", beta=False)
+    assert page.locator("#view-toggle").is_hidden() and page.locator("#hood-dropdown").is_hidden()
+    assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0
+    assert "view=" not in page.url and "hood=" not in page.url
+    assert not any("maplibre" in u for u in page._agora_requests)
+    assert page._agora_errors == []
+    # ?beta=1 (where frontend/beta/ redirects) lets the browser in.
+    page = _map_page(browser, map_site, query="?beta=1&view=map", beta=False)
+    _wait_for_pins(page)
+    assert page.locator("#view-toggle").is_visible() and page.locator("#hood-dropdown").is_visible()
+
+
+def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
+    page = _map_page(browser, map_site, query="?hood=mission")
+    page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+    page.click("#copy-link")
+    link = page.evaluate("navigator.clipboard.readText()")
+    assert link == map_site + "beta/?hood=mission"
+    page = _map_page(browser, map_site, query="?type=talk")
+    page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+    page.click("#copy-link")
+    assert page.evaluate("navigator.clipboard.readText()") == map_site + "?type=talk"
