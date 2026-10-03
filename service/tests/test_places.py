@@ -354,6 +354,21 @@ def test_joined_house_numbers_match(store):
     assert resolver(store, resp).resolve(q, ["SF Bar Guide"]).action == "new"
 
 
+def test_joined_house_numbers_take_the_text_address(store):
+    q = "2300 Chestnut St, San Francisco, CA 94123"
+    resp = {q: [nominatim("", 37.8003, -122.4405, category="building", type_="yes",
+                          house="2300;2310;2314;2320", road="Chestnut Street",
+                          city="San Francisco")]}
+    out = resolver(store, resp).resolve(q, ["Partiful"])
+    assert store.venues[out.entry["venue"]]["address"] == "2300 Chestnut St, San Francisco, CA 94123"
+
+
+def test_street_address_keeps_the_first_of_joined_numbers():
+    place = Place.from_json(nominatim("", 37.8003, -122.4405, house="2300;2310", road="Chestnut Street",
+                                      city="San Francisco"))
+    assert place.street_address().startswith("2300 Chestnut Street, San Francisco")
+
+
 def test_named_city_outside_bay_area_is_outside_not_pending(store):
     q = "1001 Center St, Santa Cruz, CA"
     resp = {q: [nominatim("Food Lounge", 36.9741, -122.0308, city="Santa Cruz")]}
@@ -410,3 +425,58 @@ def test_named_park_counts_as_a_precise_place():
     area = Place.from_json(nominatim("Embarcadero Center 2", *SPECS, rank=24,
                                      category="landuse", type_="commercial"))
     assert area.precision != "building"
+
+
+# --- the pipeline step ----------------------------------------------------------
+
+def test_resolve_locations_summary(store):
+    from places.pipeline import collect_locations, resolve_locations
+    q = "Specs', 12 Saroyan Place, San Francisco, CA"
+    locs = collect_locations([
+        {"location": q, "sources": ["SF Bar Guide"]},
+        {"location": q, "sources": ["SF Bar Guide"]},
+        {"location": "Online via Zoom", "sources": ["City Lights"]},
+        {"location": "Mystery Spot", "sources": ["Partiful"]},
+        {"location": "", "sources": ["Partiful"]},
+    ])
+    geo = FakeGeocoder({q: [nominatim("Specs Bar", *SPECS, house="12", road="Saroyan Place")]})
+    summary = resolve_locations(locs, store, geo, today=date(2026, 10, 3))
+    assert summary["actions"] == {"new": 1, "online": 1, "pending": 1}
+    assert summary["new_venues"] == ["specs-bar"]
+    assert summary["new_pending"] == ["mystery spot"] and summary["pending"] == ["mystery spot"]
+    assert summary["events_with_location"] == 4 and summary["unresolved_events"] == 1
+    # A second run: nothing new, nothing looked up again.
+    again = resolve_locations(locs, store, geo, today=date(2026, 10, 3))
+    assert again["new_pending"] == [] and again["new_venues"] == []
+    assert again["actions"] == {"known": 3}
+
+
+def test_resolve_locations_refuses_invalid_files(store):
+    from places.pipeline import resolve_locations
+    store.locations["ghost"] = {"venue": "nope"}
+    geo = FakeGeocoder()
+    summary = resolve_locations({"x": {"text": "x", "events": 1, "sources": []}}, store, geo)
+    assert "invalid" in summary and geo.queries == []
+
+
+def test_main_resolve_places_reads_upcoming_events_and_saves(tmp_path, monkeypatch):
+    from datetime import datetime, timezone
+    from unittest.mock import patch
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    import main
+    from models import Base, Event
+    engine = create_engine("sqlite:///:memory:")
+    Base.metadata.create_all(engine)
+    session = sessionmaker(bind=engine)()
+    now = datetime.now(timezone.utc)
+    for i, (when, loc) in enumerate([(now + timedelta(days=2), "Online via Zoom"),
+                                     (now - timedelta(days=3), "Long Gone Hall, Oakland")]):
+        session.add(Event(title=f"e{i}", start_time=when, location=loc, url=f"https://e/{i}",
+                          sources=["Src"], created_at=now))
+    session.commit()
+    with patch("main.get_session", return_value=session):
+        summary = main.resolve_places(geocoder=FakeGeocoder(), data_dir=tmp_path, log=lambda *a: None)
+    assert summary["actions"] == {"online": 1}           # the past event isn't looked at
+    saved = json.loads((tmp_path / "venue_locations.json").read_text())["locations"]
+    assert saved == {"online via zoom": {"place": "online"}}

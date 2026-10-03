@@ -106,6 +106,14 @@ def test_plan_cli_prints_compact_json(tmp_path, monkeypatch, capsys):
 
 # --- merge ------------------------------------------------------------------
 
+
+@pytest.fixture(autouse=True)
+def no_venue_resolution(monkeypatch):
+    """run()/merge resolve venues against OpenStreetMap and save the committed
+    venue files; never from these tests."""
+    monkeypatch.setattr("main.resolve_places", lambda **kw: None)
+
+
 @pytest.fixture
 def db_session():
     engine = create_engine("sqlite:///:memory:")
@@ -334,3 +342,67 @@ def test_alert_cli_emits_count_and_writes_body(tmp_path, capsys):
             "--body", str(body), "--run-url", "https://x/runs/1", "--mention", "@me"])
     assert capsys.readouterr().out.splitlines() == ["count=1"]
     assert "https://b.com" in body.read_text()
+
+
+# --- places -------------------------------------------------------------------
+
+def _store(tmp_path, pending=None):
+    from places.store import Store
+    s = Store(tmp_path)
+    s.venues["specs-bar"] = {"name": "Specs Bar", "region": "sf", "status": "auto", "precision": "building",
+                             "lat": 37.7979, "lng": -122.40652, "address": "12 William Saroyan Pl"}
+    for k, p in (pending or {}).items():
+        s.locations[k] = {"pending": p}
+    return s
+
+
+def _places_report(**kw):
+    base = {"actions": {}, "lookups": 0, "new_venues": [], "new_pending": [], "pending": [],
+            "events_with_location": 1000, "unresolved_events": 5}
+    return {"sources": [], "failed": 0, "exported": 1000, "places": {**base, **kw}}
+
+
+def test_places_check_quiet_when_covered(tmp_path):
+    check = ci.check_places(_places_report(), _store(tmp_path))
+    assert not check["alert"] and check["pending"] == {}
+    body = ci.render_places_body(check, _store(tmp_path), "https://run")
+    assert "0 place(s) waiting" in body and "99.5% of upcoming events have an area" in body
+
+
+def test_places_check_alerts_on_low_coverage_and_lists_pending(tmp_path):
+    pend = {"lost marbles, 2202 de la vina st": {"reason": "no map result", "events": 4,
+                                                 "sources": ["SF Bar Guide"], "first_seen": "2026-10-03"}}
+    store = _store(tmp_path, pend)
+    check = ci.check_places(_places_report(unresolved_events=40, new_pending=list(pend),
+                                           new_venues=["specs-bar"]), store)
+    assert check["alert"] and "4.0%" in check["problems"][0]
+    body = ci.render_places_body(check, store, "https://run")
+    assert "| [lost marbles, 2202 de la vina st](https://www.openstreetmap.org/search?query=lost+marbles" in body
+    assert "| 4 | SF Bar Guide | no map result | 2026-10-03 |" in body
+    assert "venue_locations.json" in body and "Specs Bar" in body and "mlat=37.7979" in body
+
+
+def test_places_check_alerts_on_many_new_pending_and_invalid_files(tmp_path):
+    many = [f"s{i}" for i in range(21)]
+    assert ci.check_places(_places_report(new_pending=many), _store(tmp_path))["alert"]
+    invalid = ci.check_places({"places": {"invalid": ["venues['x']: unknown region"]}}, _store(tmp_path))
+    assert invalid["alert"] and "don't validate" in invalid["problems"][0]
+    crashed = ci.check_places({"places": {"error": "ConnectionError: boom"}}, _store(tmp_path))
+    assert crashed["alert"]
+    assert not ci.check_places({"places": None}, _store(tmp_path))["alert"]
+
+
+def test_places_cli_outputs(tmp_path, capsys):
+    pend = {"mystery": {"reason": "no map result", "events": 2, "sources": []}}
+    _store(tmp_path, pend).save()
+    report = tmp_path / "report.json"
+    report.write_text(json.dumps(_places_report(new_pending=["mystery"], pending=["mystery"])))
+    ci.cli(["places", "--report", str(report), "--body", str(tmp_path / "b.md"),
+            "--run-url", "https://run", "--data-dir", str(tmp_path)])
+    assert capsys.readouterr().out.split() == ["pending=1", "new_pending=1", "alert=false"]
+
+
+def test_pr_body_mentions_venues(tmp_path):
+    body = ci.render_pr_body(_places_report(new_venues=["a"], pending=["b", "c"]),
+                             {"passed": True, "reason": "", "base_count": 1, "count": 1})
+    assert "**Venues:** 1 new · 2 waiting for review · 5 of 1000 events" in body

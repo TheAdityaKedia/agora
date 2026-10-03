@@ -12,6 +12,7 @@ import shutil
 import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -45,8 +46,9 @@ TAXONOMY = {
 
 def _events(n=N_EVENTS):
     """`n` events, four a day from tomorrow on, alternating jazz / poetry."""
-    base = (datetime.now(timezone.utc) + timedelta(days=1)).replace(
-        hour=19, minute=0, second=0, microsecond=0)
+    # "Tomorrow" in the page's timezone, not UTC: they differ for 7h a day.
+    base = (datetime.now(ZoneInfo(TZ)) + timedelta(days=1)).replace(
+        hour=12, minute=0, second=0, microsecond=0)
     out = []
     for i in range(n):
         jazz = i % 2 == 0
@@ -62,6 +64,9 @@ def _events(n=N_EVENTS):
             "types": [["performance", "concert"]] if jazz else [["talk"]],
             "topics": ["jazz"] if jazz else ["poetry"],
             "cost": "unknown",
+            # Every 10th event has no known area.
+            "region": None if i % 10 == 9 else ("sf" if jazz else "eastbay"),
+            "venue": None,
         })
     busy_start = base + timedelta(days=5, hours=4)
     for i in range(BUSY):
@@ -93,6 +98,9 @@ def site(tmp_path_factory):
     (root / "events.json").write_text(json.dumps({
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "taxonomy": TAXONOMY,
+        "regions": [{"id": "sf", "label": "San Francisco"}, {"id": "eastbay", "label": "East Bay"},
+                    {"id": "northbay", "label": "North Bay"}],
+        "venues": {},
         "events": _events(),
     }))
     handler = functools.partial(_QuietHandler, directory=str(root))
@@ -412,3 +420,27 @@ def test_thumbnail_labels_fit_their_tiles(browser, site):
     page = _open(browser, site, PHONE, touch=True)
     assert page.evaluate("""[...document.querySelectorAll('.thumb-label')]
         .every(l => l.scrollWidth <= l.parentNode.clientWidth)""")
+
+
+def test_area_filter(browser, site):
+    page = _open(browser, site, DESKTOP)
+    chips = page.locator("#area-chips [data-area]")
+    # Only regions that have events get a chip.
+    assert chips.all_inner_texts() == ["San Francisco", "East Bay"]
+    page.click('#area-chips [data-area="eastbay"]')
+    assert "area=eastbay" in page.url
+    regions = page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)")
+    assert regions and set(regions) == {"eastbay"}
+    assert "no known area" in page.inner_text("#meta")
+    assert "East Bay" in page.inner_text("#active-filters")
+    # A second area widens (OR); the pill clears one.
+    page.click('#area-chips [data-area="sf"]')
+    regions = page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)")
+    assert set(regions) == {"sf", "eastbay"}
+    page.locator("#active-filters .pill-clear").first.click()
+    page.locator("#active-filters .pill-clear").first.click()
+    assert "area=" not in page.url and "no known area" not in page.inner_text("#meta")
+    # Shared link.
+    page = _open(browser, site, DESKTOP, query="?area=sf")
+    assert set(page.locator(".event").evaluate_all("els => els.map(e => e.dataset.region)")) == {"sf"}
+    assert page.get_attribute('#area-chips [data-area="sf"]', "aria-pressed") == "true"

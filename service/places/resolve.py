@@ -296,8 +296,11 @@ def _text_address(location: str) -> str | None:
 def _best_address(location: str, place: Place) -> str:
     """OpenStreetMap's address when it has the house number; otherwise the
     source's own street address (OSM often pins a venue on a street without
-    a number: "West Grand Avenue" for 770 West Grand Ave)."""
-    if place.address.get("house_number"):
+    a number: "West Grand Avenue" for 770 West Grand Ave). A building with
+    several numbers ("2300;2310;2314") also defers to the source, which
+    names the one it uses."""
+    number = place.address.get("house_number") or ""
+    if number and ";" not in number:
         return place.street_address()
     return _text_address(location) or place.street_address()
 

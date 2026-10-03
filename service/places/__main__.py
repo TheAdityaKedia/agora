@@ -10,28 +10,13 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 from .geocode import Nominatim
-from .normalize import normalize_key
+from .pipeline import collect_locations
 from .resolve import Resolver
 from .store import DATA_DIR, Store
-
-
-def collect_locations(events: list[dict]) -> dict[str, dict]:
-    """key → {"text": most common raw form, "events": n, "sources": [...]}."""
-    raw: dict[str, Counter] = defaultdict(Counter)
-    sources: dict[str, set] = defaultdict(set)
-    for e in events:
-        loc = (e.get("location") or "").strip()
-        key = normalize_key(loc)
-        if not key:
-            continue
-        raw[key][loc] += 1
-        sources[key].update(e.get("sources") or [])
-    return {k: {"text": c.most_common(1)[0][0], "events": sum(c.values()),
-                "sources": sorted(sources[k])} for k, c in raw.items()}
 
 
 def cmd_validate(args) -> int:

@@ -1,6 +1,7 @@
 # Venues and the Area filter
 
-**Status: design agreed (2026-10-02), not built.** Decisions settled with the
+**Status: phase 1 shipped (#54: resolver + owner-reviewed venue list);
+phase 2 (pipeline, review issue, Area filter) in progress.** Decisions settled with the
 owner: OpenStreetMap (Nominatim) for geocoding; build the venue list now rather
 than a location→area lookup only; nobody reviews the auto-merged data PRs, so
 the pipeline must verify new places itself and route only real doubts to a

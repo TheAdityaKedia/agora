@@ -28,6 +28,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
 | Event canvases API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |
 | Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
+| Venues, areas, the Area filter, "Places to review" | `feature-specs/venues.md`; `README.md` → "Venues and areas"; code: `service/places/`, data: `service/data/venues.json` + `venue_locations.json` |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
 
