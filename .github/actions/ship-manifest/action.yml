@@ -49,7 +49,9 @@ runs:
         COUNT: ${{ steps.guard.outputs.count }}
       run: |
             set -euo pipefail
-            data_files="service/data/classifications.json service/data/venues.json service/data/venue_locations.json"
+            # descriptions.json: full descriptions beside the lean events.json
+            # (feature-specs/frontend-payload.md); it can change on its own.
+            data_files="frontend/descriptions.json service/data/classifications.json service/data/venues.json service/data/venue_locations.json"
             # shellcheck disable=SC2086
             if [ "$CHANGED" != "true" ] && git diff --quiet -- $data_files; then
               echo "No data change; nothing to ship."

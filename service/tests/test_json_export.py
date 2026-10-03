@@ -321,3 +321,47 @@ def test_export_skips_areas_when_venue_files_are_invalid(db_session, tmp_path):
     export_json(out, venues_dir=_venue_files(tmp_path, region="eastbay"))
     data = json.loads(out.read_text())
     assert data["events"][0]["region"] is None and data["venues"] == {}
+
+
+# --- lean manifest: summary in events.json, full text in descriptions.json ------
+
+from exporters.json_export import summarize  # noqa: E402
+
+
+@pytest.mark.parametrize("text, summary, more", [
+    ("Doors at seven. Bring a friend.", "Doors at seven.", True),
+    ("Just one sentence.", "Just one sentence.", False),
+    ("  No   terminal punctuation  ", "No terminal punctuation", False),
+    ("Price: $5.50 at the door", "Price: $5.50 at the door", False),  # "." not before a space
+    ("Wow! Then more", "Wow!", True),
+    (None, "", False),
+    ("   ", "", False),
+])
+def test_summarize_matches_the_page_rule(text, summary, more):
+    assert summarize(text) == (summary, more)
+
+
+def test_summarize_cuts_long_first_sentences_at_a_word():
+    text = "word " * 60 + "end. Next."
+    s, more = summarize(text)
+    assert len(s) <= 180 and not s.endswith(" ") and s.split()[-1] == "word" and more
+
+
+def test_export_splits_descriptions(db_session, tmp_path):
+    future = datetime.now(timezone.utc) + timedelta(days=7)
+    long = _make_event("Long", future, url="https://e.com/1")
+    long.description = "Doors at seven.\n\nBring   a friend."
+    short = _make_event("Short", future, url="https://e.com/2")
+    short.description = "Just one sentence."
+    db_session.add_all([long, short, _make_event("None", future, url="https://e.com/3")])
+    db_session.commit()
+
+    out = tmp_path / "events.json"
+    export_json(out)
+    events = {e["title"]: e for e in json.loads(out.read_text())["events"]}
+    assert all("description" not in e for e in events.values())
+    assert events["Long"]["summary"] == "Doors at seven." and events["Long"]["more"] is True
+    assert events["Short"] == {**events["Short"], "summary": "Just one sentence."} and "more" not in events["Short"]
+    assert "summary" not in events["None"]
+    full = json.loads((tmp_path / "descriptions.json").read_text())
+    assert full == {events["Long"]["id"]: "Doors at seven. Bring a friend."}

@@ -350,6 +350,7 @@
   .description .desc-full { display: none; white-space: pre-wrap; }
   .description.expanded .desc-preview { display: none; }
   .description.expanded .desc-full { display: inline; }
+  .description.loading .desc-toggle { opacity: 0.5; }
   .desc-toggle { color: var(--accent); font-weight: 500; margin-left: 2px; }
   .credits {
     margin: 32px 0 8px; text-align: center; font-size: 12px; color: var(--muted);
@@ -736,11 +737,40 @@
   // calendar day, so it still carries today's earlier events; drop them here
   // (before indexing, so counts and search agree) and again at each render
   // for a page left open.
+  // Descriptions (feature-specs/frontend-payload.md): events carry the first
+  // sentence as `summary` (+ `more`); the full text is in descriptions.json,
+  // fetched on the first "more" or search. An older manifest still carries
+  // `description` inline — then everything is here already.
+  const fullDescriptions = new Map();  // event uid → full description
+  const inlineDescriptions = (data.events || []).some(e => e.description != null);
+  for (const e of data.events || []) {
+    if (e.summary != null || !e.description) continue;
+    const full = e.description.replace(/\s+/g, " ").trim();
+    e.summary = firstSentence(full);
+    e.more = e.summary.length < full.length;
+    if (e.more) fullDescriptions.set(e.id, full);
+  }
+  let descriptionsReady = inlineDescriptions ? Promise.resolve(true) : null;
+  function loadDescriptions() {
+    if (!descriptionsReady) {
+      descriptionsReady = fetch("./descriptions.json", { cache: "no-cache" })
+        .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(map => {
+          for (const [uid, text] of Object.entries(map)) fullDescriptions.set(uid, text);
+          return true;
+        })
+        .catch(() => { descriptionsReady = null; return false; });  // retry next time
+    }
+    return descriptionsReady;
+  }
+
   const loadedAt = Date.now();
   const events = (data.events || [])
     .filter(e => !(new Date(e.start_time) < loadedAt))
     .map((e, i) => ({
       ...e,
+      // The full text joins the search index only once it's loaded.
+      description: fullDescriptions.get(e.id),
       _start: new Date(e.start_time),
       _uid: e.id,
       id: i,
@@ -751,26 +781,48 @@
       where_text: venueLabel(e) || "",
     }));
 
-  // The search index. Indexing ~5k descriptions blocks a phone for seconds,
-  // so it's filled in chunks after the first render (buildIndex), not here.
-  const miniSearch = new MiniSearch({
-    fields: ["title", "description", "location", "where_text", "sources_text", "tags_text"],
+  // The search index, filled in small chunks after the first render
+  // (buildIndex) so a phone stays responsive. It starts without full
+  // descriptions (only summaries); the first search loads them and a complete
+  // index is built in the background and swapped in (upgradeIndex), so a
+  // query can still match words across title and description (AND).
+  const SEARCH_OPTIONS = {
+    fields: ["title", "summary", "description", "location", "where_text", "sources_text", "tags_text"],
     storeFields: ["id"],
     searchOptions: {
-      boost: {title: 3, tags_text: 2, description: 1, location: 1, where_text: 1, sources_text: 1},
+      boost: {title: 3, tags_text: 2, summary: 1, description: 1, location: 1, where_text: 1,
+              sources_text: 1},
       prefix: true,
       fuzzy: 0.2,
       combineWith: "AND",
     },
-  });
+  };
+  const INDEX_CHUNK = 25;
+  let miniSearch = new MiniSearch(SEARCH_OPTIONS);
   let indexReady = null;
   let indexed = false;
   function buildIndex() {
     if (!indexReady) {
-      indexReady = miniSearch.addAllAsync(events, {chunkSize: 250})
+      indexReady = miniSearch.addAllAsync(events, {chunkSize: INDEX_CHUNK})
         .then(() => { indexed = true; });
     }
     return indexReady;
+  }
+  let fullIndexReady = inlineDescriptions ? Promise.resolve() : null;
+  function upgradeIndex() {
+    if (!fullIndexReady) {
+      fullIndexReady = loadDescriptions().then((ok) => {
+        if (!ok) { fullIndexReady = null; return; }  // offline: keep the summary index
+        for (const ev of events) ev.description = fullDescriptions.get(ev._uid);
+        const full = new MiniSearch(SEARCH_OPTIONS);
+        return full.addAllAsync(events, {chunkSize: INDEX_CHUNK}).then(() => {
+          miniSearch = full;
+          indexed = true;
+          if (searchQuery) updateSearch();  // re-rank with the full text
+        });
+      });
+    }
+    return fullIndexReady;
   }
 
   const generatedAt = new Date(data.generated_at);
@@ -1011,8 +1063,10 @@
     } else if (!indexed) {
       // Searched before the index finished: run once it has.
       buildIndex().then(updateSearch);
+      upgradeIndex();
       return;
     } else {
+      upgradeIndex();
       const results = miniSearch.search(q).filter(r => r.score >= SEARCH_SCORE_THRESHOLD);
       rankedOrder = results.map(r => r.id);
       document.body.classList.add("searching");
@@ -1025,7 +1079,7 @@
     clearTimeout(searchTimer);
     searchTimer = setTimeout(updateSearch, 150);
   });
-  searchEl.addEventListener("focus", buildIndex);
+  searchEl.addEventListener("focus", () => { buildIndex(); upgradeIndex(); });
 
   // The two "only events here" filters replace each other.
   function setLocationFilter(loc) {
@@ -1097,13 +1151,31 @@
       return;
     }
     const desc = e.target.closest('.description[role="button"]');
-    if (desc) desc.classList.toggle("expanded");
+    if (desc) toggleDescription(desc);
   });
   list.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const desc = e.target.closest('.description[role="button"]');
-    if (desc) { e.preventDefault(); desc.classList.toggle("expanded"); }
+    if (desc) { e.preventDefault(); toggleDescription(desc); }
   });
+  // "more": the full text comes from descriptions.json, fetched on the first
+  // tap (the row shows it's loading); later taps are instant.
+  function toggleDescription(desc) {
+    if (desc.classList.contains("expanded")) { desc.classList.remove("expanded"); return; }
+    const fullEl = desc.querySelector(".desc-full");
+    if (fullEl.childNodes.length) { desc.classList.add("expanded"); return; }
+    desc.classList.add("loading");
+    loadDescriptions().then((ok) => {
+      desc.classList.remove("loading");
+      const text = fullDescriptions.get(desc.dataset.uid);
+      if (!ok || !text) {
+        desc.querySelector(".desc-preview .desc-toggle").textContent = " (couldn’t load the rest — try again)";
+        return;
+      }
+      fullEl.innerHTML = escapeHtml(text) + ' <span class="desc-toggle">less</span>';
+      desc.classList.add("expanded");
+    });
+  }
 
   // Build source list (checkbox rows, with per-source counts). A multi-source
   // event counts toward each of its sources.
@@ -1771,9 +1843,10 @@
   const CAL_HOURS = 2;
   const calStamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   const calEnd = (ev) => new Date(ev._start.getTime() + CAL_HOURS * 3600e3);
-  const calNotes = (ev, maxDesc = Infinity) => [
-    ev.description && ev.description.length > maxDesc
-      ? ev.description.slice(0, maxDesc).replace(/\s+\S*$/, "") + "…" : ev.description,
+  // The full description when it's loaded, else the summary (the link is
+  // always there).
+  const calNotes = (ev, maxDesc = Infinity, text = fullDescriptions.get(ev._uid) || ev.summary) => [
+    text && text.length > maxDesc ? text.slice(0, maxDesc).replace(/\s+\S*$/, "") + "…" : text,
     ev.url,
     "Listed by " + (ev.sources || []).join(", ") + " on Agora",
   ].filter(Boolean).join("\n\n");
@@ -1872,7 +1945,7 @@
       + '" title="Show only events listed by ' + escapeHtml(s) + '">' + escapeHtml(s) + "</button>"
     ).join(", ") + "</span>" : "";
     const where = loc || src ? '<div class="where">' + loc + src + "</div>" : "";
-    const desc = renderDescription(ev.description);
+    const desc = renderDescription(ev.summary, ev.more, ev._uid, fullDescriptions.get(ev._uid));
     // A tile tinted by the first topic's group and labelled with the type
     // ("Talk", "Screening"); the image, if any, covers it — and removes
     // itself if it fails to load, so a dead link shows the tile too.
@@ -2102,21 +2175,19 @@ function firstSentence(text) {
   if (s.length > PREVIEW_MAX) s = s.slice(0, PREVIEW_MAX).replace(/\s+\S*$/, "").trim();
   return s;
 }
-function renderDescription(text) {
-  if (!text) return "";
-  const full = text.replace(/\s+/g, " ").trim();
-  if (!full) return "";
-  const preview = firstSentence(full);
+// `summary` is the first sentence; `more` says there's more, and `full` is
+// the whole text when descriptions.json has loaded (else filled on tap).
+function renderDescription(summary, more, uid, full) {
+  if (!summary) return "";
   // Nothing to reveal — render as plain (non-interactive) text.
-  if (preview.length >= full.length) {
-    return '<div class="description">' + escapeHtml(full) + "</div>";
-  }
+  if (!more) return '<div class="description">' + escapeHtml(summary) + "</div>";
   return (
-    '<div class="description" role="button" tabindex="0" aria-label="Expand description">' +
-      '<span class="desc-preview">' + escapeHtml(preview) +
+    '<div class="description" role="button" tabindex="0" aria-label="Expand description"' +
+      ' data-uid="' + escapeHtml(uid) + '">' +
+      '<span class="desc-preview">' + escapeHtml(summary) +
         '<span class="desc-toggle">… more</span></span>' +
-      '<span class="desc-full">' + escapeHtml(full) +
-        ' <span class="desc-toggle">less</span></span>' +
+      '<span class="desc-full">' + (full ? escapeHtml(full) +
+        ' <span class="desc-toggle">less</span>' : "") + "</span>" +
     "</div>"
   );
 }
