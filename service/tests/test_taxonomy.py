@@ -39,6 +39,19 @@ def test_valid_topics_is_flat_set_of_slugs():
     assert all(isinstance(t, str) for t in topics)
 
 
+def test_v2_adds_gap_topics_and_v1_stays_published():
+    # v2 fills the gaps that forced bad tags (blues shows tagged jazz, SAT prep
+    # tagged tech, dance parties invisible to the dance filter, …).
+    v2 = taxonomy.valid_topics(2)
+    for slug in ("blues", "soul-funk", "punk-metal", "country",
+                 "education", "dance-party", "family-kids"):
+        assert slug in v2, slug
+    # v1 stays immutable so old classifications remain interpretable.
+    v1 = taxonomy.valid_topics(1)
+    assert "blues" not in v1
+    assert "jazz" in v1
+
+
 def test_validate_topics_keeps_known_drops_unknown_and_dedupes():
     got = taxonomy.validate_topics(["poetry", "bogus", "jazz", "poetry"])
     # known kept in order, unknown dropped, deduped

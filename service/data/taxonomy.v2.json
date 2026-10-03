@@ -1,0 +1,326 @@
+{
+  "version": 2,
+  "axes": {
+    "type": {
+      "label": "Type",
+      "note": "Event FORMAT — what the event physically is. Shallow on purpose; subject/genre lives in `topic`.",
+      "tree": {
+        "performance": {
+          "label": "Performance / Show"
+        },
+        "screening": {
+          "label": "Screening"
+        },
+        "talk": {
+          "label": "Talk",
+          "children": {
+            "reading": {
+              "label": "Reading / Author talk"
+            },
+            "lecture": {
+              "label": "Lecture"
+            },
+            "panel": {
+              "label": "Panel / Discussion"
+            },
+            "conversation": {
+              "label": "Conversation / Q&A"
+            },
+            "podcast": {
+              "label": "Live podcast"
+            }
+          }
+        },
+        "workshop": {
+          "label": "Workshop / Class"
+        },
+        "exhibition": {
+          "label": "Exhibition"
+        },
+        "social": {
+          "label": "Social",
+          "children": {
+            "party-club": {
+              "label": "Party / Club night"
+            },
+            "mixer-meetup": {
+              "label": "Mixer / Meetup"
+            },
+            "dance-social": {
+              "label": "Dance social"
+            },
+            "book-club": {
+              "label": "Book club / Reading group"
+            },
+            "language-exchange": {
+              "label": "Language / Conversation group"
+            },
+            "games-hobby": {
+              "label": "Games / Hobby club"
+            },
+            "gala-fundraiser": {
+              "label": "Gala / Fundraiser"
+            },
+            "food-drink": {
+              "label": "Food & drink"
+            }
+          }
+        }
+      }
+    },
+    "topic": {
+      "label": "Topic",
+      "note": "What the event is ABOUT / the interest it serves. Flat, multi-select (0-3). Cuts across types: `poetry` covers a reading, an open mic, and a workshop.",
+      "values": {
+        "poetry": {
+          "label": "Poetry",
+          "group": "Literary"
+        },
+        "fiction": {
+          "label": "Fiction",
+          "group": "Literary"
+        },
+        "nonfiction": {
+          "label": "Nonfiction",
+          "group": "Literary"
+        },
+        "comics-zines": {
+          "label": "Comics / Zines",
+          "group": "Literary"
+        },
+        "books-authors": {
+          "label": "Books / Authors",
+          "group": "Literary"
+        },
+        "writing": {
+          "label": "Writing (craft / practice)",
+          "group": "Literary"
+        },
+        "jazz": {
+          "label": "Jazz",
+          "group": "Music"
+        },
+        "rock-indie": {
+          "label": "Rock / Indie",
+          "group": "Music"
+        },
+        "pop": {
+          "label": "Pop",
+          "group": "Music"
+        },
+        "hiphop-rnb": {
+          "label": "Hip-hop / R&B",
+          "group": "Music"
+        },
+        "electronic": {
+          "label": "Electronic",
+          "group": "Music"
+        },
+        "classical": {
+          "label": "Classical",
+          "group": "Music"
+        },
+        "folk-americana": {
+          "label": "Folk / Americana",
+          "group": "Music"
+        },
+        "world-music": {
+          "label": "World / Global",
+          "group": "Music"
+        },
+        "blues": {
+          "label": "Blues",
+          "group": "Music"
+        },
+        "soul-funk": {
+          "label": "Soul / Funk",
+          "group": "Music"
+        },
+        "punk-metal": {
+          "label": "Punk / Metal",
+          "group": "Music"
+        },
+        "country": {
+          "label": "Country",
+          "group": "Music"
+        },
+        "music": {
+          "label": "Music (other)",
+          "group": "Music"
+        },
+        "theater": {
+          "label": "Theater",
+          "group": "Theater / Stage"
+        },
+        "musical-theater": {
+          "label": "Musical theater",
+          "group": "Theater / Stage"
+        },
+        "opera": {
+          "label": "Opera",
+          "group": "Theater / Stage"
+        },
+        "dance": {
+          "label": "Dance",
+          "group": "Theater / Stage"
+        },
+        "comedy": {
+          "label": "Comedy",
+          "group": "Theater / Stage"
+        },
+        "spoken-word": {
+          "label": "Spoken word",
+          "group": "Theater / Stage"
+        },
+        "film": {
+          "label": "Film",
+          "group": "Screen"
+        },
+        "documentary": {
+          "label": "Documentary",
+          "group": "Screen"
+        },
+        "visual-art": {
+          "label": "Visual art",
+          "group": "Art & design"
+        },
+        "photography": {
+          "label": "Photography",
+          "group": "Art & design"
+        },
+        "design": {
+          "label": "Design",
+          "group": "Art & design"
+        },
+        "architecture": {
+          "label": "Architecture",
+          "group": "Art & design"
+        },
+        "craft": {
+          "label": "Craft / Making",
+          "group": "Art & design"
+        },
+        "history": {
+          "label": "History",
+          "group": "Ideas"
+        },
+        "science": {
+          "label": "Science",
+          "group": "Ideas"
+        },
+        "politics": {
+          "label": "Politics / Society",
+          "group": "Ideas"
+        },
+        "tech": {
+          "label": "Tech / Digital",
+          "group": "Ideas"
+        },
+        "business": {
+          "label": "Business / Career",
+          "group": "Ideas"
+        },
+        "language": {
+          "label": "Language",
+          "group": "Ideas"
+        },
+        "education": {
+          "label": "Education / Learning",
+          "group": "Ideas"
+        },
+        "food-drink": {
+          "label": "Food & drink",
+          "group": "Life"
+        },
+        "wine": {
+          "label": "Wine",
+          "group": "Life"
+        },
+        "wellness": {
+          "label": "Wellness / Movement",
+          "group": "Life"
+        },
+        "nature-outdoors": {
+          "label": "Nature / Outdoors",
+          "group": "Life"
+        },
+        "salsa": {
+          "label": "Salsa",
+          "group": "Dance styles"
+        },
+        "bachata": {
+          "label": "Bachata",
+          "group": "Dance styles"
+        },
+        "zouk": {
+          "label": "Zouk",
+          "group": "Dance styles"
+        },
+        "tango": {
+          "label": "Tango",
+          "group": "Dance styles"
+        },
+        "swing": {
+          "label": "Swing",
+          "group": "Dance styles"
+        },
+        "dance-party": {
+          "label": "Dance party / Freestyle",
+          "group": "Dance styles"
+        },
+        "trivia": {
+          "label": "Trivia / Quiz",
+          "group": "Nightlife"
+        },
+        "karaoke": {
+          "label": "Karaoke",
+          "group": "Nightlife"
+        },
+        "bingo": {
+          "label": "Bingo",
+          "group": "Nightlife"
+        },
+        "drag": {
+          "label": "Drag",
+          "group": "Nightlife"
+        },
+        "games": {
+          "label": "Games / Tabletop",
+          "group": "Nightlife"
+        },
+        "club-night": {
+          "label": "DJ / Club night",
+          "group": "Nightlife"
+        },
+        "women": {
+          "label": "Women",
+          "group": "Communities"
+        },
+        "lgbtq": {
+          "label": "LGBTQ+",
+          "group": "Communities"
+        },
+        "latino": {
+          "label": "Latino / Latin American",
+          "group": "Communities"
+        },
+        "asian-american": {
+          "label": "Asian American",
+          "group": "Communities"
+        },
+        "black-diaspora": {
+          "label": "Black / African diaspora",
+          "group": "Communities"
+        },
+        "jewish": {
+          "label": "Jewish",
+          "group": "Communities"
+        },
+        "family-kids": {
+          "label": "Kids / Family",
+          "group": "Communities"
+        }
+      }
+    }
+  }
+}
