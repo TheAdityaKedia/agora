@@ -3998,6 +3998,28 @@
       "region": "sf",
       "status": "verified"
     },
+    "roccapulco": {
+      "added": "2026-10-03",
+      "address": "3140 Mission Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Roccapulco in San Francisco County (building, way/273580667)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.74723,
+      "lng": -122.419281,
+      "name": "Roccapulco",
+      "osm": "way/273580667",
+      "possible_duplicates": [
+        "mothership",
+        "el-rio",
+        "the-knockout"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "rocks-den": {
       "added": "2026-10-02",
       "address": "Mission Street, San Francisco, CA 94112",
