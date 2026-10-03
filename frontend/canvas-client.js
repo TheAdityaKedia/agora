@@ -21,6 +21,7 @@
     mine: "agora.canvas.mine",
     active: "agora.canvas.active",
     shared: "agora.canvas.shared",
+    dflt: "agora.canvas.default",
     api: "agora.canvas.api",
   };
   const MINE_MAX = 100;
@@ -107,8 +108,22 @@
     rest.unshift(Object.assign({}, prev, {
       id: c.id, name: c.name, date_from: c.date_from || null,
       date_to: c.date_to || null, opened_at: Date.now(),
-    }, typeof c.yours === "boolean" ? {yours: c.yours} : {}, extra || {}));
+    }, typeof c.yours === "boolean" ? {yours: c.yours} : {},
+       typeof c.claimed === "boolean" ? {claimed: c.claimed} : {}, extra || {}));
     save(K.mine, rest.slice(0, MINE_MAX));
+  }
+
+  // The collection ☆ Save adds to, chosen per browser ("Make this my
+  // default"); pick the same one on each of your devices.
+  const defaultCanvasId = () => load(K.dflt, null);
+  const setDefaultCanvas = (id) => save(K.dflt, id || null);
+
+  // "This is mine" / "Not mine": count this browser as one of the owner's
+  // devices (or stop). Resolves to the collection's fresh view.
+  async function claimCanvas(id, on) {
+    const v = await api(on ? "POST" : "DELETE", "/canvases/" + encodeURIComponent(id) + "/claim");
+    rememberCanvas(v.canvas);
+    return v;
   }
   function forgetCanvas(id) {
     save(K.mine, myCanvases().filter(x => x.id !== id));
@@ -426,5 +441,6 @@
     api, ApiError, clientId, ensureName, currentName, myCanvases, rememberCanvas,
     forgetCanvas, activeCanvas, setActiveCanvas, canvasUrl, canvasPath, browseUrl,
     toast, formDialog, choiceDialog, createCanvasDialog, share, isShared, markShared,
+    defaultCanvasId, setDefaultCanvas, claimCanvas,
   };
 })();

@@ -213,7 +213,7 @@ def run(shots):
 
         # "Your collections" lists them all; Done ends canvas mode.
         a.goto(f"{WEB}/canvas.html")
-        started = a.locator("h2.mine-h", has_text="Started by you").locator("xpath=following-sibling::ul[1]")
+        started = a.locator("h2.mine-h", has_text="Yours").locator("xpath=following-sibling::ul[1]")
         expect(started.locator("li", has_text="Adi & Sam hangout")).to_have_count(1)
         expect(started.locator("li", has_text="Adi's weekend ideas")).to_have_count(2)  # + the copy
         expect(started.locator("li", has_text="Copy you shared")).to_have_count(1)
@@ -224,6 +224,36 @@ def run(shots):
         expect(shared.locator("li")).to_have_count(2)
         expect(shared).to_contain_text("Adi & Sam hangout")
         expect(s.locator(".mine-empty", has_text="Collections you start")).to_have_count(1)
+        # --- Adi's PC: a collection started on the phone is "Shared with you"
+        # there until Adi taps "This is mine"; then additions from both
+        # devices still count as one person, so it stays a personal list.
+        pc = hermetic(browser.new_context(viewport={"width": 1280, "height": 900}))
+        c2 = pc.new_page()
+        watch(c2, errors)
+        c2.goto(dup_url + f"&api={API}")
+        expect(c2.locator('[data-act="claim"]')).to_be_visible()
+        expect(c2.locator('[data-act="vote"]')).to_have_count(3)  # looks shared until claimed
+        c2.click('[data-act="claim"]')
+        expect(c2.locator('[data-act="unclaim"]')).to_be_visible()
+        expect(c2.locator('[data-act="vote"]')).to_have_count(0)
+        c2.click('[data-act="add-custom"]')
+        answer_dialog(c2, title="Added from the PC")
+        expect(c2.locator(".item")).to_have_count(4)
+        a.goto(dup_url)
+        expect(a.locator(".item")).to_have_count(4)
+        expect(a.locator('[data-act="vote"]')).to_have_count(0)  # still personal on the phone
+        # Make it the default on the PC: pinned first under Yours, marked.
+        c2.click('[data-act="set-default"]')
+        expect(c2.locator(".cv-kicker")).to_contain_text("Your default")
+        c2.goto(f"{WEB}/canvas.html")
+        pc_yours = c2.locator("h2.mine-h", has_text="Yours").locator("xpath=following-sibling::ul[1]")
+        expect(pc_yours.locator("li").first).to_contain_text("★ Default")
+        expect(pc_yours.locator("li").first).to_contain_text("Adi's weekend ideas")
+        # "Not mine" moves it back to Shared with you.
+        pc_yours.locator("li").first.locator("[data-unclaim]").click()
+        expect(c2.locator("h2.mine-h", has_text="Shared with you")).to_contain_text("(1)")
+        expect(c2.locator(".mine-empty", has_text="Collections you start")).to_have_count(1)
+
         # Hide takes one off the list (the collection itself stays).
         shared.locator("li", has_text="Adi & Sam hangout").locator("[data-forget]").click()
         expect(shared.locator("li")).to_have_count(1)

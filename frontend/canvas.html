@@ -164,7 +164,12 @@
   details.fold ul { list-style: none; padding: 0; margin: 8px 0 0; }
   details.fold li { font-size: 14px; padding: 4px 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
   details.fold li .t { color: var(--muted); font-size: 12px; margin-left: 6px; }
-  .you { margin-top: 26px; font-size: 13px; color: var(--muted); }
+  .owner-actions {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+    margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--border);
+    font-size: 14px; color: var(--muted);
+  }
+  .you { margin-top: 10px; font-size: 13px; color: var(--muted); }
 
   /* --- "Your canvases" (canvas.html with no ?c=) --- */
   .home h1 { font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 0.95; margin: 18px 0 6px; }
@@ -179,6 +184,7 @@
     font-family: var(--font-display); font-size: 24px; font-weight: 800; line-height: 1.05;
   }
   .mine-empty, .mine-note { color: var(--muted); font-size: 14px; }
+  .mine .row-acts { display: flex; gap: 14px; flex: 0 0 auto; }
   .mine-note { margin-top: 24px; }
 
   @media (min-width: 600px) {
@@ -280,7 +286,8 @@
     const winner = c.winner_item_id ? v.items.find(i => i.id === c.winner_item_id) : null;
     const name = AC.currentName();
     const social = isSocial(c);
-    return '<p class="cv-kicker">Collection</p>'
+    const isDefault = AC.defaultCanvasId() === c.id;
+    return '<p class="cv-kicker">Collection' + (isDefault ? " · ★ Your default" : "") + "</p>"
       + '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
       + '<div class="cv-dates">' + (dates ? esc(dates) + " · " : "")
       + '<button type="button" class="linkish" data-act="edit-dates">' + (dates ? "Change dates" : "Set dates") + "</button></div>"
@@ -304,7 +311,19 @@
       + (v.log.length ? '<details class="fold"><summary>Activity</summary><ul>'
         + v.log.map(e => "<li>" + esc(logText(e)) + ' <span class="t">' + esc(ago(e.at)) + "</span></li>").join("")
         + "</ul></details>" : "")
-      + '<p class="you"><button type="button" class="linkish" data-act="duplicate">Duplicate this collection</button> · '
+      // Ownership and default: "This is mine" counts this browser as one of
+      // the owner's devices (for a collection started on another phone or
+      // computer); the default is where ☆ Save adds events, per browser.
+      + '<p class="owner-actions">'
+      + (isDefault
+        ? '<span>★ Your default collection</span><button type="button" class="linkish" data-act="unset-default">Unset</button>'
+        : '<button type="button" class="linkish" data-act="set-default">Make this my default</button>')
+      + (!c.yours
+        ? '<button type="button" class="linkish" data-act="claim" title="Started this on another phone or computer? Mark it as yours here too.">This is mine</button>'
+        : c.claimed ? '<button type="button" class="linkish" data-act="unclaim">Not mine</button>' : "")
+      + '<button type="button" class="linkish" data-act="duplicate">Duplicate this collection</button>'
+      + "</p>"
+      + '<p class="you">'
       + (social
         ? (name ? "You’re <b>" + esc(name) + "</b> here. " : "")
           + '<button type="button" class="linkish" data-act="rename-me">' + (name ? "Change your name" : "Set your name") + "</button>"
@@ -593,6 +612,20 @@
       case "ics":
         if (it) downloadIcs(it);
         return;
+      case "set-default":
+        AC.setDefaultCanvas(cid);
+        AC.toast("Saved events will go to “" + view.canvas.name + "” on this device.");
+        return render();
+      case "unset-default":
+        AC.setDefaultCanvas(null);
+        return render();
+      case "claim": case "unclaim":
+        try {
+          apply(await AC.claimCanvas(cid, el.dataset.act === "claim"));
+          AC.toast(el.dataset.act === "claim"
+            ? "It’s under Yours on this device now." : "Moved to Shared with you on this device.");
+        } catch (err) { AC.toast(err.message); }
+        return;
       case "rename-me":
         await AC.ensureName(true);
         return render();
@@ -646,16 +679,26 @@
   // counts the moment it's opened), so nobody has to dig the link back out.
   function renderHome() {
     const mine = AC.myCanvases();
-    // Entries saved before `yours` was tracked count as started here.
-    const started = mine.filter(c => c.yours !== false);
+    const dflt = AC.defaultCanvasId();
+    // Entries saved before `yours` was tracked count as yours. The default
+    // collection is pinned first.
+    const yours = mine.filter(c => c.yours !== false)
+      .sort((a, b) => (b.id === dflt) - (a.id === dflt));
     const shared = mine.filter(c => c.yours === false);
     const row = (c) => {
-      const sub = [datesText(c), c.sent_copy ? "Copy you shared" : "",
+      const sub = [c.id === dflt ? "★ Default" : "", datesText(c),
+                   c.sent_copy ? "Copy you shared" : "",
                    c.opened_at ? "Opened " + ago(c.opened_at) : ""].filter(Boolean).join(" · ");
+      // Move between the sections: claim it as yours (started on another
+      // device), or undo a claim. Collections created here can't be unclaimed.
+      const move = c.yours === false
+        ? '<button type="button" class="linkish" data-claim="' + esc(c.id) + '">This is mine</button>'
+        : c.claimed ? '<button type="button" class="linkish" data-unclaim="' + esc(c.id) + '">Not mine</button>' : "";
       return '<li><a href="' + esc(AC.canvasPath(c.id)) + '">' + esc(c.name)
         + (sub ? '<span class="sub">' + esc(sub) + "</span>" : "") + "</a>"
+        + '<span class="row-acts">' + move
         + '<button type="button" class="linkish" data-forget="' + esc(c.id) + '" aria-label="Hide '
-        + esc(c.name) + ' from this list">Hide</button></li>';
+        + esc(c.name) + ' from this list">Hide</button></span></li>';
     };
     const section = (title, list, empty) => '<h2 class="mine-h">' + title
       + (list.length ? " (" + list.length + ")" : "") + "</h2>"
@@ -665,9 +708,9 @@
     app.innerHTML = '<section class="home"><h1>Your collections</h1>'
       + "<p>Save events that interest you, or plan something with friends: add events to a collection, then share its link if you like.</p>"
       + '<button type="button" class="btn primary" id="new-canvas">Start a collection</button>'
-      + section("Started by you", started, "Collections you start show up here.")
+      + section("Yours", yours, "Collections you start show up here. Started one on another device? Open its link here and tap “This is mine”.")
       + section("Shared with you", shared, "When someone sends you a collection link, it shows up here once you open it.")
-      + '<p class="mine-note">This list lives in this browser. On another phone or computer, open a collection’s link once and it’s added there too. Hide only removes it from this list; the collection itself stays.</p>'
+      + '<p class="mine-note">This list lives in this browser. On another phone or computer, open a collection’s link once and it’s added there too; tap “This is mine” to file it under Yours there. Hide only removes it from this list; the collection itself stays.</p>'
       + "</section>";
   }
   function initHome() {
@@ -679,9 +722,21 @@
         } catch (err) { AC.toast(err.message); }
         return;
       }
+      const claim = e.target.closest("[data-claim], [data-unclaim]");
+      if (claim) {
+        const on = "claim" in claim.dataset;
+        try {
+          await AC.claimCanvas(on ? claim.dataset.claim : claim.dataset.unclaim, on);
+        } catch (err) {
+          if (err.status === 404) AC.forgetCanvas(claim.dataset.claim || claim.dataset.unclaim);
+          AC.toast(err.message);
+        }
+        return renderHome();
+      }
       const b = e.target.closest("[data-forget]");
       if (!b) return;
       AC.forgetCanvas(b.dataset.forget);
+      if (AC.defaultCanvasId() === b.dataset.forget) AC.setDefaultCanvas(null);
       renderHome();
     });
     renderHome();
