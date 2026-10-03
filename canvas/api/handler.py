@@ -173,7 +173,7 @@ def _owners(meta):
     return {meta.get("created_by_client")} | set(meta.get("owner_clients") or ())
 
 
-def _item_out(row):
+def _item_out(row, client=""):
     out = {"id": row["id"], "kind": row["kind"], "added_by_name": row.get("added_by_name"),
            "added_at": row.get("added_at"), "start_time": _item_start(row)}
     if row["kind"] == "event":
@@ -184,7 +184,16 @@ def _item_out(row):
     if "removed_at" in row:
         out["removed_at"] = row["removed_at"]
         out["removed_by_name"] = row.get("removed_by_name")
+        out["removed_by_you"] = _by(row.get("removed_by_client"), client)
     return out
+
+
+def _by(actor_client, client):
+    """Whether this browser made a change: True/False, or None for rows from
+    before client ids were recorded (the page then falls back to a guess)."""
+    if not actor_client:
+        return None
+    return bool(client) and actor_client == client
 
 
 def _view(cid, client):
@@ -214,7 +223,7 @@ def _view(cid, client):
                                   "at": r["at"], "mine": r.get("client_id") == client})
     live, removed = [], []
     for r in items:
-        out = _item_out(r)
+        out = _item_out(r, client)
         if "removed_at" in r:
             removed.append(out)
             continue
@@ -227,6 +236,7 @@ def _view(cid, client):
     removed.sort(key=lambda i: i["removed_at"], reverse=True)
     log_out = [{k: e.get(k) for k in ("actor_name", "action", "item_id", "item_title",
                                       "fields", "name", "at") if e.get(k) is not None}
+               | ({"mine": _by(e.get("client_id"), client)} if e.get("client_id") else {})
                for e in log]
     people.discard(None)
     people = {"owner" if p in owners else p for p in people}
@@ -303,7 +313,7 @@ def get_canvas(req, cid):
 
 
 def patch_canvas(req, cid):
-    _require_client(req)
+    client = _require_client(req)
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
@@ -330,7 +340,7 @@ def patch_canvas(req, cid):
     if not fields:
         raise ApiError(400, "nothing to update")
     try:
-        store.update_canvas(cid, fields, actor, winner_title)
+        store.update_canvas(cid, fields, actor, client, winner_title)
     except store.NotFound as e:
         raise ApiError(404, f"{e} not found") from None
     return 200, {"canvas": _canvas_out(_meta_or_404(cid), req["client"])}
@@ -382,23 +392,23 @@ def add_item(req, cid):
 
 
 def remove_item(req, cid, iid):
-    _require_client(req)
+    client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
     meta = _meta_or_404(cid)
     row = _item_or_404(cid, iid, live=False)
-    store.remove_item(cid, iid, actor, _item_title(row),
+    store.remove_item(cid, iid, actor, client, _item_title(row),
                       clear_winner=meta.get("winner_item_id") == iid)
     return 200, {"ok": True}
 
 
 def restore_item(req, cid, iid):
-    _require_client(req)
+    client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
     row = _item_or_404(cid, iid, live=False)
     try:
-        store.restore_item(cid, iid, actor, _item_title(row))
+        store.restore_item(cid, iid, actor, client, _item_title(row))
     except store.NotFound:
         raise ApiError(404, "canvas not found") from None
     except store.CapReached as e:
@@ -445,12 +455,12 @@ def add_comment(req, cid, iid):
 
 
 def delete_comment(req, cid, iid, cmid):
-    _require_client(req)
+    client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
     row = _item_or_404(cid, iid, live=False)
     try:
-        store.delete_comment(cid, iid, cmid, actor, _item_title(row))
+        store.delete_comment(cid, iid, cmid, actor, client, _item_title(row))
     except store.NotFound as e:
         raise ApiError(404, f"{e} not found") from None
     return 200, {"ok": True}

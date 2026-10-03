@@ -193,9 +193,17 @@ versions so an unchanged canvas costs one tiny read.
 - Items sorted by start time; undated custom items last. Each item: snapshot
   card, **👍 N** with names ("Adi, Sam"), comment count (expands), overflow
   menu (Mark as winner, Remove).
-- Remove = soft delete with an "Undo" toast; a collapsed "Removed (N)"
-  section allows restore.
-- Collapsed "Activity" list (last 50 entries).
+- Remove = soft delete with an "Undo" toast. On a shared collection it asks
+  for your name first (once), so others see who removed what.
+- Collapsed "Activity · N removed" list (last 50 entries), which also holds
+  removals: the latest removal of a still-removed item carries **Restore**
+  (removals older than the 50 are appended from the removed items, so
+  nothing becomes unrestorable). Each entry names the event's date and time,
+  which tells apart showings with the same title. Entries read "You" for
+  this browser's own changes, else the name, else "Someone": log rows and
+  removed items store the actor's client id, and the API returns only a
+  `mine` / `removed_by_you` yes/no (never the id). Rows from before that was
+  stored fall back to "You" on your own collection.
 - Items whose time has passed render dimmed with "Past"; the canvas stays
   fully editable.
 - Polling: every 30s while the tab is visible, slowing to every 2 min after

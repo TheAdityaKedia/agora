@@ -173,13 +173,33 @@ def run(shots):
         expect(a.locator(".item")).to_have_count(3)
         expect(a.locator(".item", has_text="Dinner at Nopa").locator(".when")).to_contain_text("Any time")
         a.locator("details.fold summary", has_text="Activity").click()
-        expect(a.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+        # Your own changes read "You"; friends see your name.
+        expect(a.locator("details.fold li").first).to_contain_text("You added “Dinner at Nopa”")
         if shots:
             a.screenshot(path=f"{shots}/3-shared.png", full_page=True)
 
         # Sam's open page picks up Adi's changes by polling (forced here).
         s.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
         expect(s.locator(".item")).to_have_count(3)
+        s.locator("details.fold summary", has_text="Activity").click()
+        expect(s.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+
+        # --- Sam removes an event: Adi's Activity says who, which showing
+        # (its date), and offers Restore right there (no separate list).
+        gone = s.locator(".item").nth(1)
+        gone_title = gone.locator(".it-title").inner_text()
+        gone.locator('[data-act="remove"]').click()
+        expect(s.locator(".item")).to_have_count(2)
+        a.reload()
+        expect(a.locator(".item")).to_have_count(2)
+        expect(a.locator("details.fold summary")).to_have_text("Activity · 1 removed")
+        a.locator("details.fold summary").click()
+        removal = a.locator("details.fold li").first
+        expect(removal).to_contain_text(f"Sam removed “{gone_title}” (")
+        removal.locator('[data-act="restore"]').click()
+        expect(a.locator(".item")).to_have_count(3)
+        expect(a.locator("details.fold summary")).to_have_text("Activity")
+        expect(a.locator("details.fold li").first).to_contain_text(f"You restored “{gone_title}”")
 
         # --- Duplicate: a new, personal collection with the same items.
         a.click('[data-act="duplicate"]')

@@ -311,14 +311,7 @@
       + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
-      + (v.removed.length ? '<details class="fold"><summary>Removed (' + v.removed.length + ")</summary><ul>"
-        + v.removed.map(r => "<li>" + esc(titleOf(r)) + ' <span class="t">removed'
-          + (social && r.removed_by_name ? " by " + esc(r.removed_by_name) : "")
-          + " " + esc(ago(r.removed_at)) + '</span> <button type="button" class="linkish" data-act="restore" data-id="'
-          + esc(r.id) + '">Restore</button></li>').join("") + "</ul></details>" : "")
-      + (v.log.length ? '<details class="fold"><summary>Activity</summary><ul>'
-        + v.log.map(e => "<li>" + esc(logText(e)) + ' <span class="t">' + esc(ago(e.at)) + "</span></li>").join("")
-        + "</ul></details>" : "")
+      + activityHtml(v)
       // Ownership and default: "This is mine" counts this browser as one of
       // the owner's devices (for a collection started on another phone or
       // computer); the default is where ☆ Save adds events, per browser.
@@ -404,11 +397,46 @@
       + "</div></section>";
   }
 
-  function logText(e) {
-    // Unnamed writes (made before a name was set): on your own collection
-    // they're almost certainly yours; to anyone else, "Someone".
-    const a = e.actor_name || (view.canvas.yours ? "You" : "Someone");
-    const t = e.item_title ? "“" + e.item_title + "”" : "an item";
+  // Activity, newest first. Removals live here too: the latest removal of
+  // an item that's still removed carries its Restore button. Removals older
+  // than the log the API returns (its last 50 entries) are added from the
+  // removed items, so every removed item stays restorable.
+  function activityHtml(v) {
+    const byId = new Map(v.items.concat(v.removed).map(i => [i.id, i]));
+    const entries = v.log.slice();
+    const logged = new Set(entries.filter(e => e.action === "removed").map(e => e.item_id));
+    for (const r of v.removed) {
+      if (!logged.has(r.id)) entries.push({action: "removed", item_id: r.id, item_title: titleOf(r),
+        actor_name: r.removed_by_name, mine: r.removed_by_you, at: r.removed_at});
+    }
+    if (!entries.length) return "";
+    entries.sort((a, b) => new Date(b.at) - new Date(a.at));
+    const restorable = new Set(v.removed.map(r => r.id));
+    return '<details class="fold"><summary>Activity'
+      + (v.removed.length ? " · " + v.removed.length + " removed" : "") + "</summary><ul>"
+      + entries.map(e => {
+        const restore = e.action === "removed" && restorable.delete(e.item_id);
+        return "<li>" + esc(logText(e, byId.get(e.item_id))) + ' <span class="t">' + esc(ago(e.at)) + "</span>"
+          + (restore ? ' <button type="button" class="linkish" data-act="restore" data-id="' + esc(e.item_id) + '">Restore</button>' : "")
+          + "</li>";
+      }).join("") + "</ul></details>";
+  }
+
+  function actorOf(e) {
+    if (e.mine) return "You";
+    if (e.actor_name) return e.actor_name;
+    if (e.mine === false) return "Someone";
+    // Entries from before the API recorded who made them: unnamed ones on
+    // your own collection are almost certainly yours.
+    return view.canvas.yours ? "You" : "Someone";
+  }
+
+  function logText(e, item) {
+    const a = actorOf(e);
+    // The date tells apart showings with the same title (and what was removed).
+    const start = item && startOf(item);
+    const t = (e.item_title || (item && titleOf(item)) ? "“" + (e.item_title || titleOf(item)) + "”" : "an item")
+      + (start ? " (" + whenFmt.format(start) + ")" : "");
     switch (e.action) {
       case "created": return a + " started this collection";
       case "duplicated": return a + " made this as a copy of “" + (e.name || "a collection") + "”";
@@ -607,7 +635,9 @@
       }
       case "remove": {
         if (!it) return;
-        const who = me();
+        // Removing from a shared collection says who did it, so ask for a name.
+        const who = isSocial(view.canvas) ? await named() : me();
+        if (isSocial(view.canvas) && !who) return;
         await act(() => AC.api("DELETE", itemP(id), {actor_name: who}));
         AC.toast("Removed “" + titleOf(it) + "”", {label: "Undo",
           run: () => act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}))});

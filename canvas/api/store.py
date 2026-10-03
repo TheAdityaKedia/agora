@@ -72,7 +72,9 @@ def _pk(cid):
     return f"C#{cid}"
 
 
-def _log_row(cid, actor_name, action, **extra):
+def _log_row(cid, actor_name, action, client_id=None, **extra):
+    """client_id lets the page say "You" for this browser's own entries; the
+    API returns only that yes/no, never the id."""
     row = {
         "PK": f"L#{cid}",
         "SK": f"{int(time.time() * 1000):013d}#{secrets.token_hex(3)}",
@@ -80,7 +82,7 @@ def _log_row(cid, actor_name, action, **extra):
         "action": action,
         "at": now_iso(),
     }
-    row.update({k: v for k, v in extra.items() if v is not None})
+    row.update({k: v for k, v in {"client_id": client_id, **extra}.items() if v is not None})
     return row
 
 
@@ -186,7 +188,7 @@ def create_canvas(fields, actor_name, client_id):
             meta[k] = fields[k]
     _transact([
         _put(meta, "attribute_not_exists(PK)"),
-        _put(_log_row(cid, actor_name, "created")),
+        _put(_log_row(cid, actor_name, "created", client_id)),
     ])
     return meta
 
@@ -202,7 +204,7 @@ def duplicate_canvas(source_rows, fields, actor_name, client_id, source_name):
     with table().batch_writer() as batch:
         for r in live:
             item_id = r["id"] if r["kind"] == "event" else "c_" + secrets.token_urlsafe(6)
-            row = {k: v for k, v in r.items() if k not in ("removed_at", "removed_by_name")}
+            row = {k: v for k, v in r.items() if k not in ("removed_at", "removed_by_name", "removed_by_client")}
             # Keep who added it (provenance); the copy's maker is its client.
             row.update(PK=_pk(cid), SK=f"ITEM#{item_id}", id=item_id,
                        added_by_client=client_id, added_at=now)
@@ -219,7 +221,7 @@ def duplicate_canvas(source_rows, fields, actor_name, client_id, source_name):
             meta[k] = fields[k]
     _transact([
         _put(meta, "attribute_not_exists(PK)"),
-        _put(_log_row(cid, actor_name, "duplicated", name=source_name)),
+        _put(_log_row(cid, actor_name, "duplicated", client_id, name=source_name)),
     ])
     return meta
 
@@ -245,7 +247,7 @@ def set_owner(cid, client_id, on):
         raise CapReached(f"a collection can have at most {OWNER_CAP} owner devices") from None
 
 
-def update_canvas(cid, fields, actor_name, winner_title=None):
+def update_canvas(cid, fields, actor_name, client_id=None, winner_title=None):
     """`fields` holds only keys being changed; a None value clears that key."""
     names, sets, removes, values, ops = {}, [], [], {}, []
     for i, (k, v) in enumerate(sorted(fields.items())):
@@ -267,7 +269,7 @@ def update_canvas(cid, fields, actor_name, winner_title=None):
         action = "edited_note"
     else:
         action = "set_dates"
-    log = _log_row(cid, actor_name, action, fields=sorted(fields),
+    log = _log_row(cid, actor_name, action, client_id, fields=sorted(fields),
                    item_title=winner_title, name=fields.get("name"))
     try:
         _transact([bump, _put(log)] + ops)
@@ -287,7 +289,7 @@ def add_item(cid, item_id, body, actor_name, client_id, title):
         _transact([
             _bump(cid, extra_add="item_count :one", condition="item_count < :cap",
                   values={":cap": LIVE_ITEM_CAP}),
-            _put(_log_row(cid, actor_name, "added", item_id=item_id, item_title=title)),
+            _put(_log_row(cid, actor_name, "added", client_id, item_id=item_id, item_title=title)),
             _put(row, "attribute_not_exists(PK)"),
         ])
         return row, True
@@ -295,7 +297,7 @@ def add_item(cid, item_id, body, actor_name, client_id, title):
         if e.failed(2):
             existing = get_row(cid, f"ITEM#{item_id}")
             if existing and "removed_at" in existing:
-                restore_item(cid, item_id, actor_name, title)
+                restore_item(cid, item_id, actor_name, client_id, title)
                 return get_row(cid, f"ITEM#{item_id}"), False
             return existing, False
         if e.failed(0):
@@ -305,20 +307,20 @@ def add_item(cid, item_id, body, actor_name, client_id, title):
         raise Conflict() from None
 
 
-def remove_item(cid, item_id, actor_name, title, clear_winner):
+def remove_item(cid, item_id, actor_name, client_id, title, clear_winner):
     """Soft delete. Removing the winner clears it. No-op if already removed."""
     item_update = {"Update": {
         "TableName": table().name,
         "Key": {"PK": _pk(cid), "SK": f"ITEM#{item_id}"},
-        "UpdateExpression": "SET removed_at = :now, removed_by_name = :who",
+        "UpdateExpression": "SET removed_at = :now, removed_by_name = :who, removed_by_client = :client",
         "ConditionExpression": "attribute_exists(PK) AND attribute_not_exists(removed_at)",
-        "ExpressionAttributeValues": {":now": now_iso(), ":who": actor_name},
+        "ExpressionAttributeValues": {":now": now_iso(), ":who": actor_name, ":client": client_id},
     }}
     bump = _bump(cid, extra_add="item_count :neg",
                  extra_remove="winner_item_id" if clear_winner else "",
                  values={":neg": -1})
     try:
-        _transact([bump, _put(_log_row(cid, actor_name, "removed", item_id=item_id,
+        _transact([bump, _put(_log_row(cid, actor_name, "removed", client_id, item_id=item_id,
                                        item_title=title)), item_update])
     except _TxFailed as e:
         if e.failed(0):
@@ -328,18 +330,18 @@ def remove_item(cid, item_id, actor_name, title, clear_winner):
         raise Conflict() from None
 
 
-def restore_item(cid, item_id, actor_name, title):
+def restore_item(cid, item_id, actor_name, client_id, title):
     item_update = {"Update": {
         "TableName": table().name,
         "Key": {"PK": _pk(cid), "SK": f"ITEM#{item_id}"},
-        "UpdateExpression": "REMOVE removed_at, removed_by_name",
+        "UpdateExpression": "REMOVE removed_at, removed_by_name, removed_by_client",
         "ConditionExpression": "attribute_exists(removed_at)",
     }}
     try:
         _transact([
             _bump(cid, extra_add="item_count :one", condition="item_count < :cap",
                   values={":cap": LIVE_ITEM_CAP}),
-            _put(_log_row(cid, actor_name, "restored", item_id=item_id, item_title=title)),
+            _put(_log_row(cid, actor_name, "restored", client_id, item_id=item_id, item_title=title)),
             item_update,
         ])
     except _TxFailed as e:
@@ -357,7 +359,7 @@ def vote(cid, item_id, client_id, name, title):
     try:
         _transact([
             _bump(cid),
-            _put(_log_row(cid, name, "voted", item_id=item_id, item_title=title)),
+            _put(_log_row(cid, name, "voted", client_id, item_id=item_id, item_title=title)),
             _put(row),
             _live_item_check(cid, item_id),
         ])
@@ -386,7 +388,7 @@ def add_comment(cid, item_id, client_id, name, text, title):
         _transact([
             _bump(cid, extra_add="comment_count :one", condition="comment_count < :cap",
                   values={":cap": COMMENT_CAP}),
-            _put(_log_row(cid, name, "commented", item_id=item_id, item_title=title)),
+            _put(_log_row(cid, name, "commented", client_id, item_id=item_id, item_title=title)),
             _put(row),
             _live_item_check(cid, item_id),
         ])
@@ -399,7 +401,7 @@ def add_comment(cid, item_id, client_id, name, text, title):
     return row
 
 
-def delete_comment(cid, item_id, comment_id, actor_name, title):
+def delete_comment(cid, item_id, comment_id, actor_name, client_id, title):
     update = {"Update": {
         "TableName": table().name,
         "Key": {"PK": _pk(cid), "SK": f"CMT#{item_id}#{comment_id}"},
@@ -410,7 +412,7 @@ def delete_comment(cid, item_id, comment_id, actor_name, title):
     try:
         _transact([
             _bump(cid),
-            _put(_log_row(cid, actor_name, "deleted_comment", item_id=item_id, item_title=title)),
+            _put(_log_row(cid, actor_name, "deleted_comment", client_id, item_id=item_id, item_title=title)),
             update,
         ])
     except _TxFailed as e:

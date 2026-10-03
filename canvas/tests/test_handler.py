@@ -229,6 +229,40 @@ def test_soft_delete_and_restore(api, canvas):
     assert [e["action"] for e in v["log"][:3]] == ["restored", "removed", "added"]
 
 
+def test_activity_and_removals_say_whether_it_was_you(api, canvas):
+    """The page says "You" for this browser's own changes and the name (or
+    "Someone") for others'; the API returns only a yes/no, never client ids."""
+    friend = Api(client="client-bbbb2222", ip="5.6.7.8")
+    mine = add_event(api, canvas, E1)["json"]["item"]["id"]
+    theirs = add_event(friend, canvas, E2)["json"]["item"]["id"]
+    friend("DELETE", f"/canvases/{canvas}/items/{mine}", {})  # unnamed
+    api("DELETE", f"/canvases/{canvas}/items/{theirs}", {"actor_name": "Adi"})
+
+    r = api("GET", f"/canvases/{canvas}")
+    assert api.client not in r["body"] and friend.client not in r["body"]
+    v = r["json"]
+    removed = {i["id"]: i for i in v["removed"]}
+    assert removed[mine]["removed_by_you"] is False and not removed[mine]["removed_by_name"]
+    assert removed[theirs]["removed_by_you"] is True
+    assert [(e["action"], e["item_id"], e["mine"]) for e in v["log"][:4]] == [
+        ("removed", theirs, True), ("removed", mine, False),
+        ("added", theirs, False), ("added", mine, True)]
+    # The friend sees the same history from their side.
+    fv = view(friend, canvas)
+    assert [e["mine"] for e in fv["log"][:4]] == [False, True, True, False]
+
+    # Restoring clears who removed it.
+    api("POST", f"/canvases/{canvas}/items/{mine}/restore", {})
+    assert [i["id"] for i in view(api, canvas)["removed"]] == [theirs]
+
+
+def test_log_rows_from_before_client_ids_have_no_mine_flag(api, canvas):
+    store.table().put_item(Item={"PK": f"L#{canvas}", "SK": "0000000000001#abc",
+                                 "action": "added", "item_title": "Old", "at": "2026-01-01T00:00:00Z"})
+    old = view(api, canvas)["log"][-1]
+    assert old["item_title"] == "Old" and "mine" not in old
+
+
 def test_removed_items_keep_votes(api, canvas):
     item_id = add_event(api, canvas, E1)["json"]["item"]["id"]
     api("PUT", f"/canvases/{canvas}/items/{item_id}/vote", {"name": "Adi"})
@@ -495,7 +529,6 @@ def test_claim_is_idempotent_and_creator_noop(api, canvas):
 
 
 def test_claim_cap_and_404(api, canvas, monkeypatch):
-    import store
     monkeypatch.setattr(store, "OWNER_CAP", 1)
     assert Api(client="client-dev-00001")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 200
     assert Api(client="client-dev-00002")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 409
