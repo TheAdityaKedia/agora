@@ -107,3 +107,54 @@ Brainstormed 2026-10-03. Not committed work: pick one, write its spec in
 
 Suggested order: "Meet people" + calendar feeds first (small, change how the
 site is used, no backend), then "Become a regular".
+
+## Ideas — monetization and revenue (not yet planned)
+
+Brainstormed 2026-10-03. The asset is trust ("a free, honest guide to
+what's on"), so every option keeps to these **guardrails**: paid placement
+is always labelled and never touches ranking, filters or search; no selling
+user data (collections, submissions, any future accounts stay private);
+anything commercial built on scraped listings credits and links the source,
+and reselling content needs opt-in or a partnership.
+
+Near-term (little product work):
+- **Ticket affiliate commissions** — referral codes on outbound ticket links
+  where a platform has a programme (Eventbrite, Ticketmaster, Tixr, DICE, …).
+  Check each platform's terms; commission never affects ordering.
+- **Newsletter sponsorship** — once the weekly "Your weekend" email exists,
+  one clearly labelled sponsor slot per issue (local SF newsletters prove
+  the model).
+- **Supporter membership ("Friends of Agora")** — a few dollars a month:
+  early access to Tables, perks negotiated with venues, a supporter badge.
+  Revenue aligned with the mission.
+
+Medium (needs the organizer path from the social-life ideas):
+- **Featured listings** — organizers pay for a marked "Featured" slot,
+  capped per day, separate from organic results; Stripe on the web
+  submission form.
+- **"Claim your venue" pro tools** — a venue/organizer subscription: views,
+  clicks, saves and calendar adds for their events; fix details and manage
+  recurring series; priority submission review. Builds on stable venue ids.
+  Most durable business-to-business revenue.
+- **Restaurant/bar referrals around events** — "dinner before the show" near
+  the venue via OpenTable/Resy partner links or direct deals; uses venue
+  coordinates from the maps work.
+
+Bigger bets:
+- **Agora Tables (paid seats)** — a per-seat fee ($15–25) or a cut of a
+  set-price dinner on matched small-group outings. Highest margin and most
+  aligned with the social-life goal; also the most operations (matching,
+  safety, refunds, venue partners).
+- **Group-booking deals** — when a collection settles on an event, offer a
+  negotiated group ticket for a commission. Builds on collections → plans.
+- **Business data feed and embeds** — a clean, deduplicated, tagged,
+  geocoded Bay Area events feed or a "What's on near here" widget for
+  apartment buildings, hotels/concierge apps, offices and tourism sites.
+  Best per-customer revenue, but **needs a legal review first**: event facts
+  are generally shareable, but descriptions and images belong to the sources
+  and many sources' terms limit commercial reuse — likely facts + links only,
+  or opt-in sources.
+
+Suggested order: ticket affiliate links now; newsletter sponsorship and
+membership once the weekly email ships; then claim-your-venue pro tools;
+Tables as the long-term bet.
