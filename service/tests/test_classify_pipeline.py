@@ -1,7 +1,10 @@
 """Tests for the cache-aware batch step: select_shows + classify_new_shows."""
 import classify
+import taxonomy
 from classify import select_shows, classify_new_shows, PRIMARY_MODEL
 from classifications import Cache, Classification
+
+CURRENT = taxonomy.CURRENT_TAXONOMY_VERSION
 
 
 def test_select_shows_dedupes_and_picks_richest_description():
@@ -20,7 +23,7 @@ def test_select_shows_dedupes_and_picks_richest_description():
 def _fake_classifier(title, source, description, *, client=None):
     return Classification(
         title=title, source=source, types=[["talk"]], topics=["books-authors"],
-        cost="free", model=PRIMARY_MODEL, taxonomy_version=1,
+        cost="free", model=PRIMARY_MODEL, taxonomy_version=CURRENT,
         classified_at="2026-09-23T00:00:00+00:00",
     )
 
@@ -52,7 +55,7 @@ def test_classify_new_shows_skips_cache_hits_on_second_run(tmp_path):
 
 def test_classify_new_shows_reclassifies_when_taxonomy_version_stale(tmp_path):
     cache = Cache(tmp_path / "c.json")
-    # seed a stale entry (taxonomy_version 0 < current 1)
+    # seed a stale entry (taxonomy_version 0 < current)
     cache.put(Classification(
         title="Old", source="City Lights Booksellers", types=[["talk"]], topics=[],
         cost="unknown", model=PRIMARY_MODEL, taxonomy_version=0,
@@ -61,7 +64,7 @@ def test_classify_new_shows_reclassifies_when_taxonomy_version_stale(tmp_path):
     shows = [{"source": "City Lights Booksellers", "title": "Old", "description": "d"}]
     classified, cached = classify_new_shows(shows, cache, classifier=_fake_classifier)
     assert (classified, cached) == (1, 0)
-    assert cache.get("City Lights Booksellers", "Old").taxonomy_version == 1
+    assert cache.get("City Lights Booksellers", "Old").taxonomy_version == CURRENT
 
 
 def test_classify_new_shows_saves_cache_to_disk(tmp_path):

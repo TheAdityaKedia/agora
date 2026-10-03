@@ -51,7 +51,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
-CURRENT_TAXONOMY_VERSION = 1
+CURRENT_TAXONOMY_VERSION = 2
 _DATA_DIR = Path(__file__).parent / "data"
 
 

@@ -54,13 +54,23 @@ _SYSTEM = (
     "TOPIC = what the event is ABOUT / the interest it serves. Return 1-3 topic "
     "slugs from the TOPIC list, most relevant first. Topics cut across formats "
     "(a poetry reading, open mic, and workshop all get \"poetry\"). Choose only "
-    "listed slugs; omit rather than invent. Assign at least one topic whenever "
-    "the subject is identifiable — leave topics empty ONLY when no listed slug "
-    "genuinely fits. Guidance for the broad slugs: use \"music\" for a concert, "
-    "DJ set, open mic, or jam whose genre is unclear or mixed (prefer a specific "
-    "genre like \"jazz\"/\"electronic\" when it's clear); \"games\" for board/"
+    "listed slugs; omit rather than invent. Assign a topic only when a listed "
+    "slug genuinely names the subject. If none does, return an empty topics "
+    "list — NEVER force the nearest slug onto an unlisted subject (a chess club "
+    "is not \"latino\", a pet meetup is not \"wellness\"). Guidance for the "
+    "broad slugs: use \"music\" for a concert, DJ set, open mic, or jam whose "
+    "genre is unclear or mixed (prefer a specific genre like \"jazz\"/\"blues\"/"
+    "\"soul-funk\"/\"electronic\" when it's clear — blues/soul/R&B/funk are NOT "
+    "\"jazz\"); \"games\" for board/"
     "tabletop/hobby game nights (not trivia/bingo, which have their own slugs); "
-    "\"language\" for language-exchange / conversation-practice groups; "
+    "\"language\" for language-exchange / conversation-practice groups (the "
+    "language practiced is the subject — use \"language\", not a community "
+    "slug); \"family-kids\" for events aimed at children, teens, or families "
+    "(storytime, teen programs, family days) IN ADDITION to the subject slug; "
+    "\"education\" for instructional / learning events (test prep, tutoring, "
+    "citizenship, personal finance, job skills) — an arts or craft class keeps "
+    "its own subject instead; \"dance-party\" for a party built around a dance "
+    "floor (pair with \"club-night\" when it's a DJ'd bar/club night); "
     "\"club-night\" — ALWAYS tag this when the event features a DJ, open decks, "
     "a dance floor / dance party, or a bar/club night built around recorded or "
     "electronic music, EVEN IF it also has another element (an open-mic-plus-DJ "
@@ -96,7 +106,19 @@ _FEWSHOT = (
     "Title: Excelsior Reads Book Club\n"
     "Venue: San Francisco Public Library — free library programs; talks, book clubs.\n"
     "Desc: Monthly discussion of this month's selection. All welcome.\n"
-    '{"types":[["social","book-club"]],"topics":["books-authors"],"cost":"free"}\n'
+    '{"types":[["social","book-club"]],"topics":["books-authors"],"cost":"free"}\n\n'
+    "Title: Tony Lindsay and Future Perfect Band\n"
+    "Venue: Biscuits & Blues — Union Square SF blues & jazz supper club; live blues, soul, and R&B concerts.\n"
+    "Desc: Experience world-class blues, dinner, and drinks — all in one place. $25.\n"
+    '{"types":[["performance"]],"topics":["blues"],"cost":"paid"}\n\n'
+    "Title: Girl Dance at The Stud\n"
+    "Venue: SF Bar Guide — directory of recurring SF bar nights at a named venue.\n"
+    "Desc: Femme forward dance & pop party at The Stud, FREE admission. First Friday of the month.\n"
+    '{"types":[["social","party-club"]],"topics":["dance-party","club-night","lgbtq"],"cost":"free"}\n\n'
+    "Title: Saturday Morning Story Time!\n"
+    "Venue: Noe Valley Books — neighborhood bookstore; readings and community events.\n"
+    "Desc: Bring your little ones for picture books and songs.\n"
+    '{"types":[["social"]],"topics":["family-kids","books-authors"],"cost":"free"}\n'
 )
 
 
