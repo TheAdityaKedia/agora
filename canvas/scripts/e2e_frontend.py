@@ -88,7 +88,8 @@ def run(shots):
         browser = p.chromium.launch(executable_path=os.environ.get("CHROMIUM_PATH") or None)
         phone = {"viewport": {"width": 390, "height": 844}, "has_touch": True}
 
-        # --- Adi: main page → Plan with friends → canvas mode → add two events
+        # --- Adi: main page → Start a collection → canvas mode → add two events.
+        # No name prompt: curating for yourself never asks.
         adi = hermetic(browser.new_context(**phone))
         a = adi.new_page()
         watch(a, errors)
@@ -96,25 +97,33 @@ def run(shots):
         expect(a.locator(".event").first).to_be_visible()
         a.click("#plan-btn")
         answer_dialog(a, name="Adi & Sam hangout")
-        answer_dialog(a, name="Adi")
         expect(a.locator("#canvas-tray")).to_contain_text("Adding to Adi & Sam hangout")
         assert "canvas=" in a.url, a.url
         adds = a.locator(".canvas-add")
         for i in range(2):
             adds.nth(i).click()
             expect(adds.nth(i)).to_have_attribute("aria-pressed", "true")
-        expect(a.locator("#canvas-tray")).to_contain_text("2 options")
+        expect(a.locator("#canvas-tray")).to_contain_text("2 items")
         if shots:
             a.screenshot(path=f"{shots}/1-index-canvas-mode.png")
 
         # Adding again from a fresh load: the remembered canvas comes back.
         a.goto(f"{WEB}/")
-        expect(a.locator("#canvas-tray")).to_contain_text("2 options")
+        expect(a.locator("#canvas-tray")).to_contain_text("2 items")
         expect(a.locator('.canvas-add[aria-pressed="true"]')).to_have_count(2)
 
         a.locator("#canvas-tray a").click()
         expect(a.locator(".item")).to_have_count(2)
         canvas_url = a.url
+        # Just Adi so far: a plain list, no votes, comments or plan.
+        expect(a.locator('[data-act="vote"]')).to_have_count(0)
+        expect(a.locator('[data-act="pick"]')).to_have_count(0)
+        if shots:
+            a.screenshot(path=f"{shots}/2-personal.png", full_page=True)
+        # Share it as-is: now it asks Adi's name, and the social parts appear.
+        a.click('[data-act="share"]')
+        a.locator("dialog .ac-choice", has_text="Share this collection").click()
+        answer_dialog(a, name="Adi")
         a.locator(".item").first.locator('[data-act="vote"]').click()
         expect(a.locator(".item").first.locator(".voters")).to_have_text("Adi")
 
@@ -151,11 +160,37 @@ def run(shots):
         a.locator("details.fold summary", has_text="Activity").click()
         expect(a.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
         if shots:
-            a.screenshot(path=f"{shots}/2-canvas.png", full_page=True)
+            a.screenshot(path=f"{shots}/3-shared.png", full_page=True)
 
         # Sam's open page picks up Adi's changes by polling (forced here).
         s.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
         expect(s.locator(".item")).to_have_count(3)
+
+        # --- Duplicate: a new, personal collection with the same items.
+        a.click('[data-act="duplicate"]')
+        answer_dialog(a, name="Adi's weekend ideas")
+        expect(a.locator(".cv-name")).to_have_text("Adi's weekend ideas")
+        expect(a.locator(".item")).to_have_count(3)
+        expect(a.locator('[data-act="vote"]')).to_have_count(0)
+        expect(a.locator(".winner")).to_have_count(0)
+        dup_url = a.url
+
+        # --- Share a copy: Sam changes the copy; Adi's collection stays as is.
+        a.click('[data-act="share"]')
+        a.locator("dialog .ac-choice", has_text="Share a copy").click()
+        a.locator("dialog .ac-choice", has_text="Share the copy").click()
+        expect(a.locator("dialog[open]")).to_have_count(0)
+        copy_id = a.evaluate("JSON.parse(localStorage.getItem('agora.canvas.mine'))[0].id")
+        assert copy_id not in dup_url
+        s.goto(f"{WEB}/canvas.html?c={copy_id}")
+        expect(s.locator(".item")).to_have_count(3)
+        expect(s.locator('[data-act="vote"]')).to_have_count(3)  # Sam's view is social
+        s.click('[data-act="add-custom"]')
+        answer_dialog(s, title="Sam's idea")
+        expect(s.locator(".item")).to_have_count(4)
+        a.goto(dup_url)
+        expect(a.locator(".item")).to_have_count(3)
+        expect(a.locator('[data-act="vote"]')).to_have_count(0)  # still just Adi's
 
         # A shared search link with canvas mode must not hang on "Loading…".
         a.goto(f"{WEB}/?q=jazz&canvas=" + canvas_url.split("c=")[1].split("&")[0])
@@ -176,9 +211,10 @@ def run(shots):
         a.goto(f"{WEB}/?canvas=" + canvas_url.split("c=")[1].split("&")[0])
         expect(a.locator("#canvas-tray")).to_contain_text("Adding to")
 
-        # "Your canvases" lists it; Done ends canvas mode.
+        # "Your collections" lists them all; Done ends canvas mode.
         a.goto(f"{WEB}/canvas.html")
-        expect(a.locator(".mine li")).to_contain_text("Adi & Sam hangout")
+        expect(a.locator(".mine li", has_text="Adi & Sam hangout")).to_have_count(1)
+        expect(a.locator(".mine li", has_text="Adi's weekend ideas")).to_have_count(2)  # + shared copy
         a.goto(f"{WEB}/")
         a.locator("#canvas-tray [data-tray-done]").click()
         expect(a.locator("#canvas-tray")).to_be_hidden()

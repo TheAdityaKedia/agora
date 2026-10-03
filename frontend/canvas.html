@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plan with friends — Agora</title>
-<!-- Every canvas link shares this generic card (no per-canvas previews: the
-     site stays static). -->
-<meta name="description" content="A shortlist of Bay Area events to pick from together. 👍 the ones you're up for.">
-<meta property="og:title" content="Plan with friends on Agora">
-<meta property="og:description" content="A shortlist of Bay Area events to pick from together. 👍 the ones you're up for.">
+<title>Collection — Agora</title>
+<!-- Every collection link shares this generic card (no per-collection
+     previews: the site stays static). Internally a collection is a "canvas". -->
+<meta name="description" content="A collection of Bay Area events on Agora. Save the ones that interest you, or plan something together.">
+<meta property="og:title" content="A collection of events on Agora">
+<meta property="og:description" content="A collection of Bay Area events on Agora. Save the ones that interest you, or plan something together.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#eef1f2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1822" media="(prefers-color-scheme: dark)">
@@ -185,7 +185,7 @@
 <body>
 <header class="masthead">
   <a class="brand" href="./">Agora</a>
-  <nav><a href="./canvas.html">Your canvases</a></nav>
+  <nav><a href="./canvas.html">Your collections</a></nav>
 </header>
 <main id="app"><p class="loading">Loading…</p></main>
 
@@ -222,7 +222,14 @@
 
   if (!cid) { renderHome(); return; }
 
-  // ======================= the canvas =======================
+  // ======================= the collection =======================
+  // Votes, comments and "the plan" show once a collection involves other
+  // people: you opened someone else's link, more than one browser has done
+  // something on it, or you shared it as-is from this browser. A collection
+  // you're curating for yourself is just a list.
+  const isSocial = (c) => !c.yours || c.people > 1 || AC.isShared(c.id);
+  // The name on a write. "" is fine: curating never asks who you are.
+  const me = () => AC.currentName();
   let view = null;               // last full GET response
   let pendingRender = false;     // a poll arrived while someone was typing
   const openComments = new Set();  // item ids with their comment thread open
@@ -236,7 +243,7 @@
     } catch (e) {
       if (e.status === 404) AC.forgetCanvas(cid);
       app.innerHTML = '<p class="problem">' + esc(e.status === 404
-        ? "This canvas doesn't exist. Check that the link was copied in full."
+        ? "This collection doesn't exist. Check that the link was copied in full."
         : e.message) + '</p><p class="loading"><a href="./">Browse events on Agora</a></p>';
     }
   }
@@ -266,32 +273,38 @@
     const dates = datesText(c);
     const winner = c.winner_item_id ? v.items.find(i => i.id === c.winner_item_id) : null;
     const name = AC.currentName();
-    return '<p class="cv-kicker">Plan with friends</p>'
+    const social = isSocial(c);
+    return '<p class="cv-kicker">Collection</p>'
       + '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
       + '<div class="cv-dates">' + (dates ? esc(dates) + " · " : "")
       + '<button type="button" class="linkish" data-act="edit-dates">' + (dates ? "Change dates" : "Set dates") + "</button></div>"
       + (c.note
         ? '<div class="cv-note editable" data-act="edit-note" title="Edit note">' + esc(c.note) + "</div>"
-        : '<div class="cv-note empty editable" data-act="edit-note">Add a note, like “dinner first, then a show?”</div>')
+        : '<div class="cv-note empty editable" data-act="edit-note">Add a note' + (social ? ", like “dinner first, then a show?”" : "") + "</div>")
       + '<div class="cv-actions">'
-      + '<button type="button" class="btn primary" data-act="share">Share link</button>'
+      + '<button type="button" class="btn primary" data-act="share">Share</button>'
       + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
       + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
       + "</div>"
-      + (winner ? winnerHtml(winner) : "")
-      + '<h2 class="section-h">Options' + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
+      + (social && winner ? winnerHtml(winner) : "")
+      + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
       + (v.removed.length ? '<details class="fold"><summary>Removed (' + v.removed.length + ")</summary><ul>"
-        + v.removed.map(r => "<li>" + esc(titleOf(r)) + ' <span class="t">removed by ' + esc(r.removed_by_name || "someone")
+        + v.removed.map(r => "<li>" + esc(titleOf(r)) + ' <span class="t">removed'
+          + (social && r.removed_by_name ? " by " + esc(r.removed_by_name) : "")
           + " " + esc(ago(r.removed_at)) + '</span> <button type="button" class="linkish" data-act="restore" data-id="'
           + esc(r.id) + '">Restore</button></li>').join("") + "</ul></details>" : "")
       + (v.log.length ? '<details class="fold"><summary>Activity</summary><ul>'
         + v.log.map(e => "<li>" + esc(logText(e)) + ' <span class="t">' + esc(ago(e.at)) + "</span></li>").join("")
         + "</ul></details>" : "")
-      + '<p class="you">' + (name ? "You’re <b>" + esc(name) + "</b> here. " : "")
-      + '<button type="button" class="linkish" data-act="rename-me">' + (name ? "Change your name" : "Set your name") + "</button>"
-      + " · Anyone with the link can see and edit this canvas.</p>";
+      + '<p class="you"><button type="button" class="linkish" data-act="duplicate">Duplicate this collection</button> · '
+      + (social
+        ? (name ? "You’re <b>" + esc(name) + "</b> here. " : "")
+          + '<button type="button" class="linkish" data-act="rename-me">' + (name ? "Change your name" : "Set your name") + "</button>"
+          + " · Anyone with the link can see and edit this collection."
+        : "Only people you send the link to can see it.")
+      + "</p>";
   }
 
   const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
@@ -314,22 +327,23 @@
     const img = it.event && safeUrl(it.event.image_url)
       ? '<div class="thumb"><img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()"></div>' : "";
     const voters = it.votes.map(v => v.name);
-    const cmtOpen = openComments.has(it.id);
-    const isWinner = view.canvas.winner_item_id === it.id;
+    const social = isSocial(view.canvas);
+    const cmtOpen = social && openComments.has(it.id);
+    const isWinner = social && view.canvas.winner_item_id === it.id;
     return '<article class="item' + (past ? " past" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
       + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
       + (past ? '<span class="badge">Past</span>' : "") + (isWinner ? '<span class="badge">The plan</span>' : "") + "</div>"
       + '<div class="it-title">' + title + "</div>" + where + note
-      + '<div class="it-meta">Added by ' + esc(it.added_by_name || "someone") + "</div>"
-      + '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
+      + (social && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
+      + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
       + '" aria-label="' + (it.you_voted ? "You’re in. Tap to undo" : "I’m in") + '">👍 <span>' + (it.you_voted ? "You’re in" : "I’m in")
       + '</span><span class="n">' + voters.length + "</span></button>"
-      + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>"
+      + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
       + '<div class="it-foot">'
-      + '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
-      + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
-      + (isWinner ? '<button type="button" class="linkish" data-act="unpick">Unpick</button>'
-        : '<button type="button" class="linkish" data-act="pick">Make this the plan</button>')
+      + (social ? '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
+        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
+        + (isWinner ? '<button type="button" class="linkish" data-act="unpick">Unpick</button>'
+          : '<button type="button" class="linkish" data-act="pick">Make this the plan</button>') : "")
       + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
       + (cmtOpen ? commentsHtml(it) : "")
       + "</div>" + img + "</article>";
@@ -358,9 +372,13 @@
   }
 
   function logText(e) {
-    const a = e.actor_name || "Someone", t = e.item_title ? "“" + e.item_title + "”" : "an item";
+    // Unnamed writes (made before a name was set): on your own collection
+    // they're almost certainly yours; to anyone else, "Someone".
+    const a = e.actor_name || (view.canvas.yours ? "You" : "Someone");
+    const t = e.item_title ? "“" + e.item_title + "”" : "an item";
     switch (e.action) {
-      case "created": return a + " made this canvas";
+      case "created": return a + " started this collection";
+      case "duplicated": return a + " made this as a copy of “" + (e.name || "a collection") + "”";
       case "added": return a + " added " + t;
       case "removed": return a + " removed " + t;
       case "restored": return a + " restored " + t;
@@ -369,7 +387,7 @@
       case "deleted_comment": return a + " deleted a comment on " + t;
       case "picked_winner": return a + " made " + t + " the plan";
       case "cleared_winner": return a + " cleared the plan";
-      case "renamed": return a + " renamed the canvas" + (e.name ? " to “" + e.name + "”" : "");
+      case "renamed": return a + " renamed the collection" + (e.name ? " to “" + e.name + "”" : "");
       case "edited_note": return a + " edited the note";
       case "set_dates": return a + " changed the dates";
       default: return a + " made a change";
@@ -428,6 +446,43 @@
     return n || null;
   }
 
+  // Share: a collection already shared goes straight to the share sheet.
+  // One you've been curating alone asks first: share it as-is (friends add
+  // and vote on it), or share a copy (theirs to change; yours stays yours).
+  async function shareFlow() {
+    const c = view.canvas;
+    if (isSocial(c)) return AC.share(location.href, c.name);
+    const how = await AC.choiceDialog({
+      title: "Share “" + c.name + "”",
+      options: [
+        {value: "this", label: "Share this collection",
+         desc: "Friends can add events, 👍 the ones they’re up for and comment. Good for making plans together."},
+        {value: "copy", label: "Share a copy",
+         desc: "They get their own copy to change. Yours stays just as it is."},
+      ]});
+    if (how === "this") {
+      if (!await named()) return;  // friends will see who's who
+      AC.markShared(c.id);
+      render();
+      return AC.share(location.href, c.name);
+    }
+    if (how !== "copy") return;
+    let copy;
+    try {
+      copy = (await AC.api("POST", P("/duplicate"), {actor_name: me()})).canvas;
+    } catch (e) {
+      return AC.toast(e.message);
+    }
+    AC.rememberCanvas(Object.assign({}, copy, {name: copy.name + " (shared copy)"}));
+    // Browsers only open the share sheet straight after a tap, so ask for one.
+    const go = await AC.choiceDialog({
+      title: "Your copy is ready",
+      text: "Send this link. Whatever happens on the copy won’t touch your collection.",
+      options: [{value: "share", label: "Share the copy’s link"}],
+      cancel: "Close"});
+    if (go) AC.share(AC.canvasUrl(copy.id), copy.name);
+  }
+
   app.addEventListener("click", async (e) => {
     const el = e.target.closest("[data-act]");
     if (!el || el.tagName === "FORM") return;
@@ -437,19 +492,33 @@
     const it = view && view.items.find(i => i.id === id);
     switch (el.dataset.act) {
       case "share":
-        return AC.share(location.href, view.canvas.name);
+        return shareFlow();
+      case "duplicate": {
+        const out = await AC.formDialog({title: "Duplicate",
+          text: "A new collection with the same events, dates and note, and no votes or comments.",
+          fields: [{name: "name", label: "Name", value: ("Copy of " + view.canvas.name).slice(0, 80),
+                    required: true, max: 80}],
+          submit: "Duplicate"});
+        if (!out) return;
+        try {
+          const r = await AC.api("POST", P("/duplicate"), {name: out.name, actor_name: me()});
+          AC.rememberCanvas(r.canvas);
+          location.href = AC.canvasPath(r.canvas.id);
+        } catch (err) { AC.toast(err.message); }
+        return;
+      }
       case "edit-name": {
-        const out = await AC.formDialog({title: "Rename canvas", fields: [
+        const out = await AC.formDialog({title: "Rename collection", fields: [
           {name: "name", label: "Name", value: view.canvas.name, required: true, max: 80}]});
         if (!out || out.name === view.canvas.name) return;
-        const who = await named(); if (!who) return;
+        const who = me();
         return act(() => AC.api("PATCH", P(), {name: out.name, actor_name: who}));
       }
       case "edit-note": {
         const out = await AC.formDialog({title: "Note", fields: [
-          {name: "note", label: "Note for everyone", type: "textarea", value: view.canvas.note, max: 1000}]});
+          {name: "note", label: "Note", type: "textarea", value: view.canvas.note, max: 1000}]});
         if (!out || out.note === (view.canvas.note || "")) return;
-        const who = await named(); if (!who) return;
+        const who = me();
         return act(() => AC.api("PATCH", P(), {note: out.note, actor_name: who}));
       }
       case "edit-dates": {
@@ -458,7 +527,7 @@
           {name: "date_to", label: "To", type: "date", value: view.canvas.date_to}],
           validate: (v) => v.date_from && v.date_to && v.date_from > v.date_to ? "The end date is before the start date." : ""});
         if (!out) return;
-        const who = await named(); if (!who) return;
+        const who = me();
         return act(() => AC.api("PATCH", P(), {date_from: out.date_from || null,
           date_to: out.date_to || null, actor_name: who}));
       }
@@ -476,7 +545,7 @@
           validate: (v) => v.url && !/^https?:\/\/\S+\.\S+/i.test(v.url) && !/^\S+\.\S+$/.test(v.url)
             ? "That link doesn’t look right." : ""});
         if (!out) return;
-        const who = await named(); if (!who) return;
+        const who = me();
         const custom = {title: out.title};
         if (out.start) custom.start_time = new Date(out.start).toISOString();
         if (out.url) custom.url = /^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url;
@@ -496,23 +565,23 @@
         if (openComments.has(id)) app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input')?.focus();
         return;
       case "del-comment": {
-        const who = await named(); if (!who) return;
+        const who = me();
         return act(() => AC.api("DELETE", itemP(id, "/comments/" + encodeURIComponent(el.dataset.cmid)), {actor_name: who}));
       }
       case "pick": case "unpick": {
-        const who = await named(); if (!who) return;
+        const who = me();
         return act(() => AC.api("PATCH", P(), {winner_item_id: el.dataset.act === "pick" ? id : null, actor_name: who}));
       }
       case "remove": {
         if (!it) return;
-        const who = await named(); if (!who) return;
+        const who = me();
         await act(() => AC.api("DELETE", itemP(id), {actor_name: who}));
         AC.toast("Removed “" + titleOf(it) + "”", {label: "Undo",
           run: () => act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}))});
         return;
       }
       case "restore": {
-        const who = await named(); if (!who) return;
+        const who = me();
         return act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}));
       }
       case "ics":
@@ -566,18 +635,18 @@
     addEventListener(ev, () => { lastInteraction = Date.now(); }, {passive: true});
   }
 
-  // ======================= "Your canvases" =======================
+  // ======================= "Your collections" =======================
   function renderHome() {
     const mine = AC.myCanvases();
-    document.title = "Your canvases — Agora";
-    app.innerHTML = '<section class="home"><h1>Plan with friends</h1>'
-      + "<p>Make a canvas, add events to it, and send the link. Anyone with the link can add events and 👍 the ones they’re up for.</p>"
-      + '<button type="button" class="btn primary" id="new-canvas">New canvas</button>'
+    document.title = "Your collections — Agora";
+    app.innerHTML = '<section class="home"><h1>Your collections</h1>'
+      + "<p>Save events that interest you, or plan something with friends: add events to a collection, then share its link if you like.</p>"
+      + '<button type="button" class="btn primary" id="new-canvas">Start a collection</button>'
       + (mine.length
         ? '<ul class="mine">' + mine.map(c => '<li><a href="' + esc(AC.canvasPath(c.id)) + '">' + esc(c.name)
           + (datesText(c) ? '<span class="sub">' + esc(datesText(c)) + "</span>" : "") + "</a>"
           + '<button type="button" class="linkish" data-forget="' + esc(c.id) + '">Hide</button></li>').join("") + "</ul>"
-        : '<p style="margin-top:18px">Canvases you make or open on this device show up here.</p>')
+        : '<p style="margin-top:18px">Collections you start or open on this device show up here.</p>')
       + "</section>";
     document.getElementById("new-canvas").addEventListener("click", async () => {
       try {

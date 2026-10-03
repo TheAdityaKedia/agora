@@ -64,7 +64,8 @@
     padding: 20px 0 6px;
     display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
   }
-  /* "Plan with friends": start a canvas (canvas.html) and add events to it. */
+  /* "Start a collection" (a canvas, canvas.html): save events for yourself
+     or plan with friends. */
   .plan { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: 0 0 auto; }
   .plan-btn {
     padding: 7px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap;
@@ -509,8 +510,9 @@
     <div class="subtitle">Events around the Bay, in one calendar.</div>
   </div>
   <div class="plan" id="plan" hidden>
-    <button type="button" class="plan-btn" id="plan-btn">Plan with friends</button>
-    <a href="./canvas.html">Your canvases</a>
+    <button type="button" class="plan-btn" id="plan-btn"
+            title="Save events that interest you, or plan with friends">Start a collection</button>
+    <a href="./canvas.html">Your collections</a>
   </div>
 </header>
 
@@ -607,7 +609,7 @@
     </div>
   </div>
 </main>
-<div class="canvas-tray" id="canvas-tray" role="region" aria-label="Canvas you're adding to" hidden></div>
+<div class="canvas-tray" id="canvas-tray" role="region" aria-label="Collection you're adding to" hidden></div>
 
 <script src="./vendor/minisearch-6.3.0.min.js"></script>
 <script src="./canvas-client.js"></script>
@@ -1940,7 +1942,7 @@
       setDateRange(c.date_from ? new Date(c.date_from + "T00:00:00") : null,
                    c.date_to ? new Date(c.date_to + "T00:00:00") : null);
     }
-    AC.toast("Canvas made. Tap + Add on the events you like.");
+    AC.toast("Collection started. Tap + Add on events that interest you.");
   }
   function endCanvasMode() {
     canvasMode = null;
@@ -1950,8 +1952,7 @@
   }
   async function toggleInCanvas(ev, btn) {
     if (!canvasMode || !ev) return;
-    const who = await AC.ensureName();
-    if (!who) return;
+    const who = AC.currentName();  // no prompt: adding is curating
     const itemId = canvasItemId(ev);
     btn.disabled = true;
     try {
@@ -1973,7 +1974,7 @@
     trayEl.hidden = !canvasMode;
     trayEl.innerHTML = canvasMode
       ? '<span class="tray-label">Adding to <b>' + escapeHtml(canvasMode.name) + "</b> · "
-        + canvasMode.count + (canvasMode.count === 1 ? " option" : " options") + "</span>"
+        + canvasMode.count + (canvasMode.count === 1 ? " item" : " items") + "</span>"
         + '<a href="' + escapeHtml(AC.canvasPath(canvasMode.id)) + '">View</a>'
         + '<button type="button" data-tray-done>Done</button>'
       : "";
