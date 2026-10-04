@@ -4,7 +4,7 @@ Starts the API locally (moto, snapshots from frontend/events.json) and a
 static server for frontend/, then plays two friends in separate browser
 contexts: Adi makes a canvas on the main page and adds events in canvas
 mode; Sam opens the link, votes and comments; Adi sees it, removes + undoes,
-picks the plan, adds a custom item. Fails on any page error.
+builds and reorders the plan, adds a custom item. Fails on any page error.
 
     python canvas/scripts/e2e_frontend.py [--shots DIR]
 
@@ -125,7 +125,7 @@ def run(shots):
         canvas_url = a.url
         # Just Adi so far: a plain list, no votes, comments or plan.
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        expect(a.locator('[data-act="pick"]')).to_have_count(0)
+        expect(a.locator('[data-act="plan-add"]')).to_have_count(0)
         if shots:
             a.screenshot(path=f"{shots}/2-personal.png", full_page=True)
         # Share it as-is: now it asks Adi's name, and the social parts appear.
@@ -169,12 +169,15 @@ def run(shots):
         expect(a.locator(".item")).to_have_count(1)
         a.locator(".ac-toast button", has_text="Undo").click()
         expect(a.locator(".item")).to_have_count(2)
-        first.locator('[data-act="pick"]').click()
-        expect(a.locator(".winner")).to_contain_text("The plan")
+        expect(first.locator('[data-act="vote"]')).to_contain_text("Interested")
+        first.locator('[data-act="plan-add"]').click()
+        expect(a.locator(".plan")).to_contain_text("The plan")
         a.click('[data-act="add-custom"]')
         answer_dialog(a, title="Dinner at Nopa", url="nopasf.com")
         expect(a.locator(".item")).to_have_count(3)
         expect(a.locator(".item", has_text="Dinner at Nopa").locator(".when")).to_contain_text("Any time")
+        # Your own items: a card with a kind icon (Food is preselected).
+        expect(a.locator(".item.custom", has_text="Dinner at Nopa").locator(".thumb.kind")).to_have_attribute("aria-label", "Food")
         a.locator("details.fold summary", has_text="Activity").click()
         # Your own changes read "You"; friends see your name.
         expect(a.locator("details.fold li").first).to_contain_text("You added “Dinner at Nopa”")
@@ -186,6 +189,18 @@ def run(shots):
         expect(s.locator(".item")).to_have_count(3)
         s.locator("details.fold summary", has_text="Activity").click()
         expect(s.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+
+        # --- The plan has steps in order: dinner (undated, so last) moves first.
+        a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="plan-add"]').click()
+        steps = a.locator(".plan .step")
+        expect(steps).to_have_count(2)
+        expect(steps.nth(1)).to_contain_text("Dinner at Nopa")
+        steps.nth(1).locator('[data-act="plan-up"]').click()
+        expect(steps.nth(0)).to_contain_text("Dinner at Nopa")
+        a.reload()
+        expect(a.locator(".plan .step").nth(0)).to_contain_text("Dinner at Nopa")
+        expect(a.locator(".plan .step").nth(0).locator('[data-act="plan-up"]')).to_be_disabled()
+        expect(a.locator(".item", has_text="Dinner at Nopa").locator(".badge", has_text="In the plan")).to_have_count(1)
 
         # --- Sam removes an event: Adi's Activity says who, which showing
         # (its date), and offers Restore right there (no separate list).
@@ -204,17 +219,19 @@ def run(shots):
         expect(a.locator("details.fold summary")).to_have_text("Activity")
         expect(a.locator("details.fold li").first).to_contain_text(f"You restored “{gone_title}”")
 
-        # Removing the plan, or what others are in on, asks first.
+        # Removing what's in the plan, or what others are interested in, asks first.
         s.reload()
         plan = s.locator(".item").first
         plan.locator('[data-act="remove"]').click()
         dlg = s.locator("dialog[open]")
-        expect(dlg).to_contain_text("It’s the plan right now")
-        expect(dlg).to_contain_text("Adi is in on this.")
+        expect(dlg).to_contain_text("It’s in the plan")
+        expect(dlg).to_contain_text("Adi is interested.")
         dlg.locator("button", has_text="Keep it").click()
         expect(s.locator(".item")).to_have_count(3)
         # Your own vote and comments alone don't: a one-tap remove with Undo.
         nopa = s.locator(".item", has_text="Dinner at Nopa")
+        nopa.locator('[data-act="plan-remove"]').click()  # (in the plan, it would ask)
+        expect(s.locator(".plan .step")).to_have_count(1)
         nopa.locator('[data-act="vote"]').click()
         expect(nopa.locator(".voters")).to_have_text("Sam")
         nopa.locator('[data-act="remove"]').click()
@@ -229,7 +246,7 @@ def run(shots):
         expect(a.locator(".cv-name")).to_have_text("Adi's weekend ideas")
         expect(a.locator(".item")).to_have_count(3)
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        expect(a.locator(".winner")).to_have_count(0)
+        expect(a.locator(".plan")).to_have_count(0)
         dup_url = a.url
         # A link copied from the address bar lets a new browser in.
         assert "beta=1" in dup_url, dup_url

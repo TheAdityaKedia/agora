@@ -18,7 +18,7 @@ uses with one model:
 
 - **Social parts appear only once a collection is shared.** A collection you
   started and nobody else has touched is a plain list (events, Remove,
-  Duplicate). Votes, comments, "Make this the plan", "Added by" and the plan
+  Duplicate). Votes ("Interested"), comments, "Add to plan", "Added by" and the plan
   box appear when any of: you opened someone else's link (`canvas.yours` is
   false), more than one browser has done something on it (`canvas.people >
   1`, counted server-side from creator / item adders / voters / commenters —
@@ -83,9 +83,10 @@ The flow:
 2. Adi browses Agora as usual; every event card has **+ Add**. A tray shows
    the canvas filling up.
 3. Adi texts the canvas link to Sam.
-4. Sam opens it on a phone, 👍s the two that work ("Sam ✓"), adds one more,
-   and comments "free after 7".
-5. Someone marks the winner; it pins to the top with an add-to-calendar link.
+4. Sam opens it on a phone, marks the two that look good 👍 **Interested**,
+   adds dinner before (one of their own items), and comments "free after 7".
+5. They **Add to plan** the show and the dinner; the plan pins to the top as
+   numbered steps (moved with ↑/↓), with an add-to-calendar button.
 
 ## Goal & non-goals
 
@@ -94,8 +95,10 @@ The flow:
 - Add Agora events (from the main site, in "active canvas" mode) and custom
   items (free text + optional link + optional time) not in Agora.
 - **Anyone with the link can edit**: add, remove, restore, rename, edit the
-  note, pick the winner. One link, no roles.
-- Named 👍 votes: one per browser per item, shown as names.
+  note, build and reorder the plan. One link, no roles.
+- Named 👍 **Interested** votes: one per browser per item, shown as names.
+  ("Interested", not "I'm in": the collection is for deciding what looks
+  good; you're in once the plan is settled.)
 - Short named comments per item.
 - Soft delete + restore, an activity log, per-IP rate limits.
 - "My canvases" remembered in the browser.
@@ -166,8 +169,11 @@ only free-form content, and they carry no image.
 
 ### 5. Concurrency: per-row writes + a canvas version
 Items, votes and comments are separate rows, so two people adding/voting at
-once never conflict. Canvas-level fields (name, note, dates, winner) are
-last-write-wins and every change lands in the activity log. Every write also
+once never conflict. Canvas-level fields (name, note, dates) are
+last-write-wins and every change lands in the activity log. The plan is
+changed one step at a time (add / remove / move), each a read-modify-write
+conditioned on `META.version` and retried on conflict, so two people editing
+it at once don't overwrite each other. Every write also
 bumps `META.version` in the same DynamoDB transaction; polling compares
 versions so an unchanged canvas costs one tiny read.
 
@@ -190,15 +196,25 @@ versions so an unchanged canvas costs one tiny read.
 ### 7. Canvas page UX (mobile-first)
 - Header: name (tap to edit), date range, note (tap to edit), **Share**
   (`navigator.share` on phones, copy-link fallback), **Browse events to add**.
-- Winner (if set) pinned on top with **Add to calendar** (client-generated
-  `.ics` + Google Calendar link).
+- **The plan** (if any steps) pinned on top: numbered steps in the group's
+  order, each with time (just the time when every dated step is on one day,
+  which is said once), title (your own items with their kind icon), place,
+  a Google Calendar link, **Take out**, and ↑/↓ to move it. **Add the plan
+  to your calendar** downloads one `.ics` with every dated step. A newly
+  added step goes before the first step that starts later (undated: last),
+  so a dated plan starts in time order; people can then move steps.
 - Items sorted by start time; undated custom items last. Each item: snapshot
-  card, **👍 N** with names ("Adi, Sam"), comment count (expands), overflow
-  menu (Mark as winner, Remove).
+  card, **👍 Interested N** with names ("Adi, Sam"), comment count
+  (expands), **Add to plan** / **Take out of plan** (an "In the plan" badge
+  when it's in), Remove.
+- Your own items (not Agora events) look different: a tinted card with a
+  dashed edge, an icon for their kind (🍽️ Food, 🍸 Drinks, 🌳 Outdoors,
+  🚗 Getting there, 📌 Other; picked with chips in **Add your own**) in the
+  image's place, and a pill: "Added by <name>" once shared, else "Your own".
 - Remove = soft delete with an "Undo" toast. On a shared collection it asks
   for your name first (once), so others see who removed what. Removing the
   plan, or an item others have 👍'd or commented on, asks to confirm first
-  ("It’s the plan right now…", "Sam and Jo are in on this."); your own
+  ("It’s in the plan…", "Sam and Jo are interested."); your own
   votes and comments alone don't.
 - Collapsed "Activity · N removed" list (last 50 entries), which also holds
   removals: the latest removal of a still-removed item carries **Restore**
@@ -250,7 +266,7 @@ more (newest 50) on `L#<id>` returns the log.
 
 | PK | SK | Attributes |
 |----|----|-----------|
-| `C#<canvasId>` | `META` | `name, note, date_from, date_to, winner_item_id, version, created_at, created_by_client, created_by_name, updated_at` |
+| `C#<canvasId>` | `META` | `name, note, date_from, date_to, plan (list of item ids), version, created_at, created_by_client, created_by_name, updated_at` |
 | `C#<canvasId>` | `ITEM#<itemId>` | `kind` (`event`\|`custom`), `snapshot` (event) or `title, url, start_time, note` (custom), `added_by_name, added_by_client, added_at, removed_at?, removed_by_name?` |
 | `C#<canvasId>` | `VOTE#<itemId>#<clientId>` | `name, at` |
 | `C#<canvasId>` | `CMT#<itemId>#<commentId>` | `name, client_id, text, at, removed_at?` |
@@ -282,8 +298,9 @@ only.
 | `POST /canvases/{id}/duplicate` | `{name?, actor_name?}` | `201` the new canvas's full view (counts against the create rate limit) |
 | `GET /canvases/{id}` | — | `{canvas (incl. version, yours, people), items[] (with votes[], you_voted, comments[]), removed[], log[]}` |
 | `GET /canvases/{id}?if_version=N` | — | `200 {unchanged:true, version}` if unchanged (reads only `META`); else the full view. Not a `304`: browsers handle an unsolicited 304 inconsistently in `fetch`. |
-| `PATCH /canvases/{id}` | any of `{name, note, date_from, date_to, winner_item_id}` + `actor_name` | `{canvas}` |
-| `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?}}` + `actor_name` | `201 {item, created:true}`; `200 {item, created:false}` if the event was already there |
+| `PATCH /canvases/{id}` | any of `{name, note, date_from, date_to}` + `actor_name` | `{canvas}` |
+| `POST /canvases/{id}/plan` | `{op: add\|remove\|move, item_id, to?}` + `actor_name` | `{plan: [itemId…]}` (`to` = new position, 0 first; add/remove of what's already there is a no-op; at most 20 steps) |
+| `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?, category?}}` (category: food, drinks, outdoors, travel, other) + `actor_name` | `201 {item, created:true}`; `200 {item, created:false}` if the event was already there |
 | `DELETE /canvases/{id}/items/{itemId}` | `{actor_name}` | soft delete |
 | `POST /canvases/{id}/items/{itemId}/restore` | `{actor_name}` | restore |
 | `PUT /canvases/{id}/items/{itemId}/vote` | `{name}` | upsert this client's vote |
@@ -296,8 +313,11 @@ only.
 Errors: `400` validation, `404` unknown canvas/item/event, `409` item cap,
 `413` body over 16 KB, `429` rate limit (with `Retry-After`), `503` manifest
 unreachable. Every write is one `TransactWriteItems`: the change +
-`META.version += 1` + a log row (un-voting writes no log row). Removing the
-winner item clears `winner_item_id`.
+`META.version += 1` + a log row (un-voting writes no log row). Removing an
+item takes it out of the plan in the same write (restoring doesn't put it
+back). `canvas.plan` is the ordered list of live item ids; collections from
+before multi-step plans had one `winner_item_id`, read as a one-step plan
+and replaced by `plan` on the next plan change.
 
 ## Code layout
 
@@ -337,7 +357,7 @@ points at dev or a local server.
 
 1. **Backend** — `canvas/` handler + CDK stacks + moto tests; deploy the
    `dev` stack from the branch; smoke-test with curl.
-2. **Canvas page** — `canvas.html`: view, vote, comments, note, winner +
+2. **Canvas page** — `canvas.html`: view, vote, comments, note, plan +
    calendar, custom items, remove/restore, activity, polling.
 3. **Main-site integration** — Plan-with-friends create flow, active-canvas
    mode (+ Add, tray, date filter, URL state), my-canvases menu.
@@ -361,7 +381,7 @@ first since nothing calls it.
   handler behind a tiny local HTTP adapter with moto. Script the whole story:
   create canvas → add 2 events in canvas mode → open `canvas.html` → name
   prompt → vote → second browser context votes as another name → reload shows
-  both names; remove + undo; mark winner. Fail on any `pageerror`. Also load
+  both names; remove + undo; build and reorder the plan. Fail on any `pageerror`. Also load
   `index.html?canvas=<id>&q=jazz` to catch TDZ/"stuck on Loading…" regressions.
 - **Mobile viewport** (390×844) screenshot check of `canvas.html`.
 - **Post-deploy smoke** against `dev`: create → add → vote → get.

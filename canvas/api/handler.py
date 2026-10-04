@@ -160,8 +160,8 @@ def _item_start(row):
 
 def _canvas_out(meta, client=""):
     out = {k: meta.get(k) for k in ("id", "name", "note", "date_from", "date_to",
-                                    "winner_item_id", "created_at", "updated_at",
-                                    "created_by_name")}
+                                    "created_at", "updated_at", "created_by_name")}
+    out["plan"] = store.plan_of(meta)
     out["version"] = int(meta["version"])
     # Whether this browser made it or claimed it ("This is mine" on another
     # device). Never returns the ids themselves.
@@ -243,6 +243,8 @@ def _view(cid, client):
     people.discard(None)
     people = {"owner" if p in owners else p for p in people}
     canvas = _canvas_out(meta, client)
+    live_ids = {i["id"] for i in live}
+    canvas["plan"] = [x for x in canvas["plan"] if x in live_ids]
     canvas["people"] = len(people)
     return {"canvas": canvas, "items": live, "removed": removed, "log": log_out}
 
@@ -319,7 +321,7 @@ def patch_canvas(req, cid):
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
-    fields, winner_title = {}, None
+    fields = {}
     if "name" in b:
         fields["name"] = _clean(b["name"], "name", LIMITS["canvas_name"])
     if "note" in b:
@@ -332,19 +334,12 @@ def patch_canvas(req, cid):
     if "date_from" in fields or "date_to" in fields:
         _check_dates(fields.get("date_from", meta.get("date_from")),
                      fields.get("date_to", meta.get("date_to")))
-    if "winner_item_id" in b:
-        wid = b["winner_item_id"]
-        if wid is not None and not (isinstance(wid, str) and ITEM_ID_RE.fullmatch(wid)):
-            raise ApiError(400, "winner_item_id must be an item id or null")
-        if wid:
-            winner_title = _item_title(_item_or_404(cid, wid))
-        fields["winner_item_id"] = wid
     if not fields:
         raise ApiError(400, "nothing to update")
     try:
-        store.update_canvas(cid, fields, actor, client, winner_title)
-    except store.NotFound as e:
-        raise ApiError(404, f"{e} not found") from None
+        store.update_canvas(cid, fields, actor, client)
+    except store.NotFound:
+        raise ApiError(404, "canvas not found") from None
     return 200, {"canvas": _canvas_out(_meta_or_404(cid), req["client"])}
 
 
@@ -402,11 +397,90 @@ def remove_item(req, cid, iid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
-    meta = _meta_or_404(cid)
     row = _item_or_404(cid, iid, live=False)
-    store.remove_item(cid, iid, actor, client, _item_title(row),
-                      clear_winner=meta.get("winner_item_id") == iid)
+
+    def attempt():
+        meta = _meta_or_404(cid)
+        plan = store.plan_of(meta)
+        store.remove_item(cid, iid, actor, client, _item_title(row),
+                          plan_after=[x for x in plan if x != iid] if iid in plan else None,
+                          expected_version=meta["version"])
+    _retry_conflicts(attempt)
     return 200, {"ok": True}
+
+
+def _retry_conflicts(fn, tries=3):
+    """Run a read-modify-write that raises store.Conflict when the canvas
+    changed between the read and the write; re-read and retry a few times."""
+    for i in range(tries):
+        try:
+            return fn()
+        except store.Conflict:
+            if i == tries - 1:
+                raise ApiError(409, "conflicting edit, try again") from None
+        except store.NotFound as e:
+            raise ApiError(404, f"{e} not found") from None
+
+
+def _plan_insert(plan, iid, rows):
+    """Where a newly added step goes: before the first step that starts later,
+    so a dated plan stays in time order; undated steps go last. People can
+    move steps afterwards."""
+    start = _item_start(rows[iid])
+    if start:
+        for i, pid in enumerate(plan):
+            s = _item_start(rows[pid]) if pid in rows else None
+            if s and s > start:
+                return plan[:i] + [iid] + plan[i:]
+    return plan + [iid]
+
+
+def post_plan(req, cid):
+    """{op: add|remove|move, item_id, to?}: change the plan one step at a time,
+    so two people editing it at once don't overwrite each other."""
+    client = _require_client(req)
+    b = req["body"]
+    _rate_limit(req, WRITE_LIMIT)
+    actor = _actor(b)
+    op, iid = b.get("op"), b.get("item_id")
+    if op not in ("add", "remove", "move"):
+        raise ApiError(400, "op must be add, remove or move")
+    if not (isinstance(iid, str) and ITEM_ID_RE.fullmatch(iid)):
+        raise ApiError(400, "item_id is malformed")
+    to = b.get("to")
+    if op == "move" and not (isinstance(to, int) and not isinstance(to, bool)):
+        raise ApiError(400, "to must be a position (0 is first)")
+
+    def attempt():
+        loaded = store.load_canvas(cid)
+        if loaded is None:
+            raise ApiError(404, "canvas not found")
+        meta, rows, _ = loaded
+        items = {r["id"]: r for r in rows if r["SK"].startswith("ITEM#") and "removed_at" not in r}
+        plan = [x for x in store.plan_of(meta) if x in items]
+        if op == "add":
+            if iid not in items:
+                raise ApiError(404, "item not found")
+            if iid in plan:
+                return plan
+            if len(plan) >= store.PLAN_CAP:
+                raise ApiError(409, f"a plan has at most {store.PLAN_CAP} steps")
+            new, action = _plan_insert(plan, iid, items), "added_to_plan"
+        elif iid not in plan:
+            if op == "remove":
+                return plan
+            raise ApiError(404, "item is not in the plan")
+        elif op == "remove":
+            new, action = [x for x in plan if x != iid], "removed_from_plan"
+        else:
+            new = [x for x in plan if x != iid]
+            new.insert(max(0, min(to, len(new))), iid)
+            if new == plan:
+                return plan
+            action = "moved_in_plan"
+        store.set_plan(cid, new, meta["version"], actor, client, action, iid, _item_title(items[iid]))
+        return new
+    return 200, {"plan": _retry_conflicts(attempt)}
 
 
 def restore_item(req, cid, iid):
@@ -477,6 +551,7 @@ ROUTES = [
     (re.compile(r"^/canvases$"), {"POST": create_canvas}),
     (re.compile(rf"^/canvases/{CID}$"), {"GET": get_canvas, "PATCH": patch_canvas}),
     (re.compile(rf"^/canvases/{CID}/duplicate$"), {"POST": duplicate_canvas}),
+    (re.compile(rf"^/canvases/{CID}/plan$"), {"POST": post_plan}),
     (re.compile(rf"^/canvases/{CID}/claim$"), {"POST": claim_canvas, "DELETE": claim_canvas}),
     (re.compile(rf"^/canvases/{CID}/items$"), {"POST": add_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"DELETE": remove_item}),

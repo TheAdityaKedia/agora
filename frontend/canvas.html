@@ -94,18 +94,42 @@
   .btn:hover { border-color: var(--accent); }
   .btn.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; }
 
-  /* --- The pick ("we're going to this one") --- */
-  .winner {
+  /* --- The plan: the steps the group settled on, in the order they'll do them --- */
+  .plan {
     margin: 18px 0 4px; padding: 14px; border-radius: 12px;
     border: 2px solid var(--accent); background: var(--input-bg);
   }
-  .winner-label {
+  .plan-label {
     font-family: var(--font-display); font-weight: 800; font-size: 18px;
     letter-spacing: 0.03em; color: var(--accent); text-transform: uppercase;
   }
-  .winner-title { font-size: 18px; font-weight: 600; margin-top: 2px; overflow-wrap: anywhere; }
-  .winner-when { color: var(--muted); font-size: 14px; }
-  .winner-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; align-items: center; }
+  .plan-day { color: var(--muted); font-size: 14px; }
+  .plan ol { list-style: none; margin: 6px 0 0; padding: 0; counter-reset: step; }
+  .step {
+    display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; column-gap: 10px;
+    padding: 10px 0; border-top: 1px solid var(--border); counter-increment: step;
+  }
+  .step:first-child { border-top: 0; }
+  .step::before {
+    content: counter(step); width: 24px; height: 24px; margin-top: 1px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 13px; font-weight: 700;
+    background: var(--accent); color: var(--accent-fg);
+  }
+  .step-body { min-width: 0; }
+  .step-when { font-family: var(--font-display); font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .step-title { font-weight: 600; overflow-wrap: anywhere; }
+  .step-title a { text-decoration: none; }
+  .step-title a:hover { color: var(--accent); text-decoration: underline; }
+  .step-where { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+  .step-links { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-top: 2px; font-size: 13px; }
+  .step-move { display: flex; flex-direction: column; gap: 4px; }
+  .step-move button {
+    width: 36px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 15px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--fg);
+  }
+  .step-move button:hover:not(:disabled) { border-color: var(--accent); }
+  .step-move button:disabled { opacity: 0.3; cursor: default; }
+  .plan-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; align-items: center; }
 
   /* --- Items --- */
   .section-h {
@@ -134,7 +158,7 @@
   .when { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1.1; }
   .when .badge {
     font-family: var(--font-body); font-size: 12px; font-weight: 600; vertical-align: middle;
-    margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+    margin-left: 6px; padding: 1px 7px; border-radius: 999px; display: inline-block; white-space: nowrap;
     background: var(--chip-bg); color: var(--muted);
   }
   .it-title { font-size: 17px; line-height: 1.3; margin-top: 4px; font-weight: 600; }
@@ -310,7 +334,7 @@
   function canvasHtml(v) {
     const c = v.canvas;
     const dates = datesText(c);
-    const winner = c.winner_item_id ? v.items.find(i => i.id === c.winner_item_id) : null;
+    const plan = (c.plan || []).map(id => v.items.find(i => i.id === id)).filter(Boolean);
     const name = AC.currentName();
     const social = isSocial(c);
     const isDefault = AC.defaultCanvasId() === c.id;
@@ -326,7 +350,7 @@
       + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
       + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
       + "</div>"
-      + (social && winner ? winnerHtml(winner) : "")
+      + (social && plan.length ? planHtml(plan) : "")
       + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
@@ -382,23 +406,23 @@
     const voters = it.votes.map(v => v.name);
     const social = isSocial(view.canvas);
     const cmtOpen = social && openComments.has(it.id);
-    const isWinner = social && view.canvas.winner_item_id === it.id;
+    const inPlan = social && (view.canvas.plan || []).includes(it.id);
     // Your own items say so: "Added by Sam" once others are involved, else "Your own".
     const ownBadge = own ? '<span class="badge own">' + (social ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
     return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
       + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
-      + ownBadge + (past ? '<span class="badge">Past</span>' : "") + (isWinner ? '<span class="badge">The plan</span>' : "") + "</div>"
+      + ownBadge + (past ? '<span class="badge">Past</span>' : "") + (inPlan ? '<span class="badge">In the plan</span>' : "") + "</div>"
       + '<div class="it-title">' + title + "</div>" + where + note
       + (social && !own && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
       + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
-      + '" aria-label="' + (it.you_voted ? "You’re in. Tap to undo" : "I’m in") + '">👍 <span>' + (it.you_voted ? "You’re in" : "I’m in")
+      + '" aria-label="' + (it.you_voted ? "You’re interested. Tap to undo" : "Interested") + '">👍 <span>Interested'
       + '</span><span class="n">' + voters.length + "</span></button>"
       + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
       + '<div class="it-foot">'
       + (social ? '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
         + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
-        + (isWinner ? '<button type="button" class="linkish" data-act="unpick">Unpick</button>'
-          : '<button type="button" class="linkish" data-act="pick">Make this the plan</button>') : "")
+        + (inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
+          : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>') : "")
       + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
       + (cmtOpen ? commentsHtml(it) : "")
       + "</div>" + img + "</article>";
@@ -414,17 +438,39 @@
       + '<button type="submit" class="btn">Post</button></form></div>';
   }
 
-  function winnerHtml(it) {
-    const start = startOf(it);
-    return '<section class="winner" aria-label="The plan"><div class="winner-label">The plan</div>'
-      + '<div class="winner-title">' + esc(titleOf(it)) + "</div>"
-      + '<div class="winner-when">' + esc([start ? whenFmt.format(start) : "", it.event && it.event.location].filter(Boolean).join(" · ")) + "</div>"
-      + '<div class="winner-actions">'
-      + (start ? '<a class="btn primary" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Add to Google Calendar</a>'
-        + '<button type="button" class="linkish" data-act="ics" data-id="' + esc(it.id) + '">Apple or Outlook (.ics)</button>' : "")
-      + (linkOf(it) ? '<a class="linkish" target="_blank" rel="noopener nofollow ugc" href="' + esc(linkOf(it)) + '">Details and tickets</a>' : "")
-      + "</div></section>";
+  // The plan: numbered steps in the group's order (↑/↓ to change it). When
+  // every dated step is on one day, the day is said once and steps show times.
+  const timeFmt = new Intl.DateTimeFormat(undefined, {hour: "numeric", minute: "2-digit"});
+  function planHtml(steps) {
+    const days = new Set(steps.map(startOf).filter(Boolean).map(d => dayFmt.format(d)));
+    const oneDay = days.size === 1 ? [...days][0] : null;
+    return '<section class="plan" aria-label="The plan"><div class="plan-label">The plan</div>'
+      + (oneDay ? '<div class="plan-day">' + esc(oneDay) + "</div>" : "")
+      + "<ol>" + steps.map((it, i) => stepHtml(it, i, steps.length, oneDay)).join("") + "</ol>"
+      + (steps.some(startOf) ? '<div class="plan-actions"><button type="button" class="btn primary" data-act="ics">'
+        + "Add the plan to your calendar</button></div>" : "")
+      + "</section>";
   }
+
+  function stepHtml(it, i, n, oneDay) {
+    const start = startOf(it), url = linkOf(it);
+    const when = start ? (oneDay ? timeFmt : whenFmt).format(start) : "Any time";
+    const title = (it.event ? "" : kindOf(it)[0] + " ") + (url
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
+      : esc(titleOf(it)));
+    return '<li class="step" data-id="' + esc(it.id) + '"><div class="step-body">'
+      + '<div class="step-when">' + esc(when) + "</div>"
+      + '<div class="step-title">' + title + "</div>"
+      + (it.event && it.event.location ? '<div class="step-where">' + esc(it.event.location) + "</div>" : "")
+      + '<div class="step-links">'
+      + (start ? '<a class="linkish" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Google Calendar</a>' : "")
+      + '<button type="button" class="linkish" data-act="plan-remove">Take out</button></div></div>'
+      + '<div class="step-move">'
+      + '<button type="button" data-act="plan-up" aria-label="Move earlier in the plan"' + (i === 0 ? " disabled" : "") + ">↑</button>"
+      + '<button type="button" data-act="plan-down" aria-label="Move later in the plan"' + (i === n - 1 ? " disabled" : "") + ">↓</button>"
+      + "</div></li>";
+  }
+
 
   // Activity, newest first. Removals live here too: the latest removal of
   // an item that's still removed carries its Restore button. Removals older
@@ -472,9 +518,12 @@
       case "added": return a + " added " + t;
       case "removed": return a + " removed " + t;
       case "restored": return a + " restored " + t;
-      case "voted": return a + " is in for " + t;
+      case "voted": return a + " is interested in " + t;
       case "commented": return a + " commented on " + t;
       case "deleted_comment": return a + " deleted a comment on " + t;
+      case "added_to_plan": return a + " added " + t + " to the plan";
+      case "removed_from_plan": return a + " took " + t + " out of the plan";
+      case "moved_in_plan": return a + " moved " + t + " in the plan";
       case "picked_winner": return a + " made " + t + " the plan";
       case "cleared_winner": return a + " cleared the plan";
       case "renamed": return a + " renamed the collection" + (e.name ? " to “" + e.name + "”" : "");
@@ -497,20 +546,25 @@
     if (it.event && it.event.location) p.set("location", it.event.location);
     return "https://calendar.google.com/calendar/render?" + p;
   }
-  function downloadIcs(it) {
+  // One .ics with every dated step of the plan (Apple, Outlook, Google import).
+  function downloadIcs(items) {
     const x = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&").replace(/\r?\n/g, "\\n");
-    const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
-    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Canvas//EN", "BEGIN:VEVENT",
-      "UID:" + cid + "-" + it.id + "@agora", "DTSTAMP:" + calStamp(new Date()),
-      "DTSTART:" + calStamp(s), "DTEND:" + calStamp(e), "SUMMARY:" + x(titleOf(it))];
-    if (it.event && it.event.location) lines.push("LOCATION:" + x(it.event.location));
-    lines.push("DESCRIPTION:" + x(calNotes(it)), "END:VEVENT", "END:VCALENDAR");
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Canvas//EN"];
+    for (const it of items.filter(startOf)) {
+      const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
+      lines.push("BEGIN:VEVENT", "UID:" + cid + "-" + it.id + "@agora", "DTSTAMP:" + calStamp(new Date()),
+        "DTSTART:" + calStamp(s), "DTEND:" + calStamp(e), "SUMMARY:" + x(titleOf(it)));
+      if (it.event && it.event.location) lines.push("LOCATION:" + x(it.event.location));
+      lines.push("DESCRIPTION:" + x(calNotes(it)), "END:VEVENT");
+    }
+    lines.push("END:VCALENDAR");
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([lines.join("\r\n") + "\r\n"], {type: "text/calendar;charset=utf-8"}));
-    a.download = (titleOf(it).replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60) || "plan") + ".ics";
+    a.download = (view.canvas.name.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60) || "plan") + ".ics";
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
   }
+
 
   // --- actions ---
   const P = (sub) => "/canvases/" + encodeURIComponent(cid) + (sub || "");
@@ -535,13 +589,13 @@
   // people's input or the plan: then say what goes with it and ask first.
   const listFmt = new Intl.ListFormat(undefined, {type: "conjunction"});
   async function confirmRemove(it) {
-    const isPlan = view.canvas.winner_item_id === it.id;
+    const isPlan = (view.canvas.plan || []).includes(it.id);
     const voters = (it.votes || []).filter(v => !v.mine).map(v => v.name);
     const nComments = (it.comments || []).filter(c => !c.mine).length;
     if (!isPlan && !voters.length && !nComments) return true;
     const lines = [];
-    if (isPlan) lines.push("It’s the plan right now. Removing it clears the plan for everyone.");
-    if (voters.length) lines.push(listFmt.format(voters) + (voters.length === 1 ? " is" : " are") + " in on this.");
+    if (isPlan) lines.push("It’s in the plan. Removing it takes it out of the plan for everyone.");
+    if (voters.length) lines.push(listFmt.format(voters) + (voters.length === 1 ? " is" : " are") + " interested.");
     if (nComments) lines.push("It has " + nComments + (nComments === 1 ? " comment" : " comments") + " from others.");
     return await AC.choiceDialog({
       title: "Remove “" + titleOf(it) + "”?",
@@ -596,7 +650,7 @@
     const el = e.target.closest("[data-act]");
     if (!el || el.tagName === "FORM") return;
     lastInteraction = Date.now();
-    const art = el.closest(".item");
+    const art = el.closest(".item, .step");
     const id = el.dataset.id || (art && art.dataset.id);
     const it = view && view.items.find(i => i.id === id);
     switch (el.dataset.act) {
@@ -679,9 +733,19 @@
         const who = me();
         return act(() => AC.api("DELETE", itemP(id, "/comments/" + encodeURIComponent(el.dataset.cmid)), {actor_name: who}));
       }
-      case "pick": case "unpick": {
+      case "plan-add": case "plan-remove": {
         const who = me();
-        return act(() => AC.api("PATCH", P(), {winner_item_id: el.dataset.act === "pick" ? id : null, actor_name: who}));
+        return act(() => AC.api("POST", P("/plan"),
+          {op: el.dataset.act === "plan-add" ? "add" : "remove", item_id: id, actor_name: who}));
+      }
+      case "plan-up": case "plan-down": {
+        // Move at once on screen; the refresh after the write confirms it.
+        const plan = view.canvas.plan, from = plan.indexOf(id);
+        const to = from + (el.dataset.act === "plan-up" ? -1 : 1);
+        if (from < 0 || to < 0 || to >= plan.length) return;
+        plan.splice(to, 0, plan.splice(from, 1)[0]);
+        render();
+        return act(() => AC.api("POST", P("/plan"), {op: "move", item_id: id, to, actor_name: me()}));
       }
       case "remove": {
         if (!it) return;
@@ -699,8 +763,7 @@
         return act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}));
       }
       case "ics":
-        if (it) downloadIcs(it);
-        return;
+        return downloadIcs((view.canvas.plan || []).map(pid => view.items.find(i => i.id === pid)).filter(Boolean));
       case "set-default":
         AC.setDefaultCanvas(cid);
         AC.toast("Saved events will go to “" + view.canvas.name + "” on this device.");

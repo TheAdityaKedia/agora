@@ -26,6 +26,7 @@ from botocore.exceptions import ClientError
 LIVE_ITEM_CAP = 100
 COMMENT_CAP = 1000
 LOG_READ_LIMIT = 50
+PLAN_CAP = 20
 
 _table = None
 
@@ -247,7 +248,7 @@ def set_owner(cid, client_id, on):
         raise CapReached(f"a collection can have at most {OWNER_CAP} owner devices") from None
 
 
-def update_canvas(cid, fields, actor_name, client_id=None, winner_title=None):
+def update_canvas(cid, fields, actor_name, client_id=None):
     """`fields` holds only keys being changed; a None value clears that key."""
     names, sets, removes, values, ops = {}, [], [], {}, []
     for i, (k, v) in enumerate(sorted(fields.items())):
@@ -259,22 +260,57 @@ def update_canvas(cid, fields, actor_name, client_id=None, winner_title=None):
             values[f":v{i}"] = v
     bump = _bump(cid, extra_set=", ".join(sets), extra_remove=", ".join(removes), values=values)
     bump["Update"]["ExpressionAttributeNames"] = names
-    if fields.get("winner_item_id"):
-        ops.append(_live_item_check(cid, fields["winner_item_id"]))
-    if "winner_item_id" in fields:
-        action = "picked_winner" if fields["winner_item_id"] else "cleared_winner"
-    elif "name" in fields:
+    if "name" in fields:
         action = "renamed"
     elif "note" in fields:
         action = "edited_note"
     else:
         action = "set_dates"
     log = _log_row(cid, actor_name, action, client_id, fields=sorted(fields),
-                   item_title=winner_title, name=fields.get("name"))
+                   name=fields.get("name"))
     try:
         _transact([bump, _put(log)] + ops)
+    except _TxFailed:
+        raise NotFound("canvas") from None
+
+
+def plan_of(meta):
+    """The plan: item ids in the order the group will do them. Collections
+    from before plans had steps kept one `winner_item_id`."""
+    if "plan" in meta:
+        return list(meta["plan"])
+    return [meta["winner_item_id"]] if meta.get("winner_item_id") else []
+
+
+def _plan_bump(cid, plan, expected_version, **kw):
+    """META update that replaces the plan, only if nobody else wrote since
+    `expected_version` (else Conflict: the caller re-reads and retries)."""
+    values = {":plan": plan, ":v": expected_version}
+    values.update(kw.pop("values", {}))
+    bump = _bump(cid, extra_set="#plan = :plan", extra_remove=", ".join(
+                     x for x in ("winner_item_id", kw.pop("extra_remove", "")) if x),
+                 condition="version = :v", values=values, **kw)
+    bump["Update"]["ExpressionAttributeNames"] = {"#plan": "plan"}
+    return bump
+
+
+def set_plan(cid, plan, expected_version, actor_name, client_id, action, item_id, title):
+    """Replace the plan (added_to_plan / removed_from_plan / moved_in_plan).
+    An item being added must still be live."""
+    ops = [_plan_bump(cid, plan, expected_version),
+           _put(_log_row(cid, actor_name, action, client_id, item_id=item_id, item_title=title))]
+    if action == "added_to_plan":
+        ops.append(_live_item_check(cid, item_id))
+    try:
+        _transact(ops)
     except _TxFailed as e:
-        raise NotFound("canvas" if e.failed(0) else "item") from None
+        if e.failed(0):
+            if get_meta(cid) is None:
+                raise NotFound("canvas") from None
+            raise Conflict() from None
+        if e.failed(2):
+            raise NotFound("item") from None
+        raise Conflict() from None
 
 
 def add_item(cid, item_id, body, actor_name, client_id, title):
@@ -307,8 +343,10 @@ def add_item(cid, item_id, body, actor_name, client_id, title):
         raise Conflict() from None
 
 
-def remove_item(cid, item_id, actor_name, client_id, title, clear_winner):
-    """Soft delete. Removing the winner clears it. No-op if already removed."""
+def remove_item(cid, item_id, actor_name, client_id, title, plan_after=None, expected_version=None):
+    """Soft delete. No-op if already removed. If the item is in the plan, pass
+    the plan without it (and the version it was read at): it leaves the plan
+    in the same write, or Conflict if the canvas changed meanwhile."""
     item_update = {"Update": {
         "TableName": table().name,
         "Key": {"PK": _pk(cid), "SK": f"ITEM#{item_id}"},
@@ -316,14 +354,18 @@ def remove_item(cid, item_id, actor_name, client_id, title, clear_winner):
         "ConditionExpression": "attribute_exists(PK) AND attribute_not_exists(removed_at)",
         "ExpressionAttributeValues": {":now": now_iso(), ":who": actor_name, ":client": client_id},
     }}
-    bump = _bump(cid, extra_add="item_count :neg",
-                 extra_remove="winner_item_id" if clear_winner else "",
-                 values={":neg": -1})
+    if plan_after is None:
+        bump = _bump(cid, extra_add="item_count :neg", values={":neg": -1})
+    else:
+        bump = _plan_bump(cid, plan_after, expected_version,
+                          extra_add="item_count :neg", values={":neg": -1})
     try:
         _transact([bump, _put(_log_row(cid, actor_name, "removed", client_id, item_id=item_id,
                                        item_title=title)), item_update])
     except _TxFailed as e:
         if e.failed(0):
+            if plan_after is not None and get_meta(cid) is not None:
+                raise Conflict() from None
             raise NotFound("canvas") from None
         if e.failed(2):
             return  # already removed (or a concurrent remove won)
