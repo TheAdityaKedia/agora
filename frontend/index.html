@@ -1696,6 +1696,10 @@
     }
     const canvasId = canvasMode ? canvasMode.id : canvasPending;
     if (canvasId) p.set("canvas", canvasId);
+    // Beta-only views keep ?beta=1 in the address bar, so a link copied from
+    // it (not only from Share) lets a friend in too. Harmless after launch.
+    if ((canvasId && AC && AC.BETA_GATE)
+        || (MAP_BETA_GATE && (view === "map" || selectedHoods.size))) p.set("beta", "1");
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
     if (location.pathname + location.search !== url) {
@@ -1792,9 +1796,14 @@
   copyEl.textContent = copyLabel;
   // A view that uses the map or neighborhoods goes through /beta/ while
   // they're gated (like collection links), so whoever opens it is let in.
-  const shareUrl = () => MAP_BETA_GATE && (view === "map" || selectedHoods.size)
-    ? new URL("beta/" + location.search + location.hash, new URL("./", location.href)).href
-    : location.href;
+  // (/beta/ itself adds beta=1, so the address bar's copy is dropped here.)
+  const shareUrl = () => {
+    if (!(MAP_BETA_GATE && (view === "map" || selectedHoods.size))) return location.href;
+    const q = new URLSearchParams(location.search);
+    q.delete("beta");
+    const qs = q.toString();
+    return new URL("beta/" + (qs ? "?" + qs : "") + location.hash, new URL("./", location.href)).href;
+  };
   copyEl.addEventListener("click", async () => {
     if (canShare) {
       try { await navigator.share({title: document.title, url: shareUrl()}); } catch {}

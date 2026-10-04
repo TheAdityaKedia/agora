@@ -216,6 +216,13 @@
       + '<a class="btn primary" href="./">Browse events on Agora</a></section>';
     return;
   }
+  // A beta browser keeps ?beta=1 in the address bar, so a link copied from
+  // it (not only one from Share) lets a friend in too. Harmless after launch.
+  if (AC.BETA_GATE && new URLSearchParams(location.search).get("beta") !== "1") {
+    const u = new URL(location.href);
+    u.searchParams.set("beta", "1");
+    history.replaceState(history.state, "", u);
+  }
 
   const esc = (s) => s == null ? "" : String(s).replace(/[&<>"']/g, c =>
     ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));

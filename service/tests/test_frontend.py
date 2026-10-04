@@ -920,6 +920,8 @@ def test_map_and_neighborhoods_are_beta_only(browser, map_site):
 
 def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
     page = _map_page(browser, map_site, query="?hood=mission")
+    # The address bar keeps beta=1, so a link copied from it works too.
+    assert "beta=1" in page.url
     page.context.grant_permissions(["clipboard-read", "clipboard-write"])
     page.click("#copy-link")
     link = page.evaluate("navigator.clipboard.readText()")

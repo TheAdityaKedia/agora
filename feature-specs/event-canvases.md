@@ -60,7 +60,9 @@ uses with one model:
   `frontend/beta/canvas.html` set a per-browser flag and redirect to the real
   page (`?beta=1`); without the flag the main page shows no collections UI
   and `canvas.html` shows a "private beta" notice. Links made during the beta
-  use `…/beta/canvas.html?c=`, so recipients get in. Launch = flip the
+  use `…/beta/canvas.html?c=`, so recipients get in; collection pages (and
+  canvas mode) also keep `?beta=1` in the address bar, so a link copied
+  from there works as well. Launch = flip the
   constant; the `/beta/` pages stay forever as redirects so beta-era links
   keep working (checked by flipping it in a scratch copy). See
   `canvas/README.md` → "Private beta".

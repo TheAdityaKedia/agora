@@ -144,7 +144,10 @@ def run(shots):
         cid0 = canvas_url.split("c=")[1].split("&")[0]
         share_url = a.evaluate(f"AgoraCanvas.canvasUrl('{cid0}')")
         assert "/beta/canvas.html?c=" in share_url, share_url
-        s.goto(canvas_url + f"&api={API}")
+        # Adi's address bar carries ?beta=1 too, so a copied link works; a
+        # bare page link (beta=1 dropped) shows the beta notice instead.
+        assert "beta=1" in canvas_url, canvas_url
+        s.goto(f"{WEB}/canvas.html?c={cid0}&api={API}")
         expect(s.locator("h1")).to_have_text("Collections are in private beta")
         s.goto(share_url + f"&api={API}")
         expect(s.locator(".item")).to_have_count(2)
@@ -228,6 +231,14 @@ def run(shots):
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
         expect(a.locator(".winner")).to_have_count(0)
         dup_url = a.url
+        # A link copied from the address bar lets a new browser in.
+        assert "beta=1" in dup_url, dup_url
+        jo = hermetic(browser.new_context(**phone))
+        j = jo.new_page()
+        watch(j, errors)
+        j.goto(dup_url + ("" if "api=" in dup_url else f"&api={API}"))
+        expect(j.locator(".item")).to_have_count(3)
+        jo.close()
 
         # --- Share a copy: Sam changes the copy; Adi's collection stays as is.
         a.click('[data-act="share"]')
