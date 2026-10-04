@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T17:56:03.129843+00:00",
+  "generated_at": "2026-10-04T15:33:55.360364+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -594,13 +594,6 @@
       "lng": -122.41811,
       "neighborhood": "mission"
     },
-    "3227-telegraph-ave": {
-      "name": "3227 Telegraph Ave",
-      "region": "eastbay",
-      "address": "3227 Telegraph Avenue, Oakland, CA 94609",
-      "lat": 37.82108,
-      "lng": -122.26648
-    },
     "333-el-camino-real": {
       "name": "333 El Camino Real",
       "region": "peninsula",
@@ -1131,14 +1124,6 @@
       "lng": -122.41985,
       "neighborhood": "hayes-valley"
     },
-    "dolores-park": {
-      "name": "Dolores Park",
-      "region": "sf",
-      "address": "566 Dolores Street, San Francisco, CA 94110",
-      "lat": 37.76042,
-      "lng": -122.42579,
-      "neighborhood": "mission"
-    },
     "dominican-university-of-california": {
       "name": "Dominican University of California",
       "region": "northbay",
@@ -1271,13 +1256,6 @@
       "lng": -122.43191,
       "neighborhood": "japantown"
     },
-    "first-congregational-united-church-of-christ": {
-      "name": "First Congregational United Church of Christ",
-      "region": "eastbay",
-      "address": "2501 Harrison Street, Oakland, CA 94612",
-      "lat": 37.81371,
-      "lng": -122.26149
-    },
     "first-presbyterian-church-of-oakland": {
       "name": "First Presbyterian Church of Oakland",
       "region": "eastbay",
@@ -1316,13 +1294,6 @@
       "lat": 37.75294,
       "lng": -122.41375,
       "neighborhood": "mission"
-    },
-    "gearbox-gallery": {
-      "name": "Gearbox Gallery",
-      "region": "eastbay",
-      "address": "770 West Grand Avenue, Oakland, CA 94612",
-      "lat": 37.81313,
-      "lng": -122.27557
     },
     "gilman-brewing-company": {
       "name": "Gilman Brewing Company",
@@ -1472,13 +1443,6 @@
       "lat": 37.72419,
       "lng": -122.4563,
       "neighborhood": "west-of-twin-peaks"
-    },
-    "instudio-with-empowerment-avenue": {
-      "name": "inStudio with Empowerment Avenue",
-      "region": "eastbay",
-      "address": "473 25th Street, Oakland, CA 94612",
-      "lat": 37.81442,
-      "lng": -122.26737
     },
     "internet-archive": {
       "name": "Internet Archive",
@@ -1991,14 +1955,6 @@
       "lng": -122.42552,
       "neighborhood": "hayes-valley"
     },
-    "palace-of-fine-arts": {
-      "name": "Palace of Fine Arts",
-      "region": "sf",
-      "address": "3601 Lyon Street, San Francisco, CA 94123",
-      "lat": 37.80456,
-      "lng": -122.44815,
-      "neighborhood": "marina"
-    },
     "palace-of-fine-arts-theatre": {
       "name": "Palace of Fine Arts Theatre",
       "region": "sf",
@@ -2281,14 +2237,6 @@
       "lat": 37.80286,
       "lng": -122.45927,
       "neighborhood": "presidio"
-    },
-    "st-gregory-of-nyssa-episcopal-church": {
-      "name": "St. Gregory of Nyssa Episcopal Church",
-      "region": "sf",
-      "address": "500 De Haro Street, San Francisco, CA 94107",
-      "lat": 37.76326,
-      "lng": -122.40173,
-      "neighborhood": "potrero-hill"
     },
     "st-josephs-art-society": {
       "name": "St. Joseph’s Art Society",
@@ -2618,14 +2566,6 @@
       "lng": -122.44553,
       "neighborhood": "haight-ashbury"
     },
-    "the-midway": {
-      "name": "The Midway",
-      "region": "sf",
-      "address": "900 Marin Street, San Francisco, CA 94124",
-      "lat": 37.74953,
-      "lng": -122.38609,
-      "neighborhood": "bayview-hunters-point"
-    },
     "the-mint-karaoke-lounge": {
       "name": "The Mint Karaoke Lounge",
       "region": "sf",
@@ -2752,13 +2692,6 @@
       "lat": 37.80687,
       "lng": -122.27188
     },
-    "transmission-gallery": {
-      "name": "Transmission Gallery",
-      "region": "eastbay",
-      "address": "770 W Grand Ave Ste A, Oakland, CA 94612",
-      "lat": 37.81313,
-      "lng": -122.27557
-    },
     "tupelo": {
       "name": "Tupelo",
       "region": "sf",
@@ -2870,13 +2803,6 @@
       "lng": -122.41715,
       "neighborhood": "bernal-heights"
     },
-    "wildcat-studio": {
-      "name": "Wildcat Studio",
-      "region": "eastbay",
-      "address": "2547 Eighth Street, Berkeley, CA 94710",
-      "lat": 37.85961,
-      "lng": -122.29261
-    },
     "ybca-screening-room": {
       "name": "YBCA Screening Room",
       "region": "sf",
@@ -2900,6 +2826,13 @@
       "lat": 37.79613,
       "lng": -122.27829
     },
+    "yummy-future-coffee": {
+      "name": "Yummy Future Coffee",
+      "region": "southbay",
+      "address": "170 University Avenue, Palo Alto, CA 94301",
+      "lat": 37.4443,
+      "lng": -122.16284
+    },
     "z-space": {
       "name": "Z Space",
       "region": "sf",
@@ -2915,3545 +2848,9 @@
       "lat": 37.78707,
       "lng": -122.3975,
       "neighborhood": "financial-district-south-beach"
-    },
-    "zore-law": {
-      "name": "Zore Law",
-      "region": "sf",
-      "address": "3150 18th Street, San Francisco, CA 94110",
-      "lat": 37.76238,
-      "lng": -122.41411,
-      "neighborhood": "mission"
     }
   },
   "events": [
-    {
-      "id": "819bfe1e-fb0a-4539-ad36-b45a1dbf386c",
-      "title": "The Room @ 11 PM",
-      "start_time": "2026-10-03T07:00:00+00:00",
-      "location": "Balboa Theatre, 3630 Balboa St, San Francisco, CA 94121",
-      "url": "https://www.balboamovies.com/calendar-of-events/the-room-october-3",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e038bb792dc0e9cf1381e/1702415643122-7FYEF1BB5SMWLRGDDFOR/thumbnail_TheRoomPosterPromo.jpg",
-      "sources": [
-        "Balboa Theatre"
-      ],
-      "types": [
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "film"
-      ],
-      "cost": "unknown",
-      "venue": "balboa-theatre",
-      "region": "sf",
-      "summary": "Johnny is a successful banker who lives happily in a San Francisco townhouse with his fiancée, Lisa.",
-      "more": true
-    },
-    {
-      "id": "db413203-555b-413a-a110-0ad4c2285fed",
-      "title": "Late Night: Armen Krakirian Trio",
-      "start_time": "2026-10-03T07:00:00+00:00",
-      "location": "The Dawn Club, San Francisco",
-      "url": "https://www.dawnclub.com/music/armen-krakirian-cz68s-y5ats-ml5mz-t4ytx-kdbne-pl4z6-dz4m6-scd45-gkm76-r3xfx-zys95-3gpwl-h3y3k-c754j-zcyw9",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/63eebdb2b5694835bdac5b67/1746395328354-ET6VXFX5WUDASD37L6RN/Armen+Krakirian+Promo+%281%29.jpg",
-      "sources": [
-        "The Dawn Club"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "dawn-club",
-      "region": "sf",
-      "summary": "Armen Krakirian is an accomplished trumpeter and private teacher based in the Bay Area, California.",
-      "more": true
-    },
-    {
-      "id": "4b87f1e8-28a3-496d-88c8-016b9a5ef7a1",
-      "title": "My Morning Jacket - Seven (7) Show Ticket",
-      "start_time": "2026-10-03T07:00:01+00:00",
-      "location": "The Fillmore, 1805 Geary Blvd, San Francisco, CA 94115",
-      "url": "https://www.ticketmaster.com/my-morning-jacket-seven-7-show-san-francisco-california-10-03-2026/event/1C00647DAA0A87C3",
-      "image_url": "https://s1.ticketm.net/dam/a/ae1/0df66a15-a001-44bb-870a-8e3baa6bfae1_TABLET_LANDSCAPE_LARGE_16_9.jpg",
-      "sources": [
-        "The Fillmore"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "rock-indie"
-      ],
-      "cost": "paid",
-      "venue": "the-fillmore",
-      "region": "sf"
-    },
-    {
-      "id": "ce366464-4408-484f-a8b4-2e28dc810f92",
-      "title": "Activity: Wild Goose Qigong with Chunfu Cai",
-      "start_time": "2026-10-03T15:30:00+00:00",
-      "location": "SFPL — Marina",
-      "url": "https://sfpl.org/events/2026/10/03/activity-wild-goose-qigong-chunfu-cai",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/topics/HealthWellness.jpg?itok=H5ixRxxW",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "free",
-      "venue": "marina-branch-library",
-      "region": "sf",
-      "room": "Marina",
-      "summary": "Learn relaxed postures and gentle breathing exercises during this weekly drop-in class designed to promote better health and wellness.",
-      "more": true
-    },
-    {
-      "id": "a3e9faa1-eeb1-4029-9010-7c5bbf791fd3",
-      "title": "Activity: Button Making Mayan Art",
-      "start_time": "2026-10-03T16:00:00+00:00",
-      "location": "SFPL — Main",
-      "url": "https://sfpl.org/events/2026/10/03/activity-button-making-mayan-art",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/topics/viva2026_webBanner_1440x710.jpg?h=96735ef1&itok=wNlH3kVH",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "craft",
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-public-library-main-library",
-      "region": "sf",
-      "room": "Main",
-      "summary": "Create buttons with Mayan art designs at the Bay Area Maya Fest 2026.The Bay Area Maya Festival, a single-day festival on the Mission Campus of the City College of San Francisco",
-      "more": true
-    },
-    {
-      "id": "15ba40b2-871a-47e3-bf42-818064adcd02",
-      "title": "Saturday Morning Story Time!",
-      "start_time": "2026-10-03T16:30:00+00:00",
-      "location": "Bookshop West Portal 80 West Portal Ave San Francisco, CA 94127",
-      "url": "https://bookshopwestportal.com/event/2026-10-03/saturday-morning-story-time",
-      "image_url": "https://bookshopwestportal.com/sites/default/files/image/2026/09/15/screenshot-2026-09-15-40515-pm.png",
-      "sources": [
-        "Bookshop West Portal"
-      ],
-      "types": [
-        [
-          "social"
-        ]
-      ],
-      "topics": [
-        "family-kids",
-        "books-authors"
-      ],
-      "cost": "free",
-      "venue": "bookshop-west-portal",
-      "region": "sf",
-      "summary": "Welcome to Saturday Morning Story Time!",
-      "more": true
-    },
-    {
-      "id": "bc7b03fa-fb22-4b46-98a1-5b8c61779bf7",
-      "title": "Storytime: Olive the Storyteller",
-      "start_time": "2026-10-03T16:30:00+00:00",
-      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
-      "url": "https://blackbirdsf.com/pages/events#?event-id=33606",
-      "image_url": "https://mahina.b-cdn.net/media/1_1778629008071.png",
-      "sources": [
-        "Black Bird Bookstore"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "family-kids",
-        "books-authors"
-      ],
-      "cost": "free",
-      "venue": "black-bird-bookstore",
-      "region": "sf",
-      "summary": "Stories, myths, fables and tall tales..Olive will enchant us all with her storytelling. All ages welcome to this monthly event. ﻿ Olive Hackett-Shaughnessy is a storyteller,",
-      "more": true
-    },
-    {
-      "id": "261362f1-ad81-41aa-ae78-d70bd497d286",
-      "title": "Pilates at Dolores",
-      "start_time": "2026-10-03T17:00:00+00:00",
-      "location": "Dolores Park, 566 Dolores St, San Francisco, CA 94110",
-      "url": "https://partiful.com/e/cIy4aBO0dUTm03PdIS30",
-      "image_url": "https://partiful.imgix.net/external/user/WLXY3BmdfnOieewVFCoZDkLnqgE3/BhomLZBN_9pvPt-1x965u?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "unknown",
-      "venue": "dolores-park",
-      "region": "sf",
-      "summary": "Time for a new morning pilates session!",
-      "more": true
-    },
-    {
-      "id": "44b6517b-8b1f-45b4-b968-0bee38e054e6",
-      "title": "The Bad Guys",
-      "start_time": "2026-10-03T17:00:00+00:00",
-      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
-      "url": "https://www.4-star-movies.com/calendar-of-events/thebadguys-sat",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1790369088315-PWFNCAMNB59UE1BQWB3M/the+bad+guy.jpg",
-      "sources": [
-        "4-Star Theater"
-      ],
-      "types": [
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "film",
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "4-star-theater",
-      "region": "sf",
-      "summary": "After a lifetime of legendary heists, notorious criminals Mr.",
-      "more": true
-    },
-    {
-      "id": "ee5ac072-12df-477b-b032-1ce55bf53a16",
-      "title": "Activity: Noe Valley Knitting Circle",
-      "start_time": "2026-10-03T17:00:00+00:00",
-      "location": "SFPL — Noe Valley",
-      "url": "https://sfpl.org/events/2026/10/03/activity-noe-valley-knitting-circle",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-07/31122.jpg?h=2240b8e9&itok=1TAlA9rX",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "craft"
-      ],
-      "cost": "free",
-      "venue": "noe-valley-sally-brunn-branch-library",
-      "region": "sf",
-      "room": "Noe Valley",
-      "summary": "Knit, crochet and hang out with other knitters and crocheters.",
-      "more": true
-    },
-    {
-      "id": "5bb279a4-a16f-40f2-abc1-d456684b1c74",
-      "title": "Social: Knitting Circle",
-      "start_time": "2026-10-03T17:15:00+00:00",
-      "location": "SFPL — Sunset",
-      "url": "https://sfpl.org/events/2026/10/03/social-knitting-circle",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-05/29904.jpg?h=b530fb14&itok=m4LZ0o6s",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "craft"
-      ],
-      "cost": "free",
-      "venue": "sunset-branch-library",
-      "region": "sf",
-      "room": "Sunset",
-      "summary": "Relax in the library with the Knitting Club.",
-      "more": true
-    },
-    {
-      "id": "145e8413-b6ae-4c6d-bcba-ca9177d36eb4",
-      "title": "Workshop: Mindfulness: A Pushup for Your Brain",
-      "start_time": "2026-10-03T17:30:00+00:00",
-      "location": "SFPL — Golden Gate Valley",
-      "url": "https://sfpl.org/events/2026/10/03/workshop-mindfulness-pushup-your-brain",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31462.png?h=e074c408&itok=3qfFIH2T",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "free",
-      "venue": "golden-gate-valley-branch-library",
-      "region": "sf",
-      "room": "Golden Gate Valley",
-      "summary": "Enhance your focus, manage stress and live more fully in the moment through a simple mindfulness practice that takes just 12 minute a day.",
-      "more": true
-    },
-    {
-      "id": "5cc16671-c6a3-418e-9f82-8057dae9525a",
-      "title": "costco hotdog run 🌭",
-      "start_time": "2026-10-03T17:30:00+00:00",
-      "location": "フェリービルディング, 1 Ferry Building, San Francisco, CA 94111",
-      "url": "https://partiful.com/e/niZdDIpgOIp7FKdOSg9j",
-      "image_url": "https://partiful.imgix.net/external/user/H9gFZ8UUp5hV9VSocBi8ki2a11r2/jFIma0Lw0-PLPi3wNGWmw?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "nature-outdoors"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-ferry-building",
-      "region": "sf",
-      "summary": "Work up your appetite on a 5k through the Embarcadero.",
-      "more": true
-    },
-    {
-      "id": "e4e19021-f6ac-45c4-aefb-ede295d5d63c",
-      "title": "Activity: North Beach Walking Tour",
-      "start_time": "2026-10-03T17:30:00+00:00",
-      "location": "SFPL — North Beach",
-      "url": "https://sfpl.org/events/2026/10/03/activity-north-beach-walking-tour",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-06/29976.png?h=e7d554c4&itok=P78mKr4B",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "history"
-      ],
-      "cost": "free",
-      "venue": "north-beach-branch-library",
-      "region": "sf",
-      "room": "North Beach",
-      "summary": "Explore the culture and history of San Francisco’s Little Italy, where early immigrants in the 1910s established the authentic Italian character that remains its defining",
-      "more": true
-    },
-    {
-      "id": "eaec513f-38ac-452b-ab3d-6ef0a10074fd",
-      "title": "Performance: Musical Storytime with Cascada de Flores",
-      "start_time": "2026-10-03T17:30:00+00:00",
-      "location": "SFPL — Ingleside",
-      "url": "https://sfpl.org/events/2026/10/03/performance-musical-storytime-cascada-de-flores",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31393.png?h=f665dabb&itok=NA2mXCbJ",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "family-kids",
-        "world-music"
-      ],
-      "cost": "free",
-      "venue": "ingleside-branch-library",
-      "region": "sf",
-      "room": "Ingleside",
-      "summary": "This morning you will help Cascada de Flores sing, dance and tell their original story El Brujo y la Sirena/The Wizard and the Mermaid.",
-      "more": true
-    },
-    {
-      "id": "f12469bd-e945-41dd-b5f8-4c338782cbfe",
-      "title": "Being Here: Meditation and Dharma with Milo",
-      "start_time": "2026-10-03T17:30:00+00:00",
-      "location": "550 Laguna St, San Francisco + Full Studio",
-      "url": "https://luma.com/the-8zbp",
-      "image_url": "https://images.lumacdn.com/uploads/vq/2096f5e6-8471-4386-90f9-06459431848e.jpg",
-      "sources": [
-        "The Commons (SF)"
-      ],
-      "types": [
-        [
-          "social"
-        ],
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "free",
-      "venue": "550-laguna-st",
-      "region": "sf",
-      "summary": "Being Here is a weekly gathering guided by seasoned Dharma Teacher Milo Burn.",
-      "more": true
-    },
-    {
-      "id": "0eee7931-4a78-4a78-92dc-79ea92911dfb",
-      "title": "Milton's Paradise Lost",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "Clio’s Books, 353 Grand Avenue, Oakland, CA 94610, Oakland, CA",
-      "url": "https://www.eventbrite.com/e/miltons-paradise-lost-tickets-1996519353130",
-      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1190233818%2F1327630027533%2F1%2Foriginal.20260803-213333?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=2370e5953b4330965a9a98464f8b02db",
-      "sources": [
-        "Clio's Books"
-      ],
-      "types": [
-        [
-          "workshop"
-        ],
-        [
-          "talk",
-          "lecture"
-        ]
-      ],
-      "topics": [
-        "poetry",
-        "history"
-      ],
-      "cost": "paid",
-      "venue": "clios-books",
-      "region": "eastbay",
-      "summary": "A Clio's 4-week seminar · Have you always wanted to read John Milton’s Paradise Lost (1674) and never gotten around to it?",
-      "more": true
-    },
-    {
-      "id": "16d6f01a-a5d1-4cc3-bdfe-c776be2d0672",
-      "title": "Activity: Drawing From Film—Onibaba",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "SFPL — Main",
-      "url": "https://sfpl.org/events/2026/10/03/activity-drawing-film-onibaba",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31386.jpg?h=c673cd1c&itok=0F4ezslD",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ],
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "film",
-        "visual-art"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-public-library-main-library",
-      "region": "sf",
-      "room": "Main",
-      "summary": "We'll be pausing Shindō’s historical horror film, Onibaba, to draw striking frames.Basic materials (pencils, paper, erasers) will be provided. You may bring your own materials,",
-      "more": true
-    },
-    {
-      "id": "1bf478b6-8d68-4750-bebc-efac2e20841d",
-      "title": "Performance: Sones de Mexicanas",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "SFPL — Western Addition",
-      "url": "https://sfpl.org/events/2026/10/03/performance-sones-de-mexicanas",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-07/30726.png?h=b530fb14&itok=0hXTDamL",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "dance",
-        "family-kids",
-        "latino"
-      ],
-      "cost": "free",
-      "venue": "western-addition-branch-library",
-      "region": "sf",
-      "room": "Western Addition",
-      "summary": "Enjoy folklórico dance with music from Jalisco and Sinaloa.",
-      "more": true
-    },
-    {
-      "id": "21815483-a3c6-4487-ac96-44392753bbf3",
-      "title": "John Baccigaluppi - Making Music",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "Book Passage Corte Madera 51 Tamal Vista Blvd. Corte Madera, CA 94925",
-      "url": "https://bookpassage.com/event/john-baccigaluppi-making-music",
-      "image_url": "https://bookpassage.com/sites/default/files/image/2026/07/09/john-baccigaluppi-1.png",
-      "sources": [
-        "Book Passage"
-      ],
-      "types": [
-        [
-          "talk",
-          "conversation"
-        ]
-      ],
-      "topics": [
-        "music",
-        "books-authors"
-      ],
-      "cost": "unknown",
-      "venue": "book-passage-corte-madera",
-      "region": "northbay",
-      "summary": "John Baccigaluppi discusses Making Music , in conversation with SASAMI Groundbreaking conversations with the music producers behind the most successful recording artists on the",
-      "more": true
-    },
-    {
-      "id": "34673fdc-98cf-47fe-b3d0-876fee7ae66c",
-      "title": "Tango at Muddy Waters Coffee & Lounge",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "Muddy Waters Coffee & Lounge, 521 Valencia Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/muddy-waters-coffee-lounge",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "dance-social"
-        ]
-      ],
-      "topics": [
-        "tango"
-      ],
-      "cost": "unknown",
-      "venue": "muddy-waters-coffee-lounge",
-      "region": "sf",
-      "summary": "Tango at Muddy Waters Coffee & Lounge.",
-      "more": true
-    },
-    {
-      "id": "73c1708b-d412-4d1b-b35a-368c8480038a",
-      "title": "Activity: Gardening",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "SFPL — Merced",
-      "url": "https://sfpl.org/events/2026/10/03/activity-gardening",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-03/28485.png?h=746f5489&itok=aDu6XTaK",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "nature-outdoors",
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "merced-branch-library",
-      "region": "sf",
-      "room": "Merced",
-      "summary": "De–stress and enjoy the fresh air.",
-      "more": true
-    },
-    {
-      "id": "7f0fbc1b-b13c-4e3b-a2b6-334f983306be",
-      "title": "PURA TENTACION: Secretos de Octubre at Mayes Oyster House",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "Mayes Oyster House, 1233 Polk Street, San Francisco, 94109, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mayes-oyster-house",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "mayes-oyster-house",
-      "region": "sf",
-      "summary": "PURA TENTACION: Secretos de Octubre at Mayes Oyster House.",
-      "more": true
-    },
-    {
-      "id": "9197ea18-9953-45f2-8131-35ccb0e414fd",
-      "title": "Celebration: West Portal Elementary Centennial",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "SFPL — West Portal",
-      "url": "https://sfpl.org/events/2026/10/03/celebration-west-portal-elementary-centennial",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31440.png?h=b530fb14&itok=AcVzHIBq",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "west-portal-branch-library",
-      "region": "sf",
-      "room": "West Portal",
-      "summary": "Join West Portal Library and West Portal neighborhood for West Portal Elementary School's Centennial celebration with a scavenger hunt, “cable car” rides, centennial merchant",
-      "more": true
-    },
-    {
-      "id": "aca8d0de-454b-4df9-a227-abeb9fa777dc",
-      "title": "Come read with us",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "San Francisco, CA",
-      "url": "https://partiful.com/e/79v5MvdmXJreSkcvfI4n",
-      "image_url": "https://partiful.imgix.net/external/user/9ZCCFplF3KVtQSJ5zXZ2Tbbx7wu1/jUyb0rUnhpyBr3iputfcM?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "social",
-          "book-club"
-        ]
-      ],
-      "topics": [
-        "books-authors"
-      ],
-      "cost": "unknown",
-      "venue": null,
-      "region": "sf",
-      "summary": "OF LATE is for people who want to move through life with curiosity, intention, and genuine connection.",
-      "more": true
-    },
-    {
-      "id": "dcef70fe-678b-4b4e-8f94-af48a911f234",
-      "title": "Lips & Lashes Drag Brunch at Lookout",
-      "start_time": "2026-10-03T18:00:00+00:00",
-      "location": "Lookout, 3600 16th St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/lookout",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "lookout",
-      "region": "sf",
-      "summary": "Lips & Lashes Drag Brunch at Lookout.",
-      "more": true
-    },
-    {
-      "id": "27cf07d5-34e5-41c4-8730-206685314beb",
-      "title": "GODDESS (Drag Brunch) at Beaux",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "Beaux, 2344 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/beaux",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "beaux",
-      "region": "sf",
-      "summary": "GODDESS (Drag Brunch) at Beaux.",
-      "more": true
-    },
-    {
-      "id": "38d6d80f-7c3c-488e-926a-3a92387a576a",
-      "title": "inStudio: The Distance Between: Traveling Beyond Count Time",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "inStudio with Empowerment Avenue, 473 25th St., Suite A, Oakland",
-      "url": "https://oaklandartmurmur.org/event/instudio-the-distance-between-traveling-beyond-count-time/",
-      "image_url": "https://oaklandartmurmur.org/wp-content/uploads/2026/08/Emerging-from-the-cocoon_Alvin-Smith.jpg",
-      "sources": [
-        "Oakland Art Murmur"
-      ],
-      "types": [
-        [
-          "exhibition"
-        ],
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "visual-art",
-        "black-diaspora",
-        "politics"
-      ],
-      "cost": "free",
-      "venue": "instudio-with-empowerment-avenue",
-      "region": "eastbay",
-      "summary": "Program & Event Overview Currently on view at Empowerment Avenue’s inStudio in Oakland, The Distance Between: Traveling Beyond Count Time brings together stories told through the",
-      "more": true
-    },
-    {
-      "id": "57b170ee-b9d8-4dad-8733-7488038b3e76",
-      "title": "Tiny Monster Show ~ Opening Reception",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "The Grand Gallery, 560 2nd Street, Oakland",
-      "url": "https://oaklandartmurmur.org/event/tiny-monster-show/",
-      "image_url": "https://oaklandartmurmur.org/wp-content/uploads/2026/09/Screenshot-2026-09-20-at-11.22.36-AM.png",
-      "sources": [
-        "Oakland Art Murmur"
-      ],
-      "types": [
-        [
-          "exhibition"
-        ]
-      ],
-      "topics": [
-        "visual-art"
-      ],
-      "cost": "unknown",
-      "venue": "the-grand-gallery",
-      "region": "eastbay",
-      "summary": "Whether or not you like monsters, one has to admit, most of us like a good scare now and then.",
-      "more": true
-    },
-    {
-      "id": "785a27b6-0ecc-4f8a-91ac-f990b2f1a473",
-      "title": "Conversation Corner with Ella Vance",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
-      "url": "https://keysjazzbistro.com/event/conversation-corner-with-ella-vance/",
-      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2026/09/CONVERSATION-CORNER-HOW-YOUNG-IS-YOUR-BODY-Dr-Kylie-Rowe-PT-SATURDAY-SEPT-26th-12-noon-1.png?fit=1080%2C1350&ssl=1",
-      "sources": [
-        "Keys Jazz Bistro"
-      ],
-      "types": [
-        [
-          "talk",
-          "conversation"
-        ]
-      ],
-      "topics": [
-        "games"
-      ],
-      "cost": "unknown",
-      "venue": "keys-jazz-bistro",
-      "region": "sf",
-      "summary": "SATURDAY, October 3rd, CONVERSATION CORNER AT KEYS CAFÉ: Plot and Puzzle?",
-      "more": true
-    },
-    {
-      "id": "b4e96da3-4c2f-4bb0-8274-7e7594830db5",
-      "title": "Workshop: National AIDS Memorial Quilt Repair & Panel Making Workshop",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "SFPL — Main",
-      "url": "https://sfpl.org/events/2026/10/03/workshop-national-aids-memorial-quilt-repair-panel-making-workshop",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31385.png?h=3c06853f&itok=1gASQ4bH",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "craft",
-        "history"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-public-library-main-library",
-      "region": "sf",
-      "room": "Main",
-      "summary": "Help preserve a powerful piece of history and create new ways to honor loved ones at this hands-on workshop with the National AIDS Memorial.No sewing experience needed — all are",
-      "more": true
-    },
-    {
-      "id": "d0149386-8b72-4eae-89ef-111e34911ecf",
-      "title": "Social: Plant Swap",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "SFPL — Golden Gate Valley",
-      "url": "https://sfpl.org/events/2026/10/03/social-plant-swap",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-09/32395.png?h=2c61325d&itok=mz55qRLT",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "nature-outdoors"
-      ],
-      "cost": "free",
-      "venue": "golden-gate-valley-branch-library",
-      "region": "sf",
-      "room": "Golden Gate Valley",
-      "summary": "Bring your cuttings, seedlings, surplus harvest or plants that need a new home to swap with other gardeners.",
-      "more": true
-    },
-    {
-      "id": "fbf3f8aa-c3ae-427d-b68f-ef4665aaa11c",
-      "title": "Lips and Lashes Drag Brunch at Lookout",
-      "start_time": "2026-10-03T19:00:00+00:00",
-      "location": "Lookout, 3600 16th St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/lookout",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "lookout",
-      "region": "sf",
-      "summary": "Lips and Lashes Drag Brunch at Lookout.",
-      "more": true
-    },
-    {
-      "id": "8be0692f-bd8e-406a-b567-d460e98ae328",
-      "title": "Book Event with Mahmoud Khalil",
-      "start_time": "2026-10-03T19:30:00+00:00",
-      "location": "First Congregational Church of Oakland",
-      "url": "https://tallyhobookstore.com/events/6377620261003",
-      "image_url": "https://cdn1.bookmanager.com/i/9934103/Mahmoud_Khalil_Event.jpeg?cb=1789859944",
-      "sources": [
-        "Tally Ho! Books"
-      ],
-      "types": [
-        [
-          "talk",
-          "conversation"
-        ]
-      ],
-      "topics": [
-        "books-authors",
-        "politics"
-      ],
-      "cost": "unknown",
-      "venue": "first-congregational-united-church-of-christ",
-      "region": "eastbay",
-      "summary": "Join AROC Action and the Center for Constitutional Rights for a conversation with Palestinian organizer and writer Mahmoud Khalil on political repression, Palestine solidarity,",
-      "more": true
-    },
-    {
-      "id": "be73d5d5-2b77-4cda-a969-1535ef9ff562",
-      "title": "Drag Brunch at Beaux",
-      "start_time": "2026-10-03T19:30:00+00:00",
-      "location": "Beaux, 2344 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/beaux",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "beaux",
-      "region": "sf",
-      "summary": "Drag Brunch at Beaux.",
-      "more": true
-    },
-    {
-      "id": "755e44d9-ad3f-48e9-8131-2ed1976ae3a3",
-      "title": "Désirée Zamorano with Linda González & Jennifer Nguyen - Amarisa's Cooking Pot",
-      "start_time": "2026-10-03T20:00:00+00:00",
-      "location": "Book Passage Corte Madera 51 Tamal Vista Blvd. Corte Madera, CA 94925",
-      "url": "https://bookpassage.com/event/desiree-zamorano-linda-gonzalez-jennifer-nguyen-amarisas-cooking-pot",
-      "image_url": "https://bookpassage.com/sites/default/files/image/2026/07/28/desiree-zamorano-linda-gonzalez-jennifer-nguyen.png",
-      "sources": [
-        "Book Passage"
-      ],
-      "types": [
-        [
-          "talk",
-          "reading"
-        ]
-      ],
-      "topics": [
-        "fiction",
-        "books-authors",
-        "latino"
-      ],
-      "cost": "unknown",
-      "venue": "book-passage-corte-madera",
-      "region": "northbay",
-      "summary": "Amarisa’s Cooking Pot: Tales of Life in All Its Wonders is a riveting collection whose worlds collide and connect between the fantastic and the ordinary.",
-      "more": true
-    },
-    {
-      "id": "9f1b00bf-b698-4dfe-8f4e-97064868955b",
-      "title": "Performance: FREEDOM COMES WHEN ONE WALKS THROUGH IT",
-      "start_time": "2026-10-03T20:00:00+00:00",
-      "location": "SFPL — Visitacion Valley",
-      "url": "https://sfpl.org/events/2026/10/03/performance-freedom-comes-when-one-walks-through-it",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31510.jpg?h=1dd3cf61&itok=RxlZc_dk",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "dance"
-      ],
-      "cost": "free",
-      "venue": "visitacion-valley-branch-library",
-      "region": "sf",
-      "room": "Visitacion Valley",
-      "summary": "Watch Flyaway Productions' dance-based public art project exploring the concept of freedom at the intersection of public libraries and prisons, based on original research and text",
-      "more": true
-    },
-    {
-      "id": "9855cd0c-cc0b-4bb3-87bd-1f633fc7b8e8",
-      "title": "Palace of Fine Arts Meetup!",
-      "start_time": "2026-10-03T20:15:00+00:00",
-      "location": "Palace of Fine Arts, 3601 Lyon Street, San Francisco, CA 94123",
-      "url": "https://partiful.com/e/rfnbynafFcpqy5smkiDN",
-      "image_url": "https://partiful.imgix.net/external/user/eL7Hrq2H8LxUXbEasEGA/-NGPZax2X9H46Y0uVFheM?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "architecture",
-        "nature-outdoors"
-      ],
-      "cost": "free",
-      "venue": "palace-of-fine-arts",
-      "region": "sf",
-      "summary": "🏛️✨ let’s be transported to another time together… Come wander around the Palace of Fine Arts with us, taking pictures, admiring the architecture, and romanticizing our lives no",
-      "more": true
-    },
-    {
-      "id": "0e97880f-79d2-4606-8a0a-303654677f49",
-      "title": "Activity: Tai Chi for Wellness",
-      "start_time": "2026-10-03T20:30:00+00:00",
-      "location": "SFPL — Golden Gate Valley",
-      "url": "https://sfpl.org/events/2026/10/03/activity-tai-chi-wellness",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-09/32106.png?h=414fdf8e&itok=qKxem7VI",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "free",
-      "venue": "golden-gate-valley-branch-library",
-      "region": "sf",
-      "room": "Golden Gate Valley",
-      "summary": "Learn and practice Tai Chi - a gentle, slow moving form of exercise and meditation - with instructor Richard Fong.",
-      "more": true
-    },
-    {
-      "id": "5fbe4b4d-24ce-4feb-ae2d-7233d0e03d8b",
-      "title": "NEXUS Event at GearBox Gallery",
-      "start_time": "2026-10-03T20:30:00+00:00",
-      "location": "Gearbox Gallery, 770 West Grand Avenue, Oakland",
-      "url": "https://oaklandartmurmur.org/event/nexus-event-at-gearbox-gallery/",
-      "image_url": "https://oaklandartmurmur.org/wp-content/uploads/2026/08/IMG_2865-1.jpeg",
-      "sources": [
-        "Oakland Art Murmur"
-      ],
-      "types": [
-        [
-          "exhibition"
-        ],
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "visual-art"
-      ],
-      "cost": "free",
-      "venue": "gearbox-gallery",
-      "region": "eastbay",
-      "summary": "GearBox Gallery joins MoAD and 58 regional art organizations with a NEXUS Event, featuring a performance by Caleb Dowdell at 1:30pm.",
-      "more": true
-    },
-    {
-      "id": "07d32d84-a2ce-4473-aa2c-e9cd6863c4ba",
-      "title": "Humor Writing Workshop: The Truth is Often Funny with Jenny Jedeikin",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Book Passage, Corte Madera Store 51 Tamal Vista Blvd Corte Madera, CA 94925",
-      "url": "https://bookpassage.com/event/2026-10-03/humor-writing-workshop-truth-often-funny-jenny-jedeikin",
-      "image_url": "https://bookpassage.com/sites/default/files/image/2026/06/01/humor-writing-workshop-jenny-jedeikin-new.png",
-      "sources": [
-        "Book Passage"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "writing",
-        "comedy"
-      ],
-      "cost": "paid",
-      "venue": "book-passage-corte-madera",
-      "region": "northbay",
-      "summary": "Discover your authentically funny voice in this engaging and fun writing workshop.",
-      "more": true
-    },
-    {
-      "id": "32043b32-1653-4c10-a3ef-1d1ba50f7e2b",
-      "title": "Chuqian Li Fall Open Studio",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "3150 18th St, San Francisco, CA 94110",
-      "url": "https://partiful.com/e/SmO8lbBKjJfQ1fj9jaIc",
-      "image_url": "https://partiful.imgix.net/external/user/QtkKWlmwZKeuKVyEo11cqUizTq73/z3qu9mcBf06hLOS75qFfW?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "exhibition"
-        ]
-      ],
-      "topics": [
-        "visual-art"
-      ],
-      "cost": "free",
-      "venue": "zore-law",
-      "region": "sf",
-      "summary": "Here's the first open studio from SF-based artist Chuqian Li!",
-      "more": true
-    },
-    {
-      "id": "41c73c9a-1afd-407e-9646-9ef9d69472e6",
-      "title": "Real Social Connections",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "550 Laguna St, San Francisco + Full Studio",
-      "url": "https://luma.com/the-heo3",
-      "image_url": "https://images.lumacdn.com/uploads/38/8238afdc-2b8a-4e17-917b-ed750445c723.jpg",
-      "sources": [
-        "The Commons (SF)"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "unknown",
-      "venue": "550-laguna-st",
-      "region": "sf",
-      "summary": "🌿 Description Beyond small talk, social scripts, and the pressure to be a certain way.",
-      "more": true
-    },
-    {
-      "id": "4d848287-ab24-45e8-9a86-11a8cb5e5885",
-      "title": "Dialogue: Dr. Stone Love Fauré and Dr. Michelle Hector II—No Longer the Outsider",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "SFPL — Main",
-      "url": "https://sfpl.org/events/2026/10/03/dialogue-dr-stone-love-faure-and-dr-michelle-hector-ii-no-longer-outsider",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/topics/MTaM_2026_webBanner.jpg?h=3c06853f&itok=qItt_iP-",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "talk",
-          "conversation"
-        ]
-      ],
-      "topics": [
-        "books-authors",
-        "business",
-        "black-diaspora",
-        "women"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-public-library-main-library",
-      "region": "sf",
-      "room": "Main",
-      "summary": "An inspiring conversation featuring two Black women authors who are making their mark in the entrepreneurial space.",
-      "more": true
-    },
-    {
-      "id": "56e6d006-5126-4187-bd63-8f0d0a23f345",
-      "title": "Alfred Hitchcock's North by Northwest",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "A.C.T., 415 Geary St, San Francisco, CA 94102",
-      "url": "https://www.act-sf.org/whats-on/2026-27-season/north-by-northwest",
-      "image_url": "https://res.cloudinary.com/a-c-t/image/upload/c_fill,g_auto,h_1200,w_900/f_auto/q_auto/v1773685413/Uploads/Season_Pages/26-27_Season/North%20By%20Northwest/780x1042_thumbnail_image_North_By_Northwest_V2?_a=BAAAV6DQ",
-      "sources": [
-        "A.C.T. (American Conservatory Theater)"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater"
-      ],
-      "cost": "paid",
-      "venue": "a-c-t",
-      "region": "sf",
-      "summary": "Theater legend Emma Rice (A.C.T.’s Brief Encounter , Berkeley Rep’s The Wild Bride ) returns to the Bay Area with her inventive take on the Alfred Hitchcock 1959 classic North by",
-      "more": true
-    },
-    {
-      "id": "57287660-a43d-4543-873c-067c542dec29",
-      "title": "Peter Pan Goes Wrong",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
-      "url": "https://sfplayhouse.org/2026-2027-season/peter-pan-goes-wrong/",
-      "image_url": "https://sfplayhouse.org/wp-content/uploads/2026/03/Peter-Pan-Goes-Wrong.png",
-      "sources": [
-        "San Francisco Playhouse"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater",
-        "comedy"
-      ],
-      "cost": "paid",
-      "venue": "san-francisco-playhouse",
-      "region": "sf",
-      "summary": "The Cornley Polytechnic Drama Society is back, and this time they’re taking on Peter Pan .",
-      "more": true
-    },
-    {
-      "id": "5966240d-7f0e-42cc-bc21-1496ad7f388b",
-      "title": "The Cook",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Berkeley Rep, 2025 Addison St, Berkeley, CA 94704",
-      "url": "https://www.berkeleyrep.org/shows/the-cook-b51d",
-      "image_url": "https://img.berkeleyrep.org/B0vG7jAHVImuK3PlTzYGjVsOBkWnOlUdcnKHiEDbDBQ/c:5893:3327:nowe:0:412/s:690:390:1/aHR0cHM6Ly93d3cuYmVya2VsZXlyZXAub3JnLy9jbXNfZmlsZXMvc3lzdGVtL2ltYWdlcy9pbWcwOTUxX29yaWcuanBn",
-      "sources": [
-        "Berkeley Repertory Theatre"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater"
-      ],
-      "cost": "paid",
-      "venue": "berkeley-rep",
-      "region": "eastbay",
-      "summary": "Fri, Sep 4, 2026 – Sun, Oct 11, 2026 · A cook’s forty-year vow to protect her mistress’s Havana mansion becomes a portrait of loyalty, loss, and a nation transformed."
-    },
-    {
-      "id": "5b519881-2652-4c53-99c1-6cd30f2afec0",
-      "title": "Aerial Hoop at Pier 23 Cafe",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Pier 23 Cafe, Pier 23 The Embarcadero, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/pier-23-cafe",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "dance"
-      ],
-      "cost": "unknown",
-      "venue": "pier-23-cafe",
-      "region": "sf",
-      "summary": "Aerial Hoop at Pier 23 Cafe.",
-      "more": true
-    },
-    {
-      "id": "6d2afae7-ff7c-4997-93e6-b11b641f7a17",
-      "title": "Workshop: SFO Museum exhibition on Victorian Jardinières",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "SFPL — Ortega",
-      "url": "https://sfpl.org/events/2026/10/03/workshop-sfo-museum-exhibition-victorian-jardinieres",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-04/29305.png?h=3c06853f&itok=SqItoFuB",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "talk",
-          "lecture"
-        ],
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "design"
-      ],
-      "cost": "free",
-      "venue": "ortega-branch-library",
-      "region": "sf",
-      "room": "Ortega",
-      "summary": "Nicole Mullen, Curator in Charge of Exhibitions at SFO Museum, leads a 30‑minute virtual tour of the museum’s current exhibition Indoor Eden: Victorian Jardinières and introduces",
-      "more": true
-    },
-    {
-      "id": "9d538bca-bef0-4feb-8c32-35347b645dc9",
-      "title": "All Ages Day at Detour",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Detour, 2200 Market St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/detour",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "the-detour",
-      "region": "sf",
-      "summary": "All Ages Day at Detour.",
-      "more": true
-    },
-    {
-      "id": "b565410e-344a-4aa2-97c9-3469400ad511",
-      "title": "Fear Not – William Rhodes Artist’s Talk with Gospel Choir Performance",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Transmission Gallery, 770 West Grand Ave., Suite A, Oakland",
-      "url": "https://oaklandartmurmur.org/event/fear-not-william-rhodes-artists-talk-with-gospel-choir-performance/",
-      "image_url": "https://oaklandartmurmur.org/wp-content/uploads/2026/09/TGGallery_Rhodes_Talk.jpg",
-      "sources": [
-        "Oakland Art Murmur"
-      ],
-      "types": [
-        [
-          "talk",
-          "conversation"
-        ],
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "visual-art",
-        "music"
-      ],
-      "cost": "free",
-      "venue": "transmission-gallery",
-      "region": "eastbay",
-      "summary": "Please join us for William Rhodes’ talk with gospel choir performance by the Dr.",
-      "more": true
-    },
-    {
-      "id": "bcfaf64e-1273-442c-97bf-c02259ab68b3",
-      "title": "Sabrina Nassar Fall Open Studio",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "3150 18th St, San Francisco, CA 94110",
-      "url": "https://partiful.com/e/X0ArzZXaLVBnPnzx9Ozg",
-      "image_url": "https://partiful.imgix.net/external/user/RhLeZq6XEsU4zUJBlEO1MShAfHm1/UYfXNVMsPPxmIKZG1dd9l?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "social"
-        ],
-        [
-          "exhibition"
-        ]
-      ],
-      "topics": [
-        "visual-art"
-      ],
-      "cost": "free",
-      "venue": "zore-law",
-      "region": "sf",
-      "summary": "OPEN STUDIO 🎨 I’m opening the doors to my new studio for the first time and would love to have you come by!",
-      "more": true
-    },
-    {
-      "id": "becfe6ab-b4ee-43fa-9488-ba177e4be501",
-      "title": "Digger",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Balboa Theatre, 3630 Balboa St, San Francisco, CA 94121",
-      "url": "https://www.balboamovies.com/calendar-of-events/digger-october-3",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e038bb792dc0e9cf1381e/1789863434765-NE3CZUJUUD0WORLRI0KQ/Digger.jpg",
-      "sources": [
-        "Balboa Theatre"
-      ],
-      "types": [
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "film"
-      ],
-      "cost": "paid",
-      "venue": "balboa-theatre",
-      "region": "sf",
-      "summary": "Academy Award-winning filmmaker Alejandro G.",
-      "more": true
-    },
-    {
-      "id": "c7b58ccc-0826-4deb-9b84-f5b6ecc97a3b",
-      "title": "Support for Hawaii: Cookies and Prints Pop Up",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
-      "url": "https://blackbirdsf.com/pages/events#?event-id=90932",
-      "image_url": "https://mahina.b-cdn.net/media/2_1790216464799.png",
-      "sources": [
-        "Black Bird Bookstore"
-      ],
-      "types": [
-        [
-          "social",
-          "gala-fundraiser"
-        ],
-        [
-          "social",
-          "food-drink"
-        ]
-      ],
-      "topics": [
-        "food-drink"
-      ],
-      "cost": "unknown",
-      "venue": "black-bird-bookstore",
-      "region": "sf",
-      "summary": "Black Bird Bookseller, Baker and Artist, Sharon, is selling her prints and Hawaiian inspired cookies as a pop up Kauai relief fundraiser."
-    },
-    {
-      "id": "d3dffb3a-b32e-4fb4-bb00-6f88b1d9267d",
-      "title": "Workshop: Clothing Repair Fix-it Clinic",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "SFPL — Merced",
-      "url": "https://sfpl.org/events/2026/10/03/workshop-clothing-repair-fix-it-clinic",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31541.png?h=e074c408&itok=odjryeVz",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "craft"
-      ],
-      "cost": "free",
-      "venue": "merced-branch-library",
-      "region": "sf",
-      "room": "Merced",
-      "summary": "Extend the life of your clothes—at no cost!Clothing Repair Clinic hosted by SCRAP, with support from San Francisco Environment. Bring one clothing item in need of repair and our",
-      "more": true
-    },
-    {
-      "id": "ed5d335c-98a0-4f52-98f3-09061d3eb228",
-      "title": "Artists’ Reception – Julie Engelmann, Amos Goldbaum, Liv Losee-Unger, Fernanda Martínez, & Deirdre Weinberg",
-      "start_time": "2026-10-03T21:00:00+00:00",
-      "location": "Manna Gallery, 473 25th St., Oakland",
-      "url": "https://oaklandartmurmur.org/event/artists-reception-julie-engelmann-amos-goldbaum-liv-losee-unger-fernanda-martinez-deirdre-weinberg/",
-      "image_url": "https://oaklandartmurmur.org/wp-content/uploads/2026/09/1-1.jpg",
-      "sources": [
-        "Oakland Art Murmur"
-      ],
-      "types": [
-        [
-          "exhibition"
-        ],
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "visual-art"
-      ],
-      "cost": "free",
-      "venue": "manna-gallery",
-      "region": "eastbay",
-      "summary": "Meet the artists of Big, Small, and Everything In Between and celebrate this group exhibition featuring five Bay Area muralists.",
-      "more": true
-    },
-    {
-      "id": "36a1d614-46e8-4cdb-9738-cfc7c72ff04d",
-      "title": "Activity: Creative Saturday Afternoons / 創意無限周六午",
-      "start_time": "2026-10-03T21:30:00+00:00",
-      "location": "SFPL — Chinatown",
-      "url": "https://sfpl.org/events/2026/10/03/activity-creative-saturday-afternoons-chuangyiwuxianzhouliuwu",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-04/28789.png?h=b530fb14&itok=li-Izg9G",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ],
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "craft",
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "chinatown-him-mark-lai-branch-library",
-      "region": "sf",
-      "summary": "Take a break from your day-to-day routines and enjoy a creative and relaxing afternoon of self-guided practice in Chinese calligraphy, coloring and board",
-      "more": true
-    },
-    {
-      "id": "518858f8-dc01-4a04-aade-bae9eeb49ac5",
-      "title": "The History of Concrete",
-      "start_time": "2026-10-03T21:30:00+00:00",
-      "location": "Balboa Theatre, 3630 Balboa St, San Francisco, CA 94121",
-      "url": "https://www.balboamovies.com/calendar-of-events/the-history-of-concrete-october-3",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e038bb792dc0e9cf1381e/1788464505961-EX2COWOCV1WP63DUITQ4/The+History+of+Concrete.jpg",
-      "sources": [
-        "Balboa Theatre"
-      ],
-      "types": [
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "documentary"
-      ],
-      "cost": "paid",
-      "venue": "balboa-theatre",
-      "region": "sf",
-      "summary": "Following the finale of his acclaimed HBO series “How To with John Wilson”, NYC documentarian John Wilson looks to the bedrock of his beloved New York City for inspiration and",
-      "more": true
-    },
-    {
-      "id": "695600a4-981b-48b1-a2cd-82cebcea48d8",
-      "title": "Drag Brunch (Late Show) at Beaux",
-      "start_time": "2026-10-03T21:30:00+00:00",
-      "location": "Beaux, 2344 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/beaux",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "beaux",
-      "region": "sf",
-      "summary": "Drag Brunch (Late Show) at Beaux.",
-      "more": true
-    },
-    {
-      "id": "1a949f65-74c1-44fd-8f9f-899dfcc4dd48",
-      "title": "Roll Fog (Preview Screening Fundraiser with Q&A)",
-      "start_time": "2026-10-03T22:00:00+00:00",
-      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
-      "url": "https://www.4-star-movies.com/calendar-of-events/roll-fog-sat",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1790191166682-LSUT2JLLRFRF9I3H0QK6/4-star_Roll-Fog_Flyer_Oct3-Oct11.png",
-      "sources": [
-        "4-Star Theater"
-      ],
-      "types": [
-        [
-          "screening"
-        ],
-        [
-          "talk",
-          "conversation"
-        ]
-      ],
-      "topics": [
-        "documentary",
-        "politics"
-      ],
-      "cost": "paid",
-      "venue": "4-star-theater",
-      "region": "sf",
-      "summary": "Join us for an exclusive preview of the upcoming documentary Roll Fog.",
-      "more": true
-    },
-    {
-      "id": "1f677c23-e636-4553-b3cb-b7df7e2b2e4f",
-      "title": "Activity: Improv Theatre",
-      "start_time": "2026-10-03T22:00:00+00:00",
-      "location": "SFPL — Golden Gate Valley",
-      "url": "https://sfpl.org/events/2026/10/03/activity-improv-theatre",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-09/32113.png?h=414fdf8e&itok=GhMwrlkT",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "theater",
-        "comedy"
-      ],
-      "cost": "free",
-      "venue": "golden-gate-valley-branch-library",
-      "region": "sf",
-      "room": "Golden Gate Valley",
-      "summary": "Improvisational theatre consists of games, exercises, and techniques to create spontaneous monologues and scenes.",
-      "more": true
-    },
-    {
-      "id": "2470a196-d2e1-46c4-8a2f-36225b974cdf",
-      "title": "Workshop: Recording Studio Orientation",
-      "start_time": "2026-10-03T22:00:00+00:00",
-      "location": "SFPL — Main",
-      "url": "https://sfpl.org/events/2026/10/03/workshop-recording-studio-orientation",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/topics/AudioVideoProduction_thumb.jpg?h=b530fb14&itok=2MmehzXq",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "music",
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-public-library-main-library",
-      "region": "sf",
-      "room": "Main",
-      "summary": "Learn to use The Mix music recording studio by completing the Recording Studio Orientation.",
-      "more": true
-    },
-    {
-      "id": "78c3c7ab-f98b-418c-9b49-1e7bd9a949cd",
-      "title": "Presentation: Demystifying Video Games for Parents and Guardians",
-      "start_time": "2026-10-03T22:00:00+00:00",
-      "location": "SFPL — Main",
-      "url": "https://sfpl.org/events/2026/10/03/presentation-demystifying-video-games-parents-and-guardians",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31791.png?h=b530fb14&itok=KvqccRrm",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "talk",
-          "lecture"
-        ]
-      ],
-      "topics": [
-        "family-kids",
-        "games"
-      ],
-      "cost": "free",
-      "venue": "san-francisco-public-library-main-library",
-      "region": "sf",
-      "room": "Main",
-      "summary": "Demystify the world of video games in this informative session geared towards the parents and guardians of gamers.",
-      "more": true
-    },
-    {
-      "id": "7e663354-9e06-4fd8-aa27-49a10e3555fe",
-      "title": "Social: Puzzle Swap",
-      "start_time": "2026-10-03T22:00:00+00:00",
-      "location": "SFPL — West Portal",
-      "url": "https://sfpl.org/events/2026/10/03/social-puzzle-swap",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-07/30562.jpg?h=e074c408&itok=GpTPnqxZ",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "games",
-        "family-kids"
-      ],
-      "cost": "free",
-      "venue": "west-portal-branch-library",
-      "region": "sf",
-      "room": "West Portal",
-      "summary": "Bring a puzzle in good condition to swap with a neighbor for a new challenge to take home.",
-      "more": true
-    },
-    {
-      "id": "de869a69-21c2-4a0c-9add-f874156b4639",
-      "title": "Workshop: Ekphrastic Poetry",
-      "start_time": "2026-10-03T22:00:00+00:00",
-      "location": "SFPL — Park",
-      "url": "https://sfpl.org/events/2026/10/03/workshop-ekphrastic-poetry",
-      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/topics/FilipinoAmericanInterest.png?itok=_-L3MCjf",
-      "sources": [
-        "San Francisco Public Library"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "poetry",
-        "visual-art",
-        "writing"
-      ],
-      "cost": "free",
-      "venue": "park-branch-library",
-      "region": "sf",
-      "room": "Park",
-      "summary": "What happens when we meet visual art with words?",
-      "more": true
-    },
-    {
-      "id": "32751fcf-7144-49c5-a00b-5fda3e122306",
-      "title": "Robson Batinga at Pier 23 Cafe",
-      "start_time": "2026-10-03T23:00:00+00:00",
-      "location": "Pier 23 Cafe, Pier 23 The Embarcadero, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/pier-23-cafe",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "world-music"
-      ],
-      "cost": "unknown",
-      "venue": "pier-23-cafe",
-      "region": "sf",
-      "summary": "Robson Batinga at Pier 23 Cafe.",
-      "more": true
-    },
-    {
-      "id": "5ef90f66-8e8e-410f-a54d-f372c660cc3a",
-      "title": "Laurel Parnell, PhD - Releasing What Isn't Yours",
-      "start_time": "2026-10-03T23:00:00+00:00",
-      "location": "Book Passage Corte Madera 51 Tamal Vista Blvd. Corte Madera, CA 94925",
-      "url": "https://bookpassage.com/event/laurel-parnell-phd-releasing-what-isnt-yours",
-      "image_url": "https://bookpassage.com/sites/default/files/image/2026/07/10/laurel-parnell-phd.png",
-      "sources": [
-        "Book Passage"
-      ],
-      "types": [
-        [
-          "talk",
-          "reading"
-        ]
-      ],
-      "topics": [
-        "wellness",
-        "nonfiction"
-      ],
-      "cost": "unknown",
-      "venue": "book-passage-corte-madera",
-      "region": "northbay",
-      "summary": "A groundbreaking, multilayered mind-body-spirit approach to empowerment and healing.",
-      "more": true
-    },
-    {
-      "id": "93eb3086-0998-4b09-ac11-5689b16f96f7",
-      "title": "Pinkwash For The Dolls: The Comrades Dance Party & Trans Mutual Aid ($5 - $10)",
-      "start_time": "2026-10-03T23:00:00+00:00",
-      "location": "El Rio, 3158 Mission St, San Francisco, CA",
-      "url": "https://tockify.com/elriosf2/detail/4358/1791068400000",
-      "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/6aa1b0038f563d8adc717e72/square_272x272.jpg",
-      "sources": [
-        "El Rio"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "dance-party",
-        "lgbtq",
-        "latino"
-      ],
-      "cost": "paid",
-      "venue": "el-rio",
-      "region": "sf",
-      "summary": "Pinkwash: For the Dolls.",
-      "more": true
-    },
-    {
-      "id": "d1fd990a-1eb1-4b83-b948-af0e8d9759e9",
-      "title": "Improvised show #5",
-      "start_time": "2026-10-03T23:00:00+00:00",
-      "location": "Wildcat Studio, 2547 Eighth St, Berkeley, CA 94710",
-      "url": "https://partiful.com/e/GrDVE2aSAIiVfczcfNPw",
-      "image_url": "https://partiful.imgix.net/external/user/d99VVpahaJQQc51VTImcCUQknn03/l-TnltzgNtkWN_2wCSbVK?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "spoken-word"
-      ],
-      "cost": "unknown",
-      "venue": "wildcat-studio",
-      "region": "eastbay",
-      "summary": "Improvised show #5 Totally improvised Sound/Movement/Language are likely Also piano So what?"
-    },
-    {
-      "id": "0a528b0b-9c8b-4dbc-888f-bab5aa4af168",
-      "title": "DJ/Dance Party at Paris 75",
-      "start_time": "2026-10-03T23:30:00+00:00",
-      "location": "Paris 75, 515 Broadway, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/paris-75",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "dance-party",
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "paris-75",
-      "region": "sf",
-      "summary": "DJ/Dance Party at Paris 75.",
-      "more": true
-    },
-    {
-      "id": "60683000-2296-4eb3-9f8d-01f4f5a69c4b",
-      "title": "Paul Sussman's DID SHE REALLY SAY TANTRUM YOGA",
-      "start_time": "2026-10-04T00:00:00+00:00",
-      "location": "San Francisco",
-      "url": "https://themarsh.org/shows_and_events/paul-sussman-tantrum-yoga/",
-      "image_url": "https://themarsh.org/wp-content/uploads/2026/07/Paul-Sussman-Slideshow-Presentation.png",
-      "sources": [
-        "The Marsh"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "comedy",
-        "spoken-word"
-      ],
-      "cost": "unknown",
-      "venue": null,
-      "region": "sf",
-      "summary": "Opening Reception September 26 (Please do not bring infants to the show) The world is reeling towards chaos!",
-      "more": true
-    },
-    {
-      "id": "7fcd011b-c7e3-424d-b79f-01a207914c5a",
-      "title": "Lynkable: The Partnership Pipeline - Members +3",
-      "start_time": "2026-10-04T00:00:00+00:00",
-      "location": "Frontier Tower @ Spaceship 995 Market Street, San Francisco",
-      "url": "https://luma.com/voice-ai-for-real-life",
-      "image_url": "https://images.lumacdn.com/uploads/mf/1e1213cd-f13b-444b-9dd5-e7f96785cdfc.jpg",
-      "sources": [
-        "Frontier Tower"
-      ],
-      "types": [
-        [
-          "talk",
-          "panel"
-        ],
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "tech",
-        "business"
-      ],
-      "cost": "unknown",
-      "venue": "frontier-tower-berlinhouse",
-      "region": "sf",
-      "room": "Spaceship",
-      "summary": "Lynkable: City as a Platform is a pre-launch gathering introducing the next phase of Lynkable’s Fall and Winter work in San Francisco.",
-      "more": true
-    },
-    {
-      "id": "00e0296b-77b5-47af-94c5-a8b874197c6a",
-      "title": "Star Trek Watch Party & Discussion - Members +3",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "Frontier Tower @ FL15 Conference Room 995 Market Street, San Francisco",
-      "url": "https://luma.com/star-trek-watch-party-discussion",
-      "image_url": "https://images.lumacdn.com/api-uploads/yh/830bd7ed-8876-49e3-82aa-65423d4795ae.png",
-      "sources": [
-        "Frontier Tower"
-      ],
-      "types": [
-        [
-          "social"
-        ],
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "science",
-        "film"
-      ],
-      "cost": "unknown",
-      "venue": "frontier-tower-berlinhouse",
-      "region": "sf",
-      "room": "FL15 Conference Room",
-      "summary": "Star Trek: Voyager, Season 3, Episodes 8–9 (November 1996).",
-      "more": true
-    },
-    {
-      "id": "06644d7f-d22a-47cf-b3ba-f9fe0b2cfe45",
-      "title": "Live Jazz at Mr. Tipple's Recording Studio",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "free",
-      "venue": "mr-tipples-recording-studio",
-      "region": "sf",
-      "summary": "Live Jazz at Mr.",
-      "more": true
-    },
-    {
-      "id": "21bdc848-9482-492b-bde1-c80164ea459b",
-      "title": "SABAA TAHIR: EMPIRE",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "Books Inc. Mountain View, 317 Castro St, Mountain View, CA 94041",
-      "url": "https://www.booksinc.com/pages/events#event-7e153f4e-0cb9-4559-9981-0f973bb59434",
-      "image_url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/c3e0f8b1-2b1f-46a4-b854-883f4374dbaa/Untitled-300-x-400-px-2026-06-18T134458-443.png",
-      "sources": [
-        "Books Inc."
-      ],
-      "types": [
-        [
-          "talk",
-          "reading"
-        ]
-      ],
-      "topics": [
-        "fiction",
-        "books-authors"
-      ],
-      "cost": "paid",
-      "venue": "books-inc-mountain-view",
-      "region": "southbay",
-      "summary": "Books Inc.",
-      "more": true
-    },
-    {
-      "id": "3f634d8a-8aa3-408c-a844-4f42a8205d7e",
-      "title": "Live Music with Khalia: Silk & Soul",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "Brava Cabaret, 2781 24th Street, San Francisco, CA, 94110, United States",
-      "url": "https://www.brava.org/all-events/khalia-hkswk-l8a7g-rtztf-kwa2a-zswe8-48bgd-292pb-zzhn5-nbhmy-239dd",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/57e2ef6fc534a50452d4afa0/1788985518429-1B4KKW8AE8XBU9SFW24U/October+Concert.png",
-      "sources": [
-        "Brava Theater Center"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "soul-funk",
-        "pop"
-      ],
-      "cost": "unknown",
-      "venue": "brava-mainstage",
-      "region": "sf",
-      "summary": "Rental · October 3, 2026 · Step into Silk & Soul, an intimate evening of live music with Bay Area singer-songwriter Khalia.",
-      "more": true
-    },
-    {
-      "id": "68e1649b-0cb5-40a8-b377-c6b06e453847",
-      "title": "MARISA SOLIS & ELIZABETH DOUGHERTY: THE COMPLETE EXPERT TO AUTHOR GUIDE",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "Books Inc. Pruneyard, 1875 S Bascom Ave, Campbell, CA 95008",
-      "url": "https://www.eventbrite.com/e/marisa-solis-elizabeth-dougherty-at-books-inc-campbell-tickets-2001025541260?aff=oddtdtcreator",
-      "image_url": "https://files.elfsightcdn.com/eafe4a4d-3436-495d-b748-5bdce62d911d/21cc25df-d047-4527-a547-c904006c1710/Untitled-300-x-400-px-2026-09-14T162155-458.png",
-      "sources": [
-        "Books Inc."
-      ],
-      "types": [
-        [
-          "talk",
-          "reading"
-        ]
-      ],
-      "topics": [
-        "books-authors",
-        "writing",
-        "nonfiction"
-      ],
-      "cost": "unknown",
-      "venue": "books-inc-pruneyard",
-      "region": "southbay",
-      "summary": "Please join us at Books inc.",
-      "more": true
-    },
-    {
-      "id": "ae2f220a-bbab-4610-bb74-74d7cc9c6b00",
-      "title": "FUTURA: an art & fashion show fundraiser [UPDATED INVITE]",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "The Midway, 900 Marin St, San Francisco, CA 94124",
-      "url": "https://partiful.com/e/AF0JSslevU3VK1ip9wTv",
-      "image_url": "https://partiful.imgix.net/external/user/ogDyo8UKblo3J5ZHLuqj/KbHvy1bmEf0e3DDC6QCxF?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "social",
-          "gala-fundraiser"
-        ],
-        [
-          "exhibition"
-        ]
-      ],
-      "topics": [
-        "visual-art",
-        "design"
-      ],
-      "cost": "paid",
-      "venue": "the-midway",
-      "region": "sf",
-      "summary": "Welcome to Kaleido SF’s 4th art & fashion show fundraiser, ✨FUTURA✨.",
-      "more": true
-    },
-    {
-      "id": "c31de5ab-aa45-4795-b872-f91137ac5417",
-      "title": "O69 BINGO! By the fireplace",
-      "start_time": "2026-10-04T01:00:00+00:00",
-      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116, USA",
-      "url": "https://www.riptidesf.com/",
-      "image_url": null,
-      "sources": [
-        "The Riptide"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "bingo"
-      ],
-      "cost": "free",
-      "venue": "the-riptide",
-      "region": "sf",
-      "summary": "Every Saturday our hosts make dreams come true with Bingo.",
-      "more": true
-    },
-    {
-      "id": "122b35f9-efbc-4f7d-a2ca-eea46221ea65",
-      "title": "Tony Lindsay and Future Perfect Band",
-      "start_time": "2026-10-04T01:30:00+00:00",
-      "location": "Biscuits & Blues, 401 Mason St, San Francisco, CA 94102",
-      "url": "https://www.biscuitsandblues.com/find-a-show/20261003tonylindsay",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/6689c36c4afcd30b4b37d2bb/1785095305790-UBGM9WCUCYO22URL7C0C/20261003tonylindsay.hero.jpg",
-      "sources": [
-        "Biscuits & Blues"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "blues",
-        "soul-funk"
-      ],
-      "cost": "paid",
-      "venue": "biscuits-blues",
-      "region": "sf",
-      "summary": "Tony Lindsay and Future Perfect Band Experience world-class blues, dinner, and drinks — all in one intimate setting.",
-      "more": true
-    },
-    {
-      "id": "b6e267ce-6be0-46e9-bfb3-258b52503fb7",
-      "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
-      "start_time": "2026-10-04T01:30:00+00:00",
-      "location": "Festa Wine & Cocktail Lounge - Karaoke, 1825 Post Street, San Francisco, 94115, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/festa-wine-cocktail-lounge-karaoke",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "unknown",
-      "venue": "festa-wine-cocktail-lounge",
-      "region": "sf",
-      "room": "Karaoke",
-      "summary": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke.",
-      "more": true
-    },
-    {
-      "id": "cc2ffdd2-fff4-43f1-a9b4-dd95b1e5fa82",
-      "title": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech",
-      "start_time": "2026-10-04T01:30:00+00:00",
-      "location": "San Francisco Magic Theater @ the Marrakech, 419 O'Farrell Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/san-francisco-magic-theater-the-marrakech",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "san-francisco-magic-theater",
-      "region": "sf",
-      "room": "the Marrakech",
-      "summary": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech.",
-      "more": true
-    },
-    {
-      "id": "26e17cb7-c2fa-4241-b9ee-4d9e9ab1ae72",
-      "title": "San Francisco Contemporary Music Players Present - Mainstage Concert #1: “Bay Bridges”",
-      "start_time": "2026-10-04T01:45:00+00:00",
-      "location": "Brava Theater Center, 2781 24th Street, San Francisco, CA, 94110, United States",
-      "url": "https://www.brava.org/all-events/sfcmcoct-pe36r-6j2eg-bem6k-b6cyb-4cmlj-2eh3g-7layy-kd5eg",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/57e2ef6fc534a50452d4afa0/1788987941658-BETIUMN16840F482XWQK/Stephen+B.+Hahn_2025-11-16_First+Work_02.jpg",
-      "sources": [
-        "Brava Theater Center"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "classical"
-      ],
-      "cost": "paid",
-      "venue": "brava-theater-center",
-      "region": "sf",
-      "summary": "Rental · October 3, 2026 · SAN FRANCISCO (September 2, 2026) – San Francisco Contemporary Music Players opens its 2026–27 concert season, LUMINOUS REFRACTIONS, on Saturday,",
-      "more": true
-    },
-    {
-      "id": "350e0bba-acc2-4067-8147-23e0ca2b3fdd",
-      "title": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
-      "start_time": "2026-10-04T02:00:00+00:00",
-      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "unknown",
-      "venue": "the-function-sf-comedy-club-cocktail-lounge",
-      "region": "sf",
-      "summary": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
-      "more": true
-    },
-    {
-      "id": "38db70ee-c28c-414a-ad8e-8e04cb2899cb",
-      "title": "Marcus Shelby Quartet Celebrates Monk and Trane",
-      "start_time": "2026-10-04T02:00:00+00:00",
-      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
-      "url": "https://keysjazzbistro.com/event/marcus-shelby-quartet/",
-      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2026/08/91850DC8-33A0-484D-80B3-80A65C0D34FA.jpg?fit=1440%2C1800&ssl=1",
-      "sources": [
-        "Keys Jazz Bistro"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "paid",
-      "venue": "keys-jazz-bistro",
-      "region": "sf",
-      "summary": "Marcus Anthony Shelby is a composer, bassist, bandleader, and educator who currently lives in San Francisco, California.",
-      "more": true
-    },
-    {
-      "id": "5a74f606-c1dd-4c6f-92d7-ac01c495cf15",
-      "title": "Murmur Social Club 001 - Buck, Lore Rense, Tay & The Jangladahs with DJ Ken",
-      "start_time": "2026-10-04T02:00:00+00:00",
-      "location": "3227 Telegraph Ave, Oakland, CA 94609",
-      "url": "https://partiful.com/e/fc1Ewrc2TMERFw9TyrBh",
-      "image_url": "https://partiful.imgix.net/external/user/9dgQ6XaLyKTCuE9k3yauP1oCARm1/J0AClbYLWA0A3SKkGSu59?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "performance"
-        ],
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "blues",
-        "folk-americana",
-        "jazz",
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "3227-telegraph-ave",
-      "region": "eastbay",
-      "summary": "We are gathering at the crossroads for our first social of the year (and also celebrating Lore’s birthday).",
-      "more": true
-    },
-    {
-      "id": "5aa55807-c427-446c-b81d-2fba0eb0f5e4",
-      "title": "Trivia at Thriller Social Club",
-      "start_time": "2026-10-04T02:00:00+00:00",
-      "location": "Thriller Social Club, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/thriller-social-club",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "thriller-social-club",
-      "region": "sf",
-      "summary": "Trivia at Thriller Social Club.",
-      "more": true
-    },
-    {
-      "id": "97f90423-7bb2-415e-8bf8-760ed64f1db9",
-      "title": "Feels in the Club",
-      "start_time": "2026-10-04T02:00:00+00:00",
-      "location": "The Faight Collective, 475 Haight St, San Francisco, CA 94117",
-      "url": "https://www.eventbrite.com/e/feels-in-the-club-a-night-of-emotional-electronic-music-tickets-1997536497436",
-      "image_url": "https://cdn.sanity.io/images/3l1powkg/production/0690979f6cfbbe0d80a05210e465a67d8dda7244-1080x1080.png?w=800&fit=max&auto=format",
-      "sources": [
-        "The Faight Collective"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "electronic",
-        "club-night",
-        "dance-party"
-      ],
-      "cost": "unknown",
-      "venue": "the-faight-collective",
-      "region": "sf",
-      "summary": "feels in the club (an intentional space for emotional electronic music) is back at the faight for another night of music in the style of artists such as fred again, gorgon city,",
-      "more": true
-    },
-    {
-      "id": "a0700111-90bd-41a7-8dd7-2e32b826f88f",
-      "title": "King Lear",
-      "start_time": "2026-10-04T02:00:00+00:00",
-      "location": "Z Space's Steindler Stage",
-      "url": "https://ci.ovationtix.com/34231/production/1285198",
-      "image_url": "https://web.ovationtix.com/trs/api/rest/ClientFile(628302)",
-      "sources": [
-        "Z Space"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater"
-      ],
-      "cost": "unknown",
-      "venue": "z-space",
-      "region": "sf",
-      "room": "Steindler Stage",
-      "summary": "King Lear by William Shakespeare Directed by Michael Socrates Moran Music composed by Paul Dresher Presented by Oakland Theater Project & New Performance Traditions In the",
-      "more": true
-    },
-    {
-      "id": "038add2d-ab7d-4150-b609-ae793caff4dd",
-      "title": "Igorrr",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Great American Music Hall, 859 O'Farrell St, San Francisco, CA 94109",
-      "url": "https://wl.seetickets.us/event/igorrr/691689?afflky=GreatAmericanMusicHall",
-      "image_url": "https://prod-images.seetickets.us/eyJidWNrZXQiOiJwcm9kLXNpaC5zZWV0aWNrZXRzdXNhLnVzIiwia2V5IjoiZjliMGIxYWEtMGM0OC00YzIyLWI2NDQtNGQ1ZGIxNmNjOTZkIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDB9LCJqcGVnIjp7InF1YWxpdHkiOjYwfSwicG5nIjp7ImNvbXByZXNzaW9uTGV2ZWwiOjksInF1YWxpdHkiOjYwfSwid2VicCI6eyJxdWFsaXR5Ijo2MH19fQ==",
-      "sources": [
-        "Great American Music Hall"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "punk-metal"
-      ],
-      "cost": "paid",
-      "venue": "great-american-music-hall",
-      "region": "sf",
-      "summary": "North American Tour 2026 · with Secret Chiefs 3, Violent Magic Orchestra · Metal"
-    },
-    {
-      "id": "06294c13-c19d-475a-bbd0-9e7d17c9be40",
-      "title": "RENÉE FLEMING SINGS STRAUSS",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Davies Symphony Hall, San Francisco, CA",
-      "url": "https://sfwarmemorial.org/event-detail/?eventId=123873",
-      "image_url": "https://sfwarmemorial.org/wp-content/themes/hello-theme-child-master/calendar/event-images/7440528e38941dbe9c4b66822ac04ed331f765a7.jpg",
-      "sources": [
-        "Herbst / Davies (SF War Memorial)"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "classical"
-      ],
-      "cost": "paid",
-      "venue": "louise-m-davies-symphony-hall",
-      "region": "sf",
-      "summary": "San Francisco Symphony"
-    },
-    {
-      "id": "41cea2e0-e541-472b-87bd-8da0a6a8770f",
-      "title": "Mellow Nights at The Mellow Haight",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "The Mellow Haight, 1401 Haight Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-mellow-haight",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "the-mellow-haight",
-      "region": "sf",
-      "summary": "Mellow Nights at The Mellow Haight.",
-      "more": true
-    },
-    {
-      "id": "42abd3e1-ec5d-4e51-84d0-48889e5d9474",
-      "title": "Hard Bop Collective",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Bird & Beckett Books & Records, 653 Chenery Street, San Francisco",
-      "url": "https://birdbeckett.com/event/hard-bop-collective_2026-10-03/",
-      "image_url": "https://birdbeckett.com/wp-content/uploads/2026/08/jimmy-heath-e1788204879596.webp",
-      "sources": [
-        "Bird & Beckett"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "paid",
-      "venue": "bird-and-beckett",
-      "region": "sf",
-      "summary": "Bob Kenmotsu, tenor sax; Jordan Samuels, guitar; Tomoko Funaki, bass; Austin Harris, drums The Hard Bop Collective presents “Beyond the Pulse: Rhythm Section Edition + Celebration",
-      "more": true
-    },
-    {
-      "id": "6d379624-4beb-4943-ad68-c835ced3a14d",
-      "title": "The Cook",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Berkeley Rep, 2025 Addison St, Berkeley, CA 94704",
-      "url": "https://www.berkeleyrep.org/shows/the-cook-b51d",
-      "image_url": "https://img.berkeleyrep.org/B0vG7jAHVImuK3PlTzYGjVsOBkWnOlUdcnKHiEDbDBQ/c:5893:3327:nowe:0:412/s:690:390:1/aHR0cHM6Ly93d3cuYmVya2VsZXlyZXAub3JnLy9jbXNfZmlsZXMvc3lzdGVtL2ltYWdlcy9pbWcwOTUxX29yaWcuanBn",
-      "sources": [
-        "Berkeley Repertory Theatre"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater"
-      ],
-      "cost": "paid",
-      "venue": "berkeley-rep",
-      "region": "eastbay",
-      "summary": "Fri, Sep 4, 2026 – Sun, Oct 11, 2026 · A cook’s forty-year vow to protect her mistress’s Havana mansion becomes a portrait of loyalty, loss, and a nation transformed."
-    },
-    {
-      "id": "89f60923-296d-4d3f-81a2-5910571dc817",
-      "title": "Mahjong Night at Mr. Mahjong's",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Mr. Mahjong's, 260 Kearny Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mr-mahjongs",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "games"
-      ],
-      "cost": "unknown",
-      "venue": "mr-mahjong",
-      "region": "sf",
-      "summary": "Mahjong Night at Mr.",
-      "more": true
-    },
-    {
-      "id": "b285817d-38b6-49a2-a8bb-312bbf155ae6",
-      "title": "Malcolm Gladwell",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Sydney Goldstein Theater",
-      "url": "https://www.cityarts.net/event/malcolm-gladwell-3/",
-      "image_url": null,
-      "sources": [
-        "City Arts & Lectures"
-      ],
-      "types": [
-        [
-          "talk",
-          "conversation"
-        ]
-      ],
-      "topics": [
-        "books-authors"
-      ],
-      "cost": "unknown",
-      "venue": "sydney-goldstein-theater",
-      "region": "sf",
-      "summary": "Malcolm Gladwell in conversation with Lisa Armstrong"
-    },
-    {
-      "id": "b7ed1863-81fd-4b84-8800-ea0bd17b8e6b",
-      "title": "MILES ELECTRIC BAND",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Yoshi's, 510 Embarcadero West, Oakland, CA 94607",
-      "url": "https://yoshis.com/events/buy-tickets/miles-electric-band/detail",
-      "image_url": "https://yoshis.com/userfiles/events/images/3028/mileselectricband-copy.png",
-      "sources": [
-        "Yoshi's"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "yoshis-oakland",
-      "region": "eastbay",
-      "summary": "Founded in 2010 by EMMY and GRAMMY AWARD-WINNING producer/drummer Vince Wilburn Jr., band member and nephew of Sir Miles Dewey Davis, the “Miles Electric Band” now known as M.E.B.",
-      "more": true
-    },
-    {
-      "id": "caba30dd-ab98-4c09-8c7b-5b264cf2b53c",
-      "title": "Okaidja Afroso:  Àbor Édíŋ",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Presidio Theatre, 99 Moraga Ave, San Francisco, CA 94129",
-      "url": "https://www.presidiotheatre.org/show-details/okaidja-afroso-abor-edi",
-      "image_url": "https://www.presidiotheatre.org/storage/listing_image/presidiotheatre/dd900563c9fad544c85e1f6cadd06b226664d6b5.webp",
-      "sources": [
-        "Presidio Theatre"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "world-music"
-      ],
-      "cost": "unknown",
-      "venue": "presidio-theatre",
-      "region": "sf",
-      "summary": "“Upbeat, danceable music from the Ghana-born and now Portland-based musician Okaidja Afroso.” (NPR)"
-    },
-    {
-      "id": "fa2d4df6-8d73-4ac6-bc85-6128c09552ed",
-      "title": "Nightbreed",
-      "start_time": "2026-10-04T02:30:00+00:00",
-      "location": "Balboa Theatre, 3630 Balboa St, San Francisco, CA 94121",
-      "url": "https://www.balboamovies.com/calendar-of-events/nightbreed-october-3",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e038bb792dc0e9cf1381e/1790197787319-QX1Q7HFOGMEV1CCXYSHZ/nightbreed.jpg",
-      "sources": [
-        "Balboa Theatre"
-      ],
-      "types": [
-        [
-          "screening"
-        ]
-      ],
-      "topics": [
-        "film"
-      ],
-      "cost": "paid",
-      "venue": "balboa-theatre",
-      "region": "sf",
-      "summary": "Dive into new depths of terror with Fright Film Freakout!",
-      "more": true
-    },
-    {
-      "id": "7e2461e9-3a33-4969-878e-345de25403aa",
-      "title": "Stand-Up Comedy Show (Early) at Cheaper Than Therapy",
-      "start_time": "2026-10-04T02:45:00+00:00",
-      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "unknown",
-      "venue": "cheaper-than-therapy",
-      "region": "sf",
-      "summary": "Stand-Up Comedy Show (Early) at Cheaper Than Therapy.",
-      "more": true
-    },
-    {
-      "id": "002e776f-f620-448f-a836-507603aead8c",
-      "title": "Little Shop of Horrors",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Decker Theatre, 25 Van Ness Avenue, San Francisco, CA, 94102",
-      "url": "https://nctcsf.org/event/little-shop/",
-      "image_url": "https://nctcsf.org/wp-content/uploads/2026/01/1200-x-630-2.jpg",
-      "sources": [
-        "New Conservatory Theatre Center"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "musical-theater",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "decker-theatre",
-      "region": "sf",
-      "summary": "The killer classic comes to NCTC with an even bigger bite.",
-      "more": true
-    },
-    {
-      "id": "101cd45d-3246-4f86-91a6-561d7df663d6",
-      "title": "Live Music at Lion's Den Lounge and Bar",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "music"
-      ],
-      "cost": "unknown",
-      "venue": "lions-den-bar-lounge",
-      "region": "sf",
-      "summary": "Live Music at Lion's Den Lounge and Bar.",
-      "more": true
-    },
-    {
-      "id": "4026fe1f-782f-4a8e-be6d-e0c40896161c",
-      "title": "Alicia Dattner's Small Batch Artisanal Comedy",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Berkeley",
-      "url": "https://themarsh.org/shows_and_events/alicia-dattner-small-batch-artisanal-comedy/",
-      "image_url": "https://themarsh.org/wp-content/uploads/2026/08/Alicia-Dattner-Web-Banner.png",
-      "sources": [
-        "The Marsh"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "paid",
-      "venue": null,
-      "region": "eastbay",
-      "summary": "Opening Reception September 19 (Please do not bring infants to the show) Balinese scooters.",
-      "more": true
-    },
-    {
-      "id": "6425a1a0-7d40-43c9-a7c8-4e408403a5bd",
-      "title": "NO SHOW",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Yoshi's, 510 Embarcadero West, Oakland, CA 94607",
-      "url": "https://yoshis.com/events/buy-tickets/no-show/detail",
-      "image_url": "https://yoshis.com/userfiles/events/images/3066/snow-monkey-roll-edited.jpg",
-      "sources": [
-        "Yoshi's"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "yoshis-oakland",
-      "region": "eastbay",
-      "summary": "Join us in the bar, lounge or restaurant!"
-    },
-    {
-      "id": "646aa264-c90c-4a3f-9ec3-8fcc0817c5e4",
-      "title": "Mission Fusion w/ Jonathan, Natalie and Mark",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Saint Gregory of Nyssa Episcopal Church, 500 De Haro St, San Francisco, CA 94107",
-      "url": "https://www.facebook.com/events/1482073670446143/",
-      "image_url": null,
-      "sources": [
-        "Mission Fusion"
-      ],
-      "types": [
-        [
-          "workshop"
-        ],
-        [
-          "social",
-          "dance-social"
-        ]
-      ],
-      "topics": [
-        "dance-party"
-      ],
-      "cost": "paid",
-      "venue": "st-gregory-of-nyssa-episcopal-church",
-      "region": "sf",
-      "summary": "Another excellent night at Mission Fusion!",
-      "more": true
-    },
-    {
-      "id": "681668cf-6b58-4939-9ec2-ceb8b1c7ec35",
-      "title": "Alfred Hitchcock's North by Northwest",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "A.C.T., 415 Geary St, San Francisco, CA 94102",
-      "url": "https://www.act-sf.org/whats-on/2026-27-season/north-by-northwest",
-      "image_url": "https://res.cloudinary.com/a-c-t/image/upload/c_fill,g_auto,h_1200,w_900/f_auto/q_auto/v1773685413/Uploads/Season_Pages/26-27_Season/North%20By%20Northwest/780x1042_thumbnail_image_North_By_Northwest_V2?_a=BAAAV6DQ",
-      "sources": [
-        "A.C.T. (American Conservatory Theater)"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater"
-      ],
-      "cost": "paid",
-      "venue": "a-c-t",
-      "region": "sf",
-      "summary": "Theater legend Emma Rice (A.C.T.’s Brief Encounter , Berkeley Rep’s The Wild Bride ) returns to the Bay Area with her inventive take on the Alfred Hitchcock 1959 classic North by",
-      "more": true
-    },
-    {
-      "id": "8530d509-52f3-438b-bb3d-de70c8aaa378",
-      "title": "Azure McCall",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "The Dawn Club, San Francisco",
-      "url": "https://www.dawnclub.com/music/1onhhsjq53k5uofqbb1g8sslma85s8-2h3mk-rjgry-xaype-sww2t-tcmx3-74f4w-lcnsj-m8whx-az7gp-ya2m7-f9p73-ngxac-5bhzc-zd9be",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/63eebdb2b5694835bdac5b67/1775072503309-YFLCDFYXT9JPSM9UI0LP/azure-mccall-copy-2.jpeg",
-      "sources": [
-        "The Dawn Club"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "dawn-club",
-      "region": "sf",
-      "summary": "McCall, Hawaii’s first lady of jazz is a multi-award winning vocalist.",
-      "more": true
-    },
-    {
-      "id": "8630f36f-7eb0-43c3-b119-32199dcbaaff",
-      "title": "Dee Coco Johnson The Cover Story",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Great Star Theater, 636 Jackson St, San Francisco, CA 94133",
-      "url": "http://deecoco.eventbrite.com/",
-      "image_url": "https://www.greatstartheater.org/shows/IMG_7489.jpeg",
-      "sources": [
-        "Great Star Theater"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "music"
-      ],
-      "cost": "unknown",
-      "venue": "great-star-theater",
-      "region": "sf",
-      "summary": "October 3, 2026 · Dee Coco Johnson live in concert bringing you an exciting array of the music you love.",
-      "more": true
-    },
-    {
-      "id": "ca270cb7-bac6-4979-b434-db3f1581ce9a",
-      "title": "Bones Shredder, Dog Party, Bloodsugar, Tess and the Details",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "The Phoenix Theater, 201 Washington St., Petaluma, CA, Petaluma, CA",
-      "url": "https://www.eventbrite.com/e/bones-shredder-dog-party-bloodsugar-tess-and-the-details-tickets-2000876183527",
-      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1193383918%2F308989365325%2F1%2Foriginal.20260913-170653?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.48&fp-y=0.018&s=4ea338ce4e2c0b6392435c4da0879c3a",
-      "sources": [
-        "Phoenix Theater (Petaluma)"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "punk-metal",
-        "rock-indie"
-      ],
-      "cost": "unknown",
-      "venue": "phoenix-theater",
-      "region": "northbay",
-      "summary": "Bones Shredder, Dog Party, Bloodsugar and Tess and the Details at the Phoenix!"
-    },
-    {
-      "id": "d1278bc1-11b9-4575-8761-1cc0267b421f",
-      "title": "LIVE MUSIC: The Sleeves, Fred Frith",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
-      "url": "https://www.4-star-movies.com/calendar-of-events/live-music-the-sleeves",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1783464562120-L1Z9S5ANNVWC77NQI2GE/fred+frith+sleeves.jpeg",
-      "sources": [
-        "4-Star Theater"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "rock-indie",
-        "folk-americana"
-      ],
-      "cost": "unknown",
-      "venue": "4-star-theater",
-      "region": "sf",
-      "summary": "The Sleeves The Sleeves are the duo of Jack Cooper and Tara Cunningham, both likely known to you as one half of Modern Nature.",
-      "more": true
-    },
-    {
-      "id": "d7eb9671-aad0-4099-8be9-8d8de592b6b9",
-      "title": "My Morning Jacket",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "The Fillmore, 1805 Geary Blvd, San Francisco, CA 94115",
-      "url": "https://www.ticketmaster.com/my-morning-jacket-san-francisco-california-10-03-2026/event/1C0064761A40801B",
-      "image_url": "https://s1.ticketm.net/dam/a/ae1/0df66a15-a001-44bb-870a-8e3baa6bfae1_TABLET_LANDSCAPE_LARGE_16_9.jpg",
-      "sources": [
-        "The Fillmore"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "rock-indie"
-      ],
-      "cost": "paid",
-      "venue": "the-fillmore",
-      "region": "sf"
-    },
-    {
-      "id": "ecb1be35-8058-408d-8390-9ac9845401f5",
-      "title": "Karaoke Lounge at Pandora Karaoke & Bar",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "Pandora Karaoke & Bar, 50 Mason Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/pandora-karaoke-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "unknown",
-      "venue": "pandora-karaoke-bar",
-      "region": "sf",
-      "summary": "Karaoke Lounge at Pandora Karaoke & Bar.",
-      "more": true
-    },
-    {
-      "id": "f6162fd9-b129-425e-9cab-67bbcc64d6d5",
-      "title": "Peter Pan Goes Wrong",
-      "start_time": "2026-10-04T03:00:00+00:00",
-      "location": "San Francisco Playhouse, 450 Post St, San Francisco, CA 94102",
-      "url": "https://sfplayhouse.org/2026-2027-season/peter-pan-goes-wrong/",
-      "image_url": "https://sfplayhouse.org/wp-content/uploads/2026/03/Peter-Pan-Goes-Wrong.png",
-      "sources": [
-        "San Francisco Playhouse"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater",
-        "comedy"
-      ],
-      "cost": "paid",
-      "venue": "san-francisco-playhouse",
-      "region": "sf",
-      "summary": "The Cornley Polytechnic Drama Society is back, and this time they’re taking on Peter Pan .",
-      "more": true
-    },
-    {
-      "id": "045726c3-e0ec-44fb-aaa9-f238ab21b2df",
-      "title": "Marcus Shelby Quartet Celebrates Monk and Trane",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
-      "url": "https://keysjazzbistro.com/event/marcus-shelby-quartet/",
-      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2026/08/91850DC8-33A0-484D-80B3-80A65C0D34FA.jpg?fit=1440%2C1800&ssl=1",
-      "sources": [
-        "Keys Jazz Bistro"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "paid",
-      "venue": "keys-jazz-bistro",
-      "region": "sf",
-      "summary": "Marcus Anthony Shelby is a composer, bassist, bandleader, and educator who currently lives in San Francisco, California.",
-      "more": true
-    },
-    {
-      "id": "1b228a44-bf70-4e30-aa34-8e13c5d44fc6",
-      "title": "Filth at Eagle Tavern",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Eagle Tavern, 398 12th St, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/eagle-tavern",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "lgbtq"
-      ],
-      "cost": "unknown",
-      "venue": "eagle-tavern",
-      "region": "sf",
-      "summary": "Filth at Eagle Tavern.",
-      "more": true
-    },
-    {
-      "id": "1f33f8b2-cf50-4585-afff-c72c770da27e",
-      "title": "DJ / Dancing at The Cafe",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "The Cafe, 2369 Market St, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-cafe",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "dance-party"
-      ],
-      "cost": "free",
-      "venue": "the-caf",
-      "region": "sf",
-      "summary": "DJ / Dancing at The Cafe.",
-      "more": true
-    },
-    {
-      "id": "49dae05f-5d4e-4851-b2c4-b6e52da95dda",
-      "title": "SF Neo-Futurists' The Infinite Wrench",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "447 Minna St, 447 Minna Street, San Francisco, CA 94103, San Francisco, CA",
-      "url": "https://www.eventbrite.com/e/sf-neo-futurists-the-infinite-wrench-tickets-482054827967",
-      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1174366802%2F104588763117%2F1%2Foriginal.20260108-234659?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.602&fp-y=0.508&s=42ed61f56a4afb5e7c8949e716365833",
-      "sources": [
-        "SF Neo-Futurists"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater"
-      ],
-      "cost": "paid",
-      "venue": "447-minna",
-      "region": "sf",
-      "summary": "30 original plays in 60 minutes, featuring the personal, the political, and the profoundly WTF · See the show the SF Chronicle calls one of \"22 San Francisco things everyone must",
-      "more": true
-    },
-    {
-      "id": "5a2b2cfc-cb13-4f29-8f03-219df13fdc26",
-      "title": "Live Music: DJs at Mr. Mahjong's",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Mr. Mahjong's, 260 Kearny Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mr-mahjongs",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "mr-mahjong",
-      "region": "sf",
-      "summary": "Live Music: DJs at Mr.",
-      "more": true
-    },
-    {
-      "id": "60758d30-4725-4cf8-bb8e-dc0111522f95",
-      "title": "Live Jazz at Mr. Tipple's Recording Studio",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "free",
-      "venue": "mr-tipples-recording-studio",
-      "region": "sf",
-      "summary": "Live Jazz at Mr.",
-      "more": true
-    },
-    {
-      "id": "6a8cf614-e8b6-44e0-9766-cc2c1469eeed",
-      "title": "Karaoke at Silver Cloud Restaurant & Karaoke Bar",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Silver Cloud Restaurant & Karaoke Bar, 1994 Lombard Street, San Francisco, 94123, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/silver-cloud-restaurant-karaoke-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "free",
-      "venue": "silver-cloud-restaurant-karaoke-bar",
-      "region": "sf",
-      "summary": "Karaoke at Silver Cloud Restaurant & Karaoke Bar.",
-      "more": true
-    },
-    {
-      "id": "7a98f3c7-d687-437e-9911-ba2f568caa4c",
-      "title": "Get Busy! Every First Saturday ($10 Cover)",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "El Rio, 3158 Mission St, San Francisco, CA",
-      "url": "https://tockify.com/elriosf2/detail/4318/1791086400000",
-      "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/68017e1fdc957f1e4eaae751/square_272x272.png",
-      "sources": [
-        "El Rio"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "dance-party",
-        "lgbtq",
-        "latino"
-      ],
-      "cost": "paid",
-      "venue": "el-rio",
-      "region": "sf",
-      "summary": "GET BUSY AT EL RIO!",
-      "more": true
-    },
-    {
-      "id": "7ce46fe8-cad7-4fc2-abc9-05fabf7d8947",
-      "title": "Live DJ at Roxy's Nightclub at Rick & Roxy's",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Rick & Roxy's, 2131 Lombard Street, San Francisco, 94123, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/rick-roxys",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "rick-roxys",
-      "region": "sf",
-      "summary": "Live DJ at Roxy's Nightclub at Rick & Roxy's.",
-      "more": true
-    },
-    {
-      "id": "8aaed67d-2b3e-4cb5-9da0-86705a830a29",
-      "title": "ROYA",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "The Independent, 628 Divisadero St, San Francisco, CA 94117",
-      "url": "https://www.theindependentsf.com/tm-event/roya/",
-      "image_url": "https://i.ticketweb.com/i/00/13/48/14/83_Listings.jpg?v=11",
-      "sources": [
-        "The Independent"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "electronic",
-        "pop"
-      ],
-      "cost": "unknown",
-      "venue": "the-independent",
-      "region": "sf",
-      "summary": "ROYA is an electronic/dance-pop duo from Aarhus, Denmark, formed by Line Gade and Sebastian Igens.",
-      "more": true
-    },
-    {
-      "id": "918fbd27-d8a9-4b3a-a89f-a3c8c81d66f1",
-      "title": "Cyrille Aimée",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "SFJAZZ Center — Joe Henderson Lab",
-      "url": "https://www.sfjazz.org/tickets/productions/26-27/cyrille-aimee/",
-      "image_url": "https://www.sfjazz.org/media/qzhcjhnz/s2627_hero_cyrilleaime-e.jpg?rxy=0.5551331304191043,0.32939074809969476&v=1dced2c6df292b0",
-      "sources": [
-        "SFJAZZ Center"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "paid",
-      "venue": "sfjazz-center",
-      "region": "sf",
-      "room": "Joe Henderson Lab"
-    },
-    {
-      "id": "9f801a91-a1d1-4e7b-9c9f-ad2820b6e093",
-      "title": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "unknown",
-      "venue": "the-function-sf-comedy-club-cocktail-lounge",
-      "region": "sf",
-      "summary": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
-      "more": true
-    },
-    {
-      "id": "c81f703a-921b-4ca4-94ad-7179894f6faf",
-      "title": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "San Francisco Magic Theater @ the Marrakech, 419 O'Farrell Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/san-francisco-magic-theater-the-marrakech",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "san-francisco-magic-theater",
-      "region": "sf",
-      "room": "the Marrakech",
-      "summary": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech.",
-      "more": true
-    },
-    {
-      "id": "ea5783b0-ad63-46db-b071-24941a8bd74f",
-      "title": "DJ Kevey Kev & Black Diamond at Tupelo",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Tupelo, 1337 Grant Avenue, San Francisco, 94133, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/tupelo",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "tupelo",
-      "region": "sf",
-      "summary": "DJ Kevey Kev & Black Diamond at Tupelo.",
-      "more": true
-    },
-    {
-      "id": "f5ecb3fe-4730-4ddf-9ce7-e79e279bba81",
-      "title": "Boom Boom (Brazilian Dance Party) at Beaux",
-      "start_time": "2026-10-04T04:00:00+00:00",
-      "location": "Beaux, 2344 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/beaux",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "dance-party",
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "beaux",
-      "region": "sf",
-      "summary": "Boom Boom (Brazilian Dance Party) at Beaux.",
-      "more": true
-    },
-    {
-      "id": "1b474f9c-5d33-4464-9c72-e5f4881d569a",
-      "title": "Hiromi & Kazunori Kumagai",
-      "start_time": "2026-10-04T04:30:00+00:00",
-      "location": "SFJAZZ Center — Miner Auditorium",
-      "url": "https://www.sfjazz.org/tickets/productions/26-27/hiromi-kazunori-kumagai/",
-      "image_url": "https://www.sfjazz.org/media/sgxpwpcg/s2627_hero_hiromi.jpg?v=1dce3aa9bddebb0",
-      "sources": [
-        "SFJAZZ Center"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "paid",
-      "venue": "sfjazz-center",
-      "region": "sf",
-      "room": "Miner Auditorium"
-    },
-    {
-      "id": "33de8c1d-5f4d-4b97-a55a-358720f2e116",
-      "title": "Salsa Night with Live Band: Pacho Y Su Orquesta Evolución at The Cigar Bar & Grill",
-      "start_time": "2026-10-04T04:30:00+00:00",
-      "location": "The Cigar Bar & Grill, 850 Montgomery Street, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-cigar-bar-grill",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ],
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "salsa",
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "the-cigar-bar-grill",
-      "region": "sf",
-      "summary": "Salsa Night with Live Band: Pacho Y Su Orquesta Evolución at The Cigar Bar & Grill.",
-      "more": true
-    },
-    {
-      "id": "b5f04cf0-1843-4146-9781-163aa856e651",
-      "title": "Pacific Drive",
-      "start_time": "2026-10-04T04:30:00+00:00",
-      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
-      "url": "https://www.riptidesf.com/",
-      "image_url": null,
-      "sources": [
-        "The Riptide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "folk-americana"
-      ],
-      "cost": "free",
-      "venue": "the-riptide",
-      "region": "sf",
-      "summary": "Post HSB show with ACTUAL BLUEGRASS from some of the Bay Areas best - come check it out"
-    },
-    {
-      "id": "bf8f8289-93cb-455d-be0b-762ee47ba468",
-      "title": "MILES ELECTRIC BAND",
-      "start_time": "2026-10-04T04:30:00+00:00",
-      "location": "Yoshi's, 510 Embarcadero West, Oakland, CA 94607",
-      "url": "https://yoshis.com/events/buy-tickets/miles-electric-band/detail",
-      "image_url": "https://yoshis.com/userfiles/events/images/3028/mileselectricband-copy.png",
-      "sources": [
-        "Yoshi's"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "yoshis-oakland",
-      "region": "eastbay",
-      "summary": "Founded in 2010 by EMMY and GRAMMY AWARD-WINNING producer/drummer Vince Wilburn Jr., band member and nephew of Sir Miles Dewey Davis, the “Miles Electric Band” now known as M.E.B.",
-      "more": true
-    },
-    {
-      "id": "f232b282-0b52-4489-8e66-6fc9972289e6",
-      "title": "Stand-Up Comedy Show (Late) at Cheaper Than Therapy",
-      "start_time": "2026-10-04T04:45:00+00:00",
-      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "unknown",
-      "venue": "cheaper-than-therapy",
-      "region": "sf",
-      "summary": "Stand-Up Comedy Show (Late) at Cheaper Than Therapy.",
-      "more": true
-    },
-    {
-      "id": "3d6686a0-65f1-4b0b-acd9-ad748d9debd7",
-      "title": "El SUPERRITMO! at Make-Out Room",
-      "start_time": "2026-10-04T05:00:00+00:00",
-      "location": "Make-Out Room, 3225 22nd. St., San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/make-out-room",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "dance-party",
-        "soul-funk"
-      ],
-      "cost": "free",
-      "venue": "make-out-room",
-      "region": "sf",
-      "summary": "El SUPERRITMO!",
-      "more": true
-    },
-    {
-      "id": "b19b0109-fa3a-428d-8548-674b0d4493f6",
-      "title": "Saturday Night at Temple Nightclub San Francisco",
-      "start_time": "2026-10-04T05:00:00+00:00",
-      "location": "Temple Nightclub San Francisco, 540 Howard Street, San Francisco, 94105, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/temple-nightclub-san-francisco",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "temple-nightclub-san-francisco",
-      "region": "sf",
-      "summary": "Saturday Night at Temple Nightclub San Francisco.",
-      "more": true
-    },
-    {
-      "id": "20f3aeeb-4a2d-4068-9f2c-e07db3c3044e",
-      "title": "Saturday Night Mic - $10 Late Night Laughs at The Function SF: Comedy Club & Cocktail Lounge",
-      "start_time": "2026-10-04T05:30:00+00:00",
-      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "paid",
-      "venue": "the-function-sf-comedy-club-cocktail-lounge",
-      "region": "sf",
-      "summary": "Saturday Night Mic - $10 Late Night Laughs at The Function SF: Comedy Club & Cocktail Lounge.",
-      "more": true
-    },
-    {
-      "id": "53d83cf6-9f61-42e9-9a94-eb124a527b4f",
-      "title": "Late Set: Simon Rowe Organ Trio",
-      "start_time": "2026-10-04T05:30:00+00:00",
-      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
-      "url": "https://keysjazzbistro.com/event/late-set-simon-rowe-organ-trio-67/",
-      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2024/12/IMG_4773.jpeg?fit=1290%2C1941&ssl=1",
-      "sources": [
-        "Keys Jazz Bistro"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "keys-jazz-bistro",
-      "region": "sf",
-      "summary": "Keeping folks up past 10 pm in SF is no easy feat, but Key’s owner Simon Rowe has been showcasing the best of the Bay Area’s organ trios in his late night Saturday sets.",
-      "more": true
-    },
-    {
-      "id": "d1650a68-248c-4cd0-816a-4b6d8156c4d5",
-      "title": "Cyrille Aimée",
-      "start_time": "2026-10-04T05:30:00+00:00",
-      "location": "SFJAZZ Center — Joe Henderson Lab",
-      "url": "https://www.sfjazz.org/tickets/productions/26-27/cyrille-aimee/",
-      "image_url": "https://www.sfjazz.org/media/qzhcjhnz/s2627_hero_cyrilleaime-e.jpg?rxy=0.5551331304191043,0.32939074809969476&v=1dced2c6df292b0",
-      "sources": [
-        "SFJAZZ Center"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "paid",
-      "venue": "sfjazz-center",
-      "region": "sf",
-      "room": "Joe Henderson Lab"
-    },
-    {
-      "id": "5fefdf52-fc0a-42de-aa23-79d0edd76d61",
-      "title": "Live DJ at Lion's Den Lounge and Bar",
-      "start_time": "2026-10-04T06:00:00+00:00",
-      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "lions-den-bar-lounge",
-      "region": "sf",
-      "summary": "Live DJ at Lion's Den Lounge and Bar.",
-      "more": true
-    },
     {
       "id": "551bc531-474d-43c7-94ea-276a8956c9fa",
       "title": "Một Hike Ba",
@@ -15791,6 +12188,30 @@
       "more": true
     },
     {
+      "id": "ed3a4455-aef5-49ac-b345-fb0b56b6c13c",
+      "title": "Mixer for Travel Tech Founders & Investors",
+      "start_time": "2026-10-08T22:00:00+00:00",
+      "location": "550 Laguna St, San Francisco + Full Studio",
+      "url": "https://luma.com/the-a5gc",
+      "image_url": "https://images.lumacdn.com/gallery-images/y5/bb8ffa8c-b879-40a5-85d1-a0cd35dd276c",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "cost": "unknown",
+      "venue": "550-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "ca82d3ef-e292-4133-8f4b-d9849fb488df",
       "title": "Workshop: Recording Studio Orientation",
       "start_time": "2026-10-08T23:00:00+00:00",
@@ -21507,6 +17928,30 @@
       "region": "sf",
       "room": "Main",
       "summary": "Watch Flyaway Productions' dance-based public art project exploring the concept of freedom at the intersection of public libraries and prisons, based on original research and text",
+      "more": true
+    },
+    {
+      "id": "f85f5be4-df64-494c-8d52-f4bd22b0179f",
+      "title": "A Chinese Ghost Story",
+      "start_time": "2026-10-10T20:00:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/chinese-ghost-story",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791077158866-RE0JVGU8BTS82G6R5URX/chinese+ghost+story.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "paid",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Old Evil is coming to collect the bride.",
       "more": true
     },
     {
@@ -32585,6 +29030,32 @@
       "more": true
     },
     {
+      "id": "a853f7ed-fb78-48df-804d-2c5f5987a27c",
+      "title": "Private Tour - Community Only",
+      "start_time": "2026-10-15T16:00:00+00:00",
+      "location": "Frontier Tower @ Spaceship 995 Market Street, San Francisco",
+      "url": "https://luma.com/private-tour",
+      "image_url": "https://images.lumacdn.com/api-uploads/se/6b7b8821-dd2e-447c-8768-74d7c0c642c3.png",
+      "sources": [
+        "Frontier Tower"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech"
+      ],
+      "cost": "unknown",
+      "venue": "frontier-tower-berlinhouse",
+      "region": "sf",
+      "room": "Spaceship",
+      "summary": "This is a Private event and this is the venue placeholder This event is hosted at the Frontier Tower: We are transforming a 16-floor tower in San Francisco into a self-governed",
+      "more": true
+    },
+    {
       "id": "39673ac2-cb15-400a-8d28-8db9bc1b9092",
       "title": "Workshop: Microsoft Excel for Beginners",
       "start_time": "2026-10-15T17:00:00+00:00",
@@ -39174,6 +35645,37 @@
       "more": true
     },
     {
+      "id": "99d9e0a8-36a4-4f58-8d8d-5c83792da2e2",
+      "title": "Lynkable: The Partnership Pipeline - Members +3",
+      "start_time": "2026-10-18T00:00:00+00:00",
+      "location": "Frontier Tower @ Spaceship 995 Market Street, San Francisco",
+      "url": "https://luma.com/voice-ai-for-real-life",
+      "image_url": "https://images.lumacdn.com/uploads/mf/1e1213cd-f13b-444b-9dd5-e7f96785cdfc.jpg",
+      "sources": [
+        "Frontier Tower"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "cost": "unknown",
+      "venue": "frontier-tower-berlinhouse",
+      "region": "sf",
+      "room": "Spaceship",
+      "summary": "Lynkable: City as a Platform is a pre-launch gathering introducing the next phase of Lynkable’s Fall and Winter work in San Francisco.",
+      "more": true
+    },
+    {
       "id": "cb330906-aebc-48d5-b37d-5b3aafb5ef02",
       "title": "The Vourdalak",
       "start_time": "2026-10-18T00:30:00+00:00",
@@ -43428,6 +39930,34 @@
       "region": "sf",
       "room": "Karaoke",
       "summary": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke.",
+      "more": true
+    },
+    {
+      "id": "c38ce3cc-1ae4-4c5c-aa51-606903c8c866",
+      "title": "Reading Rhythms Palo Alto: October 19th",
+      "start_time": "2026-10-20T01:30:00+00:00",
+      "location": "Yummy Future Coffee, 170 University Ave, Palo Alto, CA 94301",
+      "url": "https://readingrhythms.co/events/palo-alto/reading-rhythms-palo-alto-october-19th-oct-20-c77b85c0",
+      "image_url": "https://images.lumacdn.com/api-uploads/60/ade6a11a-6a31-40aa-a2e5-245bb1567696.jpg",
+      "sources": [
+        "Reading Rhythms"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "yummy-future-coffee",
+      "region": "southbay",
+      "summary": "You’re invited!",
       "more": true
     },
     {
@@ -55639,6 +52169,30 @@
       "more": true
     },
     {
+      "id": "0fcd5e03-d188-4818-99e8-5f216de58873",
+      "title": "House",
+      "start_time": "2026-10-24T19:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/house-sat",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791079696453-OLBH9D78GWI8O2I1XA54/house.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "In the heart of a violet forest, an old house awaits young girls.",
+      "more": true
+    },
+    {
       "id": "94c3c2dc-f5bf-4ba5-8284-06923cbc1f17",
       "title": "Performance: Six Roses",
       "start_time": "2026-10-24T19:30:00+00:00",
@@ -57173,6 +53727,30 @@
       "more": true
     },
     {
+      "id": "d6db58e2-62c1-4da2-9cb9-7e5c71b9e1f3",
+      "title": "Evil Dead 2",
+      "start_time": "2026-10-25T02:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/evil-dead-2-sat",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791082091454-QNZCB7GBW2KI3GBO1X79/evil+dead+ii.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Kiss your nerves goodbye!",
+      "more": true
+    },
+    {
       "id": "ddc678d2-b216-4f0c-a9ed-8db1a3f6751d",
       "title": "Mahjong Night at Mr. Mahjong's",
       "start_time": "2026-10-25T02:30:00+00:00",
@@ -58381,6 +54959,30 @@
       "more": true
     },
     {
+      "id": "e8c968b5-d4b6-4830-b858-918ec7008d83",
+      "title": "House",
+      "start_time": "2026-10-25T19:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/house-sun",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791079696453-OLBH9D78GWI8O2I1XA54/house.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "In the heart of a violet forest, an old house awaits young girls.",
+      "more": true
+    },
+    {
       "id": "119bea7a-dd71-48d9-a201-6faa0028efa6",
       "title": "Workshop: Academic Skills with Study Smart Tutors",
       "start_time": "2026-10-25T20:00:00+00:00",
@@ -58978,6 +55580,30 @@
       "region": "sf",
       "room": "Ingleside",
       "summary": "Learn to play chess or improve your game with volunteers from the community.",
+      "more": true
+    },
+    {
+      "id": "2b4466c0-286c-4192-8323-77512ab982ea",
+      "title": "Evil Dead 2",
+      "start_time": "2026-10-25T21:45:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/evil-dead-2-sun",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791082091454-QNZCB7GBW2KI3GBO1X79/evil+dead+ii.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Kiss your nerves goodbye!",
       "more": true
     },
     {
@@ -61862,6 +58488,32 @@
       "venue": "book-passage-corte-madera",
       "region": "northbay",
       "summary": "A spellbinding tour de force from the bestselling author of The Invisible Bridge —a novel about varieties of infidelity, the provenance of a literary masterpiece, and the power of",
+      "more": true
+    },
+    {
+      "id": "4a629f4b-09c4-4a77-be03-6701392aa83d",
+      "title": "Myranda Wren: The Nighttimes",
+      "start_time": "2026-10-28T01:00:00+00:00",
+      "location": "Russian Hill Bookstore, 2162 Polk Street, San Francisco, CA 94109, San Francisco, CA",
+      "url": "https://www.eventbrite.com/e/myranda-wren-the-nighttimes-tickets-2002897439157",
+      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194984942%2F3005259973716%2F1%2Foriginal.20261003-195854?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.502&fp-y=0.843&s=c52b573c8fbaca216fabc5560790acb5",
+      "sources": [
+        "Russian Hill Bookstore"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "cost": "unknown",
+      "venue": "russian-hill-bookstore",
+      "region": "sf",
+      "summary": "Join us in welcoming Myranda Wren as we celebrate the release of her new YA novel, The Nighttimes, based in San Francisco.",
       "more": true
     },
     {
@@ -68546,6 +65198,31 @@
       "more": true
     },
     {
+      "id": "7c3ac91d-1c76-4211-b063-377fc79e2fce",
+      "title": "It's the Great Pumpkin Charlie Brown!",
+      "start_time": "2026-10-31T01:00:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/great-pumpkin-fri",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791087178266-0VMBDLP8YIF14WSIFT19/great%2Bpumpkin.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Every year he rises from the pumpkin patch… Join the Peanuts gang for a timeless adventure as Charlie Brown preps for a party, Snoopy sets his sights on the Red Baron, and Linus",
+      "more": true
+    },
+    {
       "id": "e0dcaa49-cdab-465a-8407-8bbb5a89350c",
       "title": "Hipsteria Live - Swing Jazz at Etcetera Wine Bar",
       "start_time": "2026-10-31T01:00:00+00:00",
@@ -70245,6 +66922,57 @@
       "more": true
     },
     {
+      "id": "00925f0f-3b46-4331-bdfa-ca81d3812d8e",
+      "title": "Lips & Lashes Drag Brunch at Lookout",
+      "start_time": "2026-10-31T18:00:00+00:00",
+      "location": "Lookout, 3600 16th St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lookout",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "lookout",
+      "region": "sf",
+      "summary": "Lips & Lashes Drag Brunch at Lookout.",
+      "more": true
+    },
+    {
+      "id": "1853ae5d-2d30-4d93-828d-0f7fcde6b3ad",
+      "title": "Tango at Muddy Waters Coffee & Lounge",
+      "start_time": "2026-10-31T18:00:00+00:00",
+      "location": "Muddy Waters Coffee & Lounge, 521 Valencia Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/muddy-waters-coffee-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "tango"
+      ],
+      "cost": "unknown",
+      "venue": "muddy-waters-coffee-lounge",
+      "region": "sf",
+      "summary": "Tango at Muddy Waters Coffee & Lounge.",
+      "more": true
+    },
+    {
       "id": "39363103-74bd-4bb9-97e6-2cd3f10a00a6",
       "title": "Activity: Gardening",
       "start_time": "2026-10-31T18:00:00+00:00",
@@ -70320,6 +67048,109 @@
       "venue": "z-space",
       "region": "sf",
       "summary": "Word for WordPLAY presents: · Spooky Fam Jam!",
+      "more": true
+    },
+    {
+      "id": "628f6966-b8cc-4ba8-9be2-fa56155066c6",
+      "title": "GODDESS (Drag Brunch) at Beaux",
+      "start_time": "2026-10-31T19:00:00+00:00",
+      "location": "Beaux, 2344 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/beaux",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "beaux",
+      "region": "sf",
+      "summary": "GODDESS (Drag Brunch) at Beaux.",
+      "more": true
+    },
+    {
+      "id": "a7fe002c-d882-4790-b968-b92402ad39ec",
+      "title": "Lips and Lashes Drag Brunch at Lookout",
+      "start_time": "2026-10-31T19:00:00+00:00",
+      "location": "Lookout, 3600 16th St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lookout",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "lookout",
+      "region": "sf",
+      "summary": "Lips and Lashes Drag Brunch at Lookout.",
+      "more": true
+    },
+    {
+      "id": "74446e63-9f20-4f74-9f40-bd45bb3011eb",
+      "title": "Drag Brunch at Beaux",
+      "start_time": "2026-10-31T19:30:00+00:00",
+      "location": "Beaux, 2344 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/beaux",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "beaux",
+      "region": "sf",
+      "summary": "Drag Brunch at Beaux.",
+      "more": true
+    },
+    {
+      "id": "b25a25fe-f6f2-4043-b164-2f46a2ecd29d",
+      "title": "It's the Great Pumpkin Charlie Brown!",
+      "start_time": "2026-10-31T19:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/great-pumpkin-sat",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791087178266-0VMBDLP8YIF14WSIFT19/great%2Bpumpkin.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Every year he rises from the pumpkin patch… Join the Peanuts gang for a timeless adventure as Charlie Brown preps for a party, Snoopy sets his sights on the Red Baron, and Linus",
       "more": true
     },
     {
@@ -70400,6 +67231,29 @@
       "more": true
     },
     {
+      "id": "7c908848-3619-4140-92b2-409ee1e2b0f2",
+      "title": "All Ages Day at Detour",
+      "start_time": "2026-10-31T21:00:00+00:00",
+      "location": "Detour, 2200 Market St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/detour",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [],
+      "cost": "unknown",
+      "venue": "the-detour",
+      "region": "sf",
+      "summary": "All Ages Day at Detour.",
+      "more": true
+    },
+    {
       "id": "c4a9895e-e982-4f85-8ffe-8fdeb2c2fc11",
       "title": "Scream",
       "start_time": "2026-10-31T21:00:00+00:00",
@@ -70445,6 +67299,32 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Fri, Oct 23, 2026 – Sun, Nov 29, 2026 · A daughter digs into her mother’s unfinished feminist revolution in this bitingly funny, intensely relevant play on freedom and inheritance."
+    },
+    {
+      "id": "b15cef1e-12b1-408d-ae0d-efefc8fd235c",
+      "title": "Drag Brunch (Late Show) at Beaux",
+      "start_time": "2026-10-31T21:30:00+00:00",
+      "location": "Beaux, 2344 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/beaux",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "beaux",
+      "region": "sf",
+      "summary": "Drag Brunch (Late Show) at Beaux.",
+      "more": true
     },
     {
       "id": "c4adb145-d556-4c58-a27a-3f6b551c10a7",
@@ -70585,6 +67465,32 @@
       "more": true
     },
     {
+      "id": "34ba113f-0e46-48fb-b3e0-4caed8dbff09",
+      "title": "DJ/Dance Party at Paris 75",
+      "start_time": "2026-10-31T23:30:00+00:00",
+      "location": "Paris 75, 515 Broadway, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/paris-75",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "paris-75",
+      "region": "sf",
+      "summary": "DJ/Dance Party at Paris 75.",
+      "more": true
+    },
+    {
       "id": "ba98c2ac-e28a-4bd7-af02-cff08a555e48",
       "title": "Balboa Halloween Mystery Marathon",
       "start_time": "2026-10-31T23:30:00+00:00",
@@ -70631,6 +67537,104 @@
       "venue": "the-riptide",
       "region": "sf",
       "summary": "Every Saturday our hosts make dreams come true with Bingo.",
+      "more": true
+    },
+    {
+      "id": "d797eb81-6e7d-4027-ae64-8f06da27e1a5",
+      "title": "Live Jazz at Mr. Tipple's Recording Studio",
+      "start_time": "2026-11-01T01:00:00+00:00",
+      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "free",
+      "venue": "mr-tipples-recording-studio",
+      "region": "sf",
+      "summary": "Live Jazz at Mr.",
+      "more": true
+    },
+    {
+      "id": "22650b7a-c4a2-4720-bef6-67682cc8d1fe",
+      "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
+      "start_time": "2026-11-01T01:30:00+00:00",
+      "location": "Festa Wine & Cocktail Lounge - Karaoke, 1825 Post Street, San Francisco, 94115, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/festa-wine-cocktail-lounge-karaoke",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "festa-wine-cocktail-lounge",
+      "region": "sf",
+      "room": "Karaoke",
+      "summary": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke.",
+      "more": true
+    },
+    {
+      "id": "d9ce77c1-9d7c-491a-b54b-171f8b648efe",
+      "title": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech",
+      "start_time": "2026-11-01T01:30:00+00:00",
+      "location": "San Francisco Magic Theater @ the Marrakech, 419 O'Farrell Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/san-francisco-magic-theater-the-marrakech",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [],
+      "cost": "unknown",
+      "venue": "san-francisco-magic-theater",
+      "region": "sf",
+      "room": "the Marrakech",
+      "summary": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech.",
+      "more": true
+    },
+    {
+      "id": "228aec5e-7467-4252-b0ad-08f1ba1b0609",
+      "title": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-11-01T02:00:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
       "more": true
     },
     {
@@ -70709,6 +67713,30 @@
       "more": true
     },
     {
+      "id": "fe8c5f3f-1933-4abd-b886-c8c35991ba45",
+      "title": "Trivia at Thriller Social Club",
+      "start_time": "2026-11-01T02:00:00+00:00",
+      "location": "Thriller Social Club, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/thriller-social-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "thriller-social-club",
+      "region": "sf",
+      "summary": "Trivia at Thriller Social Club.",
+      "more": true
+    },
+    {
       "id": "0482a978-c229-4e65-b574-478f862727c3",
       "title": "Hillbillies on Halloween",
       "start_time": "2026-11-01T02:30:00+00:00",
@@ -70730,6 +67758,31 @@
       "venue": "bird-and-beckett",
       "region": "sf",
       "summary": "Joshua Raoul Brody Christopher Gray Joe Cunningham The Potrero Hillbillies tricked out as their favorite band(s).",
+      "more": true
+    },
+    {
+      "id": "053bac2a-71e1-4109-aa45-44abcca48af8",
+      "title": "Mahjong Night at Mr. Mahjong's",
+      "start_time": "2026-11-01T02:30:00+00:00",
+      "location": "Mr. Mahjong's, 260 Kearny Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-mahjongs",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "games"
+      ],
+      "cost": "unknown",
+      "venue": "mr-mahjong",
+      "region": "sf",
+      "summary": "Mahjong Night at Mr.",
       "more": true
     },
     {
@@ -70783,6 +67836,31 @@
       "more": true
     },
     {
+      "id": "c11b6cfd-bde5-447d-a738-0346281bcea9",
+      "title": "Mellow Nights at The Mellow Haight",
+      "start_time": "2026-11-01T02:30:00+00:00",
+      "location": "The Mellow Haight, 1401 Haight Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-mellow-haight",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "the-mellow-haight",
+      "region": "sf",
+      "summary": "Mellow Nights at The Mellow Haight.",
+      "more": true
+    },
+    {
       "id": "d78a93c1-7527-49fe-b644-6a1433eca65c",
       "title": "Liberation",
       "start_time": "2026-11-01T02:30:00+00:00",
@@ -70829,6 +67907,79 @@
       "venue": "a-c-t",
       "region": "sf",
       "summary": "Be transported to San Francisco’s Fillmore District—beginning in the present day, where the echoes of a once-thriving Black neighborhood still shape the streets.",
+      "more": true
+    },
+    {
+      "id": "a6393880-5717-4d3f-9160-bb22b290825d",
+      "title": "Stand-Up Comedy Show (Early) at Cheaper Than Therapy",
+      "start_time": "2026-11-01T02:45:00+00:00",
+      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "cheaper-than-therapy",
+      "region": "sf",
+      "summary": "Stand-Up Comedy Show (Early) at Cheaper Than Therapy.",
+      "more": true
+    },
+    {
+      "id": "05f71035-9c7b-4d9c-91fa-0e7a2aaec078",
+      "title": "Karaoke Lounge at Pandora Karaoke & Bar",
+      "start_time": "2026-11-01T03:00:00+00:00",
+      "location": "Pandora Karaoke & Bar, 50 Mason Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/pandora-karaoke-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "pandora-karaoke-bar",
+      "region": "sf",
+      "summary": "Karaoke Lounge at Pandora Karaoke & Bar.",
+      "more": true
+    },
+    {
+      "id": "100628d3-7469-4954-b544-7df474e2f305",
+      "title": "Live Music at Lion's Den Lounge and Bar",
+      "start_time": "2026-11-01T03:00:00+00:00",
+      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "lions-den-bar-lounge",
+      "region": "sf",
+      "summary": "Live Music at Lion's Den Lounge and Bar.",
       "more": true
     },
     {
@@ -70929,6 +68080,79 @@
       "more": true
     },
     {
+      "id": "2a6cd253-63c7-4e6b-9235-19675cd8fa2a",
+      "title": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "San Francisco Magic Theater @ the Marrakech, 419 O'Farrell Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/san-francisco-magic-theater-the-marrakech",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [],
+      "cost": "unknown",
+      "venue": "san-francisco-magic-theater",
+      "region": "sf",
+      "room": "the Marrakech",
+      "summary": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech.",
+      "more": true
+    },
+    {
+      "id": "3a613ba2-3e84-47d0-84ca-12fe19006ec6",
+      "title": "Live DJ at Roxy's Nightclub at Rick & Roxy's",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "Rick & Roxy's, 2131 Lombard Street, San Francisco, 94123, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/rick-roxys",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "rick-roxys",
+      "region": "sf",
+      "summary": "Live DJ at Roxy's Nightclub at Rick & Roxy's.",
+      "more": true
+    },
+    {
+      "id": "3c2c74d7-df9b-4a0d-883f-7fba85f859ac",
+      "title": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
+      "more": true
+    },
+    {
       "id": "56571aa7-3bc1-47fc-878f-f614b22d0ffb",
       "title": "Final Girls Halloween Night with Finishher b2b Source, Freak POV, Parking Structure, and Girls Trip ($10 Cover)",
       "start_time": "2026-11-01T04:00:00+00:00",
@@ -70982,6 +68206,32 @@
       "summary": "Latin"
     },
     {
+      "id": "6b1bb922-e2e8-4f4f-a5b8-a70b35f34c29",
+      "title": "DJ / Dancing at The Cafe",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "The Cafe, 2369 Market St, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-cafe",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "the-caf",
+      "region": "sf",
+      "summary": "DJ / Dancing at The Cafe.",
+      "more": true
+    },
+    {
       "id": "6ed2e565-80aa-4303-b3a7-c919487327b0",
       "title": "10/31 - PLUSH  @ THE FELIX SF",
       "start_time": "2026-11-01T04:00:00+00:00",
@@ -71004,6 +68254,30 @@
       "venue": "the-felix",
       "region": "sf",
       "summary": "WHEN SPIRITS DON’T REST, THEY DANCE.",
+      "more": true
+    },
+    {
+      "id": "8a06d3c9-5d3b-43a5-aa77-29fe36c03d4e",
+      "title": "Live Jazz at Mr. Tipple's Recording Studio",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "free",
+      "venue": "mr-tipples-recording-studio",
+      "region": "sf",
+      "summary": "Live Jazz at Mr.",
       "more": true
     },
     {
@@ -71030,6 +68304,56 @@
       "venue": "the-independent",
       "region": "sf",
       "summary": "Your favorite party is coming back!",
+      "more": true
+    },
+    {
+      "id": "b86e523f-d611-4ab0-8288-e6ca8cc2194c",
+      "title": "Karaoke at Silver Cloud Restaurant & Karaoke Bar",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "Silver Cloud Restaurant & Karaoke Bar, 1994 Lombard Street, San Francisco, 94123, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/silver-cloud-restaurant-karaoke-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "free",
+      "venue": "silver-cloud-restaurant-karaoke-bar",
+      "region": "sf",
+      "summary": "Karaoke at Silver Cloud Restaurant & Karaoke Bar.",
+      "more": true
+    },
+    {
+      "id": "b87275d7-03b3-4655-b52f-91b4b82cfaa0",
+      "title": "Live Music: DJs at Mr. Mahjong's",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "Mr. Mahjong's, 260 Kearny Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-mahjongs",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "mr-mahjong",
+      "region": "sf",
+      "summary": "Live Music: DJs at Mr.",
       "more": true
     },
     {
@@ -71080,6 +68404,106 @@
       "room": "Miner Auditorium"
     },
     {
+      "id": "6651b065-cbda-443a-8aca-88e2b6fddfe6",
+      "title": "Stand-Up Comedy Show (Late) at Cheaper Than Therapy",
+      "start_time": "2026-11-01T04:45:00+00:00",
+      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "cheaper-than-therapy",
+      "region": "sf",
+      "summary": "Stand-Up Comedy Show (Late) at Cheaper Than Therapy.",
+      "more": true
+    },
+    {
+      "id": "4760ad40-a6df-4e5c-8c2f-e72cef3c1b6c",
+      "title": "El SUPERRITMO! at Make-Out Room",
+      "start_time": "2026-11-01T05:00:00+00:00",
+      "location": "Make-Out Room, 3225 22nd. St., San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/make-out-room",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "dance-party",
+        "soul-funk"
+      ],
+      "cost": "free",
+      "venue": "make-out-room",
+      "region": "sf",
+      "summary": "El SUPERRITMO!",
+      "more": true
+    },
+    {
+      "id": "4c02aff3-b3db-462f-a416-352d86f71c55",
+      "title": "Saturday Night at Temple Nightclub San Francisco",
+      "start_time": "2026-11-01T05:00:00+00:00",
+      "location": "Temple Nightclub San Francisco, 540 Howard Street, San Francisco, 94105, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/temple-nightclub-san-francisco",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "temple-nightclub-san-francisco",
+      "region": "sf",
+      "summary": "Saturday Night at Temple Nightclub San Francisco.",
+      "more": true
+    },
+    {
+      "id": "022d63cd-cfb7-49ff-9699-f90f2b052be4",
+      "title": "Saturday Night Mic - $10 Late Night Laughs at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-11-01T05:30:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Saturday Night Mic - $10 Late Night Laughs at The Function SF: Comedy Club & Cocktail Lounge.",
+      "more": true
+    },
+    {
       "id": "52bd9137-12eb-40ba-800a-322901482c5d",
       "title": "Late Set: Simon Rowe Organ Trio",
       "start_time": "2026-11-01T05:30:00+00:00",
@@ -71101,6 +68525,31 @@
       "venue": "keys-jazz-bistro",
       "region": "sf",
       "summary": "Keeping folks up past 10 pm in SF is no easy feat, but Key’s owner Simon Rowe has been showcasing the best of the Bay Area’s organ trios in his late night Saturday sets.",
+      "more": true
+    },
+    {
+      "id": "f405124a-4eff-41bc-99a8-744050038e9a",
+      "title": "Live DJ at Lion's Den Lounge and Bar",
+      "start_time": "2026-11-01T06:00:00+00:00",
+      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "lions-den-bar-lounge",
+      "region": "sf",
+      "summary": "Live DJ at Lion's Den Lounge and Bar.",
       "more": true
     },
     {
@@ -80722,6 +78171,32 @@
       "summary": "Fri, Oct 23, 2026 – Sun, Nov 29, 2026 · A daughter digs into her mother’s unfinished feminist revolution in this bitingly funny, intensely relevant play on freedom and inheritance."
     },
     {
+      "id": "a4a8e4c8-3f38-4382-844c-b32ec523d592",
+      "title": "The Science of Longing",
+      "start_time": "2026-11-12T03:00:00+00:00",
+      "location": "Clio's Books, 353 Grand Ave, Oakland, CA 94610, Oakland, CA",
+      "url": "https://www.eventbrite.com/e/the-science-of-longing-tickets-2002892714024",
+      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194867324%2F1327630027533%2F1%2Foriginal.20261001-231743?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=2a145712e2df03bc2cb67258634d9687",
+      "sources": [
+        "Clio's Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "cost": "unknown",
+      "venue": "clios-books",
+      "region": "eastbay",
+      "summary": "What would make you believe the impossible?",
+      "more": true
+    },
+    {
       "id": "ab416681-c9c2-4232-8749-15e7ade746bf",
       "title": "Poetry & Prose Open Mic",
       "start_time": "2026-11-12T03:00:00+00:00",
@@ -84452,6 +81927,32 @@
       "summary": "Talk · Sat, Nov 14, 2026"
     },
     {
+      "id": "5911d61a-028e-416e-9dff-eaa3e552e226",
+      "title": "NVB Anniversary Trivia Night",
+      "start_time": "2026-11-15T03:00:00+00:00",
+      "location": "Noe Valley Books, 3899 24th St, San Francisco, CA 94114",
+      "url": "https://noevalleybooks.com/event/2026-11-14/nvb-anniversary-trivia-night",
+      "image_url": "https://noevalleybooks.com/sites/default/files/image/2026/10/03/2026-anniversary-posts-2.png",
+      "sources": [
+        "Noe Valley Books"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "trivia",
+        "books-authors"
+      ],
+      "cost": "paid",
+      "venue": "noe-valley-books",
+      "region": "sf",
+      "summary": "It's been two wonderful years since we opened our doors here at Noe Valley Books, and we want to celebrate with you- our amazing community who supported us the whole way through.",
+      "more": true
+    },
+    {
       "id": "e4ef20ad-43b3-4c11-88db-25af23e6c070",
       "title": "An Evening with Darren Criss",
       "start_time": "2026-11-15T03:00:00+00:00",
@@ -87518,6 +85019,32 @@
       "venue": "great-american-music-hall",
       "region": "sf",
       "summary": "The Metal Saint Tour 2026 · with Livekill · Metal"
+    },
+    {
+      "id": "9b462a3d-bd57-483f-b766-275064393a64",
+      "title": "Archives of Love and Liberation",
+      "start_time": "2026-11-18T03:00:00+00:00",
+      "location": "Clio's Books, 353 Grand Ave, Oakland, CA 94610, Oakland, CA",
+      "url": "https://www.eventbrite.com/e/archives-of-love-and-liberation-tickets-2002893527457",
+      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194978596%2F1327630027533%2F1%2Foriginal.20261003-171334?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=df133b3a555a38c512596166979f2334",
+      "sources": [
+        "Clio's Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "cost": "unknown",
+      "venue": "clios-books",
+      "region": "eastbay",
+      "summary": "Past as a portal to future.",
+      "more": true
     },
     {
       "id": "a4e70c55-2a3c-4469-9c3d-3689d00266b8",
@@ -97240,6 +94767,28 @@
       "more": true
     },
     {
+      "id": "e094dcad-0db6-4150-963d-46f0da981ef3",
+      "title": "Eloise - The Drama Queen Tour",
+      "start_time": "2026-12-03T04:00:00+00:00",
+      "location": "The Fillmore, 1805 Geary Blvd, San Francisco, CA 94115",
+      "url": "https://www.ticketmaster.com/eloise-the-drama-queen-tour-san-francisco-california-12-02-2026/event/1C0064EA7F41710E",
+      "image_url": "https://s1.ticketm.net/dam/a/486/b9af0b27-c382-40bf-9332-8c2ea9a27486_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "The Fillmore"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop"
+      ],
+      "cost": "unknown",
+      "venue": "the-fillmore",
+      "region": "sf"
+    },
+    {
       "id": "c9a43b1c-593e-4e59-a254-bad688d1e1d5",
       "title": "The Bad Plus",
       "start_time": "2026-12-03T05:30:00+00:00",
@@ -97443,6 +94992,30 @@
       "region": "eastbay",
       "room": "Sol",
       "summary": "Deconstructing Yourself is a weekly drop-in guided meditation (approximately one hour) plus Q & A with Berkeley Alembic founding teacher Michael Taft.",
+      "more": true
+    },
+    {
+      "id": "ebf33cc1-bffb-4f6b-9360-a1ce721855d4",
+      "title": "\"The Second Life of Freddie Nole\": Documentary Screening",
+      "start_time": "2026-12-04T02:30:00+00:00",
+      "location": "Commonwealth Club World Affairs of California, San Francisco",
+      "url": "https://www.commonwealthclub.org/events/2026-12-03/second-life-freddie-nole-documentary-screening",
+      "image_url": "https://cdn.commonwealthclub.org/s3fs-public/styles/hero/public/2026-10/20261203%20Freddie%20Nole%20HERO.png?itok=sEn2U49a",
+      "sources": [
+        "Commonwealth Club"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "documentary"
+      ],
+      "cost": "unknown",
+      "venue": "the-commonwealth-club-of-california",
+      "region": "sf",
+      "summary": "The Second Life of Freddie Nole is a short documentary film that follows Freddie, a magnetic and deeply compassionate man, who spends his days meeting newly released citizens at",
       "more": true
     },
     {
@@ -100884,6 +98457,30 @@
       "more": true
     },
     {
+      "id": "1fa5ca2f-f6cc-4743-a00c-942b3b841721",
+      "title": "LIVE MUSIC: Storefront Church (Presented by THROWIN' BO'S)",
+      "start_time": "2026-12-11T04:00:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/live-music-storefront-church",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791061641004-PVZLZBQCPR5CT5IVKX3R/250519_Cara_D-2.JPEG",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Throwin’ Bo’s presents: Storefront Church Storefront Church is the project of Lukas Frank, who's drummed in Phoebe Bridgers' band and appeared on her albums, and the first song of",
+      "more": true
+    },
+    {
       "id": "18c7b043-9e75-4800-a256-6862b5363e5b",
       "title": "KARAOKIKI WITH YOUR HOSTS DULCE DE LECHE ++ LAMBERT ++ MOJO CARTER ++ FRISCOPINK (FREE)",
       "start_time": "2026-12-11T05:00:00+00:00",
@@ -101600,6 +99197,31 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Fri, Nov 6, 2026 – Sun, Dec 13, 2026 · In a small Georgia town, a blues star’s suspicious rise to fame and a desperate woman’s dream of escape unleash a series of secrets in a",
+      "more": true
+    },
+    {
+      "id": "0d872955-f187-4a3e-b0d6-8f0d71afe3e1",
+      "title": "Jonathan Richman",
+      "start_time": "2026-12-13T04:00:00+00:00",
+      "location": "The Phoenix Theater, 201 Washington St., Petaluma, CA, Petaluma, CA",
+      "url": "https://www.eventbrite.com/e/jonathan-richman-tickets-1995730963034",
+      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189810991%2F308989365325%2F1%2Foriginal.20260728-181931?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.498&fp-y=0.097&s=cb361843c9479a52dea8b946d912d9de",
+      "sources": [
+        "Phoenix Theater (Petaluma)"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie",
+        "folk-americana"
+      ],
+      "cost": "unknown",
+      "venue": "phoenix-theater",
+      "region": "northbay",
+      "summary": "LIVE!",
       "more": true
     },
     {
@@ -106616,6 +104238,32 @@
       "region": "sf"
     },
     {
+      "id": "5e212286-999b-4301-a2a5-1b0650ef1182",
+      "title": "The Tide is High, a night of Reggae, Ska, and Rocksteady",
+      "start_time": "2027-01-02T05:30:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116, USA",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "DJ Chaos (AKA Herman) and Dion bring boxes of 7 inch records of Ska, Rocksteady, Reggae and Dub.",
+      "more": true
+    },
+    {
       "id": "9572eb63-8850-46a6-a0b8-36b6f138c8b0",
       "title": "Rent",
       "start_time": "2027-01-02T22:00:00+00:00",
@@ -108987,6 +106635,35 @@
       "region": "sf"
     },
     {
+      "id": "7e549dd6-1fc8-46bc-ab78-29d393ebf655",
+      "title": "MANGO! Every 4th Saturday 2-8pm!",
+      "start_time": "2027-01-23T22:00:00+00:00",
+      "location": "El Rio, 3158 Mission St, San Francisco, CA",
+      "url": "https://tockify.com/elriosf2/detail/1374/1800741600000",
+      "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/67b4c0da1c08c97c952b3cd2/square_272x272.jpg",
+      "sources": [
+        "El Rio"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "club-night",
+        "lgbtq",
+        "latino",
+        "women"
+      ],
+      "cost": "free",
+      "venue": "el-rio",
+      "region": "sf",
+      "summary": "MANGO : A Day Party For Women & Their Friends!",
+      "more": true
+    },
+    {
       "id": "93e7ae32-32ea-40c8-b87a-838f9bdd6d06",
       "title": "Rent",
       "start_time": "2027-01-23T22:00:00+00:00",
@@ -109232,6 +106909,31 @@
       "venue": "presidio-theatre",
       "region": "sf",
       "summary": "What happens when you intersect accordion with strings?",
+      "more": true
+    },
+    {
+      "id": "81c56b5d-1bba-40f3-8680-1c186edb57ac",
+      "title": "LIVE MUSIC: Angela Autumn (Presented by THROWIN' BO'S)",
+      "start_time": "2027-01-25T04:00:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/live-music-angela-autumn",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791059044633-L13B2WJCMOZAAIK8PLLT/AngelaAutumn_SF.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana",
+        "country"
+      ],
+      "cost": "paid",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Throwin’ Bo’s presents: Angela Autumn Angela Autumn is a country folk artist from the Appalachia region of Pennsylvania.",
       "more": true
     },
     {
@@ -128422,6 +126124,33 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "Benjamin Barker returns to London a changed man.",
+      "more": true
+    },
+    {
+      "id": "6336ef81-b59d-4f78-969d-6acd208d5a52",
+      "title": "5Rhythms® Sweat Your Prayers",
+      "start_time": "2027-09-05T17:30:00+00:00",
+      "location": "The Berkeley Alembic (Luna), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/131900936",
+      "image_url": "https://images.momence.com/h/71603/session-template-banner/3b057c11-d38f-4acc-9e22-c1e63ca21e24.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Luna",
+      "summary": "5Rhythms® dance is a profound medicine, offering a dynamic movement map into the vast, unexplored wilderness between our head and feet.",
       "more": true
     },
     {
