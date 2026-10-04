@@ -118,6 +118,18 @@
     padding: 14px 0; border-bottom: 1px solid var(--border);
   }
   .item.past { opacity: 0.6; }
+  /* Your own items (not Agora events): a tinted card with a dashed edge, an
+     icon for what it is, and who added it. */
+  .item.custom {
+    margin: 10px 0; padding: 12px; border-radius: 10px;
+    border: 1.5px dashed color-mix(in srgb, var(--accent) 45%, var(--border));
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+  .item.custom .badge.own { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--fg); }
+  .thumb.kind {
+    display: grid; place-items: center; font-size: 30px; line-height: 1;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+  }
   .item .main { min-width: 0; overflow-wrap: anywhere; }
   .when { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1.1; }
   .when .badge {
@@ -342,6 +354,10 @@
 
   const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
   const startOf = (it) => it.start_time ? new Date(it.start_time) : null;
+  // What one of your own items is (custom.category; API: CUSTOM_CATEGORIES).
+  const KINDS = {food: ["🍽️", "Food"], drinks: ["🍸", "Drinks"], outdoors: ["🌳", "Outdoors"],
+                 travel: ["🚗", "Getting there"], other: ["📌", "Other"]};
+  const kindOf = (it) => KINDS[it.custom && it.custom.category] || KINDS.other;
   const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
 
   function itemHtml(it) {
@@ -357,7 +373,9 @@
       where = bits.length ? '<div class="it-where">' + esc(bits.join(" · ")) + "</div>" : "";
     }
     const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
-    const img = it.event && safeUrl(it.event.image_url)
+    const own = !it.event;
+    const img = own ? '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>"
+      : it.event && safeUrl(it.event.image_url)
       ? (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
         + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
         + (url ? "</a>" : "</div>") : "";
@@ -365,11 +383,13 @@
     const social = isSocial(view.canvas);
     const cmtOpen = social && openComments.has(it.id);
     const isWinner = social && view.canvas.winner_item_id === it.id;
-    return '<article class="item' + (past ? " past" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
+    // Your own items say so: "Added by Sam" once others are involved, else "Your own".
+    const ownBadge = own ? '<span class="badge own">' + (social ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
+    return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
       + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
-      + (past ? '<span class="badge">Past</span>' : "") + (isWinner ? '<span class="badge">The plan</span>' : "") + "</div>"
+      + ownBadge + (past ? '<span class="badge">Past</span>' : "") + (isWinner ? '<span class="badge">The plan</span>' : "") + "</div>"
       + '<div class="it-title">' + title + "</div>" + where + note
-      + (social && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
+      + (social && !own && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
       + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
       + '" aria-label="' + (it.you_voted ? "You’re in. Tap to undo" : "I’m in") + '">👍 <span>' + (it.you_voted ? "You’re in" : "I’m in")
       + '</span><span class="n">' + voters.length + "</span></button>"
@@ -624,6 +644,8 @@
         const out = await AC.formDialog({title: "Add your own",
           text: "Anything that isn’t on Agora: dinner, a park, a friend’s show.",
           fields: [
+            {name: "category", label: "Kind", type: "chips", value: "food",
+             options: Object.entries(KINDS).map(([value, [icon, label]]) => ({value, label: icon + " " + label}))},
             {name: "title", label: "What", required: true, max: 120, placeholder: "Dinner at Nopa"},
             {name: "start", label: "When (optional)", type: "datetime-local"},
             // Text, not type=url: the browser would silently refuse "nopasf.com".
@@ -635,7 +657,7 @@
             ? "That link doesn’t look right." : ""});
         if (!out) return;
         const who = me();
-        const custom = {title: out.title};
+        const custom = {title: out.title, category: out.category || "other"};
         if (out.start) custom.start_time = new Date(out.start).toISOString();
         if (out.url) custom.url = /^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url;
         if (out.note) custom.note = out.note;

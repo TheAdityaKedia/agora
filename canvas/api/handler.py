@@ -26,6 +26,8 @@ import store
 MAX_BODY_BYTES = 16 * 1024
 LIMITS = {"canvas_name": 80, "note": 1000, "name": 40, "comment": 500,
           "custom_title": 120, "custom_note": 500, "url": 500}
+# What one of your own items is; the page shows an icon for it.
+CUSTOM_CATEGORIES = {"food", "drinks", "outdoors", "travel", "other"}
 # (kind, max requests, window seconds) per salted IP hash.
 CREATE_LIMIT = ("create", 10, 3600)
 WRITE_LIMIT = ("write", 120, 600)
@@ -179,7 +181,7 @@ def _item_out(row, client=""):
     if row["kind"] == "event":
         out["event"] = row["event"]
     else:
-        out["custom"] = {k: row.get(k) for k in ("title", "url", "start_time", "note")
+        out["custom"] = {k: row.get(k) for k in ("title", "url", "start_time", "note", "category")
                          if row.get(k)}
     if "removed_at" in row:
         out["removed_at"] = row["removed_at"]
@@ -373,6 +375,11 @@ def add_item(req, cid):
             raise ApiError(400, "custom must be an object")
         title = _clean(c.get("title"), "custom.title", LIMITS["custom_title"])
         body = {"kind": "custom", "title": title}
+        category = c.get("category")
+        if category is not None and category not in CUSTOM_CATEGORIES:
+            raise ApiError(400, "custom.category must be one of " + ", ".join(sorted(CUSTOM_CATEGORIES)))
+        if category:
+            body["category"] = category
         for k, v in (("url", _url(c.get("url"), "custom.url")),
                      ("start_time", _datetime(c.get("start_time"), "custom.start_time")),
                      ("note", _clean(c.get("note"), "custom.note", LIMITS["custom_note"],

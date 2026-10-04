@@ -226,6 +226,27 @@
       }
       const inputs = {};
       for (const f of fields) {
+        if (f.type === "chips") {  // one of f.options [{value, label}], as chips
+          const set = document.createElement("fieldset");
+          set.className = "ac-field ac-chips";
+          const legend = document.createElement("legend");
+          legend.textContent = f.label;
+          set.appendChild(legend);
+          const row = document.createElement("div");
+          for (const o of f.options) {
+            const l = document.createElement("label");
+            const r = document.createElement("input");
+            r.type = "radio"; r.name = f.name; r.value = o.value;
+            r.checked = o.value === f.value;
+            l.append(r, document.createTextNode(o.label));
+            row.appendChild(l);
+          }
+          set.appendChild(row);
+          form.appendChild(set);
+          inputs[f.name] = {get value() { const c = set.querySelector("input:checked"); return c ? c.value : ""; },
+                            focus() {}};
+          continue;
+        }
         const label = document.createElement("label");
         label.className = "ac-field";
         const cap = document.createElement("span");
@@ -288,7 +309,7 @@
         finish(out);
       });
       dlg.showModal();
-      const first = form.querySelector("input, textarea");
+      const first = form.querySelector("input:not([type=radio]), textarea");
       if (first) first.focus();
     });
   }
@@ -436,6 +457,14 @@
         background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px;
         padding: 9px 10px; color-scheme: light dark; }
       .ac-field textarea { min-height: 84px; resize: vertical; }
+      .ac-chips { border: 0; padding: 0; margin: 0; min-width: 0; }
+      .ac-chips legend { padding: 0; margin-bottom: 4px; }
+      .ac-chips div { display: flex; flex-wrap: wrap; gap: 6px; }
+      .ac-chips label { position: relative; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+        border: 1px solid var(--border); background: var(--input-bg); color: var(--fg); font-size: 14px; }
+      .ac-chips input { position: absolute; opacity: 0; pointer-events: none; }
+      .ac-chips label:has(input:checked) { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+      .ac-chips label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
       .ac-field input:focus, .ac-field textarea:focus { outline: none; border-color: var(--accent); }
       .ac-dialog-error { margin: 0; color: var(--error); font-size: 14px; }
       .ac-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }

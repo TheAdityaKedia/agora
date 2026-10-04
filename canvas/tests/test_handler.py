@@ -544,3 +544,16 @@ def test_duplicate_does_not_copy_owners(api, canvas):
     pc("POST", f"/canvases/{canvas}/claim")
     copy = api("POST", f"/canvases/{canvas}/duplicate", {})["json"]["canvas"]["id"]
     assert not view(pc, copy)["canvas"]["yours"]
+
+
+def test_custom_item_category(api, canvas):
+    r = api("POST", f"/canvases/{canvas}/items",
+            {"custom": {"title": "Dinner at Nopa", "category": "food"}})
+    assert r["statusCode"] == 201 and r["json"]["item"]["custom"]["category"] == "food"
+    assert view(api, canvas)["items"][0]["custom"]["category"] == "food"
+    r = api("POST", f"/canvases/{canvas}/items",
+            {"custom": {"title": "Something", "category": "rocket"}})
+    assert r["statusCode"] == 400 and "category" in r["json"]["error"]
+    # Optional: older clients send none.
+    r = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Walk"}})
+    assert r["statusCode"] == 201 and "category" not in r["json"]["item"]["custom"]
