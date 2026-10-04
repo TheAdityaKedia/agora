@@ -1,8 +1,9 @@
 """DynamoDB access for event canvases.
 
-One table, single-table design (see feature-specs/event-canvases.md):
+One table, single-table design (fields of every row: canvas/HOW-IT-WORKS.md):
 
-    C#<canvasId>   META                       canvas fields + version + counters
+    C#<canvasId>   META                       canvas fields, plan (ordered item ids),
+                                              version + counters, owner devices
     C#<canvasId>   ITEM#<itemId>              an event snapshot or a custom item
     C#<canvasId>   VOTE#<itemId>#<clientId>   one 👍 per browser per item
     C#<canvasId>   CMT#<itemId>#<commentId>   a comment

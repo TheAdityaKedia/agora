@@ -30,7 +30,58 @@ here.
   collection so friends add events, vote 👍 by name, comment and pick a plan;
   duplicate / share a copy. Agora's first live backend (AWS Lambda +
   DynamoDB). Next: a one-tap ☆ Save on every event card.
-  Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md).
+  Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md);
+  how it works now: [`canvas/HOW-IT-WORKS.md`](canvas/HOW-IT-WORKS.md).
+  **Known gaps** (found 2026-10-04; none has a spec yet), most important first:
+  - *Event copies drift.* An added event is a copy made at that moment;
+    a later cancellation, new time or new venue never reaches it. Worse,
+    upstream: saves never update rows and nothing removes events that vanish
+    from their source, so a cancelled show stays on the **main site** too.
+    Fix both: the scrape marks vanished/changed events (e.g. `status`,
+    `changed_at` in the manifest), and the API refreshes copies on read from
+    its cached manifest, showing "Time changed" / "No longer listed".
+  - *Event ids aren't stable.* Ids are random per database row
+    (`uuid4`), and rows get deleted and re-scraped (the documented fix for
+    stale fields) or merged by dedup. Then a collection's `ev_<id>` points at
+    nothing, re-adding the same show makes a duplicate, and collecting mode
+    doesn't mark it as added. Needs ids derived from the event (source + URL
+    + start) or an old→new id map at export.
+  - *Losing the link loses the collection.* Everything is per browser:
+    clearing site data or a new phone loses "Your collections", the name and
+    the default (the collections themselves survive). Options: email
+    yourself your links, a recovery code, or accounts.
+  - *No protection from a careless or hostile editor.* Anyone with the link
+    can remove items, rename, rewrite the note or reorder the plan; names
+    are self-declared; links get forwarded. Undo is per item only. Options:
+    owner-only actions for name/note/delete, "restore everything removed
+    since…", a report button.
+  - *Nobody can delete a collection.* "Keep forever" plus no delete means
+    names and comments persist; removal requests need `admin.py`. Add
+    delete (owner devices) and say so in a privacy note.
+  - *No alerts.* Only a $5 budget alarm. API errors, throttling and the
+    AWS account's Lambda limit of 10 concurrent runs (a busy evening could
+    hit it) go unnoticed. Add CloudWatch alarms; ask AWS to raise the limit
+    before a public launch.
+  - *Page and API deploy separately.* A page and the API can be a version
+    apart for minutes (or longer in an open tab). Keep API changes additive
+    and remove old fields only after a release that stopped using them
+    (`winner_item_id` was removed in one step).
+  - *Tests that don't run in CI.* Only the API unit tests run (on deploy).
+    The collections end-to-end test and all of `service/` (scrapers,
+    exporter, `test_frontend.py`) only run when someone runs them, while a
+    push to `main` deploys the site.
+  - *Adding an event depends on the whole manifest.* Each cold Lambda
+    downloads and parses all of `events.json`; slower as it grows, and adds
+    fail (503) if Pages is down. A small per-event file or the lean manifest
+    alone would do.
+  - *Rate limits are per IP.* A campus or mobile carrier sharing one IP can
+    trip them for a whole group; anyone rotating IPs avoids them.
+  - *Times are the adder's time zone.* Your own items' times are entered in
+    the browser's zone; collection dates have no zone. Fine for the Bay
+    Area, wrong for a visitor planning from elsewhere.
+  - *After the plan, nothing.* "Interested" is for deciding; nothing says
+    who's actually going once the plan is set (an "I'm in" on the plan,
+    reminders); see "Collections → actual plans" below.
 - **Frontend payload scaling** — the browser downloads all of `events.json` and
   indexes every description on load (16 s to the first row on a slow phone at
   5k events). Lean manifest + descriptions on demand.

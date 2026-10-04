@@ -6,10 +6,11 @@
 > the owner) to also cover saving events for yourself — see
 > "Collections for yourself" below.
 
-**Status: phase 1 (backend) shipped in `canvas/` (prod + dev live — see
-`canvas/README.md`); phases 2–3 (the pages) built on a branch; phase 4 docs
-partly done.** Decisions below were settled with the owner
-(2026-10-02). Open items are small and listed at the end.
+**Status: shipped, in private beta.** For how it works *now* (features,
+data model, API, frontend) read [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md);
+this spec keeps the original decisions and their reasons (settled with the
+owner, 2026-10-02, and amended since) and may lag the code in detail. Known
+gaps: `future-features.md` → "Collections".
 
 ## Collections for yourself (added 2026-10-03)
 

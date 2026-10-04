@@ -3,8 +3,9 @@
 Backend for **collections** (called canvases in the code): named lists of
 events you keep for yourself or share so friends can add, vote and comment. One Python
 Lambda behind a Lambda Function URL plus one DynamoDB table, with the
-infrastructure defined in code (AWS CDK, Python) in `infra/`. Design and
-rationale: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md).
+infrastructure defined in code (AWS CDK, Python) in `infra/`. **How it all
+works** (features, data model, API, frontend): [`HOW-IT-WORKS.md`](HOW-IT-WORKS.md).
+Original design and rationale: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md).
 
 This is Agora's only live backend and it's independent of `service/`: no
 scraper code or dependencies, and it never touches Neon. The only link to the
