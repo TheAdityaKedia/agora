@@ -5900,6 +5900,22 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "yummy-future-coffee": {
+      "added": "2026-10-04",
+      "address": "170 University Avenue, Palo Alto, CA 94301",
+      "evidence": [
+        "map: 170 in Santa Clara County (building, way/80482724)",
+        "text: Palo Alto",
+        "street number matches"
+      ],
+      "lat": 37.4443,
+      "lng": -122.162839,
+      "name": "Yummy Future Coffee",
+      "osm": "way/80482724",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "z-space": {
       "added": "2026-10-02",
       "address": "450 Florida Street, San Francisco, CA 94110",
