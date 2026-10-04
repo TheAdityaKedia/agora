@@ -18,7 +18,7 @@ uses with one model:
 
 - **Social parts appear only once a collection is shared.** A collection you
   started and nobody else has touched is a plain list (events, Remove,
-  Duplicate). Votes ("Interested"), comments, "Add to plan", "Added by" and the plan
+  Duplicate). Votes ("Interested"), comments and "Added by"
   box appear when any of: you opened someone else's link (`canvas.yours` is
   false), more than one browser has done something on it (`canvas.people >
   1`, counted server-side from creator / item adders / voters / commenters —
@@ -199,7 +199,12 @@ versions so an unchanged canvas costs one tiny read.
 - **The plan** (if any steps) pinned on top: numbered steps in the group's
   order, each with time (just the time when every dated step is on one day,
   which is said once), title (your own items with their kind icon), place,
-  a Google Calendar link, **Take out**, and ↑/↓ to move it. **Add the plan
+  a Google Calendar link and **Take out**. **Press and hold a step, then drag
+  it into place**: it lifts and follows the finger, the other steps slide out
+  of its way, and it settles into the gap on release (touch: hold ~0.3 s
+  first, so a quick swipe still scrolls; mouse: press and move; keyboard:
+  focus a step, Alt+↑/↓). The plan is in personal collections too: a solo
+  itinerary. **Add the plan
   to your calendar** downloads one `.ics` with every dated step. A newly
   added step goes before the first step that starts later (undated: last),
   so a dated plan starts in time order; people can then move steps.
@@ -207,6 +212,9 @@ versions so an unchanged canvas costs one tiny read.
   card, **👍 Interested N** with names ("Adi, Sam"), comment count
   (expands), **Add to plan** / **Take out of plan** (an "In the plan" badge
   when it's in), Remove.
+- Your own items can be edited (**Edit**: kind, what, when, link, note;
+  `PATCH …/items/{itemId}` with the changed `custom` fields, empty clears
+  one); Agora events can't (they're snapshots).
 - Your own items (not Agora events) look different: a tinted card with a
   dashed edge, an icon for their kind (🍽️ Food, 🍸 Drinks, 🌳 Outdoors,
   🚗 Getting there, 📌 Other; picked with chips in **Add your own**) in the
@@ -301,6 +309,7 @@ only.
 | `PATCH /canvases/{id}` | any of `{name, note, date_from, date_to}` + `actor_name` | `{canvas}` |
 | `POST /canvases/{id}/plan` | `{op: add\|remove\|move, item_id, to?}` + `actor_name` | `{plan: [itemId…]}` (`to` = new position, 0 first; add/remove of what's already there is a no-op; at most 20 steps) |
 | `POST /canvases/{id}/items` | `{event_id}` or `{custom:{title, url?, start_time?, note?, category?}}` (category: food, drinks, outdoors, travel, other) + `actor_name` | `201 {item, created:true}`; `200 {item, created:false}` if the event was already there |
+| `PATCH /canvases/{id}/items/{itemId}` | `{custom:{title?, url?, start_time?, note?, category?}}` + `actor_name` | `{item}`; your own items only (an empty value clears a field; not the title) |
 | `DELETE /canvases/{id}/items/{itemId}` | `{actor_name}` | soft delete |
 | `POST /canvases/{id}/items/{itemId}/restore` | `{actor_name}` | restore |
 | `PUT /canvases/{id}/items/{itemId}/vote` | `{name}` | upsert this client's vote |

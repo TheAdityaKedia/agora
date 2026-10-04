@@ -372,6 +372,32 @@ def remove_item(cid, item_id, actor_name, client_id, title, plan_after=None, exp
         raise Conflict() from None
 
 
+def edit_item(cid, item_id, sets, removes, actor_name, client_id, title):
+    """Change fields of a live custom item (keys from the API's CUSTOM_KEYS)."""
+    names = {f"#k{i}": k for i, k in enumerate(list(sets) + removes)}
+    by_key = {k: n for n, k in names.items()}
+    expr = []
+    if sets:
+        expr.append("SET " + ", ".join(f"{by_key[k]} = :v{i}" for i, k in enumerate(sets)))
+    if removes:
+        expr.append("REMOVE " + ", ".join(by_key[k] for k in removes))
+    update = {"Update": {
+        "TableName": table().name,
+        "Key": {"PK": _pk(cid), "SK": f"ITEM#{item_id}"},
+        "UpdateExpression": " ".join(expr),
+        "ConditionExpression": "attribute_exists(PK) AND attribute_not_exists(removed_at) AND #kind = :custom",
+        "ExpressionAttributeNames": {**names, "#kind": "kind"},
+        "ExpressionAttributeValues": {":custom": "custom",
+                                      **{f":v{i}": v for i, v in enumerate(sets.values())}},
+    }}
+    try:
+        _transact([_bump(cid),
+                   _put(_log_row(cid, actor_name, "edited", client_id, item_id=item_id, item_title=title)),
+                   update])
+    except _TxFailed as e:
+        raise NotFound("canvas" if e.failed(0) else "item") from None
+
+
 def restore_item(cid, item_id, actor_name, client_id, title):
     item_update = {"Update": {
         "TableName": table().name,

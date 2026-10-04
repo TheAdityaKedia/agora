@@ -125,7 +125,8 @@ def run(shots):
         canvas_url = a.url
         # Just Adi so far: a plain list, no votes, comments or plan.
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        expect(a.locator('[data-act="plan-add"]')).to_have_count(0)
+        # (The plan works on your own too: Add to plan is there.)
+        expect(a.locator('[data-act="plan-add"]')).to_have_count(2)
         if shots:
             a.screenshot(path=f"{shots}/2-personal.png", full_page=True)
         # Share it as-is: now it asks Adi's name, and the social parts appear.
@@ -195,11 +196,26 @@ def run(shots):
         steps = a.locator(".plan .step")
         expect(steps).to_have_count(2)
         expect(steps.nth(1)).to_contain_text("Dinner at Nopa")
-        steps.nth(1).locator('[data-act="plan-up"]').click()
+        # Drag dinner above the first step (press, move, let go).
+        src, dst = steps.nth(1).bounding_box(), steps.nth(0).bounding_box()
+        a.mouse.move(src["x"] + 150, src["y"] + src["height"] / 2)
+        a.mouse.down()
+        for k in range(1, 9):
+            a.mouse.move(src["x"] + 150, src["y"] + src["height"] / 2 - (src["y"] - dst["y"] + 10) * k / 8)
+        a.mouse.up()
         expect(steps.nth(0)).to_contain_text("Dinner at Nopa")
         a.reload()
         expect(a.locator(".plan .step").nth(0)).to_contain_text("Dinner at Nopa")
-        expect(a.locator(".plan .step").nth(0).locator('[data-act="plan-up"]')).to_be_disabled()
+        # Your own items can be edited.
+        a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="edit-custom"]').click()
+        dlg = a.locator("dialog.ac-dialog[open]")
+        expect(dlg.locator('[name="title"]')).to_have_value("Dinner at Nopa")
+        expect(dlg.locator('[name="url"]')).to_have_value("https://nopasf.com")
+        dlg.locator("label", has_text="Drinks").click()
+        answer_dialog(a, title="Dinner at Nopa, then dessert", url="")
+        nopa_item = a.locator(".item", has_text="Dinner at Nopa, then dessert")
+        expect(nopa_item.locator(".thumb.kind")).to_have_attribute("aria-label", "Drinks")
+        expect(nopa_item.locator(".it-title a")).to_have_count(0)  # the link was cleared
         expect(a.locator(".item", has_text="Dinner at Nopa").locator(".badge", has_text="In the plan")).to_have_count(1)
 
         # --- Sam removes an event: Adi's Activity says who, which showing

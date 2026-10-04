@@ -108,7 +108,23 @@
   .step {
     display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; column-gap: 10px;
     padding: 10px 0; border-top: 1px solid var(--border); counter-increment: step;
+    position: relative; background: var(--input-bg);
+    /* Press and hold to move: no text selection or link menu on the hold. */
+    user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   }
+  .step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .plan.dragging .step { transition: transform 0.15s ease; }
+  .plan .step.lifted {
+    z-index: 2; transition: box-shadow 0.15s ease; border-radius: 10px; border-top-color: transparent;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 0.22);
+  }
+  .plan .step.settling { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .step-grip {
+    align-self: center; padding: 6px 2px 6px 8px; cursor: grab;
+    color: var(--muted); font-size: 18px; letter-spacing: -3px; line-height: 1;
+  }
+  .plan-hint { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .step:first-child { border-top: 0; }
   .step::before {
     content: counter(step); width: 24px; height: 24px; margin-top: 1px; border-radius: 50%;
@@ -122,13 +138,6 @@
   .step-title a:hover { color: var(--accent); text-decoration: underline; }
   .step-where { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
   .step-links { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-top: 2px; font-size: 13px; }
-  .step-move { display: flex; flex-direction: column; gap: 4px; }
-  .step-move button {
-    width: 36px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 15px;
-    border: 1px solid var(--border); background: var(--bg); color: var(--fg);
-  }
-  .step-move button:hover:not(:disabled) { border-color: var(--accent); }
-  .step-move button:disabled { opacity: 0.3; cursor: default; }
   .plan-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; align-items: center; }
 
   /* --- Items --- */
@@ -294,6 +303,7 @@
   // The name on a write. "" is fine: curating never asks who you are.
   const me = () => AC.currentName();
   let view = null;               // last full GET response
+  let drag = null, press = null, pressTimer = 0, suppressClickUntil = 0;  // plan reordering (below)
   let pendingRender = false;     // a poll arrived while someone was typing
   const openComments = new Set();  // item ids with their comment thread open
   let lastInteraction = Date.now();
@@ -323,11 +333,13 @@
   function render() {
     const typing = document.activeElement && app.contains(document.activeElement)
       && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
-    if (typing) { pendingRender = true; return; }
+    if (typing || drag) { pendingRender = true; return; }
     pendingRender = false;
     const scroll = window.scrollY;
+    const focusedStep = document.activeElement && document.activeElement.matches(".step") && document.activeElement.dataset.id;
     app.innerHTML = canvasHtml(view);
     window.scrollTo(0, scroll);
+    if (focusedStep) app.querySelector('.step[data-id="' + CSS.escape(focusedStep) + '"]')?.focus({preventScroll: true});
   }
   app.addEventListener("focusout", () => setTimeout(() => { if (pendingRender) render(); }, 0));
 
@@ -350,7 +362,7 @@
       + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
       + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
       + "</div>"
-      + (social && plan.length ? planHtml(plan) : "")
+      + (plan.length ? planHtml(plan) : "")
       + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
@@ -406,7 +418,7 @@
     const voters = it.votes.map(v => v.name);
     const social = isSocial(view.canvas);
     const cmtOpen = social && openComments.has(it.id);
-    const inPlan = social && (view.canvas.plan || []).includes(it.id);
+    const inPlan = (view.canvas.plan || []).includes(it.id);
     // Your own items say so: "Added by Sam" once others are involved, else "Your own".
     const ownBadge = own ? '<span class="badge own">' + (social ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
     return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
@@ -420,9 +432,10 @@
       + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
       + '<div class="it-foot">'
       + (social ? '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
-        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
-        + (inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
-          : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>') : "")
+        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>" : "")
+      + (inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
+        : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>')
+      + (own ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
       + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
       + (cmtOpen ? commentsHtml(it) : "")
       + "</div>" + img + "</article>";
@@ -446,6 +459,8 @@
     const oneDay = days.size === 1 ? [...days][0] : null;
     return '<section class="plan" aria-label="The plan"><div class="plan-label">The plan</div>'
       + (oneDay ? '<div class="plan-day">' + esc(oneDay) + "</div>" : "")
+      + (steps.length > 1 ? '<div class="plan-hint">Press and hold a step, then drag it into place.'
+        + '<span class="sr-only"> With a keyboard: focus a step and press Alt with the up or down arrow.</span></div>' : "")
       + "<ol>" + steps.map((it, i) => stepHtml(it, i, steps.length, oneDay)).join("") + "</ol>"
       + (steps.some(startOf) ? '<div class="plan-actions"><button type="button" class="btn primary" data-act="ics">'
         + "Add the plan to your calendar</button></div>" : "")
@@ -458,17 +473,14 @@
     const title = (it.event ? "" : kindOf(it)[0] + " ") + (url
       ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
       : esc(titleOf(it)));
-    return '<li class="step" data-id="' + esc(it.id) + '"><div class="step-body">'
+    return '<li class="step" tabindex="0" data-id="' + esc(it.id) + '"><div class="step-body">'
       + '<div class="step-when">' + esc(when) + "</div>"
       + '<div class="step-title">' + title + "</div>"
       + (it.event && it.event.location ? '<div class="step-where">' + esc(it.event.location) + "</div>" : "")
       + '<div class="step-links">'
       + (start ? '<a class="linkish" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Google Calendar</a>' : "")
       + '<button type="button" class="linkish" data-act="plan-remove">Take out</button></div></div>'
-      + '<div class="step-move">'
-      + '<button type="button" data-act="plan-up" aria-label="Move earlier in the plan"' + (i === 0 ? " disabled" : "") + ">↑</button>"
-      + '<button type="button" data-act="plan-down" aria-label="Move later in the plan"' + (i === n - 1 ? " disabled" : "") + ">↓</button>"
-      + "</div></li>";
+      + '<span class="step-grip" aria-hidden="true">⋮⋮</span></li>';
   }
 
 
@@ -520,6 +532,7 @@
       case "restored": return a + " restored " + t;
       case "voted": return a + " is interested in " + t;
       case "commented": return a + " commented on " + t;
+      case "edited": return a + " edited " + t;
       case "deleted_comment": return a + " deleted a comment on " + t;
       case "added_to_plan": return a + " added " + t + " to the plan";
       case "removed_from_plan": return a + " took " + t + " out of the plan";
@@ -602,6 +615,147 @@
       text: lines.join(" "),
       options: [{value: "remove", label: "Remove it"}],
       cancel: "Keep it"}) === "remove";
+  }
+
+  // "Add your own" / "Edit": one of your own items (not an Agora event).
+  // Resolves to the custom fields to send, or null if dismissed. An edit
+  // sends every field, so emptying one clears it.
+  const localInput = (iso) => {
+    if (!iso) return "";
+    const d = new Date(iso), p = (n) => String(n).padStart(2, "0");
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
+  };
+  async function customDialog(it) {
+    const c = (it && it.custom) || {};
+    const out = await AC.formDialog({title: it ? "Edit" : "Add your own",
+      text: it ? "" : "Anything that isn’t on Agora: dinner, a park, a friend’s show.",
+      fields: [
+        {name: "category", label: "Kind", type: "chips", value: it ? (c.category || "other") : "food",
+         options: Object.entries(KINDS).map(([value, [icon, label]]) => ({value, label: icon + " " + label}))},
+        {name: "title", label: "What", required: true, max: 120, placeholder: "Dinner at Nopa", value: c.title},
+        {name: "start", label: "When (optional)", type: "datetime-local", value: localInput(c.start_time)},
+        // Text, not type=url: the browser would silently refuse "nopasf.com".
+        {name: "url", label: "Link (optional)", inputmode: "url", placeholder: "nopasf.com", max: 500,
+         autocomplete: "url", value: c.url},
+        {name: "note", label: "Note (optional)", type: "textarea", max: 500, value: c.note}],
+      submit: it ? "Save" : "Add",
+      validate: (v) => v.url && !/^https?:\/\/\S+\.\S+/i.test(v.url) && !/^\S+\.\S+$/.test(v.url)
+        ? "That link doesn’t look right." : ""});
+    if (!out) return null;
+    const url = out.url ? (/^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url) : "";
+    const custom = {title: out.title, category: out.category || "other",
+      start_time: out.start ? new Date(out.start).toISOString() : "", url, note: out.note};
+    if (!it) for (const k of ["start_time", "url", "note"]) if (!custom[k]) delete custom[k];
+    return custom;
+  }
+
+  // --- Reordering the plan: press and hold a step, drag, let go ---
+  // Touch: hold still for a moment to pick a step up (a quick swipe still
+  // scrolls the page); mouse: press and move. The step follows the pointer,
+  // the others slide out of its way, and it settles into the gap on release.
+  const HOLD_MS = 280, SLOP = 8, EDGE = 70;
+
+  function moveStep(id, to) {
+    const plan = view.canvas.plan, from = plan.indexOf(id);
+    if (from < 0 || to === from || to < 0 || to >= plan.length) return;
+    plan.splice(to, 0, plan.splice(from, 1)[0]);
+    render();
+    act(() => AC.api("POST", P("/plan"), {op: "move", item_id: id, to, actor_name: me()}));
+  }
+
+  app.addEventListener("pointerdown", (e) => {
+    const step = e.target.closest(".plan .step");
+    if (!step || e.button !== 0 || e.target.closest(".step-links")) return;
+    press = {step, x: e.clientX, y: e.clientY, pointerId: e.pointerId, touch: e.pointerType !== "mouse"};
+    if (press.touch) pressTimer = setTimeout(() => press && lift(press.y), HOLD_MS);
+  });
+  window.addEventListener("pointermove", (e) => {
+    if (drag) { if (e.pointerId === drag.pointerId) follow(e.clientY); return; }
+    if (!press || e.pointerId !== press.pointerId) return;
+    if (Math.hypot(e.clientX - press.x, e.clientY - press.y) <= SLOP) return;
+    if (press.touch) return cancelPress();  // moved before the hold: it's a scroll
+    lift(press.y);
+    follow(e.clientY);
+  });
+  window.addEventListener("pointerup", (e) => { if (drag && e.pointerId === drag.pointerId) drop(); else cancelPress(); });
+  window.addEventListener("pointercancel", () => { if (drag) drop(true); else cancelPress(); });
+  // While a step is held, the page mustn't scroll under the finger.
+  window.addEventListener("touchmove", (e) => { if (drag) e.preventDefault(); }, {passive: false});
+  app.addEventListener("contextmenu", (e) => { if (drag || (press && press.touch)) e.preventDefault(); });
+  // Letting go over a link would open it; swallow the click that ends a drag.
+  app.addEventListener("click", (e) => {
+    if (Date.now() < suppressClickUntil) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  app.addEventListener("keydown", (e) => {
+    const step = e.target.closest && e.target.matches(".plan .step") && e.target;
+    if (!step || !e.altKey || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
+    e.preventDefault();
+    const from = view.canvas.plan.indexOf(step.dataset.id);
+    moveStep(step.dataset.id, from + (e.key === "ArrowUp" ? -1 : 1));
+  });
+
+  function cancelPress() { clearTimeout(pressTimer); press = null; }
+
+  function lift(clientY) {
+    clearTimeout(pressTimer);
+    const steps = [...app.querySelectorAll(".plan .step")];
+    const from = steps.indexOf(press.step);
+    if (from < 0 || steps.length < 2) return cancelPress();
+    const rects = steps.map(el => el.getBoundingClientRect());
+    drag = {
+      el: press.step, id: press.step.dataset.id, pointerId: press.pointerId, steps, from, to: from,
+      heights: rects.map(r => r.height),
+      centers: rects.map(r => r.top + scrollY + r.height / 2),
+      startY: clientY + scrollY, clientY, dy: 0, raf: 0,
+    };
+    press = null;
+    drag.el.closest(".plan").classList.add("dragging");
+    drag.el.classList.add("lifted");
+    drag.el.style.transition = "none";
+    if (navigator.vibrate) navigator.vibrate(10);
+    drag.raf = requestAnimationFrame(edgeScroll);
+  }
+
+  // Put the held step under the pointer and slide the others to open a gap.
+  function follow(clientY) {
+    drag.clientY = clientY;
+    drag.dy = clientY + scrollY - drag.startY;
+    const center = drag.centers[drag.from] + drag.dy;
+    drag.to = drag.centers.filter((c, j) => j !== drag.from && c < center).length;
+    const h = drag.heights[drag.from];
+    drag.el.style.transform = "translateY(" + drag.dy + "px) scale(1.02)";
+    drag.steps.forEach((el, j) => {
+      if (j === drag.from) return;
+      const shift = drag.from < drag.to && j > drag.from && j <= drag.to ? -h
+        : drag.to < drag.from && j >= drag.to && j < drag.from ? h : 0;
+      el.style.transform = shift ? "translateY(" + shift + "px)" : "";
+    });
+  }
+
+  // Near the top or bottom of the screen, scroll so a long plan can be reordered.
+  function edgeScroll() {
+    if (!drag) return;
+    const y = drag.clientY, by = y < EDGE ? -(EDGE - y) / 4 : y > innerHeight - EDGE ? (y - innerHeight + EDGE) / 4 : 0;
+    if (by) { scrollBy(0, by); follow(y); }
+    drag.raf = requestAnimationFrame(edgeScroll);
+  }
+
+  function drop(cancelled) {
+    const d = drag;
+    cancelAnimationFrame(d.raf);
+    suppressClickUntil = Date.now() + 400;
+    const to = cancelled ? d.from : d.to;
+    const span = (a, b) => d.heights.slice(a, b).reduce((x, y) => x + y, 0);
+    const settle = to > d.from ? span(d.from + 1, to + 1) : -span(to, d.from);
+    d.el.classList.add("settling");
+    d.el.style.transition = "";
+    d.el.style.transform = "translateY(" + settle + "px)";
+    if (cancelled) d.steps.forEach((el, j) => { if (j !== d.from) el.style.transform = ""; });
+    setTimeout(() => {
+      drag = null;
+      if (to !== d.from) moveStep(d.id, to);
+      else render();
+    }, 160);
   }
 
   async function named() {
@@ -694,28 +848,14 @@
         return act(() => AC.api("PATCH", P(), {date_from: out.date_from || null,
           date_to: out.date_to || null, actor_name: who}));
       }
-      case "add-custom": {
-        const out = await AC.formDialog({title: "Add your own",
-          text: "Anything that isn’t on Agora: dinner, a park, a friend’s show.",
-          fields: [
-            {name: "category", label: "Kind", type: "chips", value: "food",
-             options: Object.entries(KINDS).map(([value, [icon, label]]) => ({value, label: icon + " " + label}))},
-            {name: "title", label: "What", required: true, max: 120, placeholder: "Dinner at Nopa"},
-            {name: "start", label: "When (optional)", type: "datetime-local"},
-            // Text, not type=url: the browser would silently refuse "nopasf.com".
-            {name: "url", label: "Link (optional)", inputmode: "url", placeholder: "nopasf.com", max: 500,
-             autocomplete: "url"},
-            {name: "note", label: "Note (optional)", type: "textarea", max: 500}],
-          submit: "Add",
-          validate: (v) => v.url && !/^https?:\/\/\S+\.\S+/i.test(v.url) && !/^\S+\.\S+$/.test(v.url)
-            ? "That link doesn’t look right." : ""});
-        if (!out) return;
+      case "add-custom": case "edit-custom": {
+        const editing = el.dataset.act === "edit-custom" ? it : null;
+        const custom = await customDialog(editing);
+        if (!custom) return;
         const who = me();
-        const custom = {title: out.title, category: out.category || "other"};
-        if (out.start) custom.start_time = new Date(out.start).toISOString();
-        if (out.url) custom.url = /^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url;
-        if (out.note) custom.note = out.note;
-        return act(() => AC.api("POST", P("/items"), {custom, actor_name: who}));
+        return act(() => editing
+          ? AC.api("PATCH", itemP(id), {custom, actor_name: who})
+          : AC.api("POST", P("/items"), {custom, actor_name: who}));
       }
       case "vote": {
         if (!it) return;
@@ -737,15 +877,6 @@
         const who = me();
         return act(() => AC.api("POST", P("/plan"),
           {op: el.dataset.act === "plan-add" ? "add" : "remove", item_id: id, actor_name: who}));
-      }
-      case "plan-up": case "plan-down": {
-        // Move at once on screen; the refresh after the write confirms it.
-        const plan = view.canvas.plan, from = plan.indexOf(id);
-        const to = from + (el.dataset.act === "plan-up" ? -1 : 1);
-        if (from < 0 || to < 0 || to >= plan.length) return;
-        plan.splice(to, 0, plan.splice(from, 1)[0]);
-        render();
-        return act(() => AC.api("POST", P("/plan"), {op: "move", item_id: id, to, actor_name: me()}));
       }
       case "remove": {
         if (!it) return;

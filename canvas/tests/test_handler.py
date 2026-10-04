@@ -611,3 +611,30 @@ def test_custom_item_category(api, canvas):
     # Optional: older clients send none.
     r = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Walk"}})
     assert r["statusCode"] == 201 and "category" not in r["json"]["item"]["custom"]
+
+
+def test_edit_your_own_item(api, canvas):
+    cid = api("POST", f"/canvases/{canvas}/items", {"custom": {
+        "title": "Dinner", "note": "for 4", "url": "https://nopasf.com", "category": "food"}})["json"]["item"]["id"]
+    r = api("PATCH", f"/canvases/{canvas}/items/{cid}", {"actor_name": "Sam", "custom": {
+        "title": "Dinner at Nopa", "start_time": "2026-10-10T01:30:00Z", "note": "", "url": None}})
+    assert r["statusCode"] == 200, r["json"]
+    c = r["json"]["item"]["custom"]
+    assert c == {"title": "Dinner at Nopa", "start_time": "2026-10-10T01:30:00+00:00", "category": "food"}
+    v = view(api, canvas)
+    assert v["items"][0]["start_time"] == "2026-10-10T01:30:00+00:00"
+    assert v["log"][0]["action"] == "edited" and v["log"][0]["item_title"] == "Dinner at Nopa"
+
+
+def test_edit_validation(api, canvas):
+    cid = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Dinner"}})["json"]["item"]["id"]
+    ev = add_event(api, canvas, E1)["json"]["item"]["id"]
+    patch = lambda iid, c: api("PATCH", f"/canvases/{canvas}/items/{iid}", {"custom": c})
+    assert patch(cid, {"title": ""})["statusCode"] == 400  # a title can't be cleared
+    assert patch(cid, {"category": "rocket"})["statusCode"] == 400
+    assert patch(cid, {"url": "javascript:alert(1)"})["statusCode"] == 400
+    assert patch(cid, {})["statusCode"] == 400
+    assert patch(ev, {"title": "Mine now"})["statusCode"] == 400  # Agora events are snapshots
+    assert patch("c_nope", {"title": "x"})["statusCode"] == 404
+    api("DELETE", f"/canvases/{canvas}/items/{cid}", {})
+    assert patch(cid, {"title": "x"})["statusCode"] == 404  # removed

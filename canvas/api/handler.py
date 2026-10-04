@@ -365,22 +365,9 @@ def add_item(req, cid):
         body = {"kind": "event", "event": snapshot.snapshot_of(ev)}
         title = ev.get("title")
     else:
-        c = b["custom"]
-        if not isinstance(c, dict):
-            raise ApiError(400, "custom must be an object")
-        title = _clean(c.get("title"), "custom.title", LIMITS["custom_title"])
-        body = {"kind": "custom", "title": title}
-        category = c.get("category")
-        if category is not None and category not in CUSTOM_CATEGORIES:
-            raise ApiError(400, "custom.category must be one of " + ", ".join(sorted(CUSTOM_CATEGORIES)))
-        if category:
-            body["category"] = category
-        for k, v in (("url", _url(c.get("url"), "custom.url")),
-                     ("start_time", _datetime(c.get("start_time"), "custom.start_time")),
-                     ("note", _clean(c.get("note"), "custom.note", LIMITS["custom_note"],
-                                     required=False, multiline=True))):
-            if v:
-                body[k] = v
+        sets, _ = _custom_fields(b["custom"])
+        title = sets["title"]
+        body = {"kind": "custom", **sets}
         item_id = "c_" + secrets.token_urlsafe(6)
     try:
         row, created = store.add_item(cid, item_id, body, actor, client, title)
@@ -391,6 +378,58 @@ def add_item(req, cid):
     except store.Conflict:
         raise ApiError(409, "conflicting edit, try again") from None
     return (201 if created else 200), {"item": _item_out(row), "created": created}
+
+
+CUSTOM_KEYS = ("title", "url", "start_time", "note", "category")
+
+
+def _custom_fields(c, *, partial=False):
+    """Validate one of your own items' fields -> (values to set, keys to clear).
+    New items need a title; an edit (partial) changes only the keys it sends,
+    and an empty or null value clears that key (the title can't be cleared)."""
+    if not isinstance(c, dict):
+        raise ApiError(400, "custom must be an object")
+    sets, removes = {}, []
+    for k in CUSTOM_KEYS:
+        if partial and k not in c:
+            continue
+        raw = c.get(k)
+        if k == "title":
+            v = _clean(raw, "custom.title", LIMITS["custom_title"])
+        elif k == "url":
+            v = _url(raw, "custom.url")
+        elif k == "start_time":
+            v = _datetime(raw, "custom.start_time")
+        elif k == "note":
+            v = _clean(raw, "custom.note", LIMITS["custom_note"], required=False, multiline=True)
+        else:
+            if raw not in (None, "") and raw not in CUSTOM_CATEGORIES:
+                raise ApiError(400, "custom.category must be one of " + ", ".join(sorted(CUSTOM_CATEGORIES)))
+            v = raw
+        if v:
+            sets[k] = v
+        elif partial:
+            removes.append(k)
+    if partial and not (sets or removes):
+        raise ApiError(400, "nothing to update")
+    return sets, removes
+
+
+def edit_item(req, cid, iid):
+    """Change one of your own items (not an Agora event: those are snapshots)."""
+    client = _require_client(req)
+    b = req["body"]
+    _rate_limit(req, WRITE_LIMIT)
+    actor = _actor(b)
+    sets, removes = _custom_fields(b.get("custom"), partial=True)
+    row = _item_or_404(cid, iid)
+    if row["kind"] != "custom":
+        raise ApiError(400, "only your own items can be edited")
+    try:
+        store.edit_item(cid, iid, sets, removes, actor, client, sets.get("title") or _item_title(row))
+    except store.NotFound as e:
+        raise ApiError(404, f"{e} not found") from None
+    return 200, {"item": _item_out(_item_or_404(cid, iid))}
 
 
 def remove_item(req, cid, iid):
@@ -554,7 +593,7 @@ ROUTES = [
     (re.compile(rf"^/canvases/{CID}/plan$"), {"POST": post_plan}),
     (re.compile(rf"^/canvases/{CID}/claim$"), {"POST": claim_canvas, "DELETE": claim_canvas}),
     (re.compile(rf"^/canvases/{CID}/items$"), {"POST": add_item}),
-    (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"DELETE": remove_item}),
+    (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"PATCH": edit_item, "DELETE": remove_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/restore$"), {"POST": restore_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/vote$"), {"PUT": put_vote, "DELETE": delete_vote}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/comments$"), {"POST": add_comment}),
