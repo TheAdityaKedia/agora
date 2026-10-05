@@ -254,10 +254,10 @@ jobs:
                       --json number,title -q ".[] | select(.title == \"$TITLE\") | .number" | head -1)"
           if [ "$PENDING" != "0" ] || [ "$ALERT" = "true" ]; then
             if [ -z "$existing" ]; then
-              gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/places.md"
-              existing="$(gh issue list --state open --search "\"$TITLE\" in:title" \
-                          --json number,title -q ".[] | select(.title == \"$TITLE\") | .number" | head -1)"
-              gh issue comment "$existing" --body "@$GITHUB_REPOSITORY_OWNER new places to review: $RUN_URL"
+              # Take the number from create's URL: search doesn't index a
+              # brand-new issue yet, so looking it up returned "" and failed.
+              url="$(gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/places.md")"
+              gh issue comment "${url##*/}" --body "@$GITHUB_REPOSITORY_OWNER new places to review: $RUN_URL"
             else
               gh issue edit "$existing" --body-file "$RUNNER_TEMP/places.md"
               if [ "$NEW_PENDING" != "0" ] || [ "$ALERT" = "true" ]; then
