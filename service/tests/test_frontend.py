@@ -635,6 +635,8 @@ def map_site(tmp_path_factory):
     events = _map_events()
     (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
     (root / "events.json").write_text(json.dumps(_map_manifest(events)))
+    # The beta switch lives in canvas-client.js (shared with collections).
+    shutil.copy(FRONTEND / "canvas-client.js", root / "canvas-client.js")
     server = _serve(root)
     yield f"http://127.0.0.1:{server.server_port}/"
     server.shutdown()
@@ -643,10 +645,12 @@ def map_site(tmp_path_factory):
 def _map_page(browser, site, viewport=DESKTOP, query="", touch=False, beta=True):
     """A page with the map's tile server unreachable (as in CI: no network),
     so the map falls back to pins on a blank background. `beta`: the browser
-    is in the private beta (the flag frontend/beta/ sets)."""
+    is a beta member (what frontend/beta/ sets) with beta switched on for this
+    visit; "member" = a member with it switched off."""
     ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, timezone_id=TZ)
     if beta:
-        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
+        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true');"
+                            + ("" if beta == "member" else "sessionStorage.setItem('agora.beta.on', '1');"))
     ctx.route("https://tiles.openfreemap.org/**", lambda route: route.abort())
     page = ctx.new_page()
     page._agora_errors = []
@@ -920,6 +924,38 @@ def test_map_and_neighborhoods_are_beta_only(browser, map_site):
     page = _map_page(browser, map_site, query="?beta=1&view=map", beta=False)
     _wait_for_pins(page)
     assert page.locator("#view-toggle").is_visible() and page.locator("#hood-dropdown").is_visible()
+
+
+def test_beta_switch(browser, map_site):
+    # A member opening the plain address: beta starts off, with a switch.
+    page = _map_page(browser, map_site, beta="member")
+    switch = page.locator(".ac-beta")
+    assert switch.is_visible() and switch.get_attribute("aria-checked") == "false"
+    assert page.locator("#view-toggle").is_hidden() and page.locator("#plan").is_hidden()
+    # On: the page reloads with beta features. (The list view's address drops
+    # beta=1 again, so a shared search link doesn't let people into the beta.)
+    switch.click()
+    page.wait_for_selector('.ac-beta[aria-checked="true"]')
+    page.wait_for_selector(".event")
+    assert page.locator("#view-toggle").is_visible() and page.locator("#plan").is_visible()
+    # A reload keeps it on (same visit), even without ?beta=1.
+    page.goto(map_site)
+    page.wait_for_selector(".event")
+    assert page.locator("#view-toggle").is_visible()
+    # Off again: features gone, beta=1 dropped from the address.
+    page.click(".ac-beta")
+    page.wait_for_selector('.ac-beta[aria-checked="false"]')
+    page.wait_for_selector(".event")
+    assert page.locator("#view-toggle").is_hidden() and "beta=" not in page.url
+    # A new tab on the plain address starts with beta off.
+    tab = page.context.new_page()
+    tab.goto(map_site)
+    tab.wait_for_selector(".event")
+    assert tab.locator('.ac-beta[aria-checked="false"]').is_visible()
+    # Not a member: no switch at all.
+    page = _map_page(browser, map_site, beta=False)
+    assert page.locator(".ac-beta").count() == 0
+    assert page._agora_errors == []
 
 
 def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):

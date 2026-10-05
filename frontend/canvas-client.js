@@ -44,18 +44,54 @@
   }
 
   // --- Private beta gate ---------------------------------------------------
-  // While BETA_GATE is true, collections are visible only in browsers that
-  // came in through a /beta/ link: the invite (…/agora/beta/) or a shared
-  // collection (…/agora/beta/canvas.html?c=…). Those pages (frontend/beta/)
-  // set the flag and redirect here with ?beta=1. Every collection link made
-  // meanwhile goes through /beta/, so whoever opens it is let in too.
+  // While BETA_GATE is true, beta features (collections; the map and SF
+  // neighborhoods in index.html) need two things:
+  // - Membership, per browser (localStorage): set by any /beta/ link, the
+  //   invite (…/agora/beta/) or a shared collection (…/beta/canvas.html?c=…).
+  //   Those pages (frontend/beta/) set it and redirect here with ?beta=1.
+  //   Every collection link made meanwhile goes through /beta/, so whoever
+  //   opens it becomes a member too. Members get a "Beta" switch.
+  // - Switched on, per visit (sessionStorage, so per tab): ?beta=1 (a /beta/
+  //   link) or the switch turns it on. The plain address in a new tab starts
+  //   with it off.
   //
-  // LAUNCH: set BETA_GATE = false. Collections show for everyone, new links
-  // drop /beta/, and the /beta/ pages keep redirecting, so links shared during
-  // the beta still open. A soft gate: it hides UI, it doesn't secure the API.
+  // LAUNCH: set BETA_GATE = false (and MAP_BETA_GATE in index.html).
+  // Everything shows for everyone, the switch goes, new links drop /beta/,
+  // and the /beta/ pages keep redirecting, so links shared during the beta
+  // still open. A soft gate: it hides UI, it doesn't secure the API.
   const BETA_GATE = true;
-  if (new URLSearchParams(location.search).get("beta") === "1") save(K.beta, true);
-  const betaEnabled = () => !BETA_GATE || load(K.beta, false) === true;
+  const BETA_ON = "agora.beta.on";  // sessionStorage; index.html reads it too
+  const session = {
+    get() { try { return sessionStorage.getItem(BETA_ON); } catch { return memory[BETA_ON] || null; } },
+    set(v) { memory[BETA_ON] = v; try { sessionStorage.setItem(BETA_ON, v); } catch {} },
+  };
+  if (new URLSearchParams(location.search).get("beta") === "1") { save(K.beta, true); session.set("1"); }
+  const betaMember = () => load(K.beta, false) === true;
+  const betaEnabled = () => !BETA_GATE || (betaMember() && session.get() === "1");
+
+  // Turn beta features on or off for this visit, then reload so every part
+  // of the page starts over in the new mode.
+  function setBeta(on) {
+    session.set(on ? "1" : "0");
+    const u = new URL(location.href);
+    if (on) u.searchParams.set("beta", "1"); else u.searchParams.delete("beta");
+    location.replace(u.href);
+  }
+  // The "Beta" switch, for members while the gate is on; null otherwise.
+  function betaToggle() {
+    if (!BETA_GATE || !betaMember()) return null;
+    const on = betaEnabled();
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "ac-beta";
+    b.setAttribute("role", "switch");
+    b.setAttribute("aria-checked", String(on));
+    b.title = on ? "Beta features are on: collections, the map. Tap to turn them off."
+      : "Turn on beta features: collections, the map.";
+    b.innerHTML = '<span class="ac-beta-label">Beta</span><span class="ac-beta-track" aria-hidden="true"></span>';
+    b.addEventListener("click", () => setBeta(!on));
+    return b;
+  }
 
   const isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   // Read ?api= now: index.html rewrites its URL on the first render.
@@ -478,6 +514,16 @@
       .ac-choice:hover, .ac-choice:focus-visible { border-color: var(--accent); }
       .ac-choice span { color: var(--muted); font-size: 14px; }
       @media (prefers-reduced-motion: reduce) { .ac-toast { transition: none; } }
+      .ac-beta { display: inline-flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer;
+        background: none; border: 0; color: var(--muted); font: inherit; font-size: 12px; }
+      .ac-beta:hover { color: var(--fg); }
+      .ac-beta-track { position: relative; width: 28px; height: 16px; border-radius: 999px;
+        background: var(--border); transition: background 0.15s; }
+      .ac-beta-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px;
+        border-radius: 50%; background: var(--bg); transition: transform 0.15s; }
+      .ac-beta[aria-checked="true"] .ac-beta-track { background: var(--accent); }
+      .ac-beta[aria-checked="true"] .ac-beta-track::after { transform: translateX(12px); }
+      .ac-beta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
     `;
     const style = document.createElement("style");
     style.textContent = css;
@@ -488,6 +534,6 @@
     api, ApiError, clientId, ensureName, currentName, myCanvases, rememberCanvas,
     forgetCanvas, activeCanvas, setActiveCanvas, canvasUrl, canvasPath, browseUrl,
     toast, formDialog, choiceDialog, createCanvasDialog, share, isShared, markShared,
-    defaultCanvasId, setDefaultCanvas, claimCanvas, betaEnabled, BETA_GATE,
+    defaultCanvasId, setDefaultCanvas, claimCanvas, betaEnabled, betaMember, betaToggle, setBeta, BETA_GATE,
   };
 })();

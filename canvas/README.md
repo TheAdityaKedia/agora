@@ -29,15 +29,21 @@ Collections ship behind a soft gate: `BETA_GATE = true` in
 `frontend/canvas-client.js`. With it on:
 
 - **Invite link:** `https://theadityakedia.github.io/agora/beta/`. Opening it
-  marks that browser as in the beta and lands on the normal site, where
-  Start a collection / Your collections now appear.
+  makes that browser a **beta member** and lands on the normal site with beta
+  **switched on**, where Start a collection / Your collections now appear.
+- **The Beta switch.** Members get a "Beta" switch in the header (both
+  pages). Beta is on per visit (per tab): a `/beta/` link, `?beta=1` or the
+  switch turns it on; opening the plain address in a new tab starts with it
+  **off**, so members see the site as everyone else does until they switch
+  it on. (Membership is `localStorage` `agora.canvas.beta`; on/off is
+  `sessionStorage` `agora.beta.on`.)
 - **Shared collections** get links like `…/agora/beta/canvas.html?c=<id>`, so
   whoever opens one is let into the beta too. Without the flag, the site shows
   no collections UI and `canvas.html` says "Collections are in private beta".
 - It hides UI only; the API itself is open (nothing secret depends on it).
 - The same invite also unlocks the **map view and SF neighborhood filter**,
   gated separately by `MAP_BETA_GATE` in `frontend/index.html` (same
-  per-browser flag, so each feature launches on its own).
+  membership and switch, so each feature launches on its own).
 
 **To launch:** set `BETA_GATE = false` (one line) and merge. Everyone sees
 collections, new links drop `/beta/`, and **keep `frontend/beta/`**: those

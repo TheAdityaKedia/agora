@@ -66,7 +66,9 @@
   }
   /* "Start a collection" (a canvas, canvas.html): save events for yourself
      or plan with friends. */
-  .plan { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: 0 0 auto; }
+  .masthead-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex: 0 0 auto; }
+  .plan { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .plan[hidden] { display: none; }
   .plan-btn {
     padding: 7px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap;
     background: var(--input-bg); color: var(--fg); border: 1px solid var(--border); font-size: 14px;
@@ -607,10 +609,13 @@
     <div class="brand"><h1><a class="home" href="./" title="Agora home: all events, no filters">Agora</a></h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
     <div class="subtitle">Events around the Bay, in one calendar.</div>
   </div>
-  <div class="plan" id="plan" hidden>
-    <button type="button" class="plan-btn" id="plan-btn"
-            title="Save events that interest you, or plan with friends">Start a collection</button>
-    <a href="./canvas.html">Your collections</a>
+  <div class="masthead-side">
+    <div class="plan" id="plan" hidden>
+      <button type="button" class="plan-btn" id="plan-btn"
+              title="Save events that interest you, or plan with friends">Start a collection</button>
+      <a href="./canvas.html">Your collections</a>
+    </div>
+    <div id="beta-slot"></div>
   </div>
 </header>
 
@@ -779,15 +784,24 @@
   // then the page simply has no canvas features.
   const AC = window.AgoraCanvas || null;
   // Private beta for the map view and SF neighborhoods, like collections
-  // (BETA_GATE in canvas-client.js): shown only in browsers let in through a
-  // /beta/ link, which sets the same per-browser flag. Read here rather than
-  // through AC, so the map doesn't depend on canvas-client.js loading.
+  // (BETA_GATE in canvas-client.js, which explains the rule): a member
+  // browser (any /beta/ link) with beta switched on for this visit (?beta=1
+  // or the "Beta" switch). Read here rather than through AC, so the map
+  // doesn't depend on canvas-client.js loading.
   // LAUNCH: set MAP_BETA_GATE = false.
   const MAP_BETA_GATE = true;
   const mapBeta = !MAP_BETA_GATE || (() => {
     if (new URLSearchParams(location.search).get("beta") === "1") return true;
-    try { return localStorage.getItem("agora.canvas.beta") === "true"; } catch { return false; }
+    try {
+      return localStorage.getItem("agora.canvas.beta") === "true"
+        && sessionStorage.getItem("agora.beta.on") === "1";
+    } catch { return false; }
   })();
+  // The "Beta" switch, for beta members (canvas-client.js).
+  if (AC && AC.betaToggle) {
+    const t = AC.betaToggle();
+    if (t) document.getElementById("beta-slot").appendChild(t);
+  }
 
   let data;
   try {
