@@ -707,6 +707,26 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "artists-television-access": {
+      "added": "2026-10-05",
+      "address": "992 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Artists Television Access in San Francisco County (building, node/13724354404)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.757085,
+      "lng": -122.42129,
+      "name": "Artists Television Access",
+      "osm": "node/13724354404",
+      "possible_duplicates": [
+        "alamo-drafthouse-cinema"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "artogether": {
       "added": "2026-10-02",
       "address": "1200 Harrison Street, Oakland, CA 94612",
@@ -1388,6 +1408,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "childrens-garden": {
+      "added": "2026-10-05",
+      "address": "799 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 799 in San Francisco County (building, way/406944774)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.783288,
+      "lng": -122.402524,
+      "name": "Children’s Garden",
+      "osm": "way/406944774",
+      "possible_duplicates": [
+        "crepe-myrtle-garden",
+        "american-bookbinders-museum"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "chinatown-him-mark-lai-branch-library": {
       "added": "2026-10-02",
       "address": "1135 Powell Street, San Francisco, CA 94108",
@@ -1575,6 +1615,28 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "crepe-myrtle-garden": {
+      "added": "2026-10-05",
+      "address": "750 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Yerba Buena Gardens in San Francisco County (building, way/28842443)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.78465,
+      "lng": -122.402345,
+      "name": "Crepe Myrtle Garden",
+      "osm": "way/28842443",
+      "possible_duplicates": [
+        "ybca-screening-room",
+        "yerba-buena-center-for-the-arts",
+        "great-lawn",
+        "museum-of-the-african-diaspora"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "curran-theatre": {
       "added": "2026-10-02",
@@ -3444,6 +3506,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "national-maritime-museum": {
+      "added": "2026-10-05",
+      "address": "900 Beach St, San Francisco, CA 94109",
+      "evidence": [
+        "map: National Maritime Museum in San Francisco County (building, way/32839686)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.806408,
+      "lng": -122.423897,
+      "name": "National Maritime Museum",
+      "osm": "way/32839686",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "neck-of-the-woods": {
       "added": "2026-10-02",
       "address": "406 Clement Street, San Francisco, CA 94118",
@@ -4015,6 +4093,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "pier-45": {
+      "added": "2026-10-05",
+      "address": "Pier 45, San Francisco, CA 94133",
+      "evidence": [
+        "map: Pier 45 in San Francisco County (building, way/1255058987)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.809774,
+      "lng": -122.417315,
+      "name": "Pier 45",
+      "osm": "way/1255058987",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "pittsburghs-pub": {
       "added": "2026-10-02",
       "address": "4207 Judah Street, San Francisco, CA 94166",
@@ -4128,6 +4222,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "punch-line-comedy-club": {
+      "added": "2026-10-05",
+      "address": "444 Battery Street, San Francisco, CA 94111",
+      "evidence": [
+        "map: Punch Line Comedy Club in San Francisco County (building, way/104682197)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.795532,
+      "lng": -122.400119,
+      "name": "Punch Line Comedy Club",
+      "osm": "way/104682197",
+      "possible_duplicates": [
+        "patriot-house-pub"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "question-mark-tavern": {
       "added": "2026-10-02",

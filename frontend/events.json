@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T19:57:10.707298+00:00",
+  "generated_at": "2026-10-05T23:07:20.168392+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -725,6 +725,14 @@
       "lng": -122.41089,
       "neighborhood": "soma"
     },
+    "artists-television-access": {
+      "name": "Artists Television Access",
+      "region": "sf",
+      "address": "992 Valencia Street, San Francisco, CA 94110",
+      "lat": 37.75708,
+      "lng": -122.42129,
+      "neighborhood": "mission"
+    },
     "artogether": {
       "name": "ARTogether",
       "region": "eastbay",
@@ -1015,6 +1023,14 @@
       "lng": -122.40914,
       "neighborhood": "nob-hill"
     },
+    "childrens-garden": {
+      "name": "Children’s Garden",
+      "region": "sf",
+      "address": "799 Howard Street, San Francisco, CA 94103",
+      "lat": 37.78329,
+      "lng": -122.40252,
+      "neighborhood": "soma"
+    },
     "chinatown-him-mark-lai-branch-library": {
       "name": "Chinatown / Him Mark Lai Branch Library",
       "region": "sf",
@@ -1075,6 +1091,14 @@
       "address": "9 Claude Lane, San Francisco, CA 94108",
       "lat": 37.78995,
       "lng": -122.40435,
+      "neighborhood": "financial-district-south-beach"
+    },
+    "crepe-myrtle-garden": {
+      "name": "Crepe Myrtle Garden",
+      "region": "sf",
+      "address": "750 Howard Street, San Francisco, CA 94103",
+      "lat": 37.78465,
+      "lng": -122.40234,
       "neighborhood": "financial-district-south-beach"
     },
     "curran-theatre": {
@@ -1366,6 +1390,14 @@
       "lng": -122.41884,
       "neighborhood": "tenderloin"
     },
+    "great-lawn": {
+      "name": "Great Lawn",
+      "region": "sf",
+      "address": "700 Mission Street, San Francisco, CA 94103",
+      "lat": 37.78624,
+      "lng": -122.40219,
+      "neighborhood": "financial-district-south-beach"
+    },
     "great-star-theater": {
       "name": "Great Star Theater",
       "region": "sf",
@@ -1472,6 +1504,13 @@
       "lat": 37.78739,
       "lng": -122.44784,
       "neighborhood": "presidio-heights"
+    },
+    "johansson-projects": {
+      "name": "Johansson Projects",
+      "region": "eastbay",
+      "address": "2300 Telegraph Avenue, Oakland, CA 94612",
+      "lat": 37.81267,
+      "lng": -122.26865
     },
     "kalw": {
       "name": "KALW",
@@ -1799,6 +1838,14 @@
       "lng": -122.40147,
       "neighborhood": "financial-district-south-beach"
     },
+    "national-maritime-museum": {
+      "name": "National Maritime Museum",
+      "region": "sf",
+      "address": "900 Beach St, San Francisco, CA 94109",
+      "lat": 37.80641,
+      "lng": -122.4239,
+      "neighborhood": "russian-hill"
+    },
     "neck-of-the-woods": {
       "name": "Neck of the Woods",
       "region": "sf",
@@ -2038,6 +2085,14 @@
       "lng": -122.40087,
       "neighborhood": "financial-district-south-beach"
     },
+    "pier-45": {
+      "name": "Pier 45",
+      "region": "sf",
+      "address": "Pier 45, San Francisco, CA 94133",
+      "lat": 37.80977,
+      "lng": -122.41732,
+      "neighborhood": "north-beach"
+    },
     "pittsburghs-pub": {
       "name": "Pittsburgh's Pub",
       "region": "sf",
@@ -2093,6 +2148,14 @@
       "lat": 37.80197,
       "lng": -122.45683,
       "neighborhood": "presidio"
+    },
+    "punch-line-comedy-club": {
+      "name": "Punch Line Comedy Club",
+      "region": "sf",
+      "address": "444 Battery Street, San Francisco, CA 94111",
+      "lat": 37.79553,
+      "lng": -122.40012,
+      "neighborhood": "financial-district-south-beach"
     },
     "question-mark-tavern": {
       "name": "Question Mark Tavern",
@@ -6244,6 +6307,28 @@
       "summary": "Please read our Health, Safety and COVID-19 Information Our commitment to our patrons"
     },
     {
+      "id": "5f119008-be83-4f77-af48-b078b2aa5b42",
+      "title": "Brian Babylon",
+      "start_time": "2026-10-07T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/brian-babylon-san-francisco-california-10-06-2026/event/1C0064ED02F5FAE9",
+      "image_url": "https://s1.ticketm.net/dam/a/4ff/34303bd3-ce43-4d24-b41b-4874448744ff_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "6faa3e19-d019-4f04-9920-48d4849415c7",
       "title": "Ayad Akhtar",
       "start_time": "2026-10-07T02:30:00+00:00",
@@ -7118,6 +7203,34 @@
       "region": "sf",
       "room": "14th Floor - Main Space",
       "summary": "More info will be added soon This event is hosted at the Frontier Tower: We are transforming a 16-floor tower in San Francisco into a self-governed vertical village—a hub for",
+      "more": true
+    },
+    {
+      "id": "a139c52a-04be-4acb-a716-dc1b56af72b0",
+      "title": "Dance Outdoors with Rhythm & Motion",
+      "start_time": "2026-10-07T19:00:00+00:00",
+      "location": "Crepe Myrtle Garden, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/dance-outdoors-with-rhythm-motion-100726/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2025/03/082725_RhythmMotion_CreditNixGuirre_DSC00474-e1758657173812.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "crepe-myrtle-garden",
+      "region": "sf",
+      "summary": "Wednesdays at Noon.",
       "more": true
     },
     {
@@ -8758,6 +8871,28 @@
       "more": true
     },
     {
+      "id": "f1824f5c-4b10-4c1e-b288-0201a5ebaa97",
+      "title": "Ray Lau",
+      "start_time": "2026-10-08T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-07-2026/event/1C0064864F2388F1",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "f88a3a81-6ec3-4288-850e-00664f4ff56d",
       "title": "Elaine Elinson's \"RADIANT AS THE STARS\"",
       "start_time": "2026-10-08T02:00:00+00:00",
@@ -9682,6 +9817,28 @@
       "more": true
     },
     {
+      "id": "7885e8f7-0b26-464a-9fc8-75be7f474d9c",
+      "title": "Ray Lau",
+      "start_time": "2026-10-08T04:15:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-07-2026/event/1C006511A926D005",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "57b1b06d-a3cd-450c-9eca-175190d9efe5",
       "title": "Live DJ at Lion's Den Lounge and Bar",
       "start_time": "2026-10-08T06:00:00+00:00",
@@ -9812,6 +9969,31 @@
       "more": true
     },
     {
+      "id": "9130514e-c3dc-44d2-86ea-d79e9e9493d3",
+      "title": "Quinteto Latino",
+      "start_time": "2026-10-08T19:30:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/quinteto-latino-2026/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2024/03/090524_QuintetoLatino_web.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "classical",
+        "latino"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "A wind quintet with an imperative mission, Quinteto Latino is a singular Bay Area-based chamber ensemble devoted to breaking down the racial and social barriers that have long",
+      "more": true
+    },
+    {
       "id": "2d739a29-3609-4019-9c54-f00b2f1bfe3b",
       "title": "Opera Goes to Egypt: The Land of the Pharaohs in Song",
       "start_time": "2026-10-08T20:00:00+00:00",
@@ -9856,6 +10038,30 @@
       "region": "sf",
       "room": "Ortega",
       "summary": "Fitness coach Greg Bianchi, aka Coach B, leads this class designed to increase mobility and strength.",
+      "more": true
+    },
+    {
+      "id": "b8077ee9-b19e-475c-9521-28d54d6d2d2a",
+      "title": "Night Watch // Gregory Rick",
+      "start_time": "2026-10-08T20:00:00+00:00",
+      "location": "Johansson Projects, 2300 Telegraph Ave, Oakland",
+      "url": "https://oaklandartmurmur.org/event/night-watch-gregory-rick/2026-10-08/",
+      "image_url": "https://oaklandartmurmur.org/wp-content/uploads/2026/08/Gregory-Rick_Night-Watch-1.png",
+      "sources": [
+        "Oakland Art Murmur"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
+      "cost": "free",
+      "venue": "johansson-projects",
+      "region": "eastbay",
+      "summary": "Johansson Projects presents Night Watch, a striking exhibition of paintings and works on paper by Gregory Rick that boldly reimagines history painting through the fractured lens",
       "more": true
     },
     {
@@ -11569,6 +11775,28 @@
       "more": true
     },
     {
+      "id": "b579e242-6702-4f11-b15f-85df85f46329",
+      "title": "Ray Lau",
+      "start_time": "2026-10-09T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-08-2026/event/1C0064864F2788F5",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "bd3ed692-47c4-408e-8181-6a862f7f974a",
       "title": "King Lear",
       "start_time": "2026-10-09T02:00:00+00:00",
@@ -12550,6 +12778,30 @@
       "more": true
     },
     {
+      "id": "339ebaf0-677a-414e-851d-e3482c6f1a7a",
+      "title": "Souldies On Shore - Oldies on Vinyl w/Mr. 45rpm, Mr. Rhya & Dion Garcia",
+      "start_time": "2026-10-09T04:00:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "soul-funk"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf"
+    },
+    {
       "id": "41ac5ea3-30e8-4b16-99b6-00cf6722dbf6",
       "title": "Party Night at The Bitter End",
       "start_time": "2026-10-09T04:00:00+00:00",
@@ -12806,6 +13058,28 @@
       "region": "sf",
       "summary": "Karaokiki at El Rio.",
       "more": true
+    },
+    {
+      "id": "0506d399-119a-4cdb-8a06-50f8dd5c53c4",
+      "title": "Ray Lau",
+      "start_time": "2026-10-09T04:15:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-08-2026/event/1C0064BCF6D53621",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "7cccac48-e214-4939-996e-3df5c1005ef5",
@@ -14144,6 +14418,28 @@
       "more": true
     },
     {
+      "id": "18a44e5d-39f3-4507-95b7-a26586d26d92",
+      "title": "Ray Lau",
+      "start_time": "2026-10-10T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-09-2026/event/1C0064864F2B88F8",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "1db85b48-a7af-4471-a041-045274c9b609",
       "title": "Wayne Harris' America…A Dream Deferred",
       "start_time": "2026-10-10T02:30:00+00:00",
@@ -14288,6 +14584,35 @@
       "venue": "curran-theatre",
       "region": "sf",
       "summary": "The Terminator Live comes to San Francisco at Curran Theatre on October 9, 2026.",
+      "more": true
+    },
+    {
+      "id": "d5c61bdf-a2ad-4ce3-8877-273d0dfc863e",
+      "title": "3rd i Festival: A CELEBRATION OF THE EXTRAORDINARY WORK OF AVIE LUTHRA",
+      "start_time": "2026-10-10T02:30:00+00:00",
+      "location": "Roxie Theater, 3117 16th Street, San Francisco",
+      "url": "https://www.atasite.org/event/3rd-i-festival-a-celebration-of-the-extraordinary-work-of-avie-luthra/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/3rd-i-film-festival.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "film",
+        "asian-american"
+      ],
+      "cost": "unknown",
+      "venue": "roxie-theater",
+      "region": "sf",
+      "summary": "ATA co-presents Opening Night of 3rd i Festival @ the Roxie Theater 3rd i Festival is thrilled to honor the creative genius of award-winning British-Indian director and",
       "more": true
     },
     {
@@ -14653,6 +14978,34 @@
       "venue": "great-american-music-hall",
       "region": "sf",
       "summary": "Goldenvoice Presents… · with Elias Hix · Singer/Songwriter"
+    },
+    {
+      "id": "f2b582a0-2dc9-4526-bd1c-2f57094baf4f",
+      "title": "Jaap Blonk, YappiScope",
+      "start_time": "2026-10-10T03:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/jaap-blonk-yappiscope/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/Jaap.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "cost": "unknown",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "Dutch avant-garde composer and performance artist Jaap Blonk presents his absurd performance YappiScope .",
+      "more": true
     },
     {
       "id": "f881389d-1263-4995-981f-bc7f08dc6d0c",
@@ -15219,6 +15572,28 @@
       "region": "sf",
       "summary": "Stand-Up Comedy Show (Late) at Cheaper Than Therapy.",
       "more": true
+    },
+    {
+      "id": "cd3c7b81-1639-45bf-a419-1e1db85d0b93",
+      "title": "Ray Lau",
+      "start_time": "2026-10-10T04:45:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-09-2026/event/1C0064864F3088FF",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "a1e0a25d-021c-4a76-b631-728f3967484a",
@@ -15948,6 +16323,35 @@
       "more": true
     },
     {
+      "id": "db607c80-99a1-4b42-a317-fe9c926971f0",
+      "title": "Fleet Week WITH A WATERFRONT SEAT",
+      "start_time": "2026-10-10T18:00:00+00:00",
+      "location": "Pier 45, San Francisco, CA 94133",
+      "url": "https://maritime.org/events/fleetweek",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/6ab1d3bbacc6561e0d165b18/1790195915637-JPSA9X6D5J0AL43II5QG/Fleet+Week+2026+Header+%281%29.png",
+      "sources": [
+        "San Francisco Maritime National Park Association"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "history",
+        "family-kids"
+      ],
+      "cost": "paid",
+      "venue": "pier-45",
+      "region": "sf",
+      "summary": "Get ready for Fleet Week 2026, where you can experience the excitement of an incredible airshow from premier waterfront seats at Pier 45!",
+      "more": true
+    },
+    {
       "id": "e55908ed-4779-4cf7-aad7-1a6da6b0c10e",
       "title": "Workshop: From Garden to Green Bin — Climate Action at Home",
       "start_time": "2026-10-10T18:00:00+00:00",
@@ -16203,6 +16607,32 @@
       "venue": "fort-mason-center-for-arts-culture",
       "region": "sf",
       "summary": "@ About Event Features Gallery Plan Your Visit Tickets BATS Improv Explore the world of improv with Fort Mason Center For Arts & Culture resident organization BATS Improv .",
+      "more": true
+    },
+    {
+      "id": "5ab45379-ac16-479b-9cbc-31a1276eaf59",
+      "title": "Follow the Music",
+      "start_time": "2026-10-10T20:00:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/follow-the-music/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2026/04/101026_FollowTheMusic_1800x945_collage_web_1.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music",
+        "education",
+        "family-kids"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "Free RSVP Since launching in 2023 Follow the Music has been at the forefront of a rising movement promoting arts education around the Bay Area.",
       "more": true
     },
     {
@@ -17736,6 +18166,28 @@
       "more": true
     },
     {
+      "id": "b1b027fa-a398-47ca-b5ad-c723985f4bc4",
+      "title": "Ray Lau",
+      "start_time": "2026-10-11T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-10-2026/event/1C0064864F34890D",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "bc4d8bb7-f019-4ced-9285-01e0be743171",
       "title": "King Lear",
       "start_time": "2026-10-11T02:00:00+00:00",
@@ -18135,6 +18587,34 @@
       "venue": "the-love-potion-library",
       "region": "sf",
       "summary": "No one knows your heart like a best friend.",
+      "more": true
+    },
+    {
+      "id": "19530637-2cf5-400e-a1fc-06c5b1e9376d",
+      "title": "Other Cinema: Shapeshifters Benefit",
+      "start_time": "2026-10-11T03:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/other-cinema-shapeshifters-benefit/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/other-cinema-20261010.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "film",
+        "visual-art"
+      ],
+      "cost": "paid",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "MAGICK~REALISM~PSYCHO ~GEOGRAPHY A colossal collab…of microcinemas!! Other Cinema takes a knee to Oakland ‘s SHAPESHIFTERS project, with a party-hardy program of Bay Area magick!",
       "more": true
     },
     {
@@ -18702,6 +19182,28 @@
       "more": true
     },
     {
+      "id": "0427b92b-d12b-46cf-8285-fc00bc75090c",
+      "title": "Ray Lau",
+      "start_time": "2026-10-11T04:15:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ray-lau-san-francisco-california-10-10-2026/event/1C0064864F388914",
+      "image_url": "https://s1.ticketm.net/dam/a/a3e/6567d7ba-3117-4975-a260-342bd26b9a3e_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "2a6cb360-9fc5-427f-83e5-e4752cce9345",
       "title": "Emil Wakim",
       "start_time": "2026-10-11T04:15:00+00:00",
@@ -19142,6 +19644,35 @@
       "venue": "4-star-theater",
       "region": "sf",
       "summary": "Wallace & Gromit: The Curse of the Were-Rabbit is a delightful adventure.",
+      "more": true
+    },
+    {
+      "id": "7c0c7f92-a01b-47e6-9063-02d62f98a195",
+      "title": "YBG Dance Day",
+      "start_time": "2026-10-11T17:00:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/ybg-dance-day-2026/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2026/03/101126_DanceDay_1800x945_web3.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "bachata"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "Free RSVP A party, a workout, a meditation and a communal celebration, Yerba Buena Gardens Dance Day is a portal to a joyous dance-filled world!",
       "more": true
     },
     {
@@ -20556,6 +21087,31 @@
       "more": true
     },
     {
+      "id": "c49dbfa9-bea7-4670-8655-9869991d24bf",
+      "title": "Michael Douglas with Lance Gardner - One Helluva Ride (Calvary Presbyterian, SF)",
+      "start_time": "2026-10-11T23:00:00+00:00",
+      "location": "Calvary Presbyterian 2515 Fillmore St San Francisco, CA 94115",
+      "url": "https://bookpassage.com/event/michael-douglas-one-helluva-ride-calvary-presbyterian-sf",
+      "image_url": "https://bookpassage.com/sites/default/files/image/2026/10/02/michael-douglas-calvary-graphic.png",
+      "sources": [
+        "Book Passage"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
+      "cost": "paid",
+      "venue": "calvary-presbyterian",
+      "region": "sf",
+      "summary": "Don't miss this extraordinary conversation with Academy Award-winning actor and producer Michael Douglas celebrating the release of his new memoir, One Helluva Ride .",
+      "more": true
+    },
+    {
       "id": "cae9fcf6-ab26-4120-ab78-9a09f643da46",
       "title": "Michael Douglas - One Helluva Ride",
       "start_time": "2026-10-11T23:00:00+00:00",
@@ -21140,6 +21696,28 @@
       "more": true
     },
     {
+      "id": "b2e47ddb-721c-471c-a2cd-ed93c3cc57ea",
+      "title": "S. F. Comedy Showcase",
+      "start_time": "2026-10-12T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/s-f-comedy-showcase-san-francisco-california-10-11-2026/event/1C0064CDF29DAF36",
+      "image_url": "https://s1.ticketm.net/dam/a/c8b/28f14b21-0890-485a-a04a-4bebb12b6c8b_1444221_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "c69894fb-512c-41b1-b62b-f87a6aceac12",
       "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
       "start_time": "2026-10-12T02:00:00+00:00",
@@ -21709,6 +22287,35 @@
       "more": true
     },
     {
+      "id": "6acc1c5b-d840-4850-b3c8-fd3a1ecf69bb",
+      "title": "San Francisco Indigenous Peoples Day with special performance by Jeremy Dutcher",
+      "start_time": "2026-10-12T19:00:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/sf-indigenous-peoples-day-2026/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2023/08/100923_IndigenousPeoplesDay_web.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "music",
+        "world-music",
+        "family-kids"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "Free RSVP Join us in celebration of San Francisco Indigenous Peoples Day with a magnificent profusion of Native American art, music and vendors.",
+      "more": true
+    },
+    {
       "id": "37baf6fc-89f8-414a-8911-aa738cc67e0b",
       "title": "Free Pool Monday at Columbus Cafe",
       "start_time": "2026-10-12T21:00:00+00:00",
@@ -22184,6 +22791,33 @@
       "region": "sf",
       "summary": "Bingo at Fly Bar.",
       "more": true
+    },
+    {
+      "id": "cc849ce6-c33d-4ca6-bbc9-2efc4f2c9143",
+      "title": "Studio 26: Fantom Classroom of the Art Institute",
+      "start_time": "2026-10-13T02:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/studio-26-fantom-classroom-of-the-art-institute-3/2026-10-12/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/Studio-26.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "A free seminar, investigating the 16mm experimental films in the collection of the SFAI Legacy Foundation and Archives."
     },
     {
       "id": "2fadabf2-c9b2-4e72-8549-1aa3c2e66b6e",
@@ -24594,6 +25228,28 @@
       "more": true
     },
     {
+      "id": "664c6857-5dd9-4942-8588-89d648512fbb",
+      "title": "Comedy Allstars",
+      "start_time": "2026-10-14T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/comedy-allstars-san-francisco-california-10-13-2026/event/1C0064E6D3A3291A",
+      "image_url": "https://s1.ticketm.net/dam/a/204/1cf0a6ef-fc13-449d-a78a-210f4ddbd204_1486961_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "ac2ccce4-f23b-41c7-9320-61e6328b4139",
       "title": "Oh, Mary!",
       "start_time": "2026-10-14T02:30:00+00:00",
@@ -25083,6 +25739,35 @@
       "region": "sf"
     },
     {
+      "id": "7fa971c3-1b1b-48c5-88dd-85d9d9af3b9b",
+      "title": "Center for the Art of Translation, Litquake, and SFCB Present: Passages of Babel: Translation and the Book Arts of Servane Briand",
+      "start_time": "2026-10-14T13:30:00+00:00",
+      "location": "San Francisco Center for the Book, 375 Rhode Island St, San Francisco, CA 94103",
+      "url": "https://www.sfcb.org/calendar/litquake-and-sfcb-present-passages-of-babel-translation-and-the-book-arts-of-servane-briand",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/66677e69bb4bbc4906cdb6c8/1790808672747-BC0LSF25IN0A3507DOPC/litquake_fest.jpg",
+      "sources": [
+        "San Francisco Center for the Book"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "design",
+        "writing"
+      ],
+      "cost": "free",
+      "venue": "san-francisco-center-for-the-book-sfcb",
+      "region": "sf",
+      "summary": "Source: https://www.catranslation.org/event/passages-of-babel-translation-and-the-book-arts-of-servane-briand/"
+    },
+    {
       "id": "c10c3283-ff43-4aa7-8ea9-b9aac377af85",
       "title": "Wingsday All Day at Question Mark Tavern",
       "start_time": "2026-10-14T18:00:00+00:00",
@@ -25179,6 +25864,34 @@
       "region": "sf",
       "room": "Ortega",
       "summary": "Hang out with other knitters and crocheters in a fun and friendly atmosphere.",
+      "more": true
+    },
+    {
+      "id": "e9bcdad1-50e9-4f75-a43d-6c645ad159d1",
+      "title": "Dance Outdoors with Rhythm & Motion",
+      "start_time": "2026-10-14T19:00:00+00:00",
+      "location": "Crepe Myrtle Garden, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/dance-outdoors-with-rhythm-motion-101426/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2025/03/082725_RhythmMotion_CreditNixGuirre_DSC00474-e1758657173812.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "crepe-myrtle-garden",
+      "region": "sf",
+      "summary": "Wednesdays at Noon.",
       "more": true
     },
     {
@@ -27705,6 +28418,28 @@
       "more": true
     },
     {
+      "id": "f84e5e0b-9bba-416f-9dbb-16c20470c7cf",
+      "title": "Nori Reed: Nori Is Present LIVE at Punch Line SF",
+      "start_time": "2026-10-15T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/nori-reed-nori-is-present-live-san-francisco-california-10-14-2026/event/1C00649BC8993902",
+      "image_url": "https://s1.ticketm.net/dam/a/153/c6f66679-0f62-4ec9-abaa-cf301fb7b153_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "fbc16e71-de0a-4a92-9e9a-6ea6a3dfd5a0",
       "title": "Kitty Tapata's Trivia at Wild Side West",
       "start_time": "2026-10-15T03:00:00+00:00",
@@ -28029,6 +28764,30 @@
       "region": "sf",
       "room": "Richmond",
       "summary": "Take a break the hustle and reconnect with your inner calm.",
+      "more": true
+    },
+    {
+      "id": "42f5b936-674d-43a3-b161-a766ad7df3a2",
+      "title": "Richard Howell’s John Coltrane Tribute",
+      "start_time": "2026-10-15T19:30:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/richard-howells-john-coltrane-tribute-2026/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2026/03/101526_Richard-Howell_1800x945_web.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "The 100 th anniversary of John Coltrane’s birthday has inspired dozens of performances across the Bay Area this year, but no artist is better equipped to evoke the legacy of the",
       "more": true
     },
     {
@@ -30135,6 +30894,28 @@
       "more": true
     },
     {
+      "id": "399762f9-8d64-4eba-ac39-030f6d82f64e",
+      "title": "Aaron Weber",
+      "start_time": "2026-10-16T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/aaron-weber-san-francisco-california-10-15-2026/event/1C00648AB1CEDDD4",
+      "image_url": "https://s1.ticketm.net/dam/a/00a/e1ae17b4-5ded-48ba-af00-ee305d99800a_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "4ae7848b-e5e4-4a47-bf39-de77ee62b0ff",
       "title": "Live Music: DJs at Mr. Mahjong's",
       "start_time": "2026-10-16T03:00:00+00:00",
@@ -32048,6 +32829,28 @@
       "more": true
     },
     {
+      "id": "c0e53b3d-a9ac-4f3b-891a-d0c859fc8659",
+      "title": "Aaron Weber",
+      "start_time": "2026-10-17T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/aaron-weber-san-francisco-california-10-16-2026/event/1C00648AB1D2DDDB",
+      "image_url": "https://s1.ticketm.net/dam/a/00a/e1ae17b4-5ded-48ba-af00-ee305d99800a_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "c8dabdd4-5b75-4b3c-85d7-49ac160f6671",
       "title": "Our Loving Companions (San Francisco)",
       "start_time": "2026-10-17T02:30:00+00:00",
@@ -32392,6 +33195,30 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "The Cornley Polytechnic Drama Society is back, and this time they’re taking on Peter Pan .",
+      "more": true
+    },
+    {
+      "id": "57ec706e-6dc9-493b-a4e6-604503ff0f47",
+      "title": "An evening with Mike Kuchar",
+      "start_time": "2026-10-17T03:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/an-evening-with-mike-kuchar/",
+      "image_url": null,
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "The vibrant, poetic and wild works of Mike Kuchar have inspired generations of filmmakers and artists with their wickedly perverse parodies of pop-culture and abundant creativity.",
       "more": true
     },
     {
@@ -33013,6 +33840,28 @@
       "region": "eastbay",
       "summary": "One of the most influential R&B singers of his generation · Musiq Soulchild, born Taalib Johnson, is one of the most influential R&B singers of his generation.",
       "more": true
+    },
+    {
+      "id": "e7b607f2-1e25-4f0c-8744-f12a288f8e90",
+      "title": "Aaron Weber",
+      "start_time": "2026-10-17T04:45:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/aaron-weber-san-francisco-california-10-16-2026/event/1C00648AB1D6DDE7",
+      "image_url": "https://s1.ticketm.net/dam/a/00a/e1ae17b4-5ded-48ba-af00-ee305d99800a_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "fcfcd89c-6022-447d-a863-571b8016d586",
@@ -33792,6 +34641,40 @@
       "more": true
     },
     {
+      "id": "6a882dad-bf9f-4371-8864-1c023ab51687",
+      "title": "Brava! Block Party",
+      "start_time": "2026-10-17T19:00:00+00:00",
+      "location": "Brava Theater Center, 2781  24th Street, San Francisco, CA, 94110, United States",
+      "url": "https://www.brava.org/all-events/bravablockparty",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/57e2ef6fc534a50452d4afa0/1788467671960-R2RF9QNUYYRHBJPEY4SP/Brava_1080.3.jpg",
+      "sources": [
+        "Brava Theater Center"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "theater",
+        "lgbtq",
+        "women",
+        "family-kids"
+      ],
+      "cost": "free",
+      "venue": "brava-theater-center",
+      "region": "sf",
+      "summary": "Brava Presents · October 17, 2026 · BRAVA!",
+      "more": true
+    },
+    {
       "id": "a6167c70-02c2-45ae-8d6b-bbad665b81c4",
       "title": "Palestine Day Festival",
       "start_time": "2026-10-17T19:00:00+00:00",
@@ -34188,6 +35071,31 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "The Cornley Polytechnic Drama Society is back, and this time they’re taking on Peter Pan .",
+      "more": true
+    },
+    {
+      "id": "6301cf7d-a473-41aa-9508-739d57ae45ee",
+      "title": "Joe Bataan",
+      "start_time": "2026-10-17T21:00:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/joe-bataan-2026/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2026/03/DSC00687.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "soul-funk",
+        "latino"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "Free RSVP Opening Set from MeloDious Festival favorite Joe Bataan , a Latin music legend since the mid-1960s, returns to the Gardens for his third performance in the past four",
       "more": true
     },
     {
@@ -35307,6 +36215,28 @@
       "more": true
     },
     {
+      "id": "c4bba73a-a8e4-498f-a0b2-a11d9f5054a4",
+      "title": "Aaron Weber",
+      "start_time": "2026-10-18T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/aaron-weber-san-francisco-california-10-17-2026/event/1C00648AB1DDDDF9",
+      "image_url": "https://s1.ticketm.net/dam/a/00a/e1ae17b4-5ded-48ba-af00-ee305d99800a_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "da6a4c6b-3708-4ad5-ab80-a33adc71d9bd",
       "title": "Ashley Gavin",
       "start_time": "2026-10-18T02:00:00+00:00",
@@ -36195,6 +37125,28 @@
       "room": "Joe Henderson Lab"
     },
     {
+      "id": "c9e75c1f-85f7-4f5f-803f-93aa5ada2968",
+      "title": "Aaron Weber",
+      "start_time": "2026-10-18T04:15:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/aaron-weber-san-francisco-california-10-17-2026/event/1C00648AB1E1DE0F",
+      "image_url": "https://s1.ticketm.net/dam/a/00a/e1ae17b4-5ded-48ba-af00-ee305d99800a_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "cfbdb162-a7d6-492b-9fc2-50c5b51b2036",
       "title": "Ashley Gavin",
       "start_time": "2026-10-18T04:15:00+00:00",
@@ -36640,6 +37592,32 @@
       "venue": "4-star-theater",
       "region": "sf",
       "summary": "This weekend, the 4-Star offers up a festively programmed block of Halloween cartoons to go with the season!",
+      "more": true
+    },
+    {
+      "id": "6c45dbcd-3655-4c90-ae8c-3725de1e28a2",
+      "title": "October Wild Girls Mother-Daughter Book Club Meeting",
+      "start_time": "2026-10-18T17:00:00+00:00",
+      "location": "Bookshop West Portal 80 West Portal Ave San Francisco, CA 94127",
+      "url": "https://bookshopwestportal.com/event/2026-10-18/october-wild-girls-mother-daughter-book-club-meeting",
+      "image_url": "https://bookshopwestportal.com/sites/default/files/book_cover/2026/10/05/9781643797540.jpg",
+      "sources": [
+        "Bookshop West Portal"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "family-kids"
+      ],
+      "cost": "free",
+      "venue": "bookshop-west-portal",
+      "region": "sf",
+      "summary": "BookShop West Portal is delighted to announce the second meeting of the Wild Girls Mother-Daughter Book Club on Sunday, October 18 at 10 am.",
       "more": true
     },
     {
@@ -38273,6 +39251,28 @@
       "region": "sf",
       "summary": "GAMH & Psyched!",
       "more": true
+    },
+    {
+      "id": "a578cc99-0ce9-4916-9c67-f84ddd2d4b1a",
+      "title": "S. F. Comedy Showcase",
+      "start_time": "2026-10-19T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/s-f-comedy-showcase-san-francisco-california-10-18-2026/event/1C0064CDF2A1AF4C",
+      "image_url": "https://s1.ticketm.net/dam/a/c8b/28f14b21-0890-485a-a04a-4bebb12b6c8b_1444221_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "ec8414f9-c769-4a62-b6fd-030cbc95471b",
@@ -42461,6 +43461,28 @@
       "more": true
     },
     {
+      "id": "1d587bb2-bd17-43c8-a4af-410e40ff7e7f",
+      "title": "Hannah Jones",
+      "start_time": "2026-10-21T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/hannah-jones-san-francisco-california-10-20-2026/event/1C0064D7D37B67A0",
+      "image_url": "https://s1.ticketm.net/dam/a/886/374f2fcf-3674-4daa-87f4-a939abd37886_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "1f1c166d-9d50-4b6d-a170-36fa7308adf5",
       "title": "THE RING",
       "start_time": "2026-10-21T02:30:00+00:00",
@@ -43181,6 +44203,34 @@
       "venue": "mechanics-institute-library-and-chess-room",
       "region": "sf",
       "summary": "Join us for lively discussions, thoughtful reflections, and the joy of discovering new writers from across the globe."
+    },
+    {
+      "id": "8da3b1a7-730f-4f62-8a1c-7a5497c8e7de",
+      "title": "Dance Outdoors with Rhythm & Motion",
+      "start_time": "2026-10-21T19:00:00+00:00",
+      "location": "Crepe Myrtle Garden, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/dance-outdoors-with-rhythm-motion-102126/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2025/03/082725_RhythmMotion_CreditNixGuirre_DSC00474-e1758657173812.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "crepe-myrtle-garden",
+      "region": "sf",
+      "summary": "Wednesdays at Noon.",
+      "more": true
     },
     {
       "id": "6a9afdd2-8986-4b3e-8390-a78aff2e89ec",
@@ -45390,6 +46440,28 @@
       "region": "sf",
       "summary": "Scuff Queer Line Dancing & Two-Stepping at Verdi Club.",
       "more": true
+    },
+    {
+      "id": "421a6342-ad6c-43aa-a582-08656e099d39",
+      "title": "Laurie Kilmartin",
+      "start_time": "2026-10-22T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/laurie-kilmartin-san-francisco-california-10-21-2026/event/1C0064D3AA45F24E",
+      "image_url": "https://s1.ticketm.net/dam/a/1bf/7ab2e522-8376-4155-bdb7-caf1aeeee1bf_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "689d6d32-bf54-4c4d-8bc9-7e2a2368169b",
@@ -48084,6 +49156,28 @@
       "more": true
     },
     {
+      "id": "36514b99-4c9c-4089-97cc-326e9855861a",
+      "title": "Laurie Kilmartin",
+      "start_time": "2026-10-23T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/laurie-kilmartin-san-francisco-california-10-22-2026/event/1C0064D3AA49F25B",
+      "image_url": "https://s1.ticketm.net/dam/a/1bf/7ab2e522-8376-4155-bdb7-caf1aeeee1bf_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "620bcf7a-a856-4e60-8c9a-3f772d2ba3af",
       "title": "Frankie Cosmos - Celebrating 10 Years of Next Thing",
       "start_time": "2026-10-23T03:00:00+00:00",
@@ -50180,6 +51274,28 @@
       "more": true
     },
     {
+      "id": "6176cbe7-5626-412e-bec0-b498f7363239",
+      "title": "Laurie Kilmartin",
+      "start_time": "2026-10-24T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/laurie-kilmartin-san-francisco-california-10-23-2026/event/1C0064D3AA4EF264",
+      "image_url": "https://s1.ticketm.net/dam/a/1bf/7ab2e522-8376-4155-bdb7-caf1aeeee1bf_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "685014f0-68c8-42e5-9791-e6c401231750",
       "title": "Our Loving Companions (Berkeley)",
       "start_time": "2026-10-24T02:30:00+00:00",
@@ -51192,6 +52308,28 @@
       ],
       "cost": "paid",
       "venue": "cobbs-comedy-club",
+      "region": "sf"
+    },
+    {
+      "id": "4191ff37-be25-4cb1-b5a6-86d4becf8436",
+      "title": "Laurie Kilmartin",
+      "start_time": "2026-10-24T04:45:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/laurie-kilmartin-san-francisco-california-10-23-2026/event/1C0064D3AA52F27F",
+      "image_url": "https://s1.ticketm.net/dam/a/1bf/7ab2e522-8376-4155-bdb7-caf1aeeee1bf_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
       "region": "sf"
     },
     {
@@ -52602,6 +53740,33 @@
       "more": true
     },
     {
+      "id": "7a3da46b-4bad-4596-9ec9-6abe60a0397c",
+      "title": "Afro-Filipino Jazz Project",
+      "start_time": "2026-10-24T21:00:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/afro-filipino-jazz-project/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2026/03/102426_JohnCalloway_AfroFilipino-Jazz-Project_1800x945_web2.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz",
+        "world-music",
+        "asian-american",
+        "black-diaspora"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "Free RSVP Few artists have appeared at the Festival more frequently than flutist, percussionist and arranger John Calloway .",
+      "more": true
+    },
+    {
       "id": "a045dba4-a2b2-4e6d-8dd9-2616fa64b16c",
       "title": "All Ages Day at Detour",
       "start_time": "2026-10-24T21:00:00+00:00",
@@ -53179,6 +54344,32 @@
       "more": true
     },
     {
+      "id": "bd0f66dd-d6e3-4a8a-9eea-891cfda334be",
+      "title": "Litcrawl: CCA comics live",
+      "start_time": "2026-10-25T00:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/litcrawl-cca-comics-live/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/Litcrawl-2026.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comics-zines",
+        "film"
+      ],
+      "cost": "free",
+      "venue": "artists-television-access",
+      "region": "sf"
+    },
+    {
       "id": "ee2d6aea-6d0e-4a57-acf0-928db3697894",
       "title": "Litcrawl!",
       "start_time": "2026-10-25T00:00:00+00:00",
@@ -53479,6 +54670,28 @@
       "region": "sf",
       "summary": "Golden Gate Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
       "more": true
+    },
+    {
+      "id": "cc59be42-26ef-4f2e-beec-59f4a6ec7995",
+      "title": "Laurie Kilmartin",
+      "start_time": "2026-10-25T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/laurie-kilmartin-san-francisco-california-10-24-2026/event/1C0064D3AA57F28F",
+      "image_url": "https://s1.ticketm.net/dam/a/1bf/7ab2e522-8376-4155-bdb7-caf1aeeee1bf_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "f550cfce-5e5d-42dc-a229-988a7ae2b87b",
@@ -54444,6 +55657,28 @@
       ],
       "cost": "paid",
       "venue": "cobbs-comedy-club",
+      "region": "sf"
+    },
+    {
+      "id": "e18977cc-46ac-474c-a77e-3ad8c3015fc8",
+      "title": "Laurie Kilmartin",
+      "start_time": "2026-10-25T04:15:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/laurie-kilmartin-san-francisco-california-10-24-2026/event/1C0064D3AA5BF29D",
+      "image_url": "https://s1.ticketm.net/dam/a/1bf/7ab2e522-8376-4155-bdb7-caf1aeeee1bf_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "punch-line-comedy-club",
       "region": "sf"
     },
     {
@@ -55502,6 +56737,32 @@
       "more": true
     },
     {
+      "id": "7905eea7-900c-4b11-ae09-abbc5a148b47",
+      "title": "Riptide Rocksteady Social - DJs Sir Rudy Blackout & The Singapore Selector",
+      "start_time": "2026-10-25T21:00:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "Reggae, Rocksteady and Ska on a Sunday afternoon by the beach!",
+      "more": true
+    },
+    {
       "id": "8092ce6e-e91a-45b4-aced-f26509d83d38",
       "title": "Activity: Chess Club",
       "start_time": "2026-10-25T21:00:00+00:00",
@@ -56034,6 +57295,28 @@
       "more": true
     },
     {
+      "id": "b1852b27-5667-40f7-82d2-8d0f1e03037d",
+      "title": "Your Next Comic - A New Faces Showcase",
+      "start_time": "2026-10-25T23:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/your-next-comic-a-new-faces-san-francisco-california-10-25-2026/event/1C00653D4F32AC27",
+      "image_url": "https://s1.ticketm.net/dam/a/31d/d4e84823-a8cb-4f30-a2b8-820a014eb31d_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "b539384e-405b-4967-ac4b-dae32376baf8",
       "title": "Butoh-Inspired Movement Meditation with Maya Kaufman",
       "start_time": "2026-10-25T23:00:00+00:00",
@@ -56514,6 +57797,28 @@
       "summary": "Live at the Faight!"
     },
     {
+      "id": "792dfee1-5f6a-41c9-ad48-87128e3f6726",
+      "title": "S. F. Comedy Showcase",
+      "start_time": "2026-10-26T02:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/s-f-comedy-showcase-san-francisco-california-10-25-2026/event/1C0064D3AAA5F3A1",
+      "image_url": "https://s1.ticketm.net/dam/a/c8b/28f14b21-0890-485a-a04a-4bebb12b6c8b_1444221_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "7b35d6ad-c2c7-405a-9d99-9b4b87ec696d",
       "title": "Two Dykes and a Mic: Soaking Wet Tour",
       "start_time": "2026-10-26T02:00:00+00:00",
@@ -56558,6 +57863,34 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Fri, Oct 23, 2026 – Sun, Nov 29, 2026 · A daughter digs into her mother’s unfinished feminist revolution in this bitingly funny, intensely relevant play on freedom and inheritance."
+    },
+    {
+      "id": "1e20cad3-3ab4-4754-9c7b-eb5f8da5f6d5",
+      "title": "Rewards Program",
+      "start_time": "2026-10-26T02:30:00+00:00",
+      "location": "Artists’ Television Access, 992 Valencia Street, San Francisco",
+      "url": "https://www.atasite.org/event/rewards-program-202610/",
+      "image_url": null,
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "A live-scored three-projector celluloid performance with: MILES LASSI is an interdisciplinary artist based out of Oakland, CA.",
+      "more": true
     },
     {
       "id": "f3866381-2198-4e5e-a6a6-a04a6ca286f6",
@@ -60728,6 +62061,34 @@
       "more": true
     },
     {
+      "id": "119cfbb9-aba5-4b9d-8960-9f924e6b53f5",
+      "title": "Dance Outdoors with Rhythm & Motion",
+      "start_time": "2026-10-28T19:00:00+00:00",
+      "location": "Crepe Myrtle Garden, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/dance-outdoors-with-rhythm-motion-102826/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2025/03/082725_RhythmMotion_CreditNixGuirre_DSC00474-e1758657173812.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "crepe-myrtle-garden",
+      "region": "sf",
+      "summary": "Wednesdays at Noon.",
+      "more": true
+    },
+    {
       "id": "a45df255-3bbe-4b19-b7ff-fbe3d32e10fa",
       "title": "Social: Knitting Circle",
       "start_time": "2026-10-28T19:00:00+00:00",
@@ -61165,6 +62526,35 @@
       "venue": "yoshis-oakland",
       "region": "eastbay",
       "summary": "SHOW TICKET NOT INCLUDED · SHOW TICKETS NOT INCLUDED (For Show Tickets, CLICK HERE) Exclusive Meet & Greet with Daley Personal photo with Daley Access to an intimate pre-show Q&A",
+      "more": true
+    },
+    {
+      "id": "09c5fc47-57b5-4d08-a798-bee07061bfee",
+      "title": "Voice from the Fire: a Community Reading",
+      "start_time": "2026-10-29T01:00:00+00:00",
+      "location": "San Francisco Center for the Book, 375 Rhode Island St, San Francisco, CA 94103",
+      "url": "https://www.sfcb.org/calendar/voice-from-the-fire",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/66677e69bb4bbc4906cdb6c8/1787095434454-Z36HQML62IL5BPU0PI5X/blake_orc.png",
+      "sources": [
+        "San Francisco Center for the Book"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "poetry"
+      ],
+      "cost": "free",
+      "venue": "san-francisco-center-for-the-book-sfcb",
+      "region": "sf",
+      "summary": "This one-hour performance reading piece was originally performed by Betsy Davids and James Petrillo from 1983 to 2016.",
       "more": true
     },
     {
@@ -62109,6 +63499,35 @@
       "more": true
     },
     {
+      "id": "f65317dd-e6f5-40ba-8bbb-fb2a61af36cf",
+      "title": "When ICE Melts",
+      "start_time": "2026-10-29T02:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/when-ice-melts/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/When-ICE-Melts.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "cost": "unknown",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "Join us for a screening of When ICE Melts , a documentary on the Minneapolis resistance to the 2025 ICE raids, capturing the role of unions, immigrant organizations, workers’",
+      "more": true
+    },
+    {
       "id": "f6b30777-29e5-4987-9da2-1ecc01ddad8d",
       "title": "Trivia Night at Lost Marbles Brewpub",
       "start_time": "2026-10-29T02:00:00+00:00",
@@ -62671,6 +64090,28 @@
       ],
       "cost": "unknown",
       "venue": "the-fillmore",
+      "region": "sf"
+    },
+    {
+      "id": "8b403111-20f0-4ca1-8374-81c96710e8a0",
+      "title": "Mo Welch",
+      "start_time": "2026-10-29T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/mo-welch-san-francisco-california-10-28-2026/event/1C006509C3002AE4",
+      "image_url": "https://s1.ticketm.net/dam/a/2d8/63ce0230-e778-4a2a-b4dc-f0d52ca542d8_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
       "region": "sf"
     },
     {
@@ -64407,6 +65848,34 @@
       "more": true
     },
     {
+      "id": "3a84aaf1-f45f-4584-93df-059bc8662348",
+      "title": "Deadbeat at Dawn with LIVE MUSIC from Meat Hook & the Vital Organs (Presented by TRASH & TREASURES)",
+      "start_time": "2026-10-30T02:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/deadbeat-at-dawn-meathook",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791168776377-GXGEBSCY83QAHMX05BI2/DB-Goose1.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "film",
+        "punk-metal"
+      ],
+      "cost": "paid",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "TRASH & TREASURES presents: DEADBEAT AT DAWN (with Live Opening Set from Meat Hook & the Vital Organs) He quit the gangs.",
+      "more": true
+    },
+    {
       "id": "3c9f0752-02a4-402e-8dda-45233a4f8fe2",
       "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
       "start_time": "2026-10-30T02:30:00+00:00",
@@ -64923,6 +66392,28 @@
       ],
       "cost": "unknown",
       "venue": "the-fillmore",
+      "region": "sf"
+    },
+    {
+      "id": "bc1301c2-2b2d-4c87-83b2-e97bf0c1c7b1",
+      "title": "Mo Welch",
+      "start_time": "2026-10-30T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/mo-welch-san-francisco-california-10-29-2026/event/1C006509C3042AF7",
+      "image_url": "https://s1.ticketm.net/dam/a/2d8/63ce0230-e778-4a2a-b4dc-f0d52ca542d8_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
       "region": "sf"
     },
     {
@@ -66350,6 +67841,28 @@
       "more": true
     },
     {
+      "id": "44e5a33e-cd32-4b79-8d93-6b53c09ca291",
+      "title": "Mo Welch",
+      "start_time": "2026-10-31T02:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/mo-welch-san-francisco-california-10-30-2026/event/1C006509C30B2B09",
+      "image_url": "https://s1.ticketm.net/dam/a/2d8/63ce0230-e778-4a2a-b4dc-f0d52ca542d8_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "4b1a9ea4-1187-4a34-b14b-8a1fc6d21921",
       "title": "Scream",
       "start_time": "2026-10-31T02:30:00+00:00",
@@ -66397,6 +67910,34 @@
       "venue": "a-c-t",
       "region": "sf",
       "summary": "Be transported to San Francisco’s Fillmore District—beginning in the present day, where the echoes of a once-thriving Black neighborhood still shape the streets.",
+      "more": true
+    },
+    {
+      "id": "884f508c-81ec-463a-8e79-371f2646a971",
+      "title": "IT (1990) on VHS (Presented by BASEMENT VHS plus Q&A with Director Tommy Lee Wallace)",
+      "start_time": "2026-10-31T02:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/basement-vhs-it",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791172277995-1K0WFHZ4TCG3G575TPSR/it+1990.png",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "paid",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Basement VHS presents: IT (1990) ON VHS The Master of Horror unleashes everything you were ever afraid of.",
       "more": true
     },
     {
@@ -67217,6 +68758,28 @@
       "more": true
     },
     {
+      "id": "a6e28b7c-f206-4997-abbe-228701dafa9d",
+      "title": "Mo Welch",
+      "start_time": "2026-10-31T04:45:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/mo-welch-san-francisco-california-10-30-2026/event/1C006509C3102B22",
+      "image_url": "https://s1.ticketm.net/dam/a/2d8/63ce0230-e778-4a2a-b4dc-f0d52ca542d8_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "428ae934-5e5a-4a0b-b967-4196d53d4a2c",
       "title": "Hallows Gate: THE NIGHT BEFORE HALLOWEEN",
       "start_time": "2026-10-31T05:00:00+00:00",
@@ -67792,6 +69355,35 @@
       "more": true
     },
     {
+      "id": "c8f6221d-d2b8-4d6f-b688-ac7e0b6672fc",
+      "title": "Halloween Hoopla",
+      "start_time": "2026-10-31T19:00:00+00:00",
+      "location": "Children’s Garden, Yerba Buena Gardens, 799 Howard St., San Francisco",
+      "url": "https://ybgfestival.org/event/halloween-hoopla-2026/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2024/03/110224_HalloweenHoopla_web_1.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "family-kids",
+        "music",
+        "dance"
+      ],
+      "cost": "free",
+      "venue": "childrens-garden",
+      "region": "sf",
+      "summary": "Free RSVP The 26th annual Halloween Hoopla is back with family-friendly frights and delights for kids under 10 and their adults!",
+      "more": true
+    },
+    {
       "id": "74446e63-9f20-4f74-9f40-bd45bb3011eb",
       "title": "Drag Brunch at Beaux",
       "start_time": "2026-10-31T19:30:00+00:00",
@@ -67890,6 +69482,30 @@
       "venue": "mechanics-institute-library-and-chess-room",
       "region": "sf",
       "summary": "Learn about the fundamentals of wine appreciation and wine making."
+    },
+    {
+      "id": "fb55223e-30c5-41e1-b2f4-ea07cd5a8060",
+      "title": "The Shining",
+      "start_time": "2026-10-31T20:45:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/the-shining-sat",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791165571864-G8JZ19UI8XNJYWF7A539/shining.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "A masterpiece of modern horror.",
+      "more": true
     },
     {
       "id": "4c4742fb-4dd0-4a59-9096-9e621503a5b8",
@@ -68350,6 +69966,30 @@
       "more": true
     },
     {
+      "id": "33750dac-34e0-43ac-8be8-88d93ab2ee8a",
+      "title": "TINAFF: Program 8",
+      "start_time": "2026-11-01T02:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/tinaff-202609-2/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/02/tinaff-e1788851961809.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "This is Not a Film Festival (also know as TINAFF) is a monthly recurring film showcase, allowing local Bay Area filmmakers, artists and creatives to gather, connect, and present",
+      "more": true
+    },
+    {
       "id": "502cb530-800b-4ab0-ac63-165546ef339f",
       "title": "Halloween Party",
       "start_time": "2026-11-01T02:00:00+00:00",
@@ -68792,6 +70432,28 @@
       "more": true
     },
     {
+      "id": "afc46ff6-9300-427d-aab6-a5da49fc6d0e",
+      "title": "Ha Ha Halloween Showcase",
+      "start_time": "2026-11-01T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/ha-ha-halloween-showcase-san-francisco-california-10-31-2026/event/1C0064F5CB660D9D",
+      "image_url": "https://s1.ticketm.net/dam/e/839/0d4a25fa-eb9c-47da-bf29-5d8ea2b6d839_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "2a6cd253-63c7-4e6b-9235-19675cd8fa2a",
       "title": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech",
       "start_time": "2026-11-01T04:00:00+00:00",
@@ -68813,6 +70475,30 @@
       "room": "the Marrakech",
       "summary": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech.",
       "more": true
+    },
+    {
+      "id": "2fcd7a5b-7e94-41b3-97c1-7c9eda94121d",
+      "title": "Halloween Party with DJ Los Ahijados de la Changa!",
+      "start_time": "2026-11-01T04:00:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf"
     },
     {
       "id": "3a613ba2-3e84-47d0-84ca-12fe19006ec6",
@@ -69493,6 +71179,30 @@
       "more": true
     },
     {
+      "id": "c69bee85-1084-4f53-9294-8603d808886a",
+      "title": "The Shining",
+      "start_time": "2026-11-01T20:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/the-shining-sun",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791165571864-G8JZ19UI8XNJYWF7A539/shining.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "A masterpiece of modern horror.",
+      "more": true
+    },
+    {
       "id": "12405414-d75a-4ab0-972c-7f7b1cc6c9bd",
       "title": "Seisiún Afternoon at The Plough and the Stars",
       "start_time": "2026-11-01T21:00:00+00:00",
@@ -70165,6 +71875,34 @@
       "more": true
     },
     {
+      "id": "987e68e9-ece0-48a7-8911-7fbfa215be0e",
+      "title": "Local Critique",
+      "start_time": "2026-11-01T23:30:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/local-critique-october",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1780342976851-7LPLKLC2RHVP3W26YVJI/LC%2Bflyer%2BSept%2B25%2B25.png",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "visual-art"
+      ],
+      "cost": "free",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "LOCAL CRITIQUE Local Critique is a free, community event with an open format that brings together a diverse group - of artists, researchers, writers, musicians, farmers,",
+      "more": true
+    },
+    {
       "id": "5e736e71-ad30-43cb-831b-3b74a6ee62af",
       "title": "Sunday Blues Jam at Pier 23 Cafe",
       "start_time": "2026-11-02T00:00:00+00:00",
@@ -70519,6 +72257,28 @@
       "region": "sf",
       "summary": "Clutch the Pearls at Make-Out Room.",
       "more": true
+    },
+    {
+      "id": "42fccf20-ac96-4e0e-ac1b-3aa02773deea",
+      "title": "S. F. Comedy Showcase",
+      "start_time": "2026-11-02T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/s-f-comedy-showcase-san-francisco-california-11-01-2026/event/1C0064E6CFD81F61",
+      "image_url": "https://s1.ticketm.net/dam/a/c8b/28f14b21-0890-485a-a04a-4bebb12b6c8b_1444221_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "7b2e1423-a5aa-4aaf-9ca6-7b4f40f4f7ff",
@@ -72025,6 +73785,28 @@
       "more": true
     },
     {
+      "id": "7d2a717b-13dc-44ae-92d1-3ff59403ed0c",
+      "title": "Winston Hodges",
+      "start_time": "2026-11-04T03:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/winston-hodges-san-francisco-california-11-03-2026/event/1C0064C9CA867E67",
+      "image_url": "https://s1.ticketm.net/dam/a/58f/a856a90f-735f-4102-b494-0826dee4458f_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "ccbefb3a-62f9-4376-85ad-6ccfd0052546",
       "title": "Ellen Hoffman's Piano, Open Mic and SingAlong",
       "start_time": "2026-11-04T03:30:00+00:00",
@@ -73097,6 +74879,28 @@
       "more": true
     },
     {
+      "id": "ce6901d7-861e-418a-8bda-7e941a1122b0",
+      "title": "Winston Hodges",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/winston-hodges-san-francisco-california-11-04-2026/event/1C0064C9CA8B7E74",
+      "image_url": "https://s1.ticketm.net/dam/a/58f/a856a90f-735f-4102-b494-0826dee4458f_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "fb07b95c-5717-4b93-8204-4b9d5d9dcc73",
       "title": "Not Just Jazz 2026",
       "start_time": "2026-11-05T03:30:00+00:00",
@@ -73248,6 +75052,31 @@
       "region": "sf",
       "room": "Richmond",
       "summary": "Take a break the hustle and reconnect with your inner calm.",
+      "more": true
+    },
+    {
+      "id": "004aa826-b324-4b83-82bb-56539c2d344f",
+      "title": "From the Bench of Beth Thielen",
+      "start_time": "2026-11-05T20:30:00+00:00",
+      "location": "San Francisco Center for the Book, 375 Rhode Island St, San Francisco, CA 94103",
+      "url": "https://www.sfcb.org/calendar/fromthebenchofbeththielen",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/66677e69bb4bbc4906cdb6c8/1790804084925-KWBD0TPH7I82FAYWVXM7/my+photo.jpeg",
+      "sources": [
+        "San Francisco Center for the Book"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "education"
+      ],
+      "cost": "free",
+      "venue": "san-francisco-center-for-the-book-sfcb",
+      "region": "sf",
+      "summary": "Beth Thielen has worked as artist and educator with incarcerated and at-risk populations for over 30 years.",
       "more": true
     },
     {
@@ -74186,6 +76015,28 @@
       "more": true
     },
     {
+      "id": "b047f637-4c4c-49be-9518-d1929b9559ed",
+      "title": "Jake Johannsen",
+      "start_time": "2026-11-06T03:30:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/jake-johannsen-san-francisco-california-11-05-2026/event/1C0064ED0404FBE0",
+      "image_url": "https://s1.ticketm.net/dam/a/13a/cb6dcd9b-e499-48de-ac14-2848a286513a_1193631_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "46d6d390-cd18-4b46-9595-0fd596e944e1",
       "title": "Liberation",
       "start_time": "2026-11-06T04:00:00+00:00",
@@ -74256,6 +76107,30 @@
       "summary": "November 5, 2026 · Dudes Behind The Foods Live Podcast Tour w/ Tim Chantarangsu and David So"
     },
     {
+      "id": "8dbc7e7c-7020-40ef-9d88-9df7dcbcf3b5",
+      "title": "Open Screening",
+      "start_time": "2026-11-06T04:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/openscreening/2026-11-05/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/open-screening-flyer.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "ATA’s free community film/video show welcomes short format work or (15 min or less) from all genres.",
+      "more": true
+    },
+    {
       "id": "a7fc8d50-45a1-4812-accb-7857a5fb41f4",
       "title": "SFDanceworks Season 9",
       "start_time": "2026-11-06T04:00:00+00:00",
@@ -74278,6 +76153,30 @@
       "region": "sf",
       "room": "Steindler Stage",
       "summary": "SFDanceworks returns to Z Space for its 9th season with a boldly curated program spanning modern-dance lineage and today's most distinct contemporary voices, ramping up toward the",
+      "more": true
+    },
+    {
+      "id": "b4cdc3d6-788e-486d-8747-1c3bfbdd62de",
+      "title": "LIVE MUSIC: Good Friends, The Lowtimers, Red McAdam",
+      "start_time": "2026-11-06T04:00:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/live-music-good-friends-nov",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791183622301-RAN710RE2T6PC2YLJVL4/good+friends.jpg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "Good Friends Good Friends is a folk/americana band from Point Reyes, CA, centered around sweet vocal harmony, big feelings, vibrating strings, and good ol’ fashioned humor.",
       "more": true
     },
     {
@@ -76508,6 +78407,31 @@
       "more": true
     },
     {
+      "id": "e8dd873b-cfe5-4737-9c38-8f9efd5782af",
+      "title": "Annual Maritime Ball",
+      "start_time": "2026-11-08T01:00:00+00:00",
+      "location": "San Francisco, CA",
+      "url": "https://maritime.org/events/gala2026",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/6ab1d3bbacc6561e0d165b18/1790203359280-7R1ZXEOIQY07UNE9TETP/Maritime+Gala+Save+the+Date+%283%29.png",
+      "sources": [
+        "San Francisco Maritime National Park Association"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ],
+      "topics": [
+        "history"
+      ],
+      "cost": "paid",
+      "venue": null,
+      "region": "sf",
+      "summary": "You’re cordially invited to the Annual Maritime Ball Presented by the San Francisco Maritime National Park Association Reserve now Cocktail attire | Black-tie optional | Nautical",
+      "more": true
+    },
+    {
       "id": "0a35e488-edb8-4c56-860d-c7860500e42b",
       "title": "PRIVATE EVENT",
       "start_time": "2026-11-08T02:00:00+00:00",
@@ -76553,6 +78477,33 @@
       "region": "sf",
       "summary": "Every Saturday our hosts make dreams come true with Bingo.",
       "more": true
+    },
+    {
+      "id": "75bca14a-62df-4138-a522-684b1b41df7c",
+      "title": "In-Person Chantey Sing – San Francisco",
+      "start_time": "2026-11-08T02:00:00+00:00",
+      "location": "Maritime Museum, 900 Beach St, San Francisco, CA 94109",
+      "url": "https://maritime.org/events/event-three-mz467-9slf2-t8mp6-hfa3t-4zd6s-gp65j",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/6ab1d3bbacc6561e0d165b18/fb41e685-3f41-491a-b153-7a1ec429e596/Maritime-Event-Image.jpg",
+      "sources": [
+        "San Francisco Maritime National Park Association"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana",
+        "music"
+      ],
+      "cost": "free",
+      "venue": "national-maritime-museum",
+      "region": "sf",
+      "summary": "A FREE monthly event every first Saturday of the month at the Maritime Museum Building in San Francisco Maritime National Historical Park."
     },
     {
       "id": "8894a119-b6a3-4966-877d-ce62e229a5a4",
@@ -78389,6 +80340,33 @@
       "region": "sf",
       "summary": "Maria Geyman is a board-certified naturopathic doctor and writer on culture, food, and beauty.",
       "more": true
+    },
+    {
+      "id": "10641a9d-9dce-479d-b48a-1c3407332b4e",
+      "title": "Studio 26: Fantom Classroom of the Art Institute",
+      "start_time": "2026-11-10T03:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/studio-26-fantom-classroom-of-the-art-institute-3/2026-11-09/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/Studio-26.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "A free seminar, investigating the 16mm experimental films in the collection of the SFAI Legacy Foundation and Archives."
     },
     {
       "id": "820e678d-14c6-4614-b527-11adaeddf4e4",
@@ -81645,6 +83623,38 @@
       "region": "sf",
       "room": "Main",
       "summary": "Design your own custom mug, t-shirt, bag, decals or stickers using Cricut Design Space software and tools.",
+      "more": true
+    },
+    {
+      "id": "9561c544-bb80-425e-925c-bd5c07c03b0b",
+      "title": "Bhangra & Beats Night Market",
+      "start_time": "2026-11-14T00:00:00+00:00",
+      "location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103",
+      "url": "https://ybgfestival.org/event/bhangra-and-beats-111326/",
+      "image_url": "https://ybgfestival.org/wp-content/uploads/2026/05/BB-YBC-GARDENS-FESTIVAL-WEBSITE-BANNER-SEASON.jpg",
+      "sources": [
+        "Yerba Buena Gardens Festival"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "dance-party",
+        "world-music",
+        "family-kids",
+        "asian-american"
+      ],
+      "cost": "free",
+      "venue": "great-lawn",
+      "region": "sf",
+      "summary": "San Francisco’s biggest South Asian celebration is back, and for the first time ever, it lands at Yerba Buena Gardens, one of downtown’s most iconic arts and cultural destinations.",
       "more": true
     },
     {
@@ -93180,6 +95190,31 @@
       "more": true
     },
     {
+      "id": "3eaacd2f-eaf1-422f-bbf6-2f078e2e0094",
+      "title": "BACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL",
+      "start_time": "2026-11-25T04:00:00+00:00",
+      "location": "Yoshi's, 510 Embarcadero West, Oakland, CA 94607",
+      "url": "https://yoshis.com/events/buy-tickets/back-to-the-future-thanksgiving-celebration-feat-lawrence-matthews-and-derrick-hall/detail",
+      "image_url": "https://yoshis.com/userfiles/events/images/3068/back-to-the-future-copy.png",
+      "sources": [
+        "Yoshi's"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "soul-funk",
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "yoshis-oakland",
+      "region": "eastbay",
+      "summary": "A Thanksgiving celebration · This Thanksgiving season, Yoshi’s Oakland welcomes two of the Bay Area’s living gospel legends for an unforgettable night of music, memories, and",
+      "more": true
+    },
+    {
       "id": "bca46635-c24d-4967-8e0d-1adfab438837",
       "title": "Eileen's Punk Rock and Schlock Karaoke",
       "start_time": "2026-11-25T04:30:00+00:00",
@@ -97310,6 +99345,32 @@
       "more": true
     },
     {
+      "id": "f2f1d802-3290-4ddb-9c51-604251dd6da5",
+      "title": "Obi Kaufmann - California Inside Out",
+      "start_time": "2026-12-04T03:00:00+00:00",
+      "location": "Tally Ho! Books, 3941 Piedmont Ave, Oakland, CA 94611",
+      "url": "https://tallyhobookstore.com/events/6179120261203",
+      "image_url": "https://cdn1.bookmanager.com/i/9934103/OBI_KAUFMANN_2026.jpg?cb=1791130767",
+      "sources": [
+        "Tally Ho! Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "nature-outdoors"
+      ],
+      "cost": "unknown",
+      "venue": "tally-ho-books",
+      "region": "eastbay",
+      "summary": "Local hero Obi Kaufmann returns to Tally Ho!",
+      "more": true
+    },
+    {
       "id": "a19568f4-3735-43f4-a831-1e81636c083f",
       "title": "John Proctor Is the Villain",
       "start_time": "2026-12-04T03:30:00+00:00",
@@ -97450,6 +99511,30 @@
       "cost": "unknown",
       "venue": "warfield-theatre",
       "region": "sf"
+    },
+    {
+      "id": "a3c33c09-2f81-49de-a987-c988f54ad532",
+      "title": "Open Screening",
+      "start_time": "2026-12-04T04:00:00+00:00",
+      "location": "Artists' Television Access, 992 Valencia St, San Francisco, CA 94110",
+      "url": "https://www.atasite.org/event/openscreening/2026-12-03/",
+      "image_url": "https://www.atasite.org/wp-content/uploads/2026/09/open-screening-flyer.jpg",
+      "sources": [
+        "Artists' Television Access"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "free",
+      "venue": "artists-television-access",
+      "region": "sf",
+      "summary": "ATA’s free community film/video show welcomes short format work or (15 min or less) from all genres.",
+      "more": true
     },
     {
       "id": "aa4f2c3c-86f2-436a-b182-cf15acd0b0e4",
@@ -97942,6 +100027,30 @@
       "venue": "curran-theatre",
       "region": "sf",
       "summary": "Feel the nostalgia and love with The Golden Girls Live: The Christmas Episodes, coming to the Curran Theatre in San Francisco from December 4-20, 2026.",
+      "more": true
+    },
+    {
+      "id": "7641a102-b15c-4941-8a8f-470b2ec272ed",
+      "title": "LIVE MUSIC: The Crooked Jades (10th Album Release Show)",
+      "start_time": "2026-12-05T04:00:00+00:00",
+      "location": "4-Star Theater, 2200 Clement St, San Francisco, CA 94121",
+      "url": "https://www.4-star-movies.com/calendar-of-events/live-music-crooked-jades-2026",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/616e05b9520d8e7b1cd0a788/1791184807003-W1GI7UV77JMVBNW508YF/CrookedJades_Dogpatch%2725-ZacharyFineberg-0750+2.jpeg",
+      "sources": [
+        "4-Star Theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana"
+      ],
+      "cost": "unknown",
+      "venue": "4-star-theater",
+      "region": "sf",
+      "summary": "The Crooked Jades (10th Album Release Show with Special Guest Bruce Kaphan) A San Francisco original, The Crooked Jades celebrate their 10th studio album release Beautiful World —",
       "more": true
     },
     {
@@ -98550,6 +100659,33 @@
       "region": "sf",
       "summary": "Every Saturday our hosts make dreams come true with Bingo.",
       "more": true
+    },
+    {
+      "id": "8762f828-a3ae-4364-9cd5-fc286bcc219f",
+      "title": "In-Person Chantey Sing – San Francisco",
+      "start_time": "2026-12-06T02:00:00+00:00",
+      "location": "Maritime Museum, 900 Beach St, San Francisco, CA 94109",
+      "url": "https://maritime.org/events/event-three-mz467-9slf2-t8mp6-hfa3t-4zd6s-gp65j-kp3l2",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/6ab1d3bbacc6561e0d165b18/fb41e685-3f41-491a-b153-7a1ec429e596/Maritime-Event-Image.jpg",
+      "sources": [
+        "San Francisco Maritime National Park Association"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana",
+        "music"
+      ],
+      "cost": "free",
+      "venue": "national-maritime-museum",
+      "region": "sf",
+      "summary": "A FREE monthly event every first Saturday of the month at the Maritime Museum Building in San Francisco Maritime National Historical Park."
     },
     {
       "id": "d86be3e2-6a55-4db7-a8ce-65f6e7094bf2",
@@ -100150,6 +102286,36 @@
       "venue": null,
       "region": null,
       "summary": "Stop by the Bookmobile during our weekly Treasure Island visit.",
+      "more": true
+    },
+    {
+      "id": "699a6168-06f7-4710-9021-a86324eea71d",
+      "title": "Holiday Open House",
+      "start_time": "2026-12-10T00:00:00+00:00",
+      "location": "San Francisco Center for the Book, 375 Rhode Island St, San Francisco, CA 94103",
+      "url": "https://www.sfcb.org/calendar/holiday-open-house",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/66677e69bb4bbc4906cdb6c8/1790985553770-FPLU91BRMLQUTLKOA5CE/Holiday+Open+House+Flyer-3-Thumbnail+%281%29.png",
+      "sources": [
+        "San Francisco Center for the Book"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "family-kids",
+        "craft",
+        "books-authors"
+      ],
+      "cost": "free",
+      "venue": "san-francisco-center-for-the-book-sfcb",
+      "region": "sf",
+      "summary": "✨ Make a little holiday magic at SFCB!",
       "more": true
     },
     {
@@ -107149,6 +109315,31 @@
       "more": true
     },
     {
+      "id": "611b2763-71bc-4913-a39a-ece425facddf",
+      "title": "O69 BINGO! By the fireplace",
+      "start_time": "2027-01-03T02:00:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116, USA",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "bingo"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "Every Saturday our hosts make dreams come true with Bingo.",
+      "more": true
+    },
+    {
       "id": "63b452ac-3698-44c0-97aa-01bbfac56545",
       "title": "Rent",
       "start_time": "2027-01-03T04:00:00+00:00",
@@ -107197,6 +109388,29 @@
       "region": "sf",
       "summary": "Oh naur!",
       "more": true
+    },
+    {
+      "id": "11dbd7a5-d911-4ea9-bb7c-3fb64833787f",
+      "title": "Junk Parlor",
+      "start_time": "2027-01-03T05:30:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "No better way to start off 2027 thank with a big Junk Parlor show at the Riptide - love this crew!"
     },
     {
       "id": "2e413ad7-fe18-4921-a45f-5a56bf9aec10",
