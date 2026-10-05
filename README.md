@@ -208,6 +208,18 @@ WHERE url = '<event url>' AND start_time = '<UTC start>';
 -- flag also sets it back to scheduled.
 ```
 
+A source flagged **possibly partial** run after run is either a broken
+scraper (fix it: its missing events are still real) or a source that really
+dropped a lot at once, which the guard can't tell apart. Once you've checked
+the site and they really are gone, unlist them by hand (the next run's
+judgement takes over from there):
+
+```sql
+UPDATE events SET status = 'unlisted', status_at = now()
+WHERE sources->>0 = '<NAME>' AND start_time > now() AND status = 'scheduled'
+  AND (seen->>'<NAME>' IS NULL OR (seen->>'<NAME>')::timestamptz < now() - interval '2 days');
+```
+
 **Stable ids and the one-off re-key** — new rows get a stable id (a uuid5
 of the creating source, the URL or title, and the start time), so a wipe and
 re-scrape gives the same ids; changed ids leave an alias in `event_aliases`
