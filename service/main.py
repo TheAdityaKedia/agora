@@ -129,9 +129,8 @@ def save_events(raw_events: list[RawEvent], source: str,
     - skipped: same-source re-scrapes with nothing new, or events past the
                look-ahead horizon.
     `stats["updated"]` (when given) counts same-source re-scrapes whose details
-    changed (details or status) and were updated (feature-specs/event-lifecycle.md,
-    §2): only the
-    row's creating source updates it; later sources only mark it seen.
+    or status changed and were updated (feature-specs/event-lifecycle.md, §2):
+    only the row's creating source updates it; later sources only mark it seen.
 
     Every match and insert marks the row seen by `source` (lifecycle.mark_seen),
     which the CI merge reads to notice events that disappeared.

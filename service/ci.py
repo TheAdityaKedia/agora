@@ -17,9 +17,11 @@ from-imports so tests can monkeypatch "main.<fn>".
 import argparse
 import json
 import os
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote_plus
 
+import lifecycle
 import main as pipeline
 from scrapers.base import RawEvent
 
@@ -85,6 +87,10 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
     results = load_results(Path(results_dir))
     rows = []
     scraped_names: set[str] = set()
+    run_start = datetime.now(timezone.utc)
+    horizon = run_start + timedelta(days=pipeline.LOOKAHEAD_DAYS)
+    returned: dict[str, list] = {}  # good sources → start times they listed (§3 window)
+    bad_names: set[str] = set()
     for url in pipeline.select_urls(pipeline.load_sources(), source_filters, excludes):
         result = results.get(url, _MISSING)
         row = {"url": url, "name": result["source_name"], "status": result["status"],
@@ -98,12 +104,22 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
                     events, source=result["source_name"], stats=stats)
                 row["updated"] = stats.get("updated", 0)
                 scraped_names.add(result["source_name"])
+                returned.setdefault(result["source_name"], []).extend(
+                    e.start_time for e in events if e.start_time <= horizon)
             except Exception as e:
                 row["status"] = "save_error"
                 row["error"] = f"{type(e).__name__}: {e}"
+        if row["status"] != "ok" and row["name"]:
+            bad_names.add(row["name"])
         print(f"[{row['name'] or url}] {row['status']}: {row['saved']} saved, "
               f"{row['merged']} merged, {row['updated']} updated, {row['skipped']} skipped", flush=True)
         rows.append(row)
+
+    # Disappearances (feature-specs/event-lifecycle.md, §3): only sources whose
+    # every URL scraped well this run are judged.
+    lifecycle_report = judge(returned, bad_names, run_start)
+    for row in rows:
+        row["possibly_partial"] = row["name"] in lifecycle_report["possibly_partial"]
 
     # Same guard and scoping as main.run(): a classify failure (e.g. no AWS
     # creds) must not stop the export; a filtered run only tags what it scraped.
@@ -130,7 +146,27 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
     print(f"[export] wrote {exported} upcoming events to {out}", flush=True)
     return {"sources": rows, "exported": exported,
             "failed": sum(1 for r in rows if r["status"] != "ok"), "places": places,
-            "classify": tagging or None}
+            "classify": tagging or None,
+            "lifecycle": {"updated": sum(r["updated"] for r in rows), **lifecycle_report}}
+
+
+def judge(returned: dict, bad_names: set, run_start) -> dict:
+    """lifecycle.judge_disappearances over the good sources; never stops the
+    merge (a failure is reported and nothing is marked)."""
+    good = {name: starts for name, starts in returned.items() if name not in bad_names}
+    session = pipeline.get_session()
+    try:
+        out = lifecycle.judge_disappearances(session, good, run_start)
+    except Exception as e:
+        session.rollback()
+        print(f"[lifecycle] skipped ({type(e).__name__}: {e})", flush=True)
+        return {"unlisted": 0, "moved": 0, "possibly_partial": [], "error": f"{type(e).__name__}: {e}"}
+    finally:
+        session.close()
+    print(f"[lifecycle] {out['unlisted']} no longer listed, {out['moved']} moved"
+          + (f"; possibly partial: {', '.join(out['possibly_partial'])}" if out["possibly_partial"] else ""),
+          flush=True)
+    return out
 
 
 # A re-tag run has the whole job to itself (no scraping), so it may tag for
@@ -210,16 +246,25 @@ def render_pr_body(report: dict, guard: dict) -> str:
         lines.append(f"**Tagging:** {tagging['classified']} tagged in {tagging['seconds']}s · "
                      f"{tagging['failed']} failed · {tagging['left']} left for the next run · "
                      f"{tagging['throttled']} throttled retries")
+    life = report.get("lifecycle")
+    if life:
+        partial = life.get("possibly_partial") or []
+        lines.append(f"**Changes:** {life['updated']} updated · {life['unlisted']} no longer listed · "
+                     f"{life['moved']} moved"
+                     + (f" · ⚠️ possibly partial (misses not counted): {', '.join(partial)}" if partial else "")
+                     + (f" · skipped ({life['error'][:200]})" if life.get("error") else ""))
     if not retag:
-        lines += ["", "| Source | Status | Scraped | Saved | Merged | Skipped |",
-                  "|---|---|---:|---:|---:|---:|"]
+        lines += ["", "| Source | Status | Scraped | Saved | Merged | Updated | Skipped |",
+                  "|---|---|---:|---:|---:|---:|---:|"]
     for r in report["sources"]:
         if r["status"] == "ok" and r["events"] == 0:
             status, icon = "ok (0 events)", "⚠️"
+        elif r["status"] == "ok" and r.get("possibly_partial"):
+            status, icon = "ok (possibly partial)", "⚠️"
         else:
             status, icon = r["status"], _STATUS_ICON.get(r["status"], "❔")
         lines.append(f"| {r['name'] or r['url']} | {icon} {status} | {r['events']} | "
-                     f"{r['saved']} | {r['merged']} | {r['skipped']} |")
+                     f"{r['saved']} | {r['merged']} | {r.get('updated', 0)} | {r['skipped']} |")
     places = report.get("places") or {}
     if "actions" in places:
         lines += ["", f"**Venues:** {len(places['new_venues'])} new · "

@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import replace
-from datetime import datetime
+from datetime import datetime, timezone
 
 SCHEDULED, CANCELLED, POSTPONED, UNLISTED, MOVED = (
     "scheduled", "cancelled", "postponed", "unlisted", "moved")
@@ -96,3 +96,111 @@ def apply_update(row, raw, now: datetime) -> bool:
     elif row.status in EXPLICIT:
         flipped = set_status(row, SCHEDULED, now)
     return bool(was) or flipped
+
+
+# --- disappearances (§3): run by the CI merge after every source is saved ---
+
+# A scrape that misses more than this share (and more than PARTIAL_MIN) of
+# the rows it should have listed is treated as partial: no misses counted.
+PARTIAL_SHARE = 0.2
+PARTIAL_MIN = 5
+UNLISTED_AFTER = 2  # consecutive good scrapes of every source, all without it
+
+
+def _aware(t: datetime) -> datetime:
+    """SQLite hands back naive datetimes (stored as UTC)."""
+    return t if t.tzinfo else t.replace(tzinfo=timezone.utc)
+
+
+def _seen_since(row, source: str, since: datetime) -> bool:
+    at = (row.seen or {}).get(source)
+    return bool(at) and _aware(datetime.fromisoformat(at)) >= since
+
+
+def judge_disappearances(session, returned: dict[str, list[datetime]], run_start: datetime,
+                         now: datetime | None = None) -> dict:
+    """Count misses, mark rows unlisted, pair reschedules; commits.
+
+    `returned`: for each source whose scrape this run was good, the start
+    times of the events it returned. A row was listed this run by a source
+    iff save_events marked it seen by that source since `run_start`.
+
+    - Window: a source is judged only on rows with now < start <= the latest
+      start it returned (a source showing 3 weeks says nothing about week 5).
+    - Only scheduled rows are judged. Cancelled/postponed ones stay as they
+      are until their date (more informative than "unlisted"), and rows
+      already gone would otherwise count as missing forever.
+    - Partial guard: missing more than PARTIAL_SHARE (and more than
+      PARTIAL_MIN) of its judged rows → the source is "possibly partial":
+      no misses this run.
+    - A row becomes unlisted when every source on it was judged on it this
+      run and each has misses >= UNLISTED_AFTER. A source that failed, wasn't
+      in the run, or was partial blocks the decision.
+    - Reschedule: an unlisted row from S whose URL S now lists at exactly one
+      new start (a row S created since it last saw the old one), with no other
+      live row of S on that URL in the window → the old row is moved, with a
+      moved alias old → new, and the new row's changed = {start_time: old}.
+    """
+    import event_ids
+    from models import Event
+
+    now = now or datetime.now(timezone.utc)
+    upcoming = [e for e in session.query(Event).filter(Event.start_time > now).all()]
+    report = {"unlisted": 0, "moved": 0, "possibly_partial": []}
+    judged: dict = {}  # row id → sources that judged it this run
+    rows = {}
+    windows: dict[str, datetime] = {}
+    for source, starts in returned.items():
+        if not starts:
+            continue  # nothing returned: no window
+        top = max(_aware(t) for t in starts)
+        windows[source] = top
+        window = [e for e in upcoming if source in (e.sources or [])
+                  and _aware(e.start_time) <= top and (e.status or SCHEDULED) == SCHEDULED]
+        missing = [e for e in window if not _seen_since(e, source, run_start)]
+        if len(missing) > PARTIAL_SHARE * len(window) and len(missing) > PARTIAL_MIN:
+            report["possibly_partial"].append(source)
+            continue
+        for e in window:
+            judged.setdefault(e.id, set()).add(source)
+            rows[e.id] = e
+        for e in missing:
+            m = dict(e.misses or {})
+            m[source] = m.get(source, 0) + 1
+            e.misses = m
+
+    gone = []
+    for rid, e in rows.items():
+        sources = set(e.sources or [])
+        if sources <= judged[rid] and all((e.misses or {}).get(s, 0) >= UNLISTED_AFTER for s in sources):
+            set_status(e, UNLISTED, now)
+            gone.append(e)
+    report["unlisted"] = len(gone)
+
+    taken = set()
+    for old in gone:
+        s = old.sources[0]
+        if not old.url or s not in windows:
+            continue
+        last = (old.seen or {}).get(s)
+        since = _aware(datetime.fromisoformat(last)) if last else _aware(old.created_at)
+        new = [e for e in upcoming if e.url == old.url and e.id != old.id
+               and (e.sources or [None])[0] == s and _aware(e.start_time) != _aware(old.start_time)
+               and _aware(e.created_at) > since and (e.status or SCHEDULED) == SCHEDULED]
+        if len(new) != 1 or new[0].id in taken:
+            continue
+        others = [e for e in upcoming if e.url == old.url and e.id not in (old.id, new[0].id)
+                  and s in (e.sources or []) and _aware(e.start_time) <= windows[s]
+                  and (e.status or SCHEDULED) not in GONE]
+        if others:
+            continue  # a URL with several showings: ambiguous, stays unlisted
+        n = new[0]
+        taken.add(n.id)
+        set_status(old, MOVED, now)
+        event_ids.add_alias(session, old.id, n.id, "moved", now)
+        n.changed = {"start_time": _aware(old.start_time).isoformat()}
+        n.changed_at = now
+        report["moved"] += 1
+    report["unlisted"] -= report["moved"]
+    session.commit()
+    return report
