@@ -304,11 +304,36 @@ def test_desktop_shows_filters_as_sidebar(browser, site):
     assert short.locator("#filters").bounding_box()["y"] >= h1["y"] + h1["height"]
 
 
-def test_slash_focuses_search_and_meta_is_relative(browser, site):
+def test_slash_focuses_search(browser, site):
     page = _open(browser, site, DESKTOP)
     page.keyboard.press("/")
     assert page.evaluate("document.activeElement.id") == "search-input"
-    assert "Updated" in page.inner_text("#meta")
+
+
+def test_no_count_or_updated_line_without_notes(browser, site):
+    page = _open(browser, site, DESKTOP)
+    # The result count and "Updated …" are gone; the line shows only notes.
+    assert not page.locator("#meta").is_visible()
+    assert "upcoming events" not in page.inner_text("body")
+
+
+def test_filters_button_lights_up_when_a_filter_is_on(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    btn = page.locator("#filters-btn")
+    assert "active" not in (btn.get_attribute("class") or "")
+    page.click("#preset-tomorrow")
+    assert "active" in btn.get_attribute("class")
+    assert page.inner_text("#filters-count") == "1"
+    page.click("#active-filters .pill-clear")
+    assert "active" not in btn.get_attribute("class")
+
+
+def test_reset_button_is_filled(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    page.click("#filters-btn")
+    page.wait_for_selector("#filters.open")
+    bg = page.evaluate("getComputedStyle(document.getElementById('reset')).backgroundColor")
+    assert bg not in ("rgba(0, 0, 0, 0)", "transparent")
 
 
 def _busy_day(page):
@@ -340,7 +365,7 @@ def test_single_day_results_are_not_capped(browser, site):
 def test_started_events_never_show(browser, site):
     page = _open(browser, site, DESKTOP)
     assert page.locator(".event", has_text="Already started").count() == 0
-    assert f"{TOTAL:,} upcoming events" in page.inner_text("#meta")
+    assert _rendered(page) > 0
     page.fill("#search-input", "already started")
     page.wait_for_timeout(600)
     assert page.locator(".event", has_text="Already started").count() == 0
@@ -813,11 +838,13 @@ def test_neighborhood_filter_in_list_and_map(browser, map_site):
     events = [e for e in _map_events() if e["id"] != "started"]
     roxie = sum(1 for e in events if e["venue"] == "roxie")
     page = _map_page(browser, map_site)
-    # Only neighborhoods with events, with counts.
+    # Only neighborhoods with events, with counts, busiest first.
+    dawn = sum(1 for e in events if e["venue"] == "dawn-club")
+    expected = sorted([("Mission", roxie), ("SoMa", dawn)], key=lambda x: (-x[1], x[0]))
     rows = page.locator("#hood-list label")
-    assert rows.locator("span:not(.count)").all_text_contents() == ["Mission", "SoMa"]
-    assert rows.locator(".count").all_text_contents() == [str(roxie), str(sum(
-        1 for e in events if e["venue"] == "dawn-club"))]
+    assert rows.locator("span:not(.count)").all_text_contents() == [h for h, _ in expected]
+    assert rows.locator(".count").all_text_contents() == [str(c) for _, c in expected]
+    assert roxie != dawn  # the order really is by count, not by name
     page.click("#hood-summary")
     page.check('#hood-list [data-hood="mission"]')
     assert "hood=mission" in page.url

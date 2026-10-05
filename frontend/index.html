@@ -149,6 +149,11 @@
     border-radius: 999px; background: var(--accent); color: var(--accent-fg);
     font-size: 12px; text-align: center;
   }
+  /* A filter is on: the button fills with the accent, the count inverts. */
+  .filters-btn.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600;
+  }
+  .filters-btn.active .badge { background: var(--accent-fg); color: var(--accent); font-weight: 700; }
   /* Presets scroll sideways on a phone instead of wrapping onto three lines;
      the List | Map toggle stays pinned at the end of the row. */
   .view-line { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
@@ -260,7 +265,10 @@
     background: transparent; color: var(--muted); border: 1px solid var(--border);
     font-size: 13px; cursor: pointer;
   }
-  .dropdown-bulk button:hover, .reset-btn:hover { color: var(--fg); }
+  .dropdown-bulk button:hover { color: var(--fg); }
+  /* "Reset all" is filled so it stands out in the sheet's header. */
+  .reset-btn { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
+  .reset-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
   .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
   .copy-btn.copied { color: var(--accent-fg); background: var(--accent); border-color: var(--accent); }
   .dropdown-item {
@@ -1048,19 +1056,6 @@
     return fullIndexReady;
   }
 
-  const generatedAt = new Date(data.generated_at);
-  // "Updated 3 hours ago", with the exact time on hover.
-  const updatedHtml = (() => {
-    const mins = Math.round((Date.now() - generatedAt) / 60000);
-    if (!isFinite(mins)) return "";
-    const rtf = new Intl.RelativeTimeFormat(undefined, {numeric: "auto"});
-    const ago = mins < 60 ? rtf.format(-mins, "minute")
-      : mins < 48 * 60 ? rtf.format(-Math.round(mins / 60), "hour")
-      : rtf.format(-Math.round(mins / 1440), "day");
-    return '<span title="' + escapeHtml(generatedAt.toLocaleString()) + '">Updated '
-      + escapeHtml(ago) + "</span>";
-  })();
-
   // State — events carry a `sources` list (a physical event may be listed by
   // multiple sources), so counts and filtering consider every entry in that list.
   // Sources in the manifest are already human-readable names — the backend
@@ -1120,7 +1115,10 @@
   const hoodLabels = new Map((data.neighborhoods || []).map(h => [h.id, h.label]));
   const hoodCounts = new Map();
   for (const e of events) if (e._hood) hoodCounts.set(e._hood, (hoodCounts.get(e._hood) || 0) + 1);
-  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id));
+  // Busiest first (most upcoming events); ties alphabetical.
+  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id))
+    .sort((a, b) => hoodCounts.get(b) - hoodCounts.get(a)
+      || hoodLabels.get(a).localeCompare(hoodLabels.get(b)));
   const selectedHoods = new Set();
   const hoodDropdownEl = document.getElementById("hood-dropdown");
   const hoodListEl = document.getElementById("hood-list");
@@ -2302,7 +2300,6 @@
 
   if (events.length === 0) {
     list.innerHTML = '<div class="empty">No upcoming events.</div>';
-    meta.innerHTML = updatedHtml;
     return;
   }
   filters.hidden = false;
@@ -2354,7 +2351,6 @@
       filtered = events.filter(ev => otherFiltersPass(ev));
     }
 
-    const isFiltered = filtered.length !== events.length;
     const n = (x) => x.toLocaleString();
     // With an area chosen, say how many otherwise-matching events have no
     // known area (unknown or pending venue) and so aren't shown — with a
@@ -2373,8 +2369,10 @@
     const noMapHtml = pins && pins.unmapped ? '<span class="no-area">' + n(pins.unmapped)
       + (pins.unmapped === 1 ? " event has" : " events have") + " no map location and "
       + (pins.unmapped === 1 ? "isn’t" : "aren’t") + " shown.</span>" : "";
-    meta.innerHTML = "<span>" + (isFiltered ? n(filtered.length) + " of " + n(events.length)
-      : n(events.length)) + " upcoming events</span>" + updatedHtml + noAreaHtml + noMapHtml;
+    // The line above the list only carries notes (events a filter can't place);
+    // the result count and "updated" time were noise, so they're gone.
+    meta.innerHTML = noAreaHtml + noMapHtml;
+    meta.hidden = !meta.innerHTML;
     renderChrome(filtered, flat);
     if (pins) {
       // The list is rebuilt when you switch back.
@@ -2430,6 +2428,8 @@
     ).join("");
     filtersCountEl.hidden = active.length === 0;
     filtersCountEl.textContent = active.length;
+    // The whole Filters button lights up while any filter is on.
+    filtersBtnEl.classList.toggle("active", active.length > 0);
     filtersDoneEl.textContent = filtered.length === 0 ? "No events match"
       : "Show " + filtered.length.toLocaleString() + (filtered.length === 1 ? " event" : " events");
 
