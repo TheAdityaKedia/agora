@@ -169,7 +169,7 @@ Reapplied each run, so a row that comes back is restored (§2).
   `cancelled` and `postponed` events (with `"status"`) until their date,
   so people who saw them learn they're off. `unlisted` and `moved` rows are
   **not** in `events[]`.
-- Each event changed in the last 14 days carries
+- Each event changed in the last 7 days carries
   `"changed": {"at": …, "was": {field: old value}}` (only `title`,
   `location`, `start_time` are shown to people; the rest are kept for
   diagnostics).
@@ -198,7 +198,7 @@ also trips the existing 70% guard.
   that still works (people may want to record it, but see collections
   below). Search and filters treat them like any event.
 - `changed.was.start_time` (a rescheduled event's new row): a
-  **Rescheduled** badge ("was Fri 7 PM") for 14 days. `changed.was.location`:
+  **Rescheduled** badge ("was Fri 7 PM") for 7 days. `changed.was.location`:
   **Venue changed**. Title changes: nothing shown.
 - Rows not in the manifest simply aren't shown (as today).
 - Collecting mode marks an event as added when the collection holds it
@@ -271,11 +271,11 @@ pipeline from the branch with `scrape.yml` (non-`main` runs use the
 by, check the report's `updated` / `unlisted` / `possibly partial` numbers,
 then run `rekey_events.py` (dry run, then `--apply`) against Neon.
 
-## Open questions (decide during review)
+## Decisions (settled with the owner, 2026-10-05)
 
-- Should `cancelled` events count in the "N upcoming events" line and in
-  filter counts? Proposed: yes; they're listed.
-- How long to show "Rescheduled" / "Venue changed" on the main site: 14
-  days proposed.
-- Does an `unlisted` event that comes back after being hidden for a few
-  days need any notice? Proposed: no; it just reappears.
+- `cancelled` and `postponed` events **count** in the "N upcoming events"
+  line and in filter counts: they're listed, so the numbers match the page.
+- "Rescheduled" / "Venue changed" show on the main site for **7 days**
+  after the change (and `changed` stays in the manifest for those 7 days).
+- An `unlisted` event that its source lists again **just reappears**, with
+  no badge.
