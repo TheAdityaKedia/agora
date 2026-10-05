@@ -94,6 +94,7 @@ platform scraper may be the better path for some (noted where relevant).
 - **Bimbo's 365 Club** — https://bimbos365club.com/  *(Ticketweb — WAF, may be hard)*
 - **Freight & Salvage** (Berkeley) — https://thefreight.org/ *(spiked 2026-10: Cloudflare 403 to datacenter IPs)*
 - **EnActe Arts** (South Asian theater) — https://enacte.org/
+- **F8** (SoMa nightclub) — https://www.feightsf.com/new-events *(spiked 2026-10: Squarespace events collection. The page's JSON is public at `https://www.feightsf.com/new-events?format=json` (`upcoming` array, 14 events): title, start/end (epoch ms), venue address + lat/lng, description (`body`/`excerpt`), event URL (`fullUrl`), and an image on every event (`assetUrl`, Squarespace CDN). No browser needed)*
 
 ## Dance
 
