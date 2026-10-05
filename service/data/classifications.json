@@ -92,6 +92,26 @@
       "topics": [],
       "types": []
     },
+    "4-Star Theater\u001fDeadbeat at Dawn with LIVE MUSIC from Meat Hook & the Vital Organs (Presented by TRASH & TREASURES)": {
+      "classified_at": "2026-10-05T23:07:00.862193+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Deadbeat at Dawn with LIVE MUSIC from Meat Hook & the Vital Organs (Presented by TRASH & TREASURES)",
+      "topics": [
+        "film",
+        "punk-metal"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fDellaMorte DellaMore: Cemetery Man (Presented by MEDIA MELTDOWN MOVIE MADHOUSE)": {
       "classified_at": "2026-10-03T04:50:22.272937+00:00",
       "cost": "unknown",
@@ -199,6 +219,26 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fIT (1990) on VHS (Presented by BASEMENT VHS plus Q&A with Director Tommy Lee Wallace)": {
+      "classified_at": "2026-10-05T23:07:00.039335+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "IT (1990) on VHS (Presented by BASEMENT VHS plus Q&A with Director Tommy Lee Wallace)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -350,6 +390,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fLIVE MUSIC: Good Friends, The Lowtimers, Red McAdam": {
+      "classified_at": "2026-10-05T23:06:59.992934+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: Good Friends, The Lowtimers, Red McAdam",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fLIVE MUSIC: Green-House, Cool Maritime (Presented by THROWIN' BO'S)": {
       "classified_at": "2026-10-03T04:50:26.755463+00:00",
       "cost": "paid",
@@ -465,6 +521,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fLIVE MUSIC: The Crooked Jades (10th Album Release Show)": {
+      "classified_at": "2026-10-05T23:07:00.011131+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: The Crooked Jades (10th Album Release Show)",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fLIVE MUSIC: The Sleeves, Fred Frith": {
       "classified_at": "2026-10-03T04:50:11.159099+00:00",
       "cost": "unknown",
@@ -560,6 +632,26 @@
         "family-kids"
       ],
       "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fLocal Critique": {
+      "classified_at": "2026-10-05T23:07:01.673190+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Local Critique",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
         [
           "screening"
         ]
@@ -674,6 +766,22 @@
       "topics": [
         "film",
         "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fThe Shining": {
+      "classified_at": "2026-10-05T23:06:59.922559+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "The Shining",
+      "topics": [
+        "film"
       ],
       "types": [
         [
@@ -1468,6 +1576,196 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001f3rd i Festival: A CELEBRATION OF THE EXTRAORDINARY WORK OF AVIE LUTHRA": {
+      "classified_at": "2026-10-05T23:07:01.595487+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "3rd i Festival: A CELEBRATION OF THE EXTRAORDINARY WORK OF AVIE LUTHRA",
+      "topics": [
+        "film",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fAn evening with Mike Kuchar": {
+      "classified_at": "2026-10-05T23:07:02.238663+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "An evening with Mike Kuchar",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fJaap Blonk, YappiScope": {
+      "classified_at": "2026-10-05T23:07:01.768620+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Jaap Blonk, YappiScope",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fLitcrawl: CCA comics live": {
+      "classified_at": "2026-10-05T23:07:02.431257+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Litcrawl: CCA comics live",
+      "topics": [
+        "comics-zines",
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fOpen Screening": {
+      "classified_at": "2026-10-05T23:07:02.429878+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Open Screening",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fOther Cinema: Shapeshifters Benefit": {
+      "classified_at": "2026-10-05T23:07:01.671689+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Other Cinema: Shapeshifters Benefit",
+      "topics": [
+        "film",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fRewards Program": {
+      "classified_at": "2026-10-05T23:07:02.435013+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Rewards Program",
+      "topics": [
+        "film",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fStudio 26: Fantom Classroom of the Art Institute": {
+      "classified_at": "2026-10-05T23:07:02.266075+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Studio 26: Fantom Classroom of the Art Institute",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fTINAFF: Program 8": {
+      "classified_at": "2026-10-05T23:07:02.334445+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "TINAFF: Program 8",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fWhen ICE Melts": {
+      "classified_at": "2026-10-05T23:07:02.589016+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "When ICE Melts",
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -7293,6 +7591,23 @@
         ]
       ]
     },
+    "Book Passage\u001fMichael Douglas with Lance Gardner - One Helluva Ride (Calvary Presbyterian, SF)": {
+      "classified_at": "2026-10-05T23:07:00.852309+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Michael Douglas with Lance Gardner - One Helluva Ride (Calvary Presbyterian, SF)",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fMichael Moritz - Ausländer": {
       "classified_at": "2026-09-25T06:06:03.650892+00:00",
       "cost": "unknown",
@@ -9432,6 +9747,24 @@
       "topics": [
         "nonfiction",
         "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
+    "Bookshop West Portal\u001fOctober Wild Girls Mother-Daughter Book Club Meeting": {
+      "classified_at": "2026-10-05T23:07:01.411879+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bookshop West Portal",
+      "taxonomy_version": 2,
+      "title": "October Wild Girls Mother-Daughter Book Club Meeting",
+      "topics": [
+        "books-authors",
+        "family-kids"
       ],
       "types": [
         [
@@ -25683,6 +26016,214 @@
         ]
       ]
     },
+    "Punch Line San Francisco\u001fAaron Weber": {
+      "classified_at": "2026-10-05T23:07:00.034465+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Aaron Weber",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fBrian Babylon": {
+      "classified_at": "2026-10-05T23:07:04.250868+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Brian Babylon",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fComedy Allstars": {
+      "classified_at": "2026-10-05T23:07:04.206946+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Comedy Allstars",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fHa Ha Halloween Showcase": {
+      "classified_at": "2026-10-05T23:07:04.508067+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Ha Ha Halloween Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fHannah Jones": {
+      "classified_at": "2026-10-05T23:07:03.826721+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Hannah Jones",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fJake Johannsen": {
+      "classified_at": "2026-10-05T23:07:04.816623+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Jake Johannsen",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fLaurie Kilmartin": {
+      "classified_at": "2026-10-05T23:06:59.957292+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Laurie Kilmartin",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fMo Welch": {
+      "classified_at": "2026-10-05T23:07:04.500776+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Mo Welch",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fNori Reed: Nori Is Present LIVE at Punch Line SF": {
+      "classified_at": "2026-10-05T23:07:04.411570+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Nori Reed: Nori Is Present LIVE at Punch Line SF",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fRay Lau": {
+      "classified_at": "2026-10-05T23:07:04.101418+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Ray Lau",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fS. F. Comedy Showcase": {
+      "classified_at": "2026-10-05T23:07:01.589522+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "S. F. Comedy Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fWinston Hodges": {
+      "classified_at": "2026-10-05T23:07:04.803655+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Winston Hodges",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fYour Next Comic - A New Faces Showcase": {
+      "classified_at": "2026-10-05T23:07:04.476804+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Your Next Comic - A New Faces Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Reading Rhythms\u001fReading Rhythms Palo Alto: October 19th": {
       "classified_at": "2026-10-04T15:33:52.166972+00:00",
       "cost": "unknown",
@@ -32221,6 +32762,146 @@
         "jazz"
       ],
       "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fCenter for the Art of Translation, Litquake, and SFCB Present: Passages of Babel: Translation and the Book Arts of Servane Briand": {
+      "classified_at": "2026-10-05T23:07:05.048307+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "Center for the Art of Translation, Litquake, and SFCB Present: Passages of Babel: Translation and the Book Arts of Servane Briand",
+      "topics": [
+        "books-authors",
+        "design",
+        "writing"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fFrom the Bench of Beth Thielen": {
+      "classified_at": "2026-10-05T23:07:05.114729+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "From the Bench of Beth Thielen",
+      "topics": [
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fHoliday Open House": {
+      "classified_at": "2026-10-05T23:07:05.360903+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "Holiday Open House",
+      "topics": [
+        "family-kids",
+        "craft",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fVoice from the Fire: a Community Reading": {
+      "classified_at": "2026-10-05T23:07:05.078407+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "Voice from the Fire: a Community Reading",
+      "topics": [
+        "books-authors",
+        "poetry"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Maritime National Park Association\u001fAnnual Maritime Ball": {
+      "classified_at": "2026-10-05T23:07:05.336581+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Maritime National Park Association",
+      "taxonomy_version": 2,
+      "title": "Annual Maritime Ball",
+      "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
+    "San Francisco Maritime National Park Association\u001fFleet Week WITH A WATERFRONT SEAT": {
+      "classified_at": "2026-10-05T23:07:05.442579+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Maritime National Park Association",
+      "taxonomy_version": 2,
+      "title": "Fleet Week WITH A WATERFRONT SEAT",
+      "topics": [
+        "history",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "San Francisco Maritime National Park Association\u001fIn-Person Chantey Sing – San Francisco": {
+      "classified_at": "2026-10-05T23:07:06.353964+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Maritime National Park Association",
+      "taxonomy_version": 2,
+      "title": "In-Person Chantey Sing – San Francisco",
+      "topics": [
+        "folk-americana",
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
         [
           "performance"
         ]
@@ -42212,6 +42893,24 @@
         ]
       ]
     },
+    "Tally Ho! Books\u001fObi Kaufmann - California Inside Out": {
+      "classified_at": "2026-10-05T23:07:01.516839+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Tally Ho! Books",
+      "taxonomy_version": 2,
+      "title": "Obi Kaufmann - California Inside Out",
+      "topics": [
+        "books-authors",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001f3RD EAR PRESENTS: Mystic Songs of India - Exploring the Wisdom & Poetry of Kabir Through Folk Songs with Priyal Maheshwari": {
       "classified_at": "2026-10-03T05:12:53.978344+00:00",
       "cost": "unknown",
@@ -47708,6 +48407,40 @@
         ]
       ]
     },
+    "The Riptide\u001fHalloween Party with DJ Los Ahijados de la Changa!": {
+      "classified_at": "2026-10-05T23:07:00.645047+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Halloween Party with DJ Los Ahijados de la Changa!",
+      "topics": [
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fJunk Parlor": {
+      "classified_at": "2026-10-05T23:07:00.706815+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Junk Parlor",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fLive Evil - Celebrating 20 Years": {
       "classified_at": "2026-10-03T04:53:40.170697+00:00",
       "cost": "free",
@@ -47860,6 +48593,42 @@
       "topics": [
         "club-night",
         "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fRiptide Rocksteady Social - DJs Sir Rudy Blackout & The Singapore Selector": {
+      "classified_at": "2026-10-05T23:07:03.739931+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Riptide Rocksteady Social - DJs Sir Rudy Blackout & The Singapore Selector",
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fSouldies On Shore - Oldies on Vinyl w/Mr. 45rpm, Mr. Rhya & Dion Garcia": {
+      "classified_at": "2026-10-05T23:07:00.693992+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Souldies On Shore - Oldies on Vinyl w/Mr. 45rpm, Mr. Rhya & Dion Garcia",
+      "topics": [
+        "club-night",
+        "soul-funk"
       ],
       "types": [
         [
@@ -48540,6 +49309,200 @@
         ]
       ]
     },
+    "Yerba Buena Gardens Festival\u001fAfro-Filipino Jazz Project": {
+      "classified_at": "2026-10-05T23:07:03.790032+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Afro-Filipino Jazz Project",
+      "topics": [
+        "jazz",
+        "world-music",
+        "asian-american",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fBhangra & Beats Night Market": {
+      "classified_at": "2026-10-05T23:07:04.146735+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Bhangra & Beats Night Market",
+      "topics": [
+        "club-night",
+        "dance-party",
+        "world-music",
+        "family-kids",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fDance Outdoors with Rhythm & Motion": {
+      "classified_at": "2026-10-05T23:07:02.986807+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Dance Outdoors with Rhythm & Motion",
+      "topics": [
+        "dance-party"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fFollow the Music": {
+      "classified_at": "2026-10-05T23:07:03.130843+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Follow the Music",
+      "topics": [
+        "music",
+        "education",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fHalloween Hoopla": {
+      "classified_at": "2026-10-05T23:07:03.810691+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Halloween Hoopla",
+      "topics": [
+        "family-kids",
+        "music",
+        "dance"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fJoe Bataan": {
+      "classified_at": "2026-10-05T23:07:03.420178+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Joe Bataan",
+      "topics": [
+        "soul-funk",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fQuinteto Latino": {
+      "classified_at": "2026-10-05T23:07:03.029990+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Quinteto Latino",
+      "topics": [
+        "classical",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fRichard Howell’s John Coltrane Tribute": {
+      "classified_at": "2026-10-05T23:07:03.165569+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Richard Howell’s John Coltrane Tribute",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fSan Francisco Indigenous Peoples Day with special performance by Jeremy Dutcher": {
+      "classified_at": "2026-10-05T23:07:03.369387+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "San Francisco Indigenous Peoples Day with special performance by Jeremy Dutcher",
+      "topics": [
+        "music",
+        "world-music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fYBG Dance Day": {
+      "classified_at": "2026-10-05T23:07:03.357791+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "YBG Dance Day",
+      "topics": [
+        "dance-party",
+        "bachata"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Yoshi's\u001f40 FINGERS": {
       "classified_at": "2026-10-03T05:03:04.167397+00:00",
       "cost": "paid",
@@ -48615,6 +49578,23 @@
       "title": "ANDY MCKEE",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fBACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL": {
+      "classified_at": "2026-10-05T23:07:00.831140+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 2,
+      "title": "BACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL",
+      "topics": [
+        "soul-funk",
+        "music"
       ],
       "types": [
         [
