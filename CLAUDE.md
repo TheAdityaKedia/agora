@@ -29,6 +29,7 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | Collections ("event canvases"): how it works — features, data model, API, frontend | `canvas/HOW-IT-WORKS.md` (keep it current when you change collections) |
 | Collections: deploy, local server, beta gate, admin | `canvas/README.md`; original design `feature-specs/event-canvases.md` |
 | Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
+| Event ids, updates, cancellations, disappearances (and how collections show them) | `feature-specs/event-lifecycle.md`; code: `service/event_ids.py`, `lifecycle.py`, `rekey_events.py`; README → "Scheduled scraping" → Operations |
 | Venues, areas, the Area filter, "Places to review" | `feature-specs/venues.md`; `README.md` → "Venues and areas"; code: `service/places/`, data: `service/data/venues.json` + `venue_locations.json` |
 | Candidate sources to onboard next | `future-sources.md` |
 | Add a **new subsystem/feature** (not a scraper) | write a spec in `feature-specs/` first — see `CONTRIBUTING.md` |
@@ -53,7 +54,9 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `canvas.html` + `canvas-client.js` (collections; talk to `canvas/`'s API),
   `vendor/` (pinned MiniSearch; MapLibre GL, imported only when the map
   opens), `events.json` (the manifest — carries the taxonomy block +
-  per-event `types`/`topics`/`cost`; venue coordinates + SF neighborhoods).
+  per-event `types`/`topics`/`cost`, and `status`/`changed`; venue
+  coordinates + SF neighborhoods), `event-index.json` (current facts by id,
+  gone events and aliases, for the collections API).
 - `scripts/` — `preview_site.py` (scratch real-data site outside the repo),
   `measure_load.py` (first-load timing; numbers in
   `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`.
@@ -80,10 +83,13 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   (optionally `--sources <substr>` / `--exclude <substr>` / `--workers N`).
   Rebuild the image (`docker compose build scraper`) after changing Python — the
   container won't pick up edits otherwise.
-- **When a scraper's *output* changes** (URLs, descriptions, times — not just
-  new events): wipe the DB (`docker compose down -v`, then `up -d db`) and
-  re-scrape. Saves **skip** existing rows; they are never updated, so stale
-  fields linger otherwise.
+- **When a scraper's *output* changes:** saves now **update** a row from its
+  creating source (title, location, url, description, image; recorded in
+  `changed`), so re-running picks up new fields. A new *start time* is a new
+  row (a new id); locally the old one lingers (only the CI merge notices
+  disappearances), so wipe the local DB (`docker compose down -v`, then `up -d
+  db`) if you changed how a scraper computes times. Ids are stable
+  (`event_ids.py`), so a wipe and re-scrape gives the same ids.
 - **Commits:** one logical change per commit; keep the large regenerated
   `events.json` in its **own** commit so code stays reviewable. Imperative
   subject, no attribution footer (match `git log`). Commit/push only when asked;
@@ -121,11 +127,15 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   `ingest/images.py` (never screenshots). Test ingest changes from a branch —
   non-`main` runs use the `ci-test` DB but **share the real inbox**, so they
   label and reply to real mail.
-- **Stale rows live in Neon too.** Saves never update existing rows, so when a
-  scraper's *output* changes, CI keeps serving the old fields until that
-  source's rows are deleted in Neon (README → "Scheduled scraping" →
-  Operations). Hosted Postgres also drops idle connections — `db.py` uses
-  `pool_pre_ping` for that; keep it.
+- **Event lifecycle** (`feature-specs/event-lifecycle.md`): ids are stable
+  uuid5s of the creating source's key, and old ids resolve through
+  `event_aliases`; never give rows random ids or delete rows without an alias
+  (`dedupe_existing.py` and `rekey_events.py` write them). The CI merge marks
+  rows `unlisted` / `moved` after two good scrapes without them
+  (`lifecycle.judge_disappearances`); don't delete Neon rows to "refresh" a
+  source any more: that breaks collection items. Forcing a status by SQL:
+  README → "Scheduled scraping" → Operations. Hosted Postgres also drops idle
+  connections — `db.py` uses `pool_pre_ping` for that; keep it.
 
 - **`--exclude`/`--sources` are plain substring matches.** `sfpl` also matches
   `sfplayhouse`; use `sfpl.org`. Check for collisions before trusting a filter.

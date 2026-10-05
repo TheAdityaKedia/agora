@@ -19,7 +19,8 @@ can edit it**.
 
 | Concept | What it is |
 |---|---|
-| **Item** | One thing in a collection: an **Agora event** (a copy of a listing, added from the main site) or **your own item** (anything else: dinner, a park, a ride). |
+| **Item** | One thing in a collection: an **Agora event** (a copy of a listing, added from the main site, shown with its current state) or **your own item** (anything else: dinner, a park, a ride). |
+| **What became of an event** | Each Agora event shows what's changed since it was added: **Cancelled** / **Postponed** (red, also on its plan step, left out of the plan's calendar), **Moved to Sat 8 PM** with **Use the new time** (swaps in the new showing, same place in the plan), **Time changed** / **Venue changed** (old value struck through), **No longer listed** ("<Source> no longer lists this"). Times and places everywhere use the current values. See §5 "Event copies". |
 | **Your own items** | Free text + optional time, link, note and a **kind** (🍽️ Food, 🍸 Drinks, 🌳 Outdoors, 🚗 Getting there, 📌 Other). Shown as a tinted dashed card with the kind's icon. Editable; Agora events are not. |
 | **👍 Interested** | One per browser per item, shown by name. "Interested", not "I'm in": the collection is for deciding what looks good. |
 | **Comments** | Short named comments per item. |
@@ -39,11 +40,11 @@ can edit it**.
 ```
  browser                                   AWS (us-east-1)                     GitHub Pages
  ────────────────────────────              ─────────────────────────           ─────────────
- index.html  (collecting mode) ─┐          Lambda Function URL                  events.json
- canvas.html (a collection,     ├─ fetch ─▶ canvas/api/handler.py  ──reads──▶  (the manifest)
-              Your collections) │   JSON   ├─ store.py ──▶ DynamoDB table
- canvas-client.js (shared code)─┘          └─ snapshot.py (copies event details
-                                                          from events.json)
+ index.html  (collecting mode) ─┐          Lambda Function URL                  event-index.json
+ canvas.html (a collection,     ├─ fetch ─▶ canvas/api/handler.py  ──reads──▶  (events by id;
+              Your collections) │   JSON   ├─ store.py ──▶ DynamoDB table        events.json as
+ canvas-client.js (shared code)─┘          └─ snapshot.py (copies event details   the fallback)
+                                                          and overlays their current state)
 ```
 
 - **One Lambda + one DynamoDB table**, defined in code (AWS CDK) in
@@ -51,8 +52,9 @@ can edit it**.
   `AgoraCanvasProd` (deployed from `main`), by
   `.github/workflows/deploy-canvas-api.yml`.
 - It is **independent of the rest of Agora**: no scraper code and no Neon. Its
-  only link is that, to add an Agora event, it reads the published
-  `events.json` and stores a copy of that event's details.
+  only link is that it reads the published `event-index.json` (beside
+  `events.json`): to copy an event's details when it's added, and to say on
+  every read what has become of it.
 - The **pages are static** (GitHub Pages). They call the API with `fetch`;
   `canvas-client.js` picks the URL (production; dev for `localhost`; or
   `?api=<url>`, remembered).
@@ -81,15 +83,19 @@ self-expiring rows, point-in-time recovery on prod (35 days).
 | PK | SK | Row | Fields |
 |---|---|---|---|
 | `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: "This is mine" browsers). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
-| `C#<id>` | `ITEM#<itemId>` | an item | `id`, `kind` (`event` / `custom`), `added_by_name`, `added_by_client`, `added_at`. **event:** `event` = {`id`, `title`, `start_time`, `location`, `url`, `image_url`, `sources`} copied when added. **custom:** `title`, `start_time`, `url`, `note`, `category` (`food`, `drinks`, `outdoors`, `travel`, `other`). **removed:** `removed_at`, `removed_by_name`, `removed_by_client`. |
+| `C#<id>` | `ITEM#<itemId>` | an item | `id`, `kind` (`event` / `custom`), `added_by_name`, `added_by_client`, `added_at`. **event:** `event` = {`id`, `title`, `start_time`, `location`, `url`, `image_url`, `sources`} copied when added (never rewritten; the current state is overlaid on read). **custom:** `title`, `start_time`, `url`, `note`, `category` (`food`, `drinks`, `outdoors`, `travel`, `other`). **removed:** `removed_at`, `removed_by_name`, `removed_by_client`. |
 | `C#<id>` | `VOTE#<itemId>#<clientId>` | one 👍 Interested | `name`, `at` |
 | `C#<id>` | `CMT#<itemId>#<commentId>` | a comment | `id`, `name`, `client_id`, `text`, `at`, `removed_at` if deleted |
 | `L#<id>` | `<ms, 13 digits>#<6 hex>` | an activity entry | `action`, `actor_name`, `client_id`, `at`, and as relevant `item_id`, `item_title`, `name`, `fields` |
 | `RL#<ipHash>#<kind>#<bucket>` | `RL` | a rate-limit counter | `count`, `ttl` |
 
-**Item ids.** An Agora event's item id is `ev_<eventId>`, so adding the same
-event twice finds the existing item (and restores it if removed). Your own
-items get `c_<random>`.
+**Item ids.** An Agora event's item id is `ev_<eventId>` with the id it was
+added under, so adding the same event twice finds the existing item (and
+restores it if removed). Event ids are stable, and an id that changed
+(duplicates merged, the one-off re-key, a moved showing) resolves through
+the index's `aliases`: adding an old id adds the event it is now, and adding
+an event that's already here under another of its ids returns that item.
+Your own items get `c_<random>`.
 
 **Activity actions:** `created`, `duplicated`, `renamed`, `edited_note`,
 `set_dates`, `added`, `edited`, `removed`, `restored`, `voted`, `commented`,
@@ -129,12 +135,12 @@ shown in Activity.
 | Method and path | Body | Returns |
 |---|---|---|
 | `POST /canvases` | `name`, `note?`, `date_from?`, `date_to?` | `201` the full view |
-| `GET /canvases/{id}` | — | the full view: `canvas`, `items[]`, `removed[]`, `log[]` |
+| `GET /canvases/{id}` | — | the full view: `canvas`, `items[]`, `removed[]`, `log[]`. Event items carry `now` when the index is available (see "Event copies") |
 | `GET /canvases/{id}?if_version=N` | — | `{unchanged: true, version}` or the full view |
 | `PATCH /canvases/{id}` | any of `name`, `note`, `date_from`, `date_to` | `{canvas}` |
 | `POST /canvases/{id}/duplicate` | `name?` | `201` the new collection's full view |
 | `POST` / `DELETE /canvases/{id}/claim` | — | the full view ("This is mine" / "Not mine") |
-| `POST /canvases/{id}/plan` | `op` (`add`, `remove`, `move`), `item_id`, `to?` (position, 0 first) | `{plan: [itemId…]}` |
+| `POST /canvases/{id}/plan` | `op` (`add`, `remove`, `move`), `item_id`, `to?` (position, 0 first; required for `move`, optional for `add`) | `{plan: [itemId…]}` |
 | `POST /canvases/{id}/items` | `event_id`, or `custom: {title, start_time?, url?, note?, category?}` | `201 {item, created: true}`; `200 … created: false` if already there |
 | `PATCH /canvases/{id}/items/{itemId}` | `custom: {…}`: only the fields that change; empty clears one (not the title) | `{item}`; your own items only |
 | `DELETE /canvases/{id}/items/{itemId}` | — | soft delete (also leaves the plan) |
@@ -143,8 +149,9 @@ shown in Activity.
 | `POST /canvases/{id}/items/{itemId}/comments` | `name`, `text` | `201 {comment}` |
 | `DELETE /canvases/{id}/items/{itemId}/comments/{commentId}` | — | soft delete |
 
-**Where a plan step goes when added:** before the first step that starts
-later, so a dated plan starts in time order; undated steps go last.
+**Where a plan step goes when added:** at `to` if given (Use the new time);
+otherwise before the first step that starts later, so a dated plan starts in
+time order; undated steps go last.
 
 **Errors:** `400` invalid input (message says which field), `404` unknown
 collection/item/event (or an event that has left the manifest), `409` a cap
@@ -160,10 +167,19 @@ is cleaned of control and bidi-override characters; links must be http(s).
 **CORS:** only the origins in the stack's `ALLOWED_ORIGINS` (the Pages site;
 `localhost` on dev).
 
-**Event copies:** `snapshot.py` keeps the parsed `events.json` per warm
-Lambda for 10 minutes and re-fetches at most once a minute when asked for an
-id it doesn't know (so a just-published event can be added soon after a
-data refresh). The copy is never updated afterwards (see the gaps below).
+**Event copies and their current state** (feature-specs/event-lifecycle.md,
+§6): `snapshot.py` keeps the parsed `event-index.json` per warm Lambda for 10
+minutes and re-fetches at most once a minute when asked for an id it doesn't
+know (so a just-published event can be added soon after a data refresh). If
+the index can't be fetched it falls back to `events.json`: adds still work,
+with no overlay. On every full read each event item gets, next to its stored
+copy, `now` = {`status` (`scheduled`, `cancelled`, `postponed`, `moved`,
+`unlisted`) and only what differs: `start_time`, `location`, `title`, `url`;
+for a moved one `moved_to` and the new showing's time and place;
+`current_id` when the id changed}. No `now`: unknown (index unavailable, or
+the event has passed or left the listing), and the page shows the copy.
+Items sort by the current time. Polling (`?if_version=`) tracks writes only,
+so a change shows on the next full read (page load, or after any write).
 
 ## 6. The frontend
 
@@ -192,7 +208,7 @@ pages keep `?beta=1` in the address bar so a copied link works.
 | API (routes, validation, store, plan concurrency, privacy) | `cd canvas && python -m pytest` (moto, no AWS) | yes, before every deploy |
 | Infrastructure (CDK assertions) | same suite, `tests/test_infra.py` | yes |
 | After deploy | `scripts/smoke.py` against the dev URL | yes, on branch deploys |
-| Pages end to end (three browsers: beta gate, collecting mode, sharing, Interested, comments, plan drag, edit, remove/restore, duplicate, claim/default) | `CHROMIUM_PATH=… python canvas/scripts/e2e_frontend.py [--shots DIR]` | **no**, run it by hand |
+| Pages end to end (three browsers: beta gate, collecting mode, sharing, Interested, comments, plan drag, edit, remove/restore, duplicate, claim/default; then the event lifecycle against a rewritten `event-index.json`: every badge in light and dark, the plan's .ics, Use the new time) | `CHROMIUM_PATH=… python canvas/scripts/e2e_frontend.py [--shots DIR]` | **no**, run it by hand |
 
 ## 8. Changing things: where to look
 
@@ -203,6 +219,8 @@ pages keep `?beta=1` in the address bar so a copied link works.
   write's transaction; add its sentence to `logText` in `canvas.html`.
 - **A new endpoint:** a function in `handler.py` + a line in `ROUTES`; store
   work in `store.py` as one `_transact([...])` that includes `_bump(...)`.
-- **Anything about the event copy:** `snapshot.SNAPSHOT_FIELDS`.
+- **Anything about the event copy:** `snapshot.SNAPSHOT_FIELDS`; what the
+  overlay compares: `snapshot.NOW_FIELDS` and `snapshot.current`; how the
+  page shows it: `evOf`, `lifeBadges`, `lifeNote` in `canvas.html`.
 - **Keep this file current** when you change behaviour, the schema or the
   API; it is the reference the others link to.

@@ -39,7 +39,8 @@ agora/
 ├── frontend/                   # Static site served by GitHub Pages
 │   ├── index.html              # Self-contained page (inline CSS/JS, no build)
 │   ├── vendor/                 # Vendored client libs (MiniSearch, MapLibre GL; pinned)
-│   └── events.json             # Manifest the scraper writes, the page reads
+│   ├── events.json             # Manifest the scraper writes, the page reads
+│   └── event-index.json        # Current facts by id, gone events, aliases (collections API)
 ├── .github/workflows/          # CI
 │   └── deploy-pages.yml        # Publishes frontend/ to GitHub Pages
 ├── docker-compose.yml          # Postgres + API + scraper for local runs
@@ -176,9 +177,51 @@ scripts/scrape-to-neon.sh gamh.com           # any sources (substring match)
 It refuses to run while a `scrape.yml` run is in progress on `main` (one
 writer at a time) and skips tagging (CI tags new shows).
 
-**Operations** — when a scraper's *output* changes (not just new events), its
-stale rows live on in Neon (saves never update): delete them in the Neon SQL
-editor before the next run, e.g. `DELETE FROM events WHERE sources->>0 = '<NAME>';`.
+**Operations: changes, cancellations, disappearances**
+(`feature-specs/event-lifecycle.md`). Saves **update** an event when the
+source that created it lists it with new details (title, venue, link,
+description, image; the old values go in `changed`), and record which good
+scrape last listed it (`seen`). After every source is saved, the merge job
+judges each source that scraped well, over the dates it actually covered:
+
+- **Cancelled / postponed**: the source flags it (or titles it `CANCELLED:` /
+  `[Postponed]` …). The site keeps it, badged, until its date.
+- **No longer listed** (`unlisted`): every source that listed it has gone
+  two good scrapes in a row without it. It leaves the site; collections say
+  "<Source> no longer lists this". If it comes back it simply reappears.
+- **Moved**: no longer listed, and its source now lists the same URL at
+  exactly one new time. Collections offer "Use the new time"; the old id
+  resolves to the new one.
+- **Possibly partial**: a source that misses more than 20% (and more than
+  5) of what it should have listed counts no misses that run; the data PR
+  flags it (⚠️ ok (possibly partial)) and its **Changes** line totals updated
+  / no longer listed / moved.
+
+Don't delete a source's rows in Neon to refresh it any more: saves update
+rows, and deleting breaks the ids collections hold. To force a status by
+hand (Neon SQL editor), e.g. a cancellation the source doesn't show:
+
+```sql
+UPDATE events SET status = 'cancelled', status_at = now()
+WHERE url = '<event url>' AND start_time = '<UTC start>';
+-- back on: status = 'scheduled'. The creating source re-listing it without a
+-- flag also sets it back to scheduled.
+```
+
+**Stable ids and the one-off re-key** — new rows get a stable id (a uuid5
+of the creating source, the URL or title, and the start time), so a wipe and
+re-scrape gives the same ids; changed ids leave an alias in `event_aliases`
+that collections and calendars resolve through. Rows saved before this have
+random ids; re-key them once (needs the production `DATABASE_URL`):
+
+```bash
+cd service
+DATABASE_URL='<neon production url>' python rekey_events.py           # dry run: counts + collisions
+DATABASE_URL='<neon production url>' python rekey_events.py --apply   # one transaction
+```
+
+Collisions (two rows that compute one id: a missed duplicate) are listed and
+left alone; `python dedupe_existing.py` merges the fuzzy ones.
 
 **Tagging budget and re-tagging** — the merge job tags new or stale shows
 8 at a time for at most 15 minutes, then saves what it has; the rest wait for
@@ -195,7 +238,8 @@ until its PR says 0 left.
 from a *different* source at the same start time when the titles match after
 normalization and the locations don't disagree (`service/dedup.py`). The
 earlier source in `sources.txt` keeps the row. To merge duplicates already in
-the DB: `python dedupe_existing.py` (dry run) then `--apply`.
+the DB: `python dedupe_existing.py` (dry run) then `--apply`; each deleted row
+leaves a `merged` alias so collections holding it still find the event.
 
 **Venues and areas** — the merge job resolves every upcoming event's
 location to a venue in `service/data/venues.json` (via

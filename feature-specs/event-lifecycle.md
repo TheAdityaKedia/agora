@@ -1,6 +1,7 @@
 # Event lifecycle: stable ids, changes and cancellations
 
-**Status: spec, not started (2026-10-05).** Covers two gaps recorded in
+**Status: built (2026-10-05); phases 1–7 done.
+Rollout (the re-key against Neon) waits for the owner: see the PR.** Covers two gaps recorded in
 `future-features.md` → Collections: *event copies drift* and *event ids
 aren't stable*. They are one project: you can only say "this event changed"
 or "was cancelled" if "this event" keeps its identity from one scrape to the
