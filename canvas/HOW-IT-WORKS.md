@@ -175,8 +175,10 @@ the index can't be fetched it falls back to `events.json`: adds still work,
 with no overlay. On every full read each event item gets, next to its stored
 copy, `now` = {`status` (`scheduled`, `cancelled`, `postponed`, `moved`,
 `unlisted`) and only what differs: `start_time`, `location`, `title`, `url`;
-for a moved one `moved_to` and the new showing's time and place;
-`current_id` when the id changed}. No `now`: unknown (index unavailable, or
+`venue_changed` when the location is another place, not the same one
+written differently (venue ids when both have one, else `same_place`'s
+street-number / name rule); for a moved one `moved_to` and the new showing's
+time and place; `current_id` when the id changed}. No `now`: unknown (index unavailable, or
 the event has passed or left the listing), and the page shows the copy.
 Items sort by the current time. Polling (`?if_version=`) tracks writes only,
 so a change shows on the next full read (page load, or after any write).

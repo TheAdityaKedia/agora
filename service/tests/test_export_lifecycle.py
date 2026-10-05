@@ -69,6 +69,20 @@ def test_changes_show_for_seven_days_and_only_shown_fields(db_session, tmp_path)
     assert index["events"][fresh]["changed"] == by_title["Fresh"]["changed"]
 
 
+def test_a_reworded_location_is_not_a_venue_change(db_session, tmp_path):
+    _add(db_session, "Lawn", location="Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco",
+         changed_at=NOW, changed={"location": "Great Lawn, Yerba Buena Gardens, Mission St. between 3rd & 4th"})
+    _add(db_session, "Both", location="540 Laguna St, San Francisco, CA",
+         changed_at=NOW, changed={"location": "540 Laguna St + 540 Cafe", "title": "Old"})
+    _add(db_session, "Moved", location="The Lost Church, 988 Columbus Ave",
+         changed_at=NOW, changed={"location": "Bird & Beckett, 653 Chenery St"})
+    manifest, index = _export(tmp_path)
+    by_title = {e["title"]: e for e in manifest["events"]}
+    assert "changed" not in by_title["Lawn"]
+    assert by_title["Both"]["changed"]["was"] == {"title": "Old"}
+    assert by_title["Moved"]["changed"]["was"] == {"location": "Bird & Beckett, 653 Chenery St"}
+
+
 def test_recent_change_handles_naive_sqlite_times():
     e = Event(changed={"title": "Old"}, changed_at=(NOW - timedelta(hours=1)).replace(tzinfo=None))
     assert recent_change(e, now=NOW)["was"] == {"title": "Old"}

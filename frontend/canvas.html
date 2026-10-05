@@ -452,7 +452,7 @@
     if (label) return '<span class="' + cls + (n.status === "unlisted" ? "" : " off") + '">' + label + "</span>";
     let out = "";
     if (n.start_time && n.start_time !== it.event.start_time) out += '<span class="' + cls + '">Time changed</span>';
-    if (n.location && n.location !== it.event.location) out += '<span class="' + cls + '">Venue changed</span>';
+    if (n.venue_changed) out += '<span class="' + cls + '">Venue changed</span>';
     return out;
   }
   // What to do about it, under the card's title.
@@ -482,7 +482,10 @@
       : esc(titleOf(it));
     let where = "";
     if (it.event) {
-      const place = changedHtml(it.event.location, placeOf(it), (x) => x);
+      // The old place struck through only when it's another place, not the
+      // same one written differently.
+      const place = it.now && it.now.venue_changed
+        ? changedHtml(it.event.location, placeOf(it), (x) => x) : esc(placeOf(it) || "");
       const listed = (it.event.sources || []).length ? esc("Listed by " + it.event.sources.join(", ")) : "";
       const bits = [placeOf(it) || it.event.location ? place : "", listed].filter(Boolean);
       where = bits.length ? '<div class="it-where">' + bits.join(" · ") + "</div>" : "";
@@ -558,7 +561,8 @@
     return '<li class="step' + (isOff(it) ? " off" : "") + '" tabindex="0" data-id="' + esc(it.id) + '"><div class="step-body">'
       + '<div class="step-when">' + esc(when + moved) + lifeBadges(it, "step-badge") + "</div>"
       + '<div class="step-title">' + title + "</div>"
-      + (placeOf(it) ? '<div class="step-where">' + changedHtml(it.event.location, placeOf(it), (x) => x) + "</div>" : "")
+      + (placeOf(it) ? '<div class="step-where">' + (it.now && it.now.venue_changed
+        ? changedHtml(it.event.location, placeOf(it), (x) => x) : esc(placeOf(it))) + "</div>" : "")
       + '<div class="step-links">'
       + (start && !notHappening(it) ? '<a class="linkish" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Google Calendar</a>' : "")
       + '<button type="button" class="linkish" data-act="plan-remove">Take out</button></div></div>'

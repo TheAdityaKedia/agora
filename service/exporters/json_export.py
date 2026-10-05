@@ -29,6 +29,7 @@ from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import dedup
 import event_ids
 import lifecycle
 import taxonomy
@@ -66,7 +67,8 @@ INDEX_FILE = "event-index.json"
 # Decisions), and only these fields are shown; the rest stay in the DB.
 CHANGED_DAYS = 7
 SHOWN_CHANGES = ("title", "location", "start_time")
-INDEX_FIELDS = ("title", "start_time", "location", "url", "image_url", "sources", "status", "changed")
+INDEX_FIELDS = ("title", "start_time", "location", "url", "image_url", "sources", "venue",
+                "status", "changed")
 
 
 def summarize(text: str | None) -> tuple[str, bool]:
@@ -140,7 +142,7 @@ def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> 
         out["room"] = place["room"]  # only when named: most events have none
     if event.status in lifecycle.EXPLICIT:
         out["status"] = event.status
-    changed = recent_change(event)
+    changed = recent_change(event, venue_of=_venue_of(venues))
     if changed:
         out["changed"] = changed
     return out
@@ -150,14 +152,29 @@ def _aware(t: datetime) -> datetime:
     return t if t.tzinfo else t.replace(tzinfo=timezone.utc)  # SQLite: naive UTC
 
 
-def recent_change(event: Event, now: datetime | None = None) -> dict | None:
+def _venue_of(venues: VenueStore | None):
+    """dedup's venue lookup over already-validated venue files, or None."""
+    if not venues:
+        return None
+
+    def venue_of(location):
+        e = venues.entry(location)
+        return (e["venue"], e.get("room")) if e and "venue" in e else None
+    return venue_of
+
+
+def recent_change(event: Event, now: datetime | None = None, venue_of=None) -> dict | None:
     """{"at", "was": {field: old}} for a change to a shown field in the last
-    CHANGED_DAYS, else None."""
+    CHANGED_DAYS, else None. A location that only changed how it's written
+    (same venue, or the same street number / venue name: dedup's
+    locations_agree) is not a change of venue, so it isn't shown."""
     if not (event.changed and event.changed_at):
         return None
     now = now or datetime.now(timezone.utc)
     at = _aware(event.changed_at)
     was = {f: v for f, v in event.changed.items() if f in SHOWN_CHANGES}
+    if "location" in was and dedup.locations_agree(was["location"], event.location, venue_of) is not False:
+        del was["location"]
     if not was or now - at > timedelta(days=CHANGED_DAYS):
         return None
     return {"at": at.isoformat(), "was": was}

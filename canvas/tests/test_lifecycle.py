@@ -87,9 +87,38 @@ def test_only_what_differs_and_the_current_time_sorts(api, canvas, index):
     v = view(api, canvas)
     it = next(i for i in v["items"] if i["event"]["id"] == E1)
     assert it["now"] == {"status": "scheduled", "start_time": later, "location": "Somewhere New",
-                         "title": "New Title"}
+                         "venue_changed": True, "title": "New Title"}
     assert it["event"]["location"] == BASE[E1].get("location")  # the copy is kept
     assert it["start_time"] == later and v["items"][-1]["id"] == it["id"]
+
+
+@pytest.mark.parametrize("old, new, moved", [
+    # One place written two ways: the current text, but not a venue change.
+    ({"location": "Great Lawn, Yerba Buena Gardens, Mission St."},
+     {"location": "Great Lawn, Yerba Buena Gardens, 750 Howard St, San Francisco"}, False),
+    ({"location": "540 Laguna St, San Francisco + 540 Cafe"},
+     {"location": "540 Laguna St, San Francisco, CA 94102"}, False),
+    # Venue ids decide when both copies have one.
+    ({"location": "The Hall", "venue": "a"}, {"location": "The Hall, 1 Main St", "venue": "b"}, True),
+    ({"location": "Somewhere", "venue": "a"}, {"location": "Elsewhere", "venue": "a"}, False),
+    ({"location": "Bird & Beckett, 653 Chenery St"}, {"location": "The Lost Church, 988 Columbus Ave"}, True),
+])
+def test_a_venue_change_is_another_place_not_new_wording(old, new, moved):
+    assert snapshot.same_place(old, new) is not moved
+
+
+def test_reworded_location_shows_the_text_without_a_venue_change(api, canvas, index):
+    index(events=_with(E1, location="Somewhere, 12 Main St"))
+    add_event(api, canvas, E1)
+    index(events=_with(E1, location="Somewhere Bar, 12 Main St, San Francisco, CA"))
+    assert item(api, canvas)["now"] == {"status": "scheduled",
+                                        "location": "Somewhere Bar, 12 Main St, San Francisco, CA"}
+
+
+def test_copies_keep_the_venue_id(api, canvas, index):
+    index(events=_with(E1, venue="the-dawn-club"))
+    r = add_event(api, canvas, E1)
+    assert r["json"]["item"]["event"]["venue"] == "the-dawn-club"
 
 
 def test_no_longer_listed(api, canvas, index):

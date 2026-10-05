@@ -18,6 +18,7 @@ MISS_REFETCH_S so unknown IDs can't make us hammer Pages.
 import gzip
 import json
 import os
+import re
 import time
 import urllib.request
 
@@ -26,7 +27,7 @@ INDEX_FILE = "event-index.json"
 # SNAPSHOT_CACHE_TTL_S: only for local runs (the e2e changes the index mid-run).
 CACHE_TTL_S = int(os.environ.get("SNAPSHOT_CACHE_TTL_S") or 600)
 MISS_REFETCH_S = 60
-SNAPSHOT_FIELDS = ("id", "title", "start_time", "location", "url", "image_url", "sources")
+SNAPSHOT_FIELDS = ("id", "title", "start_time", "location", "url", "image_url", "sources", "venue")
 # What the overlay compares between the copy and the current event.
 NOW_FIELDS = ("start_time", "location", "title", "url")
 MAX_ALIAS_HOPS = 20
@@ -113,11 +114,33 @@ def aliases_of(event_id, now=None):
     return [old for old in idx["aliases"] if old != event_id and resolve(idx, old) == cur]
 
 
+_STREET_NUMBER = re.compile(r"\b(\d{1,5})\s+(?=\d{0,3}[A-Za-z])")
+
+
+def same_place(old, new):
+    """Whether two location strings are one place written two ways. Venue
+    ids (from the venue files) decide when both copies have one; otherwise
+    a shared street number, or one's venue name (before the first comma)
+    inside the other: a small port of the pipeline's dedup.locations_agree."""
+    a, b = (old or {}).get("location"), (new or {}).get("location")
+    if (old or {}).get("venue") and (new or {}).get("venue"):
+        return old["venue"] == new["venue"]
+    if not (a and b):
+        return True  # one side unknown: nothing to say
+    if set(_STREET_NUMBER.findall(a)) & set(_STREET_NUMBER.findall(b)):
+        return True
+    na, nb = a.casefold(), b.casefold()
+    va, vb = na.split(",")[0].strip(), nb.split(",")[0].strip()
+    return bool(va and va in nb) or bool(vb and vb in na)
+
+
 def current(stored, now=None):
     """The `now` overlay for an item's stored copy: its status and only what
-    differs ({status, start_time?, location?, title?, url?, moved_to?,
-    current_id?}), or None when unknown (index unavailable, or the event has
-    left the listing: passed or dropped)."""
+    differs ({status, start_time?, location?, venue_changed?, title?, url?,
+    moved_to?, current_id?}), or None when unknown (index unavailable, or the
+    event has left the listing: passed or dropped). `location` is the current
+    text whenever it differs; `venue_changed` only when it's another place,
+    not the same one written differently."""
     try:
         idx = _index(None, now)
     except ManifestUnavailable:
@@ -130,6 +153,8 @@ def current(stored, now=None):
         ev = idx["events"][cur]
         out = {"status": ev.get("status") or "scheduled"}
         out.update({k: ev[k] for k in NOW_FIELDS if ev.get(k) and ev.get(k) != stored.get(k)})
+        if "location" in out and not same_place(stored, ev):
+            out["venue_changed"] = True
     elif cur in idx["gone"]:
         g = idx["gone"][cur]
         out = {"status": g.get("status") or "unlisted"}
