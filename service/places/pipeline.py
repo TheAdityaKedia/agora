@@ -20,9 +20,12 @@ MAX_LOOKUPS = 50
 
 def collect_locations(events) -> dict[str, dict]:
     """(location, sources) pairs or event dicts → per normalised key:
-    {"text": most common raw form, "events": n, "sources": [...]}."""
+    {"text": most common raw form, "events": n, "sources": [...]}, plus
+    "example" — the soonest event's title/url/date — when the dicts carry
+    "title" and "start" (an ISO date), so the review issue can name it."""
     raw: dict[str, Counter] = defaultdict(Counter)
     sources: dict[str, set] = defaultdict(set)
+    examples: dict[str, dict] = {}
     for e in events:
         loc, srcs = (e.get("location"), e.get("sources")) if isinstance(e, dict) else e
         loc = (loc or "").strip()
@@ -31,8 +34,13 @@ def collect_locations(events) -> dict[str, dict]:
             continue
         raw[key][loc] += 1
         sources[key].update(srcs or [])
+        if isinstance(e, dict) and e.get("title") and e.get("start"):
+            ex = {"title": e["title"], "url": e.get("url"), "date": e["start"]}
+            if key not in examples or ex["date"] < examples[key]["date"]:
+                examples[key] = ex
     return {k: {"text": c.most_common(1)[0][0], "events": sum(c.values()),
-                "sources": sorted(sources[k])} for k, c in raw.items()}
+                "sources": sorted(sources[k]),
+                **({"example": examples[k]} if k in examples else {})} for k, c in raw.items()}
 
 
 def resolve_locations(locations: dict[str, dict], store: Store, geocoder,
@@ -53,7 +61,8 @@ def resolve_locations(locations: dict[str, dict], store: Store, geocoder,
     actions = Counter()
     new_pending = []
     for key, info in sorted(locations.items(), key=lambda kv: -kv[1]["events"]):
-        out = resolver.resolve(info["text"], info["sources"], info["events"])
+        out = resolver.resolve(info["text"], info["sources"], info["events"],
+                               example=info.get("example"))
         actions[out.action] += 1
         if out.action == "pending" and key not in pending_before:
             new_pending.append(key)

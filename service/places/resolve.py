@@ -5,7 +5,8 @@ Steps, in order (feature-specs/venues.md → "Resolving a new location string"):
 1. Known string — already in venue_locations.json (and not pending).
 2. Not a place — online / hybrid / TBA / various.
 3. Just a city — "San Francisco, CA" → region only.
-4. A room of a known venue — "SFJAZZ Center — Miner Auditorium".
+4. A room of a known venue — "SFJAZZ Center — Miner Auditorium",
+   "The Dairy (Sports Basement Presidio)".
 5. Geocode with Nominatim and apply the evidence rules.
 6. AI-assisted: the model proposes a name/address to look up; the result
    must pass the same rules against the source's text (assist.py).
@@ -72,13 +73,21 @@ class Resolver:
 
     # --- entry point -----------------------------------------------------
 
-    def resolve(self, location: str, sources=(), events: int = 0) -> Outcome:
-        """Resolve one string, record the result in the store, return it."""
+    def resolve(self, location: str, sources=(), events: int = 0,
+                example: dict | None = None) -> Outcome:
+        """Resolve one string, record the result in the store, return it.
+        `example` (an upcoming event's title/url/date) is kept on a pending
+        entry so the review issue can say which event brought it in."""
         key = normalize_key(location)
         existing = self.store.locations.get(key)
         if existing and "pending" not in existing:
             return Outcome(location, "known", existing)
         if existing and not self._due(existing):
+            # Not retried yet, but keep what the review issue shows current.
+            p = existing["pending"]
+            p.update(events=events, sources=sorted(set(sources)))
+            if example:
+                p["example"] = example
             return Outcome(location, "known", existing)
         try:
             out = self._resolve(location, list(sources))
@@ -94,6 +103,7 @@ class Resolver:
                 "events": events,
                 "sources": sorted(set(sources)),
                 **({"suggestion": out.suggestion} if out.suggestion else {}),
+                **({"example": example} if example else {}),
             }}
         self.store.locations[key] = out.entry
         return out
@@ -123,6 +133,9 @@ class Resolver:
         # likewise a room: "Spaceship 995 Market Street" → "Spaceship".
         vp, room = _drop_address(vp), room and _drop_address(room)
         known = self._known_venue(vp)
+        if not known and room and self._known_venue(room):
+            # "The Dairy (Sports Basement Presidio)": a room, then the venue.
+            known, room = self._known_venue(room), vp
         if known and city and REGION_OF_COUNTY[city[1]] != self.store.venues[known]["region"]:
             # "SFJAZZ Center — Paramount Theatre, Oakland": the presenter's
             # venue is in SF, the event isn't. Look the place up instead.
