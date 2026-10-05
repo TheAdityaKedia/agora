@@ -196,7 +196,9 @@ def run(shots):
         steps = a.locator(".plan .step")
         expect(steps).to_have_count(2)
         expect(steps.nth(1)).to_contain_text("Dinner at Nopa")
-        # Drag dinner above the first step (press, move, let go).
+        # Drag dinner above the first step (press, move, let go). Centre the
+        # plan first: near the screen's edge, a drag scrolls the page.
+        a.locator(".plan").evaluate("e => e.scrollIntoView({block: 'center'})")
         src, dst = steps.nth(1).bounding_box(), steps.nth(0).bounding_box()
         a.mouse.move(src["x"] + 150, src["y"] + src["height"] / 2)
         a.mouse.down()

@@ -363,7 +363,10 @@ def test_weekend_preset(browser, site):
     page.click("#preset-weekend")
     assert "dates=weekend" in page.url
     assert "active" in page.get_attribute("#preset-weekend", "class")
-    assert _rendered(page) > 0
+    # On a Sunday "this weekend" is just the rest of today, and the fixture's
+    # events start tomorrow: nothing to show is then correct.
+    if datetime.now(ZoneInfo(TZ)).weekday() != 6:
+        assert _rendered(page) > 0
     # Friday from 5pm, Saturday, Sunday — and nothing else.
     assert page.evaluate("""[...document.querySelectorAll('.event')].every(e => {
         const d = new Date(e.dataset.start), w = d.getDay();
@@ -371,9 +374,10 @@ def test_weekend_preset(browser, site):
     })""")
     page.click("#preset-weekend")
     assert "dates=" not in page.url
-    # Survives a reload as the symbolic preset.
-    page = _open(browser, site, DESKTOP, query="?dates=weekend")
-    assert "active" in page.get_attribute("#preset-weekend", "class")
+    # Survives a reload as the symbolic preset (waiting for the preset, not
+    # for events: there may be none, see above).
+    page.goto(site + "?dates=weekend")
+    page.wait_for_selector("#preset-weekend.active", timeout=15000)
     assert "This weekend" in page.inner_text("#active-filters")
 
 
