@@ -1,12 +1,17 @@
-"""Server-built event snapshots.
+"""Server-built event snapshots, and the current state of events.
 
 Anyone with a canvas link can edit it, so the browser never supplies event
-data: it sends an `event_id` and we copy the fields from the published
-`events.json`. Event items are therefore always real Agora data, and the copy
-outlives the manifest (past events are pruned; IDs can churn on re-scrape or
-dedup merges).
+data: it sends an `event_id` and we copy the fields from what Agora
+published. Event items are therefore always real Agora data, and the copy
+(the "as added" record) outlives the listing.
 
-The manifest (~7 MB) is cached per warm Lambda container for CACHE_TTL_S and
+What we read is `event-index.json` (feature-specs/event-lifecycle.md, §4):
+current facts by id (no descriptions), the events that are gone (unlisted,
+moved) until their date, and aliases for ids that changed. Until that file
+is published (or if it can't be fetched) we fall back to `events.json`,
+which can add events but knows nothing about changes: no overlay then.
+
+The index is cached per warm Lambda container for CACHE_TTL_S and
 re-fetched early on a miss (an event newer than our copy), at most once per
 MISS_REFETCH_S so unknown IDs can't make us hammer Pages.
 """
@@ -17,47 +22,128 @@ import time
 import urllib.request
 
 DEFAULT_MANIFEST_URL = "https://theadityakedia.github.io/agora/events.json"
-CACHE_TTL_S = 600
+INDEX_FILE = "event-index.json"
+# SNAPSHOT_CACHE_TTL_S: only for local runs (the e2e changes the index mid-run).
+CACHE_TTL_S = int(os.environ.get("SNAPSHOT_CACHE_TTL_S") or 600)
 MISS_REFETCH_S = 60
 SNAPSHOT_FIELDS = ("id", "title", "start_time", "location", "url", "image_url", "sources")
+# What the overlay compares between the copy and the current event.
+NOW_FIELDS = ("start_time", "location", "title", "url")
+MAX_ALIAS_HOPS = 20
 
-_cache = {"by_id": None, "fetched_at": 0.0}
+_cache = {"index": None, "fetched_at": 0.0}
 
 
 class ManifestUnavailable(Exception):
     pass
 
 
-def _fetch():
-    url = os.environ.get("MANIFEST_URL") or DEFAULT_MANIFEST_URL
+def _urls():
+    manifest = os.environ.get("MANIFEST_URL") or DEFAULT_MANIFEST_URL
+    index = os.environ.get("INDEX_URL") or manifest.rsplit("/", 1)[0] + "/" + INDEX_FILE
+    return index, manifest
+
+
+def _get(url):
     req = urllib.request.Request(url, headers={"Accept-Encoding": "gzip"})
     with urllib.request.urlopen(req, timeout=10) as r:
         raw = r.read()
         if r.headers.get("Content-Encoding") == "gzip":
             raw = gzip.decompress(raw)
-    data = json.loads(raw)
-    return {e["id"]: e for e in data.get("events", []) if e.get("id")}
+    return json.loads(raw)
+
+
+def _fetch():
+    """{"events": {id: event}, "gone": {...}, "aliases": {...}, "overlay": bool}."""
+    index_url, manifest_url = _urls()
+    try:
+        data = _get(index_url)
+        return {"events": {i: dict(e, id=i) for i, e in (data.get("events") or {}).items()},
+                "gone": data.get("gone") or {}, "aliases": data.get("aliases") or {},
+                "overlay": True}
+    except Exception:  # not published yet, or unreachable: the manifest can still add
+        data = _get(manifest_url)
+        return {"events": {e["id"]: e for e in data.get("events", []) if e.get("id")},
+                "gone": {}, "aliases": {}, "overlay": False}
 
 
 def _refresh(now):
     try:
-        _cache["by_id"] = _fetch()
+        _cache["index"] = _fetch()
     except Exception as e:  # network, HTTP, bad JSON
-        if _cache["by_id"] is None:
+        if _cache["index"] is None:
             raise ManifestUnavailable(type(e).__name__) from None
         # keep serving the stale copy; try again after MISS_REFETCH_S
     _cache["fetched_at"] = now
 
 
-def lookup(event_id, now=None):
-    """The manifest event with this id, or None."""
+def _index(event_id=None, now=None):
     now = time.time() if now is None else now
     age = now - _cache["fetched_at"]
-    if _cache["by_id"] is None or age > CACHE_TTL_S:
+    idx = _cache["index"]
+    if idx is None or age > CACHE_TTL_S:
         _refresh(now)
-    elif event_id not in _cache["by_id"] and age > MISS_REFETCH_S:
+    elif event_id is not None and age > MISS_REFETCH_S and resolve(idx, event_id) not in idx["events"]:
         _refresh(now)
-    return _cache["by_id"].get(event_id)
+    return _cache["index"]
+
+
+def resolve(idx, event_id):
+    """The current id for `event_id` (aliases are already resolved by the
+    exporter; the hop limit only guards against a bad file)."""
+    cur = event_id
+    for _ in range(MAX_ALIAS_HOPS):
+        nxt = idx["aliases"].get(cur)
+        if nxt is None or nxt == cur:
+            break
+        cur = nxt
+    return cur
+
+
+def lookup(event_id, now=None):
+    """The listed event this id (or an old alias of it) is now, or None."""
+    idx = _index(event_id, now)
+    return idx["events"].get(resolve(idx, event_id))
+
+
+def aliases_of(event_id, now=None):
+    """Old ids that lead to this event id (for the duplicate check)."""
+    idx = _index(None, now)
+    cur = resolve(idx, event_id)
+    return [old for old in idx["aliases"] if old != event_id and resolve(idx, old) == cur]
+
+
+def current(stored, now=None):
+    """The `now` overlay for an item's stored copy: its status and only what
+    differs ({status, start_time?, location?, title?, url?, moved_to?,
+    current_id?}), or None when unknown (index unavailable, or the event has
+    left the listing: passed or dropped)."""
+    try:
+        idx = _index(None, now)
+    except ManifestUnavailable:
+        return None
+    if not idx.get("overlay") or not stored or not stored.get("id"):
+        return None
+    eid = stored["id"]
+    cur = resolve(idx, eid)
+    if cur in idx["events"]:
+        ev = idx["events"][cur]
+        out = {"status": ev.get("status") or "scheduled"}
+        out.update({k: ev[k] for k in NOW_FIELDS if ev.get(k) and ev.get(k) != stored.get(k)})
+    elif cur in idx["gone"]:
+        g = idx["gone"][cur]
+        out = {"status": g.get("status") or "unlisted"}
+        to = g.get("moved_to")
+        if to:
+            out["moved_to"] = to
+            new = idx["events"].get(to)
+            if new:  # the new showing's time and place, for "Moved to Sat 8 PM"
+                out.update({k: new[k] for k in ("start_time", "location") if new.get(k)})
+    else:
+        return None
+    if cur != eid:
+        out["current_id"] = cur
+    return out
 
 
 def snapshot_of(event):
@@ -65,5 +151,5 @@ def snapshot_of(event):
 
 
 def reset_cache():
-    _cache["by_id"] = None
+    _cache["index"] = None
     _cache["fetched_at"] = 0.0

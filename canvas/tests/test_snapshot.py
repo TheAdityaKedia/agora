@@ -15,7 +15,8 @@ def fetches(monkeypatch):
 
     def fake_fetch():
         calls.append(1)
-        return {e["id"]: e for e in EVENTS["events"]}
+        return {"events": {e["id"]: e for e in EVENTS["events"]}, "gone": {}, "aliases": {},
+                "overlay": True}
 
     monkeypatch.setattr(snapshot, "_fetch", fake_fetch)
     snapshot.reset_cache()
@@ -80,4 +81,28 @@ def test_fetch_handles_gzip(tmp_path, monkeypatch):
             pass
 
     monkeypatch.setattr(snapshot.urllib.request, "urlopen", lambda req, timeout: Resp())
-    assert snapshot._fetch()["a"]["title"] == "A"
+    assert snapshot._get("https://x/events.json") == EVENTS
+
+
+def test_reads_the_index_beside_the_manifest_and_falls_back_to_the_manifest(monkeypatch):
+    monkeypatch.setenv("MANIFEST_URL", "https://pages/agora/events.json")
+    monkeypatch.delenv("INDEX_URL", raising=False)
+    asked = []
+    index = {"events": {"a": {"title": "A"}}, "gone": {"g": {"status": "unlisted"}}, "aliases": {"o": "a"}}
+
+    def get(url):
+        asked.append(url)
+        if url.endswith("event-index.json") and index is not None:
+            return index
+        if url.endswith("events.json"):
+            return EVENTS
+        raise OSError("404")
+
+    monkeypatch.setattr(snapshot, "_get", get)
+    got = snapshot._fetch()
+    assert asked == ["https://pages/agora/event-index.json"]
+    assert got["overlay"] and got["events"]["a"] == {"title": "A", "id": "a"} and got["aliases"] == {"o": "a"}
+    index = None  # not published yet
+    got = snapshot._fetch()
+    assert asked[-2:] == ["https://pages/agora/event-index.json", "https://pages/agora/events.json"]
+    assert not got["overlay"] and got["events"]["a"]["title"] == "A" and got["gone"] == {}
