@@ -1047,7 +1047,7 @@ def test_collecting_mode_marks_events_added_under_an_old_id(browser, lifecycle_s
     page = ctx.new_page()
     errors = []
     page.on("pageerror", lambda e: errors.append(str(e)))
-    page.goto(lifecycle_site + "?canvas=abc")
+    page.goto(lifecycle_site + "?beta=1&canvas=abc")  # a member, beta on for this visit
     page.wait_for_selector(".canvas-add")
     assert _row(page, "Poetry reading 3").locator(".canvas-add").inner_text() == "✓ Added"
     assert _row(page, "Jazz night 8").locator(".canvas-add").inner_text() == "✓ Added"
