@@ -251,14 +251,14 @@
   /* A drawn chevron (the ▾ glyph was ~10px and hard to see on a phone):
      an L of two borders turned 45°, flipped when open. */
   .dropdown > summary::after {
-    content: ""; flex: 0 0 auto; width: 6px; height: 6px; margin: 0 2px 0 4px;
-    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-    transform: translateY(-1.5px) rotate(45deg); opacity: 0.75;
+    content: ""; flex: 0 0 auto; width: 4px; height: 4px; margin: 0 2px 0 4px;
+    border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+    transform: translateY(-1px) rotate(45deg); opacity: 0.75;
     transition: transform 0.15s ease;
   }
-  .dropdown[open] > summary::after { transform: translateY(1.5px) rotate(-135deg); }
+  .dropdown[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
   @media (pointer: coarse) {
-    .dropdown > summary::after { width: 7px; height: 7px; border-width: 0 2px 2px 0; }
+    .dropdown > summary::after { width: 4.5px; height: 4.5px; border-width: 0 1.25px 1.25px 0; }
   }
   @media (prefers-reduced-motion: reduce) { .dropdown > summary::after { transition: none; } }
   .dropdown-panel {
