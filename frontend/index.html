@@ -228,6 +228,16 @@
   .date-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .date-fields label { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--muted); min-width: 0; }
   .date-fields .date-input { width: 100%; min-width: 0; }
+  /* Our own placeholder: iOS Safari shows an empty date field as blank (no
+     mm/dd/yyyy), and Chrome's mm/dd/yyyy says less than "Today"/"Any date". */
+  .date-field { position: relative; display: block; min-width: 0; }
+  .date-ph {
+    position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 16px; pointer-events: none; display: none;
+  }
+  .date-field.is-empty .date-ph { display: block; }
+  .date-field.is-empty:focus-within .date-ph { display: none; }
+  .date-field.is-empty .date-input:not(:focus)::-webkit-datetime-edit { color: transparent; }
 
   /* Sources / Topics: disclosure lists that expand in place. */
   .dropdown > summary {
@@ -310,7 +320,13 @@
   .date-input {
     padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px;
     background: var(--input-bg); color: var(--fg); font: inherit; font-size: 16px;
+    /* iOS Safari gives date inputs an intrinsic min width that ignores
+       width: 100%, so two side by side overlapped on a 375px iPhone mini.
+       Dropping the native appearance lets them fit their column. */
+    -webkit-appearance: none; appearance: none;
+    display: block; box-sizing: border-box; min-height: 38px; text-align: left;
   }
+  .date-input::-webkit-date-and-time-value { text-align: left; }  /* iOS centres it */
 
   /* --- Above the list: active-filter pills, counts, day strip. --- */
   .active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
@@ -750,8 +766,8 @@
   <div class="filter-group">
     <h3>Dates</h3>
     <div class="date-fields">
-      <label>From <input type="date" id="date-from" class="date-input"></label>
-      <label>To <input type="date" id="date-to" class="date-input"></label>
+      <label>From <span class="date-field"><input type="date" id="date-from" class="date-input"><span class="date-ph" aria-hidden="true">Today</span></span></label>
+      <label>To <span class="date-field"><input type="date" id="date-to" class="date-input"><span class="date-ph" aria-hidden="true">Any date</span></span></label>
     </div>
   </div>
   <div class="filter-group" id="area-group" hidden>
@@ -2325,6 +2341,8 @@
 
   function render() {
     writeStateToUrl();
+    // Show the date fields' own placeholders while they're empty.
+    for (const el of [fromEl, toEl]) el.parentElement.classList.toggle("is-empty", !el.value);
     const now = new Date();
     const otherFiltersPass = (ev, ignoreArea = false) => {
       if (ev._start < now) return false;

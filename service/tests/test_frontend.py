@@ -1047,3 +1047,23 @@ def test_theme_switch_from_a_dark_system(browser, site):
     assert _bg(page) == LIGHT_BG
     assert page.locator("#theme-btn .moon").is_visible()
     assert page.evaluate("localStorage.getItem('agora-theme')") == "light"
+
+
+def test_date_fields_fit_a_small_phone_and_have_placeholders(browser, site):
+    # iPhone mini width: iOS Safari's intrinsic date-input width once pushed
+    # "To" past the screen edge, over "From"; and iOS shows no mm/dd/yyyy.
+    page = _open(browser, site, {"width": 375, "height": 812}, touch=True)
+    page.click("#filters-btn")
+    page.wait_for_selector("#filters.open")
+    page.wait_for_timeout(500)  # the sheet slides in; measure once it's still
+    f, t = page.locator("#date-from").bounding_box(), page.locator("#date-to").bounding_box()
+    assert f["y"] == t["y"] and f["x"] + f["width"] <= t["x"] and t["x"] + t["width"] <= 375
+    ph = page.locator(".date-ph")
+    assert ph.all_inner_texts() == ["Today", "Any date"]
+    assert ph.nth(0).is_visible() and ph.nth(1).is_visible()
+    page.fill("#date-from", "2030-01-01")
+    assert not ph.nth(0).is_visible() and ph.nth(1).is_visible()
+    # Setting a date doesn't move the fields (no stray padding on the empty one).
+    assert page.locator("#date-from").bounding_box()["y"] == page.locator("#date-to").bounding_box()["y"]
+    page.click("#reset")
+    assert ph.nth(0).is_visible()
