@@ -56,6 +56,10 @@
     font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 0.9;
     text-decoration: none;
   }
+  .brand-line { display: flex; align-items: baseline; gap: 8px; }
+  .byline { color: var(--muted); font-size: 14px; }
+  .byline a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .byline a:hover { color: var(--accent); }
   .masthead nav a { color: var(--muted); font-size: 14px; }
   .masthead nav a:hover { color: var(--accent); }
 
@@ -241,7 +245,7 @@
 </head>
 <body>
 <header class="masthead">
-  <a class="brand" href="./">Agora</a>
+  <div class="brand-line"><a class="brand" href="./" title="Agora home: all events, no filters">Agora</a><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
   <nav><a href="./canvas.html">Your collections</a></nav>
 </header>
 <main id="app"><p class="loading">Loading…</p></main>

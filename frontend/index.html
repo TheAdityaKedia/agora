@@ -79,6 +79,8 @@
     font-size: 46px; line-height: 0.9; letter-spacing: 0.01em;
   }
   .brand { display: flex; align-items: baseline; gap: 8px; }
+  /* The logo goes home: the plain address, so every filter is off. */
+  .brand .home { color: inherit; text-decoration: none; }
   .byline { color: var(--muted); font-size: 14px; }
   .byline a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .byline a:hover { color: var(--accent); }
@@ -602,7 +604,7 @@
 <body>
 <header class="masthead">
   <div>
-    <div class="brand"><h1>Agora</h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
+    <div class="brand"><h1><a class="home" href="./" title="Agora home: all events, no filters">Agora</a></h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
     <div class="subtitle">Events around the Bay, in one calendar.</div>
   </div>
   <div class="plan" id="plan" hidden>
