@@ -956,3 +956,61 @@ def test_day_strip_shows_the_month_on_every_day(browser, site):
     marked = [btns.nth(i).get_attribute("data-day") for i in range(btns.count())
               if "new-month" in btns.nth(i).get_attribute("class")]
     assert marked == changes
+
+
+# --- theme switch: follows the system by default; the sun/moon overrides it ---
+
+def _themed_page(browser, site, scheme):
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ, color_scheme=scheme)
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    page.goto(site)
+    page.wait_for_selector(".event")
+    page._agora_errors = errors
+    return page
+
+
+def _bg(page):
+    return page.evaluate("getComputedStyle(document.body).backgroundColor")
+
+
+LIGHT_BG, DARK_BG = "rgb(238, 241, 242)", "rgb(14, 24, 34)"
+
+
+def test_theme_follows_the_system_by_default(browser, site):
+    light = _themed_page(browser, site, "light")
+    assert _bg(light) == LIGHT_BG
+    assert light.locator("#theme-btn .moon").is_visible() and not light.locator("#theme-btn .sun").is_visible()
+    assert light.get_attribute("#theme-btn", "aria-label") == "Switch to dark theme"
+    dark = _themed_page(browser, site, "dark")
+    assert _bg(dark) == DARK_BG
+    assert dark.locator("#theme-btn .sun").is_visible() and not dark.locator("#theme-btn .moon").is_visible()
+    assert dark.get_attribute("#theme-btn", "aria-label") == "Switch to light theme"
+
+
+def test_theme_switch_overrides_and_remembers(browser, site):
+    page = _themed_page(browser, site, "light")
+    page.click("#theme-btn")
+    assert _bg(page) == DARK_BG
+    assert page.locator("#theme-btn .sun").is_visible()
+    assert page.evaluate("localStorage.getItem('agora-theme')") == "dark"
+    # Remembered across a reload, applied before the page renders.
+    page.reload()
+    assert page.evaluate("document.documentElement.dataset.theme") == "dark"
+    page.wait_for_selector(".event")
+    assert _bg(page) == DARK_BG
+    # Switching back to the system's own theme goes back to following it.
+    page.click("#theme-btn")
+    assert _bg(page) == LIGHT_BG
+    assert page.evaluate("localStorage.getItem('agora-theme')") is None
+    assert page.evaluate("document.documentElement.dataset.theme") is None
+    assert page._agora_errors == []
+
+
+def test_theme_switch_from_a_dark_system(browser, site):
+    page = _themed_page(browser, site, "dark")
+    page.click("#theme-btn")
+    assert _bg(page) == LIGHT_BG
+    assert page.locator("#theme-btn .moon").is_visible()
+    assert page.evaluate("localStorage.getItem('agora-theme')") == "light"
