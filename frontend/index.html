@@ -238,8 +238,19 @@
     font-size: 14px; border: 1px solid var(--border);
   }
   .dropdown > summary::-webkit-details-marker { display: none; }
-  .dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
-  .dropdown[open] > summary::after { content: "▴"; }
+  /* A drawn chevron (the ▾ glyph was ~10px and hard to see on a phone):
+     an L of two borders turned 45°, flipped when open. */
+  .dropdown > summary::after {
+    content: ""; flex: 0 0 auto; width: 8px; height: 8px; margin: 0 2px 0 4px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg); opacity: 0.75;
+    transition: transform 0.15s ease;
+  }
+  .dropdown[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+  @media (pointer: coarse) {
+    .dropdown > summary::after { width: 9px; height: 9px; border-width: 0 2.5px 2.5px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .dropdown > summary::after { transition: none; } }
   .dropdown-panel {
     margin-top: 8px;
     background: var(--input-bg); color: var(--fg);
