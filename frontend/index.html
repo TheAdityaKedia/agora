@@ -79,6 +79,8 @@
     font-size: 46px; line-height: 0.9; letter-spacing: 0.01em;
   }
   .brand { display: flex; align-items: baseline; gap: 8px; }
+  /* The logo goes home: the plain address, so every filter is off. */
+  .brand .home { color: inherit; text-decoration: none; }
   .byline { color: var(--muted); font-size: 14px; }
   .byline a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .byline a:hover { color: var(--accent); }
@@ -284,11 +286,18 @@
   }
   .day-btn .dow { font-size: 11px; color: var(--muted); }
   .day-btn .dom { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1; }
+  /* Every day names its month, so a scrolled strip never loses it; the
+     first day of a month marks the change. */
+  .day-btn .mon {
+    font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em;
+    margin-top: 1px;
+  }
+  .day-btn.new-month .mon { color: var(--accent); font-weight: 700; }
   .day-btn:hover { border-color: var(--accent); }
   /* The day at the top of the list: a position marker, so ink, not the
      accent that marks active filters. */
   .day-btn.current { background: var(--fg); border-color: var(--fg); color: var(--bg); }
-  .day-btn.current .dow { color: var(--bg); }
+  .day-btn.current .dow, .day-btn.current .mon { color: var(--bg); }
 
   /* --- Event list --- */
   h2.date {
@@ -333,7 +342,7 @@
     grid-column: 2; grid-row: 1 / span 2;
     width: 64px; height: 64px; position: relative;
     display: grid; place-items: center; overflow: hidden;
-    border-radius: 6px;
+    border-radius: 6px; text-decoration: none;
     background: hsl(var(--h) var(--chip-s) var(--chip-l) / 0.14);
     color: hsl(var(--h) var(--chip-s) var(--chip-l));
   }
@@ -595,7 +604,7 @@
 <body>
 <header class="masthead">
   <div>
-    <div class="brand"><h1>Agora</h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
+    <div class="brand"><h1><a class="home" href="./" title="Agora home: all events, no filters">Agora</a></h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
     <div class="subtitle">Events around the Bay, in one calendar.</div>
   </div>
   <div class="plan" id="plan" hidden>
@@ -1689,6 +1698,10 @@
     }
     const canvasId = canvasMode ? canvasMode.id : canvasPending;
     if (canvasId) p.set("canvas", canvasId);
+    // Beta-only views keep ?beta=1 in the address bar, so a link copied from
+    // it (not only from Share) lets a friend in too. Harmless after launch.
+    if ((canvasId && AC && AC.BETA_GATE)
+        || (MAP_BETA_GATE && (view === "map" || selectedHoods.size))) p.set("beta", "1");
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
     if (location.pathname + location.search !== url) {
@@ -1785,9 +1798,14 @@
   copyEl.textContent = copyLabel;
   // A view that uses the map or neighborhoods goes through /beta/ while
   // they're gated (like collection links), so whoever opens it is let in.
-  const shareUrl = () => MAP_BETA_GATE && (view === "map" || selectedHoods.size)
-    ? new URL("beta/" + location.search + location.hash, new URL("./", location.href)).href
-    : location.href;
+  // (/beta/ itself adds beta=1, so the address bar's copy is dropped here.)
+  const shareUrl = () => {
+    if (!(MAP_BETA_GATE && (view === "map" || selectedHoods.size))) return location.href;
+    const q = new URLSearchParams(location.search);
+    q.delete("beta");
+    const qs = q.toString();
+    return new URL("beta/" + (qs ? "?" + qs : "") + location.hash, new URL("./", location.href)).href;
+  };
   copyEl.addEventListener("click", async () => {
     if (canShare) {
       try { await navigator.share({title: document.title, url: shareUrl()}); } catch {}
@@ -2335,13 +2353,15 @@
     dayStripEl.hidden = days.length < 2;
     let prevMonth = null;
     dayStripEl.innerHTML = days.map(([key, d]) => {
-      // The first day of each month in the strip shows the month instead of the weekday.
+      // Weekday, date, month on every button; the first day of a new month
+      // after the strip's start gets the month highlighted.
       const month = d.getMonth();
-      const top = prevMonth !== null && month !== prevMonth ? stripMonthFmt.format(d) : stripDowFmt.format(d);
+      const newMonth = prevMonth !== null && month !== prevMonth;
       prevMonth = month;
-      return '<button type="button" class="day-btn" data-day="' + key + '" aria-label="'
-        + escapeHtml(dateFmt.format(d)) + '"><span class="dow">' + escapeHtml(top)
-        + '</span><span class="dom">' + d.getDate() + "</span></button>";
+      return '<button type="button" class="day-btn' + (newMonth ? " new-month" : "") + '" data-day="'
+        + key + '" aria-label="' + escapeHtml(dateFmt.format(d)) + '"><span class="dow">'
+        + escapeHtml(stripDowFmt.format(d)) + '</span><span class="dom">' + d.getDate()
+        + '</span><span class="mon">' + escapeHtml(stripMonthFmt.format(d)) + "</span></button>";
     }).join("");
   }
 
@@ -2487,13 +2507,17 @@
     const typeLabel = (typeLabels.get((ev.types || [])[0]?.[0]) || "").split(" / ")
       .reduce((a, b) => (b.length < a.length ? b : a));
     const hue = ev.topics?.length ? topicHue(ev.topics[0]) : GROUP_HUE.type;
-    const thumb = '<div class="thumb" style="--h:' + hue + '">'
+    // The tile links to the event too (a bigger target than the title on a
+    // phone); hidden from keyboards and screen readers, which have the title.
+    const thumbTag = ev.url ? "a" : "div";
+    const thumb = "<" + thumbTag + ' class="thumb" style="--h:' + hue + '"'
+      + (ev.url ? ' href="' + escapeHtml(ev.url) + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"' : "") + ">"
       + (typeLabel ? '<span class="thumb-label">' + escapeHtml(typeLabel) + "</span>" : "")
       + (ev.image_url
         ? '<img loading="lazy" decoding="async" alt="" src="' + escapeHtml(ev.image_url)
           + '" onerror="this.remove()">'
         : "")
-      + "</div>";
+      + "</" + thumbTag + ">";
     return (
       '<article class="event" data-start="' + escapeHtml(ev.start_time)
         + '" data-region="' + escapeHtml(ev.region || "") + '">' +

@@ -4,7 +4,7 @@ Starts the API locally (moto, snapshots from frontend/events.json) and a
 static server for frontend/, then plays two friends in separate browser
 contexts: Adi makes a canvas on the main page and adds events in canvas
 mode; Sam opens the link, votes and comments; Adi sees it, removes + undoes,
-picks the plan, adds a custom item. Fails on any page error.
+builds and reorders the plan, adds a custom item. Fails on any page error.
 
     python canvas/scripts/e2e_frontend.py [--shots DIR]
 
@@ -125,7 +125,8 @@ def run(shots):
         canvas_url = a.url
         # Just Adi so far: a plain list, no votes, comments or plan.
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        expect(a.locator('[data-act="pick"]')).to_have_count(0)
+        # (The plan works on your own too: Add to plan is there.)
+        expect(a.locator('[data-act="plan-add"]')).to_have_count(2)
         if shots:
             a.screenshot(path=f"{shots}/2-personal.png", full_page=True)
         # Share it as-is: now it asks Adi's name, and the social parts appear.
@@ -144,7 +145,10 @@ def run(shots):
         cid0 = canvas_url.split("c=")[1].split("&")[0]
         share_url = a.evaluate(f"AgoraCanvas.canvasUrl('{cid0}')")
         assert "/beta/canvas.html?c=" in share_url, share_url
-        s.goto(canvas_url + f"&api={API}")
+        # Adi's address bar carries ?beta=1 too, so a copied link works; a
+        # bare page link (beta=1 dropped) shows the beta notice instead.
+        assert "beta=1" in canvas_url, canvas_url
+        s.goto(f"{WEB}/canvas.html?c={cid0}&api={API}")
         expect(s.locator("h1")).to_have_text("Collections are in private beta")
         s.goto(share_url + f"&api={API}")
         expect(s.locator(".item")).to_have_count(2)
@@ -166,19 +170,92 @@ def run(shots):
         expect(a.locator(".item")).to_have_count(1)
         a.locator(".ac-toast button", has_text="Undo").click()
         expect(a.locator(".item")).to_have_count(2)
-        first.locator('[data-act="pick"]').click()
-        expect(a.locator(".winner")).to_contain_text("The plan")
+        expect(first.locator('[data-act="vote"]')).to_contain_text("Interested")
+        first.locator('[data-act="plan-add"]').click()
+        expect(a.locator(".plan")).to_contain_text("The plan")
         a.click('[data-act="add-custom"]')
         answer_dialog(a, title="Dinner at Nopa", url="nopasf.com")
         expect(a.locator(".item")).to_have_count(3)
         expect(a.locator(".item", has_text="Dinner at Nopa").locator(".when")).to_contain_text("Any time")
+        # Your own items: a card with a kind icon (Food is preselected).
+        expect(a.locator(".item.custom", has_text="Dinner at Nopa").locator(".thumb.kind")).to_have_attribute("aria-label", "Food")
         a.locator("details.fold summary", has_text="Activity").click()
-        expect(a.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+        # Your own changes read "You"; friends see your name.
+        expect(a.locator("details.fold li").first).to_contain_text("You added “Dinner at Nopa”")
         if shots:
             a.screenshot(path=f"{shots}/3-shared.png", full_page=True)
 
         # Sam's open page picks up Adi's changes by polling (forced here).
         s.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+        expect(s.locator(".item")).to_have_count(3)
+        s.locator("details.fold summary", has_text="Activity").click()
+        expect(s.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+
+        # --- The plan has steps in order: dinner (undated, so last) moves first.
+        a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="plan-add"]').click()
+        steps = a.locator(".plan .step")
+        expect(steps).to_have_count(2)
+        expect(steps.nth(1)).to_contain_text("Dinner at Nopa")
+        # Drag dinner above the first step (press, move, let go). Centre the
+        # plan first: near the screen's edge, a drag scrolls the page.
+        a.locator(".plan").evaluate("e => e.scrollIntoView({block: 'center'})")
+        src, dst = steps.nth(1).bounding_box(), steps.nth(0).bounding_box()
+        a.mouse.move(src["x"] + 150, src["y"] + src["height"] / 2)
+        a.mouse.down()
+        for k in range(1, 9):
+            a.mouse.move(src["x"] + 150, src["y"] + src["height"] / 2 - (src["y"] - dst["y"] + 10) * k / 8)
+        a.mouse.up()
+        expect(steps.nth(0)).to_contain_text("Dinner at Nopa")
+        a.reload()
+        expect(a.locator(".plan .step").nth(0)).to_contain_text("Dinner at Nopa")
+        # Your own items can be edited.
+        a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="edit-custom"]').click()
+        dlg = a.locator("dialog.ac-dialog[open]")
+        expect(dlg.locator('[name="title"]')).to_have_value("Dinner at Nopa")
+        expect(dlg.locator('[name="url"]')).to_have_value("https://nopasf.com")
+        dlg.locator("label", has_text="Drinks").click()
+        answer_dialog(a, title="Dinner at Nopa, then dessert", url="")
+        nopa_item = a.locator(".item", has_text="Dinner at Nopa, then dessert")
+        expect(nopa_item.locator(".thumb.kind")).to_have_attribute("aria-label", "Drinks")
+        expect(nopa_item.locator(".it-title a")).to_have_count(0)  # the link was cleared
+        expect(a.locator(".item", has_text="Dinner at Nopa").locator(".badge", has_text="In the plan")).to_have_count(1)
+
+        # --- Sam removes an event: Adi's Activity says who, which showing
+        # (its date), and offers Restore right there (no separate list).
+        gone = s.locator(".item").nth(1)
+        gone_title = gone.locator(".it-title").inner_text()
+        gone.locator('[data-act="remove"]').click()
+        expect(s.locator(".item")).to_have_count(2)
+        a.reload()
+        expect(a.locator(".item")).to_have_count(2)
+        expect(a.locator("details.fold summary")).to_have_text("Activity · 1 removed")
+        a.locator("details.fold summary").click()
+        removal = a.locator("details.fold li").first
+        expect(removal).to_contain_text(f"Sam removed “{gone_title}” (")
+        removal.locator('[data-act="restore"]').click()
+        expect(a.locator(".item")).to_have_count(3)
+        expect(a.locator("details.fold summary")).to_have_text("Activity")
+        expect(a.locator("details.fold li").first).to_contain_text(f"You restored “{gone_title}”")
+
+        # Removing what's in the plan, or what others are interested in, asks first.
+        s.reload()
+        plan = s.locator(".item").first
+        plan.locator('[data-act="remove"]').click()
+        dlg = s.locator("dialog[open]")
+        expect(dlg).to_contain_text("It’s in the plan")
+        expect(dlg).to_contain_text("Adi is interested.")
+        dlg.locator("button", has_text="Keep it").click()
+        expect(s.locator(".item")).to_have_count(3)
+        # Your own vote and comments alone don't: a one-tap remove with Undo.
+        nopa = s.locator(".item", has_text="Dinner at Nopa")
+        nopa.locator('[data-act="plan-remove"]').click()  # (in the plan, it would ask)
+        expect(s.locator(".plan .step")).to_have_count(1)
+        nopa.locator('[data-act="vote"]').click()
+        expect(nopa.locator(".voters")).to_have_text("Sam")
+        nopa.locator('[data-act="remove"]').click()
+        expect(s.locator(".item")).to_have_count(2)
+        expect(s.locator("dialog[open]")).to_have_count(0)
+        s.locator(".ac-toast button", has_text="Undo").click()
         expect(s.locator(".item")).to_have_count(3)
 
         # --- Duplicate: a new, personal collection with the same items.
@@ -187,8 +264,16 @@ def run(shots):
         expect(a.locator(".cv-name")).to_have_text("Adi's weekend ideas")
         expect(a.locator(".item")).to_have_count(3)
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        expect(a.locator(".winner")).to_have_count(0)
+        expect(a.locator(".plan")).to_have_count(0)
         dup_url = a.url
+        # A link copied from the address bar lets a new browser in.
+        assert "beta=1" in dup_url, dup_url
+        jo = hermetic(browser.new_context(**phone))
+        j = jo.new_page()
+        watch(j, errors)
+        j.goto(dup_url + ("" if "api=" in dup_url else f"&api={API}"))
+        expect(j.locator(".item")).to_have_count(3)
+        jo.close()
 
         # --- Share a copy: Sam changes the copy; Adi's collection stays as is.
         a.click('[data-act="share"]')

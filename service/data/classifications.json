@@ -17,6 +17,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fA Chinese Ghost Story": {
+      "classified_at": "2026-10-04T15:33:51.501811+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "A Chinese Ghost Story",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fCOMEDY: Frankie Marcos (Presented by Ain't No Joke Stand-Up)": {
       "classified_at": "2026-10-03T04:50:15.591359+00:00",
       "cost": "paid",
@@ -133,6 +149,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fEvil Dead 2": {
+      "classified_at": "2026-10-04T15:33:51.405519+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Evil Dead 2",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fFOGCUTTER FILM SERIES: VOLUME 26 - The Buddy Holly Story (Hosted by Chuck Prophet)": {
       "classified_at": "2026-10-03T04:50:34.357265+00:00",
       "cost": "free",
@@ -154,6 +186,39 @@
         ]
       ]
     },
+    "4-Star Theater\u001fHouse": {
+      "classified_at": "2026-10-04T15:33:51.407345+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "House",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fIt's the Great Pumpkin Charlie Brown!": {
+      "classified_at": "2026-10-04T15:33:51.487722+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "It's the Great Pumpkin Charlie Brown!",
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fLIVE MUSIC: @ (Presented by THROWIN' BO'S)": {
       "classified_at": "2026-10-03T04:50:39.312325+00:00",
       "cost": "unknown",
@@ -163,6 +228,23 @@
       "title": "LIVE MUSIC: @ (Presented by THROWIN' BO'S)",
       "topics": [
         "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fLIVE MUSIC: Angela Autumn (Presented by THROWIN' BO'S)": {
+      "classified_at": "2026-10-04T15:33:51.450826+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: Angela Autumn (Presented by THROWIN' BO'S)",
+      "topics": [
+        "folk-americana",
+        "country"
       ],
       "types": [
         [
@@ -358,6 +440,22 @@
       "source": "4-Star Theater",
       "taxonomy_version": 2,
       "title": "LIVE MUSIC: School Fair, goldenstar, Poor Image (Presented by THROWIN' BO'S)",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fLIVE MUSIC: Storefront Church (Presented by THROWIN' BO'S)": {
+      "classified_at": "2026-10-04T15:33:51.491557+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: Storefront Church (Presented by THROWIN' BO'S)",
       "topics": [
         "rock-indie"
       ],
@@ -1104,6 +1202,22 @@
       "title": "The Music of Queen",
       "topics": [
         "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fThe Outsiders": {
+      "classified_at": "2026-10-03T14:57:54.271016+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "The Outsiders",
+      "topics": [
+        "musical-theater"
       ],
       "types": [
         [
@@ -10539,6 +10653,24 @@
         ]
       ]
     },
+    "Clio's Books\u001fArchives of Love and Liberation": {
+      "classified_at": "2026-10-04T15:33:52.271597+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 2,
+      "title": "Archives of Love and Liberation",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Clio's Books\u001fBuild or Die": {
       "classified_at": "2026-10-03T05:07:39.604672+00:00",
       "cost": "unknown",
@@ -10873,6 +11005,24 @@
         ]
       ]
     },
+    "Clio's Books\u001fThe Science of Longing": {
+      "classified_at": "2026-10-04T15:33:52.140605+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 2,
+      "title": "The Science of Longing",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Clio's Books\u001fYou Don't Need a Smartphone": {
       "classified_at": "2026-10-03T05:08:15.474015+00:00",
       "cost": "unknown",
@@ -10888,6 +11038,22 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001f\"The Second Life of Freddie Nole\": Documentary Screening": {
+      "classified_at": "2026-10-04T15:33:52.025918+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "\"The Second Life of Freddie Nole\": Documentary Screening",
+      "topics": [
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -13361,6 +13527,23 @@
           "talk",
           "panel"
         ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fPrivate Tour - Community Only": {
+      "classified_at": "2026-10-04T15:33:52.311361+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Private Tour - Community Only",
+      "topics": [
+        "tech"
+      ],
+      "types": [
         [
           "social",
           "mixer-meetup"
@@ -19966,6 +20149,24 @@
         ]
       ]
     },
+    "Noe Valley Books\u001fNVB Anniversary Trivia Night": {
+      "classified_at": "2026-10-04T15:33:52.195157+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Noe Valley Books",
+      "taxonomy_version": 2,
+      "title": "NVB Anniversary Trivia Night",
+      "topics": [
+        "trivia",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Noe Valley Books\u001fPoetry Night": {
       "classified_at": "2026-10-03T05:06:47.064036+00:00",
       "cost": "free",
@@ -22769,6 +22970,23 @@
         ]
       ]
     },
+    "Phoenix Theater (Petaluma)\u001fJonathan Richman": {
+      "classified_at": "2026-10-04T15:33:51.549426+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Phoenix Theater (Petaluma)",
+      "taxonomy_version": 2,
+      "title": "Jonathan Richman",
+      "topics": [
+        "rock-indie",
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Phoenix Theater (Petaluma)\u001fMuselet, Finding Nico, Swe-Bop!, Chris & Liz": {
       "classified_at": "2026-10-03T01:23:41.178663+00:00",
       "cost": "unknown",
@@ -23477,6 +23695,26 @@
         ]
       ]
     },
+    "Reading Rhythms\u001fReading Rhythms Palo Alto: October 19th": {
+      "classified_at": "2026-10-04T15:33:52.166972+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Reading Rhythms",
+      "taxonomy_version": 2,
+      "title": "Reading Rhythms Palo Alto: October 19th",
+      "topics": [
+        "books-authors",
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Reading Rhythms\u001fReading Rhythms San Francisco + Free Book: Sense and Sensibility (Movie Tie-In Special)": {
       "classified_at": "2026-10-03T05:17:34.130885+00:00",
       "cost": "paid",
@@ -23538,6 +23776,24 @@
         ],
         [
           "screening"
+        ]
+      ]
+    },
+    "Russian Hill Bookstore\u001fMyranda Wren: The Nighttimes": {
+      "classified_at": "2026-10-04T15:33:52.315432+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Russian Hill Bookstore",
+      "taxonomy_version": 2,
+      "title": "Myranda Wren: The Nighttimes",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -24049,6 +24305,25 @@
         [
           "social",
           "dance-social"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fCity of Reggaeton: Halloween Eve at Roccapulco": {
+      "classified_at": "2026-10-03T14:57:54.433978+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "City of Reggaeton: Halloween Eve at Roccapulco",
+      "topics": [
+        "hiphop-rnb",
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -41503,6 +41778,24 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fMixer for Travel Tech Founders & Investors": {
+      "classified_at": "2026-10-04T15:33:52.127914+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Mixer for Travel Tech Founders & Investors",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fNew Year, New Alignment: 2027 Astrology Workshop": {
       "classified_at": "2026-10-03T05:11:57.069488+00:00",
       "cost": "unknown",
@@ -43032,6 +43325,22 @@
         ]
       ]
     },
+    "The Fillmore\u001fEloise - The Drama Queen Tour": {
+      "classified_at": "2026-10-04T15:33:51.519260+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Eloise - The Drama Queen Tour",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Fillmore\u001fEslabon Armado - Amor Nocturno": {
       "classified_at": "2026-09-23T19:53:23.058395+00:00",
       "cost": "paid",
@@ -43103,6 +43412,22 @@
       "source": "The Fillmore",
       "taxonomy_version": 1,
       "title": "JACK WHITE LIVE 2026",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fJackie Greene": {
+      "classified_at": "2026-10-03T14:57:54.295283+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Jackie Greene",
       "topics": [
         "rock-indie"
       ],
@@ -43992,6 +44317,24 @@
       "title": "rusowsky",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Marsh\u001fA Very Scrumpy Holiday Carol": {
+      "classified_at": "2026-10-03T17:56:01.106469+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Marsh",
+      "taxonomy_version": 2,
+      "title": "A Very Scrumpy Holiday Carol",
+      "topics": [
+        "theater",
+        "comedy",
+        "spoken-word"
       ],
       "types": [
         [
@@ -45216,6 +45559,22 @@
       "title": "Goldenvoice Presents The Fatal Flaw Tour Paris Paloma with Susannah Joffe",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents The NDA Tour Trippie Redd": {
+      "classified_at": "2026-10-03T14:57:54.313369+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents The NDA Tour Trippie Redd",
+      "topics": [
+        "hiphop-rnb"
       ],
       "types": [
         [

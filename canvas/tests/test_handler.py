@@ -229,6 +229,40 @@ def test_soft_delete_and_restore(api, canvas):
     assert [e["action"] for e in v["log"][:3]] == ["restored", "removed", "added"]
 
 
+def test_activity_and_removals_say_whether_it_was_you(api, canvas):
+    """The page says "You" for this browser's own changes and the name (or
+    "Someone") for others'; the API returns only a yes/no, never client ids."""
+    friend = Api(client="client-bbbb2222", ip="5.6.7.8")
+    mine = add_event(api, canvas, E1)["json"]["item"]["id"]
+    theirs = add_event(friend, canvas, E2)["json"]["item"]["id"]
+    friend("DELETE", f"/canvases/{canvas}/items/{mine}", {})  # unnamed
+    api("DELETE", f"/canvases/{canvas}/items/{theirs}", {"actor_name": "Adi"})
+
+    r = api("GET", f"/canvases/{canvas}")
+    assert api.client not in r["body"] and friend.client not in r["body"]
+    v = r["json"]
+    removed = {i["id"]: i for i in v["removed"]}
+    assert removed[mine]["removed_by_you"] is False and not removed[mine]["removed_by_name"]
+    assert removed[theirs]["removed_by_you"] is True
+    assert [(e["action"], e["item_id"], e["mine"]) for e in v["log"][:4]] == [
+        ("removed", theirs, True), ("removed", mine, False),
+        ("added", theirs, False), ("added", mine, True)]
+    # The friend sees the same history from their side.
+    fv = view(friend, canvas)
+    assert [e["mine"] for e in fv["log"][:4]] == [False, True, True, False]
+
+    # Restoring clears who removed it.
+    api("POST", f"/canvases/{canvas}/items/{mine}/restore", {})
+    assert [i["id"] for i in view(api, canvas)["removed"]] == [theirs]
+
+
+def test_log_rows_from_before_client_ids_have_no_mine_flag(api, canvas):
+    store.table().put_item(Item={"PK": f"L#{canvas}", "SK": "0000000000001#abc",
+                                 "action": "added", "item_title": "Old", "at": "2026-01-01T00:00:00Z"})
+    old = view(api, canvas)["log"][-1]
+    assert old["item_title"] == "Old" and "mine" not in old
+
+
 def test_removed_items_keep_votes(api, canvas):
     item_id = add_event(api, canvas, E1)["json"]["item"]["id"]
     api("PUT", f"/canvases/{canvas}/items/{item_id}/vote", {"name": "Adi"})
@@ -237,29 +271,82 @@ def test_removed_items_keep_votes(api, canvas):
     assert view(api, canvas)["items"][0]["votes"][0]["name"] == "Adi"
 
 
-# --- winner ---
+# --- the plan ---
 
-def test_winner_set_and_cleared_on_remove(api, canvas):
-    item_id = add_event(api, canvas, E1)["json"]["item"]["id"]
-    r = api("PATCH", f"/canvases/{canvas}", {"winner_item_id": item_id, "actor_name": "Sam"})
-    assert r["json"]["canvas"]["winner_item_id"] == item_id
-    assert view(api, canvas)["log"][0]["action"] == "picked_winner"
-    api("DELETE", f"/canvases/{canvas}/items/{item_id}", {"actor_name": "Sam"})
-    assert view(api, canvas)["canvas"]["winner_item_id"] is None
+def plan_op(api, cid, op, item_id, **kw):
+    return api("POST", f"/canvases/{cid}/plan", {"op": op, "item_id": item_id, "actor_name": "Sam", **kw})
 
 
-def test_winner_must_be_live_item(api, canvas):
-    r = api("PATCH", f"/canvases/{canvas}", {"winner_item_id": "ev_nope", "actor_name": "Sam"})
-    assert r["statusCode"] == 404
-    r = api("PATCH", f"/canvases/{canvas}", {"winner_item_id": "a#b", "actor_name": "Sam"})
-    assert r["statusCode"] == 400
+def test_plan_steps_go_in_time_order_and_can_be_moved(api, canvas):
+    e3 = add_event(api, canvas, E3)["json"]["item"]["id"]
+    e1 = add_event(api, canvas, E1)["json"]["item"]["id"]
+    e2 = add_event(api, canvas, E2)["json"]["item"]["id"]
+    c = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Tacos"}})["json"]["item"]["id"]
+    assert plan_op(api, canvas, "add", e3)["json"]["plan"] == [e3]
+    assert plan_op(api, canvas, "add", e1)["json"]["plan"] == [e1, e3]
+    assert plan_op(api, canvas, "add", c)["json"]["plan"] == [e1, e3, c]  # undated: last
+    assert plan_op(api, canvas, "add", e2)["json"]["plan"] == [e1, e2, e3, c]
+    assert plan_op(api, canvas, "add", e2)["json"]["plan"] == [e1, e2, e3, c]  # no-op
+    assert plan_op(api, canvas, "move", c, to=0)["json"]["plan"] == [c, e1, e2, e3]
+    assert plan_op(api, canvas, "move", e1, to=99)["json"]["plan"] == [c, e2, e3, e1]
+    assert plan_op(api, canvas, "remove", e2)["json"]["plan"] == [c, e3, e1]
+    assert plan_op(api, canvas, "remove", e2)["json"]["plan"] == [c, e3, e1]  # no-op
+    v = view(api, canvas)
+    assert v["canvas"]["plan"] == [c, e3, e1]
+    assert [e["action"] for e in v["log"][:3]] == ["removed_from_plan", "moved_in_plan", "moved_in_plan"]
 
 
-def test_winner_cleared_explicitly(api, canvas):
-    item_id = add_event(api, canvas, E1)["json"]["item"]["id"]
-    api("PATCH", f"/canvases/{canvas}", {"winner_item_id": item_id, "actor_name": "Sam"})
-    r = api("PATCH", f"/canvases/{canvas}", {"winner_item_id": None, "actor_name": "Sam"})
-    assert r["json"]["canvas"]["winner_item_id"] is None
+def test_removing_an_item_takes_it_out_of_the_plan(api, canvas):
+    e1 = add_event(api, canvas, E1)["json"]["item"]["id"]
+    e2 = add_event(api, canvas, E2)["json"]["item"]["id"]
+    plan_op(api, canvas, "add", e1)
+    plan_op(api, canvas, "add", e2)
+    api("DELETE", f"/canvases/{canvas}/items/{e1}", {"actor_name": "Sam"})
+    assert view(api, canvas)["canvas"]["plan"] == [e2]
+    # Restoring brings the item back, not its place in the plan.
+    api("POST", f"/canvases/{canvas}/items/{e1}/restore", {})
+    assert view(api, canvas)["canvas"]["plan"] == [e2]
+
+
+def test_plan_validation(api, canvas):
+    e1 = add_event(api, canvas, E1)["json"]["item"]["id"]
+    assert plan_op(api, canvas, "pick", e1)["statusCode"] == 400
+    assert plan_op(api, canvas, "add", "a#b")["statusCode"] == 400
+    assert plan_op(api, canvas, "add", "ev_nope")["statusCode"] == 404
+    assert plan_op(api, canvas, "move", e1, to=0)["statusCode"] == 404  # not in the plan
+    plan_op(api, canvas, "add", e1)
+    assert plan_op(api, canvas, "move", e1, to=True)["statusCode"] == 400
+    assert plan_op(api, canvas, "move", e1, to="1")["statusCode"] == 400
+    api("DELETE", f"/canvases/{canvas}/items/{e1}", {})
+    assert plan_op(api, canvas, "add", e1)["statusCode"] == 404  # removed
+    assert api("POST", "/canvases/AAAAAAAAAAAAAAAAAAAAAA/plan",
+               {"op": "add", "item_id": e1})["statusCode"] == 404
+
+
+def test_a_one_event_winner_reads_as_a_one_step_plan(api, canvas):
+    e1 = add_event(api, canvas, E1)["json"]["item"]["id"]
+    e2 = add_event(api, canvas, E2)["json"]["item"]["id"]
+    store.table().update_item(Key={"PK": f"C#{canvas}", "SK": "META"},
+                              UpdateExpression="SET winner_item_id = :w",
+                              ExpressionAttributeValues={":w": e1})
+    assert view(api, canvas)["canvas"]["plan"] == [e1]
+    assert plan_op(api, canvas, "add", e2)["json"]["plan"] == [e1, e2]
+    assert "winner_item_id" not in store.get_meta(canvas)
+
+
+def test_concurrent_plan_edits_are_retried_not_lost(api, canvas, monkeypatch):
+    e1 = add_event(api, canvas, E1)["json"]["item"]["id"]
+    e2 = add_event(api, canvas, E2)["json"]["item"]["id"]
+    real, calls = store.set_plan, []
+
+    def racing(*a, **kw):
+        calls.append(1)
+        if len(calls) == 1:  # someone else writes between our read and write
+            real(canvas, [e2], store.get_meta(canvas)["version"], "Jo", "client-jo", "added_to_plan", e2, "x")
+        return real(*a, **kw)
+    monkeypatch.setattr(store, "set_plan", racing)
+    assert plan_op(api, canvas, "add", e1)["json"]["plan"] == [e1, e2]
+    assert len(calls) == 2
 
 
 # --- votes ---
@@ -421,7 +508,8 @@ def test_duplicate_copies_live_items_only(api, canvas):
     api("DELETE", f"/canvases/{canvas}/items/{e2}", {"actor_name": "Adi"})
     api("PUT", f"/canvases/{canvas}/items/{e1}/vote", {"name": "Adi"})
     api("POST", f"/canvases/{canvas}/items/{e1}/comments", {"name": "Adi", "text": "yes"})
-    api("PATCH", f"/canvases/{canvas}", {"winner_item_id": e1, "note": "n", "actor_name": "Adi"})
+    api("PATCH", f"/canvases/{canvas}", {"note": "n", "actor_name": "Adi"})
+    api("POST", f"/canvases/{canvas}/plan", {"op": "add", "item_id": e1})
     sam = Api(client="client-sam-0001", ip="5.6.7.8")
     r = sam("POST", f"/canvases/{canvas}/duplicate", {})
     assert r["statusCode"] == 201
@@ -430,7 +518,7 @@ def test_duplicate_copies_live_items_only(api, canvas):
     assert copy["canvas"]["name"] == "Adi & Sam hangout"
     assert copy["canvas"]["note"] == "n" and copy["canvas"]["date_from"] == "2026-10-10"
     assert copy["canvas"]["yours"] and copy["canvas"]["people"] == 1
-    assert copy["canvas"]["winner_item_id"] is None
+    assert copy["canvas"]["plan"] == []
     titles = sorted(i.get("event", {}).get("title") or i["custom"]["title"] for i in copy["items"])
     assert len(titles) == 2 and "Tacos" in titles
     assert all(i["votes"] == [] and i["comments"] == [] for i in copy["items"])
@@ -495,7 +583,6 @@ def test_claim_is_idempotent_and_creator_noop(api, canvas):
 
 
 def test_claim_cap_and_404(api, canvas, monkeypatch):
-    import store
     monkeypatch.setattr(store, "OWNER_CAP", 1)
     assert Api(client="client-dev-00001")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 200
     assert Api(client="client-dev-00002")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 409
@@ -511,3 +598,43 @@ def test_duplicate_does_not_copy_owners(api, canvas):
     pc("POST", f"/canvases/{canvas}/claim")
     copy = api("POST", f"/canvases/{canvas}/duplicate", {})["json"]["canvas"]["id"]
     assert not view(pc, copy)["canvas"]["yours"]
+
+
+def test_custom_item_category(api, canvas):
+    r = api("POST", f"/canvases/{canvas}/items",
+            {"custom": {"title": "Dinner at Nopa", "category": "food"}})
+    assert r["statusCode"] == 201 and r["json"]["item"]["custom"]["category"] == "food"
+    assert view(api, canvas)["items"][0]["custom"]["category"] == "food"
+    r = api("POST", f"/canvases/{canvas}/items",
+            {"custom": {"title": "Something", "category": "rocket"}})
+    assert r["statusCode"] == 400 and "category" in r["json"]["error"]
+    # Optional: older clients send none.
+    r = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Walk"}})
+    assert r["statusCode"] == 201 and "category" not in r["json"]["item"]["custom"]
+
+
+def test_edit_your_own_item(api, canvas):
+    cid = api("POST", f"/canvases/{canvas}/items", {"custom": {
+        "title": "Dinner", "note": "for 4", "url": "https://nopasf.com", "category": "food"}})["json"]["item"]["id"]
+    r = api("PATCH", f"/canvases/{canvas}/items/{cid}", {"actor_name": "Sam", "custom": {
+        "title": "Dinner at Nopa", "start_time": "2026-10-10T01:30:00Z", "note": "", "url": None}})
+    assert r["statusCode"] == 200, r["json"]
+    c = r["json"]["item"]["custom"]
+    assert c == {"title": "Dinner at Nopa", "start_time": "2026-10-10T01:30:00+00:00", "category": "food"}
+    v = view(api, canvas)
+    assert v["items"][0]["start_time"] == "2026-10-10T01:30:00+00:00"
+    assert v["log"][0]["action"] == "edited" and v["log"][0]["item_title"] == "Dinner at Nopa"
+
+
+def test_edit_validation(api, canvas):
+    cid = api("POST", f"/canvases/{canvas}/items", {"custom": {"title": "Dinner"}})["json"]["item"]["id"]
+    ev = add_event(api, canvas, E1)["json"]["item"]["id"]
+    patch = lambda iid, c: api("PATCH", f"/canvases/{canvas}/items/{iid}", {"custom": c})
+    assert patch(cid, {"title": ""})["statusCode"] == 400  # a title can't be cleared
+    assert patch(cid, {"category": "rocket"})["statusCode"] == 400
+    assert patch(cid, {"url": "javascript:alert(1)"})["statusCode"] == 400
+    assert patch(cid, {})["statusCode"] == 400
+    assert patch(ev, {"title": "Mine now"})["statusCode"] == 400  # Agora events are snapshots
+    assert patch("c_nope", {"title": "x"})["statusCode"] == 404
+    api("DELETE", f"/canvases/{canvas}/items/{cid}", {})
+    assert patch(cid, {"title": "x"})["statusCode"] == 404  # removed

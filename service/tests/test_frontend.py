@@ -363,7 +363,10 @@ def test_weekend_preset(browser, site):
     page.click("#preset-weekend")
     assert "dates=weekend" in page.url
     assert "active" in page.get_attribute("#preset-weekend", "class")
-    assert _rendered(page) > 0
+    # On a Sunday "this weekend" is just the rest of today, and the fixture's
+    # events start tomorrow: nothing to show is then correct.
+    if datetime.now(ZoneInfo(TZ)).weekday() != 6:
+        assert _rendered(page) > 0
     # Friday from 5pm, Saturday, Sunday — and nothing else.
     assert page.evaluate("""[...document.querySelectorAll('.event')].every(e => {
         const d = new Date(e.dataset.start), w = d.getDay();
@@ -371,9 +374,10 @@ def test_weekend_preset(browser, site):
     })""")
     page.click("#preset-weekend")
     assert "dates=" not in page.url
-    # Survives a reload as the symbolic preset.
-    page = _open(browser, site, DESKTOP, query="?dates=weekend")
-    assert "active" in page.get_attribute("#preset-weekend", "class")
+    # Survives a reload as the symbolic preset (waiting for the preset, not
+    # for events: there may be none, see above).
+    page.goto(site + "?dates=weekend")
+    page.wait_for_selector("#preset-weekend.active", timeout=15000)
     assert "This weekend" in page.inner_text("#active-filters")
 
 
@@ -920,6 +924,8 @@ def test_map_and_neighborhoods_are_beta_only(browser, map_site):
 
 def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
     page = _map_page(browser, map_site, query="?hood=mission")
+    # The address bar keeps beta=1, so a link copied from it works too.
+    assert "beta=1" in page.url
     page.context.grant_permissions(["clipboard-read", "clipboard-write"])
     page.click("#copy-link")
     link = page.evaluate("navigator.clipboard.readText()")
@@ -928,3 +934,16 @@ def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
     page.context.grant_permissions(["clipboard-read", "clipboard-write"])
     page.click("#copy-link")
     assert page.evaluate("navigator.clipboard.readText()") == map_site + "?type=talk"
+
+
+def test_day_strip_shows_the_month_on_every_day(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    btns = page.locator("#day-strip .day-btn")
+    keys = [btns.nth(i).get_attribute("data-day") for i in range(btns.count())]
+    mons = page.locator("#day-strip .day-btn .mon").all_inner_texts()
+    assert len(mons) == len(keys) and all(m.strip() for m in mons)
+    # The first day of each new month (after the strip's first) is marked.
+    changes = [k for prev, k in zip(keys, keys[1:]) if prev[:7] != k[:7]]
+    marked = [btns.nth(i).get_attribute("data-day") for i in range(btns.count())
+              if "new-month" in btns.nth(i).get_attribute("class")]
+    assert marked == changes

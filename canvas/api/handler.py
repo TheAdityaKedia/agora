@@ -26,6 +26,8 @@ import store
 MAX_BODY_BYTES = 16 * 1024
 LIMITS = {"canvas_name": 80, "note": 1000, "name": 40, "comment": 500,
           "custom_title": 120, "custom_note": 500, "url": 500}
+# What one of your own items is; the page shows an icon for it.
+CUSTOM_CATEGORIES = {"food", "drinks", "outdoors", "travel", "other"}
 # (kind, max requests, window seconds) per salted IP hash.
 CREATE_LIMIT = ("create", 10, 3600)
 WRITE_LIMIT = ("write", 120, 600)
@@ -158,8 +160,8 @@ def _item_start(row):
 
 def _canvas_out(meta, client=""):
     out = {k: meta.get(k) for k in ("id", "name", "note", "date_from", "date_to",
-                                    "winner_item_id", "created_at", "updated_at",
-                                    "created_by_name")}
+                                    "created_at", "updated_at", "created_by_name")}
+    out["plan"] = store.plan_of(meta)
     out["version"] = int(meta["version"])
     # Whether this browser made it or claimed it ("This is mine" on another
     # device). Never returns the ids themselves.
@@ -173,18 +175,27 @@ def _owners(meta):
     return {meta.get("created_by_client")} | set(meta.get("owner_clients") or ())
 
 
-def _item_out(row):
+def _item_out(row, client=""):
     out = {"id": row["id"], "kind": row["kind"], "added_by_name": row.get("added_by_name"),
            "added_at": row.get("added_at"), "start_time": _item_start(row)}
     if row["kind"] == "event":
         out["event"] = row["event"]
     else:
-        out["custom"] = {k: row.get(k) for k in ("title", "url", "start_time", "note")
+        out["custom"] = {k: row.get(k) for k in ("title", "url", "start_time", "note", "category")
                          if row.get(k)}
     if "removed_at" in row:
         out["removed_at"] = row["removed_at"]
         out["removed_by_name"] = row.get("removed_by_name")
+        out["removed_by_you"] = _by(row.get("removed_by_client"), client)
     return out
+
+
+def _by(actor_client, client):
+    """Whether this browser made a change: True/False, or None for rows from
+    before client ids were recorded (the page then falls back to a guess)."""
+    if not actor_client:
+        return None
+    return bool(client) and actor_client == client
 
 
 def _view(cid, client):
@@ -214,7 +225,7 @@ def _view(cid, client):
                                   "at": r["at"], "mine": r.get("client_id") == client})
     live, removed = [], []
     for r in items:
-        out = _item_out(r)
+        out = _item_out(r, client)
         if "removed_at" in r:
             removed.append(out)
             continue
@@ -227,10 +238,13 @@ def _view(cid, client):
     removed.sort(key=lambda i: i["removed_at"], reverse=True)
     log_out = [{k: e.get(k) for k in ("actor_name", "action", "item_id", "item_title",
                                       "fields", "name", "at") if e.get(k) is not None}
+               | ({"mine": _by(e.get("client_id"), client)} if e.get("client_id") else {})
                for e in log]
     people.discard(None)
     people = {"owner" if p in owners else p for p in people}
     canvas = _canvas_out(meta, client)
+    live_ids = {i["id"] for i in live}
+    canvas["plan"] = [x for x in canvas["plan"] if x in live_ids]
     canvas["people"] = len(people)
     return {"canvas": canvas, "items": live, "removed": removed, "log": log_out}
 
@@ -303,11 +317,11 @@ def get_canvas(req, cid):
 
 
 def patch_canvas(req, cid):
-    _require_client(req)
+    client = _require_client(req)
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
-    fields, winner_title = {}, None
+    fields = {}
     if "name" in b:
         fields["name"] = _clean(b["name"], "name", LIMITS["canvas_name"])
     if "note" in b:
@@ -320,19 +334,12 @@ def patch_canvas(req, cid):
     if "date_from" in fields or "date_to" in fields:
         _check_dates(fields.get("date_from", meta.get("date_from")),
                      fields.get("date_to", meta.get("date_to")))
-    if "winner_item_id" in b:
-        wid = b["winner_item_id"]
-        if wid is not None and not (isinstance(wid, str) and ITEM_ID_RE.fullmatch(wid)):
-            raise ApiError(400, "winner_item_id must be an item id or null")
-        if wid:
-            winner_title = _item_title(_item_or_404(cid, wid))
-        fields["winner_item_id"] = wid
     if not fields:
         raise ApiError(400, "nothing to update")
     try:
-        store.update_canvas(cid, fields, actor, winner_title)
-    except store.NotFound as e:
-        raise ApiError(404, f"{e} not found") from None
+        store.update_canvas(cid, fields, actor, client)
+    except store.NotFound:
+        raise ApiError(404, "canvas not found") from None
     return 200, {"canvas": _canvas_out(_meta_or_404(cid), req["client"])}
 
 
@@ -358,17 +365,9 @@ def add_item(req, cid):
         body = {"kind": "event", "event": snapshot.snapshot_of(ev)}
         title = ev.get("title")
     else:
-        c = b["custom"]
-        if not isinstance(c, dict):
-            raise ApiError(400, "custom must be an object")
-        title = _clean(c.get("title"), "custom.title", LIMITS["custom_title"])
-        body = {"kind": "custom", "title": title}
-        for k, v in (("url", _url(c.get("url"), "custom.url")),
-                     ("start_time", _datetime(c.get("start_time"), "custom.start_time")),
-                     ("note", _clean(c.get("note"), "custom.note", LIMITS["custom_note"],
-                                     required=False, multiline=True))):
-            if v:
-                body[k] = v
+        sets, _ = _custom_fields(b["custom"])
+        title = sets["title"]
+        body = {"kind": "custom", **sets}
         item_id = "c_" + secrets.token_urlsafe(6)
     try:
         row, created = store.add_item(cid, item_id, body, actor, client, title)
@@ -381,24 +380,155 @@ def add_item(req, cid):
     return (201 if created else 200), {"item": _item_out(row), "created": created}
 
 
+CUSTOM_KEYS = ("title", "url", "start_time", "note", "category")
+
+
+def _custom_fields(c, *, partial=False):
+    """Validate one of your own items' fields -> (values to set, keys to clear).
+    New items need a title; an edit (partial) changes only the keys it sends,
+    and an empty or null value clears that key (the title can't be cleared)."""
+    if not isinstance(c, dict):
+        raise ApiError(400, "custom must be an object")
+    sets, removes = {}, []
+    for k in CUSTOM_KEYS:
+        if partial and k not in c:
+            continue
+        raw = c.get(k)
+        if k == "title":
+            v = _clean(raw, "custom.title", LIMITS["custom_title"])
+        elif k == "url":
+            v = _url(raw, "custom.url")
+        elif k == "start_time":
+            v = _datetime(raw, "custom.start_time")
+        elif k == "note":
+            v = _clean(raw, "custom.note", LIMITS["custom_note"], required=False, multiline=True)
+        else:
+            if raw not in (None, "") and raw not in CUSTOM_CATEGORIES:
+                raise ApiError(400, "custom.category must be one of " + ", ".join(sorted(CUSTOM_CATEGORIES)))
+            v = raw
+        if v:
+            sets[k] = v
+        elif partial:
+            removes.append(k)
+    if partial and not (sets or removes):
+        raise ApiError(400, "nothing to update")
+    return sets, removes
+
+
+def edit_item(req, cid, iid):
+    """Change one of your own items (not an Agora event: those are snapshots)."""
+    client = _require_client(req)
+    b = req["body"]
+    _rate_limit(req, WRITE_LIMIT)
+    actor = _actor(b)
+    sets, removes = _custom_fields(b.get("custom"), partial=True)
+    row = _item_or_404(cid, iid)
+    if row["kind"] != "custom":
+        raise ApiError(400, "only your own items can be edited")
+    try:
+        store.edit_item(cid, iid, sets, removes, actor, client, sets.get("title") or _item_title(row))
+    except store.NotFound as e:
+        raise ApiError(404, f"{e} not found") from None
+    return 200, {"item": _item_out(_item_or_404(cid, iid))}
+
+
 def remove_item(req, cid, iid):
-    _require_client(req)
+    client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
-    meta = _meta_or_404(cid)
     row = _item_or_404(cid, iid, live=False)
-    store.remove_item(cid, iid, actor, _item_title(row),
-                      clear_winner=meta.get("winner_item_id") == iid)
+
+    def attempt():
+        meta = _meta_or_404(cid)
+        plan = store.plan_of(meta)
+        store.remove_item(cid, iid, actor, client, _item_title(row),
+                          plan_after=[x for x in plan if x != iid] if iid in plan else None,
+                          expected_version=meta["version"])
+    _retry_conflicts(attempt)
     return 200, {"ok": True}
 
 
+def _retry_conflicts(fn, tries=3):
+    """Run a read-modify-write that raises store.Conflict when the canvas
+    changed between the read and the write; re-read and retry a few times."""
+    for i in range(tries):
+        try:
+            return fn()
+        except store.Conflict:
+            if i == tries - 1:
+                raise ApiError(409, "conflicting edit, try again") from None
+        except store.NotFound as e:
+            raise ApiError(404, f"{e} not found") from None
+
+
+def _plan_insert(plan, iid, rows):
+    """Where a newly added step goes: before the first step that starts later,
+    so a dated plan stays in time order; undated steps go last. People can
+    move steps afterwards."""
+    start = _item_start(rows[iid])
+    if start:
+        for i, pid in enumerate(plan):
+            s = _item_start(rows[pid]) if pid in rows else None
+            if s and s > start:
+                return plan[:i] + [iid] + plan[i:]
+    return plan + [iid]
+
+
+def post_plan(req, cid):
+    """{op: add|remove|move, item_id, to?}: change the plan one step at a time,
+    so two people editing it at once don't overwrite each other."""
+    client = _require_client(req)
+    b = req["body"]
+    _rate_limit(req, WRITE_LIMIT)
+    actor = _actor(b)
+    op, iid = b.get("op"), b.get("item_id")
+    if op not in ("add", "remove", "move"):
+        raise ApiError(400, "op must be add, remove or move")
+    if not (isinstance(iid, str) and ITEM_ID_RE.fullmatch(iid)):
+        raise ApiError(400, "item_id is malformed")
+    to = b.get("to")
+    if op == "move" and not (isinstance(to, int) and not isinstance(to, bool)):
+        raise ApiError(400, "to must be a position (0 is first)")
+
+    def attempt():
+        loaded = store.load_canvas(cid)
+        if loaded is None:
+            raise ApiError(404, "canvas not found")
+        meta, rows, _ = loaded
+        items = {r["id"]: r for r in rows if r["SK"].startswith("ITEM#") and "removed_at" not in r}
+        plan = [x for x in store.plan_of(meta) if x in items]
+        if op == "add":
+            if iid not in items:
+                raise ApiError(404, "item not found")
+            if iid in plan:
+                return plan
+            if len(plan) >= store.PLAN_CAP:
+                raise ApiError(409, f"a plan has at most {store.PLAN_CAP} steps")
+            new, action = _plan_insert(plan, iid, items), "added_to_plan"
+        elif iid not in plan:
+            if op == "remove":
+                return plan
+            raise ApiError(404, "item is not in the plan")
+        elif op == "remove":
+            new, action = [x for x in plan if x != iid], "removed_from_plan"
+        else:
+            new = [x for x in plan if x != iid]
+            new.insert(max(0, min(to, len(new))), iid)
+            if new == plan:
+                return plan
+            action = "moved_in_plan"
+        store.set_plan(cid, new, meta["version"], actor, client, action, iid, _item_title(items[iid]))
+        return new
+    return 200, {"plan": _retry_conflicts(attempt)}
+
+
 def restore_item(req, cid, iid):
-    _require_client(req)
+    client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
     row = _item_or_404(cid, iid, live=False)
     try:
-        store.restore_item(cid, iid, actor, _item_title(row))
+        store.restore_item(cid, iid, actor, client, _item_title(row))
     except store.NotFound:
         raise ApiError(404, "canvas not found") from None
     except store.CapReached as e:
@@ -445,12 +575,12 @@ def add_comment(req, cid, iid):
 
 
 def delete_comment(req, cid, iid, cmid):
-    _require_client(req)
+    client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
     row = _item_or_404(cid, iid, live=False)
     try:
-        store.delete_comment(cid, iid, cmid, actor, _item_title(row))
+        store.delete_comment(cid, iid, cmid, actor, client, _item_title(row))
     except store.NotFound as e:
         raise ApiError(404, f"{e} not found") from None
     return 200, {"ok": True}
@@ -460,9 +590,10 @@ ROUTES = [
     (re.compile(r"^/canvases$"), {"POST": create_canvas}),
     (re.compile(rf"^/canvases/{CID}$"), {"GET": get_canvas, "PATCH": patch_canvas}),
     (re.compile(rf"^/canvases/{CID}/duplicate$"), {"POST": duplicate_canvas}),
+    (re.compile(rf"^/canvases/{CID}/plan$"), {"POST": post_plan}),
     (re.compile(rf"^/canvases/{CID}/claim$"), {"POST": claim_canvas, "DELETE": claim_canvas}),
     (re.compile(rf"^/canvases/{CID}/items$"), {"POST": add_item}),
-    (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"DELETE": remove_item}),
+    (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"PATCH": edit_item, "DELETE": remove_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/restore$"), {"POST": restore_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/vote$"), {"PUT": put_vote, "DELETE": delete_vote}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/comments$"), {"POST": add_comment}),

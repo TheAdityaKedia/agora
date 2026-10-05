@@ -56,6 +56,10 @@
     font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 0.9;
     text-decoration: none;
   }
+  .brand-line { display: flex; align-items: baseline; gap: 8px; }
+  .byline { color: var(--muted); font-size: 14px; }
+  .byline a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .byline a:hover { color: var(--accent); }
   .masthead nav a { color: var(--muted); font-size: 14px; }
   .masthead nav a:hover { color: var(--accent); }
 
@@ -94,18 +98,51 @@
   .btn:hover { border-color: var(--accent); }
   .btn.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; }
 
-  /* --- The pick ("we're going to this one") --- */
-  .winner {
+  /* --- The plan: the steps the group settled on, in the order they'll do them --- */
+  .plan {
     margin: 18px 0 4px; padding: 14px; border-radius: 12px;
     border: 2px solid var(--accent); background: var(--input-bg);
   }
-  .winner-label {
+  .plan-label {
     font-family: var(--font-display); font-weight: 800; font-size: 18px;
     letter-spacing: 0.03em; color: var(--accent); text-transform: uppercase;
   }
-  .winner-title { font-size: 18px; font-weight: 600; margin-top: 2px; overflow-wrap: anywhere; }
-  .winner-when { color: var(--muted); font-size: 14px; }
-  .winner-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; align-items: center; }
+  .plan-day { color: var(--muted); font-size: 14px; }
+  .plan ol { list-style: none; margin: 6px 0 0; padding: 0; counter-reset: step; }
+  .step {
+    display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; column-gap: 10px;
+    padding: 10px 0; border-top: 1px solid var(--border); counter-increment: step;
+    position: relative; background: var(--input-bg);
+    /* Press and hold to move: no text selection or link menu on the hold. */
+    user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  }
+  .step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .plan.dragging .step { transition: transform 0.15s ease; }
+  .plan .step.lifted {
+    z-index: 2; transition: box-shadow 0.15s ease; border-radius: 10px; border-top-color: transparent;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 0.22);
+  }
+  .plan .step.settling { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .step-grip {
+    align-self: center; padding: 6px 2px 6px 8px; cursor: grab;
+    color: var(--muted); font-size: 18px; letter-spacing: -3px; line-height: 1;
+  }
+  .plan-hint { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .step:first-child { border-top: 0; }
+  .step::before {
+    content: counter(step); width: 24px; height: 24px; margin-top: 1px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 13px; font-weight: 700;
+    background: var(--accent); color: var(--accent-fg);
+  }
+  .step-body { min-width: 0; }
+  .step-when { font-family: var(--font-display); font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .step-title { font-weight: 600; overflow-wrap: anywhere; }
+  .step-title a { text-decoration: none; }
+  .step-title a:hover { color: var(--accent); text-decoration: underline; }
+  .step-where { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+  .step-links { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-top: 2px; font-size: 13px; }
+  .plan-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; align-items: center; }
 
   /* --- Items --- */
   .section-h {
@@ -118,11 +155,23 @@
     padding: 14px 0; border-bottom: 1px solid var(--border);
   }
   .item.past { opacity: 0.6; }
+  /* Your own items (not Agora events): a tinted card with a dashed edge, an
+     icon for what it is, and who added it. */
+  .item.custom {
+    margin: 10px 0; padding: 12px; border-radius: 10px;
+    border: 1.5px dashed color-mix(in srgb, var(--accent) 45%, var(--border));
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+  .item.custom .badge.own { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--fg); }
+  .thumb.kind {
+    display: grid; place-items: center; font-size: 30px; line-height: 1;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+  }
   .item .main { min-width: 0; overflow-wrap: anywhere; }
   .when { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1.1; }
   .when .badge {
     font-family: var(--font-body); font-size: 12px; font-weight: 600; vertical-align: middle;
-    margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+    margin-left: 6px; padding: 1px 7px; border-radius: 999px; display: inline-block; white-space: nowrap;
     background: var(--chip-bg); color: var(--muted);
   }
   .it-title { font-size: 17px; line-height: 1.3; margin-top: 4px; font-weight: 600; }
@@ -130,7 +179,7 @@
   .it-title a:hover { color: var(--accent); text-decoration: underline; }
   .it-where, .it-meta { font-size: 14px; color: var(--muted); margin-top: 2px; }
   .it-note { font-size: 14px; margin-top: 4px; white-space: pre-wrap; }
-  .thumb { width: 64px; height: 64px; border-radius: 6px; overflow: hidden; background: var(--chip-bg); }
+  .thumb { display: block; width: 64px; height: 64px; border-radius: 6px; overflow: hidden; background: var(--chip-bg); }
   .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .votes { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 10px; }
@@ -196,7 +245,7 @@
 </head>
 <body>
 <header class="masthead">
-  <a class="brand" href="./">Agora</a>
+  <div class="brand-line"><a class="brand" href="./" title="Agora home: all events, no filters">Agora</a><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
   <nav><a href="./canvas.html">Your collections</a></nav>
 </header>
 <main id="app"><p class="loading">Loading…</p></main>
@@ -215,6 +264,13 @@
       + "<p>If someone sent you a collection, ask them for the link again: it starts with …/agora/beta/.</p>"
       + '<a class="btn primary" href="./">Browse events on Agora</a></section>';
     return;
+  }
+  // A beta browser keeps ?beta=1 in the address bar, so a link copied from
+  // it (not only one from Share) lets a friend in too. Harmless after launch.
+  if (AC.BETA_GATE && new URLSearchParams(location.search).get("beta") !== "1") {
+    const u = new URL(location.href);
+    u.searchParams.set("beta", "1");
+    history.replaceState(history.state, "", u);
   }
 
   const esc = (s) => s == null ? "" : String(s).replace(/[&<>"']/g, c =>
@@ -251,6 +307,7 @@
   // The name on a write. "" is fine: curating never asks who you are.
   const me = () => AC.currentName();
   let view = null;               // last full GET response
+  let drag = null, press = null, pressTimer = 0, suppressClickUntil = 0;  // plan reordering (below)
   let pendingRender = false;     // a poll arrived while someone was typing
   const openComments = new Set();  // item ids with their comment thread open
   let lastInteraction = Date.now();
@@ -280,18 +337,20 @@
   function render() {
     const typing = document.activeElement && app.contains(document.activeElement)
       && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
-    if (typing) { pendingRender = true; return; }
+    if (typing || drag) { pendingRender = true; return; }
     pendingRender = false;
     const scroll = window.scrollY;
+    const focusedStep = document.activeElement && document.activeElement.matches(".step") && document.activeElement.dataset.id;
     app.innerHTML = canvasHtml(view);
     window.scrollTo(0, scroll);
+    if (focusedStep) app.querySelector('.step[data-id="' + CSS.escape(focusedStep) + '"]')?.focus({preventScroll: true});
   }
   app.addEventListener("focusout", () => setTimeout(() => { if (pendingRender) render(); }, 0));
 
   function canvasHtml(v) {
     const c = v.canvas;
     const dates = datesText(c);
-    const winner = c.winner_item_id ? v.items.find(i => i.id === c.winner_item_id) : null;
+    const plan = (c.plan || []).map(id => v.items.find(i => i.id === id)).filter(Boolean);
     const name = AC.currentName();
     const social = isSocial(c);
     const isDefault = AC.defaultCanvasId() === c.id;
@@ -307,18 +366,11 @@
       + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
       + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
       + "</div>"
-      + (social && winner ? winnerHtml(winner) : "")
+      + (plan.length ? planHtml(plan) : "")
       + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
-      + (v.removed.length ? '<details class="fold"><summary>Removed (' + v.removed.length + ")</summary><ul>"
-        + v.removed.map(r => "<li>" + esc(titleOf(r)) + ' <span class="t">removed'
-          + (social && r.removed_by_name ? " by " + esc(r.removed_by_name) : "")
-          + " " + esc(ago(r.removed_at)) + '</span> <button type="button" class="linkish" data-act="restore" data-id="'
-          + esc(r.id) + '">Restore</button></li>').join("") + "</ul></details>" : "")
-      + (v.log.length ? '<details class="fold"><summary>Activity</summary><ul>'
-        + v.log.map(e => "<li>" + esc(logText(e)) + ' <span class="t">' + esc(ago(e.at)) + "</span></li>").join("")
-        + "</ul></details>" : "")
+      + activityHtml(v)
       // Ownership and default: "This is mine" counts this browser as one of
       // the owner's devices (for a collection started on another phone or
       // computer); the default is where ☆ Save adds events, per browser.
@@ -342,6 +394,10 @@
 
   const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
   const startOf = (it) => it.start_time ? new Date(it.start_time) : null;
+  // What one of your own items is (custom.category; API: CUSTOM_CATEGORIES).
+  const KINDS = {food: ["🍽️", "Food"], drinks: ["🍸", "Drinks"], outdoors: ["🌳", "Outdoors"],
+                 travel: ["🚗", "Getting there"], other: ["📌", "Other"]};
+  const kindOf = (it) => KINDS[it.custom && it.custom.category] || KINDS.other;
   const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
 
   function itemHtml(it) {
@@ -357,26 +413,33 @@
       where = bits.length ? '<div class="it-where">' + esc(bits.join(" · ")) + "</div>" : "";
     }
     const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
-    const img = it.event && safeUrl(it.event.image_url)
-      ? '<div class="thumb"><img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()"></div>' : "";
+    const own = !it.event;
+    const img = own ? '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>"
+      : it.event && safeUrl(it.event.image_url)
+      ? (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
+        + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
+        + (url ? "</a>" : "</div>") : "";
     const voters = it.votes.map(v => v.name);
     const social = isSocial(view.canvas);
     const cmtOpen = social && openComments.has(it.id);
-    const isWinner = social && view.canvas.winner_item_id === it.id;
-    return '<article class="item' + (past ? " past" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
+    const inPlan = (view.canvas.plan || []).includes(it.id);
+    // Your own items say so: "Added by Sam" once others are involved, else "Your own".
+    const ownBadge = own ? '<span class="badge own">' + (social ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
+    return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
       + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
-      + (past ? '<span class="badge">Past</span>' : "") + (isWinner ? '<span class="badge">The plan</span>' : "") + "</div>"
+      + ownBadge + (past ? '<span class="badge">Past</span>' : "") + (inPlan ? '<span class="badge">In the plan</span>' : "") + "</div>"
       + '<div class="it-title">' + title + "</div>" + where + note
-      + (social && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
+      + (social && !own && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
       + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
-      + '" aria-label="' + (it.you_voted ? "You’re in. Tap to undo" : "I’m in") + '">👍 <span>' + (it.you_voted ? "You’re in" : "I’m in")
+      + '" aria-label="' + (it.you_voted ? "You’re interested. Tap to undo" : "Interested") + '">👍 <span>Interested'
       + '</span><span class="n">' + voters.length + "</span></button>"
       + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
       + '<div class="it-foot">'
       + (social ? '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
-        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
-        + (isWinner ? '<button type="button" class="linkish" data-act="unpick">Unpick</button>'
-          : '<button type="button" class="linkish" data-act="pick">Make this the plan</button>') : "")
+        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>" : "")
+      + (inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
+        : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>')
+      + (own ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
       + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
       + (cmtOpen ? commentsHtml(it) : "")
       + "</div>" + img + "</article>";
@@ -392,32 +455,92 @@
       + '<button type="submit" class="btn">Post</button></form></div>';
   }
 
-  function winnerHtml(it) {
-    const start = startOf(it);
-    return '<section class="winner" aria-label="The plan"><div class="winner-label">The plan</div>'
-      + '<div class="winner-title">' + esc(titleOf(it)) + "</div>"
-      + '<div class="winner-when">' + esc([start ? whenFmt.format(start) : "", it.event && it.event.location].filter(Boolean).join(" · ")) + "</div>"
-      + '<div class="winner-actions">'
-      + (start ? '<a class="btn primary" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Add to Google Calendar</a>'
-        + '<button type="button" class="linkish" data-act="ics" data-id="' + esc(it.id) + '">Apple or Outlook (.ics)</button>' : "")
-      + (linkOf(it) ? '<a class="linkish" target="_blank" rel="noopener nofollow ugc" href="' + esc(linkOf(it)) + '">Details and tickets</a>' : "")
-      + "</div></section>";
+  // The plan: numbered steps in the group's order (↑/↓ to change it). When
+  // every dated step is on one day, the day is said once and steps show times.
+  const timeFmt = new Intl.DateTimeFormat(undefined, {hour: "numeric", minute: "2-digit"});
+  function planHtml(steps) {
+    const days = new Set(steps.map(startOf).filter(Boolean).map(d => dayFmt.format(d)));
+    const oneDay = days.size === 1 ? [...days][0] : null;
+    return '<section class="plan" aria-label="The plan"><div class="plan-label">The plan</div>'
+      + (oneDay ? '<div class="plan-day">' + esc(oneDay) + "</div>" : "")
+      + (steps.length > 1 ? '<div class="plan-hint">Press and hold a step, then drag it into place.'
+        + '<span class="sr-only"> With a keyboard: focus a step and press Alt with the up or down arrow.</span></div>' : "")
+      + "<ol>" + steps.map((it, i) => stepHtml(it, i, steps.length, oneDay)).join("") + "</ol>"
+      + (steps.some(startOf) ? '<div class="plan-actions"><button type="button" class="btn primary" data-act="ics">'
+        + "Add the plan to your calendar</button></div>" : "")
+      + "</section>";
   }
 
-  function logText(e) {
-    // Unnamed writes (made before a name was set): on your own collection
-    // they're almost certainly yours; to anyone else, "Someone".
-    const a = e.actor_name || (view.canvas.yours ? "You" : "Someone");
-    const t = e.item_title ? "“" + e.item_title + "”" : "an item";
+  function stepHtml(it, i, n, oneDay) {
+    const start = startOf(it), url = linkOf(it);
+    const when = start ? (oneDay ? timeFmt : whenFmt).format(start) : "Any time";
+    const title = (it.event ? "" : kindOf(it)[0] + " ") + (url
+      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
+      : esc(titleOf(it)));
+    return '<li class="step" tabindex="0" data-id="' + esc(it.id) + '"><div class="step-body">'
+      + '<div class="step-when">' + esc(when) + "</div>"
+      + '<div class="step-title">' + title + "</div>"
+      + (it.event && it.event.location ? '<div class="step-where">' + esc(it.event.location) + "</div>" : "")
+      + '<div class="step-links">'
+      + (start ? '<a class="linkish" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Google Calendar</a>' : "")
+      + '<button type="button" class="linkish" data-act="plan-remove">Take out</button></div></div>'
+      + '<span class="step-grip" aria-hidden="true">⋮⋮</span></li>';
+  }
+
+
+  // Activity, newest first. Removals live here too: the latest removal of
+  // an item that's still removed carries its Restore button. Removals older
+  // than the log the API returns (its last 50 entries) are added from the
+  // removed items, so every removed item stays restorable.
+  function activityHtml(v) {
+    const byId = new Map(v.items.concat(v.removed).map(i => [i.id, i]));
+    const entries = v.log.slice();
+    const logged = new Set(entries.filter(e => e.action === "removed").map(e => e.item_id));
+    for (const r of v.removed) {
+      if (!logged.has(r.id)) entries.push({action: "removed", item_id: r.id, item_title: titleOf(r),
+        actor_name: r.removed_by_name, mine: r.removed_by_you, at: r.removed_at});
+    }
+    if (!entries.length) return "";
+    entries.sort((a, b) => new Date(b.at) - new Date(a.at));
+    const restorable = new Set(v.removed.map(r => r.id));
+    return '<details class="fold"><summary>Activity'
+      + (v.removed.length ? " · " + v.removed.length + " removed" : "") + "</summary><ul>"
+      + entries.map(e => {
+        const restore = e.action === "removed" && restorable.delete(e.item_id);
+        return "<li>" + esc(logText(e, byId.get(e.item_id))) + ' <span class="t">' + esc(ago(e.at)) + "</span>"
+          + (restore ? ' <button type="button" class="linkish" data-act="restore" data-id="' + esc(e.item_id) + '">Restore</button>' : "")
+          + "</li>";
+      }).join("") + "</ul></details>";
+  }
+
+  function actorOf(e) {
+    if (e.mine) return "You";
+    if (e.actor_name) return e.actor_name;
+    if (e.mine === false) return "Someone";
+    // Entries from before the API recorded who made them: unnamed ones on
+    // your own collection are almost certainly yours.
+    return view.canvas.yours ? "You" : "Someone";
+  }
+
+  function logText(e, item) {
+    const a = actorOf(e);
+    // The date tells apart showings with the same title (and what was removed).
+    const start = item && startOf(item);
+    const t = (e.item_title || (item && titleOf(item)) ? "“" + (e.item_title || titleOf(item)) + "”" : "an item")
+      + (start ? " (" + whenFmt.format(start) + ")" : "");
     switch (e.action) {
       case "created": return a + " started this collection";
       case "duplicated": return a + " made this as a copy of “" + (e.name || "a collection") + "”";
       case "added": return a + " added " + t;
       case "removed": return a + " removed " + t;
       case "restored": return a + " restored " + t;
-      case "voted": return a + " is in for " + t;
+      case "voted": return a + " is interested in " + t;
       case "commented": return a + " commented on " + t;
+      case "edited": return a + " edited " + t;
       case "deleted_comment": return a + " deleted a comment on " + t;
+      case "added_to_plan": return a + " added " + t + " to the plan";
+      case "removed_from_plan": return a + " took " + t + " out of the plan";
+      case "moved_in_plan": return a + " moved " + t + " in the plan";
       case "picked_winner": return a + " made " + t + " the plan";
       case "cleared_winner": return a + " cleared the plan";
       case "renamed": return a + " renamed the collection" + (e.name ? " to “" + e.name + "”" : "");
@@ -440,20 +563,25 @@
     if (it.event && it.event.location) p.set("location", it.event.location);
     return "https://calendar.google.com/calendar/render?" + p;
   }
-  function downloadIcs(it) {
+  // One .ics with every dated step of the plan (Apple, Outlook, Google import).
+  function downloadIcs(items) {
     const x = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&").replace(/\r?\n/g, "\\n");
-    const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
-    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Canvas//EN", "BEGIN:VEVENT",
-      "UID:" + cid + "-" + it.id + "@agora", "DTSTAMP:" + calStamp(new Date()),
-      "DTSTART:" + calStamp(s), "DTEND:" + calStamp(e), "SUMMARY:" + x(titleOf(it))];
-    if (it.event && it.event.location) lines.push("LOCATION:" + x(it.event.location));
-    lines.push("DESCRIPTION:" + x(calNotes(it)), "END:VEVENT", "END:VCALENDAR");
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Canvas//EN"];
+    for (const it of items.filter(startOf)) {
+      const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
+      lines.push("BEGIN:VEVENT", "UID:" + cid + "-" + it.id + "@agora", "DTSTAMP:" + calStamp(new Date()),
+        "DTSTART:" + calStamp(s), "DTEND:" + calStamp(e), "SUMMARY:" + x(titleOf(it)));
+      if (it.event && it.event.location) lines.push("LOCATION:" + x(it.event.location));
+      lines.push("DESCRIPTION:" + x(calNotes(it)), "END:VEVENT");
+    }
+    lines.push("END:VCALENDAR");
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([lines.join("\r\n") + "\r\n"], {type: "text/calendar;charset=utf-8"}));
-    a.download = (titleOf(it).replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60) || "plan") + ".ics";
+    a.download = (view.canvas.name.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").slice(0, 60) || "plan") + ".ics";
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
   }
+
 
   // --- actions ---
   const P = (sub) => "/canvases/" + encodeURIComponent(cid) + (sub || "");
@@ -474,6 +602,166 @@
   async function refresh() {
     try { apply(await AC.api("GET", P())); } catch {}
   }
+  // Removing is one tap (with Undo) unless it would take away other
+  // people's input or the plan: then say what goes with it and ask first.
+  const listFmt = new Intl.ListFormat(undefined, {type: "conjunction"});
+  async function confirmRemove(it) {
+    const isPlan = (view.canvas.plan || []).includes(it.id);
+    const voters = (it.votes || []).filter(v => !v.mine).map(v => v.name);
+    const nComments = (it.comments || []).filter(c => !c.mine).length;
+    if (!isPlan && !voters.length && !nComments) return true;
+    const lines = [];
+    if (isPlan) lines.push("It’s in the plan. Removing it takes it out of the plan for everyone.");
+    if (voters.length) lines.push(listFmt.format(voters) + (voters.length === 1 ? " is" : " are") + " interested.");
+    if (nComments) lines.push("It has " + nComments + (nComments === 1 ? " comment" : " comments") + " from others.");
+    return await AC.choiceDialog({
+      title: "Remove “" + titleOf(it) + "”?",
+      text: lines.join(" "),
+      options: [{value: "remove", label: "Remove it"}],
+      cancel: "Keep it"}) === "remove";
+  }
+
+  // "Add your own" / "Edit": one of your own items (not an Agora event).
+  // Resolves to the custom fields to send, or null if dismissed. An edit
+  // sends every field, so emptying one clears it.
+  const localInput = (iso) => {
+    if (!iso) return "";
+    const d = new Date(iso), p = (n) => String(n).padStart(2, "0");
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes());
+  };
+  async function customDialog(it) {
+    const c = (it && it.custom) || {};
+    const out = await AC.formDialog({title: it ? "Edit" : "Add your own",
+      text: it ? "" : "Anything that isn’t on Agora: dinner, a park, a friend’s show.",
+      fields: [
+        {name: "category", label: "Kind", type: "chips", value: it ? (c.category || "other") : "food",
+         options: Object.entries(KINDS).map(([value, [icon, label]]) => ({value, label: icon + " " + label}))},
+        {name: "title", label: "What", required: true, max: 120, placeholder: "Dinner at Nopa", value: c.title},
+        {name: "start", label: "When (optional)", type: "datetime-local", value: localInput(c.start_time)},
+        // Text, not type=url: the browser would silently refuse "nopasf.com".
+        {name: "url", label: "Link (optional)", inputmode: "url", placeholder: "nopasf.com", max: 500,
+         autocomplete: "url", value: c.url},
+        {name: "note", label: "Note (optional)", type: "textarea", max: 500, value: c.note}],
+      submit: it ? "Save" : "Add",
+      validate: (v) => v.url && !/^https?:\/\/\S+\.\S+/i.test(v.url) && !/^\S+\.\S+$/.test(v.url)
+        ? "That link doesn’t look right." : ""});
+    if (!out) return null;
+    const url = out.url ? (/^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url) : "";
+    const custom = {title: out.title, category: out.category || "other",
+      start_time: out.start ? new Date(out.start).toISOString() : "", url, note: out.note};
+    if (!it) for (const k of ["start_time", "url", "note"]) if (!custom[k]) delete custom[k];
+    return custom;
+  }
+
+  // --- Reordering the plan: press and hold a step, drag, let go ---
+  // Touch: hold still for a moment to pick a step up (a quick swipe still
+  // scrolls the page); mouse: press and move. The step follows the pointer,
+  // the others slide out of its way, and it settles into the gap on release.
+  const HOLD_MS = 280, SLOP = 8, EDGE = 70;
+
+  function moveStep(id, to) {
+    const plan = view.canvas.plan, from = plan.indexOf(id);
+    if (from < 0 || to === from || to < 0 || to >= plan.length) return;
+    plan.splice(to, 0, plan.splice(from, 1)[0]);
+    render();
+    act(() => AC.api("POST", P("/plan"), {op: "move", item_id: id, to, actor_name: me()}));
+  }
+
+  app.addEventListener("pointerdown", (e) => {
+    const step = e.target.closest(".plan .step");
+    if (!step || e.button !== 0 || e.target.closest(".step-links")) return;
+    press = {step, x: e.clientX, y: e.clientY, pointerId: e.pointerId, touch: e.pointerType !== "mouse"};
+    if (press.touch) pressTimer = setTimeout(() => press && lift(press.y), HOLD_MS);
+  });
+  window.addEventListener("pointermove", (e) => {
+    if (drag) { if (e.pointerId === drag.pointerId) follow(e.clientY); return; }
+    if (!press || e.pointerId !== press.pointerId) return;
+    if (Math.hypot(e.clientX - press.x, e.clientY - press.y) <= SLOP) return;
+    if (press.touch) return cancelPress();  // moved before the hold: it's a scroll
+    lift(press.y);
+    follow(e.clientY);
+  });
+  window.addEventListener("pointerup", (e) => { if (drag && e.pointerId === drag.pointerId) drop(); else cancelPress(); });
+  window.addEventListener("pointercancel", () => { if (drag) drop(true); else cancelPress(); });
+  // While a step is held, the page mustn't scroll under the finger.
+  window.addEventListener("touchmove", (e) => { if (drag) e.preventDefault(); }, {passive: false});
+  app.addEventListener("contextmenu", (e) => { if (drag || (press && press.touch)) e.preventDefault(); });
+  // Letting go over a link would open it; swallow the click that ends a drag.
+  app.addEventListener("click", (e) => {
+    if (Date.now() < suppressClickUntil) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  app.addEventListener("keydown", (e) => {
+    const step = e.target.closest && e.target.matches(".plan .step") && e.target;
+    if (!step || !e.altKey || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
+    e.preventDefault();
+    const from = view.canvas.plan.indexOf(step.dataset.id);
+    moveStep(step.dataset.id, from + (e.key === "ArrowUp" ? -1 : 1));
+  });
+
+  function cancelPress() { clearTimeout(pressTimer); press = null; }
+
+  function lift(clientY) {
+    clearTimeout(pressTimer);
+    const steps = [...app.querySelectorAll(".plan .step")];
+    const from = steps.indexOf(press.step);
+    if (from < 0 || steps.length < 2) return cancelPress();
+    const rects = steps.map(el => el.getBoundingClientRect());
+    drag = {
+      el: press.step, id: press.step.dataset.id, pointerId: press.pointerId, steps, from, to: from,
+      heights: rects.map(r => r.height),
+      centers: rects.map(r => r.top + scrollY + r.height / 2),
+      startY: clientY + scrollY, clientY, dy: 0, raf: 0,
+    };
+    press = null;
+    drag.el.closest(".plan").classList.add("dragging");
+    drag.el.classList.add("lifted");
+    drag.el.style.transition = "none";
+    if (navigator.vibrate) navigator.vibrate(10);
+    drag.raf = requestAnimationFrame(edgeScroll);
+  }
+
+  // Put the held step under the pointer and slide the others to open a gap.
+  function follow(clientY) {
+    drag.clientY = clientY;
+    drag.dy = clientY + scrollY - drag.startY;
+    const center = drag.centers[drag.from] + drag.dy;
+    drag.to = drag.centers.filter((c, j) => j !== drag.from && c < center).length;
+    const h = drag.heights[drag.from];
+    drag.el.style.transform = "translateY(" + drag.dy + "px) scale(1.02)";
+    drag.steps.forEach((el, j) => {
+      if (j === drag.from) return;
+      const shift = drag.from < drag.to && j > drag.from && j <= drag.to ? -h
+        : drag.to < drag.from && j >= drag.to && j < drag.from ? h : 0;
+      el.style.transform = shift ? "translateY(" + shift + "px)" : "";
+    });
+  }
+
+  // Near the top or bottom of the screen, scroll so a long plan can be reordered.
+  function edgeScroll() {
+    if (!drag) return;
+    const y = drag.clientY, by = y < EDGE ? -(EDGE - y) / 4 : y > innerHeight - EDGE ? (y - innerHeight + EDGE) / 4 : 0;
+    if (by) { scrollBy(0, by); follow(y); }
+    drag.raf = requestAnimationFrame(edgeScroll);
+  }
+
+  function drop(cancelled) {
+    const d = drag;
+    cancelAnimationFrame(d.raf);
+    suppressClickUntil = Date.now() + 400;
+    const to = cancelled ? d.from : d.to;
+    const span = (a, b) => d.heights.slice(a, b).reduce((x, y) => x + y, 0);
+    const settle = to > d.from ? span(d.from + 1, to + 1) : -span(to, d.from);
+    d.el.classList.add("settling");
+    d.el.style.transition = "";
+    d.el.style.transform = "translateY(" + settle + "px)";
+    if (cancelled) d.steps.forEach((el, j) => { if (j !== d.from) el.style.transform = ""; });
+    setTimeout(() => {
+      drag = null;
+      if (to !== d.from) moveStep(d.id, to);
+      else render();
+    }, 160);
+  }
+
   async function named() {
     const n = await AC.ensureName();
     return n || null;
@@ -520,7 +808,7 @@
     const el = e.target.closest("[data-act]");
     if (!el || el.tagName === "FORM") return;
     lastInteraction = Date.now();
-    const art = el.closest(".item");
+    const art = el.closest(".item, .step");
     const id = el.dataset.id || (art && art.dataset.id);
     const it = view && view.items.find(i => i.id === id);
     switch (el.dataset.act) {
@@ -564,26 +852,14 @@
         return act(() => AC.api("PATCH", P(), {date_from: out.date_from || null,
           date_to: out.date_to || null, actor_name: who}));
       }
-      case "add-custom": {
-        const out = await AC.formDialog({title: "Add your own",
-          text: "Anything that isn’t on Agora: dinner, a park, a friend’s show.",
-          fields: [
-            {name: "title", label: "What", required: true, max: 120, placeholder: "Dinner at Nopa"},
-            {name: "start", label: "When (optional)", type: "datetime-local"},
-            // Text, not type=url: the browser would silently refuse "nopasf.com".
-            {name: "url", label: "Link (optional)", inputmode: "url", placeholder: "nopasf.com", max: 500,
-             autocomplete: "url"},
-            {name: "note", label: "Note (optional)", type: "textarea", max: 500}],
-          submit: "Add",
-          validate: (v) => v.url && !/^https?:\/\/\S+\.\S+/i.test(v.url) && !/^\S+\.\S+$/.test(v.url)
-            ? "That link doesn’t look right." : ""});
-        if (!out) return;
+      case "add-custom": case "edit-custom": {
+        const editing = el.dataset.act === "edit-custom" ? it : null;
+        const custom = await customDialog(editing);
+        if (!custom) return;
         const who = me();
-        const custom = {title: out.title};
-        if (out.start) custom.start_time = new Date(out.start).toISOString();
-        if (out.url) custom.url = /^https?:\/\//i.test(out.url) ? out.url : "https://" + out.url;
-        if (out.note) custom.note = out.note;
-        return act(() => AC.api("POST", P("/items"), {custom, actor_name: who}));
+        return act(() => editing
+          ? AC.api("PATCH", itemP(id), {custom, actor_name: who})
+          : AC.api("POST", P("/items"), {custom, actor_name: who}));
       }
       case "vote": {
         if (!it) return;
@@ -601,13 +877,17 @@
         const who = me();
         return act(() => AC.api("DELETE", itemP(id, "/comments/" + encodeURIComponent(el.dataset.cmid)), {actor_name: who}));
       }
-      case "pick": case "unpick": {
+      case "plan-add": case "plan-remove": {
         const who = me();
-        return act(() => AC.api("PATCH", P(), {winner_item_id: el.dataset.act === "pick" ? id : null, actor_name: who}));
+        return act(() => AC.api("POST", P("/plan"),
+          {op: el.dataset.act === "plan-add" ? "add" : "remove", item_id: id, actor_name: who}));
       }
       case "remove": {
         if (!it) return;
-        const who = me();
+        if (!await confirmRemove(it)) return;
+        // Removing from a shared collection says who did it, so ask for a name.
+        const who = isSocial(view.canvas) ? await named() : me();
+        if (isSocial(view.canvas) && !who) return;
         await act(() => AC.api("DELETE", itemP(id), {actor_name: who}));
         AC.toast("Removed “" + titleOf(it) + "”", {label: "Undo",
           run: () => act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}))});
@@ -618,8 +898,7 @@
         return act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}));
       }
       case "ics":
-        if (it) downloadIcs(it);
-        return;
+        return downloadIcs((view.canvas.plan || []).map(pid => view.items.find(i => i.id === pid)).filter(Boolean));
       case "set-default":
         AC.setDefaultCanvas(cid);
         AC.toast("Saved events will go to “" + view.canvas.name + "” on this device.");

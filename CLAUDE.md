@@ -26,7 +26,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 | AI tagging — taxonomy, classifier, cache, filters | code: `service/taxonomy.py`, `classify.py`, `classifications.py`; venue priors in `source_profiles.json`; re-tag without scraping: `retag.yml` (README → "Tagging budget and re-tagging") |
 | Scheduled CI scraping, alerts, secrets, Neon | `README.md` → "Scheduled scraping"; code: `service/ci.py`, `.github/workflows/scrape.yml` |
 | Event submissions by email (Gmail → events) | `README.md` → "Event submissions by email"; code: `service/ingest/`, `.github/workflows/ingest-email.yml` |
-| Collections ("event canvases") API (Lambda + DynamoDB; deploy, local server, admin) | `canvas/README.md`; spec `feature-specs/event-canvases.md` |
+| Collections ("event canvases"): how it works — features, data model, API, frontend | `canvas/HOW-IT-WORKS.md` (keep it current when you change collections) |
+| Collections: deploy, local server, beta gate, admin | `canvas/README.md`; original design `feature-specs/event-canvases.md` |
 | Cross-source duplicate merging | code: `service/dedup.py` (save-time), `service/dedupe_existing.py` (one-off cleanup) |
 | Venues, areas, the Area filter, "Places to review" | `feature-specs/venues.md`; `README.md` → "Venues and areas"; code: `service/places/`, data: `service/data/venues.json` + `venue_locations.json` |
 | Candidate sources to onboard next | `future-sources.md` |

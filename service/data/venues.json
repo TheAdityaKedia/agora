@@ -4012,6 +4012,28 @@
       "region": "sf",
       "status": "verified"
     },
+    "roccapulco": {
+      "added": "2026-10-03",
+      "address": "3140 Mission Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Roccapulco in San Francisco County (building, way/273580667)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.74723,
+      "lng": -122.419281,
+      "name": "Roccapulco",
+      "osm": "way/273580667",
+      "possible_duplicates": [
+        "mothership",
+        "el-rio",
+        "the-knockout"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "rocks-den": {
       "added": "2026-10-02",
       "address": "Mission Street, San Francisco, CA 94112",
@@ -5891,6 +5913,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "yummy-future-coffee": {
+      "added": "2026-10-04",
+      "address": "170 University Avenue, Palo Alto, CA 94301",
+      "evidence": [
+        "map: 170 in Santa Clara County (building, way/80482724)",
+        "text: Palo Alto",
+        "street number matches"
+      ],
+      "lat": 37.4443,
+      "lng": -122.162839,
+      "name": "Yummy Future Coffee",
+      "osm": "way/80482724",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "z-space": {
       "added": "2026-10-02",
