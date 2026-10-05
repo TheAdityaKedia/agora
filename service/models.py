@@ -11,6 +11,8 @@ class Base(DeclarativeBase):
 class Event(Base):
     __tablename__ = "events"
 
+    # Stable: save_events sets uuid5 of the creating source's key
+    # (event_ids.event_id); uuid4 is only a fallback.
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = Column(String, nullable=False)
     # tz-aware; scrapers normalize source-local times to UTC before persisting
@@ -47,6 +49,20 @@ class Event(Base):
             sqlite_where=url.isnot(None),
         ),
     )
+
+
+class EventAlias(Base):
+    """An event id that changed, and what it became (feature-specs/
+    event-lifecycle.md, §1). `reason`: merged (duplicates merged), rekeyed
+    (the one-off re-key to stable ids) or moved (rescheduled to a new
+    time). Old ids keep resolving for collections and calendars that stored
+    them; follow chains with event_ids.resolve."""
+    __tablename__ = "event_aliases"
+
+    old_id = Column(UUID(as_uuid=True), primary_key=True)
+    new_id = Column(UUID(as_uuid=True), nullable=False)
+    reason = Column(String, nullable=False)
+    at = Column(DateTime(timezone=True), nullable=False)
 
 
 class SubmissionCount(Base):

@@ -1,10 +1,12 @@
 import argparse
 import os
+import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import dedup
+import event_ids
 from config import LOOKAHEAD_DAYS
 from db import init_db, get_session
 from exporters.json_export import export_json
@@ -105,6 +107,17 @@ def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event 
     return None
 
 
+def _new_id(session, raw: RawEvent, source: str):
+    """The stable id for a new row (event_ids.event_id). If a row already
+    holds it (one whose url or title changed since, so it didn't match),
+    fall back to a random id rather than fail the save."""
+    eid = event_ids.event_id(source, raw.url, raw.title, raw.start_time)
+    if session.get(Event, eid) is not None:
+        print(f"[ids] {eid} already taken; using a random id for {raw.title[:60]!r}", flush=True)
+        return uuid.uuid4()
+    return eid
+
+
 def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]:
     """Persist raw events, merging cross-source duplicates. Returns (saved, merged, skipped).
 
@@ -133,6 +146,7 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]
                 merged += 1
                 continue
             session.add(Event(
+                id=_new_id(session, raw, source),
                 title=raw.title,
                 start_time=raw.start_time,
                 location=raw.location,

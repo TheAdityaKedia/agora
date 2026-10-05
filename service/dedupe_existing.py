@@ -6,7 +6,8 @@
 Uses the same rule as save-time dedup (dedup.is_near_duplicate, same start
 time, rows from different sources). In each cluster the row whose first
 source comes earliest in sources.txt is kept (what save order would have
-kept); the others' sources are appended to it and they are deleted.
+kept); the others' sources are appended to it and they are deleted, each
+leaving a `merged` alias to the kept row's id.
 """
 from __future__ import annotations
 
@@ -14,6 +15,7 @@ import argparse
 from dataclasses import dataclass
 
 import dedup
+import event_ids
 from models import Event
 
 
@@ -70,6 +72,9 @@ def apply(session, merges: list[Merge]) -> int:
     for m in merges:
         m.keep.sources = list(m.sources)  # reassign: JSON column mutations aren't tracked
         for d in m.drop:
+            # Collections and calendars that stored the dropped id still find
+            # the event (feature-specs/event-lifecycle.md, §1).
+            event_ids.add_alias(session, d.id, m.keep.id, "merged")
             session.delete(d)
     session.commit()
     return sum(len(m.drop) for m in merges)
