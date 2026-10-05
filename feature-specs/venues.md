@@ -3,8 +3,9 @@
 **Status: phases 1–3 shipped (#54: resolver + owner-reviewed venue list;
 #56: pipeline, review issue, Area filter; #60: AI-assisted resolution,
 venue-aware dedup, venue names and links — see "Phase 3 design"). Phase 4
-(map view + SF neighbourhoods, minus "near me") is built, behind the
-private beta — see "Phase 4 design". "Near me" is deferred until the owner wants a
+(map view + SF neighbourhoods, minus "near me") is built: neighbourhoods
+are live for everyone (2026-10-05), the map is still in the private beta —
+see "Phase 4 design". "Near me" is deferred until the owner wants a
 location-permission prompt.** Decisions settled with the owner: OpenStreetMap
 (Nominatim) for geocoding; build the venue list now rather than a
 location→area lookup only; nobody reviews the auto-merged data PRs, so
@@ -344,15 +345,15 @@ an **SF neighbourhood filter**. Out of scope: "near me" (no
 location-permission prompt until the owner wants one), venue pages,
 directions.
 
-**Private beta** (2026-10-03): both features ship behind
+**Private beta** (2026-10-03): both features shipped behind
 `MAP_BETA_GATE` in `frontend/index.html`, like collections (`BETA_GATE`,
-`canvas/README.md` → "Private beta"). They show only in browsers that came
-in through the `/beta/` invite (the same `agora.canvas.beta` flag, or
-`?beta=1`); elsewhere the toggle and the neighbourhood dropdown are hidden,
-`?view=map` / `?hood=` are ignored and MapLibre is never fetched. A shared
-view that uses either goes through `/beta/` (like collection links), so its
-recipient is let in. The
-exporter writes coordinates and neighbourhoods regardless. **Launch:** set
+`canvas/README.md` → "Private beta"). **The SF neighbourhood filter left the
+beta on 2026-10-05** and shows for everyone. The **map** still shows only
+for beta members with beta switched on (a `/beta/` link, `?beta=1` or the
+header's Beta switch); elsewhere the List/Map toggle is hidden, `?view=map`
+is ignored and MapLibre is never fetched. A shared map view goes through
+`/beta/` (like collection links), so its recipient is let in. The exporter
+writes coordinates and neighbourhoods regardless. **Launch the map:** set
 `MAP_BETA_GATE = false`.
 
 ### Manifest

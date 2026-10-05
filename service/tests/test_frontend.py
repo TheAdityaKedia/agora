@@ -635,6 +635,8 @@ def map_site(tmp_path_factory):
     events = _map_events()
     (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
     (root / "events.json").write_text(json.dumps(_map_manifest(events)))
+    # The beta switch lives in canvas-client.js (shared with collections).
+    shutil.copy(FRONTEND / "canvas-client.js", root / "canvas-client.js")
     server = _serve(root)
     yield f"http://127.0.0.1:{server.server_port}/"
     server.shutdown()
@@ -643,10 +645,12 @@ def map_site(tmp_path_factory):
 def _map_page(browser, site, viewport=DESKTOP, query="", touch=False, beta=True):
     """A page with the map's tile server unreachable (as in CI: no network),
     so the map falls back to pins on a blank background. `beta`: the browser
-    is in the private beta (the flag frontend/beta/ sets)."""
+    is a beta member (what frontend/beta/ sets) with beta switched on for this
+    visit; "member" = a member with it switched off."""
     ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, timezone_id=TZ)
     if beta:
-        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
+        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true');"
+                            + ("" if beta == "member" else "sessionStorage.setItem('agora.beta.on', '1');"))
     ctx.route("https://tiles.openfreemap.org/**", lambda route: route.abort())
     page = ctx.new_page()
     page._agora_errors = []
@@ -907,33 +911,38 @@ def test_map_goes_to_the_results_when_none_are_in_view(browser, map_site):
     assert page._agora_errors == []
 
 
-def test_map_and_neighborhoods_are_beta_only(browser, map_site):
-    # Outside the beta: no toggle, no neighborhood filter, links ignored,
-    # MapLibre never requested.
+def test_map_is_beta_only_neighborhoods_are_not(browser, map_site):
+    # Outside the beta: no map toggle, ?view=map ignored, MapLibre never
+    # requested; the SF neighborhood filter (out of beta) works for everyone.
     page = _map_page(browser, map_site, query="?view=map&at=37.77,-122.42,13&hood=mission", beta=False)
-    assert page.locator("#view-toggle").is_hidden() and page.locator("#hood-dropdown").is_hidden()
-    assert page.locator("#map-wrap").is_hidden() and _rendered(page) > 0
-    assert "view=" not in page.url and "hood=" not in page.url
+    assert page.locator("#view-toggle").is_hidden() and page.locator("#map-wrap").is_hidden()
+    assert page.locator("#hood-dropdown").is_visible()
+    assert "view=" not in page.url and "hood=mission" in page.url and "beta=" not in page.url
+    assert _rendered(page) > 0
+    assert page.evaluate("[...document.querySelectorAll('.event')].length") == _rendered(page)
     assert not any("maplibre" in u for u in page._agora_requests)
     assert page._agora_errors == []
-    # ?beta=1 (where frontend/beta/ redirects) lets the browser in.
+    # ?beta=1 (where frontend/beta/ redirects) lets the browser into the map.
     page = _map_page(browser, map_site, query="?beta=1&view=map", beta=False)
     _wait_for_pins(page)
     assert page.locator("#view-toggle").is_visible() and page.locator("#hood-dropdown").is_visible()
 
 
-def test_shared_map_and_neighborhood_views_go_through_beta(browser, map_site):
-    page = _map_page(browser, map_site, query="?hood=mission")
+def test_shared_map_views_go_through_beta_neighborhoods_dont(browser, map_site):
+    page = _map_page(browser, map_site, query="?view=map")
+    _wait_for_pins(page)
     # The address bar keeps beta=1, so a link copied from it works too.
     assert "beta=1" in page.url
     page.context.grant_permissions(["clipboard-read", "clipboard-write"])
     page.click("#copy-link")
     link = page.evaluate("navigator.clipboard.readText()")
-    assert link == map_site + "beta/?hood=mission"
-    page = _map_page(browser, map_site, query="?type=talk")
+    assert link.startswith(map_site + "beta/?") and "view=map" in link and "beta=1" not in link
+    # A neighborhood view is an ordinary link now.
+    page = _map_page(browser, map_site, query="?hood=mission", beta=False)
+    assert "beta=" not in page.url
     page.context.grant_permissions(["clipboard-read", "clipboard-write"])
     page.click("#copy-link")
-    assert page.evaluate("navigator.clipboard.readText()") == map_site + "?type=talk"
+    assert page.evaluate("navigator.clipboard.readText()") == map_site + "?hood=mission"
 
 
 def test_day_strip_shows_the_month_on_every_day(browser, site):

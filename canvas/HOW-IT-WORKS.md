@@ -33,7 +33,7 @@ can edit it**.
 | **This is mine** | Marks a collection started on another device as yours on this one too (owner devices count as one person). |
 | **Default collection** | Per browser: where a future one-tap ☆ Save will add events. |
 | **Collecting mode** | On the main page, "Start a collection" (or a collection's **Add events**) turns on a tray, "Adding to <name> · N items", with an add button on every event row. It switches itself off after a day unused. |
-| **Private beta** | Hidden unless the browser came in through a `/beta/` link. See [`README.md`](README.md) → "Private beta". |
+| **Private beta** | Hidden unless the browser is a beta member (came in through a `/beta/` link) **and** beta is switched on for this visit (the `/beta/` link does that; members also get a "Beta" switch in the header; the plain address in a new tab starts with it off). See [`README.md`](README.md) → "Private beta". |
 
 ## 2. The moving parts
 
@@ -193,7 +193,8 @@ so a change shows on the next full read (page load, or after any write).
 **What the browser stores** (`localStorage`, keys `agora.canvas.*`):
 `client` (the id), `name`, `mine` (collections opened here, ≤ 100, with
 `yours`), `shared` (shared as-is from here), `default`, `active` (collecting
-mode, expires after 24 h unused), `api` (override), `beta`. Clearing site
+mode, expires after 24 h unused), `api` (override), `beta` (membership);
+and in `sessionStorage`, `agora.beta.on` (beta switched on this visit). Clearing site
 data loses the list, the name and the default, not the collections.
 
 **Page behaviour worth knowing:** polling never re-renders while you are

@@ -60,6 +60,7 @@
   .byline { color: var(--muted); font-size: 14px; }
   .byline a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .byline a:hover { color: var(--accent); }
+  .masthead nav { display: flex; align-items: center; gap: 14px; }
   .masthead nav a { color: var(--muted); font-size: 14px; }
   .masthead nav a:hover { color: var(--accent); }
 
@@ -261,7 +262,7 @@
 <body>
 <header class="masthead">
   <div class="brand-line"><a class="brand" href="./" title="Agora home: all events, no filters">Agora</a><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
-  <nav><a href="./canvas.html">Your collections</a></nav>
+  <nav><span id="beta-slot"></span><a href="./canvas.html">Your collections</a></nav>
 </header>
 <main id="app"><p class="loading">Loading…</p></main>
 
@@ -272,12 +273,20 @@
   const AC = window.AgoraCanvas;
   const app = document.getElementById("app");
   const cid = new URLSearchParams(location.search).get("c");
-  // Private beta (see BETA_GATE in canvas-client.js).
+  // Private beta (see BETA_GATE in canvas-client.js). Members get the
+  // "Beta" switch; with beta off, this page says how to turn it on.
+  const betaSwitch = AC.betaToggle();
+  if (betaSwitch) document.getElementById("beta-slot").appendChild(betaSwitch);
   if (!AC.betaEnabled()) {
     document.title = "Collections — Agora";
-    app.innerHTML = '<section class="home"><h1>Collections are in private beta</h1>'
-      + "<p>If someone sent you a collection, ask them for the link again: it starts with …/agora/beta/.</p>"
-      + '<a class="btn primary" href="./">Browse events on Agora</a></section>';
+    app.innerHTML = AC.betaMember()
+      ? '<section class="home"><h1>Beta features are off</h1>'
+        + "<p>Collections are a beta feature. Turn beta on to see this page.</p>"
+        + '<button type="button" class="btn primary" id="beta-on">Turn on beta</button></section>'
+      : '<section class="home"><h1>Collections are in private beta</h1>'
+        + "<p>If someone sent you a collection, ask them for the link again: it starts with …/agora/beta/.</p>"
+        + '<a class="btn primary" href="./">Browse events on Agora</a></section>';
+    document.getElementById("beta-on")?.addEventListener("click", () => AC.setBeta(true));
     return;
   }
   // A beta browser keeps ?beta=1 in the address bar, so a link copied from
