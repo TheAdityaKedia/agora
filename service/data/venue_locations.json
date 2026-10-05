@@ -331,6 +331,9 @@
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
     },
+    "calvary presbyterian church, 2515 fillmore st, san francisco, ca": {
+      "venue": "calvary-presbyterian"
+    },
     "calvary presbyterian, 2515 fillmore ave, san francisco": {
       "venue": "calvary-presbyterian"
     },
@@ -456,6 +459,9 @@
     },
     "etcetera wine bar, 795 valencia street, san francisco, ca": {
       "venue": "etcetera-wine-bar"
+    },
+    "f8 nightclub, 1192 folsom st, san francisco, ca": {
+      "venue": "f8-nightclub"
     },
     "fabulosa books, 489 castro st, san francisco, ca": {
       "venue": "fabulosa-books"
@@ -586,6 +592,9 @@
     "jcc east bay community campus, 5957 chabot rd, oakland, ca": {
       "venue": "jcc-east-bay"
     },
+    "jcc san francisco, 3200 california street, san francisco, ca": {
+      "venue": "jccsf-kanbar-hall"
+    },
     "jccsf kanbar hall, 3200 california st, san francisco": {
       "venue": "jccsf-kanbar-hall"
     },
@@ -661,6 +670,9 @@
     },
     "make-out room, 3225 22nd. st., san francisco, ca, san francisco, ca": {
       "venue": "make-out-room"
+    },
+    "maker studio, 600a octavia blvd, san francisco, ca": {
+      "venue": "maker-studio"
     },
     "manna gallery, 473 25th st., oakland": {
       "venue": "manna-gallery"
@@ -1080,6 +1092,9 @@
     "sydney goldstein theater, 275 hayes st, san francisco": {
       "venue": "sydney-goldstein-theater"
     },
+    "sydney goldstein theater, 275 hayes st, san francisco, ca": {
+      "venue": "sydney-goldstein-theater"
+    },
     "tally ho! books, 3941 piedmont ave, oakland, ca": {
       "venue": "tally-ho-books"
     },
@@ -1152,6 +1167,23 @@
     },
     "the crown, 2523 broadway, oakland": {
       "venue": "the-crown"
+    },
+    "the dairy (sports basement presidio), 610 old mason st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "first_seen": "2026-10-05",
+        "last_tried": "2026-10-05",
+        "reason": "text says San Francisco (San Francisco County), map result 'The Hirsch Dairy Barn' is in Alameda County",
+        "sources": [
+          "Green Apple Books"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "name": "The Dairy (Sports Basement Presidio)",
+          "street_address": "610 Old Mason St"
+        }
+      }
     },
     "the dawn club, san francisco": {
       "venue": "dawn-club"
