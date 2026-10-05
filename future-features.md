@@ -127,6 +127,46 @@ here.
   on 2026-09-29 with `service/dedupe_existing.py` (29 rows).
   Spec: not written.
 
+## Ideas — topic discovery (not yet planned)
+
+Brainstormed 2026-10-03, after a friend said he doesn't know what "Topics"
+exist and doesn't want to scroll a list to find out. Today the only way to
+see the 62 topics (10 groups) is Filters → Topics → scroll. Pick one, write
+its spec in `feature-specs/`, then move it up into the list above.
+
+Quick wins (front end only):
+1. **Topic chips on the main page** — a sideways-scrolling row under the
+   date presets with the 10–12 topics that have the most events in the
+   current view, with counts ("Jazz 42 · Theater 38 · Trivia 20 · …"), then
+   **All topics →**. People learn the vocabulary by seeing it; one tap
+   filters; it follows the date filter.
+2. **Counts that follow your filters** — the dropdown counts all upcoming
+   events; count only what's visible, and dim or hide topics with zero.
+3. **Search suggests topics** — typing "jaz" shows a **Topic: Jazz (466)**
+   chip above the results; a small synonym list covers common mismatches
+   ("standup" → Comedy, "books" → Books / Authors).
+
+Medium:
+4. **A "Browse topics" screen** — the 10 groups as cards, each with its
+   topics as chips with counts (maybe an event photo per group), replacing
+   the long dropdown as the place to see everything.
+5. **Ready-made views** — named, shareable presets bundling topics and
+   dates: "Free this weekend", "Date night", "Live music tonight", "Kids &
+   family".
+
+Bigger:
+6. **"What are you into?" on a first visit** — pick a few topics, saved in
+   the browser, driving a **For you** preset; pairs with ☆ Save and the
+   weekly email.
+7. **Tidy the topic list** — some topics barely have events (on
+   2026-10-03: Bachata 1, Zouk 1, Wine 4, Comics / Zines 8, Opera 9) and
+   "Music (other)" is a 273-event catch-all. Group small ones in the display
+   (Salsa, Bachata, Zouk, Tango → "Latin & partner dance") without
+   re-tagging.
+
+Suggested order: 1 + 2 together, then 3 (all front end, one PR); 4 if the
+dropdown still feels heavy.
+
 ## Ideas — better social life in SF (not yet planned)
 
 Brainstormed 2026-10-03. Not committed work: pick one, write its spec in
