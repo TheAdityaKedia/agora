@@ -401,8 +401,13 @@ def test_classify_upcoming_includes_earlier_today_events(db_session, tmp_path):
     import main
     from classifications import Classification
 
+    from exporters.json_export import EXPORT_TZ
+
     now = datetime.now(timezone.utc)
-    earlier_today = now - timedelta(hours=3)  # a few hours ago, still today
+    # Halfway between local (Pacific) midnight and now: before `now` but always
+    # the same local day — a fixed "now - 3h" falls on yesterday before 3am.
+    local_midnight = datetime.now(EXPORT_TZ).replace(hour=0, minute=0, second=0, microsecond=0)
+    earlier_today = (local_midnight + (now - local_midnight) / 2).astimezone(timezone.utc)
     db_session.add(Event(title="Noon Show", start_time=earlier_today,
                          location=None, url="https://x", description="d",
                          sources=["City Lights Booksellers"], created_at=now))

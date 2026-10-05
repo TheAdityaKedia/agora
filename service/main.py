@@ -20,6 +20,8 @@ from scrapers import (
     bachdds, biscuitsblues, dawnclub, keysjazz, yoshis, partiful,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho, faight,
+    atasite, ybgfestival, omca, jccsf, fortmason, sfmasonic, cobbs, punchline,
+    glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
 )
 from scrapers.base import RawEvent
 
@@ -39,6 +41,8 @@ SCRAPERS = [
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
     partiful, frontiertower, alembic, faight, missionfusion,
+    atasite, ybgfestival, omca, jccsf, fortmason, sfmasonic, cobbs, punchline,
+    glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
 ]
 
 
