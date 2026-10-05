@@ -4361,6 +4361,40 @@
       "region": "sf",
       "status": "verified"
     },
+    "sports-basement-berkeley": {
+      "added": "2026-10-02",
+      "address": "2727 Milvia Street, Berkeley, CA 94703",
+      "evidence": [
+        "map: Sports Basement in Alameda County (building, way/68675078)",
+        "text: Berkeley",
+        "street number matches",
+        "renamed 2026-10-05: was 'the-community-room', named after the room the events are in"
+      ],
+      "lat": 37.85972,
+      "lng": -122.268749,
+      "name": "Sports Basement Berkeley",
+      "osm": "way/68675078",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "sports-basement-bryant": {
+      "added": "2026-10-02",
+      "address": "1590 Bryant Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Sports Basement Outdoor & Camping in San Francisco County (building, way/35343322)",
+        "text: San Francisco",
+        "street number matches",
+        "renamed 2026-10-05: was 'the-treeline', named after the room the events are in"
+      ],
+      "lat": 37.767098,
+      "lng": -122.411132,
+      "name": "Sports Basement Bryant",
+      "osm": "way/35343322",
+      "precision": "building",
+      "region": "sf",
+      "status": "verified"
+    },
     "sports-basement-presidio": {
       "added": "2026-10-02",
       "address": "610 Mason Street, San Francisco, CA 94129",
@@ -4774,22 +4808,6 @@
       "osm": "node/9659886917",
       "precision": "building",
       "region": "sf",
-      "status": "verified"
-    },
-    "the-community-room": {
-      "added": "2026-10-02",
-      "address": "2727 Milvia Street, Berkeley, CA 94703",
-      "evidence": [
-        "map: Sports Basement in Alameda County (building, way/68675078)",
-        "text: Berkeley",
-        "street number matches"
-      ],
-      "lat": 37.85972,
-      "lng": -122.268749,
-      "name": "The Community Room",
-      "osm": "way/68675078",
-      "precision": "building",
-      "region": "eastbay",
       "status": "verified"
     },
     "the-continental": {
@@ -5467,22 +5485,6 @@
       "lng": -122.419629,
       "name": "The Sycamore",
       "osm": "node/2454979580",
-      "precision": "building",
-      "region": "sf",
-      "status": "verified"
-    },
-    "the-treeline": {
-      "added": "2026-10-02",
-      "address": "1590 Bryant Street, San Francisco, CA 94103",
-      "evidence": [
-        "map: Sports Basement Outdoor & Camping in San Francisco County (building, way/35343322)",
-        "text: San Francisco",
-        "street number matches"
-      ],
-      "lat": 37.767098,
-      "lng": -122.411132,
-      "name": "The Treeline",
-      "osm": "way/35343322",
       "precision": "building",
       "region": "sf",
       "status": "verified"

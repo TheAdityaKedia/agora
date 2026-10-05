@@ -1163,27 +1163,15 @@
       "venue": "the-commonwealth-club-of-california"
     },
     "the community room, sports basement berkeley, 2727 milvia st, berkeley, ca": {
-      "venue": "the-community-room"
+      "room": "The Community Room",
+      "venue": "sports-basement-berkeley"
     },
     "the crown, 2523 broadway, oakland": {
       "venue": "the-crown"
     },
     "the dairy (sports basement presidio), 610 old mason st, san francisco, ca": {
-      "pending": {
-        "events": 1,
-        "first_seen": "2026-10-05",
-        "last_tried": "2026-10-05",
-        "reason": "text says San Francisco (San Francisco County), map result 'The Hirsch Dairy Barn' is in Alameda County",
-        "sources": [
-          "Green Apple Books"
-        ],
-        "suggestion": {
-          "city": "San Francisco",
-          "kind": "venue",
-          "name": "The Dairy (Sports Basement Presidio)",
-          "street_address": "610 Old Mason St"
-        }
-      }
+      "room": "The Dairy",
+      "venue": "sports-basement-presidio"
     },
     "the dawn club, san francisco": {
       "venue": "dawn-club"
@@ -1301,7 +1289,8 @@
       "venue": "the-sycamore"
     },
     "the treeline, sports basement bryant, 1590 bryant st, san francisco": {
-      "venue": "the-treeline"
+      "room": "The Treeline",
+      "venue": "sports-basement-bryant"
     },
     "the warfield, 982 market st, san francisco, ca": {
       "venue": "warfield-theatre"
