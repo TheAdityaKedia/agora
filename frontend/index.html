@@ -783,7 +783,7 @@
   // Event canvases (canvas-client.js). Absent if that script failed to load;
   // then the page simply has no canvas features.
   const AC = window.AgoraCanvas || null;
-  // Private beta for the map view and SF neighborhoods, like collections
+  // Private beta for the map view (SF neighborhoods launched 2026-10-05), like collections
   // (BETA_GATE in canvas-client.js, which explains the rule): a member
   // browser (any /beta/ link) with beta switched on for this visit (?beta=1
   // or the "Beta" switch). Read here rather than through AC, so the map
@@ -1041,7 +1041,7 @@
   const hoodLabels = new Map((data.neighborhoods || []).map(h => [h.id, h.label]));
   const hoodCounts = new Map();
   for (const e of events) if (e._hood) hoodCounts.set(e._hood, (hoodCounts.get(e._hood) || 0) + 1);
-  const hoodIds = mapBeta ? [...hoodLabels.keys()].filter(id => hoodCounts.has(id)) : [];
+  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id));
   const selectedHoods = new Set();
   const hoodDropdownEl = document.getElementById("hood-dropdown");
   const hoodListEl = document.getElementById("hood-list");
@@ -1715,7 +1715,7 @@
     // Beta-only views keep ?beta=1 in the address bar, so a link copied from
     // it (not only from Share) lets a friend in too. Harmless after launch.
     if ((canvasId && AC && AC.BETA_GATE)
-        || (MAP_BETA_GATE && (view === "map" || selectedHoods.size))) p.set("beta", "1");
+        || (MAP_BETA_GATE && view === "map")) p.set("beta", "1");
     const qs = p.toString();
     const url = qs ? `${location.pathname}?${qs}` : location.pathname;
     if (location.pathname + location.search !== url) {
@@ -1810,11 +1810,11 @@
   const canShare = !!navigator.share && matchMedia("(pointer: coarse)").matches;
   const copyLabel = canShare ? "Share this view" : "Copy link to this view";
   copyEl.textContent = copyLabel;
-  // A view that uses the map or neighborhoods goes through /beta/ while
-  // they're gated (like collection links), so whoever opens it is let in.
+  // A map view goes through /beta/ while the map is gated (like collection
+  // links), so whoever opens it is let in.
   // (/beta/ itself adds beta=1, so the address bar's copy is dropped here.)
   const shareUrl = () => {
-    if (!(MAP_BETA_GATE && (view === "map" || selectedHoods.size))) return location.href;
+    if (!(MAP_BETA_GATE && view === "map")) return location.href;
     const q = new URLSearchParams(location.search);
     q.delete("beta");
     const qs = q.toString();

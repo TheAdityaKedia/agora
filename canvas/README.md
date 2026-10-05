@@ -41,9 +41,10 @@ Collections ship behind a soft gate: `BETA_GATE = true` in
   whoever opens one is let into the beta too. Without the flag, the site shows
   no collections UI and `canvas.html` says "Collections are in private beta".
 - It hides UI only; the API itself is open (nothing secret depends on it).
-- The same invite also unlocks the **map view and SF neighborhood filter**,
-  gated separately by `MAP_BETA_GATE` in `frontend/index.html` (same
-  membership and switch, so each feature launches on its own).
+- The same invite also unlocks the **map view**, gated separately by
+  `MAP_BETA_GATE` in `frontend/index.html` (same membership and switch, so
+  each feature launches on its own). The SF neighborhood filter was gated
+  with it until 2026-10-05; it's now live for everyone.
 
 **To launch:** set `BETA_GATE = false` (one line) and merge. Everyone sees
 collections, new links drop `/beta/`, and **keep `frontend/beta/`**: those
