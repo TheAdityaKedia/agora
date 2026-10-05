@@ -42,3 +42,14 @@ def test_fortmason_collapses_daily_exhibition_entries(monkeypatch):
     out = fortmason.scrape()
     assert sorted(e.title for e in out) == ["Farmers Market", "Tied / Untied"]
     assert next(e for e in out if e.title == "Tied / Untied").start_time.day == 3
+
+
+def test_ybgfestival_maps_cross_street_locations():
+    cross = _ev("Dance", 7, "Crepe Myrtle Garden, Yerba Buena Gardens, 3rd St. between Mission and Howard Sts., San Francisco")
+    numbered = _ev("Kids", 8, "Children’s Garden, Yerba Buena Gardens, 799 Howard St., San Francisco")
+    bare = _ev("Fest", 9, None)
+    assert ybgfestival.place(cross).location == \
+        "Crepe Myrtle Garden, Yerba Buena Gardens, 750 Howard St, San Francisco, CA 94103"
+    assert ybgfestival.place(numbered).location == \
+        "Children’s Garden, Yerba Buena Gardens, 799 Howard St., San Francisco"  # already mappable
+    assert ybgfestival.place(bare).location == ybgfestival.STREET

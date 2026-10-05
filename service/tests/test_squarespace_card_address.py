@@ -58,3 +58,18 @@ def test_wrappers_match():
     assert sfcb.matches("https://www.sfcb.org/calendar")
     assert maritime.matches("https://maritime.org/events")
     assert not sfcb.matches("https://www.sfpl.org/events")
+
+
+def _maritime_ev(title, location):
+    from scrapers.base import RawEvent
+    return RawEvent(title=title, start_time=datetime(2026, 10, 10), location=location,
+                    url="u", description="d")
+
+
+def test_maritime_places_each_event():
+    assert maritime.place(_maritime_ev(
+        "Fleet Week", "USS Pampanito and the Triangle at Historic Pier 45")).location == maritime.PIER_45
+    assert maritime.place(_maritime_ev(
+        "In-Person Chantey Sing – San Francisco", None)).location == maritime.MARITIME_MUSEUM
+    # No address and no known venue: placed in the city only, never guessed.
+    assert maritime.place(_maritime_ev("Annual Maritime Ball", None)).location == "San Francisco, CA"
