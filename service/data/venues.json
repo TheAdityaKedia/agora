@@ -1883,6 +1883,29 @@
       "region": "sf",
       "status": "verified"
     },
+    "f8-nightclub": {
+      "added": "2026-10-05",
+      "address": "1192 Folsom Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: F8 in San Francisco County (building, node/10861603640)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.775281,
+      "lng": -122.409955,
+      "name": "F8 Nightclub",
+      "osm": "node/10861603640",
+      "possible_duplicates": [
+        "cat-club",
+        "decentered-arts-studio",
+        "arc-gallery-studios",
+        "the-stud",
+        "nosh-box"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "fabulosa-books": {
       "added": "2026-10-02",
       "address": "489 Castro Street, San Francisco, CA 94114",
@@ -2899,6 +2922,20 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "maker-studio": {
+      "added": "2026-10-05",
+      "address": "600a Octavia Blvd, San Francisco, CA 94102",
+      "evidence": [
+        "map: Octavia Boulevard in San Francisco County (street, way/983835542)",
+        "text: San Francisco"
+      ],
+      "lat": 37.775546,
+      "lng": -122.424245,
+      "name": "Maker Studio",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
     },
     "manna-gallery": {
       "added": "2026-10-02",
