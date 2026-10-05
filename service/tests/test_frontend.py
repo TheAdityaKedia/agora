@@ -328,12 +328,18 @@ def test_filters_button_lights_up_when_a_filter_is_on(browser, site):
     assert "active" not in btn.get_attribute("class")
 
 
-def test_reset_button_is_filled(browser, site):
+def test_reset_button_lights_up_only_when_a_filter_is_on(browser, site):
     page = _open(browser, site, PHONE, touch=True)
+    bg = "getComputedStyle(document.getElementById('reset')).backgroundColor"
     page.click("#filters-btn")
     page.wait_for_selector("#filters.open")
-    bg = page.evaluate("getComputedStyle(document.getElementById('reset')).backgroundColor")
-    assert bg not in ("rgba(0, 0, 0, 0)", "transparent")
+    assert "active" not in (page.get_attribute("#reset", "class") or "")
+    assert page.evaluate(bg) in ("rgba(0, 0, 0, 0)", "transparent")  # quiet: nothing to reset
+    page.locator("#area-chips button").first.click()  # a filter, from inside the drawer
+    assert "active" in page.get_attribute("#reset", "class")
+    assert page.evaluate(bg) not in ("rgba(0, 0, 0, 0)", "transparent")
+    page.click("#reset")
+    assert "active" not in page.get_attribute("#reset", "class")
 
 
 def _busy_day(page):

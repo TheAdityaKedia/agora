@@ -266,9 +266,12 @@
     font-size: 13px; cursor: pointer;
   }
   .dropdown-bulk button:hover { color: var(--fg); }
-  /* "Reset all" is filled so it stands out in the sheet's header. */
-  .reset-btn { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
-  .reset-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+  .reset-btn:hover { color: var(--fg); }
+  /* With a filter on, "Reset all" lights up like the Filters button: it
+     only stands out when there's something to reset. */
+  .reset-btn.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600;
+  }
   .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
   .copy-btn.copied { color: var(--accent-fg); background: var(--accent); border-color: var(--accent); }
   .dropdown-item {
@@ -2430,6 +2433,7 @@
     filtersCountEl.textContent = active.length;
     // The whole Filters button lights up while any filter is on.
     filtersBtnEl.classList.toggle("active", active.length > 0);
+    resetEl.classList.toggle("active", active.length > 0);
     filtersDoneEl.textContent = filtered.length === 0 ? "No events match"
       : "Show " + filtered.length.toLocaleString() + (filtered.length === 1 ? " event" : " events");
 
