@@ -51,9 +51,12 @@ runs:
             set -euo pipefail
             # descriptions.json: full descriptions beside the lean events.json
             # (feature-specs/frontend-payload.md); it can change on its own.
-            data_files="frontend/descriptions.json service/data/classifications.json service/data/venues.json service/data/venue_locations.json"
+            # event-index.json: current facts by id for collections
+            # (feature-specs/event-lifecycle.md); "gone" can change on its own.
+            data_files="frontend/descriptions.json frontend/event-index.json service/data/classifications.json service/data/venues.json service/data/venue_locations.json"
             # shellcheck disable=SC2086
-            if [ "$CHANGED" != "true" ] && git diff --quiet -- $data_files; then
+            # status, not diff: a data file can be new (event-index.json's first run).
+            if [ "$CHANGED" != "true" ] && [ -z "$(git status --porcelain -- $data_files)" ]; then
               echo "No data change; nothing to ship."
               exit 0
             fi
