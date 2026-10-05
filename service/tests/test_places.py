@@ -270,6 +270,19 @@ def test_room_of_known_venue_needs_no_lookup(store):
     assert len(r.geo.queries) == calls
 
 
+def test_known_venue_in_parentheses_takes_the_rest_as_its_room(store):
+    store.venues["sports-basement-presidio"] = {
+        "name": "Sports Basement Presidio", "region": "sf", "status": "verified",
+        "precision": "building", "lat": 37.802859, "lng": -122.459265,
+        "address": "610 Mason Street, San Francisco, CA 94129"}
+    q = "The Dairy (Sports Basement Presidio), 610 Old Mason St, San Francisco, CA"
+    r = resolver(store)
+    out = r.resolve(q, ["Green Apple Books"])
+    assert out.action == "room"
+    assert out.entry == {"venue": "sports-basement-presidio", "room": "The Dairy"}
+    assert r.geo.queries == []
+
+
 def test_same_osm_object_or_nearby_same_name_is_an_alias(store):
     resp = {
         "Specs', 12 Saroyan Place, San Francisco": [nominatim("Specs Bar", *SPECS, osm="node/9")],
@@ -514,6 +527,24 @@ def test_resolve_locations_summary(store):
     again = resolve_locations(locs, store, geo, today=date(2026, 10, 3))
     assert again["new_pending"] == [] and again["new_venues"] == []
     assert again["actions"] == {"known": 3}
+
+
+def test_pending_entry_keeps_the_soonest_example_event(store):
+    from places.pipeline import collect_locations, resolve_locations
+    locs = collect_locations([
+        {"location": "Nowhere Hall", "sources": ["X"], "title": "Later", "url": "u2", "start": "2026-11-02"},
+        {"location": "nowhere hall", "sources": ["Y"], "title": "Sooner", "url": "u1", "start": "2026-10-09"},
+    ])
+    assert locs["nowhere hall"]["example"] == {"title": "Sooner", "url": "u1", "date": "2026-10-09"}
+    resolve_locations(locs, store, FakeGeocoder(), today=date(2026, 10, 3))
+    pending = store.locations["nowhere hall"]["pending"]
+    assert pending["example"]["title"] == "Sooner" and pending["sources"] == ["X", "Y"]
+    # Not due a retry yet, but the example and counts stay current.
+    locs = collect_locations([{"location": "Nowhere Hall", "sources": ["X"], "title": "Next",
+                               "url": "u3", "start": "2026-10-20"}])
+    resolve_locations(locs, store, FakeGeocoder(), today=date(2026, 10, 4))
+    pending = store.locations["nowhere hall"]["pending"]
+    assert pending["example"]["title"] == "Next" and pending["events"] == 1
 
 
 def test_resolve_locations_refuses_invalid_files(store):

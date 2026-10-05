@@ -294,8 +294,9 @@ def resolve_places(geocoder=None, data_dir=None, max_lookups=None, log=print,
     cutoff = datetime.combine(today_local, datetime.min.time(), tzinfo=EXPORT_TZ).astimezone(timezone.utc)
     session = get_session()
     try:
-        rows = [(e.location, e.sources) for e in
-                session.query(Event).filter(Event.start_time >= cutoff).all()]
+        rows = [{"location": e.location, "sources": e.sources, "title": e.title, "url": e.url,
+                 "start": e.start_time.astimezone(EXPORT_TZ).date().isoformat()}
+                for e in session.query(Event).filter(Event.start_time >= cutoff).all()]
     finally:
         session.close()
     store = Store(data_dir or DATA_DIR)

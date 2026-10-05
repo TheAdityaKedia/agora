@@ -422,8 +422,11 @@ def test_places_check_alerts_on_low_coverage_and_lists_pending(tmp_path):
                                            new_venues=["specs-bar"]), store)
     assert check["alert"] and "4.0%" in check["problems"][0]
     body = ci.render_places_body(check, store, "https://run")
-    assert "| [lost marbles, 2202 de la vina st](https://www.openstreetmap.org/search?query=lost+marbles" in body
-    assert "| 4 | SF Bar Guide | no map result | 2026-10-03 |" in body
+    assert "### 1. `lost marbles, 2202 de la vina st`" in body
+    assert "- **Events:** 4 upcoming" in body
+    assert "- **From:** SF Bar Guide · waiting since 2026-10-03" in body
+    assert "- **Why it's waiting:** no map result ([search the map](https://www.openstreetmap.org/" \
+           "search?query=lost+marbles" in body
     assert "venue_locations.json" in body and "Specs Bar" in body and "mlat=37.7979" in body
 
 
@@ -437,9 +440,38 @@ def test_places_body_shows_the_ai_suggestion(tmp_path):
                           "suggestion": {"kind": "not_a_place"}}}
     store = _store(tmp_path, pend)
     body = ci.render_places_body(ci.check_places(_places_report(), store), store, "https://run")
-    assert "no map result · AI suggests **Nourse Theater, 275 Hayes St, San Francisco** — map found " \
+    assert "- AI suggests **Nourse Theater, 275 Hayes St, San Francisco** — map found " \
            "[Nourse](https://www.openstreetmap.org/?mlat=37.7781&mlon=-122.4209" in body
-    assert "no map result · AI: not a place |" in body
+    assert "- AI: not a place" in body
+
+
+def test_places_body_names_the_event_and_a_venue_we_already_have(tmp_path, monkeypatch):
+    monkeypatch.setenv("GITHUB_REPOSITORY", "o/r")
+    pend = {"the dairy (sports basement presidio), 610 old mason st, san francisco, ca": {
+        "reason": "map result is in Alameda County", "events": 2, "sources": ["Green Apple Books"],
+        "first_seen": "2026-10-05",
+        "example": {"title": "Offsite: Kirk Lombard", "url": "https://ga.com/e/1", "date": "2026-10-30"},
+        "suggestion": {"kind": "venue", "name": "The Dairy (Sports Basement Presidio)",
+                       "street_address": "610 Old Mason St", "city": "San Francisco"}}}
+    store = _store(tmp_path, pend)
+    store.venues["sports-basement-presidio"] = {
+        "name": "Sports Basement Presidio", "region": "sf", "status": "verified",
+        "precision": "building", "lat": 37.8, "lng": -122.46, "address": "610 Mason Street, San Francisco"}
+    body = ci.render_places_body(ci.check_places(_places_report(), store), store, "https://run")
+    assert "- **Event:** [Offsite: Kirk Lombard](https://ga.com/e/1) on 2026-10-30 and 1 more" in body
+    assert "**Probably Sports Basement Presidio**, a venue we already have (`sports-basement-presidio`" in body
+    assert '{"venue": "sports-basement-presidio", "room": "The Dairy"}' in body
+    assert "https://github.com/o/r/edit/main/service/data/venue_locations.json" in body
+    assert "Specs Bar" not in body
+
+
+def test_existing_venue_found_by_street_address(tmp_path):
+    store = _store(tmp_path)
+    p = {"reason": "x", "events": 1, "sources": ["X"]}
+    assert ci._existing_venues("back room, 12 william saroyan place, san francisco", p, store) == \
+        [("specs-bar", None)]
+    assert ci._existing_venues("12 william st, san francisco", p, store) == []
+    assert ci._existing_venues("14 william saroyan pl", p, store) == []
 
 
 def test_places_check_alerts_on_many_new_pending_and_invalid_files(tmp_path):
