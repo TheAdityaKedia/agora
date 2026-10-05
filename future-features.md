@@ -33,6 +33,9 @@ here.
   Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md);
   how it works now: [`canvas/HOW-IT-WORKS.md`](canvas/HOW-IT-WORKS.md).
   **Known gaps** (found 2026-10-04; none has a spec yet), most important first:
+  - Spec for the first two: [`feature-specs/event-lifecycle.md`](feature-specs/event-lifecycle.md)
+    (stable ids, updates, cancellations and disappearances, shown on the
+    main site and in collections).
   - *Event copies drift.* An added event is a copy made at that moment;
     a later cancellation, new time or new venue never reaches it. Worse,
     upstream: saves never update rows and nothing removes events that vanish
