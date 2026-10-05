@@ -88,19 +88,21 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
     for url in pipeline.select_urls(pipeline.load_sources(), source_filters, excludes):
         result = results.get(url, _MISSING)
         row = {"url": url, "name": result["source_name"], "status": result["status"],
-               "events": len(result["events"]), "saved": 0, "merged": 0, "skipped": 0,
-               "error": result["error"]}
+               "events": len(result["events"]), "saved": 0, "merged": 0, "updated": 0,
+               "skipped": 0, "error": result["error"]}
         if result["status"] == "ok":
             try:
                 events = [RawEvent.from_dict(d) for d in result["events"]]
+                stats = {}
                 row["saved"], row["merged"], row["skipped"] = pipeline.save_events(
-                    events, source=result["source_name"])
+                    events, source=result["source_name"], stats=stats)
+                row["updated"] = stats.get("updated", 0)
                 scraped_names.add(result["source_name"])
             except Exception as e:
                 row["status"] = "save_error"
                 row["error"] = f"{type(e).__name__}: {e}"
         print(f"[{row['name'] or url}] {row['status']}: {row['saved']} saved, "
-              f"{row['merged']} merged, {row['skipped']} skipped", flush=True)
+              f"{row['merged']} merged, {row['updated']} updated, {row['skipped']} skipped", flush=True)
         rows.append(row)
 
     # Same guard and scoping as main.run(): a classify failure (e.g. no AWS

@@ -19,11 +19,14 @@ def test_matches():
     assert not alembic.matches("https://luma.com/frontiertower")
 
 
-def test_drops_cancelled_and_online_copies(events):
+def test_drops_online_copies_and_flags_cancelled(events):
     # fixture: Chalice in person + its (ONLINE) copy, two cancelled, one breathwork
-    assert [e.title for e in events] == [
-        "THE CHALICE: Between Science and Spirituality, with Bob Jesse",
-        "Psychedelic Breathwork with Matt Barkin",
+    assert [(e.title, e.status) for e in events] == [
+        ("THE CHALICE: Between Science and Spirituality, with Bob Jesse", None),
+        ("Soulful Flow with Anne Rene", "cancelled"),
+        ("Psychedelic Breathwork with Matt Barkin", None),
+        ("Emotional and Relational Surfing: Tools for Developmental Friendship with Brian Basham "
+         "and Kedar Shashidhar", "cancelled"),
     ]
 
 
@@ -38,4 +41,5 @@ def test_event_fields(events):
 
 def test_building_wide_room_uses_plain_address(events):
     # sessions whose "room" is the whole venue don't repeat the venue name
-    assert events[1].location == alembic.ADDRESS
+    breathwork = next(e for e in events if e.title.startswith("Psychedelic Breathwork"))
+    assert breathwork.location == alembic.ADDRESS

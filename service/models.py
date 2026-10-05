@@ -33,6 +33,17 @@ class Event(Base):
     sources = Column(JSON, nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False)
 
+    # Lifecycle (feature-specs/event-lifecycle.md, §2). All nullable so rows
+    # saved before them read as scheduled and never seen; db.init_db adds
+    # them to an existing table.
+    # scheduled / cancelled / postponed / unlisted / moved (lifecycle.py)
+    status = Column(String, server_default="scheduled")
+    status_at = Column(DateTime(timezone=True))   # when status last changed
+    changed_at = Column(DateTime(timezone=True))  # when a tracked field last changed
+    changed = Column(JSON)  # {field: previous value} for the most recent change
+    seen = Column(JSON)     # {source: ISO time} of the last good scrape that listed it
+    misses = Column(JSON)   # {source: n} consecutive good scrapes that should have and didn't
+
     # Enforce uniqueness on (url, start_time) for events that have a URL, not on
     # url alone: a single show URL legitimately hosts many performances at
     # different times (Berkeley Rep, NCTC expose no per-performance URL). NULL

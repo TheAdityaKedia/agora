@@ -76,7 +76,7 @@ def parse_events(calendar: list[dict], productions: list[dict], *, client_id: st
             venue = _clean((detail.get("venue") or {}).get("name"))
             logo = prod.get("logoFile")
             for st in prod.get("showtimes") or []:
-                if st.get("isCancelled") or st.get("isVisible") is False:
+                if st.get("isVisible") is False:
                     continue
                 start = _parse_start(st.get("performanceStartTime"))
                 if not start:
@@ -89,6 +89,7 @@ def parse_events(calendar: list[dict], productions: list[dict], *, client_id: st
                     url=PRODUCTION_URL.format(client=client_id, id=pid) if pid is not None else None,
                     description=_clean(detail.get("description")),
                     image_url=IMAGE_URL.format(file=logo) if logo else None,
+                    status="cancelled" if st.get("isCancelled") else None,
                 )))
 
     per_day = Counter((pid, date) for pid, date, _ in rows)

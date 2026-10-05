@@ -9,7 +9,8 @@ class RawEvent:
     `start_time` must be timezone-aware (scrapers normalize source-local times
     to UTC). `id`, `sources`, and `created_at` are assigned at save time.
     `image_url` is optional (None for sources that don't expose an image, or
-    for URL-less email/flyer submissions).
+    for URL-less email/flyer submissions). `status` is None unless the
+    source flags the event cancelled or postponed.
     """
     title: str
     start_time: datetime
@@ -17,6 +18,9 @@ class RawEvent:
     url: str | None
     description: str | None
     image_url: str | None = None
+    # "cancelled" / "postponed" when the source says so (feature-specs/
+    # event-lifecycle.md, §2): emit the event with it instead of dropping it.
+    status: str | None = None
 
     def to_dict(self) -> dict:
         """JSON-safe form, for handing events between processes (CI scrape → merge)."""

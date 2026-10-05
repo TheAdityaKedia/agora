@@ -39,7 +39,7 @@ def test_timed_entry_slots_collapse_to_earliest():
     assert len(events) == 4
 
 
-def test_skips_cancelled_hidden_and_test_events():
+def test_skips_hidden_and_test_events_and_flags_cancelled():
     calendar = [{"date": "2026-10-10", "productions": [
         {"productionId": 1, "name": "Dream Warrior Test Event", "showtimes": [
             {"performanceStartTime": "2026-10-10 19:00"}]},
@@ -49,8 +49,9 @@ def test_skips_cancelled_hidden_and_test_events():
             {"performanceStartTime": "2026-10-10 21:00"}]},
     ]}]
     events = ovationtix.parse_events(calendar, [], client_id="1", fallback_location="X")
-    assert [(e.title, e.start_time.hour) for e in events] == [("Real Show", 4)]
-    assert events[0].location == "X"
+    assert [(e.title, e.start_time.hour, e.status) for e in events] == [
+        ("Real Show", 2, "cancelled"), ("Real Show", 4, None)]
+    assert events[1].location == "X"
 
 
 def test_wrappers():

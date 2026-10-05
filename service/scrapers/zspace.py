@@ -116,7 +116,7 @@ def parse_events(calendar: list[dict], productions: list[dict]) -> list[RawEvent
     """Join the calendar (performances) with the catalog (descriptions/venue).
 
     Pure — no network — so it's testable against captured API responses. One
-    RawEvent per visible, non-cancelled showtime.
+    RawEvent per visible showtime (cancelled ones with status "cancelled").
     """
     catalog = _index_productions(productions)
     events: list[RawEvent] = []
@@ -132,7 +132,7 @@ def parse_events(calendar: list[dict], productions: list[dict]) -> list[RawEvent
             logo = prod.get("logoFile")
             image_url = IMAGE_URL.format(file=logo) if logo else None
             for st in prod.get("showtimes") or []:
-                if st.get("isCancelled") or st.get("isVisible") is False:
+                if st.get("isVisible") is False:
                     continue
                 start_time = _parse_start(st.get("performanceStartTime"))
                 if not (title and start_time):
@@ -144,6 +144,7 @@ def parse_events(calendar: list[dict], productions: list[dict]) -> list[RawEvent
                     url=url,
                     description=description,
                     image_url=image_url,
+                    status="cancelled" if st.get("isCancelled") else None,
                 ))
     return events
 

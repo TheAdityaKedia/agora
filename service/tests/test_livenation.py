@@ -18,15 +18,17 @@ def test_parse_reads_each_jsonld_show():
     assert events[0].image_url.startswith("https://")
 
 
-def test_parse_skips_cancelled_naive_dates_are_pacific_and_dedupes():
+def test_parse_keeps_cancelled_with_status_naive_dates_are_pacific_and_dedupes():
     block = ('<script type="application/ld+json">{"@type":"MusicEvent","name":"%s",'
              '"startDate":"%s","eventStatus":"%s"}</script>')
     html = (block % ("Gone", "2026-10-05T20:00:00", "https://schema.org/EventCancelled")
+            + block % ("Later", "2026-10-05T20:30:00", "https://schema.org/EventPostponed")
             + block % ("Late Show", "2026-10-05T21:00:00", "https://schema.org/EventScheduled")
             + block % ("Late Show", "2026-10-05T21:00:00", "https://schema.org/EventScheduled"))
     events = livenation.parse(html, venue=VENUE)
-    assert [e.title for e in events] == ["Late Show"]
-    assert events[0].start_time == datetime(2026, 10, 6, 4, 0, tzinfo=timezone.utc)
+    assert [(e.title, e.status) for e in events] == [
+        ("Gone", "cancelled"), ("Later", "postponed"), ("Late Show", None)]
+    assert events[2].start_time == datetime(2026, 10, 6, 4, 0, tzinfo=timezone.utc)
 
 
 def test_wrappers_match_their_own_sites():
