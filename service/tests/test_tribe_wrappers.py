@@ -53,3 +53,31 @@ def test_ybgfestival_maps_cross_street_locations():
     assert ybgfestival.place(numbered).location == \
         "Children’s Garden, Yerba Buena Gardens, 799 Howard St., San Francisco"  # already mappable
     assert ybgfestival.place(bare).location == ybgfestival.STREET
+
+
+def test_tribe_falls_back_to_excerpt_when_description_is_missing():
+    base = {"title": "Talk", "utc_start_date": "2026-10-10 02:00:00", "url": "u"}
+    events = [
+        dict(base, description="", excerpt="<p>In this lecture at the JCCSF, marvel at the works.</p>"),
+        dict(base, description="<p>B</p>", excerpt="<p>Lace up for an unforgettable fall hike in the Presidio.</p>"),
+        dict(base, description="<p>" + "A full description of the event. " * 3 + "</p>", excerpt="<p>Short.</p>"),
+    ]
+    out = tribe_events.parse_events(events)
+    assert out[0].description.startswith("In this lecture")
+    assert out[1].description.startswith("Lace up")
+    assert out[2].description.startswith("A full description")  # long description wins
+
+
+def test_fortmason_strips_flattened_tab_bar():
+    cases = {
+        "@ About Event Details About The Artists Gallery Plan Your Visit 250 Years, Indigenous Futures Presented":
+            "250 Years, Indigenous Futures Presented",
+        "@ (Donations welcome) About Tour Details Historic Images Plan Your Visit Reserve Space Fort Mason Tour":
+            "Fort Mason Tour",
+        "@ About Event Features Plan Your Visit Related Events TICKETS Presented By Arion Press":
+            "Presented By Arion Press",
+        "A normal description with no tab bar.": "A normal description with no tab bar.",
+    }
+    for raw, want in cases.items():
+        assert fortmason.strip_tabs(raw) == want
+    assert fortmason.strip_tabs(None) is None
