@@ -2538,6 +2538,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "india-community-center": {
+      "added": "2026-10-06",
+      "address": "525 Los Coches Street, Milpitas, CA 95035",
+      "evidence": [
+        "map: India Community Center in Santa Clara County (building, way/157811574)",
+        "text: Milpitas",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.431923,
+      "lng": -121.895253,
+      "name": "India Community Center",
+      "osm": "way/157811574",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "ingleside-branch-library": {
       "added": "2026-10-02",
       "address": "1298 Ocean Avenue, San Francisco, CA 94112",
@@ -4704,6 +4721,22 @@
       "region": "southbay",
       "status": "verified"
     },
+    "starbright-theater": {
+      "added": "2026-10-06",
+      "address": "1770 West Campbell Avenue, Campbell, CA 95008",
+      "evidence": [
+        "map: 1770 in Santa Clara County (building, way/417907163)",
+        "text: Campbell",
+        "street number matches"
+      ],
+      "lat": 37.285749,
+      "lng": -121.981716,
+      "name": "Starbright Theater",
+      "osm": "way/417907163",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "starlite-room": {
       "added": "2026-10-02",
       "address": "450 Powell Street, San Francisco, CA 94102",
@@ -4725,6 +4758,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "sunnyvale-theatre": {
+      "added": "2026-10-06",
+      "address": "550 East Remington Drive, Sunnyvale, CA 94088",
+      "evidence": [
+        "map: Sunnyvale Theatre in Santa Clara County (building, way/61114768)",
+        "text: Sunnyvale",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.358089,
+      "lng": -122.024846,
+      "name": "Sunnyvale Theatre",
+      "osm": "way/61114768",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "sunset-branch-library": {
       "added": "2026-10-02",
@@ -5933,6 +5983,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "village-theatre": {
+      "added": "2026-10-06",
+      "address": "233 Front Street, Danville, CA 94526",
+      "evidence": [
+        "map: Village Theatre & Art Gallery in Contra Costa County (building, way/1052130747)",
+        "text: Danville",
+        "street number matches"
+      ],
+      "lat": 37.821185,
+      "lng": -121.997507,
+      "name": "Village Theatre",
+      "osm": "way/1052130747",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "vintage-berkeley-wine-shop": {
       "added": "2026-10-02",
