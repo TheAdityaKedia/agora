@@ -225,7 +225,7 @@ jobs:
         env:
           COUNT: ${{ steps.alert.outputs.count }}
         run: |
-          echo "::error::${COUNT} source(s) failed — see the Scrape failures issue"
+          echo "::error::${COUNT} source(s) need attention — see the Scrape failures issue"
           exit 1
       # Venues (feature-specs/venues.md): one "Places to review" issue lists
       # every location string waiting for a decision. Its body is rewritten in

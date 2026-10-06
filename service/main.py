@@ -139,6 +139,15 @@ def save_events(raw_events: list[RawEvent], source: str,
     now = datetime.now(timezone.utc)
     session = get_session()
     saved = merged = skipped = updated = 0
+    # Rows this batch already matched. One source listing two events with the
+    # same title at the same time (two rooms, two screens) matches them both to
+    # one row through _find_duplicate's title rule; without this the second
+    # would apply_update over the first, and the next run would swap them back
+    # — a row flapping its url/location forever, with a bogus "Venue changed"
+    # badge and a manifest diff every refresh. The first one wins; the rest are
+    # skipped, as they were before updates existed.
+    claimed: set = set()
+    collisions = 0
     try:
         for raw in raw_events:
             # "CANCELLED: …" → status, and the plain title for the id and matching.
@@ -148,7 +157,16 @@ def save_events(raw_events: list[RawEvent], source: str,
                 continue
             existing = _find_duplicate(session, raw, source)
             if existing is not None:
+                was_moved = existing.status == lifecycle.MOVED
                 lifecycle.mark_seen(existing, source, now)
+                if was_moved and lifecycle.undo_move(session, existing):
+                    print(f"[{source}] {existing.title[:60]!r} is listed again at its old "
+                          f"time; undid the move", flush=True)
+                if existing.id in claimed:
+                    collisions += 1
+                    skipped += 1
+                    continue
+                claimed.add(existing.id)
                 if source in (existing.sources or []):
                     # Same source re-scraping something it already produced:
                     # the creating source's new details win.
@@ -163,8 +181,10 @@ def save_events(raw_events: list[RawEvent], source: str,
                 merged += 1
                 continue
             status = raw.status if raw.status in lifecycle.EXPLICIT else lifecycle.SCHEDULED
+            new_id = _new_id(session, raw, source)
+            claimed.add(new_id)  # a later event in this batch must not update it
             session.add(Event(
-                id=_new_id(session, raw, source),
+                id=new_id,
                 title=raw.title,
                 start_time=raw.start_time,
                 location=raw.location,
@@ -179,6 +199,9 @@ def save_events(raw_events: list[RawEvent], source: str,
                 misses={source: 0},
             ))
             saved += 1
+        if collisions:
+            print(f"[{source}] {collisions} event(s) matched a row another event in this "
+                  f"run already claimed (same title and time); kept the first", flush=True)
         session.commit()
     except Exception:
         session.rollback()

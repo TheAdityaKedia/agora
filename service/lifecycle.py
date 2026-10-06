@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import replace
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 SCHEDULED, CANCELLED, POSTPONED, UNLISTED, MOVED = (
     "scheduled", "cancelled", "postponed", "unlisted", "moved")
@@ -23,6 +23,10 @@ GONE = (UNLISTED, MOVED)
 
 # The fields the creating source owns; a change to any is recorded.
 TRACKED_FIELDS = ("title", "location", "url", "description", "image_url")
+
+# How long a change stays worth showing. Here rather than in the exporter
+# because apply_update needs it too: it keeps unexpired entries in `changed`.
+CHANGED_DAYS = 7
 
 # "CANCELLED: Jazz Night", "[Canceled] Jazz Night", "POSTPONED - Jazz Night",
 # "(Cancelled) …"; and at the end, "Jazz Night (Cancelled)", "Jazz Night -
@@ -62,11 +66,39 @@ def _iso(t: datetime) -> str:
 
 def mark_seen(row, source: str, now: datetime) -> None:
     """The source listed this row in a good scrape: seen now, no misses, and
-    an unlisted (or moved) row is back: it was a flaky scrape."""
+    an unlisted (or moved) row is back: it was a flaky scrape.
+
+    A row that comes back from `moved` also needs its move undone — see
+    undo_move, which the save path calls because it needs the session.
+    """
     row.seen = {**(row.seen or {}), source: _iso(now)}  # reassign: JSON isn't tracked in place
     row.misses = {**(row.misses or {}), source: 0}
     if row.status in GONE:
         set_status(row, SCHEDULED, now)
+
+
+def undo_move(session, row) -> bool:
+    """The source lists this row again after it was judged moved: the pairing
+    was wrong (a flaky scrape, or the old showing came back). Restoring the row
+    alone would leave both showings listed while an alias still redirected this
+    id to the other one and the other one still claimed "Rescheduled · was
+    <this row's time>". Drop that alias and that marker. Returns whether
+    anything was undone.
+    """
+    from models import Event, EventAlias  # local: models imports nothing of ours
+
+    alias = session.get(EventAlias, row.id)
+    if alias is None or alias.reason != MOVED:
+        return False
+    successor = session.get(Event, alias.new_id)
+    was = (successor.changed or {}).get("start_time") if successor is not None else None
+    if was and _aware(datetime.fromisoformat(was)) == _aware(row.start_time):
+        rest = {k: v for k, v in successor.changed.items() if k != "start_time"}
+        successor.changed = rest or None
+        if not rest:
+            successor.changed_at = None
+    session.delete(alias)
+    return True
 
 
 def set_status(row, status: str, now: datetime) -> bool:
@@ -88,7 +120,15 @@ def apply_update(row, raw, now: datetime) -> bool:
     for f in was:
         setattr(row, f, getattr(raw, f))
     if was:
-        row.changed, row.changed_at = was, now
+        # Merge, don't replace: a description-only re-scrape must not erase a
+        # live "Rescheduled · was …" or "Venue changed" badge (only some
+        # tracked fields are shown). Entries already recorded win, so what's
+        # shown stays the value from before the first change in the window;
+        # entries whose window has passed are dropped.
+        prior = row.changed or {}
+        if not prior or not row.changed_at or now - _aware(row.changed_at) > timedelta(days=CHANGED_DAYS):
+            prior = {}
+        row.changed, row.changed_at = {**was, **prior}, now
     # An explicit status applies at once; listed again without one, it's on.
     flipped = False
     if raw.status in EXPLICIT:

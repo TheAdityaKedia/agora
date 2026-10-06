@@ -65,7 +65,7 @@ INDEX_FILE = "event-index.json"
 
 # A change shows on the site for this long (feature-specs/event-lifecycle.md,
 # Decisions), and only these fields are shown; the rest stay in the DB.
-CHANGED_DAYS = 7
+CHANGED_DAYS = lifecycle.CHANGED_DAYS
 SHOWN_CHANGES = ("title", "location", "start_time")
 INDEX_FIELDS = ("title", "start_time", "location", "url", "image_url", "sources", "venue",
                 "status", "changed")

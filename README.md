@@ -156,7 +156,9 @@ testing workflow changes.
    `main`'s manifest, so a filtered run against a near-empty DB would be blocked).
 
 **Failure alerts** — if any source hard-fails (error, crashed/timed-out job,
-save error, no scraper) or returns 0 events, the run opens a **Scrape
+save error, no scraper), returns 0 events, or comes back **possibly partial**
+(it listed far fewer events than the DB holds for it, so no event was marked no
+longer listed — the signal that a scraper half-broke), the run opens a **Scrape
 failures** issue (or comments on the open one) that @mentions the repo owner —
 GitHub emails you — and the run is marked failed. Data still ships first. A
 clean run closes the issue. Sources in `service/data/local_only_sources.txt`

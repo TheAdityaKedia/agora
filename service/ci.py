@@ -295,7 +295,15 @@ def load_local_only(path=LOCAL_ONLY_FILE) -> list[str]:
 
 
 def find_alerts(report: dict, local_only: list[str]) -> list[dict]:
-    """Sources worth an alert: any non-ok status, or ok with 0 events.
+    """Sources worth an alert: any non-ok status, ok with 0 events, or a scrape
+    the lifecycle judge found possibly partial.
+
+    A possibly-partial source listed far fewer of its own events than the DB
+    holds (lifecycle.PARTIAL_SHARE), so its misses weren't counted. That is the
+    pipeline's only signal for a scraper that half-broke — it caught San
+    Francisco Playhouse dropping 101 performances while both shows were still
+    on its site — and it ships in an auto-merged PR body nobody reads, so it
+    belongs here.
 
     Known local-only sources are skipped — they fail from CI every day by
     design, and alerting on them would bury real regressions.
@@ -308,18 +316,23 @@ def find_alerts(report: dict, local_only: list[str]) -> list[dict]:
             alerts.append({**r, "reason": r["status"]})
         elif r["events"] == 0:
             alerts.append({**r, "reason": "0 events"})
+        elif r.get("possibly_partial"):
+            alerts.append({**r, "reason": "possibly partial scrape (misses not counted)"})
     return alerts
 
 
 def render_alert_body(alerts: list[dict], run_url: str, mention: str = "") -> str:
     """Markdown for the failure issue/comment: one line per failing source."""
-    lines = [f"{len(alerts)} source(s) failed in [this run]({run_url}). {mention}".rstrip(),
+    lines = [f"{len(alerts)} source(s) need attention in [this run]({run_url}). {mention}".rstrip(),
              "", "| Source | Problem | Error |", "|---|---|---|"]
     for a in alerts:
         error = (a["error"] or "").replace("`", "'").replace("|", "/").replace("\n", " ")[:300]
         lines.append(f"| {a['name'] or a['url']} | {a['reason']} | {error} |")
-    lines += ["", "Existing rows for these sources are kept. Known CI-blocked sources "
-                  "(`service/data/local_only_sources.txt`) are not alerted on."]
+    lines += ["", "Existing rows for these sources are kept. A **possibly partial** scrape "
+                  "listed far fewer events than the DB holds for it, so no event was marked "
+                  "no longer listed — check the scraper before trusting a drop. Known "
+                  "CI-blocked sources (`service/data/local_only_sources.txt`) are not "
+                  "alerted on."]
     return "\n".join(lines) + "\n"
 
 

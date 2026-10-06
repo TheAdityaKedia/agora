@@ -32,6 +32,15 @@ def plan(session) -> Plan:
     ids = {e.id for e in rows}
     wanted: dict = {}
     for e in rows:
+        # Already keyed at creation: leave it. id_of_row recomputes from the
+        # row's *current* url and title, but the id was computed from the
+        # values at creation — a row whose url has since been corrected by an
+        # update would otherwise be re-keyed on every pass, churning ids that
+        # collections and calendar entries hold. Derived ids are uuid5; a row
+        # saved before stable ids (or after a collision) has a random uuid4.
+        if getattr(e.id, "version", None) == 5:
+            out.unchanged += 1
+            continue
         new = event_ids.id_of_row(e)
         if new is None or new == e.id:
             out.unchanged += 1
