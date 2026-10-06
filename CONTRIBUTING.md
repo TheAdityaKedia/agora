@@ -109,6 +109,19 @@ writing a parser, spike the page:
    HTML can be *inconsistent* — Luma sometimes returns a bare JS shell with no
    calendar id or JSON-LD — so resolve identifiers through an API
    (`api.luma.com/url?url=<slug>`) rather than depending on the page markup.
+6. **Confirm a platform id is really this venue's.** A ticketing id found in a
+   page can belong to someone else: SF Ballet's calendar embeds an OvationTix
+   client id whose API returns The Argyros, a theater in Idaho. Before
+   building on an id, check the API's own venue or production names.
+7. **Don't sink time into WordPress custom post types without dates.**
+   `/wp-json/wp/v2/types` often lists an `event`/`show` type, but its REST
+   items usually carry only the *publish* date, with the event date in page
+   text (SFMOMA, Shotgun Players, Letterform Archive and others, 2026-10).
+   That's a per-page DOM scrape, not an API.
+8. **A 403 from a datacenter IP predicts a CI failure.** GitHub's runners are
+   datacenter IPs too. If a plain fetch from a cloud sandbox gets a Cloudflare
+   403, expect the same in `scrape.yml` and see "When to give up" (or
+   `local_only_sources.txt`).
 
 ### Data-source priority ladder
 
@@ -271,6 +284,40 @@ Fetch the detail page and extract the real synopsis. Lessons:
   detail-page fetches are expensive — see "Detail-page fetches inside a single
   scraper" below.
 
+## Check image and description quality before calling a source done
+
+Tests prove the parser matches its fixture; they don't prove the site's data
+is any good. In the October 2026 sprints, 5 of 14 new sources shipped with
+bad or missing descriptions that every test passed: JCCSF had text on 1 of 28
+events (and it was the letter "B"), and Fort Mason's opened with navigation
+text. Before calling a source done, run its `scrape()` live and check:
+
+- **Coverage:** count events with an image and with a description of at least
+  ~40 characters. Note anything well under 100% in the scraper's docstring
+  with the reason (e.g. "Live Nation pages carry no descriptions").
+- **Read 3–5 descriptions in full.** Look for the junk we've hit:
+  - flattened tab bars ("@ About Event Details … Plan Your Visit", Fort Mason)
+  - logistics headers ("LOCATION … ADMISSION … RSVP here", GLBT)
+  - schedule and policy blocks ("Dates : … Times: … Terms & Conditions",
+    OvationTix)
+  - credit-only lines ("Source: <url>", SF Center for the Book)
+  - stray one-character fields (JCCSF; the Tribe excerpt was the fix)
+  - one blurb repeated on every event of a series (fine for a run of the same
+    show, wrong for different events)
+- **Load a few image URLs** (200 + an `image/*` content type), and look at
+  whether they're the show's image or a generic logo. Check that a page's
+  `og:image` / `og:description` are per show before relying on them; on
+  Another Planet's sites they're the same site-wide logo and text on every
+  page.
+- **Fix it before the first production scrape.** Saves never update existing
+  rows, so a cleanup shipped later only reaches newly listed events unless
+  that source's rows are deleted in Neon (README → "Scheduled scraping" →
+  Operations).
+
+A quick way to measure every source at once is the live manifest:
+`frontend/events.json` (per-event `image_url` and `summary`) plus
+`frontend/descriptions.json` (full text by event id).
+
 ## Dedup & keys
 
 `main._find_duplicate` matches on `(url, start_time)`, then `(title,
@@ -286,6 +333,11 @@ share one show URL (Berkeley Rep, NCTC). The DB's partial unique index is on
   `sfjazz.py`. When the source gives an absolute ISO datetime, use it (no
   inference needed) — always prefer that.
 - Always normalize **source-local → UTC** before storing.
+- **Check two or three events' times against the venue's own page.** Wrong
+  times look fine in tests. F8's Squarespace cards all parsed as midnight
+  (the `?format=json` feed had the real 9pm starts), and Montalvo's JSON-LD
+  labels local times as `+00:00`. A whole source at midnight, or at odd hours
+  like 2am, is the tell.
 
 ## Filter irrelevant content at scrape time
 
@@ -312,6 +364,16 @@ filter in the exporter instead. Reference:
 joined — while keeping events that merely touch food/drink in another format (a
 cooking `workshop`, a food `talk`, a dinner + `performance`). Key on the type
 being the *only* format, not on the topic, so genuine events aren't lost.
+
+**Drop listings that aren't public events** at scrape time too. Seen so far:
+ticketing allocations and school shows (Stanford Live's "Student Lottery
+Winners", "Student Matinee"), platform test productions (OvationTix "test
+event"), members-only competitions (Mechanics' Institute chess tournaments),
+online-only sessions, and timed-entry slots that would flood the calendar
+(Henry J's exhibition sold a slot every 30 minutes; collapse those to one
+listing, see `ovationtix.py`). Multi-region organizations need a Bay Area
+filter on location (`bay_area.py`; Diaspora Arts Connection also lists San
+Diego).
 
 ## When to give up
 
@@ -469,6 +531,11 @@ Silence during a multi-minute scrape is scary. Every scraper should log with a
 - Cover: one event per showing, correct date+time (and year inference), the
   URL, description extraction (incl. noise-stripping), and the empty/fallback
   case.
+- **Don't let tests depend on today's date.** A fixture event "next month"
+  becomes past in a few weeks; "now minus 3 hours" lands on yesterday before
+  3am. Compute expectations from the same clock the code uses (see
+  `test_upcoming_only_drops_past_cards`) or build times relative to local
+  midnight.
 - Run `service/.venv/bin/python -m pytest` from `service/`.
 
 ## Running & building
@@ -479,6 +546,15 @@ an **ephemeral working store** (safe to `docker compose down -v`); the committed
 `frontend/events.json` is the durable artifact the site serves. When a scraper's
 *output* changes (URLs, descriptions), wipe the DB and re-scrape so stale rows
 don't linger (dedup skips existing rows, it doesn't update them).
+
+**Before merging new sources, run them once from CI on the branch:**
+`gh workflow run scrape.yml --ref <branch> -f sources="<substrings>"`. Non-`main`
+runs use the `ci-test` database and a throwaway `ci-sandbox/` branch, so
+nothing ships. It shows whether GitHub's datacenter IPs can reach each site
+and how the venue resolver handles your location strings (unplaced ones land
+in a "Places to review (test run on <branch>)" issue). The `sources` filter is
+a plain substring match, so check each substring matches exactly one line of
+`sources.txt`.
 
 ## Commits
 
