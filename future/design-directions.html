@@ -76,6 +76,15 @@
   .spec .input { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--p-border); background: var(--p-input); color: var(--p-muted); font-size: 14px; }
   .spec .cta { padding: 12px; border-radius: 10px; text-align: center; font-weight: 700; background: var(--p-accent); color: var(--p-accent-fg); }
   .spec .hues { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  /* Logo boards: the canvas's 640×440 artboards, shown at 3/4 size; they
+     keep their own colours, and scroll sideways on a phone. */
+  .boards { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 20px; margin-top: 20px; }
+  @media (max-width: 560px) { .boards { grid-template-columns: minmax(0, 1fr); } }
+  .board-fig { margin: 0; display: grid; gap: 6px; min-width: 0; }
+  .board-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); }
+  .board { zoom: 0.75; width: 640px; }
+  .board-fig figcaption { font-size: 13px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -92,6 +101,646 @@
   <h3><span class="num">1.1</span>Autumn</h3>
   <p>Explored October 2026. Started from muted red, oat and pumpkin, which read as soft and feminine; then moved toward workwear and leather tones for a more rugged take. Tobacco &amp; ochre with earthy tags is the current favourite. Contrast is against each palette's background; text needs 4.5:1, buttons and large text 3:1.</p>
   <div class="palettes" id="autumn"></div>
+
+  <h2><span class="num">2</span>Logos</h2>
+  <p>Logo explorations from October 2026, drawn on a design canvas. Each board shows the mark large, as an app icon, on the dark ground and at favicon size. All use the current palette (fog, bay navy, International Orange) and Big Shoulders Display. None has shipped; the site still uses the plain "Agora" wordmark.</p>
+
+  <h3><span class="num">2.1</span>Marks</h3>
+  <p>Eleven directions: the agora itself (stoa, theatron), a map pin, the Golden Gate (span, towers, tower A, above the fog), a crowd gathering in a circle, the fog sun, Victorian gables and a gull.</p>
+  <div class="boards">
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">01 · Stoa</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<polygon points="8,38 50,10 92,38" fill="#13212e"/>
+<circle cx="50" cy="29" r="6" fill="#c0362c"/>
+<rect x="17" y="44" width="11" height="36" fill="#13212e"/>
+<rect x="44.5" y="44" width="11" height="36" fill="#13212e"/>
+<rect x="72" y="44" width="11" height="36" fill="#13212e"/>
+<rect x="8" y="84" width="84" height="7" fill="#13212e"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+<polygon points="8,38 50,10 92,38" fill="#ffffff"/>
+<circle cx="50" cy="29" r="6" fill="#c0362c"/>
+<rect x="17" y="44" width="11" height="36" fill="#ffffff"/>
+<rect x="44.5" y="44" width="11" height="36" fill="#ffffff"/>
+<rect x="72" y="44" width="11" height="36" fill="#ffffff"/>
+<rect x="8" y="84" width="84" height="7" fill="#ffffff"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<polygon points="8,38 50,10 92,38" fill="#e4e9ec"/>
+<circle cx="50" cy="29" r="6" fill="#f26b4a"/>
+<rect x="17" y="44" width="11" height="36" fill="#e4e9ec"/>
+<rect x="44.5" y="44" width="11" height="36" fill="#e4e9ec"/>
+<rect x="72" y="44" width="11" height="36" fill="#e4e9ec"/>
+<rect x="8" y="84" width="84" height="7" fill="#e4e9ec"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<polygon points="8,38 50,10 92,38" fill="#13212e"/>
+<rect x="17" y="44" width="11" height="36" fill="#13212e"/>
+<rect x="44.5" y="44" width="11" height="36" fill="#13212e"/>
+<rect x="72" y="44" width="11" height="36" fill="#13212e"/>
+<rect x="8" y="84" width="84" height="7" fill="#13212e"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">02 · Theatron</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M12,78 A38,38 0 0 1 88,78" fill="none" stroke="#13212e" stroke-width="8" stroke-linecap="round"/>
+<path d="M26,78 A24,24 0 0 1 74,78" fill="none" stroke="#13212e" stroke-width="8" stroke-linecap="round"/>
+<path d="M40,78 A10,10 0 0 1 60,78" fill="none" stroke="#13212e" stroke-width="8" stroke-linecap="round"/>
+<circle cx="50" cy="88" r="6" fill="#c0362c"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="62" height="62" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M12,78 A38,38 0 0 1 88,78" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+<path d="M26,78 A24,24 0 0 1 74,78" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+<path d="M40,78 A10,10 0 0 1 60,78" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+<circle cx="50" cy="90" r="6" fill="#13212e"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M12,78 A38,38 0 0 1 88,78" fill="none" stroke="#e4e9ec" stroke-width="8" stroke-linecap="round"/>
+<path d="M26,78 A24,24 0 0 1 74,78" fill="none" stroke="#e4e9ec" stroke-width="8" stroke-linecap="round"/>
+<path d="M40,78 A10,10 0 0 1 60,78" fill="none" stroke="#e4e9ec" stroke-width="8" stroke-linecap="round"/>
+<circle cx="50" cy="88" r="6" fill="#f26b4a"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<path d="M12,80 A38,38 0 0 1 88,80" fill="none" stroke="#13212e" stroke-width="12" stroke-linecap="round"/>
+<path d="M33,80 A17,17 0 0 1 67,80" fill="none" stroke="#13212e" stroke-width="12" stroke-linecap="round"/>
+<circle cx="50" cy="88" r="9" fill="#c0362c"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">03 · Pin</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M50,95 C50,95 16,60 16,38 A34,34 0 1 1 84,38 C84,60 50,95 50,95 Z" fill="#c0362c"/>
+<path d="M36,58 L50,20 L64,58" fill="none" stroke="#ffffff" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="41" y1="45" x2="59" y2="45" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #13212e; display: flex; align-items: center; justify-content: center">
+<svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M50,95 C50,95 16,60 16,38 A34,34 0 1 1 84,38 C84,60 50,95 50,95 Z" fill="#c0362c"/>
+<path d="M36,58 L50,20 L64,58" fill="none" stroke="#ffffff" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="41" y1="45" x2="59" y2="45" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M50,95 C50,95 16,60 16,38 A34,34 0 1 1 84,38 C84,60 50,95 50,95 Z" fill="#f26b4a"/>
+<path d="M36,58 L50,20 L64,58" fill="none" stroke="#0e1822" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="41" y1="45" x2="59" y2="45" stroke="#0e1822" stroke-width="7" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<path d="M50,96 C50,96 14,60 14,38 A36,36 0 1 1 86,38 C86,60 50,96 50,96 Z" fill="#c0362c"/>
+<path d="M35,60 L50,18 L65,60" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">04 · Span</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<line x1="22" y1="90" x2="50" y2="10" stroke="#c0362c" stroke-width="10" stroke-linecap="round"/>
+<line x1="78" y1="90" x2="50" y2="10" stroke="#c0362c" stroke-width="10" stroke-linecap="round"/>
+<path d="M4,22 Q50,78 96,22" fill="none" stroke="#13212e" stroke-width="4" stroke-linecap="round"/>
+<line x1="4" y1="66" x2="96" y2="66" stroke="#13212e" stroke-width="6" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="62" height="62" viewBox="0 0 100 100" aria-hidden="true">
+<line x1="22" y1="90" x2="50" y2="10" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+<line x1="78" y1="90" x2="50" y2="10" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+<path d="M4,22 Q50,78 96,22" fill="none" stroke="#13212e" stroke-width="4" stroke-linecap="round"/>
+<line x1="4" y1="66" x2="96" y2="66" stroke="#13212e" stroke-width="6" stroke-linecap="round"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<line x1="22" y1="90" x2="50" y2="10" stroke="#f26b4a" stroke-width="10" stroke-linecap="round"/>
+<line x1="78" y1="90" x2="50" y2="10" stroke="#f26b4a" stroke-width="10" stroke-linecap="round"/>
+<path d="M4,22 Q50,78 96,22" fill="none" stroke="#e4e9ec" stroke-width="4" stroke-linecap="round"/>
+<line x1="4" y1="66" x2="96" y2="66" stroke="#e4e9ec" stroke-width="6" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<line x1="20" y1="92" x2="50" y2="8" stroke="#c0362c" stroke-width="15" stroke-linecap="round"/>
+<line x1="80" y1="92" x2="50" y2="8" stroke="#c0362c" stroke-width="15" stroke-linecap="round"/>
+<line x1="6" y1="64" x2="94" y2="64" stroke="#13212e" stroke-width="10" stroke-linecap="round"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">05 · Gathering</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="16" r="7" fill="#13212e"/>
+<circle cx="70" cy="22.5" r="7" fill="#13212e"/>
+<circle cx="82.3" cy="39.5" r="7" fill="#13212e"/>
+<circle cx="82.3" cy="60.5" r="7" fill="#13212e"/>
+<circle cx="70" cy="77.5" r="7" fill="#13212e"/>
+<circle cx="50" cy="84" r="7" fill="#13212e"/>
+<circle cx="30" cy="77.5" r="7" fill="#13212e"/>
+<circle cx="17.7" cy="60.5" r="7" fill="#13212e"/>
+<circle cx="17.7" cy="39.5" r="7" fill="#13212e"/>
+<circle cx="30" cy="22.5" r="7" fill="#13212e"/>
+<circle cx="50" cy="50" r="13" fill="#c0362c"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="16" r="7" fill="#ffffff"/>
+<circle cx="70" cy="22.5" r="7" fill="#ffffff"/>
+<circle cx="82.3" cy="39.5" r="7" fill="#ffffff"/>
+<circle cx="82.3" cy="60.5" r="7" fill="#ffffff"/>
+<circle cx="70" cy="77.5" r="7" fill="#ffffff"/>
+<circle cx="50" cy="84" r="7" fill="#ffffff"/>
+<circle cx="30" cy="77.5" r="7" fill="#ffffff"/>
+<circle cx="17.7" cy="60.5" r="7" fill="#ffffff"/>
+<circle cx="17.7" cy="39.5" r="7" fill="#ffffff"/>
+<circle cx="30" cy="22.5" r="7" fill="#ffffff"/>
+<circle cx="50" cy="50" r="13" fill="#13212e"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="16" r="7" fill="#e4e9ec"/>
+<circle cx="70" cy="22.5" r="7" fill="#e4e9ec"/>
+<circle cx="82.3" cy="39.5" r="7" fill="#e4e9ec"/>
+<circle cx="82.3" cy="60.5" r="7" fill="#e4e9ec"/>
+<circle cx="70" cy="77.5" r="7" fill="#e4e9ec"/>
+<circle cx="50" cy="84" r="7" fill="#e4e9ec"/>
+<circle cx="30" cy="77.5" r="7" fill="#e4e9ec"/>
+<circle cx="17.7" cy="60.5" r="7" fill="#e4e9ec"/>
+<circle cx="17.7" cy="39.5" r="7" fill="#e4e9ec"/>
+<circle cx="30" cy="22.5" r="7" fill="#e4e9ec"/>
+<circle cx="50" cy="50" r="13" fill="#f26b4a"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<circle cx="50" cy="13" r="11" fill="#13212e"/>
+<circle cx="85" cy="50" r="11" fill="#13212e"/>
+<circle cx="50" cy="87" r="11" fill="#13212e"/>
+<circle cx="15" cy="50" r="11" fill="#13212e"/>
+<circle cx="50" cy="50" r="17" fill="#c0362c"/>
+</svg>
+</div>
+</div></div></div><figcaption>Developed further into the Gathering wordmark (13).</figcaption></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">06 · Fog sun</div>
+<div style="display: flex; align-items: baseline; height: 150px; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 140px; line-height: 1; letter-spacing: 0.01em; padding-top: 10px; box-sizing: border-box">
+<span>ag</span>
+<svg width="74" height="74" viewBox="0 0 100 100" aria-hidden="true" style="margin: 0 2px; align-self: flex-end; margin-bottom: 26px">
+<circle cx="50" cy="50" r="46" fill="#c0362c"/>
+<rect x="0" y="58" width="100" height="8" fill="#eef1f2"/>
+<rect x="0" y="74" width="100" height="8" fill="#eef1f2"/>
+</svg>
+<span>ra</span>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #13212e; display: flex; align-items: center; justify-content: center">
+<svg width="58" height="58" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="50" r="46" fill="#c0362c"/>
+<rect x="0" y="58" width="100" height="8" fill="#13212e"/>
+<rect x="0" y="74" width="100" height="8" fill="#13212e"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: baseline; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 52px; line-height: 88px; color: #e4e9ec">
+<span>ag</span>
+<svg width="27" height="27" viewBox="0 0 100 100" aria-hidden="true" style="margin: 0 1px">
+<circle cx="50" cy="50" r="46" fill="#f26b4a"/>
+<rect x="0" y="58" width="100" height="8" fill="#0e1822"/>
+<rect x="0" y="74" width="100" height="8" fill="#0e1822"/>
+</svg>
+<span>ra</span>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<circle cx="50" cy="50" r="48" fill="#c0362c"/>
+<rect x="0" y="60" width="100" height="12" fill="#eef1f2"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">07 · Gables</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<polygon points="2,92 2,50 17,32 32,50 32,92" fill="#13212e"/>
+<circle cx="17" cy="47" r="3.5" fill="#eef1f2"/>
+<rect x="9" y="60" width="16" height="12" fill="#eef1f2"/>
+<rect x="9" y="78" width="16" height="10" fill="#eef1f2"/>
+<polygon points="35,92 35,40 50,12 65,40 65,92" fill="#c0362c"/>
+<rect x="41" y="48" width="18" height="6" fill="#eef1f2"/>
+<rect x="44" y="70" width="12" height="22" fill="#eef1f2"/>
+<polygon points="68,92 68,50 83,32 98,50 98,92" fill="#13212e"/>
+<circle cx="83" cy="47" r="3.5" fill="#eef1f2"/>
+<rect x="75" y="60" width="16" height="12" fill="#eef1f2"/>
+<rect x="75" y="78" width="16" height="10" fill="#eef1f2"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #13212e; display: flex; align-items: center; justify-content: center">
+<svg width="62" height="62" viewBox="0 0 100 100" aria-hidden="true">
+<polygon points="2,92 2,50 17,32 32,50 32,92" fill="#e4e9ec"/>
+<polygon points="35,92 35,40 50,12 65,40 65,92" fill="#c0362c"/>
+<rect x="41" y="48" width="18" height="6" fill="#13212e"/>
+<rect x="44" y="70" width="12" height="22" fill="#13212e"/>
+<polygon points="68,92 68,50 83,32 98,50 98,92" fill="#e4e9ec"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<polygon points="2,92 2,50 17,32 32,50 32,92" fill="#e4e9ec"/>
+<polygon points="35,92 35,40 50,12 65,40 65,92" fill="#f26b4a"/>
+<rect x="41" y="48" width="18" height="6" fill="#0e1822"/>
+<rect x="44" y="70" width="12" height="22" fill="#0e1822"/>
+<polygon points="68,92 68,50 83,32 98,50 98,92" fill="#e4e9ec"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<polygon points="0,94 0,52 16,34 32,52 32,94" fill="#13212e"/>
+<polygon points="34,94 34,40 50,8 66,40 66,94" fill="#c0362c"/>
+<polygon points="68,94 68,52 84,34 100,52 100,94" fill="#13212e"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">08 · Gull</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M22,74 A28,28 0 0 1 78,74 Z" fill="#c0362c"/>
+<line x1="8" y1="80" x2="92" y2="80" stroke="#13212e" stroke-width="5" stroke-linecap="round"/>
+<line x1="22" y1="90" x2="78" y2="90" stroke="#13212e" stroke-width="5" stroke-linecap="round"/>
+<path d="M14,34 Q30,16 50,36 Q70,16 86,34" fill="none" stroke="#13212e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #13212e; display: flex; align-items: center; justify-content: center">
+<svg width="62" height="62" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M22,74 A28,28 0 0 1 78,74 Z" fill="#c0362c"/>
+<line x1="8" y1="80" x2="92" y2="80" stroke="#e4e9ec" stroke-width="5" stroke-linecap="round"/>
+<line x1="22" y1="90" x2="78" y2="90" stroke="#e4e9ec" stroke-width="5" stroke-linecap="round"/>
+<path d="M14,34 Q30,16 50,36 Q70,16 86,34" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M22,74 A28,28 0 0 1 78,74 Z" fill="#f26b4a"/>
+<line x1="8" y1="80" x2="92" y2="80" stroke="#e4e9ec" stroke-width="5" stroke-linecap="round"/>
+<line x1="22" y1="90" x2="78" y2="90" stroke="#e4e9ec" stroke-width="5" stroke-linecap="round"/>
+<path d="M14,34 Q30,16 50,36 Q70,16 86,34" fill="none" stroke="#e4e9ec" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<path d="M14,80 A36,36 0 0 1 86,80 Z" fill="#c0362c"/>
+<line x1="4" y1="88" x2="96" y2="88" stroke="#13212e" stroke-width="9" stroke-linecap="round"/>
+<path d="M10,34 Q30,10 50,34 Q70,10 90,34" fill="none" stroke="#13212e" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 24px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">09 · Span: Towers</div>
+<div style="display: flex; align-items: center; gap: 24px">
+<svg width="256" height="160" viewBox="0 0 160 100" aria-hidden="true">
+<path d="M2,64 Q30,44 52,14 Q82,98 112,14 Q130,44 158,64" fill="none" stroke="#c0362c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="62" y1="38" x2="62" y2="66" stroke="#c0362c" stroke-width="1.5"/>
+<line x1="72" y1="52" x2="72" y2="66" stroke="#c0362c" stroke-width="1.5"/>
+<line x1="92" y1="52" x2="92" y2="66" stroke="#c0362c" stroke-width="1.5"/>
+<line x1="102" y1="38" x2="102" y2="66" stroke="#c0362c" stroke-width="1.5"/>
+<rect x="46" y="12" width="4" height="72" fill="#c0362c"/>
+<rect x="54" y="12" width="4" height="72" fill="#c0362c"/>
+<rect x="46" y="18" width="12" height="3" fill="#c0362c"/>
+<rect x="46" y="32" width="12" height="3" fill="#c0362c"/>
+<rect x="46" y="46" width="12" height="3" fill="#c0362c"/>
+<rect x="106" y="12" width="4" height="72" fill="#c0362c"/>
+<rect x="114" y="12" width="4" height="72" fill="#c0362c"/>
+<rect x="106" y="18" width="12" height="3" fill="#c0362c"/>
+<rect x="106" y="32" width="12" height="3" fill="#c0362c"/>
+<rect x="106" y="46" width="12" height="3" fill="#c0362c"/>
+<line x1="0" y1="67" x2="160" y2="67" stroke="#13212e" stroke-width="5"/>
+<line x1="24" y1="88" x2="136" y2="88" stroke="#13212e" stroke-width="3" stroke-linecap="round"/>
+<line x1="48" y1="96" x2="112" y2="96" stroke="#13212e" stroke-width="3" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 84px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="40 6 84 84" aria-hidden="true">
+<path d="M40,58 Q46,40 52,14 Q82,98 112,14 Q118,40 124,58" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="46" y="12" width="4.5" height="72" fill="#ffffff"/>
+<rect x="53.5" y="12" width="4.5" height="72" fill="#ffffff"/>
+<rect x="46" y="20" width="12" height="3.5" fill="#ffffff"/>
+<rect x="46" y="36" width="12" height="3.5" fill="#ffffff"/>
+<rect x="106" y="12" width="4.5" height="72" fill="#ffffff"/>
+<rect x="113.5" y="12" width="4.5" height="72" fill="#ffffff"/>
+<rect x="106" y="20" width="12" height="3.5" fill="#ffffff"/>
+<rect x="106" y="36" width="12" height="3.5" fill="#ffffff"/>
+<line x1="40" y1="67" x2="124" y2="67" stroke="#13212e" stroke-width="6"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="84" height="52" viewBox="0 0 160 100" aria-hidden="true">
+<path d="M2,64 Q30,44 52,14 Q82,98 112,14 Q130,44 158,64" fill="none" stroke="#f26b4a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="46" y="12" width="4" height="72" fill="#f26b4a"/>
+<rect x="54" y="12" width="4" height="72" fill="#f26b4a"/>
+<rect x="46" y="20" width="12" height="3" fill="#f26b4a"/>
+<rect x="46" y="36" width="12" height="3" fill="#f26b4a"/>
+<rect x="106" y="12" width="4" height="72" fill="#f26b4a"/>
+<rect x="114" y="12" width="4" height="72" fill="#f26b4a"/>
+<rect x="106" y="20" width="12" height="3" fill="#f26b4a"/>
+<rect x="106" y="36" width="12" height="3" fill="#f26b4a"/>
+<line x1="0" y1="67" x2="160" y2="67" stroke="#e4e9ec" stroke-width="5"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<path d="M0,60 Q14,40 24,8 Q50,90 76,8 Q86,40 100,60" fill="none" stroke="#c0362c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="18" y="6" width="12" height="88" fill="#c0362c"/>
+<rect x="70" y="6" width="12" height="88" fill="#c0362c"/>
+<line x1="0" y1="66" x2="100" y2="66" stroke="#13212e" stroke-width="10"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">10 · Span: Tower A</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M46,12 Q24,52 4,86" fill="none" stroke="#c0362c" stroke-width="4.5" stroke-linecap="round"/>
+<path d="M54,12 Q76,52 96,86" fill="none" stroke="#c0362c" stroke-width="4.5" stroke-linecap="round"/>
+<line x1="38" y1="27" x2="38" y2="66" stroke="#c0362c" stroke-width="1.8"/>
+<line x1="30" y1="41" x2="30" y2="66" stroke="#c0362c" stroke-width="1.8"/>
+<line x1="62" y1="27" x2="62" y2="66" stroke="#c0362c" stroke-width="1.8"/>
+<line x1="70" y1="41" x2="70" y2="66" stroke="#c0362c" stroke-width="1.8"/>
+<rect x="43" y="8" width="5" height="84" fill="#c0362c"/>
+<rect x="52" y="8" width="5" height="84" fill="#c0362c"/>
+<rect x="43" y="16" width="14" height="4" fill="#c0362c"/>
+<rect x="43" y="32" width="14" height="4" fill="#c0362c"/>
+<rect x="43" y="48" width="14" height="4" fill="#c0362c"/>
+<line x1="4" y1="68" x2="96" y2="68" stroke="#13212e" stroke-width="6" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M46,12 Q24,52 4,86" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M54,12 Q76,52 96,86" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+<rect x="42" y="8" width="6" height="84" fill="#ffffff"/>
+<rect x="52" y="8" width="6" height="84" fill="#ffffff"/>
+<rect x="42" y="18" width="16" height="5" fill="#ffffff"/>
+<rect x="42" y="36" width="16" height="5" fill="#ffffff"/>
+<line x1="4" y1="68" x2="96" y2="68" stroke="#13212e" stroke-width="7" stroke-linecap="round"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="52" height="52" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M46,12 Q24,52 4,86" fill="none" stroke="#f26b4a" stroke-width="5" stroke-linecap="round"/>
+<path d="M54,12 Q76,52 96,86" fill="none" stroke="#f26b4a" stroke-width="5" stroke-linecap="round"/>
+<rect x="43" y="8" width="5" height="84" fill="#f26b4a"/>
+<rect x="52" y="8" width="5" height="84" fill="#f26b4a"/>
+<rect x="43" y="18" width="14" height="4" fill="#f26b4a"/>
+<rect x="43" y="36" width="14" height="4" fill="#f26b4a"/>
+<line x1="4" y1="68" x2="96" y2="68" stroke="#e4e9ec" stroke-width="6" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<path d="M44,10 Q22,52 2,90" fill="none" stroke="#c0362c" stroke-width="10" stroke-linecap="round"/>
+<path d="M56,10 Q78,52 98,90" fill="none" stroke="#c0362c" stroke-width="10" stroke-linecap="round"/>
+<rect x="40" y="4" width="20" height="92" fill="#c0362c"/>
+<line x1="4" y1="68" x2="96" y2="68" stroke="#13212e" stroke-width="11" stroke-linecap="round"/>
+</svg>
+</div>
+</div></div></div><figcaption>Developed further into the Tower A wordmark (12).</figcaption></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">11 · Span: Above the fog</div>
+<div style="display: flex; align-items: center; gap: 28px">
+<svg width="150" height="150" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M2,48 Q16,30 28,12 Q50,76 72,12 Q84,30 98,48" fill="none" stroke="#c0362c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="22" y="10" width="5" height="56" fill="#c0362c"/>
+<rect x="30" y="10" width="5" height="56" fill="#c0362c"/>
+<rect x="22" y="17" width="13" height="4" fill="#c0362c"/>
+<rect x="22" y="32" width="13" height="4" fill="#c0362c"/>
+<rect x="65" y="10" width="5" height="56" fill="#c0362c"/>
+<rect x="73" y="10" width="5" height="56" fill="#c0362c"/>
+<rect x="65" y="17" width="13" height="4" fill="#c0362c"/>
+<rect x="65" y="32" width="13" height="4" fill="#c0362c"/>
+<path d="M0,56 Q12,48 24,56 T48,56 T72,56 T96,56 L100,56 L100,72 L0,72 Z" fill="#eef1f2"/>
+<path d="M2,56 Q14,48 26,56 T50,56 T74,56 T98,56" fill="none" stroke="#7d8d98" stroke-width="5" stroke-linecap="round"/>
+<path d="M8,70 Q20,62 32,70 T56,70 T80,70 T96,70" fill="none" stroke="#7d8d98" stroke-width="5" stroke-linecap="round"/>
+<path d="M18,84 Q30,76 42,84 T66,84 T86,84" fill="none" stroke="#7d8d98" stroke-width="5" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 96px; line-height: 1; letter-spacing: 0.01em">Agora</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #13212e; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M2,48 Q16,30 28,12 Q50,76 72,12 Q84,30 98,48" fill="none" stroke="#c0362c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="21" y="10" width="6" height="56" fill="#c0362c"/>
+<rect x="30" y="10" width="6" height="56" fill="#c0362c"/>
+<rect x="21" y="18" width="15" height="5" fill="#c0362c"/>
+<rect x="64" y="10" width="6" height="56" fill="#c0362c"/>
+<rect x="73" y="10" width="6" height="56" fill="#c0362c"/>
+<rect x="64" y="18" width="15" height="5" fill="#c0362c"/>
+<path d="M0,56 Q12,48 24,56 T48,56 T72,56 T96,56 L100,56 L100,100 L0,100 Z" fill="#13212e"/>
+<path d="M2,56 Q14,48 26,56 T50,56 T74,56 T98,56" fill="none" stroke="#e4e9ec" stroke-width="6" stroke-linecap="round"/>
+<path d="M10,72 Q22,64 34,72 T58,72 T82,72 T94,72" fill="none" stroke="#e4e9ec" stroke-width="6" stroke-linecap="round"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 24px; border-radius: 20px; background: #0e1822; display: flex; align-items: center; gap: 14px">
+<svg width="52" height="52" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M2,48 Q16,30 28,12 Q50,76 72,12 Q84,30 98,48" fill="none" stroke="#f26b4a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="22" y="10" width="5" height="56" fill="#f26b4a"/>
+<rect x="30" y="10" width="5" height="56" fill="#f26b4a"/>
+<rect x="22" y="18" width="13" height="4" fill="#f26b4a"/>
+<rect x="65" y="10" width="5" height="56" fill="#f26b4a"/>
+<rect x="73" y="10" width="5" height="56" fill="#f26b4a"/>
+<rect x="65" y="18" width="13" height="4" fill="#f26b4a"/>
+<path d="M0,56 Q12,48 24,56 T48,56 T72,56 T96,56 L100,56 L100,100 L0,100 Z" fill="#0e1822"/>
+<path d="M2,56 Q14,48 26,56 T50,56 T74,56 T98,56" fill="none" stroke="#93a3ae" stroke-width="5" stroke-linecap="round"/>
+<path d="M10,72 Q22,64 34,72 T58,72 T82,72 T94,72" fill="none" stroke="#93a3ae" stroke-width="5" stroke-linecap="round"/>
+</svg>
+<div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 40px; color: #e4e9ec">Agora</div>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<rect x="18" y="6" width="14" height="56" fill="#c0362c"/>
+<rect x="68" y="6" width="14" height="56" fill="#c0362c"/>
+<path d="M4,60 Q16,50 28,60 T52,60 T76,60 T96,60" fill="none" stroke="#7d8d98" stroke-width="11" stroke-linecap="round"/>
+<path d="M10,84 Q22,74 34,84 T58,84 T82,84 T92,84" fill="none" stroke="#7d8d98" stroke-width="11" stroke-linecap="round"/>
+</svg>
+</div>
+</div></div></div></figure>
+  </div>
+
+  <h3><span class="num">2.2</span>Wordmarks</h3>
+  <p>The two marks taken further, folded into the name: the bridge tower as the A, and the gathering circle as the o.</p>
+  <div class="boards">
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 24px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">12 · Tower A wordmark</div>
+<svg width="560" height="160" viewBox="0 0 420 120" aria-label="AGORA" role="img">
+<path d="M50,6 Q208,46 366,6" fill="none" stroke="#c0362c" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(0,2)">
+<path d="M46,4 Q24,50 4,100" fill="none" stroke="#c0362c" stroke-width="5" stroke-linecap="round"/>
+<path d="M54,4 Q76,50 96,100" fill="none" stroke="#c0362c" stroke-width="5" stroke-linecap="round"/>
+<rect x="43" y="0" width="5" height="100" fill="#c0362c"/>
+<rect x="52" y="0" width="5" height="100" fill="#c0362c"/>
+<rect x="43" y="10" width="14" height="4" fill="#c0362c"/>
+<rect x="43" y="28" width="14" height="4" fill="#c0362c"/>
+<rect x="43" y="46" width="14" height="4" fill="#c0362c"/>
+<line x1="8" y1="72" x2="92" y2="72" stroke="#13212e" stroke-width="7" stroke-linecap="round"/>
+</g>
+<text x="108" y="102" font-family="Big Shoulders Display, sans-serif" font-weight="800" font-size="104" fill="#13212e" textLength="200" lengthAdjust="spacingAndGlyphs">GOR</text>
+<g transform="translate(316,2)">
+<path d="M46,4 Q24,50 4,100" fill="none" stroke="#c0362c" stroke-width="5" stroke-linecap="round"/>
+<path d="M54,4 Q76,50 96,100" fill="none" stroke="#c0362c" stroke-width="5" stroke-linecap="round"/>
+<rect x="43" y="0" width="5" height="100" fill="#c0362c"/>
+<rect x="52" y="0" width="5" height="100" fill="#c0362c"/>
+<rect x="43" y="10" width="14" height="4" fill="#c0362c"/>
+<rect x="43" y="28" width="14" height="4" fill="#c0362c"/>
+<rect x="43" y="46" width="14" height="4" fill="#c0362c"/>
+<line x1="8" y1="72" x2="92" y2="72" stroke="#13212e" stroke-width="7" stroke-linecap="round"/>
+</g>
+</svg>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true">
+<path d="M46,12 Q24,52 4,86" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M54,12 Q76,52 96,86" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+<rect x="42" y="8" width="6" height="84" fill="#ffffff"/>
+<rect x="52" y="8" width="6" height="84" fill="#ffffff"/>
+<rect x="42" y="18" width="16" height="5" fill="#ffffff"/>
+<rect x="42" y="36" width="16" height="5" fill="#ffffff"/>
+<line x1="4" y1="68" x2="96" y2="68" stroke="#13212e" stroke-width="7" stroke-linecap="round"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 22px; border-radius: 20px; background: #0e1822; display: flex; align-items: center">
+<svg width="200" height="57" viewBox="0 0 420 120" aria-label="AGORA" role="img">
+<path d="M50,6 Q208,46 366,6" fill="none" stroke="#f26b4a" stroke-width="4" stroke-linecap="round"/>
+<g transform="translate(0,2)">
+<path d="M46,4 Q24,50 4,100" fill="none" stroke="#f26b4a" stroke-width="6" stroke-linecap="round"/>
+<path d="M54,4 Q76,50 96,100" fill="none" stroke="#f26b4a" stroke-width="6" stroke-linecap="round"/>
+<rect x="42" y="0" width="6" height="100" fill="#f26b4a"/>
+<rect x="52" y="0" width="6" height="100" fill="#f26b4a"/>
+<rect x="42" y="12" width="16" height="5" fill="#f26b4a"/>
+<rect x="42" y="34" width="16" height="5" fill="#f26b4a"/>
+<line x1="8" y1="72" x2="92" y2="72" stroke="#e4e9ec" stroke-width="8" stroke-linecap="round"/>
+</g>
+<text x="108" y="102" font-family="Big Shoulders Display, sans-serif" font-weight="800" font-size="104" fill="#e4e9ec" textLength="200" lengthAdjust="spacingAndGlyphs">GOR</text>
+<g transform="translate(316,2)">
+<path d="M46,4 Q24,50 4,100" fill="none" stroke="#f26b4a" stroke-width="6" stroke-linecap="round"/>
+<path d="M54,4 Q76,50 96,100" fill="none" stroke="#f26b4a" stroke-width="6" stroke-linecap="round"/>
+<rect x="42" y="0" width="6" height="100" fill="#f26b4a"/>
+<rect x="52" y="0" width="6" height="100" fill="#f26b4a"/>
+<rect x="42" y="12" width="16" height="5" fill="#f26b4a"/>
+<rect x="42" y="34" width="16" height="5" fill="#f26b4a"/>
+<line x1="8" y1="72" x2="92" y2="72" stroke="#e4e9ec" stroke-width="8" stroke-linecap="round"/>
+</g>
+</svg>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<path d="M44,10 Q22,52 2,90" fill="none" stroke="#c0362c" stroke-width="10" stroke-linecap="round"/>
+<path d="M56,10 Q78,52 98,90" fill="none" stroke="#c0362c" stroke-width="10" stroke-linecap="round"/>
+<rect x="40" y="4" width="20" height="92" fill="#c0362c"/>
+<line x1="4" y1="68" x2="96" y2="68" stroke="#13212e" stroke-width="11" stroke-linecap="round"/>
+</svg>
+</div>
+</div></div></div></figure>
+<figure class="board-fig"><div class="board-scroll"><div class="board"><div style="width: 640px; height: 440px; box-sizing: border-box; padding: 40px; background: #eef1f2; color: #13212e; font-family: 'Instrument Sans', sans-serif; display: flex; flex-direction: column; gap: 24px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4a5a66">13 · Gathering wordmark</div>
+<svg width="460" height="184" viewBox="0 0 300 120" aria-label="agora" role="img">
+<text x="0" y="96" font-family="Big Shoulders Display, sans-serif" font-weight="800" font-size="128" fill="#13212e" textLength="112" lengthAdjust="spacingAndGlyphs">ag</text>
+<g transform="translate(118,32) scale(0.64)">
+<circle cx="50" cy="16" r="7.5" fill="#13212e"/>
+<circle cx="70" cy="22.5" r="7.5" fill="#13212e"/>
+<circle cx="82.3" cy="39.5" r="7.5" fill="#13212e"/>
+<circle cx="82.3" cy="60.5" r="7.5" fill="#13212e"/>
+<circle cx="70" cy="77.5" r="7.5" fill="#13212e"/>
+<circle cx="50" cy="84" r="7.5" fill="#13212e"/>
+<circle cx="30" cy="77.5" r="7.5" fill="#13212e"/>
+<circle cx="17.7" cy="60.5" r="7.5" fill="#13212e"/>
+<circle cx="17.7" cy="39.5" r="7.5" fill="#13212e"/>
+<circle cx="30" cy="22.5" r="7.5" fill="#13212e"/>
+<circle cx="50" cy="50" r="14" fill="#c0362c"/>
+</g>
+<text x="188" y="96" font-family="Big Shoulders Display, sans-serif" font-weight="800" font-size="128" fill="#13212e" textLength="108" lengthAdjust="spacingAndGlyphs">ra</text>
+</svg>
+<div style="display: flex; align-items: center; gap: 24px; margin-top: auto">
+<div style="width: 88px; height: 88px; border-radius: 20px; background: #c0362c; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="16" r="7" fill="#ffffff"/>
+<circle cx="70" cy="22.5" r="7" fill="#ffffff"/>
+<circle cx="82.3" cy="39.5" r="7" fill="#ffffff"/>
+<circle cx="82.3" cy="60.5" r="7" fill="#ffffff"/>
+<circle cx="70" cy="77.5" r="7" fill="#ffffff"/>
+<circle cx="50" cy="84" r="7" fill="#ffffff"/>
+<circle cx="30" cy="77.5" r="7" fill="#ffffff"/>
+<circle cx="17.7" cy="60.5" r="7" fill="#ffffff"/>
+<circle cx="17.7" cy="39.5" r="7" fill="#ffffff"/>
+<circle cx="30" cy="22.5" r="7" fill="#ffffff"/>
+<circle cx="50" cy="50" r="13" fill="#13212e"/>
+</svg>
+</div>
+<div style="height: 88px; padding: 0 22px; border-radius: 20px; background: #0e1822; display: flex; align-items: center">
+<svg width="170" height="68" viewBox="0 0 300 120" aria-label="agora" role="img">
+<text x="0" y="96" font-family="Big Shoulders Display, sans-serif" font-weight="800" font-size="128" fill="#e4e9ec" textLength="112" lengthAdjust="spacingAndGlyphs">ag</text>
+<g transform="translate(118,32) scale(0.64)">
+<circle cx="50" cy="16" r="8" fill="#e4e9ec"/>
+<circle cx="70" cy="22.5" r="8" fill="#e4e9ec"/>
+<circle cx="82.3" cy="39.5" r="8" fill="#e4e9ec"/>
+<circle cx="82.3" cy="60.5" r="8" fill="#e4e9ec"/>
+<circle cx="70" cy="77.5" r="8" fill="#e4e9ec"/>
+<circle cx="50" cy="84" r="8" fill="#e4e9ec"/>
+<circle cx="30" cy="77.5" r="8" fill="#e4e9ec"/>
+<circle cx="17.7" cy="60.5" r="8" fill="#e4e9ec"/>
+<circle cx="17.7" cy="39.5" r="8" fill="#e4e9ec"/>
+<circle cx="30" cy="22.5" r="8" fill="#e4e9ec"/>
+<circle cx="50" cy="50" r="15" fill="#f26b4a"/>
+</g>
+<text x="188" y="96" font-family="Big Shoulders Display, sans-serif" font-weight="800" font-size="128" fill="#e4e9ec" textLength="108" lengthAdjust="spacingAndGlyphs">ra</text>
+</svg>
+</div>
+<svg width="32" height="32" viewBox="0 0 100 100" aria-label="Favicon size">
+<circle cx="50" cy="13" r="11" fill="#13212e"/>
+<circle cx="85" cy="50" r="11" fill="#13212e"/>
+<circle cx="50" cy="87" r="11" fill="#13212e"/>
+<circle cx="15" cy="50" r="11" fill="#13212e"/>
+<circle cx="50" cy="50" r="17" fill="#c0362c"/>
+</svg>
+</div>
+</div></div></div></figure>
+  </div>
 </div>
 
 <script>
