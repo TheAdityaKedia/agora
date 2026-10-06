@@ -10,7 +10,7 @@
 data model, API, frontend) read [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md);
 this spec keeps the original decisions and their reasons (settled with the
 owner, 2026-10-02, and amended since) and may lag the code in detail. Known
-gaps: `future-features.md` → "Collections".
+gaps: `future/future-features.md` → "Collections".
 
 ## Collections for yourself (added 2026-10-03)
 
@@ -373,7 +373,7 @@ points at dev or a local server.
    mode (+ Add, tray, date filter, URL state), my-canvases menu.
 4. **Launch** — prod stack, budget alert, docs: README section ("Event
    canvases": architecture, deploy, admin delete), CLAUDE.md layout/router
-   lines, delete this spec's `future-features.md` entry.
+   lines, delete this spec's `future/future-features.md` entry.
 
 Phases 2–3 ship together in one PR (the flow needs both); phase 1 can land
 first since nothing calls it.

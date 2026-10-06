@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agora Design Directions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* A catalogue of visual directions explored for Agora. Each palette is data
+     (PALETTES below) mapped onto the site's own CSS variables, so a direction
+     can be lifted straight into frontend/index.html and canvas.html. */
+  :root {
+    --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f3f1ec; --fg: #1f1c18; --muted: #6a645b; --line: #dcd6cc; --card: #fbfaf7; --mark: #b5651d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #171512; --fg: #ece6da; --muted: #a49c8f; --line: #332e27; --card: #1f1c18; --mark: #e3a940; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(48px, 8vw, 80px); }
+  h2 { font-size: 44px; margin-top: 56px; padding-bottom: 10px; border-bottom: 2px solid var(--fg); }
+  h3 { font-size: 30px; margin-top: 36px; }
+  .num { color: var(--mark); margin-right: 10px; }
+  p { margin: 10px 0 0; max-width: 68ch; }
+  .muted { color: var(--muted); }
+  code { font-family: var(--mono); font-size: 13px; }
+  .intro { color: var(--muted); font-size: 17px; }
+
+  .palettes { display: grid; gap: 28px; margin-top: 22px; }
+  .pal { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 16px; }
+  .pal-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  .pal-head h4 { font: 800 30px/1 var(--display); margin: 0; }
+  .badge { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .badge.fav { background: var(--mark); border-color: var(--mark); color: var(--bg); }
+  .pal-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  @media (max-width: 820px) { .pal-body { grid-template-columns: 1fr; } }
+
+  .tokens { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .tokens td { padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 14px; }
+  .tokens tr:last-child td { border-bottom: none; }
+  .tokens .sw { width: 26px; height: 26px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(127,127,127,0.35); }
+  .tokens .hex { font-family: var(--mono); font-size: 13px; }
+  .tokens .cr { color: var(--muted); font-size: 12px; text-align: right; white-space: nowrap; }
+  .tokens .warn { color: var(--mark); font-weight: 600; }
+  .notes { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+  pre { margin: 8px 0 0; padding: 12px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); overflow-x: auto; font: 12px/1.5 var(--mono); }
+
+  /* Specimen: a slice of the real site, drawn from the palette's tokens. */
+  .spec { border-radius: 12px; padding: 16px; display: grid; gap: 12px; min-width: 0;
+          background: var(--p-bg); color: var(--p-fg); border: 1px solid var(--p-border); }
+  .spec .brand { font: 800 40px/1 var(--display); }
+  .spec .brand small { font: 400 13px var(--body); color: var(--p-muted); margin-left: 6px; }
+  .spec .day { font: 700 24px/1 var(--display); border-bottom: 1px solid var(--p-fg); padding-bottom: 6px; }
+  .spec .row { display: grid; grid-template-columns: 50px minmax(0, 1fr) 52px; gap: 10px; align-items: start; }
+  .spec .time { font: 700 21px/1.05 var(--display); }
+  .spec .time em { display: block; font: 500 12px var(--body); font-style: normal; color: var(--p-muted); }
+  .spec .title { font-weight: 600; font-size: 15px; line-height: 1.3; }
+  .spec .meta { color: var(--p-muted); font-size: 13px; }
+  .spec .meta a { color: var(--p-accent); text-decoration: none; font-weight: 600; }
+  .spec .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .spec .tag { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+               color: hsl(var(--h) var(--p-s) var(--p-l)); border: 1px solid hsl(var(--h) var(--p-s) var(--p-l) / 0.40);
+               background: hsl(var(--h) var(--p-s) var(--p-l) / 0.10); }
+  .spec .thumb { width: 52px; height: 52px; border-radius: 6px; display: grid; place-items: center; font: 700 13px/1 var(--display);
+                 background: hsl(var(--h) var(--p-s) var(--p-l) / 0.14); color: hsl(var(--h) var(--p-s) var(--p-l)); }
+  .spec .controls { display: flex; flex-wrap: wrap; gap: 6px; }
+  .spec .pill { font: 600 13px/1 var(--body); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--p-border); background: var(--p-chip); color: var(--p-fg); display: inline-flex; align-items: center; gap: 6px; }
+  .spec .pill.on { background: var(--p-accent); border-color: var(--p-accent); color: var(--p-accent-fg); }
+  .spec .pill .chev { width: 4px; height: 4px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: translateY(-1px) rotate(45deg); opacity: 0.75; }
+  .spec .input { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--p-border); background: var(--p-input); color: var(--p-muted); font-size: 14px; }
+  .spec .cta { padding: 12px; border-radius: 10px; text-align: center; font-weight: 700; background: var(--p-accent); color: var(--p-accent-fg); }
+  .spec .hues { display: flex; flex-wrap: wrap; gap: 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="muted" style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase">Agora · future</div>
+    <h1>Design directions</h1>
+    <p class="intro">Visual directions explored for the site, kept here so they can be revisited. Nothing on this page has shipped. Each palette uses the site's own CSS variables (<code>--bg</code>, <code>--fg</code>, <code>--accent</code>…), so applying one means replacing the <code>:root</code> blocks in <code>frontend/index.html</code> and <code>frontend/canvas.html</code>, plus the <code>theme-color</code> tags.</p>
+  </header>
+
+  <h2><span class="num">1</span>Seasonal</h2>
+  <p>A single theme for everyone (no light/dark switch) that changes with the Bay Area's seasons.</p>
+
+  <h3><span class="num">1.1</span>Autumn</h3>
+  <p>Explored October 2026. Started from muted red, oat and pumpkin, which read as soft and feminine; then moved toward workwear and leather tones for a more rugged take. Tobacco &amp; ochre with earthy tags is the current favourite. Contrast is against each palette's background; text needs 4.5:1, buttons and large text 3:1.</p>
+  <div class="palettes" id="autumn"></div>
+</div>
+
+<script>
+  // Topic-group hues for tag chips (GROUP_HUE in frontend/index.html).
+  const SITE_HUES = { type: 215, Literary: 270, Music: 350, "Theater / Stage": 25, Screen: 190,
+    "Art & design": 160, Ideas: 130, Life: 320, "Dance styles": 45, Communities: 290, Nightlife: 95 };
+  const EARTHY_HUES = { type: 205, Literary: 290, Music: 12, "Theater / Stage": 340, Screen: 185,
+    "Art & design": 115, Ideas: 46, Life: 80, "Dance styles": 28, Communities: 262, Nightlife: 150 };
+
+  const PALETTES = [
+    { name: "Muted red, oat & pumpkin", mood: "Feminine · the first take", badge: "Daytime",
+      colors: { bg: "#7a3530", fg: "#ecdfc6", muted: "#d6bfac", accent: "#f39a48", "accent-fg": "#2a0f0c",
+                "chip-bg": "#83433c", border: "#8d524a", "input-bg": "#6b2f2a", error: "#ffd4a8" },
+      tags: { s: "70%", l: "82%", hues: SITE_HUES },
+      notes: ["Soft brick ground, cream-oat text, pumpkin for anything that's on or a main action.",
+              "Reads cozy and soft: the red has a rosy undertone and every colour sits in the pink-to-orange range.",
+              "Pumpkin as small text (links, \"… more\") is 4.0:1, just under the bar. A lighter pumpkin or a deeper red fixes it.",
+              "The site's blue/green/purple tag hues clash with it."] },
+    { name: "Oxblood night", mood: "Feminine · dark counterpart", badge: "Variation",
+      colors: { bg: "#24120f", fg: "#ecdfc6", muted: "#bda594", accent: "#f39a48", "accent-fg": "#24120f",
+                "chip-bg": "#3d201b", border: "#563029", "input-bg": "#1c0e0c", error: "#ffb39c" },
+      tags: { s: "70%", l: "80%", hues: SITE_HUES },
+      notes: ["Same oat and pumpkin on a near-black oxblood; the red survives only in button fills and borders.",
+              "Best contrast of the red family (oat 13.6:1, pumpkin 8.2:1); pumpkin fills glow like jack-o'-lanterns.",
+              "Reads more brown than red. For a clearly red night, push the ground toward #2e1412."] },
+    { name: "Olive field jacket", mood: "Masculine · waxed canvas, hunting jackets", badge: "Variation",
+      colors: { bg: "#3a3d2b", fg: "#e6dcc6", muted: "#bbb49f", accent: "#ec944c", "accent-fg": "#1d1a12",
+                "chip-bg": "#484a37", border: "#575845", "input-bg": "#313425", error: "#ffc7a8" },
+      tags: { s: "45%", l: "78%", hues: SITE_HUES },
+      notes: ["Olive drab ground, bone text, burnt orange accent: outdoors and workwear rather than cozy.",
+              "The furthest from the red take, while the orange keeps it autumnal.",
+              "With the orange lightened to #ec944c it passes as small text too (4.7:1)."] },
+    { name: "Tobacco & ochre", mood: "Masculine · saddle leather, whiskey, a library", badge: "Favourite",
+      colors: { bg: "#4e3523", fg: "#e9dcc3", muted: "#c2b29b", accent: "#e3a940", "accent-fg": "#1d1a12",
+                "chip-bg": "#5a4230", border: "#68513e", "input-bg": "#422d1e", error: "#ffb8a0" },
+      tags: { s: "45%", l: "78%", hues: SITE_HUES },
+      notes: ["Tobacco brown ground, bone text, ochre (mustard gold) accent. Warm, rich, a little vintage.",
+              "Best contrast of the set: ochre is 5.4:1 on the ground, so even small links read comfortably.",
+              "With the site's original tag hues, the blue and green tags still stand out."] },
+    { name: "Tobacco & ochre, earthy tags", mood: "Masculine · the current pick", badge: "Favourite",
+      colors: { bg: "#4e3523", fg: "#e9dcc3", muted: "#c2b29b", accent: "#e3a940", "accent-fg": "#1d1a12",
+                "chip-bg": "#5a4230", border: "#68513e", "input-bg": "#422d1e", error: "#ffb8a0" },
+      tags: { s: "30%", l: "72%", hues: EARTHY_HUES },
+      notes: ["Tag hues moved to earthy shades and desaturated (30%): denim slate types, rust music, mulberry stage, copper dance, mustard ideas, olive life, sage art, juniper nightlife, steel-teal screen, heather-plum literary, dusk-lavender communities.",
+              "Checkboxes take the accent (accent-color: var(--accent)) instead of the browser's blue.",
+              "Denim and heather stay slightly cool on purpose so tags don't all blur into brown; for fully warm, make type tags bone or tan.",
+              "Applying it: single theme, remove the sun/moon button, set color-scheme: dark."] },
+  ];
+
+  // WCAG contrast.
+  const lum = (hex) => {
+    const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+      .map(x => x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+
+  const ROLE = { bg: "Page background", fg: "Text", muted: "Secondary text", accent: "Accent (on / go)",
+    "accent-fg": "Text on accent", "chip-bg": "Button fill", border: "Borders", "input-bg": "Input fields", error: "Errors" };
+
+  function tokenRows(c) {
+    return Object.entries(c).map(([k, v]) => {
+      const against = k === "accent-fg" ? c.accent : c.bg;
+      const text = ["fg", "muted", "accent", "accent-fg", "error"].includes(k);
+      const r = text ? contrast(v, against) : null;
+      const cr = r ? `<span class="${r < 4.5 ? "warn" : ""}">${r.toFixed(1)}:1</span>${k === "accent-fg" ? " on accent" : ""}` : "";
+      return `<tr><td><div class="sw" style="background:${v}"></div></td><td>${ROLE[k]}</td>`
+        + `<td class="hex">--${k}: ${v}</td><td class="cr">${cr}</td></tr>`;
+    }).join("");
+  }
+
+  function css(p) {
+    const lines = Object.entries(p.colors).map(([k, v]) => `  --${k}: ${v};`);
+    lines.push(`  --chip-s: ${p.tags.s}; --chip-l: ${p.tags.l};`, "  color-scheme: dark;");
+    let out = ":root {\n" + lines.join("\n") + "\n}";
+    if (p.tags.hues === EARTHY_HUES)
+      out += "\n\n/* GROUP_HUE */\n" + JSON.stringify(EARTHY_HUES, null, 1).replace(/\n\s*/g, " ");
+    return out;
+  }
+
+  function specimen(p) {
+    const c = p.colors, h = p.tags.hues;
+    const style = `--p-bg:${c.bg};--p-fg:${c.fg};--p-muted:${c.muted};--p-accent:${c.accent};--p-accent-fg:${c["accent-fg"]};`
+      + `--p-chip:${c["chip-bg"]};--p-border:${c.border};--p-input:${c["input-bg"]};--p-s:${p.tags.s};--p-l:${p.tags.l}`;
+    const hueChips = Object.entries(h).map(([g, v]) => `<span class="tag" style="--h:${v}">${g === "type" ? "Event type" : g}</span>`).join("");
+    return `<div class="spec" style="${style}">
+      <div class="brand">Agora<small>Events around the Bay</small></div>
+      <div class="input">Search events, venues, topics</div>
+      <div class="day">Friday, October 30</div>
+      <div class="row" style="--h:${h.Literary}">
+        <div class="time">6:30<em>pm</em></div>
+        <div><div class="title">Offsite: Kirk Lombard</div>
+          <div class="meta">Sports Basement Presidio · The Dairy</div>
+          <div class="meta">Listed by Green Apple Books · <a>… more</a></div>
+          <div class="tags"><span class="tag" style="--h:${h.type}">Reading</span><span class="tag" style="--h:${h.Literary}">Books / Authors</span></div></div>
+        <div class="thumb">Talk</div>
+      </div>
+      <div class="controls">
+        <span class="pill">SF neighborhoods <span class="chev"></span></span>
+        <span class="pill on">San Francisco</span><span class="pill">East Bay</span>
+      </div>
+      <div class="hues">${hueChips}</div>
+      <div class="cta">Show 3,714 events</div>
+    </div>`;
+  }
+
+  document.getElementById("autumn").innerHTML = PALETTES.map(p => `
+    <article class="pal">
+      <div class="pal-head"><h4>${p.name}</h4><span class="badge${p.badge === "Favourite" ? " fav" : ""}">${p.badge}</span>
+        <span class="muted">${p.mood}</span></div>
+      <div class="pal-body">
+        <div>
+          <table class="tokens">${tokenRows(p.colors)}
+            <tr><td></td><td>Tag colour</td><td class="hex">hsl(hue ${p.tags.s} ${p.tags.l})</td><td class="cr">${p.tags.hues === EARTHY_HUES ? "earthy hues" : "site hues"}</td></tr>
+          </table>
+          <ul class="notes" style="margin-top:12px">${p.notes.map(n => `<li>${n}</li>`).join("")}</ul>
+          <details style="margin-top:10px"><summary>CSS to apply</summary><pre>${css(p)}</pre></details>
+        </div>
+        ${specimen(p)}
+      </div>
+    </article>`).join("");
+</script>
+</body>
+</html>
