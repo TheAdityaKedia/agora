@@ -1,7 +1,7 @@
 # Event lifecycle: stable ids, changes and cancellations
 
 **Status: spec, not started (2026-10-05).** Covers two gaps recorded in
-`future-features.md` → Collections: *event copies drift* and *event ids
+`future/future-features.md` → Collections: *event copies drift* and *event ids
 aren't stable*. They are one project: you can only say "this event changed"
 or "was cancelled" if "this event" keeps its identity from one scrape to the
 next.
@@ -263,7 +263,7 @@ The page (`canvas.html`) shows, on the item card and its plan step:
 7. **Docs.** CLAUDE.md ("saves never update rows" and the Neon delete
    workaround change), README → "Scheduled scraping" → Operations (what
    `unlisted` means, how to run the re-key, how to force a status by SQL),
-   `canvas/HOW-IT-WORKS.md`, this spec's status, `future-features.md`.
+   `canvas/HOW-IT-WORKS.md`, this spec's status, `future/future-features.md`.
 
 **Rollout:** one branch and PR (it touches the jobs and the site). Test the
 pipeline from the branch with `scrape.yml` (non-`main` runs use the

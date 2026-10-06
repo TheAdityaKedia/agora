@@ -19,7 +19,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 
 | Task | Read |
 |------|------|
-| What's planned next (features + their specs) | `future-features.md` |
+| What's planned next (features + their specs) | `future/future-features.md` |
+| Visual directions explored (seasonal palettes) | `future/design-directions.html` |
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
 | Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
@@ -185,4 +186,4 @@ Shipped: AI tagging, scheduled per-source CI scraping (Neon, auto-merged data
 PRs, failure alerts), email submissions, and cross-source fuzzy dedup. Ongoing: scaling the source list (candidates in
 `future-sources.md`) and pruning source noise (e.g. SFPL non-events). Planned
 work, including the frontend payload wall as the manifest grows, is in
-`future-features.md`.
+`future/future-features.md`.
