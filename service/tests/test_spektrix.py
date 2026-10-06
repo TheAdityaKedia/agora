@@ -46,3 +46,24 @@ def test_stanfordlive_drops_student_allocations_and_links_pageless_events():
     assert any("Student Lottery" in e.title for e in raw)  # the fixture has one
     assert all(e.url for e in out)
     assert stanfordlive.matches("https://live.stanford.edu/calendar")
+
+
+def test_stanfordlive_header_image_from_srcset():
+    html = ('<img class="page-item__image" src="https://x/related.jpg">'
+            '<img loading="lazy" class="event-header__image" '
+            'srcset="https://res.cloudinary.com/a/show-1440x1080?_a=B, https://res.cloudinary.com/a/show@2x 2x">')
+    assert stanfordlive.header_image(html) == "https://res.cloudinary.com/a/show-1440x1080?_a=B"
+    assert stanfordlive.header_image('<img class="page-item__image" src="x">') is None
+
+
+def test_stanfordlive_add_images_fetches_each_page_once():
+    from scrapers.base import RawEvent
+    t = datetime(2026, 10, 9, tzinfo=timezone.utc)
+    page = "https://live.stanford.edu/events/26-frost/show/"
+    events = [RawEvent(title="Show", start_time=t, location="L", url=page, description=None),
+              RawEvent(title="Show", start_time=t.replace(day=10), location="L", url=page, description=None),
+              RawEvent(title="Messiah", start_time=t, location="L", url=stanfordlive.EVENTS_URL, description=None)]
+    calls = []
+    stanfordlive.add_images(events, fetch=lambda u: calls.append(u) or "https://img/show.jpg")
+    assert calls == [page]  # once per page; the calendar fallback isn't fetched
+    assert [e.image_url for e in events] == ["https://img/show.jpg", "https://img/show.jpg", None]
