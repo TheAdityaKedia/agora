@@ -227,3 +227,62 @@ def _enrich_from_detail_pages(events: list[RawEvent]) -> None:
         for ev, desc in zip(events, pool.map(fetch, events)):
             if desc:
                 ev.description = desc
+
+
+# --- JSON feed ---------------------------------------------------------------
+# A collection page with ``?format=json`` returns ``{"upcoming": [...], "past":
+# [...]}``: each item has the exact start time (epoch ms), the venue address,
+# the excerpt and the image. Some themes render the HTML list without a
+# reliable start time (F8's cards all parse as midnight), so this is the better
+# source when the HTML falls short.
+
+def _json_location(loc: dict | None) -> str | None:
+    if not isinstance(loc, dict):
+        return None
+    parts = [(loc.get(k) or "").strip() for k in ("addressTitle", "addressLine1", "addressLine2")]
+    parts = [p for p in parts if p]
+    return ", ".join(parts) or None
+
+
+def parse_json_events(data: dict, *, base_url: str,
+                      fallback_location: str | None = None) -> list[RawEvent]:
+    """The ``upcoming`` items of a collection's ``?format=json`` → RawEvents. Pure."""
+    origin = _origin(base_url)
+    events: list[RawEvent] = []
+    for item in (data or {}).get("upcoming") or []:
+        # Raw title: the HTML list's "~ <showtime>" suffix isn't used here, and
+        # titles can use "~" themselves ("INTERZONE SF ~ FREE DARKWAVE …").
+        title = (item.get("title") or "").strip()
+        start_ms = item.get("startDate")
+        if not title or not isinstance(start_ms, (int, float)):
+            continue
+        href = item.get("fullUrl")
+        excerpt = item.get("excerpt") or ""
+        description = re.sub(r"\s+", " ", BeautifulSoup(excerpt, "html.parser").get_text(" ", strip=True)).strip()
+        events.append(RawEvent(
+            title=title,
+            start_time=datetime.fromtimestamp(start_ms / 1000, timezone.utc).replace(microsecond=0),
+            location=_json_location(item.get("location")) or fallback_location,
+            url=origin + href if href and href.startswith("/") else href,
+            description=description or None,
+            image_url=item.get("assetUrl") or None,
+        ))
+    return events
+
+
+def scrape_json(calendar_url: str, *, fallback_location: str | None = None,
+                enrich_descriptions: bool = False) -> list[RawEvent]:
+    """Fetch a collection's ``?format=json`` feed (upcoming events only)."""
+    try:
+        resp = requests.get(calendar_url, params={"format": "json"},
+                            headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        data = resp.json()
+    except (requests.RequestException, ValueError) as exc:
+        _log(f"json fetch failed for {calendar_url}: {exc}")
+        return []
+    events = parse_json_events(data, base_url=calendar_url, fallback_location=fallback_location)
+    if enrich_descriptions:
+        _enrich_from_detail_pages(events)
+    _log(f"{calendar_url} (json): {len(events)} events")
+    return events
