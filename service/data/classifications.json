@@ -92,6 +92,26 @@
       "topics": [],
       "types": []
     },
+    "4-Star Theater\u001fDeadbeat at Dawn with LIVE MUSIC from Meat Hook & the Vital Organs (Presented by TRASH & TREASURES)": {
+      "classified_at": "2026-10-05T23:07:00.862193+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Deadbeat at Dawn with LIVE MUSIC from Meat Hook & the Vital Organs (Presented by TRASH & TREASURES)",
+      "topics": [
+        "film",
+        "punk-metal"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fDellaMorte DellaMore: Cemetery Man (Presented by MEDIA MELTDOWN MOVIE MADHOUSE)": {
       "classified_at": "2026-10-03T04:50:22.272937+00:00",
       "cost": "unknown",
@@ -199,6 +219,26 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fIT (1990) on VHS (Presented by BASEMENT VHS plus Q&A with Director Tommy Lee Wallace)": {
+      "classified_at": "2026-10-05T23:07:00.039335+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "IT (1990) on VHS (Presented by BASEMENT VHS plus Q&A with Director Tommy Lee Wallace)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -350,6 +390,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fLIVE MUSIC: Good Friends, The Lowtimers, Red McAdam": {
+      "classified_at": "2026-10-05T23:06:59.992934+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: Good Friends, The Lowtimers, Red McAdam",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fLIVE MUSIC: Green-House, Cool Maritime (Presented by THROWIN' BO'S)": {
       "classified_at": "2026-10-03T04:50:26.755463+00:00",
       "cost": "paid",
@@ -465,6 +521,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fLIVE MUSIC: The Crooked Jades (10th Album Release Show)": {
+      "classified_at": "2026-10-05T23:07:00.011131+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: The Crooked Jades (10th Album Release Show)",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "4-Star Theater\u001fLIVE MUSIC: The Sleeves, Fred Frith": {
       "classified_at": "2026-10-03T04:50:11.159099+00:00",
       "cost": "unknown",
@@ -560,6 +632,26 @@
         "family-kids"
       ],
       "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fLocal Critique": {
+      "classified_at": "2026-10-05T23:07:01.673190+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Local Critique",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
         [
           "screening"
         ]
@@ -674,6 +766,22 @@
       "topics": [
         "film",
         "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fThe Shining": {
+      "classified_at": "2026-10-05T23:06:59.922559+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "The Shining",
+      "topics": [
+        "film"
       ],
       "types": [
         [
@@ -859,6 +967,23 @@
       "title": "Troilus and Cressida",
       "topics": [
         "theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fA Drag Queen Christmas": {
+      "classified_at": "2026-10-05T19:54:31.505878+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "A Drag Queen Christmas",
+      "topics": [
+        "drag",
+        "comedy"
       ],
       "types": [
         [
@@ -1451,6 +1576,217 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001f3rd i Festival: A CELEBRATION OF THE EXTRAORDINARY WORK OF AVIE LUTHRA": {
+      "classified_at": "2026-10-05T23:07:01.595487+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "3rd i Festival: A CELEBRATION OF THE EXTRAORDINARY WORK OF AVIE LUTHRA",
+      "topics": [
+        "film",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fAn evening with Mike Kuchar": {
+      "classified_at": "2026-10-05T23:07:02.238663+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "An evening with Mike Kuchar",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fJaap Blonk, YappiScope": {
+      "classified_at": "2026-10-05T23:07:01.768620+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Jaap Blonk, YappiScope",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fLitcrawl: CCA comics live": {
+      "classified_at": "2026-10-05T23:07:02.431257+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Litcrawl: CCA comics live",
+      "topics": [
+        "comics-zines",
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fOpen Screening": {
+      "classified_at": "2026-10-05T23:07:02.429878+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Open Screening",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fOther Cinema: Shapeshifters Benefit": {
+      "classified_at": "2026-10-05T23:07:01.671689+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Other Cinema: Shapeshifters Benefit",
+      "topics": [
+        "film",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fOther Cinema: UFO PSY-OPS": {
+      "classified_at": "2026-10-06T17:02:01.293863+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Other Cinema: UFO PSY-OPS",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fRewards Program": {
+      "classified_at": "2026-10-05T23:07:02.435013+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Rewards Program",
+      "topics": [
+        "film",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fStudio 26: Fantom Classroom of the Art Institute": {
+      "classified_at": "2026-10-05T23:07:02.266075+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Studio 26: Fantom Classroom of the Art Institute",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fTINAFF: Program 8": {
+      "classified_at": "2026-10-05T23:07:02.334445+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "TINAFF: Program 8",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fWhen ICE Melts": {
+      "classified_at": "2026-10-05T23:07:02.589016+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "When ICE Melts",
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -4196,6 +4532,38 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fBig Daddy Cade's Tribute to B.B. King": {
+      "classified_at": "2026-10-05T19:54:33.755101+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Big Daddy Cade's Tribute to B.B. King",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fCelso Salim Band": {
+      "classified_at": "2026-10-05T19:54:32.463692+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Celso Salim Band",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fChris Cain": {
       "classified_at": "2026-10-03T05:04:26.200822+00:00",
       "cost": "paid",
@@ -4368,6 +4736,22 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fJ.C. Smith Band": {
+      "classified_at": "2026-10-05T19:54:33.179486+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "J.C. Smith Band",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fJeffrey James Trio": {
       "classified_at": "2026-10-03T05:04:05.502091+00:00",
       "cost": "paid",
@@ -4427,6 +4811,22 @@
       "topics": [
         "blues",
         "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fLaura Chavez with Special Guest Alabama Mike": {
+      "classified_at": "2026-10-05T19:54:33.561480+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Laura Chavez with Special Guest Alabama Mike",
+      "topics": [
+        "blues"
       ],
       "types": [
         [
@@ -4502,6 +4902,23 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fNew Year’s Eve with Sugaray Rayford": {
+      "classified_at": "2026-10-05T19:54:33.145120+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "New Year’s Eve with Sugaray Rayford",
+      "topics": [
+        "blues",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fOscar LaDell": {
       "classified_at": "2026-09-24T23:01:07.842974+00:00",
       "cost": "paid",
@@ -4526,6 +4943,23 @@
       "taxonomy_version": 1,
       "title": "Otto Junior",
       "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fRed Curtain Presents: Laughs and Blues": {
+      "classified_at": "2026-10-05T19:54:32.367292+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Red Curtain Presents: Laughs and Blues",
+      "topics": [
+        "comedy",
+        "blues"
+      ],
       "types": [
         [
           "performance"
@@ -4682,6 +5116,23 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fTony Lindsay": {
+      "classified_at": "2026-10-05T19:54:32.562598+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Tony Lindsay",
+      "topics": [
+        "blues",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fTony Lindsay and Future Perfect Band": {
       "classified_at": "2026-10-03T05:03:55.912684+00:00",
       "cost": "paid",
@@ -4692,6 +5143,22 @@
       "topics": [
         "blues",
         "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fWill Johns Band": {
+      "classified_at": "2026-10-05T19:54:33.076780+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Will Johns Band",
+      "topics": [
+        "blues"
       ],
       "types": [
         [
@@ -7145,6 +7612,23 @@
         ]
       ]
     },
+    "Book Passage\u001fMichael Douglas with Lance Gardner - One Helluva Ride (Calvary Presbyterian, SF)": {
+      "classified_at": "2026-10-05T23:07:00.852309+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Michael Douglas with Lance Gardner - One Helluva Ride (Calvary Presbyterian, SF)",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fMichael Moritz - Ausländer": {
       "classified_at": "2026-09-25T06:06:03.650892+00:00",
       "cost": "unknown",
@@ -9292,6 +9776,24 @@
         ]
       ]
     },
+    "Bookshop West Portal\u001fOctober Wild Girls Mother-Daughter Book Club Meeting": {
+      "classified_at": "2026-10-05T23:07:01.411879+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bookshop West Portal",
+      "taxonomy_version": 2,
+      "title": "October Wild Girls Mother-Daughter Book Club Meeting",
+      "topics": [
+        "books-authors",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "Bookshop West Portal\u001fRomance Author Kathleen Reidy Live at a Wine Bar!": {
       "classified_at": "2026-10-03T05:07:16.658327+00:00",
       "cost": "free",
@@ -11041,6 +11543,329 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fAnthony Locascio": {
+      "classified_at": "2026-10-05T19:55:31.919477+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Anthony Locascio",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fAshley Gavin": {
+      "classified_at": "2026-10-05T19:55:28.876577+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Ashley Gavin",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fBest Friends Podcast with Nicole Byer and Sasheer Zamata": {
+      "classified_at": "2026-10-05T19:55:24.171953+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Best Friends Podcast with Nicole Byer and Sasheer Zamata",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "talk",
+          "podcast"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fCobb's Comedy Showcase": {
+      "classified_at": "2026-10-05T19:55:53.158573+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Cobb's Comedy Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fDaniela Mora": {
+      "classified_at": "2026-10-05T19:55:42.744594+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Daniela Mora",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fDrag-Up Comedy": {
+      "classified_at": "2026-10-05T19:55:30.038480+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Drag-Up Comedy",
+      "topics": [
+        "comedy",
+        "drag"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fEd Larson and Billy Wayne Davis": {
+      "classified_at": "2026-10-05T19:55:37.750295+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Ed Larson and Billy Wayne Davis",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fEmil Wakim": {
+      "classified_at": "2026-10-05T19:55:27.122451+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Emil Wakim",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fFahim Anwar": {
+      "classified_at": "2026-10-05T19:56:05.646508+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Fahim Anwar",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fGiulio Gallarotti": {
+      "classified_at": "2026-10-05T19:55:54.409952+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Giulio Gallarotti",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fGus Heagerty": {
+      "classified_at": "2026-10-05T19:55:35.959215+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Gus Heagerty",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fPhoebe Robinson: Feral & Fired Up!": {
+      "classified_at": "2026-10-05T19:55:39.378530+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Phoebe Robinson: Feral & Fired Up!",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fPoly Díaz - En Español": {
+      "classified_at": "2026-10-05T19:55:47.191731+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Poly Díaz - En Español",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fRay Lau": {
+      "classified_at": "2026-10-05T19:55:18.781009+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Ray Lau",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fRocky Dale Davis": {
+      "classified_at": "2026-10-05T19:55:50.039158+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Rocky Dale Davis",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fSam Salem": {
+      "classified_at": "2026-10-05T19:55:26.076409+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Sam Salem",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fScuffed Realtor: LIVE with Nick Rochefort and Alex Schultz": {
+      "classified_at": "2026-10-05T19:55:33.442957+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Scuffed Realtor: LIVE with Nick Rochefort and Alex Schultz",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fTokyo Kanpai Boys (in Japanese)": {
+      "classified_at": "2026-10-05T19:55:40.404306+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Tokyo Kanpai Boys (in Japanese)",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fTwo Dykes and a Mic: Soaking Wet Tour": {
+      "classified_at": "2026-10-05T19:55:36.954901+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Two Dykes and a Mic: Soaking Wet Tour",
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fVidura Bandara Rajapaksa: The Paradise Gothic Tour": {
+      "classified_at": "2026-10-05T19:55:25.201634+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Vidura Bandara Rajapaksa: The Paradise Gothic Tour",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Commonwealth Club\u001f\"The Second Life of Freddie Nole\": Documentary Screening": {
       "classified_at": "2026-10-04T15:33:52.025918+00:00",
       "cost": "unknown",
@@ -12478,6 +13303,29 @@
         ]
       ]
     },
+    "El Rio\u001fBitch, Get Up and Drag Your Ass to El Rio's Mini Movie Theater ($5)": {
+      "classified_at": "2026-10-05T19:54:33.595459+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Bitch, Get Up and Drag Your Ass to El Rio's Mini Movie Theater ($5)",
+      "topics": [
+        "film",
+        "lgbtq",
+        "latino",
+        "drag"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fBussdown Baddies with Marchante, 4Dhila, Joog, and Jambalaya ($5 Cover)": {
       "classified_at": "2026-10-03T04:58:57.319159+00:00",
       "cost": "paid",
@@ -12647,6 +13495,25 @@
         ]
       ]
     },
+    "El Rio\u001fGayface with Siobhan Aluvalot (Free)": {
+      "classified_at": "2026-10-05T19:54:32.358475+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Gayface with Siobhan Aluvalot (Free)",
+      "topics": [
+        "club-night",
+        "drag",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fGet Busy! Every First Saturday ($10 Cover)": {
       "classified_at": "2026-10-03T04:58:58.512291+00:00",
       "cost": "paid",
@@ -12664,6 +13531,26 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "El Rio\u001fGirl Into Destruction and The Bluets ($10 Cover)": {
+      "classified_at": "2026-10-05T19:54:31.722557+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Girl Into Destruction and The Bluets ($10 Cover)",
+      "topics": [
+        "punk-metal",
+        "pop",
+        "spoken-word",
+        "lgbtq",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -12956,6 +13843,27 @@
         "lgbtq"
       ],
       "types": []
+    },
+    "El Rio\u001fRnB & Ribs ($30 w/ RSVP)": {
+      "classified_at": "2026-10-05T19:54:31.649088+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "RnB & Ribs ($30 w/ RSVP)",
+      "topics": [
+        "hiphop-rnb",
+        "club-night",
+        "food-drink",
+        "lgbtq",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
     },
     "El Rio\u001fSAPPHORIA, SOULFUL, SEXY, SAPPHIC": {
       "classified_at": "2026-10-03T04:59:10.388658+00:00",
@@ -13310,6 +14218,142 @@
         ]
       ]
     },
+    "Fort Mason Center\u001fArion Press Public Tours 2026": {
+      "classified_at": "2026-10-05T19:54:54.858650+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Arion Press Public Tours 2026",
+      "topics": [
+        "design",
+        "craft"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Fort Mason Center\u001fBATS IMPROV SHOWS 2026": {
+      "classified_at": "2026-10-05T19:54:47.605497+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "BATS IMPROV SHOWS 2026",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Fort Mason Center\u001fFort Mason Art Points Of Departure Fall 2026": {
+      "classified_at": "2026-10-05T19:54:51.110220+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Fort Mason Art Points Of Departure Fall 2026",
+      "topics": [
+        "theater",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Fort Mason Center\u001fFort Mason Center for Arts & Culture Farmers Market": {
+      "classified_at": "2026-10-05T19:55:51.871520+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Fort Mason Center for Arts & Culture Farmers Market",
+      "topics": [
+        "food-drink",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "Fort Mason Center\u001fFort Mason Historic District Walking Tour": {
+      "classified_at": "2026-10-05T19:54:46.697216+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Fort Mason Historic District Walking Tour",
+      "topics": [
+        "history",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Fort Mason Center\u001fGreens Restaurant Special Meals & Holiday Take-Out Options 2026": {
+      "classified_at": "2026-10-05T19:54:42.670170+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Greens Restaurant Special Meals & Holiday Take-Out Options 2026",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "Fort Mason Center\u001fHaines Gallery: 250 Years, Indigenous Futures": {
+      "classified_at": "2026-10-05T19:54:47.218689+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Haines Gallery: 250 Years, Indigenous Futures",
+      "topics": [],
+      "types": []
+    },
+    "Fort Mason Center\u001fRhône By The Bay": {
+      "classified_at": "2026-10-05T19:54:54.277891+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fort Mason Center",
+      "taxonomy_version": 2,
+      "title": "Rhône By The Bay",
+      "topics": [
+        "wine",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Frontier Tower\u001f#SFTW Why Fintech Growth Fails? Slash Your CAC with AI-Powered Growth Engine - Open Registration": {
       "classified_at": "2026-10-03T05:18:23.774803+00:00",
       "cost": "unknown",
@@ -13346,6 +14390,23 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fAI BEYOND THE SCREEN — SexTech × AI Harness: Connecting AI Agents, Devices & Human Experiences": {
+      "classified_at": "2026-10-05T19:54:34.984103+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "AI BEYOND THE SCREEN — SexTech × AI Harness: Connecting AI Agents, Devices & Human Experiences",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
         ]
       ]
     },
@@ -13442,6 +14503,24 @@
         ]
       ]
     },
+    "Frontier Tower\u001fFrontier Tower Presents: Friends building the future of Enhancement - #SFTechWeek - Members Only": {
+      "classified_at": "2026-10-05T19:54:34.872198+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Frontier Tower Presents: Friends building the future of Enhancement - #SFTechWeek - Members Only",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Frontier Tower\u001fGarry's List: A Conversation with Matt Dorsey and Stephen Sherrill": {
       "classified_at": "2026-09-29T16:48:24.193774+00:00",
       "cost": "free",
@@ -13456,6 +14535,24 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fJaspers Terminal Private Pre-Launch & Functional Cocktails Party - #SFTechWeek - Members Only": {
+      "classified_at": "2026-10-05T19:54:34.643639+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Jaspers Terminal Private Pre-Launch & Functional Cocktails Party - #SFTechWeek - Members Only",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -13693,6 +14790,24 @@
         ]
       ]
     },
+    "Frontier Tower\u001fVenture.Community x Frontier Residency - Open Registration": {
+      "classified_at": "2026-10-06T17:02:01.330597+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Venture.Community x Frontier Residency - Open Registration",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Frontier Tower\u001fVenue Hold - Signal SF x Frontier Tower - Open Registration": {
       "classified_at": "2026-10-03T05:16:57.104032+00:00",
       "cost": "unknown",
@@ -13702,6 +14817,23 @@
       "title": "Venue Hold - Signal SF x Frontier Tower - Open Registration",
       "topics": [
         "tech"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fWeekly Accountabili-tea Circle: Reflection & Planning #35 - Members Only": {
+      "classified_at": "2026-10-05T19:54:34.463202+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Weekly Accountabili-tea Circle: Reflection & Planning #35 - Members Only",
+      "topics": [
+        "wellness"
       ],
       "types": [
         [
@@ -13747,6 +14879,85 @@
         ],
         [
           "exhibition"
+        ]
+      ]
+    },
+    "GLBT Historical Society\u001fQueer Home on Film: A Shorts Program": {
+      "classified_at": "2026-10-05T19:55:43.957126+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "GLBT Historical Society",
+      "taxonomy_version": 2,
+      "title": "Queer Home on Film: A Shorts Program",
+      "topics": [
+        "film",
+        "lgbtq",
+        "history"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "GLBT Historical Society\u001fReunion 2026": {
+      "classified_at": "2026-10-05T19:56:26.583104+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "GLBT Historical Society",
+      "taxonomy_version": 2,
+      "title": "Reunion 2026",
+      "topics": [
+        "lgbtq",
+        "history"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
+    "GLBT Historical Society\u001fWorkshop | Making Room: A Cyanotype Walk Through the Castro": {
+      "classified_at": "2026-10-05T19:55:41.258878+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "GLBT Historical Society",
+      "taxonomy_version": 2,
+      "title": "Workshop | Making Room: A Cyanotype Walk Through the Castro",
+      "topics": [
+        "visual-art",
+        "history",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "GLBT Historical Society\u001f“Castro on Fire”: A Queer Resistance Walking Tour by Unspeakable Vice": {
+      "classified_at": "2026-10-05T19:55:46.793742+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "GLBT Historical Society",
+      "taxonomy_version": 2,
+      "title": "“Castro on Fire”: A Queer Resistance Walking Tour by Unspeakable Vice",
+      "topics": [
+        "history",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "talk"
+        ],
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -14250,6 +15461,23 @@
       "topics": [
         "rock-indie",
         "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fJess Williamson": {
+      "classified_at": "2026-10-06T17:02:00.539920+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "Jess Williamson",
+      "topics": [
+        "rock-indie",
+        "folk-americana"
       ],
       "types": [
         [
@@ -15401,6 +16629,24 @@
         ]
       ]
     },
+    "Green Apple Books\u001f9th Ave: K-Ming Chang with Sarah Matsui": {
+      "classified_at": "2026-10-06T17:25:00.105652+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "9th Ave: K-Ming Chang with Sarah Matsui",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Green Apple Books\u001f9th Ave: Kawai Strong Washburn": {
       "classified_at": "2026-10-03T01:22:10.505593+00:00",
       "cost": "free",
@@ -15411,6 +16657,24 @@
       "topics": [
         "fiction",
         "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Kawai Strong Washburn with Tommy Orange": {
+      "classified_at": "2026-10-06T17:25:00.048197+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "9th Ave: Kawai Strong Washburn with Tommy Orange",
+      "topics": [
+        "books-authors",
+        "fiction"
       ],
       "types": [
         [
@@ -16120,6 +17384,528 @@
         ]
       ]
     },
+    "JCCSF\u001f60+ Thanksgiving Luncheon: Serving Gratitude": {
+      "classified_at": "2026-10-05T19:54:41.277531+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "60+ Thanksgiving Luncheon: Serving Gratitude",
+      "topics": [
+        "jewish",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "JCCSF\u001fA Joyful Thanksgiving Concert: Come Celebrate with Us": {
+      "classified_at": "2026-10-05T19:54:39.761506+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "A Joyful Thanksgiving Concert: Come Celebrate with Us",
+      "topics": [
+        "music",
+        "jewish"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "JCCSF\u001fAging or Sage-ing: Thriving as the Seasons Change": {
+      "classified_at": "2026-10-05T19:54:36.096333+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Aging or Sage-ing: Thriving as the Seasons Change",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "JCCSF\u001fCream: The Legendary Reign of the Original Rock Supergroup": {
+      "classified_at": "2026-10-05T19:54:50.190257+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Cream: The Legendary Reign of the Original Rock Supergroup",
+      "topics": [
+        "rock-indie",
+        "music"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "JCCSF\u001fDaniel Kahn & Jake Shulman-Ment – UMRU/UNREST": {
+      "classified_at": "2026-10-05T19:54:36.621182+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Daniel Kahn & Jake Shulman-Ment – UMRU/UNREST",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "JCCSF\u001fDrawing Meaning: Three Years of Israeli Political Cartoons": {
+      "classified_at": "2026-10-05T19:54:35.295589+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Drawing Meaning: Three Years of Israeli Political Cartoons",
+      "topics": [
+        "visual-art",
+        "jewish"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "JCCSF\u001fFall Hoops Night": {
+      "classified_at": "2026-10-05T19:54:36.456156+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Fall Hoops Night",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "JCCSF\u001fGertrude Stein: a Family Saga Meets the Birth of Modernism": {
+      "classified_at": "2026-10-05T19:54:58.418743+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Gertrude Stein: a Family Saga Meets the Birth of Modernism",
+      "topics": [
+        "books-authors",
+        "history",
+        "jewish"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "JCCSF\u001fHere-ish & Queer-ish: Stories of Queer Jewish California": {
+      "classified_at": "2026-10-05T19:54:35.918568+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Here-ish & Queer-ish: Stories of Queer Jewish California",
+      "topics": [
+        "jewish",
+        "lgbtq",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "JCCSF\u001fHold on to Your Music – A Mother’s Legacy": {
+      "classified_at": "2026-10-05T19:54:36.884247+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Hold on to Your Music – A Mother’s Legacy",
+      "topics": [
+        "books-authors",
+        "jewish",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "JCCSF\u001fItamar Srulovich & Sarit Packer with Samin Nosrat – Honey & Co. Daily": {
+      "classified_at": "2026-10-05T19:54:35.076587+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Itamar Srulovich & Sarit Packer with Samin Nosrat – Honey & Co. Daily",
+      "topics": [
+        "food-drink",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "JCCSF\u001fJon Ronson – Adventures in a World Of Unraveling Men": {
+      "classified_at": "2026-10-06T17:02:01.281837+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Jon Ronson – Adventures in a World Of Unraveling Men",
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "JCCSF\u001fKetubah Renaissance – Reception with the Curator": {
+      "classified_at": "2026-10-05T19:55:04.373509+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Ketubah Renaissance – Reception with the Curator",
+      "topics": [
+        "jewish"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "JCCSF\u001fMahjong – Beginner Sessions": {
+      "classified_at": "2026-10-05T19:54:35.693011+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Mahjong – Beginner Sessions",
+      "topics": [
+        "games",
+        "jewish"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "JCCSF\u001fMahjong – Social Play": {
+      "classified_at": "2026-10-05T19:54:36.741542+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Mahjong – Social Play",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "JCCSF\u001fOpera Goes to Egypt: The Land of the Pharaohs in Song": {
+      "classified_at": "2026-10-05T19:54:35.270576+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Opera Goes to Egypt: The Land of the Pharaohs in Song",
+      "topics": [
+        "opera"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "JCCSF\u001fPapercut Workshop: Tradition Takes Shape": {
+      "classified_at": "2026-10-05T19:54:52.926540+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Papercut Workshop: Tradition Takes Shape",
+      "topics": [
+        "craft",
+        "jewish"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fRikud By The Bay Israeli Dance": {
+      "classified_at": "2026-10-05T19:54:36.706745+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Rikud By The Bay Israeli Dance",
+      "topics": [
+        "dance",
+        "jewish"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ]
+    },
+    "JCCSF\u001fShape Your Shabbat: Candlesticks Ceramic Workshop": {
+      "classified_at": "2026-10-05T19:54:36.563925+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Shape Your Shabbat: Candlesticks Ceramic Workshop",
+      "topics": [
+        "craft",
+        "jewish"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fSky-High Sweat: A Fleet Week Fitness Flyby": {
+      "classified_at": "2026-10-05T19:54:35.574233+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Sky-High Sweat: A Fleet Week Fitness Flyby",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fTWIST OF TRADITION: HANDS-ON CHALLAH": {
+      "classified_at": "2026-10-05T19:54:38.775674+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "TWIST OF TRADITION: HANDS-ON CHALLAH",
+      "topics": [
+        "food-drink",
+        "jewish"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fThe Art of Living and Dying: Looking Through a Jewish Lens": {
+      "classified_at": "2026-10-05T19:54:35.686170+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "The Art of Living and Dying: Looking Through a Jewish Lens",
+      "topics": [
+        "jewish",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "JCCSF\u001fThe Last Waltz – Co-Presented with SFFILM": {
+      "classified_at": "2026-10-05T19:54:35.890223+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "The Last Waltz – Co-Presented with SFFILM",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "JCCSF\u001fThe Lunch Club: Serving Up Tzedek with Repair The World": {
+      "classified_at": "2026-10-05T19:54:35.870577+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "The Lunch Club: Serving Up Tzedek with Repair The World",
+      "topics": [
+        "jewish",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "JCCSF\u001fTrails & Traditions: Paths of Connection": {
+      "classified_at": "2026-10-05T19:54:35.208728+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Trails & Traditions: Paths of Connection",
+      "topics": [
+        "jewish",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "JCCSF\u001fTreasures of the Pharaohs: de Young Exhibition": {
+      "classified_at": "2026-10-05T19:54:35.086787+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Treasures of the Pharaohs: de Young Exhibition",
+      "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "JCCSF\u001fTwist of Tradition: Hands-On Challah": {
+      "classified_at": "2026-10-05T19:55:06.708308+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Twist of Tradition: Hands-On Challah",
+      "topics": [
+        "food-drink",
+        "jewish",
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fTwist of Tradition: Hands-on Challah": {
+      "classified_at": "2026-10-05T19:54:36.416426+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Twist of Tradition: Hands-on Challah",
+      "topics": [
+        "food-drink",
+        "jewish"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fZ3 Conference 2026": {
+      "classified_at": "2026-10-05T19:54:36.627676+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Z3 Conference 2026",
+      "topics": [
+        "jewish"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "JCCSF\u001fbenny blanco – F*ck Failure": {
+      "classified_at": "2026-10-05T19:54:35.959331+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "benny blanco – F*ck Failure",
+      "topics": [
+        "music",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Keys Jazz Bistro\u001fAkira Tana & Friends from Osaka FT. Tony Lindsay": {
       "classified_at": "2026-09-24T22:58:47.100989+00:00",
       "cost": "unknown",
@@ -16200,6 +17986,24 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Keys Jazz Bistro\u001fCristian Eck": {
+      "classified_at": "2026-10-05T19:54:32.451025+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Cristian Eck",
+      "topics": [
+        "jazz",
+        "blues",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -18889,6 +20693,447 @@
         ]
       ]
     },
+    "Masala Comedy Club\u001fMasala Comedy Club: Laugh Ticket 10 — Campbell": {
+      "classified_at": "2026-10-06T00:09:30.196423+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Masala Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Masala Comedy Club: Laugh Ticket 10 — Campbell",
+      "topics": [
+        "comedy",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Masala Comedy Club\u001fMasala Comedy Club: Laugh Ticket 10 — Danville": {
+      "classified_at": "2026-10-06T00:09:30.188630+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Masala Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Masala Comedy Club: Laugh Ticket 10 — Danville",
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Masala Comedy Club\u001fMasala Comedy Club: Laugh Ticket 10 — Sunnyvale": {
+      "classified_at": "2026-10-06T00:09:30.169121+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Masala Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Masala Comedy Club: Laugh Ticket 10 — Sunnyvale",
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Masala Comedy Club\u001fMasala Comedy Club: Open Mic": {
+      "classified_at": "2026-10-06T00:09:30.327223+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Masala Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Masala Comedy Club: Open Mic",
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001f2026 Halloween Rapid": {
+      "classified_at": "2026-10-05T19:56:06.379395+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "2026 Halloween Rapid",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fBrown Bag Mystery Readers: Rebecca by Daphne Du Maurier": {
+      "classified_at": "2026-10-05T19:56:01.002205+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Brown Bag Mystery Readers: Rebecca by Daphne Du Maurier",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fChess Lecture from IM John Donaldson": {
+      "classified_at": "2026-10-05T19:56:09.228308+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Chess Lecture from IM John Donaldson",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fChess Lecture from IM Ladia Jirasek": {
+      "classified_at": "2026-10-05T19:55:48.623227+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Chess Lecture from IM Ladia Jirasek",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fContemporary Translated Works - Piñen by Daniela Catrileo": {
+      "classified_at": "2026-10-05T19:56:01.740064+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Contemporary Translated Works - Piñen by Daniela Catrileo",
+      "topics": [
+        "fiction",
+        "writing"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fDaytime Series Presents: Diane Frankel and the Fierce Voices Project": {
+      "classified_at": "2026-10-05T19:55:59.781654+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Daytime Series Presents: Diane Frankel and the Fierce Voices Project",
+      "topics": [
+        "nonfiction",
+        "women"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fDaytime Series Presents: John Briscoe On the Plagiarism of Women Writers": {
+      "classified_at": "2026-10-05T19:56:04.785402+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Daytime Series Presents: John Briscoe On the Plagiarism of Women Writers",
+      "topics": [
+        "writing",
+        "women",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fDrop-In Writers' Circle": {
+      "classified_at": "2026-10-05T19:55:57.258872+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Drop-In Writers' Circle",
+      "topics": [
+        "writing"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fEarth 7 with Author Deb Olin Unferth": {
+      "classified_at": "2026-10-05T19:56:34.875279+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Earth 7 with Author Deb Olin Unferth",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fFreedom: Essays with author Zinzi Clemmons (Litquake & MoAD)": {
+      "classified_at": "2026-10-06T17:02:00.553309+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Freedom: Essays with author Zinzi Clemmons (Litquake & MoAD)",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fIntroduction to Food Writing with James Beard Award Winner Soleil Ho": {
+      "classified_at": "2026-10-05T19:55:58.115184+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Introduction to Food Writing with James Beard Award Winner Soleil Ho",
+      "topics": [
+        "food-drink",
+        "writing"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fMovies at Mechanics' Presents: It Happened One Night (1934)": {
+      "classified_at": "2026-10-05T19:56:03.036760+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Movies at Mechanics' Presents: It Happened One Night (1934)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fMovies at Mechanics' Presents: My Man Godfrey (1936)": {
+      "classified_at": "2026-10-05T19:55:52.593114+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Movies at Mechanics' Presents: My Man Godfrey (1936)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fMusic at Mechanics' Welcomes: New Century Chamber Orchestra Quartet": {
+      "classified_at": "2026-10-05T19:56:21.289391+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Music at Mechanics' Welcomes: New Century Chamber Orchestra Quartet",
+      "topics": [
+        "classical"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fProust Seminar with Dr. Mark Calkins (Fall 2026)": {
+      "classified_at": "2026-10-05T19:55:55.958317+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Proust Seminar with Dr. Mark Calkins (Fall 2026)",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fSteel Magnolias: Dolly Parton Memorial Screening with Costume Contest": {
+      "classified_at": "2026-10-05T19:56:18.679676+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Steel Magnolias: Dolly Parton Memorial Screening with Costume Contest",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fTech Support Hour": {
+      "classified_at": "2026-10-05T19:56:13.630959+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Tech Support Hour",
+      "topics": [
+        "tech",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fThe Sea Captain's Wife with author Tilar Mazzeo (Litquake)": {
+      "classified_at": "2026-10-06T17:02:00.459731+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "The Sea Captain's Wife with author Tilar Mazzeo (Litquake)",
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fTravel with AI": {
+      "classified_at": "2026-10-05T19:56:27.580096+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Travel with AI",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fWine Appreciation Series #1: Wine 101": {
+      "classified_at": "2026-10-05T19:56:09.909703+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Wine Appreciation Series #1: Wine 101",
+      "topics": [
+        "wine"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fWine Appreciation Series - Session 5": {
+      "classified_at": "2026-10-05T19:55:47.936937+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Wine Appreciation Series - Session 5",
+      "topics": [
+        "wine"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fWine Appreciation Series - Session 6": {
+      "classified_at": "2026-10-05T19:56:08.384778+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Wine Appreciation Series - Session 6",
+      "topics": [
+        "wine"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001f!Laloismo! A poetic and musical reimagining of the lyrics  of Lalo Guerrero": {
       "classified_at": "2026-10-03T04:51:54.821415+00:00",
       "cost": "unknown",
@@ -19507,6 +21752,27 @@
       "taxonomy_version": 2,
       "title": "Mission Fusion w/ Jonathan, Natalie and Mark",
       "topics": [
+        "dance-party"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ]
+    },
+    "Mission Fusion\u001fTango Ramp Up: Axis & Orbits: Exploring Volcadas & Calecitas": {
+      "classified_at": "2026-10-05T19:54:32.608609+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mission Fusion",
+      "taxonomy_version": 2,
+      "title": "Tango Ramp Up: Axis & Orbits: Exploring Volcadas & Calecitas",
+      "topics": [
+        "tango",
         "dance-party"
       ],
       "types": [
@@ -20940,6 +23206,240 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001f32nd Annual Día de los Muertos Community Celebration": {
+      "classified_at": "2026-10-05T19:54:34.134103+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "32nd Annual Día de los Muertos Community Celebration",
+      "topics": [
+        "latino",
+        "family-kids",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fFriday Nights at OMCA with CHIKA DI": {
+      "classified_at": "2026-10-05T19:54:32.845721+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Friday Nights at OMCA with CHIKA DI",
+      "topics": [
+        "dance-party",
+        "club-night",
+        "music",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fFriday Nights at OMCA with DATANAGAN": {
+      "classified_at": "2026-10-05T19:54:33.787520+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Friday Nights at OMCA with DATANAGAN",
+      "topics": [
+        "music",
+        "club-night",
+        "dance-party",
+        "lgbtq",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fFriday Nights at OMCA with LA GENTE SF": {
+      "classified_at": "2026-10-05T19:54:34.267502+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Friday Nights at OMCA with LA GENTE SF",
+      "topics": [
+        "club-night",
+        "music",
+        "latino",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fFriday Nights at OMCA with MacArthur Maze | 60th Anniversary of the Black Panther Party": {
+      "classified_at": "2026-10-05T19:54:33.741531+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Friday Nights at OMCA with MacArthur Maze | 60th Anniversary of the Black Panther Party",
+      "topics": [
+        "hiphop-rnb",
+        "club-night",
+        "black-diaspora",
+        "documentary",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fOMCA Architecture Walk and Talk": {
+      "classified_at": "2026-10-05T19:54:34.932956+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "OMCA Architecture Walk and Talk",
+      "topics": [
+        "architecture",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fSpecial Guest Gallery Chat with Traditional Medicine Practitioner Batul True Heart": {
+      "classified_at": "2026-10-05T19:54:34.026536+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Special Guest Gallery Chat with Traditional Medicine Practitioner Batul True Heart",
+      "topics": [
+        "wellness",
+        "latino",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fSpotlight Sundays: Roadsongs for Dorothea Lange": {
+      "classified_at": "2026-10-05T19:54:33.300423+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Spotlight Sundays: Roadsongs for Dorothea Lange",
+      "topics": [
+        "photography",
+        "history",
+        "theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland Theater Project\u001fA Night of Songs and Stories from \"Least of My Children\" with Dean Linnard": {
+      "classified_at": "2026-10-05T19:56:12.773957+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Theater Project",
+      "taxonomy_version": 2,
+      "title": "A Night of Songs and Stories from \"Least of My Children\" with Dean Linnard",
+      "topics": [
+        "music",
+        "theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland Theater Project\u001fShe Se Puede": {
+      "classified_at": "2026-10-05T19:56:11.132752+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Theater Project",
+      "taxonomy_version": 2,
+      "title": "She Se Puede",
+      "topics": [
+        "theater",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Omnivore Books on Food\u001f*OFF-SITE* Fuchsia Dunlop at Mister Jiu's • Five Tastes: Delicious Recipes for Chinese Flavors": {
+      "classified_at": "2026-10-05T19:54:34.486203+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Omnivore Books on Food",
+      "taxonomy_version": 2,
+      "title": "*OFF-SITE* Fuchsia Dunlop at Mister Jiu's • Five Tastes: Delicious Recipes for Chinese Flavors",
+      "topics": [
+        "food-drink",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -23726,6 +26226,214 @@
       "topics": [
         "classical",
         "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fAaron Weber": {
+      "classified_at": "2026-10-05T23:07:00.034465+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Aaron Weber",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fBrian Babylon": {
+      "classified_at": "2026-10-05T23:07:04.250868+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Brian Babylon",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fComedy Allstars": {
+      "classified_at": "2026-10-05T23:07:04.206946+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Comedy Allstars",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fHa Ha Halloween Showcase": {
+      "classified_at": "2026-10-05T23:07:04.508067+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Ha Ha Halloween Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fHannah Jones": {
+      "classified_at": "2026-10-05T23:07:03.826721+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Hannah Jones",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fJake Johannsen": {
+      "classified_at": "2026-10-05T23:07:04.816623+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Jake Johannsen",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fLaurie Kilmartin": {
+      "classified_at": "2026-10-05T23:06:59.957292+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Laurie Kilmartin",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fMo Welch": {
+      "classified_at": "2026-10-05T23:07:04.500776+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Mo Welch",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fNori Reed: Nori Is Present LIVE at Punch Line SF": {
+      "classified_at": "2026-10-05T23:07:04.411570+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Nori Reed: Nori Is Present LIVE at Punch Line SF",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fRay Lau": {
+      "classified_at": "2026-10-05T23:07:04.101418+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Ray Lau",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fS. F. Comedy Showcase": {
+      "classified_at": "2026-10-05T23:07:01.589522+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "S. F. Comedy Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fWinston Hodges": {
+      "classified_at": "2026-10-05T23:07:04.803655+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Winston Hodges",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fYour Next Comic - A New Faces Showcase": {
+      "classified_at": "2026-10-05T23:07:04.476804+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Your Next Comic - A New Faces Showcase",
+      "topics": [
+        "comedy"
       ],
       "types": [
         [
@@ -30276,6 +32984,146 @@
         ]
       ]
     },
+    "San Francisco Center for the Book\u001fCenter for the Art of Translation, Litquake, and SFCB Present: Passages of Babel: Translation and the Book Arts of Servane Briand": {
+      "classified_at": "2026-10-05T23:07:05.048307+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "Center for the Art of Translation, Litquake, and SFCB Present: Passages of Babel: Translation and the Book Arts of Servane Briand",
+      "topics": [
+        "books-authors",
+        "design",
+        "writing"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fFrom the Bench of Beth Thielen": {
+      "classified_at": "2026-10-05T23:07:05.114729+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "From the Bench of Beth Thielen",
+      "topics": [
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fHoliday Open House": {
+      "classified_at": "2026-10-05T23:07:05.360903+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "Holiday Open House",
+      "topics": [
+        "family-kids",
+        "craft",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Center for the Book\u001fVoice from the Fire: a Community Reading": {
+      "classified_at": "2026-10-05T23:07:05.078407+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Center for the Book",
+      "taxonomy_version": 2,
+      "title": "Voice from the Fire: a Community Reading",
+      "topics": [
+        "books-authors",
+        "poetry"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Maritime National Park Association\u001fAnnual Maritime Ball": {
+      "classified_at": "2026-10-05T23:07:05.336581+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Maritime National Park Association",
+      "taxonomy_version": 2,
+      "title": "Annual Maritime Ball",
+      "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
+    "San Francisco Maritime National Park Association\u001fFleet Week WITH A WATERFRONT SEAT": {
+      "classified_at": "2026-10-05T23:07:05.442579+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Maritime National Park Association",
+      "taxonomy_version": 2,
+      "title": "Fleet Week WITH A WATERFRONT SEAT",
+      "topics": [
+        "history",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "San Francisco Maritime National Park Association\u001fIn-Person Chantey Sing – San Francisco": {
+      "classified_at": "2026-10-05T23:07:06.353964+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Maritime National Park Association",
+      "taxonomy_version": 2,
+      "title": "In-Person Chantey Sing – San Francisco",
+      "topics": [
+        "folk-americana",
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "San Francisco Playhouse\u001fLife of Pi": {
       "classified_at": "2026-10-03T01:23:53.020219+00:00",
       "cost": "paid",
@@ -35583,6 +38431,27 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: Pan American Companion Plant Stories with Alicia Retes": {
+      "classified_at": "2026-10-06T17:02:00.588427+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Pan American Companion Plant Stories with Alicia Retes",
+      "topics": [
+        "nature-outdoors",
+        "family-kids",
+        "latino"
+      ],
+      "types": [
+        [
+          "talk"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Photograph History, Care and Conservation": {
       "classified_at": "2026-10-03T01:26:48.475137+00:00",
       "cost": "free",
@@ -40262,6 +43131,24 @@
         ]
       ]
     },
+    "Tally Ho! Books\u001fObi Kaufmann - California Inside Out": {
+      "classified_at": "2026-10-05T23:07:01.516839+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Tally Ho! Books",
+      "taxonomy_version": 2,
+      "title": "Obi Kaufmann - California Inside Out",
+      "topics": [
+        "books-authors",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001f3RD EAR PRESENTS: Mystic Songs of India - Exploring the Wisdom & Poetry of Kabir Through Folk Songs with Priyal Maheshwari": {
       "classified_at": "2026-10-03T05:12:53.978344+00:00",
       "cost": "unknown",
@@ -40880,6 +43767,22 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fSomatic Breathwork Journey: Emotional Release & Nervous System Reset with Anna Bolender": {
+      "classified_at": "2026-10-06T17:02:01.218914+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Somatic Breathwork Journey: Emotional Release & Nervous System Reset with Anna Bolender",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fSoul-Nourishing Kirtan: A Night of Inner Peace & Community Connection with Jordan Loder": {
       "classified_at": "2026-10-03T05:13:03.221912+00:00",
       "cost": "unknown",
@@ -41314,6 +44217,23 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fA Little BOO, A Lot of Good": {
+      "classified_at": "2026-10-05T19:54:31.726500+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "A Little BOO, A Lot of Good",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fADHD & Chill": {
       "classified_at": "2026-10-03T05:14:55.645453+00:00",
       "cost": "free",
@@ -41472,6 +44392,40 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fCommunity & Belonging Circle": {
+      "classified_at": "2026-10-06T17:02:00.438525+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Community & Belonging Circle",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fCommunity & Belonging Circles": {
+      "classified_at": "2026-10-06T17:02:00.435127+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Community & Belonging Circles",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -41647,6 +44601,27 @@
       "source": "The Commons (SF)",
       "taxonomy_version": 2,
       "title": "Group Coaching & Peer Support for Founders, Creators & Business Builders: Navigating Uncertainty & Relationships",
+      "topics": [
+        "business",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fGroup Coaching and Peer Support": {
+      "classified_at": "2026-10-05T19:54:31.779405+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Group Coaching and Peer Support",
       "topics": [
         "business",
         "education"
@@ -41893,6 +44868,28 @@
       "types": [
         [
           "talk"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fPoker + Rave night": {
+      "classified_at": "2026-10-06T17:02:00.584753+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Poker + Rave night",
+      "topics": [
+        "club-night",
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -43233,6 +46230,28 @@
         ]
       ]
     },
+    "The Faight Collective\u001fThe Hilltop On Haight": {
+      "classified_at": "2026-10-05T19:54:34.440131+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "The Hilltop On Haight",
+      "topics": [
+        "music",
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "The Faight Collective\u001fThe Last Wild Buffalo": {
       "classified_at": "2026-10-03T05:18:01.606944+00:00",
       "cost": "unknown",
@@ -43555,6 +46574,22 @@
         ]
       ]
     },
+    "The Fillmore\u001fPattie Gonia: SAVE HER! Feat. Sequoia and VERA!": {
+      "classified_at": "2026-10-05T19:54:31.697143+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Pattie Gonia: SAVE HER! Feat. Sequoia and VERA!",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Fillmore\u001fPouya - The Forever Glades Tour 2026": {
       "classified_at": "2026-10-03T01:20:02.741595+00:00",
       "cost": "unknown",
@@ -43789,6 +46824,250 @@
       "title": "Thee Sinseers: Love Stories Tour",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001f\"Jamie Foxx: Take Care of Yourself\" Watch Party": {
+      "classified_at": "2026-10-05T19:56:15.368200+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "\"Jamie Foxx: Take Care of Yourself\" Watch Party",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fBerkeley Symphony Presents INHERITANCE": {
+      "classified_at": "2026-10-05T19:56:16.515689+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Berkeley Symphony Presents INHERITANCE",
+      "topics": [
+        "classical"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fDía de los Muertos": {
+      "classified_at": "2026-10-05T19:56:35.592209+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Día de los Muertos",
+      "topics": [
+        "dance",
+        "latino",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fHoliday at the Temple - A Marcus McCauley Production": {
+      "classified_at": "2026-10-05T19:56:20.549800+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Holiday at the Temple - A Marcus McCauley Production",
+      "topics": [
+        "jazz",
+        "classical",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fJamie Foxx Watch Party Pre-Screening Dinner": {
+      "classified_at": "2026-10-05T19:56:31.252453+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Jamie Foxx Watch Party Pre-Screening Dinner",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fOrchestra Liberation": {
+      "classified_at": "2026-10-05T19:56:32.239934+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Orchestra Liberation",
+      "topics": [
+        "music",
+        "black-diaspora",
+        "hiphop-rnb",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fRockin’ Holiday at The Henry J": {
+      "classified_at": "2026-10-05T19:56:29.679795+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Rockin’ Holiday at The Henry J",
+      "topics": [
+        "family-kids",
+        "music",
+        "film"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fThankful, A Comedy Show Starring Sinbad": {
+      "classified_at": "2026-10-05T19:56:21.954675+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Thankful, A Comedy Show Starring Sinbad",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fThe Banksy Art Exhibit": {
+      "classified_at": "2026-10-05T19:56:38.786976+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "The Banksy Art Exhibit",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fThe Peking Acrobats": {
+      "classified_at": "2026-10-05T19:56:33.870003+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "The Peking Acrobats",
+      "topics": [
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fThe Rock and Roll Playhouse Plays Music of The Beatles for Kids": {
+      "classified_at": "2026-10-05T19:56:17.358178+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "The Rock and Roll Playhouse Plays Music of The Beatles for Kids",
+      "topics": [
+        "music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fThe Very Hungry Caterpillar Interactive Show": {
+      "classified_at": "2026-10-05T19:56:28.367639+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "The Very Hungry Caterpillar Interactive Show",
+      "topics": [
+        "family-kids",
+        "theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fYuletide Youth Holiday Concert": {
+      "classified_at": "2026-10-05T19:56:23.819565+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Yuletide Youth Holiday Concert",
+      "topics": [
+        "music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001f“Scoopin’ Up Joy” - Oakland Interfaith Gospel Choir 41st Annual Holiday Concert": {
+      "classified_at": "2026-10-05T19:56:24.760910+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "“Scoopin’ Up Joy” - Oakland Interfaith Gospel Choir 41st Annual Holiday Concert",
+      "topics": [
+        "music",
+        "family-kids"
       ],
       "types": [
         [
@@ -44925,6 +48204,393 @@
         ]
       ]
     },
+    "The Masonic\u001fAli Wong Live": {
+      "classified_at": "2026-10-05T19:55:30.646027+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Ali Wong Live",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fAnthony Jeselnik: Wrath of Man": {
+      "classified_at": "2026-10-05T19:55:34.211884+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Anthony Jeselnik: Wrath of Man",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fCHELSEA HANDLER: THE HIGH AND MIGHTY TOUR": {
+      "classified_at": "2026-10-05T19:55:01.600548+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "CHELSEA HANDLER: THE HIGH AND MIGHTY TOUR",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fDaniel Sloss: BITTER  (Brand New Tour!)": {
+      "classified_at": "2026-10-05T19:54:56.867332+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Daniel Sloss: BITTER  (Brand New Tour!)",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fEsDeeKid - Council House Rat Tour": {
+      "classified_at": "2026-10-05T19:55:15.572942+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "EsDeeKid - Council House Rat Tour",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fFLO - Therapy At The Club Tour": {
+      "classified_at": "2026-10-05T19:55:21.218254+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "FLO - Therapy At The Club Tour",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fFetty Wap: Nostalgia Tour": {
+      "classified_at": "2026-10-05T19:55:05.783594+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Fetty Wap: Nostalgia Tour",
+      "topics": [
+        "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fGnarls Barkley: To Whom It Still Concerns Tour": {
+      "classified_at": "2026-10-05T19:55:00.847482+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Gnarls Barkley: To Whom It Still Concerns Tour",
+      "topics": [
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fJeff Arcuri: The Road Trip Tour": {
+      "classified_at": "2026-10-05T19:55:16.031112+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fJodeci - 35th Anniversary Tour of Forever My Lady": {
+      "classified_at": "2026-10-05T19:55:10.453774+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Jodeci - 35th Anniversary Tour of Forever My Lady",
+      "topics": [
+        "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fLaura Ramoso: The Calm Down Tour": {
+      "classified_at": "2026-10-05T19:54:56.099790+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Laura Ramoso: The Calm Down Tour",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fLive 105 Presents: Rise Against: Ricochet 2026": {
+      "classified_at": "2026-10-05T19:54:43.854325+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Live 105 Presents: Rise Against: Ricochet 2026",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fLoathe: A Stranger to You": {
+      "classified_at": "2026-10-05T19:55:07.830905+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Loathe: A Stranger to You",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fMatteo Lane: We Gotta Catch Up!": {
+      "classified_at": "2026-10-05T19:55:09.402592+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Matteo Lane: We Gotta Catch Up!",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fPolyphia: BE NOT AFRAID World Tour": {
+      "classified_at": "2026-10-05T19:55:19.576252+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Polyphia: BE NOT AFRAID World Tour",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fProtocols with Andrew Huberman": {
+      "classified_at": "2026-10-05T19:54:48.592383+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Protocols with Andrew Huberman",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "The Masonic\u001fSAINT LEVANT - AFANDI WORLD TOUR": {
+      "classified_at": "2026-10-05T19:55:22.332867+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "SAINT LEVANT - AFANDI WORLD TOUR",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fSTRANGERS, FRIENDS, AND LOVERS: A NIGHT OUT WITH ESTHER PEREL": {
+      "classified_at": "2026-10-05T19:55:17.450114+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "STRANGERS, FRIENDS, AND LOVERS: A NIGHT OUT WITH ESTHER PEREL",
+      "topics": [
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "The Masonic\u001fShaboozey - Outlaws Never Die Tour": {
+      "classified_at": "2026-10-05T19:54:40.539235+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Shaboozey - Outlaws Never Die Tour",
+      "topics": [
+        "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fStella Lefty: Long Way Home Tour": {
+      "classified_at": "2026-10-05T19:55:13.547061+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Stella Lefty: Long Way Home Tour",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fTHE CHICKS - TAKING THE LONG WAY": {
+      "classified_at": "2026-10-05T19:55:14.202620+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "THE CHICKS - TAKING THE LONG WAY",
+      "topics": [
+        "rock-indie",
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fTRIVIUM: CROWN IN THE GRAVE WORLD TOUR": {
+      "classified_at": "2026-10-05T19:55:12.503439+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "TRIVIUM: CROWN IN THE GRAVE WORLD TOUR",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fTom Jones: Come Gather Round Tour": {
+      "classified_at": "2026-10-05T19:54:59.935555+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Tom Jones: Come Gather Round Tour",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Masonic\u001fUnderoath - Define the Great Line 20th Anniversary Tour": {
+      "classified_at": "2026-10-05T19:55:03.171951+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Underoath - Define the Great Line 20th Anniversary Tour",
+      "topics": [
+        "punk-metal"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fBar Trivia with @SFTrivia": {
       "classified_at": "2026-10-03T01:24:38.975330+00:00",
       "cost": "free",
@@ -45044,6 +48710,40 @@
       "title": "Fossil Farm",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Riptide\u001fHalloween Party with DJ Los Ahijados de la Changa!": {
+      "classified_at": "2026-10-05T23:07:00.645047+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Halloween Party with DJ Los Ahijados de la Changa!",
+      "topics": [
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fJunk Parlor": {
+      "classified_at": "2026-10-05T23:07:00.706815+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Junk Parlor",
+      "topics": [
+        "music"
       ],
       "types": [
         [
@@ -45203,6 +48903,42 @@
       "topics": [
         "club-night",
         "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fRiptide Rocksteady Social - DJs Sir Rudy Blackout & The Singapore Selector": {
+      "classified_at": "2026-10-05T23:07:03.739931+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Riptide Rocksteady Social - DJs Sir Rudy Blackout & The Singapore Selector",
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fSouldies On Shore - Oldies on Vinyl w/Mr. 45rpm, Mr. Rhya & Dion Garcia": {
+      "classified_at": "2026-10-05T23:07:00.693992+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Souldies On Shore - Oldies on Vinyl w/Mr. 45rpm, Mr. Rhya & Dion Garcia",
+      "topics": [
+        "club-night",
+        "soul-funk"
       ],
       "types": [
         [
@@ -45467,6 +49203,22 @@
       "title": "Goldenvoice Presents Buena Vista Orchestra",
       "topics": [
         "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents Cookies Christmas 2026 ft. Berner, Paul Wall, & Baby Bash": {
+      "classified_at": "2026-10-05T19:54:31.628381+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents Cookies Christmas 2026 ft. Berner, Paul Wall, & Baby Bash",
+      "topics": [
+        "hiphop-rnb"
       ],
       "types": [
         [
@@ -45867,6 +49619,200 @@
         ]
       ]
     },
+    "Yerba Buena Gardens Festival\u001fAfro-Filipino Jazz Project": {
+      "classified_at": "2026-10-05T23:07:03.790032+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Afro-Filipino Jazz Project",
+      "topics": [
+        "jazz",
+        "world-music",
+        "asian-american",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fBhangra & Beats Night Market": {
+      "classified_at": "2026-10-05T23:07:04.146735+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Bhangra & Beats Night Market",
+      "topics": [
+        "club-night",
+        "dance-party",
+        "world-music",
+        "family-kids",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fDance Outdoors with Rhythm & Motion": {
+      "classified_at": "2026-10-05T23:07:02.986807+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Dance Outdoors with Rhythm & Motion",
+      "topics": [
+        "dance-party"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fFollow the Music": {
+      "classified_at": "2026-10-05T23:07:03.130843+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Follow the Music",
+      "topics": [
+        "music",
+        "education",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fHalloween Hoopla": {
+      "classified_at": "2026-10-05T23:07:03.810691+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Halloween Hoopla",
+      "topics": [
+        "family-kids",
+        "music",
+        "dance"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fJoe Bataan": {
+      "classified_at": "2026-10-05T23:07:03.420178+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Joe Bataan",
+      "topics": [
+        "soul-funk",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fQuinteto Latino": {
+      "classified_at": "2026-10-05T23:07:03.029990+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Quinteto Latino",
+      "topics": [
+        "classical",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fRichard Howell’s John Coltrane Tribute": {
+      "classified_at": "2026-10-05T23:07:03.165569+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "Richard Howell’s John Coltrane Tribute",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fSan Francisco Indigenous Peoples Day with special performance by Jeremy Dutcher": {
+      "classified_at": "2026-10-05T23:07:03.369387+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "San Francisco Indigenous Peoples Day with special performance by Jeremy Dutcher",
+      "topics": [
+        "music",
+        "world-music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
+    "Yerba Buena Gardens Festival\u001fYBG Dance Day": {
+      "classified_at": "2026-10-05T23:07:03.357791+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yerba Buena Gardens Festival",
+      "taxonomy_version": 2,
+      "title": "YBG Dance Day",
+      "topics": [
+        "dance-party",
+        "bachata"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Yoshi's\u001f40 FINGERS": {
       "classified_at": "2026-10-03T05:03:04.167397+00:00",
       "cost": "paid",
@@ -45942,6 +49888,40 @@
       "title": "ANDY MCKEE",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fBACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL": {
+      "classified_at": "2026-10-05T23:07:00.831140+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 2,
+      "title": "BACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL",
+      "topics": [
+        "soul-funk",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fBACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL & COMPANY": {
+      "classified_at": "2026-10-06T17:02:00.483170+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 2,
+      "title": "BACK TO THE FUTURE THANKSGIVING CELEBRATION: FEAT LAWRENCE MATTHEWS AND DERRICK HALL & COMPANY",
+      "topics": [
+        "soul-funk",
+        "music"
       ],
       "types": [
         [

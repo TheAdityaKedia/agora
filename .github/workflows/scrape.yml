@@ -277,9 +277,12 @@ jobs:
 
   # Heartbeat for the hourly email job, which can't notice its own absence
   # (GitHub drops scheduled runs; it has dropped this repo's before). If no
-  # ingest-email.yml run on main has succeeded in the last 6 hours, post to the
+  # ingest-email.yml run on main has succeeded in the last 9 hours, post to the
   # "Email ingest failures" issue (@mentions the owner) and go red. A paused job
   # (EMAIL_INGEST=off) still runs and succeeds, so pausing doesn't trigger this.
+  # 9h, not the nominal 1h: GitHub only honors a few of this repo's hourly
+  # slots a day (3-6 runs, gaps up to ~7.5h observed 2026-10), so a tighter
+  # window alerts on GitHub's scheduling rather than on anything we can fix.
   ingest-heartbeat:
     if: github.ref_name == 'main'
     runs-on: ubuntu-latest
@@ -291,7 +294,12 @@ jobs:
       - name: Check the email job ran recently
         env:
           GH_TOKEN: ${{ github.token }}
-          MAX_AGE_HOURS: "6"
+          # This job doesn't check out the repo, so `gh issue` has no git remote
+          # to infer it from ("failed to run git: fatal: not a git repository",
+          # which killed the alert before it filed anything). GH_REPO tells gh
+          # outright.
+          GH_REPO: ${{ github.repository }}
+          MAX_AGE_HOURS: "9"
           TITLE: Email ingest failures
         run: |
           set -euo pipefail

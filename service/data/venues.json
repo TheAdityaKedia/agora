@@ -707,6 +707,26 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "artists-television-access": {
+      "added": "2026-10-05",
+      "address": "992 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Artists Television Access in San Francisco County (building, node/13724354404)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.757085,
+      "lng": -122.42129,
+      "name": "Artists Television Access",
+      "osm": "node/13724354404",
+      "possible_duplicates": [
+        "alamo-drafthouse-cinema"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "artogether": {
       "added": "2026-10-02",
       "address": "1200 Harrison Street, Oakland, CA 94612",
@@ -1284,6 +1304,25 @@
       "region": "sf",
       "status": "verified"
     },
+    "calvin-simmons-theater": {
+      "added": "2026-10-05",
+      "address": "10 10th Street, Oakland, CA 94607",
+      "evidence": [
+        "map: 10 in Alameda County (building, way/202577492)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.797818,
+      "lng": -122.263735,
+      "name": "Calvin Simmons Theater",
+      "osm": "way/202577492",
+      "possible_duplicates": [
+        "oakland-museum-of-california"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "cassa-jam": {
       "added": "2026-10-02",
       "address": "37729 Niles Boulevard, Fremont, CA 94536",
@@ -1369,6 +1408,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "childrens-garden": {
+      "added": "2026-10-05",
+      "address": "799 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 799 in San Francisco County (building, way/406944774)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.783288,
+      "lng": -122.402524,
+      "name": "Children’s Garden",
+      "osm": "way/406944774",
+      "possible_duplicates": [
+        "crepe-myrtle-garden",
+        "american-bookbinders-museum"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "chinatown-him-mark-lai-branch-library": {
       "added": "2026-10-02",
       "address": "1135 Powell Street, San Francisco, CA 94108",
@@ -1443,6 +1502,28 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "cobbs-comedy-club": {
+      "added": "2026-10-05",
+      "address": "915 Columbus Avenue, San Francisco, CA 94133",
+      "evidence": [
+        "map: Cobb's Comedy Club in San Francisco County (building, node/2106473327)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.802923,
+      "lng": -122.414203,
+      "name": "Cobb's Comedy Club",
+      "osm": "node/2106473327",
+      "possible_duplicates": [
+        "the-lost-church",
+        "north-beach-branch-library",
+        "sweeties-art-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "columbus-cafe": {
       "added": "2026-10-02",
@@ -1534,6 +1615,28 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "crepe-myrtle-garden": {
+      "added": "2026-10-05",
+      "address": "750 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Yerba Buena Gardens in San Francisco County (building, way/28842443)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.78465,
+      "lng": -122.402345,
+      "name": "Crepe Myrtle Garden",
+      "osm": "way/28842443",
+      "possible_duplicates": [
+        "ybca-screening-room",
+        "yerba-buena-center-for-the-arts",
+        "great-lawn",
+        "museum-of-the-african-diaspora"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "curran-theatre": {
       "added": "2026-10-02",
@@ -1998,6 +2101,23 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "flax-art-and-design": {
+      "added": "2026-10-05",
+      "address": "1501 Martin Luther King Junior Way, Oakland, CA 94612",
+      "evidence": [
+        "map: FLAX Art and Design in Alameda County (building, way/334467207)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.807224,
+      "lng": -122.275718,
+      "name": "FLAX Art and Design",
+      "osm": "way/334467207",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "fly-bar-restaurant": {
       "added": "2026-10-02",
       "address": "762 Divisadero Street, San Francisco, CA 94117",
@@ -2418,6 +2538,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "india-community-center": {
+      "added": "2026-10-06",
+      "address": "525 Los Coches Street, Milpitas, CA 95035",
+      "evidence": [
+        "map: India Community Center in Santa Clara County (building, way/157811574)",
+        "text: Milpitas",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.431923,
+      "lng": -121.895253,
+      "name": "India Community Center",
+      "osm": "way/157811574",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "ingleside-branch-library": {
       "added": "2026-10-02",
       "address": "1298 Ocean Avenue, San Francisco, CA 94112",
@@ -2487,6 +2624,27 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "james-moore-theater": {
+      "added": "2026-10-05",
+      "address": "1000 Oak Street, Oakland, CA 94607",
+      "evidence": [
+        "map: James Moore Theater in Alameda County (building, node/6302622831)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.79809,
+      "lng": -122.262682,
+      "name": "James Moore Theater",
+      "osm": "node/6302622831",
+      "possible_duplicates": [
+        "calvin-simmons-theater",
+        "oakland-museum-of-california"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "jcc-east-bay": {
       "added": "2026-10-02",
@@ -2659,6 +2817,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "la-pista": {
+      "added": "2026-10-05",
+      "address": "3450 3rd Street, San Francisco, CA 94124",
+      "evidence": [
+        "map: 3450 in San Francisco County (building, way/255351741)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.745607,
+      "lng": -122.387349,
+      "name": "La Pista",
+      "osm": "way/255351741",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "la-reyna-bakery": {
       "added": "2026-10-02",
@@ -3349,6 +3523,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "national-maritime-museum": {
+      "added": "2026-10-05",
+      "address": "900 Beach St, San Francisco, CA 94109",
+      "evidence": [
+        "map: National Maritime Museum in San Francisco County (building, way/32839686)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.806408,
+      "lng": -122.423897,
+      "name": "National Maritime Museum",
+      "osm": "way/32839686",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "neck-of-the-woods": {
       "added": "2026-10-02",
       "address": "406 Clement Street, San Francisco, CA 94118",
@@ -3514,6 +3704,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "oakland-museum-of-california": {
+      "added": "2026-10-05",
+      "address": "1000 Oak Street, Oakland, CA 94607",
+      "evidence": [
+        "map: Oakland Museum of California in Alameda County (building, relation/6431998)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.798614,
+      "lng": -122.263604,
+      "name": "Oakland Museum of California",
+      "osm": "relation/6431998",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "oakland-photo-workshop": {
       "added": "2026-10-02",
       "address": "312 8th Street, Oakland, CA 94609",
@@ -3671,6 +3878,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "oshman-family-jcc": {
+      "added": "2026-10-05",
+      "address": "3921 Fabian Way, Palo Alto, CA 94303",
+      "evidence": [
+        "map: 3921 in Santa Clara County (building, way/229815132)",
+        "text: Palo Alto",
+        "street number matches"
+      ],
+      "lat": 37.423639,
+      "lng": -122.103463,
+      "name": "Oshman Family JCC",
+      "osm": "way/229815132",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "pacific-pipe": {
       "added": "2026-10-02",
@@ -3887,6 +4110,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "pier-45": {
+      "added": "2026-10-05",
+      "address": "Pier 45, San Francisco, CA 94133",
+      "evidence": [
+        "map: Pier 45 in San Francisco County (building, way/1255058987)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.809774,
+      "lng": -122.417315,
+      "name": "Pier 45",
+      "osm": "way/1255058987",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "pittsburghs-pub": {
       "added": "2026-10-02",
       "address": "4207 Judah Street, San Francisco, CA 94166",
@@ -4000,6 +4239,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "punch-line-comedy-club": {
+      "added": "2026-10-05",
+      "address": "444 Battery Street, San Francisco, CA 94111",
+      "evidence": [
+        "map: Punch Line Comedy Club in San Francisco County (building, way/104682197)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.795532,
+      "lng": -122.400119,
+      "name": "Punch Line Comedy Club",
+      "osm": "way/104682197",
+      "possible_duplicates": [
+        "patriot-house-pub"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "question-mark-tavern": {
       "added": "2026-10-02",
@@ -4462,6 +4721,22 @@
       "region": "southbay",
       "status": "verified"
     },
+    "starbright-theater": {
+      "added": "2026-10-06",
+      "address": "1770 West Campbell Avenue, Campbell, CA 95008",
+      "evidence": [
+        "map: 1770 in Santa Clara County (building, way/417907163)",
+        "text: Campbell",
+        "street number matches"
+      ],
+      "lat": 37.285749,
+      "lng": -121.981716,
+      "name": "Starbright Theater",
+      "osm": "way/417907163",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "starlite-room": {
       "added": "2026-10-02",
       "address": "450 Powell Street, San Francisco, CA 94102",
@@ -4483,6 +4758,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "sunnyvale-theatre": {
+      "added": "2026-10-06",
+      "address": "550 East Remington Drive, Sunnyvale, CA 94088",
+      "evidence": [
+        "map: Sunnyvale Theatre in Santa Clara County (building, way/61114768)",
+        "text: Sunnyvale",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.358089,
+      "lng": -122.024846,
+      "name": "Sunnyvale Theatre",
+      "osm": "way/61114768",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "sunset-branch-library": {
       "added": "2026-10-02",
@@ -5247,6 +5539,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-masonic": {
+      "added": "2026-10-05",
+      "address": "1111 California Street, San Francisco, CA 94108",
+      "evidence": [
+        "map: The Masonic in San Francisco County (building, way/32947040)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.791174,
+      "lng": -122.41299,
+      "name": "The Masonic",
+      "osm": "way/32947040",
+      "possible_duplicates": [
+        "grace-cathedral"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "the-mellow-haight": {
       "added": "2026-10-02",
       "address": "1401 Haight Street, San Francisco, CA 94117",
@@ -5489,6 +5801,33 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-westin-st-francis": {
+      "added": "2026-10-05",
+      "address": "335 Powell Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: The Westin St. Francis in San Francisco County (building, way/332378158)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.78775,
+      "lng": -122.408976,
+      "name": "The Westin St. Francis",
+      "osm": "way/332378158",
+      "possible_duplicates": [
+        "san-francisco-playhouse",
+        "biscuits-blues",
+        "cheaper-than-therapy",
+        "starlite-room",
+        "a-c-t",
+        "curran-theatre",
+        "feinsteins-at-the-nikko",
+        "the-redwood-room"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "three-restaurant": {
       "added": "2026-10-02",
       "address": "721 Texas Street, Fairfield, CA 94533",
@@ -5644,6 +5983,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "village-theatre": {
+      "added": "2026-10-06",
+      "address": "233 Front Street, Danville, CA 94526",
+      "evidence": [
+        "map: Village Theatre & Art Gallery in Contra Costa County (building, way/1052130747)",
+        "text: Danville",
+        "street number matches"
+      ],
+      "lat": 37.821185,
+      "lng": -121.997507,
+      "name": "Village Theatre",
+      "osm": "way/1052130747",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "vintage-berkeley-wine-shop": {
       "added": "2026-10-02",
