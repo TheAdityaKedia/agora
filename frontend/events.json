@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T23:07:20.168392+00:00",
+  "generated_at": "2026-10-06T00:09:37.564155+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -1460,6 +1460,13 @@
       "lng": -122.39811,
       "neighborhood": "soma"
     },
+    "india-community-center": {
+      "name": "India Community Center",
+      "region": "southbay",
+      "address": "525 Los Coches Street, Milpitas, CA 95035",
+      "lat": 37.43192,
+      "lng": -121.89525
+    },
     "ingleside-branch-library": {
       "name": "Ingleside Branch Library",
       "region": "sf",
@@ -2337,6 +2344,13 @@
       "lng": -122.4143,
       "neighborhood": "soma"
     },
+    "starbright-theater": {
+      "name": "Starbright Theater",
+      "region": "southbay",
+      "address": "1770 West Campbell Avenue, Campbell, CA 95008",
+      "lat": 37.28575,
+      "lng": -121.98172
+    },
     "starlite-room": {
       "name": "Starlite Room",
       "region": "sf",
@@ -2344,6 +2358,13 @@
       "lat": 37.78896,
       "lng": -122.40831,
       "neighborhood": "financial-district-south-beach"
+    },
+    "sunnyvale-theatre": {
+      "name": "Sunnyvale Theatre",
+      "region": "southbay",
+      "address": "550 East Remington Drive, Sunnyvale, CA 94088",
+      "lat": 37.35809,
+      "lng": -122.02485
     },
     "sunset-branch-library": {
       "name": "Sunset Branch Library",
@@ -2807,6 +2828,13 @@
       "lat": 37.76329,
       "lng": -122.40791,
       "neighborhood": "mission"
+    },
+    "village-theatre": {
+      "name": "Village Theatre",
+      "region": "eastbay",
+      "address": "233 Front Street, Danville, CA 94526",
+      "lat": 37.82118,
+      "lng": -121.99751
     },
     "vintage-berkeley-wine-shop": {
       "name": "Vintage Berkeley Wine Shop",
@@ -12488,6 +12516,34 @@
       "more": true
     },
     {
+      "id": "7a891fd2-f842-4a37-8c75-a792d795d9de",
+      "title": "Masala Comedy Club: Open Mic",
+      "start_time": "2026-10-09T03:00:00+00:00",
+      "location": "India Community Center, 525 Los Coches St, Milpitas, CA 95035",
+      "url": "https://www.masalacc.org/open-mic/?eid=114714",
+      "image_url": "https://static.tugoz.com/images/users/I3417555615B23B6.png",
+      "sources": [
+        "Masala Comedy Club"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "cost": "free",
+      "venue": "india-community-center",
+      "region": "southbay",
+      "summary": "Sign up for desi & Hinglish open mic nights in Silicon Valley.",
+      "more": true
+    },
+    {
       "id": "8e975db1-0f69-45d2-a699-fbba423c655c",
       "title": "Edie Arnold Is a Loser",
       "start_time": "2026-10-09T03:00:00+00:00",
@@ -17638,6 +17694,31 @@
       "venue": "medicine-for-nightmares",
       "region": "sf",
       "summary": "!Poetry on La VeintiCuatro! is a poetry crawl that celebrates three influential readings that have had a deep impact on this neighborhood’s literary history. 5-6pm Poets in the",
+      "more": true
+    },
+    {
+      "id": "9a7b2b58-3f20-4e3c-8ab7-d0f739ac7345",
+      "title": "Masala Comedy Club: Laugh Ticket 10 — Sunnyvale",
+      "start_time": "2026-10-11T00:00:00+00:00",
+      "location": "Sunnyvale Theatre, 550 E Remington Dr, Sunnyvale, CA 94087",
+      "url": "https://masalacc.org/laugh-ticket-10/?eid=113945",
+      "image_url": "https://static.tugoz.com/images/users/I696589A3AAD0030.jpeg",
+      "sources": [
+        "Masala Comedy Club"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "cost": "paid",
+      "venue": "sunnyvale-theatre",
+      "region": "southbay",
+      "summary": "Laugh Ticket 10 — the next desi & Hinglish stand-up comedy show from Masala Comedy Club in the Bay Area.",
       "more": true
     },
     {
@@ -38776,6 +38857,31 @@
       "more": true
     },
     {
+      "id": "9ba75305-80b6-4eb5-ad40-3d5c4cb728ac",
+      "title": "Masala Comedy Club: Laugh Ticket 10 — Danville",
+      "start_time": "2026-10-18T23:00:00+00:00",
+      "location": "Village Theatre, 233 Front St, Danville, CA 94526",
+      "url": "https://masalacc.org/laugh-ticket-10/?eid=113920",
+      "image_url": "https://static.tugoz.com/images/users/I696589A3AAD0030.jpeg",
+      "sources": [
+        "Masala Comedy Club"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "cost": "paid",
+      "venue": "village-theatre",
+      "region": "eastbay",
+      "summary": "Laugh Ticket 10 — the next desi & Hinglish stand-up comedy show from Masala Comedy Club in the Bay Area.",
+      "more": true
+    },
+    {
       "id": "dfe6184c-8ea0-422c-b0e2-e5cbdc81d6b3",
       "title": "Sunday Blues Jam at Pier 23 Cafe",
       "start_time": "2026-10-18T23:00:00+00:00",
@@ -49178,6 +49284,34 @@
       "region": "sf"
     },
     {
+      "id": "57995891-271e-4c01-b927-724ac2597ad4",
+      "title": "Masala Comedy Club: Open Mic",
+      "start_time": "2026-10-23T03:00:00+00:00",
+      "location": "India Community Center, 525 Los Coches St, Milpitas, CA 95035",
+      "url": "https://www.masalacc.org/open-mic/?eid=114722",
+      "image_url": "https://static.tugoz.com/images/users/I3417555615B23B6.png",
+      "sources": [
+        "Masala Comedy Club"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "cost": "free",
+      "venue": "india-community-center",
+      "region": "southbay",
+      "summary": "Sign up for desi & Hinglish open mic nights in Silicon Valley.",
+      "more": true
+    },
+    {
       "id": "620bcf7a-a856-4e60-8c9a-3f772d2ba3af",
       "title": "Frankie Cosmos - Celebrating 10 Years of Next Thing",
       "start_time": "2026-10-23T03:00:00+00:00",
@@ -51738,6 +51872,31 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "The Cornley Polytechnic Drama Society is back, and this time they’re taking on Peter Pan .",
+      "more": true
+    },
+    {
+      "id": "d5438d13-f950-466c-bf20-d0e9528894e0",
+      "title": "Masala Comedy Club: Laugh Ticket 10 — Campbell",
+      "start_time": "2026-10-24T03:00:00+00:00",
+      "location": "Starbright Theater, 1770 W Campbell Ave, Campbell, CA 95008",
+      "url": "https://masalacc.org/laugh-ticket-10/?eid=113884",
+      "image_url": "https://static.tugoz.com/images/users/I696589A3AAD0030.jpeg",
+      "sources": [
+        "Masala Comedy Club"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "latino"
+      ],
+      "cost": "paid",
+      "venue": "starbright-theater",
+      "region": "southbay",
+      "summary": "Laugh Ticket 10 — the next desi & Hinglish stand-up comedy show from Masala Comedy Club in the Bay Area.",
       "more": true
     },
     {
@@ -76035,6 +76194,34 @@
       "cost": "unknown",
       "venue": "punch-line-comedy-club",
       "region": "sf"
+    },
+    {
+      "id": "36800a8e-bf05-4d76-88b9-a3b6f937ef47",
+      "title": "Masala Comedy Club: Open Mic",
+      "start_time": "2026-11-06T04:00:00+00:00",
+      "location": "India Community Center, 525 Los Coches St, Milpitas, CA 95035",
+      "url": "https://www.masalacc.org/open-mic/?eid=114726",
+      "image_url": "https://static.tugoz.com/images/users/I3417555615B23B6.png",
+      "sources": [
+        "Masala Comedy Club"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "asian-american"
+      ],
+      "cost": "free",
+      "venue": "india-community-center",
+      "region": "southbay",
+      "summary": "Sign up for desi & Hinglish open mic nights in Silicon Valley.",
+      "more": true
     },
     {
       "id": "46d6d390-cd18-4b46-9595-0fd596e944e1",
