@@ -291,6 +291,11 @@ jobs:
       - name: Check the email job ran recently
         env:
           GH_TOKEN: ${{ github.token }}
+          # This job doesn't check out the repo, so `gh issue` has no git remote
+          # to infer it from ("failed to run git: fatal: not a git repository",
+          # which killed the alert before it filed anything). GH_REPO tells gh
+          # outright.
+          GH_REPO: ${{ github.repository }}
           MAX_AGE_HOURS: "6"
           TITLE: Email ingest failures
         run: |
