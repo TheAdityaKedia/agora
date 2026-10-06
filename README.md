@@ -273,8 +273,9 @@ into logs, PRs, the DB, or the manifest.
   emails you) and turns the run red. The next clean run closes it. Per-email
   problems (no date, blocked link) aren't alerts — the sender gets a reply.
   A heartbeat in the daily scrape run also alerts (same issue) if the email
-  job hasn't succeeded on `main` in 6 hours — GitHub can silently drop
-  scheduled runs.
+  job hasn't succeeded on `main` in 9 hours — GitHub can silently drop
+  scheduled runs, and in practice honors only 3–6 of the 24 hourly slots a
+  day, so the window allows for that rather than alerting on it.
 
 **Setup** (done; for a rebuild): Gmail account with 2-Step Verification + app
 password; secrets in environments `production` and `ci-test`:
