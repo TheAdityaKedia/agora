@@ -107,13 +107,28 @@ def _card_address(art) -> str | None:
     return ", ".join(parts) or None
 
 
+def _card_description(desc_el, skip_paragraphs: re.Pattern | None) -> str | None:
+    if desc_el is None:
+        return None
+    if skip_paragraphs is None:
+        text = desc_el.get_text(" ", strip=True)
+    else:
+        blocks = desc_el.find_all(["p", "h1", "h2", "h3", "h4", "li"]) or [desc_el]
+        kept = [b.get_text(" ", strip=True) for b in blocks]
+        text = " ".join(t for t in kept if t and not skip_paragraphs.search(t))
+    return re.sub(r"\s+", " ", text).strip() or None
+
+
 def parse_events(html: str, *, base_url: str, fallback_location: str | None = None,
-                 card_address: bool = False) -> list[RawEvent]:
+                 card_address: bool = False,
+                 skip_paragraphs: re.Pattern | None = None) -> list[RawEvent]:
     """Parse a Squarespace events-collection page into RawEvents (one per showing).
 
     `card_address` takes each card's own address line (venue name + street)
     over `fallback_location` — opt in for sources whose events aren't all at
-    one place (GLBT Historical Society).
+    one place (GLBT Historical Society). `skip_paragraphs` drops description
+    paragraphs that match it (a logistics header such as GLBT's
+    "LOCATION … / ADMISSION …").
 
     Pure — no network — so it's testable against a captured page.
     """
@@ -146,11 +161,7 @@ def parse_events(html: str, *, base_url: str, fallback_location: str | None = No
                or art.find("img"))
         image_url = (img.get("data-src") or img.get("src")) if img else None
 
-        desc_el = art.select_one(".eventlist-description")
-        description = None
-        if desc_el:
-            text = desc_el.get_text(" ", strip=True)
-            description = re.sub(r"\s+", " ", text).strip() or None
+        description = _card_description(art.select_one(".eventlist-description"), skip_paragraphs)
 
         location = (_card_address(art) if card_address else None) or fallback_location
         events.append(RawEvent(
@@ -181,7 +192,8 @@ def parse_detail_description(html: str) -> str | None:
 def scrape_collection(calendar_url: str, *, fallback_location: str | None = None,
                       enrich_descriptions: bool = False,
                       card_address: bool = False,
-                      upcoming_only: bool = False) -> list[RawEvent]:
+                      upcoming_only: bool = False,
+                      skip_paragraphs: re.Pattern | None = None) -> list[RawEvent]:
     """Fetch and parse a venue's Squarespace events-collection page.
 
     `enrich_descriptions` fetches each event's detail page for the full synopsis
@@ -200,7 +212,7 @@ def scrape_collection(calendar_url: str, *, fallback_location: str | None = None
         _log(f"fetch failed for {calendar_url}: {exc}")
         return []
     events = parse_events(resp.text, base_url=calendar_url, fallback_location=fallback_location,
-                          card_address=card_address)
+                          card_address=card_address, skip_paragraphs=skip_paragraphs)
     if upcoming_only:
         today = datetime.now(SOURCE_TZ).replace(hour=0, minute=0, second=0, microsecond=0)
         events = [e for e in events if e.start_time >= today]
