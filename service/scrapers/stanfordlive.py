@@ -33,10 +33,12 @@ NAME = "Stanford Live"
 API_BASE = "https://ticketing.purchase.live.stanford.edu/stanfordlive/api/v3"
 EVENTS_URL = "https://live.stanford.edu/calendar"
 ADDRESS = "Stanford University, Stanford, CA 94305"
-# venue_title on a show page -> address. "The Studio" is inside Bing.
+# venue_title on a show page -> address. "The Studio" is a room inside Bing:
+# the "Venue — Room" form keeps it from becoming a venue of its own that
+# Bing Concert Hall's shows would then alias to (same building on the map).
 HALLS = {
     "bing concert hall": "Bing Concert Hall, 327 Lasuen St, Stanford, CA 94305",
-    "the studio": "Bing Studio, Bing Concert Hall, 327 Lasuen St, Stanford, CA 94305",
+    "the studio": "Bing Concert Hall — Bing Studio, 327 Lasuen St, Stanford, CA 94305",
     "frost amphitheater": "Frost Amphitheater, 351 Lasuen St, Stanford, CA 94305",
     "memorial auditorium": "Memorial Auditorium, 551 Jane Stanford Way, Stanford, CA 94305",
     "memorial church": "Stanford Memorial Church, 450 Jane Stanford Way, Stanford, CA 94305",
