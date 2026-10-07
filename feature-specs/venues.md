@@ -136,6 +136,12 @@ re-saves are byte-identical (like `classifications.json`).
 - `status`: `verified` (a person checked it) · `auto` (passed the evidence
   rules unattended). Both are used; the distinction drives spot-checks and
   lets a person see what has never been looked at.
+- `rooms` (optional, hand-curated): the venue's named sections, e.g.
+  Salesforce Park's gardens and plazas from the park's own map. A string that
+  names the venue (or a comma-free alias key in `venue_locations.json`) and
+  one of its rooms as whole words resolves to that room, in any order:
+  "Salesforce Park Amphitheater", "Main Plaza, Salesforce Park, SF". Opt-in,
+  because a name inside a longer string is only safe when the room is known.
 
 ### `venue_locations.json` — string → place (mostly machine-maintained)
 

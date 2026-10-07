@@ -59,6 +59,21 @@ def _parse_utc(value: str | None) -> datetime | None:
         return None
 
 
+# A description shorter than this is treated as missing (JCCSF's are empty or
+# a stray "B"); the event's excerpt is used instead when it says more.
+MIN_DESCRIPTION = 40
+
+
+def _description(e: dict) -> str | None:
+    desc = _clean_html(e.get("description"))
+    if desc and len(desc) >= MIN_DESCRIPTION:
+        return desc
+    excerpt = _clean_html(e.get("excerpt"))
+    if excerpt and len(excerpt) > len(desc or ""):
+        return excerpt
+    return desc
+
+
 def parse_events(events: list[dict], *, fallback_location: str | None = None) -> list[RawEvent]:
     """Map Tribe event dicts to RawEvents. Pure — testable against a captured page."""
     out: list[RawEvent] = []
@@ -72,7 +87,7 @@ def parse_events(events: list[dict], *, fallback_location: str | None = None) ->
             start_time=start_time,
             location=_venue_location(e.get("venue")) or fallback_location,
             url=e.get("url") or None,
-            description=_clean_html(e.get("description")),
+            description=_description(e),
             image_url=(e.get("image") or {}).get("url") if isinstance(e.get("image"), dict) else None,
         ))
     return out

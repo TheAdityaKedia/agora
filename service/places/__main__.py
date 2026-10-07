@@ -4,6 +4,8 @@
   resolve --manifest PATH       resolve every location string in a manifest
                                 that isn't known yet (and pending ones due a retry)
   report  --manifest PATH       list venues and pending strings for review
+  check   --sources SUBSTR...   scrape sources live and show where each location
+                                lands, without touching the committed files
 """
 from __future__ import annotations
 
@@ -63,6 +65,11 @@ def cmd_report(args) -> int:
     return 0
 
 
+def cmd_check(args) -> int:
+    from .check import run
+    return run(args.sources, data_dir=args.data_dir)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="python -m places")
     ap.add_argument("--data-dir", type=Path, default=DATA_DIR)
@@ -76,8 +83,12 @@ def main(argv=None) -> int:
                    help="retry pending strings now instead of weekly")
     p = sub.add_parser("report")
     p.add_argument("--manifest", required=True)
+    c = sub.add_parser("check")
+    c.add_argument("--sources", nargs="+", required=True,
+                   help="substrings of sources.txt lines, as for main.py --sources")
     args = ap.parse_args(argv)
-    return {"validate": cmd_validate, "resolve": cmd_resolve, "report": cmd_report}[args.cmd](args)
+    return {"validate": cmd_validate, "resolve": cmd_resolve, "report": cmd_report,
+            "check": cmd_check}[args.cmd](args)
 
 
 if __name__ == "__main__":

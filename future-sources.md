@@ -81,8 +81,6 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Cinemas & film orgs
 
-- **Roxie Theater** — https://roxie.com/calendar/  *(⚠️ no longer Veezi — now WordPress-hosted; needs a fresh spike)*
-- **The Castro Theatre** — https://thecastro.com/events
 - **SFFILM** — https://sffilm.org/calendar/
 - **SF Silent Film Festival** — https://silentfilm.org/
 - **CAAMFest** (Center for Asian American Media) — https://caamfest.com/
@@ -91,15 +89,13 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Music & performance venues
 
-- **Bimbo's 365 Club** — https://bimbos365club.com/  *(Ticketweb — WAF, may be hard)*
 - **Freight & Salvage** (Berkeley) — https://thefreight.org/ *(spiked 2026-10: Cloudflare 403 to datacenter IPs)*
-- **EnActe Arts** (South Asian theater) — https://enacte.org/
-- **F8** (SoMa nightclub) — https://www.feightsf.com/new-events *(spiked 2026-10: Squarespace events collection. The page's JSON is public at `https://www.feightsf.com/new-events?format=json` (`upcoming` array, 14 events): title, start/end (epoch ms), venue address + lat/lng, description (`body`/`excerpt`), event URL (`fullUrl`), and an image on every event (`assetUrl`, Squarespace CDN). No browser needed)*
+- **EnActe Arts** (South Asian theater) — https://enacte.org/ *(spiked 2026-10: EventON plugin, JSON-LD on event pages, but only ~2 upcoming events)*
 
 ## Dance
 
 - **ODC** — https://odc.dance/  *(Wix — needs a spike)*
-- **SF Ballet** — https://www.sfballet.org/  *(OvationTix — reuse the Z Space pattern)*
+- **SF Ballet** — https://www.sfballet.org/  *(spiked 2026-10: not OvationTix — the ovationtix id on its calendar page is another venue's (The Argyros, Idaho). Productions are a WP `tessi_performance` type (Tessitura) with dates only in page text)*
 - **Zaccho Dance Theatre** — https://zaccho.org/
 
 ## Bookstores, literary orgs & publishers
@@ -153,7 +149,6 @@ platform scraper may be the better path for some (noted where relevant).
 - **GAPA** (Gay Asian Pacific Alliance) — https://gapa.org/
 - **Sentro Filipino** — https://sentrofilipino.com/
 - **API Cultural Center** — https://www.apiculturalcenter.org/
-- **Diaspora Arts Connection** — https://www.diasporaartsconnection.org/
 - **Counterculture Museum** — https://counterculturemuseum.org/events/
 - **The Third Place** — https://thethirdplace.is/
 - **Chinese Culture Center / Edge on the Square** — https://www.cccsf.us/ · https://edgeonthesquare.org/
@@ -178,19 +173,13 @@ farmers markets, "Virtual") were filtered out. Parenthetical count = events seen
 on BAR (a rough volume signal, not a full inventory).
 
 ### Music venues / jazz & blues clubs
-- **The UC Theatre** (Berkeley) — https://www.theuctheatre.org/  *(nonprofit music hall; 26)*
 - **Mr. Tipple's** (SF) — https://mrtipplessf.com/  *(Hayes Valley jazz club; 23)*
 - **San Jose Jazz / SJZ Break Room** (San Jose) — https://sanjosejazz.org/  *(17)*
-- **Feinstein's at the Nikko** (SF) — https://www.feinsteinssf.com/  *(cabaret/supper club; 13)*
 - **Black Cat** (SF) — https://blackcatsf.com/  *(Tenderloin jazz supper club; 1)*
 - **The Mountain Winery** (Saratoga) — https://www.mountainwinery.com/  *(summer concert series; 3)*
 
-### Concert-hall presenters (multi-venue programs)
-- **Cal Performances** (UC Berkeley — Zellerbach Hall/Playhouse, Hertz Hall) — https://calperformances.org/  *(major music/dance/theater presenter; ~50 across its halls)*
-- **Stanford Live** (Bing Concert Hall, Frost Amphitheater, Memorial Aud.) — https://live.stanford.edu/  *(~45 across venues; may overlap Kronos Quartet, already a source)*
-
 ### Suburban performing-arts centers (multi-genre)
-- **Montalvo Arts Center** (Saratoga) — https://montalvoarts.org/  *(35)*
+- **Montalvo Arts Center** (Saratoga) — https://montalvoarts.org/  *(35; spiked 2026-10: /events JSON-LD lists only 5, mostly school matinees, with local times mislabelled +00:00)*
 - **Luther Burbank Center for the Arts** (Santa Rosa, North Bay) — https://lutherburbankcenter.org/  *(27)*
 - **Lesher Center for the Arts** (Walnut Creek) — https://www.lesherartscenter.org/  *(16)*
 - **Bankhead Theater / Livermore Valley PAC** (Livermore) — https://www.livermorearts.org/  *(11)*
@@ -198,11 +187,6 @@ on BAR (a rough volume signal, not a full inventory).
 - **San Jose Center for the Performing Arts / San Jose Theaters** (San Jose) — https://sanjosetheaters.org/  *(6)*
 - **Mountain View Center for the Performing Arts** (Mountain View) — https://mvcpa.com/  *(TheatreWorks; 2)*
 - **Hillbarn Theatre** (Foster City) — https://hillbarntheatre.org/  *(5)*
-
-### Rock / touring music (bigger; Another Planet / Live Nation — may be harder)
-- **Fox Theater Oakland** (Oakland) — https://thefoxoakland.com/  *(5)*
-- **The Greek Theatre** (Berkeley) — https://thegreekberkeley.com/  *(9)*
-- **August Hall** (SF) — https://www.augusthallsf.com/  *(2)*
 
 ### Comedy (genre gap in our current sources)
 - **FLUID510** (Oakland) — https://fluid510.com/  *(1)*
@@ -223,6 +207,8 @@ on BAR (a rough volume signal, not a full inventory).
 
 
 ## Sprint spike notes (2026-10)
+
+- **WordPress custom post types without dates:** Letterform Archive, Counterculture Museum, Center for the Art of Translation, The East Cut, Shotgun Players, Livermore Arts, Villa Albertine, SFMOMA — their REST endpoints list events but carry no event date (only publish date); a scraper would have to read each detail page's text.
 
 Platform signatures found but not yet built (each should be a thin wrapper):
 - **Live Nation JSON-LD** (`scrapers/livenation.py`): none left; Fox Oakland,

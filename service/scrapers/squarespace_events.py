@@ -107,13 +107,28 @@ def _card_address(art) -> str | None:
     return ", ".join(parts) or None
 
 
+def _card_description(desc_el, skip_paragraphs: re.Pattern | None) -> str | None:
+    if desc_el is None:
+        return None
+    if skip_paragraphs is None:
+        text = desc_el.get_text(" ", strip=True)
+    else:
+        blocks = desc_el.find_all(["p", "h1", "h2", "h3", "h4", "li"]) or [desc_el]
+        kept = [b.get_text(" ", strip=True) for b in blocks]
+        text = " ".join(t for t in kept if t and not skip_paragraphs.search(t))
+    return re.sub(r"\s+", " ", text).strip() or None
+
+
 def parse_events(html: str, *, base_url: str, fallback_location: str | None = None,
-                 card_address: bool = False) -> list[RawEvent]:
+                 card_address: bool = False,
+                 skip_paragraphs: re.Pattern | None = None) -> list[RawEvent]:
     """Parse a Squarespace events-collection page into RawEvents (one per showing).
 
     `card_address` takes each card's own address line (venue name + street)
     over `fallback_location` — opt in for sources whose events aren't all at
-    one place (GLBT Historical Society).
+    one place (GLBT Historical Society). `skip_paragraphs` drops description
+    paragraphs that match it (a logistics header such as GLBT's
+    "LOCATION … / ADMISSION …").
 
     Pure — no network — so it's testable against a captured page.
     """
@@ -146,11 +161,7 @@ def parse_events(html: str, *, base_url: str, fallback_location: str | None = No
                or art.find("img"))
         image_url = (img.get("data-src") or img.get("src")) if img else None
 
-        desc_el = art.select_one(".eventlist-description")
-        description = None
-        if desc_el:
-            text = desc_el.get_text(" ", strip=True)
-            description = re.sub(r"\s+", " ", text).strip() or None
+        description = _card_description(art.select_one(".eventlist-description"), skip_paragraphs)
 
         location = (_card_address(art) if card_address else None) or fallback_location
         events.append(RawEvent(
@@ -181,7 +192,8 @@ def parse_detail_description(html: str) -> str | None:
 def scrape_collection(calendar_url: str, *, fallback_location: str | None = None,
                       enrich_descriptions: bool = False,
                       card_address: bool = False,
-                      upcoming_only: bool = False) -> list[RawEvent]:
+                      upcoming_only: bool = False,
+                      skip_paragraphs: re.Pattern | None = None) -> list[RawEvent]:
     """Fetch and parse a venue's Squarespace events-collection page.
 
     `enrich_descriptions` fetches each event's detail page for the full synopsis
@@ -200,7 +212,7 @@ def scrape_collection(calendar_url: str, *, fallback_location: str | None = None
         _log(f"fetch failed for {calendar_url}: {exc}")
         return []
     events = parse_events(resp.text, base_url=calendar_url, fallback_location=fallback_location,
-                          card_address=card_address)
+                          card_address=card_address, skip_paragraphs=skip_paragraphs)
     if upcoming_only:
         today = datetime.now(SOURCE_TZ).replace(hour=0, minute=0, second=0, microsecond=0)
         events = [e for e in events if e.start_time >= today]
@@ -227,3 +239,62 @@ def _enrich_from_detail_pages(events: list[RawEvent]) -> None:
         for ev, desc in zip(events, pool.map(fetch, events)):
             if desc:
                 ev.description = desc
+
+
+# --- JSON feed ---------------------------------------------------------------
+# A collection page with ``?format=json`` returns ``{"upcoming": [...], "past":
+# [...]}``: each item has the exact start time (epoch ms), the venue address,
+# the excerpt and the image. Some themes render the HTML list without a
+# reliable start time (F8's cards all parse as midnight), so this is the better
+# source when the HTML falls short.
+
+def _json_location(loc: dict | None) -> str | None:
+    if not isinstance(loc, dict):
+        return None
+    parts = [(loc.get(k) or "").strip() for k in ("addressTitle", "addressLine1", "addressLine2")]
+    parts = [p for p in parts if p]
+    return ", ".join(parts) or None
+
+
+def parse_json_events(data: dict, *, base_url: str,
+                      fallback_location: str | None = None) -> list[RawEvent]:
+    """The ``upcoming`` items of a collection's ``?format=json`` → RawEvents. Pure."""
+    origin = _origin(base_url)
+    events: list[RawEvent] = []
+    for item in (data or {}).get("upcoming") or []:
+        # Raw title: the HTML list's "~ <showtime>" suffix isn't used here, and
+        # titles can use "~" themselves ("INTERZONE SF ~ FREE DARKWAVE …").
+        title = (item.get("title") or "").strip()
+        start_ms = item.get("startDate")
+        if not title or not isinstance(start_ms, (int, float)):
+            continue
+        href = item.get("fullUrl")
+        excerpt = item.get("excerpt") or ""
+        description = re.sub(r"\s+", " ", BeautifulSoup(excerpt, "html.parser").get_text(" ", strip=True)).strip()
+        events.append(RawEvent(
+            title=title,
+            start_time=datetime.fromtimestamp(start_ms / 1000, timezone.utc).replace(microsecond=0),
+            location=_json_location(item.get("location")) or fallback_location,
+            url=origin + href if href and href.startswith("/") else href,
+            description=description or None,
+            image_url=item.get("assetUrl") or None,
+        ))
+    return events
+
+
+def scrape_json(calendar_url: str, *, fallback_location: str | None = None,
+                enrich_descriptions: bool = False) -> list[RawEvent]:
+    """Fetch a collection's ``?format=json`` feed (upcoming events only)."""
+    try:
+        resp = requests.get(calendar_url, params={"format": "json"},
+                            headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        data = resp.json()
+    except (requests.RequestException, ValueError) as exc:
+        _log(f"json fetch failed for {calendar_url}: {exc}")
+        return []
+    events = parse_json_events(data, base_url=calendar_url, fallback_location=fallback_location)
+    if enrich_descriptions:
+        _enrich_from_detail_pages(events)
+    _log(f"{calendar_url} (json): {len(events)} events")
+    return events

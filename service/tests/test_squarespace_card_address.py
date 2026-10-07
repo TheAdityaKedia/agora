@@ -73,3 +73,30 @@ def test_maritime_places_each_event():
         "In-Person Chantey Sing – San Francisco", None)).location == maritime.MARITIME_MUSEUM
     # No address and no known venue: placed in the city only, never guessed.
     assert maritime.place(_maritime_ev("Annual Maritime Ball", None)).location == "San Francisco, CA"
+
+
+def test_skip_paragraphs_drops_glbt_logistics_header():
+    html = ('<article class="eventlist-event"><h1 class="eventlist-title">'
+            '<a class="eventlist-title-link" href="/events/x">Talk</a></h1>'
+            '<time class="event-date" datetime="2026-10-22"></time>'
+            '<time class="event-time-localized-start">6:00 PM</time>'
+            '<div class="eventlist-description">'
+            '<p>LOCATION GLBT Historical Society Museum 4127 18th Street San Francisco, CA 94114</p>'
+            '<p>ADMISSION $10; Free for Members</p><p>RSVP and reserve tickets here</p>'
+            '<p>A panel discussion on queer historical fiction.</p></div></article>')
+    [plain] = sq.parse_events(html, base_url=BASE)
+    [clean] = sq.parse_events(html, base_url=BASE, skip_paragraphs=glbthistory.LOGISTICS_RE)
+    assert plain.description.startswith("LOCATION")  # default unchanged
+    assert clean.description == "A panel discussion on queer historical fiction."
+
+
+def test_sfcb_drops_source_only_descriptions():
+    from scrapers.base import RawEvent
+    t = datetime(2026, 10, 14)
+    events = [RawEvent(title="A", start_time=t, location="L", url="u",
+                       description="Source: https://www.catranslation.org/event/passages-of-babel/"),
+              RawEvent(title="B", start_time=t, location="L", url="u",
+                       description="Source material: the artist's notebooks, shown for the first time.")]
+    out = sfcb.drop_source_only(events)
+    assert out[0].description is None
+    assert out[1].description.startswith("Source material")

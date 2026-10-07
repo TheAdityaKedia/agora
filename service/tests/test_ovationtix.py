@@ -57,3 +57,14 @@ def test_wrappers():
     assert oaklandtheaterproject.matches("https://oaklandtheaterproject.org/")
     assert henryj.matches("https://www.thehenryj.org/upcoming-events")
     assert not henryj.matches("https://www.zspace.org/")
+
+
+def test_synopsis_cuts_at_first_logistics_label():
+    text = ("World Premiere She Se Puede (a chorus of Huertas) by Lisa Ramirez directed by Karina Gutiérrez "
+            "Dates : Nov 20–Dec 6 Times: Thu–Sat @ 7:30 p.m. Run time: 90 minutes Seating • General Admission")
+    assert ovationtix._synopsis(text) == (
+        "World Premiere She Se Puede (a chorus of Huertas) by Lisa Ramirez directed by Karina Gutiérrez")
+    # A label at the very start leaves nothing worth keeping: text stays as is.
+    assert ovationtix._synopsis("Dates: Oct 7. A watch party.") == "Dates: Oct 7. A watch party."
+    assert ovationtix._synopsis("A concert with no logistics.") == "A concert with no logistics."
+    assert ovationtix._synopsis(None) is None
