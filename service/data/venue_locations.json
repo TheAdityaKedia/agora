@@ -224,6 +224,9 @@
     "artogether center, 1200 harrison street, oakland": {
       "venue": "artogether"
     },
+    "august hall, 420 mason st, san francisco, ca": {
+      "venue": "august-hall"
+    },
     "bach dancing & dynamite society (douglas beach house), 311 mirada rd, half moon bay, ca": {
       "room": "Douglas Beach House",
       "venue": "bach-dancing-dynamite-society"
@@ -249,6 +252,9 @@
     },
     "berkeley rep, 2025 addison st, berkeley, ca": {
       "venue": "berkeley-rep"
+    },
+    "bimbo's 365 club, 1025 columbus ave, san francisco, ca": {
+      "venue": "bimbos-365-club"
     },
     "bird & beckett books & records, 653 chenery st, san francisco, ca": {
       "venue": "bird-and-beckett"
@@ -337,6 +343,22 @@
     "brava theater center, 2781 24th street, san francisco, ca": {
       "venue": "brava-theater-center"
     },
+    "cal performances, uc berkeley, berkeley, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2027-03-04",
+          "title": "Cal Performances’ 2027 Gala",
+          "url": "https://calperformances.org/events/2026-27/special-events/cal-performances-2027-gala/"
+        },
+        "first_seen": "2026-10-06",
+        "last_tried": "2026-10-06",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Cal Performances"
+        ]
+      }
+    },
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
     },
@@ -366,6 +388,9 @@
     },
     "children's garden, yerba buena gardens, 799 howard st., san francisco": {
       "venue": "childrens-garden"
+    },
+    "church of zouk, 345 7th st., san francisco": {
+      "venue": "church-of-zouk"
     },
     "city lights booksellers, 261 columbus ave, san francisco, ca": {
       "venue": "city-lights-booksellers"
@@ -487,8 +512,14 @@
     "f8 nightclub, 1192 folsom st, san francisco, ca": {
       "venue": "f8-nightclub"
     },
+    "f8, 1192 folsom, san francisco": {
+      "venue": "f8-nightclub"
+    },
     "fabulosa books, 489 castro st, san francisco, ca": {
       "venue": "fabulosa-books"
+    },
+    "feinstein's at the nikko, 222 mason st, san francisco, ca": {
+      "venue": "feinsteins-at-the-nikko"
     },
     "feinstein's at the nikko, 222 mason street, san francisco, ca": {
       "venue": "feinsteins-at-the-nikko"
@@ -500,6 +531,22 @@
     "festa wine & cocktail lounge - karaoke, 1825 post street, san francisco, 94115, san francisco, ca": {
       "room": "Karaoke",
       "venue": "festa-wine-cocktail-lounge"
+    },
+    "first church, berkeley, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2027-04-16",
+          "title": "The Tallis Scholars; Peter Phillips, director: Slings and Arrows…",
+          "url": "https://calperformances.org/events/2026-27/early-music/the-tallis-scholars-peter-phillips-director-slings-and-arrows/"
+        },
+        "first_seen": "2026-10-06",
+        "last_tried": "2026-10-06",
+        "reason": "map result 'First Church of Christ Scientist' doesn't match the name or street number",
+        "sources": [
+          "Cal Performances"
+        ]
+      }
     },
     "first congregational church of oakland": {
       "venue": "first-congregational-united-church-of-christ"
@@ -520,6 +567,9 @@
     },
     "fort mason center for arts & culture, 2 marina blvd, san francisco, ca": {
       "venue": "fort-mason-center-for-arts-culture"
+    },
+    "fox theater, 1807 telegraph ave, oakland, ca": {
+      "venue": "fox-oakland-theater"
     },
     "frontier tower @ 10th floor annex 995 market street, san francisco": {
       "room": "10th Floor Annex",
@@ -612,6 +662,9 @@
     "great star theater, 636 jackson st, san francisco, ca": {
       "venue": "great-star-theater"
     },
+    "greek theatre, 2001 gayley rd, berkeley, ca": {
+      "venue": "hearst-greek-theatre"
+    },
     "green apple books on the park, 1231 9th ave, san francisco": {
       "venue": "green-apple-books-on-the-park"
     },
@@ -624,11 +677,20 @@
     "henry j kaiser center arena, henry j. kaiser center for the arts, 10 10th st, oakland, ca": {
       "venue": "calvin-simmons-theater"
     },
+    "henry j. kaiser center for the arts, oakland": {
+      "venue": "henry-j-kaiser-center-for-the-arts"
+    },
     "herbst theatre, san francisco, ca": {
       "venue": "war-memorial-veterans-building-herbst-theatre"
     },
+    "hertz hall, uc berkeley, berkeley, ca": {
+      "venue": "hertz-hall"
+    },
     "hi tops san francisco, 2247 market street, san francisco, 94114, san francisco, ca": {
       "venue": "hi-tops"
+    },
+    "impossible stage, 2033 university ave, berkeley, ca": {
+      "venue": "impossible-stage"
     },
     "india community center, 525 los coches st, milpitas, ca": {
       "venue": "india-community-center"
@@ -712,6 +774,9 @@
     "lost marbles brewpub, 2202 de la vina street, san francisco, ca": {
       "venue": "lost-marbles-brewpub"
     },
+    "mad oak bar": {
+      "venue": "mad-oak"
+    },
     "madrone art bar, 500 divisadero st, san francisco, ca": {
       "venue": "madrone-art-bar"
     },
@@ -791,8 +856,14 @@
       "place": "region",
       "region": "eastbay"
     },
+    "montgomery theater, 271 south market street, san jose, ca": {
+      "venue": "montgomery-theater"
+    },
     "mothership, 3152 mission street, san francisco, 94110, san francisco, ca": {
       "venue": "mothership"
+    },
+    "mountain view center for the performing arts, 500 castro street, mountain view, ca": {
+      "venue": "mountain-view-center-for-the-performing-arts"
     },
     "mr. mahjong's, 260 kearny street, san francisco, ca": {
       "venue": "mr-mahjong"
@@ -959,6 +1030,9 @@
     },
     "saint joseph's arts society, 1401 howard st, san francisco, ca": {
       "venue": "st-josephs-art-society"
+    },
+    "salesforce park, san francisco": {
+      "venue": "salesforce-park"
     },
     "san francisco": {
       "place": "region",
@@ -1162,6 +1236,22 @@
     "st. joseph's art society, 1401 howard st, san francisco": {
       "venue": "st-josephs-art-society"
     },
+    "stanford live, stanford university, stanford, ca": {
+      "pending": {
+        "events": 89,
+        "example": {
+          "date": "2026-10-09",
+          "title": "Slightly Stoopid",
+          "url": "https://live.stanford.edu/events/26-frost/slightly-stoopid/"
+        },
+        "first_seen": "2026-10-06",
+        "last_tried": "2026-10-06",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Stanford Live"
+        ]
+      }
+    },
     "stanford, california": {
       "place": "region",
       "region": "southbay"
@@ -1227,6 +1317,9 @@
       "room": "Sol",
       "venue": "the-alembic"
     },
+    "the berkeley alembic, 2820 7th st, berkeley, ca": {
+      "venue": "the-alembic"
+    },
     "the berkeley alembic, 2820 seventh street, berkeley, ca": {
       "venue": "the-alembic"
     },
@@ -1247,6 +1340,9 @@
     },
     "the cafe, 2369 market st, san francisco, ca, san francisco, ca": {
       "venue": "the-caf"
+    },
+    "the castro theatre, 429 castro st, san francisco, ca": {
+      "venue": "castro-theatre"
     },
     "the cigar bar & grill, 850 montgomery street, san francisco, ca, san francisco, ca": {
       "venue": "the-cigar-bar-grill"
@@ -1393,6 +1489,9 @@
       "room": "The Treeline",
       "venue": "sports-basement-bryant"
     },
+    "the uc theatre, 2036 university ave, berkeley, ca": {
+      "venue": "the-uc-theatre"
+    },
     "the warfield, 982 market st, san francisco, ca": {
       "venue": "warfield-theatre"
     },
@@ -1473,6 +1572,9 @@
     "ybca screening room, 701 mission st, san francisco": {
       "venue": "ybca-screening-room"
     },
+    "yerba buena center for the arts, 700 howard street, san francisco, ca": {
+      "venue": "yerba-buena-center-for-the-arts"
+    },
     "yoshi's, 510 embarcadero west, oakland, ca": {
       "venue": "yoshis-oakland"
     },
@@ -1489,6 +1591,12 @@
     "z space's steindler stage": {
       "room": "Steindler Stage",
       "venue": "z-space"
+    },
+    "zellerbach hall, uc berkeley, berkeley, ca": {
+      "venue": "zellerbach-hall"
+    },
+    "zellerbach playhouse, uc berkeley, berkeley, ca": {
+      "venue": "zellerbach-playhouse"
     },
     "zoë, 579 howard street, san francisco, ca 94105, san francisco, ca, san francisco, ca": {
       "venue": "zo"

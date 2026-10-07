@@ -755,6 +755,34 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "august-hall": {
+      "added": "2026-10-07",
+      "address": "420 Mason Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: August Hall in San Francisco County (building, node/725100718)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.787588,
+      "lng": -122.409787,
+      "name": "August Hall",
+      "osm": "node/725100718",
+      "possible_duplicates": [
+        "biscuits-blues",
+        "the-westin-st-francis",
+        "a-c-t",
+        "san-francisco-playhouse",
+        "curran-theatre",
+        "the-redwood-room",
+        "cheaper-than-therapy",
+        "starlite-room",
+        "feinsteins-at-the-nikko"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "bach-dancing-dynamite-society": {
       "added": "2026-10-02",
       "address": "311 Mirada Road, Half Moon Bay, CA 94019",
@@ -950,6 +978,27 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "bimbos-365-club": {
+      "added": "2026-10-07",
+      "address": "1025 Columbus Avenue, San Francisco, CA 94133",
+      "evidence": [
+        "map: Bimbo's 365 Club in San Francisco County (building, way/262435071)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.803731,
+      "lng": -122.415646,
+      "name": "Bimbo's 365 Club",
+      "osm": "way/262435071",
+      "possible_duplicates": [
+        "the-lost-church",
+        "cobbs-comedy-club"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "bird-and-beckett": {
       "added": "2026-10-02",
@@ -1350,6 +1399,29 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "castro-theatre": {
+      "added": "2026-10-07",
+      "address": "429 Castro Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Castro Theatre in San Francisco County (building, way/1206216224)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.761991,
+      "lng": -122.43475,
+      "name": "Castro Theatre",
+      "osm": "way/1206216224",
+      "possible_duplicates": [
+        "fabulosa-books",
+        "the-caf",
+        "glbt-historical-society",
+        "beaux"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "castro-valley-marketplace": {
       "added": "2026-10-02",
       "address": "3295 Castro Valley Boulevard, Castro Valley, CA 94546",
@@ -1452,6 +1524,27 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "church-of-zouk": {
+      "added": "2026-10-07",
+      "address": "345 7th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Ukrainian Orthodox Church of Saint Michael in San Francisco County (building, way/260459201)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.776395,
+      "lng": -122.406937,
+      "name": "CHURCH OF ZOUK",
+      "osm": "way/260459201",
+      "possible_duplicates": [
+        "the-stud",
+        "nosh-box",
+        "decentered-arts-studio"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "city-lights-booksellers": {
       "added": "2026-10-02",
@@ -2163,6 +2256,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "fox-oakland-theater": {
+      "added": "2026-10-07",
+      "address": "1807 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: Fox Oakland Theater in Alameda County (building, node/443522428)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.807994,
+      "lng": -122.270158,
+      "name": "Fox Oakland Theater",
+      "osm": "node/443522428",
+      "possible_duplicates": [
+        "torch-bar",
+        "paramount-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "frontier-tower-berlinhouse": {
       "added": "2026-10-02",
       "address": "995 Market Street, San Francisco, CA 94103",
@@ -2496,6 +2610,59 @@
       "region": "sf",
       "status": "verified"
     },
+    "hearst-greek-theatre": {
+      "added": "2026-10-07",
+      "address": "2001 Gayley Rd, Berkeley, CA 94720",
+      "evidence": [
+        "map: Hearst Greek Theatre in Alameda County (building, way/24025050)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.873675,
+      "lng": -122.254241,
+      "name": "Hearst Greek Theatre",
+      "osm": "way/24025050",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "henry-j-kaiser-center-for-the-arts": {
+      "added": "2026-10-07",
+      "address": "10 10th Street, Oakland, CA 94612",
+      "evidence": [
+        "map: Henry J. Kaiser Center for the Arts in Alameda County (building, way/23593180)",
+        "text: Oakland",
+        "name matches"
+      ],
+      "lat": 37.797578,
+      "lng": -122.26157,
+      "name": "Henry J. Kaiser Center for the Arts",
+      "osm": "way/23593180",
+      "possible_duplicates": [
+        "james-moore-theater",
+        "calvin-simmons-theater",
+        "oakland-museum-of-california"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "hertz-hall": {
+      "added": "2026-10-07",
+      "address": "Ong & Ong Plaza, Berkeley, CA 94720",
+      "evidence": [
+        "map: Hertz Hall in Alameda County (building, way/24024671)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.871046,
+      "lng": -122.255714,
+      "name": "Hertz Hall",
+      "osm": "way/24024671",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "hi-tops": {
       "added": "2026-10-02",
       "address": "2247 Market Street, San Francisco, CA 94114",
@@ -2548,6 +2715,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "impossible-stage": {
+      "added": "2026-10-07",
+      "address": "2033 University Avenue, Berkeley, CA 94704",
+      "evidence": [
+        "map: 2033 in Alameda County (building, way/771466844)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.871823,
+      "lng": -122.270068,
+      "name": "Impossible Stage",
+      "osm": "way/771466844",
+      "possible_duplicates": [
+        "the-uc-theatre",
+        "berkeley-rep"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "india-community-center": {
       "added": "2026-10-06",
@@ -3052,6 +3239,25 @@
       "region": "sf",
       "status": "verified"
     },
+    "mad-oak": {
+      "added": "2026-10-07",
+      "address": "135 12th Street, Oakland, CA 94607",
+      "evidence": [
+        "map: Mad Oak in Alameda County (building, node/3613169961)",
+        "name matches"
+      ],
+      "lat": 37.799862,
+      "lng": -122.264642,
+      "name": "Mad Oak",
+      "osm": "node/3613169961",
+      "possible_duplicates": [
+        "oakland-museum-of-california",
+        "calvin-simmons-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "madrone-art-bar": {
       "added": "2026-10-02",
       "address": "500 Divisadero Street, San Francisco, CA 94117",
@@ -3419,6 +3625,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "montgomery-theater": {
+      "added": "2026-10-07",
+      "address": "271 South Market Street, San Jose, CA 95113",
+      "evidence": [
+        "map: Montgomery Theater in Santa Clara County (building, node/9115664628)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.330936,
+      "lng": -121.889297,
+      "name": "Montgomery Theater",
+      "osm": "node/9115664628",
+      "possible_duplicates": [
+        "nirvana-soul",
+        "the-continental"
+      ],
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "mothership": {
       "added": "2026-10-02",
       "address": "3152 Mission Street, San Francisco, CA 94110",
@@ -3439,6 +3666,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "mountain-view-center-for-the-performing-arts": {
+      "added": "2026-10-07",
+      "address": "500 Castro Street, Mountain View, CA 94041",
+      "evidence": [
+        "map: 500 in Santa Clara County (building, way/417922883)",
+        "text: Mountain View",
+        "street number matches"
+      ],
+      "lat": 37.389985,
+      "lng": -122.0815,
+      "name": "Mountain View Center for the Performing Arts",
+      "osm": "way/417922883",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "mr-mahjong": {
       "added": "2026-10-02",
@@ -4398,6 +4641,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "salesforce-park": {
+      "added": "2026-10-07",
+      "address": "San Francisco, CA 94105",
+      "evidence": [
+        "map: Salesforce Park in San Francisco County (building, relation/8524888)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.789115,
+      "lng": -122.396655,
+      "name": "Salesforce Park",
+      "osm": "relation/8524888",
+      "possible_duplicates": [
+        "temple-nightclub-san-francisco",
+        "zo"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "san-francisco-center-for-the-book-sfcb": {
       "added": "2026-10-02",
@@ -5812,6 +6075,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-uc-theatre": {
+      "added": "2026-10-07",
+      "address": "2036 University Avenue, Berkeley, CA 94704",
+      "evidence": [
+        "map: The UC Theatre in Alameda County (building, node/4070522012)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.871806,
+      "lng": -122.269814,
+      "name": "The UC Theatre",
+      "osm": "node/4070522012",
+      "possible_duplicates": [
+        "berkeley-rep"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "the-westin-st-francis": {
       "added": "2026-10-05",
       "address": "335 Powell Street, San Francisco, CA 94102",
@@ -6353,6 +6636,41 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "zellerbach-hall": {
+      "added": "2026-10-07",
+      "address": "Lower Sproul Plaza, Berkeley, CA 94720",
+      "evidence": [
+        "map: Zellerbach Hall in Alameda County (building, way/24025430)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.86905,
+      "lng": -122.260788,
+      "name": "Zellerbach Hall",
+      "osm": "way/24025430",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "zellerbach-playhouse": {
+      "added": "2026-10-07",
+      "address": "Spieker Plaza, Berkeley, CA 94704",
+      "evidence": [
+        "map: Zellerbach Playhouse in Alameda County (building, way/24025431)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.869054,
+      "lng": -122.261297,
+      "name": "Zellerbach Playhouse",
+      "osm": "way/24025431",
+      "possible_duplicates": [
+        "zellerbach-hall"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "zo": {
       "added": "2026-10-02",
