@@ -30,7 +30,10 @@ def test_calperformances_locations_and_seasons():
     assert cp.location_for("Hertz Hall") == f"Hertz Hall, {cp.CAMPUS}"
     assert cp.location_for("Henry J. Kaiser Center for the Arts, Oakland") == \
         "Henry J. Kaiser Center for the Arts, Oakland"
-    assert cp.location_for("First Church") == "First Church, Berkeley, CA"
+    assert cp.location_for("First Church") == \
+        "First Congregational Church of Berkeley, 2345 Channing Way, Berkeley, CA 94704"
+    assert cp.location_for("Freight") == "Freight, Berkeley, CA"
+    assert cp.location_for("") == f"Zellerbach Hall, {cp.CAMPUS}"
     assert cp.seasons(date(2026, 10, 7)) == ("2026-27", "2027-28")
     assert cp.seasons(date(2027, 3, 1)) == ("2026-27", "2027-28")
 

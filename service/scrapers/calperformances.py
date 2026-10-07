@@ -57,11 +57,22 @@ def _in_seasons(url: str, wanted: tuple[str, ...]) -> bool:
 _CAMPUS_HALLS_RE = re.compile(r"^(Zellerbach|Hertz|Wheeler|Greek Theatre|Hearst|Haas|Cal Performances)", re.I)
 
 
+# Off-campus halls whose bare name the map can't place (OSM's "First Church"
+# is First Church of Christ, Scientist, a different building).
+_KNOWN_HALLS = {
+    "first church": "First Congregational Church of Berkeley, 2345 Channing Way, Berkeley, CA 94704",
+}
+
+
 def location_for(hall: str) -> str:
     """Campus halls get the campus address; a hall naming its city is kept;
-    any other bare name (First Church) is placed in Berkeley. Pure."""
+    any other bare name is placed in Berkeley. No hall (galas, season
+    events) means Zellerbach, Cal Performances' home hall — the map can't
+    place a bare "UC Berkeley". Pure."""
     if not hall:
-        return f"Cal Performances, {CAMPUS}"
+        return f"Zellerbach Hall, {CAMPUS}"
+    if hall.lower() in _KNOWN_HALLS:
+        return _KNOWN_HALLS[hall.lower()]
     if "," in hall:
         return hall
     if _CAMPUS_HALLS_RE.match(hall):

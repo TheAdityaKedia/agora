@@ -3,14 +3,15 @@
 Stanford University's performing-arts presenter (Bing Concert Hall, Frost
 Amphitheater, Dinkelspiel, Memorial Auditorium) plus the Department of Music's
 concerts, all ticketed through Spektrix. Thin wrapper around
-scrapers/spektrix.py; one event per performance. The API names no hall, so
-events fall back to the campus. Kronos Quartet's Stanford dates also appear
-here; cross-source dedup merges them.
+scrapers/spektrix.py; one event per performance. Kronos Quartet's Stanford
+dates also appear here; cross-source dedup merges them.
 
-Images: the Spektrix catalog has none, so each show page (one fetch per
-unique page, in parallel) contributes its header image
-(``img.event-header__image``). Only the header is read; the page's other
-images belong to related shows.
+The Spektrix catalog has no images and names no hall, so each show page (one
+fetch per unique page, in parallel) contributes its header image
+(``img.event-header__image``; the page's other images belong to related
+shows) and its hall (``meta[name=venue_title]``), which HALLS maps to a street
+address the venue resolver can place. Events without a page, or with an
+unmapped hall, fall back to the campus.
 
 Dropped: "Student Lottery Winners" allocations and "Student Matinee" school
 shows (not public; they also carry no web page). Other events without a page
@@ -31,7 +32,16 @@ SOURCE = "live.stanford.edu"
 NAME = "Stanford Live"
 API_BASE = "https://ticketing.purchase.live.stanford.edu/stanfordlive/api/v3"
 EVENTS_URL = "https://live.stanford.edu/calendar"
-ADDRESS = "Stanford Live, Stanford University, Stanford, CA 94305"
+ADDRESS = "Stanford University, Stanford, CA 94305"
+# venue_title on a show page -> address. "The Studio" is inside Bing.
+HALLS = {
+    "bing concert hall": "Bing Concert Hall, 327 Lasuen St, Stanford, CA 94305",
+    "the studio": "Bing Studio, Bing Concert Hall, 327 Lasuen St, Stanford, CA 94305",
+    "frost amphitheater": "Frost Amphitheater, 351 Lasuen St, Stanford, CA 94305",
+    "memorial auditorium": "Memorial Auditorium, 551 Jane Stanford Way, Stanford, CA 94305",
+    "memorial church": "Stanford Memorial Church, 450 Jane Stanford Way, Stanford, CA 94305",
+    "dinkelspiel auditorium": "Dinkelspiel Auditorium, 471 Lagunita Dr, Stanford, CA 94305",
+}
 
 PAGE_WORKERS = 5
 REQUEST_TIMEOUT = 25
@@ -64,27 +74,38 @@ def header_image(html: str) -> str | None:
     return src or None
 
 
-def _fetch_image(page_url: str) -> str | None:
+def hall_location(html: str) -> str | None:
+    """The show's hall on a live.stanford.edu page, as an address. A hall
+    missing from HALLS is still placed on campus. Pure."""
+    meta = BeautifulSoup(html, "html.parser").select_one("meta[name=venue_title]")
+    hall = (meta.get("content") or "").strip() if meta else ""
+    if not hall:
+        return None
+    return HALLS.get(hall.lower(), f"{hall}, {ADDRESS}")
+
+
+def _fetch_page(page_url: str) -> tuple[str | None, str | None]:
     try:
         r = requests.get(page_url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
         r.raise_for_status()
     except requests.RequestException:
-        return None
-    return header_image(r.text)
+        return None, None
+    return header_image(r.text), hall_location(r.text)
 
 
-def add_images(events: list[RawEvent], fetch=_fetch_image) -> None:
-    """Fill missing images from each show page, fetched once per page."""
+def add_page_details(events: list[RawEvent], fetch=_fetch_page) -> None:
+    """Fill image and hall from each show page, fetched once per page."""
     pages = sorted({e.url for e in events
-                    if not e.image_url and e.url and e.url != EVENTS_URL and "live.stanford.edu" in e.url})
+                    if e.url and e.url != EVENTS_URL and "live.stanford.edu" in e.url})
     with ThreadPoolExecutor(max_workers=PAGE_WORKERS) as pool:
-        images = dict(zip(pages, pool.map(fetch, pages)))
+        details = dict(zip(pages, pool.map(fetch, pages)))
     for e in events:
-        if not e.image_url and images.get(e.url):
-            e.image_url = images[e.url]
+        image, location = details.get(e.url, (None, None))
+        e.image_url = e.image_url or image
+        e.location = location or e.location
 
 
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
     events = public(spektrix.scrape(API_BASE, fallback_location=ADDRESS, tag="stanfordlive"))
-    add_images(events)
+    add_page_details(events)
     return events

@@ -56,7 +56,15 @@ def test_stanfordlive_header_image_from_srcset():
     assert stanfordlive.header_image('<img class="page-item__image" src="x">') is None
 
 
-def test_stanfordlive_add_images_fetches_each_page_once():
+def test_stanfordlive_hall_location():
+    page = '<meta class="swiftype" name="venue_title" data-type="string" content="The Studio" />'
+    assert stanfordlive.hall_location(page) == stanfordlive.HALLS["the studio"]
+    assert stanfordlive.hall_location('<meta name="venue_title" content="Braun Rehearsal Hall">') == \
+        f"Braun Rehearsal Hall, {stanfordlive.ADDRESS}"
+    assert stanfordlive.hall_location("<p>no meta</p>") is None
+
+
+def test_stanfordlive_add_page_details_fetches_each_page_once():
     from scrapers.base import RawEvent
     t = datetime(2026, 10, 9, tzinfo=timezone.utc)
     page = "https://live.stanford.edu/events/26-frost/show/"
@@ -64,6 +72,17 @@ def test_stanfordlive_add_images_fetches_each_page_once():
               RawEvent(title="Show", start_time=t.replace(day=10), location="L", url=page, description=None),
               RawEvent(title="Messiah", start_time=t, location="L", url=stanfordlive.EVENTS_URL, description=None)]
     calls = []
-    stanfordlive.add_images(events, fetch=lambda u: calls.append(u) or "https://img/show.jpg")
+    hall = stanfordlive.HALLS["frost amphitheater"]
+    stanfordlive.add_page_details(events, fetch=lambda u: calls.append(u) or ("https://img/show.jpg", hall))
     assert calls == [page]  # once per page; the calendar fallback isn't fetched
     assert [e.image_url for e in events] == ["https://img/show.jpg", "https://img/show.jpg", None]
+    assert [e.location for e in events] == [hall, hall, "L"]
+
+
+def test_stanfordlive_add_page_details_keeps_fallback_when_page_fails():
+    from scrapers.base import RawEvent
+    t = datetime(2026, 10, 9, tzinfo=timezone.utc)
+    events = [RawEvent(title="Show", start_time=t, location="L",
+                       url="https://live.stanford.edu/events/x/", description=None)]
+    stanfordlive.add_page_details(events, fetch=lambda u: (None, None))
+    assert (events[0].image_url, events[0].location) == (None, "L")
