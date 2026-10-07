@@ -253,6 +253,9 @@
     "879 embarcadero dr, el dorado hills, ca": {
       "place": "outside"
     },
+    "912 larkin st, san francisco, ca": {
+      "venue": "moth-belly-gallery"
+    },
     "931 pacific ave, santa cruz, ca": {
       "place": "outside"
     },
@@ -284,6 +287,9 @@
     },
     "alchemy springs, 939 post st, san francisco, ca": {
       "venue": "alchemy-springs"
+    },
+    "all out comedy theater, 2550 telegraph ave, oakland, ca": {
+      "venue": "all-out-comedy-theater"
     },
     "amelie wine bar, 1754 polk st, san francisco, ca": {
       "venue": "amelie-wine-bar"
@@ -660,6 +666,9 @@
       "room": "Karaoke",
       "venue": "festa-wine-cocktail-lounge"
     },
+    "first congregational church of berkeley, 2345 channing way, berkeley, ca": {
+      "venue": "first-congregational-church-of-berkeley"
+    },
     "first congregational church of oakland": {
       "venue": "first-congregational-united-church-of-christ"
     },
@@ -682,6 +691,9 @@
     },
     "fort mason center for arts & culture, 2 marina blvd, san francisco, ca": {
       "venue": "fort-mason-center-for-arts-culture"
+    },
+    "fourth street maker's row, 1919 fourth st, berkeley, ca": {
+      "venue": "1919-fourth-st"
     },
     "fox theater, 1807 telegraph ave, oakland, ca": {
       "venue": "fox-oakland-theater"
@@ -800,6 +812,9 @@
     },
     "henry j kaiser center arena, henry j. kaiser center for the arts, 10 10th st, oakland, ca": {
       "venue": "calvin-simmons-theater"
+    },
+    "henry j. kaiser center for the arts, oakland": {
+      "venue": "henry-j-kaiser-center-for-the-arts"
     },
     "herbst theatre, san francisco, ca": {
       "venue": "war-memorial-veterans-building-herbst-theatre"
@@ -946,6 +961,9 @@
     "marcus books, 3900 martin luther king jr way, oakland, ca": {
       "venue": "marcus-books"
     },
+    "marina green, 411-401 marina blvd, san francisco, ca": {
+      "venue": "marina-green"
+    },
     "maritime museum, 900 beach st, san francisco, ca": {
       "venue": "national-maritime-museum"
     },
@@ -1004,11 +1022,20 @@
       "place": "region",
       "region": "eastbay"
     },
+    "montgomery theater, 271 south market street, san jose, ca": {
+      "venue": "montgomery-theater"
+    },
     "mosswood park, 3612 webster st, oakland, ca": {
       "venue": "mosswood-park"
     },
     "mothership, 3152 mission street, san francisco, 94110, san francisco, ca": {
       "venue": "mothership"
+    },
+    "mountain view center for the performing arts, 500 castro street, mountain view, ca": {
+      "venue": "mountain-view-center-for-the-performing-arts"
+    },
+    "mr. mahjong's, 260 kearny st, san francisco, ca": {
+      "venue": "mr-mahjong"
     },
     "mr. mahjong's, 260 kearny street, san francisco, ca": {
       "venue": "mr-mahjong"
@@ -1238,6 +1265,27 @@
     "scopo divino, 2800 california st, san francisco, ca": {
       "venue": "scopo-divino"
     },
+    "scott st & page st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-11",
+          "title": "🤠🇺🇸 FREE Line Dancing w/ LHLD!💃🕺🪩",
+          "url": "https://partiful.com/e/IqsIJvhTKG6x2Fa2xBqc"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "not_a_place",
+          "name": "Scott St & Page St"
+        }
+      }
+    },
     "sfjazz center — davies symphony hall": {
       "room": "Davies Symphony Hall",
       "venue": "sfjazz-center"
@@ -1396,6 +1444,9 @@
     "slate contemporary gallery, 5510 college ave, oakland": {
       "venue": "slate-contemporary-gallery"
     },
+    "society of thumbs, 1398 valencia st, san francisco, ca": {
+      "venue": "society-of-thumbs"
+    },
     "sofa pocket park, 540 s first st, san jose, ca": {
       "venue": "sofa-pocket-park"
     },
@@ -1525,6 +1576,9 @@
     "the cafe, 2369 market st, san francisco, ca, san francisco, ca": {
       "venue": "the-caf"
     },
+    "the castro theatre, 429 castro st, san francisco, ca": {
+      "venue": "castro-theatre"
+    },
     "the cigar bar & grill, 850 montgomery street, san francisco, ca, san francisco, ca": {
       "venue": "the-cigar-bar-grill"
     },
@@ -1638,6 +1692,9 @@
     },
     "the phoenix theater, 201 washington st., petaluma, ca, petaluma, ca": {
       "venue": "phoenix-theater"
+    },
+    "the plough and stars, 116 clement st, san francisco, ca": {
+      "venue": "the-plough-and-the-stars"
     },
     "the plough and the stars, 116 clement st, san francisco, ca": {
       "venue": "the-plough-and-the-stars"
@@ -1793,6 +1850,9 @@
     },
     "zellerbach hall, uc berkeley, berkeley, ca": {
       "venue": "zellerbach-hall"
+    },
+    "zellerbach playhouse, uc berkeley, berkeley, ca": {
+      "venue": "zellerbach-playhouse"
     },
     "zoë, 579 howard street, san francisco, ca 94105, san francisco, ca, san francisco, ca": {
       "venue": "zo"

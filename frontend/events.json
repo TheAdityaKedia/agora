@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T21:04:40.418048+00:00",
+  "generated_at": "2026-10-07T21:23:36.656105+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -748,6 +748,13 @@
       "lng": -122.41739,
       "neighborhood": "tenderloin"
     },
+    "all-out-comedy-theater": {
+      "name": "All Out Comedy Theater",
+      "region": "eastbay",
+      "address": "2550 Telegraph Avenue, Oakland, CA 94612",
+      "lat": 37.81503,
+      "lng": -122.26805
+    },
     "almanac-west-oakland-clubhouse": {
       "name": "Almanac West Oakland Clubhouse",
       "region": "eastbay",
@@ -1117,6 +1124,14 @@
       "lat": 37.79782,
       "lng": -122.26373
     },
+    "castro-theatre": {
+      "name": "Castro Theatre",
+      "region": "sf",
+      "address": "429 Castro Street, San Francisco, CA 94114",
+      "lat": 37.76199,
+      "lng": -122.43475,
+      "neighborhood": "castro-upper-market"
+    },
     "castro-valley-marketplace": {
       "name": "Castro Valley Marketplace",
       "region": "eastbay",
@@ -1426,6 +1441,13 @@
       "lng": -122.43191,
       "neighborhood": "japantown"
     },
+    "first-congregational-church-of-berkeley": {
+      "name": "First Congregational Church of Berkeley",
+      "region": "eastbay",
+      "address": "2345 Channing Way, Berkeley, CA 94701",
+      "lat": 37.86703,
+      "lng": -122.26164
+    },
     "first-presbyterian-church-of-oakland": {
       "name": "First Presbyterian Church of Oakland",
       "region": "eastbay",
@@ -1633,6 +1655,13 @@
       "address": "2001 Gayley Rd, Berkeley, CA 94720",
       "lat": 37.87367,
       "lng": -122.25424
+    },
+    "henry-j-kaiser-center-for-the-arts": {
+      "name": "Henry J. Kaiser Center for the Arts",
+      "region": "eastbay",
+      "address": "10 10th Street, Oakland, CA 94612",
+      "lat": 37.79758,
+      "lng": -122.26157
     },
     "hertz-hall": {
       "name": "Hertz Hall",
@@ -1952,6 +1981,14 @@
       "lng": -122.43419,
       "neighborhood": "marina"
     },
+    "marina-green": {
+      "name": "Marina Green",
+      "region": "sf",
+      "address": "San Francisco, CA",
+      "lat": 37.8066,
+      "lng": -122.43912,
+      "neighborhood": "marina"
+    },
     "martunis": {
       "name": "Martuni's",
       "region": "sf",
@@ -2045,12 +2082,27 @@
       "lng": -122.40833,
       "neighborhood": "soma"
     },
+    "montgomery-theater": {
+      "name": "Montgomery Theater",
+      "region": "southbay",
+      "address": "271 South Market Street, San Jose, CA 95113",
+      "lat": 37.33094,
+      "lng": -121.8893
+    },
     "mosswood-park": {
       "name": "Mosswood Park",
       "region": "eastbay",
       "address": "3612 Webster Street, Oakland, CA 94609",
       "lat": 37.8237,
       "lng": -122.26141
+    },
+    "moth-belly-gallery": {
+      "name": "Moth Belly Gallery",
+      "region": "sf",
+      "address": "912 Larkin Street, San Francisco, CA 94109",
+      "lat": 37.78637,
+      "lng": -122.41804,
+      "neighborhood": "tenderloin"
     },
     "mothership": {
       "name": "Mothership",
@@ -2059,6 +2111,13 @@
       "lat": 37.74688,
       "lng": -122.41925,
       "neighborhood": "bernal-heights"
+    },
+    "mountain-view-center-for-the-performing-arts": {
+      "name": "Mountain View Center for the Performing Arts",
+      "region": "southbay",
+      "address": "500 Castro Street, Mountain View, CA 94041",
+      "lat": 37.38999,
+      "lng": -122.0815
     },
     "mr-mahjong": {
       "name": "Mr. Mahjong",
@@ -2592,6 +2651,14 @@
       "address": "5510 College Avenue, Oakland, CA 94618",
       "lat": 37.84261,
       "lng": -122.25176
+    },
+    "society-of-thumbs": {
+      "name": "Society of Thumbs",
+      "region": "sf",
+      "address": "1398 Valencia Street, San Francisco, CA 94110",
+      "lat": 37.75059,
+      "lng": -122.42067,
+      "neighborhood": "mission"
     },
     "sofa-pocket-park": {
       "name": "SoFA Pocket Park",
@@ -3345,6 +3412,13 @@
       "address": "Lower Sproul Plaza, Berkeley, CA 94720",
       "lat": 37.86905,
       "lng": -122.26079
+    },
+    "zellerbach-playhouse": {
+      "name": "Zellerbach Playhouse",
+      "region": "eastbay",
+      "address": "Spieker Plaza, Berkeley, CA 94704",
+      "lat": 37.86905,
+      "lng": -122.2613
     },
     "zentner-collection": {
       "name": "Zentner Collection",
@@ -6061,6 +6135,31 @@
       "venue": "the-orbit-room",
       "region": "sf",
       "summary": "Cosmic Comedy Wednesdays at The Orbit Room.",
+      "more": true
+    },
+    {
+      "id": "607c6ffb-943e-4bdd-9fc8-7a5cf7bcd589",
+      "title": "Sammy Rae & The Friends",
+      "start_time": "2026-10-08T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/sammy-rae-and-the-friends-261007",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/03/1024_SammyRae-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Two Nights!",
       "more": true
     },
     {
@@ -9587,6 +9686,30 @@
       "summary": "Talent Moat presents… · with Bill Orcutt, Famous Mammals · Indie"
     },
     {
+      "id": "f3bb789e-6b45-459a-9846-f5c70d750b90",
+      "title": "Mon Rovîa",
+      "start_time": "2026-10-09T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/mon-rovia-261008",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/05/1024_MonRovia-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Bloodline Tour · with Sydney Rose Sarah Julia"
+    },
+    {
       "id": "d75c4948-aea5-4cf2-88ac-9f69c3d653f5",
       "title": "Jam!",
       "start_time": "2026-10-09T03:15:00+00:00",
@@ -10277,8 +10400,8 @@
       ],
       "topics": [],
       "cost": "free",
-      "venue": null,
-      "region": null,
+      "venue": "marina-green",
+      "region": "sf",
       "summary": "The parade of ships and the air show is Friday!",
       "more": true
     },
@@ -12261,6 +12384,29 @@
       "more": true
     },
     {
+      "id": "9a207add-86a1-4760-8729-41f330df0010",
+      "title": "Emergency Intercom Live",
+      "start_time": "2026-10-10T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/emergency-intercom-261009",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/07/1024_EmergencyIntercom-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "spoken-word",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
+    },
+    {
       "id": "9ae32176-7c13-4cf4-b374-7578507bf83d",
       "title": "Live Music at Lion's Den Lounge and Bar",
       "start_time": "2026-10-10T03:00:00+00:00",
@@ -12351,8 +12497,8 @@
         "asian-american"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "montgomery-theater",
+      "region": "southbay",
       "summary": "San Jose Performance RAD Arts Foundation & Diaspora Arts Connection, proudly presents Trust Me!!! on October 9 at 8pm at the Montgomery Theater , a compelling contemporary",
       "more": true
     },
@@ -12673,8 +12819,8 @@
         "electronic"
       ],
       "cost": "free",
-      "venue": null,
-      "region": null,
+      "venue": "mr-mahjong",
+      "region": "sf",
       "summary": "Groove Global is back at our favorite spot in the city!",
       "more": true
     },
@@ -16767,6 +16913,29 @@
       "summary": "Kat Robichaud's... · Performing Arts General"
     },
     {
+      "id": "a1fea846-9793-439c-8f8b-7135f0226629",
+      "title": "Jacob Collier",
+      "start_time": "2026-10-11T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/jacob-collier-261010",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/03/JacobCollier_1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Light For Days Tour - A Series Of Solo Performances In Intimate Spaces"
+    },
+    {
       "id": "b6d9477c-b653-423d-b0d3-23b9b87ef225",
       "title": "Peter Pan Goes Wrong",
       "start_time": "2026-10-11T03:00:00+00:00",
@@ -17399,8 +17568,8 @@
         "comedy"
       ],
       "cost": "paid",
-      "venue": null,
-      "region": null,
+      "venue": "all-out-comedy-theater",
+      "region": "eastbay",
       "summary": "Our dad has been taking a lot of extended vacations… leaving us plenty of time to bring you another show!",
       "more": true
     },
@@ -19376,6 +19545,30 @@
       "region": "sf",
       "summary": "River of Life LGBTQ+, directed by drama therapist Grace Walcott, is a multigenerational LGBTQ+ documentary that follows 13 queer participants of diverse races, ages, and",
       "more": true
+    },
+    {
+      "id": "ab0ce151-5108-4cdc-b240-0722aa33e767",
+      "title": "9 to 5",
+      "start_time": "2026-10-11T22:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/9-to-5-261011",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/9to5_Still_1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Frameline & Another Planet Entertainment present A tribute to Dolly Parton · with Featuring a drag performance by Peaches Christ"
     },
     {
       "id": "4bc96ffe-8085-48c9-9277-b4f855d8c160",
@@ -27661,6 +27854,29 @@
       "summary": "with FIGHTMASTER , Ill Peach"
     },
     {
+      "id": "4803633e-d289-4843-95d6-18a5031ce2b1",
+      "title": "Finn Wolfhard",
+      "start_time": "2026-10-15T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/finn-wolfhard-261014",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_Finn-Wolfhard-Press-Photo-Credit-Louis-Nice-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Common Side Effects Tour · with Malcy"
+    },
+    {
       "id": "4eb01467-c178-4893-822c-bf1797614032",
       "title": "Cosmic Comedy Wednesdays at The Orbit Room",
       "start_time": "2026-10-15T03:00:00+00:00",
@@ -33268,6 +33484,29 @@
       "cost": "unknown",
       "venue": "august-hall",
       "region": "sf"
+    },
+    {
+      "id": "82284264-7a87-43ce-84ce-78d4d9978045",
+      "title": "Iron & Wine",
+      "start_time": "2026-10-17T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/iron-and-wine-261016",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/02/1024_IronWine-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "folk-americana"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with Ken Pomeroy"
     },
     {
       "id": "ad334ee8-aa06-4b22-a956-1c6e40f45b58",
@@ -40588,6 +40827,29 @@
       "more": true
     },
     {
+      "id": "f413cc0a-43d8-4c0c-b068-16fb7bb34717",
+      "title": "Dinosaur Jr.",
+      "start_time": "2026-10-19T02:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/dinosaur-jr-261018",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024_DinosaurJr-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Fall Tour 2026 · with with special guest Stef Chura"
+    },
+    {
       "id": "fb8413b1-01c1-4b66-9199-da9d3d23b9e1",
       "title": "DAMIEN ESCOBAR",
       "start_time": "2026-10-19T02:00:00+00:00",
@@ -42591,6 +42853,29 @@
       "region": "sf",
       "summary": "GAMH & Psyched!",
       "more": true
+    },
+    {
+      "id": "4064e555-b685-44c0-a2c4-517a8b1eb39d",
+      "title": "almost monday",
+      "start_time": "2026-10-20T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/almost-monday-261019",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024_AlmostMonday-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "THANK GOD IT'S ALMOST MONDAY · with Rec Hall"
     },
     {
       "id": "7547777a-51fc-40e3-aeb1-2ef6035bf907",
@@ -45455,6 +45740,30 @@
       "venue": "dawn-club",
       "region": "sf",
       "summary": "Drummer/Vibraphonist/Saxophonist Smith Dobson V has been performing in the Bay Area for nearly twenty years.",
+      "more": true
+    },
+    {
+      "id": "a6ff2132-1839-4d75-b16c-a50e8931db01",
+      "title": "Shakey Graves",
+      "start_time": "2026-10-21T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/shakey-graves-261020",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/05/1024_ShakeyGraves-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Fondness, Etc.",
       "more": true
     },
     {
@@ -48404,6 +48713,29 @@
       "more": true
     },
     {
+      "id": "4117c057-0ed9-490e-9c1c-a5f937ba576b",
+      "title": "Todd Rundgren",
+      "start_time": "2026-10-22T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/todd-rundgren-261021",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/07/1024_ToddRundgren-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "DAMNED IF I DO TOUR An Evening With"
+    },
+    {
       "id": "419d4f21-b8ef-4d3c-adbd-5a186b5baf45",
       "title": "Scuff Queer Line Dancing & Two-Stepping at Verdi Club",
       "start_time": "2026-10-22T03:00:00+00:00",
@@ -51251,6 +51583,29 @@
       "region": "sf",
       "summary": "Stand-Up Comedy Show at Cheaper Than Therapy.",
       "more": true
+    },
+    {
+      "id": "1fc2b31c-8bce-4832-94ff-53b891684839",
+      "title": "George Clanton",
+      "start_time": "2026-10-23T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/george-clanton-261022",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/07/1024_GeorgeClanton-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "electronic"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with ideasforconversations"
     },
     {
       "id": "2ab4055d-e7a1-40a9-887d-0ae1209e4576",
@@ -54338,6 +54693,30 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "The Cornley Polytechnic Drama Society is back, and this time they’re taking on Peter Pan .",
+      "more": true
+    },
+    {
+      "id": "d2cdf3fe-ad06-4525-9988-9c4bfb7a0478",
+      "title": "Julia Jacklin",
+      "start_time": "2026-10-24T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/julia-jacklin-261023",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024-LEAD-PHOTO_General-Use-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Two Nights!",
       "more": true
     },
     {
@@ -58319,6 +58698,30 @@
       "more": true
     },
     {
+      "id": "0daf020f-0eaa-4dfa-b535-6403caab5316",
+      "title": "Julia Jacklin",
+      "start_time": "2026-10-25T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/julia-jacklin-261024",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024-LEAD-PHOTO_General-Use-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "2nd Show Added by Popular Demand!",
+      "more": true
+    },
+    {
       "id": "14cc2fb7-5a3f-4ed7-9ca1-b42c68c58e67",
       "title": "Assimilation",
       "start_time": "2026-10-25T03:00:00+00:00",
@@ -61409,6 +61812,30 @@
       "more": true
     },
     {
+      "id": "541d1719-0bf6-4af2-bdcc-3579ffb52df6",
+      "title": "Joy Oladokun",
+      "start_time": "2026-10-26T02:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/joy-oladokun-261025",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/07/1024_JoyOladokun-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Heavy Things Tour"
+    },
+    {
       "id": "6ea54083-dd71-41ff-a6e1-639437ab861e",
       "title": "Hector Lugo Jazz/Latin Trio",
       "start_time": "2026-10-26T02:00:00+00:00",
@@ -62974,6 +63401,29 @@
       "region": "sf",
       "summary": "Karaoke with Dana at Eagle Tavern.",
       "more": true
+    },
+    {
+      "id": "7ae72adb-ac82-4e88-bd14-5ba0ec510852",
+      "title": "Fred Armisen: Comedy for Musicians But Everyone is Welcome",
+      "start_time": "2026-10-27T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/fred-armisen-261026",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_Fred-Armisen-Headshot-PC-SHEVA-KAFAI-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "3rd Show Added by Popular Demand!"
     },
     {
       "id": "b628575f-b072-4eb2-8d0f-ba1205336d0a",
@@ -65449,6 +65899,29 @@
       "more": true
     },
     {
+      "id": "5531c289-8269-4412-a05e-17335bf2f3cf",
+      "title": "Fred Armisen: Comedy For Musicians But Everyone Is Welcome",
+      "start_time": "2026-10-28T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/fred-armisen-261027",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_Fred-Armisen-Headshot-PC-SHEVA-KAFAI-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "2nd Show Added by Popular Demand!"
+    },
+    {
       "id": "93ac219e-2023-4b3e-964e-2a12777f54b6",
       "title": "General Trivia at The Bitter End",
       "start_time": "2026-10-28T03:00:00+00:00",
@@ -66669,8 +67142,8 @@
         "games"
       ],
       "cost": "paid",
-      "venue": null,
-      "region": null,
+      "venue": "society-of-thumbs",
+      "region": "sf",
       "summary": "Join Mo Pai Mahjong Club for mahjong night!",
       "more": true
     },
@@ -68347,6 +68820,29 @@
       "region": "sf",
       "summary": "GAMH & Psyched!",
       "more": true
+    },
+    {
+      "id": "e42c97fa-b749-44fb-b527-b7c8e2135177",
+      "title": "Fred Armisen: Comedy For Musicians But Everyone Is Welcome",
+      "start_time": "2026-10-29T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/fred-armisen-261028",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_Fred-Armisen-Headshot-PC-SHEVA-KAFAI-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Three Nights!"
     },
     {
       "id": "e9dcf7fd-a0c8-4b1c-859d-5fde892d77b9",
@@ -70509,6 +71005,30 @@
       "more": true
     },
     {
+      "id": "9d1c8677-c88d-41cc-97f5-d4107498da48",
+      "title": "Daði Freyr",
+      "start_time": "2026-10-30T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/dadi-freyr-261029",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/03/1024_DadiFreyr-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Too Much, Not Enough · with BRÍET"
+    },
+    {
       "id": "a65b4fc6-03b4-414d-96e8-632a9c4dcbb3",
       "title": "Live Music at Lion's Den Lounge and Bar",
       "start_time": "2026-10-30T03:00:00+00:00",
@@ -71659,8 +72179,8 @@
         "music"
       ],
       "cost": "free",
-      "venue": null,
-      "region": null,
+      "venue": "moth-belly-gallery",
+      "region": "sf",
       "summary": "🗣️ Sketchboard Presents: Drink n' Draw at Moth Belly Gallery.",
       "more": true
     },
@@ -72540,6 +73060,29 @@
       "region": "sf",
       "summary": "Hope is distinctly human.",
       "more": true
+    },
+    {
+      "id": "5042fd6b-8694-4222-a38c-410388cd41dd",
+      "title": "Montell Fish",
+      "start_time": "2026-10-31T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/montell-fish-261030",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/Primary-Press-Photo-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "hiphop-rnb"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Nest Tour"
     },
     {
       "id": "54b6ba4e-d6e8-4006-bc9e-0da1269d331e",
@@ -74962,6 +75505,30 @@
       "more": true
     },
     {
+      "id": "01d27a7a-903f-4736-8436-2a691c1f1c9a",
+      "title": "DJ Mandy Presents: The Raveyard",
+      "start_time": "2026-11-01T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/dj-mandy-261031",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/Mandy1-353x192.png",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
+    },
+    {
       "id": "05f71035-9c7b-4d9c-91fa-0e7a2aaec078",
       "title": "Karaoke Lounge at Pandora Karaoke & Bar",
       "start_time": "2026-11-01T03:00:00+00:00",
@@ -75126,8 +75693,8 @@
         "music"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "the-plough-and-the-stars",
+      "region": "sf",
       "summary": "🎃 Halloween Night with Middle Dog!",
       "more": true
     },
@@ -78320,6 +78887,30 @@
       "more": true
     },
     {
+      "id": "1070ebe1-343f-44ce-8ad8-f0ce6e4a7441",
+      "title": "Club Kid",
+      "start_time": "2026-11-03T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/club-kid-261102",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/club_kid_poster_crop_sffilm_2026_1024x576.jpg-353x192.png",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "SFFILM presents · with in 35mm"
+    },
+    {
       "id": "15c6a842-805a-49c2-a910-138d9beb58f6",
       "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
       "start_time": "2026-11-03T03:00:00+00:00",
@@ -80250,6 +80841,30 @@
       "region": "sf",
       "summary": "General Trivia at The Bitter End.",
       "more": true
+    },
+    {
+      "id": "83df753f-7fcd-4446-bd46-4ae77fada927",
+      "title": "Rebecca Black",
+      "start_time": "2026-11-04T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/rebecca-black-261103",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/07/rebeccablack_1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Exhibitionism on Tour · with BAYLI"
     },
     {
       "id": "acef00b6-c5b2-456a-9279-7f0bb39f2440",
@@ -82716,6 +83331,30 @@
       "more": true
     },
     {
+      "id": "9ae01b37-3056-4c04-8c67-efd096ec62cf",
+      "title": "Elsinore",
+      "start_time": "2026-11-06T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/elsinore-261105",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_Elsinore-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Frameline presents"
+    },
+    {
       "id": "a4cc4d7a-1820-4ab0-a846-f4d1f7519f8b",
       "title": "Tricyclist — Joon Oluchi Lee",
       "start_time": "2026-11-06T03:00:00+00:00",
@@ -84163,6 +84802,29 @@
       "more": true
     },
     {
+      "id": "26238698-d6ab-4807-9669-168c3bc89f0a",
+      "title": "SYML",
+      "start_time": "2026-11-07T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/syml-261106",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_SYML-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Solo in North America · with Olivia Vedder"
+    },
+    {
       "id": "27f110e5-9c95-4f79-8be5-84f92973cbc3",
       "title": "Goldenvoice Presents Buena Vista Orchestra",
       "start_time": "2026-11-07T04:00:00+00:00",
@@ -85147,8 +85809,8 @@
         "craft"
       ],
       "cost": "free",
-      "venue": null,
-      "region": null,
+      "venue": "1919-fourth-st",
+      "region": "eastbay",
       "summary": "🍂 HARVEST ON FOURTH Spend a fall afternoon on Fourth Street with local makers, seasonal activities, good food, and plenty to explore.",
       "more": true
     },
@@ -86293,6 +86955,29 @@
       "room": "Z Below",
       "summary": "A Word for Word and Z Space production · Stories by E.L. Doctorow & Tatyana Tolstaya Presented by Word for Word and Z Space Directed by Rotimi Agbabiaka In “Assimilation” by E. L.",
       "more": true
+    },
+    {
+      "id": "0b8fd61e-c83b-43c4-82de-1b9e824d8c26",
+      "title": "PJ Morton",
+      "start_time": "2026-11-08T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/pj-morton-261107",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_PJMorton-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "soul-funk"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Saturday Night Sunday Morning Tour"
     },
     {
       "id": "16a3a26f-b84e-4eb8-b04a-76bc3d9e1988",
@@ -88412,6 +89097,30 @@
       "more": true
     },
     {
+      "id": "598d8997-88fa-4b30-8841-e49761b308c2",
+      "title": "Sienna Spiro",
+      "start_time": "2026-11-10T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/sienna-spiro-261109",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024_SiennaSpiro_TVSlide-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "My House Tour · with with special guest Summer Joy"
+    },
+    {
       "id": "790207dc-7962-4639-975b-6b33736b42f5",
       "title": "Quadeca",
       "start_time": "2026-11-10T04:00:00+00:00",
@@ -89490,6 +90199,30 @@
       "more": true
     },
     {
+      "id": "bd3a2f59-8671-49e5-952c-d6cf1e261878",
+      "title": "Claudio Simonetti’s Goblin Performs the Live Score to Tenebre",
+      "start_time": "2026-11-11T03:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/claudio-simonettis-goblin-261110",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_ClaudioBandPressPic-2-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "film",
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Another Planet Entertainment and The Italian Cultural Institute of San Francisco present"
+    },
+    {
       "id": "8600c578-750f-48f3-bc3f-e661994a7ac2",
       "title": "Rio Amor",
       "start_time": "2026-11-11T04:00:00+00:00",
@@ -90128,6 +90861,29 @@
       "cost": "unknown",
       "venue": "the-fillmore",
       "region": "sf"
+    },
+    {
+      "id": "b642a2b9-e989-4a6f-be54-062c1409e43d",
+      "title": "Ólafur Arnalds",
+      "start_time": "2026-11-12T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/olafur-arnalds-261111",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/01/OlafurArnalds1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "classical"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "2nd Show Added by Popular Demand!"
     },
     {
       "id": "ef10a24e-5d5c-4bc0-827a-6a3dbf1d8793",
@@ -91313,8 +92069,8 @@
         "black-diaspora"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "henry-j-kaiser-center-for-the-arts",
+      "region": "eastbay",
       "summary": "William Kentridge brings the West Coast premiere of his The Head & the Load, tracing the untold history of Africans in World War I, to Berkeley."
     },
     {
@@ -91433,6 +92189,29 @@
       "cost": "unknown",
       "venue": "the-fillmore",
       "region": "sf"
+    },
+    {
+      "id": "77dbef89-fa55-421b-b33a-102622127329",
+      "title": "Ólafur Arnalds",
+      "start_time": "2026-11-13T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/olafur-arnalds-261112",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/01/OlafurArnalds1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "classical"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Two Nights!"
     },
     {
       "id": "7c3b49a5-3dfa-4d87-8ae5-46c47d9b432c",
@@ -92447,6 +93226,29 @@
       ],
       "cost": "unknown",
       "venue": "the-fillmore",
+      "region": "sf"
+    },
+    {
+      "id": "218b34cd-09c3-4581-9081-8342bb7c3c37",
+      "title": "The Moth GrandSLAM Championship",
+      "start_time": "2026-11-14T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/the-moth-261113",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024X576-353x192.png",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "spoken-word",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
       "region": "sf"
     },
     {
@@ -94112,8 +94914,8 @@
         "world-music"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "mountain-view-center-for-the-performing-arts",
+      "region": "southbay",
       "summary": "Diaspora Arts Connection proudly presents the Music in-Takht Ensemble on Saturday, November 14 2026 at 8:00 PM at Mountain View Center for Performing Arts' SecondStage.",
       "more": true
     },
@@ -94701,6 +95503,29 @@
       "region": "sf",
       "summary": "A mosaic of emotive piano keys, physical percussion, buzzing analog synths, and expansive vocals, RHYE find humanity in musicality.",
       "more": true
+    },
+    {
+      "id": "a18a0016-3cb5-40df-bf94-de158de3fde8",
+      "title": "Paul Cauthen",
+      "start_time": "2026-11-15T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/paul-cauthen-261114",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024_PaulCauthen-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "country"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with The Wilder Blue"
     },
     {
       "id": "bb99731a-e862-4b0b-bcec-9ec435466020",
@@ -96036,6 +96861,29 @@
       "more": true
     },
     {
+      "id": "953be93e-3620-4d8b-941e-2f7e556264de",
+      "title": "Rodrigo y Gabriela",
+      "start_time": "2026-11-16T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/rodrigo-y-gabriela-261115",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/Rodrigo-y-Gabriela_1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "OurHome Tour An Evening With"
+    },
+    {
       "id": "afaff2f4-821f-45ea-8fd8-59c20d72877c",
       "title": "BRIAN SIMPSON",
       "start_time": "2026-11-16T03:00:00+00:00",
@@ -96677,6 +97525,28 @@
       "cost": "unknown",
       "venue": null,
       "region": "eastbay"
+    },
+    {
+      "id": "639665c6-0a6d-45c7-9755-d5928976572b",
+      "title": "Jorja Smith",
+      "start_time": "2026-11-17T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/jorja-smith-261116",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_JorjaSmith-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "7e88c400-a5a4-44ec-ba22-a1f09d491a98",
@@ -98997,6 +99867,29 @@
       "cost": "unknown",
       "venue": "august-hall",
       "region": "sf"
+    },
+    {
+      "id": "2ee86c55-b084-4bb9-a388-d252fb2210d4",
+      "title": "Hamilton Leithauser + Rostam",
+      "start_time": "2026-11-19T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/hamilton-leithauser-and-rostam-261118",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_HamiltonRostam-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Joint Tour"
     },
     {
       "id": "71f9cc46-d16e-4efa-9766-6311be501f50",
@@ -101321,6 +102214,29 @@
       "region": "sf"
     },
     {
+      "id": "9da2cdcb-d23c-43c9-8a6f-9dbc9ccb5be7",
+      "title": "DANNA",
+      "start_time": "2026-11-21T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/danna-261120",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/DANNA-WET-DREAMS-08.18-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "THE BEDROOM SESSIONS US TOUR An Evening With"
+    },
+    {
       "id": "aa97968e-8f20-4868-951b-16854214706d",
       "title": "HUG feat. Gyan Riley, Devendra Banhart, Noah Georgeson",
       "start_time": "2026-11-21T04:00:00+00:00",
@@ -102905,6 +103821,29 @@
       "summary": "Rock"
     },
     {
+      "id": "78633e3a-eddd-4940-a1b8-f5541fcb03eb",
+      "title": "BERTHA: Grateful Drag",
+      "start_time": "2026-11-22T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/bertha-grateful-drag-261121",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/05/1024_BERTHA-Press-Image-2025-Credit-Eli-Meltzer-@nashnouveau-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
+    },
+    {
       "id": "7dc842d1-a12f-4491-8353-6c0a413ad539",
       "title": "Lynne Kaufman's THE SECRET MUSEUM",
       "start_time": "2026-11-22T04:00:00+00:00",
@@ -103705,6 +104644,30 @@
       "more": true
     },
     {
+      "id": "e184c936-0e0f-4157-ac81-9af4c71aa49f",
+      "title": "Legends Awards",
+      "start_time": "2026-11-23T02:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/legends-awards-261122",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/2026Legends_1920x1080-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ],
+      "topics": [
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Academy SF"
+    },
+    {
       "id": "368141c2-4c8b-4487-8737-9e39f1d0c9fe",
       "title": "Liberation",
       "start_time": "2026-11-23T03:00:00+00:00",
@@ -104169,6 +105132,28 @@
       "region": "sf",
       "summary": "Best of The Bay Award Winning Charlie Kaupp's Riptide Open Mic !",
       "more": true
+    },
+    {
+      "id": "64313eb5-50b1-4bfe-823f-b76f97632902",
+      "title": "La Bola Negra",
+      "start_time": "2026-11-24T03:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/la-bola-negra-261123",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/10/1024_LaBolaNegra-750x407.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "4771f6f4-023c-475c-b2ab-2ec34a236302",
@@ -104978,6 +105963,30 @@
       "more": true
     },
     {
+      "id": "d9e3211e-018d-43c8-a77d-e70538abe4ad",
+      "title": "The Music of Hey Arnold Live! Feat. Jim Lang and the PS 118 AllStars",
+      "start_time": "2026-11-25T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/hey-arnold-261124",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_HeyArnold_TVSlide-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Two Nights!",
+      "more": true
+    },
+    {
       "id": "bca46635-c24d-4967-8e0d-1adfab438837",
       "title": "Eileen's Punk Rock and Schlock Karaoke",
       "start_time": "2026-11-25T04:30:00+00:00",
@@ -105554,6 +106563,30 @@
       "venue": null,
       "region": "eastbay",
       "summary": "For information on weekly guests, please see The Marsh’s newsletter or social media."
+    },
+    {
+      "id": "3515ed2f-8f05-438c-b5c1-85a3a8225f24",
+      "title": "The Music of Hey Arnold Live! Feat. Jim Lang and The PS 118 AllStars",
+      "start_time": "2026-11-26T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/hey-arnold-261125",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/HeyArnold_TVSlide-copy-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "2nd Show Added by Popular Demand!",
+      "more": true
     },
     {
       "id": "77c44753-fcad-4474-9d0f-1e9d0feaceab",
@@ -107818,6 +108851,29 @@
       "summary": "Fri, Oct 23, 2026 – Sun, Nov 29, 2026 · A daughter digs into her mother’s unfinished feminist revolution in this bitingly funny, intensely relevant play on freedom and inheritance."
     },
     {
+      "id": "473f49fc-6305-4a26-8d3b-132bd03de0b5",
+      "title": "Dweezil Zappa",
+      "start_time": "2026-11-30T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/dweezil-zappa-261129",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/05/1024_DweezilZappa-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "DZ20: Like Father, Like Son An Evening With"
+    },
+    {
       "id": "0bf9b354-80a2-4607-a660-dfdc40023e18",
       "title": "Activity: OWLS Older Writers Laboratory",
       "start_time": "2026-11-30T18:00:00+00:00",
@@ -108102,6 +109158,28 @@
       "region": "sf",
       "summary": "City Lights celebrates the 10th Anniversary of the seminal poetry anthology Of Poetry & Protest: From Emmett Till to Trayvon Martin, complied by Phil Cushway and edited by Michael",
       "more": true
+    },
+    {
+      "id": "0740e00d-9ed1-49ee-bf85-bfc3a152991f",
+      "title": "Julio Torres: Something New",
+      "start_time": "2026-12-01T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/julio-torres-261130",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_JulioTorres-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "f772f335-35d6-43d5-aaae-617ef0bc7ed6",
@@ -108935,6 +110013,29 @@
       "more": true
     },
     {
+      "id": "67555828-f1f3-4d20-abc0-5e25a4fe4f5e",
+      "title": "Cameron Winter at Carnegie Hall",
+      "start_time": "2026-12-03T03:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/cameron-winter-at-carnegie-hall-261202",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/CameronWinterAtCarnegieHall-Still-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "A Janus Films and Criterion Release · with Directed by Paul Thomas Anderson Presented in 35mm"
+    },
+    {
       "id": "c9effc3f-4be3-4191-9eaa-7f8f9c023ccb",
       "title": "Black Bird Writing Club",
       "start_time": "2026-12-03T03:30:00+00:00",
@@ -109521,6 +110622,30 @@
       "region": "eastbay",
       "summary": "Two Voices, One Purpose.",
       "more": true
+    },
+    {
+      "id": "5bbb94a3-ea02-4e5e-aa1f-57f17abfe818",
+      "title": "Sandra Bernhard",
+      "start_time": "2026-12-04T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/sandra-bernhard-261203",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/04/1024_SandraBernhard-LO-RES-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "\"Caught Off Guard\""
     },
     {
       "id": "5de40bfa-0036-4103-9d69-3adbc97191fa",
@@ -111137,6 +112262,30 @@
       "region": "sf"
     },
     {
+      "id": "4a67f0a8-0dda-4f3a-8cea-8d56813df27a",
+      "title": "Marc Maron: Yammering into the Void Tour",
+      "start_time": "2026-12-06T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/marc-maron-261205-early",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_MarcMaron-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Early Show!",
+      "more": true
+    },
+    {
       "id": "61c2f23b-dfac-4515-9e4a-65aac1f02d58",
       "title": "“Scoopin’ Up Joy” - Oakland Interfaith Gospel Choir 41st Annual Holiday Concert",
       "start_time": "2026-12-06T03:00:00+00:00",
@@ -111629,6 +112778,30 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "4ff1ce79-07b3-4b06-b83e-baef8ffae9ac",
+      "title": "Marc Maron: Yammering into the Void Tour",
+      "start_time": "2026-12-06T05:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/marc-maron-261205-late",
+      "image_url": "https://thecastro.com/wp-content/uploads/tm_event/marc-maron-yammering-into-the-void-tour-live-special-taping-930pm-353x192.gif",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Late Show!",
+      "more": true
     },
     {
       "id": "ab31976c-7cce-48cc-802b-a01abc972ee0",
@@ -112310,6 +113483,30 @@
       "more": true
     },
     {
+      "id": "4c3380b4-9e95-4ea8-85c9-a2af821408d5",
+      "title": "Circle Jerks x Repo Man",
+      "start_time": "2026-12-07T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/circle-jerks-x-repo-man-261206",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024-353x192.png",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "punk-metal",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
+    },
+    {
       "id": "ac19b2a5-d6af-40b9-9871-163fa47a6d3d",
       "title": "DEMOLA THE VIOLINIST",
       "start_time": "2026-12-07T03:00:00+00:00",
@@ -112581,6 +113778,29 @@
       "region": "eastbay",
       "summary": "\"The United Kingdom’s Greatest Soul Singer” · The James Hunter Six returns with their first album on Easy Eye Sound, delivering another dose of timeless rhythm & soul.",
       "more": true
+    },
+    {
+      "id": "70074f9e-87d3-48b4-9696-8317778f9924",
+      "title": "Angine de Poitrine",
+      "start_time": "2026-12-08T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/angine-de-poitrine-261207",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/03/1024_ANGINE_Credit_ConstantinMonfilliette-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with zouz"
     },
     {
       "id": "80b3ffb7-3d9b-47f0-8506-79573c6a27bd",
@@ -113005,6 +114225,29 @@
       "venue": "bimbos-365-club",
       "region": "sf",
       "summary": "with Sasha Alex Sloan , Macy Todd"
+    },
+    {
+      "id": "ed7549ff-75d0-4f61-93fb-0255df5e3e82",
+      "title": "Frost Children",
+      "start_time": "2026-12-09T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/frost-children-261208",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_FrostChildren-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with +Kuru"
     },
     {
       "id": "f2430a5a-5363-49c7-a96a-ac28d3182c4a",
@@ -114329,6 +115572,30 @@
       "region": "sf"
     },
     {
+      "id": "56dafe1e-13f6-43c2-8f60-a8dd2da8c3c3",
+      "title": "Lucius",
+      "start_time": "2026-12-12T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/lucius-261211",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_Lucius-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "A History Worth Repeating: Songs and Stories from Lucius An Evening With"
+    },
+    {
       "id": "62db1f99-4ee4-45ac-bf96-a318960a82de",
       "title": "Covenant",
       "start_time": "2026-12-12T04:00:00+00:00",
@@ -115058,6 +116325,29 @@
       "more": true
     },
     {
+      "id": "12e915b1-318d-4290-bb4e-acb3baafd4f7",
+      "title": "Tiny Habits",
+      "start_time": "2026-12-13T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/tiny-habits-261212",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024_TinyHabits-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "spoken-word"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Keepers Tour · with Marie Dresselhuis"
+    },
+    {
       "id": "14bff46d-bcf5-4441-b493-8060d4cb084f",
       "title": "LIVE MUSIC: June McDoom, Eliana Glass (Presented by THROWIN' BO'S)",
       "start_time": "2026-12-13T04:00:00+00:00",
@@ -115705,6 +116995,29 @@
       "region": "sf"
     },
     {
+      "id": "8bf6c413-2b1b-4c0d-a7d4-38f7e8f9d360",
+      "title": "Yaelokre",
+      "start_time": "2026-12-14T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/yaelokre-261213",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/1024_Yaelokre-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with Ben Caplan"
+    },
+    {
       "id": "8e901c84-6a82-4077-abe7-01d52bc7ca52",
       "title": "CON FUNK SHUN",
       "start_time": "2026-12-14T03:00:00+00:00",
@@ -116255,6 +117568,28 @@
       "region": "eastbay",
       "summary": "FEAT.",
       "more": true
+    },
+    {
+      "id": "1b38c2f6-26e8-4f6d-9613-a9a857d728e3",
+      "title": "Syd",
+      "start_time": "2026-12-16T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/syd-261215",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_Syd-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "dbd45fa7-3bba-4217-9ef4-7f4aafe4f406",
@@ -117263,6 +118598,28 @@
       "more": true
     },
     {
+      "id": "0c1d51a6-c4f0-4084-b559-7e432bfd5d8b",
+      "title": "Venna",
+      "start_time": "2026-12-19T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/venna-261218",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_Venna-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
+    },
+    {
       "id": "4a3a2892-2456-42c6-a77d-c0f570e01a49",
       "title": "The Mother Hips Annual Holiday Show",
       "start_time": "2026-12-19T04:00:00+00:00",
@@ -117977,6 +119334,30 @@
       "more": true
     },
     {
+      "id": "1589e8b8-359c-4fc3-9b03-713b088238ba",
+      "title": "David Archuleta",
+      "start_time": "2026-12-20T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/david-archuleta-261219",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/07/1024_DavidArchuleta-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "pop",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Warm Me Up Holiday Tour"
+    },
+    {
       "id": "3bc70889-712a-4fe9-8d72-80bdfa9f5370",
       "title": "Rent",
       "start_time": "2026-12-20T04:00:00+00:00",
@@ -118587,6 +119968,29 @@
       "region": "eastbay",
       "summary": "Jazz pianist bridging musical and artistic genres · Robert Glasper is the leader of a new sonic paradigm with a career that bridges musical and artistic genres.",
       "more": true
+    },
+    {
+      "id": "c23550da-2b6c-4d8f-a024-db5d98107ba8",
+      "title": "Alyssa Edwards – A Very Alyssa Christmas",
+      "start_time": "2026-12-21T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/alyssa-edwards-271220",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/10/1024_AlyssaEdwards-750x407.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "c5418f48-59f4-45e8-93e6-1300d76c6ee7",
@@ -119475,6 +120879,56 @@
       "more": true
     },
     {
+      "id": "01e2ffa0-fbc0-46a7-a395-15d72eea23b0",
+      "title": "San Francisco Gay Men’s Chorus",
+      "start_time": "2026-12-24T23:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/san-francisco-gay-mens-chorus-261224-1",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_SFGMC-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "1 Night, 3 Shows!",
+      "more": true
+    },
+    {
+      "id": "99e7e36e-54f5-42f8-a912-d1b6fc262059",
+      "title": "San Francisco Gay Men’s Chorus",
+      "start_time": "2026-12-25T01:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/san-francisco-gay-mens-chorus-2",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_SFGMC-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "1 Night, 3 Shows!",
+      "more": true
+    },
+    {
       "id": "1a0bea55-54cc-409c-9ebf-1fd8402e11e2",
       "title": "A Christmas Swingin’ Spectacular with Lavay Smith and Her Red Hot Skillet Lickers",
       "start_time": "2026-12-25T02:30:00+00:00",
@@ -119523,6 +120977,31 @@
       "venue": "great-american-music-hall",
       "region": "sf",
       "summary": "37th Annual Christmas Eve Concert · Gospel"
+    },
+    {
+      "id": "edc3e259-2c83-4209-bc7a-de9c9e1bb62c",
+      "title": "San Francisco Gay Men’s Chorus",
+      "start_time": "2026-12-25T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/san-francisco-gay-mens-chorus-3",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_SFGMC-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "1 Night, 3 Shows!",
+      "more": true
     },
     {
       "id": "73948e02-70e3-4145-9f74-7c10904fce73",
@@ -122020,6 +123499,31 @@
       "more": true
     },
     {
+      "id": "baab53db-4c60-43b6-a4dd-913bdd590d0d",
+      "title": "Sleepaway Camp: The Midnight Mass Experience",
+      "start_time": "2027-01-08T03:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/sleepaway-camp-270107",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/10/1024_Sleepaway-750x407.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with Hosted by Peaches Christ & Michael Varrati with special guest Felissa Rose"
+    },
+    {
       "id": "fb16a615-31c0-492b-ad48-64a6539a15e2",
       "title": "A Kidman Carol: A Gay Dementia on Australian Dames",
       "start_time": "2027-01-08T03:30:00+00:00",
@@ -123425,6 +124929,29 @@
       "more": true
     },
     {
+      "id": "06cf6ff0-caf9-46c6-b740-e7821ae501f8",
+      "title": "STS9",
+      "start_time": "2027-01-16T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/sts9-270115",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_STS9-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "electronic"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "REVERIE TOUR"
+    },
+    {
       "id": "ed1ec1c5-ea80-41f5-bba5-4e94d5bc5de4",
       "title": "Rent",
       "start_time": "2027-01-16T04:00:00+00:00",
@@ -123593,6 +125120,29 @@
       "region": "sf",
       "summary": "Ivan Camblor (Pellejo Seco), tres; Carlos Caro, congas; Juan Ceballos, flute; Yadier Noa, bass; Sandor Moss, timbal Cuban & traditional salsa, Musica Tipica, and folkloric music",
       "more": true
+    },
+    {
+      "id": "786046b4-8a2c-4701-938f-b37ec11319d2",
+      "title": "STS9",
+      "start_time": "2027-01-17T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/sts9-270116",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/08/1024_STS9-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "electronic"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "REVERIE TOUR"
     },
     {
       "id": "f3ae2a4f-cdd2-4131-866e-f6e2024dba58",
@@ -124029,6 +125579,36 @@
       "venue": "yoshis-oakland",
       "region": "eastbay",
       "summary": "One of the world’s finest acoustic guitarists · Andy McKee is one of the world’s finest acoustic guitarists, and it’s evident from the accolades he’s received throughout his",
+      "more": true
+    },
+    {
+      "id": "9605a45a-0f44-4bff-9be4-eec2ac8a5cb8",
+      "title": "DJ Meredith Marks",
+      "start_time": "2027-01-21T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/dj-meredith-marks-270120",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_MeredithMarks-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "YOU.",
       "more": true
     },
     {
@@ -127917,6 +129497,30 @@
       "more": true
     },
     {
+      "id": "006b6b31-b828-4e6b-b06d-77de444138e0",
+      "title": "La Roux",
+      "start_time": "2027-02-21T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/la-roux-270220",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_LaRoux-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "electronic",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "The Old Flames Tour"
+    },
+    {
       "id": "aac49e54-3f70-4f1f-b6e1-157a21540b1c",
       "title": "Jazz at Lincoln Center Orchestra Featuring Wynton Marsalis",
       "start_time": "2027-02-21T04:00:00+00:00",
@@ -128592,8 +130196,8 @@
         "music"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "zellerbach-playhouse",
+      "region": "eastbay",
       "summary": "Founded to mentor young composers, Luna Composition Lab celebrates its 10th anniversary in this stop in Berkeley."
     },
     {
@@ -129338,6 +130942,29 @@
       "summary": "The Vienna Philharmonic and Yannick Nézet-Séguin return to Berkeley for three Mahler-focused nights plus Prokofiev with Yuja Wang."
     },
     {
+      "id": "8b024e4b-e1a6-4c49-b88f-7b01e3e45df5",
+      "title": "Wasia Project",
+      "start_time": "2027-03-03T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/wasia-project-270302",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_WasiaProject-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Nocturne Live 2027"
+    },
+    {
       "id": "6b48b287-c17d-4899-ba42-9253b3aa7c49",
       "title": "Lizard Boy",
       "start_time": "2027-03-03T22:00:00+00:00",
@@ -129509,6 +131136,30 @@
       "region": "sf",
       "summary": "This team still sucks—but now they sing!",
       "more": true
+    },
+    {
+      "id": "a2d3f14d-2468-4d11-bd2b-e7b4948bdb39",
+      "title": "Blondshell",
+      "start_time": "2027-03-04T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/blondshell-261017",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/05/1024_Blondshell-1-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Show Rescheduled from 10/17/2026 Scaring Strangers Tour"
     },
     {
       "id": "777c9311-65c4-4230-95ee-8dc916be6cbc",
@@ -130714,6 +132365,30 @@
       "region": "eastbay",
       "summary": "Sun, Jan 31, 2027 – Sun, Mar 21, 2027 · Over the course of decades, ambition, love, friendship, and success reshape the trajectories of six childhood friends who dream of leading",
       "more": true
+    },
+    {
+      "id": "43aa149a-ac7f-482e-9dc8-71aa6894deb3",
+      "title": "strongboi",
+      "start_time": "2027-03-10T04:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/strongboi-270309",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/06/strongboi_1024-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "electronic",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Show Moved from The Independent on 11/15/2026 KALW presents · with Salami Rose Joe Louis"
     },
     {
       "id": "a3591337-c713-44c2-9550-53151a8b9df3",
@@ -132920,6 +134595,29 @@
       "more": true
     },
     {
+      "id": "94010983-8bb0-40f5-8b81-9dd65d536de7",
+      "title": "Aaron Chen: Technology",
+      "start_time": "2027-03-21T02:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/aaron-chen-270320",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_Aaron-Chen-Technology-Hero-CMYK-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "talk"
+        ]
+      ],
+      "topics": [
+        "tech"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Early Show!"
+    },
+    {
       "id": "d9abbc6d-1fad-4719-9645-c16db924b83c",
       "title": "Troilus and Cressida",
       "start_time": "2027-03-21T02:00:00+00:00",
@@ -133133,6 +134831,29 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "fe53559c-052b-46db-9f95-da9cba4600cf",
+      "title": "Aaron Chen: Technology",
+      "start_time": "2027-03-21T04:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/aaron-chen-270320-late",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_Aaron-Chen-Technology-Hero-CMYK-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "talk"
+        ]
+      ],
+      "topics": [
+        "tech"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Late Show Added by Popular Demand!"
     },
     {
       "id": "9daaccca-83bc-4bad-97ca-1ef06e70e59d",
@@ -135893,6 +137614,30 @@
       "more": true
     },
     {
+      "id": "72344680-cc8a-4d2c-8d29-aff0b4bb992d",
+      "title": "Chris Fleming Live",
+      "start_time": "2027-04-09T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/chris-fleming-live-270408",
+      "image_url": "https://thecastro.com/wp-content/uploads/tm_event/chris-fleming-live-353x192.gif",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "Two Nights!"
+    },
+    {
       "id": "e2c05169-823c-4402-b02f-ad340c7067fb",
       "title": "Sid Sriram",
       "start_time": "2027-04-09T04:30:00+00:00",
@@ -135914,6 +137659,31 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "ce9b52ea-37a0-461b-9c03-dfaae66f692b",
+      "title": "Chris Fleming Live",
+      "start_time": "2027-04-10T02:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/chris-fleming-live-270409",
+      "image_url": "https://thecastro.com/wp-content/uploads/tm_event/chris-fleming-live-353x192.gif",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "2nd Show Added by Popular Demand!",
+      "more": true
     },
     {
       "id": "1846731b-08b5-4b99-b190-e4e6d968c684",
@@ -135983,6 +137753,31 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Fri, Mar 12, 2027 – Sun, Apr 18, 2027 · Playfully provocative and disarmingly vulnerable, this charming romantic comedy delves into the passion, intimacy, and vulnerability of",
+      "more": true
+    },
+    {
+      "id": "125c5cc4-2076-418c-9d36-c1ec0ff3131e",
+      "title": "Chris Fleming Live",
+      "start_time": "2027-04-10T04:30:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/chris-fleming-live-270409-late",
+      "image_url": "https://thecastro.com/wp-content/uploads/tm_event/chris-fleming-live-353x192.gif",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "cost": "paid",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "3rd Show Added by Popular Demand!",
       "more": true
     },
     {
@@ -136587,8 +138382,8 @@
         "classical"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "first-congregational-church-of-berkeley",
+      "region": "eastbay",
       "summary": "The Tallis Scholars return to Berkeley with a program centered on one of Josquin des Prez's true masterpieces, Missa Fortuna desperata."
     },
     {
@@ -137643,6 +139438,29 @@
       "region": "sf",
       "summary": "Life’s a mother- Packing and unpacking.",
       "more": true
+    },
+    {
+      "id": "5b8e4ea2-234e-4f08-9af9-60edca750ef5",
+      "title": "Mei Semones",
+      "start_time": "2027-04-25T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/mei-semones-270424",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_LEAD-PHOTO-Mei-Semones-credit-Saeka-Shimada-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "d0b3cc55-a6a7-43bf-bbfb-2368ed6e0910",
@@ -139247,6 +141065,29 @@
       "more": true
     },
     {
+      "id": "7aa63215-f523-4892-8ca6-20cca014a682",
+      "title": "Alaska Thunderf*ck: The Revolution Tour",
+      "start_time": "2027-05-10T02:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/alaska-270509",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/Static_LN-Carousel-Mobile_1080x1350_Alaska5000_2027_Photo-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
+    },
+    {
       "id": "196cb7e9-6bbd-407b-84a3-1eda8dcbdd9f",
       "title": "Django Festival Allstars",
       "start_time": "2027-05-10T04:30:00+00:00",
@@ -139489,6 +141330,30 @@
       "region": "sf",
       "summary": "When a group of millennial classmates meet to pregame for their twentieth high school reunion, everyone is nervous for the night ahead.",
       "more": true
+    },
+    {
+      "id": "d3afe19b-a564-4cb3-95b9-40f30858a65c",
+      "title": "Palaye Royale",
+      "start_time": "2027-05-13T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/palaye-royale-270512",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/10/1024_PalayeRoyale-750x407.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "punk-metal",
+        "lgbtq"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf",
+      "summary": "with Beauty School Dropout"
     },
     {
       "id": "5c129b3b-bfa6-446e-9e21-8865d699e975",
@@ -140370,6 +142235,28 @@
       "region": "sf",
       "summary": "This hilariously chaotic new play follows five generations of Assyrian women attempting to reclaim their story as it’s being narrated by some British guy (said British guy being",
       "more": true
+    },
+    {
+      "id": "2bf7fd1d-7bdc-42de-b106-73c4833dee08",
+      "title": "Agnes Obel",
+      "start_time": "2027-05-21T03:00:00+00:00",
+      "location": "The Castro Theatre, 429 Castro St, San Francisco, CA 94114",
+      "url": "https://thecastro.com/events/agnes-obel-270520",
+      "image_url": "https://thecastro.com/wp-content/uploads/2026/09/1024_Agnes-Obel-353x192.jpg",
+      "sources": [
+        "The Castro Theatre"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "castro-theatre",
+      "region": "sf"
     },
     {
       "id": "ac8a61b7-ec14-42a5-b411-90c26be08495",
