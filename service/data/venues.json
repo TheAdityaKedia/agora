@@ -61,7 +61,7 @@
     "San Francisco Maritime National Park Association": "sf",
     "San Francisco Playhouse": "sf",
     "San Francisco Public Library": "sf",
-    "Stanford Live": "peninsula",
+    "Stanford Live": "southbay",
     "Tally Ho! Books": "eastbay",
     "The Berkeley Alembic": "eastbay",
     "The Booksmith": "sf",
@@ -1072,6 +1072,24 @@
       "region": "sf",
       "status": "auto"
     },
+    "bing-concert-hall": {
+      "added": "2026-10-07",
+      "address": "327 Lasuen St, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Bing Concert Hall (way/205182889)"
+      ],
+      "lat": 37.431997,
+      "lng": -122.166124,
+      "name": "Bing Concert Hall",
+      "osm": "way/205182889",
+      "precision": "building",
+      "region": "southbay",
+      "rooms": [
+        "Bing Studio"
+      ],
+      "status": "verified"
+    },
     "bird-and-beckett": {
       "added": "2026-10-02",
       "address": "653 Chenery Street, San Francisco, CA 94112",
@@ -1866,6 +1884,21 @@
       "region": "sf",
       "status": "verified"
     },
+    "dinkelspiel-auditorium": {
+      "added": "2026-10-07",
+      "address": "471 Lagunita Dr, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Dinkelspiel Auditorium (way/232805665)"
+      ],
+      "lat": 37.424118,
+      "lng": -122.169899,
+      "name": "Dinkelspiel Auditorium",
+      "osm": "way/232805665",
+      "precision": "building",
+      "region": "southbay",
+      "status": "verified"
+    },
     "dolores-park": {
       "added": "2026-10-02",
       "address": "566 Dolores Street, San Francisco, CA 94110",
@@ -2390,6 +2423,21 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "frost-amphitheater": {
+      "added": "2026-10-07",
+      "address": "351 Lasuen St, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Frost Amphitheater (way/26250717)"
+      ],
+      "lat": 37.430661,
+      "lng": -122.165957,
+      "name": "Frost Amphitheater",
+      "osm": "way/26250717",
+      "precision": "building",
+      "region": "southbay",
       "status": "verified"
     },
     "galeria-de-la-raza": {
@@ -3570,6 +3618,21 @@
       "osm": "node/10650803521",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "memorial-auditorium-stanford": {
+      "added": "2026-10-07",
+      "address": "551 Jane Stanford Way, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Memorial Auditorium (node/5689447559)"
+      ],
+      "lat": 37.428518,
+      "lng": -122.167224,
+      "name": "Memorial Auditorium",
+      "osm": "node/5689447559",
+      "precision": "building",
+      "region": "southbay",
       "status": "verified"
     },
     "merced-branch-library": {
@@ -5180,6 +5243,21 @@
       "precision": "building",
       "region": "sf",
       "status": "auto"
+    },
+    "stanford-memorial-church": {
+      "added": "2026-10-07",
+      "address": "450 Jane Stanford Way, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Stanford Memorial Church (way/836474103)"
+      ],
+      "lat": 37.426916,
+      "lng": -122.170505,
+      "name": "Stanford Memorial Church",
+      "osm": "way/836474103",
+      "precision": "building",
+      "region": "southbay",
+      "status": "verified"
     },
     "stanford-shopping-center": {
       "added": "2026-10-02",
