@@ -3355,6 +3355,21 @@
       "region": "sf",
       "status": "verified"
     },
+    "mad-oak-bar-n-yard": {
+      "added": "2026-10-07",
+      "address": "135 12th St, Oakland, CA 94607",
+      "evidence": [
+        "owner: Mad Oak Bar 'N' Yard, 135 12th St",
+        "map: Mad Oak (node/3613169961)"
+      ],
+      "lat": 37.799862,
+      "lng": -122.264642,
+      "name": "Mad Oak Bar 'N' Yard",
+      "osm": "node/3613169961",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
     "madrone-art-bar": {
       "added": "2026-10-02",
       "address": "500 Divisadero Street, San Francisco, CA 94117",
@@ -4754,6 +4769,47 @@
       "region": "sf",
       "status": "verified"
     },
+    "salesforce-park": {
+      "added": "2026-10-07",
+      "address": "425 Mission St, San Francisco, CA 94105",
+      "evidence": [
+        "owner: 425 Mission St; sections from the park's own map",
+        "map: Salesforce Park (relation/8524888)"
+      ],
+      "lat": 37.789115,
+      "lng": -122.396655,
+      "name": "Salesforce Park",
+      "osm": "relation/8524888",
+      "precision": "building",
+      "region": "sf",
+      "rooms": [
+        "Amphitheater",
+        "Amphitheater Main Lawn",
+        "Amphitheater Stage",
+        "Main Lawn",
+        "Desert Garden",
+        "California Garden",
+        "Fog Garden",
+        "Chilean Garden",
+        "Bus Fountain",
+        "West Skylight",
+        "Central Lawn",
+        "Palm Garden",
+        "Children's Play Area",
+        "South African Garden",
+        "Australian Garden",
+        "Grass Garden",
+        "Main Plaza",
+        "Oculus",
+        "Bamboo Grove",
+        "Mediterranean Basin",
+        "East Skylight",
+        "Redwood Forest",
+        "Prehistoric Garden",
+        "Wetland Garden"
+      ],
+      "status": "verified"
+    },
     "san-francisco-center-for-the-book-sfcb": {
       "added": "2026-10-02",
       "address": "375 Rhode Island Street, San Francisco, CA 94103",
@@ -5086,6 +5142,21 @@
       "possible_duplicates": [
         "oasis"
       ],
+      "precision": "building",
+      "region": "sf",
+      "status": "verified"
+    },
+    "st-michaels-ukrainian-orthodox-church": {
+      "added": "2026-10-07",
+      "address": "345 7th St, San Francisco, CA 94103",
+      "evidence": [
+        "owner: Church of Zouk events are always here",
+        "map: Ukrainian Orthodox Church of Saint Michael (way/260459201)"
+      ],
+      "lat": 37.776395,
+      "lng": -122.406937,
+      "name": "St. Michael's Ukrainian Orthodox Church",
+      "osm": "way/260459201",
       "precision": "building",
       "region": "sf",
       "status": "verified"
