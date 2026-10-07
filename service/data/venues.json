@@ -750,6 +750,31 @@
       "region": "sf",
       "status": "verified"
     },
+    "all-out-comedy-theater": {
+      "added": "2026-10-07",
+      "address": "2550 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: 2550 in Alameda County (building, way/417922199)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.815031,
+      "lng": -122.26805,
+      "name": "All Out Comedy Theater",
+      "osm": "way/417922199",
+      "possible_duplicates": [
+        "the-double-standard",
+        "instudio-with-empowerment-avenue",
+        "manna-gallery",
+        "werkshack",
+        "mercury-20-gallery",
+        "new-parkway-theater",
+        "thee-stork-club"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "almanac-west-oakland-clubhouse": {
       "added": "2026-10-02",
       "address": "1640 18th Street, Oakland, CA 94607",
@@ -1647,6 +1672,29 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "castro-theatre": {
+      "added": "2026-10-07",
+      "address": "429 Castro Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Castro Theatre in San Francisco County (building, way/1206216224)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.761991,
+      "lng": -122.43475,
+      "name": "Castro Theatre",
+      "osm": "way/1206216224",
+      "possible_duplicates": [
+        "fabulosa-books",
+        "the-caf",
+        "glbt-historical-society",
+        "beaux"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "castro-valley-marketplace": {
       "added": "2026-10-02",
       "address": "3295 Castro Valley Boulevard, Castro Valley, CA 94546",
@@ -2445,6 +2493,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "first-congregational-church-of-berkeley": {
+      "added": "2026-10-07",
+      "address": "2345 Channing Way, Berkeley, CA 94701",
+      "evidence": [
+        "map: First Congregational Church of Berkeley in Alameda County (building, relation/4083050)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.867026,
+      "lng": -122.26164,
+      "name": "First Congregational Church of Berkeley",
+      "osm": "relation/4083050",
+      "possible_duplicates": [
+        "zellerbach-playhouse",
+        "zellerbach-hall"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "first-congregational-united-church-of-christ": {
       "added": "2026-10-02",
       "address": "2501 Harrison Street, Oakland, CA 94612",
@@ -2959,6 +3028,28 @@
       "lng": -122.254241,
       "name": "Hearst Greek Theatre",
       "osm": "way/24025050",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "henry-j-kaiser-center-for-the-arts": {
+      "added": "2026-10-07",
+      "address": "10 10th Street, Oakland, CA 94612",
+      "evidence": [
+        "map: Henry J. Kaiser Center for the Arts in Alameda County (building, way/23593180)",
+        "text: Oakland",
+        "name matches"
+      ],
+      "lat": 37.797578,
+      "lng": -122.26157,
+      "name": "Henry J. Kaiser Center for the Arts",
+      "osm": "way/23593180",
+      "possible_duplicates": [
+        "james-moore-theater",
+        "lake-merritt-amphitheater",
+        "calvin-simmons-theater",
+        "oakland-museum-of-california"
+      ],
       "precision": "building",
       "region": "eastbay",
       "status": "auto"
@@ -3790,6 +3881,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "marina-green": {
+      "added": "2026-10-07",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: Marina Green in San Francisco County (building, way/16761472)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.806603,
+      "lng": -122.439117,
+      "name": "Marina Green",
+      "osm": "way/16761472",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "martunis": {
       "added": "2026-10-02",
       "address": "4 Valencia Street, San Francisco, CA 94103",
@@ -4047,6 +4154,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "montgomery-theater": {
+      "added": "2026-10-07",
+      "address": "271 South Market Street, San Jose, CA 95113",
+      "evidence": [
+        "map: Montgomery Theater in Santa Clara County (building, node/9115664628)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.330936,
+      "lng": -121.889297,
+      "name": "Montgomery Theater",
+      "osm": "node/9115664628",
+      "possible_duplicates": [
+        "nirvana-soul",
+        "the-continental"
+      ],
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "mosswood-park": {
       "added": "2026-10-07",
       "address": "3612 Webster Street, Oakland, CA 94609",
@@ -4061,6 +4189,27 @@
       "osm": "way/1509844815",
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "moth-belly-gallery": {
+      "added": "2026-10-07",
+      "address": "912 Larkin Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Moth Belly Gallery in San Francisco County (building, node/13058206962)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.786371,
+      "lng": -122.418038,
+      "name": "Moth Belly Gallery",
+      "osm": "node/13058206962",
+      "possible_duplicates": [
+        "alchemy-springs",
+        "great-american-music-hall",
+        "xex"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "mothership": {
@@ -4083,6 +4232,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "mountain-view-center-for-the-performing-arts": {
+      "added": "2026-10-07",
+      "address": "500 Castro Street, Mountain View, CA 94041",
+      "evidence": [
+        "map: 500 in Santa Clara County (building, way/417922883)",
+        "text: Mountain View",
+        "street number matches"
+      ],
+      "lat": 37.389985,
+      "lng": -122.0815,
+      "name": "Mountain View Center for the Performing Arts",
+      "osm": "way/417922883",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "mr-mahjong": {
       "added": "2026-10-02",
@@ -5369,6 +5534,26 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "society-of-thumbs": {
+      "added": "2026-10-07",
+      "address": "1398 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Society of Thumbs in San Francisco County (building, node/2056745156)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.750594,
+      "lng": -122.420672,
+      "name": "Society of Thumbs",
+      "osm": "node/2056745156",
+      "possible_duplicates": [
+        "et-al-gallery-and-bookshop"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "sofa-pocket-park": {
       "added": "2026-10-07",
@@ -7358,6 +7543,25 @@
       "lng": -122.260788,
       "name": "Zellerbach Hall",
       "osm": "way/24025430",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "zellerbach-playhouse": {
+      "added": "2026-10-07",
+      "address": "Spieker Plaza, Berkeley, CA 94704",
+      "evidence": [
+        "map: Zellerbach Playhouse in Alameda County (building, way/24025431)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.869054,
+      "lng": -122.261297,
+      "name": "Zellerbach Playhouse",
+      "osm": "way/24025431",
+      "possible_duplicates": [
+        "zellerbach-hall"
+      ],
       "precision": "building",
       "region": "eastbay",
       "status": "auto"
