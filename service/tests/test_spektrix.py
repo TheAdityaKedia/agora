@@ -89,24 +89,32 @@ def test_stanfordlive_add_page_details_keeps_fallback_when_page_fails():
 
 
 class _Resp:
-    def __init__(self, status, text=""):
-        self.status_code, self.text = status, text
+    def __init__(self, status, text="", headers=None):
+        self.status_code, self.text, self.headers = status, text, headers or {}
 
     def raise_for_status(self):
         if self.status_code >= 400:
             import requests
-            raise requests.HTTPError(f"{self.status_code}")
+            raise requests.HTTPError(f"{self.status_code}", response=self)
 
 
 def test_stanfordlive_fetch_page_retries_transient_failures():
     page = ('<meta name="venue_title" content="Frost Amphitheater">'
             '<img class="event-header__image" src="https://img/frost.jpg">')
-    replies = [_Resp(429), _Resp(503), _Resp(200, page)]
+    replies = [_Resp(429, headers={"Retry-After": "12"}), _Resp(503), _Resp(200, page)]
     sleeps = []
     out = stanfordlive._fetch_page("https://live.stanford.edu/events/x/",
                                    get=lambda *a, **k: replies.pop(0), sleep=sleeps.append)
     assert out == ("https://img/frost.jpg", stanfordlive.HALLS["frost amphitheater"])
-    assert sleeps == [stanfordlive.RETRY_BACKOFF, stanfordlive.RETRY_BACKOFF * 2]
+    # The 429's Retry-After is honoured; the 503 without one backs off.
+    assert sleeps == [12.0, stanfordlive.RETRY_BACKOFF * 2]
+
+
+def test_stanfordlive_retry_after_is_capped():
+    assert stanfordlive._retry_delay(_Resp(429, headers={"Retry-After": "3600"}), 0) == \
+        stanfordlive.MAX_RETRY_AFTER
+    assert stanfordlive._retry_delay(_Resp(429, headers={"Retry-After": "Wed, 21 Oct 2026"}), 1) == \
+        stanfordlive.RETRY_BACKOFF * 2
 
 
 def test_stanfordlive_fetch_page_gives_up_and_says_so(capsys):

@@ -46,11 +46,13 @@ HALLS = {
     "dinkelspiel auditorium": "Dinkelspiel Auditorium, 471 Lagunita Dr, Stanford, CA 94305",
 }
 
-# From GitHub's runners, 5 parallel fetches lost 14 of ~60 show pages
-# (2026-10-07) that all load fine one at a time; fewer workers plus retries.
-PAGE_WORKERS = 3
-PAGE_ATTEMPTS = 3
-RETRY_BACKOFF = 2.0  # seconds, doubled per retry
+# The site rate-limits GitHub's runners (429): 5 parallel fetches lost 14 of
+# ~60 show pages, 3 workers with short retries still lost 3 (2026-10-07).
+# Fetch 2 at a time and, on a 429, wait as long as Retry-After asks.
+PAGE_WORKERS = 2
+PAGE_ATTEMPTS = 4
+RETRY_BACKOFF = 5.0  # seconds, doubled per retry, when Retry-After is absent
+MAX_RETRY_AFTER = 60.0
 REQUEST_TIMEOUT = 25
 _NOT_PUBLIC_RE = re.compile(r"\bstudent (lottery|matinee)\b", re.I)
 
@@ -91,6 +93,16 @@ def hall_location(html: str) -> str | None:
     return HALLS.get(hall.lower(), f"{hall}, {ADDRESS}")
 
 
+def _retry_delay(response, attempt: int) -> float:
+    """Seconds to wait before retrying: the server's Retry-After (seconds
+    form, capped) when it sent one, else exponential backoff."""
+    header = response.headers.get("Retry-After") if response is not None else None
+    try:
+        return min(float(header), MAX_RETRY_AFTER)
+    except (TypeError, ValueError):
+        return RETRY_BACKOFF * 2 ** attempt
+
+
 def _fetch_page(page_url: str, get=requests.get, sleep=time.sleep) -> tuple[str | None, str | None]:
     """A show page's (image, hall address), retrying transient failures;
     (None, None) when every attempt fails."""
@@ -102,7 +114,7 @@ def _fetch_page(page_url: str, get=requests.get, sleep=time.sleep) -> tuple[str 
         except requests.RequestException as e:
             error = e
             if attempt + 1 < PAGE_ATTEMPTS:
-                sleep(RETRY_BACKOFF * 2 ** attempt)
+                sleep(_retry_delay(getattr(e, "response", None), attempt))
     print(f"[stanfordlive] show page failed: {page_url} ({type(error).__name__}: {error})", flush=True)
     return None, None
 
