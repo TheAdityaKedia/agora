@@ -18,6 +18,9 @@
     "110 yacht rd, san francisco, ca": {
       "venue": "110-yacht-rd"
     },
+    "111 minna gallery, 111 minna st, san francisco, ca": {
+      "venue": "111-minna-gallery"
+    },
     "1172 ocean ave, emeryville, ca": {
       "venue": "1172-ocean-ave"
     },
@@ -69,6 +72,28 @@
     "2428 whipple rd, hayward, ca": {
       "venue": "2428-whipple-rd"
     },
+    "26th ave & cabrillo st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-12-06",
+          "title": "Block Clean Up",
+          "url": "https://partiful.com/e/lmqFIxmMnxs72QxkbaBj"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "name": "26th Ave & Cabrillo St",
+          "street_address": "26th Ave & Cabrillo St"
+        }
+      }
+    },
     "2831 mission st, san francisco, ca": {
       "venue": "2831-mission-st"
     },
@@ -108,11 +133,20 @@
     "4-star theater, 2200 clement st, san francisco, ca": {
       "venue": "4-star-theater"
     },
+    "419 georgia st, vallejo, ca": {
+      "venue": "419-georgia-st"
+    },
     "4207 judah st, san francisco, ca": {
       "venue": "pittsburghs-pub"
     },
+    "424 hayes st, san francisco, ca": {
+      "venue": "424-hayes-st"
+    },
     "4330 olympic ave, san mateo, ca": {
       "venue": "bel-mateo-bowl"
+    },
+    "4425 linden st, emeryville, ca": {
+      "venue": "4425-linden-st"
     },
     "447 minna st, 447 minna street, san francisco, ca 94103, san francisco, ca": {
       "venue": "447-minna"
@@ -123,11 +157,35 @@
     "473a haight st, san francisco, ca": {
       "venue": "the-faight-collective-2"
     },
+    "4835 doyle rd, san jose, ca": {
+      "venue": "easterbrook-discovery-school"
+    },
     "49a municipal wharf, santa cruz, ca": {
       "place": "outside"
     },
     "504 balboa st, san francisco, ca": {
       "venue": "504-balboa-st"
+    },
+    "5200 coast hwy, pacifica, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-17",
+          "title": "Tacobell Ultra Marathon",
+          "url": "https://partiful.com/e/tOzTNvmV9Fmerww4P3Tu"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "text says Pacifica (San Mateo County), map result 'Coast Highway' is in Sonoma County",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "Pacifica",
+          "kind": "venue",
+          "street_address": "5200 Coast Hwy"
+        }
+      }
     },
     "524 union, 524 union st, san francisco": {
       "venue": "524-union"
@@ -162,6 +220,9 @@
     "565 green st, san francisco, ca": {
       "venue": "belle-cora"
     },
+    "5757 horton st, emeryville, ca": {
+      "venue": "zentner-collection"
+    },
     "660 stanford shopping center, palo alto, ca": {
       "venue": "stanford-shopping-center"
     },
@@ -183,6 +244,9 @@
     "931 pacific ave, santa cruz, ca": {
       "place": "outside"
     },
+    "968 valencia st, san francisco, ca": {
+      "venue": "big-time-vintage"
+    },
     "a.c.t., 415 geary st, san francisco, ca": {
       "venue": "a-c-t"
     },
@@ -199,6 +263,9 @@
     "alamo square park": {
       "venue": "alamo-square"
     },
+    "alamo square, hayes st & steiner st, san francisco, ca": {
+      "venue": "alamo-square"
+    },
     "alamo square, san francisco, ca": {
       "place": "region",
       "region": "sf"
@@ -208,6 +275,9 @@
     },
     "american bookbinders museum, 355 clementina st, san francisco": {
       "venue": "american-bookbinders-museum"
+    },
+    "anina, 482 hayes st, san francisco, ca": {
+      "venue": "anina"
     },
     "arc gallery, 1246 folsom st, san francisco": {
       "venue": "arc-gallery-studios"
@@ -333,6 +403,9 @@
     },
     "brava mainstage, 2781 24th street, san francisco, ca": {
       "venue": "brava-mainstage"
+    },
+    "brava theater center, 2781 24th st, san francisco, ca": {
+      "venue": "brava-theater-center"
     },
     "brava theater center, 2781 24th street, san francisco, ca": {
       "venue": "brava-theater-center"
@@ -484,11 +557,17 @@
     "etcetera wine bar, 795 valencia street, san francisco, ca": {
       "venue": "etcetera-wine-bar"
     },
+    "eureka valley - harvey milk branch library, 3555 16th st, san francisco, ca": {
+      "venue": "eureka-valley-harvey-milk-memorial-branch-library"
+    },
     "f8 nightclub, 1192 folsom st, san francisco, ca": {
       "venue": "f8-nightclub"
     },
     "fabulosa books, 489 castro st, san francisco, ca": {
       "venue": "fabulosa-books"
+    },
+    "fancy flavors, 1645 saratoga ave, unit 20, san jose, ca": {
+      "venue": "fancy-flavors"
     },
     "feinstein's at the nikko, 222 mason street, san francisco, ca": {
       "venue": "feinsteins-at-the-nikko"
@@ -515,11 +594,17 @@
     "fly bar, 762 divisadero st, san francisco, ca": {
       "venue": "fly-bar-restaurant"
     },
+    "flywheel coffee roasters, 672 stanyan st, san francisco, ca": {
+      "venue": "flywheel-coffee-roasters"
+    },
     "fort mason center for arts & culture, 2 marina blvd bldg c, unit 260, san francisco, ca": {
       "venue": "fort-mason-center-for-arts-culture"
     },
     "fort mason center for arts & culture, 2 marina blvd, san francisco, ca": {
       "venue": "fort-mason-center-for-arts-culture"
+    },
+    "frankie's java house sf, pier 40, san francisco, ca": {
+      "venue": "frankies-java-house"
     },
     "frontier tower @ 10th floor annex 995 market street, san francisco": {
       "room": "10th Floor Annex",
@@ -591,6 +676,9 @@
     "golden gate theatre, 1 taylor st, san francisco": {
       "venue": "golden-gate-theater"
     },
+    "golden ratio, 1517 franklin st, oakland, ca": {
+      "venue": "golden-ratio"
+    },
     "grace cathedral": {
       "venue": "grace-cathedral"
     },
@@ -636,6 +724,12 @@
     "instudio with empowerment avenue, 473 25th st., suite a, oakland": {
       "venue": "instudio-with-empowerment-avenue"
     },
+    "iris + emerson, 790 arguello blvd, san francisco, ca": {
+      "venue": "iris-emerson"
+    },
+    "ivy room, 860 san pablo ave, albany, ca": {
+      "venue": "ivy-room"
+    },
     "jack london square, 472 water st, oakland, ca": {
       "venue": "jack-london-square"
     },
@@ -675,6 +769,9 @@
     "keys jazz bistro, 498 broadway, san francisco, ca": {
       "venue": "keys-jazz-bistro"
     },
+    "kilowatt, 3160 16th st, san francisco, ca": {
+      "venue": "kilowatt"
+    },
     "kqed commons, 2601 mariposa st, san francisco, ca": {
       "venue": "kqed-commons"
     },
@@ -686,6 +783,9 @@
     },
     "lafayette public library, lafayette": {
       "venue": "lafayette-library-and-learning-center"
+    },
+    "lake merritt amphitheater, lake merritt blvd, oakland, ca": {
+      "venue": "lake-merritt-amphitheater"
     },
     "land's end main parking lot, 680 point lobos ave, san francisco, ca": {
       "venue": "lands-end-main-parking-lot"
@@ -781,6 +881,9 @@
     "mission bowling club, 3176 17th street, san francisco, 94110, san francisco, ca": {
       "venue": "mission-bowling-club"
     },
+    "mission dolores park, 566 dolores st, san francisco, ca": {
+      "venue": "dolores-park"
+    },
     "mission hill saloon, 491 potrero ave, san francisco, ca, san francisco, ca": {
       "venue": "mission-hill-saloon"
     },
@@ -790,6 +893,9 @@
     "montana st & fruitvale ave, oakland, ca": {
       "place": "region",
       "region": "eastbay"
+    },
+    "mosswood park, 3612 webster st, oakland, ca": {
+      "venue": "mosswood-park"
     },
     "mothership, 3152 mission street, san francisco, 94110, san francisco, ca": {
       "venue": "mothership"
@@ -826,6 +932,9 @@
     },
     "noe valley books, 3899 24th st, san francisco, ca": {
       "venue": "noe-valley-books"
+    },
+    "nook, 1500 hyde st, san francisco, ca": {
+      "venue": "cafe-nook"
     },
     "north stage ballroom, henry j. kaiser center for the arts, 10 10th st, oakland, ca": {
       "venue": "calvin-simmons-theater"
@@ -924,6 +1033,9 @@
     "presidio tunnel tops, 210 lincoln blvd, san francisco, ca": {
       "venue": "presidio-tunnel-tops"
     },
+    "public works, 161 erie st, san francisco, ca": {
+      "venue": "public-works"
+    },
     "punch line comedy club, 444 battery st, san francisco, ca": {
       "venue": "punch-line-comedy-club"
     },
@@ -941,6 +1053,9 @@
     },
     "rocks den, 4753 mission street, san francisco, ca": {
       "venue": "rocks-den"
+    },
+    "root division, 1131 mission st, san francisco, ca": {
+      "venue": "root-division"
     },
     "roxie theater, 3117 16th st, san francisco": {
       "venue": "roxie-theater"
@@ -1150,6 +1265,12 @@
     "slate contemporary gallery, 5510 college ave, oakland": {
       "venue": "slate-contemporary-gallery"
     },
+    "sofa pocket park, 540 s first st, san jose, ca": {
+      "venue": "sofa-pocket-park"
+    },
+    "spark social sf, 601 mission bay blvd north, san francisco, ca": {
+      "venue": "spark-social-sf"
+    },
     "spark social, 601 mission bay blvd north, san francisco, ca": {
       "venue": "spark-social-sf"
     },
@@ -1161,6 +1282,9 @@
     },
     "st. joseph's art society, 1401 howard st, san francisco": {
       "venue": "st-josephs-art-society"
+    },
+    "standard deviant brewing, 280 14th st, san francisco, ca": {
+      "venue": "standard-deviant"
     },
     "stanford, california": {
       "place": "region",
@@ -1206,6 +1330,9 @@
       "venue": "temescal-brewing"
     },
     "temple nightclub san francisco, 540 howard street, san francisco, 94105, san francisco, ca": {
+      "venue": "temple-nightclub-san-francisco"
+    },
+    "temple san francisco, 540 howard st, san francisco, ca": {
       "venue": "temple-nightclub-san-francisco"
     },
     "the art bloc sausalito, 200 gate five rd, suite 110, sausalito, ca": {
@@ -1399,6 +1526,9 @@
     "the westin st. francis, 335 powell street san francisco, ca": {
       "venue": "the-westin-st-francis"
     },
+    "thee stork club, 2330 telegraph ave, oakland, ca": {
+      "venue": "thee-stork-club"
+    },
     "thriller social club, san francisco, ca, san francisco, ca": {
       "venue": "thriller-social-club"
     },
@@ -1457,11 +1587,17 @@
     "werkshack, 481 25th street, oakland": {
       "venue": "werkshack"
     },
+    "whack donuts, 4 embarcadero center, ste 4507, san francisco, ca": {
+      "venue": "whack-donuts"
+    },
     "wild side west, 424 cortland ave, san francisco, ca": {
       "venue": "wild-side-west"
     },
     "wildcat studio, 2547 eighth st, berkeley, ca": {
       "venue": "wildcat-studio"
+    },
+    "willard park, 2730 hillegass ave, berkeley, ca": {
+      "venue": "willard-park"
     },
     "xex, 1131 polk st, san francisco, ca": {
       "venue": "xex"
