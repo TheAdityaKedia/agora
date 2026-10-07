@@ -21,6 +21,9 @@
     "111 minna gallery, 111 minna st, san francisco, ca": {
       "venue": "111-minna-gallery"
     },
+    "1117 geary blvd, san francisco, ca": {
+      "venue": "1117-geary-blvd"
+    },
     "1172 ocean ave, emeryville, ca": {
       "venue": "1172-ocean-ave"
     },
@@ -29,6 +32,9 @@
     },
     "1250 thomas ave, san francisco, ca": {
       "venue": "1250-thomas-ave"
+    },
+    "1430 cole st, san francisco, ca": {
+      "venue": "1430-cole-st"
     },
     "160 waverly pl, san francisco, ca": {
       "venue": "160-waverly-pl"
@@ -57,11 +63,17 @@
     "215 s b st, san mateo, ca": {
       "venue": "215-s-b-st"
     },
+    "215 washington st, oakland, ca": {
+      "venue": "215-washington-st"
+    },
     "2200 broadway, redwood city, ca": {
       "venue": "2200-broadway"
     },
     "2300 chestnut st, san francisco, ca": {
       "venue": "2300-chestnut-st"
+    },
+    "2369 market st, san francisco, ca": {
+      "venue": "the-caf"
     },
     "239 kearny st, san francisco, ca": {
       "venue": "nightingale"
@@ -273,6 +285,9 @@
     "alchemy springs, 939 post st, san francisco, ca": {
       "venue": "alchemy-springs"
     },
+    "amelie wine bar, 1754 polk st, san francisco, ca": {
+      "venue": "amelie-wine-bar"
+    },
     "american bookbinders museum, 355 clementina st, san francisco": {
       "venue": "american-bookbinders-museum"
     },
@@ -293,6 +308,9 @@
     },
     "artogether center, 1200 harrison street, oakland": {
       "venue": "artogether"
+    },
+    "august hall, 420 mason st, san francisco, ca": {
+      "venue": "august-hall"
     },
     "bach dancing & dynamite society (douglas beach house), 311 mirada rd, half moon bay, ca": {
       "room": "Douglas Beach House",
@@ -319,6 +337,9 @@
     },
     "berkeley rep, 2025 addison st, berkeley, ca": {
       "venue": "berkeley-rep"
+    },
+    "bimbo's 365 club, 1025 columbus ave, san francisco, ca": {
+      "venue": "bimbos-365-club"
     },
     "bing concert hall — bing studio, 327 lasuen st, stanford, ca": {
       "room": "Bing Studio",
@@ -405,6 +426,34 @@
     "bottom's up, 4704 mission st., san francisco, ca": {
       "venue": "bottoms-up"
     },
+    "bow n arrow clothing, 2200 petaluma blvd n, unit 600, petaluma, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-25",
+          "title": "★ treat or trinkets! ★",
+          "url": "https://partiful.com/e/gLvlO6uNZhA5HyoASulc"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "Petaluma",
+          "kind": "venue",
+          "map": {
+            "label": "Petaluma Boulevard North",
+            "lat": 38.247962,
+            "lng": -122.645622,
+            "osm": "way/1074986518"
+          },
+          "name": "Bow N Arrow Clothing",
+          "street_address": "2200 Petaluma Blvd N, Unit 600"
+        }
+      }
+    },
     "brava cabaret, 2781 24th street, san francisco, ca": {
       "venue": "brava-mainstage"
     },
@@ -416,6 +465,9 @@
     },
     "brava theater center, 2781 24th street, san francisco, ca": {
       "venue": "brava-theater-center"
+    },
+    "buzzworks, 365 11th st, san francisco, ca": {
+      "venue": "buzzworks"
     },
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
@@ -516,6 +568,9 @@
     "davies symphony hall, san francisco, ca": {
       "venue": "louise-m-davies-symphony-hall"
     },
+    "dear john, 3807 macarthur blvd, oakland": {
+      "venue": "dear-john"
+    },
     "decentered arts studio, 1175 folsom st, san francisco, ca": {
       "venue": "decentered-arts-studio"
     },
@@ -545,6 +600,9 @@
     },
     "donkey & goat winery, 1340 fifth st, berkeley, ca": {
       "venue": "donkey-and-goat"
+    },
+    "double standard, 2424 telegraph ave, oakland, ca": {
+      "venue": "the-double-standard"
     },
     "eagle tavern, 398 12th st, san francisco, ca, san francisco, ca": {
       "venue": "eagle-tavern"
@@ -579,11 +637,17 @@
     "f8 nightclub, 1192 folsom st, san francisco, ca": {
       "venue": "f8-nightclub"
     },
+    "f8, 1192 folsom, san francisco": {
+      "venue": "f8-nightclub"
+    },
     "fabulosa books, 489 castro st, san francisco, ca": {
       "venue": "fabulosa-books"
     },
     "fancy flavors, 1645 saratoga ave, unit 20, san jose, ca": {
       "venue": "fancy-flavors"
+    },
+    "feinstein's at the nikko, 222 mason st, san francisco, ca": {
+      "venue": "feinsteins-at-the-nikko"
     },
     "feinstein's at the nikko, 222 mason street, san francisco, ca": {
       "venue": "feinsteins-at-the-nikko"
@@ -618,6 +682,9 @@
     },
     "fort mason center for arts & culture, 2 marina blvd, san francisco, ca": {
       "venue": "fort-mason-center-for-arts-culture"
+    },
+    "fox theater, 1807 telegraph ave, oakland, ca": {
+      "venue": "fox-oakland-theater"
     },
     "frankie's java house sf, pier 40, san francisco, ca": {
       "venue": "frankies-java-house"
@@ -719,6 +786,9 @@
     "great star theater, 636 jackson st, san francisco, ca": {
       "venue": "great-star-theater"
     },
+    "greek theatre, 2001 gayley rd, berkeley, ca": {
+      "venue": "hearst-greek-theatre"
+    },
     "green apple books on the park, 1231 9th ave, san francisco": {
       "venue": "green-apple-books-on-the-park"
     },
@@ -734,8 +804,14 @@
     "herbst theatre, san francisco, ca": {
       "venue": "war-memorial-veterans-building-herbst-theatre"
     },
+    "hertz hall, uc berkeley, berkeley, ca": {
+      "venue": "hertz-hall"
+    },
     "hi tops san francisco, 2247 market street, san francisco, 94114, san francisco, ca": {
       "venue": "hi-tops"
+    },
+    "impossible stage, 2033 university ave, berkeley, ca": {
+      "venue": "impossible-stage"
     },
     "india community center, 525 los coches st, milpitas, ca": {
       "venue": "india-community-center"
@@ -772,6 +848,9 @@
     },
     "jollibee, 934 market st, san francisco, ca": {
       "venue": "jollibee"
+    },
+    "june's pizza, 2408 mandela pkwy, oakland, ca": {
+      "venue": "junes-pizza"
     },
     "kalw": {
       "place": "none"
@@ -1028,6 +1107,9 @@
     "pacific pipe, 2140 mandela pkwy, oakland, ca": {
       "venue": "pacific-pipe"
     },
+    "pacifica state beach, 5116—5246 coast hwy, pacifica, ca": {
+      "venue": "pacifica-state-beach"
+    },
     "page street co-writing, 297 page st, san francisco": {
       "venue": "page-street-co-writing"
     },
@@ -1036,6 +1118,9 @@
     },
     "palace of fine arts, 3601 lyon street, san francisco, ca": {
       "venue": "palace-of-fine-arts"
+    },
+    "palo alto children's theatre, 1305 middlefield rd, palo alto, ca": {
+      "venue": "palo-alto-childrens-theatre"
     },
     "pandora karaoke & bar, 50 mason street, san francisco, 94102, san francisco, ca": {
       "venue": "pandora-karaoke-bar"
@@ -1143,6 +1228,9 @@
     "san francisco, california": {
       "place": "region",
       "region": "sf"
+    },
+    "san pablo park, 2800 park st, berkeley, ca": {
+      "venue": "san-pablo-park"
     },
     "sausalito books by the bay, 100 bay st, sausalito": {
       "venue": "sausalito-books-by-the-bay"
@@ -1296,6 +1384,9 @@
       "room": "Western Addition",
       "venue": "western-addition-branch-library"
     },
+    "shark boy fish & chips, 1100 n first st, san jose, ca": {
+      "venue": "shark-boy-fish-and-chips"
+    },
     "silver cloud restaurant & karaoke bar, 1994 lombard street, san francisco, 94123, san francisco, ca": {
       "venue": "silver-cloud-restaurant-karaoke-bar"
     },
@@ -1319,6 +1410,9 @@
     },
     "sports basement presidio, 610 old mason street, san francisco, ca": {
       "venue": "sports-basement-presidio"
+    },
+    "sports basement, 1590 bryant st, san francisco, ca": {
+      "venue": "sports-basement-bryant"
     },
     "st. joseph's art society, 1401 howard st, san francisco": {
       "venue": "st-josephs-art-society"
@@ -1348,6 +1442,12 @@
     },
     "sunnyvale theatre, 550 e remington dr, sunnyvale, ca": {
       "venue": "sunnyvale-theatre"
+    },
+    "sunset commons, 1600 irving st, san francisco, ca": {
+      "venue": "sunset-commons"
+    },
+    "sutro baths, 680 point lobos ave, san francisco, ca": {
+      "venue": "lands-end-main-parking-lot"
     },
     "sweeties art bar, 475 francisco st., san francisco, ca": {
       "venue": "sweeties-art-bar"
@@ -1570,6 +1670,9 @@
       "room": "The Treeline",
       "venue": "sports-basement-bryant"
     },
+    "the uc theatre, 2036 university ave, berkeley, ca": {
+      "venue": "the-uc-theatre"
+    },
     "the warfield, 982 market st, san francisco, ca": {
       "venue": "warfield-theatre"
     },
@@ -1599,6 +1702,9 @@
     },
     "underdogs tres, 1224 9th avenue, san francisco, 94122, san francisco, ca": {
       "venue": "underdogs-tres"
+    },
+    "up the creek records, 2042 mount diablo blvd, walnut creek, ca": {
+      "venue": "up-the-creek-records"
     },
     "verdi club, 2424 mariposa street, san francisco, ca": {
       "venue": "verdi-club"
@@ -1637,6 +1743,9 @@
     "werkshack, 481 25th street, oakland": {
       "venue": "werkshack"
     },
+    "westwood, 2036 lombard st, san francisco, ca": {
+      "venue": "westwood"
+    },
     "whack donuts, 4 embarcadero center, ste 4507, san francisco, ca": {
       "venue": "whack-donuts"
     },
@@ -1659,6 +1768,12 @@
     "ybca screening room, 701 mission st, san francisco": {
       "venue": "ybca-screening-room"
     },
+    "yerba buena center for the arts, 700 howard street, san francisco, ca": {
+      "venue": "yerba-buena-center-for-the-arts"
+    },
+    "yerba buena gardens, 750 howard st, san francisco, ca": {
+      "venue": "crepe-myrtle-garden"
+    },
     "yoshi's, 510 embarcadero west, oakland, ca": {
       "venue": "yoshis-oakland"
     },
@@ -1675,6 +1790,9 @@
     "z space's steindler stage": {
       "room": "Steindler Stage",
       "venue": "z-space"
+    },
+    "zellerbach hall, uc berkeley, berkeley, ca": {
+      "venue": "zellerbach-hall"
     },
     "zoë, 579 howard street, san francisco, ca 94105, san francisco, ca, san francisco, ca": {
       "venue": "zo"
