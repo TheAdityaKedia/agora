@@ -182,6 +182,19 @@ writer at a time) and skips tagging (CI tags new shows).
 stale rows live on in Neon (saves never update): delete them in the Neon SQL
 editor before the next run, e.g. `DELETE FROM events WHERE sources->>0 = '<NAME>';`.
 
+To run SQL from a terminal instead, on any Mac or Linux machine:
+
+```bash
+scripts/neon-sql.sh --query """SELECT count(*) FROM events WHERE sources->>0 = '<NAME>';"""
+scripts/neon-sql.sh --branch ci-test --query """SELECT * FROM events LIMIT 5;"""
+```
+
+It installs the Neon CLI and `psql` if they're missing, asks for
+`NEON_API_KEY` unless the machine has run `neon auth`, and defaults to the
+`production` branch. The query runs as one transaction that stops at the first
+error, and a query that can change production data asks you to type
+`production` first (`--yes` skips that). `--help` has the details.
+
 **Tagging budget and re-tagging** — the merge job tags new or stale shows
 8 at a time for at most 15 minutes, then saves what it has; the rest wait for
 the next run and keep their old tags meanwhile. The log and the data PR show

@@ -57,7 +57,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   per-event `types`/`topics`/`cost`; venue coordinates + SF neighborhoods).
 - `scripts/` — `preview_site.py` (scratch real-data site outside the repo),
   `measure_load.py` (first-load timing; numbers in
-  `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`.
+  `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`, `neon-sql.sh`
+  (run SQL against Neon from any machine: `--query """…"""`, `--branch`).
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
 - `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
   source → single merge job (Neon) → guarded auto-merged data PR → deploy.
