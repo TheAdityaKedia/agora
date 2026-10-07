@@ -682,3 +682,61 @@ def test_model_is_asked_only_for_what_the_rules_leave_pending(tmp_path):
     assert out.action == "new" and calls == []
     _, _, calls = resolve(tmp_path, "Online via Zoom", {}, PROPOSAL)
     assert calls == []
+
+
+# --- places check (pre-merge location check) -------------------------------------
+
+def test_check_locations_describes_new_and_pending_strings(store):
+    from collections import Counter
+    from places.check import check_locations, format_rows
+    q = "Specs', 12 Saroyan Place, San Francisco, CA"
+    geo = FakeGeocoder({q: [nominatim("Specs Bar", *SPECS, house="12", road="Saroyan Place")]})
+    rows = check_locations(Counter({q: 4, "Stanford Live, Stanford University, Stanford, CA": 89}),
+                           "SF Bar Guide", store, geo)
+    by_text = {r["text"]: r for r in rows}
+    assert by_text[q]["action"] == "new"
+    assert by_text[q]["where"].startswith("Specs Bar, ") and "openstreetmap.org" in by_text[q]["where"]
+    stanford = by_text["Stanford Live, Stanford University, Stanford, CA"]
+    assert stanford["action"] == "pending" and stanford["where"].startswith("PENDING: ")
+    assert [r["events"] for r in rows] == [89, 4]  # most events first
+    assert format_rows("SF Bar Guide", rows)[0] == "== SF Bar Guide: 93 events, 2 location(s)"
+
+
+def test_check_run_leaves_the_committed_files_alone(tmp_path, monkeypatch):
+    import main
+    from places import check
+    from scrapers.base import RawEvent
+    Store(tmp_path).save()
+    before = {p.name: p.read_text() for p in tmp_path.iterdir()}
+
+    class Scraper:
+        NAME = "Fake Venue"
+
+        @staticmethod
+        def scrape(url):
+            t = date(2026, 10, 9)
+            return [RawEvent(title="Show", start_time=t, location="Nowhere Hall, Atlantis, CA",
+                             url=url, description=None)]
+
+    monkeypatch.setattr(main, "load_sources", lambda: ["https://fake.example/events"])
+    monkeypatch.setattr(main, "find_scraper", lambda url: Scraper)
+    lines = []
+    assert check.run(["fake"], data_dir=tmp_path, geocoder=FakeGeocoder(), log=lines.append) == 1
+    assert lines[0] == "== Fake Venue: 1 events, 1 location(s)"
+    assert lines[-1].startswith("1 pending location(s).")
+    assert {p.name: p.read_text() for p in tmp_path.iterdir()} == before
+    assert check.run(["nomatch"], data_dir=tmp_path, geocoder=FakeGeocoder(), log=lines.append) == 1
+
+
+def test_stanford_studio_is_a_room_of_bing_whichever_resolves_first(store):
+    from scrapers.stanfordlive import HALLS
+    bing = nominatim("Bing Concert Hall", 37.432, -122.1661, house="327", road="Lasuen Street",
+                     city="Stanford", osm="way/205182889")
+    resp = {HALLS["the studio"]: [bing], HALLS["bing concert hall"]: [bing],
+            "Bing Concert Hall, Stanford, CA": [bing]}
+    r = resolver(store, resp)
+    studio = r.resolve(HALLS["the studio"], ["Stanford Live"])
+    hall = r.resolve(HALLS["bing concert hall"], ["Stanford Live"])
+    assert studio.entry["room"] == "Bing Studio"
+    assert studio.entry["venue"] == hall.entry["venue"]
+    assert store.venues[hall.entry["venue"]]["name"] == "Bing Concert Hall"
