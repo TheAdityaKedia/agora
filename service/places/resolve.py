@@ -52,6 +52,11 @@ _ADDRESS = re.compile(r"(?<![\w-])(\d{1,5}[a-z]?\s+(?:[nsew]\.?\s+)?[a-z0-9][\w.
 PENDING_RETRY = timedelta(days=7)
 
 
+def _contains(key: str, name: str) -> bool:
+    """Whole-word match of a normalised name inside a normalised key."""
+    return re.search(rf"(?<![\w']){re.escape(normalize_key(name))}(?![\w'])", key) is not None
+
+
 @dataclass
 class Outcome:
     location: str
@@ -140,11 +145,19 @@ class Resolver:
             # "SFJAZZ Center — Paramount Theatre, Oakland": the presenter's
             # venue is in SF, the event isn't. Look the place up instead.
             known = None
+        if known and not room:
+            # "Salesforce Park Amphitheater, 425 Mission St": the name part is
+            # itself a known string for a room; keep the room.
+            room = self.store.locations.get(normalize_key(vp), {}).get("room")
         if known and normalize_key(vp) != normalize_key(location):
             entry = {"venue": known}
             if room:
                 entry["room"] = room
             return Outcome(location, "room", entry, evidence=[f"known venue: {known}"])
+        named = self._named_room(location, city)
+        if named:
+            return Outcome(location, "room", {"venue": named[0], "room": named[1]},
+                           evidence=[f"known venue and room: {named[0]}"])
 
         home = next((self.store.source_homes[s] for s in sources if s in self.store.source_homes), None)
         seg = city_segment(location)
@@ -199,6 +212,26 @@ class Resolver:
                     out.evidence.append(f"ai: proposed {assist.summary(proposal)}")
                     return out, seen
         return None, seen
+
+    def _named_room(self, location: str, city) -> tuple[str, str] | None:
+        """A venue that lists its rooms (``rooms`` in venues.json), named
+        anywhere in the string together with one of them: "Salesforce Park
+        Amphitheater", "Main Plaza, Salesforce Park, San Francisco". Opt-in,
+        so a venue name inside another name can't match on its own."""
+        key = normalize_key(location)
+        for vid, v in self.store.venues.items():
+            if not v.get("rooms"):
+                continue
+            if city and REGION_OF_COUNTY[city[1]] != v["region"]:
+                continue
+            names = [v["name"]] + [k for k, e in self.store.locations.items()
+                                   if e.get("venue") == vid and "," not in k and "room" not in e]
+            if not any(_contains(key, n) for n in names):
+                continue
+            for room in sorted(v["rooms"], key=len, reverse=True):
+                if _contains(key, room):
+                    return vid, room
+        return None
 
     def _known_venue(self, vp: str) -> str | None:
         k = normalize_key(vp)

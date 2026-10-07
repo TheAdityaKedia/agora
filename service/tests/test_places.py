@@ -740,3 +740,57 @@ def test_stanford_studio_is_a_room_of_bing_whichever_resolves_first(store):
     assert studio.entry["room"] == "Bing Studio"
     assert studio.entry["venue"] == hall.entry["venue"]
     assert store.venues[hall.entry["venue"]]["name"] == "Bing Concert Hall"
+
+
+# --- venues that list their rooms ------------------------------------------------
+
+@pytest.fixture
+def park(store):
+    store.venues["salesforce-park"] = {
+        "name": "Salesforce Park", "address": "425 Mission St, San Francisco, CA 94105",
+        "lat": 37.789115, "lng": -122.396655, "precision": "building", "region": "sf",
+        "status": "verified", "rooms": ["Amphitheater", "Amphitheater Main Lawn", "Main Plaza",
+                                        "Children's Play Area"]}
+    store.venues["mad-oak-bar-n-yard"] = {
+        "name": "Mad Oak Bar 'N' Yard", "region": "eastbay", "precision": "building",
+        "status": "verified"}
+    store.locations["mad oak bar"] = {"venue": "mad-oak-bar-n-yard"}
+    return store
+
+
+@pytest.mark.parametrize("text, room", [
+    ("Salesforce Park Amphitheater", "Amphitheater"),
+    ("Salesforce Park Amphitheater Main Lawn, San Francisco", "Amphitheater Main Lawn"),
+    ("Main Plaza, Salesforce Park, San Francisco", "Main Plaza"),
+    ("Amphitheater at Salesforce Park", "Amphitheater"),
+    ("Children’s Play Area, Salesforce Park", "Children's Play Area"),
+])
+def test_listed_room_named_with_its_venue(park, text, room):
+    out = resolver(park).resolve(text)
+    assert (out.action, out.entry) == ("room", {"venue": "salesforce-park", "room": room})
+
+
+@pytest.mark.parametrize("text", [
+    "Main Plaza, San Francisco",                 # a room without its venue
+    "Salesforce Park Amphitheater, Oakland",     # the venue's name, the wrong city
+    "Salesforce Parking Garage, Main Plaza",     # not a whole-word match
+])
+def test_listed_room_needs_the_venue_in_the_same_city(park, text):
+    assert resolver(park).resolve(text).action == "pending"
+
+
+def test_listed_rooms_are_opt_in(park):
+    # Mad Oak lists no rooms, so its name inside a longer string is left to the map.
+    assert resolver(park).resolve("Mad Oak Bar Trivia Night Patio").action == "pending"
+
+
+def test_a_known_room_string_keeps_its_room_inside_a_longer_one(park):
+    r = resolver(park)
+    r.resolve("Salesforce Park Amphitheater")
+    out = r.resolve("Salesforce Park Amphitheater, 425 Mission St, San Francisco, CA")
+    assert out.entry == {"venue": "salesforce-park", "room": "Amphitheater"}
+
+
+def test_rooms_must_be_a_list_of_names(park):
+    park.venues["salesforce-park"]["rooms"] = "Amphitheater"
+    assert any("rooms must be a list" in e for e in park.validate())
