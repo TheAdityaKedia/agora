@@ -67,7 +67,9 @@ to `source_homes` in `service/data/venues.json` (`"sf"`, `"eastbay"`,
 `"peninsula"`, `"southbay"`, `"northbay"`), keyed by the same `NAME`. Venue
 resolution uses it as a weak signal and to reject far-away map matches; leave
 it out for sources that list events all over (Partiful, Litquake). Then run
-`python -m places validate`. See `feature-specs/venues.md`.
+`python -m places validate`, and `python -m places check --sources <substr>`
+to see where the source's location strings land (see "Check that every
+location lands on the map" below). See `feature-specs/venues.md`.
 
 `RawEvent` (see `scrapers/base.py`): `title`, `start_time` (tz-aware, **UTC**),
 `location`, `url`, `description`, `image_url`. Keep `parse*` functions **pure**
@@ -318,6 +320,46 @@ text. Before calling a source done, run its `scrape()` live and check:
 A quick way to measure every source at once is the live manifest:
 `frontend/events.json` (per-event `image_url` and `summary`) plus
 `frontend/descriptions.json` (full text by event id).
+
+## Check that every location lands on the map
+
+The same goes for `location`: tests and `python -m places validate` pass
+even when the map can't place a source's strings, or places them on the
+wrong building. In the October 2026 theater sprint, all 89 Stanford Live
+events carried "Stanford Live, Stanford University, Stanford, CA" (no map
+result, so no area or pin), and Cal Performances' bare "First Church" was
+about to become First Church of Christ, Scientist instead of First
+Congregational. Both surfaced only in the branch CI run's "Places to review"
+issue. Check before that:
+
+```bash
+cd service && ./.venv/bin/python -m places check --sources <substr> [<substr> ...]
+```
+
+It scrapes the matching sources live and resolves each distinct location
+against a scratch copy of the venue files (nothing committed changes). For
+every string it prints what it resolves to: an existing venue, a new one
+from the map, or `PENDING` with the reason. Then:
+
+- **Fix every `PENDING` line in the scraper.** No map result usually means
+  the string has no street address. Give it one: a fixed `ADDRESS`, or a
+  table from hall name to address when the source spreads over a few halls.
+  A name the map matches to the wrong place needs the right street address.
+  Hand-answering `venue_locations.json` is for strings you can't fix at the
+  source (other people's listings).
+- **Open the map link on every `new` and `alias` line.** A street-number
+  match is accepted even when the map object is a neighbor (Stanford
+  Memorial Church's address resolves to a statue in its courtyard: close
+  enough). A pin on the wrong block, or across town, isn't.
+- **Read the venue name on every `alias` line.** Two strings that hit the
+  same map building become one venue, named by whichever resolved first.
+  Stanford Live's "Bing Studio, Bing Concert Hall, …" came first, so Bing
+  Concert Hall's own shows aliased to a venue called "Bing Studio". Write a
+  room inside a venue as `Venue — Room, address` and it is recorded as a
+  room of that venue.
+- **Prefer the hall the event is actually in** over one address for the
+  whole source when the site says which hall (Stanford Live's show pages
+  carry it in `meta[name=venue_title]`). Area and map pins are per event.
 
 ## Dedup & keys
 
