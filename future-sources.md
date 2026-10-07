@@ -81,7 +81,6 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Cinemas & film orgs
 
-- **Roxie Theater** — https://roxie.com/calendar/  *(⚠️ no longer Veezi — now WordPress-hosted; needs a fresh spike)*
 - **SFFILM** — https://sffilm.org/calendar/
 - **SF Silent Film Festival** — https://silentfilm.org/
 - **CAAMFest** (Center for Asian American Media) — https://caamfest.com/
@@ -90,7 +89,6 @@ platform scraper may be the better path for some (noted where relevant).
 
 ## Music & performance venues
 
-- **Bimbo's 365 Club** — https://bimbos365club.com/  *(spiked 2026-10: TicketWeb WordPress plugin (`.tw-name` / `.tw-event-date` cards, no WAF), same template as August Hall and Feinstein's. Date formats differ per site and some omit the year; no JSON-LD on `/tm-event/` pages. A shared `ticketweb.py` would cover all three)*
 - **Freight & Salvage** (Berkeley) — https://thefreight.org/ *(spiked 2026-10: Cloudflare 403 to datacenter IPs)*
 - **EnActe Arts** (South Asian theater) — https://enacte.org/ *(spiked 2026-10: EventON plugin, JSON-LD on event pages, but only ~2 upcoming events)*
 
@@ -175,15 +173,10 @@ farmers markets, "Virtual") were filtered out. Parenthetical count = events seen
 on BAR (a rough volume signal, not a full inventory).
 
 ### Music venues / jazz & blues clubs
-- **The UC Theatre** (Berkeley) — https://www.theuctheatre.org/  *(nonprofit music hall; 26)*
 - **Mr. Tipple's** (SF) — https://mrtipplessf.com/  *(Hayes Valley jazz club; 23)*
 - **San Jose Jazz / SJZ Break Room** (San Jose) — https://sanjosejazz.org/  *(17)*
-- **Feinstein's at the Nikko** (SF) — https://www.feinsteinssf.com/  *(cabaret/supper club; 13)*
 - **Black Cat** (SF) — https://blackcatsf.com/  *(Tenderloin jazz supper club; 1)*
 - **The Mountain Winery** (Saratoga) — https://www.mountainwinery.com/  *(summer concert series; 3)*
-
-### Concert-hall presenters (multi-venue programs)
-- **Cal Performances** (UC Berkeley — Zellerbach Hall/Playhouse, Hertz Hall) — https://calperformances.org/  *(major music/dance/theater presenter; ~50 across its halls)*
 
 ### Suburban performing-arts centers (multi-genre)
 - **Montalvo Arts Center** (Saratoga) — https://montalvoarts.org/  *(35; spiked 2026-10: /events JSON-LD lists only 5, mostly school matinees, with local times mislabelled +00:00)*
@@ -194,9 +187,6 @@ on BAR (a rough volume signal, not a full inventory).
 - **San Jose Center for the Performing Arts / San Jose Theaters** (San Jose) — https://sanjosetheaters.org/  *(6)*
 - **Mountain View Center for the Performing Arts** (Mountain View) — https://mvcpa.com/  *(TheatreWorks; 2)*
 - **Hillbarn Theatre** (Foster City) — https://hillbarntheatre.org/  *(5)*
-
-### Rock / touring music (bigger; Another Planet / Live Nation — may be harder)
-- **August Hall** (SF) — https://www.augusthallsf.com/  *(2)*
 
 ### Comedy (genre gap in our current sources)
 - **FLUID510** (Oakland) — https://fluid510.com/  *(1)*
