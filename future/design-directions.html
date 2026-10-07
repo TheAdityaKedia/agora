@@ -102,6 +102,10 @@
   <p>Explored October 2026. Started from muted red, oat and pumpkin, which read as soft and feminine; then moved toward workwear and leather tones for a more rugged take. Tobacco &amp; ochre with earthy tags is the current favourite. Contrast is against each palette's background; text needs 4.5:1, buttons and large text 3:1.</p>
   <div class="palettes" id="autumn"></div>
 
+  <h3><span class="num">1.2</span>Winter</h3>
+  <p>Explored October 2026. Bay Area winter is the rainy season, not snow: the hills turn green, storms come in off the Pacific, and persimmons, Meyer lemons and Dungeness crab are in season. All three use the earthy tag hues from autumn. Cypress &amp; persimmon is the closest partner to tobacco &amp; ochre, so it's the natural pick for a fall-to-winter transition; storm slate is the clearest break into winter.</p>
+  <div class="palettes" id="winter"></div>
+
   <h2><span class="num">2</span>Logos</h2>
   <p>Logo explorations from October 2026, drawn on a design canvas. Each board shows the mark large, as an app icon, on the dark ground and at favicon size. All use the current palette (fog, bay navy, International Orange) and Big Shoulders Display. None has shipped; the site still uses the plain "Agora" wordmark.</p>
 
@@ -790,6 +794,32 @@
               "Applying it: single theme, remove the sun/moon button, set color-scheme: dark."] },
   ];
 
+  const WINTER = [
+    { name: "Cypress & persimmon", mood: "Green hills after the first rains, Monterey cypress, persimmons on bare branches", badge: "Pairs with fall",
+      day: "Saturday, January 16",
+      colors: { bg: "#2c3a30", fg: "#e6e2d3", muted: "#b8b8aa", accent: "#ea8a3c", "accent-fg": "#1a1712",
+                "chip-bg": "#3b473d", border: "#4c574c", "input-bg": "#243027", error: "#ffb8a0" },
+      tags: { s: "30%", l: "74%", hues: EARTHY_HUES },
+      notes: ["Evergreen ground, bone text, persimmon accent.",
+              "The natural follow-on to tobacco & ochre: the ground turns from brown to green, while the accent stays a warm orange, so the two read as one family changing season.",
+              "Persimmon pops harder here than ochre does on brown."] },
+    { name: "Storm slate & Meyer lemon", mood: "Wet slate skies, rain on the bay, winter citrus", badge: "Clearest winter",
+      day: "Saturday, January 16",
+      colors: { bg: "#2f3b42", fg: "#e4e7e3", muted: "#b7bcbb", accent: "#e8c547", "accent-fg": "#1d2328",
+                "chip-bg": "#3d494f", border: "#4e585d", "input-bg": "#273036", error: "#ffb3a6" },
+      tags: { s: "30%", l: "74%", hues: EARTHY_HUES },
+      notes: ["Cool and crisp, a rainy afternoon. The coolest palette so far.",
+              "The yellow is the boldest accent of any direction; text on it is 9.5:1.",
+              "The biggest jump from fall: it would feel like a new season rather than a continuation."] },
+    { name: "Deep Pacific & crab shell", mood: "Cold ocean, Dungeness crab season", badge: "Variation",
+      day: "Saturday, January 16",
+      colors: { bg: "#1d2f3a", fg: "#e8e4da", muted: "#b5b7b2", accent: "#ef7d5e", "accent-fg": "#13202a",
+                "chip-bg": "#2d3d47", border: "#404e55", "input-bg": "#182730", error: "#ffc4b0" },
+      tags: { s: "30%", l: "74%", hues: EARTHY_HUES },
+      notes: ["Deep navy ground, sea-salt text, cooked-crab coral accent.",
+              "Handsome, but close to the site's current fog/navy/International Orange look, so it reads as \"back to normal\" more than as a season."] },
+  ];
+
   // WCAG contrast.
   const lum = (hex) => {
     const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
@@ -829,7 +859,7 @@
     return `<div class="spec" style="${style}">
       <div class="brand">Agora<small>Events around the Bay</small></div>
       <div class="input">Search events, venues, topics</div>
-      <div class="day">Friday, October 30</div>
+      <div class="day">${p.day || "Friday, October 30"}</div>
       <div class="row" style="--h:${h.Literary}">
         <div class="time">6:30<em>pm</em></div>
         <div><div class="title">Offsite: Kirk Lombard</div>
@@ -847,9 +877,9 @@
     </div>`;
   }
 
-  document.getElementById("autumn").innerHTML = PALETTES.map(p => `
+  const card = (p) => `
     <article class="pal">
-      <div class="pal-head"><h4>${p.name}</h4><span class="badge${p.badge === "Favourite" ? " fav" : ""}">${p.badge}</span>
+      <div class="pal-head"><h4>${p.name}</h4><span class="badge${["Favourite", "Pairs with fall"].includes(p.badge) ? " fav" : ""}">${p.badge}</span>
         <span class="muted">${p.mood}</span></div>
       <div class="pal-body">
         <div>
@@ -861,7 +891,9 @@
         </div>
         ${specimen(p)}
       </div>
-    </article>`).join("");
+    </article>`;
+  document.getElementById("autumn").innerHTML = PALETTES.map(card).join("");
+  document.getElementById("winter").innerHTML = WINTER.map(card).join("");
 </script>
 </body>
 </html>
