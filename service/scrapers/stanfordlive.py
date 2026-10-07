@@ -18,6 +18,7 @@ shows (not public; they also carry no web page). Other events without a page
 link to the calendar.
 """
 import re
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
@@ -45,7 +46,11 @@ HALLS = {
     "dinkelspiel auditorium": "Dinkelspiel Auditorium, 471 Lagunita Dr, Stanford, CA 94305",
 }
 
-PAGE_WORKERS = 5
+# From GitHub's runners, 5 parallel fetches lost 14 of ~60 show pages
+# (2026-10-07) that all load fine one at a time; fewer workers plus retries.
+PAGE_WORKERS = 3
+PAGE_ATTEMPTS = 3
+RETRY_BACKOFF = 2.0  # seconds, doubled per retry
 REQUEST_TIMEOUT = 25
 _NOT_PUBLIC_RE = re.compile(r"\bstudent (lottery|matinee)\b", re.I)
 
@@ -86,13 +91,20 @@ def hall_location(html: str) -> str | None:
     return HALLS.get(hall.lower(), f"{hall}, {ADDRESS}")
 
 
-def _fetch_page(page_url: str) -> tuple[str | None, str | None]:
-    try:
-        r = requests.get(page_url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
-        r.raise_for_status()
-    except requests.RequestException:
-        return None, None
-    return header_image(r.text), hall_location(r.text)
+def _fetch_page(page_url: str, get=requests.get, sleep=time.sleep) -> tuple[str | None, str | None]:
+    """A show page's (image, hall address), retrying transient failures;
+    (None, None) when every attempt fails."""
+    for attempt in range(PAGE_ATTEMPTS):
+        try:
+            r = get(page_url, headers={"User-Agent": BROWSER_UA}, timeout=REQUEST_TIMEOUT)
+            r.raise_for_status()
+            return header_image(r.text), hall_location(r.text)
+        except requests.RequestException as e:
+            error = e
+            if attempt + 1 < PAGE_ATTEMPTS:
+                sleep(RETRY_BACKOFF * 2 ** attempt)
+    print(f"[stanfordlive] show page failed: {page_url} ({type(error).__name__}: {error})", flush=True)
+    return None, None
 
 
 def add_page_details(events: list[RawEvent], fetch=_fetch_page) -> None:
@@ -101,6 +113,9 @@ def add_page_details(events: list[RawEvent], fetch=_fetch_page) -> None:
                     if e.url and e.url != EVENTS_URL and "live.stanford.edu" in e.url})
     with ThreadPoolExecutor(max_workers=PAGE_WORKERS) as pool:
         details = dict(zip(pages, pool.map(fetch, pages)))
+    failed = sum(1 for d in details.values() if d == (None, None))
+    if failed:
+        print(f"[stanfordlive] {failed} of {len(pages)} show pages gave no image or hall", flush=True)
     for e in events:
         image, location = details.get(e.url, (None, None))
         e.image_url = e.image_url or image

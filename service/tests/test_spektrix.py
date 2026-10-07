@@ -86,3 +86,32 @@ def test_stanfordlive_add_page_details_keeps_fallback_when_page_fails():
                        url="https://live.stanford.edu/events/x/", description=None)]
     stanfordlive.add_page_details(events, fetch=lambda u: (None, None))
     assert (events[0].image_url, events[0].location) == (None, "L")
+
+
+class _Resp:
+    def __init__(self, status, text=""):
+        self.status_code, self.text = status, text
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            import requests
+            raise requests.HTTPError(f"{self.status_code}")
+
+
+def test_stanfordlive_fetch_page_retries_transient_failures():
+    page = ('<meta name="venue_title" content="Frost Amphitheater">'
+            '<img class="event-header__image" src="https://img/frost.jpg">')
+    replies = [_Resp(429), _Resp(503), _Resp(200, page)]
+    sleeps = []
+    out = stanfordlive._fetch_page("https://live.stanford.edu/events/x/",
+                                   get=lambda *a, **k: replies.pop(0), sleep=sleeps.append)
+    assert out == ("https://img/frost.jpg", stanfordlive.HALLS["frost amphitheater"])
+    assert sleeps == [stanfordlive.RETRY_BACKOFF, stanfordlive.RETRY_BACKOFF * 2]
+
+
+def test_stanfordlive_fetch_page_gives_up_and_says_so(capsys):
+    calls = []
+    out = stanfordlive._fetch_page("https://live.stanford.edu/events/x/",
+                                   get=lambda *a, **k: calls.append(1) or _Resp(500), sleep=lambda s: None)
+    assert out == (None, None) and len(calls) == stanfordlive.PAGE_ATTEMPTS
+    assert "show page failed: https://live.stanford.edu/events/x/" in capsys.readouterr().out
