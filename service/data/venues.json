@@ -22,6 +22,7 @@
     "Clio's Books": "eastbay",
     "Cobb's Comedy Club": "sf",
     "Commonwealth Club": "sf",
+    "Drake's Brewing": "eastbay",
     "El Rio": "sf",
     "F8": "sf",
     "Fabulosa Books": "sf",
@@ -2181,6 +2182,36 @@
       "lng": -122.302321,
       "name": "Donkey and goat",
       "osm": "node/8868922302",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "drakes-barrel-house": {
+      "added": "2026-10-08",
+      "address": "1933 Davis St, San Leandro, CA 94577",
+      "evidence": [
+        "owner review: Drake's Brewing taproom",
+        "map: Drake's Barrel House (node/4072704052)"
+      ],
+      "lat": 37.714795,
+      "lng": -122.17908,
+      "name": "Drake's Barrel House",
+      "osm": "node/4072704052",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "drakes-dealership": {
+      "added": "2026-10-08",
+      "address": "2325 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Drake's Brewing taproom",
+        "map: Drake's Dealership (node/3744652568)"
+      ],
+      "lat": 37.812733,
+      "lng": -122.266691,
+      "name": "Drake's Dealership",
+      "osm": "node/3744652568",
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
