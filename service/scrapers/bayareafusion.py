@@ -16,8 +16,11 @@ occurrences, so we expand them with the app's own rule (``Ix`` in its bundle):
 and apply ``event_unique_occurrences`` (per-date title/time/venue overrides).
 Times are free text ("8pm - 2am", "6:00 - 11:45pm", " - "); a start without
 am/pm borrows the end's, and a bare hour defaults to pm (evening dances);
-no time at all → noon (festival days). Rows outside the Bay Area
-(Sacramento, Nevada City, Mendocino, Santa Cruz…) are dropped by county.
+no time at all → noon (festival days). Outside the Bay Area (by county:
+Sacramento, Nevada City, Mendocino, Santa Cruz…) only festivals and retreats
+are kept — the weekends people travel for; out-of-area weekly socials and
+workshops are dropped (owner's call, 2026-10-08). Kept ones resolve to an
+"outside" place, so an Area filter hides them.
 Event links go to the site's own page for that date.
 """
 from __future__ import annotations
@@ -43,6 +46,7 @@ EVENT_URL = "https://bayareafusioncal.com/event/{short_id}?date={day}"
 SELECT = "*,event_unique_occurrences!event_unique_occurrences_event_id_fkey(*)"
 SOURCE_TZ = ZoneInfo("America/Los_Angeles")
 REQUEST_TIMEOUT = 25
+TRAVEL_TYPES = {"festival", "retreat"}  # kept even outside the Bay Area
 BAY_REGIONS_WITHOUT_CITY = {"SF", "East Bay"}  # the site's own regions; its North/South Bay reach Lake and Santa Cruz counties
 
 _BUNDLE_RE = re.compile(r'src="(/assets/index-[^"]+\.js)"')
@@ -95,14 +99,17 @@ def parse_start_time(text: str | None) -> tuple[int, int]:
 
 
 def _location(row: dict) -> str | None:
-    """"Venue, address, city, CA" when the place is in a Bay Area county. Pure."""
+    """"Venue, address, city, CA" when the place is in a Bay Area county, or
+    anywhere for a festival/retreat; None otherwise. Pure."""
     city = (row.get("city") or "").strip()
     parts = [p.strip() for p in (row.get("venue"), row.get("address"), city) if p and p.strip()]
     text = ", ".join(parts + ["CA"])
     found = city_in_text(f"{city}, CA") or city_in_text(text)
     if found:
-        return text if REGION_OF_COUNTY.get(found[1]) else None
-    return text if not city and row.get("region") in BAY_REGIONS_WITHOUT_CITY else None
+        in_bay = bool(REGION_OF_COUNTY.get(found[1]))
+    else:
+        in_bay = not city and row.get("region") in BAY_REGIONS_WITHOUT_CITY
+    return text if in_bay or row.get("type") in TRAVEL_TYPES else None
 
 
 def _description(row: dict) -> str | None:

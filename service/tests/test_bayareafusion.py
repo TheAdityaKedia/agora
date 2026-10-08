@@ -43,7 +43,7 @@ def test_parse_start_time_free_text():
 def test_expand_applies_overrides_skips_and_region():
     events = bf.expand(ROWS, date(2026, 2, 1), 140)  # Feb 1 – Jun 20, 2026
     titles = {e.title for e in events}
-    assert "Firehouse 5" not in titles                         # Sacramento: outside the Bay Area
+    assert "Firehouse 5" not in titles                         # Sacramento social: outside the Bay Area
     assert "Alchemy of Fusion: Urban Kiz Connection Games" in titles  # per-date title override
     feb20 = next(e for e in events if e.title.startswith("Alchemy of Fusion: Urban"))
     assert feb20.start_time == datetime(2026, 2, 21, 3, 30, tzinfo=timezone.utc)  # 7:30 PM PST
@@ -60,3 +60,13 @@ def test_expand_applies_overrides_skips_and_region():
 def test_matches():
     assert bf.matches("https://bayareafusioncal.com/")
     assert not bf.matches("https://www.facebook.com/MissionFusion/events")
+
+
+def test_out_of_area_festivals_are_kept_socials_are_not():
+    far = {"title": "Gold Country Unbound", "type": "festival", "city": "Nevada City", "region": "Sacramento",
+           "venue": "Miners Foundry", "address": "325 Spring St", "schedule_type": "occasional",
+           "only_dates": ["2027-07-03"], "created_at": "2026-01-01T00:00:00+00:00", "short_id": "x"}
+    social = {**far, "title": "Firehouse 5", "type": "social"}
+    events = bf.expand([far, social], date(2027, 7, 1), 10)
+    assert [e.title for e in events] == ["Gold Country Unbound"]
+    assert events[0].location == "Miners Foundry, 325 Spring St, Nevada City, CA"
