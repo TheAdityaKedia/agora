@@ -81,3 +81,16 @@ def test_fortmason_strips_flattened_tab_bar():
     for raw, want in cases.items():
         assert fortmason.strip_tabs(raw) == want
     assert fortmason.strip_tabs(None) is None
+
+
+def test_drakes_keeps_bay_area_taprooms_only(monkeypatch):
+    from scrapers import drakes
+    assert drakes.matches("https://events.drinkdrakes.com/")
+    events = [_ev("Trivia", 13, "Drake’s Dealership, 2325 Broadway, Oakland"),
+              _ev("Lotería", 13, "Drake’s Barrel House, 1933 Davis Street, San Leandro"),
+              _ev("Barnflix", 14, "Drake’s: The Barn, 985 Riverfront Street, West Sacramento")]
+    calls = []
+    monkeypatch.setattr(tribe_events, "scrape_events",
+                        lambda base, **kw: calls.append((base, kw["fallback_location"])) or events)
+    assert [e.title for e in drakes.scrape()] == ["Trivia", "Lotería"]
+    assert calls == [(drakes.SITE_BASE, drakes.ADDRESS)]
