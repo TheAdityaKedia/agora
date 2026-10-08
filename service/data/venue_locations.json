@@ -278,6 +278,9 @@
     "artogether center, 1200 harrison street, oakland": {
       "venue": "artogether"
     },
+    "athletic playground, 4770 san pablo ave, emeryville, ca": {
+      "venue": "athletic-playground"
+    },
     "august hall, 420 mason st, san francisco, ca": {
       "venue": "august-hall"
     },
@@ -306,6 +309,9 @@
     },
     "berkeley rep, 2025 addison st, berkeley, ca": {
       "venue": "berkeley-rep"
+    },
+    "berkeley yoga center, 2121 bonar st, berkeley, ca": {
+      "venue": "berkeley-yoga-center"
     },
     "bimbo's 365 club, 1025 columbus ave, san francisco, ca": {
       "venue": "bimbos-365-club"
@@ -413,6 +419,22 @@
     "buzzworks, 365 11th st, san francisco, ca": {
       "venue": "buzzworks"
     },
+    "cal performances, uc berkeley, berkeley, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2027-03-04",
+          "title": "Cal Performances’ 2027 Gala",
+          "url": "https://calperformances.org/events/2026-27/special-events/cal-performances-2027-gala/"
+        },
+        "first_seen": "2026-10-08",
+        "last_tried": "2026-10-08",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Cal Performances"
+        ]
+      }
+    },
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
     },
@@ -505,6 +527,9 @@
     },
     "curran theatre, 445 geary st, san francisco": {
       "venue": "curran-theatre"
+    },
+    "dance boulevard, 1824 hillsdale ave, san jose, ca": {
+      "venue": "dance-boulevard"
     },
     "davies symphony hall, 201 van ness ave., san francisco": {
       "venue": "louise-m-davies-symphony-hall"
@@ -618,6 +643,22 @@
     "festa wine & cocktail lounge - karaoke, 1825 post street, san francisco, 94115, san francisco, ca": {
       "room": "Karaoke",
       "venue": "festa-wine-cocktail-lounge"
+    },
+    "first church, berkeley, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2027-04-16",
+          "title": "The Tallis Scholars; Peter Phillips, director: Slings and Arrows…",
+          "url": "https://calperformances.org/events/2026-27/early-music/the-tallis-scholars-peter-phillips-director-slings-and-arrows/"
+        },
+        "first_seen": "2026-10-08",
+        "last_tried": "2026-10-08",
+        "reason": "map result 'First Church of Christ Scientist' doesn't match the name or street number",
+        "sources": [
+          "Cal Performances"
+        ]
+      }
     },
     "first congregational church of berkeley, 2345 channing way, berkeley, ca": {
       "venue": "first-congregational-church-of-berkeley"
@@ -878,6 +919,9 @@
     "lost marbles brewpub, 2202 de la vina street, san francisco, ca": {
       "venue": "lost-marbles-brewpub"
     },
+    "luna del soul, 822 cassia st, redwood city, ca": {
+      "venue": "luna-del-soul"
+    },
     "mad oak": {
       "venue": "mad-oak-bar-n-yard"
     },
@@ -940,6 +984,9 @@
     },
     "medicine for nightmares, 3036 24th st, san francisco, ca": {
       "venue": "medicine-for-nightmares"
+    },
+    "melifolla studio, 1339 mission st, san francisco, ca": {
+      "venue": "melifolla-studio"
     },
     "memorial auditorium, 551 jane stanford way, stanford, ca": {
       "venue": "memorial-auditorium-stanford"
@@ -1204,6 +1251,9 @@
     "pier 45, san francisco, ca": {
       "venue": "pier-45"
     },
+    "polish club, 3040 22nd st, san francisco, ca": {
+      "venue": "polish-club-of-san-francisco"
+    },
     "potrero del sol park (la raza), portrero avenue and 25th street, san francisco, ca": {
       "venue": "potrero-del-sol-park"
     },
@@ -1224,6 +1274,9 @@
     },
     "red tail, 545 irving st, san francisco, ca": {
       "venue": "the-red-tail"
+    },
+    "revival hall, 4799 shattuck ave, oakland, ca": {
+      "venue": "revival-hall"
     },
     "rick & roxy's, 2131 lombard street, san francisco, 94123, san francisco, ca": {
       "venue": "rick-roxys"
@@ -1495,6 +1548,22 @@
     },
     "standard deviant brewing, 280 14th st, san francisco, ca": {
       "venue": "standard-deviant"
+    },
+    "stanford live, stanford university, stanford, ca": {
+      "pending": {
+        "events": 89,
+        "example": {
+          "date": "2026-10-09",
+          "title": "Slightly Stoopid",
+          "url": "https://live.stanford.edu/events/26-frost/slightly-stoopid/"
+        },
+        "first_seen": "2026-10-08",
+        "last_tried": "2026-10-08",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Stanford Live"
+        ]
+      }
     },
     "stanford memorial church, 450 jane stanford way, stanford, ca": {
       "venue": "stanford-memorial-church"
