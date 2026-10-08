@@ -393,6 +393,20 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "26th-ave-cabrillo-st": {
+      "added": "2026-10-08",
+      "address": "26th Ave & Cabrillo St, San Francisco, CA 94121",
+      "evidence": [
+        "owner review: a street corner (Partiful block clean-up)",
+        "map: shared node of 26th Avenue and Cabrillo Street"
+      ],
+      "lat": 37.774391,
+      "lng": -122.485414,
+      "name": "26th Ave & Cabrillo St",
+      "precision": "street",
+      "region": "sf",
+      "status": "verified"
+    },
     "2831-mission-st": {
       "added": "2026-10-02",
       "address": "2831 Mission Street, San Francisco, CA 94110",
@@ -1544,6 +1558,21 @@
       "osm": "way/290021225",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "bow-n-arrow-clothing": {
+      "added": "2026-10-08",
+      "address": "2200 Petaluma Blvd N, Unit 600, Petaluma, CA 94952",
+      "evidence": [
+        "owner review: unit 600 at Petaluma Village Premium Outlets (2200 Petaluma Blvd N)",
+        "map: 2200 Petaluma Boulevard North (way/383773854)"
+      ],
+      "lat": 38.257914,
+      "lng": -122.65074,
+      "name": "Bow N Arrow Clothing",
+      "osm": "way/383773854",
+      "precision": "building",
+      "region": "northbay",
       "status": "verified"
     },
     "brava-mainstage": {
@@ -5453,6 +5482,20 @@
       "region": "sf",
       "status": "auto"
     },
+    "scott-st-page-st": {
+      "added": "2026-10-08",
+      "address": "Scott St & Page St, San Francisco, CA 94117",
+      "evidence": [
+        "owner review: a street corner (Partiful line dancing)",
+        "map: shared node of Scott Street and Page Street"
+      ],
+      "lat": 37.77242,
+      "lng": -122.435584,
+      "name": "Scott St & Page St",
+      "precision": "street",
+      "region": "sf",
+      "status": "verified"
+    },
     "sfjazz-center": {
       "added": "2026-10-02",
       "address": "201 Franklin Street, San Francisco, CA 94102",
@@ -5900,6 +5943,21 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "taco-bell-cantina-pacifica": {
+      "added": "2026-10-08",
+      "address": "5200 Coast Hwy, Pacifica, CA 94044",
+      "evidence": [
+        "owner review: 5200 Coast Hwy is the Taco Bell Cantina on Pacifica State Beach",
+        "map: Taco Bell Cantina (way/1292202052)"
+      ],
+      "lat": 37.597185,
+      "lng": -122.503768,
+      "name": "Taco Bell Cantina Pacifica",
+      "osm": "way/1292202052",
+      "precision": "building",
+      "region": "peninsula",
       "status": "verified"
     },
     "tally-ho-books": {

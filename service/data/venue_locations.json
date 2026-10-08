@@ -85,26 +85,7 @@
       "venue": "2428-whipple-rd"
     },
     "26th ave & cabrillo st, san francisco, ca": {
-      "pending": {
-        "events": 1,
-        "example": {
-          "date": "2026-12-06",
-          "title": "Block Clean Up",
-          "url": "https://partiful.com/e/lmqFIxmMnxs72QxkbaBj"
-        },
-        "first_seen": "2026-10-07",
-        "last_tried": "2026-10-07",
-        "reason": "no map result in the Bay Area",
-        "sources": [
-          "Partiful"
-        ],
-        "suggestion": {
-          "city": "San Francisco",
-          "kind": "venue",
-          "name": "26th Ave & Cabrillo St",
-          "street_address": "26th Ave & Cabrillo St"
-        }
-      }
+      "venue": "26th-ave-cabrillo-st"
     },
     "2831 mission st, san francisco, ca": {
       "venue": "2831-mission-st"
@@ -179,25 +160,7 @@
       "venue": "504-balboa-st"
     },
     "5200 coast hwy, pacifica, ca": {
-      "pending": {
-        "events": 1,
-        "example": {
-          "date": "2026-10-17",
-          "title": "Tacobell Ultra Marathon",
-          "url": "https://partiful.com/e/tOzTNvmV9Fmerww4P3Tu"
-        },
-        "first_seen": "2026-10-07",
-        "last_tried": "2026-10-07",
-        "reason": "text says Pacifica (San Mateo County), map result 'Coast Highway' is in Sonoma County",
-        "sources": [
-          "Partiful"
-        ],
-        "suggestion": {
-          "city": "Pacifica",
-          "kind": "venue",
-          "street_address": "5200 Coast Hwy"
-        }
-      }
+      "venue": "taco-bell-cantina-pacifica"
     },
     "524 union, 524 union st, san francisco": {
       "venue": "524-union"
@@ -433,32 +396,7 @@
       "venue": "bottoms-up"
     },
     "bow n arrow clothing, 2200 petaluma blvd n, unit 600, petaluma, ca": {
-      "pending": {
-        "events": 1,
-        "example": {
-          "date": "2026-10-25",
-          "title": "★ treat or trinkets! ★",
-          "url": "https://partiful.com/e/gLvlO6uNZhA5HyoASulc"
-        },
-        "first_seen": "2026-10-07",
-        "last_tried": "2026-10-07",
-        "reason": "no map result in the Bay Area",
-        "sources": [
-          "Partiful"
-        ],
-        "suggestion": {
-          "city": "Petaluma",
-          "kind": "venue",
-          "map": {
-            "label": "Petaluma Boulevard North",
-            "lat": 38.247962,
-            "lng": -122.645622,
-            "osm": "way/1074986518"
-          },
-          "name": "Bow N Arrow Clothing",
-          "street_address": "2200 Petaluma Blvd N, Unit 600"
-        }
-      }
+      "venue": "bow-n-arrow-clothing"
     },
     "brava cabaret, 2781 24th street, san francisco, ca": {
       "venue": "brava-mainstage"
@@ -1266,25 +1204,7 @@
       "venue": "scopo-divino"
     },
     "scott st & page st, san francisco, ca": {
-      "pending": {
-        "events": 1,
-        "example": {
-          "date": "2026-10-11",
-          "title": "🤠🇺🇸 FREE Line Dancing w/ LHLD!💃🕺🪩",
-          "url": "https://partiful.com/e/IqsIJvhTKG6x2Fa2xBqc"
-        },
-        "first_seen": "2026-10-07",
-        "last_tried": "2026-10-07",
-        "reason": "no map result in the Bay Area",
-        "sources": [
-          "Partiful"
-        ],
-        "suggestion": {
-          "city": "San Francisco",
-          "kind": "not_a_place",
-          "name": "Scott St & Page St"
-        }
-      }
+      "venue": "scott-st-page-st"
     },
     "sfjazz center — davies symphony hall": {
       "room": "Davies Symphony Hall",
