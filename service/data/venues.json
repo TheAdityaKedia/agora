@@ -985,6 +985,22 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "athletic-playground": {
+      "added": "2026-10-08",
+      "address": "4770 San Pablo Ave, Emeryville, CA",
+      "evidence": [
+        "map: Athletic Playground in Alameda County (building, node/12219772612)",
+        "text: Emeryville",
+        "name matches"
+      ],
+      "lat": 37.836247,
+      "lng": -122.280781,
+      "name": "Athletic Playground",
+      "osm": "node/12219772612",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "august-hall": {
       "added": "2026-10-07",
       "address": "420 Mason Street, San Francisco, CA 94102",
@@ -1192,6 +1208,23 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "berkeley-yoga-center": {
+      "added": "2026-10-08",
+      "address": "2121 Bonar Street, Berkeley, CA 94702",
+      "evidence": [
+        "map: Berkeley Yoga Center in Alameda County (building, node/2443760063)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.868203,
+      "lng": -122.287055,
+      "name": "Berkeley Yoga Center",
+      "osm": "node/2443760063",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "bernal-heights-branch-library": {
       "added": "2026-10-02",
@@ -2065,6 +2098,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "dance-boulevard": {
+      "added": "2026-10-08",
+      "address": "1824 Hillsdale Avenue, San Jose, CA 95124",
+      "evidence": [
+        "map: Dance Boulevard in Santa Clara County (building, node/6286794114)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.262142,
+      "lng": -121.917874,
+      "name": "Dance Boulevard",
+      "osm": "node/6286794114",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "dawn-club": {
       "added": "2026-10-02",
@@ -3822,6 +3872,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "luna-del-soul": {
+      "added": "2026-10-08",
+      "address": "822 Cassia Street, Redwood City, CA 94063",
+      "evidence": [
+        "map: 822 in San Mateo County (building, way/8936188)",
+        "text: Redwood City",
+        "street number matches"
+      ],
+      "lat": 37.48634,
+      "lng": -122.22274,
+      "name": "Luna del Soul",
+      "osm": "way/8936188",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
+    },
     "mabuhay-gardens": {
       "added": "2026-10-02",
       "address": "435 Broadway, San Francisco, CA 94113",
@@ -4068,6 +4134,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "melifolla-studio": {
+      "added": "2026-10-08",
+      "address": "1339 Mission Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1339 in San Francisco County (building, way/252570896)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.775622,
+      "lng": -122.415088,
+      "name": "Melifolla Studio",
+      "osm": "way/252570896",
+      "possible_duplicates": [
+        "st-josephs-art-society"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "memorial-auditorium-stanford": {
       "added": "2026-10-07",
@@ -5356,6 +5441,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "polish-club-of-san-francisco": {
+      "added": "2026-10-08",
+      "address": "3040 22nd Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Polish Club of San Francisco in San Francisco County (building, way/261247832)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.755831,
+      "lng": -122.41528,
+      "name": "Polish Club of San Francisco",
+      "osm": "way/261247832",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "portola-branch-library": {
       "added": "2026-10-02",
       "address": "380 Bacon Street, San Francisco, CA 94134",
@@ -5503,6 +5605,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "revival-hall": {
+      "added": "2026-10-08",
+      "address": "4799 Shattuck Avenue, Oakland, CA 94609",
+      "evidence": [
+        "map: Revival Hall in Alameda County (building, way/279193365)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.834999,
+      "lng": -122.264154,
+      "name": "Revival Hall",
+      "osm": "way/279193365",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "richmond-branch-san-francisco-public-library": {
       "added": "2026-10-02",
@@ -6425,6 +6544,22 @@
       "precision": "building",
       "region": "northbay",
       "status": "verified"
+    },
+    "the-barn": {
+      "added": "2026-10-08",
+      "address": "6731 Sebastopol Avenue, Sebastopol, CA 95472",
+      "evidence": [
+        "map: The Barn in Sonoma County (building, node/13736721663)",
+        "text: Sebastopol",
+        "name matches"
+      ],
+      "lat": 38.402544,
+      "lng": -122.819348,
+      "name": "The Barn",
+      "osm": "node/13736721663",
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
     },
     "the-bitter-end": {
       "added": "2026-10-02",
