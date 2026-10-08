@@ -3161,6 +3161,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "harvey-milk-photo-center": {
+      "added": "2026-10-08",
+      "address": "50 Scott Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Harvey Milk Photo Center in San Francisco County (building, node/13233207936)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.769506,
+      "lng": -122.43448,
+      "name": "Harvey Milk Photo Center",
+      "osm": "node/13233207936",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "hearst-greek-theatre": {
       "added": "2026-10-07",
       "address": "2001 Gayley Rd, Berkeley, CA 94720",
