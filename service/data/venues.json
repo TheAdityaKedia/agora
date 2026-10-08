@@ -23,6 +23,7 @@
     "Cobb's Comedy Club": "sf",
     "Commonwealth Club": "sf",
     "Drake's Brewing": "eastbay",
+    "EastSide Arts Alliance": "eastbay",
     "El Rio": "sf",
     "F8": "sf",
     "Fabulosa Books": "sf",
@@ -45,10 +46,14 @@
     "New Conservatory Theatre Center": "sf",
     "Noe Valley Books": "sf",
     "Oakland Art Murmur": "eastbay",
+    "Oakland Asian Cultural Center": "eastbay",
     "Oakland Museum of California": "eastbay",
+    "Oakland Public Library": "eastbay",
     "Oakland Theater Project": "eastbay",
+    "Oakland United Beerworks": "eastbay",
     "Omnivore Books on Food": "sf",
     "Palace of Fine Arts Theatre": "sf",
+    "Paramount Theatre": "eastbay",
     "Phoenix Theater (Petaluma)": "northbay",
     "Presidio Theatre": "sf",
     "Punch Line San Francisco": "sf",
@@ -709,6 +714,20 @@
       "osm": "way/158468955",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "african-american-museum-and-library-at-oakland": {
+      "added": "2026-10-08",
+      "address": "659 14th Street, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch AAA centre point"
+      ],
+      "lat": 37.806117,
+      "lng": -122.276332,
+      "name": "African American Museum and Library at Oakland",
+      "precision": "building",
+      "region": "eastbay",
       "status": "verified"
     },
     "alamo-drafthouse-cinema": {
@@ -4584,6 +4603,35 @@
       "region": "sf",
       "status": "verified"
     },
+    "oakland-asian-cultural-center": {
+      "added": "2026-10-08",
+      "address": "388 9th St #290, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland sprint source venue",
+        "map: Oakland Asian Cultural Center (node/3992959602)"
+      ],
+      "lat": 37.80065,
+      "lng": -122.27087,
+      "name": "Oakland Asian Cultural Center",
+      "osm": "node/3992959602",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "oakland-main-library": {
+      "added": "2026-10-08",
+      "address": "125 14th Street, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch OHR centre point"
+      ],
+      "lat": 37.80094,
+      "lng": -122.263876,
+      "name": "Oakland Main Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
     "oakland-museum-of-california": {
       "added": "2026-10-05",
       "address": "1000 Oak Street, Oakland, CA 94607",
@@ -4614,6 +4662,21 @@
       "lng": -122.270319,
       "name": "Oakland Photo Workshop",
       "osm": "node/10019085237",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "oakland-united-beerworks": {
+      "added": "2026-10-08",
+      "address": "262 2nd St, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland sprint source venue",
+        "map: Oakland United Beerworks (node/8400170781)"
+      ],
+      "lat": 37.794517,
+      "lng": -122.271994,
+      "name": "Oakland United Beerworks",
+      "osm": "node/8400170781",
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
@@ -4688,6 +4751,230 @@
       "osm": "node/3454181858",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "opl-81st-avenue-branch": {
+      "added": "2026-10-08",
+      "address": "1021 81st Avenue, Oakland, CA 94621",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch 81A centre point"
+      ],
+      "lat": 37.753591,
+      "lng": -122.185552,
+      "name": "81st Avenue Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-asian-branch": {
+      "added": "2026-10-08",
+      "address": "388 Ninth Street, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch ASA centre point"
+      ],
+      "lat": 37.800738,
+      "lng": -122.271158,
+      "name": "Asian Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-brookfield-branch": {
+      "added": "2026-10-08",
+      "address": "9255 Edes Avenue, Oakland, CA 94603",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch BRA centre point"
+      ],
+      "lat": 37.737336,
+      "lng": -122.188573,
+      "name": "Brookfield Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-dimond-branch": {
+      "added": "2026-10-08",
+      "address": "3565 Fruitvale Avenue, Oakland, CA 94602",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch DMA centre point"
+      ],
+      "lat": 37.801459,
+      "lng": -122.216039,
+      "name": "Dimond Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-eastmont-branch": {
+      "added": "2026-10-08",
+      "address": "7200 Bancroft Avenue, Oakland, CA 94605",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch EAA centre point"
+      ],
+      "lat": 37.768785,
+      "lng": -122.177664,
+      "name": "Eastmont Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-elmhurst-branch": {
+      "added": "2026-10-08",
+      "address": "1427 88th Avenue, Oakland, CA 94621",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch ELA centre point"
+      ],
+      "lat": 37.751568,
+      "lng": -122.174915,
+      "name": "Elmhurst Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-fruitvale-branch": {
+      "added": "2026-10-08",
+      "address": "3301 East 12th Street, Oakland, CA 94601",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch CCA centre point"
+      ],
+      "lat": 37.77606,
+      "lng": -122.225006,
+      "name": "Fruitvale Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-golden-gate-branch": {
+      "added": "2026-10-08",
+      "address": "5606 San Pablo Avenue, Oakland, CA 94608",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch GGA centre point"
+      ],
+      "lat": 37.839193,
+      "lng": -122.282203,
+      "name": "Golden Gate Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-lakeview-branch": {
+      "added": "2026-10-08",
+      "address": "550 El Embarcadero, Oakland, CA 94610",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch LVA centre point"
+      ],
+      "lat": 37.8092,
+      "lng": -122.248949,
+      "name": "Lakeview Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-martin-luther-king-jr-branch": {
+      "added": "2026-10-08",
+      "address": "6833 International Boulevard, Oakland, CA 94621",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch KGA centre point"
+      ],
+      "lat": 37.760606,
+      "lng": -122.19079,
+      "name": "Martin Luther King Jr. Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-melrose-branch": {
+      "added": "2026-10-08",
+      "address": "4805 Foothill Boulevard, Oakland, CA 94601",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch MEA centre point"
+      ],
+      "lat": 37.772432,
+      "lng": -122.207614,
+      "name": "Melrose Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-montclair-branch": {
+      "added": "2026-10-08",
+      "address": "1687 Mountain Boulevard, Oakland, CA 94611",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch MOA centre point"
+      ],
+      "lat": 37.831983,
+      "lng": -122.214111,
+      "name": "Montclair Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-piedmont-avenue-branch": {
+      "added": "2026-10-08",
+      "address": "80 Echo Avenue, Oakland, CA 94611",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch PMA centre point"
+      ],
+      "lat": 37.827844,
+      "lng": -122.248151,
+      "name": "Piedmont Avenue Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-rockridge-branch": {
+      "added": "2026-10-08",
+      "address": "5366 College Avenue, Oakland, CA 94618",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch RRA centre point"
+      ],
+      "lat": 37.839908,
+      "lng": -122.251076,
+      "name": "Rockridge Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-temescal-branch": {
+      "added": "2026-10-08",
+      "address": "5205 Telegraph Avenue, Oakland, CA 94609",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch TMA centre point"
+      ],
+      "lat": 37.8382,
+      "lng": -122.262509,
+      "name": "Temescal Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-west-oakland-branch": {
+      "added": "2026-10-08",
+      "address": "1801 Adeline Street, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch WAS centre point"
+      ],
+      "lat": 37.812925,
+      "lng": -122.285292,
+      "name": "West Oakland Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
       "status": "verified"
     },
     "oreillys-pub": {
