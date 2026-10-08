@@ -183,13 +183,12 @@ on BAR (a rough volume signal, not a full inventory).
 - **Luther Burbank Center for the Arts** (Santa Rosa, North Bay) — https://lutherburbankcenter.org/  *(27)*
 - **Lesher Center for the Arts** (Walnut Creek) — https://www.lesherartscenter.org/  *(16)*
 - **Bankhead Theater / Livermore Valley PAC** (Livermore) — https://www.livermorearts.org/  *(11)*
-- **Paramount Theatre** (Oakland) — https://www.paramountoakland.org/  *(classic films + concerts; 11)*
 - **San Jose Center for the Performing Arts / San Jose Theaters** (San Jose) — https://sanjosetheaters.org/  *(6)*
 - **Mountain View Center for the Performing Arts** (Mountain View) — https://mvcpa.com/  *(TheatreWorks; 2)*
 - **Hillbarn Theatre** (Foster City) — https://hillbarntheatre.org/  *(5)*
 
 ### Comedy (genre gap in our current sources)
-- **FLUID510** (Oakland) — https://fluid510.com/  *(1)*
+- *(FLUID510, Oakland: now a restaurant/party venue, no event calendar — 2026-10.)*
 
 ### Theater
 - **Shotgun Players / Ashby Stage** (Berkeley) — https://shotgunplayers.org/  *(2)*
@@ -213,6 +212,7 @@ on BAR (a rough volume signal, not a full inventory).
 Platform signatures found but not yet built (each should be a thin wrapper):
 - **Live Nation JSON-LD** (`scrapers/livenation.py`): none left; Fox Oakland,
   Greek Theatre, Paramount use other templates (Ticketmaster widgets, no JSON-LD).
+  Paramount is onboarded (`paramount.py`, Carbonhouse `events_ajax`).
 - **Squarespace events collections** to locate (no `eventlist` on the obvious
   pages yet): GAPA, Diaspora Arts Connection, Ruth's Table, afikra, O2 Artisans,
   Marin MOCA, Babylon Salon.
@@ -220,6 +220,31 @@ Platform signatures found but not yet built (each should be a thin wrapper):
   EnActe Arts (EventON plugin).
 - Datacenter-IP 403s (likely to fail on CI too): BAMPFA, FAMSF, Freight &
   Salvage, Gray Area, SFFILM, SFIAF, Lesher Center.
+
+### Oakland spike (2026-10-08)
+
+Onboarded: Paramount Theatre, Oakland Public Library (BiblioCommons API),
+Oakland Asian Cultural Center, Oakland United Beerworks, EastSide Arts
+Alliance, Drake's Brewing (Dealership + Barrel House). Ruled out or parked:
+
+- **No usable calendar right now:** The New Parish (TicketWeb plugin in
+  calendar mode — its `get_events_for_calendar` AJAX returns 0 events), Pro
+  Arts, Piedmont Piano, Temescal Brewing, Original Pattern, OIGC (Squarespace
+  pages with no upcoming events), The Crucible (Tribe API empty), Walden Pond
+  Books (news page, not events), East Bay Booksellers (JS-only).
+- **Not an Oakland events source:** Children's Fairyland (daily opening hours
+  + puppet-show schedule, kid-only), AXIS Dance (classes at a Berkeley
+  studio), Oakland Symphony (all dates are at the Paramount — covered), Jack
+  London Square (dates only in prose; lists past concerts), theflightdeck.org
+  (domain now a spam site), FLUID510 (restaurant).
+- **Blocked:** Visit Oakland (Simpleview API behind Akamai "Access Denied"),
+  Chabot Space & Science Center (403 from a datacenter IP).
+- **Parked, needs more work:** Starline Social Club (RHP Events plugin;
+  grid rendered client-side, endpoint not found), Eli's Mile High Club, The
+  Alley, Oakland LGBTQ Center (Wix), Oakland Zoo (JS).
+- **Unreachable from the agent sandbox** (proxy 502 — retry from a normal
+  network or CI): Crybaby, Leo's, Kingman's, Octopus Literary Salon, Somar,
+  Studio Grand, Chapel of the Chimes, Laurel Book Store, Federation Brewing.
 
 ## Notable aggregators seen (not venues — reference/competitor scan)
 

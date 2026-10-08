@@ -23,7 +23,8 @@ from scrapers import (
     atasite, ybgfestival, omca, jccsf, fortmason, sfmasonic, cobbs, punchline,
     glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
     f8, diasporaarts, stanfordlive, castro, foxoakland, greekberkeley,
-    bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, masala,
+    bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, masala, drakes,
+    paramount, oaklandlibrary, oacc, oaklandunited, eastsidearts,
 )
 from scrapers.base import RawEvent
 
@@ -46,7 +47,8 @@ SCRAPERS = [
     atasite, ybgfestival, omca, jccsf, fortmason, sfmasonic, cobbs, punchline,
     glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
     f8, diasporaarts, stanfordlive, castro, foxoakland, greekberkeley,
-    bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, masala,
+    bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, drakes,
+    paramount, oaklandlibrary, oacc, oaklandunited, eastsidearts,
 ]
 
 
