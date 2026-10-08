@@ -24,6 +24,7 @@ from scrapers import (
     glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
     f8, diasporaarts, stanfordlive, castro, foxoakland, greekberkeley,
     bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, masala, drakes,
+    paramount, oaklandlibrary, oacc, oaklandunited, eastsidearts,
 )
 from scrapers.base import RawEvent
 
@@ -47,6 +48,7 @@ SCRAPERS = [
     glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
     f8, diasporaarts, stanfordlive, castro, foxoakland, greekberkeley,
     bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, drakes,
+    paramount, oaklandlibrary, oacc, oaklandunited, eastsidearts,
 ]
 
 
