@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T17:26:08.507147+00:00",
+  "generated_at": "2026-10-08T17:48:29.147684+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -1705,6 +1705,14 @@
       "lat": 37.78834,
       "lng": -122.43358,
       "neighborhood": "pacific-heights"
+    },
+    "harvey-milk-photo-center": {
+      "name": "Harvey Milk Photo Center",
+      "region": "sf",
+      "address": "50 Scott Street, San Francisco, CA 94114",
+      "lat": 37.76951,
+      "lng": -122.43448,
+      "neighborhood": "haight-ashbury"
     },
     "hearst-greek-theatre": {
       "name": "Hearst Greek Theatre",
@@ -3707,6 +3715,24 @@
       "region": "eastbay",
       "room": "TeenZone",
       "summary": "Let Books Be: Protect the Freedom to Read Celebrate your freedom to read at the 2nd Annual Banned Books Teen Read-a-thon.",
+      "more": true
+    },
+    {
+      "id": "82c653cb-8649-48b0-8177-ec72e6b57411",
+      "title": "Haines Gallery: 250 Years, Indigenous Futures",
+      "start_time": "2026-10-08T10:30:00+00:00",
+      "location": "Fort Mason Center for Arts & Culture, 2 Marina Blvd, San Francisco, CA 94123",
+      "url": "https://fortmason.org/event/haines-gallery-250-years-indigenous-futures/2026-10-08/",
+      "image_url": "https://fortmason.org/wp-content/uploads/2026/08/haines_indigenous_kahlhamer_1800x1278.jpg",
+      "sources": [
+        "Fort Mason Center"
+      ],
+      "types": [],
+      "topics": [],
+      "cost": "unknown",
+      "venue": "fort-mason-center-for-arts-culture",
+      "region": "sf",
+      "summary": "250 Years, Indigenous Futures Presented By Haines Gallery As the U.S. marks its 250th anniversary, Haines Gallery presents 250 Years, Indigenous Futures , a group exhibition",
       "more": true
     },
     {
@@ -12375,6 +12401,32 @@
       "more": true
     },
     {
+      "id": "288ecbfb-227d-44bd-8c66-c14c94b7337b",
+      "title": "Activity: Chess, Chinese Chess, Chinese Checker and Go",
+      "start_time": "2026-10-10T21:00:00+00:00",
+      "location": "SFPL — Visitacion Valley",
+      "url": "https://sfpl.org/events/2026/10/10/activity-chess-chinese-chess-chinese-checker-and-go",
+      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-09/32225.png?h=b530fb14&itok=A-yrvazo",
+      "sources": [
+        "San Francisco Public Library"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "games"
+      ],
+      "cost": "free",
+      "venue": "visitacion-valley-branch-library",
+      "region": "sf",
+      "room": "Visitacion Valley",
+      "summary": "Enjoy a relaxing afternoon of self-directed play with Chess, Chinese Chess, Chinese Checkers, and Go.",
+      "more": true
+    },
+    {
       "id": "36e16ab6-5bf8-4bb6-a054-8290c987e856",
       "title": "Left Coast Writers® Laurie McAndish King - Wild Thing, I Think I Love You!",
       "start_time": "2026-10-10T21:00:00+00:00",
@@ -19846,6 +19898,30 @@
       "more": true
     },
     {
+      "id": "5dd15ac8-55a7-4d81-8b34-79f9f96ad736",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-10-13T02:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-luvq",
+      "image_url": "https://images.lumacdn.com/uploads/ap/7d8b1bb1-c6ab-4a94-b323-ee26bdc19324.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "If you know about Circling or T-Groups, this is very similar!",
+      "more": true
+    },
+    {
       "id": "7b53f5a3-926f-4bcd-8ef3-c812ff0fb37c",
       "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
       "start_time": "2026-10-13T02:00:00+00:00",
@@ -25338,6 +25414,33 @@
       "venue": "san-francisco-center-for-the-book-sfcb",
       "region": "sf",
       "summary": "FREE, $10-$15 suggested donation Part of Words Around the World Sponsored by Center for the Art of Translation Co-presented with San Francisco Center for the Book Center for the",
+      "more": true
+    },
+    {
+      "id": "9644bf0d-f49d-43dc-b421-0e4ddd2d6756",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-10-15T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-sx8f",
+      "image_url": "https://images.lumacdn.com/uploads/0l/28ebe66c-a1c7-4c65-ad7f-e7d0598018ec.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "Join us for an evening of writing, productivity, and camaraderie at The Commons.",
       "more": true
     },
     {
@@ -34489,6 +34592,31 @@
       "more": true
     },
     {
+      "id": "9c542b34-d1ab-4c56-a995-e86f9b366f53",
+      "title": "San Francisco Photobook Fair",
+      "start_time": "2026-10-17T18:00:00+00:00",
+      "location": "Harvey Milk Photo Center, 50 Scott St, San Francisco, CA 94117",
+      "url": "https://partiful.com/e/LlOxT9SxTOKBXJFlHvG6",
+      "image_url": "https://partiful.imgix.net/external/user/e8AHD3d7OyTfkaZ919Jt/hgDXfyMLjttAMCQql7dFD?w=800&fit=clip",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "photography",
+        "books-authors"
+      ],
+      "cost": "free",
+      "venue": "harvey-milk-photo-center",
+      "region": "sf",
+      "summary": "The San Francisco Photobook Fair will host over 30 tables of publishers and vendors selling and promoting photography books, magazines, and zine publications during a two-day",
+      "more": true
+    },
+    {
       "id": "a2a40ebf-fb28-4118-9e64-2baeeeac5029",
       "title": "Book Club: Flashlight",
       "start_time": "2026-10-17T18:00:00+00:00",
@@ -35032,6 +35160,31 @@
       "more": true
     },
     {
+      "id": "d77e38ca-9626-4c95-ac20-d8fc657755ab",
+      "title": "ZYZZYVA Movie Matinee with Ingrid Rojas Contreras: Amarcord (35mm)",
+      "start_time": "2026-10-17T19:30:00+00:00",
+      "location": "Roxie Theater, 3117 16th St, San Francisco, CA 94103",
+      "url": "https://roxie.com/film/zyzzyva-movie-matinee-with-ingrid-rojas-contreras-amarcord/",
+      "image_url": "https://roxie.com/wp-content/uploads/2026/04/3-47.jpg",
+      "sources": [
+        "Roxie Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film",
+        "books-authors"
+      ],
+      "cost": "unknown",
+      "venue": "roxie-theater",
+      "region": "sf",
+      "summary": "Co-presented by Zyzzyva Magazine and Litquake, San Francisco’s Literary Festival This year’s Litquake festival will take place October 8th-24th!",
+      "more": true
+    },
+    {
       "id": "e4f9fff2-8d0a-4937-be60-1f5bd014ff88",
       "title": "ZYZZYVA Movie Matinee: Amarcord",
       "start_time": "2026-10-17T19:30:00+00:00",
@@ -35187,6 +35340,31 @@
       "venue": "opl-melrose-branch",
       "region": "eastbay",
       "summary": "Join us every Saturday at 1 p.m. for jewelry making and original decorative craft projects. All materials provided."
+    },
+    {
+      "id": "f242f250-bc72-463e-86b1-4e32db1a3e20",
+      "title": "HOWL-O-WEEN (CUTEST🎃 Party!)\n🐶 🎃 👻 🐶",
+      "start_time": "2026-10-17T20:00:00+00:00",
+      "location": "Alamo Square, Hayes St & Steiner St, San Francisco, CA 94117",
+      "url": "https://partiful.com/e/vL4RHWwdW0xT7PATsrVp",
+      "image_url": "https://partiful.imgix.net/external/user/27gp7LCjrvayxbfkGViCHLPtduP2/ODJhgmRPLmDdd60ZHtj5_?w=800&fit=clip",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "family-kids"
+      ],
+      "cost": "free",
+      "venue": "alamo-square",
+      "region": "sf",
+      "summary": "🎃🐶 HOWL-O-WEEN — SF’s CUTEST Halloween Party!",
+      "more": true
     },
     {
       "id": "6378665c-970f-4cb8-aa5d-9e837a0214a2",
@@ -36044,6 +36222,31 @@
       "venue": "balboa-theatre",
       "region": "sf",
       "summary": "Thirty-four days before she’s sent to prison, notorious Silicon Valley founder Elizabeth Holmes invites a skeptical film crew to document her every move.",
+      "more": true
+    },
+    {
+      "id": "ea6809ce-e435-4bd3-be0c-ed9fb1b49caa",
+      "title": "San Francisco Cat Walk - Mission",
+      "start_time": "2026-10-17T22:15:00+00:00",
+      "location": null,
+      "url": "https://partiful.com/e/5aa3kWz1nZSwG6D3zICX",
+      "image_url": "https://partiful.imgix.net/external/user/amPCuawxF8OdCEDWuVwf2rjR0Uo2/vUaQ-5xUvW29l4hu_uep3?w=800&fit=clip",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free",
+      "venue": null,
+      "region": null,
+      "summary": "Join for a slow, free afternoon stroll through the Mission, stopping at the homes of window cats who have agreed to star in the walk.",
       "more": true
     },
     {
@@ -42436,6 +42639,31 @@
       "more": true
     },
     {
+      "id": "648bc370-fee0-474c-acf1-05a6707dda50",
+      "title": "How A Strong Public Defense Contributes to Public Safety: In Conversation with San Francisco Public Defender Mano Raju",
+      "start_time": "2026-10-20T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=92438",
+      "image_url": "https://mahina.b-cdn.net/media/October%20Ev_1791426984866.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "politics"
+      ],
+      "cost": "free",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "The SF Public Defender’s Office represents over 20,000 San Franciscans in criminal cases each year.",
+      "more": true
+    },
+    {
       "id": "7b9cf6e4-3eeb-4997-bae9-e52cd27030eb",
       "title": "The Psychology of Climate Change: Why We Struggle to Act",
       "start_time": "2026-10-20T02:00:00+00:00",
@@ -42698,6 +42926,30 @@
       "venue": "calvary-presbyterian",
       "region": "sf",
       "summary": "We are honored to welcome Bonnie Garmus to Calvary Presbyterian for an evening celebrating the release of Peck & Peck.",
+      "more": true
+    },
+    {
+      "id": "cdb85903-30fc-4dc6-b18f-38e8a926f29e",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-10-20T02:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-mlsx",
+      "image_url": "https://images.lumacdn.com/uploads/vf/d6dca6a0-1efd-4679-8011-7395769c87fe.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "If you know about Circling or T-Groups, this is very similar!",
       "more": true
     },
     {
@@ -47788,6 +48040,33 @@
       "venue": null,
       "region": null,
       "summary": "The Night Library, hosted by Nightlight Society, is a monthly evening for people who want to unwind, read, and connect with other curious minds.",
+      "more": true
+    },
+    {
+      "id": "27a330eb-e20e-41e2-bcf1-a45481566efd",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-10-22T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-rn9p",
+      "image_url": "https://images.lumacdn.com/uploads/lq/3e3ca519-b045-4456-a6e2-fa82f7c738f1.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "Join us for an evening of writing, productivity, and camaraderie at The Commons.",
       "more": true
     },
     {
@@ -55584,6 +55863,30 @@
       "more": true
     },
     {
+      "id": "1c3636ee-e005-4cfb-a17e-f185d93c2f3b",
+      "title": "Vista Francisco, Suver, Cigmund Floyd",
+      "start_time": "2026-10-24T03:00:00+00:00",
+      "location": "The Phoenix Theater, 201 Washington St., Petaluma, CA, Petaluma, CA",
+      "url": "https://www.eventbrite.com/e/vista-francisco-suver-cigmund-floyd-tickets-2003086941965",
+      "image_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1195306918%2F308989365325%2F1%2Foriginal.20261007-190219?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.527&fp-y=0.31&s=2630a44db9afdcf66577ef7a067f8adc",
+      "sources": [
+        "Phoenix Theater (Petaluma)"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "punk-metal",
+        "rock-indie"
+      ],
+      "cost": "unknown",
+      "venue": "phoenix-theater",
+      "region": "northbay",
+      "summary": "Vista Francisco, Suver and Cigmund Floyd at the Phoenix!"
+    },
+    {
       "id": "271fde78-bd41-4ee4-a8c5-4a84a33fa40e",
       "title": "SLIFT",
       "start_time": "2026-10-24T03:00:00+00:00",
@@ -61272,6 +61575,32 @@
       "more": true
     },
     {
+      "id": "37fbf180-a457-4ee2-bbb3-b17887601213",
+      "title": "Mystic Songs of India - A Workshop Exploring the Wisdom & Poetry of Kabir Through Folk Songs with Priyal Maheshwari",
+      "start_time": "2026-10-25T16:00:00+00:00",
+      "location": "The Berkeley Alembic (Sol), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145034350",
+      "image_url": "https://images.momence.com/h/71603/session-banner/97c86bc1-c9f2-47c7-bde6-94966f401293.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "poetry",
+        "world-music"
+      ],
+      "cost": "unknown",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Sol",
+      "summary": "In this immersive workshop, we explore the deeper esoteric meanings within the poetry of Indian mystic saints such as Kabir and Guru Nanak through the indigenous folk songs of the",
+      "more": true
+    },
+    {
       "id": "4ccb7aef-84f2-4dd5-a63b-bc22ac75fc13",
       "title": "The Commons Public Hours ☕",
       "start_time": "2026-10-25T16:00:00+00:00",
@@ -64805,6 +65134,30 @@
       "more": true
     },
     {
+      "id": "941ad9d8-2224-41f4-b49b-9d5219562ebf",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-10-27T02:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-4qq8",
+      "image_url": "https://images.lumacdn.com/uploads/2g/26213ef6-a627-44b3-9747-104dac9eb1e6.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "If you know about Circling or T-Groups, this is very similar!",
+      "more": true
+    },
+    {
       "id": "99c638e9-222a-4781-9663-c4f4c1145ca8",
       "title": "Karaoke Night at Question Mark Tavern",
       "start_time": "2026-10-27T02:00:00+00:00",
@@ -66560,6 +66913,35 @@
       "region": "sf",
       "room": "Main",
       "summary": "Practice your Cantonese in a fun, relaxed setting.",
+      "more": true
+    },
+    {
+      "id": "d71aabe1-8f73-4c4d-84fa-74f92eab6897",
+      "title": "When ICE Melts",
+      "start_time": "2026-10-28T01:00:00+00:00",
+      "location": "Roxie Theater, 3117 16th St, San Francisco, CA 94103",
+      "url": "https://roxie.com/?post_type=wp_theatre_prod&p=33867",
+      "image_url": "https://roxie.com/wp-content/uploads/2026/10/2-1.jpg",
+      "sources": [
+        "Roxie Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "cost": "unknown",
+      "venue": "roxie-theater",
+      "region": "sf",
+      "summary": "Director Kip Hedges in person for a post-screening Q&A moderated by SFSU Faculty and CFA member Blanca Missé.",
       "more": true
     },
     {
@@ -68378,6 +68760,34 @@
       "more": true
     },
     {
+      "id": "0bb06ee5-104b-417b-8d9d-a523a67b51b2",
+      "title": "Rewind Presents: The Craft with Live Drag!",
+      "start_time": "2026-10-28T04:15:00+00:00",
+      "location": "Roxie Theater, 3117 16th St, San Francisco, CA 94103",
+      "url": "https://roxie.com/film/rewind-presents-the-craft/",
+      "image_url": "https://roxie.com/wp-content/uploads/2026/08/Untitled-design-1.jpg",
+      "sources": [
+        "Roxie Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "film",
+        "drag"
+      ],
+      "cost": "unknown",
+      "venue": "roxie-theater",
+      "region": "sf",
+      "summary": "With Live Drag by Mary Vice!",
+      "more": true
+    },
+    {
       "id": "b8c782c4-a3c1-4cb4-b584-dd68a26abd2d",
       "title": "Rewind Presents: The Craft",
       "start_time": "2026-10-28T04:15:00+00:00",
@@ -69588,6 +69998,33 @@
       "more": true
     },
     {
+      "id": "5f003795-96a4-4a8a-a69c-c71ec0ad2e6e",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-10-29T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-36h9",
+      "image_url": "https://images.lumacdn.com/uploads/pb/5cd50c2b-7185-4823-8ad7-d24bcf2e317d.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "Join us for an evening of writing, productivity, and camaraderie at The Commons.",
+      "more": true
+    },
+    {
       "id": "701aeb50-ac99-49ce-8b3b-b21275b310ec",
       "title": "Book Club: Mission Bay Reads The Turn of the Screw by Henry James",
       "start_time": "2026-10-29T01:30:00+00:00",
@@ -70146,6 +70583,31 @@
       "venue": "harrys-bar",
       "region": "sf",
       "summary": "Weekly Trivia Night at Harry’s Bar.",
+      "more": true
+    },
+    {
+      "id": "bc275e8c-c0cd-486b-bfc3-c9281c7e6cae",
+      "title": "The Laugh Boat: Local Brews & Free Comedy at Ocean Ale House",
+      "start_time": "2026-10-29T02:00:00+00:00",
+      "location": "Ocean Ale House, 1314 Ocean Avenue, San Francisco, 94112, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/ocean-ale-house",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "free",
+      "venue": "ocean-ale-house",
+      "region": "sf",
+      "summary": "The Laugh Boat: Local Brews & Free Comedy at Ocean Ale House.",
       "more": true
     },
     {
@@ -78647,6 +79109,28 @@
       "region": "sf"
     },
     {
+      "id": "da54ff3a-ee9b-4170-9037-6c70a5f58012",
+      "title": "A Ghostly, Ghastly Get It?! Gameshow",
+      "start_time": "2026-11-01T03:00:00+00:00",
+      "location": "Cobb's Comedy Club, 915 Columbus Ave, San Francisco, CA 94133",
+      "url": "https://www.ticketmaster.com/a-ghostly-ghastly-get-it-gameshow-san-francisco-california-10-31-2026/event/1C0064F5074B301C",
+      "image_url": "https://s1.ticketm.net/dam/e/88b/07d97b06-dc65-4732-b3b5-b08e2f39d88b_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Cobb's Comedy Club"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "cobbs-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "09a333fc-77ef-4f9f-b1bb-4525818389f3",
       "title": "Horror Hi-Fi at Pubic Works San Francisco",
       "start_time": "2026-11-01T04:00:00+00:00",
@@ -85010,6 +85494,31 @@
       "more": true
     },
     {
+      "id": "a7c81562-cc13-4645-b00c-7aec75b6d621",
+      "title": "Wing Wednesday at Underdogs Tres",
+      "start_time": "2026-11-05T00:30:00+00:00",
+      "location": "Underdogs Tres, 1224 9th Avenue, San Francisco, 94122, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/underdogs-tres",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "food-drink"
+      ],
+      "cost": "unknown",
+      "venue": "underdogs-tres",
+      "region": "sf",
+      "summary": "Wing Wednesday at Underdogs Tres.",
+      "more": true
+    },
+    {
       "id": "d2fb19a2-5052-40e3-bb03-a839260fbedb",
       "title": "Teen Advisory Board at Dimond",
       "start_time": "2026-11-05T00:30:00+00:00",
@@ -85321,6 +85830,31 @@
       "more": true
     },
     {
+      "id": "35cb3711-ade7-4195-8f03-8797a505ca94",
+      "title": "Safe Words Comedy & Hot Dogs at Eagle Tavern",
+      "start_time": "2026-11-05T02:00:00+00:00",
+      "location": "Eagle Tavern, 398 12th St, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/eagle-tavern",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "eagle-tavern",
+      "region": "sf",
+      "summary": "Safe Words Comedy & Hot Dogs at Eagle Tavern.",
+      "more": true
+    },
+    {
       "id": "4c735c41-173f-4213-b730-de9cc7dbf209",
       "title": "Mark Danner with Adam Hochschild - Crossing the Rubicon",
       "start_time": "2026-11-05T02:00:00+00:00",
@@ -85344,6 +85878,56 @@
       "venue": "book-passage-corte-madera",
       "region": "northbay",
       "summary": "Essays on fascism, the war on terror, Abu Ghraib, Dick Cheney, the Iraq War, the Bush-Gore and Trump elections, and many other subjects from one of America's foremost political",
+      "more": true
+    },
+    {
+      "id": "4d633fa8-5064-48fd-bd07-4e78d80f310e",
+      "title": "FULL: Workshop: Winter, Wick & Wonder",
+      "start_time": "2026-11-05T02:00:00+00:00",
+      "location": "SFPL — West Portal",
+      "url": "https://sfpl.org/events/2026/11/04/full-workshop-winter-wick-wonder",
+      "image_url": "https://sfpl.org/sites/default/files/styles/thumbnail/public/2026-08/31512.png?h=c3a0d3a2&itok=49F5RT2q",
+      "sources": [
+        "San Francisco Public Library"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "craft"
+      ],
+      "cost": "free",
+      "venue": "west-portal-branch-library",
+      "region": "sf",
+      "room": "West Portal",
+      "summary": "The event and waitlist are full.",
+      "more": true
+    },
+    {
+      "id": "8e97f30a-cf14-47b0-a6d3-35ac132ba4d4",
+      "title": "Trivia Night at Sante Adairius Rustic Ales (Capitola)",
+      "start_time": "2026-11-05T02:00:00+00:00",
+      "location": "103 Kennedy Dr, Capitola, CA 95010",
+      "url": "https://www.rusticales.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free",
+      "venue": null,
+      "region": null,
+      "summary": "Think you're a brainiac?",
       "more": true
     },
     {
@@ -85397,6 +85981,31 @@
       "venue": "book-passage-corte-madera",
       "region": "northbay",
       "summary": "Please join us for our upcoming ​event with Kristen Naiman, co-author of Real Style and Chief Brand Officer at The RealReal.",
+      "more": true
+    },
+    {
+      "id": "a772be91-afa7-44c5-a3a5-9991229b9c3c",
+      "title": "Wednesday Trivia at Patriot House Pub",
+      "start_time": "2026-11-05T02:00:00+00:00",
+      "location": "Patriot House Pub, 2 Embarcadero Center, San Francisco, 94111, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/patriot-house-pub",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "patriot-house-pub",
+      "region": "sf",
+      "summary": "Wednesday Trivia at Patriot House Pub.",
       "more": true
     },
     {
@@ -85533,6 +86142,81 @@
       "more": true
     },
     {
+      "id": "760f908d-1261-4b39-84af-18ae04f531fe",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-11-05T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-k6hd",
+      "image_url": "https://images.lumacdn.com/uploads/de/5105befc-f1f5-417c-b7aa-2099b49714ac.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "Join us for an evening of writing, productivity, and camaraderie at The Commons.",
+      "more": true
+    },
+    {
+      "id": "98cc7321-ca41-4edc-a438-3cbf53351306",
+      "title": "Wednesday Big Table at Specs'",
+      "start_time": "2026-11-05T02:30:00+00:00",
+      "location": "Specs', 12 Saroyan Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/specs",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [],
+      "cost": "free",
+      "venue": "specs-bar",
+      "region": "sf",
+      "summary": "Wednesday Big Table at Specs'.",
+      "more": true
+    },
+    {
+      "id": "afd37fa1-e866-4d86-8522-0ca1c290555e",
+      "title": "Trivia Night at McGee's (Alameda)",
+      "start_time": "2026-11-05T02:30:00+00:00",
+      "location": "1645 Park St, Alameda, CA 94501",
+      "url": "http://www.mcgeesbarandgrill.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "1645-park-st",
+      "region": "eastbay",
+      "summary": "Ready to prove you're the smartest in Alameda?",
+      "more": true
+    },
+    {
       "id": "b48420cb-aa18-4e02-a6c2-f6091864ed19",
       "title": "Paint and Sip- Autumn Charm",
       "start_time": "2026-11-05T02:30:00+00:00",
@@ -85611,6 +86295,32 @@
       "more": true
     },
     {
+      "id": "c9ffd249-e1e1-43de-ad86-8de4e2a90306",
+      "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
+      "start_time": "2026-11-05T02:30:00+00:00",
+      "location": "Festa Wine & Cocktail Lounge - Karaoke, 1825 Post Street, San Francisco, 94115, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/festa-wine-cocktail-lounge-karaoke",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "festa-wine-cocktail-lounge",
+      "region": "sf",
+      "room": "Karaoke",
+      "summary": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke.",
+      "more": true
+    },
+    {
       "id": "ea54122d-8332-4fe0-a5e9-93bb1f1aa53e",
       "title": "Parallel Pursuits Circle",
       "start_time": "2026-11-05T02:30:00+00:00",
@@ -85682,6 +86392,154 @@
       "region": "sf",
       "room": "Z Below",
       "summary": "A Word for Word and Z Space production · Stories by E.L. Doctorow & Tatyana Tolstaya Presented by Word for Word and Z Space Directed by Rotimi Agbabiaka In “Assimilation” by E. L.",
+      "more": true
+    },
+    {
+      "id": "2a2e18dc-3d0a-49f2-be4b-e005d636e43f",
+      "title": "Weekly Trivia Night at Harry’s Bar",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Harry’s Bar, 2020 Fillmore St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/harrys-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "harrys-bar",
+      "region": "sf",
+      "summary": "Weekly Trivia Night at Harry’s Bar.",
+      "more": true
+    },
+    {
+      "id": "2a3526a4-ccc7-422a-9eca-5053aa8acd18",
+      "title": "Trivia Night at Lost Marbles Brewery",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Lost Marbles Brewery, 823 Clement Street, San Francisco, 94118, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lost-marbles-brewery",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "lost-marbles",
+      "region": "sf",
+      "summary": "Trivia Night at Lost Marbles Brewery.",
+      "more": true
+    },
+    {
+      "id": "3472783a-a233-447b-a7b8-7925b23b4ff7",
+      "title": "Trivia Night at Lost Marbles Brewpub",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Lost Marbles Brewpub, 2202 De La Vina Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lost-marbles-brewpub",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free",
+      "venue": "lost-marbles-brewpub",
+      "region": "sf",
+      "summary": "Trivia Night at Lost Marbles Brewpub.",
+      "more": true
+    },
+    {
+      "id": "39f24f56-9451-4530-980a-bcb1e3cb2c48",
+      "title": "Trivia at The Riptide",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "The Riptide, 3639 Taraval Street, San Francisco, 94116, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-riptide",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "Trivia at The Riptide.",
+      "more": true
+    },
+    {
+      "id": "3c3980e3-b019-41c7-bbb0-d9a90f7da6e5",
+      "title": "Bingo Night at Abbey Tavern",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Abbey Tavern, 4100 Geary Blvd, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/abbey-tavern",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "bingo"
+      ],
+      "cost": "unknown",
+      "venue": "abbey-tavern",
+      "region": "sf",
+      "summary": "Bingo Night at Abbey Tavern.",
+      "more": true
+    },
+    {
+      "id": "443196d8-7d69-4c39-90d7-b61662447a11",
+      "title": "Live Jazz at Mr. Tipple's Recording Studio",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "free",
+      "venue": "mr-tipples-recording-studio",
+      "region": "sf",
+      "summary": "Live Jazz at Mr.",
       "more": true
     },
     {
@@ -85761,6 +86619,55 @@
       "summary": "Fri, Oct 23, 2026 – Sun, Nov 29, 2026 · A daughter digs into her mother’s unfinished feminist revolution in this bitingly funny, intensely relevant play on freedom and inheritance."
     },
     {
+      "id": "63dcc341-e7cd-4d04-b365-c6289b54df11",
+      "title": "Trivia Night at O'Reilly's Pub",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "O'Reilly's Pub, 1840 Haight St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/oreillys-pub",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "oreillys-pub",
+      "region": "sf",
+      "summary": "Trivia Night at O'Reilly's Pub.",
+      "more": true
+    },
+    {
+      "id": "687244c8-3060-4f4f-bec9-d86dec0e31db",
+      "title": "Trivia Night at Makai Island Kitchen & Groggery (Santa Cruz)",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "49A Municipal Wharf, Santa Cruz, CA 95060",
+      "url": "https://www.makaisantacruz.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": null,
+      "region": null,
+      "summary": "Think youâre a trivia whiz?",
+      "more": true
+    },
+    {
       "id": "6cc4f0a0-f828-4e05-868d-a3fc256a11d3",
       "title": "Bar Trivia with @SFTrivia",
       "start_time": "2026-11-05T03:00:00+00:00",
@@ -85783,6 +86690,35 @@
       "venue": "the-riptide",
       "region": "sf",
       "summary": "Wednesday nights we're here to help reinforce how smart you are or remind you otherwise.",
+      "more": true
+    },
+    {
+      "id": "7f6e4cc5-b1d8-4c1f-87d5-6f5c7c844e4e",
+      "title": "Swing Dance Night w/ Live Music at On Broadway at Mabuhay Gardens",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "On Broadway at Mabuhay Gardens, 435 Broadway, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/on-broadway-at-mabuhay-gardens",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "swing",
+        "dance-party"
+      ],
+      "cost": "unknown",
+      "venue": "mabuhay-gardens",
+      "region": "sf",
+      "summary": "Swing Dance Night w/ Live Music at On Broadway at Mabuhay Gardens.",
       "more": true
     },
     {
@@ -85835,6 +86771,82 @@
       "venue": "great-american-music-hall",
       "region": "sf",
       "summary": "Goldenvoice presents… · with Killing Time, Missing Link, Mizery · Hardcore"
+    },
+    {
+      "id": "bb6ccdf6-d269-4cab-8a26-62bbf05df904",
+      "title": "Tindervention: Hook-Up Horror Stories Comedy Show at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Tindervention: Hook-Up Horror Stories Comedy Show at The Function SF: Comedy Club & Cocktail Lounge.",
+      "more": true
+    },
+    {
+      "id": "c02e3e72-a4c6-4a47-a718-066097b0744d",
+      "title": "Open Decks — Welcome All DJs! at Question Mark Tavern",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Question Mark Tavern, 312 Harriet Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/question-mark-tavern",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "question-mark-tavern",
+      "region": "sf",
+      "summary": "Open Decks — Welcome All DJs!",
+      "more": true
+    },
+    {
+      "id": "ecd5ccd1-2b11-489c-8bb6-27cdcd800a30",
+      "title": "Black Bird Writing Club",
+      "start_time": "2026-11-05T03:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
+      "more": true
     },
     {
       "id": "ef4270a9-097c-451f-a70f-f4016a76d9a5",
@@ -85912,6 +86924,30 @@
       "more": true
     },
     {
+      "id": "051e481d-c249-4e01-bf96-95688e9697e7",
+      "title": "Trivia Night at El Lopo",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "El Lopo, 1327 Polk St, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/el-lopo",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free",
+      "venue": "el-lopo",
+      "region": "sf",
+      "summary": "Trivia Night at El Lopo.",
+      "more": true
+    },
+    {
       "id": "0bbf5cc5-20c9-4c9c-8fdc-f7a07af1582b",
       "title": "RISING - Michelle Moghtader's Saffron Confessions",
       "start_time": "2026-11-05T03:30:00+00:00",
@@ -85934,6 +86970,31 @@
       "venue": null,
       "region": "sf",
       "summary": "(Please do not bring infants to the show) Saffron Confessions is a semi-autobiographical one-woman comedy that invites you into the chaos of an Iranian-American dinner party.",
+      "more": true
+    },
+    {
+      "id": "24a4107f-f1ec-41fa-b7ce-5cbd55ea8612",
+      "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
       "more": true
     },
     {
@@ -85964,6 +87025,33 @@
       "more": true
     },
     {
+      "id": "411c072a-6d9b-40d1-9dd7-201bc20a6996",
+      "title": "Open Mic Wednesdays at Neck of the Woods",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "Neck of the Woods, 406 Clement Street, San Francisco, 94118, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/neck-of-the-woods",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "spoken-word"
+      ],
+      "cost": "free",
+      "venue": "neck-of-the-woods",
+      "region": "sf",
+      "summary": "Open Mic Wednesdays at Neck of the Woods.",
+      "more": true
+    },
+    {
       "id": "4661d03a-1299-4e22-970e-aebf90e05d4f",
       "title": "Raphaël Feuillâtre: Latin Passions",
       "start_time": "2026-11-05T03:30:00+00:00",
@@ -85986,6 +87074,55 @@
       "venue": "bing-concert-hall",
       "region": "southbay",
       "summary": "Works by Francisco Tárrega, Isaac Albéniz, Miguel Llobet Solés, Mario Castelnuovo-Tedesco, Domenico Scarlatti, Augustín Barrios, Antonio Lauro, Leo Brouwer, Sergio Assad, Heitor",
+      "more": true
+    },
+    {
+      "id": "5ae26cab-b55b-4a7e-a8cd-b2903e467d82",
+      "title": "Bingo Wednesday at Red Tail",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "Red Tail, 545 Irving St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/red-tail",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "bingo"
+      ],
+      "cost": "unknown",
+      "venue": "the-red-tail",
+      "region": "sf",
+      "summary": "Bingo Wednesday at Red Tail.",
+      "more": true
+    },
+    {
+      "id": "719f32c1-06c8-4f1a-b379-59b51f3244fc",
+      "title": "Bingo at The Sycamore",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "The Sycamore, 2140 Mission St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-sycamore",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "bingo"
+      ],
+      "cost": "unknown",
+      "venue": "the-sycamore",
+      "region": "sf",
+      "summary": "Bingo at The Sycamore.",
       "more": true
     },
     {
@@ -86039,6 +87176,31 @@
       "more": true
     },
     {
+      "id": "ad42e83c-d447-43c1-a19a-ea3e7d7d52c4",
+      "title": "Trivia Night at O'Neills Irish Pub (San Mateo)",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": " 34 S B St, San Mateo, CA 94401",
+      "url": "https://www.yelp.com/biz/o-neills-irish-pub-san-mateo",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "34-s-b-st",
+      "region": "peninsula",
+      "summary": "Think you're the ultimate trivia master?",
+      "more": true
+    },
+    {
       "id": "ce6901d7-861e-418a-8bda-7e941a1122b0",
       "title": "Winston Hodges",
       "start_time": "2026-11-05T03:30:00+00:00",
@@ -86059,6 +87221,31 @@
       "cost": "unknown",
       "venue": "punch-line-comedy-club",
       "region": "sf"
+    },
+    {
+      "id": "ec0b56cf-573e-4423-8823-270b37c7e1ca",
+      "title": "Trivia Night at Surf City Billiards (Santa Cruz)",
+      "start_time": "2026-11-05T03:30:00+00:00",
+      "location": "931 Pacific Ave, Santa Cruz, CA 95060",
+      "url": "https://www.surfcitybilliards.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": null,
+      "region": null,
+      "summary": "Ready to prove your genius?",
+      "more": true
     },
     {
       "id": "fb07b95c-5717-4b93-8204-4b9d5d9dcc73",
@@ -86085,6 +87272,106 @@
       "summary": "For information on weekly guests, please see The Marsh’s newsletter or social media."
     },
     {
+      "id": "2b249cce-9134-4942-9400-aa7c03c6477f",
+      "title": "Stand-Up Comedy Show at Cheaper Than Therapy",
+      "start_time": "2026-11-05T03:45:00+00:00",
+      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "cheaper-than-therapy",
+      "region": "sf",
+      "summary": "Stand-Up Comedy Show at Cheaper Than Therapy.",
+      "more": true
+    },
+    {
+      "id": "3fc207b5-13b5-45ef-81cd-ceeac6dc5efe",
+      "title": "Karaoke Lounge at Pandora Karaoke & Bar",
+      "start_time": "2026-11-05T04:00:00+00:00",
+      "location": "Pandora Karaoke & Bar, 50 Mason Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/pandora-karaoke-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "pandora-karaoke-bar",
+      "region": "sf",
+      "summary": "Karaoke Lounge at Pandora Karaoke & Bar.",
+      "more": true
+    },
+    {
+      "id": "65bb3e3d-6218-4c3b-92cf-aabf2289bda1",
+      "title": "Cosmic Comedy Wednesdays at The Orbit Room",
+      "start_time": "2026-11-05T04:00:00+00:00",
+      "location": "The Orbit Room, 1900 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-orbit-room",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy",
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "the-orbit-room",
+      "region": "sf",
+      "summary": "Cosmic Comedy Wednesdays at The Orbit Room.",
+      "more": true
+    },
+    {
+      "id": "68371dc1-cd8d-4a50-8ab4-ce9f345614c7",
+      "title": "Kitty Tapata's Trivia at Wild Side West",
+      "start_time": "2026-11-05T04:00:00+00:00",
+      "location": "Wild Side West, 424 Cortland Ave, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/wild-side-west",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free",
+      "venue": "wild-side-west",
+      "region": "sf",
+      "summary": "Kitty Tapata's Trivia at Wild Side West.",
+      "more": true
+    },
+    {
       "id": "8c037f4c-3298-48ef-84b4-606bc6f5139f",
       "title": "LIVE MUSIC: Green-House, Cool Maritime (Presented by THROWIN' BO'S)",
       "start_time": "2026-11-05T04:00:00+00:00",
@@ -86106,6 +87393,55 @@
       "venue": "4-star-theater",
       "region": "sf",
       "summary": "Throwin’ Bo’s presents: Green-House Green-House is a project birthed by Olive Ardizoni and now officially a duo project featuring long-time collaborator and confidant, Michael",
+      "more": true
+    },
+    {
+      "id": "8dea2bc4-fc5d-4bea-811f-d7de1d5bb104",
+      "title": "Live Music at Lion's Den Lounge and Bar",
+      "start_time": "2026-11-05T04:00:00+00:00",
+      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "lions-den-bar-lounge",
+      "region": "sf",
+      "summary": "Live Music at Lion's Den Lounge and Bar.",
+      "more": true
+    },
+    {
+      "id": "b52a11d2-028e-43b9-bc64-3a132e2f9a51",
+      "title": "Entertainment Trivia at The Bitter End",
+      "start_time": "2026-11-05T04:00:00+00:00",
+      "location": "The Bitter End, 441 Clement Street, San Francisco, 94118, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-bitter-end",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "the-bitter-end",
+      "region": "sf",
+      "summary": "Entertainment Trivia at The Bitter End.",
       "more": true
     },
     {
@@ -86133,6 +87469,33 @@
       "more": true
     },
     {
+      "id": "d115f808-86b1-423c-863a-5e4d30e9c931",
+      "title": "Scuff Queer Line Dancing & Two-Stepping at Verdi Club",
+      "start_time": "2026-11-05T04:00:00+00:00",
+      "location": "Verdi Club, 2424 Mariposa Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/verdi-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "club-night",
+        "lgbtq"
+      ],
+      "cost": "free",
+      "venue": "verdi-club",
+      "region": "sf",
+      "summary": "Scuff Queer Line Dancing & Two-Stepping at Verdi Club.",
+      "more": true
+    },
+    {
       "id": "db16932b-b1f8-4f96-b894-ab14d9fb5e92",
       "title": "LOS TRAIN WRECK'S ALL STAR JAM EVERY 1ST WED! (FREE)",
       "start_time": "2026-11-05T04:00:00+00:00",
@@ -86140,7 +87503,8 @@
       "url": "https://tockify.com/elriosf2/detail/1284/1793851200000",
       "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/688d589a40792e03c2a2a9fc/square_272x272.jpg",
       "sources": [
-        "El Rio"
+        "El Rio",
+        "SF Bar Guide"
       ],
       "types": [
         [
@@ -86161,6 +87525,157 @@
       "venue": "el-rio",
       "region": "sf",
       "summary": "Come out and listen to local heros jam!",
+      "more": true
+    },
+    {
+      "id": "1cb52910-585c-484f-b0aa-9d2dfab12af9",
+      "title": "Set Dancing at The Plough and the Stars",
+      "start_time": "2026-11-05T05:00:00+00:00",
+      "location": "The Plough and the Stars, 116 Clement St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-plough-and-the-stars",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "the-plough-and-the-stars",
+      "region": "sf",
+      "summary": "Set Dancing at The Plough and the Stars.",
+      "more": true
+    },
+    {
+      "id": "810743bf-902a-4c4c-add4-c68307be5f55",
+      "title": "DJ Cocoa Leche at Tupelo",
+      "start_time": "2026-11-05T05:00:00+00:00",
+      "location": "Tupelo, 1337 Grant Avenue, San Francisco, 94133, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/tupelo",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "tupelo",
+      "region": "sf",
+      "summary": "DJ Cocoa Leche at Tupelo.",
+      "more": true
+    },
+    {
+      "id": "a23f4870-6c3a-404d-a99f-73ab08d7679b",
+      "title": "Pan Dulce Wednesdays (Latin Night) at Beaux",
+      "start_time": "2026-11-05T05:00:00+00:00",
+      "location": "Beaux, 2344 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/beaux",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "latino"
+      ],
+      "cost": "free",
+      "venue": "beaux",
+      "region": "sf",
+      "summary": "Pan Dulce Wednesdays (Latin Night) at Beaux.",
+      "more": true
+    },
+    {
+      "id": "edc7fcc0-1230-4aa7-9442-c90752eea1f8",
+      "title": "PLAY-X-LAND at Cat Club",
+      "start_time": "2026-11-05T05:00:00+00:00",
+      "location": "Cat Club, 1190 Folsom St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cat-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "cat-club",
+      "region": "sf",
+      "summary": "PLAY-X-LAND at Cat Club.",
+      "more": true
+    },
+    {
+      "id": "ffa424bc-7984-413a-a7a5-8fac82678fb8",
+      "title": "Karaoke at Silver Cloud Restaurant & Karaoke Bar",
+      "start_time": "2026-11-05T05:00:00+00:00",
+      "location": "Silver Cloud Restaurant & Karaoke Bar, 1994 Lombard Street, San Francisco, 94123, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/silver-cloud-restaurant-karaoke-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "free",
+      "venue": "silver-cloud-restaurant-karaoke-bar",
+      "region": "sf",
+      "summary": "Karaoke at Silver Cloud Restaurant & Karaoke Bar.",
+      "more": true
+    },
+    {
+      "id": "9700086c-728c-4747-9894-717981290df7",
+      "title": "Live DJ at Lion's Den Lounge and Bar",
+      "start_time": "2026-11-05T07:00:00+00:00",
+      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "lions-den-bar-lounge",
+      "region": "sf",
+      "summary": "Live DJ at Lion's Den Lounge and Bar.",
       "more": true
     },
     {
@@ -87070,6 +88585,35 @@
       "venue": "omnivore-books-on-food",
       "region": "sf",
       "summary": "Rachel Gurjar is a chef and food writer from Mumbai, India, currently based in Brooklyn, New York.",
+      "more": true
+    },
+    {
+      "id": "edd2f7f1-b643-4a17-b4bb-1f871daf132f",
+      "title": "New People: Closure",
+      "start_time": "2026-11-06T02:30:00+00:00",
+      "location": "Roxie Theater, 3117 16th St, San Francisco, CA 94103",
+      "url": "https://roxie.com/?post_type=wp_theatre_prod&p=33873",
+      "image_url": "https://roxie.com/wp-content/uploads/2026/10/NEW-PEOPLE-WATERMARK.jpg",
+      "sources": [
+        "Roxie Theater"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "cost": "unknown",
+      "venue": "roxie-theater",
+      "region": "sf",
+      "summary": "All listed screenings take place at NEW PEOPLE CINEMA, located at 1746 Post Street in Japantown.",
       "more": true
     },
     {
@@ -89280,6 +90824,28 @@
       "room": "Joe Henderson Lab"
     },
     {
+      "id": "6939df05-f583-4b1d-aa1b-1f2aa3c879fd",
+      "title": "Jake Johannsen",
+      "start_time": "2026-11-07T05:15:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/jake-johannsen-san-francisco-california-11-06-2026/event/1C0064ED0410FBF3",
+      "image_url": "https://s1.ticketm.net/dam/a/13a/cb6dcd9b-e499-48de-ac14-2848a286513a_1193631_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
+    },
+    {
       "id": "0717b6ae-69e9-4e90-bb6b-f300f0b172ce",
       "title": "Joshua Redman Quartet",
       "start_time": "2026-11-07T05:30:00+00:00",
@@ -91086,6 +92652,28 @@
       "venue": "curran-theatre",
       "region": "sf",
       "summary": "Concert · Sat, Nov 7, 2026"
+    },
+    {
+      "id": "9f342069-95a0-44e5-b2d9-76d17970e9ca",
+      "title": "Jake Johannsen",
+      "start_time": "2026-11-08T03:00:00+00:00",
+      "location": "Punch Line Comedy Club, 444 Battery St, San Francisco, CA 94111",
+      "url": "https://www.ticketmaster.com/jake-johannsen-san-francisco-california-11-07-2026/event/1C0064ED0415FBF7",
+      "image_url": "https://s1.ticketm.net/dam/a/13a/cb6dcd9b-e499-48de-ac14-2848a286513a_1193631_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "Punch Line San Francisco"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "punch-line-comedy-club",
+      "region": "sf"
     },
     {
       "id": "f5d66b4c-2ada-4c1a-bb1a-9c8143040a32",
@@ -93563,6 +95151,30 @@
       "more": true
     },
     {
+      "id": "2562be0f-f39c-42af-ba76-f788e07b3b5e",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-11-10T03:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-azrm",
+      "image_url": "https://images.lumacdn.com/uploads/hh/913e121a-0c26-4a7e-b832-030ee8aa5980.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "If you know about Circling or T-Groups, this is very similar!",
+      "more": true
+    },
+    {
       "id": "61e94643-8e99-4895-a58a-33f20406defa",
       "title": "Shades SF",
       "start_time": "2026-11-10T03:00:00+00:00",
@@ -95343,6 +96955,33 @@
       "venue": "opl-temescal-branch",
       "region": "eastbay",
       "summary": "Give your broken items a second chance!",
+      "more": true
+    },
+    {
+      "id": "51b59212-ddfd-453e-ab1c-febb4c0d1e23",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-11-12T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-engb",
+      "image_url": "https://images.lumacdn.com/uploads/ea/bc3cc589-0d0f-4527-a371-20692b7d217b.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf",
+      "summary": "Join us for an evening of writing, productivity, and camaraderie at The Commons.",
       "more": true
     },
     {
@@ -103411,6 +105050,28 @@
       "room": "Joe Henderson Lab"
     },
     {
+      "id": "7b6eb656-7113-4666-8d26-c103e6dd6899",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-11-17T03:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-z1my",
+      "image_url": "https://images.lumacdn.com/uploads/62/5ab6ab03-ba84-42f1-a520-54dfc398f7b4.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "d171523b-4db5-467b-b0ac-f0fa6eac1316",
       "title": "Shades SF",
       "start_time": "2026-11-17T03:00:00+00:00",
@@ -105881,6 +107542,31 @@
       "region": "eastbay",
       "summary": "Join us for a lively discussion at our monthly book club.",
       "more": true
+    },
+    {
+      "id": "91f95d73-3375-4e23-89c0-e3f1e0b95ac6",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-11-19T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-x2j9",
+      "image_url": "https://images.lumacdn.com/uploads/bj/94830d3f-b4d5-4318-bf5a-055d94e2a428.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
     },
     {
       "id": "a05dea50-03dc-4615-a668-dd6b6dae7b09",
@@ -112513,6 +114199,28 @@
       "more": true
     },
     {
+      "id": "084224b5-baa3-4ef8-941e-d2416d650052",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-11-24T03:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-11f9",
+      "image_url": "https://images.lumacdn.com/uploads/0v/c2d55120-cb67-4ba3-b74b-76d749097736.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "c63f280f-6cf0-4d0b-b985-157bc4778a35",
       "title": "Open Mic by Charlie Kaupp",
       "start_time": "2026-11-24T03:00:00+00:00",
@@ -114210,6 +115918,31 @@
       "more": true
     },
     {
+      "id": "e668a8c3-7e25-461b-a9b8-8b4e871a9149",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-11-26T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-r5lc",
+      "image_url": "https://images.lumacdn.com/uploads/xp/96af24e0-bf85-4edf-b4e6-e80ec8808f22.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "0aa5c721-191b-42b0-9771-de67ba0c8eda",
       "title": "Bar Trivia with @SFTrivia",
       "start_time": "2026-11-26T03:00:00+00:00",
@@ -114333,6 +116066,30 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Fri, Nov 6, 2026 – Sun, Dec 13, 2026 · In a small Georgia town, a blues star’s suspicious rise to fame and a desperate woman’s dream of escape unleash a series of secrets in a",
+      "more": true
+    },
+    {
+      "id": "954dedf5-937d-4d7c-b5b9-a135b6920a9d",
+      "title": "Psychedelic Breathwork with Matt Barkin",
+      "start_time": "2026-11-26T03:00:00+00:00",
+      "location": "The Berkeley Alembic, 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145033291",
+      "image_url": "https://images.momence.com/h/71603/session-banner/786dcd7c-f536-4def-82f8-5de3d3cc0aab.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "summary": "By increasing the flow of oxygen or Prana in our bodies, we can begin to move and release tension.",
       "more": true
     },
     {
@@ -114813,6 +116570,30 @@
       "cost": "unknown",
       "venue": "550-laguna-st",
       "region": "sf"
+    },
+    {
+      "id": "e042e73c-8413-447a-916e-6f6e877937cb",
+      "title": "Blue Moon Marquee Trio",
+      "start_time": "2026-11-28T02:30:00+00:00",
+      "location": "Biscuits & Blues, 401 Mason St, San Francisco, CA 94102",
+      "url": "https://www.biscuitsandblues.com/find-a-show/20261127bluemoonmarquee",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/6689c36c4afcd30b4b37d2bb/1791424914098-OQKREENT51YTL1XYQZ93/bluemoonmarquee.jpg",
+      "sources": [
+        "Biscuits & Blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "blues"
+      ],
+      "cost": "paid",
+      "venue": "biscuits-blues",
+      "region": "sf",
+      "summary": "Live at Biscuits and Blues Blue Moon Marquee Trio Dinner, drinks, 100-seat room Early show 6:30 PM Doors 5:15 PM Late show 9:00 PM Doors 8:30 PM From $33.77 incl. fees · goes up",
+      "more": true
     },
     {
       "id": "3ee11e91-ae55-4773-96e9-f45bd846b16d",
@@ -117432,6 +119213,28 @@
       "more": true
     },
     {
+      "id": "085d65a7-72d1-47e1-a439-0cf9735ea1e8",
+      "title": "Emergence - a Relational Mindfulness Practice",
+      "start_time": "2026-12-01T03:00:00+00:00",
+      "location": "540 Laguna St, San Francisco + Astrology Lounge",
+      "url": "https://luma.com/the-n95i",
+      "image_url": "https://images.lumacdn.com/uploads/rb/9a78c77c-51ca-4026-a67e-a38f4e1e4040.jpg",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "27e6c13e-bf5d-4752-b37e-0bd8aff047d7",
       "title": "Shades SF",
       "start_time": "2026-12-01T03:00:00+00:00",
@@ -118600,6 +120403,31 @@
       "more": true
     },
     {
+      "id": "3e0ab089-fa6e-41d6-b503-b1f849f84dbf",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-12-03T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-3efy",
+      "image_url": "https://images.lumacdn.com/uploads/jx/23e154fd-090c-4667-ab4b-f1283aaaedc7.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "73513846-ffc3-42b2-b357-2e8b3d5ca41f",
       "title": "9th Ave: Wordnight with USF",
       "start_time": "2026-12-03T02:30:00+00:00",
@@ -118782,6 +120610,33 @@
       "venue": "orpheum-theatre",
       "region": "sf",
       "summary": "Concert · At Christmas · Wed, Dec 2, 2026"
+    },
+    {
+      "id": "9e16a8a0-3e15-437a-b649-c8297195a8f3",
+      "title": "Black Bird Writing Club",
+      "start_time": "2026-12-03T03:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
+      "more": true
     },
     {
       "id": "f49b8f93-4f9b-4389-ad73-8cf6e50113e2",
@@ -119395,6 +121250,30 @@
       "id": "ebf33cc1-bffb-4f6b-9360-a1ce721855d4",
       "title": "\"The Second Life of Freddie Nole\": Documentary Screening",
       "start_time": "2026-12-04T02:30:00+00:00",
+      "location": "Commonwealth Club World Affairs of California, San Francisco",
+      "url": "https://www.commonwealthclub.org/events/2026-12-03/second-life-freddie-nole-documentary-screening",
+      "image_url": "https://cdn.commonwealthclub.org/s3fs-public/styles/hero/public/2026-10/20261203%20Freddie%20Nole%20HERO.png?itok=sEn2U49a",
+      "sources": [
+        "Commonwealth Club"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "documentary"
+      ],
+      "cost": "unknown",
+      "venue": "the-commonwealth-club-of-california",
+      "region": "sf",
+      "summary": "The Second Life of Freddie Nole is a short documentary film that follows Freddie, a magnetic and deeply compassionate man, who spends his days meeting newly released citizens at",
+      "more": true
+    },
+    {
+      "id": "00ca0c9f-d773-4f59-92f9-3cab739f2e7c",
+      "title": "\"The Second Life of Freddie Nole\": Documentary Screening",
+      "start_time": "2026-12-04T03:00:00+00:00",
       "location": "Commonwealth Club World Affairs of California, San Francisco",
       "url": "https://www.commonwealthclub.org/events/2026-12-03/second-life-freddie-nole-documentary-screening",
       "image_url": "https://cdn.commonwealthclub.org/s3fs-public/styles/hero/public/2026-10/20261203%20Freddie%20Nole%20HERO.png?itok=sEn2U49a",
@@ -124459,6 +126338,31 @@
       "more": true
     },
     {
+      "id": "5471c111-e667-4fc1-b8a1-508f2b494a1a",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-12-10T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-9rxj",
+      "image_url": "https://images.lumacdn.com/uploads/oi/48326ccc-c60b-45fe-936d-f5a68f78b136.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "84e94840-8832-435a-b360-38f6bb59f6ee",
       "title": "Relatefulness with Josh Rosenberg and Daniel Ricciardelli",
       "start_time": "2026-12-10T02:30:00+00:00",
@@ -124782,6 +126686,28 @@
       ],
       "cost": "unknown",
       "venue": "august-hall",
+      "region": "sf"
+    },
+    {
+      "id": "a5345e26-387a-4b3b-93d3-8ffae27bd49d",
+      "title": "Sanctuary Park Tour: Celebrating 40 Years of The Jayhawks ",
+      "start_time": "2026-12-10T04:00:00+00:00",
+      "location": "The Fillmore, 1805 Geary Blvd, San Francisco, CA 94115",
+      "url": "https://www.ticketmaster.com/sanctuary-park-tour-celebrating-40-years-san-francisco-california-12-09-2026/event/1C0064D0C756F6B6",
+      "image_url": "https://s1.ticketm.net/dam/a/96c/9a7dfc43-e447-4748-b8f9-34661411296c_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+      "sources": [
+        "The Fillmore"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "unknown",
+      "venue": "the-fillmore",
       "region": "sf"
     },
     {
@@ -128925,6 +130851,31 @@
       "more": true
     },
     {
+      "id": "df02cb7b-1d0f-4dab-8799-c4d4a09c037e",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-12-17T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-iig4",
+      "image_url": "https://images.lumacdn.com/uploads/mw/bc0d21e7-4222-45fa-b992-63783dbef09b.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "f660bdbf-735b-49e6-ac5b-61b5165fff95",
       "title": "Dimond Book Club",
       "start_time": "2026-12-17T02:30:00+00:00",
@@ -132872,6 +134823,31 @@
       "more": true
     },
     {
+      "id": "4b98bf6b-f8ea-45dd-a859-f282c6a871b6",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-12-24T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-8uz2",
+      "image_url": "https://images.lumacdn.com/uploads/8a/338d01c1-f3e3-4552-b007-9a360dab8ee2.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "6c0a76d9-9a60-4f22-b529-ca71d278e806",
       "title": "Ladies In Between Spaces",
       "start_time": "2026-12-24T02:30:00+00:00",
@@ -132917,6 +134893,30 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "In New York’s East Village, a group of young artists struggles to build lives, make art, and hold onto each other in the face of uncertainty.",
+      "more": true
+    },
+    {
+      "id": "606a6d08-33d6-48df-974d-990f8d0c627d",
+      "title": "Psychedelic Breathwork with Matt Barkin",
+      "start_time": "2026-12-24T03:00:00+00:00",
+      "location": "The Berkeley Alembic, 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145033483",
+      "image_url": "https://images.momence.com/h/71603/session-banner/786dcd7c-f536-4def-82f8-5de3d3cc0aab.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "summary": "By increasing the flow of oxygen or Prana in our bodies, we can begin to move and release tension.",
       "more": true
     },
     {
@@ -135037,6 +137037,31 @@
       "more": true
     },
     {
+      "id": "10fca44f-2aaf-44c3-b955-d175944ef56d",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2026-12-31T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-0ofs",
+      "image_url": "https://images.lumacdn.com/uploads/7w/b9a66e9b-3dd9-4f8f-904d-87bc39d3b6ea.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "544e3f7f-4337-477d-a62c-5368fe36ef63",
       "title": "Rent",
       "start_time": "2026-12-31T03:00:00+00:00",
@@ -136460,6 +138485,31 @@
       "summary": "More details to come, watch this space!"
     },
     {
+      "id": "ec95007b-7c50-4f54-a053-381d1632b784",
+      "title": "Eileen's Punk Rock and Schlock Karaoke",
+      "start_time": "2027-01-06T04:30:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116, USA",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke",
+        "punk-metal",
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf"
+    },
+    {
       "id": "37d8a40b-935c-41c1-a6ea-7494e2f9c0b5",
       "title": "Rent",
       "start_time": "2027-01-06T22:00:00+00:00",
@@ -136507,6 +138557,58 @@
       "region": "eastbay",
       "room": "TeenZone",
       "summary": "Make your crafty dreams come true at our weekly Teen Crafternoons!",
+      "more": true
+    },
+    {
+      "id": "b646d281-0fbf-4a82-80af-8843c69ae320",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-01-07T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-brkv",
+      "image_url": "https://images.lumacdn.com/uploads/vk/b3fc1b5d-aaee-4ebd-971f-ebafe4a82bad.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
+      "id": "6fdff808-001d-4f4d-962e-22982478429c",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-01-07T03:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
       "more": true
     },
     {
@@ -138236,6 +140338,31 @@
       "more": true
     },
     {
+      "id": "ab9f8ae8-f27b-4fe9-9544-a00d3effbd37",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-01-14T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-10se",
+      "image_url": "https://images.lumacdn.com/uploads/3j/66e2baf6-3667-4e10-aa1d-6e2e377c5b05.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "b23645ff-ad27-4369-9db8-a64a1d4f00ba",
       "title": "Relatefulness with Josh Rosenberg and Daniel Ricciardelli",
       "start_time": "2027-01-14T02:30:00+00:00",
@@ -139049,6 +141176,80 @@
       "room": "Miner Auditorium"
     },
     {
+      "id": "45c4e6f2-ebc6-4bb9-8eab-69f68057504e",
+      "title": "The 16th Annual Bowie Bash!",
+      "start_time": "2027-01-16T05:30:00+00:00",
+      "location": "Great American Music Hall, 859 O'Farrell St, San Francisco, CA 94109",
+      "url": "https://wl.seetickets.us/event/the-16th-annual-bowie-bash/707829?afflky=GreatAmericanMusicHall",
+      "image_url": "https://prod-images.seetickets.us/eyJidWNrZXQiOiJwcm9kLXNpaC5zZWV0aWNrZXRzdXNhLnVzIiwia2V5IjoiNDhiOWJjZDUtNDNiNy00NmZiLWIzYmQtMDhiNWY2NGJlMjg4IiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDB9LCJqcGVnIjp7InF1YWxpdHkiOjYwfSwicG5nIjp7ImNvbXByZXNzaW9uTGV2ZWwiOjksInF1YWxpdHkiOjYwfSwid2VicCI6eyJxdWFsaXR5Ijo2MH19fQ==",
+      "sources": [
+        "Great American Music Hall"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie",
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "great-american-music-hall",
+      "region": "sf",
+      "summary": "Tribute Act"
+    },
+    {
+      "id": "9252b43a-b5bb-4608-b6e2-5ce30e2ee671",
+      "title": "*2-DAY PASS* The 16th Annual Bowie Bash!",
+      "start_time": "2027-01-16T05:30:00+00:00",
+      "location": "Great American Music Hall, 859 O'Farrell St, San Francisco, CA 94109",
+      "url": "https://wl.seetickets.us/event/2-day-pass-the-16th-annual-bowie-bash/707830?afflky=GreatAmericanMusicHall",
+      "image_url": "https://prod-images.seetickets.us/eyJidWNrZXQiOiJwcm9kLXNpaC5zZWV0aWNrZXRzdXNhLnVzIiwia2V5IjoiNjRiNjY2MWEtZTk4MS00M2I3LThlODMtN2M0NzU3YzY3ZmI4IiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDB9LCJqcGVnIjp7InF1YWxpdHkiOjYwfSwicG5nIjp7ImNvbXByZXNzaW9uTGV2ZWwiOjksInF1YWxpdHkiOjYwfSwid2VicCI6eyJxdWFsaXR5Ijo2MH19fQ==",
+      "sources": [
+        "Great American Music Hall"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie",
+        "music"
+      ],
+      "cost": "paid",
+      "venue": "great-american-music-hall",
+      "region": "sf",
+      "summary": "Tribute Act"
+    },
+    {
+      "id": "04a91c6d-05fb-4033-a25f-231bdecfa13c",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-01-16T21:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104229",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
+    },
+    {
       "id": "ac05e268-858d-4866-bbe5-79a8488964d9",
       "title": "Rent",
       "start_time": "2027-01-16T22:00:00+00:00",
@@ -139290,6 +141491,56 @@
       "region": "southbay",
       "room": "Bing Studio",
       "summary": "Don Ross and Julie Malía, both well-established solo guitarists, formed a musical partnership in 2023, and have since performed together across North America and Europe.",
+      "more": true
+    },
+    {
+      "id": "791f6291-a5c8-4183-b7b2-ab99768ac7bd",
+      "title": "The 16th Annual Bowie Bash!",
+      "start_time": "2027-01-17T05:30:00+00:00",
+      "location": "Great American Music Hall, 859 O'Farrell St, San Francisco, CA 94109",
+      "url": "https://wl.seetickets.us/event/the-16th-annual-bowie-bash/707831?afflky=GreatAmericanMusicHall",
+      "image_url": "https://prod-images.seetickets.us/eyJidWNrZXQiOiJwcm9kLXNpaC5zZWV0aWNrZXRzdXNhLnVzIiwia2V5IjoiZGY1OGM0ZGQtMTA1ZS00Y2JhLTlmZGEtNDA2NzBmZDE5ZmMxIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2MDB9LCJqcGVnIjp7InF1YWxpdHkiOjYwfSwicG5nIjp7ImNvbXByZXNzaW9uTGV2ZWwiOjksInF1YWxpdHkiOjYwfSwid2VicCI6eyJxdWFsaXR5Ijo2MH19fQ==",
+      "sources": [
+        "Great American Music Hall"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie",
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "great-american-music-hall",
+      "region": "sf",
+      "summary": "Tribute Act"
+    },
+    {
+      "id": "dad7e497-2f8a-4f63-8e64-58e02854a4a8",
+      "title": "Paldrom Catharine Collins - Girl in a Box",
+      "start_time": "2027-01-17T21:00:00+00:00",
+      "location": "Book Passage Corte Madera 51 Tamal Vista Blvd. Corte Madera, CA 94925",
+      "url": "https://bookpassage.com/event/paldrom-catharine-collins-girl-box",
+      "image_url": "https://bookpassage.com/sites/default/files/image/2026/10/07/paldrom-catharine-collins.png",
+      "sources": [
+        "Book Passage"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "cost": "free",
+      "venue": "book-passage-corte-madera",
+      "region": "northbay",
+      "summary": "Girl in a Box: Seeking Enlightenment as a Tibetan Buddhist Nun is a memoir of spiritual longing and the search for an end to suffering, where both transcendent experiences and",
       "more": true
     },
     {
@@ -139866,6 +142117,31 @@
       "topics": [
         "women",
         "business"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
+      "id": "eeb04f51-f493-421d-adf5-38eaa2ae8bb8",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-01-21T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-x3wa",
+      "image_url": "https://images.lumacdn.com/uploads/8g/7fbf58f2-cc6f-476f-a149-906b86a16a14.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
       ],
       "cost": "unknown",
       "venue": "540-laguna-st",
@@ -141568,6 +143844,31 @@
       "more": true
     },
     {
+      "id": "24436e68-a3d3-4c57-b160-a1133fcc5f54",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-01-28T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-h0w8",
+      "image_url": "https://images.lumacdn.com/uploads/ub/782bbcce-810a-48f4-ad4e-6c98e8f5a068.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "cdca48e6-6961-4f86-8c76-a98895e4e3fc",
       "title": "Rent",
       "start_time": "2027-01-28T03:00:00+00:00",
@@ -142583,6 +144884,31 @@
       "more": true
     },
     {
+      "id": "88bd9bcb-99ae-4f14-8eec-7659c1489ccf",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-02-04T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-sy8k",
+      "image_url": "https://images.lumacdn.com/uploads/tv/7206f342-e705-4b04-9c15-89c0bda297e2.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "bc26ae2c-f77b-41de-ba4a-a657d8171773",
       "title": "Glen Park History Project with Evelyn Rose",
       "start_time": "2027-02-04T02:30:00+00:00",
@@ -142680,6 +145006,33 @@
       "venue": "melifolla-studio",
       "region": "sf",
       "summary": "The Fusion Dance Academy is the place for high-quality leveled fusion classes in the SF Bay.",
+      "more": true
+    },
+    {
+      "id": "853be087-3ee7-4790-a611-daf88e0bb666",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-02-04T03:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
       "more": true
     },
     {
@@ -144085,6 +146438,31 @@
       "more": true
     },
     {
+      "id": "b335017f-13fc-4c84-9777-120ae07c1427",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-02-11T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-gtx0",
+      "image_url": "https://images.lumacdn.com/uploads/g3/f9b3093c-1a5e-433b-a44d-e7712ec97ea2.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "b7aaaa84-3a12-42fd-bdf7-ea741e9da096",
       "title": "The Interestings",
       "start_time": "2027-02-11T03:00:00+00:00",
@@ -145211,6 +147589,31 @@
       "more": true
     },
     {
+      "id": "d83ef6cf-cd15-4f1f-a352-38fe85f01ff2",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-02-18T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-3io3",
+      "image_url": "https://images.lumacdn.com/uploads/gu/abf07604-ddd1-4598-800c-4be5a39777a1.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "34e78c7d-8d55-4cae-abbb-172a11e7dfe9",
       "title": "Fusion Dance Academy",
       "start_time": "2027-02-18T03:00:00+00:00",
@@ -145703,6 +148106,32 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "e77e4430-2508-4891-a933-10877f5a937d",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-02-20T21:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104230",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
     },
     {
       "id": "4b8ba0db-200b-409f-943e-40103dde8e1c",
@@ -146546,6 +148975,31 @@
       "region": "eastbay",
       "summary": "Unleash your inner maker at our Open Art Lab!",
       "more": true
+    },
+    {
+      "id": "8f3b2ae0-e6a4-4c3a-825b-252994d5e308",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-02-25T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-0da9",
+      "image_url": "https://images.lumacdn.com/uploads/hf/b6ce0139-cc3b-48e0-bb50-5a204da62efd.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
     },
     {
       "id": "f56deead-1561-4e81-abf2-7a783b98d7d1",
@@ -148022,6 +150476,58 @@
       "region": "eastbay",
       "room": "TeenZone",
       "summary": "Make your crafty dreams come true at our weekly Teen Crafternoons!",
+      "more": true
+    },
+    {
+      "id": "508615ce-486a-487e-af47-6b7dd3c70b3e",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-03-04T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-4edj",
+      "image_url": "https://images.lumacdn.com/uploads/no/49589305-7e47-4e68-b99f-bffe340abb24.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
+      "id": "4a97bfdc-a6d0-49e5-b9ad-0e6e86a7b207",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-03-04T03:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
       "more": true
     },
     {
@@ -149923,6 +152429,31 @@
       "more": true
     },
     {
+      "id": "86afae29-36e9-47a7-956d-757f121f34d9",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-03-11T02:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-b7er",
+      "image_url": "https://images.lumacdn.com/uploads/3a/8df41b57-4d0a-4110-865e-1f4deb4f9832.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "6b37ca04-3306-49ee-b0ad-91d3a0089ccf",
       "title": "Lizard Boy",
       "start_time": "2027-03-11T03:00:00+00:00",
@@ -151754,6 +154285,31 @@
       "region": "sf"
     },
     {
+      "id": "288e729e-9dc3-4ba5-af81-a6fbf73bad42",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-03-18T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-tzey",
+      "image_url": "https://images.lumacdn.com/uploads/vf/575d1fa1-ed25-40b4-999a-82f6a6ba7f7e.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "2502e4ad-f56b-41cd-b247-70375e61bd46",
       "title": "Perfect Daughter",
       "start_time": "2027-03-18T02:00:00+00:00",
@@ -152534,6 +155090,32 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "a14aaf6c-5c10-40dd-bd83-2a2e62b03e8f",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-03-20T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104249",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
     },
     {
       "id": "13212f3c-59ff-4581-9707-0a1ebaf8986b",
@@ -153587,6 +156169,31 @@
       "room": "TeenZone",
       "summary": "Make your crafty dreams come true at our weekly Teen Crafternoons!",
       "more": true
+    },
+    {
+      "id": "15208804-1db7-4c52-843f-d3c15e5339ba",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-03-25T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-2gl1",
+      "image_url": "https://images.lumacdn.com/uploads/qj/8500587e-7629-42ea-be19-5978dfa4d5ed.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
     },
     {
       "id": "1ad8c1a2-14bc-45e9-969d-380f0390a7e4",
@@ -155093,6 +157700,31 @@
       "more": true
     },
     {
+      "id": "ebd3693a-0243-4753-b4aa-63cce537d08e",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-04-01T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-o0dn",
+      "image_url": "https://images.lumacdn.com/uploads/o1/97aa365f-dc35-4939-ae48-9272b2a311e0.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "162578a1-5763-48c9-b6c4-726d229800bf",
       "title": "Hold Me in the Water",
       "start_time": "2027-04-01T02:00:00+00:00",
@@ -156549,6 +159181,58 @@
       "more": true
     },
     {
+      "id": "70112e70-a9ab-4ee4-ae47-5b1bb8acc79b",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-04-08T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-q5l3",
+      "image_url": "https://images.lumacdn.com/uploads/tr/5e7ed137-38cc-4e01-8afb-3cbb389d1951.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
+      "id": "235b3498-a590-4358-a558-2363ccdc9c67",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-04-08T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
+      "more": true
+    },
+    {
       "id": "3424ddf2-c6fc-45aa-bfbc-9d7d525b499a",
       "title": "Fusion Dance Academy",
       "start_time": "2027-04-08T02:00:00+00:00",
@@ -157655,6 +160339,31 @@
       "more": true
     },
     {
+      "id": "69fc63ea-4e1d-447b-b541-ceb6f754739e",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-04-15T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-m5pv",
+      "image_url": "https://images.lumacdn.com/uploads/b3/63ba96f0-8fcf-4d68-ba97-fb985753c6c8.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "4394b4f3-a4c5-400b-a1d0-a15d4ad01075",
       "title": "Fusion Dance Academy",
       "start_time": "2027-04-15T02:00:00+00:00",
@@ -158247,6 +160956,32 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "f3f07dce-60a5-4fb2-a3ef-b199c3ca1009",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-04-17T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104265",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
     },
     {
       "id": "2af619e8-adf7-40f1-9243-8574210d1f65",
@@ -158966,6 +161701,31 @@
       "room": "TeenZone",
       "summary": "Make your crafty dreams come true at our weekly Teen Crafternoons!",
       "more": true
+    },
+    {
+      "id": "1a91263c-d13d-45fc-9327-08b5cd46cc8a",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-04-22T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-l245",
+      "image_url": "https://images.lumacdn.com/uploads/2w/c7da73df-7e4b-409a-a385-f78574fec82e.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
     },
     {
       "id": "31c74242-4a94-4c49-bc1c-f11730714ec3",
@@ -160200,6 +162960,31 @@
       "more": true
     },
     {
+      "id": "8a140bee-48a3-4ce8-af34-13a99c0aed40",
+      "title": "Write Night - SF Emerging Writers",
+      "start_time": "2027-04-29T01:30:00+00:00",
+      "location": "540 Laguna St, San Francisco + Hogwarts Hall",
+      "url": "https://luma.com/the-pwqx",
+      "image_url": "https://images.lumacdn.com/uploads/t4/d4179ea5-7415-4c37-a9bc-d5ff01aa7674.png",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "unknown",
+      "venue": "540-laguna-st",
+      "region": "sf"
+    },
+    {
       "id": "dd8dbc78-e5ae-46ce-963c-81e815eeb1e3",
       "title": "Relatefulness with Josh Rosenberg and Daniel Ricciardelli",
       "start_time": "2027-04-29T01:30:00+00:00",
@@ -161247,6 +164032,33 @@
       "venue": "melifolla-studio",
       "region": "sf",
       "summary": "The Fusion Dance Academy is the place for high-quality leveled fusion classes in the SF Bay.",
+      "more": true
+    },
+    {
+      "id": "e714e7d4-74e4-4285-b26d-3984a08e3480",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-05-06T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
       "more": true
     },
     {
@@ -162820,6 +165632,32 @@
       "venue": "sfjazz-center",
       "region": "sf",
       "room": "Miner Auditorium"
+    },
+    {
+      "id": "029d50a3-5858-46fb-a6e9-c730345d92a8",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-05-15T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104305",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
     },
     {
       "id": "1baabdda-3312-417c-bd84-1332b6244333",
@@ -166067,6 +168905,33 @@
       "more": true
     },
     {
+      "id": "c9719439-c7c1-456c-aec4-a8bd0ec080c2",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-06-03T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
+      "more": true
+    },
+    {
       "id": "ec5405d7-0fbf-45ce-a027-7ea46eb846ad",
       "title": "Fusion Dance Academy",
       "start_time": "2027-06-03T02:00:00+00:00",
@@ -168580,6 +171445,32 @@
       "more": true
     },
     {
+      "id": "00e0932d-7881-4d5c-8586-8183feb02ab4",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-06-19T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104323",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
+    },
+    {
       "id": "0a8db045-29a0-4630-ae92-2e651bb3215f",
       "title": "Leopoldstadt",
       "start_time": "2027-06-19T21:00:00+00:00",
@@ -170362,6 +173253,33 @@
       "more": true
     },
     {
+      "id": "9f9119d2-862a-43f0-9560-de9c6d038c91",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-07-08T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
+      "more": true
+    },
+    {
       "id": "9049ab3c-f7c3-4e41-8b6e-c045ee6ea949",
       "title": "Black Bird Writing Club",
       "start_time": "2027-07-08T02:30:00+00:00",
@@ -171070,6 +173988,32 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "Benjamin Barker returns to London a changed man.",
+      "more": true
+    },
+    {
+      "id": "7b3c8c8d-9a20-42a2-afa1-dbe962898ad7",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-07-17T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104390",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
       "more": true
     },
     {
@@ -172221,6 +175165,33 @@
       "more": true
     },
     {
+      "id": "ba160781-0efd-4f60-96fb-a6cb95909e1c",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-08-05T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
+      "more": true
+    },
+    {
       "id": "dae9644b-6c8e-44ce-9f86-6f58010d930a",
       "title": "Sweeney Todd: The Demon Barber of Fleet Street",
       "start_time": "2027-08-05T02:00:00+00:00",
@@ -173213,6 +176184,32 @@
       "more": true
     },
     {
+      "id": "4c9589e4-c08b-4301-aac0-15bfb16ec21e",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-08-21T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104393",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
+    },
+    {
       "id": "ef1996f3-94ca-437e-ae2e-6bcbe72209c7",
       "title": "Sweeney Todd: The Demon Barber of Fleet Street",
       "start_time": "2027-08-21T21:00:00+00:00",
@@ -173977,6 +176974,33 @@
       "venue": "san-francisco-playhouse",
       "region": "sf",
       "summary": "Benjamin Barker returns to London a changed man.",
+      "more": true
+    },
+    {
+      "id": "635cc6bd-4f78-447f-81a0-ae86fc8fae46",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-09-02T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
       "more": true
     },
     {
@@ -174816,6 +177840,32 @@
       "more": true
     },
     {
+      "id": "21309a2b-f934-41dd-b169-422eeb8a5f94",
+      "title": "Alligator Lizards in the Air: Integration Through Creative Expression with Krisztina Lazar",
+      "start_time": "2027-09-18T20:30:00+00:00",
+      "location": "The Berkeley Alembic (Mercury), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145104394",
+      "image_url": "https://images.momence.com/h/71603/session-banner/8c310c60-46b8-4808-b44b-f9eb0ee31d54.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Mercury",
+      "summary": "Creative expression is a way to integrate phenomenon and visions experienced in altered states of consciousness, whether they be meditative or entheogenic in nature.",
+      "more": true
+    },
+    {
       "id": "8453642d-127e-471d-9ebc-144579c01303",
       "title": "Mission Fusion",
       "start_time": "2027-09-19T03:00:00+00:00",
@@ -175496,6 +178546,33 @@
       "venue": "melifolla-studio",
       "region": "sf",
       "summary": "The Fusion Dance Academy is the place for high-quality leveled fusion classes in the SF Bay.",
+      "more": true
+    },
+    {
+      "id": "80e6220b-5148-4fb4-81c5-73482fa16543",
+      "title": "Black Bird Writing Club",
+      "start_time": "2027-10-07T02:00:00+00:00",
+      "location": "Black Bird Bookstore, 4033 Judah St, San Francisco, CA 94122",
+      "url": "https://blackbirdsf.com/pages/events#?event-id=35545",
+      "image_url": "https://mahina.b-cdn.net/media/5_1763423255388.png",
+      "sources": [
+        "Black Bird Bookstore"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing"
+      ],
+      "cost": "paid",
+      "venue": "black-bird-bookstore",
+      "region": "sf",
+      "summary": "*When purchasing your ticket, please specify the date you are signing up for* Time and space to write in community with fellow writers.",
       "more": true
     },
     {
