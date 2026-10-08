@@ -413,6 +413,22 @@
     "buzzworks, 365 11th st, san francisco, ca": {
       "venue": "buzzworks"
     },
+    "cal performances, uc berkeley, berkeley, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2027-03-04",
+          "title": "Cal Performances’ 2027 Gala",
+          "url": "https://calperformances.org/events/2026-27/special-events/cal-performances-2027-gala/"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Cal Performances"
+        ]
+      }
+    },
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
     },
@@ -560,6 +576,12 @@
     "eagle tavern, 398 12th st, san francisco, ca, san francisco, ca": {
       "venue": "eagle-tavern"
     },
+    "eastside arts alliance, 2277 international boulevard, oakland, ca": {
+      "venue": "eastside-arts-alliance"
+    },
+    "eastside arts alliance, 2285 international boulevard, oakland, ca": {
+      "venue": "eastside-arts-alliance"
+    },
     "eclectic box sf, 446 valencia street, san francisco, ca": {
       "venue": "eclectic-box"
     },
@@ -612,6 +634,22 @@
     "festa wine & cocktail lounge - karaoke, 1825 post street, san francisco, 94115, san francisco, ca": {
       "room": "Karaoke",
       "venue": "festa-wine-cocktail-lounge"
+    },
+    "first church, berkeley, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2027-04-16",
+          "title": "The Tallis Scholars; Peter Phillips, director: Slings and Arrows…",
+          "url": "https://calperformances.org/events/2026-27/early-music/the-tallis-scholars-peter-phillips-director-slings-and-arrows/"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "map result 'First Church of Christ Scientist' doesn't match the name or street number",
+        "sources": [
+          "Cal Performances"
+        ]
+      }
     },
     "first congregational church of berkeley, 2345 channing way, berkeley, ca": {
       "venue": "first-congregational-church-of-berkeley"
@@ -1180,6 +1218,9 @@
     "pandora karaoke & bar, 50 mason street, san francisco, 94102, san francisco, ca": {
       "venue": "pandora-karaoke-bar"
     },
+    "paramount theatre, 2025 broadway, oakland, ca": {
+      "venue": "paramount-theater"
+    },
     "paris 75, 515 broadway, san francisco, ca": {
       "venue": "paris-75"
     },
@@ -1484,6 +1525,22 @@
     "standard deviant brewing, 280 14th st, san francisco, ca": {
       "venue": "standard-deviant"
     },
+    "stanford live, stanford university, stanford, ca": {
+      "pending": {
+        "events": 89,
+        "example": {
+          "date": "2026-10-09",
+          "title": "Slightly Stoopid",
+          "url": "https://live.stanford.edu/events/26-frost/slightly-stoopid/"
+        },
+        "first_seen": "2026-10-07",
+        "last_tried": "2026-10-07",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Stanford Live"
+        ]
+      }
+    },
     "stanford memorial church, 450 jane stanford way, stanford, ca": {
       "venue": "stanford-memorial-church"
     },
@@ -1563,6 +1620,9 @@
     },
     "the berkeley alembic (sol), 2820 seventh street, berkeley, ca": {
       "room": "Sol",
+      "venue": "the-alembic"
+    },
+    "the berkeley alembic, 2820 7th st, berkeley, ca": {
       "venue": "the-alembic"
     },
     "the berkeley alembic, 2820 seventh street, berkeley, ca": {
