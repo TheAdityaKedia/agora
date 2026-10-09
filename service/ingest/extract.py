@@ -1,5 +1,5 @@
-"""One Bedrock call: content (text or image) → candidate events, via a forced
-tool schema so the reply is always parseable. Inputs come from strangers and
+"""One Bedrock call: content (text or image) → candidate events, via a tool
+schema so the reply is always parseable. Inputs come from strangers and
 arbitrary pages, so the model only *returns data*; code validates it."""
 from __future__ import annotations
 
@@ -127,20 +127,31 @@ def _normalize(event: dict) -> dict:
     return {k: (event.get(k) if event.get(k) not in ("", []) else None) for k in _FIELDS}
 
 
+def _tool_choice(model_id: str, tool: str) -> tuple[dict, str]:
+    """(toolChoice, system-prompt suffix). Haiku 5.5 accepts a forced tool;
+    Sonnet 5.5 rejects one (400), so it gets `auto` and is told to call it.
+    A reply without the call reads as {} — no events, and no image published."""
+    if "haiku" in model_id:
+        return {"tool": {"name": tool}}, ""
+    return {"auto": {}}, f" Always answer by calling the {tool} tool."
+
+
 def _call(client, content: list, *, system: str, tool: str, description: str, schema: dict,
           models: tuple[str, ...]) -> dict:
-    """One forced-tool Converse call; returns the tool input ({} if none)."""
+    """One tool-use Converse call; returns the tool input ({} if none)."""
     errors = []
     for model_id in models:
+        choice, steer = _tool_choice(model_id, tool)
         try:
             resp = client.converse(
                 modelId=model_id,
-                system=[{"text": system}],
+                system=[{"text": system + steer}],
                 messages=[{"role": "user", "content": content}],
                 toolConfig={"tools": [{"toolSpec": {"name": tool, "description": description,
                                                     "inputSchema": {"json": schema}}}],
-                            "toolChoice": {"tool": {"name": tool}}},
-                inferenceConfig={"maxTokens": MAX_OUTPUT_TOKENS, "temperature": 0.0},
+                            "toolChoice": choice},
+                # No temperature: the 5.5 models reject it.
+                inferenceConfig={"maxTokens": MAX_OUTPUT_TOKENS},
             )
         except Exception as e:
             errors.append(f"{model_id}: {type(e).__name__}: {e}")
@@ -195,10 +206,11 @@ def extract_image(client, image: tuple[str, bytes], *, now: datetime,
 
 
 # The last check before an image is published uses a stronger model: on real
-# photos Haiku's bystander/personal-info verdicts were inconsistent, and
+# photos Haiku 4.5's bystander/personal-info verdicts were inconsistent, and
 # Sonnet 4.5 was the only model tested that caught a partly visible person.
-VERIFY_MODELS = ("global.anthropic.claude-sonnet-4-5-20250929-v1:0",
-                 "us.anthropic.claude-sonnet-4-5-20250929-v1:0")
+# Now Sonnet 5.5 (4.5 is deprecated).
+VERIFY_MODELS = ("global.anthropic.claude-sonnet-5-5",
+                 "us.anthropic.claude-sonnet-5-5")
 
 
 def assess_image(client, image: tuple[str, bytes],

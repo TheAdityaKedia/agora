@@ -134,7 +134,7 @@ testing workflow changes.
    a role (`AgoraGitHubBedrock`, account `978355607698`) trusted only for
    `repo:TheAdityaKedia/agora:environment:production` — jobs that declare an
    `environment:` get that OIDC subject instead of `ref:…`, and `production` is
-   main-only — allowing just `bedrock:InvokeModel` on the Haiku 4.5 global
+   main-only — allowing just `bedrock:InvokeModel` on the Haiku 5.5 global
    inference profile + foundation model used in `service/classify.py`. A $5/mo
    AWS Budget (`agora-monthly`) emails on 80% actual / 100% forecast.
    Without the role, runs still ship — new shows are just untagged.
@@ -256,7 +256,7 @@ are one event; phone numbers and emails are scrubbed from descriptions.
 **Images** become the event picture only if safe: a designed flyer, a photo of
 a flyer cropped to the flyer, or the flyer embedded in a screenshot (an
 Instagram post) cropped out — snapped to the post image's straight edges — and
-only after a final Claude Sonnet 4.5 check finds a clean flyer with no app UI,
+only after a final Claude Sonnet 5.5 check finds a clean flyer with no app UI,
 identifiable person, or private contact details. A screenshot itself (chat,
 DM, app UI) is never published. Safe images go to the private S3 bucket
 `agora-submissions-978355607698`, served via CloudFront
@@ -296,5 +296,5 @@ into logs, PRs, the DB, or the manifest.
 password; secrets in environments `production` and `ci-test`:
 `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD`, `SUBMISSION_HASH_KEY`,
 `SUBMISSION_IMAGE_BUCKET`, `SUBMISSION_IMAGE_BASE_URL` (plus the AWS role
-secrets); the Bedrock role allows Haiku 4.5 + Sonnet 4.5 and `s3:PutObject` on
+secrets); the Bedrock role allows Haiku 5.5 + Sonnet 5.5 and `s3:PutObject` on
 the bucket's `img/*`; AWS Budget `agora-monthly` is $10.

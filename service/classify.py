@@ -20,12 +20,17 @@ from pathlib import Path
 import taxonomy
 from classifications import Classification
 
-# Primary: global cross-region Haiku 4.5 inference profile. Fallback: the
+# Primary: global cross-region Haiku 5.5 inference profile. Fallback: the
 # US-only inference profile (same model, routed within US regions) for when the
-# global one is unavailable. Haiku 4.5 can't be called on-demand by its bare
-# foundation-model id — Bedrock requires an inference profile.
-PRIMARY_MODEL = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
-FALLBACK_MODEL = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+# global one is unavailable. Call Haiku through an inference profile, not its
+# bare foundation-model id.
+PRIMARY_MODEL = "global.anthropic.claude-haiku-5-5"
+FALLBACK_MODEL = "us.anthropic.claude-haiku-5-5"
+
+# Haiku 5.5 thinks by default and rejects `temperature`. Low effort keeps a
+# one-line JSON answer quick; thinking counts toward maxTokens, so leave room.
+MODEL_FIELDS = {"output_config": {"effort": "low"}}
+MAX_TOKENS = 1024
 
 _VALID_COSTS = {"free", "paid", "unknown"}
 _DATA_DIR = Path(__file__).parent / "data"
@@ -170,9 +175,14 @@ def _converse(client, model_id: str, system: str, user: str) -> str:
         modelId=model_id,
         system=[{"text": system}],
         messages=[{"role": "user", "content": [{"text": user}]}],
-        inferenceConfig={"maxTokens": 250, "temperature": 0.0},
+        inferenceConfig={"maxTokens": MAX_TOKENS},
+        additionalModelRequestFields=MODEL_FIELDS,
     )
-    return resp["output"]["message"]["content"][0]["text"]
+    # The reply can open with a reasoning block; the answer is the text block.
+    for block in resp["output"]["message"]["content"]:
+        if "text" in block:
+            return block["text"]
+    raise RuntimeError(f"no text in reply (stopReason {resp.get('stopReason')})")
 
 
 def make_client():

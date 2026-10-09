@@ -116,3 +116,17 @@ def test_assess_image_classifies_only():
     client = AssessClient([], a)
     assert extract.assess_image(client, ("image/png", png_bytes())) == a
     assert client.calls[0]["toolConfig"]["tools"][0]["toolSpec"]["name"] == extract.ASSESS_TOOL
+
+
+def test_haiku_is_forced_to_the_tool_and_sonnet_is_steered_to_it():
+    # Sonnet 5.5 rejects a forced tool choice; it gets `auto` plus a prompt line.
+    client = FakeClient([])
+    extract.extract_events(client, text="x", now=NOW)
+    assert client.calls[0]["toolConfig"]["toolChoice"] == {"tool": {"name": extract.TOOL_NAME}}
+    client = FakeClient([])
+    extract.assess_image(client, ("image/png", png_bytes()))
+    kw = client.calls[0]
+    assert kw["modelId"] == extract.VERIFY_MODELS[0]
+    assert kw["toolConfig"]["toolChoice"] == {"auto": {}}
+    assert kw["system"][0]["text"].endswith(f"calling the {extract.ASSESS_TOOL} tool.")
+    assert "temperature" not in kw["inferenceConfig"]
