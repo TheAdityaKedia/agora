@@ -594,8 +594,10 @@ don't linger (dedup skips existing rows, it doesn't update them).
 `gh workflow run scrape.yml --ref <branch> -f sources="<substrings>"`. Non-`main`
 runs use the `ci-test` database and a throwaway `ci-sandbox/` branch, so
 nothing ships. It shows whether GitHub's datacenter IPs can reach each site
-and how the venue resolver handles your location strings (unplaced ones land
-in a "Places to review (test run on <branch>)" issue). The `sources` filter is
+and how the venue resolver handles your location strings (the run's summary
+page lists unplaced ones and venues it added on its own — check each). Run
+`python -m places check` locally first; the `ci-test` DB keeps rows from
+earlier test runs, so some pending places in the summary can be stale. The `sources` filter is
 a plain substring match, so check each substring matches exactly one line of
 `sources.txt`.
 

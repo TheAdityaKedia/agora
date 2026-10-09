@@ -231,6 +231,8 @@ jobs:
       # every location string waiting for a decision. Its body is rewritten in
       # place each run; a comment (which emails the owner) only when something
       # new went pending or coverage dropped. Closed when nothing is waiting.
+      # Main only: a branch run's report goes to its run summary instead — the
+      # ci-test DB keeps stale rows, so test-run issues were mostly old noise.
       - name: Check places
         id: places
         if: always() && steps.merge.outcome == 'success'
@@ -239,15 +241,21 @@ jobs:
           python ci.py places --report "$RUNNER_TEMP/report.json" \
             --body "$RUNNER_TEMP/places.md" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+      - name: Places to review (run summary, branch runs)
+        if: always() && steps.places.outcome == 'success' && env.IS_MAIN != 'true'
+        run: |
+          { echo "## Places to review (test run, \`ci-test\` DB)"; echo
+            echo "_Pending entries can be stale rows left in \`ci-test\` by earlier test runs._"; echo
+            cat "$RUNNER_TEMP/places.md"; } >> "$GITHUB_STEP_SUMMARY"
       - name: Places to review issue
-        if: always() && steps.places.outcome == 'success'
+        if: always() && steps.places.outcome == 'success' && env.IS_MAIN == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PENDING: ${{ steps.places.outputs.pending }}
           NEW_PENDING: ${{ steps.places.outputs.new_pending }}
           ALERT: ${{ steps.places.outputs.alert }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          TITLE: ${{ github.ref_name == 'main' && 'Places to review' || format('Places to review (test run on {0})', github.ref_name) }}
+          TITLE: Places to review
         run: |
           set -euo pipefail
           existing="$(gh issue list --state open --search "\"$TITLE\" in:title" \
@@ -272,7 +280,7 @@ jobs:
       - name: Fail run on places alert
         if: always() && steps.places.outputs.alert == 'true'
         run: |
-          echo "::error::Venue coverage problem — see the Places to review issue"
+          echo "::error::Venue coverage problem — see the Places to review issue (or, on a branch, this run's summary)"
           exit 1
 
   # Heartbeat for the hourly email job, which can't notice its own absence
