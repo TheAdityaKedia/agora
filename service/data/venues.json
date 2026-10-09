@@ -429,6 +429,20 @@
       "region": "sf",
       "status": "verified"
     },
+    "301-great-hwy": {
+      "added": "2026-10-09",
+      "address": "301 Great Hwy, San Francisco, CA 94121",
+      "evidence": [
+        "map: Great Highway in San Francisco County (street, way/286356826)",
+        "text: San Francisco"
+      ],
+      "lat": 37.775371,
+      "lng": -122.511294,
+      "name": "301 Great Hwy",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
+    },
     "3227-telegraph-ave": {
       "added": "2026-10-02",
       "address": "3227 Telegraph Avenue, Oakland, CA 94609",
@@ -4682,6 +4696,29 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "noisebridge": {
+      "added": "2026-10-09",
+      "address": "272 Capp Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Noisebridge in San Francisco County (building, way/960975186)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.762434,
+      "lng": -122.418659,
+      "name": "Noisebridge",
+      "osm": "way/960975186",
+      "possible_duplicates": [
+        "the-sycamore",
+        "the-secret-alley",
+        "clarion-alley-mural-project",
+        "mission-bowling-club"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "north-beach-branch-library": {
       "added": "2026-10-02",
