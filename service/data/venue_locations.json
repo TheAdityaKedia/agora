@@ -90,6 +90,9 @@
     "2831 mission st, san francisco, ca": {
       "venue": "2831-mission-st"
     },
+    "301 great hwy, san francisco, ca": {
+      "venue": "301-great-hwy"
+    },
     "3150 18th st, san francisco, ca": {
       "venue": "zore-law"
     },
@@ -841,6 +844,22 @@
     "karma cafe, 1901 hayes st, san francisco, ca": {
       "venue": "karma-cafe"
     },
+    "kearny st & clay st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-10",
+          "title": "Chinatown Cleanup",
+          "url": "https://partiful.com/e/q3VyUa5VHEnxoisSSQMG"
+        },
+        "first_seen": "2026-10-09",
+        "last_tried": "2026-10-09",
+        "reason": "map result 'Kearny Street & Clay Street' doesn't match the name or street number",
+        "sources": [
+          "Partiful"
+        ]
+      }
+    },
     "kerouac alley, 275 columbus ave, san francisco": {
       "venue": "kerouac-alley"
     },
@@ -1040,6 +1059,9 @@
     },
     "noe valley books, 3899 24th st, san francisco, ca": {
       "venue": "noe-valley-books"
+    },
+    "noisebridge, 272 capp st, san francisco, ca": {
+      "venue": "noisebridge"
     },
     "nook, 1500 hyde st, san francisco, ca": {
       "venue": "cafe-nook"
@@ -1815,6 +1837,9 @@
     },
     "udon mugizo, 1072 saratoga ave, san jose, ca": {
       "venue": "udon-mugizo"
+    },
+    "underdogs tres, 1224 9th ave, san francisco, ca": {
+      "venue": "underdogs-tres"
     },
     "underdogs tres, 1224 9th avenue, san francisco, 94122, san francisco, ca": {
       "venue": "underdogs-tres"
