@@ -2068,6 +2068,22 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "crane-cove-park": {
+      "added": "2026-10-10",
+      "address": "787 Illinois Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: 787 in San Francisco County (building, way/27041630)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.76243,
+      "lng": -122.387635,
+      "name": "Crane Cove Park",
+      "osm": "way/27041630",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "crepe-myrtle-garden": {
       "added": "2026-10-05",
       "address": "750 Howard Street, San Francisco, CA 94103",
@@ -2757,6 +2773,36 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "fm-gallery": {
+      "added": "2026-10-10",
+      "address": "483 25th Street, Oakland, CA 94612",
+      "evidence": [
+        "map: 483 in Alameda County (building, way/149518768)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.814313,
+      "lng": -122.267631,
+      "name": "FM Gallery",
+      "osm": "way/149518768",
+      "possible_duplicates": [
+        "werkshack",
+        "instudio-with-empowerment-avenue",
+        "manna-gallery",
+        "mercury-20-gallery",
+        "new-parkway-theater",
+        "the-double-standard",
+        "all-out-comedy-theater",
+        "thee-stork-club",
+        "drakes-dealership",
+        "mighty-mighty-studio",
+        "johansson-projects",
+        "the-crown"
+      ],
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "fort-mason-center-for-arts-culture": {

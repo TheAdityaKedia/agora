@@ -206,6 +206,114 @@
         ]
       ]
     },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: A City in the Forest (Closing Night!)": {
+      "classified_at": "2026-10-10T16:04:47.902653+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: A City in the Forest (Closing Night!)",
+      "topics": [
+        "documentary",
+        "politics",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Animal Conservation Shorts": {
+      "classified_at": "2026-10-10T16:04:47.391499+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Animal Conservation Shorts",
+      "topics": [
+        "documentary",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Best Day Ever (with Other Shorts)": {
+      "classified_at": "2026-10-10T16:04:47.468569+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Best Day Ever (with Other Shorts)",
+      "topics": [
+        "film",
+        "documentary",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Bodyhackers": {
+      "classified_at": "2026-10-10T16:04:47.911272+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Bodyhackers",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Don't Be Prey (with The Locals)": {
+      "classified_at": "2026-10-10T16:04:47.115636+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Don't Be Prey (with The Locals)",
+      "topics": [
+        "film",
+        "documentary",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Harvest": {
+      "classified_at": "2026-10-10T16:04:46.030025+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Harvest",
+      "topics": [
+        "documentary",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fGREEN FILM FESTIVAL: Hen (Opening Night!)": {
       "classified_at": "2026-10-10T02:03:48.293922+00:00",
       "cost": "unknown",
@@ -215,6 +323,107 @@
       "title": "GREEN FILM FESTIVAL: Hen (Opening Night!)",
       "topics": [
         "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: In Excess (with Elders of Time)": {
+      "classified_at": "2026-10-10T16:04:47.296327+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: In Excess (with Elders of Time)",
+      "topics": [
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Narrative Fiction Shorts": {
+      "classified_at": "2026-10-10T16:04:46.072645+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Narrative Fiction Shorts",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: The Big Picture Shorts": {
+      "classified_at": "2026-10-10T16:04:46.074253+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: The Big Picture Shorts",
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: The Terroirist (with Plant Life)": {
+      "classified_at": "2026-10-10T16:04:46.140333+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: The Terroirist (with Plant Life)",
+      "topics": [
+        "film",
+        "documentary",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Unless Something Goes Terribly Wrong (with Dad vs. Bees)": {
+      "classified_at": "2026-10-10T16:04:47.379238+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Unless Something Goes Terribly Wrong (with Dad vs. Bees)",
+      "topics": [
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Water & Oceans Shorts": {
+      "classified_at": "2026-10-10T16:04:47.485198+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Water & Oceans Shorts",
+      "topics": [
+        "documentary",
+        "nature-outdoors"
       ],
       "types": [
         [
@@ -765,6 +974,71 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Animated Shorts": {
+      "classified_at": "2026-10-10T16:04:47.380779+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: Animated Shorts",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Funny Shorts": {
+      "classified_at": "2026-10-10T16:04:47.299505+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: Funny Shorts",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Opening Night Shorts": {
+      "classified_at": "2026-10-10T16:04:46.712805+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: Opening Night Shorts",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: True Stories Shorts": {
+      "classified_at": "2026-10-10T16:04:46.038086+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: True Stories Shorts",
+      "topics": [
+        "documentary",
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -8519,6 +8793,23 @@
         ]
       ]
     },
+    "Book Passage\u001fHalloween Storytime": {
+      "classified_at": "2026-10-10T16:04:48.721127+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Halloween Storytime",
+      "topics": [
+        "family-kids",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
     "Book Passage\u001fHandmade Cards and Papercrafts with Suzanne Gailey": {
       "classified_at": "2026-09-25T06:06:04.916366+00:00",
       "cost": "paid",
@@ -10986,6 +11277,28 @@
         "nonfiction"
       ],
       "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Books Inc.\u001fMIKE CHEN: THE HAUNTING OF SANTO DOMINGO STREET": {
+      "classified_at": "2026-10-10T16:04:49.078306+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "MIKE CHEN: THE HAUNTING OF SANTO DOMINGO STREET",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
         [
           "talk",
           "conversation"
@@ -14604,6 +14917,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fLuke Kidgell - Live In The USA": {
+      "classified_at": "2026-10-10T16:04:45.979919+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Luke Kidgell - Live In The USA",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fPhoebe Robinson: Feral & Fired Up!": {
       "classified_at": "2026-10-05T19:55:39.378530+00:00",
       "cost": "paid",
@@ -14643,6 +14972,22 @@
       "source": "Cobb's Comedy Club",
       "taxonomy_version": 2,
       "title": "Ray Lau",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fReem Edan & Melissa Shoshahi": {
+      "classified_at": "2026-10-10T16:04:45.972041+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Reem Edan & Melissa Shoshahi",
       "topics": [
         "comedy"
       ],
@@ -15444,6 +15789,24 @@
         ]
       ]
     },
+    "Commonwealth Club\u001fNico Perrino: Free Speech Generation": {
+      "classified_at": "2026-10-10T16:04:49.287534+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "Nico Perrino: Free Speech Generation",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "Commonwealth Club\u001fOut of the Darkness: Rediscovering Classic Swedish Literature": {
       "classified_at": "2026-10-03T04:53:13.214342+00:00",
       "cost": "unknown",
@@ -15771,6 +16134,24 @@
         [
           "talk",
           "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fThe Quantum Threat: What Happens When Our Digital Locks Stop Working": {
+      "classified_at": "2026-10-10T16:04:47.950184+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "The Quantum Threat: What Happens When Our Digital Locks Stop Working",
+      "topics": [
+        "tech",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
         ]
       ]
     },
@@ -19474,6 +19855,23 @@
         ]
       ]
     },
+    "Great American Music Hall\u001f*RESCHEDULED* Divine Offering: Celebrating Alice Coltrane": {
+      "classified_at": "2026-10-10T16:04:46.624974+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "*RESCHEDULED* Divine Offering: Celebrating Alice Coltrane",
+      "topics": [
+        "jazz",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Great American Music Hall\u001f82MAJOR": {
       "classified_at": "2026-10-07T17:56:11.913517+00:00",
       "cost": "unknown",
@@ -20187,6 +20585,22 @@
       "topics": [
         "rock-indie",
         "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fMisfit Cabaret Presents Grimm": {
+      "classified_at": "2026-10-10T16:04:46.642537+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "Misfit Cabaret Presents Grimm",
+      "topics": [
+        "theater"
       ],
       "types": [
         [
@@ -22776,6 +23190,22 @@
         ]
       ]
     },
+    "Keys Jazz Bistro\u001fHelen Sung": {
+      "classified_at": "2026-10-10T16:04:48.741938+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Helen Sung",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Keys Jazz Bistro\u001fHoward Wiley": {
       "classified_at": "2026-10-03T05:03:11.891565+00:00",
       "cost": "unknown",
@@ -23210,6 +23640,22 @@
       "source": "Keys Jazz Bistro",
       "taxonomy_version": 2,
       "title": "Tony Lindsay",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Keys Jazz Bistro\u001fWil Blades Trio ft. Otis McDonald": {
+      "classified_at": "2026-10-10T16:04:48.691718+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Wil Blades Trio ft. Otis McDonald",
       "topics": [
         "jazz"
       ],
@@ -25324,6 +25770,39 @@
         ]
       ]
     },
+    "Magic Theatre\u001fCoriolanus Translated by Sean San José": {
+      "classified_at": "2026-10-10T16:04:46.731662+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Magic Theatre",
+      "taxonomy_version": 2,
+      "title": "Coriolanus Translated by Sean San José",
+      "topics": [
+        "theater",
+        "politics"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Magic Theatre\u001fFive Forgeries By Lucas BaiscH": {
+      "classified_at": "2026-10-10T16:04:46.695486+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Magic Theatre",
+      "taxonomy_version": 2,
+      "title": "Five Forgeries By Lucas BaiscH",
+      "topics": [
+        "theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Magic Theatre\u001fM Is For More": {
       "classified_at": "2026-10-03T01:22:17.797992+00:00",
       "cost": "unknown",
@@ -25360,6 +25839,23 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Magic Theatre\u001fPollinated- A salon Series": {
+      "classified_at": "2026-10-10T16:04:46.687972+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Magic Theatre",
+      "taxonomy_version": 2,
+      "title": "Pollinated- A salon Series",
+      "topics": [
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -25685,6 +26181,22 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fNew Book Spotlight": {
+      "classified_at": "2026-10-10T16:04:49.284061+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "New Book Spotlight",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social"
         ]
       ]
     },
@@ -26947,6 +27459,23 @@
         ]
       ]
     },
+    "New Conservatory Theatre Center\u001fNCTC Education FUNdraiser: Improv Show": {
+      "classified_at": "2026-10-10T16:04:46.636018+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "New Conservatory Theatre Center",
+      "taxonomy_version": 2,
+      "title": "NCTC Education FUNdraiser: Improv Show",
+      "topics": [
+        "comedy",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Noe Valley Books\u001fBook Talk: City on the Edge": {
       "classified_at": "2026-10-03T05:07:04.022916+00:00",
       "cost": "unknown",
@@ -27235,6 +27764,42 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001f2026 FM Annual: “I Left My Heart In Oakland”": {
+      "classified_at": "2026-10-10T16:04:48.557956+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "2026 FM Annual: “I Left My Heart In Oakland”",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001f2026 FM Annual: “I Left My Heart In Oakland” RECEPTION": {
+      "classified_at": "2026-10-10T16:04:48.739263+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "2026 FM Annual: “I Left My Heart In Oakland” RECEPTION",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -27858,6 +28423,22 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fPaul Thompson’s “West Wild: American Culture” RECEPTION": {
+      "classified_at": "2026-10-10T16:04:48.549907+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Paul Thompson’s “West Wild: American Culture” RECEPTION",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fThe Tiny Monster Show ~ Artist Talk": {
       "classified_at": "2026-10-03T05:10:03.154707+00:00",
       "cost": "free",
@@ -28011,6 +28592,27 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland Asian Cultural Center\u001fThe 2026 OACC Gala: Holding Place, Holding Space": {
+      "classified_at": "2026-10-10T16:04:49.469144+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Asian Cultural Center",
+      "taxonomy_version": 2,
+      "title": "The 2026 OACC Gala: Holding Place, Holding Space",
+      "topics": [
+        "asian-american",
+        "dance"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -33002,6 +33604,26 @@
         ]
       ]
     },
+    "Partiful\u001fNathan Fielder Lookalike Contest!": {
+      "classified_at": "2026-10-10T16:04:49.142948+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Nathan Fielder Lookalike Contest!",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fOUR FIRST PUBLIC POP-UP!": {
       "classified_at": "2026-10-07T17:56:16.915745+00:00",
       "cost": "unknown",
@@ -33718,6 +34340,22 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fSundown Cinema: Beetlejuice": {
+      "classified_at": "2026-10-10T16:04:49.227388+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Sundown Cinema: Beetlejuice",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -35306,6 +35944,22 @@
       "source": "Punch Line San Francisco",
       "taxonomy_version": 2,
       "title": "Brian Babylon",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fChelsea Peretti Live: Back to Work (In Progress)": {
+      "classified_at": "2026-10-10T16:04:48.106934+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Chelsea Peretti Live: Back to Work (In Progress)",
       "topics": [
         "comedy"
       ],
@@ -56163,6 +56817,26 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fVisions and Vibrations: Art Show Opening": {
+      "classified_at": "2026-10-10T16:04:49.478222+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Visions and Vibrations: Art Show Opening",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fVocal Discovery with Julia Norton": {
       "classified_at": "2026-10-03T05:13:14.842471+00:00",
       "cost": "paid",
@@ -57832,6 +58506,24 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fConnected Neighbors Lab": {
+      "classified_at": "2026-10-10T16:04:48.113382+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Connected Neighbors Lab",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fDeep Listening - Good Grief by Sara Bareilles": {
       "classified_at": "2026-10-03T05:19:06.788116+00:00",
       "cost": "unknown",
@@ -57958,6 +58650,25 @@
         ],
         [
           "workshop"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fFull Moon Meditation + Kirtan": {
+      "classified_at": "2026-10-10T16:04:48.101022+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Full Moon Meditation + Kirtan",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social"
         ]
       ]
     },
@@ -58307,6 +59018,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fReal Social Connections presents: Being Seen": {
+      "classified_at": "2026-10-10T16:04:48.176037+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Real Social Connections presents: Being Seen",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -60206,6 +60934,22 @@
       "source": "The Fillmore",
       "taxonomy_version": 2,
       "title": "Slow Pulp",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fStrawberry Guy": {
+      "classified_at": "2026-10-10T16:04:46.008208+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Strawberry Guy",
       "topics": [
         "rock-indie"
       ],
