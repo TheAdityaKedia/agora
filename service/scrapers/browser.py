@@ -197,3 +197,25 @@ def load_page_html(
     finally:
         log("page: close")
         page.close()
+
+
+def resilient_fetcher(context, log: Callable[[str], None] = print):
+    """Return `fetch(url) -> html` that survives one Cloudflare challenge.
+
+    Cloudflare scores a *session*: after a dozen or so requests on one cookie
+    jar it can start answering with a "Just a moment..." challenge (403), yet a
+    brand-new context on the same IP passes at once. So on a 403 we swap in a
+    fresh context and retry that URL once; a second 403 propagates as
+    RateLimited. Pair with `browser_context(full_chromium=True)`.
+    """
+    current = [context]
+
+    def fetch(url: str) -> str:
+        try:
+            return load_page_html(current[0], url)
+        except RateLimited:
+            log(f"challenged at {url}; retrying once in a fresh browser context")
+            current[0] = new_browser_context(context.browser)
+            return load_page_html(current[0], url)
+
+    return fetch

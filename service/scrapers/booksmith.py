@@ -5,6 +5,7 @@ Only the site base and address are venue-specific.
 """
 from scrapers import indiecommerce
 from scrapers.base import RawEvent
+from scrapers.browser import browser_context, resilient_fetcher
 
 
 SOURCE = "booksmith.com"
@@ -19,4 +20,10 @@ def matches(url: str) -> bool:
 
 
 def scrape(url: str = EVENTS_URL) -> list[RawEvent]:
-    return indiecommerce.scrape_events(SITE_BASE, fallback_location=ADDRESS, tag="booksmith")
+    # Since Oct 2026 the whole site sits behind Cloudflare's managed challenge
+    # (403 "Just a moment..." to plain requests), so fetch with full Chromium,
+    # the Green Apple route (CONTRIBUTING → "When to give up").
+    with browser_context(full_chromium=True) as context:
+        fetch = resilient_fetcher(context, lambda m: print(f"[booksmith] {m}", flush=True))
+        return indiecommerce.scrape_events(SITE_BASE, fallback_location=ADDRESS, tag="booksmith",
+                                           get=fetch, workers=1)

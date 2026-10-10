@@ -120,3 +120,33 @@ def test_offsite_ticket_price_survives_in_event_details():
 
 def test_title_html_entities_decoded():
     assert _logistics_first().title == "Nicole Nelson & Friends - Family Language"
+
+
+# --- injected fetcher (Booksmith's browser route) ----------------------------
+
+def test_scrape_events_uses_the_given_fetcher(monkeypatch):
+    detail = (FIXTURES / "indiecommerce_detail.html").read_text()
+    item = indiecommerce.ListingItem(title="X", url=BASE + "/event/x", day=None)
+    monkeypatch.setattr(indiecommerce, "parse_listing",
+                        lambda html, base: [item] if html == "LISTING" else [])
+    seen = []
+
+    def get(url):
+        seen.append(url)
+        if url == item.url:
+            return detail
+        return "LISTING" if len(seen) == 1 else ""
+
+    events = indiecommerce.scrape_events(BASE, get=get, workers=1, fallback_location="F")
+    assert seen[0].startswith(BASE + "/events/")
+    assert item.url in seen  # detail pages go through `get` too
+    assert len(events) == 1
+
+
+def test_a_challenged_listing_ends_the_walk_without_raising():
+    from scrapers.browser import RateLimited
+
+    def get(url):
+        raise RateLimited(url, 403)
+
+    assert indiecommerce.scrape_events(BASE, get=get, workers=1) == []
