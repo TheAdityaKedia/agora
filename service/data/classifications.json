@@ -206,6 +206,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fGREEN FILM FESTIVAL: Hen (Opening Night!)": {
+      "classified_at": "2026-10-10T02:03:48.293922+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "GREEN FILM FESTIVAL: Hen (Opening Night!)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fHouse": {
       "classified_at": "2026-10-04T15:33:51.407345+00:00",
       "cost": "unknown",
@@ -319,6 +335,23 @@
       "topics": [
         "rock-indie",
         "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fLIVE MUSIC: Computerwife (Presented by THROWIN' BO'S)": {
+      "classified_at": "2026-10-10T02:03:48.342539+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "LIVE MUSIC: Computerwife (Presented by THROWIN' BO'S)",
+      "topics": [
+        "rock-indie",
+        "electronic"
       ],
       "types": [
         [
@@ -6642,6 +6675,22 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fPhilip Sayce": {
+      "classified_at": "2026-10-10T02:03:48.919425+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Philip Sayce",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fRed Curtain Presents: Laughs and Blues": {
       "classified_at": "2026-10-05T19:54:32.367292+00:00",
       "cost": "paid",
@@ -8452,6 +8501,24 @@
         ]
       ]
     },
+    "Book Passage\u001fGreg Orfalea - Wonder and Shame": {
+      "classified_at": "2026-10-10T02:03:47.508847+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Greg Orfalea - Wonder and Shame",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fHandmade Cards and Papercrafts with Suzanne Gailey": {
       "classified_at": "2026-09-25T06:06:04.916366+00:00",
       "cost": "paid",
@@ -8481,6 +8548,24 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Book Passage\u001fHannah Hindley - Love and Other Fish": {
+      "classified_at": "2026-10-10T02:03:49.168426+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Hannah Hindley - Love and Other Fish",
+      "topics": [
+        "nonfiction",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -9287,6 +9372,25 @@
         ]
       ]
     },
+    "Book Passage\u001fMerritt R. Turetsky with Ed Yong - Bogland": {
+      "classified_at": "2026-10-10T02:03:49.222486+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Merritt R. Turetsky with Ed Yong - Bogland",
+      "topics": [
+        "nonfiction",
+        "science",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fMichael Connelly - The Hollow": {
       "classified_at": "2026-10-03T05:05:58.082771+00:00",
       "cost": "unknown",
@@ -9584,6 +9688,25 @@
         ]
       ]
     },
+    "Book Passage\u001fOrville Schell - Inside China's Secret Prisons": {
+      "classified_at": "2026-10-10T02:03:47.530453+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Orville Schell - Inside China's Secret Prisons",
+      "topics": [
+        "nonfiction",
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fPaldrom Catharine Collins - Girl in a Box": {
       "classified_at": "2026-10-08T17:48:23.696510+00:00",
       "cost": "free",
@@ -9731,6 +9854,25 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Book Passage\u001fRhae Lynn Barnes & David M. Henkin - Darkology & Out of the Ballpark": {
+      "classified_at": "2026-10-10T02:03:47.545209+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Rhae Lynn Barnes & David M. Henkin - Darkology & Out of the Ballpark",
+      "topics": [
+        "nonfiction",
+        "history",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -10214,6 +10356,23 @@
         "writing",
         "family-kids",
         "books-authors"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Book Passage\u001fWriting Your Family History with Laurel Hilton: 4 Meetings": {
+      "classified_at": "2026-10-10T02:03:49.086047+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Writing Your Family History with Laurel Hilton: 4 Meetings",
+      "topics": [
+        "writing",
+        "nonfiction"
       ],
       "types": [
         [
@@ -13737,6 +13896,25 @@
         ]
       ]
     },
+    "Clio's Books\u001fA Natural History of the Spirits: Reading the Living World": {
+      "classified_at": "2026-10-10T02:03:49.269660+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 2,
+      "title": "A Natural History of the Spirits: Reading the Living World",
+      "topics": [
+        "nonfiction",
+        "history",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Clio's Books\u001fAll the Tiny Beauties": {
       "classified_at": "2026-10-03T05:12:06.665060+00:00",
       "cost": "unknown",
@@ -13829,6 +14007,24 @@
         ]
       ]
     },
+    "Clio's Books\u001fCrossing the Rubicon: The Betrayal of American Democracy, 2000–2026": {
+      "classified_at": "2026-10-10T02:03:49.098380+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 2,
+      "title": "Crossing the Rubicon: The Betrayal of American Democracy, 2000–2026",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Clio's Books\u001fDavid Maisel and the Apocalyptic Sublime": {
       "classified_at": "2026-10-03T05:07:42.633748+00:00",
       "cost": "unknown",
@@ -13845,6 +14041,26 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Clio's Books\u001fDaylight Come: Harry Belafonte and the World He Made": {
+      "classified_at": "2026-10-10T02:03:49.148912+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 2,
+      "title": "Daylight Come: Harry Belafonte and the World He Made",
+      "topics": [
+        "history",
+        "music",
+        "politics",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -15388,6 +15604,25 @@
       "topics": [
         "nature-outdoors",
         "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fRobert Alter: The Language of Fiction, the Craft of Writing and the Pleasures of Reading": {
+      "classified_at": "2026-10-10T02:03:48.354456+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "Robert Alter: The Language of Fiction, the Craft of Writing and the Pleasures of Reading",
+      "topics": [
+        "fiction",
+        "writing",
+        "books-authors"
       ],
       "types": [
         [
@@ -19513,6 +19748,23 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fDJ X'ces": {
+      "classified_at": "2026-10-10T02:03:47.522094+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "DJ X'ces",
+      "topics": [
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -25196,6 +25448,23 @@
         [
           "social",
           "games-hobby"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fBagels and Ballot Measures with the League of Women Voters": {
+      "classified_at": "2026-10-10T02:03:47.373306+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "Bagels and Ballot Measures with the League of Women Voters",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
         ]
       ]
     },
@@ -31539,6 +31808,23 @@
         ]
       ]
     },
+    "Partiful\u001fChinatown Cleanup": {
+      "classified_at": "2026-10-10T02:03:49.890625+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Chinatown Cleanup",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fChuqian Li Fall Open Studio": {
       "classified_at": "2026-10-03T05:11:13.945040+00:00",
       "cost": "free",
@@ -32223,6 +32509,24 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fJonny Wild - Who Let The Zoo Out": {
+      "classified_at": "2026-10-10T02:03:49.609762+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Jonny Wild - Who Let The Zoo Out",
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -33603,6 +33907,21 @@
         ]
       ]
     },
+    "Partiful\u001fUF v Texas San Francisco Watch Party  🐊🏈": {
+      "classified_at": "2026-10-10T02:03:49.581602+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "UF v Texas San Francisco Watch Party  🐊🏈",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fWaves & Breakfast w/ CodeRabbit #SFTechWeek": {
       "classified_at": "2026-10-07T17:56:32.167768+00:00",
       "cost": "free",
@@ -33889,6 +34208,23 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fnoisecafe": {
+      "classified_at": "2026-10-10T02:03:49.769798+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "noisecafe",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -35114,6 +35450,22 @@
       "source": "Punch Line San Francisco",
       "taxonomy_version": 2,
       "title": "S. F. Comedy Showcase",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fSanti Espinosa - ME Time (English/Spanish Show)": {
+      "classified_at": "2026-10-10T02:03:49.945631+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Santi Espinosa - ME Time (English/Spanish Show)",
       "topics": [
         "comedy"
       ],
@@ -40659,11 +41011,11 @@
       ]
     },
     "SF Bar Guide\u001fThe Camarros at Tupelo": {
-      "classified_at": "2026-09-24T05:43:52.877884+00:00",
-      "cost": "unknown",
+      "classified_at": "2026-10-10T02:03:47.461392+00:00",
+      "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "SF Bar Guide",
-      "taxonomy_version": 1,
+      "taxonomy_version": 2,
       "title": "The Camarros at Tupelo",
       "topics": [
         "rock-indie"
@@ -47075,6 +47427,28 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fFilm: Groundworks": {
+      "classified_at": "2026-10-10T02:03:47.555833+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Groundworks",
+      "topics": [
+        "film",
+        "dance",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fFilm: Hard Boiled": {
       "classified_at": "2026-10-03T01:31:04.023006+00:00",
       "cost": "free",
@@ -47148,6 +47522,27 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Maxita": {
+      "classified_at": "2026-10-10T02:03:48.399857+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Maxita",
+      "topics": [
+        "documentary",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "panel"
         ]
       ]
     },
@@ -48114,6 +48509,27 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: PEN 2 POWER": {
+      "classified_at": "2026-10-10T02:03:48.297990+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: PEN 2 POWER",
+      "topics": [
+        "poetry",
+        "spoken-word",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
         ]
       ]
     },
@@ -51873,6 +52289,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Felt Holiday Baubles / 節日氈布小飾手作": {
+      "classified_at": "2026-10-10T02:03:47.464400+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Felt Holiday Baubles / 節日氈布小飾手作",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Flower Arrangement with Fiona Huang": {
       "classified_at": "2026-10-03T01:25:51.103388+00:00",
       "cost": "free",
@@ -51965,6 +52397,23 @@
       "title": "Workshop: Help You Help Others",
       "topics": [
         "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Homemade Butter in a Jar": {
+      "classified_at": "2026-10-10T02:03:48.195669+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Homemade Butter in a Jar",
+      "topics": [
+        "food-drink",
+        "family-kids"
       ],
       "types": [
         [
@@ -55039,6 +55488,27 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fDeath Day: Facing Mortality, Mourning, and the Strife of Endings": {
+      "classified_at": "2026-10-10T02:03:49.925681+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Death Day: Facing Mortality, Mourning, and the Strife of Endings",
+      "topics": [
+        "history",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fDeath Sangha": {
       "classified_at": "2026-10-03T05:13:14.423788+00:00",
       "cost": "unknown",
@@ -57130,6 +57600,24 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fA Salon for Navigating Work, Identity, and Change - with Di Ye @ Zhennovate (#SFTechWeek)": {
+      "classified_at": "2026-10-10T02:03:48.316660+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "A Salon for Navigating Work, Identity, and Change - with Di Ye @ Zhennovate (#SFTechWeek)",
+      "topics": [
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fADHD & Chill": {
       "classified_at": "2026-10-03T05:14:55.645453+00:00",
       "cost": "free",
@@ -57829,6 +58317,22 @@
       "source": "The Commons (SF)",
       "taxonomy_version": 2,
       "title": "Reflect, Release, & Reset: Create Your Vision for 2027",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fReturning to your Inner Light: An evening of Yin and Sound Healing": {
+      "classified_at": "2026-10-10T02:03:48.879848+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Returning to your Inner Light: An evening of Yin and Sound Healing",
       "topics": [
         "wellness"
       ],
@@ -60109,6 +60613,41 @@
         ],
         [
           "screening"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fSkate the Town - NOV 22 - Adult & Dual Sessions": {
+      "classified_at": "2026-10-10T02:03:50.112335+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Skate the Town - NOV 22 - Adult & Dual Sessions",
+      "topics": [
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fSkate the Town - NOV 22 - Family Session": {
+      "classified_at": "2026-10-10T02:03:49.883876+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Skate the Town - NOV 22 - Family Session",
+      "topics": [
+        "dance-party",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -62874,6 +63413,23 @@
       "title": "Goldenvoice Presents Love You Even Still 2026 World Tour SUGAR with J. Robbins (Jawbox)",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents NYE 2027 Deltron 3030 performing \"Deltron 3030\" with DJ Prince Paul, Souls of Mischief": {
+      "classified_at": "2026-10-10T02:03:48.176539+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents NYE 2027 Deltron 3030 performing \"Deltron 3030\" with DJ Prince Paul, Souls of Mischief",
+      "topics": [
+        "hiphop-rnb",
+        "club-night"
       ],
       "types": [
         [

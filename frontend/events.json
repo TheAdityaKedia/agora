@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T17:14:09.925021+00:00",
+  "generated_at": "2026-10-10T02:03:51.968372+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -1815,6 +1815,14 @@
       "lng": -122.44782,
       "neighborhood": "lone-mountain-usf"
     },
+    "kearny-st-clay-st": {
+      "name": "Kearny St & Clay St",
+      "region": "sf",
+      "address": "Kearny St & Clay St, San Francisco, CA 94108",
+      "lat": 37.79446,
+      "lng": -122.40479,
+      "approx": true
+    },
     "kerouac-alley": {
       "name": "Kerouac Alley",
       "region": "sf",
@@ -2238,14 +2246,6 @@
       "lat": 37.75024,
       "lng": -122.43512,
       "neighborhood": "noe-valley"
-    },
-    "noisebridge": {
-      "name": "Noisebridge",
-      "region": "sf",
-      "address": "272 Capp Street, San Francisco, CA 94110",
-      "lat": 37.76243,
-      "lng": -122.41866,
-      "neighborhood": "mission"
     },
     "north-beach-branch-library": {
       "name": "North Beach Branch Library",
@@ -4271,8 +4271,16 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "tech",
+        "business"
+      ],
       "cost": "unknown",
       "venue": null,
       "region": null,
@@ -9175,11 +9183,18 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "nature-outdoors"
+      ],
+      "cost": "free",
+      "venue": "kearny-st-clay-st",
+      "region": "sf",
       "summary": "Meet at the corner of Kearny St and Clay St (660 Kearny St) to grab our supplies and form our crew.",
       "more": true
     },
@@ -12080,23 +12095,6 @@
       "venue": "frontier-tower-berlinhouse",
       "region": "sf",
       "room": "Spaceship"
-    },
-    {
-      "id": "ff90fdbc-c72f-4d44-8349-7a5bf0bdca31",
-      "title": "noisecafe",
-      "start_time": "2026-10-11T16:00:00+00:00",
-      "location": "Noisebridge, 272 Capp St, San Francisco, CA 94110",
-      "url": "https://partiful.com/e/zU9F0gVgmsirqPd9QbFF",
-      "image_url": "https://partiful.imgix.net/external/user/12LpQU5RszWqnfDHsRcaw75ciuz2/f1KgDu3FYE9dv_H1iJlDS?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "noisebridge",
-      "region": "sf",
-      "summary": "there will be: coffee chocolate alt milks+prolly dairy matcha milk tea (taiwanese style) La Marzocco espresso machine (learn to use) grinder cart cans of pumpkin"
     },
     {
       "id": "59272361-b865-4d9d-8d7e-db23fad59bea",
@@ -24633,8 +24631,14 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "screening"
+        ]
+      ],
+      "topics": [
+        "film"
+      ],
       "cost": "unknown",
       "venue": "4-star-theater",
       "region": "sf",
@@ -30266,9 +30270,14 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
       "topics": [],
-      "cost": "unknown",
+      "cost": "free",
       "venue": "underdogs-tres",
       "region": "sf",
       "summary": "WE ARE SOOOO BACK 🐊 Florida football looks good again and the SF Gator Club is making a come back!",
@@ -39466,8 +39475,15 @@
       "sources": [
         "Great American Music Hall"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
       "cost": "unknown",
       "venue": "great-american-music-hall",
       "region": "sf",
@@ -39929,9 +39945,16 @@
       "sources": [
         "Mechanics' Institute"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "politics"
+      ],
+      "cost": "free",
       "venue": "mechanics-institute-library-and-chess-room",
       "region": "sf",
       "summary": "Your Vote Counts!",
@@ -60955,8 +60978,14 @@
       "sources": [
         "The Commons (SF)"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
       "cost": "unknown",
       "venue": "550-laguna-st",
       "region": "sf",
@@ -74201,8 +74230,19 @@
       "sources": [
         "The Berkeley Alembic"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "history",
+        "wellness"
+      ],
       "cost": "unknown",
       "venue": "the-alembic",
       "region": "eastbay",
@@ -74388,9 +74428,20 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "panel"
+        ]
+      ],
+      "topics": [
+        "documentary",
+        "nature-outdoors"
+      ],
+      "cost": "free",
       "venue": "san-francisco-public-library-main-library",
       "region": "sf",
       "room": "Main",
@@ -86629,7 +86680,7 @@
       "topics": [
         "rock-indie"
       ],
-      "cost": "unknown",
+      "cost": "free",
       "venue": "tupelo",
       "region": "sf",
       "summary": "The Camarros at Tupelo.",
@@ -91559,9 +91610,21 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "film",
+        "dance",
+        "nature-outdoors"
+      ],
+      "cost": "free",
       "venue": "glen-park-branch-library",
       "region": "sf",
       "room": "Glen Park",
@@ -91917,8 +91980,14 @@
       "sources": [
         "Punch Line San Francisco"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
       "cost": "unknown",
       "venue": "punch-line-comedy-club",
       "region": "sf"
@@ -92007,8 +92076,16 @@
       "sources": [
         "Clio's Books"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "politics",
+        "history"
+      ],
       "cost": "unknown",
       "venue": "clios-books",
       "region": "eastbay",
@@ -92955,8 +93032,18 @@
       "sources": [
         "Clio's Books"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "history",
+        "music",
+        "politics",
+        "black-diaspora"
+      ],
       "cost": "unknown",
       "venue": "clios-books",
       "region": "eastbay",
@@ -103256,9 +103343,15 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "craft"
+      ],
+      "cost": "free",
       "venue": "chinatown-him-mark-lai-branch-library",
       "region": "sf",
       "summary": "Sew a festive felt holiday bauble with small beads and ribbon.",
@@ -105038,9 +105131,16 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "food-drink",
+        "family-kids"
+      ],
+      "cost": "free",
       "venue": "bayview-branch-library",
       "region": "sf",
       "room": "Bayview",
@@ -105554,8 +105654,17 @@
       "sources": [
         "Clio's Books"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "history",
+        "nature-outdoors"
+      ],
       "cost": "unknown",
       "venue": "clios-books",
       "region": "eastbay",
@@ -107422,8 +107531,15 @@
       "sources": [
         "4-Star Theater"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie",
+        "electronic"
+      ],
       "cost": "unknown",
       "venue": "4-star-theater",
       "region": "sf",
@@ -108846,8 +108962,16 @@
       "sources": [
         "Partiful"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
       "cost": "unknown",
       "venue": "public-works",
       "region": "sf",
@@ -110913,9 +111037,17 @@
       "sources": [
         "The Henry J. Kaiser Center for the Arts"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "family-kids"
+      ],
+      "cost": "paid",
       "venue": "calvin-simmons-theater",
       "region": "eastbay",
       "summary": "Skate The Town - Family Session Sun, Nov 22 | 12:30 PM - 2:30PM The Henry J.",
@@ -111294,9 +111426,16 @@
       "sources": [
         "The Henry J. Kaiser Center for the Arts"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "paid",
       "venue": "calvin-simmons-theater",
       "region": "eastbay",
       "summary": "Skate The Town Sun, Nov 22 | 12:30 PM -2:30 PM & 3:00 PM - 5:00PM The Henry J.",
@@ -119877,9 +120016,20 @@
       "sources": [
         "San Francisco Public Library"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "poetry",
+        "spoken-word",
+        "family-kids"
+      ],
+      "cost": "free",
       "venue": "san-francisco-public-library-main-library",
       "region": "sf",
       "room": "Main",
@@ -124970,8 +125120,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "science",
+        "nature-outdoors"
+      ],
       "cost": "unknown",
       "venue": "book-passage-corte-madera",
       "region": "northbay",
@@ -135407,8 +135566,15 @@
       "sources": [
         "The Warfield"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "hiphop-rnb",
+        "club-night"
+      ],
       "cost": "unknown",
       "venue": "warfield-theatre",
       "region": "sf"
@@ -137570,8 +137736,16 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
       "cost": "unknown",
       "venue": "book-passage-corte-madera",
       "region": "northbay",
@@ -137915,8 +138089,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "politics",
+        "history"
+      ],
       "cost": "unknown",
       "venue": "book-passage-corte-madera",
       "region": "northbay",
@@ -138414,8 +138597,17 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "history",
+        "books-authors"
+      ],
       "cost": "unknown",
       "venue": "book-passage-ferry-building",
       "region": "sf",
@@ -139941,8 +140133,17 @@
       "sources": [
         "Commonwealth Club"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ],
+      "topics": [
+        "fiction",
+        "writing",
+        "books-authors"
+      ],
       "cost": "unknown",
       "venue": "the-commonwealth-club-of-california",
       "region": "sf",
@@ -140211,9 +140412,16 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "writing",
+        "nonfiction"
+      ],
+      "cost": "paid",
       "venue": "book-passage-corte-madera",
       "region": "northbay",
       "summary": "4 Wednesdays: Jan 20 - Feb 10, 2027 Writing about your family history can be a daunting task.",
@@ -140691,9 +140899,15 @@
       "sources": [
         "Biscuits & Blues"
       ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "blues"
+      ],
+      "cost": "paid",
       "venue": "biscuits-blues",
       "region": "sf",
       "summary": "Live at Biscuits and Blues Philip Sayce Dinner, drinks, 100-seat room Early show 6:30 PM Doors 5:15 PM Late show 9:00 PM Doors 8:30 PM From $44.43 incl. fees · goes up on show day",
@@ -140951,8 +141165,16 @@
       "sources": [
         "Book Passage"
       ],
-      "types": [],
-      "topics": [],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "nonfiction",
+        "nature-outdoors"
+      ],
       "cost": "unknown",
       "venue": "book-passage-corte-madera",
       "region": "northbay",
