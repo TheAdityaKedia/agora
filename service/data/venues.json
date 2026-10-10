@@ -6,22 +6,30 @@
     "ATG (Curran, Orpheum, Golden Gate)": "sf",
     "Alonzo King LINES Ballet": "sf",
     "Artists' Television Access": "sf",
+    "August Hall": "sf",
     "Bach Dancing & Dynamite Society": "peninsula",
     "Balboa Theatre": "sf",
     "Berkeley Repertory Theatre": "eastbay",
+    "Bimbo's 365 Club": "sf",
     "Bird & Beckett": "sf",
     "Biscuits & Blues": "sf",
     "Black Bird Bookstore": "sf",
     "Bookshop West Portal": "sf",
     "Brava Theater Center": "sf",
+    "Cal Performances": "eastbay",
     "City Arts & Lectures": "sf",
     "City Lights Booksellers": "sf",
     "Clio's Books": "eastbay",
     "Cobb's Comedy Club": "sf",
     "Commonwealth Club": "sf",
+    "Drake's Brewing": "eastbay",
+    "EastSide Arts Alliance": "eastbay",
     "El Rio": "sf",
+    "F8": "sf",
     "Fabulosa Books": "sf",
+    "Feinstein's at the Nikko": "sf",
     "Fort Mason Center": "sf",
+    "Fox Theater Oakland": "eastbay",
     "Frontier Tower": "sf",
     "GLBT Historical Society": "sf",
     "Great American Music Hall": "sf",
@@ -38,14 +46,19 @@
     "New Conservatory Theatre Center": "sf",
     "Noe Valley Books": "sf",
     "Oakland Art Murmur": "eastbay",
+    "Oakland Asian Cultural Center": "eastbay",
     "Oakland Museum of California": "eastbay",
+    "Oakland Public Library": "eastbay",
     "Oakland Theater Project": "eastbay",
+    "Oakland United Beerworks": "eastbay",
     "Omnivore Books on Food": "sf",
     "Palace of Fine Arts Theatre": "sf",
+    "Paramount Theatre": "eastbay",
     "Phoenix Theater (Petaluma)": "northbay",
     "Presidio Theatre": "sf",
     "Punch Line San Francisco": "sf",
     "Reading Rhythms": "sf",
+    "Roxie Theater": "sf",
     "Russian Hill Bookstore": "sf",
     "SF Bar Guide": "sf",
     "SF Neo-Futurists": "sf",
@@ -54,17 +67,21 @@
     "San Francisco Maritime National Park Association": "sf",
     "San Francisco Playhouse": "sf",
     "San Francisco Public Library": "sf",
+    "Stanford Live": "southbay",
     "Tally Ho! Books": "eastbay",
     "The Berkeley Alembic": "eastbay",
     "The Booksmith": "sf",
+    "The Castro Theatre": "sf",
     "The Commons (SF)": "sf",
     "The Dawn Club": "sf",
     "The Faight Collective": "sf",
     "The Fillmore": "sf",
+    "The Greek Theatre Berkeley": "eastbay",
     "The Henry J. Kaiser Center for the Arts": "eastbay",
     "The Independent": "sf",
     "The Masonic": "sf",
     "The Riptide": "sf",
+    "The UC Theatre": "eastbay",
     "The Warfield": "sf",
     "Yerba Buena Gardens Festival": "sf",
     "Yoshi's": "eastbay",
@@ -117,6 +134,44 @@
       "region": "sf",
       "status": "verified"
     },
+    "111-minna-gallery": {
+      "added": "2026-10-07",
+      "address": "111 Minna Street, San Francisco, CA 94105",
+      "evidence": [
+        "map: 111 Minna Gallery in San Francisco County (building, node/4425675189)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.787466,
+      "lng": -122.399322,
+      "name": "111 Minna Gallery",
+      "osm": "node/4425675189",
+      "possible_duplicates": [
+        "zo",
+        "temple-nightclub-san-francisco",
+        "museum-of-the-african-diaspora"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "1117-geary-blvd": {
+      "added": "2026-10-07",
+      "address": "1117 Geary Blvd, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1109;1111;1113;1115;1117;1119;1121 in San Francisco County (building, way/257981287)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.785396,
+      "lng": -122.422192,
+      "name": "1117 Geary Blvd",
+      "osm": "way/257981287",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1172-ocean-ave": {
       "added": "2026-10-03",
       "address": "1172 Ocean Avenue, Oakland, CA 94608",
@@ -167,6 +222,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "1430-cole-st": {
+      "added": "2026-10-07",
+      "address": "1430 Cole Street, San Francisco, CA 94117",
+      "evidence": [
+        "map: 1430 in San Francisco County (building, way/265674117)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.761198,
+      "lng": -122.448799,
+      "name": "1430 Cole St",
+      "osm": "way/265674117",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "160-waverly-pl": {
       "added": "2026-10-02",
@@ -255,6 +326,28 @@
       "region": "peninsula",
       "status": "verified"
     },
+    "215-washington-st": {
+      "added": "2026-10-07",
+      "address": "215 Washington Street, Oakland, CA 94607",
+      "evidence": [
+        "map: 215 in Alameda County (building, way/93229246)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.796953,
+      "lng": -122.277644,
+      "name": "215 Washington St",
+      "osm": "way/93229246",
+      "possible_duplicates": [
+        "201-washington-st",
+        "yoshis-oakland",
+        "the-grand-gallery",
+        "jack-london-square"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "2200-broadway": {
       "added": "2026-10-02",
       "address": "2200 Broadway, Redwood City, CA 94063",
@@ -306,6 +399,20 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "26th-ave-cabrillo-st": {
+      "added": "2026-10-08",
+      "address": "26th Ave & Cabrillo St, San Francisco, CA 94121",
+      "evidence": [
+        "owner review: a street corner (Partiful block clean-up)",
+        "map: shared node of 26th Avenue and Cabrillo Street"
+      ],
+      "lat": 37.774391,
+      "lng": -122.485414,
+      "name": "26th Ave & Cabrillo St",
+      "precision": "street",
+      "region": "sf",
+      "status": "verified"
+    },
     "2831-mission-st": {
       "added": "2026-10-02",
       "address": "2831 Mission Street, San Francisco, CA 94110",
@@ -321,6 +428,20 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "301-great-hwy": {
+      "added": "2026-10-09",
+      "address": "301 Great Hwy, San Francisco, CA 94121",
+      "evidence": [
+        "map: Great Highway in San Francisco County (street, way/286356826)",
+        "text: San Francisco"
+      ],
+      "lat": 37.775371,
+      "lng": -122.511294,
+      "name": "301 Great Hwy",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
     },
     "3227-telegraph-ave": {
       "added": "2026-10-02",
@@ -408,6 +529,62 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "419-georgia-st": {
+      "added": "2026-10-07",
+      "address": "419 Georgia Street, Vallejo, CA 94590",
+      "evidence": [
+        "map: 419 in Solano County (building, way/8719321)",
+        "text: Vallejo",
+        "street number matches"
+      ],
+      "lat": 38.101032,
+      "lng": -122.256232,
+      "name": "419 Georgia St",
+      "osm": "way/8719321",
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
+    },
+    "424-hayes-st": {
+      "added": "2026-10-07",
+      "address": "424 Hayes Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: 424 in San Francisco County (building, node/9708086686)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.776928,
+      "lng": -122.423519,
+      "name": "424 Hayes St",
+      "osm": "node/9708086686",
+      "possible_duplicates": [
+        "anina",
+        "maker-studio",
+        "sfjazz-center",
+        "sydney-goldstein-theater",
+        "540-laguna-st",
+        "550-laguna-st"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "4425-linden-st": {
+      "added": "2026-10-07",
+      "address": "4425 Linden Street, Oakland, CA 94608",
+      "evidence": [
+        "map: 4425 in Alameda County (building, way/10622731)",
+        "text: Emeryville",
+        "street number matches"
+      ],
+      "lat": 37.834449,
+      "lng": -122.275945,
+      "name": "4425 Linden St",
+      "osm": "way/10622731",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "447-minna": {
       "added": "2026-10-02",
@@ -553,6 +730,20 @@
       "region": "sf",
       "status": "verified"
     },
+    "african-american-museum-and-library-at-oakland": {
+      "added": "2026-10-08",
+      "address": "659 14th Street, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch AAA centre point"
+      ],
+      "lat": 37.806117,
+      "lng": -122.276332,
+      "name": "African American Museum and Library at Oakland",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
     "alamo-drafthouse-cinema": {
       "added": "2026-10-02",
       "address": "2550 Mission Street, San Francisco, CA 94110",
@@ -607,6 +798,31 @@
       "region": "sf",
       "status": "verified"
     },
+    "all-out-comedy-theater": {
+      "added": "2026-10-07",
+      "address": "2550 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: 2550 in Alameda County (building, way/417922199)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.815031,
+      "lng": -122.26805,
+      "name": "All Out Comedy Theater",
+      "osm": "way/417922199",
+      "possible_duplicates": [
+        "the-double-standard",
+        "instudio-with-empowerment-avenue",
+        "manna-gallery",
+        "werkshack",
+        "mercury-20-gallery",
+        "new-parkway-theater",
+        "thee-stork-club"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "almanac-west-oakland-clubhouse": {
       "added": "2026-10-02",
       "address": "1640 18th Street, Oakland, CA 94607",
@@ -620,6 +836,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "amelie-wine-bar": {
+      "added": "2026-10-07",
+      "address": "1754 Polk St, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1750;1754;1760 in San Francisco County (building, way/252915050)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.793128,
+      "lng": -122.420933,
+      "name": "Amelie Wine Bar",
+      "osm": "way/252915050",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "american-bookbinders-museum": {
       "added": "2026-10-02",
@@ -653,6 +885,29 @@
       "precision": "building",
       "region": "northbay",
       "status": "verified"
+    },
+    "anina": {
+      "added": "2026-10-07",
+      "address": "482 Hayes Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: Anina in San Francisco County (building, node/9655241060)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.776828,
+      "lng": -122.424297,
+      "name": "Anina",
+      "osm": "node/9655241060",
+      "possible_duplicates": [
+        "maker-studio",
+        "540-laguna-st",
+        "550-laguna-st",
+        "sfjazz-center"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "anza-branch-library": {
       "added": "2026-10-02",
@@ -707,6 +962,26 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "artists-television-access": {
+      "added": "2026-10-05",
+      "address": "992 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Artists Television Access in San Francisco County (building, node/13724354404)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.757085,
+      "lng": -122.42129,
+      "name": "Artists Television Access",
+      "osm": "node/13724354404",
+      "possible_duplicates": [
+        "alamo-drafthouse-cinema"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "artogether": {
       "added": "2026-10-02",
       "address": "1200 Harrison Street, Oakland, CA 94612",
@@ -723,6 +998,50 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "athletic-playground": {
+      "added": "2026-10-08",
+      "address": "4770 San Pablo Avenue, Emeryville, CA 94608",
+      "evidence": [
+        "map: 4770 in Alameda County (building, way/515898408)",
+        "text: Emeryville",
+        "street number matches"
+      ],
+      "lat": 37.836555,
+      "lng": -122.281867,
+      "name": "Athletic Playground",
+      "osm": "way/515898408",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "august-hall": {
+      "added": "2026-10-07",
+      "address": "420 Mason Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: August Hall in San Francisco County (building, node/725100718)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.787588,
+      "lng": -122.409787,
+      "name": "August Hall",
+      "osm": "node/725100718",
+      "possible_duplicates": [
+        "biscuits-blues",
+        "the-westin-st-francis",
+        "a-c-t",
+        "san-francisco-playhouse",
+        "curran-theatre",
+        "the-redwood-room",
+        "cheaper-than-therapy",
+        "starlite-room",
+        "feinsteins-at-the-nikko"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "bach-dancing-dynamite-society": {
       "added": "2026-10-02",
@@ -904,6 +1223,23 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "berkeley-yoga-center": {
+      "added": "2026-10-08",
+      "address": "2121 Bonar Street, Berkeley, CA 94702",
+      "evidence": [
+        "map: Berkeley Yoga Center in Alameda County (building, node/2443760063)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.868203,
+      "lng": -122.287055,
+      "name": "Berkeley Yoga Center",
+      "osm": "node/2443760063",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "bernal-heights-branch-library": {
       "added": "2026-10-02",
       "address": "500 Cortland Avenue, San Francisco, CA 94110",
@@ -918,6 +1254,65 @@
       "osm": "way/225063373",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "big-time-vintage": {
+      "added": "2026-10-07",
+      "address": "968 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Big Time Vintage in San Francisco County (building, node/13724354409)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.757437,
+      "lng": -122.42133,
+      "name": "Big Time Vintage",
+      "osm": "node/13724354409",
+      "possible_duplicates": [
+        "artists-television-access",
+        "alamo-drafthouse-cinema"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "bimbos-365-club": {
+      "added": "2026-10-07",
+      "address": "1025 Columbus Avenue, San Francisco, CA 94133",
+      "evidence": [
+        "map: Bimbo's 365 Club in San Francisco County (building, way/262435071)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.803731,
+      "lng": -122.415646,
+      "name": "Bimbo's 365 Club",
+      "osm": "way/262435071",
+      "possible_duplicates": [
+        "the-lost-church",
+        "cobbs-comedy-club"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "bing-concert-hall": {
+      "added": "2026-10-07",
+      "address": "327 Lasuen St, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Bing Concert Hall (way/205182889)"
+      ],
+      "lat": 37.431997,
+      "lng": -122.166124,
+      "name": "Bing Concert Hall",
+      "osm": "way/205182889",
+      "precision": "building",
+      "region": "southbay",
+      "rooms": [
+        "Bing Studio"
+      ],
       "status": "verified"
     },
     "bird-and-beckett": {
@@ -1232,6 +1627,21 @@
       "region": "sf",
       "status": "verified"
     },
+    "bow-n-arrow-clothing": {
+      "added": "2026-10-08",
+      "address": "2200 Petaluma Blvd N, Unit 600, Petaluma, CA 94952",
+      "evidence": [
+        "owner review: unit 600 at Petaluma Village Premium Outlets (2200 Petaluma Blvd N)",
+        "map: 2200 Petaluma Boulevard North (way/383773854)"
+      ],
+      "lat": 38.257914,
+      "lng": -122.65074,
+      "name": "Bow N Arrow Clothing",
+      "osm": "way/383773854",
+      "precision": "building",
+      "region": "northbay",
+      "status": "verified"
+    },
     "brava-mainstage": {
       "added": "2026-10-02",
       "address": "2781 24th Street, San Francisco, CA 94110",
@@ -1268,6 +1678,45 @@
       "region": "sf",
       "status": "verified"
     },
+    "buzzworks": {
+      "added": "2026-10-07",
+      "address": "365 11th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Buzzworks in San Francisco County (building, way/132605452)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.771301,
+      "lng": -122.412895,
+      "name": "Buzzworks",
+      "osm": "way/132605452",
+      "possible_duplicates": [
+        "the-foundry-sf",
+        "eagle-tavern",
+        "oasis"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "cafe-nook": {
+      "added": "2026-10-07",
+      "address": "1500 Hyde Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Cafe Nook in San Francisco County (building, node/1478460133)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.794656,
+      "lng": -122.41801,
+      "name": "Cafe Nook",
+      "osm": "node/1478460133",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "calvary-presbyterian": {
       "added": "2026-10-02",
       "address": "2515 Fillmore Street, San Francisco, CA 94115",
@@ -1284,6 +1733,25 @@
       "region": "sf",
       "status": "verified"
     },
+    "calvin-simmons-theater": {
+      "added": "2026-10-05",
+      "address": "10 10th Street, Oakland, CA 94607",
+      "evidence": [
+        "map: 10 in Alameda County (building, way/202577492)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.797818,
+      "lng": -122.263735,
+      "name": "Calvin Simmons Theater",
+      "osm": "way/202577492",
+      "possible_duplicates": [
+        "oakland-museum-of-california"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "cassa-jam": {
       "added": "2026-10-02",
       "address": "37729 Niles Boulevard, Fremont, CA 94536",
@@ -1299,6 +1767,29 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "castro-theatre": {
+      "added": "2026-10-07",
+      "address": "429 Castro Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Castro Theatre in San Francisco County (building, way/1206216224)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.761991,
+      "lng": -122.43475,
+      "name": "Castro Theatre",
+      "osm": "way/1206216224",
+      "possible_duplicates": [
+        "fabulosa-books",
+        "the-caf",
+        "glbt-historical-society",
+        "beaux"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "castro-valley-marketplace": {
       "added": "2026-10-02",
@@ -1368,6 +1859,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "childrens-garden": {
+      "added": "2026-10-05",
+      "address": "799 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 799 in San Francisco County (building, way/406944774)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.783288,
+      "lng": -122.402524,
+      "name": "Children’s Garden",
+      "osm": "way/406944774",
+      "possible_duplicates": [
+        "crepe-myrtle-garden",
+        "american-bookbinders-museum"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "chinatown-him-mark-lai-branch-library": {
       "added": "2026-10-02",
@@ -1443,6 +1954,28 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "cobbs-comedy-club": {
+      "added": "2026-10-05",
+      "address": "915 Columbus Avenue, San Francisco, CA 94133",
+      "evidence": [
+        "map: Cobb's Comedy Club in San Francisco County (building, node/2106473327)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.802923,
+      "lng": -122.414203,
+      "name": "Cobb's Comedy Club",
+      "osm": "node/2106473327",
+      "possible_duplicates": [
+        "the-lost-church",
+        "north-beach-branch-library",
+        "sweeties-art-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "columbus-cafe": {
       "added": "2026-10-02",
@@ -1535,6 +2068,28 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "crepe-myrtle-garden": {
+      "added": "2026-10-05",
+      "address": "750 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Yerba Buena Gardens in San Francisco County (building, way/28842443)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.78465,
+      "lng": -122.402345,
+      "name": "Crepe Myrtle Garden",
+      "osm": "way/28842443",
+      "possible_duplicates": [
+        "ybca-screening-room",
+        "yerba-buena-center-for-the-arts",
+        "great-lawn",
+        "museum-of-the-african-diaspora"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "curran-theatre": {
       "added": "2026-10-02",
       "address": "445 Geary Street, San Francisco, CA 94102",
@@ -1558,6 +2113,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "dance-boulevard": {
+      "added": "2026-10-08",
+      "address": "1824 Hillsdale Avenue, San Jose, CA 95124",
+      "evidence": [
+        "map: Dance Boulevard in Santa Clara County (building, node/6286794114)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.262142,
+      "lng": -121.917874,
+      "name": "Dance Boulevard",
+      "osm": "node/6286794114",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "dawn-club": {
       "added": "2026-10-02",
       "address": "Annie Street, San Francisco, CA 94104",
@@ -1573,6 +2145,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "dear-john": {
+      "added": "2026-10-07",
+      "address": "3807 Macarthur Blvd, Oakland",
+      "evidence": [
+        "map: 3807;3811 in Alameda County (building, way/236498291)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.791492,
+      "lng": -122.198831,
+      "name": "Dear John",
+      "osm": "way/236498291",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "decentered-arts-studio": {
       "added": "2026-10-02",
@@ -1612,6 +2200,21 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "dinkelspiel-auditorium": {
+      "added": "2026-10-07",
+      "address": "471 Lagunita Dr, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Dinkelspiel Auditorium (way/232805665)"
+      ],
+      "lat": 37.424118,
+      "lng": -122.169899,
+      "name": "Dinkelspiel Auditorium",
+      "osm": "way/232805665",
+      "precision": "building",
+      "region": "southbay",
       "status": "verified"
     },
     "dolores-park": {
@@ -1666,6 +2269,36 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "drakes-barrel-house": {
+      "added": "2026-10-08",
+      "address": "1933 Davis St, San Leandro, CA 94577",
+      "evidence": [
+        "owner review: Drake's Brewing taproom",
+        "map: Drake's Barrel House (node/4072704052)"
+      ],
+      "lat": 37.714795,
+      "lng": -122.17908,
+      "name": "Drake's Barrel House",
+      "osm": "node/4072704052",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "drakes-dealership": {
+      "added": "2026-10-08",
+      "address": "2325 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Drake's Brewing taproom",
+        "map: Drake's Dealership (node/3744652568)"
+      ],
+      "lat": 37.812733,
+      "lng": -122.266691,
+      "name": "Drake's Dealership",
+      "osm": "node/3744652568",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
     "dumpling-time-thrive-city": {
       "added": "2026-10-02",
       "address": "191 Warriors Way, San Francisco, CA 94158",
@@ -1697,6 +2330,38 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "easterbrook-discovery-school": {
+      "added": "2026-10-07",
+      "address": "4835 Doyle Road, San Jose, CA 95129",
+      "evidence": [
+        "map: Easterbrook Discovery School in Santa Clara County (building, way/440705867)",
+        "text: San Jose",
+        "street number matches"
+      ],
+      "lat": 37.304831,
+      "lng": -121.986983,
+      "name": "Easterbrook Discovery School",
+      "osm": "way/440705867",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
+    "eastside-arts-alliance": {
+      "added": "2026-10-08",
+      "address": "2277 International Boulevard, Oakland, CA 94606",
+      "evidence": [
+        "map: 2277 in Alameda County (building, way/801428030)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.783657,
+      "lng": -122.236485,
+      "name": "EastSide Arts Alliance",
+      "osm": "way/801428030",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "eclectic-box": {
       "added": "2026-10-02",
@@ -1883,6 +2548,29 @@
       "region": "sf",
       "status": "verified"
     },
+    "f8-nightclub": {
+      "added": "2026-10-05",
+      "address": "1192 Folsom Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: F8 in San Francisco County (building, node/10861603640)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.775281,
+      "lng": -122.409955,
+      "name": "F8 Nightclub",
+      "osm": "node/10861603640",
+      "possible_duplicates": [
+        "cat-club",
+        "decentered-arts-studio",
+        "arc-gallery-studios",
+        "the-stud",
+        "nosh-box"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "fabulosa-books": {
       "added": "2026-10-02",
       "address": "489 Castro Street, San Francisco, CA 94114",
@@ -1902,6 +2590,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "fancy-flavors": {
+      "added": "2026-10-07",
+      "address": "1645 Saratoga Avenue, San Jose, CA 95130",
+      "evidence": [
+        "map: Fancy Flavors in Santa Clara County (building, node/10958806503)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.292963,
+      "lng": -121.991318,
+      "name": "Fancy Flavors",
+      "osm": "node/10958806503",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "feinsteins-at-the-nikko": {
       "added": "2026-10-02",
@@ -1947,6 +2652,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "first-congregational-church-of-berkeley": {
+      "added": "2026-10-07",
+      "address": "2345 Channing Way, Berkeley, CA 94701",
+      "evidence": [
+        "map: First Congregational Church of Berkeley in Alameda County (building, relation/4083050)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.867026,
+      "lng": -122.26164,
+      "name": "First Congregational Church of Berkeley",
+      "osm": "relation/4083050",
+      "possible_duplicates": [
+        "zellerbach-playhouse",
+        "zellerbach-hall"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "first-congregational-united-church-of-christ": {
       "added": "2026-10-02",
       "address": "2501 Harrison Street, Oakland, CA 94612",
@@ -1975,6 +2701,23 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "flax-art-and-design": {
+      "added": "2026-10-05",
+      "address": "1501 Martin Luther King Junior Way, Oakland, CA 94612",
+      "evidence": [
+        "map: FLAX Art and Design in Alameda County (building, way/334467207)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.807224,
+      "lng": -122.275718,
+      "name": "FLAX Art and Design",
+      "osm": "way/334467207",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "fly-bar-restaurant": {
       "added": "2026-10-02",
       "address": "762 Divisadero Street, San Francisco, CA 94117",
@@ -1995,6 +2738,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "flywheel-coffee-roasters": {
+      "added": "2026-10-07",
+      "address": "672 Stanyan St, San Francisco, CA 94117",
+      "evidence": [
+        "map: 670;672 in San Francisco County (building, way/228246797)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.769705,
+      "lng": -122.453357,
+      "name": "Flywheel Coffee Roasters",
+      "osm": "way/228246797",
+      "possible_duplicates": [
+        "oreillys-pub",
+        "the-booksmith",
+        "park-branch-library"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "fort-mason-center-for-arts-culture": {
       "added": "2026-10-02",
       "address": "2 Building B Marina Boulevard, San Francisco, CA 94123",
@@ -2008,6 +2772,43 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "fox-oakland-theater": {
+      "added": "2026-10-07",
+      "address": "1807 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: Fox Oakland Theater in Alameda County (building, node/443522428)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.807994,
+      "lng": -122.270158,
+      "name": "Fox Oakland Theater",
+      "osm": "node/443522428",
+      "possible_duplicates": [
+        "torch-bar",
+        "paramount-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "frankies-java-house": {
+      "added": "2026-10-07",
+      "address": "Herb Caen Way..., San Francisco, CA 94017",
+      "evidence": [
+        "map: Frankie’s Java House in San Francisco County (building, node/317124793)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.781426,
+      "lng": -122.387807,
+      "name": "Frankie’s Java House",
+      "osm": "node/317124793",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "frontier-tower-berlinhouse": {
       "added": "2026-10-02",
@@ -2028,6 +2829,21 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "frost-amphitheater": {
+      "added": "2026-10-07",
+      "address": "351 Lasuen St, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Frost Amphitheater (way/26250717)"
+      ],
+      "lat": 37.430661,
+      "lng": -122.165957,
+      "name": "Frost Amphitheater",
+      "osm": "way/26250717",
+      "precision": "building",
+      "region": "southbay",
       "status": "verified"
     },
     "galeria-de-la-raza": {
@@ -2174,6 +2990,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "golden-ratio": {
+      "added": "2026-10-07",
+      "address": "1517 Franklin Street, Oakland, CA 94612",
+      "evidence": [
+        "map: Golden Ratio in Alameda County (building, node/1186413940)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.805156,
+      "lng": -122.269383,
+      "name": "Golden Ratio",
+      "osm": "node/1186413940",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "grace-cathedral": {
       "added": "2026-10-02",
@@ -2342,6 +3175,77 @@
       "region": "sf",
       "status": "verified"
     },
+    "harvey-milk-photo-center": {
+      "added": "2026-10-08",
+      "address": "50 Scott Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Harvey Milk Photo Center in San Francisco County (building, node/13233207936)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.769506,
+      "lng": -122.43448,
+      "name": "Harvey Milk Photo Center",
+      "osm": "node/13233207936",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "hearst-greek-theatre": {
+      "added": "2026-10-07",
+      "address": "2001 Gayley Rd, Berkeley, CA 94720",
+      "evidence": [
+        "map: Hearst Greek Theatre in Alameda County (building, way/24025050)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.873675,
+      "lng": -122.254241,
+      "name": "Hearst Greek Theatre",
+      "osm": "way/24025050",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "henry-j-kaiser-center-for-the-arts": {
+      "added": "2026-10-07",
+      "address": "10 10th Street, Oakland, CA 94612",
+      "evidence": [
+        "map: Henry J. Kaiser Center for the Arts in Alameda County (building, way/23593180)",
+        "text: Oakland",
+        "name matches"
+      ],
+      "lat": 37.797578,
+      "lng": -122.26157,
+      "name": "Henry J. Kaiser Center for the Arts",
+      "osm": "way/23593180",
+      "possible_duplicates": [
+        "james-moore-theater",
+        "lake-merritt-amphitheater",
+        "calvin-simmons-theater",
+        "oakland-museum-of-california"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "hertz-hall": {
+      "added": "2026-10-07",
+      "address": "Ong & Ong Plaza, Berkeley, CA 94720",
+      "evidence": [
+        "map: Hertz Hall in Alameda County (building, way/24024671)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.871046,
+      "lng": -122.255714,
+      "name": "Hertz Hall",
+      "osm": "way/24024671",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "hi-tops": {
       "added": "2026-10-02",
       "address": "2247 Market Street, San Francisco, CA 94114",
@@ -2395,6 +3299,43 @@
       "region": "sf",
       "status": "verified"
     },
+    "impossible-stage": {
+      "added": "2026-10-07",
+      "address": "2033 University Avenue, Berkeley, CA 94704",
+      "evidence": [
+        "map: 2033 in Alameda County (building, way/195604807)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.872096,
+      "lng": -122.26993,
+      "name": "Impossible Stage",
+      "osm": "way/195604807",
+      "possible_duplicates": [
+        "the-uc-theatre",
+        "berkeley-rep"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "india-community-center": {
+      "added": "2026-10-06",
+      "address": "525 Los Coches Street, Milpitas, CA 95035",
+      "evidence": [
+        "map: India Community Center in Santa Clara County (building, way/157811574)",
+        "text: Milpitas",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.431923,
+      "lng": -121.895253,
+      "name": "India Community Center",
+      "osm": "way/157811574",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "ingleside-branch-library": {
       "added": "2026-10-02",
       "address": "1298 Ocean Avenue, San Francisco, CA 94112",
@@ -2445,6 +3386,40 @@
       "region": "sf",
       "status": "verified"
     },
+    "iris-emerson": {
+      "added": "2026-10-07",
+      "address": "790 Arguello Boulevard, San Francisco, CA 94118",
+      "evidence": [
+        "map: Iris & Emerson in San Francisco County (building, node/6700815974)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.775538,
+      "lng": -122.45829,
+      "name": "Iris & Emerson",
+      "osm": "node/6700815974",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "ivy-room": {
+      "added": "2026-10-07",
+      "address": "860 San Pablo Avenue, Albany, CA 94706",
+      "evidence": [
+        "map: Ivy Room in Alameda County (building, node/343611002)",
+        "text: Albany",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.890442,
+      "lng": -122.299201,
+      "name": "Ivy Room",
+      "osm": "node/343611002",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "jack-london-square": {
       "added": "2026-10-02",
       "address": "472 Water Street, Oakland, CA 94607",
@@ -2464,6 +3439,27 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "james-moore-theater": {
+      "added": "2026-10-05",
+      "address": "1000 Oak Street, Oakland, CA 94607",
+      "evidence": [
+        "map: James Moore Theater in Alameda County (building, node/6302622831)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.79809,
+      "lng": -122.262682,
+      "name": "James Moore Theater",
+      "osm": "node/6302622831",
+      "possible_duplicates": [
+        "calvin-simmons-theater",
+        "oakland-museum-of-california"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "jcc-east-bay": {
       "added": "2026-10-02",
@@ -2542,6 +3538,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "junes-pizza": {
+      "added": "2026-10-07",
+      "address": "2408 Mandela Parkway, Oakland, CA 94607",
+      "evidence": [
+        "map: June’s Pizza in Alameda County (building, node/12212782379)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.819001,
+      "lng": -122.288658,
+      "name": "June’s Pizza",
+      "osm": "node/12212782379",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "kalw": {
       "added": "2026-10-02",
       "address": "220 Montgomery Street, San Francisco, CA 94104",
@@ -2576,6 +3589,20 @@
       "name": "Karma Cafe",
       "osm": "node/1958696320",
       "precision": "building",
+      "region": "sf",
+      "status": "verified"
+    },
+    "kearny-st-clay-st": {
+      "added": "2026-10-10",
+      "address": "Kearny St & Clay St, San Francisco, CA 94108",
+      "evidence": [
+        "owner review: a street corner (Partiful Chinatown Cleanup)",
+        "map: shared node of Kearny Street and Clay Street"
+      ],
+      "lat": 37.794462,
+      "lng": -122.404793,
+      "name": "Kearny St & Clay St",
+      "precision": "street",
       "region": "sf",
       "status": "verified"
     },
@@ -2617,6 +3644,31 @@
       "region": "sf",
       "status": "verified"
     },
+    "kilowatt": {
+      "added": "2026-10-07",
+      "address": "3160 16th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Kilowatt in San Francisco County (building, node/275723361)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.764974,
+      "lng": -122.423241,
+      "name": "Kilowatt",
+      "osm": "node/275723361",
+      "possible_duplicates": [
+        "roxie-theater",
+        "elixir",
+        "eclectic-box",
+        "muddy-waters-coffee-lounge",
+        "lore-speakeasy-and-escape-room",
+        "the-drawing-room-annex"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "kqed-commons": {
       "added": "2026-10-02",
       "address": "2601 Mariposa Street, San Francisco, CA 94110",
@@ -2636,6 +3688,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "la-pista": {
+      "added": "2026-10-05",
+      "address": "3450 3rd Street, San Francisco, CA 94124",
+      "evidence": [
+        "map: 3450 in San Francisco County (building, way/255351741)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.745607,
+      "lng": -122.387349,
+      "name": "La Pista",
+      "osm": "way/255351741",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "la-reyna-bakery": {
       "added": "2026-10-02",
@@ -2670,6 +3738,25 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "lake-merritt-amphitheater": {
+      "added": "2026-10-07",
+      "address": "Channel Path, Oakland, CA 94606",
+      "evidence": [
+        "map: Lake Merritt Amphitheater in Alameda County (building, node/4316619345)",
+        "text: Oakland",
+        "name matches"
+      ],
+      "lat": 37.799045,
+      "lng": -122.26068,
+      "name": "Lake Merritt Amphitheater",
+      "osm": "node/4316619345",
+      "possible_duplicates": [
+        "james-moore-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "lands-end-main-parking-lot": {
       "added": "2026-10-02",
@@ -2830,6 +3917,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "luna-del-soul": {
+      "added": "2026-10-08",
+      "address": "822 Cassia Street, Redwood City, CA 94063",
+      "evidence": [
+        "map: 822 in San Mateo County (building, way/8936188)",
+        "text: Redwood City",
+        "street number matches"
+      ],
+      "lat": 37.48634,
+      "lng": -122.22274,
+      "name": "Luna del Soul",
+      "osm": "way/8936188",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
+    },
     "mabuhay-gardens": {
       "added": "2026-10-02",
       "address": "435 Broadway, San Francisco, CA 94113",
@@ -2842,6 +3945,21 @@
       "osm": "way/70077929",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "mad-oak-bar-n-yard": {
+      "added": "2026-10-07",
+      "address": "135 12th St, Oakland, CA 94607",
+      "evidence": [
+        "owner: Mad Oak Bar 'N' Yard, 135 12th St",
+        "map: Mad Oak (node/3613169961)"
+      ],
+      "lat": 37.799862,
+      "lng": -122.264642,
+      "name": "Mad Oak Bar 'N' Yard",
+      "osm": "node/3613169961",
+      "precision": "building",
+      "region": "eastbay",
       "status": "verified"
     },
     "madrone-art-bar": {
@@ -2900,6 +4018,20 @@
       "region": "sf",
       "status": "verified"
     },
+    "maker-studio": {
+      "added": "2026-10-05",
+      "address": "600a Octavia Blvd, San Francisco, CA 94102",
+      "evidence": [
+        "map: Octavia Boulevard in San Francisco County (street, way/983835542)",
+        "text: San Francisco"
+      ],
+      "lat": 37.775546,
+      "lng": -122.424245,
+      "name": "Maker Studio",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
+    },
     "manna-gallery": {
       "added": "2026-10-02",
       "address": "473 25th Street, Oakland, CA 94612",
@@ -2954,6 +4086,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "marina-green": {
+      "added": "2026-10-07",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: Marina Green in San Francisco County (building, way/16761472)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.806603,
+      "lng": -122.439117,
+      "name": "Marina Green",
+      "osm": "way/16761472",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "martunis": {
       "added": "2026-10-02",
@@ -3030,6 +4178,40 @@
       "osm": "node/10650803521",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "melifolla-studio": {
+      "added": "2026-10-08",
+      "address": "1339 Mission Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1339 in San Francisco County (building, way/252570896)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.775622,
+      "lng": -122.415088,
+      "name": "Melifolla Studio",
+      "osm": "way/252570896",
+      "possible_duplicates": [
+        "st-josephs-art-society"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "memorial-auditorium-stanford": {
+      "added": "2026-10-07",
+      "address": "551 Jane Stanford Way, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Memorial Auditorium (node/5689447559)"
+      ],
+      "lat": 37.428518,
+      "lng": -122.167224,
+      "name": "Memorial Auditorium",
+      "osm": "node/5689447559",
+      "precision": "building",
+      "region": "southbay",
       "status": "verified"
     },
     "merced-branch-library": {
@@ -3197,6 +4379,64 @@
       "region": "sf",
       "status": "verified"
     },
+    "montgomery-theater": {
+      "added": "2026-10-07",
+      "address": "271 South Market Street, San Jose, CA 95113",
+      "evidence": [
+        "map: Montgomery Theater in Santa Clara County (building, node/9115664628)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.330936,
+      "lng": -121.889297,
+      "name": "Montgomery Theater",
+      "osm": "node/9115664628",
+      "possible_duplicates": [
+        "nirvana-soul",
+        "the-continental"
+      ],
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
+    "mosswood-park": {
+      "added": "2026-10-07",
+      "address": "3612 Webster Street, Oakland, CA 94609",
+      "evidence": [
+        "map: Mosswood Recreation Center in Alameda County (building, way/1509844815)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.823695,
+      "lng": -122.261412,
+      "name": "Mosswood Park",
+      "osm": "way/1509844815",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "moth-belly-gallery": {
+      "added": "2026-10-07",
+      "address": "912 Larkin Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Moth Belly Gallery in San Francisco County (building, node/13058206962)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.786371,
+      "lng": -122.418038,
+      "name": "Moth Belly Gallery",
+      "osm": "node/13058206962",
+      "possible_duplicates": [
+        "alchemy-springs",
+        "great-american-music-hall",
+        "xex"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "mothership": {
       "added": "2026-10-02",
       "address": "3152 Mission Street, San Francisco, CA 94110",
@@ -3217,6 +4457,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "mountain-view-center-for-the-performing-arts": {
+      "added": "2026-10-07",
+      "address": "500 Castro Street, Mountain View, CA 94041",
+      "evidence": [
+        "map: 500 in Santa Clara County (building, way/417922883)",
+        "text: Mountain View",
+        "street number matches"
+      ],
+      "lat": 37.389985,
+      "lng": -122.0815,
+      "name": "Mountain View Center for the Performing Arts",
+      "osm": "way/417922883",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "mr-mahjong": {
       "added": "2026-10-02",
@@ -3311,6 +4567,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "national-maritime-museum": {
+      "added": "2026-10-05",
+      "address": "900 Beach St, San Francisco, CA 94109",
+      "evidence": [
+        "map: National Maritime Museum in San Francisco County (building, way/32839686)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.806408,
+      "lng": -122.423897,
+      "name": "National Maritime Museum",
+      "osm": "way/32839686",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "neck-of-the-woods": {
       "added": "2026-10-02",
@@ -3439,6 +4711,29 @@
       "region": "sf",
       "status": "verified"
     },
+    "noisebridge": {
+      "added": "2026-10-09",
+      "address": "272 Capp Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Noisebridge in San Francisco County (building, way/960975186)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.762434,
+      "lng": -122.418659,
+      "name": "Noisebridge",
+      "osm": "way/960975186",
+      "possible_duplicates": [
+        "the-sycamore",
+        "the-secret-alley",
+        "clarion-alley-mural-project",
+        "mission-bowling-club"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "north-beach-branch-library": {
       "added": "2026-10-02",
       "address": "850 Columbus Avenue, San Francisco, CA 94133",
@@ -3477,6 +4772,52 @@
       "region": "sf",
       "status": "verified"
     },
+    "oakland-asian-cultural-center": {
+      "added": "2026-10-08",
+      "address": "388 9th St #290, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland sprint source venue",
+        "map: Oakland Asian Cultural Center (node/3992959602)"
+      ],
+      "lat": 37.80065,
+      "lng": -122.27087,
+      "name": "Oakland Asian Cultural Center",
+      "osm": "node/3992959602",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "oakland-main-library": {
+      "added": "2026-10-08",
+      "address": "125 14th Street, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch OHR centre point"
+      ],
+      "lat": 37.80094,
+      "lng": -122.263876,
+      "name": "Oakland Main Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "oakland-museum-of-california": {
+      "added": "2026-10-05",
+      "address": "1000 Oak Street, Oakland, CA 94607",
+      "evidence": [
+        "map: Oakland Museum of California in Alameda County (building, relation/6431998)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.798614,
+      "lng": -122.263604,
+      "name": "Oakland Museum of California",
+      "osm": "relation/6431998",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "oakland-photo-workshop": {
       "added": "2026-10-02",
       "address": "312 8th Street, Oakland, CA 94609",
@@ -3490,6 +4831,21 @@
       "lng": -122.270319,
       "name": "Oakland Photo Workshop",
       "osm": "node/10019085237",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "oakland-united-beerworks": {
+      "added": "2026-10-08",
+      "address": "262 2nd St, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland sprint source venue",
+        "map: Oakland United Beerworks (node/8400170781)"
+      ],
+      "lat": 37.794517,
+      "lng": -122.271994,
+      "name": "Oakland United Beerworks",
+      "osm": "node/8400170781",
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
@@ -3566,6 +4922,230 @@
       "region": "sf",
       "status": "verified"
     },
+    "opl-81st-avenue-branch": {
+      "added": "2026-10-08",
+      "address": "1021 81st Avenue, Oakland, CA 94621",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch 81A centre point"
+      ],
+      "lat": 37.753591,
+      "lng": -122.185552,
+      "name": "81st Avenue Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-asian-branch": {
+      "added": "2026-10-08",
+      "address": "388 Ninth Street, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch ASA centre point"
+      ],
+      "lat": 37.800738,
+      "lng": -122.271158,
+      "name": "Asian Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-brookfield-branch": {
+      "added": "2026-10-08",
+      "address": "9255 Edes Avenue, Oakland, CA 94603",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch BRA centre point"
+      ],
+      "lat": 37.737336,
+      "lng": -122.188573,
+      "name": "Brookfield Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-dimond-branch": {
+      "added": "2026-10-08",
+      "address": "3565 Fruitvale Avenue, Oakland, CA 94602",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch DMA centre point"
+      ],
+      "lat": 37.801459,
+      "lng": -122.216039,
+      "name": "Dimond Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-eastmont-branch": {
+      "added": "2026-10-08",
+      "address": "7200 Bancroft Avenue, Oakland, CA 94605",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch EAA centre point"
+      ],
+      "lat": 37.768785,
+      "lng": -122.177664,
+      "name": "Eastmont Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-elmhurst-branch": {
+      "added": "2026-10-08",
+      "address": "1427 88th Avenue, Oakland, CA 94621",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch ELA centre point"
+      ],
+      "lat": 37.751568,
+      "lng": -122.174915,
+      "name": "Elmhurst Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-fruitvale-branch": {
+      "added": "2026-10-08",
+      "address": "3301 East 12th Street, Oakland, CA 94601",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch CCA centre point"
+      ],
+      "lat": 37.77606,
+      "lng": -122.225006,
+      "name": "Fruitvale Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-golden-gate-branch": {
+      "added": "2026-10-08",
+      "address": "5606 San Pablo Avenue, Oakland, CA 94608",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch GGA centre point"
+      ],
+      "lat": 37.839193,
+      "lng": -122.282203,
+      "name": "Golden Gate Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-lakeview-branch": {
+      "added": "2026-10-08",
+      "address": "550 El Embarcadero, Oakland, CA 94610",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch LVA centre point"
+      ],
+      "lat": 37.8092,
+      "lng": -122.248949,
+      "name": "Lakeview Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-martin-luther-king-jr-branch": {
+      "added": "2026-10-08",
+      "address": "6833 International Boulevard, Oakland, CA 94621",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch KGA centre point"
+      ],
+      "lat": 37.760606,
+      "lng": -122.19079,
+      "name": "Martin Luther King Jr. Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-melrose-branch": {
+      "added": "2026-10-08",
+      "address": "4805 Foothill Boulevard, Oakland, CA 94601",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch MEA centre point"
+      ],
+      "lat": 37.772432,
+      "lng": -122.207614,
+      "name": "Melrose Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-montclair-branch": {
+      "added": "2026-10-08",
+      "address": "1687 Mountain Boulevard, Oakland, CA 94611",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch MOA centre point"
+      ],
+      "lat": 37.831983,
+      "lng": -122.214111,
+      "name": "Montclair Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-piedmont-avenue-branch": {
+      "added": "2026-10-08",
+      "address": "80 Echo Avenue, Oakland, CA 94611",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch PMA centre point"
+      ],
+      "lat": 37.827844,
+      "lng": -122.248151,
+      "name": "Piedmont Avenue Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-rockridge-branch": {
+      "added": "2026-10-08",
+      "address": "5366 College Avenue, Oakland, CA 94618",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch RRA centre point"
+      ],
+      "lat": 37.839908,
+      "lng": -122.251076,
+      "name": "Rockridge Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-temescal-branch": {
+      "added": "2026-10-08",
+      "address": "5205 Telegraph Avenue, Oakland, CA 94609",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch TMA centre point"
+      ],
+      "lat": 37.8382,
+      "lng": -122.262509,
+      "name": "Temescal Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "opl-west-oakland-branch": {
+      "added": "2026-10-08",
+      "address": "1801 Adeline Street, Oakland, CA 94607",
+      "evidence": [
+        "owner review: Oakland Public Library branch",
+        "map: BiblioCommons branch WAS centre point"
+      ],
+      "lat": 37.812925,
+      "lng": -122.285292,
+      "name": "West Oakland Branch, Oakland Public Library",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
     "oreillys-pub": {
       "added": "2026-10-02",
       "address": "1840 Haight Street, San Francisco, CA 94117",
@@ -3635,6 +5215,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "oshman-family-jcc": {
+      "added": "2026-10-05",
+      "address": "3921 Fabian Way, Palo Alto, CA 94303",
+      "evidence": [
+        "map: 3921 in Santa Clara County (building, way/229815132)",
+        "text: Palo Alto",
+        "street number matches"
+      ],
+      "lat": 37.423639,
+      "lng": -122.103463,
+      "name": "Oshman Family JCC",
+      "osm": "way/229815132",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "pacific-pipe": {
       "added": "2026-10-02",
       "address": "2140 Mandela Parkway, Oakland, CA 94607",
@@ -3650,6 +5246,18 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "pacifica-state-beach": {
+      "added": "2026-10-07",
+      "address": "5246 Coast Hwy, Pacifica, CA 94044",
+      "evidence": [
+        "map: Pacifica State Beach in San Mateo County (city, way/39970023)",
+        "text: Pacifica"
+      ],
+      "name": "Pacifica State Beach",
+      "precision": "city",
+      "region": "peninsula",
+      "status": "auto"
     },
     "page-street-co-writing": {
       "added": "2026-10-02",
@@ -3699,6 +5307,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "palo-alto-childrens-theatre": {
+      "added": "2026-10-07",
+      "address": "1305 Middlefield Road, Palo Alto, CA 94301",
+      "evidence": [
+        "map: Lucie Stern Community Center in Santa Clara County (building, way/231246591)",
+        "text: Palo Alto",
+        "street number matches"
+      ],
+      "lat": 37.444328,
+      "lng": -122.145605,
+      "name": "Palo Alto Children's Theatre",
+      "osm": "way/231246591",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "pandora-karaoke-bar": {
       "added": "2026-10-02",
@@ -3850,6 +5474,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "pier-45": {
+      "added": "2026-10-05",
+      "address": "Pier 45, San Francisco, CA 94133",
+      "evidence": [
+        "map: Pier 45 in San Francisco County (building, way/1255058987)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.809774,
+      "lng": -122.417315,
+      "name": "Pier 45",
+      "osm": "way/1255058987",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "pittsburghs-pub": {
       "added": "2026-10-02",
       "address": "4207 Judah Street, San Francisco, CA 94166",
@@ -3868,6 +5508,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "polish-club-of-san-francisco": {
+      "added": "2026-10-08",
+      "address": "3040 22nd Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Polish Club of San Francisco in San Francisco County (building, way/261247832)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.755831,
+      "lng": -122.41528,
+      "name": "Polish Club of San Francisco",
+      "osm": "way/261247832",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "portola-branch-library": {
       "added": "2026-10-02",
@@ -3964,6 +5621,67 @@
       "region": "sf",
       "status": "verified"
     },
+    "press-club": {
+      "added": "2026-10-08",
+      "address": "20 Yerba Buena Lane, San Francisco, CA 94108",
+      "evidence": [
+        "map: Press Club in San Francisco County (building, node/1844915443)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.785999,
+      "lng": -122.404443,
+      "name": "Press Club",
+      "osm": "node/1844915443",
+      "possible_duplicates": [
+        "39-grant-ave",
+        "ybca-screening-room",
+        "yerba-buena-center-for-the-arts",
+        "great-lawn",
+        "crepe-myrtle-garden"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "public-works": {
+      "added": "2026-10-07",
+      "address": "161 Erie Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Public Works in San Francisco County (building, way/260973315)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.768893,
+      "lng": -122.419265,
+      "name": "Public Works",
+      "osm": "way/260973315",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "punch-line-comedy-club": {
+      "added": "2026-10-05",
+      "address": "444 Battery Street, San Francisco, CA 94111",
+      "evidence": [
+        "map: Punch Line Comedy Club in San Francisco County (building, way/104682197)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.795532,
+      "lng": -122.400119,
+      "name": "Punch Line Comedy Club",
+      "osm": "way/104682197",
+      "possible_duplicates": [
+        "patriot-house-pub"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "question-mark-tavern": {
       "added": "2026-10-02",
       "address": "312 Harriet Street, San Francisco, CA 94107",
@@ -3979,6 +5697,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "revival-hall": {
+      "added": "2026-10-08",
+      "address": "4799 Shattuck Avenue, Oakland, CA 94609",
+      "evidence": [
+        "map: Revival Hall in Alameda County (building, way/279193365)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.834999,
+      "lng": -122.264154,
+      "name": "Revival Hall",
+      "osm": "way/279193365",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "richmond-branch-san-francisco-public-library": {
       "added": "2026-10-02",
@@ -4053,6 +5788,25 @@
       "region": "sf",
       "status": "verified"
     },
+    "root-division": {
+      "added": "2026-10-07",
+      "address": "1131 Mission Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1131 in San Francisco County (building, way/260462719)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.778435,
+      "lng": -122.411454,
+      "name": "Root Division",
+      "osm": "way/260462719",
+      "possible_duplicates": [
+        "lines-dance-center"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "roxie-theater": {
       "added": "2026-10-02",
       "address": "3117 16th Street, San Francisco, CA 94143",
@@ -4090,6 +5844,47 @@
       "osm": "node/9696861040",
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "salesforce-park": {
+      "added": "2026-10-07",
+      "address": "425 Mission St, San Francisco, CA 94105",
+      "evidence": [
+        "owner: 425 Mission St; sections from the park's own map",
+        "map: Salesforce Park (relation/8524888)"
+      ],
+      "lat": 37.789115,
+      "lng": -122.396655,
+      "name": "Salesforce Park",
+      "osm": "relation/8524888",
+      "precision": "building",
+      "region": "sf",
+      "rooms": [
+        "Amphitheater",
+        "Amphitheater Main Lawn",
+        "Amphitheater Stage",
+        "Main Lawn",
+        "Desert Garden",
+        "California Garden",
+        "Fog Garden",
+        "Chilean Garden",
+        "Bus Fountain",
+        "West Skylight",
+        "Central Lawn",
+        "Palm Garden",
+        "Children's Play Area",
+        "South African Garden",
+        "Australian Garden",
+        "Grass Garden",
+        "Main Plaza",
+        "Oculus",
+        "Bamboo Grove",
+        "Mediterranean Basin",
+        "East Skylight",
+        "Redwood Forest",
+        "Prehistoric Garden",
+        "Wetland Garden"
+      ],
       "status": "verified"
     },
     "san-francisco-center-for-the-book-sfcb": {
@@ -4183,6 +5978,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "san-pablo-park": {
+      "added": "2026-10-07",
+      "address": "2800 Park Street, Berkeley, CA 94702",
+      "evidence": [
+        "map: 2800 in Alameda County (building, way/423805368)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.856516,
+      "lng": -122.28335,
+      "name": "San Pablo Park",
+      "osm": "way/423805368",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "sausalito-books-by-the-bay": {
       "added": "2026-10-02",
       "address": "100 Bay Street, Sausalito, CA 94965",
@@ -4216,6 +6027,20 @@
       "region": "sf",
       "status": "auto"
     },
+    "scott-st-page-st": {
+      "added": "2026-10-08",
+      "address": "Scott St & Page St, San Francisco, CA 94117",
+      "evidence": [
+        "owner review: a street corner (Partiful line dancing)",
+        "map: shared node of Scott Street and Page Street"
+      ],
+      "lat": 37.77242,
+      "lng": -122.435584,
+      "name": "Scott St & Page St",
+      "precision": "street",
+      "region": "sf",
+      "status": "verified"
+    },
     "sfjazz-center": {
       "added": "2026-10-02",
       "address": "201 Franklin Street, San Francisco, CA 94102",
@@ -4231,6 +6056,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "shark-boy-fish-and-chips": {
+      "added": "2026-10-07",
+      "address": "1100 North 1st Street, San Jose, CA 95112",
+      "evidence": [
+        "map: Shark Boy Fish and Chips in Santa Clara County (building, node/6515610986)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.356624,
+      "lng": -121.90519,
+      "name": "Shark Boy Fish and Chips",
+      "osm": "node/6515610986",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "silver-cloud-restaurant-karaoke-bar": {
       "added": "2026-10-02",
@@ -4281,6 +6123,46 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "society-of-thumbs": {
+      "added": "2026-10-07",
+      "address": "1398 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Society of Thumbs in San Francisco County (building, node/2056745156)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.750594,
+      "lng": -122.420672,
+      "name": "Society of Thumbs",
+      "osm": "node/2056745156",
+      "possible_duplicates": [
+        "et-al-gallery-and-bookshop"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "sofa-pocket-park": {
+      "added": "2026-10-07",
+      "address": "540 South 1st Street, San Jose, CA 95112",
+      "evidence": [
+        "map: SoFA Pocket Park in Santa Clara County (building, way/1043526459)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.328043,
+      "lng": -121.884089,
+      "name": "SoFA Pocket Park",
+      "osm": "way/1043526459",
+      "possible_duplicates": [
+        "guildhouse"
+      ],
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "spark-social-sf": {
       "added": "2026-10-02",
       "address": "601 Mission Bay Boulevard North, San Francisco, CA 94158",
@@ -4320,6 +6202,40 @@
         "tupelo",
         "the-cigar-bar-grill"
       ],
+      "precision": "building",
+      "region": "sf",
+      "status": "verified"
+    },
+    "sports-basement-berkeley": {
+      "added": "2026-10-02",
+      "address": "2727 Milvia Street, Berkeley, CA 94703",
+      "evidence": [
+        "map: Sports Basement in Alameda County (building, way/68675078)",
+        "text: Berkeley",
+        "street number matches",
+        "renamed 2026-10-05: was 'the-community-room', named after the room the events are in"
+      ],
+      "lat": 37.85972,
+      "lng": -122.268749,
+      "name": "Sports Basement Berkeley",
+      "osm": "way/68675078",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "verified"
+    },
+    "sports-basement-bryant": {
+      "added": "2026-10-02",
+      "address": "1590 Bryant Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Sports Basement Outdoor & Camping in San Francisco County (building, way/35343322)",
+        "text: San Francisco",
+        "street number matches",
+        "renamed 2026-10-05: was 'the-treeline', named after the room the events are in"
+      ],
+      "lat": 37.767098,
+      "lng": -122.411132,
+      "name": "Sports Basement Bryant",
+      "osm": "way/35343322",
       "precision": "building",
       "region": "sf",
       "status": "verified"
@@ -4374,6 +6290,56 @@
       "region": "sf",
       "status": "verified"
     },
+    "st-michaels-ukrainian-orthodox-church": {
+      "added": "2026-10-07",
+      "address": "345 7th St, San Francisco, CA 94103",
+      "evidence": [
+        "owner: Church of Zouk events are always here",
+        "map: Ukrainian Orthodox Church of Saint Michael (way/260459201)"
+      ],
+      "lat": 37.776395,
+      "lng": -122.406937,
+      "name": "St. Michael's Ukrainian Orthodox Church",
+      "osm": "way/260459201",
+      "precision": "building",
+      "region": "sf",
+      "status": "verified"
+    },
+    "standard-deviant": {
+      "added": "2026-10-07",
+      "address": "280 14th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Standard Deviant in San Francisco County (building, way/260973325)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.768471,
+      "lng": -122.419476,
+      "name": "Standard Deviant",
+      "osm": "way/260973325",
+      "possible_duplicates": [
+        "public-works"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "stanford-memorial-church": {
+      "added": "2026-10-07",
+      "address": "450 Jane Stanford Way, Stanford, CA 94305",
+      "evidence": [
+        "owner: Stanford Live hall",
+        "map: Stanford Memorial Church (way/836474103)"
+      ],
+      "lat": 37.426916,
+      "lng": -122.170505,
+      "name": "Stanford Memorial Church",
+      "osm": "way/836474103",
+      "precision": "building",
+      "region": "southbay",
+      "status": "verified"
+    },
     "stanford-shopping-center": {
       "added": "2026-10-02",
       "address": "660 Stanford Shopping Center, Palo Alto, CA 94304",
@@ -4390,6 +6356,22 @@
       "precision": "building",
       "region": "southbay",
       "status": "verified"
+    },
+    "starbright-theater": {
+      "added": "2026-10-06",
+      "address": "1770 West Campbell Avenue, Campbell, CA 95008",
+      "evidence": [
+        "map: 1770 in Santa Clara County (building, way/417907163)",
+        "text: Campbell",
+        "street number matches"
+      ],
+      "lat": 37.285749,
+      "lng": -121.981716,
+      "name": "Starbright Theater",
+      "osm": "way/417907163",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "starlite-room": {
       "added": "2026-10-02",
@@ -4413,6 +6395,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "sunnyvale-theatre": {
+      "added": "2026-10-06",
+      "address": "550 East Remington Drive, Sunnyvale, CA 94088",
+      "evidence": [
+        "map: Sunnyvale Theatre in Santa Clara County (building, way/61114768)",
+        "text: Sunnyvale",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.358089,
+      "lng": -122.024846,
+      "name": "Sunnyvale Theatre",
+      "osm": "way/61114768",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "sunset-branch-library": {
       "added": "2026-10-02",
       "address": "1305 18th Avenue, San Francisco, CA 94122",
@@ -4428,6 +6427,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "sunset-commons": {
+      "added": "2026-10-07",
+      "address": "1600 Irving Street, San Francisco, CA 94122",
+      "evidence": [
+        "map: Sunset Commons in San Francisco County (building, node/13015863377)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.763787,
+      "lng": -122.475139,
+      "name": "Sunset Commons",
+      "osm": "node/13015863377",
+      "possible_duplicates": [
+        "sunset-branch-library"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "sweeties-art-bar": {
       "added": "2026-10-02",
@@ -4447,6 +6466,21 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "sweets-ballroom": {
+      "added": "2026-10-08",
+      "address": "1933 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "owner review: Bay Area Fusion Calendar venue",
+        "map: Sweet's Ballroom (way/36976553)"
+      ],
+      "lat": 37.808334,
+      "lng": -122.269119,
+      "name": "Sweet's Ballroom",
+      "osm": "way/36976553",
+      "precision": "building",
+      "region": "eastbay",
       "status": "verified"
     },
     "sydney-goldstein-theater": {
@@ -4469,6 +6503,21 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "verified"
+    },
+    "taco-bell-cantina-pacifica": {
+      "added": "2026-10-08",
+      "address": "5200 Coast Hwy, Pacifica, CA 94044",
+      "evidence": [
+        "owner review: 5200 Coast Hwy is the Taco Bell Cantina on Pacifica State Beach",
+        "map: Taco Bell Cantina (way/1292202052)"
+      ],
+      "lat": 37.597185,
+      "lng": -122.503768,
+      "name": "Taco Bell Cantina Pacifica",
+      "osm": "way/1292202052",
+      "precision": "building",
+      "region": "peninsula",
       "status": "verified"
     },
     "tally-ho-books": {
@@ -4737,22 +6786,6 @@
       "osm": "node/9659886917",
       "precision": "building",
       "region": "sf",
-      "status": "verified"
-    },
-    "the-community-room": {
-      "added": "2026-10-02",
-      "address": "2727 Milvia Street, Berkeley, CA 94703",
-      "evidence": [
-        "map: Sports Basement in Alameda County (building, way/68675078)",
-        "text: Berkeley",
-        "street number matches"
-      ],
-      "lat": 37.85972,
-      "lng": -122.268749,
-      "name": "The Community Room",
-      "osm": "way/68675078",
-      "precision": "building",
-      "region": "eastbay",
       "status": "verified"
     },
     "the-continental": {
@@ -5192,6 +7225,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-masonic": {
+      "added": "2026-10-05",
+      "address": "1111 California Street, San Francisco, CA 94108",
+      "evidence": [
+        "map: The Masonic in San Francisco County (building, way/32947040)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.791174,
+      "lng": -122.41299,
+      "name": "The Masonic",
+      "osm": "way/32947040",
+      "possible_duplicates": [
+        "grace-cathedral"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "the-mellow-haight": {
       "added": "2026-10-02",
       "address": "1401 Haight Street, San Francisco, CA 94117",
@@ -5434,21 +7487,79 @@
       "region": "sf",
       "status": "verified"
     },
-    "the-treeline": {
-      "added": "2026-10-02",
-      "address": "1590 Bryant Street, San Francisco, CA 94103",
+    "the-uc-theatre": {
+      "added": "2026-10-07",
+      "address": "2036 University Avenue, Berkeley, CA 94704",
       "evidence": [
-        "map: Sports Basement Outdoor & Camping in San Francisco County (building, way/35343322)",
-        "text: San Francisco",
+        "map: The UC Theatre in Alameda County (building, node/4070522012)",
+        "text: Berkeley",
+        "name matches",
         "street number matches"
       ],
-      "lat": 37.767098,
-      "lng": -122.411132,
-      "name": "The Treeline",
-      "osm": "way/35343322",
+      "lat": 37.871806,
+      "lng": -122.269814,
+      "name": "The UC Theatre",
+      "osm": "node/4070522012",
+      "possible_duplicates": [
+        "berkeley-rep"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "the-westin-st-francis": {
+      "added": "2026-10-05",
+      "address": "335 Powell Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: The Westin St. Francis in San Francisco County (building, way/332378158)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.78775,
+      "lng": -122.408976,
+      "name": "The Westin St. Francis",
+      "osm": "way/332378158",
+      "possible_duplicates": [
+        "san-francisco-playhouse",
+        "biscuits-blues",
+        "cheaper-than-therapy",
+        "starlite-room",
+        "a-c-t",
+        "curran-theatre",
+        "feinsteins-at-the-nikko",
+        "the-redwood-room"
+      ],
       "precision": "building",
       "region": "sf",
-      "status": "verified"
+      "status": "auto"
+    },
+    "thee-stork-club": {
+      "added": "2026-10-07",
+      "address": "2330 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: Thee Stork Club in Alameda County (building, way/36979364)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.813136,
+      "lng": -122.268385,
+      "name": "Thee Stork Club",
+      "osm": "way/36979364",
+      "possible_duplicates": [
+        "johansson-projects",
+        "mighty-mighty-studio",
+        "new-parkway-theater",
+        "the-double-standard",
+        "werkshack",
+        "instudio-with-empowerment-avenue",
+        "manna-gallery",
+        "mercury-20-gallery"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "three-restaurant": {
       "added": "2026-10-02",
@@ -5589,6 +7700,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "up-the-creek-records": {
+      "added": "2026-10-07",
+      "address": "2042 Mount Diablo Boulevard, Walnut Creek, CA 94596",
+      "evidence": [
+        "map: 2042 in Contra Costa County (building, way/232849856)",
+        "text: Walnut Creek",
+        "street number matches"
+      ],
+      "lat": 37.897043,
+      "lng": -122.068478,
+      "name": "Up The Creek Records",
+      "osm": "way/232849856",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "verdi-club": {
       "added": "2026-10-02",
       "address": "2424 Mariposa Street, San Francisco, CA 94110",
@@ -5605,6 +7732,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "village-theatre": {
+      "added": "2026-10-06",
+      "address": "233 Front Street, Danville, CA 94526",
+      "evidence": [
+        "map: Village Theatre & Art Gallery in Contra Costa County (building, way/1052130747)",
+        "text: Danville",
+        "street number matches"
+      ],
+      "lat": 37.821185,
+      "lng": -121.997507,
+      "name": "Village Theatre",
+      "osm": "way/1052130747",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "vintage-berkeley-wine-shop": {
       "added": "2026-10-02",
@@ -5806,6 +7949,47 @@
       "region": "sf",
       "status": "verified"
     },
+    "westwood": {
+      "added": "2026-10-07",
+      "address": "2036 Lombard St, San Francisco, CA 94123",
+      "evidence": [
+        "map: 2034;2036 in San Francisco County (building, way/263347526)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.800186,
+      "lng": -122.435478,
+      "name": "Westwood",
+      "osm": "way/263347526",
+      "possible_duplicates": [
+        "silver-cloud-restaurant-karaoke-bar",
+        "rick-roxys",
+        "marina-branch-library"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "whack-donuts": {
+      "added": "2026-10-07",
+      "address": "5 Sacramento Alley, San Francisco, CA 94111",
+      "evidence": [
+        "map: Whack Donuts in San Francisco County (building, node/11612234499)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.794654,
+      "lng": -122.395336,
+      "name": "Whack Donuts",
+      "osm": "node/11612234499",
+      "possible_duplicates": [
+        "san-francisco-ferry-building",
+        "book-passage-ferry-building"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "wild-side-west": {
       "added": "2026-10-02",
       "address": "424 Cortland Avenue, San Francisco, CA 94110",
@@ -5841,6 +8025,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "willard-park": {
+      "added": "2026-10-07",
+      "address": "2730 Hillegass Avenue, Berkeley, CA 94705",
+      "evidence": [
+        "map: 2730 in Alameda County (building, way/6362542)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.861053,
+      "lng": -122.256076,
+      "name": "Willard Park",
+      "osm": "way/6362542",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "xex": {
       "added": "2026-10-02",
@@ -5948,6 +8148,57 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "zellerbach-hall": {
+      "added": "2026-10-07",
+      "address": "Lower Sproul Plaza, Berkeley, CA 94720",
+      "evidence": [
+        "map: Zellerbach Hall in Alameda County (building, way/24025430)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.86905,
+      "lng": -122.260788,
+      "name": "Zellerbach Hall",
+      "osm": "way/24025430",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "zellerbach-playhouse": {
+      "added": "2026-10-07",
+      "address": "Spieker Plaza, Berkeley, CA 94704",
+      "evidence": [
+        "map: Zellerbach Playhouse in Alameda County (building, way/24025431)",
+        "text: Berkeley",
+        "name matches"
+      ],
+      "lat": 37.869054,
+      "lng": -122.261297,
+      "name": "Zellerbach Playhouse",
+      "osm": "way/24025431",
+      "possible_duplicates": [
+        "zellerbach-hall"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "zentner-collection": {
+      "added": "2026-10-07",
+      "address": "5757 Horton Street, Emeryville, CA 94608",
+      "evidence": [
+        "map: Zentner Collection in Alameda County (building, way/135841800)",
+        "text: Emeryville",
+        "street number matches"
+      ],
+      "lat": 37.838624,
+      "lng": -122.291248,
+      "name": "Zentner Collection",
+      "osm": "way/135841800",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "zo": {
       "added": "2026-10-02",

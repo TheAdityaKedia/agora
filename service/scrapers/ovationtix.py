@@ -43,6 +43,13 @@ REQUEST_TIMEOUT = 30
 TIMED_ENTRY_PER_DAY = 4
 
 _TEST_RE = re.compile(r"\btest event\b", re.I)
+# Descriptions often run straight into logistics ("… Dates : Nov 20–Dec 6
+# Times: Thu–Sat … Seating … Terms & Conditions …"). Cut at the first such
+# label when there's real text before it (Oakland Theater Project).
+_LOGISTICS_RE = re.compile(
+    r"\b(Dates?|Times?|Run ?time|Running time|Preview Performances|Opening Night|Location"
+    r"|Box office)\s*:", re.I)
+MIN_KEPT = 20
 
 
 def _clean(text: str | None) -> str | None:
@@ -51,6 +58,16 @@ def _clean(text: str | None) -> str | None:
     text = BeautifulSoup(text, "html.parser").get_text(" ", strip=True)
     text = re.sub(r"[﻿​\xa0]", " ", text)
     return re.sub(r"\s+", " ", text).strip() or None
+
+
+def _synopsis(text: str | None) -> str | None:
+    """Description up to the first logistics label. Pure."""
+    if not text:
+        return None
+    cut = _LOGISTICS_RE.search(text)
+    if cut and cut.start() >= MIN_KEPT:
+        text = text[:cut.start()].strip()
+    return text or None
 
 
 def _parse_start(value: str | None) -> datetime | None:
@@ -87,7 +104,7 @@ def parse_events(calendar: list[dict], productions: list[dict], *, client_id: st
                     location=f"{venue}, {fallback_location}" if venue and venue not in fallback_location
                     else fallback_location,
                     url=PRODUCTION_URL.format(client=client_id, id=pid) if pid is not None else None,
-                    description=_clean(detail.get("description")),
+                    description=_synopsis(_clean(detail.get("description"))),
                     image_url=IMAGE_URL.format(file=logo) if logo else None,
                     status="cancelled" if st.get("isCancelled") else None,
                 )))

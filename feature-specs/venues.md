@@ -136,6 +136,12 @@ re-saves are byte-identical (like `classifications.json`).
 - `status`: `verified` (a person checked it) · `auto` (passed the evidence
   rules unattended). Both are used; the distinction drives spot-checks and
   lets a person see what has never been looked at.
+- `rooms` (optional, hand-curated): the venue's named sections, e.g.
+  Salesforce Park's gardens and plazas from the park's own map. A string that
+  names the venue (or a comma-free alias key in `venue_locations.json`) and
+  one of its rooms as whole words resolves to that room, in any order:
+  "Salesforce Park Amphitheater", "Main Plaza, Salesforce Park, SF". Opt-in,
+  because a name inside a longer string is only safe when the room is known.
 
 ### `venue_locations.json` — string → place (mostly machine-maintained)
 
@@ -175,8 +181,9 @@ one wins.
    TBA/various/"see event page" → `none`; online *and* a place → `none`
    (hybrid).
 3. **Room of a known venue** — `<venue alias> — <room>` / `<room> at <venue>`
-   patterns against existing venue names and aliases (`SFPL — Main`,
-   `Z Below` once added as an alias).
+   / `<room> (<venue>)` patterns against existing venue names and aliases
+   (`SFPL — Main`, `The Dairy (Sports Basement Presidio)`, `Z Below` once
+   added as an alias).
 4. **Geocode the string** with Nominatim (Bay Area `viewbox`, `bounded=1`,
    `addressdetails=1`), then apply the evidence rules below.
 5. **AI-assisted (phase 3)** — Haiku, given the string, source and source
@@ -223,9 +230,11 @@ once addresses or maps are shown.
 
 - **"Places to review" issue** (GitHub, like "Scrape failures"): opened or
   updated by the merge job, @mentions the owner, closed when nothing is
-  pending. Never blocks shipping. Each entry: the string; sources and event
-  count; the proposed venue, address and region if any; an OpenStreetMap link;
-  the reason it's waiting. A fix is an edit to `venue_locations.json` (map the
+  pending. Never blocks shipping. Each entry: the string; an example event
+  (the soonest: title, link, date) and how many more; sources; the reason
+  it's waiting and an OpenStreetMap link; the AI's proposal if any; and, when
+  the text names a venue we already have or carries its street address, that
+  venue with a paste-ready answer (`{"venue": …, "room": …}`). A fix is an edit to `venue_locations.json` (map the
   string to a venue, or to `none`) or a new entry in `venues.json`; it takes
   effect at the next run.
 - **Coverage alert:** the run goes red (after data ships) when more than 3% of

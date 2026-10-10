@@ -19,7 +19,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
 
 | Task | Read |
 |------|------|
-| What's planned next (features + their specs) | `future-features.md` |
+| What's planned next (features + their specs) | `future/future-features.md` |
+| Visual directions explored (seasonal palettes) | `future/design-directions.html` |
 | Add or fix a **scraper** (the most common change) | `CONTRIBUTING.md` |
 | Run it locally / deploy / update the site | `README.md` |
 | Frontend search (MiniSearch, ranking) | code: `frontend/index.html` |
@@ -59,7 +60,8 @@ Pipeline: `sources.txt → scrapers (concurrent) → Postgres → classify (cach
   gone events and aliases, for the collections API).
 - `scripts/` — `preview_site.py` (scratch real-data site outside the repo),
   `measure_load.py` (first-load timing; numbers in
-  `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`.
+  `feature-specs/frontend-payload.md`), `scrape-to-neon.sh`, `neon-sql.sh`
+  (run SQL against Neon from any machine: `--query """…"""`, `--branch`).
 - `.github/workflows/deploy-pages.yml` — deploys `frontend/` on push to `main`.
 - `.github/workflows/scrape.yml` — daily + on-demand scrape: one runner per
   source → single merge job (Neon) → guarded auto-merged data PR → deploy.
@@ -195,4 +197,4 @@ Shipped: AI tagging, scheduled per-source CI scraping (Neon, auto-merged data
 PRs, failure alerts), email submissions, and cross-source fuzzy dedup. Ongoing: scaling the source list (candidates in
 `future-sources.md`) and pruning source noise (e.g. SFPL non-events). Planned
 work, including the frontend payload wall as the manifest grows, is in
-`future-features.md`.
+`future/future-features.md`.

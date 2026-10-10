@@ -67,7 +67,9 @@ to `source_homes` in `service/data/venues.json` (`"sf"`, `"eastbay"`,
 `"peninsula"`, `"southbay"`, `"northbay"`), keyed by the same `NAME`. Venue
 resolution uses it as a weak signal and to reject far-away map matches; leave
 it out for sources that list events all over (Partiful, Litquake). Then run
-`python -m places validate`. See `feature-specs/venues.md`.
+`python -m places validate`, and `python -m places check --sources <substr>`
+to see where the source's location strings land (see "Check that every
+location lands on the map" below). See `feature-specs/venues.md`.
 
 `RawEvent` (see `scrapers/base.py`): `title`, `start_time` (tz-aware, **UTC**),
 `location`, `url`, `description`, `image_url`. Keep `parse*` functions **pure**
@@ -109,6 +111,19 @@ writing a parser, spike the page:
    HTML can be *inconsistent* — Luma sometimes returns a bare JS shell with no
    calendar id or JSON-LD — so resolve identifiers through an API
    (`api.luma.com/url?url=<slug>`) rather than depending on the page markup.
+6. **Confirm a platform id is really this venue's.** A ticketing id found in a
+   page can belong to someone else: SF Ballet's calendar embeds an OvationTix
+   client id whose API returns The Argyros, a theater in Idaho. Before
+   building on an id, check the API's own venue or production names.
+7. **Don't sink time into WordPress custom post types without dates.**
+   `/wp-json/wp/v2/types` often lists an `event`/`show` type, but its REST
+   items usually carry only the *publish* date, with the event date in page
+   text (SFMOMA, Shotgun Players, Letterform Archive and others, 2026-10).
+   That's a per-page DOM scrape, not an API.
+8. **A 403 from a datacenter IP predicts a CI failure.** GitHub's runners are
+   datacenter IPs too. If a plain fetch from a cloud sandbox gets a Cloudflare
+   403, expect the same in `scrape.yml` and see "When to give up" (or
+   `local_only_sources.txt`).
 
 ### Data-source priority ladder
 
@@ -135,7 +150,7 @@ thin wrapper (`SOURCE`, `NAME`, the platform id/URL, `matches()`, and a one-line
 |----------|---------------|--------------------------|------------------|
 | **Eventbrite** | `eventbrite.com/o/<org>` organizer page (or `/e/…-tickets-<id>` links) | `eventbrite.py` → `scrape_organizer(url)` | `phoenix.py`, `neofuturists.py` |
 | **Luma** | `luma.com/<slug>` / `lu.ma` | `luma.py` → `scrape_calendar(url)` (resolves the calendar api_id via the page or the `/url` endpoint, then pages the `get-items` API) | `bigbrainbay.py`, `thecommons.py`, `readingrhythms.py` |
-| **Squarespace Events Collection** | `article.eventlist-event` in the events page HTML | `squarespace_events.py` → `scrape_collection(url, fallback_location=…)` | `balboa.py`, `fourstar.py`, `medicinenightmares.py` |
+| **Squarespace Events Collection** | `article.eventlist-event` in the events page HTML | `squarespace_events.py` → `scrape_collection(url, fallback_location=…)`, or `scrape_json(url)` for the `?format=json` feed (exact start times + per-event venue; use it when the HTML cards lack times) | `balboa.py`, `fourstar.py`, `medicinenightmares.py` |
 | **WordPress + The Events Calendar (Tribe)** | `GET /wp-json/tribe/events/v1/events` returns JSON | `tribe_events.py` → `scrape_events(site_base, fallback_location=…)` | `birdbeckett.py`, `oaklandartmurmur.py` |
 | **Elfsight Event Calendar** | `elfsight` in page; widget XHR to `widget-data.service.elfsight.com/api/events?source=<id>` | `elfsight_events.py` → `scrape_events(source_id, …)` | `riptide.py` |
 | **iCal / ICS feed** | any `.ics` link (Sched `all.ics`, Squarespace `?format=ical`) | `ics.py` → `scrape_ics(ics_url, fallback_location=…)` | `litquake.py` (Sched) |
@@ -145,6 +160,10 @@ thin wrapper (`SOURCE`, `NAME`, the platform id/URL, `matches()`, and a one-line
 | **BookManager** (bookstore webstore SPA) | "You need to enable JavaScript"; XHRs to `api.bookmanager.com/customer/…` | `bookmanager.py` → `scrape_events(store_id, site_base, …)` | `tallyho.py` |
 | **Live Nation venue site** | `MusicEvent` JSON-LD blocks on `<venue>.com/shows` (Chakra UI SPA) | `livenation.py` → `scrape_shows(url, venue=…)` | `sfmasonic.py`, `cobbs.py`, `punchline.py` (`fillmore.py` keeps its own copy) |
 | **OvationTix** (AudienceView) | `ci.ovationtix.com/<clientId>` links | `ovationtix.py` → `scrape_client(client_id, fallback_location=…)` (joins `CalendarProductions` + `Production`; collapses timed-entry slots) | `oaklandtheaterproject.py`, `henryj.py` (`zspace.py` keeps its own copy) |
+| **Tugoz** (ticketing) | `tugoz.com/js/tugoz.js` + a `<div id="tugoz-embed">` widget with an event id (often in the site's own JS config) | `tugoz.py` → `fetch_feed(event_id)` + `upcoming_shows(feed)` (public static feed `static.tugoz.com/api/json/www/v4/e-<id>`; `einfo.related` lists every show in the series; there's no host-level listing, so the wrapper finds the ids; ignore the CDN-stale `ispast`) | `masala.py` |
+| **Spektrix** (ticketing) | `spektrix_base` / `<host>/<client>/website/` in page source; `<host>/<client>/api/v3/events` answers JSON | `spektrix.py` → `scrape(api_base, fallback_location=…)` (joins `/events` + `/instances`; one event per performance) | `stanfordlive.py` |
+| **Another Planet venue site** | `h2.show-title` + `.date-show[itemprop=startDate]` / `.time-show` cards (Castro, Fox, Greek) | `anotherplanet.py` → `scrape_site(url, venue=…)` | `castro.py`, `foxoakland.py`, `greekberkeley.py` |
+| **TicketWeb WordPress plugin** | `.tw-name` / `.tw-event-date` cards; one `/tm-event/<slug>/` page per show date | `ticketweb.py` → `scrape_site(site_base, venue=…)` (walks the paginated listing, reads date/time from each show page; year-less dates placed by weekday) | `bimbos.py`, `augusthall.py`, `feinsteins.py` |
 | **Facebook Page events** | `facebook.com/<page>/events`. Loads logged out but needs browser headers (a bare UA gets 400); robots.txt disallows all, owner OK'd it for Pages that post events only there | `facebook.py` → `scrape_page(page)` (reads the Relay JSON embedded in the listing and event pages; goes through Zyte's cheap non-browser tier when `ZYTE_API_KEY` is set, as on CI, otherwise a direct fetch; keeps Bay Area events only; no images because fbcdn URLs expire) | `missionfusion.py` |
 
 And a few **patterns** we reuse by copying rather than a shared lib:
@@ -268,6 +287,80 @@ Fetch the detail page and extract the real synopsis. Lessons:
   detail-page fetches are expensive — see "Detail-page fetches inside a single
   scraper" below.
 
+## Check image and description quality before calling a source done
+
+Tests prove the parser matches its fixture; they don't prove the site's data
+is any good. In the October 2026 sprints, 5 of 14 new sources shipped with
+bad or missing descriptions that every test passed: JCCSF had text on 1 of 28
+events (and it was the letter "B"), and Fort Mason's opened with navigation
+text. Before calling a source done, run its `scrape()` live and check:
+
+- **Coverage:** count events with an image and with a description of at least
+  ~40 characters. Note anything well under 100% in the scraper's docstring
+  with the reason (e.g. "Live Nation pages carry no descriptions").
+- **Read 3–5 descriptions in full.** Look for the junk we've hit:
+  - flattened tab bars ("@ About Event Details … Plan Your Visit", Fort Mason)
+  - logistics headers ("LOCATION … ADMISSION … RSVP here", GLBT)
+  - schedule and policy blocks ("Dates : … Times: … Terms & Conditions",
+    OvationTix)
+  - credit-only lines ("Source: <url>", SF Center for the Book)
+  - stray one-character fields (JCCSF; the Tribe excerpt was the fix)
+  - one blurb repeated on every event of a series (fine for a run of the same
+    show, wrong for different events)
+- **Load a few image URLs** (200 + an `image/*` content type), and look at
+  whether they're the show's image or a generic logo. Check that a page's
+  `og:image` / `og:description` are per show before relying on them; on
+  Another Planet's sites they're the same site-wide logo and text on every
+  page.
+- **Fix it before the first production scrape.** Saves never update existing
+  rows, so a cleanup shipped later only reaches newly listed events unless
+  that source's rows are deleted in Neon (README → "Scheduled scraping" →
+  Operations).
+
+A quick way to measure every source at once is the live manifest:
+`frontend/events.json` (per-event `image_url` and `summary`) plus
+`frontend/descriptions.json` (full text by event id).
+
+## Check that every location lands on the map
+
+The same goes for `location`: tests and `python -m places validate` pass
+even when the map can't place a source's strings, or places them on the
+wrong building. In the October 2026 theater sprint, all 89 Stanford Live
+events carried "Stanford Live, Stanford University, Stanford, CA" (no map
+result, so no area or pin), and Cal Performances' bare "First Church" was
+about to become First Church of Christ, Scientist instead of First
+Congregational. Both surfaced only in the branch CI run's "Places to review"
+issue. Check before that:
+
+```bash
+cd service && ./.venv/bin/python -m places check --sources <substr> [<substr> ...]
+```
+
+It scrapes the matching sources live and resolves each distinct location
+against a scratch copy of the venue files (nothing committed changes). For
+every string it prints what it resolves to: an existing venue, a new one
+from the map, or `PENDING` with the reason. Then:
+
+- **Fix every `PENDING` line in the scraper.** No map result usually means
+  the string has no street address. Give it one: a fixed `ADDRESS`, or a
+  table from hall name to address when the source spreads over a few halls.
+  A name the map matches to the wrong place needs the right street address.
+  Hand-answering `venue_locations.json` is for strings you can't fix at the
+  source (other people's listings).
+- **Open the map link on every `new` and `alias` line.** A street-number
+  match is accepted even when the map object is a neighbor (Stanford
+  Memorial Church's address resolves to a statue in its courtyard: close
+  enough). A pin on the wrong block, or across town, isn't.
+- **Read the venue name on every `alias` line.** Two strings that hit the
+  same map building become one venue, named by whichever resolved first.
+  Stanford Live's "Bing Studio, Bing Concert Hall, …" came first, so Bing
+  Concert Hall's own shows aliased to a venue called "Bing Studio". Write a
+  room inside a venue as `Venue — Room, address` and it is recorded as a
+  room of that venue.
+- **Prefer the hall the event is actually in** over one address for the
+  whole source when the site says which hall (Stanford Live's show pages
+  carry it in `meta[name=venue_title]`). Area and map pins are per event.
+
 ## Dedup & keys
 
 `main._find_duplicate` matches on `(url, start_time)`, then `(title,
@@ -283,6 +376,11 @@ share one show URL (Berkeley Rep, NCTC). The DB's partial unique index is on
   `sfjazz.py`. When the source gives an absolute ISO datetime, use it (no
   inference needed) — always prefer that.
 - Always normalize **source-local → UTC** before storing.
+- **Check two or three events' times against the venue's own page.** Wrong
+  times look fine in tests. F8's Squarespace cards all parsed as midnight
+  (the `?format=json` feed had the real 9pm starts), and Montalvo's JSON-LD
+  labels local times as `+00:00`. A whole source at midnight, or at odd hours
+  like 2am, is the tell.
 
 ## Filter irrelevant content at scrape time
 
@@ -309,6 +407,16 @@ filter in the exporter instead. Reference:
 joined — while keeping events that merely touch food/drink in another format (a
 cooking `workshop`, a food `talk`, a dinner + `performance`). Key on the type
 being the *only* format, not on the topic, so genuine events aren't lost.
+
+**Drop listings that aren't public events** at scrape time too. Seen so far:
+ticketing allocations and school shows (Stanford Live's "Student Lottery
+Winners", "Student Matinee"), platform test productions (OvationTix "test
+event"), members-only competitions (Mechanics' Institute chess tournaments),
+online-only sessions, and timed-entry slots that would flood the calendar
+(Henry J's exhibition sold a slot every 30 minutes; collapse those to one
+listing, see `ovationtix.py`). Multi-region organizations need a Bay Area
+filter on location (`bay_area.py`; Diaspora Arts Connection also lists San
+Diego).
 
 ## When to give up
 
@@ -466,6 +574,11 @@ Silence during a multi-minute scrape is scary. Every scraper should log with a
 - Cover: one event per showing, correct date+time (and year inference), the
   URL, description extraction (incl. noise-stripping), and the empty/fallback
   case.
+- **Don't let tests depend on today's date.** A fixture event "next month"
+  becomes past in a few weeks; "now minus 3 hours" lands on yesterday before
+  3am. Compute expectations from the same clock the code uses (see
+  `test_upcoming_only_drops_past_cards`) or build times relative to local
+  midnight.
 - Run `service/.venv/bin/python -m pytest` from `service/`.
 
 ## Running & building
@@ -476,6 +589,17 @@ an **ephemeral working store** (safe to `docker compose down -v`); the committed
 `frontend/events.json` is the durable artifact the site serves. When a scraper's
 *output* changes (URLs, descriptions), wipe the DB and re-scrape so stale rows
 don't linger (dedup skips existing rows, it doesn't update them).
+
+**Before merging new sources, run them once from CI on the branch:**
+`gh workflow run scrape.yml --ref <branch> -f sources="<substrings>"`. Non-`main`
+runs use the `ci-test` database and a throwaway `ci-sandbox/` branch, so
+nothing ships. It shows whether GitHub's datacenter IPs can reach each site
+and how the venue resolver handles your location strings (the run's summary
+page lists unplaced ones and venues it added on its own — check each). Run
+`python -m places check` locally first; the `ci-test` DB keeps rows from
+earlier test runs, so some pending places in the summary can be stale. The `sources` filter is
+a plain substring match, so check each substring matches exactly one line of
+`sources.txt`.
 
 ## Commits
 

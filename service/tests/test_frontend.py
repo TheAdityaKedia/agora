@@ -304,11 +304,42 @@ def test_desktop_shows_filters_as_sidebar(browser, site):
     assert short.locator("#filters").bounding_box()["y"] >= h1["y"] + h1["height"]
 
 
-def test_slash_focuses_search_and_meta_is_relative(browser, site):
+def test_slash_focuses_search(browser, site):
     page = _open(browser, site, DESKTOP)
     page.keyboard.press("/")
     assert page.evaluate("document.activeElement.id") == "search-input"
-    assert "Updated" in page.inner_text("#meta")
+
+
+def test_no_count_or_updated_line_without_notes(browser, site):
+    page = _open(browser, site, DESKTOP)
+    # The result count and "Updated …" are gone; the line shows only notes.
+    assert not page.locator("#meta").is_visible()
+    assert "upcoming events" not in page.inner_text("body")
+
+
+def test_filters_button_lights_up_when_a_filter_is_on(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    btn = page.locator("#filters-btn")
+    assert "active" not in (btn.get_attribute("class") or "")
+    page.click("#preset-tomorrow")
+    assert "active" in btn.get_attribute("class")
+    assert page.inner_text("#filters-count") == "1"
+    page.click("#active-filters .pill-clear")
+    assert "active" not in btn.get_attribute("class")
+
+
+def test_reset_button_lights_up_only_when_a_filter_is_on(browser, site):
+    page = _open(browser, site, PHONE, touch=True)
+    bg = "getComputedStyle(document.getElementById('reset')).backgroundColor"
+    page.click("#filters-btn")
+    page.wait_for_selector("#filters.open")
+    assert "active" not in (page.get_attribute("#reset", "class") or "")
+    assert page.evaluate(bg) in ("rgba(0, 0, 0, 0)", "transparent")  # quiet: nothing to reset
+    page.locator("#area-chips button").first.click()  # a filter, from inside the drawer
+    assert "active" in page.get_attribute("#reset", "class")
+    assert page.evaluate(bg) not in ("rgba(0, 0, 0, 0)", "transparent")
+    page.click("#reset")
+    assert "active" not in page.get_attribute("#reset", "class")
 
 
 def _busy_day(page):
@@ -340,7 +371,7 @@ def test_single_day_results_are_not_capped(browser, site):
 def test_started_events_never_show(browser, site):
     page = _open(browser, site, DESKTOP)
     assert page.locator(".event", has_text="Already started").count() == 0
-    assert f"{TOTAL:,} upcoming events" in page.inner_text("#meta")
+    assert _rendered(page) > 0
     page.fill("#search-input", "already started")
     page.wait_for_timeout(600)
     assert page.locator(".event", has_text="Already started").count() == 0
@@ -813,11 +844,13 @@ def test_neighborhood_filter_in_list_and_map(browser, map_site):
     events = [e for e in _map_events() if e["id"] != "started"]
     roxie = sum(1 for e in events if e["venue"] == "roxie")
     page = _map_page(browser, map_site)
-    # Only neighborhoods with events, with counts.
+    # Only neighborhoods with events, with counts, busiest first.
+    dawn = sum(1 for e in events if e["venue"] == "dawn-club")
+    expected = sorted([("Mission", roxie), ("SoMa", dawn)], key=lambda x: (-x[1], x[0]))
     rows = page.locator("#hood-list label")
-    assert rows.locator("span:not(.count)").all_text_contents() == ["Mission", "SoMa"]
-    assert rows.locator(".count").all_text_contents() == [str(roxie), str(sum(
-        1 for e in events if e["venue"] == "dawn-club"))]
+    assert rows.locator("span:not(.count)").all_text_contents() == [h for h, _ in expected]
+    assert rows.locator(".count").all_text_contents() == [str(c) for _, c in expected]
+    assert roxie != dawn  # the order really is by count, not by name
     page.click("#hood-summary")
     page.check('#hood-list [data-hood="mission"]')
     assert "hood=mission" in page.url
@@ -1003,9 +1036,8 @@ def test_cancelled_and_postponed_rows_are_dimmed_badged_and_not_calendared(brows
     plain = _row(page, "Jazz night 0")
     assert plain.get_attribute("class") == "event" and plain.locator(".status-badge").count() == 0
     assert plain.locator("details.cal").count() == 1
-    # They count, and search finds them like any event.
-    listed = len([e for e in _lifecycle_events() if e["id"] != "started"])
-    assert page.inner_text("#meta").startswith(f"{listed} upcoming events")
+    # Search finds them like any event. (They used to be checked in the
+    # "N upcoming events" count; main has since removed that line.)
     page.fill("#search-input", "Poetry reading 1")
     page.wait_for_function("document.querySelector('.event .status-badge.off') !== null")
     assert page._agora_errors == []
@@ -1055,3 +1087,81 @@ def test_collecting_mode_marks_events_added_under_an_old_id(browser, lifecycle_s
     # A cancelled row still has its add button (no calendar to sit beside).
     assert _row(page, "Poetry reading 1").locator(".canvas-add").count() == 1
     assert errors == []
+
+
+# --- theme switch: follows the system by default; the sun/moon overrides it ---
+
+def _themed_page(browser, site, scheme):
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ, color_scheme=scheme)
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    page.goto(site)
+    page.wait_for_selector(".event")
+    page._agora_errors = errors
+    return page
+
+
+def _bg(page):
+    return page.evaluate("getComputedStyle(document.body).backgroundColor")
+
+
+LIGHT_BG, DARK_BG = "rgb(238, 241, 242)", "rgb(14, 24, 34)"
+
+
+def test_theme_follows_the_system_by_default(browser, site):
+    light = _themed_page(browser, site, "light")
+    assert _bg(light) == LIGHT_BG
+    assert light.locator("#theme-btn .moon").is_visible() and not light.locator("#theme-btn .sun").is_visible()
+    assert light.get_attribute("#theme-btn", "aria-label") == "Switch to dark theme"
+    dark = _themed_page(browser, site, "dark")
+    assert _bg(dark) == DARK_BG
+    assert dark.locator("#theme-btn .sun").is_visible() and not dark.locator("#theme-btn .moon").is_visible()
+    assert dark.get_attribute("#theme-btn", "aria-label") == "Switch to light theme"
+
+
+def test_theme_switch_overrides_and_remembers(browser, site):
+    page = _themed_page(browser, site, "light")
+    page.click("#theme-btn")
+    assert _bg(page) == DARK_BG
+    assert page.locator("#theme-btn .sun").is_visible()
+    assert page.evaluate("localStorage.getItem('agora-theme')") == "dark"
+    # Remembered across a reload, applied before the page renders.
+    page.reload()
+    assert page.evaluate("document.documentElement.dataset.theme") == "dark"
+    page.wait_for_selector(".event")
+    assert _bg(page) == DARK_BG
+    # Switching back to the system's own theme goes back to following it.
+    page.click("#theme-btn")
+    assert _bg(page) == LIGHT_BG
+    assert page.evaluate("localStorage.getItem('agora-theme')") is None
+    assert page.evaluate("document.documentElement.dataset.theme") is None
+    assert page._agora_errors == []
+
+
+def test_theme_switch_from_a_dark_system(browser, site):
+    page = _themed_page(browser, site, "dark")
+    page.click("#theme-btn")
+    assert _bg(page) == LIGHT_BG
+    assert page.locator("#theme-btn .moon").is_visible()
+    assert page.evaluate("localStorage.getItem('agora-theme')") == "light"
+
+
+def test_date_fields_fit_a_small_phone_and_have_placeholders(browser, site):
+    # iPhone mini width: iOS Safari's intrinsic date-input width once pushed
+    # "To" past the screen edge, over "From"; and iOS shows no mm/dd/yyyy.
+    page = _open(browser, site, {"width": 375, "height": 812}, touch=True)
+    page.click("#filters-btn")
+    page.wait_for_selector("#filters.open")
+    page.wait_for_timeout(500)  # the sheet slides in; measure once it's still
+    f, t = page.locator("#date-from").bounding_box(), page.locator("#date-to").bounding_box()
+    assert f["y"] == t["y"] and f["x"] + f["width"] <= t["x"] and t["x"] + t["width"] <= 375
+    ph = page.locator(".date-ph")
+    assert ph.all_inner_texts() == ["Today", "Any date"]
+    assert ph.nth(0).is_visible() and ph.nth(1).is_visible()
+    page.fill("#date-from", "2030-01-01")
+    assert not ph.nth(0).is_visible() and ph.nth(1).is_visible()
+    # Setting a date doesn't move the fields (no stray padding on the empty one).
+    assert page.locator("#date-from").bounding_box()["y"] == page.locator("#date-to").bounding_box()["y"]
+    page.click("#reset")
+    assert ph.nth(0).is_visible()

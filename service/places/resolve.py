@@ -5,7 +5,8 @@ Steps, in order (feature-specs/venues.md → "Resolving a new location string"):
 1. Known string — already in venue_locations.json (and not pending).
 2. Not a place — online / hybrid / TBA / various.
 3. Just a city — "San Francisco, CA" → region only.
-4. A room of a known venue — "SFJAZZ Center — Miner Auditorium".
+4. A room of a known venue — "SFJAZZ Center — Miner Auditorium",
+   "The Dairy (Sports Basement Presidio)".
 5. Geocode with Nominatim and apply the evidence rules.
 6. AI-assisted: the model proposes a name/address to look up; the result
    must pass the same rules against the source's text (assist.py).
@@ -51,6 +52,11 @@ _ADDRESS = re.compile(r"(?<![\w-])(\d{1,5}[a-z]?\s+(?:[nsew]\.?\s+)?[a-z0-9][\w.
 PENDING_RETRY = timedelta(days=7)
 
 
+def _contains(key: str, name: str) -> bool:
+    """Whole-word match of a normalised name inside a normalised key."""
+    return re.search(rf"(?<![\w']){re.escape(normalize_key(name))}(?![\w'])", key) is not None
+
+
 @dataclass
 class Outcome:
     location: str
@@ -72,13 +78,21 @@ class Resolver:
 
     # --- entry point -----------------------------------------------------
 
-    def resolve(self, location: str, sources=(), events: int = 0) -> Outcome:
-        """Resolve one string, record the result in the store, return it."""
+    def resolve(self, location: str, sources=(), events: int = 0,
+                example: dict | None = None) -> Outcome:
+        """Resolve one string, record the result in the store, return it.
+        `example` (an upcoming event's title/url/date) is kept on a pending
+        entry so the review issue can say which event brought it in."""
         key = normalize_key(location)
         existing = self.store.locations.get(key)
         if existing and "pending" not in existing:
             return Outcome(location, "known", existing)
         if existing and not self._due(existing):
+            # Not retried yet, but keep what the review issue shows current.
+            p = existing["pending"]
+            p.update(events=events, sources=sorted(set(sources)))
+            if example:
+                p["example"] = example
             return Outcome(location, "known", existing)
         try:
             out = self._resolve(location, list(sources))
@@ -94,6 +108,7 @@ class Resolver:
                 "events": events,
                 "sources": sorted(set(sources)),
                 **({"suggestion": out.suggestion} if out.suggestion else {}),
+                **({"example": example} if example else {}),
             }}
         self.store.locations[key] = out.entry
         return out
@@ -123,15 +138,26 @@ class Resolver:
         # likewise a room: "Spaceship 995 Market Street" → "Spaceship".
         vp, room = _drop_address(vp), room and _drop_address(room)
         known = self._known_venue(vp)
+        if not known and room and self._known_venue(room):
+            # "The Dairy (Sports Basement Presidio)": a room, then the venue.
+            known, room = self._known_venue(room), vp
         if known and city and REGION_OF_COUNTY[city[1]] != self.store.venues[known]["region"]:
             # "SFJAZZ Center — Paramount Theatre, Oakland": the presenter's
             # venue is in SF, the event isn't. Look the place up instead.
             known = None
+        if known and not room:
+            # "Salesforce Park Amphitheater, 425 Mission St": the name part is
+            # itself a known string for a room; keep the room.
+            room = self.store.locations.get(normalize_key(vp), {}).get("room")
         if known and normalize_key(vp) != normalize_key(location):
             entry = {"venue": known}
             if room:
                 entry["room"] = room
             return Outcome(location, "room", entry, evidence=[f"known venue: {known}"])
+        named = self._named_room(location, city)
+        if named:
+            return Outcome(location, "room", {"venue": named[0], "room": named[1]},
+                           evidence=[f"known venue and room: {named[0]}"])
 
         home = next((self.store.source_homes[s] for s in sources if s in self.store.source_homes), None)
         seg = city_segment(location)
@@ -186,6 +212,26 @@ class Resolver:
                     out.evidence.append(f"ai: proposed {assist.summary(proposal)}")
                     return out, seen
         return None, seen
+
+    def _named_room(self, location: str, city) -> tuple[str, str] | None:
+        """A venue that lists its rooms (``rooms`` in venues.json), named
+        anywhere in the string together with one of them: "Salesforce Park
+        Amphitheater", "Main Plaza, Salesforce Park, San Francisco". Opt-in,
+        so a venue name inside another name can't match on its own."""
+        key = normalize_key(location)
+        for vid, v in self.store.venues.items():
+            if not v.get("rooms"):
+                continue
+            if city and REGION_OF_COUNTY[city[1]] != v["region"]:
+                continue
+            names = [v["name"]] + [k for k, e in self.store.locations.items()
+                                   if e.get("venue") == vid and "," not in k and "room" not in e]
+            if not any(_contains(key, n) for n in names):
+                continue
+            for room in sorted(v["rooms"], key=len, reverse=True):
+                if _contains(key, room):
+                    return vid, room
+        return None
 
     def _known_venue(self, vp: str) -> str | None:
         k = normalize_key(vp)

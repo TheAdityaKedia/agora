@@ -118,14 +118,15 @@ def test_classify_show_falls_back_when_primary_fails():
 def test_classify_show_error_names_every_failed_model():
     """A fallback's error must not hide the primary's (the real cause)."""
     import pytest
-    client = _FakeClient("{}", fail_models=[PRIMARY_MODEL, FALLBACK_MODEL])
+    from classify import MODELS
+    client = _FakeClient("{}", fail_models=MODELS)
     with pytest.raises(RuntimeError) as exc:
         classify_show("A Talk", "City Lights Booksellers", "A reading.", client=client)
-    assert PRIMARY_MODEL in str(exc.value) and FALLBACK_MODEL in str(exc.value)
+    assert all(m in str(exc.value) for m in MODELS)
 
 
 def test_fallback_is_an_inference_profile():
-    # Haiku 4.5 rejects on-demand calls by bare foundation-model id.
+    # Call Haiku through an inference profile, not its bare foundation-model id.
     assert FALLBACK_MODEL.startswith("us.anthropic.")
 
 
@@ -162,3 +163,29 @@ def test_non_game_topics_survive_a_game_keyword():
     c = classify_show("Drag Bingo at Y", "SF Bar Guide", "Drag bingo.", client=client)
     assert "bingo" in c.topics and "drag" in c.topics
     assert "trivia" not in c.topics
+
+
+class _RecordingClient:
+    def __init__(self, content):
+        self.content, self.kwargs = content, None
+
+    def converse(self, **kwargs):
+        self.kwargs = kwargs
+        return {"output": {"message": {"content": self.content}}, "stopReason": "end_turn"}
+
+
+def test_converse_skips_reasoning_and_sends_no_temperature():
+    import classify
+    client = _RecordingClient([{"reasoningContent": {"reasoningText": {"text": "hmm"}}},
+                               {"text": '{"cost":"free"}'}])
+    assert classify._converse(client, PRIMARY_MODEL, "s", "u") == '{"cost":"free"}'
+    assert "temperature" not in client.kwargs["inferenceConfig"]  # 400 on Haiku 5.5
+    assert client.kwargs["additionalModelRequestFields"] == {"output_config": {"effort": "low"}}
+
+
+def test_converse_without_text_raises_so_nothing_is_cached():
+    import classify
+    import pytest
+    client = _RecordingClient([{"reasoningContent": {"reasoningText": {"text": "hmm"}}}])
+    with pytest.raises(RuntimeError, match="no text"):
+        classify._converse(client, PRIMARY_MODEL, "s", "u")

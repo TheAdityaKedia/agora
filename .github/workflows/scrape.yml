@@ -231,6 +231,8 @@ jobs:
       # every location string waiting for a decision. Its body is rewritten in
       # place each run; a comment (which emails the owner) only when something
       # new went pending or coverage dropped. Closed when nothing is waiting.
+      # Main only: a branch run's report goes to its run summary instead — the
+      # ci-test DB keeps stale rows, so test-run issues were mostly old noise.
       - name: Check places
         id: places
         if: always() && steps.merge.outcome == 'success'
@@ -239,15 +241,21 @@ jobs:
           python ci.py places --report "$RUNNER_TEMP/report.json" \
             --body "$RUNNER_TEMP/places.md" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+      - name: Places to review (run summary, branch runs)
+        if: always() && steps.places.outcome == 'success' && env.IS_MAIN != 'true'
+        run: |
+          { echo "## Places to review (test run, \`ci-test\` DB)"; echo
+            echo "_Pending entries can be stale rows left in \`ci-test\` by earlier test runs._"; echo
+            cat "$RUNNER_TEMP/places.md"; } >> "$GITHUB_STEP_SUMMARY"
       - name: Places to review issue
-        if: always() && steps.places.outcome == 'success'
+        if: always() && steps.places.outcome == 'success' && env.IS_MAIN == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PENDING: ${{ steps.places.outputs.pending }}
           NEW_PENDING: ${{ steps.places.outputs.new_pending }}
           ALERT: ${{ steps.places.outputs.alert }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          TITLE: ${{ github.ref_name == 'main' && 'Places to review' || format('Places to review (test run on {0})', github.ref_name) }}
+          TITLE: Places to review
         run: |
           set -euo pipefail
           existing="$(gh issue list --state open --search "\"$TITLE\" in:title" \
@@ -272,14 +280,17 @@ jobs:
       - name: Fail run on places alert
         if: always() && steps.places.outputs.alert == 'true'
         run: |
-          echo "::error::Venue coverage problem — see the Places to review issue"
+          echo "::error::Venue coverage problem — see the Places to review issue (or, on a branch, this run's summary)"
           exit 1
 
   # Heartbeat for the hourly email job, which can't notice its own absence
   # (GitHub drops scheduled runs; it has dropped this repo's before). If no
-  # ingest-email.yml run on main has succeeded in the last 6 hours, post to the
+  # ingest-email.yml run on main has succeeded in the last 9 hours, post to the
   # "Email ingest failures" issue (@mentions the owner) and go red. A paused job
   # (EMAIL_INGEST=off) still runs and succeeds, so pausing doesn't trigger this.
+  # 9h, not the nominal 1h: GitHub only honors a few of this repo's hourly
+  # slots a day (3-6 runs, gaps up to ~7.5h observed 2026-10), so a tighter
+  # window alerts on GitHub's scheduling rather than on anything we can fix.
   ingest-heartbeat:
     if: github.ref_name == 'main'
     runs-on: ubuntu-latest
@@ -291,7 +302,12 @@ jobs:
       - name: Check the email job ran recently
         env:
           GH_TOKEN: ${{ github.token }}
-          MAX_AGE_HOURS: "6"
+          # This job doesn't check out the repo, so `gh issue` has no git remote
+          # to infer it from ("failed to run git: fatal: not a git repository",
+          # which killed the alert before it filed anything). GH_REPO tells gh
+          # outright.
+          GH_REPO: ${{ github.repository }}
+          MAX_AGE_HOURS: "9"
           TITLE: Email ingest failures
         run: |
           set -euo pipefail

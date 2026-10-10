@@ -145,6 +145,9 @@ class Store:
                 errs.append(f"{where}: status must be one of {sorted(STATUSES)}")
             if v.get("precision") not in PRECISIONS:
                 errs.append(f"{where}: precision must be one of {sorted(PRECISIONS)}")
+            rooms = v.get("rooms", [])
+            if not (isinstance(rooms, list) and all(isinstance(r, str) and r.strip() for r in rooms)):
+                errs.append(f"{where}: rooms must be a list of names")
             has_lat, has_lng = v.get("lat") is not None, v.get("lng") is not None
             if has_lat != has_lng:
                 errs.append(f"{where}: lat and lng go together")

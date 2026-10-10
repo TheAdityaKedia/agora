@@ -264,4 +264,4 @@ gets its own budget line alarm too.
   (instrumentation), `frontend/privacy.html`, footer note
 - `scripts/analytics_report.py`, `.github/workflows/analytics-digest.yml`,
   `.github/workflows/deploy-analytics.yml`
-- `README.md` (operations: opt-out, reports, retention), `future-features.md`
+- `README.md` (operations: opt-out, reports, retention), `future/future-features.md`

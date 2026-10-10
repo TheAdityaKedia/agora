@@ -25,6 +25,9 @@ from scrapers import (
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho, faight,
     atasite, ybgfestival, omca, jccsf, fortmason, sfmasonic, cobbs, punchline,
     glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
+    f8, diasporaarts, stanfordlive, castro, foxoakland, greekberkeley,
+    bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, masala, drakes,
+    paramount, oaklandlibrary, oacc, oaklandunited, eastsidearts, bayareafusion,
 )
 from scrapers.base import RawEvent
 
@@ -43,9 +46,12 @@ SCRAPERS = [
     yoshis, keysjazz, dawnclub, biscuitsblues, bachdds,
     booksmith, bookpassage, noevalleybooks, mrsdalloways, bookshopwestportal,
     clios, russianhill, booksinc, omnivore, fabulosa, tallyho,
-    partiful, frontiertower, alembic, faight, missionfusion,
+    partiful, frontiertower, alembic, faight, missionfusion, masala,
     atasite, ybgfestival, omca, jccsf, fortmason, sfmasonic, cobbs, punchline,
     glbthistory, sfcb, maritime, milibrary, oaklandtheaterproject, henryj,
+    f8, diasporaarts, stanfordlive, castro, foxoakland, greekberkeley,
+    bimbos, augusthall, feinsteins, calperformances, uctheatre, roxie, drakes,
+    paramount, oaklandlibrary, oacc, oaklandunited, eastsidearts, bayareafusion,
 ]
 
 
@@ -329,10 +335,11 @@ def _places_assistant():
 
     def ask(system: str, user: str) -> str:
         errors = []
-        for model_id in (_classify.PRIMARY_MODEL, _classify.FALLBACK_MODEL):
+        for model_id in _classify.available(_classify.MODELS):
             try:
                 return _classify._converse(client, model_id, system, user)
             except Exception as e:  # try the next model
+                _classify.note_failure(model_id, e)
                 errors.append(f"{model_id}: {type(e).__name__}")
         raise RuntimeError("; ".join(errors))
 
@@ -357,8 +364,9 @@ def resolve_places(geocoder=None, data_dir=None, max_lookups=None, log=print,
     cutoff = datetime.combine(today_local, datetime.min.time(), tzinfo=EXPORT_TZ).astimezone(timezone.utc)
     session = get_session()
     try:
-        rows = [(e.location, e.sources) for e in
-                session.query(Event).filter(Event.start_time >= cutoff).all()]
+        rows = [{"location": e.location, "sources": e.sources, "title": e.title, "url": e.url,
+                 "start": e.start_time.astimezone(EXPORT_TZ).date().isoformat()}
+                for e in session.query(Event).filter(Event.start_time >= cutoff).all()]
     finally:
         session.close()
     store = Store(data_dir or DATA_DIR)

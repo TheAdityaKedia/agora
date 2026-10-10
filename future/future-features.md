@@ -16,27 +16,27 @@ here.
   - **"Near me"** — deferred until the owner wants a location-permission
     prompt (browser geolocation, client-side only).
   - **Venue pages.**
-  Spec: [`feature-specs/venues.md`](feature-specs/venues.md).
+  Spec: [`feature-specs/venues.md`](../feature-specs/venues.md).
 - **Product analytics** — cookieless, first-party usage analytics: visits and
   geography, what people search, filter and click (events, tags, sources,
   venues, areas, normalized by supply), engagement funnel, and later CTR,
   real-visitor performance and errors; private weekly digest email.
-  Spec: [`feature-specs/analytics.md`](feature-specs/analytics.md) (draft).
+  Spec: [`feature-specs/analytics.md`](../feature-specs/analytics.md) (draft).
 - **Adaptive / self-healing scrapers** — detect when a source's markup or
   endpoint changes and adapt instead of silently returning `[]`.
-  Spec: [`feature-specs/adaptive-scrapers.md`](feature-specs/adaptive-scrapers.md)
+  Spec: [`feature-specs/adaptive-scrapers.md`](../feature-specs/adaptive-scrapers.md)
   (early design; open decisions to settle first).
 - **Collections (event canvases)** — save events for yourself, or share a
   collection so friends add events, vote 👍 by name, comment and pick a plan;
   duplicate / share a copy. Agora's first live backend (AWS Lambda +
   DynamoDB). Next: a one-tap ☆ Save on every event card.
-  Spec: [`feature-specs/event-canvases.md`](feature-specs/event-canvases.md);
-  how it works now: [`canvas/HOW-IT-WORKS.md`](canvas/HOW-IT-WORKS.md).
+  Spec: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md);
+  how it works now: [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md).
   **Built** (2026-10-05, PR "Event lifecycle"): stable event ids with
   aliases, updates from the source, cancellations and disappearances, shown
   on the main site and in collections (the two gaps found 2026-10-04,
   *event copies drift* and *event ids aren't stable*). Spec:
-  [`feature-specs/event-lifecycle.md`](feature-specs/event-lifecycle.md).
+  [`feature-specs/event-lifecycle.md`](../feature-specs/event-lifecycle.md).
   Left for later: notifying people of a change (email/push), and badges in
   the overlay refreshing without a full read (polling tracks writes only).
   **Known gaps** (found 2026-10-04; none has a spec yet), most important first:
@@ -79,7 +79,7 @@ here.
 - **Frontend payload scaling** — the browser downloads all of `events.json` and
   indexes every description on load (16 s to the first row on a slow phone at
   5k events). Lean manifest + descriptions on demand.
-  Spec: [`feature-specs/frontend-payload.md`](feature-specs/frontend-payload.md)
+  Spec: [`feature-specs/frontend-payload.md`](../feature-specs/frontend-payload.md)
   (in progress).
 - **Platform scrapers** — one scraper per shared ticketing backend (Veezi for
   indie cinemas, Eventive for film fests, VBO, Tixr) unlocks many venues at

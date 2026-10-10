@@ -8,7 +8,7 @@ collection parts of `frontend/index.html`.
 - Running it, deploying it, the private beta, admin: [`README.md`](README.md)
 - Why it was designed this way (the original decisions):
   [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md)
-- Known gaps and planned work: [`future-features.md`](../future-features.md)
+- Known gaps and planned work: [`future/future-features.md`](../future/future-features.md)
   → "Collections"
 
 ## 1. What people can do

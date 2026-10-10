@@ -17,6 +17,7 @@ from-imports so tests can monkeypatch "main.<fn>".
 import argparse
 import json
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote_plus
@@ -385,21 +386,20 @@ def render_places_body(check: dict, store, run_url: str) -> str:
     share = "" if check["share"] is None else f" · {100 * (1 - check['share']):.1f}% of upcoming events have an area"
     lines.append(f"**{len(pending)} place(s) waiting for a decision**{share} · "
                  f"updated by [this run]({run_url})")
+    for n, (key, p) in enumerate(pending, 1):
+        lines += ["", *_pending_place(n, key, p, store)]
     if pending:
-        lines += ["", "| Location text | Events | Sources | Why it's waiting | Since |", "|---|---:|---|---|---|"]
-        for key, p in pending:
-            text = key.replace("|", "/")
-            link = f"[{text}](https://www.openstreetmap.org/search?query={quote_plus(key)})"
-            reason = (p.get("reason") or "").replace("|", "/")
-            if p.get("suggestion"):
-                reason += " · " + _suggestion_text(p["suggestion"]).replace("|", "/")
-            sources = ", ".join(p.get("sources") or []).replace("|", "/")
-            lines.append(f"| {link} | {p.get('events', 0)} | {sources} | {reason} | {p.get('first_seen', '')} |")
-        lines += ["", "**To resolve one**, edit `service/data/venue_locations.json` in GitHub's editor and "
-                      "replace the string's `pending` entry with `{\"venue\": \"<id from venues.json>\"}` "
-                      "(optionally with `\"room\"`), `{\"place\": \"none\"}` or `{\"place\": \"online\"}` — "
-                      "or add a venue to `service/data/venues.json` and point the string at it. "
-                      "`python -m places validate` checks an edit; the next run applies it."]
+        repo = os.environ.get("GITHUB_REPOSITORY")
+        file = (f"[`service/data/venue_locations.json`](https://github.com/{repo}/edit/main/"
+                "service/data/venue_locations.json)" if repo else "`service/data/venue_locations.json`")
+        lines += ["", "---", "", f"**How to answer:** open {file} in GitHub's editor, find the location "
+                  "text, and replace its value (`{\"pending\": {…}}`) with one of:", "",
+                  "- `{\"venue\": \"<id>\"}` — it's a venue in `service/data/venues.json`; add "
+                  "`\"room\": \"…\"` for a room inside it. A new venue: add it to `venues.json` first.",
+                  "- `{\"place\": \"online\"}` — an online event.",
+                  "- `{\"place\": \"none\"}` — not a single place (a walking tour, \"TBA\").", "",
+                  "Commit to `main`; the next run applies it and drops the place from this list. "
+                  "Until then the event is on the site without an area or a map pin."]
     if check["new_venues"]:
         lines += ["", f"<details><summary>{len(check['new_venues'])} venue(s) added automatically in this run</summary>", ""]
         for vid in check["new_venues"]:
@@ -409,6 +409,75 @@ def render_places_body(check: dict, store, run_url: str) -> str:
             lines.append(f"- **{v.get('name', vid)}** ({v.get('region')}), {v.get('address', '')}{where}")
         lines += ["", "</details>"]
     return "\n".join(lines) + "\n"
+
+
+def _pending_place(n: int, key: str, p: dict, store) -> list[str]:
+    """One waiting place in the review issue: which event, why, and the
+    likely answer when the text points at a venue we already have."""
+    map_search = f"https://www.openstreetmap.org/search?query={quote_plus(key)}"
+    heading = key.replace("`", "'")
+    out = [f"### {n}. `{heading}`", ""]
+    events = p.get("events", 0)
+    more = f" and {events - 1} more" if events > 1 else ""
+    ex = p.get("example")
+    if ex:
+        title = ex["title"].replace("[", "(").replace("]", ")")
+        what = f"[{title}]({ex['url']})" if ex.get("url") else f"**{title}**"
+        out.append(f"- **Event:** {what} on {ex['date']}{more}")
+    else:
+        out.append(f"- **Events:** {events} upcoming")
+    out.append(f"- **From:** {', '.join(p.get('sources') or []) or 'unknown'} · "
+               f"waiting since {p.get('first_seen', '?')}")
+    out.append(f"- **Why it's waiting:** {p.get('reason', '')} ([search the map]({map_search}))")
+    if p.get("suggestion"):
+        out.append(f"- {_suggestion_text(p['suggestion'])}")
+    for vid, room in _existing_venues(key, p, store)[:2]:
+        v = store.venues[vid]
+        answer = {"venue": vid, **({"room": room} if room else {})}
+        out += [f"- **Probably {v['name']}**, a venue we already have (`{vid}`, {v.get('address', '')}). "
+                "If so, the answer is:", "",
+                "  ```json", f"  {json.dumps(answer)}", "  ```"]
+    return out
+
+
+_STREET_SUFFIX = {"st", "street", "ave", "avenue", "blvd", "boulevard", "rd", "road", "way", "dr",
+                  "drive", "pl", "place", "ln", "lane", "ct", "court", "ter", "terrace", "hwy"}
+
+
+def _street(segment: str) -> tuple[str, frozenset] | None:
+    """'610 Old Mason St' → ('610', {'old', 'mason'})."""
+    m = re.match(r"\s*(\d+[a-z]?)\s+([a-z0-9 .'-]+)$", segment.lower())
+    if not m:
+        return None
+    words = frozenset(re.findall(r"[a-z0-9]+", m.group(2))) - _STREET_SUFFIX
+    return (m.group(1), words) if words else None
+
+
+def _existing_venues(key: str, p: dict, store) -> list[tuple[str, str | None]]:
+    """Venues the pending text names, or whose street address it carries
+    (same number, the venue's street words all present: '610 Old Mason St'
+    finds '610 Mason Street'). Each with a room guess for a name match."""
+    from places.normalize import GENERIC, name_tokens, names_match, normalize_key, venue_part
+    sug = p.get("suggestion") or {}
+    texts = [key, normalize_key(sug.get("name") or ""), (sug.get("street_address") or "").lower()]
+    streets = {st for t in texts for seg in t.split(",") if (st := _street(seg))}
+    found = []
+    for vid, v in store.venues.items():
+        name = normalize_key(v.get("name") or "")
+        named = bool(name_tokens(name) - GENERIC) and any(
+            re.search(rf"(?<![a-z0-9]){re.escape(name)}(?![a-z0-9])", t) for t in texts if t)
+        vst = next((st for seg in (v.get("address") or "").split(",") if (st := _street(seg))), None)
+        at = vst is not None and any(st[0] == vst[0] and vst[1] <= st[1] for st in streets)
+        if not (named or at):
+            continue
+        room = None
+        if named:
+            vp, rm = venue_part(sug.get("name") or key)
+            room = vp if names_match(rm, v["name"]) else rm if names_match(vp, v["name"]) else None
+            if room and room == room.lower():
+                room = room.title()
+        found.append((vid, room))
+    return found
 
 
 def _suggestion_text(s: dict) -> str:

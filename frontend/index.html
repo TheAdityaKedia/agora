@@ -7,6 +7,14 @@
 <meta name="description" content="Concerts, readings, screenings, talks and more around the Bay, in one calendar.">
 <meta name="theme-color" content="#eef1f2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1822" media="(prefers-color-scheme: dark)">
+<script>
+  // Theme: follows the system unless the viewer picked one with the sun/moon
+  // button (stored per browser). Set before first paint so nothing flashes.
+  try {
+    const t = localStorage.getItem("agora-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
 <link rel="preload" href="./vendor/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* Self-hosted (SIL OFL; licenses alongside). Latin subsets: other scripts
@@ -42,13 +50,23 @@
     /* Height of the sticky search bar; set from JS so day headings stick below it. */
     --sticky-top: 0px;
   }
+  /* Dark: the system's choice unless overridden (data-theme on <html>). */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --fg: #e4e9ec; --muted: #93a3ae; --accent: #f26b4a; --accent-fg: #0e1822;
       --bg: #0e1822; --chip-bg: #1b2a37; --border: #243644; --input-bg: #15222e;
       --error: #ff8a75; --sheet-shadow: 0 -8px 32px rgba(0,0,0,0.5);
     }
   }
+  :root[data-theme="dark"] {
+    --fg: #e4e9ec; --muted: #93a3ae; --accent: #f26b4a; --accent-fg: #0e1822;
+    --bg: #0e1822; --chip-bg: #1b2a37; --border: #243644; --input-bg: #15222e;
+    --error: #ff8a75; --sheet-shadow: 0 -8px 32px rgba(0,0,0,0.5);
+  }
+  /* Native controls (date pickers, scrollbars) follow the same theme. */
+  :root { color-scheme: light dark; }
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
   * { box-sizing: border-box; }
   /* Ensure the hidden attribute wins over `display: flex` set on filter rows. */
   [hidden] { display: none !important; }
@@ -60,7 +78,24 @@
   }
   body.sheet-open { overflow: hidden; }
   button { font: inherit; }
+  /* Sun/moon theme switch, top right: shows the theme a tap switches TO. */
+  .theme-btn {
+    position: absolute; top: 12px; right: 0;
+    width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--fg); border: 1px solid var(--border);
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-btn svg { width: 20px; height: 20px; }
+  .theme-btn .sun { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-btn .sun { display: block; }
+    :root:not([data-theme="light"]) .theme-btn .moon { display: none; }
+  }
+  :root[data-theme="dark"] .theme-btn .sun { display: block; }
+  :root[data-theme="dark"] .theme-btn .moon { display: none; }
   header.masthead {
+    position: relative;
     padding: 20px 0 6px;
     display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
   }
@@ -114,6 +149,11 @@
     border-radius: 999px; background: var(--accent); color: var(--accent-fg);
     font-size: 12px; text-align: center;
   }
+  /* A filter is on: the button fills with the accent, the count inverts. */
+  .filters-btn.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600;
+  }
+  .filters-btn.active .badge { background: var(--accent-fg); color: var(--accent); font-weight: 700; }
   /* Presets scroll sideways on a phone instead of wrapping onto three lines;
      the List | Map toggle stays pinned at the end of the row. */
   .view-line { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
@@ -188,6 +228,16 @@
   .date-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .date-fields label { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--muted); min-width: 0; }
   .date-fields .date-input { width: 100%; min-width: 0; }
+  /* Our own placeholder: iOS Safari shows an empty date field as blank (no
+     mm/dd/yyyy), and Chrome's mm/dd/yyyy says less than "Today"/"Any date". */
+  .date-field { position: relative; display: block; min-width: 0; }
+  .date-ph {
+    position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 16px; pointer-events: none; display: none;
+  }
+  .date-field.is-empty .date-ph { display: block; }
+  .date-field.is-empty:focus-within .date-ph { display: none; }
+  .date-field.is-empty .date-input:not(:focus)::-webkit-datetime-edit { color: transparent; }
 
   /* Sources / Topics: disclosure lists that expand in place. */
   .dropdown > summary {
@@ -198,8 +248,19 @@
     font-size: 14px; border: 1px solid var(--border);
   }
   .dropdown > summary::-webkit-details-marker { display: none; }
-  .dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
-  .dropdown[open] > summary::after { content: "▴"; }
+  /* A drawn chevron (the ▾ glyph was ~10px and hard to see on a phone):
+     an L of two borders turned 45°, flipped when open. */
+  .dropdown > summary::after {
+    content: ""; flex: 0 0 auto; width: 4px; height: 4px; margin: 0 2px 0 4px;
+    border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+    transform: translateY(-1px) rotate(45deg); opacity: 0.75;
+    transition: transform 0.15s ease;
+  }
+  .dropdown[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+  @media (pointer: coarse) {
+    .dropdown > summary::after { width: 4.5px; height: 4.5px; border-width: 0 1.25px 1.25px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .dropdown > summary::after { transition: none; } }
   .dropdown-panel {
     margin-top: 8px;
     background: var(--input-bg); color: var(--fg);
@@ -225,7 +286,13 @@
     background: transparent; color: var(--muted); border: 1px solid var(--border);
     font-size: 13px; cursor: pointer;
   }
-  .dropdown-bulk button:hover, .reset-btn:hover { color: var(--fg); }
+  .dropdown-bulk button:hover { color: var(--fg); }
+  .reset-btn:hover { color: var(--fg); }
+  /* With a filter on, "Reset all" lights up like the Filters button: it
+     only stands out when there's something to reset. */
+  .reset-btn.active {
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600;
+  }
   .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
   .copy-btn.copied { color: var(--accent-fg); background: var(--accent); border-color: var(--accent); }
   .dropdown-item {
@@ -253,8 +320,13 @@
   .date-input {
     padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px;
     background: var(--input-bg); color: var(--fg); font: inherit; font-size: 16px;
-    color-scheme: light dark;
+    /* iOS Safari gives date inputs an intrinsic min width that ignores
+       width: 100%, so two side by side overlapped on a 375px iPhone mini.
+       Dropping the native appearance lets them fit their column. */
+    -webkit-appearance: none; appearance: none;
+    display: block; box-sizing: border-box; min-height: 38px; text-align: left;
   }
+  .date-input::-webkit-date-and-time-value { text-align: left; }  /* iOS centres it */
 
   /* --- Above the list: active-filter pills, counts, day strip. --- */
   .active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
@@ -406,7 +478,8 @@
      One --h drives text/border/bg; lightness flips by theme so chips read on
      both backgrounds. --- */
   :root { --chip-s: 50%; --chip-l: 34%; }
-  @media (prefers-color-scheme: dark) { :root { --chip-s: 52%; --chip-l: 72%; } }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --chip-s: 52%; --chip-l: 72%; } }
+  :root[data-theme="dark"] { --chip-s: 52%; --chip-l: 72%; }
   .tags { display: flex; flex-wrap: wrap; gap: 5px; }
   /* Tags, then "Add to calendar" pushed to the right edge. */
   .row-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 8px; }
@@ -616,6 +689,15 @@
 </head>
 <body>
 <header class="masthead">
+  <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch theme">
+    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+    </svg>
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>
+    </svg>
+  </button>
   <div>
     <div class="brand"><h1><a class="home" href="./" title="Agora home: all events, no filters">Agora</a></h1><span class="byline">by <a href="https://adikedia.com">Adi</a></span></div>
     <div class="subtitle">Events around the Bay, in one calendar.</div>
@@ -629,6 +711,41 @@
     <div id="beta-slot"></div>
   </div>
 </header>
+<script>
+  // The sun/moon switch. Independent of the events, so it works while they load.
+  (function () {
+    const btn = document.getElementById("theme-btn");
+    const root = document.documentElement;
+    const systemDark = matchMedia("(prefers-color-scheme: dark)");
+    const metas = document.querySelectorAll('meta[name="theme-color"]');
+    const systemTheme = () => (systemDark.matches ? "dark" : "light");
+    const current = () => root.dataset.theme || systemTheme();
+    function sync() {
+      const dark = current() === "dark";
+      const label = dark ? "Switch to light theme" : "Switch to dark theme";
+      btn.setAttribute("aria-label", label);
+      btn.title = label;
+      // The browser's toolbar colour follows an override too.
+      for (const m of metas) {
+        const own = m.media.includes("dark") ? "#0e1822" : "#eef1f2";
+        m.content = root.dataset.theme ? (dark ? "#0e1822" : "#eef1f2") : own;
+      }
+    }
+    btn.addEventListener("click", () => {
+      const next = current() === "dark" ? "light" : "dark";
+      // Choosing the system's own theme goes back to following the system.
+      const follow = next === systemTheme();
+      if (follow) delete root.dataset.theme; else root.dataset.theme = next;
+      try {
+        if (follow) localStorage.removeItem("agora-theme");
+        else localStorage.setItem("agora-theme", next);
+      } catch (e) {}
+      sync();
+    });
+    systemDark.addEventListener("change", sync);
+    sync();
+  })();
+</script>
 
 <div class="topbar" id="topbar">
   <div class="search-line">
@@ -660,8 +777,8 @@
   <div class="filter-group">
     <h3>Dates</h3>
     <div class="date-fields">
-      <label>From <input type="date" id="date-from" class="date-input"></label>
-      <label>To <input type="date" id="date-to" class="date-input"></label>
+      <label>From <span class="date-field"><input type="date" id="date-from" class="date-input"><span class="date-ph" aria-hidden="true">Today</span></span></label>
+      <label>To <span class="date-field"><input type="date" id="date-to" class="date-input"><span class="date-ph" aria-hidden="true">Any date</span></span></label>
     </div>
   </div>
   <div class="filter-group" id="area-group" hidden>
@@ -980,19 +1097,6 @@
     return fullIndexReady;
   }
 
-  const generatedAt = new Date(data.generated_at);
-  // "Updated 3 hours ago", with the exact time on hover.
-  const updatedHtml = (() => {
-    const mins = Math.round((Date.now() - generatedAt) / 60000);
-    if (!isFinite(mins)) return "";
-    const rtf = new Intl.RelativeTimeFormat(undefined, {numeric: "auto"});
-    const ago = mins < 60 ? rtf.format(-mins, "minute")
-      : mins < 48 * 60 ? rtf.format(-Math.round(mins / 60), "hour")
-      : rtf.format(-Math.round(mins / 1440), "day");
-    return '<span title="' + escapeHtml(generatedAt.toLocaleString()) + '">Updated '
-      + escapeHtml(ago) + "</span>";
-  })();
-
   // State — events carry a `sources` list (a physical event may be listed by
   // multiple sources), so counts and filtering consider every entry in that list.
   // Sources in the manifest are already human-readable names — the backend
@@ -1052,7 +1156,10 @@
   const hoodLabels = new Map((data.neighborhoods || []).map(h => [h.id, h.label]));
   const hoodCounts = new Map();
   for (const e of events) if (e._hood) hoodCounts.set(e._hood, (hoodCounts.get(e._hood) || 0) + 1);
-  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id));
+  // Busiest first (most upcoming events); ties alphabetical.
+  const hoodIds = [...hoodLabels.keys()].filter(id => hoodCounts.has(id))
+    .sort((a, b) => hoodCounts.get(b) - hoodCounts.get(a)
+      || hoodLabels.get(a).localeCompare(hoodLabels.get(b)));
   const selectedHoods = new Set();
   const hoodDropdownEl = document.getElementById("hood-dropdown");
   const hoodListEl = document.getElementById("hood-list");
@@ -2238,7 +2345,6 @@
 
   if (events.length === 0) {
     list.innerHTML = '<div class="empty">No upcoming events.</div>';
-    meta.innerHTML = updatedHtml;
     return;
   }
   filters.hidden = false;
@@ -2250,6 +2356,8 @@
 
   function render() {
     writeStateToUrl();
+    // Show the date fields' own placeholders while they're empty.
+    for (const el of [fromEl, toEl]) el.parentElement.classList.toggle("is-empty", !el.value);
     const now = new Date();
     const otherFiltersPass = (ev, ignoreArea = false) => {
       if (ev._start < now) return false;
@@ -2290,7 +2398,6 @@
       filtered = events.filter(ev => otherFiltersPass(ev));
     }
 
-    const isFiltered = filtered.length !== events.length;
     const n = (x) => x.toLocaleString();
     // With an area chosen, say how many otherwise-matching events have no
     // known area (unknown or pending venue) and so aren't shown — with a
@@ -2309,8 +2416,10 @@
     const noMapHtml = pins && pins.unmapped ? '<span class="no-area">' + n(pins.unmapped)
       + (pins.unmapped === 1 ? " event has" : " events have") + " no map location and "
       + (pins.unmapped === 1 ? "isn’t" : "aren’t") + " shown.</span>" : "";
-    meta.innerHTML = "<span>" + (isFiltered ? n(filtered.length) + " of " + n(events.length)
-      : n(events.length)) + " upcoming events</span>" + updatedHtml + noAreaHtml + noMapHtml;
+    // The line above the list only carries notes (events a filter can't place);
+    // the result count and "updated" time were noise, so they're gone.
+    meta.innerHTML = noAreaHtml + noMapHtml;
+    meta.hidden = !meta.innerHTML;
     renderChrome(filtered, flat);
     if (pins) {
       // The list is rebuilt when you switch back.
@@ -2366,6 +2475,9 @@
     ).join("");
     filtersCountEl.hidden = active.length === 0;
     filtersCountEl.textContent = active.length;
+    // The whole Filters button lights up while any filter is on.
+    filtersBtnEl.classList.toggle("active", active.length > 0);
+    resetEl.classList.toggle("active", active.length > 0);
     filtersDoneEl.textContent = filtered.length === 0 ? "No events match"
       : "Show " + filtered.length.toLocaleString() + (filtered.length === 1 ? " event" : " events");
 

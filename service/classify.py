@@ -20,12 +20,52 @@ from pathlib import Path
 import taxonomy
 from classifications import Classification
 
-# Primary: global cross-region Haiku 4.5 inference profile. Fallback: the
-# US-only inference profile (same model, routed within US regions) for when the
-# global one is unavailable. Haiku 4.5 can't be called on-demand by its bare
-# foundation-model id — Bedrock requires an inference profile.
-PRIMARY_MODEL = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
-FALLBACK_MODEL = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+# Haiku 5.5 through its global cross-region inference profile, then the
+# US-only one (same model, routed within US regions). Call Haiku through an
+# inference profile, not its bare foundation-model id.
+PRIMARY_MODEL = "global.anthropic.claude-haiku-5-5"
+FALLBACK_MODEL = "us.anthropic.claude-haiku-5-5"
+# Haiku 4.5 is the fallback while the account has no Haiku 5.5 capacity
+# (its 5.5 quotas are 0 until AWS raises them) and for any 5.5 outage.
+HAIKU_45 = ("global.anthropic.claude-haiku-4-5-20251001-v1:0",
+            "us.anthropic.claude-haiku-4-5-20251001-v1:0")
+MODELS = (PRIMARY_MODEL, FALLBACK_MODEL) + HAIKU_45
+
+# Haiku 5.5 thinks by default and rejects `temperature`. Low effort keeps a
+# one-line JSON answer quick; thinking counts toward maxTokens, so leave room.
+MODEL_FIELDS = {"output_config": {"effort": "low"}}
+MAX_TOKENS = 1024
+
+
+def is_55(model_id: str) -> bool:
+    """A 5.5 model: no `temperature`, and it may think before answering."""
+    return "-5-5" in model_id
+
+
+def inference_config(model_id: str, max_tokens: int) -> dict:
+    """Converse `inferenceConfig` for this model: 5.5 rejects `temperature`;
+    4.5 takes 0 for repeatable tags."""
+    return {"maxTokens": max_tokens} if is_55(model_id) else {"maxTokens": max_tokens, "temperature": 0.0}
+
+
+# Models Bedrock refused with AccessDeniedException in this process (no access,
+# or a quota of 0). Not retried until the next run: otherwise every one of a
+# run's calls would first spend a round trip on each refusing model.
+_unavailable: set[str] = set()
+
+
+def available(models) -> tuple[str, ...]:
+    """`models` minus those refused earlier in this run; all of them if every
+    one was refused (so the caller still reports the real errors)."""
+    left = tuple(m for m in models if m not in _unavailable)
+    return left or tuple(models)
+
+
+def note_failure(model_id: str, error: Exception) -> None:
+    if type(error).__name__ == "AccessDeniedException" and model_id not in _unavailable:
+        _unavailable.add(model_id)
+        print(f"[bedrock] {model_id} refused ({str(error)[:120]}); using the fallbacks for the rest of this run",
+              flush=True)
 
 _VALID_COSTS = {"free", "paid", "unknown"}
 _DATA_DIR = Path(__file__).parent / "data"
@@ -170,9 +210,14 @@ def _converse(client, model_id: str, system: str, user: str) -> str:
         modelId=model_id,
         system=[{"text": system}],
         messages=[{"role": "user", "content": [{"text": user}]}],
-        inferenceConfig={"maxTokens": 250, "temperature": 0.0},
+        inferenceConfig=inference_config(model_id, MAX_TOKENS if is_55(model_id) else 250),
+        **({"additionalModelRequestFields": MODEL_FIELDS} if is_55(model_id) else {}),
     )
-    return resp["output"]["message"]["content"][0]["text"]
+    # The reply can open with a reasoning block; the answer is the text block.
+    for block in resp["output"]["message"]["content"]:
+        if "text" in block:
+            return block["text"]
+    raise RuntimeError(f"no text in reply (stopReason {resp.get('stopReason')})")
 
 
 def make_client():
@@ -236,7 +281,7 @@ def classify_show(
     description: str | None,
     *,
     client=None,
-    models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL),
+    models: tuple[str, ...] = MODELS,
 ) -> Classification:
     """Classify one show. Tries each model in order until one succeeds; the
     surviving model id is recorded on the Classification. Title-keyword topics
@@ -247,10 +292,11 @@ def classify_show(
     system, user = build_prompt(title, source, description)
 
     errors: list[str] = []
-    for model_id in models:
+    for model_id in available(models):
         try:
             text = _converse(client, model_id, system, user)
         except Exception as e:  # try the next model
+            note_failure(model_id, e)
             errors.append(f"{model_id}: {type(e).__name__}: {e}")
             continue
         parsed = parse_classification(text)

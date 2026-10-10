@@ -1,0 +1,75 @@
+{
+ "events": [
+  {
+   "id": "26001APLNVRTPLBBPSVMJQSVGGNQMBRBG",
+   "name": "Bob Marley: How Reggae Changed the World Featuring Duane Forrest",
+   "description": "Singer-songwriter Duane Forrest performs acoustic renditions of legendary reggae songs\u2014from Bob Marley to Toots and the Maytals\u2014that reshaped countless lives, including his own. This uplifting show earned five stars from Broadway Baby, sold out at the 2024 Edinburgh Fringe, and won the Jury\u2019s Choice Award at the Ottawa Fringe Festival, Patron\u2019s Pick at the Toronto Fringe Festival, and Best Music Show at the Perth and Adelaide Fringe Festivals.",
+   "imageUrl": "",
+   "webUrl": "https://live.stanford.edu/events/26-27season/studio/bob-marley/",
+   "firstInstanceDateTime": "2026-11-11T19:00:00"
+  },
+  {
+   "id": "33601ABMMCLRHCDGJGLSCVTKRJSMDCMSS",
+   "name": "Slightly Stoopid",
+   "description": "",
+   "imageUrl": "",
+   "webUrl": "https://live.stanford.edu/events/26-frost/slightly-stoopid/",
+   "firstInstanceDateTime": "2026-10-09T16:00:00"
+  },
+  {
+   "id": "40601AVRVRQNNTTMJRHQKDLRCKSKHBGKP",
+   "name": "Slightly Stoopid - Student Lottery Winners",
+   "description": "",
+   "imageUrl": "",
+   "webUrl": "",
+   "firstInstanceDateTime": "2026-10-09T16:00:00"
+  }
+ ],
+ "instances": [
+  {
+   "id": "41201ATDVHVNDPRBLKPLQHLVPNSCNQLLP",
+   "event": {
+    "id": "33601ABMMCLRHCDGJGLSCVTKRJSMDCMSS"
+   },
+   "start": "2026-10-09T16:00:00",
+   "startUtc": "2026-10-09T23:00:00",
+   "cancelled": false
+  },
+  {
+   "id": "50401ARMBCNTPHTPBVLQSVDRCMHSBBNBM",
+   "event": {
+    "id": "40601AVRVRQNNTTMJRHQKDLRCKSKHBGKP"
+   },
+   "start": "2026-10-09T16:00:00",
+   "startUtc": "2026-10-09T23:00:00",
+   "cancelled": false
+  },
+  {
+   "id": "32001ABCGNLKMHMQDQQTTRQRNTSNGPVMC",
+   "event": {
+    "id": "26001APLNVRTPLBBPSVMJQSVGGNQMBRBG"
+   },
+   "start": "2026-11-11T19:00:00",
+   "startUtc": "2026-11-12T03:00:00",
+   "cancelled": false
+  },
+  {
+   "id": "32002ASTSQHHHLMTNCVKBMDRQHMSGVJJJ",
+   "event": {
+    "id": "26001APLNVRTPLBBPSVMJQSVGGNQMBRBG"
+   },
+   "start": "2026-11-12T19:00:00",
+   "startUtc": "2026-11-13T03:00:00",
+   "cancelled": false
+  },
+  {
+   "id": "32003ARPNQNBVTBJTMLNVRCRDKVJPHDTL",
+   "event": {
+    "id": "26001APLNVRTPLBBPSVMJQSVGGNQMBRBG"
+   },
+   "start": "2026-11-13T19:00:00",
+   "startUtc": "2026-11-14T03:00:00",
+   "cancelled": false
+  }
+ ]
+}

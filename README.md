@@ -46,7 +46,9 @@ agora/
 ├── docker-compose.yml          # Postgres + API + scraper for local runs
 ├── CONTRIBUTING.md             # How to add a source (scraper) + write feature specs
 ├── feature-specs/              # Design specs for features not yet built
-├── future-features.md          # Planned features, each linked to its spec
+├── future/                     # What's next
+│   ├── future-features.md      # Planned features, each linked to its spec
+│   └── design-directions.html  # Visual directions explored (palettes, specimens)
 ├── future-sources.md           # Candidate sources + sources that need fixing
 └── README.md
 ```
@@ -133,8 +135,13 @@ testing workflow changes.
    a role (`AgoraGitHubBedrock`, account `978355607698`) trusted only for
    `repo:TheAdityaKedia/agora:environment:production` — jobs that declare an
    `environment:` get that OIDC subject instead of `ref:…`, and `production` is
-   main-only — allowing just `bedrock:InvokeModel` on the Haiku 4.5 global
-   inference profile + foundation model used in `service/classify.py`. A $5/mo
+   main-only — allowing just `bedrock:InvokeModel` on the inference
+   profiles + foundation models the code calls: Haiku 5.5 and Sonnet 5.5,
+   with Haiku 4.5 and Sonnet 4.5 as fallbacks (`MODELS` in
+   `service/classify.py`, `VERIFY_MODELS` in `service/ingest/extract.py`). A
+   model Bedrock refuses is skipped for the rest of that run, and the log says
+   so (`[bedrock] … refused`). Bedrock also needs the model's agreement
+   accepted and a non-zero tokens-per-minute quota for the account. A $5/mo
    AWS Budget (`agora-monthly`) emails on 80% actual / 100% forecast.
    Without the role, runs still ship — new shows are just untagged.
 3. **Secrets, scoped by GitHub Environment** (Settings → Environments):
@@ -237,6 +244,19 @@ DATABASE_URL='<neon production url>' python rekey_events.py --apply   # one tran
 Collisions (two rows that compute one id: a missed duplicate) are listed and
 left alone; `python dedupe_existing.py` merges the fuzzy ones.
 
+To run SQL from a terminal instead, on any Mac or Linux machine:
+
+```bash
+scripts/neon-sql.sh --query """SELECT count(*) FROM events WHERE sources->>0 = '<NAME>';"""
+scripts/neon-sql.sh --branch ci-test --query """SELECT * FROM events LIMIT 5;"""
+```
+
+It installs the Neon CLI and `psql` if they're missing, asks for
+`NEON_API_KEY` unless the machine has run `neon auth`, and defaults to the
+`production` branch. The query runs as one transaction that stops at the first
+error, and a query that can change production data asks you to type
+`production` first (`--yes` skips that). `--help` has the details.
+
 **Tagging budget and re-tagging** — the merge job tags new or stale shows
 8 at a time for at most 15 minutes, then saves what it has; the rest wait for
 the next run and keep their old tags meanwhile. The log and the data PR show
@@ -299,7 +319,8 @@ are one event; phone numbers and emails are scrubbed from descriptions.
 **Images** become the event picture only if safe: a designed flyer, a photo of
 a flyer cropped to the flyer, or the flyer embedded in a screenshot (an
 Instagram post) cropped out — snapped to the post image's straight edges — and
-only after a final Claude Sonnet 4.5 check finds a clean flyer with no app UI,
+only after a final Claude Sonnet 5.5 check (Sonnet 4.5 as its fallback, never
+Haiku) finds a clean flyer with no app UI,
 identifiable person, or private contact details. A screenshot itself (chat,
 DM, app UI) is never published. Safe images go to the private S3 bucket
 `agora-submissions-978355607698`, served via CloudFront
@@ -331,12 +352,13 @@ into logs, PRs, the DB, or the manifest.
   emails you) and turns the run red. The next clean run closes it. Per-email
   problems (no date, blocked link) aren't alerts — the sender gets a reply.
   A heartbeat in the daily scrape run also alerts (same issue) if the email
-  job hasn't succeeded on `main` in 6 hours — GitHub can silently drop
-  scheduled runs.
+  job hasn't succeeded on `main` in 9 hours — GitHub can silently drop
+  scheduled runs, and in practice honors only 3–6 of the 24 hourly slots a
+  day, so the window allows for that rather than alerting on it.
 
 **Setup** (done; for a rebuild): Gmail account with 2-Step Verification + app
 password; secrets in environments `production` and `ci-test`:
 `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD`, `SUBMISSION_HASH_KEY`,
 `SUBMISSION_IMAGE_BUCKET`, `SUBMISSION_IMAGE_BASE_URL` (plus the AWS role
-secrets); the Bedrock role allows Haiku 4.5 + Sonnet 4.5 and `s3:PutObject` on
+secrets); the Bedrock role allows Haiku 5.5 + Sonnet 5.5 (and their 4.5 fallbacks) and `s3:PutObject` on
 the bucket's `img/*`; AWS Budget `agora-monthly` is $10.

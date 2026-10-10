@@ -270,6 +270,19 @@ def test_room_of_known_venue_needs_no_lookup(store):
     assert len(r.geo.queries) == calls
 
 
+def test_known_venue_in_parentheses_takes_the_rest_as_its_room(store):
+    store.venues["sports-basement-presidio"] = {
+        "name": "Sports Basement Presidio", "region": "sf", "status": "verified",
+        "precision": "building", "lat": 37.802859, "lng": -122.459265,
+        "address": "610 Mason Street, San Francisco, CA 94129"}
+    q = "The Dairy (Sports Basement Presidio), 610 Old Mason St, San Francisco, CA"
+    r = resolver(store)
+    out = r.resolve(q, ["Green Apple Books"])
+    assert out.action == "room"
+    assert out.entry == {"venue": "sports-basement-presidio", "room": "The Dairy"}
+    assert r.geo.queries == []
+
+
 def test_same_osm_object_or_nearby_same_name_is_an_alias(store):
     resp = {
         "Specs', 12 Saroyan Place, San Francisco": [nominatim("Specs Bar", *SPECS, osm="node/9")],
@@ -516,6 +529,24 @@ def test_resolve_locations_summary(store):
     assert again["actions"] == {"known": 3}
 
 
+def test_pending_entry_keeps_the_soonest_example_event(store):
+    from places.pipeline import collect_locations, resolve_locations
+    locs = collect_locations([
+        {"location": "Nowhere Hall", "sources": ["X"], "title": "Later", "url": "u2", "start": "2026-11-02"},
+        {"location": "nowhere hall", "sources": ["Y"], "title": "Sooner", "url": "u1", "start": "2026-10-09"},
+    ])
+    assert locs["nowhere hall"]["example"] == {"title": "Sooner", "url": "u1", "date": "2026-10-09"}
+    resolve_locations(locs, store, FakeGeocoder(), today=date(2026, 10, 3))
+    pending = store.locations["nowhere hall"]["pending"]
+    assert pending["example"]["title"] == "Sooner" and pending["sources"] == ["X", "Y"]
+    # Not due a retry yet, but the example and counts stay current.
+    locs = collect_locations([{"location": "Nowhere Hall", "sources": ["X"], "title": "Next",
+                               "url": "u3", "start": "2026-10-20"}])
+    resolve_locations(locs, store, FakeGeocoder(), today=date(2026, 10, 4))
+    pending = store.locations["nowhere hall"]["pending"]
+    assert pending["example"]["title"] == "Next" and pending["events"] == 1
+
+
 def test_resolve_locations_refuses_invalid_files(store):
     from places.pipeline import resolve_locations
     store.locations["ghost"] = {"venue": "nope"}
@@ -651,3 +682,115 @@ def test_model_is_asked_only_for_what_the_rules_leave_pending(tmp_path):
     assert out.action == "new" and calls == []
     _, _, calls = resolve(tmp_path, "Online via Zoom", {}, PROPOSAL)
     assert calls == []
+
+
+# --- places check (pre-merge location check) -------------------------------------
+
+def test_check_locations_describes_new_and_pending_strings(store):
+    from collections import Counter
+    from places.check import check_locations, format_rows
+    q = "Specs', 12 Saroyan Place, San Francisco, CA"
+    geo = FakeGeocoder({q: [nominatim("Specs Bar", *SPECS, house="12", road="Saroyan Place")]})
+    rows = check_locations(Counter({q: 4, "Stanford Live, Stanford University, Stanford, CA": 89}),
+                           "SF Bar Guide", store, geo)
+    by_text = {r["text"]: r for r in rows}
+    assert by_text[q]["action"] == "new"
+    assert by_text[q]["where"].startswith("Specs Bar, ") and "openstreetmap.org" in by_text[q]["where"]
+    stanford = by_text["Stanford Live, Stanford University, Stanford, CA"]
+    assert stanford["action"] == "pending" and stanford["where"].startswith("PENDING: ")
+    assert [r["events"] for r in rows] == [89, 4]  # most events first
+    assert format_rows("SF Bar Guide", rows)[0] == "== SF Bar Guide: 93 events, 2 location(s)"
+
+
+def test_check_run_leaves_the_committed_files_alone(tmp_path, monkeypatch):
+    import main
+    from places import check
+    from scrapers.base import RawEvent
+    Store(tmp_path).save()
+    before = {p.name: p.read_text() for p in tmp_path.iterdir()}
+
+    class Scraper:
+        NAME = "Fake Venue"
+
+        @staticmethod
+        def scrape(url):
+            t = date(2026, 10, 9)
+            return [RawEvent(title="Show", start_time=t, location="Nowhere Hall, Atlantis, CA",
+                             url=url, description=None)]
+
+    monkeypatch.setattr(main, "load_sources", lambda: ["https://fake.example/events"])
+    monkeypatch.setattr(main, "find_scraper", lambda url: Scraper)
+    lines = []
+    assert check.run(["fake"], data_dir=tmp_path, geocoder=FakeGeocoder(), log=lines.append) == 1
+    assert lines[0] == "== Fake Venue: 1 events, 1 location(s)"
+    assert lines[-1].startswith("1 pending location(s).")
+    assert {p.name: p.read_text() for p in tmp_path.iterdir()} == before
+    assert check.run(["nomatch"], data_dir=tmp_path, geocoder=FakeGeocoder(), log=lines.append) == 1
+
+
+def test_stanford_studio_is_a_room_of_bing_whichever_resolves_first(store):
+    from scrapers.stanfordlive import HALLS
+    bing = nominatim("Bing Concert Hall", 37.432, -122.1661, house="327", road="Lasuen Street",
+                     city="Stanford", osm="way/205182889")
+    resp = {HALLS["the studio"]: [bing], HALLS["bing concert hall"]: [bing],
+            "Bing Concert Hall, Stanford, CA": [bing]}
+    r = resolver(store, resp)
+    studio = r.resolve(HALLS["the studio"], ["Stanford Live"])
+    hall = r.resolve(HALLS["bing concert hall"], ["Stanford Live"])
+    assert studio.entry["room"] == "Bing Studio"
+    assert studio.entry["venue"] == hall.entry["venue"]
+    assert store.venues[hall.entry["venue"]]["name"] == "Bing Concert Hall"
+
+
+# --- venues that list their rooms ------------------------------------------------
+
+@pytest.fixture
+def park(store):
+    store.venues["salesforce-park"] = {
+        "name": "Salesforce Park", "address": "425 Mission St, San Francisco, CA 94105",
+        "lat": 37.789115, "lng": -122.396655, "precision": "building", "region": "sf",
+        "status": "verified", "rooms": ["Amphitheater", "Amphitheater Main Lawn", "Main Plaza",
+                                        "Children's Play Area"]}
+    store.venues["mad-oak-bar-n-yard"] = {
+        "name": "Mad Oak Bar 'N' Yard", "region": "eastbay", "precision": "building",
+        "status": "verified"}
+    store.locations["mad oak bar"] = {"venue": "mad-oak-bar-n-yard"}
+    return store
+
+
+@pytest.mark.parametrize("text, room", [
+    ("Salesforce Park Amphitheater", "Amphitheater"),
+    ("Salesforce Park Amphitheater Main Lawn, San Francisco", "Amphitheater Main Lawn"),
+    ("Main Plaza, Salesforce Park, San Francisco", "Main Plaza"),
+    ("Amphitheater at Salesforce Park", "Amphitheater"),
+    ("Children’s Play Area, Salesforce Park", "Children's Play Area"),
+])
+def test_listed_room_named_with_its_venue(park, text, room):
+    out = resolver(park).resolve(text)
+    assert (out.action, out.entry) == ("room", {"venue": "salesforce-park", "room": room})
+
+
+@pytest.mark.parametrize("text", [
+    "Main Plaza, San Francisco",                 # a room without its venue
+    "Salesforce Park Amphitheater, Oakland",     # the venue's name, the wrong city
+    "Salesforce Parking Garage, Main Plaza",     # not a whole-word match
+])
+def test_listed_room_needs_the_venue_in_the_same_city(park, text):
+    assert resolver(park).resolve(text).action == "pending"
+
+
+def test_listed_rooms_are_opt_in(park):
+    # Mad Oak lists no rooms, so its name inside a longer string is left to the map.
+    assert resolver(park).resolve("Mad Oak Bar Trivia Night Patio").action == "pending"
+
+
+def test_a_known_room_string_keeps_its_room_inside_a_longer_one(park):
+    r = resolver(park)
+    r.resolve("Salesforce Park Amphitheater")
+    out = r.resolve("Salesforce Park Amphitheater, 425 Mission St, San Francisco, CA")
+    assert out.entry == {"venue": "salesforce-park", "room": "Amphitheater"}
+
+
+def test_rooms_must_be_a_list_of_names(park):
+    park.venues["salesforce-park"]["rooms"] = "Amphitheater"
+    assert any("rooms must be a list" in e for e in park.validate())
