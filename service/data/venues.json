@@ -134,6 +134,25 @@
       "region": "sf",
       "status": "verified"
     },
+    "1109-leavenworth-st": {
+      "added": "2026-10-10",
+      "address": "1109 Leavenworth St, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1109;1117;1119;1121;1123 in San Francisco County (building, way/259798372)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.791569,
+      "lng": -122.416078,
+      "name": "1109 Leavenworth St",
+      "osm": "way/259798372",
+      "possible_duplicates": [
+        "grace-cathedral"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "111-minna-gallery": {
       "added": "2026-10-07",
       "address": "111 Minna Street, San Francisco, CA 94105",
@@ -2067,6 +2086,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "crane-cove-park": {
+      "added": "2026-10-10",
+      "address": "787 Illinois Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: 787 in San Francisco County (building, way/27041630)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.76243,
+      "lng": -122.387635,
+      "name": "Crane Cove Park",
+      "osm": "way/27041630",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "crepe-myrtle-garden": {
       "added": "2026-10-05",
