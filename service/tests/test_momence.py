@@ -25,9 +25,10 @@ def test_event_from_session_detail_uses_physical_address_and_level_description()
     assert e.image_url.startswith("https://images.momence.com/")
 
 
-def test_cancelled_online_or_draft_sessions_are_dropped():
+def test_online_or_draft_sessions_are_dropped_and_cancelled_flagged():
     m = SESSION["message"]
-    assert momence.event_from_session_detail(dict(m, isCancelled=True)) is None
+    assert momence.event_from_session_detail(m).status is None
+    assert momence.event_from_session_detail(dict(m, isCancelled=True)).status == "cancelled"
     assert momence.event_from_session_detail(dict(m, inPerson=False)) is None
     assert momence.event_from_session_detail(dict(m, isDraft=True)) is None
 

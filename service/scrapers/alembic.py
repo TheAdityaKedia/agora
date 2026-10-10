@@ -11,7 +11,8 @@ Each page holds ~20 sessions (one per occurrence) with name, UTC start, room,
 description (oddly, in the `level` field), image, and a momence.com/s/<id>
 booking link. `pagination.totalCount` says when to stop.
 
-Dropped: cancelled sessions, and online-only copies — hybrid talks appear
+Cancelled sessions are kept with status "cancelled" (the site shows
+them as cancelled). Dropped: online-only copies — hybrid talks appear
 twice, the second as "<title> (ONLINE)" with `inPerson: false` and no room.
 """
 from __future__ import annotations
@@ -44,8 +45,9 @@ def matches(url: str) -> bool:
 
 
 def event_from_session(s: dict) -> RawEvent | None:
-    """RawEvent for one Momence session, or None if cancelled/online/malformed."""
-    if s.get("isCancelled") or not s.get("inPerson"):
+    """RawEvent for one Momence session (status "cancelled" if it's cancelled),
+    or None if online or malformed."""
+    if not s.get("inPerson"):
         return None
     title = (s.get("sessionName") or "").strip()
     if not title or not s.get("startsAt"):
@@ -63,6 +65,7 @@ def event_from_session(s: dict) -> RawEvent | None:
         url=s.get("link"),
         description=(s.get("level") or "").strip() or None,
         image_url=s.get("image"),
+        status="cancelled" if s.get("isCancelled") else None,
     )
 
 

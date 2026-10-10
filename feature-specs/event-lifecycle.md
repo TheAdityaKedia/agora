@@ -1,6 +1,7 @@
 # Event lifecycle: stable ids, changes and cancellations
 
-**Status: spec, not started (2026-10-05).** Covers two gaps recorded in
+**Status: built (2026-10-05); phases 1–7 done.
+Rollout (the re-key against Neon) waits for the owner: see the PR.** Covers two gaps recorded in
 `future/future-features.md` → Collections: *event copies drift* and *event ids
 aren't stable*. They are one project: you can only say "this event changed"
 or "was cancelled" if "this event" keeps its identity from one scrape to the
@@ -124,6 +125,18 @@ SQLite used by tests gets the columns from `create_all`). Same for the new
 - **Every match** (same source or merge) and every insert: set
   `seen[source] = now`, `misses[source] = 0`; if the row's status is
   `unlisted`, set it back to `scheduled`: it was a flaky scrape.
+  A row coming back from `moved` is restored the same way, and its move is
+  **undone** (`lifecycle.undo_move`): the `moved` alias pointing this id at the
+  successor is deleted and the successor's `changed.start_time` marker for this
+  row's time is cleared. Otherwise both showings list while the old id still
+  redirects to the new one, which still claims it was rescheduled from a time
+  that is once again on sale.
+- **One row per batch.** A source listing two events with the same title at the
+  same time (two screens, two rooms) matches both to one row through the
+  title rule. The first wins; the rest count as `skipped`. Without this the
+  second would update over the first and the next run would swap them back,
+  flapping the row's url and location forever — an `updated` every run, a false
+  "Venue changed" badge, and a manifest diff on every refresh.
 - **Explicit status from the scraper:** `RawEvent` gains an optional
   `status` (`cancelled` or `postponed`). Scrapers that currently drop
   cancelled events emit them with the status instead. A shared helper also

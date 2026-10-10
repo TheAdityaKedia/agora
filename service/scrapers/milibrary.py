@@ -67,7 +67,7 @@ def parse(html: str) -> list[RawEvent]:
     for e in _calendar(html):
         title = (e.get("title") or "").strip()
         start = _start(e.get("start_date"))
-        if not (title and start) or e.get("cancelled_at") or e.get("visibility") != "public":
+        if not (title and start) or e.get("visibility") != "public":
             continue
         if CHESS_TOURNAMENT_TAG in (e.get("event_tag_ids") or "").split(","):
             continue
@@ -81,6 +81,7 @@ def parse(html: str) -> list[RawEvent]:
             url=f"{BASE_URL}/events/{e['id']}" if e.get("id") else EVENTS_URL,
             description=(e.get("short_description") or "").strip() or None,
             image_url=BASE_URL + quote(image) if image and image.startswith("/") else image,
+            status="cancelled" if e.get("cancelled_at") else None,
         ))
     return events
 

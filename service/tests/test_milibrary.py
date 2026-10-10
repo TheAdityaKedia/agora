@@ -28,7 +28,7 @@ def test_parse_inlined_calendar():
     assert " " not in events[1].image_url
 
 
-def test_parse_skips_cancelled_online_and_private():
+def test_parse_skips_online_and_private_and_flags_cancelled():
     tpl = ('{"id":"%s","visibility":"%s","title":"%s","start_date":"2026-10-09 18:00:00",'
            '"event_tag_ids":"","cancelled_at":"%s",},')
     html = ("var events = { \"9\":[ "
@@ -37,7 +37,8 @@ def test_parse_skips_cancelled_online_and_private():
             + tpl % ("3", "private", "Members Only", "")
             + tpl % ("4", "public", "Author Talk", "")
             + " ], };\n")
-    assert [e.title for e in milibrary.parse(html)] == ["Author Talk"]
+    assert [(e.title, e.status) for e in milibrary.parse(html)] == [
+        ("Called Off", "cancelled"), ("Author Talk", None)]
 
 
 def test_parse_without_calendar_is_empty():

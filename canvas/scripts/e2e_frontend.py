@@ -4,7 +4,11 @@ Starts the API locally (moto, snapshots from frontend/events.json) and a
 static server for frontend/, then plays two friends in separate browser
 contexts: Adi makes a canvas on the main page and adds events in canvas
 mode; Sam opens the link, votes and comments; Adi sees it, removes + undoes,
-builds and reorders the plan, adds a custom item. Fails on any page error.
+builds and reorders the plan, adds a custom item. Then the event lifecycle
+(feature-specs/event-lifecycle.md, §6): the API reads an event-index.json
+that the script rewrites, so a collection's events turn cancelled, moved,
+no longer listed, postponed and changed, and "Use the new time" swaps one.
+Fails on any page error.
 
     python canvas/scripts/e2e_frontend.py [--shots DIR]
 
@@ -14,7 +18,9 @@ CHROMIUM_PATH=/path/to/chrome).
 import argparse
 import contextlib
 import functools
+import json
 import os
+import tempfile
 import re
 import http.server
 import subprocess
@@ -32,10 +38,29 @@ API = f"http://localhost:{API_PORT}"
 WEB = f"http://localhost:{WEB_PORT}"
 
 
+INDEX = Path(tempfile.mkdtemp(prefix="agora-e2e-")) / "event-index.json"
+INDEX_FIELDS = ("title", "start_time", "location", "url", "image_url", "sources")
+
+
+def base_index():
+    """event-index.json's events, as the exporter would write them for the
+    committed manifest."""
+    m = json.loads((ROOT / "frontend" / "events.json").read_text())
+    return {e["id"]: {k: e[k] for k in INDEX_FIELDS if e.get(k)} for e in m["events"]}
+
+
+def publish(events, gone=None, aliases=None):
+    INDEX.write_text(json.dumps({"generated_at": "e2e", "events": events,
+                                 "gone": gone or {}, "aliases": aliases or {}}))
+
+
 @contextlib.contextmanager
 def servers():
+    publish(base_index())
+    # --cache-ttl 0: the lifecycle part rewrites the index and must see it.
     api = subprocess.Popen([sys.executable, str(ROOT / "canvas/scripts/local_server.py"),
-                            "--moto", "--port", str(API_PORT)],
+                            "--moto", "--port", str(API_PORT), "--index", INDEX.as_uri(),
+                            "--cache-ttl", "0"],
                            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *args):
@@ -366,12 +391,120 @@ def run(shots):
         # An unknown canvas explains itself.
         a.goto(f"{WEB}/canvas.html?c=" + "B" * 22)
         expect(a.locator(".problem")).to_contain_text("doesn't exist")
+
+        lifecycle(browser, phone, shots, errors)
         browser.close()
 
     real = [e for e in errors if "404" not in e]  # the unknown-canvas fetch logs a 404
     if real:
         raise SystemExit("page errors:\n" + "\n".join(real))
     print("e2e OK")
+
+
+def call(method, path, body=None):
+    req = urllib.request.Request(API + path, method=method,
+                                 data=json.dumps(body).encode() if body is not None else None,
+                                 headers={"Content-Type": "application/json", "Origin": WEB,
+                                          "X-Agora-Client": "e2e-lifecycle-0001"})
+    with urllib.request.urlopen(req) as r:
+        return json.loads(r.read())
+
+
+def lifecycle(browser, phone, shots, errors):
+    """A collection whose events change after they were added."""
+    from datetime import datetime, timedelta, timezone
+
+    events = base_index()
+    soon = datetime.now(timezone.utc) + timedelta(days=1)
+    upcoming = sorted((e["start_time"], i) for i, e in events.items()
+                      if datetime.fromisoformat(e["start_time"]) > soon)
+    seen_titles, ids = set(), []
+    for _, i in upcoming:  # distinct titles, so the cards are easy to tell apart
+        if events[i]["title"] not in seen_titles:
+            seen_titles.add(events[i]["title"])
+            ids.append(i)
+        if len(ids) == 6:
+            break
+    off, moved, gone, changed, later, new = ids
+    cid = call("POST", "/canvases", {"name": "Saturday plans", "actor_name": "Adi"})["canvas"]["id"]
+    for e in (off, moved, gone, changed, later):
+        call("POST", f"/canvases/{cid}/items", {"event_id": e, "actor_name": "Adi"})
+    for e in (off, moved, changed):
+        call("POST", f"/canvases/{cid}/plan", {"op": "add", "item_id": f"ev_{e}"})
+
+    # The next data refresh: one cancelled, one postponed, one moved to a new
+    # showing, one no longer listed, one at a new time and venue.
+    now = dict(events)
+    now[off] = {**events[off], "status": "cancelled"}
+    now[later] = {**events[later], "status": "postponed"}
+    t = (datetime.fromisoformat(events[changed]["start_time"]) + timedelta(hours=1)).isoformat()
+    now[changed] = {**events[changed], "start_time": t, "location": "The New Venue, 1 Market St, San Francisco"}
+    now[new] = {**events[moved], "start_time": events[new]["start_time"],
+                "changed": {"at": "x", "was": {"start_time": events[moved]["start_time"]}}}
+    del now[moved], now[gone]
+    publish(now, gone={
+        moved: {"status": "moved", "at": "x", "title": events[moved]["title"],
+                "start_time": events[moved]["start_time"], "moved_to": new},
+        gone: {"status": "unlisted", "at": "x", "title": events[gone]["title"],
+               "start_time": events[gone]["start_time"]}})
+
+    card = lambda page, e: page.locator(f'.item[data-id="ev_{e}"]')  # noqa: E731
+    step = lambda page, e: page.locator(f'.step[data-id="ev_{e}"]')  # noqa: E731
+    for scheme in ("dark", "light"):  # light last: it goes on to change things
+        ctx = hermetic(browser.new_context(**phone, color_scheme=scheme))
+        ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
+        page = ctx.new_page()
+        watch(page, errors)
+        page.goto(f"{WEB}/canvas.html?c={cid}&api={API}&beta=1")
+        expect(card(page, off).locator(".badge.off")).to_have_text("Cancelled")
+        expect(card(page, off)).to_have_class(re.compile(r"\boff\b"))
+        expect(card(page, later).locator(".badge.off")).to_have_text("Postponed")
+        expect(card(page, moved).locator(".badge.off")).to_have_text("Moved")
+        expect(card(page, moved).locator(".it-change")).to_contain_text("Moved to")
+        expect(card(page, gone).locator(".badge")).to_contain_text(["No longer listed"])
+        expect(card(page, gone).locator(".it-change")).to_contain_text("no longer lists this")
+        expect(card(page, changed).locator(".badge")).to_contain_text(["Time changed", "Venue changed"])
+        expect(card(page, changed).locator(".was")).to_have_count(2)  # old time and venue, struck
+        expect(card(page, changed).locator(".it-where")).to_contain_text("The New Venue")
+        # The plan: badges on steps; no calendar link for what isn't happening.
+        expect(step(page, off).locator(".step-badge.off")).to_have_text("Cancelled")
+        expect(step(page, off).locator("a", has_text="Google Calendar")).to_have_count(0)
+        expect(step(page, moved).locator("a", has_text="Google Calendar")).to_have_count(0)
+        expect(step(page, changed).locator("a", has_text="Google Calendar")).to_have_count(1)
+        assert "The+New+Venue" in step(page, changed).locator("a", has_text="Google Calendar").get_attribute("href")
+        if shots:
+            page.locator(".plan").screenshot(path=f"{shots}/lifecycle-plan-{scheme}.png")
+            for name, e in (("cancelled", off), ("moved", moved), ("unlisted", gone), ("changed", changed)):
+                card(page, e).screenshot(path=f"{shots}/lifecycle-card-{name}-{scheme}.png")
+            page.screenshot(path=f"{shots}/lifecycle-collection-{scheme}.png", full_page=True)
+        if scheme == "dark":
+            ctx.close()
+            continue
+        # "Add the plan to your calendar": only what's still happening.
+        with page.expect_download() as dl:
+            page.click('[data-act="ics"]')
+        ics = Path(dl.value.path()).read_text()
+        assert ics.count("BEGIN:VEVENT") == 1 and "The New Venue" in ics, ics
+        # "Use the new time": the new showing takes the old one's place in the plan.
+        plan = call("GET", f"/canvases/{cid}")["canvas"]["plan"]
+        pos = plan.index(f"ev_{moved}")
+        card(page, moved).locator('[data-act="use-new-time"]').click()
+        expect(card(page, new)).to_be_visible()
+        expect(card(page, moved)).to_have_count(0)
+        plan = call("GET", f"/canvases/{cid}")["canvas"]["plan"]
+        assert plan.index(f"ev_{new}") == pos and f"ev_{moved}" not in plan, plan
+        ctx.close()
+
+    # Back to the plain manifest (no index): the copies, no badges.
+    INDEX.unlink()
+    ctx = hermetic(browser.new_context(**phone))
+    ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
+    page = ctx.new_page()
+    watch(page, errors)
+    page.goto(f"{WEB}/canvas.html?c={cid}&api={API}&beta=1")
+    expect(card(page, off)).to_be_visible()
+    expect(page.locator(".badge.off")).to_have_count(0)
+    ctx.close()
 
 
 if __name__ == "__main__":

@@ -229,6 +229,14 @@ def _view(cid, client):
         if "removed_at" in r:
             removed.append(out)
             continue
+        if r["kind"] == "event":
+            # The event as it is now, next to the copy made when it was added
+            # (feature-specs/event-lifecycle.md, §6). None: unknown, show the copy.
+            now = snapshot.current(r.get("event"))
+            if now is not None:
+                out["now"] = now
+                if now.get("start_time") and now["status"] != "moved":
+                    out["start_time"] = now["start_time"]  # sort and show by the current time
         out["votes"] = sorted(votes[r["id"]], key=lambda v: v["at"])
         out["you_voted"] = any(v["mine"] for v in out["votes"])
         out["comments"] = sorted(comments[r["id"]], key=lambda c: c["at"])
@@ -356,12 +364,20 @@ def add_item(req, cid):
             raise ApiError(400, "event_id is malformed")
         _meta_or_404(cid)
         try:
+            # An old id (merged, re-keyed) resolves to the event it is now.
             ev = snapshot.lookup(eid)
+            others = snapshot.aliases_of(eid) if ev else []
         except snapshot.ManifestUnavailable:
             raise ApiError(503, "event list unavailable, try again shortly") from None
         if ev is None:
             raise ApiError(404, "event not found (it may have passed or been removed)")
+        # Already here under another of its ids? Then that item (restored if
+        # removed), never a second copy. The id as added stays the item id.
         item_id = f"ev_{eid}"
+        for other in dict.fromkeys([ev["id"]] + others):
+            if other != eid and store.get_row(cid, f"ITEM#ev_{other}"):
+                item_id = f"ev_{other}"
+                break
         body = {"kind": "event", "event": snapshot.snapshot_of(ev)}
         title = ev.get("title")
     else:
@@ -476,7 +492,10 @@ def _plan_insert(plan, iid, rows):
 
 def post_plan(req, cid):
     """{op: add|remove|move, item_id, to?}: change the plan one step at a time,
-    so two people editing it at once don't overwrite each other."""
+    so two people editing it at once don't overwrite each other. `to` is
+    required for move; for add it's optional (else the step goes in time
+    order), so "Use the new time" can put a moved event's new showing where
+    the old one was."""
     client = _require_client(req)
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
@@ -487,7 +506,8 @@ def post_plan(req, cid):
     if not (isinstance(iid, str) and ITEM_ID_RE.fullmatch(iid)):
         raise ApiError(400, "item_id is malformed")
     to = b.get("to")
-    if op == "move" and not (isinstance(to, int) and not isinstance(to, bool)):
+    if (op == "move" or (op == "add" and to is not None)) and not (
+            isinstance(to, int) and not isinstance(to, bool)):
         raise ApiError(400, "to must be a position (0 is first)")
 
     def attempt():
@@ -504,7 +524,11 @@ def post_plan(req, cid):
                 return plan
             if len(plan) >= store.PLAN_CAP:
                 raise ApiError(409, f"a plan has at most {store.PLAN_CAP} steps")
-            new, action = _plan_insert(plan, iid, items), "added_to_plan"
+            if to is None:
+                new = _plan_insert(plan, iid, items)
+            else:
+                new = plan[:max(0, to)] + [iid] + plan[max(0, to):]
+            action = "added_to_plan"
         elif iid not in plan:
             if op == "remove":
                 return plan

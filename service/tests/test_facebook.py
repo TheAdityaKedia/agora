@@ -25,10 +25,11 @@ def test_missionfusion_matches():
     assert not missionfusion.matches("https://www.missionfusion.com/")
 
 
-def test_parse_listing_skips_cancelled_and_dedupes(listing_html):
+def test_parse_listing_keeps_cancelled_and_dedupes(listing_html):
     nodes = facebook.parse_listing(listing_html)
-    assert [n["id"] for n in nodes] == [EVENT_ID, "876134272104509"]
-    assert [facebook.listing_city(n) for n in nodes] == ["San Francisco", "Mendocino"]
+    assert [n["id"] for n in nodes] == [EVENT_ID, "876134272104509", "999"]
+    assert [facebook.listing_city(n) for n in nodes] == ["San Francisco", "Mendocino", "San Francisco"]
+    assert nodes[2]["is_canceled"] is True
 
 
 def test_parse_event(event_html):
@@ -40,6 +41,13 @@ def test_parse_event(event_html):
     assert ev.url == f"https://www.facebook.com/events/{EVENT_ID}/"
     assert "All Levels Class with Mark Carpenter" in ev.description
     assert ev.image_url is None  # fbcdn URLs expire; see parse_event
+
+
+def test_parse_event_flags_cancelled(event_html):
+    assert facebook.parse_event(event_html, EVENT_ID).status is None
+    cancelled = event_html.replace('"is_canceled":false', '"is_canceled":true')
+    ev = facebook.parse_event(cancelled, EVENT_ID)
+    assert ev.status == "cancelled" and ev.title == "Mission Fusion w/ Jonathan, Natalie and Mark"
 
 
 def test_parse_event_wrong_id_is_none(event_html):
@@ -56,8 +64,10 @@ def test_scrape_page_fetches_only_bay_area_events(monkeypatch, listing_html, eve
     monkeypatch.setattr(facebook, "fetch_html", fake_fetch)
     events = facebook.scrape_page("MissionFusion")
     assert [e.title for e in events] == ["Mission Fusion w/ Jonathan, Natalie and Mark"]
-    # the Mendocino campout's page is never fetched (saves a Zyte credit)
-    assert fetched == [facebook.listing_url("MissionFusion"), facebook.event_url(EVENT_ID)]
+    # the Mendocino campout's page is never fetched (saves a Zyte credit);
+    # the cancelled SF one is, for its time (the fake serves another event's page)
+    assert fetched == [facebook.listing_url("MissionFusion"), facebook.event_url(EVENT_ID),
+                       facebook.event_url("999")]
 
 
 def test_fetch_uses_zyte_cheap_tier_when_keyed(monkeypatch):

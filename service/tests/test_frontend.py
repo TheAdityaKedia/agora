@@ -991,6 +991,104 @@ def test_day_strip_shows_the_month_on_every_day(browser, site):
     assert marked == changes
 
 
+# --- event lifecycle (feature-specs/event-lifecycle.md, §5) -------------------
+
+def _lifecycle_events():
+    """The usual events, with some cancelled, postponed and recently changed."""
+    out = _events(40)
+    now = datetime.now(timezone.utc)
+    recent, stale = (now - timedelta(days=2)).isoformat(), (now - timedelta(days=8)).isoformat()
+    by_id = {e["id"]: e for e in out}
+    by_id["ev1"]["status"] = "cancelled"
+    by_id["ev2"]["status"] = "postponed"
+    was = datetime.fromisoformat(by_id["ev3"]["start_time"]) - timedelta(days=1, hours=2)
+    by_id["ev3"]["changed"] = {"at": recent, "was": {"start_time": was.isoformat()}}
+    by_id["ev5"]["changed"] = {"at": recent, "was": {"location": "The Old Place"}}
+    by_id["ev6"]["changed"] = {"at": stale, "was": {"location": "Long Ago Hall"}}  # past the 7 days
+    by_id["ev7"]["changed"] = {"at": recent, "was": {"title": "Old name"}}         # titles: nothing
+    return out
+
+
+@pytest.fixture(scope="module")
+def lifecycle_site(tmp_path_factory):
+    from exporters.json_export import split_descriptions
+    root = tmp_path_factory.mktemp("lifecycle")
+    events = _lifecycle_events()
+    (root / "descriptions.json").write_text(json.dumps(split_descriptions(events)))
+    (root / "events.json").write_text(json.dumps(_manifest(events)))
+    shutil.copy(FRONTEND / "canvas-client.js", root / "canvas-client.js")
+    server = _serve(root)
+    yield f"http://127.0.0.1:{server.server_port}/"
+    server.shutdown()
+
+
+def _row(page, title):
+    return page.locator(".event", has=page.locator(".title", has_text=title)).first
+
+
+def test_cancelled_and_postponed_rows_are_dimmed_badged_and_not_calendared(browser, lifecycle_site):
+    page = _open(browser, lifecycle_site, DESKTOP)
+    for title, badge in (("Poetry reading 1", "Cancelled"), ("Jazz night 2", "Postponed")):
+        row = _row(page, title)
+        assert row.get_attribute("class") == "event off"
+        assert row.locator(".status-badge.off").inner_text() == badge
+        assert row.locator("details.cal").count() == 0
+    plain = _row(page, "Jazz night 0")
+    assert plain.get_attribute("class") == "event" and plain.locator(".status-badge").count() == 0
+    assert plain.locator("details.cal").count() == 1
+    # Search finds them like any event. (They used to be checked in the
+    # "N upcoming events" count; main has since removed that line.)
+    page.fill("#search-input", "Poetry reading 1")
+    page.wait_for_function("document.querySelector('.event .status-badge.off') !== null")
+    assert page._agora_errors == []
+
+
+def test_rescheduled_and_venue_changed_badges_for_seven_days(browser, lifecycle_site):
+    page = _open(browser, lifecycle_site, PHONE, touch=True)
+    resched = _row(page, "Poetry reading 3").locator(".status-badge")
+    assert resched.inner_text().startswith("Rescheduled · was ")
+    assert _row(page, "Poetry reading 5").locator(".status-badge").inner_text() == "Venue changed"
+    assert "The Old Place" in _row(page, "Poetry reading 5").locator(".status-badge").get_attribute("title")
+    for title in ("Jazz night 6", "Poetry reading 7"):  # stale; a title change
+        assert _row(page, title).locator(".status-badge").count() == 0
+    assert page._agora_errors == []
+
+
+def test_a_shared_link_to_a_cancelled_event_loads(browser, lifecycle_site):
+    # TDZ guard: a ?q= link renders during readStateFromUrl, before the
+    # badge code's declarations would be reached.
+    page = _open(browser, lifecycle_site, DESKTOP, query="?q=Poetry%20reading%201")
+    assert page.locator(".event .status-badge.off").first.inner_text() == "Cancelled"
+    assert page._agora_errors == []
+
+
+def test_collecting_mode_marks_events_added_under_an_old_id(browser, lifecycle_site):
+    start = _lifecycle_events()[3]["start_time"]
+    view = {"canvas": {"id": "abc", "name": "Weekend", "version": 1}, "removed": [], "log": [],
+            "items": [
+                # Added before a re-key: the copy's id and title are old; the
+                # API says what it is now.
+                {"id": "ev_0ld", "kind": "event",
+                 "event": {"id": "0ld", "title": "Old title", "start_time": "2020-01-01T00:00:00Z"},
+                 "now": {"status": "scheduled", "current_id": "ev3", "start_time": start}},
+                {"id": "ev_ev8", "kind": "event", "event": {"id": "ev8", "title": "x", "start_time": "y"}},
+            ]}
+    ctx = browser.new_context(viewport=DESKTOP, timezone_id=TZ)
+    ctx.add_init_script("localStorage.setItem('agora.canvas.beta', 'true')")
+    ctx.route("**/canvases/abc", lambda route: route.fulfill(json=view))
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    page.goto(lifecycle_site + "?beta=1&canvas=abc")  # a member, beta on for this visit
+    page.wait_for_selector(".canvas-add")
+    assert _row(page, "Poetry reading 3").locator(".canvas-add").inner_text() == "✓ Added"
+    assert _row(page, "Jazz night 8").locator(".canvas-add").inner_text() == "✓ Added"
+    assert _row(page, "Jazz night 4").locator(".canvas-add").inner_text() == "+ Add"
+    # A cancelled row still has its add button (no calendar to sit beside).
+    assert _row(page, "Poetry reading 1").locator(".canvas-add").count() == 1
+    assert errors == []
+
+
 # --- theme switch: follows the system by default; the sun/moon overrides it ---
 
 def _themed_page(browser, site, scheme):

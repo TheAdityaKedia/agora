@@ -1,10 +1,13 @@
 import argparse
 import os
+import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import dedup
+import event_ids
+import lifecycle
 from config import LOOKAHEAD_DAYS
 from db import init_db, get_session
 from exporters.json_export import export_json
@@ -111,34 +114,83 @@ def _find_duplicate(session, raw: RawEvent, source: str | None = None) -> Event 
     return None
 
 
-def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]:
+def _new_id(session, raw: RawEvent, source: str):
+    """The stable id for a new row (event_ids.event_id). If a row already
+    holds it (one whose url or title changed since, so it didn't match),
+    fall back to a random id rather than fail the save."""
+    eid = event_ids.event_id(source, raw.url, raw.title, raw.start_time)
+    if session.get(Event, eid) is not None:
+        print(f"[ids] {eid} already taken; using a random id for {raw.title[:60]!r}", flush=True)
+        return uuid.uuid4()
+    return eid
+
+
+def save_events(raw_events: list[RawEvent], source: str,
+                stats: dict | None = None) -> tuple[int, int, int]:
     """Persist raw events, merging cross-source duplicates. Returns (saved, merged, skipped).
 
-    - saved:   new rows inserted.
+    - saved:   new rows inserted (with their stable id, event_ids.event_id).
     - merged:  a duplicate matched an existing row and `source` was appended to
                its sources list (one physical event listed by multiple sources).
-    - skipped: same-source re-scrapes, or events past the look-ahead horizon.
+    - skipped: same-source re-scrapes with nothing new, or events past the
+               look-ahead horizon.
+    `stats["updated"]` (when given) counts same-source re-scrapes whose details
+    or status changed and were updated (feature-specs/event-lifecycle.md, §2):
+    only the row's creating source updates it; later sources only mark it seen.
+
+    Every match and insert marks the row seen by `source` (lifecycle.mark_seen),
+    which the CI merge reads to notice events that disappeared.
     """
     horizon = datetime.now(timezone.utc) + timedelta(days=LOOKAHEAD_DAYS)
+    now = datetime.now(timezone.utc)
     session = get_session()
-    saved = merged = skipped = 0
+    saved = merged = skipped = updated = 0
+    # Rows this batch already matched. One source listing two events with the
+    # same title at the same time (two rooms, two screens) matches them both to
+    # one row through _find_duplicate's title rule; without this the second
+    # would apply_update over the first, and the next run would swap them back
+    # — a row flapping its url/location forever, with a bogus "Venue changed"
+    # badge and a manifest diff every refresh. The first one wins; the rest are
+    # skipped, as they were before updates existed.
+    claimed: set = set()
+    collisions = 0
     try:
         for raw in raw_events:
+            # "CANCELLED: …" → status, and the plain title for the id and matching.
+            raw = lifecycle.with_title_status(raw)
             if raw.start_time > horizon:
                 skipped += 1
                 continue
             existing = _find_duplicate(session, raw, source)
             if existing is not None:
-                if source in (existing.sources or []):
-                    # Same source re-scraping something it already produced.
+                was_moved = existing.status == lifecycle.MOVED
+                lifecycle.mark_seen(existing, source, now)
+                if was_moved and lifecycle.undo_move(session, existing):
+                    print(f"[{source}] {existing.title[:60]!r} is listed again at its old "
+                          f"time; undid the move", flush=True)
+                if existing.id in claimed:
+                    collisions += 1
                     skipped += 1
+                    continue
+                claimed.add(existing.id)
+                if source in (existing.sources or []):
+                    # Same source re-scraping something it already produced:
+                    # the creating source's new details win.
+                    if existing.sources[0] == source and lifecycle.apply_update(existing, raw, now):
+                        updated += 1
+                    else:
+                        skipped += 1
                     continue
                 # SQLAlchemy's JSON column doesn't track in-place mutations,
                 # so reassign a fresh list to trigger an UPDATE on commit.
                 existing.sources = list(existing.sources) + [source]
                 merged += 1
                 continue
+            status = raw.status if raw.status in lifecycle.EXPLICIT else lifecycle.SCHEDULED
+            new_id = _new_id(session, raw, source)
+            claimed.add(new_id)  # a later event in this batch must not update it
             session.add(Event(
+                id=new_id,
                 title=raw.title,
                 start_time=raw.start_time,
                 location=raw.location,
@@ -146,15 +198,24 @@ def save_events(raw_events: list[RawEvent], source: str) -> tuple[int, int, int]
                 description=raw.description,
                 image_url=raw.image_url,
                 sources=[source],
-                created_at=datetime.now(timezone.utc),
+                created_at=now,
+                status=status,
+                status_at=now if status != lifecycle.SCHEDULED else None,
+                seen={source: now.isoformat()},
+                misses={source: 0},
             ))
             saved += 1
+        if collisions:
+            print(f"[{source}] {collisions} event(s) matched a row another event in this "
+                  f"run already claimed (same title and time); kept the first", flush=True)
         session.commit()
     except Exception:
         session.rollback()
         raise
     finally:
         session.close()
+    if stats is not None:
+        stats["updated"] = stats.get("updated", 0) + updated
     return saved, merged, skipped
 
 
@@ -208,9 +269,11 @@ def _save_scraped(scraper, raw_events, url: str) -> None:
     # NAME is the human-readable label users see on the frontend. We persist it
     # directly (not the domain SOURCE) so the manifest, DB, and UI all agree on
     # one canonical string per venue and no frontend translation layer is needed.
-    saved, merged, skipped = save_events(raw_events, source=scraper.NAME)
+    stats = {}
+    saved, merged, skipped = save_events(raw_events, source=scraper.NAME, stats=stats)
     # flush so per-source progress is visible live during a long run.
-    print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {skipped} skipped", flush=True)
+    print(f"[{scraper.NAME}] {saved} saved, {merged} merged, {stats.get('updated', 0)} updated, "
+          f"{skipped} skipped", flush=True)
 
 
 def scrape_and_save(url: str) -> None:

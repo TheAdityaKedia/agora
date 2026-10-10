@@ -257,7 +257,7 @@ def test_run_isolates_a_failing_source_and_still_exports(tmp_path, monkeypatch):
     saved_sources: list[str] = []
     monkeypatch.setattr(
         "main.save_events",
-        lambda raw, source: (saved_sources.append(source), (1, 0, 0))[1],
+        lambda raw, source, **kw: (saved_sources.append(source), (1, 0, 0))[1],
     )
     exported = {"called": False}
     monkeypatch.setattr(
@@ -304,7 +304,7 @@ def test_run_saves_in_source_order_despite_out_of_order_scrapes(tmp_path, monkey
     saved_order: list[str] = []
     monkeypatch.setattr(
         "main.save_events",
-        lambda raw, source: (saved_order.append(source), (1, 0, 0))[1],
+        lambda raw, source, **kw: (saved_order.append(source), (1, 0, 0))[1],
     )
 
     run(max_workers=3, classify=False)

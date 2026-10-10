@@ -50,8 +50,9 @@ def _venue(entity: dict | None, room: str) -> str | None:
 
 
 def event_from_session_detail(s: dict) -> RawEvent | None:
-    """RawEvent for one session payload, or None if cancelled/online/draft/malformed."""
-    if s.get("isCancelled") or s.get("isDraft") or not s.get("inPerson"):
+    """RawEvent for one session payload (status "cancelled" if it's cancelled),
+    or None if online, a draft or malformed."""
+    if s.get("isDraft") or not s.get("inPerson"):
         return None
     title = (s.get("sessionName") or "").strip()
     if not title or not s.get("startsAt"):
@@ -72,4 +73,5 @@ def event_from_session_detail(s: dict) -> RawEvent | None:
         url=SHORT_URL.format(id=s["id"]) if s.get("id") else None,
         description=description,
         image_url=s.get("topImage1") or None,
+        status="cancelled" if s.get("isCancelled") else None,
     )

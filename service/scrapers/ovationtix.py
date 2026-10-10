@@ -93,7 +93,7 @@ def parse_events(calendar: list[dict], productions: list[dict], *, client_id: st
             venue = _clean((detail.get("venue") or {}).get("name"))
             logo = prod.get("logoFile")
             for st in prod.get("showtimes") or []:
-                if st.get("isCancelled") or st.get("isVisible") is False:
+                if st.get("isVisible") is False:
                     continue
                 start = _parse_start(st.get("performanceStartTime"))
                 if not start:
@@ -106,15 +106,38 @@ def parse_events(calendar: list[dict], productions: list[dict], *, client_id: st
                     url=PRODUCTION_URL.format(client=client_id, id=pid) if pid is not None else None,
                     description=_synopsis(_clean(detail.get("description"))),
                     image_url=IMAGE_URL.format(file=logo) if logo else None,
+                    status="cancelled" if st.get("isCancelled") else None,
                 )))
 
-    per_day = Counter((pid, date) for pid, date, _ in rows)
+    return collapse_timed_entry(rows)
+
+
+def collapse_timed_entry(rows: list[tuple[int, str, RawEvent]]) -> list[RawEvent]:
+    """Collapse timed-entry productions (a museum selling many slots a day) to
+    one event, and pass everything else through.
+
+    Cancelled slots neither count toward a timed-entry day nor stand for it: one
+    cancelled 10:00 slot must not turn an open exhibition day into a single
+    cancelled event. A production whose slots are *all* cancelled is still
+    reported, as cancelled.
+    """
+    open_rows = [r for r in rows if r[2].status != "cancelled"]
+    per_day = Counter((pid, date) for pid, date, _ in open_rows)
     timed = {pid for (pid, _), n in per_day.items() if n > TIMED_ENTRY_PER_DAY}
+    # A production with nothing open left is timed-entry if its cancelled slots
+    # would have made it so; otherwise one cancelled show becomes many rows.
+    all_cancelled = Counter((pid, date) for pid, date, ev in rows
+                            if pid not in {p for p, _, _ in open_rows})
+    timed |= {pid for (pid, _), n in all_cancelled.items() if n > TIMED_ENTRY_PER_DAY}
     events: list[RawEvent] = []
     first_timed: dict[int, RawEvent] = {}
     for pid, _, ev in rows:
         if pid in timed:
-            if pid not in first_timed or ev.start_time < first_timed[pid].start_time:
+            # One event per timed-entry production, represented by its earliest
+            # open slot; a cancelled slot only stands in if none are open.
+            best = first_timed.get(pid)
+            better = best is None or (best.status == "cancelled" and ev.status != "cancelled")
+            if better or (ev.status == best.status and ev.start_time < best.start_time):
                 first_timed[pid] = ev
         else:
             events.append(ev)

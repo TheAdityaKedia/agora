@@ -18,9 +18,11 @@ import argparse
 import json
 import os
 import re
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote_plus
 
+import lifecycle
 import main as pipeline
 from scrapers.base import RawEvent
 
@@ -86,23 +88,39 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
     results = load_results(Path(results_dir))
     rows = []
     scraped_names: set[str] = set()
+    run_start = datetime.now(timezone.utc)
+    horizon = run_start + timedelta(days=pipeline.LOOKAHEAD_DAYS)
+    returned: dict[str, list] = {}  # good sources → start times they listed (§3 window)
+    bad_names: set[str] = set()
     for url in pipeline.select_urls(pipeline.load_sources(), source_filters, excludes):
         result = results.get(url, _MISSING)
         row = {"url": url, "name": result["source_name"], "status": result["status"],
-               "events": len(result["events"]), "saved": 0, "merged": 0, "skipped": 0,
-               "error": result["error"]}
+               "events": len(result["events"]), "saved": 0, "merged": 0, "updated": 0,
+               "skipped": 0, "error": result["error"]}
         if result["status"] == "ok":
             try:
                 events = [RawEvent.from_dict(d) for d in result["events"]]
+                stats = {}
                 row["saved"], row["merged"], row["skipped"] = pipeline.save_events(
-                    events, source=result["source_name"])
+                    events, source=result["source_name"], stats=stats)
+                row["updated"] = stats.get("updated", 0)
                 scraped_names.add(result["source_name"])
+                returned.setdefault(result["source_name"], []).extend(
+                    e.start_time for e in events if e.start_time <= horizon)
             except Exception as e:
                 row["status"] = "save_error"
                 row["error"] = f"{type(e).__name__}: {e}"
+        if row["status"] != "ok" and row["name"]:
+            bad_names.add(row["name"])
         print(f"[{row['name'] or url}] {row['status']}: {row['saved']} saved, "
-              f"{row['merged']} merged, {row['skipped']} skipped", flush=True)
+              f"{row['merged']} merged, {row['updated']} updated, {row['skipped']} skipped", flush=True)
         rows.append(row)
+
+    # Disappearances (feature-specs/event-lifecycle.md, §3): only sources whose
+    # every URL scraped well this run are judged.
+    lifecycle_report = judge(returned, bad_names, run_start)
+    for row in rows:
+        row["possibly_partial"] = row["name"] in lifecycle_report["possibly_partial"]
 
     # Same guard and scoping as main.run(): a classify failure (e.g. no AWS
     # creds) must not stop the export; a filtered run only tags what it scraped.
@@ -129,7 +147,27 @@ def merge_results(results_dir, source_filters=None, excludes=None, classify=True
     print(f"[export] wrote {exported} upcoming events to {out}", flush=True)
     return {"sources": rows, "exported": exported,
             "failed": sum(1 for r in rows if r["status"] != "ok"), "places": places,
-            "classify": tagging or None}
+            "classify": tagging or None,
+            "lifecycle": {"updated": sum(r["updated"] for r in rows), **lifecycle_report}}
+
+
+def judge(returned: dict, bad_names: set, run_start) -> dict:
+    """lifecycle.judge_disappearances over the good sources; never stops the
+    merge (a failure is reported and nothing is marked)."""
+    good = {name: starts for name, starts in returned.items() if name not in bad_names}
+    session = pipeline.get_session()
+    try:
+        out = lifecycle.judge_disappearances(session, good, run_start)
+    except Exception as e:
+        session.rollback()
+        print(f"[lifecycle] skipped ({type(e).__name__}: {e})", flush=True)
+        return {"unlisted": 0, "moved": 0, "possibly_partial": [], "error": f"{type(e).__name__}: {e}"}
+    finally:
+        session.close()
+    print(f"[lifecycle] {out['unlisted']} no longer listed, {out['moved']} moved"
+          + (f"; possibly partial: {', '.join(out['possibly_partial'])}" if out["possibly_partial"] else ""),
+          flush=True)
+    return out
 
 
 # A re-tag run has the whole job to itself (no scraping), so it may tag for
@@ -209,16 +247,25 @@ def render_pr_body(report: dict, guard: dict) -> str:
         lines.append(f"**Tagging:** {tagging['classified']} tagged in {tagging['seconds']}s · "
                      f"{tagging['failed']} failed · {tagging['left']} left for the next run · "
                      f"{tagging['throttled']} throttled retries")
+    life = report.get("lifecycle")
+    if life:
+        partial = life.get("possibly_partial") or []
+        lines.append(f"**Changes:** {life['updated']} updated · {life['unlisted']} no longer listed · "
+                     f"{life['moved']} moved"
+                     + (f" · ⚠️ possibly partial (misses not counted): {', '.join(partial)}" if partial else "")
+                     + (f" · skipped ({life['error'][:200]})" if life.get("error") else ""))
     if not retag:
-        lines += ["", "| Source | Status | Scraped | Saved | Merged | Skipped |",
-                  "|---|---|---:|---:|---:|---:|"]
+        lines += ["", "| Source | Status | Scraped | Saved | Merged | Updated | Skipped |",
+                  "|---|---|---:|---:|---:|---:|---:|"]
     for r in report["sources"]:
         if r["status"] == "ok" and r["events"] == 0:
             status, icon = "ok (0 events)", "⚠️"
+        elif r["status"] == "ok" and r.get("possibly_partial"):
+            status, icon = "ok (possibly partial)", "⚠️"
         else:
             status, icon = r["status"], _STATUS_ICON.get(r["status"], "❔")
         lines.append(f"| {r['name'] or r['url']} | {icon} {status} | {r['events']} | "
-                     f"{r['saved']} | {r['merged']} | {r['skipped']} |")
+                     f"{r['saved']} | {r['merged']} | {r.get('updated', 0)} | {r['skipped']} |")
     places = report.get("places") or {}
     if "actions" in places:
         lines += ["", f"**Venues:** {len(places['new_venues'])} new · "
@@ -249,7 +296,15 @@ def load_local_only(path=LOCAL_ONLY_FILE) -> list[str]:
 
 
 def find_alerts(report: dict, local_only: list[str]) -> list[dict]:
-    """Sources worth an alert: any non-ok status, or ok with 0 events.
+    """Sources worth an alert: any non-ok status, ok with 0 events, or a scrape
+    the lifecycle judge found possibly partial.
+
+    A possibly-partial source listed far fewer of its own events than the DB
+    holds (lifecycle.PARTIAL_SHARE), so its misses weren't counted. That is the
+    pipeline's only signal for a scraper that half-broke — it caught San
+    Francisco Playhouse dropping 101 performances while both shows were still
+    on its site — and it ships in an auto-merged PR body nobody reads, so it
+    belongs here.
 
     Known local-only sources are skipped — they fail from CI every day by
     design, and alerting on them would bury real regressions.
@@ -262,18 +317,23 @@ def find_alerts(report: dict, local_only: list[str]) -> list[dict]:
             alerts.append({**r, "reason": r["status"]})
         elif r["events"] == 0:
             alerts.append({**r, "reason": "0 events"})
+        elif r.get("possibly_partial"):
+            alerts.append({**r, "reason": "possibly partial scrape (misses not counted)"})
     return alerts
 
 
 def render_alert_body(alerts: list[dict], run_url: str, mention: str = "") -> str:
     """Markdown for the failure issue/comment: one line per failing source."""
-    lines = [f"{len(alerts)} source(s) failed in [this run]({run_url}). {mention}".rstrip(),
+    lines = [f"{len(alerts)} source(s) need attention in [this run]({run_url}). {mention}".rstrip(),
              "", "| Source | Problem | Error |", "|---|---|---|"]
     for a in alerts:
         error = (a["error"] or "").replace("`", "'").replace("|", "/").replace("\n", " ")[:300]
         lines.append(f"| {a['name'] or a['url']} | {a['reason']} | {error} |")
-    lines += ["", "Existing rows for these sources are kept. Known CI-blocked sources "
-                  "(`service/data/local_only_sources.txt`) are not alerted on."]
+    lines += ["", "Existing rows for these sources are kept. A **possibly partial** scrape "
+                  "listed far fewer events than the DB holds for it, so no event was marked "
+                  "no longer listed — check the scraper before trusting a drop. Known "
+                  "CI-blocked sources (`service/data/local_only_sources.txt`) are not "
+                  "alerted on."]
     return "\n".join(lines) + "\n"
 
 

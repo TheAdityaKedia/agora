@@ -11,6 +11,8 @@ class Base(DeclarativeBase):
 class Event(Base):
     __tablename__ = "events"
 
+    # Stable: save_events sets uuid5 of the creating source's key
+    # (event_ids.event_id); uuid4 is only a fallback.
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = Column(String, nullable=False)
     # tz-aware; scrapers normalize source-local times to UTC before persisting
@@ -31,6 +33,17 @@ class Event(Base):
     sources = Column(JSON, nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False)
 
+    # Lifecycle (feature-specs/event-lifecycle.md, §2). All nullable so rows
+    # saved before them read as scheduled and never seen; db.init_db adds
+    # them to an existing table.
+    # scheduled / cancelled / postponed / unlisted / moved (lifecycle.py)
+    status = Column(String, server_default="scheduled")
+    status_at = Column(DateTime(timezone=True))   # when status last changed
+    changed_at = Column(DateTime(timezone=True))  # when a tracked field last changed
+    changed = Column(JSON)  # {field: previous value} for the most recent change
+    seen = Column(JSON)     # {source: ISO time} of the last good scrape that listed it
+    misses = Column(JSON)   # {source: n} consecutive good scrapes that should have and didn't
+
     # Enforce uniqueness on (url, start_time) for events that have a URL, not on
     # url alone: a single show URL legitimately hosts many performances at
     # different times (Berkeley Rep, NCTC expose no per-performance URL). NULL
@@ -47,6 +60,20 @@ class Event(Base):
             sqlite_where=url.isnot(None),
         ),
     )
+
+
+class EventAlias(Base):
+    """An event id that changed, and what it became (feature-specs/
+    event-lifecycle.md, §1). `reason`: merged (duplicates merged), rekeyed
+    (the one-off re-key to stable ids) or moved (rescheduled to a new
+    time). Old ids keep resolving for collections and calendars that stored
+    them; follow chains with event_ids.resolve."""
+    __tablename__ = "event_aliases"
+
+    old_id = Column(UUID(as_uuid=True), primary_key=True)
+    new_id = Column(UUID(as_uuid=True), nullable=False)
+    reason = Column(String, nullable=False)
+    at = Column(DateTime(timezone=True), nullable=False)
 
 
 class SubmissionCount(Base):

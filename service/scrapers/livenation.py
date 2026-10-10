@@ -62,8 +62,9 @@ def parse(html: str, *, venue: str) -> list[RawEvent]:
         name, start = obj.get("name"), obj.get("startDate")
         if not (name and start):
             continue
-        if "Cancelled" in (obj.get("eventStatus") or ""):
-            continue
+        # schema.org EventCancelled / EventPostponed: kept, with the status.
+        state = obj.get("eventStatus") or ""
+        status = "cancelled" if "Cancelled" in state else "postponed" if "Postponed" in state else None
         try:
             start_time = datetime.fromisoformat(start)
         except ValueError:
@@ -84,6 +85,7 @@ def parse(html: str, *, venue: str) -> list[RawEvent]:
             url=obj.get("url"),
             description=obj.get("description"),
             image_url=image if isinstance(image, str) else None,
+            status=status,
         ))
     return events
 

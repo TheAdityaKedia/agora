@@ -33,17 +33,18 @@ def test_matches():
 
 
 def test_one_event_per_visible_showtime(events):
-    """King Lear has 4 raw showtimes (1 cancelled, 1 hidden) → 2 survive, plus
-    Assimilation and One-Night Cabaret → 4 events total."""
-    assert len(events) == 4
+    """King Lear has 4 raw showtimes (1 cancelled, 1 hidden) → 3 survive (the
+    cancelled one flagged), plus Assimilation and One-Night Cabaret → 5."""
+    assert len(events) == 5
     assert all(isinstance(e, RawEvent) for e in events)
 
 
-def test_skips_cancelled_and_hidden(events):
+def test_skips_hidden_and_flags_cancelled(events):
     kl = [e for e in events if e.title == "King Lear"]
-    assert len(kl) == 2  # 22:00 cancelled and 27th 19:00 hidden are dropped
-    starts = {e.start_time.astimezone(UTC) for e in kl}
-    assert datetime(2026, 9, 26, 5, 0, tzinfo=UTC) not in starts  # 22:00 PT cancelled
+    assert len(kl) == 3  # 27th 19:00 hidden is dropped
+    cancelled = [e.start_time.astimezone(UTC) for e in kl if e.status == "cancelled"]
+    assert cancelled == [datetime(2026, 9, 26, 5, 0, tzinfo=UTC)]  # 22:00 PT cancelled
+    starts = {e.start_time.astimezone(UTC) for e in kl if e.status is None}
     assert datetime(2026, 9, 28, 2, 0, tzinfo=UTC) not in starts  # 27th 19:00 PT hidden
     # the two survivors are the 25th 19:00 and 27th 14:00 shows
     assert datetime(2026, 9, 26, 2, 0, tzinfo=UTC) in starts

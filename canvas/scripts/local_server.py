@@ -71,9 +71,16 @@ def main():
     ap.add_argument("--port", type=int, default=8787)
     ap.add_argument("--manifest", default=(ROOT / "frontend" / "events.json").as_uri(),
                     help="events.json URL used for snapshots (default: local file)")
+    ap.add_argument("--index", help="event-index.json URL (default: beside the manifest; "
+                                    "if missing, the manifest is used, with no overlay)")
+    ap.add_argument("--cache-ttl", type=int, help="seconds to cache the index (default 600)")
     args = ap.parse_args()
 
     os.environ["MANIFEST_URL"] = args.manifest
+    if args.index:
+        os.environ["INDEX_URL"] = args.index
+    if args.cache_ttl is not None:
+        os.environ["SNAPSHOT_CACHE_TTL_S"] = str(args.cache_ttl)
     os.environ["ALLOW_LOCALHOST"] = "true"
     os.environ.setdefault("AWS_DEFAULT_REGION", "us-west-2")
     if args.moto:

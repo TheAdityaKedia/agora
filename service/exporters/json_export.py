@@ -3,10 +3,18 @@
 Reads persisted events from the database and writes the manifest for the
 static frontend (GitHub Pages). Prunes past events so the files stay small.
 
-Two files (feature-specs/frontend-payload.md):
+Three files (feature-specs/frontend-payload.md, event-lifecycle.md):
     events.json        {"generated_at", "taxonomy", "regions", "neighborhoods",
-                        "venues", "events": [ {...event, "summary", "more"?}, ... ]}
+                        "venues", "events": [ {...event, "summary", "more"?,
+                        "status"?, "changed"?}, ... ]}
     descriptions.json  {"<event id>": "<full description>", ...}
+    event-index.json   current facts by id, for the collections API:
+                       {"generated_at", "events": {id: {...}}, "gone": {id: {...}},
+                        "aliases": {old id: current id}}
+
+events.json lists scheduled events and, until their date, cancelled and
+postponed ones (with "status"); unlisted and moved rows are only in the
+index's "gone".
 
 Events carry the description's first sentence as `summary` (what a row shows
 collapsed) and `more: true` when there is more; the full text lives in
@@ -21,6 +29,9 @@ from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import dedup
+import event_ids
+import lifecycle
 import taxonomy
 from classifications import Cache
 from places.regions import REGIONS, neighborhood_at, neighborhoods
@@ -50,6 +61,14 @@ _FOOD_DRINK_TYPE = ["social", "food-drink"]
 # the summary is exactly what a collapsed row shows.
 SUMMARY_MAX = 180
 DESCRIPTIONS_FILE = "descriptions.json"
+INDEX_FILE = "event-index.json"
+
+# A change shows on the site for this long (feature-specs/event-lifecycle.md,
+# Decisions), and only these fields are shown; the rest stay in the DB.
+CHANGED_DAYS = lifecycle.CHANGED_DAYS
+SHOWN_CHANGES = ("title", "location", "start_time")
+INDEX_FIELDS = ("title", "start_time", "location", "url", "image_url", "sources", "venue",
+                "status", "changed")
 
 
 def summarize(text: str | None) -> tuple[str, bool]:
@@ -121,7 +140,77 @@ def _serialize(event: Event, cache: Cache, venues: VenueStore | None = None) -> 
     }
     if place and place.get("venue") and place.get("room"):
         out["room"] = place["room"]  # only when named: most events have none
+    if event.status in lifecycle.EXPLICIT:
+        out["status"] = event.status
+    changed = recent_change(event, venue_of=_venue_of(venues))
+    if changed:
+        out["changed"] = changed
     return out
+
+
+def _aware(t: datetime) -> datetime:
+    return t if t.tzinfo else t.replace(tzinfo=timezone.utc)  # SQLite: naive UTC
+
+
+def _venue_of(venues: VenueStore | None):
+    """dedup's venue lookup over already-validated venue files, or None."""
+    if not venues:
+        return None
+
+    def venue_of(location):
+        e = venues.entry(location)
+        return (e["venue"], e.get("room")) if e and "venue" in e else None
+    return venue_of
+
+
+def recent_change(event: Event, now: datetime | None = None, venue_of=None) -> dict | None:
+    """{"at", "was": {field: old}} for a change to a shown field in the last
+    CHANGED_DAYS, else None. A location that only changed how it's written
+    (same venue, or the same street number / venue name: dedup's
+    locations_agree) is not a change of venue, so it isn't shown."""
+    if not (event.changed and event.changed_at):
+        return None
+    now = now or datetime.now(timezone.utc)
+    at = _aware(event.changed_at)
+    was = {f: v for f, v in event.changed.items() if f in SHOWN_CHANGES}
+    if "location" in was and dedup.locations_agree(was["location"], event.location, venue_of) is not False:
+        del was["location"]
+    if not was or now - at > timedelta(days=CHANGED_DAYS):
+        return None
+    return {"at": at.isoformat(), "was": was}
+
+
+def build_index(listed: list[dict], gone_rows: list[Event], aliases: dict[str, str],
+                live: set[str]) -> dict:
+    """event-index.json: the exported events' current facts, the rows that
+    are gone (unlisted or moved) until their date, and every old id that
+    still leads to one of them."""
+    events = {e["id"]: {k: e[k] for k in INDEX_FIELDS if e.get(k) not in (None, "", [])}
+              for e in listed}
+    gone = {}
+    for r in gone_rows:
+        entry = {"status": r.status, "at": _aware(r.status_at).isoformat() if r.status_at else None,
+                 "title": r.title, "start_time": _aware(r.start_time).isoformat()}
+        if r.status == lifecycle.MOVED and str(r.id) in aliases:
+            # The moved row is live itself, so resolve from its successor.
+            entry["moved_to"] = event_ids.resolve(aliases, aliases[str(r.id)], live)
+        gone[str(r.id)] = {k: v for k, v in entry.items() if v is not None}
+    exported = events.keys() | gone.keys()
+    # Only ids that are no longer rows: a live row (even a moved one) answers
+    # for itself, through events or gone.
+    resolved = {old: event_ids.resolve(aliases, old, live) for old in aliases if old not in live}
+    return {"events": events, "gone": gone,
+            "aliases": {old: new for old, new in sorted(resolved.items()) if new in exported}}
+
+
+def write_index(path: Path, index: dict, generated_at: str) -> None:
+    """One entry per line, like the other files, so data PR diffs stay small."""
+    def block(d):
+        return "{\n" + ",\n".join(f"{json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}"
+                                    for k, v in d.items()) + "\n}" if d else "{}"
+    with open(path, "w") as f:
+        f.write(f'{{"generated_at": {json.dumps(generated_at)},\n"events": {block(index["events"])},\n'
+                f'"gone": {block(index["gone"])},\n"aliases": {block(index["aliases"])}}}\n')
 
 
 # Map pins (feature-specs/venues.md, phase 4): which precisions get
@@ -200,7 +289,7 @@ def export_json(
     venues = _load_venues(venues_dir)
     session = get_session()
     try:
-        events = (
+        rows = (
             session.query(Event)
             .filter(Event.start_time >= cutoff)
             # id is a stable tiebreaker for events sharing a start_time, so
@@ -208,7 +297,11 @@ def export_json(
             .order_by(Event.start_time, Event.id)
             .all()
         )
+        events = [e for e in rows if (e.status or lifecycle.SCHEDULED) in lifecycle.LISTED]
+        gone_rows = [e for e in rows if e.status in lifecycle.GONE]
         payload = [_serialize(e, cache, venues) for e in events]
+        aliases = event_ids.alias_map(session)
+        live = {str(i) for (i,) in session.query(Event.id).all()}
     finally:
         session.close()
 
@@ -220,10 +313,13 @@ def export_json(
         print(f"[export] dropped {dropped} food/drink-only events", flush=True)
     payload = kept
 
+    # Built before split_descriptions, which rewrites the payload in place.
+    index = build_index(payload, gone_rows, aliases, live)
     descriptions = split_descriptions(payload)
     path.parent.mkdir(parents=True, exist_ok=True)
+    generated_at = datetime.now(timezone.utc).isoformat()
     manifest = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": generated_at,
         # The taxonomy travels with the manifest so the static frontend builds
         # its type/topic filters from the same source of truth (no extra fetch).
         "taxonomy": taxonomy.load_taxonomy(),
@@ -240,6 +336,7 @@ def export_json(
     # data PR diffs line-based like the manifest's.
     with open(path.with_name(DESCRIPTIONS_FILE), "w") as f:
         json.dump(descriptions, f, indent=0, ensure_ascii=False)
+    write_index(path.with_name(INDEX_FILE), index, generated_at)
     return len(payload)
 
 

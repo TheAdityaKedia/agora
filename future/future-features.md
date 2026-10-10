@@ -32,23 +32,14 @@ here.
   DynamoDB). Next: a one-tap ☆ Save on every event card.
   Spec: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md);
   how it works now: [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md).
+  **Built** (2026-10-05, PR "Event lifecycle"): stable event ids with
+  aliases, updates from the source, cancellations and disappearances, shown
+  on the main site and in collections (the two gaps found 2026-10-04,
+  *event copies drift* and *event ids aren't stable*). Spec:
+  [`feature-specs/event-lifecycle.md`](../feature-specs/event-lifecycle.md).
+  Left for later: notifying people of a change (email/push), and badges in
+  the overlay refreshing without a full read (polling tracks writes only).
   **Known gaps** (found 2026-10-04; none has a spec yet), most important first:
-  - Spec for the first two: [`feature-specs/event-lifecycle.md`](../feature-specs/event-lifecycle.md)
-    (stable ids, updates, cancellations and disappearances, shown on the
-    main site and in collections).
-  - *Event copies drift.* An added event is a copy made at that moment;
-    a later cancellation, new time or new venue never reaches it. Worse,
-    upstream: saves never update rows and nothing removes events that vanish
-    from their source, so a cancelled show stays on the **main site** too.
-    Fix both: the scrape marks vanished/changed events (e.g. `status`,
-    `changed_at` in the manifest), and the API refreshes copies on read from
-    its cached manifest, showing "Time changed" / "No longer listed".
-  - *Event ids aren't stable.* Ids are random per database row
-    (`uuid4`), and rows get deleted and re-scraped (the documented fix for
-    stale fields) or merged by dedup. Then a collection's `ev_<id>` points at
-    nothing, re-adding the same show makes a duplicate, and collecting mode
-    doesn't mark it as added. Needs ids derived from the event (source + URL
-    + start) or an old→new id map at export.
   - *Losing the link loses the collection.* Everything is per browser:
     clearing site data or a new phone loses "Your collections", the name and
     the default (the collections themselves survive). Options: email

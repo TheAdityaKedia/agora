@@ -198,6 +198,21 @@
   .it-title a { text-decoration: none; }
   .it-title a:hover { color: var(--accent); text-decoration: underline; }
   .it-where, .it-meta { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  /* What became of an Agora event since it was added (feature-specs/
+     event-lifecycle.md, §6): a red badge when it's off, the old value struck
+     through when the time or place changed, a line saying what to do. */
+  .badge.off, .step-badge.off { background: none; border: 1px solid var(--error); color: var(--error); }
+  .step-badge {
+    display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 999px; vertical-align: middle;
+    font-family: var(--font-body); font-size: 11px; font-weight: 600; white-space: nowrap;
+    background: var(--chip-bg); color: var(--muted);
+  }
+  .was { color: var(--muted); font-weight: 400; text-decoration: line-through; margin-right: 6px; }
+  .when .was { font-size: 15px; }
+  .it-change { margin-top: 6px; font-size: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+  .it-change .btn { padding: 4px 10px; font-size: 13px; }
+  .item.off .it-title, .item.off .when > .t, .item.off .thumb, .step.off .step-title { opacity: 0.6; }
+  .item.off .it-title a, .step.off .step-title a { text-decoration: line-through; }
   .it-note { font-size: 14px; margin-top: 4px; white-space: pre-wrap; }
   .thumb { display: block; width: 64px; height: 64px; border-radius: 6px; overflow: hidden; background: var(--chip-bg); }
   .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -420,26 +435,81 @@
       + "</p>";
   }
 
-  const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
+  // An Agora event as it is now: the API sends the copy made when it was
+  // added (`event`) and, when it knows, `now` (its status and only what
+  // changed). A moved event keeps the old showing here; the new one is in
+  // its note, until "Use the new time".
+  const evOf = (it) => {
+    const n = it.now;
+    if (!it.event || !n || n.status === "moved") return it.event;
+    const out = {...it.event};
+    for (const k of ["title", "location", "url", "start_time"]) if (n[k]) out[k] = n[k];
+    return out;
+  };
+  const isOff = (it) => !!it.now && (it.now.status === "cancelled" || it.now.status === "postponed");
+  // Not on the calendar: off, or moved to another time.
+  const notHappening = (it) => isOff(it) || (!!it.now && it.now.status === "moved");
+  const STATUS_LABEL = {cancelled: "Cancelled", postponed: "Postponed", moved: "Moved", unlisted: "No longer listed"};
+  const titleOf = (it) => it.event ? evOf(it).title : (it.custom && it.custom.title) || "";
   const startOf = (it) => it.start_time ? new Date(it.start_time) : null;
   // What one of your own items is (custom.category; API: CUSTOM_CATEGORIES).
   const KINDS = {food: ["🍽️", "Food"], drinks: ["🍸", "Drinks"], outdoors: ["🌳", "Outdoors"],
                  travel: ["🚗", "Getting there"], other: ["📌", "Other"]};
   const kindOf = (it) => KINDS[it.custom && it.custom.category] || KINDS.other;
-  const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
+  const linkOf = (it) => safeUrl(it.event ? evOf(it).url : it.custom && it.custom.url);
+  const placeOf = (it) => it.event ? evOf(it).location : null;
+  // The time / place line with the old value struck through when it changed.
+  function changedHtml(old, cur, fmt) {
+    return old && cur && old !== cur ? '<span class="was">' + esc(fmt(old)) + "</span>" + esc(fmt(cur)) : esc(fmt(cur || old));
+  }
+  const whenText = (iso) => whenFmt.format(new Date(iso));
+  // Badges for the card's time line and the plan step.
+  function lifeBadges(it, cls) {
+    const n = it.now;
+    if (!it.event || !n) return "";
+    const label = STATUS_LABEL[n.status];
+    if (label) return '<span class="' + cls + (n.status === "unlisted" ? "" : " off") + '">' + label + "</span>";
+    let out = "";
+    if (n.start_time && n.start_time !== it.event.start_time) out += '<span class="' + cls + '">Time changed</span>';
+    if (n.venue_changed) out += '<span class="' + cls + '">Venue changed</span>';
+    return out;
+  }
+  // What to do about it, under the card's title.
+  function lifeNote(it) {
+    const n = it.now;
+    if (!it.event || !n) return "";
+    if (n.status === "moved") {
+      return '<div class="it-change">Moved to <b>' + (n.start_time ? esc(whenText(n.start_time)) : "a new time") + "</b>"
+        + (n.moved_to ? '<button type="button" class="btn" data-act="use-new-time">Use the new time</button>' : "") + "</div>";
+    }
+    if (n.status === "unlisted") {
+      const who = (it.event.sources || []).join(", ") || "Its listing";
+      const url = linkOf(it);
+      return '<div class="it-change">' + esc(who) + " no longer lists this."
+        + (url ? ' <a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">Check the event page.</a>' : "") + "</div>";
+    }
+    return "";
+  }
 
   function itemHtml(it) {
     const start = startOf(it);
     const past = start && start < new Date();
+    const off = isOff(it);
     const url = linkOf(it);
     const title = url
       ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
       : esc(titleOf(it));
     let where = "";
     if (it.event) {
-      const bits = [it.event.location, (it.event.sources || []).length ? "Listed by " + it.event.sources.join(", ") : ""].filter(Boolean);
-      where = bits.length ? '<div class="it-where">' + esc(bits.join(" · ")) + "</div>" : "";
+      // The old place struck through only when it's another place, not the
+      // same one written differently.
+      const place = it.now && it.now.venue_changed
+        ? changedHtml(it.event.location, placeOf(it), (x) => x) : esc(placeOf(it) || "");
+      const listed = (it.event.sources || []).length ? esc("Listed by " + it.event.sources.join(", ")) : "";
+      const bits = [placeOf(it) || it.event.location ? place : "", listed].filter(Boolean);
+      where = bits.length ? '<div class="it-where">' + bits.join(" · ") + "</div>" : "";
     }
+    const was = it.event && it.now && it.now.status !== "moved" ? it.event.start_time : null;
     const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
     const own = !it.event;
     const img = own ? '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>"
@@ -453,10 +523,10 @@
     const inPlan = (view.canvas.plan || []).includes(it.id);
     // Your own items say so: "Added by Sam" once others are involved, else "Your own".
     const ownBadge = own ? '<span class="badge own">' + (social ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
-    return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
-      + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
-      + ownBadge + (past ? '<span class="badge">Past</span>' : "") + (inPlan ? '<span class="badge">In the plan</span>' : "") + "</div>"
-      + '<div class="it-title">' + title + "</div>" + where + note
+    return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + (off ? " off" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
+      + '<div class="when"><span class="t">' + (start ? changedHtml(was, it.start_time, whenText) : "Any time") + "</span>"
+      + ownBadge + lifeBadges(it, "badge") + (past ? '<span class="badge">Past</span>' : "") + (inPlan ? '<span class="badge">In the plan</span>' : "") + "</div>"
+      + '<div class="it-title">' + title + "</div>" + where + lifeNote(it) + note
       + (social && !own && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
       + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
       + '" aria-label="' + (it.you_voted ? "You’re interested. Tap to undo" : "Interested") + '">👍 <span>Interested'
@@ -494,7 +564,7 @@
       + (steps.length > 1 ? '<div class="plan-hint">Press and hold a step, then drag it into place.'
         + '<span class="sr-only"> With a keyboard: focus a step and press Alt with the up or down arrow.</span></div>' : "")
       + "<ol>" + steps.map((it, i) => stepHtml(it, i, steps.length, oneDay)).join("") + "</ol>"
-      + (steps.some(startOf) ? '<div class="plan-actions"><button type="button" class="btn primary" data-act="ics">'
+      + (steps.some(it => startOf(it) && !notHappening(it)) ? '<div class="plan-actions"><button type="button" class="btn primary" data-act="ics">'
         + "Add the plan to your calendar</button></div>" : "")
       + "</section>";
   }
@@ -505,12 +575,15 @@
     const title = (it.event ? "" : kindOf(it)[0] + " ") + (url
       ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
       : esc(titleOf(it)));
-    return '<li class="step" tabindex="0" data-id="' + esc(it.id) + '"><div class="step-body">'
-      + '<div class="step-when">' + esc(when) + "</div>"
+    const moved = it.now && it.now.status === "moved" && it.now.start_time
+      ? " → " + whenText(it.now.start_time) : "";
+    return '<li class="step' + (isOff(it) ? " off" : "") + '" tabindex="0" data-id="' + esc(it.id) + '"><div class="step-body">'
+      + '<div class="step-when">' + esc(when + moved) + lifeBadges(it, "step-badge") + "</div>"
       + '<div class="step-title">' + title + "</div>"
-      + (it.event && it.event.location ? '<div class="step-where">' + esc(it.event.location) + "</div>" : "")
+      + (placeOf(it) ? '<div class="step-where">' + (it.now && it.now.venue_changed
+        ? changedHtml(it.event.location, placeOf(it), (x) => x) : esc(placeOf(it))) + "</div>" : "")
       + '<div class="step-links">'
-      + (start ? '<a class="linkish" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Google Calendar</a>' : "")
+      + (start && !notHappening(it) ? '<a class="linkish" target="_blank" rel="noopener" href="' + esc(googleCalUrl(it)) + '">Google Calendar</a>' : "")
       + '<button type="button" class="linkish" data-act="plan-remove">Take out</button></div></div>'
       + '<span class="step-grip" aria-hidden="true">⋮⋮</span></li>';
   }
@@ -588,18 +661,18 @@
     const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
     const p = new URLSearchParams({action: "TEMPLATE", text: titleOf(it),
       dates: calStamp(s) + "/" + calStamp(e), details: calNotes(it)});
-    if (it.event && it.event.location) p.set("location", it.event.location);
+    if (placeOf(it)) p.set("location", placeOf(it));
     return "https://calendar.google.com/calendar/render?" + p;
   }
   // One .ics with every dated step of the plan (Apple, Outlook, Google import).
   function downloadIcs(items) {
     const x = (t) => String(t).replace(/\\/g, "\\\\").replace(/[;,]/g, "\\$&").replace(/\r?\n/g, "\\n");
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Agora//Canvas//EN"];
-    for (const it of items.filter(startOf)) {
+    for (const it of items.filter(it => startOf(it) && !notHappening(it))) {
       const s = startOf(it), e = new Date(s.getTime() + CAL_HOURS * 3600e3);
       lines.push("BEGIN:VEVENT", "UID:" + cid + "-" + it.id + "@agora", "DTSTAMP:" + calStamp(new Date()),
         "DTSTART:" + calStamp(s), "DTEND:" + calStamp(e), "SUMMARY:" + x(titleOf(it)));
-      if (it.event && it.event.location) lines.push("LOCATION:" + x(it.event.location));
+      if (placeOf(it)) lines.push("LOCATION:" + x(placeOf(it)));
       lines.push("DESCRIPTION:" + x(calNotes(it)), "END:VEVENT");
     }
     lines.push("END:VCALENDAR");
@@ -924,6 +997,18 @@
       case "restore": {
         const who = me();
         return act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}));
+      }
+      case "use-new-time": {
+        // Add the new showing, put it where the old one was in the plan,
+        // then remove the old one (restorable from Activity, as ever).
+        if (!it || !it.now || !it.now.moved_to) return;
+        const who = me();
+        const pos = (view.canvas.plan || []).indexOf(id);
+        return act(async () => {
+          const r = await AC.api("POST", P("/items"), {event_id: it.now.moved_to, actor_name: who});
+          if (pos >= 0) await AC.api("POST", P("/plan"), {op: "add", item_id: r.item.id, to: pos, actor_name: who});
+          if (r.item.id !== id) await AC.api("DELETE", itemP(id), {actor_name: who});
+        }, "Switched to the new time");
       }
       case "ics":
         return downloadIcs((view.canvas.plan || []).map(pid => view.items.find(i => i.id === pid)).filter(Boolean));

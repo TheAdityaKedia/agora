@@ -77,11 +77,12 @@ def _value_after(html: str, key: str):
 
 
 def parse_listing(html: str) -> list[dict]:
-    """Upcoming, non-cancelled Event nodes on a Page's events tab, deduped by id."""
+    """Upcoming Event nodes on a Page's events tab (cancelled ones too: the
+    site shows them as cancelled), deduped by id."""
     events: dict[str, dict] = {}
     for m in _EVENT_NODE_RE.finditer(html):
         node = _decode_at(html, m.start())
-        if isinstance(node, dict) and node.get("name") and not node.get("is_canceled"):
+        if isinstance(node, dict) and node.get("name"):
             events.setdefault(node["id"], node)
     return list(events.values())
 
@@ -101,9 +102,10 @@ def _event_object(html: str, event_id: str) -> dict | None:
 
 
 def parse_event(html: str, event_id: str) -> RawEvent | None:
-    """RawEvent from an event page, or None if cancelled/online/unparseable."""
+    """RawEvent from an event page (status "cancelled" if it's cancelled), or
+    None if online or unparseable."""
     event = _event_object(html, event_id)
-    if not event or event.get("is_canceled") or event.get("is_online"):
+    if not event or event.get("is_online"):
         return None
     place = (event.get("event_place") or {}).get("name")
     address = _value_after(html, "one_line_address")
@@ -121,6 +123,7 @@ def parse_event(html: str, event_id: str) -> RawEvent | None:
         # No image: fbcdn cover URLs are signed and expire within days (`oe=`),
         # saved rows are never refreshed, and the site has no broken-image fallback.
         image_url=None,
+        status="cancelled" if event.get("is_canceled") else None,
     )
 
 
