@@ -272,10 +272,11 @@ def _places_assistant():
 
     def ask(system: str, user: str) -> str:
         errors = []
-        for model_id in (_classify.PRIMARY_MODEL, _classify.FALLBACK_MODEL):
+        for model_id in _classify.available(_classify.MODELS):
             try:
                 return _classify._converse(client, model_id, system, user)
             except Exception as e:  # try the next model
+                _classify.note_failure(model_id, e)
                 errors.append(f"{model_id}: {type(e).__name__}")
         raise RuntimeError("; ".join(errors))
 

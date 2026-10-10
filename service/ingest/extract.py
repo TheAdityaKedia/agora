@@ -6,7 +6,7 @@ from __future__ import annotations
 from datetime import datetime
 from io import BytesIO
 
-from classify import FALLBACK_MODEL, PRIMARY_MODEL
+from classify import MODELS, available, inference_config, note_failure
 from ingest import LOCAL_TZ, MAX_EVENTS_PER_EMAIL
 
 TOOL_NAME = "record_events"
@@ -128,10 +128,11 @@ def _normalize(event: dict) -> dict:
 
 
 def _tool_choice(model_id: str, tool: str) -> tuple[dict, str]:
-    """(toolChoice, system-prompt suffix). Haiku 5.5 accepts a forced tool;
-    Sonnet 5.5 rejects one (400), so it gets `auto` and is told to call it.
-    A reply without the call reads as {} — no events, and no image published."""
-    if "haiku" in model_id:
+    """(toolChoice, system-prompt suffix). Haiku (4.5 and 5.5) and Sonnet 4.5
+    accept a forced tool; Sonnet 5.5 rejects one (400), so it gets `auto` and
+    is told to call it. A reply without the call reads as {} — no events, and
+    no image published."""
+    if "sonnet-5-5" not in model_id:
         return {"tool": {"name": tool}}, ""
     return {"auto": {}}, f" Always answer by calling the {tool} tool."
 
@@ -140,7 +141,7 @@ def _call(client, content: list, *, system: str, tool: str, description: str, sc
           models: tuple[str, ...]) -> dict:
     """One tool-use Converse call; returns the tool input ({} if none)."""
     errors = []
-    for model_id in models:
+    for model_id in available(models):
         choice, steer = _tool_choice(model_id, tool)
         try:
             resp = client.converse(
@@ -150,10 +151,11 @@ def _call(client, content: list, *, system: str, tool: str, description: str, sc
                 toolConfig={"tools": [{"toolSpec": {"name": tool, "description": description,
                                                     "inputSchema": {"json": schema}}}],
                             "toolChoice": choice},
-                # No temperature: the 5.5 models reject it.
-                inferenceConfig={"maxTokens": MAX_OUTPUT_TOKENS},
+                # No temperature on 5.5 (it's rejected); 0 on 4.5.
+                inferenceConfig=inference_config(model_id, MAX_OUTPUT_TOKENS),
             )
         except Exception as e:
+            note_failure(model_id, e)
             errors.append(f"{model_id}: {type(e).__name__}: {e}")
             continue
         if resp.get("stopReason") == "max_tokens":
@@ -183,7 +185,7 @@ def _image_block(image: tuple[str, bytes]) -> dict | None:
 
 def extract_events(client, *, text: str | None = None, image: tuple[str, bytes] | None = None,
                    now: datetime, context: str = "",
-                   models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL)) -> list[dict]:
+                   models: tuple[str, ...] = MODELS) -> list[dict]:
     if image is not None:
         return extract_image(client, image, now=now, models=models)[0]
     content = [{"text": text or ""},
@@ -193,7 +195,7 @@ def extract_events(client, *, text: str | None = None, image: tuple[str, bytes] 
 
 
 def extract_image(client, image: tuple[str, bytes], *, now: datetime,
-                  models: tuple[str, ...] = (PRIMARY_MODEL, FALLBACK_MODEL)) -> tuple[list[dict], dict | None]:
+                  models: tuple[str, ...] = MODELS) -> tuple[list[dict], dict | None]:
     """Events in an image plus a privacy assessment of the image itself (same call)."""
     block = _image_block(image)
     if block is None:
@@ -208,9 +210,13 @@ def extract_image(client, image: tuple[str, bytes], *, now: datetime,
 # The last check before an image is published uses a stronger model: on real
 # photos Haiku 4.5's bystander/personal-info verdicts were inconsistent, and
 # Sonnet 4.5 was the only model tested that caught a partly visible person.
-# Now Sonnet 5.5 (4.5 is deprecated).
+# Now Sonnet 5.5, falling back to Sonnet 4.5 (deprecated, still answering)
+# while the account has no Sonnet 5.5 capacity. Never down to Haiku: a weaker
+# model here would publish images the stronger one rejects.
 VERIFY_MODELS = ("global.anthropic.claude-sonnet-5-5",
-                 "us.anthropic.claude-sonnet-5-5")
+                 "us.anthropic.claude-sonnet-5-5",
+                 "global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                 "us.anthropic.claude-sonnet-4-5-20250929-v1:0")
 
 
 def assess_image(client, image: tuple[str, bytes],

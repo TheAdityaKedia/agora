@@ -45,12 +45,12 @@ def test_caps_at_twenty_events():
 
 
 def test_falls_back_and_reports_every_model_error():
-    client = FakeClient([{"title": "X"}], fail_models=[extract.PRIMARY_MODEL])
+    client = FakeClient([{"title": "X"}], fail_models=[extract.MODELS[0]])
     assert extract.extract_events(client, text="x", now=NOW)[0]["title"] == "X"
-    both = FakeClient(fail_models=[extract.PRIMARY_MODEL, extract.FALLBACK_MODEL])
+    every = FakeClient(fail_models=extract.MODELS)
     with pytest.raises(RuntimeError) as e:
-        extract.extract_events(both, text="x", now=NOW)
-    assert extract.PRIMARY_MODEL in str(e.value) and extract.FALLBACK_MODEL in str(e.value)
+        extract.extract_events(every, text="x", now=NOW)
+    assert all(m in str(e.value) for m in extract.MODELS)
 
 
 def test_prepare_image_downscales_large_images_under_bedrock_limits():

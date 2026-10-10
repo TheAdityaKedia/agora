@@ -118,10 +118,11 @@ def test_classify_show_falls_back_when_primary_fails():
 def test_classify_show_error_names_every_failed_model():
     """A fallback's error must not hide the primary's (the real cause)."""
     import pytest
-    client = _FakeClient("{}", fail_models=[PRIMARY_MODEL, FALLBACK_MODEL])
+    from classify import MODELS
+    client = _FakeClient("{}", fail_models=MODELS)
     with pytest.raises(RuntimeError) as exc:
         classify_show("A Talk", "City Lights Booksellers", "A reading.", client=client)
-    assert PRIMARY_MODEL in str(exc.value) and FALLBACK_MODEL in str(exc.value)
+    assert all(m in str(exc.value) for m in MODELS)
 
 
 def test_fallback_is_an_inference_profile():
