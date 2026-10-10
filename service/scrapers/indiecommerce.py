@@ -28,7 +28,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from scrapers.base import RawEvent
-from scrapers.browser import BROWSER_UA
+from scrapers.browser import BROWSER_UA, RateLimited
 
 
 SF_TZ = ZoneInfo("America/Los_Angeles")
@@ -193,9 +193,15 @@ def _add_month(d: date) -> date:
 
 
 def scrape_events(site_base: str, *, fallback_location: str | None = None,
-                  tag: str = "indiecommerce") -> list[RawEvent]:
+                  tag: str = "indiecommerce", get=None,
+                  workers: int = DETAIL_WORKERS) -> list[RawEvent]:
     """Walk the month listings from this month forward, then enrich each
-    upcoming card from its detail page (concurrently)."""
+    upcoming card from its detail page (concurrently).
+
+    `get(url) -> html` defaults to plain requests; a store behind a Cloudflare
+    challenge passes a browser fetcher instead (with workers=1: one browser
+    context is not thread-safe)."""
+    get = get or _get
     site_base = site_base.rstrip("/")
     today = datetime.now(SF_TZ).date()
     month = today.replace(day=1)
@@ -204,8 +210,8 @@ def scrape_events(site_base: str, *, fallback_location: str | None = None,
     for _ in range(MAX_MONTHS):
         path = month_path(month)
         try:
-            found = parse_listing(_get(site_base + path), site_base)
-        except requests.RequestException as e:
+            found = parse_listing(get(site_base + path), site_base)
+        except (requests.RequestException, RateLimited) as e:
             print(f"[{tag}] listing {path} failed: {e}", flush=True)
             break
         upcoming = [i for i in found if i.day is None or i.day >= today]
@@ -219,14 +225,14 @@ def scrape_events(site_base: str, *, fallback_location: str | None = None,
 
     def fetch(item: ListingItem) -> RawEvent | None:
         try:
-            return parse_event(_get(item.url), item.url, fallback_location=fallback_location)
-        except requests.RequestException as e:
+            return parse_event(get(item.url), item.url, fallback_location=fallback_location)
+        except (requests.RequestException, RateLimited) as e:
             print(f"[{tag}] detail failed {item.url}: {e}", flush=True)
             return None
 
     t0 = time.monotonic()
-    print(f"[{tag}] fetching {len(items)} detail pages ({DETAIL_WORKERS} workers)", flush=True)
-    with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as pool:
+    print(f"[{tag}] fetching {len(items)} detail pages ({workers} workers)", flush=True)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
         events = [e for e in pool.map(fetch, items.values()) if e is not None]
     print(f"[{tag}] done: {len(events)} events in {time.monotonic() - t0:.0f}s", flush=True)
     return events
