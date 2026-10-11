@@ -993,6 +993,22 @@
         ]
       ]
     },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Closing Night Shorts": {
+      "classified_at": "2026-10-11T16:33:05.241441+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: Closing Night Shorts",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Funny Shorts": {
       "classified_at": "2026-10-10T16:04:47.299505+00:00",
       "cost": "unknown",
@@ -1025,6 +1041,38 @@
         ]
       ]
     },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Spine-tingling Shorts": {
+      "classified_at": "2026-10-11T16:33:05.205669+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: Spine-tingling Shorts",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSF SHORT FILM FESTIVAL: Spontaneous Connections Shorts": {
+      "classified_at": "2026-10-11T16:33:05.179228+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "SF SHORT FILM FESTIVAL: Spontaneous Connections Shorts",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fSF SHORT FILM FESTIVAL: True Stories Shorts": {
       "classified_at": "2026-10-10T16:04:46.038086+00:00",
       "cost": "unknown",
@@ -1039,6 +1087,44 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSTUDIO 8 FILM FESTIVAL: Juried Show: Personal Visions (Presented by SF Artists Alumni)": {
+      "classified_at": "2026-10-11T16:33:05.214141+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "STUDIO 8 FILM FESTIVAL: Juried Show: Personal Visions (Presented by SF Artists Alumni)",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fSTUDIO 8 FILM FESTIVAL: Juror Night (Films from Ed Jones, Michael LaRocco & Jac White - Presented by SF Artists Alumni)": {
+      "classified_at": "2026-10-11T16:33:05.294474+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "STUDIO 8 FILM FESTIVAL: Juror Night (Films from Ed Jones, Michael LaRocco & Jac White - Presented by SF Artists Alumni)",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -1403,6 +1489,22 @@
       "source": "ATG (Curran, Orpheum, Golden Gate)",
       "taxonomy_version": 2,
       "title": "Coraline in Concert",
+      "topics": [
+        "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fElf The Musical": {
+      "classified_at": "2026-10-11T16:33:05.184285+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "Elf The Musical",
       "topics": [
         "musical-theater"
       ],
@@ -1930,6 +2032,56 @@
       "source": "Artists' Television Access",
       "taxonomy_version": 2,
       "title": "An evening with Mike Kuchar",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fCine+Mas: Carmela and the Walkers (Carmela y los caminantes)": {
+      "classified_at": "2026-10-11T16:33:05.903489+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Cine+Mas: Carmela and the Walkers (Carmela y los caminantes)",
+      "topics": [
+        "documentary",
+        "latino"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fCine+Mas: Garden of Silences (Jardim dos Silêncios)": {
+      "classified_at": "2026-10-11T16:33:06.508494+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Cine+Mas: Garden of Silences (Jardim dos Silêncios)",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fCine+Mas: Oca": {
+      "classified_at": "2026-10-11T16:33:05.830431+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Cine+Mas: Oca",
       "topics": [
         "film"
       ],
@@ -14869,6 +15021,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fGeoffrey Asmus - SOLD OUT": {
+      "classified_at": "2026-10-11T16:33:06.503445+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Geoffrey Asmus - SOLD OUT",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fGiulio Gallarotti": {
       "classified_at": "2026-10-05T19:55:54.409952+00:00",
       "cost": "unknown",
@@ -14908,6 +15076,22 @@
       "source": "Cobb's Comedy Club",
       "taxonomy_version": 2,
       "title": "JT Parr",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fJim Norton: Stupid Smile": {
+      "classified_at": "2026-10-11T16:33:06.510805+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Jim Norton: Stupid Smile",
       "topics": [
         "comedy"
       ],
@@ -30344,6 +30528,23 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fOne Village, One Book Bookclub": {
+      "classified_at": "2026-10-11T16:33:06.693138+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "One Village, One Book Bookclub",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fOpen Art Lab": {
       "classified_at": "2026-10-08T01:10:46.161175+00:00",
       "cost": "free",
@@ -30475,6 +30676,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fSpanish Conversation Club": {
+      "classified_at": "2026-10-11T16:33:06.546237+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Spanish Conversation Club",
+      "topics": [
+        "language"
+      ],
+      "types": [
+        [
+          "social",
+          "language-exchange"
         ]
       ]
     },
@@ -32234,6 +32452,27 @@
         ]
       ]
     },
+    "Partiful\u001fBlack Girls Blooming 🌸 Saturday Writing Club": {
+      "classified_at": "2026-10-11T16:33:05.962134+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Black Girls Blooming 🌸 Saturday Writing Club",
+      "topics": [
+        "writing",
+        "black-diaspora",
+        "women"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
     "Partiful\u001fBlock Clean Up": {
       "classified_at": "2026-10-07T17:56:24.695859+00:00",
       "cost": "free",
@@ -32391,6 +32630,27 @@
         ],
         [
           "social"
+        ]
+      ]
+    },
+    "Partiful\u001fCardinal West Coast Swing: Classes + Social": {
+      "classified_at": "2026-10-11T16:33:05.977666+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Cardinal West Coast Swing: Classes + Social",
+      "topics": [
+        "swing",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "dance-social"
         ]
       ]
     },
@@ -36033,6 +36293,22 @@
         ]
       ]
     },
+    "Punch Line San Francisco\u001fJamie Kaler": {
+      "classified_at": "2026-10-11T16:33:06.522908+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Jamie Kaler",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Punch Line San Francisco\u001fLaurie Kilmartin": {
       "classified_at": "2026-10-05T23:06:59.957292+00:00",
       "cost": "paid",
@@ -36113,6 +36389,22 @@
         ]
       ]
     },
+    "Punch Line San Francisco\u001fSF Comedy Kings: An Old School Blowout": {
+      "classified_at": "2026-10-11T16:33:06.670119+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "SF Comedy Kings: An Old School Blowout",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Punch Line San Francisco\u001fSanti Espinosa - ME Time (English/Spanish Show)": {
       "classified_at": "2026-10-10T02:03:49.945631+00:00",
       "cost": "unknown",
@@ -36156,6 +36448,26 @@
         "comedy"
       ],
       "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Reading Rhythms\u001fBooksgiving with Reading Rhythms": {
+      "classified_at": "2026-10-11T16:33:05.949147+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Reading Rhythms",
+      "taxonomy_version": 2,
+      "title": "Booksgiving with Reading Rhythms",
+      "topics": [
+        "books-authors",
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
         [
           "performance"
         ]
@@ -39021,6 +39333,25 @@
       "topics": [
         "drag",
         "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fFagatha Christie's Book Club at The Stud": {
+      "classified_at": "2026-10-11T16:33:05.248535+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Fagatha Christie's Book Club at The Stud",
+      "topics": [
+        "drag",
+        "books-authors",
+        "lgbtq"
       ],
       "types": [
         [
@@ -60166,6 +60497,22 @@
         ]
       ]
     },
+    "The Faight Collective\u001fElephant Garden, Jaded, OUTER PLANETS": {
+      "classified_at": "2026-10-11T16:33:05.861267+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "Elephant Garden, Jaded, OUTER PLANETS",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Faight Collective\u001fFeels in the Club": {
       "classified_at": "2026-10-03T05:17:50.087639+00:00",
       "cost": "unknown",
@@ -60390,6 +60737,28 @@
         ]
       ]
     },
+    "The Faight Collective\u001fRobert Rene REWIND": {
+      "classified_at": "2026-10-11T16:33:05.952396+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "Robert Rene REWIND",
+      "topics": [
+        "dance-party",
+        "club-night",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Faight Collective\u001fSchwartzy: Release Party": {
       "classified_at": "2026-10-03T05:17:54.564662+00:00",
       "cost": "unknown",
@@ -60475,6 +60844,22 @@
       "topics": [
         "folk-americana",
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fThe Last Wild Buffalo ft. Okeba, Alana Silver": {
+      "classified_at": "2026-10-11T16:33:05.870349+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "The Last Wild Buffalo ft. Okeba, Alana Silver",
+      "topics": [
+        "music"
       ],
       "types": [
         [
@@ -60742,6 +61127,22 @@
       "source": "The Fillmore",
       "taxonomy_version": 2,
       "title": "Jackie Greene",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fJorma Kaukonen": {
+      "classified_at": "2026-10-11T16:33:05.250148+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Jorma Kaukonen",
       "topics": [
         "rock-indie"
       ],
