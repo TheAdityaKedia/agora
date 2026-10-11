@@ -4098,6 +4098,32 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "mannys": {
+      "added": "2026-10-11",
+      "address": "3092 16th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Manny's in San Francisco County (building, node/9790719931)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.765058,
+      "lng": -122.421716,
+      "name": "Manny's",
+      "osm": "node/9790719931",
+      "possible_duplicates": [
+        "muddy-waters-coffee-lounge",
+        "lore-speakeasy-and-escape-room",
+        "roxie-theater",
+        "eclectic-box",
+        "kilowatt",
+        "the-drawing-room-annex",
+        "elixir"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "marcus-books": {
       "added": "2026-10-02",
       "address": "3900 Martin Luther King Junior Way, Oakland, CA 94609",
@@ -5792,6 +5818,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "roble-arts-gym": {
+      "added": "2026-10-11",
+      "address": "375 Santa Teresa Street, Stanford, CA 94305",
+      "evidence": [
+        "map: Roble Gymnasium in Santa Clara County (building, relation/6593510)",
+        "text: Stanford",
+        "street number matches"
+      ],
+      "lat": 37.426194,
+      "lng": -122.174521,
+      "name": "Roble Arts Gym",
+      "osm": "relation/6593510",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "roccapulco": {
       "added": "2026-10-03",
