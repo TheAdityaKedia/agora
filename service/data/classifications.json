@@ -1498,6 +1498,24 @@
         ]
       ]
     },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fDrag Queen Sing-A-Long": {
+      "classified_at": "2026-10-12T20:11:26.898935+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "Drag Queen Sing-A-Long",
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "ATG (Curran, Orpheum, Golden Gate)\u001fElf The Musical": {
       "classified_at": "2026-10-11T16:33:05.184285+00:00",
       "cost": "paid",
@@ -1894,6 +1912,22 @@
       "source": "ATG (Curran, Orpheum, Golden Gate)",
       "taxonomy_version": 2,
       "title": "World Ballet Company: Swan Lake",
+      "topics": [
+        "dance"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fWorld Ballet Company: The Nutcracker": {
+      "classified_at": "2026-10-12T20:11:26.619777+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "World Ballet Company: The Nutcracker",
       "topics": [
         "dance"
       ],
@@ -3130,6 +3164,27 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fA Double Feature With Sandow Birk in Person (Dante's Inferno/In Smog and Thunder)": {
+      "classified_at": "2026-10-12T20:11:27.741663+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "A Double Feature With Sandow Birk in Person (Dante's Inferno/In Smog and Thunder)",
+      "topics": [
+        "film",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -8550,6 +8605,23 @@
         ]
       ]
     },
+    "Book Passage\u001fDiscovering Your Story: A Writing Group with Melissa Cistaro: 6 Meetings": {
+      "classified_at": "2026-10-12T20:11:27.602107+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Discovering Your Story: A Writing Group with Melissa Cistaro: 6 Meetings",
+      "topics": [
+        "writing",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Book Passage\u001fDominican University Faculty Lecture Series - From Snake Oil to Social Media": {
       "classified_at": "2026-10-03T05:06:14.692199+00:00",
       "cost": "unknown",
@@ -8636,6 +8708,24 @@
         "fiction",
         "books-authors",
         "latino"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Book Passage\u001fEdward Burns - The Marlboro Road Gang": {
+      "classified_at": "2026-10-12T20:11:27.744947+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Edward Burns - The Marlboro Road Gang",
+      "topics": [
+        "fiction",
+        "books-authors"
       ],
       "types": [
         [
@@ -9048,6 +9138,22 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Book Passage\u001fHoliday Cheese Board Workshop": {
+      "classified_at": "2026-10-12T20:11:27.686350+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Holiday Cheese Board Workshop",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -14734,6 +14840,24 @@
         ]
       ]
     },
+    "Clio's Books\u001fStartup Campus: The Stories Behind What We Build": {
+      "classified_at": "2026-10-12T20:11:27.743443+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Clio's Books",
+      "taxonomy_version": 2,
+      "title": "Startup Campus: The Stories Behind What We Build",
+      "topics": [
+        "business",
+        "tech"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Clio's Books\u001fSugar Coated": {
       "classified_at": "2026-10-03T05:07:49.009988+00:00",
       "cost": "unknown",
@@ -15012,6 +15136,22 @@
       "source": "Cobb's Comedy Club",
       "taxonomy_version": 2,
       "title": "Fahim Anwar",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fGeoffrey Asmus": {
+      "classified_at": "2026-10-12T20:11:28.507155+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Geoffrey Asmus",
       "topics": [
         "comedy"
       ],
@@ -17722,6 +17862,29 @@
         ]
       ]
     },
+    "El Rio\u001fQueer Tattoo Alliance Presents: Unwrapped A Blood & Glitter LGBTQ+ & Ally Tattoo Convention Fundraiser": {
+      "classified_at": "2026-10-12T20:11:27.709523+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Queer Tattoo Alliance Presents: Unwrapped A Blood & Glitter LGBTQ+ & Ally Tattoo Convention Fundraiser",
+      "topics": [
+        "lgbtq",
+        "music",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fRnB & Ribs ($30 w/ RSVP)": {
       "classified_at": "2026-10-05T19:54:31.649088+00:00",
       "cost": "paid",
@@ -18046,6 +18209,24 @@
         ]
       ]
     },
+    "F8\u001fCausmic Creative ft. Taso": {
+      "classified_at": "2026-10-12T20:11:29.225438+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Causmic Creative ft. Taso",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "F8\u001fCrash Course presents J.Espinosa": {
       "classified_at": "2026-10-07T20:56:00.219381+00:00",
       "cost": "free",
@@ -18139,6 +18320,24 @@
         ]
       ]
     },
+    "F8\u001fMusic is the Answer and Teego present Mixed Sounds": {
+      "classified_at": "2026-10-12T20:11:29.271707+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Music is the Answer and Teego present Mixed Sounds",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "F8\u001fNO BIAS REN FAIRE FT. estoc": {
       "classified_at": "2026-10-07T20:56:00.326161+00:00",
       "cost": "paid",
@@ -18165,6 +18364,42 @@
       "source": "F8",
       "taxonomy_version": 2,
       "title": "PURGATORY",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fSKYLER ULTRAVIOLET TOUR": {
+      "classified_at": "2026-10-12T20:11:29.279738+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "SKYLER ULTRAVIOLET TOUR",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fSide Hustle Presents: GRIND": {
+      "classified_at": "2026-10-12T20:11:29.285535+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Side Hustle Presents: GRIND",
       "topics": [
         "club-night",
         "electronic"
@@ -18219,6 +18454,24 @@
       "source": "F8",
       "taxonomy_version": 2,
       "title": "program audio: Dual Monitor",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fprogram audio: PAURRO b2b Debit b2b erika": {
+      "classified_at": "2026-10-12T20:11:29.303629+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "program audio: PAURRO b2b Debit b2b erika",
       "topics": [
         "club-night",
         "electronic"
@@ -19887,6 +20140,23 @@
         ]
       ]
     },
+    "Frontier Tower\u001fWeekly Accountabili-tea Circle: Reflection & Planning #36 - Members Only": {
+      "classified_at": "2026-10-12T20:11:28.418721+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Weekly Accountabili-tea Circle: Reflection & Planning #36 - Members Only",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Frontier Tower\u001fWhat Does Neuroscience Teach Us About AI? - Members Only": {
       "classified_at": "2026-10-03T05:15:54.302436+00:00",
       "cost": "unknown",
@@ -20032,6 +20302,22 @@
       "title": "*CANCELLED*  King of Drag",
       "topics": [
         "drag"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001f*POSTPONED* Ali Amran": {
+      "classified_at": "2026-10-12T20:11:27.386795+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "*POSTPONED* Ali Amran",
+      "topics": [
+        "folk-americana"
       ],
       "types": [
         [
@@ -22734,6 +23020,41 @@
         [
           "talk",
           "lecture"
+        ]
+      ]
+    },
+    "JCCSF\u001fHandmade for Hanukkah: Menorah Ceramic Workshop": {
+      "classified_at": "2026-10-12T20:11:28.505624+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Handmade for Hanukkah: Menorah Ceramic Workshop",
+      "topics": [
+        "craft",
+        "jewish",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fHanukkah Coat Drive": {
+      "classified_at": "2026-10-12T20:11:28.580879+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Hanukkah Coat Drive",
+      "topics": [
+        "jewish"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
         ]
       ]
     },
@@ -27122,6 +27443,27 @@
         "latino"
       ],
       "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Mission Fusion\u001fMission Fusion w/ Cricket, Kate": {
+      "classified_at": "2026-10-12T20:11:28.465904+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mission Fusion",
+      "taxonomy_version": 2,
+      "title": "Mission Fusion w/ Cricket, Kate",
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
         [
           "workshop"
         ]
@@ -31679,6 +32021,27 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Omnivore Books on Food\u001fChef Eric Bédiat • 60-Minute Culinary Demonstration & Book Signing of Le Cordon Bleu Culinary Arts School: Volumes 1-7": {
+      "classified_at": "2026-10-12T20:11:28.246454+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Omnivore Books on Food",
+      "taxonomy_version": 2,
+      "title": "Chef Eric Bédiat • 60-Minute Culinary Demonstration & Book Signing of Le Cordon Bleu Culinary Arts School: Volumes 1-7",
+      "topics": [
+        "food-drink",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -36373,6 +36736,22 @@
         ]
       ]
     },
+    "Punch Line San Francisco\u001fRicky Velez": {
+      "classified_at": "2026-10-12T20:11:28.983385+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Ricky Velez",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Punch Line San Francisco\u001fS. F. Comedy Showcase": {
       "classified_at": "2026-10-05T23:07:01.589522+00:00",
       "cost": "unknown",
@@ -36837,6 +37216,22 @@
       "title": "Ashes and Diamonds (4K Restoration)",
       "topics": [
         "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fBeing Heumann": {
+      "classified_at": "2026-10-12T20:11:28.536329+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Being Heumann",
+      "topics": [
+        "documentary"
       ],
       "types": [
         [
@@ -37480,6 +37875,22 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fNew People: Being Heumann": {
+      "classified_at": "2026-10-12T20:11:26.722856+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "New People: Being Heumann",
+      "topics": [
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -40094,6 +40505,23 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fKyle Parry 'Ways of Seeing After Dark' Book Party at Specs'": {
+      "classified_at": "2026-10-12T20:11:26.719875+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Kyle Parry 'Ways of Seeing After Dark' Book Party at Specs'",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -59003,6 +59431,24 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fGTM in cybersecurity: growth and marketing motions that work.": {
+      "classified_at": "2026-10-12T20:11:26.753281+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "GTM in cybersecurity: growth and marketing motions that work.",
+      "topics": [
+        "business",
+        "tech"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fGroup Bike Ride: Golden Gate Park and The Great Highway": {
       "classified_at": "2026-09-24T06:43:25.458508+00:00",
       "cost": "free",
@@ -60449,6 +60895,28 @@
         ]
       ]
     },
+    "The Faight Collective\u001fBeats & Crafts: ArtSpan Open Studios Opening Night Party": {
+      "classified_at": "2026-10-12T20:11:26.877376+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "Beats & Crafts: ArtSpan Open Studios Opening Night Party",
+      "topics": [
+        "visual-art",
+        "club-night",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "The Faight Collective\u001fBlond in Car": {
       "classified_at": "2026-10-03T05:18:00.916375+00:00",
       "cost": "unknown",
@@ -60478,6 +60946,24 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fCreativeMornings SF: “Altitude” with Azikiwee “Z” Anderson of Rize Up Bakery": {
+      "classified_at": "2026-10-12T20:11:26.921179+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "CreativeMornings SF: “Altitude” with Azikiwee “Z” Anderson of Rize Up Bakery",
+      "topics": [
+        "business",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -60756,6 +61242,24 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fSF Cyberia: CYBERWEEN": {
+      "classified_at": "2026-10-12T20:11:26.705924+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "SF Cyberia: CYBERWEEN",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -63153,6 +63657,22 @@
         ]
       ]
     },
+    "The Masonic\u001fGianmarco Soresi: The Misery Loves Tour": {
+      "classified_at": "2026-10-12T20:11:28.480180+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Masonic",
+      "taxonomy_version": 2,
+      "title": "Gianmarco Soresi: The Misery Loves Tour",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Masonic\u001fGnarls Barkley: To Whom It Still Concerns Tour": {
       "classified_at": "2026-10-05T19:55:00.847482+00:00",
       "cost": "paid",
@@ -64444,6 +64964,22 @@
       "title": "Goldenvoice Presents BOYNEXTDOOR TOUR 'KNOCK ON Vol.2' IN NORTH AMERICA BOYNEXTDOOR",
       "topics": [
         "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents Beginning of Forever Tour ALLEYCVT Sippy, Machaki": {
+      "classified_at": "2026-10-12T20:11:27.591733+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents Beginning of Forever Tour ALLEYCVT Sippy, Machaki",
+      "topics": [
+        "electronic"
       ],
       "types": [
         [
