@@ -11,6 +11,7 @@ events go stale until fixed.
 | **The Marsh** (Ludus) | 91 | 0 | Cloudflare 403 on the Ludus calendar (`themarsh.ludus.com`) | Same Cloudflare datacenter-IP scoring (not yet confirmed with a diagnostic) |
 | **City Arts & Lectures** | 15 | 0 | Cloudflare 403 on the first plain request | Datacenter-IP block — from a residential IP the same plain request gets 200 |
 | **San Francisco Playhouse** | 375 | 4 | Show detail pages timed out (25 s), then performance expansion crashed (`Page.content: … page is navigating`), falling back to 4 run-level events | Unconfirmed: the mid-load navigation looks like a challenge redirect (likely the same IP issue) |
+| **The Booksmith** (IndieCommerce) | ? | 0 | Since 2026-10-08 every request (even robots.txt) gets Cloudflare's managed challenge (403 `cf-mitigated: challenge`). Full Chromium + a fresh-context retry still got 403 from a runner (run `38074209366`) | Cloudflare challenge newly turned on site-wide; datacenter IPs don't clear it. The scraper now fetches through full Chromium (the Green Apple route) for local runs — not yet confirmed from a residential IP |
 
 Stopgap: these four are listed in `service/data/local_only_sources.txt`;
 `scripts/scrape-to-neon.sh --blocked` scrapes them from a residential IP into
