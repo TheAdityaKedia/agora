@@ -181,6 +181,16 @@ def test_owner_devices_see_each_others_changes_as_yours(api):
     assert not any(e.get("mine") for e in v["log"])
 
 
+def test_an_invalid_patch_changes_nothing(api):
+    # Planning isn't switched when another field in the same request is bad.
+    cid = new(api)
+    assert api("PATCH", f"/canvases/{cid}", {"planning": True, "name": ""})["statusCode"] == 400
+    assert view(api, cid)["canvas"]["planning"] is False
+    r = api("PATCH", f"/canvases/{cid}", {"planning": True, "name": "Jazz picks"})
+    assert r["statusCode"] == 200 and r["json"]["canvas"]["planning"] is True
+    assert r["json"]["canvas"]["name"] == "Jazz picks"
+
+
 def test_planning_must_be_a_boolean(api):
     cid = new(api)
     assert api("PATCH", f"/canvases/{cid}", {"planning": "yes"})["statusCode"] == 400

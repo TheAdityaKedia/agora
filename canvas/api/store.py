@@ -322,6 +322,17 @@ def update_canvas(cid, fields, actor_name, client_id=None):
         raise NotFound("canvas") from None
 
 
+def _transact_checked(cid, ops):
+    """A transaction conditioned on what the caller read: NotFound if the
+    canvas is gone, else Conflict (it changed meanwhile; re-read and retry)."""
+    try:
+        _transact(ops)
+    except _TxFailed:
+        if get_meta(cid) is None:
+            raise NotFound("canvas") from None
+        raise Conflict() from None
+
+
 def set_planning(cid, on, actor_name, client_id, expected_version, together=False):
     """Switch planning on or off. Only if nothing changed since the caller
     read the canvas (it checked the rules on that read); turning it on also
@@ -332,12 +343,7 @@ def set_planning(cid, on, actor_name, client_id, expected_version, together=Fals
                  condition="version = :v" + (" AND attribute_not_exists(view_id)" if on else ""),
                  values={":p": bool(on), ":v": expected_version, **({":t": True} if together else {})})
     action = "plan_together" if together else "planning_on" if on else "planning_off"
-    try:
-        _transact([bump, _put(_log_row(cid, actor_name, action, client_id))])
-    except _TxFailed:
-        if get_meta(cid) is None:
-            raise NotFound("canvas") from None
-        raise Conflict() from None
+    _transact_checked(cid, [bump, _put(_log_row(cid, actor_name, action, client_id))])
 
 
 def get_view_row(view_id):
@@ -348,19 +354,14 @@ def get_view_row(view_id):
 def show_canvas(cid, view_id, show_as, actor_name, client_id, expected_version):
     """Start showing: a new view-only link. Only if nothing changed since the
     caller checked the rules (solo, planning off)."""
-    try:
-        _transact([
-            _bump(cid, extra_set="view_id = :vid, show_as = :sa",
-                  condition="version = :v AND attribute_not_exists(view_id)",
-                  values={":vid": view_id, ":sa": show_as, ":v": expected_version}),
-            _put({"PK": f"V#{view_id}", "SK": "VIEW", "canvas_id": cid, "created_at": now_iso()},
-                 "attribute_not_exists(PK)"),
-            _put(_log_row(cid, actor_name, "shown", client_id, name=show_as)),
-        ])
-    except _TxFailed:
-        if get_meta(cid) is None:
-            raise NotFound("canvas") from None
-        raise Conflict() from None
+    _transact_checked(cid, [
+        _bump(cid, extra_set="view_id = :vid, show_as = :sa",
+              condition="version = :v AND attribute_not_exists(view_id)",
+              values={":vid": view_id, ":sa": show_as, ":v": expected_version}),
+        _put({"PK": f"V#{view_id}", "SK": "VIEW", "canvas_id": cid, "created_at": now_iso()},
+             "attribute_not_exists(PK)"),
+        _put(_log_row(cid, actor_name, "shown", client_id, name=show_as)),
+    ])
 
 
 def rename_show(cid, show_as, actor_name, client_id):
