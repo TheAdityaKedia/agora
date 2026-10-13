@@ -1,4 +1,5 @@
-"""Post-deploy smoke test: create → add an event → vote → read back.
+"""Post-deploy smoke test: create → add an event → plan together → vote →
+show a copy → read the view-only page.
 
     python canvas/scripts/smoke.py https://<function-url-id>.lambda-url.<region>.on.aws
     python canvas/scripts/smoke.py http://localhost:8787    # local_server.py
@@ -35,11 +36,22 @@ def main(base):
                        {"event_id": event_id, "actor_name": "CI"})
     assert status == 201, (status, out)
     item_id = out["item"]["id"]
+    # New collections are plain lists; votes need planning on.
+    status, _ = call(base, "PATCH", f"/canvases/{cid}", {"planning": True})
+    assert status == 200
     status, _ = call(base, "PUT", f"/canvases/{cid}/items/{item_id}/vote", {"name": "CI"})
     assert status == 200
     status, out = call(base, "GET", f"/canvases/{cid}")
     assert status == 200 and out["items"][0]["votes"][0]["name"] == "CI", out
-    print(f"smoke OK: canvas {cid}, event {event_id}")
+    # Show a plain copy and read it through its view-only link.
+    status, out = call(base, "POST", f"/canvases/{cid}/duplicate", {"name": "CI smoke list"})
+    assert status == 201, (status, out)
+    copy = out["canvas"]["id"]
+    status, out = call(base, "POST", f"/canvases/{copy}/show", {"show_as": "CI"})
+    assert status == 200, (status, out)
+    status, out = call(base, "GET", f"/views/{out['view_id']}")
+    assert status == 200 and out["view"]["show_as"] == "CI" and len(out["items"]) == 1, out
+    print(f"smoke OK: canvas {cid}, shown copy {copy}, event {event_id}")
 
 
 if __name__ == "__main__":
