@@ -200,6 +200,7 @@ def run(shots):
         a.locator("details.fold summary", has_text="Activity").click()
         # Your own changes read "You"; friends see your name.
         expect(a.locator("details.fold li").first).to_contain_text("You added “Dinner at Nopa”")
+        expect(a.locator("details.fold li", has_text="You are interested in")).to_have_count(1)
         if shots:
             a.screenshot(path=f"{shots}/3-shared.png", full_page=True)
 
@@ -208,6 +209,24 @@ def run(shots):
         expect(s.locator(".item")).to_have_count(3)
         s.locator("details.fold summary", has_text="Activity").click()
         expect(s.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+        # A change that lands while Sam types waits; tapping Post (a press,
+        # then a release) still posts, and the redraw keeps no stale draft.
+        sf = s.locator(".item").first
+        sf.locator(".cmt-form input").fill("running late")
+        sf.locator(".cmt-form input").focus()
+        a.locator(".item").nth(1).locator('[data-act="vote"]').click()  # and back
+        expect(a.locator(".item").nth(1).locator(".voters")).to_have_text("Adi")
+        a.locator(".item").nth(1).locator('[data-act="vote"]').click()
+        expect(a.locator(".item").nth(1).locator(".voters")).to_have_count(0)
+        s.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+        s.wait_for_timeout(500)
+        box = sf.locator(".cmt-form button").bounding_box()
+        s.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+        s.mouse.down()
+        s.wait_for_timeout(150)
+        s.mouse.up()
+        expect(sf.locator(".cmt", has_text="running late")).to_have_count(1)
+        expect(sf.locator(".cmt-form input")).to_have_value("")
 
         # --- The plan has steps in order: dinner (undated, so last) moves first.
         a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="plan-add"]').click()
@@ -341,6 +360,16 @@ def run(shots):
         expect(s.locator(".view-note")).to_contain_text("Only @adi can change this collection")
         if shots:
             s.screenshot(path=f"{shots}/5-view-only.png", full_page=True)
+        # The editable address, leaked to Sam: read-only too (the API would
+        # refuse Sam's writes), so nothing to change is offered.
+        s.goto(dup_url + ("" if "api=" in dup_url else f"&api={API}"))
+        expect(s.locator(".item")).to_have_count(3)
+        expect(s.locator(".shown")).to_contain_text("Only they can change it")
+        expect(s.locator('[data-act="share"], [data-act="add-custom"], [data-act="remove"], '
+                         '[data-act="edit-name"], [data-act="edit-note"], .cmt-form')).to_have_count(0)
+        expect(s.locator(".you")).to_have_text("Only @adi can change this collection.")
+        s.evaluate(f"AgoraCanvas.forgetCanvas('{dup_id}')")  # keep Sam's lists as below
+        s.goto(view_url + f"&api={API}")
         # Plan with friends: Sam's own copy, planning on, "From @adi's collection".
         s.locator('[data-view-act="plan"]').click()
         answer_dialog(s, name="Saturday with Sam")

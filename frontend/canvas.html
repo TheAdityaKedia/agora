@@ -396,19 +396,34 @@
   }
 
   // Don't redraw under someone's cursor: a poll that lands while a comment
-  // is being typed waits until the field loses focus.
+  // is being typed waits until the field loses focus, and while a finger or
+  // button is down (tapping Post blurs the field first; redrawing then would
+  // swallow the tap). Half-written comments survive a redraw.
+  let pointerDown = false;
   function render() {
     const typing = document.activeElement && app.contains(document.activeElement)
       && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
-    if (typing || drag) { pendingRender = true; return; }
+    if (typing || drag || pointerDown) { pendingRender = true; return; }
     pendingRender = false;
     const scroll = window.scrollY;
     const focusedStep = document.activeElement && document.activeElement.matches(".step") && document.activeElement.dataset.id;
+    // (A disabled one is being posted: it isn't a draft any more.)
+    const drafts = [...app.querySelectorAll(".cmt-form input")].filter(i => i.value && !i.disabled)
+      .map(i => [i.closest(".item").dataset.id, i.value]);
     app.innerHTML = canvasHtml(view);
+    for (const [id, text] of drafts) {
+      const input = app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input');
+      if (input) input.value = text;
+    }
     window.scrollTo(0, scroll);
     if (focusedStep) app.querySelector('.step[data-id="' + CSS.escape(focusedStep) + '"]')?.focus({preventScroll: true});
   }
-  app.addEventListener("focusout", () => setTimeout(() => { if (pendingRender) render(); }, 0));
+  const renderIfPending = () => setTimeout(() => { if (pendingRender) render(); }, 0);
+  app.addEventListener("focusout", renderIfPending);
+  app.addEventListener("pointerdown", () => { pointerDown = true; });
+  for (const type of ["pointerup", "pointercancel"]) {
+    document.addEventListener(type, () => { pointerDown = false; renderIfPending(); });
+  }
 
   function canvasHtml(v) {
     const c = v.canvas;
@@ -417,6 +432,9 @@
     const name = AC.currentName();
     const many = crowd(c);
     const isDefault = AC.defaultCanvasId() === c.id;
+    // Someone else's shown collection, opened by its editable address: the
+    // API refuses their writes, so offer nothing to change.
+    const locked = !!c.shown && !c.yours;
     // The Planning switch: only while the collection is just yours and not
     // shown (shown ones stay plain lists; once others join it stays on).
     const planSwitch = c.solo && !c.shown
@@ -434,28 +452,31 @@
           + '<button type="button" class="linkish" data-act="manage-show">Manage</button></span></div>'
         : '<div class="shown"><span>Shown by <b>' + esc(c.shown.show_as) + "</b>. Only they can change it.</span></div>";
     return '<div class="cv-kickrow"><p class="cv-kicker">' + kicker + "</p>" + planSwitch + "</div>"
-      + '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
+      + (locked ? '<h1 class="cv-name">' + esc(c.name) + "</h1>"
+        + (dates ? '<div class="cv-dates">' + esc(dates) + "</div>" : "")
+        + (c.note ? '<div class="cv-note">' + esc(c.note) + "</div>" : "")
+      : '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
       + '<div class="cv-dates">' + (dates ? esc(dates) + " · " : "")
       + '<button type="button" class="linkish" data-act="edit-dates">' + (dates ? "Change dates" : "Set dates") + "</button></div>"
       + (c.note
         ? '<div class="cv-note editable" data-act="edit-note" title="Edit note">' + esc(c.note) + "</div>"
-        : '<div class="cv-note empty editable" data-act="edit-note">Add a note' + (c.planning ? ", like “dinner first, then a show?”" : "") + "</div>")
+        : '<div class="cv-note empty editable" data-act="edit-note">Add a note' + (c.planning ? ", like “dinner first, then a show?”" : "") + "</div>"))
       + shown
-      + '<div class="cv-actions">'
+      + (locked ? "" : '<div class="cv-actions">'
       + '<button type="button" class="btn primary" data-act="share">Share</button>'
       + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
       + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
-      + "</div>"
+      + "</div>")
       + (c.planning && plan.length ? planHtml(plan) : "")
       + '<h2 class="section-h">' + (c.planning ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
-      + (v.items.length ? v.items.map(itemHtml).join("")
+      + (v.items.length ? v.items.map(it => itemHtml(it, locked)).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
       + activityHtml(v)
       // Your devices and default. "Use on another device" makes a one-time
       // link that turns another browser into one of yours; the default is
       // where ☆ Save adds events, per browser.
       + '<p class="owner-actions">'
-      + (isDefault
+      + (locked && !isDefault ? "" : isDefault
         ? '<span>★ Your default collection</span><button type="button" class="linkish" data-act="unset-default">Unset</button>'
         : '<button type="button" class="linkish" data-act="set-default">Make this my default</button>')
       + (c.yours ? '<button type="button" class="linkish" data-act="device-link" title="Open this collection as yours on your other phone or computer">Use on another device</button>' : "")
@@ -463,7 +484,8 @@
       + '<button type="button" class="linkish" data-act="duplicate">Duplicate this collection</button>'
       + "</p>"
       + '<p class="you">'
-      + (many
+      + (locked ? "Only " + esc(c.shown.show_as || "its owner") + " can change this collection."
+        : many
         ? (name ? "You’re <b>" + esc(name) + "</b> here. " : "")
           + '<button type="button" class="linkish" data-act="rename-me">' + (name ? "Change your name" : "Set your name") + "</button>"
           + " · Anyone with the link can see and edit this collection."
@@ -474,7 +496,7 @@
 
 
 
-  function itemHtml(it) {
+  function itemHtml(it, locked) {
     const start = startOf(it);
     const past = start && start < new Date();
     const url = linkOf(it);
@@ -510,17 +532,17 @@
       + '</span><span class="n">' + voters.length + "</span></button>"
       + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
       + '<div class="it-foot">'
-      + '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
-        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>"
+      + (locked && !it.comments.length ? "" : '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
+        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>")
       + (!planning ? "" : inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
         : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>')
-      + (own ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
-      + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
-      + (cmtOpen ? commentsHtml(it) : "")
+      + (own && !locked ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
+      + (locked ? "" : '<button type="button" class="linkish" data-act="remove">Remove</button>') + "</div>"
+      + (cmtOpen ? commentsHtml(it, locked) : "")
       + "</div>" + img + "</article>";
   }
 
-  function commentsHtml(it) {
+  function commentsHtml(it, locked) {
     // A curator's comments carried into a copy say whose they were; an
     // unnamed note is yours (or "Someone"'s).
     const who = (c) => c.from_curator ? c.name + ", on their collection"
@@ -528,10 +550,11 @@
     return '<div class="cmts">' + it.comments.map(c =>
       '<div class="cmt"><b>' + esc(who(c)) + '</b> <span class="txt">' + esc(c.text) + "</span>"
       + '<span class="meta">' + esc(ago(c.at))
-      + '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button></span></div>'
+      + (locked ? "" : '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button>')
+      + "</span></div>"
     ).join("")
-      + '<form class="cmt-form" data-act="comment"><input name="text" maxlength="500" placeholder="Add a comment" aria-label="Add a comment" autocomplete="off">'
-      + '<button type="submit" class="btn">Post</button></form></div>';
+      + (locked ? "" : '<form class="cmt-form" data-act="comment"><input name="text" maxlength="500" placeholder="Add a comment" aria-label="Add a comment" autocomplete="off">'
+      + '<button type="submit" class="btn">Post</button></form>') + "</div>";
   }
 
   // The plan: numbered steps in the group's order (↑/↓ to change it). When
@@ -612,7 +635,7 @@
       case "added": return a + " added " + t;
       case "removed": return a + " removed " + t;
       case "restored": return a + " restored " + t;
-      case "voted": return a + " is interested in " + t;
+      case "voted": return a + (a === "You" ? " are" : " is") + " interested in " + t;
       case "commented": return a + " commented on " + t;
       case "edited": return a + " edited " + t;
       case "deleted_comment": return a + " deleted a comment on " + t;
@@ -1139,6 +1162,9 @@
       input.value = "";
     } catch (err) {
       AC.toast(err.message);
+      // A redraw meanwhile made a new field: put the text back there.
+      const now = app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input');
+      if (now && now !== input && !now.value) now.value = text;
     }
     input.disabled = false;
     input.blur();
