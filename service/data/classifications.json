@@ -9766,6 +9766,24 @@
         ]
       ]
     },
+    "Book Passage\u001fMarin Theatre - A Conversation about \"Betrayal\"": {
+      "classified_at": "2026-10-13T17:49:41.087076+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Marin Theatre - A Conversation about \"Betrayal\"",
+      "topics": [
+        "theater",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Book Passage\u001fMarina Richie - Feathered Forest": {
       "classified_at": "2026-10-03T05:05:33.981323+00:00",
       "cost": "unknown",
@@ -10751,6 +10769,23 @@
         [
           "social",
           "book-club"
+        ]
+      ]
+    },
+    "Book Passage\u001fThe Power of Imagery with Nina Schuyler": {
+      "classified_at": "2026-10-13T17:49:41.034166+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "The Power of Imagery with Nina Schuyler",
+      "topics": [
+        "writing",
+        "fiction"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -15321,6 +15356,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fRoast Battle Bay Area": {
+      "classified_at": "2026-10-13T17:49:41.619294+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Roast Battle Bay Area",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fRocky Dale Davis": {
       "classified_at": "2026-10-05T19:55:50.039158+00:00",
       "cost": "paid",
@@ -17393,6 +17444,29 @@
         ]
       ]
     },
+    "El Rio\u001fDaytime Realness Season Finale ($25)": {
+      "classified_at": "2026-10-13T17:49:40.953327+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Daytime Realness Season Finale ($25)",
+      "topics": [
+        "drag",
+        "club-night",
+        "lgbtq",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "El Rio\u001fEW featuring 999ADJ and Chagga Star ($25)": {
       "classified_at": "2026-10-03T05:16:40.408168+00:00",
       "cost": "paid",
@@ -17468,6 +17542,24 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "El Rio\u001fG$MakinMonsta Presents: Chuckles Comedy ($5 - $10 sliding scale)": {
+      "classified_at": "2026-10-13T17:49:40.142024+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "G$MakinMonsta Presents: Chuckles Comedy ($5 - $10 sliding scale)",
+      "topics": [
+        "comedy",
+        "lgbtq",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -20703,6 +20795,22 @@
         ]
       ]
     },
+    "Great American Music Hall\u001fElie's 60th World Tour featuring Dumpstaphunk": {
+      "classified_at": "2026-10-13T17:49:40.042021+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "Elie's 60th World Tour featuring Dumpstaphunk",
+      "topics": [
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Great American Music Hall\u001fFoy Vance": {
       "classified_at": "2026-10-03T01:21:08.700531+00:00",
       "cost": "paid",
@@ -21283,6 +21391,22 @@
       "source": "Great American Music Hall",
       "taxonomy_version": 1,
       "title": "Rusty Chains - A Tribute to Chris Cornell",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fSaxsquatch": {
+      "classified_at": "2026-10-13T17:49:40.076253+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "Saxsquatch",
       "topics": [
         "rock-indie"
       ],
@@ -23041,6 +23165,23 @@
         ]
       ]
     },
+    "JCCSF\u001fHanukkah Candle Lighting": {
+      "classified_at": "2026-10-13T17:49:41.518749+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Hanukkah Candle Lighting",
+      "topics": [
+        "jewish",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
     "JCCSF\u001fHanukkah Coat Drive": {
       "classified_at": "2026-10-12T20:11:28.580879+00:00",
       "cost": "free",
@@ -23295,6 +23436,22 @@
       "title": "TWIST OF TRADITION: HANDS-ON CHALLAH",
       "topics": [
         "food-drink",
+        "jewish"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "JCCSF\u001fTarot & Ritual by Candlelight: A Jewish Mystical Workshop": {
+      "classified_at": "2026-10-13T17:49:41.701150+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Tarot & Ritual by Candlelight: A Jewish Mystical Workshop",
+      "topics": [
         "jewish"
       ],
       "types": [
@@ -29121,6 +29278,28 @@
         ]
       ]
     },
+    "Oakland Asian Cultural Center\u001fOne Fighting Irishman: A Film Screening and Panel Discussion": {
+      "classified_at": "2026-10-13T17:49:42.327884+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Asian Cultural Center",
+      "taxonomy_version": 2,
+      "title": "One Fighting Irishman: A Film Screening and Panel Discussion",
+      "topics": [
+        "documentary",
+        "history",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Oakland Asian Cultural Center\u001fThe 2026 OACC Gala: Holding Place, Holding Space": {
       "classified_at": "2026-10-10T16:04:49.469144+00:00",
       "cost": "paid",
@@ -30022,6 +30201,25 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fEating for Life: A Holistic Cookbook for Pregnancy and a Thriving Family": {
+      "classified_at": "2026-10-13T17:49:41.885032+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Eating for Life: A Holistic Cookbook for Pregnancy and a Thriving Family",
+      "topics": [
+        "food-drink",
+        "family-kids",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fEnglish Conversation Club": {
       "classified_at": "2026-10-08T01:10:49.139159+00:00",
       "cost": "free",
@@ -30315,6 +30513,22 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fHalloween Parade and Trick-Or-Treating": {
+      "classified_at": "2026-10-13T17:49:41.721326+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Halloween Parade and Trick-Or-Treating",
+      "topics": [
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fHaunted History Bike Ride": {
       "classified_at": "2026-10-08T01:12:50.568674+00:00",
       "cost": "free",
@@ -30397,6 +30611,24 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fIntroducing Skilled Trades: A Mini Career Fair": {
+      "classified_at": "2026-10-13T17:49:42.030640+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Introducing Skilled Trades: A Mini Career Fair",
+      "topics": [
+        "education",
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -30620,6 +30852,25 @@
       "topics": [
         "books-authors",
         "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fMeet the Author: Gil Durán - The Nerd Reich: Silicon Valley Fascism and the War on Democracy": {
+      "classified_at": "2026-10-13T17:49:40.189746+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Meet the Author: Gil Durán - The Nerd Reich: Silicon Valley Fascism and the War on Democracy",
+      "topics": [
+        "nonfiction",
+        "politics",
+        "tech"
       ],
       "types": [
         [
@@ -31190,6 +31441,24 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fTeen Board Games": {
+      "classified_at": "2026-10-13T17:49:41.756464+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Teen Board Games",
+      "topics": [
+        "games",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -33155,6 +33424,24 @@
         ]
       ]
     },
+    "Partiful\u001fDIWALI PASTRY POP-UP": {
+      "classified_at": "2026-10-13T17:49:41.012539+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "DIWALI PASTRY POP-UP",
+      "topics": [
+        "food-drink",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fDOLLS KILL CASTING CALL": {
       "classified_at": "2026-09-28T18:16:07.508662+00:00",
       "cost": "free",
@@ -33506,6 +33793,23 @@
       "source": "Partiful",
       "taxonomy_version": 2,
       "title": "HOWL-O-WEEN (CUTEST🎃 Party!)\n🐶 🎃 👻 🐶",
+      "topics": [
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fHOWL-O-WEEN SF 🎃 Pup Crawl! 🐶": {
+      "classified_at": "2026-10-13T17:49:41.323350+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "HOWL-O-WEEN SF 🎃 Pup Crawl! 🐶",
       "topics": [
         "family-kids"
       ],
@@ -37935,6 +38239,22 @@
         ]
       ]
     },
+    "Roxie Theater\u001fNew People: Ghost in the Shell: 30th Anniversary Remaster": {
+      "classified_at": "2026-10-13T17:49:40.038692+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "New People: Ghost in the Shell: 30th Anniversary Remaster",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Roxie Theater\u001fNew People: Hausu": {
       "classified_at": "2026-10-07T21:02:17.361495+00:00",
       "cost": "unknown",
@@ -38709,6 +39029,22 @@
       "source": "Roxie Theater",
       "taxonomy_version": 2,
       "title": "Wild at Heart",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fWild at Heart (4K Restoration)": {
+      "classified_at": "2026-10-13T17:49:41.686002+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Wild at Heart (4K Restoration)",
       "topics": [
         "film"
       ],
@@ -57381,6 +57717,22 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fReturn to Center: An Experiential Yoga Practice with Vickie Russell Bell": {
+      "classified_at": "2026-10-13T17:49:41.143312+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Return to Center: An Experiential Yoga Practice with Vickie Russell Bell",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fReturn to Center: Exploring Stability, Mobility & Ease with Vickie Russell Bell": {
       "classified_at": "2026-10-03T05:12:37.736783+00:00",
       "cost": "unknown",
@@ -58672,6 +59024,22 @@
         ]
       ]
     },
+    "The Castro Theatre\u001fRichard Thompson & Band": {
+      "classified_at": "2026-10-13T17:49:40.913406+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Castro Theatre",
+      "taxonomy_version": 2,
+      "title": "Richard Thompson & Band",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Castro Theatre\u001fRodrigo y Gabriela": {
       "classified_at": "2026-10-07T21:22:50.878054+00:00",
       "cost": "unknown",
@@ -58835,6 +59203,22 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "The Castro Theatre\u001fThe Hip Abduction": {
+      "classified_at": "2026-10-13T17:49:40.809603+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Castro Theatre",
+      "taxonomy_version": 2,
+      "title": "The Hip Abduction",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -59085,6 +59469,23 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fAsk a Recruiter | Fireside Chat with Bernadette Lagman | CareerDette": {
+      "classified_at": "2026-10-13T17:49:40.140034+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Ask a Recruiter | Fireside Chat with Bernadette Lagman | CareerDette",
+      "topics": [
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fAutumn Ingathering": {
       "classified_at": "2026-10-03T04:58:13.708595+00:00",
       "cost": "unknown",
@@ -59097,6 +59498,27 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fBallot Party!": {
+      "classified_at": "2026-10-13T17:49:40.273464+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Ballot Party!",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "talk",
+          "panel"
         ]
       ]
     },
@@ -60174,6 +60596,23 @@
       "title": "The Thought Experiment Lab [Hold]",
       "topics": [
         "tech"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fThe Unknowing Lab": {
+      "classified_at": "2026-10-13T17:49:40.242183+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "The Unknowing Lab",
+      "topics": [
+        "wellness",
+        "science"
       ],
       "types": [
         [
