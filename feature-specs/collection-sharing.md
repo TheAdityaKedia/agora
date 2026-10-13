@@ -149,8 +149,15 @@ On copied comments: `from_curator: true` and `name = show_as`.
 
 - `together` (true) — set by **Plan it together**; never cleared.
 
-"Solo" is computed: no `together`, and no item, vote or comment row
-(removed ones included) written by a client outside the owner set.
+- `joined_clients` (string set) — every browser outside the owner set that
+  has written to the collection, recorded before its write lands. Un-votes,
+  restores, renames and plan changes leave no row of their own, so rows alone
+  can't tell.
+
+"Solo" is computed: no `together`, and no client outside the owner set in
+`joined_clients` or on an item, vote or comment row (removed ones included;
+the rows cover collections from before `joined_clients`). A browser that
+later becomes an owner device stops counting.
 
 ## API
 

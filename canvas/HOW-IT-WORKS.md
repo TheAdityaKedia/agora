@@ -23,7 +23,7 @@ separate view-only link that changes nothing. Sharing is spelled out in
 |---|---|
 | **Item** | One thing in a collection: an **Agora event** (a copy of a listing, added from the main site) or **your own item** (anything else: dinner, a park, a ride). |
 | **Your own items** | Free text + optional time, link, note and a **kind** (🍽️ Food, 🍸 Drinks, 🌳 Outdoors, 🚗 Getting there, 📌 Other). Shown as a tinted dashed card with the kind's icon. Editable; Agora events are not. |
-| **Planning** | A setting on each collection: **Interested** and **The plan** show only with it on. New collections start with it off (older ones count as on). While the collection is just yours there's a **Planning** switch; once anyone else joins (adds, removes, votes or comments) it stays on. Off hides votes and the plan; they come back when it's switched on. |
+| **Planning** | A setting on each collection: **Interested** and **The plan** show only with it on. New collections start with it off (older ones count as on). While the collection is just yours there's a **Planning** switch; once it's shared with **Plan it together**, or anyone else changes anything in it (even something they undo later), it stays on. Off hides votes and the plan; they come back when it's switched on. |
 | **👍 Interested** | One per browser per item, shown by name. "Interested", not "I'm in": the collection is for deciding what looks good. |
 | **Comments** | Short comments per item, in every collection: on your own list they're notes to yourself (no name needed). |
 | **The plan** | An ordered list of steps (items), pinned on top. Items have **Add to plan** / **Take out of plan**; steps are reordered by **press, hold and drag** (keyboard: Alt+↑/↓). **Add the plan to your calendar** downloads one `.ics`. |
@@ -92,7 +92,7 @@ self-expiring rows, point-in-time recovery on prod (35 days).
 
 | PK | SK | Row | Fields |
 |---|---|---|---|
-| `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: browsers added by a device link), `planning` (bool; absent = on, for collections made before it existed), `view_id` + `show_as` (while shown), `together` (true once **Plan it together** handed out the editable link; never cleared), `copied_from` (`{view_id, name, show_as}` on copies made from a view-only page). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
+| `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: browsers added by a device link), `planning` (bool; absent = on, for collections made before it existed), `view_id` + `show_as` (while shown), `together` (true once **Plan it together** handed out the editable link; never cleared), `joined_clients` (string set, ≤ 20: browsers outside the owner set that have written to it; recorded before their write, never returned), `copied_from` (`{view_id, name, show_as}` on copies made from a view-only page). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
 | `C#<id>` | `ITEM#<itemId>` | an item | `id`, `kind` (`event` / `custom`), `added_by_name`, `added_by_client`, `added_at`. **event:** `event` = {`id`, `title`, `start_time`, `location`, `url`, `image_url`, `sources`} copied when added. **custom:** `title`, `start_time`, `url`, `note`, `category` (`food`, `drinks`, `outdoors`, `travel`, `other`). **removed:** `removed_at`, `removed_by_name`, `removed_by_client`. |
 | `C#<id>` | `VOTE#<itemId>#<clientId>` | one 👍 Interested | `name`, `at` |
 | `C#<id>` | `CMT#<itemId>#<commentId>` | a comment | `id`, `name`, `client_id`, `text`, `at`, `removed_at` if deleted; `from_curator` (and no `client_id`) on comments carried into a copy from a view-only page |
@@ -118,7 +118,7 @@ items, votes, comments; strongly consistent) and the newest 50 rows of
 `L#<id>`. `handler._view` assembles the response: live items (sorted by time,
 undated last) with their votes and comments, removed items, the plan
 (filtered to live items), activity, the "people" count (for "Added by"
-names) and `solo` (not shared to plan together, and no browser but the owner's devices has written: decides
+names) and `solo` (not shared to plan together, and no browser but the owner's devices has written, per `joined_clients` and the rows themselves: decides
 whether planning can be switched off and whether it can be shown). With
 planning off, votes and the plan are left out of the view, not deleted.
 
