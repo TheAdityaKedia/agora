@@ -2,9 +2,14 @@
 
     python canvas/scripts/admin.py --table agora-canvas-prod show <canvasId>
     python canvas/scripts/admin.py --table agora-canvas-prod delete <canvasId>
+    python canvas/scripts/admin.py --table agora-canvas-prod add-owner <canvasId>
 
 Ids made before Oct 2026 can start with "-"; put `--` before such an id
 (`... delete -- -AbC...`) so it isn't read as an option.
+
+`add-owner` prints a one-time "use on another device" link (valid 15 minutes)
+for an owner who has lost every device: send it to them and the browser that
+opens it becomes an owner device.
 
 `delete` is a hard delete of the canvas and its activity log — use it when a
 canvas is reported. Uses AWS credentials/region from the environment. Prints
@@ -13,6 +18,8 @@ history by accident (`show --full` prints them).
 """
 import argparse
 import json
+import secrets
+import time
 from collections import Counter
 
 import boto3
@@ -39,6 +46,9 @@ def main():
     delete = sub.add_parser("delete")
     delete.add_argument("canvas_id")
     delete.add_argument("--yes", action="store_true", help="skip the confirmation prompt")
+    owner = sub.add_parser("add-owner")
+    owner.add_argument("canvas_id")
+    owner.add_argument("--site", default="https://theadityakedia.github.io/agora/")
     args = ap.parse_args()
 
     table = boto3.resource("dynamodb").Table(args.table)
@@ -49,7 +59,14 @@ def main():
     kinds = Counter(r["SK"].split("#", 1)[0] for r in content)
     print(f"canvas {args.canvas_id}: {dict(kinds)}, {len(log)} log rows")
 
-    if args.cmd == "show" and args.full:
+    if args.cmd == "add-owner":
+        token = secrets.token_urlsafe(16)
+        while token.startswith("-"):
+            token = secrets.token_urlsafe(16)
+        table.put_item(Item={"PK": f"D#{token}", "SK": "DEVICE", "canvas_id": args.canvas_id,
+                             "made_by_client": "admin", "ttl": int(time.time()) + 15 * 60})
+        print(f"device link (one use, 15 minutes): {args.site}canvas.html?device={token}")
+    elif args.cmd == "show" and args.full:
         for r in content + log:
             print(json.dumps(r, default=str, ensure_ascii=False))
     elif args.cmd == "delete":

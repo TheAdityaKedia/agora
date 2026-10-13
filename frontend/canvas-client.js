@@ -24,6 +24,7 @@
     dflt: "agora.canvas.default",
     api: "agora.canvas.api",
     beta: "agora.canvas.beta",
+    following: "agora.canvas.following",
   };
   const MINE_MAX = 100;
 
@@ -55,11 +56,12 @@
   //   link) or the switch turns it on. The plain address in a new tab starts
   //   with it off.
   //
-  // LAUNCH: set BETA_GATE = false (and MAP_BETA_GATE in index.html).
-  // Everything shows for everyone, the switch goes, new links drop /beta/,
-  // and the /beta/ pages keep redirecting, so links shared during the beta
-  // still open. A soft gate: it hides UI, it doesn't secure the API.
-  const BETA_GATE = true;
+  // Collections launched 2026-10-13: BETA_GATE is false, so they show for
+  // everyone, new links drop /beta/, and the /beta/ pages keep redirecting
+  // (links shared during the beta still open). The map is still gated
+  // (MAP_BETA_GATE in index.html), so members keep the switch there.
+  // A soft gate: it hides UI, it doesn't secure the API.
+  const BETA_GATE = false;
   const BETA_ON = "agora.beta.on";  // sessionStorage; index.html reads it too
   const session = {
     get() { try { return sessionStorage.getItem(BETA_ON); } catch { return memory[BETA_ON] || null; } },
@@ -77,17 +79,17 @@
     if (on) u.searchParams.set("beta", "1"); else u.searchParams.delete("beta");
     location.replace(u.href);
   }
-  // The "Beta" switch, for members while the gate is on; null otherwise.
-  function betaToggle() {
-    if (!BETA_GATE || !betaMember()) return null;
+  // The "Beta" switch, for members while something is still gated (pass
+  // the page's own gates, e.g. the map's); null otherwise.
+  function betaToggle(gated = BETA_GATE) {
+    if (!gated || !betaMember()) return null;
     const on = betaEnabled();
     const b = document.createElement("button");
     b.type = "button";
     b.className = "ac-beta";
     b.setAttribute("role", "switch");
     b.setAttribute("aria-checked", String(on));
-    b.title = on ? "Beta features are on: collections, the map. Tap to turn them off."
-      : "Turn on beta features: collections, the map.";
+    b.title = on ? "Beta features are on. Tap to turn them off." : "Turn on beta features.";
     b.innerHTML = '<span class="ac-beta-label">Beta</span><span class="ac-beta-track" aria-hidden="true"></span>';
     b.addEventListener("click", () => setBeta(!on));
     return b;
@@ -169,15 +171,31 @@
   const defaultCanvasId = () => load(K.dflt, null);
   const setDefaultCanvas = (id) => save(K.dflt, id || null);
 
-  // "This is mine" / "Not mine": count this browser as one of the owner's
-  // devices (or stop). Resolves to the collection's fresh view.
-  async function claimCanvas(id, on) {
-    const v = await api(on ? "POST" : "DELETE", "/canvases/" + encodeURIComponent(id) + "/claim");
+  // "Not mine": stop counting this browser as one of the owner's devices.
+  // (Becoming one takes a device link: "Use on another device".) Resolves
+  // to the collection's fresh view.
+  async function unclaimCanvas(id) {
+    const v = await api("DELETE", "/canvases/" + encodeURIComponent(id) + "/claim");
     rememberCanvas(v.canvas);
     return v;
   }
   function forgetCanvas(id) {
     save(K.mine, myCanvases().filter(x => x.id !== id));
+  }
+
+  // --- Shown collections this browser has opened by their view-only link
+  // ("Following" in Your collections). ---
+  function myFollowing() {
+    const list = load(K.following, []);
+    return Array.isArray(list) ? list.filter(v => v && typeof v.id === "string") : [];
+  }
+  function rememberView(v) {
+    const rest = myFollowing().filter(x => x.id !== v.id);
+    rest.unshift({id: v.id, name: v.name, show_as: v.show_as || "", opened_at: Date.now()});
+    save(K.following, rest.slice(0, MINE_MAX));
+  }
+  function forgetView(id) {
+    save(K.following, myFollowing().filter(x => x.id !== id));
   }
 
   // --- The canvas the main page is adding to ("canvas mode"). It switches
@@ -201,10 +219,13 @@
   }
 
   const canvasPath = (id) => "canvas.html?c=" + encodeURIComponent(id);
-  // The link to share. Both pages live at the site root (…/agora/).
-  function canvasUrl(id) {
-    return new URL((BETA_GATE ? "beta/" : "") + canvasPath(id), new URL("./", location.href)).href;
-  }
+  const viewPath = (id) => "canvas.html?v=" + encodeURIComponent(id);
+  // Links to share. Both pages live at the site root (…/agora/); while the
+  // beta is gated they go through /beta/, which lets whoever opens them in.
+  const siteUrl = (path) => new URL((BETA_GATE ? "beta/" : "") + path, new URL("./", location.href)).href;
+  const canvasUrl = (id) => siteUrl(canvasPath(id));
+  const viewUrl = (id) => siteUrl(viewPath(id));
+  const deviceUrl = (token) => siteUrl("canvas.html?device=" + encodeURIComponent(token));
   // The main page in canvas mode, filtered to the canvas's dates if it has any.
   function browseUrl(c) {
     const p = new URLSearchParams({canvas: c.id});
@@ -533,7 +554,8 @@
   window.AgoraCanvas = {
     api, ApiError, clientId, ensureName, currentName, myCanvases, rememberCanvas,
     forgetCanvas, activeCanvas, setActiveCanvas, canvasUrl, canvasPath, browseUrl,
+    viewUrl, viewPath, deviceUrl, myFollowing, rememberView, forgetView,
     toast, formDialog, choiceDialog, createCanvasDialog, share, isShared, markShared,
-    defaultCanvasId, setDefaultCanvas, claimCanvas, betaEnabled, betaMember, betaToggle, setBeta, BETA_GATE,
+    defaultCanvasId, setDefaultCanvas, unclaimCanvas, betaEnabled, betaMember, betaToggle, setBeta, BETA_GATE,
   };
 })();

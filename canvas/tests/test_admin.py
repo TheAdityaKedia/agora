@@ -10,7 +10,7 @@ def test_delete_removes_canvas_and_log(api, canvas, monkeypatch, capsys):
     monkeypatch.setattr(sys, "argv", ["admin", "--table", "agora-canvas-test",
                                       "delete", "--yes", "--", canvas])
     admin.main()
-    assert "deleted 4 rows" in capsys.readouterr().out  # META, ITEM, 2 log rows
+    assert "deleted 5 rows" in capsys.readouterr().out  # META, ITEM, 3 log rows
     assert store.load_canvas(canvas) is None
     assert api("GET", f"/canvases/{canvas}")["statusCode"] == 404
 
@@ -19,3 +19,13 @@ def test_new_ids_never_start_with_dash(monkeypatch):
     ids = iter(["-leading-dash-id-00000", "fine-id-0000000000000a"])
     monkeypatch.setattr(store.secrets, "token_urlsafe", lambda n: next(ids))
     assert store.new_canvas_id() == "fine-id-0000000000000a"
+
+
+def test_add_owner_prints_a_working_device_link(api, canvas, monkeypatch, capsys):
+    from conftest import Api
+    monkeypatch.setattr(sys, "argv", ["admin", "--table", "agora-canvas-test", "add-owner", "--", canvas])
+    admin.main()
+    token = capsys.readouterr().out.strip().split("device=")[1]
+    phone = Api(client="client-new-phone1")
+    assert phone("POST", f"/device-links/{token}")["json"]["canvas_id"] == canvas
+    assert phone("GET", f"/canvases/{canvas}")["json"]["canvas"]["yours"]

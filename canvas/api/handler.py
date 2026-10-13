@@ -1,7 +1,8 @@
 """Event canvases API — one Lambda behind a Function URL (payload format 2.0).
 
 Routes, validation, CORS, rate limits. Storage lives in store.py, event
-snapshots in snapshot.py. Design: feature-specs/event-canvases.md.
+snapshots in snapshot.py. How it works: canvas/HOW-IT-WORKS.md; sharing
+(show it / plan it together): feature-specs/collection-sharing.md.
 
 Privacy: never log request bodies, names, client ids or IPs. The one log line
 per request is method, route, status and latency.
@@ -24,7 +25,7 @@ import snapshot
 import store
 
 MAX_BODY_BYTES = 16 * 1024
-LIMITS = {"canvas_name": 80, "note": 1000, "name": 40, "comment": 500,
+LIMITS = {"canvas_name": 80, "note": 1000, "name": 40, "comment": 500, "show_as": 40,
           "custom_title": 120, "custom_note": 500, "url": 500}
 # What one of your own items is; the page shows an icon for it.
 CUSTOM_CATEGORIES = {"food", "drinks", "outdoors", "travel", "other"}
@@ -37,6 +38,8 @@ ITEM_ID_RE = re.compile(r"[A-Za-z0-9_-]{1,64}")
 # Bidi embeddings/overrides/isolates: invisible, and abusable to spoof text.
 BIDI_CONTROLS = set("\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069")
 CID = r"(?P<cid>[A-Za-z0-9_-]{22})"
+VID = r"(?P<vid>[A-Za-z0-9_-]{22})"
+TOKEN = r"(?P<token>[A-Za-z0-9_-]{22})"
 IID = r"(?P<iid>[A-Za-z0-9_-]{1,64})"
 CMID = r"(?P<cmid>[A-Za-z0-9_-]{1,32})"
 
@@ -150,6 +153,83 @@ def _item_or_404(cid, iid, *, live=True):
     return row
 
 
+def _planning(meta):
+    """Planning (Interested + the plan) is on unless switched off. New
+    collections are created with it off; older ones have no field: on."""
+    return meta.get("planning", True) is not False
+
+
+def _owners(meta):
+    """The owner's devices: the creating browser plus those added by a
+    device link. They count as one person."""
+    return {meta.get("created_by_client")} | set(meta.get("owner_clients") or ())
+
+
+def _is_owner(meta, client):
+    return bool(client) and client in _owners(meta)
+
+
+def _load_or_404(cid):
+    """(META, content rows) of a canvas, strongly consistent."""
+    loaded = store.load_canvas(cid)
+    if loaded is None:
+        raise ApiError(404, "canvas not found")
+    meta, rows, _ = loaded
+    return meta, rows
+
+
+def _refuse_if_shown(meta, client):
+    """A shown collection takes writes only from its owner's devices (a
+    leaked editable address can't change it)."""
+    if meta.get("view_id") and not _is_owner(meta, client):
+        raise ApiError(403, "Only " + (meta.get("show_as") or "its owner") + " can change this collection")
+
+
+def _writable(cid, client):
+    """META for a write: refused on a shown collection unless from an owner
+    device; a first write from anyone else is recorded (see _others)."""
+    meta = _meta_or_404(cid)
+    _refuse_if_shown(meta, client)
+    if _is_owner(meta, client):
+        return meta
+    if client not in (meta.get("joined_clients") or ()):
+        # Someone else is joining in: record it before their write lands, so
+        # the collection stops being solo for good (planning stays on).
+        store.note_joined(cid, client)
+        meta = _meta_or_404(cid)
+    return meta
+
+
+def _need_planning(meta):
+    if not _planning(meta):
+        raise ApiError(409, "planning is off for this collection")
+
+
+def _others(meta, rows):
+    """Browsers other than the owner's devices that have written anything
+    (added, removed, voted, commented, renamed, …). None of them: the
+    collection is solo. `joined_clients` records every such writer, even when
+    their row is gone (an un-vote, a restore); the rows cover collections
+    from before it was recorded."""
+    owners, seen = _owners(meta), set(meta.get("joined_clients") or ())
+    for r in rows:
+        kind, rest = r["SK"].split("#", 1)
+        if kind == "ITEM":
+            seen.update((r.get("added_by_client"), r.get("removed_by_client")))
+        elif kind == "VOTE":
+            seen.add(rest.split("#", 1)[1])
+        elif kind == "CMT":
+            seen.add(r.get("client_id"))
+    seen.discard(None)
+    return seen - owners
+
+
+def _solo(meta, rows):
+    """Just the owner's: nobody else has written to it and its editable link
+    hasn't gone out to plan together."""
+    return not meta.get("together") and not _others(meta, rows)
+
+
 def _item_title(row):
     return (row.get("event") or {}).get("title") or row.get("title") or ""
 
@@ -163,19 +243,23 @@ def _canvas_out(meta, client=""):
                                     "created_at", "updated_at", "created_by_name")}
     out["plan"] = store.plan_of(meta)
     out["version"] = int(meta["version"])
-    # Whether this browser made it or claimed it ("This is mine" on another
-    # device). Never returns the ids themselves.
-    claimed = bool(client) and client in (meta.get("owner_clients") or set())
-    out["yours"] = bool(client) and (meta.get("created_by_client") == client or claimed)
-    out["claimed"] = claimed
+    out["planning"] = _planning(meta)
+    if meta.get("copied_from"):
+        out["copied_from"] = {k: meta["copied_from"].get(k) for k in ("view_id", "name", "show_as")}
+    if meta.get("view_id"):
+        # The view-only link is the owner's to hand out; others only learn
+        # that it's shown, and by whom (writes from them are refused).
+        out["shown"] = {"show_as": meta.get("show_as")}
+        if _is_owner(meta, client):
+            out["shown"]["view_id"] = meta["view_id"]
+    # Whether this browser is one of the owner's devices, and whether it
+    # became one by a device link. Never returns the ids themselves.
+    out["yours"] = _is_owner(meta, client)
+    out["claimed"] = bool(client) and client in (meta.get("owner_clients") or ())
     return out
 
 
-def _owners(meta):
-    return {meta.get("created_by_client")} | set(meta.get("owner_clients") or ())
-
-
-def _item_out(row, client=""):
+def _item_out(row, client="", owners=()):
     out = {"id": row["id"], "kind": row["kind"], "added_by_name": row.get("added_by_name"),
            "added_at": row.get("added_at"), "start_time": _item_start(row)}
     if row["kind"] == "event":
@@ -186,16 +270,25 @@ def _item_out(row, client=""):
     if "removed_at" in row:
         out["removed_at"] = row["removed_at"]
         out["removed_by_name"] = row.get("removed_by_name")
-        out["removed_by_you"] = _by(row.get("removed_by_client"), client)
+        out["removed_by_you"] = _by(row.get("removed_by_client"), client, owners)
     return out
 
 
-def _by(actor_client, client):
+def _by(actor_client, client, owners=()):
     """Whether this browser made a change: True/False, or None for rows from
-    before client ids were recorded (the page then falls back to a guess)."""
+    before client ids were recorded (the page then falls back to a guess).
+    The owner's devices count as one person: on any of them, a change made
+    from another of them is "yours" too."""
     if not actor_client:
         return None
-    return bool(client) and actor_client == client
+    if not client:
+        return False
+    return actor_client == client or (client in owners and actor_client in owners)
+
+
+def _by_time(item):
+    """Sort key for items: by start time, undated last."""
+    return (item["start_time"] is None, item["start_time"] or "", item.get("added_at") or "")
 
 
 def _view(cid, client):
@@ -204,16 +297,16 @@ def _view(cid, client):
         raise ApiError(404, "canvas not found")
     meta, rows, log = loaded
     items, votes, comments = [], defaultdict(list), defaultdict(list)
-    # Browsers that have done anything here: the page shows votes, comments
-    # and "the plan" only once a collection involves more than one person.
-    # The owner's devices (creator + claimed) count as one person.
+    # Browsers that have done anything here: the page names who added what
+    # ("Added by Sam") once a collection involves more than one person. The
+    # owner's devices count as one person.
     owners = _owners(meta)
     people = {"owner"}
     for r in rows:
         kind, rest = r["SK"].split("#", 1)
         if kind == "ITEM":
             items.append(r)
-            people.add(r.get("added_by_client"))
+            people.update((r.get("added_by_client"), r.get("removed_by_client")))
         elif kind == "VOTE":
             iid, voter = rest.split("#", 1)
             people.add(voter)
@@ -222,10 +315,11 @@ def _view(cid, client):
             people.add(r.get("client_id"))
             iid = rest.split("#", 1)[0]
             comments[iid].append({"id": r["id"], "name": r["name"], "text": r["text"],
-                                  "at": r["at"], "mine": r.get("client_id") == client})
+                                  "at": r["at"], "mine": bool(_by(r.get("client_id"), client, owners)),
+                                  **({"from_curator": True} if r.get("from_curator") else {})})
     live, removed = [], []
     for r in items:
-        out = _item_out(r, client)
+        out = _item_out(r, client, owners)
         if "removed_at" in r:
             removed.append(out)
             continue
@@ -234,11 +328,11 @@ def _view(cid, client):
         out["comments"] = sorted(comments[r["id"]], key=lambda c: c["at"])
         live.append(out)
     # Dated items by start time, undated (custom) items last, then add order.
-    live.sort(key=lambda i: (i["start_time"] is None, i["start_time"] or "", i["added_at"] or ""))
+    live.sort(key=_by_time)
     removed.sort(key=lambda i: i["removed_at"], reverse=True)
     log_out = [{k: e.get(k) for k in ("actor_name", "action", "item_id", "item_title",
                                       "fields", "name", "at") if e.get(k) is not None}
-               | ({"mine": _by(e.get("client_id"), client)} if e.get("client_id") else {})
+               | ({"mine": _by(e.get("client_id"), client, owners)} if e.get("client_id") else {})
                for e in log]
     people.discard(None)
     people = {"owner" if p in owners else p for p in people}
@@ -246,6 +340,12 @@ def _view(cid, client):
     live_ids = {i["id"] for i in live}
     canvas["plan"] = [x for x in canvas["plan"] if x in live_ids]
     canvas["people"] = len(people)
+    canvas["solo"] = _solo(meta, rows)
+    if not canvas["planning"]:
+        # Hidden, not deleted: switching planning back on shows them again.
+        canvas["plan"] = []
+        for i in live:
+            i["votes"], i["you_voted"] = [], False
     return {"canvas": canvas, "items": live, "removed": removed, "log": log_out}
 
 
@@ -269,23 +369,55 @@ def create_canvas(req):
                  "items": [], "removed": [], "log": []}
 
 
-def claim_canvas(req, cid):
-    """ "This is mine": count this browser as one of the owner's devices, so
-    a collection started on your phone is yours on your PC too (listed under
-    Yours, and your additions don't make it look shared). DELETE undoes it.
-    Anyone with the link could claim; it changes only how the collection
-    is displayed, not what anyone can do."""
+def unclaim_canvas(req, cid):
+    """ "Not mine": stop counting this browser as one of the owner's devices.
+    (Becoming one takes a device link from an owner: POST /device-links.)"""
+    client = _require_client(req)
+    _rate_limit(req, WRITE_LIMIT)
+    _meta_or_404(cid)
+    store.set_owner(cid, client, False)
+    return 200, _view(cid, client)
+
+
+def make_device_link(req, cid):
+    """ "Use on another device": a one-time link (~15 min) that makes the
+    browser opening it one of the owner's devices. Owners only."""
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     meta = _meta_or_404(cid)
-    if req["method"] == "DELETE":
-        store.set_owner(cid, client, False)
-    elif meta.get("created_by_client") != client:
+    if not _is_owner(meta, client):
+        raise ApiError(403, "only the owner's devices can do this")
+    token, expires = store.make_device_link(cid, client)
+    return 201, {"token": token, "expires_at": expires}
+
+
+def use_device_link(req, token):
+    client = _require_client(req)
+    _rate_limit(req, WRITE_LIMIT)
+    gone = ApiError(404, "this link has been used or has expired")
+    # Check the device cap before using the link up, so a refusal leaves it
+    # usable (e.g. after "Not mine" on an old device frees a place).
+    cid = store.peek_device_link(token)
+    if cid is None:
+        raise gone
+    meta = _meta_or_404(cid)
+    if not _is_owner(meta, client) and len(meta.get("owner_clients") or ()) >= store.OWNER_CAP:
+        raise ApiError(409, f"a collection can have at most {store.OWNER_CAP} owner devices")
+    if store.use_device_link(token) is None:
+        raise gone
+    if not _is_owner(meta, client):
         try:
             store.set_owner(cid, client, True)
         except store.CapReached as e:
             raise ApiError(409, str(e)) from None
-    return 200, _view(cid, client)
+    return 200, {"canvas_id": cid}
+
+
+def _copy_fields(meta, b):
+    """A copy's name (`name`, else the original's), note and dates."""
+    name = _clean(b.get("name"), "name", LIMITS["canvas_name"], required=False) or meta["name"]
+    return {"name": name, "note": meta.get("note") or "",
+            "date_from": meta.get("date_from"), "date_to": meta.get("date_to")}
 
 
 def duplicate_canvas(req, cid):
@@ -296,14 +428,8 @@ def duplicate_canvas(req, cid):
     b = req["body"]
     _rate_limit(req, CREATE_LIMIT)
     _rate_limit(req, WRITE_LIMIT)
-    loaded = store.load_canvas(cid)
-    if loaded is None:
-        raise ApiError(404, "canvas not found")
-    meta, rows, _ = loaded
-    name = _clean(b.get("name"), "name", LIMITS["canvas_name"], required=False) or meta["name"]
-    fields = {"name": name, "note": meta.get("note") or "",
-              "date_from": meta.get("date_from"), "date_to": meta.get("date_to")}
-    new = store.duplicate_canvas(rows, fields, _actor(b), client, meta["name"])
+    meta, rows = _load_or_404(cid)
+    new = store.duplicate_canvas(rows, _copy_fields(meta, b), _actor(b), client, meta["name"])
     return 201, _view(new["id"], client)
 
 
@@ -316,11 +442,34 @@ def get_canvas(req, cid):
     return 200, _view(cid, req["client"])
 
 
+def _set_planning(cid, on, actor, client, together=False):
+    """On: anyone who can edit, unless the collection is shown. Off: only
+    while solo (nobody but the owner's devices has written to it, and it
+    hasn't been shared to plan together). `together`: planning on, for good."""
+
+    def attempt():
+        meta, rows = _load_or_404(cid)
+        if _planning(meta) == on and (not together or meta.get("together")):
+            return
+        if on and meta.get("view_id"):
+            raise ApiError(409, "it's shown with a view-only link: stop showing it first, "
+                                "or use Plan with friends to plan in a copy")
+        if not on and not _solo(meta, rows):
+            raise ApiError(409, "others have joined this collection, so planning stays on")
+        store.set_planning(cid, on, actor, client, meta["version"], together=together)
+    _retry_conflicts(attempt)
+
+
 def patch_canvas(req, cid):
     client = _require_client(req)
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
+    together = b.get("together")
+    if together is not None and (together is not True or b.get("planning") is False):
+        raise ApiError(400, "together can only be true (and turns planning on)")
+    if "planning" in b and not isinstance(b["planning"], bool):
+        raise ApiError(400, "planning must be true or false")
     fields = {}
     if "name" in b:
         fields["name"] = _clean(b["name"], "name", LIMITS["canvas_name"])
@@ -330,17 +479,23 @@ def patch_canvas(req, cid):
         fields["date_from"] = _date(b["date_from"], "date_from")
     if "date_to" in b:
         fields["date_to"] = _date(b["date_to"], "date_to")
-    meta = _meta_or_404(cid)
+    meta = _writable(cid, client)
     if "date_from" in fields or "date_to" in fields:
         _check_dates(fields.get("date_from", meta.get("date_from")),
                      fields.get("date_to", meta.get("date_to")))
-    if not fields:
+    planning = "planning" in b or together
+    if not fields and not planning:
         raise ApiError(400, "nothing to update")
-    try:
-        store.update_canvas(cid, fields, actor, client)
-    except store.NotFound:
-        raise ApiError(404, "canvas not found") from None
-    return 200, {"canvas": _canvas_out(_meta_or_404(cid), req["client"])}
+    # Everything is valid: now write (planning first, so a refused switch
+    # leaves the rest unchanged too).
+    if planning:
+        _set_planning(cid, b.get("planning", True), actor, client, together=bool(together))
+    if fields:
+        try:
+            store.update_canvas(cid, fields, actor, client)
+        except store.NotFound:
+            raise ApiError(404, "canvas not found") from None
+    return 200, {"canvas": _canvas_out(_meta_or_404(cid), client)}
 
 
 def add_item(req, cid):
@@ -348,6 +503,7 @@ def add_item(req, cid):
     b = req["body"]
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
+    _writable(cid, client)
     if ("event_id" in b) == ("custom" in b):
         raise ApiError(400, "send exactly one of event_id or custom")
     if "event_id" in b:
@@ -422,6 +578,7 @@ def edit_item(req, cid, iid):
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
     sets, removes = _custom_fields(b.get("custom"), partial=True)
+    _writable(cid, client)
     row = _item_or_404(cid, iid)
     if row["kind"] != "custom":
         raise ApiError(400, "only your own items can be edited")
@@ -439,7 +596,7 @@ def remove_item(req, cid, iid):
     row = _item_or_404(cid, iid, live=False)
 
     def attempt():
-        meta = _meta_or_404(cid)
+        meta = _writable(cid, client)
         plan = store.plan_of(meta)
         store.remove_item(cid, iid, actor, client, _item_title(row),
                           plan_after=[x for x in plan if x != iid] if iid in plan else None,
@@ -489,12 +646,12 @@ def post_plan(req, cid):
     to = b.get("to")
     if op == "move" and not (isinstance(to, int) and not isinstance(to, bool)):
         raise ApiError(400, "to must be a position (0 is first)")
+    _writable(cid, client)
 
     def attempt():
-        loaded = store.load_canvas(cid)
-        if loaded is None:
-            raise ApiError(404, "canvas not found")
-        meta, rows, _ = loaded
+        meta, rows = _load_or_404(cid)
+        _refuse_if_shown(meta, client)  # shown since _writable's check
+        _need_planning(meta)
         items = {r["id"]: r for r in rows if r["SK"].startswith("ITEM#") and "removed_at" not in r}
         plan = [x for x in store.plan_of(meta) if x in items]
         if op == "add":
@@ -526,6 +683,7 @@ def restore_item(req, cid, iid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
+    _writable(cid, client)
     row = _item_or_404(cid, iid, live=False)
     try:
         store.restore_item(cid, iid, actor, client, _item_title(row))
@@ -540,6 +698,7 @@ def put_vote(req, cid, iid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     name = _clean(req["body"].get("name"), "name", LIMITS["name"])
+    _need_planning(_writable(cid, client))
     row = _item_or_404(cid, iid)
     try:
         store.vote(cid, iid, client, name, _item_title(row))
@@ -551,6 +710,7 @@ def put_vote(req, cid, iid):
 def delete_vote(req, cid, iid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
+    _need_planning(_writable(cid, client))
     try:
         store.unvote(cid, iid, client)
     except store.NotFound:
@@ -561,8 +721,10 @@ def delete_vote(req, cid, iid):
 def add_comment(req, cid, iid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
-    name = _clean(req["body"].get("name"), "name", LIMITS["name"])
+    # Optional: a note on your own list doesn't need a name (shown as "You").
+    name = _clean(req["body"].get("name"), "name", LIMITS["name"], required=False)
     text = _clean(req["body"].get("text"), "text", LIMITS["comment"], multiline=True)
+    _writable(cid, client)
     row = _item_or_404(cid, iid)
     try:
         c = store.add_comment(cid, iid, client, name, text, _item_title(row))
@@ -578,6 +740,7 @@ def delete_comment(req, cid, iid, cmid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(req["body"])
+    _writable(cid, client)
     row = _item_or_404(cid, iid, live=False)
     try:
         store.delete_comment(cid, iid, cmid, actor, client, _item_title(row))
@@ -586,12 +749,148 @@ def delete_comment(req, cid, iid, cmid):
     return 200, {"ok": True}
 
 
+# --- showing: view-only links ---
+
+def _show_as(b):
+    return _clean(b.get("show_as"), "show_as", LIMITS["show_as"])
+
+
+def _owner_meta(req, cid):
+    """(client, META) for an owner-only action; 403 for anyone else."""
+    client = _require_client(req)
+    _rate_limit(req, WRITE_LIMIT)
+    meta = _meta_or_404(cid)
+    if not _is_owner(meta, client):
+        raise ApiError(403, "only the owner's devices can show a collection")
+    return client, meta
+
+
+def show_canvas(req, cid):
+    """Start showing (solo, planning off): returns the view-only link's id;
+    if already shown, the current one."""
+    client, _ = _owner_meta(req, cid)
+    b = req["body"]
+    actor, show_as = _actor(b), _show_as(b)
+
+    def attempt():
+        meta, rows = _load_or_404(cid)
+        if meta.get("view_id"):
+            return meta["view_id"]
+        if not _solo(meta, rows):
+            raise ApiError(409, "it's planned together with friends, so it can't be shown")
+        if _planning(meta):
+            raise ApiError(409, "switch planning off before showing this collection")
+        vid = store.new_canvas_id()
+        store.show_canvas(cid, vid, show_as, actor, client, meta["version"])
+        return vid
+    vid = _retry_conflicts(attempt)
+    return 200, {"view_id": vid, "canvas": _canvas_out(_meta_or_404(cid), client)}
+
+
+def rename_show(req, cid):
+    """Change the "Show as" name."""
+    client, meta = _owner_meta(req, cid)
+    b = req["body"]
+    actor, show_as = _actor(b), _show_as(b)
+    if not meta.get("view_id"):
+        raise ApiError(409, "this collection isn't shown")
+    try:
+        store.rename_show(cid, show_as, actor, client)
+    except store.NotFound:
+        raise ApiError(409, "this collection isn't shown") from None
+    return 200, {"canvas": _canvas_out(_meta_or_404(cid), client)}
+
+
+def stop_showing(req, cid):
+    """The view-only link stops working; showing again makes a new one."""
+    client, meta = _owner_meta(req, cid)
+    if meta.get("view_id"):
+        try:
+            store.stop_showing(cid, meta["view_id"], _actor(req["body"]), client)
+        except store.NotFound:
+            pass  # stopped meanwhile
+    return 200, {"canvas": _canvas_out(_meta_or_404(cid), client)}
+
+
+def _view_source(vid):
+    """(META, rows) of the collection behind a live view-only link, else
+    404 (no such link) or 410 (stopped)."""
+    row = store.get_view_row(vid)
+    if row is None:
+        raise ApiError(404, "view not found")
+    if row.get("stopped_at"):
+        raise ApiError(410, "this collection isn't shown anymore")
+    loaded = store.load_canvas(row["canvas_id"])
+    if loaded is None:
+        raise ApiError(410, "this collection isn't shown anymore")
+    meta, rows, _ = loaded
+    if meta.get("view_id") != vid:
+        raise ApiError(410, "this collection isn't shown anymore")
+    return meta, rows
+
+
+def _curator_comments(meta, rows):
+    owners = _owners(meta)
+    return [r for r in rows if r["SK"].startswith("CMT#") and "removed_at" not in r
+            and r.get("client_id") in owners]
+
+
+def get_view(req, vid):
+    """The view-only page: name, note, "By <show_as>", live items and the
+    curator's comments. Never the collection's id, votes, plan or activity."""
+    if_version = req["query"].get("if_version")
+    meta, rows = _view_source(vid)
+    version = int(meta["version"])
+    if if_version is not None and str(version) == if_version:
+        return 200, {"unchanged": True, "version": version}
+    show_as = meta.get("show_as") or ""
+    notes = defaultdict(list)
+    for c in _curator_comments(meta, rows):
+        notes[c["SK"].split("#")[1]].append({"name": show_as, "text": c["text"], "at": c["at"]})
+    live = sorted((_item_out(r) for r in rows if r["SK"].startswith("ITEM#") and "removed_at" not in r),
+                  key=_by_time)
+    items = []
+    for out in live:
+        # Who added what is the collection's business, not its followers'.
+        out = {k: v for k, v in out.items() if k not in ("added_by_name", "added_at")}
+        out["comments"] = sorted(notes[out["id"]], key=lambda c: c["at"])
+        items.append(out)
+    view = {k: meta.get(k) for k in ("name", "note", "date_from", "date_to", "updated_at")}
+    view.update(id=vid, show_as=show_as, version=version)
+    return 200, {"view": view, "items": items}
+
+
+def copy_view(req, vid):
+    """ "Plan with friends" (planning on) / "Save a copy" (off): your own copy
+    of a shown collection, with the curator's comments, "From <show_as>'s
+    collection". The original is untouched."""
+    client = _require_client(req)
+    b = req["body"]
+    _rate_limit(req, CREATE_LIMIT)
+    _rate_limit(req, WRITE_LIMIT)
+    planning = b.get("planning", False)
+    if not isinstance(planning, bool):
+        raise ApiError(400, "planning must be true or false")
+    meta, rows = _view_source(vid)
+    show_as = meta.get("show_as") or ""
+    comments = [dict(c, name=show_as) for c in _curator_comments(meta, rows)]
+    new = store.duplicate_canvas(rows, _copy_fields(meta, b), _actor(b), client, meta["name"], planning=planning,
+                                 comments=comments,
+                                 copied_from={"view_id": vid, "name": meta["name"], "show_as": show_as})
+    return 201, _view(new["id"], client)
+
+
 ROUTES = [
     (re.compile(r"^/canvases$"), {"POST": create_canvas}),
     (re.compile(rf"^/canvases/{CID}$"), {"GET": get_canvas, "PATCH": patch_canvas}),
     (re.compile(rf"^/canvases/{CID}/duplicate$"), {"POST": duplicate_canvas}),
     (re.compile(rf"^/canvases/{CID}/plan$"), {"POST": post_plan}),
-    (re.compile(rf"^/canvases/{CID}/claim$"), {"POST": claim_canvas, "DELETE": claim_canvas}),
+    (re.compile(rf"^/canvases/{CID}/claim$"), {"DELETE": unclaim_canvas}),
+    (re.compile(rf"^/canvases/{CID}/show$"), {"POST": show_canvas, "PATCH": rename_show, "DELETE": stop_showing}),
+    (re.compile(rf"^/canvases/{CID}/device-link$"), {"POST": make_device_link}),
+    (re.compile(rf"^/device-links/{TOKEN}$"), {"POST": use_device_link}),
+    (re.compile(rf"^/views/{VID}$"), {"GET": get_view}),
+    (re.compile(rf"^/views/{VID}/copy$"), {"POST": copy_view}),
     (re.compile(rf"^/canvases/{CID}/items$"), {"POST": add_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}$"), {"PATCH": edit_item, "DELETE": remove_item}),
     (re.compile(rf"^/canvases/{CID}/items/{IID}/restore$"), {"POST": restore_item}),

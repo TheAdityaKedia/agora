@@ -88,6 +88,29 @@
 
   /* --- Canvas header: name, dates, note, actions --- */
   .cv-kicker { margin: 18px 0 2px; color: var(--muted); font-size: 13px; letter-spacing: 0.02em; }
+  .cv-kickrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 18px 0 2px; }
+  .cv-kickrow .cv-kicker { margin: 0; }
+  .cv-kicker a { color: inherit; }
+  /* The Planning switch (while the collection is just yours). */
+  .plan-switch { display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; cursor: pointer;
+    background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px; }
+  .plan-switch .track { position: relative; width: 28px; height: 16px; border-radius: 999px; background: var(--border); }
+  .plan-switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--bg); transition: transform 0.15s; }
+  .plan-switch[aria-checked="true"] { color: var(--fg); }
+  .plan-switch[aria-checked="true"] .track { background: var(--accent); }
+  .plan-switch[aria-checked="true"] .track::after { transform: translateX(12px); }
+  .plan-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  /* "Shown with a view-only link" under the note. */
+  .shown { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: 12px;
+    padding: 10px 12px; border-radius: 10px; background: var(--chip-bg); font-size: 13.5px; }
+  .shown .shown-acts { display: flex; gap: 14px; margin-left: auto; }
+  .curator { margin-top: 10px; font-size: 14px; }
+  .view-note { margin-top: 18px; color: var(--muted); font-size: 13px; text-align: center; }
+  .item.flash { animation: flash 1.6s ease-out; }
+  @keyframes flash { 0%, 30% { background: color-mix(in srgb, var(--accent) 14%, transparent); } 100% { background: transparent; } }
+  @media (prefers-reduced-motion: reduce) { .item.flash { animation: none; outline: 2px solid var(--accent); } }
+  .step { cursor: pointer; }
   .cv-name {
     margin: 0; font-family: var(--font-display); font-weight: 800;
     font-size: 40px; line-height: 0.95; overflow-wrap: anywhere;
@@ -324,16 +347,50 @@
   }
   const safeUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u) ? u : null;
 
+  // Item helpers, shared by the collection and view-only pages (declared
+  // before the page branches below, which return early).
+  const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
+  const startOf = (it) => it.start_time ? new Date(it.start_time) : null;
+  // What one of your own items is (custom.category; API: CUSTOM_CATEGORIES).
+  const KINDS = {food: ["🍽️", "Food"], drinks: ["🍸", "Drinks"], outdoors: ["🌳", "Outdoors"],
+                 travel: ["🚗", "Getting there"], other: ["📌", "Other"]};
+  const kindOf = (it) => KINDS[it.custom && it.custom.category] || KINDS.other;
+  const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
+  // A card's title (a link to the event or your link), note and thumbnail.
+  function titleHtml(it) {
+    const url = linkOf(it);
+    return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
+      : esc(titleOf(it));
+  }
+  const noteHtml = (it) => it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
+  function thumbHtml(it) {
+    if (!it.event) return '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>";
+    if (!safeUrl(it.event.image_url)) return "";
+    const url = linkOf(it);
+    return (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
+      + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
+      + (url ? "</a>" : "</div>");
+  }
+  const params = new URLSearchParams(location.search);
+  if (params.get("device")) { useDeviceLink(params.get("device")); return; }
+  if (params.get("v")) { initView(params.get("v")); return; }
   if (!cid) { initHome(); return; }
 
   // ======================= the collection =======================
-  // Votes, comments and "the plan" show once a collection involves other
-  // people: you opened someone else's link, more than one browser has done
-  // something on it, or you shared it as-is from this browser. A collection
-  // you're curating for yourself is just a list.
-  const isSocial = (c) => !c.yours || c.people > 1 || AC.isShared(c.id);
+  // Comments are on everywhere (on your own list they're notes to yourself).
+  // Interested and the plan follow the collection's `planning` setting
+  // (feature-specs/collection-sharing.md). Names ("Added by Sam") show once
+  // more than one person is involved, or will be: shared to plan together
+  // (maybe from another of your devices) means it isn't solo any more.
+  const withOthers = (c) => !c.yours || !c.solo || c.people > 1 || AC.isShared(c.id);
+  // Someone else's shown collection, opened by its editable address: the
+  // API refuses their writes, so the page offers nothing to change.
+  const isLocked = (c) => !!c.shown && !c.yours;
   // The name on a write. "" is fine: curating never asks who you are.
   const me = () => AC.currentName();
+  // The name on a write others will see: asked for once others are involved
+  // (null if they cancel); on your own list, whatever you've set, or "".
+  const writerName = async () => withOthers(view.canvas) ? named() : me();
   let view = null;               // last full GET response
   let drag = null, press = null, pressTimer = 0, suppressClickUntil = 0;  // plan reordering (below)
   let pendingRender = false;     // a poll arrived while someone was typing
@@ -361,126 +418,156 @@
   }
 
   // Don't redraw under someone's cursor: a poll that lands while a comment
-  // is being typed waits until the field loses focus.
+  // is being typed waits until the field loses focus, and while a finger or
+  // button is down (tapping Post blurs the field first; redrawing then would
+  // swallow the tap). Half-written comments survive a redraw.
+  let pointerDown = false;
   function render() {
     const typing = document.activeElement && app.contains(document.activeElement)
       && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
-    if (typing || drag) { pendingRender = true; return; }
+    if (typing || drag || pointerDown) { pendingRender = true; return; }
     pendingRender = false;
     const scroll = window.scrollY;
     const focusedStep = document.activeElement && document.activeElement.matches(".step") && document.activeElement.dataset.id;
+    // (A disabled one is being posted: it isn't a draft any more.)
+    const drafts = [...app.querySelectorAll(".cmt-form input")].filter(i => i.value && !i.disabled)
+      .map(i => [i.closest(".item").dataset.id, i.value]);
     app.innerHTML = canvasHtml(view);
+    for (const [id, text] of drafts) {
+      const input = app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input');
+      if (input) input.value = text;
+    }
     window.scrollTo(0, scroll);
     if (focusedStep) app.querySelector('.step[data-id="' + CSS.escape(focusedStep) + '"]')?.focus({preventScroll: true});
   }
-  app.addEventListener("focusout", () => setTimeout(() => { if (pendingRender) render(); }, 0));
+  const renderIfPending = () => setTimeout(() => { if (pendingRender) render(); }, 0);
+  app.addEventListener("focusout", renderIfPending);
+  app.addEventListener("pointerdown", () => { pointerDown = true; });
+  for (const type of ["pointerup", "pointercancel"]) {
+    document.addEventListener(type, () => { pointerDown = false; renderIfPending(); });
+  }
 
   function canvasHtml(v) {
     const c = v.canvas;
     const dates = datesText(c);
     const plan = (c.plan || []).map(id => v.items.find(i => i.id === id)).filter(Boolean);
     const name = AC.currentName();
-    const social = isSocial(c);
+    const many = withOthers(c);
     const isDefault = AC.defaultCanvasId() === c.id;
-    return '<p class="cv-kicker">Collection' + (isDefault ? " · ★ Your default" : "") + "</p>"
-      + '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
+    const locked = isLocked(c);
+    // The Planning switch: only while the collection is just yours and not
+    // shown (shown ones stay plain lists; once others join it stays on).
+    const planSwitch = c.solo && !c.shown
+      ? '<button type="button" class="plan-switch" role="switch" data-act="planning" aria-checked="' + c.planning
+        + '" title="' + (c.planning ? "Turn off Interested and the plan" : "Turn on Interested and the plan: for a night out")
+        + '">Planning <span class="track" aria-hidden="true"></span></button>'
+      : (c.planning && !c.solo ? '<span class="cv-kicker">Planning together</span>' : "");
+    const kicker = c.copied_from
+      ? 'From <a href="' + esc(AC.viewPath(c.copied_from.view_id)) + '">' + esc(c.copied_from.show_as || "someone") + "’s collection</a>"
+      : "Collection" + (isDefault ? " · ★ Your default" : "");
+    const shown = !c.shown ? ""
+      : c.shown.view_id
+        ? '<div class="shown"><span>Shown with a view-only link, as <b>' + esc(c.shown.show_as) + "</b></span>"
+          + '<span class="shown-acts"><button type="button" class="linkish" data-act="copy-view">Copy link</button>'
+          + '<button type="button" class="linkish" data-act="manage-show">Manage</button></span></div>'
+        : '<div class="shown"><span>Shown by <b>' + esc(c.shown.show_as) + "</b>. Only they can change it.</span></div>";
+    return '<div class="cv-kickrow"><p class="cv-kicker">' + kicker + "</p>" + planSwitch + "</div>"
+      + (locked ? '<h1 class="cv-name">' + esc(c.name) + "</h1>"
+        + (dates ? '<div class="cv-dates">' + esc(dates) + "</div>" : "")
+        + (c.note ? '<div class="cv-note">' + esc(c.note) + "</div>" : "")
+      : '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
       + '<div class="cv-dates">' + (dates ? esc(dates) + " · " : "")
       + '<button type="button" class="linkish" data-act="edit-dates">' + (dates ? "Change dates" : "Set dates") + "</button></div>"
       + (c.note
         ? '<div class="cv-note editable" data-act="edit-note" title="Edit note">' + esc(c.note) + "</div>"
-        : '<div class="cv-note empty editable" data-act="edit-note">Add a note' + (social ? ", like “dinner first, then a show?”" : "") + "</div>")
-      + '<div class="cv-actions">'
+        : '<div class="cv-note empty editable" data-act="edit-note">Add a note' + (c.planning ? ", like “dinner first, then a show?”" : "") + "</div>"))
+      + shown
+      + (locked ? "" : '<div class="cv-actions">'
       + '<button type="button" class="btn primary" data-act="share">Share</button>'
       + '<a class="btn" href="' + esc(AC.browseUrl(c)) + '">Add events</a>'
       + '<button type="button" class="btn" data-act="add-custom">Add your own</button>'
-      + "</div>"
-      + (plan.length ? planHtml(plan) : "")
-      + '<h2 class="section-h">' + (social ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
+      + "</div>")
+      + (c.planning && plan.length ? planHtml(plan) : "")
+      + '<h2 class="section-h">' + (c.planning ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
       + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
       + activityHtml(v)
-      // Ownership and default: "This is mine" counts this browser as one of
-      // the owner's devices (for a collection started on another phone or
-      // computer); the default is where ☆ Save adds events, per browser.
+      // Your devices and default. "Use on another device" makes a one-time
+      // link that turns another browser into one of yours; the default is
+      // where ☆ Save adds events, per browser.
       + '<p class="owner-actions">'
-      + (isDefault
+      + (locked && !isDefault ? "" : isDefault
         ? '<span>★ Your default collection</span><button type="button" class="linkish" data-act="unset-default">Unset</button>'
         : '<button type="button" class="linkish" data-act="set-default">Make this my default</button>')
-      + (!c.yours
-        ? '<button type="button" class="linkish" data-act="claim" title="Started this on another phone or computer? Mark it as yours here too.">This is mine</button>'
-        : c.claimed ? '<button type="button" class="linkish" data-act="unclaim">Not mine</button>' : "")
+      + (c.yours ? '<button type="button" class="linkish" data-act="device-link" title="Open this collection as yours on your other phone or computer">Use on another device</button>' : "")
+      + (c.claimed ? '<button type="button" class="linkish" data-act="unclaim">Not mine</button>' : "")
       + '<button type="button" class="linkish" data-act="duplicate">Duplicate this collection</button>'
       + "</p>"
       + '<p class="you">'
-      + (social
+      + (locked ? "Only " + esc(c.shown.show_as || "its owner") + " can change this collection."
+        : many
         ? (name ? "You’re <b>" + esc(name) + "</b> here. " : "")
           + '<button type="button" class="linkish" data-act="rename-me">' + (name ? "Change your name" : "Set your name") + "</button>"
           + " · Anyone with the link can see and edit this collection."
-        : "Only people you send the link to can see it.")
+        : c.shown ? "People with the view-only link can see it; only you can change it."
+        : "Only you can see it until you share it.")
       + "</p>";
   }
 
-  const titleOf = (it) => it.event ? it.event.title : (it.custom && it.custom.title) || "";
-  const startOf = (it) => it.start_time ? new Date(it.start_time) : null;
-  // What one of your own items is (custom.category; API: CUSTOM_CATEGORIES).
-  const KINDS = {food: ["🍽️", "Food"], drinks: ["🍸", "Drinks"], outdoors: ["🌳", "Outdoors"],
-                 travel: ["🚗", "Getting there"], other: ["📌", "Other"]};
-  const kindOf = (it) => KINDS[it.custom && it.custom.category] || KINDS.other;
-  const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
-
   function itemHtml(it) {
+    const locked = isLocked(view.canvas);
     const start = startOf(it);
     const past = start && start < new Date();
-    const url = linkOf(it);
-    const title = url
-      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
-      : esc(titleOf(it));
+    const title = titleHtml(it);
     let where = "";
     if (it.event) {
       const bits = [it.event.location, (it.event.sources || []).length ? "Listed by " + it.event.sources.join(", ") : ""].filter(Boolean);
       where = bits.length ? '<div class="it-where">' + esc(bits.join(" · ")) + "</div>" : "";
     }
-    const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
+    const note = noteHtml(it);
     const own = !it.event;
-    const img = own ? '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>"
-      : it.event && safeUrl(it.event.image_url)
-      ? (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
-        + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
-        + (url ? "</a>" : "</div>") : "";
+    const img = thumbHtml(it);
     const voters = it.votes.map(v => v.name);
-    const social = isSocial(view.canvas);
-    const cmtOpen = social && openComments.has(it.id);
-    const inPlan = (view.canvas.plan || []).includes(it.id);
+    const planning = view.canvas.planning;
+    const many = withOthers(view.canvas);
+    const cmtOpen = openComments.has(it.id);
+    const inPlan = planning && (view.canvas.plan || []).includes(it.id);
     // Your own items say so: "Added by Sam" once others are involved, else "Your own".
-    const ownBadge = own ? '<span class="badge own">' + (social ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
+    const ownBadge = own ? '<span class="badge own">' + (many ? "Added by " + esc(it.added_by_name || "someone") : "Your own") + "</span>" : "";
     return '<article class="item' + (past ? " past" : "") + (own ? " custom" : "") + '" data-id="' + esc(it.id) + '"><div class="main">'
       + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time")
       + ownBadge + (past ? '<span class="badge">Past</span>' : "") + (inPlan ? '<span class="badge">In the plan</span>' : "") + "</div>"
       + '<div class="it-title">' + title + "</div>" + where + note
-      + (social && !own && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
-      + (social ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
+      + (many && !own && it.added_by_name ? '<div class="it-meta">Added by ' + esc(it.added_by_name) + "</div>" : "")
+      + (planning ? '<div class="votes"><button type="button" class="vote" data-act="vote" aria-pressed="' + (it.you_voted ? "true" : "false")
       + '" aria-label="' + (it.you_voted ? "You’re interested. Tap to undo" : "Interested") + '">👍 <span>Interested'
       + '</span><span class="n">' + voters.length + "</span></button>"
       + (voters.length ? '<span class="voters">' + esc(voters.join(", ")) + "</span>" : "") + "</div>" : "")
       + '<div class="it-foot">'
-      + (social ? '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
-        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>" : "")
-      + (inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
+      + (locked && !it.comments.length ? "" : '<button type="button" class="linkish" data-act="comments" aria-expanded="' + cmtOpen + '">'
+        + (it.comments.length ? it.comments.length + (it.comments.length === 1 ? " comment" : " comments") : "Comment") + "</button>")
+      + (!planning ? "" : inPlan ? '<button type="button" class="linkish" data-act="plan-remove">Take out of plan</button>'
         : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>')
-      + (own ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
-      + '<button type="button" class="linkish" data-act="remove">Remove</button></div>'
+      + (own && !locked ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
+      + (locked ? "" : '<button type="button" class="linkish" data-act="remove">Remove</button>') + "</div>"
       + (cmtOpen ? commentsHtml(it) : "")
       + "</div>" + img + "</article>";
   }
 
   function commentsHtml(it) {
+    const locked = isLocked(view.canvas);
+    // A curator's comments carried into a copy say whose they were; an
+    // unnamed note is yours (or "Someone"'s).
+    const who = (c) => c.from_curator ? c.name + ", on their collection"
+      : c.name || (c.mine ? "You" : "Someone");
     return '<div class="cmts">' + it.comments.map(c =>
-      '<div class="cmt"><b>' + esc(c.name) + '</b> <span class="txt">' + esc(c.text) + "</span>"
+      '<div class="cmt"><b>' + esc(who(c)) + '</b> <span class="txt">' + esc(c.text) + "</span>"
       + '<span class="meta">' + esc(ago(c.at))
-      + '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button></span></div>'
+      + (locked ? "" : '<button type="button" class="linkish del" data-act="del-comment" data-cmid="' + esc(c.id) + '" aria-label="Delete comment">Delete</button>')
+      + "</span></div>"
     ).join("")
-      + '<form class="cmt-form" data-act="comment"><input name="text" maxlength="500" placeholder="Add a comment" aria-label="Add a comment" autocomplete="off">'
-      + '<button type="submit" class="btn">Post</button></form></div>';
+      + (locked ? "" : '<form class="cmt-form" data-act="comment"><input name="text" maxlength="500" placeholder="Add a comment" aria-label="Add a comment" autocomplete="off">'
+      + '<button type="submit" class="btn">Post</button></form>') + "</div>";
   }
 
   // The plan: numbered steps in the group's order (↑/↓ to change it). When
@@ -502,10 +589,9 @@
   function stepHtml(it, i, n, oneDay) {
     const start = startOf(it), url = linkOf(it);
     const when = start ? (oneDay ? timeFmt : whenFmt).format(start) : "Any time";
-    const title = (it.event ? "" : kindOf(it)[0] + " ") + (url
-      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
-      : esc(titleOf(it)));
-    return '<li class="step" tabindex="0" data-id="' + esc(it.id) + '"><div class="step-body">'
+    // Tapping a step finds its event below (the card links to the event).
+    const title = (it.event ? "" : kindOf(it)[0] + " ") + esc(titleOf(it));
+    return '<li class="step" tabindex="0" data-id="' + esc(it.id) + '" title="Show it in the collection"><div class="step-body">'
       + '<div class="step-when">' + esc(when) + "</div>"
       + '<div class="step-title">' + title + "</div>"
       + (it.event && it.event.location ? '<div class="step-where">' + esc(it.event.location) + "</div>" : "")
@@ -562,7 +648,7 @@
       case "added": return a + " added " + t;
       case "removed": return a + " removed " + t;
       case "restored": return a + " restored " + t;
-      case "voted": return a + " is interested in " + t;
+      case "voted": return a + (a === "You" ? " are" : " is") + " interested in " + t;
       case "commented": return a + " commented on " + t;
       case "edited": return a + " edited " + t;
       case "deleted_comment": return a + " deleted a comment on " + t;
@@ -574,6 +660,13 @@
       case "renamed": return a + " renamed the collection" + (e.name ? " to “" + e.name + "”" : "");
       case "edited_note": return a + " edited the note";
       case "set_dates": return a + " changed the dates";
+      case "planning_on": return a + " turned planning on";
+      case "planning_off": return a + " turned planning off";
+      case "plan_together": return a + " shared it to plan together";
+      case "shown": return a + " started showing it with a view-only link";
+      case "renamed_show": return a + " changed how it’s shown" + (e.name ? " to “" + e.name + "”" : "");
+      case "stopped_showing": return a + " stopped showing it";
+      case "copied_from_view": return a + " made this from “" + (e.name || "a collection") + "”";
       default: return a + " made a change";
     }
   }
@@ -720,6 +813,7 @@
   }, true);
   app.addEventListener("keydown", (e) => {
     const step = e.target.closest && e.target.matches(".plan .step") && e.target;
+    if (step && e.key === "Enter") return findItem(step.dataset.id);
     if (!step || !e.altKey || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
     e.preventDefault();
     const from = view.canvas.plan.indexOf(step.dataset.id);
@@ -795,27 +889,60 @@
     return n || null;
   }
 
-  // Share: a collection already shared goes straight to the share sheet.
-  // One you've been curating alone asks first: share it as-is (friends add
-  // and vote on it), or share a copy (theirs to change; yours stays yours).
+  const PLAN_DESC = "Friends can add events, mark what they’re interested in, comment, and build the plan with you.";
+  const COPY_OPTION = {value: "copy", label: "Send a copy instead",
+    desc: "They get their own copy to change. Yours stays just as it is."};
+
+  // Share, by the collection's state (feature-specs/collection-sharing.md):
+  // - shown (yours): copy the view-only link, rename, stop, or plan in a copy;
+  // - planned together (shared to plan, or others joined; or someone
+  //   else's): the editable link, or send a copy;
+  // - just yours: Show it (view-only), Plan it together, or send a copy.
   async function shareFlow() {
     const c = view.canvas;
-    if (isSocial(c)) return AC.share(AC.canvasUrl(c.id), c.name);
+    if (c.shown && c.shown.view_id) return shownFlow(c);
+    const legacyShared = c.yours && c.solo && c.planning && AC.isShared(c.id);
+    if (!c.yours || !c.solo || legacyShared) {
+      // Planned together: send the editable link to more friends, or a copy.
+      const how = await AC.choiceDialog({
+        title: "Share “" + c.name + "”",
+        options: [
+          {value: "this", label: "Share this collection",
+           desc: PLAN_DESC},
+          COPY_OPTION,
+        ]});
+      if (how === "copy") return sendCopy();
+      if (how !== "this") return;
+      if (!await named()) return;  // friends see who's who
+      // Shared to plan before that was recorded on the collection: record it.
+      if (legacyShared) await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
+      return AC.share(AC.canvasUrl(c.id), c.name);
+    }
     const how = await AC.choiceDialog({
       title: "Share “" + c.name + "”",
+      text: "How should people use it?",
       options: [
-        {value: "this", label: "Share this collection",
-         desc: "Friends can add events, 👍 the ones they’re up for and comment. Good for making plans together."},
-        {value: "copy", label: "Share a copy",
-         desc: "They get their own copy to change. Yours stays just as it is."},
+        {value: "show", label: "Show it",
+         desc: "Anyone with the link sees your picks and your comments. Only you can change it."},
+        {value: "plan", label: "Plan it together",
+         desc: PLAN_DESC},
+        COPY_OPTION,
       ]});
-    if (how === "this") {
-      if (!await named()) return;  // friends will see who's who
+    if (how === "show") return showIt(c);
+    if (how === "plan") {
+      if (!await named()) return;
+      // Marks it planned together for good: from now on Share offers this
+      // link (or a copy), and planning stays on.
+      await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
       AC.markShared(c.id);
       render();
       return AC.share(AC.canvasUrl(c.id), c.name);
     }
-    if (how !== "copy") return;
+    if (how === "copy") return sendCopy();
+  }
+
+  // "Send a copy instead": a duplicate that's theirs to change.
+  async function sendCopy() {
     let copy;
     try {
       copy = (await AC.api("POST", P("/duplicate"), {actor_name: me()})).canvas;
@@ -832,6 +959,99 @@
     if (go) AC.share(AC.canvasUrl(copy.id), copy.name);
   }
 
+  // "Show it": asks once how to sign it, then hands out the view-only link.
+  async function showIt(c) {
+    const out = await AC.formDialog({title: "Show “" + c.name + "”",
+      text: "Anyone with the link sees your picks and your comments. Only you can change it."
+        + (c.planning ? " Planning (Interested and the plan) turns off while it’s shown; nothing is deleted." : ""),
+      fields: [{name: "show_as", label: "Show as", value: AC.currentName(), required: true, max: 40,
+                placeholder: "Your name or @handle", hint: "Shown as “By …” on the page. You can change it later."}],
+      submit: "Get the link"});
+    if (!out) return;
+    let r, switchedOff = false;
+    try {
+      if (c.planning) {
+        await AC.api("PATCH", P(), {planning: false, actor_name: me()});
+        switchedOff = true;
+      }
+      r = await AC.api("POST", P("/show"), {show_as: out.show_as, actor_name: me()});
+    } catch (e) {
+      AC.toast(e.message);
+      // Not shown after all: put planning back as it was.
+      if (switchedOff) await AC.api("PATCH", P(), {planning: true, actor_name: me()}).catch(() => {});
+      return refresh();
+    }
+    await refresh();
+    const go = await AC.choiceDialog({title: "It’s shown",
+      text: "Anyone with this link can see it. Only you can change it.",
+      options: [{value: "share", label: "Share the link"}], cancel: "Close"});
+    if (go) AC.share(AC.viewUrl(r.view_id), c.name);
+  }
+
+  // Share on a shown collection: ways to share it. Managing the showing
+  // itself (its name, stopping it) is under "Manage" on the Shown strip.
+  async function shownFlow(c) {
+    const how = await AC.choiceDialog({
+      title: "Share “" + c.name + "”",
+      text: "Shown with a view-only link, as " + c.shown.show_as + ".",
+      options: [
+        {value: "share", label: "Share the view-only link"},
+        {value: "plan", label: "Plan with friends",
+         desc: "Make a copy to plan in. This collection stays as it is."},
+      ]});
+    if (how === "share") return AC.share(AC.viewUrl(c.shown.view_id), c.name);
+    if (how === "plan") return planFromView(c.shown.view_id, c.name, c.shown.show_as);
+  }
+
+  async function manageShow(c) {
+    const how = await AC.choiceDialog({
+      title: "Manage showing",
+      text: "Shown with a view-only link, as " + c.shown.show_as + ".",
+      options: [
+        {value: "rename", label: "Change “Show as”"},
+        {value: "stop", label: "Stop showing",
+         desc: "The link stops working. Showing it again makes a new link."},
+      ]});
+    if (how === "rename") {
+      const out = await AC.formDialog({title: "Show as", fields: [
+        {name: "show_as", label: "Show as", value: c.shown.show_as, required: true, max: 40}]});
+      if (out) return act(() => AC.api("PATCH", P("/show"), {show_as: out.show_as, actor_name: me()}));
+      return;
+    }
+    if (how === "stop") {
+      const sure = await AC.choiceDialog({title: "Stop showing?",
+        text: "People with the link will see “This collection isn’t shown anymore.”",
+        options: [{value: "stop", label: "Stop showing"}], cancel: "Keep showing"});
+      if (sure) return act(() => AC.api("DELETE", P("/show"), {actor_name: me()}), "It’s not shown anymore.");
+    }
+  }
+
+  // "Use on another device": a one-time link for your other phone or computer.
+  async function deviceLink() {
+    let r;
+    try {
+      r = await AC.api("POST", P("/device-link"));
+    } catch (e) { return AC.toast(e.message); }
+    const go = await AC.choiceDialog({title: "Use on another device",
+      text: "Open this link on your other phone or computer within 15 minutes. It works once, and makes that device one of yours for this collection.",
+      options: [{value: "share", label: "Send the link to yourself"}], cancel: "Close"});
+    if (go) AC.share(AC.deviceUrl(r.token), view.canvas.name);
+  }
+
+  // Tapping a step in the plan scrolls to its event below and flashes it.
+  function findItem(id) {
+    const card = app.querySelector('.item[data-id="' + CSS.escape(id) + '"]');
+    if (!card) return;
+    card.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center"});
+    card.classList.remove("flash");
+    void card.offsetWidth;  // restart the animation
+    card.classList.add("flash");
+  }
+
+  app.addEventListener("click", (e) => {
+    const step = e.target.closest(".plan .step");
+    if (step && !e.target.closest("a, button")) findItem(step.dataset.id);
+  });
   app.addEventListener("click", async (e) => {
     const el = e.target.closest("[data-act]");
     if (!el || el.tagName === "FORM") return;
@@ -840,6 +1060,17 @@
     const id = el.dataset.id || (art && art.dataset.id);
     const it = view && view.items.find(i => i.id === id);
     switch (el.dataset.act) {
+      case "planning": {
+        const on = !view.canvas.planning;
+        return act(() => AC.api("PATCH", P(), {planning: on, actor_name: me()}),
+          on ? "Planning on: Interested and the plan." : "Planning off.");
+      }
+      case "copy-view":
+        return AC.share(AC.viewUrl(view.canvas.shown.view_id), view.canvas.name);
+      case "manage-show":
+        return manageShow(view.canvas);
+      case "device-link":
+        return deviceLink();
       case "share":
         return shareFlow();
       case "duplicate": {
@@ -914,8 +1145,8 @@
         if (!it) return;
         if (!await confirmRemove(it)) return;
         // Removing from a shared collection says who did it, so ask for a name.
-        const who = isSocial(view.canvas) ? await named() : me();
-        if (isSocial(view.canvas) && !who) return;
+        const who = await writerName();
+        if (who === null) return;
         await act(() => AC.api("DELETE", itemP(id), {actor_name: who}));
         AC.toast("Removed “" + titleOf(it) + "”", {label: "Undo",
           run: () => act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}))});
@@ -934,11 +1165,10 @@
       case "unset-default":
         AC.setDefaultCanvas(null);
         return render();
-      case "claim": case "unclaim":
+      case "unclaim":
         try {
-          apply(await AC.claimCanvas(cid, el.dataset.act === "claim"));
-          AC.toast(el.dataset.act === "claim"
-            ? "It’s under Yours on this device now." : "Moved to Shared with you on this device.");
+          apply(await AC.unclaimCanvas(cid));
+          AC.toast("Moved to Shared with you on this device.");
         } catch (err) { AC.toast(err.message); }
         return;
       case "rename-me":
@@ -955,13 +1185,18 @@
     const text = input.value.trim();
     if (!text) return;
     const id = form.closest(".item").dataset.id;
-    const who = await named(); if (!who) return;
+    // A note on your own list needs no name; others see who said what.
+    const who = await writerName();
+    if (who === null) return;
     input.disabled = true;
     try {
       await AC.api("POST", itemP(id, "/comments"), {name: who, text});
       input.value = "";
     } catch (err) {
       AC.toast(err.message);
+      // A redraw meanwhile made a new field: put the text back there.
+      const now = app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input');
+      if (now && now !== input && !now.value) now.value = text;
     }
     input.disabled = false;
     input.blur();
@@ -1000,32 +1235,36 @@
     const yours = mine.filter(c => c.yours !== false)
       .sort((a, b) => (b.id === dflt) - (a.id === dflt));
     const shared = mine.filter(c => c.yours === false);
+    const following = AC.myFollowing();
+    const followRow = (v) => '<li><a href="' + esc(AC.viewPath(v.id)) + '">' + esc(v.name)
+      + '<span class="sub">' + esc(["By " + (v.show_as || "someone"), v.opened_at ? "Opened " + ago(v.opened_at) : ""]
+        .filter(Boolean).join(" · ")) + "</span></a>"
+      + '<span class="row-acts"><button type="button" class="linkish" data-forget-view="' + esc(v.id)
+      + '" aria-label="Hide ' + esc(v.name) + ' from this list">Hide</button></span></li>';
     const row = (c) => {
       const sub = [c.id === dflt ? "★ Default" : "", datesText(c),
                    c.sent_copy ? "Copy you shared" : "",
                    c.opened_at ? "Opened " + ago(c.opened_at) : ""].filter(Boolean).join(" · ");
-      // Move between the sections: claim it as yours (started on another
-      // device), or undo a claim. Collections created here can't be unclaimed.
-      const move = c.yours === false
-        ? '<button type="button" class="linkish" data-claim="' + esc(c.id) + '">This is mine</button>'
-        : c.claimed ? '<button type="button" class="linkish" data-unclaim="' + esc(c.id) + '">Not mine</button>' : "";
+      // Undo "this device is one of yours" (collections created here stay).
+      const move = c.claimed ? '<button type="button" class="linkish" data-unclaim="' + esc(c.id) + '">Not mine</button>' : "";
       return '<li><a href="' + esc(AC.canvasPath(c.id)) + '">' + esc(c.name)
         + (sub ? '<span class="sub">' + esc(sub) + "</span>" : "") + "</a>"
         + '<span class="row-acts">' + move
         + '<button type="button" class="linkish" data-forget="' + esc(c.id) + '" aria-label="Hide '
         + esc(c.name) + ' from this list">Hide</button></span></li>';
     };
-    const section = (title, list, empty) => '<h2 class="mine-h">' + title
+    const section = (title, list, empty, rowFn = row) => '<h2 class="mine-h">' + title
       + (list.length ? " (" + list.length + ")" : "") + "</h2>"
-      + (list.length ? '<ul class="mine">' + list.map(row).join("") + "</ul>"
+      + (list.length ? '<ul class="mine">' + list.map(rowFn).join("") + "</ul>"
         : '<p class="mine-empty">' + empty + "</p>");
     document.title = "Your collections — Agora";
     app.innerHTML = '<section class="home"><h1>Your collections</h1>'
       + "<p>Save events that interest you, or plan something with friends: add events to a collection, then share its link if you like.</p>"
       + '<button type="button" class="btn primary" id="new-canvas">Start a collection</button>'
-      + section("Yours", yours, "Collections you start show up here. Started one on another device? Open its link here and tap “This is mine”.")
-      + section("Shared with you", shared, "When someone sends you a collection link, it shows up here once you open it.")
-      + '<p class="mine-note">This list lives in this browser. On another phone or computer, open a collection’s link once and it’s added there too; tap “This is mine” to file it under Yours there. Hide only removes it from this list; the collection itself stays.</p>'
+      + section("Yours", yours, "Collections you start show up here. Started one on another device? Open it there and tap “Use on another device”.")
+      + section("Shared with you", shared, "When someone sends you a collection to plan together, it shows up here once you open it.")
+      + (following.length ? section("Following", following, "", followRow) : "")
+      + '<p class="mine-note">This list lives in this browser. To have a collection as yours on another phone or computer, open it here and tap “Use on another device”. Hide only removes it from this list; the collection itself stays.</p>'
       + "</section>";
   }
   function initHome() {
@@ -1037,15 +1276,19 @@
         } catch (err) { AC.toast(err.message); }
         return;
       }
-      const claim = e.target.closest("[data-claim], [data-unclaim]");
-      if (claim) {
-        const on = "claim" in claim.dataset;
+      const unclaim = e.target.closest("[data-unclaim]");
+      if (unclaim) {
         try {
-          await AC.claimCanvas(on ? claim.dataset.claim : claim.dataset.unclaim, on);
+          await AC.unclaimCanvas(unclaim.dataset.unclaim);
         } catch (err) {
-          if (err.status === 404) AC.forgetCanvas(claim.dataset.claim || claim.dataset.unclaim);
+          if (err.status === 404) AC.forgetCanvas(unclaim.dataset.unclaim);
           AC.toast(err.message);
         }
+        return renderHome();
+      }
+      const fv = e.target.closest("[data-forget-view]");
+      if (fv) {
+        AC.forgetView(fv.dataset.forgetView);
         return renderHome();
       }
       const b = e.target.closest("[data-forget]");
@@ -1055,6 +1298,88 @@
       renderHome();
     });
     renderHome();
+  }
+
+  // ======================= view-only page (?v=) =======================
+  // A shown collection as its followers see it: the curator's picks and
+  // comments, nothing to edit. Plan with friends / Save a copy make the
+  // visitor's own copy (feature-specs/collection-sharing.md).
+  async function initView(vid) {
+    let v;
+    try {
+      v = await AC.api("GET", "/views/" + encodeURIComponent(vid));
+    } catch (e) {
+      if (e.status === 404 || e.status === 410) AC.forgetView(vid);
+      app.innerHTML = '<p class="problem">' + esc(e.status === 410 ? "This collection isn’t shown anymore."
+        : e.status === 404 ? "This collection doesn’t exist. Check that the link was copied in full." : e.message)
+        + '</p><p class="loading"><a href="./">Browse events on Agora</a></p>';
+      return;
+    }
+    const w = v.view;
+    AC.rememberView(w);
+    document.title = w.name + " — Agora";
+    const dates = datesText(w);
+    app.innerHTML = '<p class="cv-kicker">Collection</p>'
+      + '<h1 class="cv-name">' + esc(w.name) + "</h1>"
+      + (dates ? '<div class="cv-dates">' + esc(dates) + "</div>" : "")
+      + (w.note ? '<div class="cv-note">' + esc(w.note) + "</div>" : "")
+      + '<p class="curator">By <b>' + esc(w.show_as || "someone") + "</b>" + (w.updated_at ? " · updated " + esc(ago(w.updated_at)) : "") + "</p>"
+      + '<div class="cv-actions"><button type="button" class="btn primary" data-view-act="plan">Plan with friends</button>'
+      + '<button type="button" class="btn" data-view-act="save">Save a copy</button></div>'
+      + '<h2 class="section-h">' + v.items.length + (v.items.length === 1 ? " event" : " events") + "</h2>"
+      + (v.items.length ? v.items.map(viewItemHtml).join("") : '<p class="empty-items">Nothing here yet.</p>')
+      + '<p class="view-note">Only ' + esc(w.show_as || "its owner") + " can change this collection.</p>";
+    app.addEventListener("click", async (e) => {
+      const b = e.target.closest("[data-view-act]");
+      if (b) planFromView(vid, w.name, w.show_as, b.dataset.viewAct === "plan");
+    });
+  }
+
+  function viewItemHtml(it) {
+    const start = startOf(it), own = !it.event;
+    const where = it.event && it.event.location ? '<div class="it-where">' + esc(it.event.location) + "</div>" : "";
+    const cmts = (it.comments || []).length ? '<div class="cmts">' + it.comments.map(c =>
+      '<div class="cmt"><b>' + esc(c.name) + '</b> <span class="txt">' + esc(c.text) + "</span></div>").join("") + "</div>" : "";
+    return '<article class="item' + (own ? " custom" : "") + '"><div class="main">'
+      + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time") + "</div>"
+      + '<div class="it-title">' + titleHtml(it) + "</div>" + where + noteHtml(it) + cmts
+      + "</div>" + thumbHtml(it) + "</article>";
+  }
+
+  // Plan with friends (planning on) / Save a copy (off) from a shown
+  // collection: the visitor's own copy, "From <show as>'s collection".
+  async function planFromView(vid, name, showAs, planning = true) {
+    const out = await AC.formDialog({
+      title: planning ? "Plan with friends" : "Save a copy",
+      text: (planning
+        ? "You’ll get your own copy of these events, ready to plan: friends you share it with can add events, mark what they’re interested in and build the plan. "
+        : "You’ll get your own copy of these events to keep and change. ")
+        + (showAs || "The curator") + "’s comments come along, and their collection stays as it is.",
+      fields: [{name: "name", label: "Name", value: name, required: true, max: 80}],
+      submit: planning ? "Start planning" : "Save"});
+    if (!out) return;
+    try {
+      const r = await AC.api("POST", "/views/" + encodeURIComponent(vid) + "/copy",
+        {name: out.name, planning, actor_name: AC.currentName()});
+      AC.rememberCanvas(r.canvas);
+      location.href = AC.canvasPath(r.canvas.id);
+    } catch (e) { AC.toast(e.message); }
+  }
+
+  // ======================= device links (?device=) =======================
+  // "Use on another device": the browser opening the link becomes one of the
+  // owner's devices, then lands on the collection.
+  async function useDeviceLink(token) {
+    try {
+      const r = await AC.api("POST", "/device-links/" + encodeURIComponent(token));
+      const v = await AC.api("GET", "/canvases/" + encodeURIComponent(r.canvas_id));
+      AC.rememberCanvas(v.canvas);
+      location.replace(AC.canvasPath(r.canvas_id));
+    } catch (e) {
+      app.innerHTML = '<section class="home"><h1>This link didn’t work</h1><p>' + esc(e.status === 404
+        ? "It has been used already, or it’s more than 15 minutes old. On your other device, open the collection and tap “Use on another device” again."
+        : e.message) + '</p><a class="btn primary" href="./canvas.html">Your collections</a></section>';
+    }
   }
 })();
 </script>

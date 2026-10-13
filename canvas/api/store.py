@@ -9,6 +9,9 @@ One table, single-table design (fields of every row: canvas/HOW-IT-WORKS.md):
     C#<canvasId>   CMT#<itemId>#<commentId>   a comment
     L#<canvasId>   <ms>#<rand>                activity log (own partition so a
                                               canvas read never drags it all in)
+    V#<viewId>     VIEW                       a view-only link -> its canvas
+    D#<token>      DEVICE                     a one-time "use on another device"
+                                              link (TTL-expired)
     RL#<ipHash>#<kind>#<bucket>  RL           rate-limit counter (TTL-expired)
 
 Every canvas write is one transaction: the change itself + `META.version += 1`
@@ -25,6 +28,7 @@ from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
 
 LIVE_ITEM_CAP = 100
+DEVICE_LINK_TTL_S = 15 * 60
 COMMENT_CAP = 1000
 LOG_READ_LIMIT = 50
 PLAN_CAP = 20
@@ -184,6 +188,9 @@ def create_canvas(fields, actor_name, client_id):
         "version": 1, "item_count": 0, "comment_count": 0,
         "created_at": now, "updated_at": now,
         "created_by_name": actor_name, "created_by_client": client_id,
+        # New collections start as plain lists; collections made before this
+        # field existed have no `planning` and count as planning on.
+        "planning": False,
     }
     for k in ("date_from", "date_to"):
         if fields.get(k):
@@ -195,35 +202,53 @@ def create_canvas(fields, actor_name, client_id):
     return meta
 
 
-def duplicate_canvas(source_rows, fields, actor_name, client_id, source_name):
-    """Copy a canvas's live items into a new canvas (no votes, comments, plan
-    or log). Items are written first and META last, so a failure part-way
+def duplicate_canvas(source_rows, fields, actor_name, client_id, source_name,
+                     planning=False, comments=(), copied_from=None):
+    """Copy a canvas's live items into a new canvas (no votes, plan or log).
+    `comments`: comment rows to carry over (a copy made from a view-only
+    page brings the curator's), written as the curator's and owned by no
+    browser. Items are written first and META last, so a failure part-way
     leaves only unreachable rows, never a half-copied canvas."""
     cid = new_canvas_id()
     now = now_iso()
     live = [r for r in source_rows
             if r["SK"].startswith("ITEM#") and "removed_at" not in r][:LIVE_ITEM_CAP]
+    new_ids, carried = {}, 0
     with table().batch_writer() as batch:
         for r in live:
             item_id = r["id"] if r["kind"] == "event" else "c_" + secrets.token_urlsafe(6)
+            new_ids[r["id"]] = item_id
             row = {k: v for k, v in r.items() if k not in ("removed_at", "removed_by_name", "removed_by_client")}
             # Keep who added it (provenance); the copy's maker is its client.
             row.update(PK=_pk(cid), SK=f"ITEM#{item_id}", id=item_id,
                        added_by_client=client_id, added_at=now)
             batch.put_item(Item=row)
+        for c in comments:
+            item_id = new_ids.get(c["SK"].split("#")[1])
+            if item_id is None or carried >= COMMENT_CAP:
+                continue
+            comment_id = secrets.token_urlsafe(6)
+            batch.put_item(Item={"PK": _pk(cid), "SK": f"CMT#{item_id}#{comment_id}", "id": comment_id,
+                                 "name": c["name"], "text": c["text"], "at": c["at"],
+                                 "from_curator": True})
+            carried += 1
     meta = {
         "PK": _pk(cid), "SK": "META", "id": cid,
         "name": fields["name"], "note": fields.get("note") or "",
-        "version": 1, "item_count": len(live), "comment_count": 0,
+        "version": 1, "item_count": len(live), "comment_count": carried,
         "created_at": now, "updated_at": now,
         "created_by_name": actor_name, "created_by_client": client_id,
+        "planning": bool(planning),
     }
     for k in ("date_from", "date_to"):
         if fields.get(k):
             meta[k] = fields[k]
+    if copied_from:
+        meta["copied_from"] = copied_from
+    action = "copied_from_view" if copied_from else "duplicated"
     _transact([
         _put(meta, "attribute_not_exists(PK)"),
-        _put(_log_row(cid, actor_name, "duplicated", client_id, name=source_name)),
+        _put(_log_row(cid, actor_name, action, client_id, name=source_name)),
     ])
     return meta
 
@@ -247,6 +272,28 @@ def set_owner(cid, client_id, on):
         if get_meta(cid) is None:
             raise NotFound("canvas") from None
         raise CapReached(f"a collection can have at most {OWNER_CAP} owner devices") from None
+
+
+JOINED_CAP = 20
+
+
+def note_joined(cid, client_id):
+    """Record that a browser outside the owner set is writing to the canvas
+    (META.joined_clients, a string set), before its write lands. "Solo" then
+    survives what leaves no row behind: an un-vote, a restore, a rename or a
+    plan change. Bumps the version, so a show or planning-off that read the
+    canvas before this fails its version check and re-checks. A few clients
+    are enough to tell; past the cap (or if the canvas is gone) it's a no-op."""
+    try:
+        table().update_item(
+            Key={"PK": _pk(cid), "SK": "META"},
+            UpdateExpression="ADD joined_clients :c, version :one",
+            ConditionExpression="attribute_exists(PK) AND (attribute_not_exists(joined_clients)"
+                                " OR size(joined_clients) < :cap)",
+            ExpressionAttributeValues={":c": {client_id}, ":one": 1, ":cap": JOINED_CAP})
+    except ClientError as e:
+        if e.response["Error"]["Code"] != "ConditionalCheckFailedException":
+            raise
 
 
 def update_canvas(cid, fields, actor_name, client_id=None):
@@ -273,6 +320,107 @@ def update_canvas(cid, fields, actor_name, client_id=None):
         _transact([bump, _put(log)] + ops)
     except _TxFailed:
         raise NotFound("canvas") from None
+
+
+def _transact_checked(cid, ops):
+    """A transaction conditioned on what the caller read: NotFound if the
+    canvas is gone, else Conflict (it changed meanwhile; re-read and retry)."""
+    try:
+        _transact(ops)
+    except _TxFailed:
+        if get_meta(cid) is None:
+            raise NotFound("canvas") from None
+        raise Conflict() from None
+
+
+def set_planning(cid, on, actor_name, client_id, expected_version, together=False):
+    """Switch planning on or off. Only if nothing changed since the caller
+    read the canvas (it checked the rules on that read); turning it on also
+    requires that the canvas isn't shown. `together` also records that its
+    editable link went out to plan with friends ("Plan it together"), which
+    keeps planning on from then on."""
+    bump = _bump(cid, extra_set="planning = :p" + (", together = :t" if together else ""),
+                 condition="version = :v" + (" AND attribute_not_exists(view_id)" if on else ""),
+                 values={":p": bool(on), ":v": expected_version, **({":t": True} if together else {})})
+    action = "plan_together" if together else "planning_on" if on else "planning_off"
+    _transact_checked(cid, [bump, _put(_log_row(cid, actor_name, action, client_id))])
+
+
+def get_view_row(view_id):
+    r = table().get_item(Key={"PK": f"V#{view_id}", "SK": "VIEW"}, ConsistentRead=True)
+    return r.get("Item")
+
+
+def show_canvas(cid, view_id, show_as, actor_name, client_id, expected_version):
+    """Start showing: a new view-only link. Only if nothing changed since the
+    caller checked the rules (solo, planning off)."""
+    _transact_checked(cid, [
+        _bump(cid, extra_set="view_id = :vid, show_as = :sa",
+              condition="version = :v AND attribute_not_exists(view_id)",
+              values={":vid": view_id, ":sa": show_as, ":v": expected_version}),
+        _put({"PK": f"V#{view_id}", "SK": "VIEW", "canvas_id": cid, "created_at": now_iso()},
+             "attribute_not_exists(PK)"),
+        _put(_log_row(cid, actor_name, "shown", client_id, name=show_as)),
+    ])
+
+
+def rename_show(cid, show_as, actor_name, client_id):
+    try:
+        _transact([
+            _bump(cid, extra_set="show_as = :sa", condition="attribute_exists(view_id)",
+                  values={":sa": show_as}),
+            _put(_log_row(cid, actor_name, "renamed_show", client_id, name=show_as)),
+        ])
+    except _TxFailed:
+        raise NotFound("view") from None
+
+
+def stop_showing(cid, view_id, actor_name, client_id):
+    """The view-only link stops working (its row stays, so old links can say
+    the collection isn't shown anymore). Showing again makes a new link."""
+    try:
+        _transact([
+            _bump(cid, extra_remove="view_id", condition="view_id = :vid", values={":vid": view_id}),
+            {"Update": {"TableName": table().name, "Key": {"PK": f"V#{view_id}", "SK": "VIEW"},
+                        "UpdateExpression": "SET stopped_at = :now",
+                        "ExpressionAttributeValues": {":now": now_iso()}}},
+            _put(_log_row(cid, actor_name, "stopped_showing", client_id)),
+        ])
+    except _TxFailed:
+        raise NotFound("view") from None
+
+
+def make_device_link(cid, client_id):
+    """A one-time link that makes another browser an owner device."""
+    token = new_canvas_id()
+    expires = int(time.time()) + DEVICE_LINK_TTL_S
+    table().put_item(Item={"PK": f"D#{token}", "SK": "DEVICE", "canvas_id": cid,
+                           "made_by_client": client_id, "ttl": expires})
+    return token, expires
+
+
+def peek_device_link(token):
+    """A device link's canvas id without using it up; None if unknown or expired."""
+    row = table().get_item(Key={"PK": f"D#{token}", "SK": "DEVICE"}, ConsistentRead=True).get("Item")
+    if not row or int(row.get("ttl", 0)) < time.time():
+        return None
+    return row.get("canvas_id")
+
+
+def use_device_link(token):
+    """Consume a device link: its canvas id, or None if unknown, used or
+    expired (DynamoDB deletes expired rows lazily, so check the time too)."""
+    try:
+        r = table().delete_item(Key={"PK": f"D#{token}", "SK": "DEVICE"},
+                                ConditionExpression="attribute_exists(PK)", ReturnValues="ALL_OLD")
+    except ClientError as e:
+        if e.response["Error"]["Code"] == "ConditionalCheckFailedException":
+            return None
+        raise
+    row = r.get("Attributes") or {}
+    if int(row.get("ttl", 0)) < time.time():
+        return None
+    return row.get("canvas_id")
 
 
 def plan_of(meta):

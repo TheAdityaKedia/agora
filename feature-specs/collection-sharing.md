@@ -1,7 +1,6 @@
 # Collection sharing: show it, or plan it together
 
-**Status: spec, not started (2026-10-13). Must ship before collections leave
-the beta.** Decisions below were settled with the owner on 2026-10-13. UI
+**Status: shipped with the collections launch (2026-10-13).** How it works now: [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md). Decisions below were settled with the owner on 2026-10-13. UI
 mocks: the "Collections: lists and plans" design canvas (the Hybrid row).
 How collections work today: [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md).
 
@@ -33,10 +32,11 @@ Rules that make the states hold:
 
 - **More than one person editing means planning is on.** The only way to hand
   out the editable link is **Plan it together**, which switches planning on.
-- **Planning can only be switched off while the collection is solo**: no
-  browser other than the owner's devices has ever written to it (added,
-  removed, voted, commented, …). Once someone else has joined, the switch
-  goes away and planning stays on. Switching it off while solo **hides** any
+- **Planning can only be switched off while the collection is solo**: it
+  hasn't been shared with **Plan it together**, and no browser other than
+  the owner's devices has ever written to it (added, removed, voted,
+  commented, …). Once the link has gone out to plan together, the switch
+  goes away and planning stays on, even before a friend opens it. Switching it off while solo **hides** any
   votes and plan; switching back on shows them again (nothing is deleted).
 - **Only solo collections with planning off can be shown.** A group that
   wants to show what it planned duplicates the collection and shows the copy.
@@ -61,14 +61,16 @@ The Share sheet depends on the state (mock: board "1 · Share").
     interested in, comment, and build the plan with you. Switches planning
     on, then opens the system share sheet with the editable link.
   - *Send them a copy instead* (today's "Share a copy").
-- **Shown:** **Copy link** (the view-only link), **Change "Show as"**, and
-  **Stop showing**. To plan around it: **Plan with friends** (below), which
-  leaves the shown collection untouched.
-- **Planned:** **Copy link** (the editable link, for more friends), and
-  *Send a copy instead*. No "Show it".
+- **Shown:** Share offers ways to share: **Share the view-only link**, and
+  **Plan with friends** (below), which plans in a copy and leaves the shown
+  collection untouched. Managing the showing is on the Shown strip's
+  **Manage**: **Change "Show as"** and **Stop showing**.
+- **Planned:** **Share this collection** (the editable link, for more
+  friends) and *Send a copy instead*. No "Show it".
 
 A shown collection's page says so in a strip under its note: "Shown with a
-view-only link · Copy link" (mock: "Hybrid · Mira's collection").
+view-only link, as Mira · Copy link · Manage" (mock: "Hybrid · Mira's
+collection").
 
 **Stop showing** turns the view-only link off. Old links then say "This
 collection isn't shown anymore". Showing again makes a **new** link.
@@ -144,14 +146,24 @@ New rows:
 
 On copied comments: `from_curator: true` and `name = show_as`.
 
-"Solo" is computed, not stored: no item, vote or comment row (removed ones
-included) written by a client outside the owner set.
+- `together` (true) — set by **Plan it together**; never cleared.
+
+- `joined_clients` (string set) — every browser outside the owner set that
+  has written to the collection, recorded before its write lands. Un-votes,
+  restores, renames and plan changes leave no row of their own, so rows alone
+  can't tell.
+
+"Solo" is computed: no `together`, and no client outside the owner set in
+`joined_clients` or on an item, vote or comment row (removed ones included;
+the rows cover collections from before `joined_clients`). A browser that
+later becomes an owner device stops counting.
 
 ## API
 
 | Method and path | Who | What |
 |---|---|---|
 | `PATCH /canvases/{id}` with `planning` | anyone who can edit | `true`: always allowed. `false`: `409` unless solo. |
+| `PATCH /canvases/{id}` with `together: true` | anyone who can edit | Plan it together: planning on, for good (`409` while shown) |
 | `POST /canvases/{id}/show` `{show_as}` | owner devices | starts showing (`409` unless solo with planning off); returns `{view_id}`; already shown: returns the current one |
 | `PATCH /canvases/{id}/show` `{show_as}` | owner devices | changes the curator name |
 | `DELETE /canvases/{id}/show` | owner devices | stops showing |
@@ -165,7 +177,7 @@ included) written by a client outside the owner set.
 - On a shown collection, every write from a non-owner client answers `403`.
 - The full view (`GET /canvases/{id}`) adds `planning`, `solo`, `shown`
   (`{view_id, show_as}` for owner devices only) and `copied_from`.
-- Activity gains `planning_on`, `planning_off`, `shown`, `stopped_showing`,
+- Activity gains `planning_on`, `planning_off`, `plan_together`, `shown`, `stopped_showing`,
   `copied_from_view` (on the copy). Viewers never see activity.
 
 ## Frontend

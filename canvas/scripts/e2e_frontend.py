@@ -1,10 +1,12 @@
 """End-to-end check of the canvas UI in headless Chromium.
 
 Starts the API locally (moto, snapshots from frontend/events.json) and a
-static server for frontend/, then plays two friends in separate browser
-contexts: Adi makes a canvas on the main page and adds events in canvas
-mode; Sam opens the link, votes and comments; Adi sees it, removes + undoes,
-builds and reorders the plan, adds a custom item. Fails on any page error.
+static server for frontend/, then plays friends in separate browser
+contexts: Adi makes a collection on the main page, adds events, keeps notes,
+then shares it to plan together; Sam opens the link, votes and comments;
+Adi removes + undoes, builds and reorders the plan, adds and edits own items.
+Then a curator flow: Adi shows a list (view-only link), Sam opens it and
+plans in a copy; device links; Your collections. Fails on any page error.
 
     python canvas/scripts/e2e_frontend.py [--shots DIR]
 
@@ -93,14 +95,13 @@ def run(shots):
         adi = hermetic(browser.new_context(**phone))
         a = adi.new_page()
         watch(a, errors)
-        # Private beta: without the flag, no collections UI anywhere...
-        a.goto(f"{WEB}/?api={API}")
-        expect(a.locator(".event").first).to_be_visible()
-        expect(a.locator("#plan-btn")).to_be_hidden()
-        a.goto(f"{WEB}/canvas.html")
-        expect(a.locator("h1")).to_have_text("Collections are in private beta")
-        # ...and the /beta/ invite link lets this browser in.
+        # Launched: collections show for everyone, with no beta flag; the
+        # old /beta/ invite still lands on the site.
+        a.goto(f"{WEB}/canvas.html?api={API}")
+        expect(a.locator("h1")).to_have_text("Your collections")
         a.goto(f"{WEB}/beta/?api={API}")
+        expect(a.locator(".event").first).to_be_visible()
+        a.goto(f"{WEB}/")
         expect(a.locator(".event").first).to_be_visible()
         expect(a.locator("#plan-btn")).to_be_visible()
         a.click("#plan-btn")
@@ -123,16 +124,32 @@ def run(shots):
         a.locator("#canvas-tray a").click()
         expect(a.locator(".item")).to_have_count(2)
         canvas_url = a.url
-        # Just Adi so far: a plain list, no votes, comments or plan.
+        # A new collection is a plain list: comments (notes to yourself, no
+        # name asked), no Interested or plan; the Planning switch is off.
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        # (The plan works on your own too: Add to plan is there.)
-        expect(a.locator('[data-act="plan-add"]')).to_have_count(2)
+        expect(a.locator('[data-act="plan-add"]')).to_have_count(0)
+        expect(a.locator('.plan-switch[aria-checked="false"]')).to_be_visible()
+        a.locator(".item").first.locator('[data-act="comments"]').click()
+        a.locator(".item").first.locator(".cmt-form input").fill("sit on the left")
+        a.locator(".item").first.locator(".cmt-form button").click()
+        expect(a.locator(".item").first.locator(".cmt")).to_contain_text("You sit on the left")
+        expect(a.locator("dialog[open]")).to_have_count(0)
         if shots:
             a.screenshot(path=f"{shots}/2-personal.png", full_page=True)
-        # Share it as-is: now it asks Adi's name, and the social parts appear.
+        # Share → Plan it together: asks Adi's name, switches planning on.
         a.click('[data-act="share"]')
-        a.locator("dialog .ac-choice", has_text="Share this collection").click()
+        a.locator("dialog .ac-choice", has_text="Plan it together").click()
         answer_dialog(a, name="Adi")
+        # Planned together from now on, before anyone has joined: no
+        # switch, and Share offers the link or a copy (no Show it / Plan it again).
+        expect(a.locator(".plan-switch")).to_have_count(0)
+        expect(a.locator(".cv-kickrow")).to_contain_text("Planning together")
+        a.click('[data-act="share"]')
+        expect(a.locator("dialog .ac-choice", has_text="Send a copy instead")).to_have_count(1)
+        expect(a.locator("dialog .ac-choice", has_text="Show it")).to_have_count(0)
+        a.locator("dialog .ac-choice", has_text="Share this collection").click()
+        expect(a.locator("dialog[open]")).to_have_count(0)
+        expect(a.locator(".ac-toast")).to_contain_text("Link copied")
         a.locator(".item").first.locator('[data-act="vote"]').click()
         expect(a.locator(".item").first.locator(".voters")).to_have_text("Adi")
 
@@ -140,16 +157,13 @@ def run(shots):
         sam = hermetic(browser.new_context(**phone))
         s = sam.new_page()
         watch(s, errors)
-        # Links made during the beta go through /beta/, which lets Sam in;
-        # the bare page link would show the beta notice instead.
+        # Links are plain page links now; a link shared during the beta
+        # (through /beta/) still opens.
         cid0 = canvas_url.split("c=")[1].split("&")[0]
         share_url = a.evaluate(f"AgoraCanvas.canvasUrl('{cid0}')")
-        assert "/beta/canvas.html?c=" in share_url, share_url
-        # Adi's address bar carries ?beta=1 too, so a copied link works; a
-        # bare page link (beta=1 dropped) shows the beta notice instead.
-        assert "beta=1" in canvas_url, canvas_url
-        s.goto(f"{WEB}/canvas.html?c={cid0}&api={API}")
-        expect(s.locator("h1")).to_have_text("Collections are in private beta")
+        assert "/beta/" not in share_url and "/canvas.html?c=" in share_url, share_url
+        s.goto(f"{WEB}/beta/canvas.html?c={cid0}&api={API}")
+        expect(s.locator(".cv-name")).to_have_text("Adi & Sam hangout")
         s.goto(share_url + f"&api={API}")
         expect(s.locator(".item")).to_have_count(2)
         expect(s.locator(".cv-name")).to_have_text("Adi & Sam hangout")
@@ -159,13 +173,16 @@ def run(shots):
         s.locator(".item").first.locator('[data-act="comments"]').click()
         s.locator(".item").first.locator(".cmt-form input").fill("free after 7")
         s.locator(".item").first.locator(".cmt-form button").click()
-        expect(s.locator(".item").first.locator(".cmt")).to_contain_text("free after 7")
+        expect(s.locator(".item").first.locator(".cmt").last).to_contain_text("free after 7")
 
         # --- Adi sees Sam's vote and comment; remove + undo; pick; custom item
         a.reload()
         first = a.locator(".item").first
         expect(first.locator(".voters")).to_have_text("Adi, Sam")
-        expect(first.locator('[data-act="comments"]')).to_have_text("1 comment")
+        expect(first.locator('[data-act="comments"]')).to_have_text("2 comments")
+        # Sam has joined: planning stays on (no switch any more).
+        expect(a.locator(".plan-switch")).to_have_count(0)
+        expect(a.locator(".cv-kickrow")).to_contain_text("Planning together")
         a.locator(".item").nth(1).locator('[data-act="remove"]').click()
         expect(a.locator(".item")).to_have_count(1)
         a.locator(".ac-toast button", has_text="Undo").click()
@@ -182,6 +199,7 @@ def run(shots):
         a.locator("details.fold summary", has_text="Activity").click()
         # Your own changes read "You"; friends see your name.
         expect(a.locator("details.fold li").first).to_contain_text("You added “Dinner at Nopa”")
+        expect(a.locator("details.fold li", has_text="You are interested in")).to_have_count(1)
         if shots:
             a.screenshot(path=f"{shots}/3-shared.png", full_page=True)
 
@@ -190,6 +208,24 @@ def run(shots):
         expect(s.locator(".item")).to_have_count(3)
         s.locator("details.fold summary", has_text="Activity").click()
         expect(s.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+        # A change that lands while Sam types waits; tapping Post (a press,
+        # then a release) still posts, and the redraw keeps no stale draft.
+        sf = s.locator(".item").first
+        sf.locator(".cmt-form input").fill("running late")
+        sf.locator(".cmt-form input").focus()
+        a.locator(".item").nth(1).locator('[data-act="vote"]').click()  # and back
+        expect(a.locator(".item").nth(1).locator(".voters")).to_have_text("Adi")
+        a.locator(".item").nth(1).locator('[data-act="vote"]').click()
+        expect(a.locator(".item").nth(1).locator(".voters")).to_have_count(0)
+        s.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+        s.wait_for_timeout(500)
+        box = sf.locator(".cmt-form button").bounding_box()
+        s.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+        s.mouse.down()
+        s.wait_for_timeout(150)
+        s.mouse.up()
+        expect(sf.locator(".cmt", has_text="running late")).to_have_count(1)
+        expect(sf.locator(".cmt-form input")).to_have_value("")
 
         # --- The plan has steps in order: dinner (undated, so last) moves first.
         a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="plan-add"]').click()
@@ -219,6 +255,11 @@ def run(shots):
         expect(nopa_item.locator(".thumb.kind")).to_have_attribute("aria-label", "Drinks")
         expect(nopa_item.locator(".it-title a")).to_have_count(0)  # the link was cleared
         expect(a.locator(".item", has_text="Dinner at Nopa").locator(".badge", has_text="In the plan")).to_have_count(1)
+        # Tapping a step finds its event below (and flashes it).
+        a.evaluate("scrollTo(0, 0)")
+        a.locator(".plan .step").nth(1).locator(".step-when").click()
+        expect(a.locator(".item.flash")).to_have_count(1)
+        expect(a.locator(".item.flash")).to_be_in_viewport()
 
         # --- Sam removes an event: Adi's Activity says who, which showing
         # (its date), and offers Restore right there (no separate list).
@@ -266,8 +307,13 @@ def run(shots):
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
         expect(a.locator(".plan")).to_have_count(0)
         dup_url = a.url
-        # A link copied from the address bar lets a new browser in.
-        assert "beta=1" in dup_url, dup_url
+        dup_id = dup_url.split("c=")[1].split("&")[0]
+        # Solo: the Planning switch turns Interested on and off again.
+        a.click(".plan-switch")
+        expect(a.locator('[data-act="vote"]')).to_have_count(3)
+        a.click(".plan-switch")
+        expect(a.locator('[data-act="vote"]')).to_have_count(0)
+        # A link copied from the address bar works in a new browser.
         jo = hermetic(browser.new_context(**phone))
         j = jo.new_page()
         watch(j, errors)
@@ -277,20 +323,72 @@ def run(shots):
 
         # --- Share a copy: Sam changes the copy; Adi's collection stays as is.
         a.click('[data-act="share"]')
-        a.locator("dialog .ac-choice", has_text="Share a copy").click()
+        a.locator("dialog .ac-choice", has_text="Send a copy instead").click()
         a.locator("dialog .ac-choice", has_text="Share the copy").click()
         expect(a.locator("dialog[open]")).to_have_count(0)
         copy_id = a.evaluate("JSON.parse(localStorage.getItem('agora.canvas.mine'))[0].id")
         assert copy_id not in dup_url
         s.goto(f"{WEB}/canvas.html?c={copy_id}")
         expect(s.locator(".item")).to_have_count(3)
-        expect(s.locator('[data-act="vote"]')).to_have_count(3)  # Sam's view is social
         s.click('[data-act="add-custom"]')
         answer_dialog(s, title="Sam's idea")
         expect(s.locator(".item")).to_have_count(4)
         a.goto(dup_url)
         expect(a.locator(".item")).to_have_count(3)
         expect(a.locator('[data-act="vote"]')).to_have_count(0)  # still just Adi's
+
+        # --- Show it: a view-only link for the curated list.
+        a.click('[data-act="share"]')
+        a.locator("dialog .ac-choice", has_text="Show it").click()
+        with a.expect_response(lambda resp: resp.url.endswith("/show") and resp.request.method == "POST") as shown:
+            answer_dialog(a, show_as="@adi")
+        vid = shown.value.json()["view_id"]
+        a.locator("dialog .ac-choice", has_text="Share the link").click()
+        expect(a.locator(".shown")).to_contain_text("Shown with a view-only link, as @adi")
+        expect(a.locator(".plan-switch")).to_have_count(0)
+        view_url = a.evaluate(f"AgoraCanvas.viewUrl('{vid}')")
+        assert "/canvas.html?v=" in view_url and dup_id not in view_url, view_url
+        if shots:
+            a.screenshot(path=f"{shots}/4-shown.png", full_page=True)
+        # Sam opens it: read-only, the curator's comment-free picks, Following.
+        s.goto(view_url + f"&api={API}")
+        expect(s.locator(".curator")).to_contain_text("By @adi")
+        expect(s.locator(".item")).to_have_count(3)
+        expect(s.locator('[data-act="remove"], [data-act="vote"], .cmt-form')).to_have_count(0)
+        expect(s.locator(".view-note")).to_contain_text("Only @adi can change this collection")
+        if shots:
+            s.screenshot(path=f"{shots}/5-view-only.png", full_page=True)
+        # The editable address, leaked to Sam: read-only too (the API would
+        # refuse Sam's writes), so nothing to change is offered.
+        s.goto(dup_url + ("" if "api=" in dup_url else f"&api={API}"))
+        expect(s.locator(".item")).to_have_count(3)
+        expect(s.locator(".shown")).to_contain_text("Only they can change it")
+        expect(s.locator('[data-act="share"], [data-act="add-custom"], [data-act="remove"], '
+                         '[data-act="edit-name"], [data-act="edit-note"], .cmt-form')).to_have_count(0)
+        expect(s.locator(".you")).to_have_text("Only @adi can change this collection.")
+        s.evaluate(f"AgoraCanvas.forgetCanvas('{dup_id}')")  # keep Sam's lists as below
+        s.goto(view_url + f"&api={API}")
+        # Plan with friends: Sam's own copy, planning on, "From @adi's collection".
+        s.locator('[data-view-act="plan"]').click()
+        answer_dialog(s, name="Saturday with Sam")
+        expect(s.locator(".cv-name")).to_have_text("Saturday with Sam")
+        expect(s.locator(".cv-kickrow")).to_contain_text("From @adi’s collection")
+        expect(s.locator('[data-act="vote"]')).to_have_count(3)
+        a.goto(dup_url)
+        expect(a.locator(".item")).to_have_count(3)  # Adi's list is untouched
+        # Share offers only ways to share; Manage holds Show as / Stop showing.
+        a.click('[data-act="share"]')
+        expect(a.locator("dialog .ac-choice")).to_have_count(2)
+        expect(a.locator("dialog[open]")).not_to_contain_text("Stop showing")
+        a.keyboard.press("Escape")
+        # Stop showing: the link stops working.
+        a.click('[data-act="manage-show"]')
+        expect(a.locator("dialog .ac-choice", has_text="Change “Show as”")).to_be_visible()
+        a.locator("dialog .ac-choice", has_text="Stop showing").click()
+        a.locator("dialog .ac-choice", has_text="Stop showing").click()
+        expect(a.locator(".shown")).to_have_count(0)
+        s.goto(view_url + f"&api={API}")
+        expect(s.locator(".problem")).to_contain_text("isn’t shown anymore")
 
         # A shared search link with canvas mode must not hang on "Loading…".
         a.goto(f"{WEB}/?q=jazz&canvas=" + canvas_url.split("c=")[1].split("&")[0])
@@ -318,24 +416,34 @@ def run(shots):
         expect(started.locator("li", has_text="Adi's weekend ideas")).to_have_count(2)  # + the copy
         expect(started.locator("li", has_text="Copy you shared")).to_have_count(1)
         expect(a.locator(".mine-empty", has_text="When someone sends you")).to_have_count(1)
-        # Sam opened two links; both are "Shared with you", nothing started.
+        # Sam opened two links ("Shared with you") and made a plan from a
+        # view link (under Yours); the stopped view link is no longer followed.
         s.goto(f"{WEB}/canvas.html")
         shared = s.locator("h2.mine-h", has_text="Shared with you").locator("xpath=following-sibling::ul[1]")
         expect(shared.locator("li")).to_have_count(2)
         expect(shared).to_contain_text("Adi & Sam hangout")
-        expect(s.locator(".mine-empty", has_text="Collections you start")).to_have_count(1)
-        # --- Adi's PC: a collection started on the phone is "Shared with you"
-        # there until Adi taps "This is mine"; then additions from both
-        # devices still count as one person, so it stays a personal list.
+        sam_yours = s.locator("h2.mine-h", has_text="Yours").locator("xpath=following-sibling::ul[1]")
+        expect(sam_yours.locator("li", has_text="Saturday with Sam")).to_have_count(1)
+        expect(s.locator("h2.mine-h", has_text="Following")).to_have_count(0)
+        # --- Adi's PC: "Use on another device" on the phone makes a one-time
+        # link; opening it on the PC makes the PC one of Adi's devices, so
+        # additions from both still count as one person (a personal list).
+        a.goto(dup_url)
+        with a.expect_response(lambda resp: resp.url.endswith("/device-link")) as made:
+            a.click('[data-act="device-link"]')
+        a.locator("dialog .ac-choice", has_text="Send the link to yourself").click()
+        device_url = a.evaluate(f"AgoraCanvas.deviceUrl('{made.value.json()['token']}')")
         pc = hermetic(browser.new_context(viewport={"width": 1280, "height": 900}))
         c2 = pc.new_page()
         watch(c2, errors)
-        c2.goto(f"{WEB}/beta/canvas.html?c=" + dup_url.split("c=")[1].split("&")[0] + f"&api={API}")
-        expect(c2.locator('[data-act="claim"]')).to_be_visible()
-        expect(c2.locator('[data-act="vote"]')).to_have_count(3)  # looks shared until claimed
-        c2.click('[data-act="claim"]')
+        c2.goto(device_url + f"&api={API}")
+        expect(c2.locator(".cv-name")).to_have_text("Adi's weekend ideas")
         expect(c2.locator('[data-act="unclaim"]')).to_be_visible()
         expect(c2.locator('[data-act="vote"]')).to_have_count(0)
+        # The link worked once.
+        c3 = hermetic(browser.new_context()).new_page()
+        c3.goto(device_url + f"&api={API}")
+        expect(c3.locator("h1")).to_have_text("This link didn’t work")
         c2.click('[data-act="add-custom"]')
         answer_dialog(c2, title="Added from the PC")
         expect(c2.locator(".item")).to_have_count(4)
@@ -368,7 +476,9 @@ def run(shots):
         expect(a.locator(".problem")).to_contain_text("doesn't exist")
         browser.close()
 
-    real = [e for e in errors if "404" not in e]  # the unknown-canvas fetch logs a 404
+    # Intended failures the browser logs: the unknown collection (404) and the
+    # stopped view-only link (410).
+    real = [e for e in errors if "404" not in e and "410 (Gone)" not in e]
     if real:
         raise SystemExit("page errors:\n" + "\n".join(real))
     print("e2e OK")

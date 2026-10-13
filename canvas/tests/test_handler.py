@@ -27,7 +27,7 @@ def test_create_returns_unguessable_id(api, canvas):
     assert v["canvas"]["name"] == "Adi & Sam hangout"
     assert v["canvas"]["date_from"] == "2026-10-10"
     assert v["canvas"]["created_by_name"] == "Adi"
-    assert v["items"] == [] and v["log"][0]["action"] == "created"
+    assert v["items"] == [] and [e["action"] for e in v["log"]] == ["planning_on", "created"]
 
 
 def test_client_id_never_leaks(api, canvas):
@@ -433,10 +433,10 @@ def test_write_rate_limit(api, canvas, monkeypatch):
     import handler
     monkeypatch.setattr(handler, "WRITE_LIMIT", ("write", 3, 600))
     item_id = add_event(api, canvas, E1)["json"]["item"]["id"]
-    # The canvas create and the add already used 2 of the 3 writes.
+    # The canvas create, switching planning on and the add used all 3 writes.
     codes = [api("PUT", f"/canvases/{canvas}/items/{item_id}/vote", {"name": "A"})["statusCode"]
-             for _ in range(3)]
-    assert codes == [200, 429, 429]
+             for _ in range(2)]
+    assert codes == [429, 429]
 
 
 def test_cors(api, canvas, monkeypatch):
@@ -479,11 +479,12 @@ def test_names_are_optional_for_curating(canvas):
     assert item["added_by_name"] == ""
     assert me("DELETE", f"/canvases/{cid}/items/{item['id']}")["statusCode"] == 200
     assert me("PATCH", f"/canvases/{cid}", {"note": "x"})["statusCode"] == 200
-    # votes and comments are seen by others, so they still need a name
+    # A vote is seen by others, so it needs a name; a comment can be a note
+    # to yourself (the page asks for a name once others are involved).
     me("POST", f"/canvases/{cid}/items/{item['id']}/restore")
     assert me("PUT", f"/canvases/{cid}/items/{item['id']}/vote", {})["statusCode"] == 400
     r = me("POST", f"/canvases/{cid}/items/{item['id']}/comments", {"text": "hi"})
-    assert r["statusCode"] == 400
+    assert r["statusCode"] == 201
 
 
 def test_yours_and_people(api, canvas):
@@ -544,13 +545,20 @@ def test_duplicate_unknown_404(api):
 
 # --- "This is mine": claiming from another device ---
 
+def claim(owner, device, cid):
+    """ "Use on another device": the owner makes a link, the device opens it."""
+    token = owner("POST", f"/canvases/{cid}/device-link")["json"]["token"]
+    return device("POST", f"/device-links/{token}")
+
+
 def test_claim_makes_it_yours_and_one_person(api, canvas):
     pc = Api(client="client-adi-pc-01", ip="1.2.3.4")  # Adi's other device
     v = view(pc, canvas)["canvas"]
     assert not v["yours"] and not v["claimed"]
-    r = pc("POST", f"/canvases/{canvas}/claim")
-    assert r["statusCode"] == 200
-    assert r["json"]["canvas"]["yours"] and r["json"]["canvas"]["claimed"]
+    r = claim(api, pc, canvas)
+    assert r["statusCode"] == 200 and r["json"]["canvas_id"] == canvas
+    v = view(pc, canvas)["canvas"]
+    assert v["yours"] and v["claimed"]
     # Adding from both devices is still one person: the list stays personal.
     add_event(api, canvas, E1)
     add_event(pc, canvas, E2)
@@ -566,36 +574,54 @@ def test_claim_makes_it_yours_and_one_person(api, canvas):
 
 def test_unclaim(api, canvas):
     pc = Api(client="client-adi-pc-01")
-    pc("POST", f"/canvases/{canvas}/claim")
+    claim(api, pc, canvas)
     add_event(pc, canvas, E1)
+    assert view(api, canvas)["canvas"]["people"] == 1
     r = pc("DELETE", f"/canvases/{canvas}/claim")
     assert r["statusCode"] == 200 and not r["json"]["canvas"]["yours"]
     assert view(api, canvas)["canvas"]["people"] == 2  # pc is a separate person again
 
 
-def test_claim_is_idempotent_and_creator_noop(api, canvas):
+def test_device_links(api, canvas, monkeypatch):
     v1 = view(api, canvas)["canvas"]["version"]
-    r = api("POST", f"/canvases/{canvas}/claim")  # the creator: nothing to do
-    assert r["statusCode"] == 200 and r["json"]["canvas"]["version"] == v1
+    assert claim(api, api, canvas)["statusCode"] == 200  # the creator: nothing to do
+    assert view(api, canvas)["canvas"]["version"] == v1
     pc = Api(client="client-adi-pc-01")
-    for _ in range(2):
-        assert pc("POST", f"/canvases/{canvas}/claim")["json"]["canvas"]["claimed"]
+    token = api("POST", f"/canvases/{canvas}/device-link")["json"]["token"]
+    assert pc("POST", f"/device-links/{token}")["statusCode"] == 200
+    # One use only; and only owner devices can make links.
+    assert Api(client="client-sam-0001")("POST", f"/device-links/{token}")["statusCode"] == 404
+    assert pc("POST", f"/canvases/{canvas}/device-link")["statusCode"] == 201  # pc is an owner now
+    sam = Api(client="client-sam-0001", ip="5.6.7.8")
+    assert sam("POST", f"/canvases/{canvas}/device-link")["statusCode"] == 403
+    # "This is mine" is gone: claiming needs a link.
+    assert sam("POST", f"/canvases/{canvas}/claim")["statusCode"] == 405
+    # Expired links don't work.
+    token = api("POST", f"/canvases/{canvas}/device-link")["json"]["token"]
+    monkeypatch.setattr(store.time, "time", lambda: 9e12)
+    assert sam("POST", f"/device-links/{token}")["statusCode"] == 404
 
 
 def test_claim_cap_and_404(api, canvas, monkeypatch):
     monkeypatch.setattr(store, "OWNER_CAP", 1)
-    assert Api(client="client-dev-00001")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 200
-    assert Api(client="client-dev-00002")("POST", f"/canvases/{canvas}/claim")["statusCode"] == 409
-    assert api("POST", "/canvases/" + "a" * 22 + "/claim")["statusCode"] == 404
+    assert claim(api, Api(client="client-dev-00001"), canvas)["statusCode"] == 200
+    third = Api(client="client-dev-00002")
+    token = api("POST", f"/canvases/{canvas}/device-link")["json"]["token"]
+    assert third("POST", f"/device-links/{token}")["statusCode"] == 409
+    # The refusal doesn't use the link up: free a place and it works.
+    Api(client="client-dev-00001")("DELETE", f"/canvases/{canvas}/claim")
+    assert third("POST", f"/device-links/{token}")["statusCode"] == 200
+    assert api("POST", "/canvases/" + "a" * 22 + "/device-link")["statusCode"] == 404
+    assert api("POST", "/device-links/" + "a" * 22)["statusCode"] == 404
 
 
-def test_claim_needs_client(canvas):
-    assert Api(client=None)("POST", f"/canvases/{canvas}/claim")["statusCode"] == 400
+def test_device_links_need_client(canvas):
+    assert Api(client=None)("POST", f"/device-links/{'a' * 22}")["statusCode"] == 400
 
 
 def test_duplicate_does_not_copy_owners(api, canvas):
     pc = Api(client="client-adi-pc-01")
-    pc("POST", f"/canvases/{canvas}/claim")
+    claim(api, pc, canvas)
     copy = api("POST", f"/canvases/{canvas}/duplicate", {})["json"]["canvas"]["id"]
     assert not view(pc, copy)["canvas"]["yours"]
 
