@@ -365,8 +365,9 @@
   // Comments are on everywhere (on your own list they're notes to yourself).
   // Interested and the plan follow the collection's `planning` setting
   // (feature-specs/collection-sharing.md). Names ("Added by Sam") show once
-  // more than one person is involved.
-  const crowd = (c) => !c.yours || c.people > 1 || AC.isShared(c.id);
+  // more than one person is involved, or will be: shared to plan together
+  // (maybe from another of your devices) means it isn't solo any more.
+  const crowd = (c) => !c.yours || !c.solo || c.people > 1 || AC.isShared(c.id);
   // The name on a write. "" is fine: curating never asks who you are.
   const me = () => AC.currentName();
   let view = null;               // last full GET response
@@ -936,17 +937,23 @@
   // "Show it": asks once how to sign it, then hands out the view-only link.
   async function showIt(c) {
     const out = await AC.formDialog({title: "Show “" + c.name + "”",
-      text: "Anyone with the link sees your picks and your comments. Only you can change it.",
+      text: "Anyone with the link sees your picks and your comments. Only you can change it."
+        + (c.planning ? " Planning (Interested and the plan) turns off while it’s shown; nothing is deleted." : ""),
       fields: [{name: "show_as", label: "Show as", value: AC.currentName(), required: true, max: 40,
                 placeholder: "Your name or @handle", hint: "Shown as “By …” on the page. You can change it later."}],
       submit: "Get the link"});
     if (!out) return;
-    let r;
+    let r, switchedOff = false;
     try {
-      if (c.planning) await AC.api("PATCH", P(), {planning: false, actor_name: me()});
+      if (c.planning) {
+        await AC.api("PATCH", P(), {planning: false, actor_name: me()});
+        switchedOff = true;
+      }
       r = await AC.api("POST", P("/show"), {show_as: out.show_as, actor_name: me()});
     } catch (e) {
       AC.toast(e.message);
+      // Not shown after all: put planning back as it was.
+      if (switchedOff) await AC.api("PATCH", P(), {planning: true, actor_name: me()}).catch(() => {});
       return refresh();
     }
     await refresh();
