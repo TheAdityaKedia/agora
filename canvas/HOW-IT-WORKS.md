@@ -220,6 +220,7 @@ pages keep `?beta=1` in the address bar so a copied link works.
 | Infrastructure (CDK assertions) | same suite, `tests/test_infra.py` | yes |
 | After deploy | `scripts/smoke.py` against the dev URL | yes, on branch deploys |
 | Pages end to end (several browsers: beta gate, collecting mode, notes, Plan it together, Interested, comments, plan drag and tap, edit, remove/restore, duplicate, Show it, the view-only page, Plan with friends, Stop showing, device links, default, Your collections) | `CHROMIUM_PATH=… python canvas/scripts/e2e_frontend.py [--shots DIR]` | **no**, run it by hand |
+| By hand, as a person would | the 20 stories in [`USER-STORIES.md`](USER-STORIES.md) | no |
 
 ## 8. Changing things: where to look
 
