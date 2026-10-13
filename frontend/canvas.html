@@ -624,6 +624,13 @@
       case "renamed": return a + " renamed the collection" + (e.name ? " to “" + e.name + "”" : "");
       case "edited_note": return a + " edited the note";
       case "set_dates": return a + " changed the dates";
+      case "planning_on": return a + " turned planning on";
+      case "planning_off": return a + " turned planning off";
+      case "plan_together": return a + " shared it to plan together";
+      case "shown": return a + " started showing it with a view-only link";
+      case "renamed_show": return a + " changed how it’s shown" + (e.name ? " to “" + e.name + "”" : "");
+      case "stopped_showing": return a + " stopped showing it";
+      case "copied_from_view": return a + " made this from “" + (e.name || "a collection") + "”";
       default: return a + " made a change";
     }
   }
@@ -848,13 +855,21 @@
 
   // Share, by the collection's state (feature-specs/collection-sharing.md):
   // - shown (yours): copy the view-only link, rename, stop, or plan in a copy;
-  // - planning with others (or someone else's): send the editable link;
+  // - planned together (shared to plan, or others joined; or someone
+  //   else's): just send the editable link;
   // - just yours: Show it (view-only), Plan it together, or send a copy.
   async function shareFlow() {
     const c = view.canvas;
     if (c.shown && c.shown.view_id) return shownFlow(c);
     if (!c.yours || !c.solo) {
       if (!await named()) return;  // friends see who's who
+      return AC.share(AC.canvasUrl(c.id), c.name);
+    }
+    if (c.planning && AC.isShared(c.id)) {
+      // Shared to plan before that was recorded on the collection: record
+      // it now, and just send the link again.
+      if (!await named()) return;
+      await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
       return AC.share(AC.canvasUrl(c.id), c.name);
     }
     const how = await AC.choiceDialog({
@@ -871,7 +886,9 @@
     if (how === "show") return showIt(c);
     if (how === "plan") {
       if (!await named()) return;
-      if (!c.planning) await act(() => AC.api("PATCH", P(), {planning: true, actor_name: me()}));
+      // Marks it planned together for good: from now on Share just hands
+      // out this link, and planning stays on.
+      await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
       AC.markShared(c.id);
       render();
       return AC.share(AC.canvasUrl(c.id), c.name);

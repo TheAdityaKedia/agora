@@ -193,6 +193,12 @@ def _others(meta, rows):
     return seen - owners
 
 
+def _solo(meta, rows):
+    """Just the owner's: nobody else has written to it and its editable link
+    hasn't gone out to plan together."""
+    return not meta.get("together") and not _others(meta, rows)
+
+
 def _item_title(row):
     return (row.get("event") or {}).get("title") or row.get("title") or ""
 
@@ -299,7 +305,7 @@ def _view(cid, client):
     live_ids = {i["id"] for i in live}
     canvas["plan"] = [x for x in canvas["plan"] if x in live_ids]
     canvas["people"] = len(people)
-    canvas["solo"] = not _others(meta, rows)
+    canvas["solo"] = _solo(meta, rows)
     if not canvas["planning"]:
         # Hidden, not deleted: switching planning back on shows them again.
         canvas["plan"] = []
@@ -393,9 +399,10 @@ def get_canvas(req, cid):
     return 200, _view(cid, req["client"])
 
 
-def _set_planning(cid, on, actor, client):
+def _set_planning(cid, on, actor, client, together=False):
     """On: anyone who can edit, unless the collection is shown. Off: only
-    while solo (nobody but the owner's devices has written to it)."""
+    while solo (nobody but the owner's devices has written to it, and it
+    hasn't been shared to plan together). `together`: planning on, for good."""
     if not isinstance(on, bool):
         raise ApiError(400, "planning must be true or false")
 
@@ -404,14 +411,14 @@ def _set_planning(cid, on, actor, client):
         if loaded is None:
             raise ApiError(404, "canvas not found")
         meta, rows, _ = loaded
-        if _planning(meta) == on:
+        if _planning(meta) == on and (not together or meta.get("together")):
             return
         if on and meta.get("view_id"):
             raise ApiError(409, "it's shown with a view-only link: stop showing it first, "
                                 "or use Plan with friends to plan in a copy")
-        if not on and _others(meta, rows):
+        if not on and not _solo(meta, rows):
             raise ApiError(409, "others have joined this collection, so planning stays on")
-        store.set_planning(cid, on, actor, client, meta["version"])
+        store.set_planning(cid, on, actor, client, meta["version"], together=together)
     _retry_conflicts(attempt)
 
 
@@ -421,8 +428,11 @@ def patch_canvas(req, cid):
     _rate_limit(req, WRITE_LIMIT)
     actor = _actor(b)
     _writable(cid, client)
-    if "planning" in b:
-        _set_planning(cid, b["planning"], actor, client)
+    together = b.get("together")
+    if together is not None and (together is not True or b.get("planning") is False):
+        raise ApiError(400, "together can only be true (and turns planning on)")
+    if "planning" in b or together:
+        _set_planning(cid, b.get("planning", True), actor, client, together=bool(together))
         if not any(k in b for k in ("name", "note", "date_from", "date_to")):
             return 200, {"canvas": _canvas_out(_meta_or_404(cid), client)}
     fields = {}
@@ -737,10 +747,10 @@ def show_canvas(req, cid):
         meta, rows, _ = loaded
         if meta.get("view_id"):
             return meta["view_id"]
+        if not _solo(meta, rows):
+            raise ApiError(409, "it's planned together with friends, so it can't be shown")
         if _planning(meta):
             raise ApiError(409, "switch planning off before showing this collection")
-        if _others(meta, rows):
-            raise ApiError(409, "others have joined this collection, so it can't be shown")
         vid = store.new_canvas_id()
         store.show_canvas(cid, vid, show_as, actor, client, meta["version"])
         return vid

@@ -300,15 +300,18 @@ def update_canvas(cid, fields, actor_name, client_id=None):
         raise NotFound("canvas") from None
 
 
-def set_planning(cid, on, actor_name, client_id, expected_version):
+def set_planning(cid, on, actor_name, client_id, expected_version, together=False):
     """Switch planning on or off. Only if nothing changed since the caller
     read the canvas (it checked the rules on that read); turning it on also
-    requires that the canvas isn't shown."""
-    bump = _bump(cid, extra_set="planning = :p",
+    requires that the canvas isn't shown. `together` also records that its
+    editable link went out to plan with friends ("Plan it together"), which
+    keeps planning on from then on."""
+    bump = _bump(cid, extra_set="planning = :p" + (", together = :t" if together else ""),
                  condition="version = :v" + (" AND attribute_not_exists(view_id)" if on else ""),
-                 values={":p": bool(on), ":v": expected_version})
+                 values={":p": bool(on), ":v": expected_version, **({":t": True} if together else {})})
+    action = "plan_together" if together else "planning_on" if on else "planning_off"
     try:
-        _transact([bump, _put(_log_row(cid, actor_name, "planning_on" if on else "planning_off", client_id))])
+        _transact([bump, _put(_log_row(cid, actor_name, action, client_id))])
     except _TxFailed:
         if get_meta(cid) is None:
             raise NotFound("canvas") from None

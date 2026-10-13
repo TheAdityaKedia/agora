@@ -141,7 +141,13 @@ def run(shots):
         a.click('[data-act="share"]')
         a.locator("dialog .ac-choice", has_text="Plan it together").click()
         answer_dialog(a, name="Adi")
-        expect(a.locator('.plan-switch[aria-checked="true"]')).to_be_visible()
+        # Planned together from now on, before anyone has joined: no
+        # switch, and Share just sends the link (no Show it / Plan it again).
+        expect(a.locator(".plan-switch")).to_have_count(0)
+        expect(a.locator(".cv-kickrow")).to_contain_text("Planning together")
+        a.click('[data-act="share"]')
+        expect(a.locator("dialog[open]")).to_have_count(0)
+        expect(a.locator(".ac-toast")).to_contain_text("Link copied")
         a.locator(".item").first.locator('[data-act="vote"]').click()
         expect(a.locator(".item").first.locator(".voters")).to_have_text("Adi")
 

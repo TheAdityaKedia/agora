@@ -75,6 +75,36 @@ def test_planning_locks_on_once_someone_else_joins(api):
     assert api("PATCH", f"/canvases/{cid}", {"planning": False})["statusCode"] == 409
 
 
+def test_plan_it_together_locks_planning_on_before_anyone_joins(api):
+    # "Plan it together" hands out the editable link: from then on it's a
+    # planned collection, even while no friend has done anything yet.
+    cid = new(api)
+    r = api("PATCH", f"/canvases/{cid}", {"together": True, "actor_name": "Mira"})
+    assert r["statusCode"] == 200 and r["json"]["canvas"]["planning"] is True
+    v = view(api, cid)
+    assert v["canvas"]["solo"] is False
+    assert [e["action"] for e in v["log"]][:1] == ["plan_together"]
+    r = api("PATCH", f"/canvases/{cid}", {"planning": False})
+    assert r["statusCode"] == 409 and "planning stays on" in r["json"]["error"]
+    r = show(api, cid)
+    assert r["statusCode"] == 409 and "planned together" in r["json"]["error"]
+    # Saying it again is a no-op; it can't be undone or combined with off.
+    version = v["canvas"]["version"]
+    assert api("PATCH", f"/canvases/{cid}", {"together": True})["statusCode"] == 200
+    assert view(api, cid)["canvas"]["version"] == version
+    assert api("PATCH", f"/canvases/{cid}", {"together": False})["statusCode"] == 400
+    assert api("PATCH", f"/canvases/{cid}", {"together": True, "planning": False})["statusCode"] == 400
+
+
+def test_plan_it_together_on_a_solo_plan(api):
+    # Planning already on (a solo itinerary): still marks it shared.
+    cid = new(api)
+    api("PATCH", f"/canvases/{cid}", {"planning": True})
+    assert view(api, cid)["canvas"]["solo"] is True
+    api("PATCH", f"/canvases/{cid}", {"together": True})
+    assert view(api, cid)["canvas"]["solo"] is False
+
+
 def test_owner_devices_count_as_solo(api):
     cid = new(api)
     pc = Api(client="client-mira-pc01")
