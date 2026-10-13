@@ -14,22 +14,26 @@ collection parts of `frontend/index.html`.
 ## 1. What people can do
 
 A **collection** is a named list of things to do, at its own unguessable link
-(`canvas.html?c=<22-char id>`). There are no accounts: **anyone with the link
-can edit it**.
+(`canvas.html?c=<22-char id>`). There are no accounts: **anyone with that
+(editable) link can edit it**. A collection can also be **shown** through a
+separate view-only link that changes nothing. Sharing is spelled out in
+[`feature-specs/collection-sharing.md`](../feature-specs/collection-sharing.md).
 
 | Concept | What it is |
 |---|---|
 | **Item** | One thing in a collection: an **Agora event** (a copy of a listing, added from the main site) or **your own item** (anything else: dinner, a park, a ride). |
 | **Your own items** | Free text + optional time, link, note and a **kind** (🍽️ Food, 🍸 Drinks, 🌳 Outdoors, 🚗 Getting there, 📌 Other). Shown as a tinted dashed card with the kind's icon. Editable; Agora events are not. |
+| **Planning** | A setting on each collection: **Interested** and **The plan** show only with it on. New collections start with it off (older ones count as on). While the collection is just yours there's a **Planning** switch; once anyone else joins (adds, removes, votes or comments) it stays on. Off hides votes and the plan; they come back when it's switched on. |
 | **👍 Interested** | One per browser per item, shown by name. "Interested", not "I'm in": the collection is for deciding what looks good. |
-| **Comments** | Short named comments per item. |
+| **Comments** | Short comments per item, in every collection: on your own list they're notes to yourself (no name needed). |
 | **The plan** | An ordered list of steps (items), pinned on top. Items have **Add to plan** / **Take out of plan**; steps are reordered by **press, hold and drag** (keyboard: Alt+↑/↓). **Add the plan to your calendar** downloads one `.ics`. |
 | **Remove / Restore** | Removing is a soft delete with Undo; the item stays restorable from **Activity** forever. Removing something in the plan, or that others are interested in or commented on, asks first. |
 | **Activity** | The last 50 changes ("You added …", "Sam removed … (Fri, Oct 9, 9:45 PM)"), with Restore on removals. |
-| **Personal vs shared** | A collection only you have touched is a plain list (no Interested, comments or "Added by"). Those appear once it's shared: someone else opened it, more than one browser has written to it, or you shared it as-is. The plan works in both. |
-| **Share** | "Share this collection" (friends edit it with you) or "Share a copy" (they get their own copy; yours stays as it is). **Duplicate** makes a copy for yourself. |
-| **Your collections** | `canvas.html` with no `?c=`: every collection this browser opened, split into **Yours** and **Shared with you**, with Hide. |
-| **This is mine** | Marks a collection started on another device as yours on this one too (owner devices count as one person). |
+| **Three states** | **Personal** (just you), **Shown** (just you, plus a view-only link) or **Planned** (you and friends, planning on). Only a solo collection with planning off can be shown; a planned one never is. "Added by <name>" shows once more than one person is involved. |
+| **Share** | Depends on the state. Personal: **Show it** (asks for a "Show as" name, hands out the view-only link), **Plan it together** (switches planning on, hands out the editable link) or **Send a copy instead**. Shown: the view-only link, **Plan with friends** (a planning copy), **Change "Show as"**, **Stop showing** (old links then say "isn't shown anymore"; showing again makes a new link). Planned: the editable link. **Duplicate** makes a copy for yourself. |
+| **View-only page** | `canvas.html?v=<viewId>`: name, note, "By <show as>", the events and only the owner's comments; nothing to edit. **Plan with friends** / **Save a copy** make the visitor's own copy (planning on / off), headed "From <show as>'s collection", with the curator's comments. A shown collection refuses writes from anyone but its owner's devices. |
+| **Your collections** | `canvas.html` with no `?c=`: every collection this browser opened, split into **Yours**, **Shared with you** and **Following** (view-only links opened), with Hide. |
+| **Your other devices** | **Use on another device** (owners) makes a one-time link, valid 15 minutes (`canvas.html?device=<token>`); the browser that opens it becomes one of your devices (they count as one person). **Not mine** undoes it. Lost every device: `scripts/admin.py add-owner`. |
 | **Default collection** | Per browser: where a future one-tap ☆ Save will add events. |
 | **Collecting mode** | On the main page, "Start a collection" (or a collection's **Add events**) turns on a tray, "Adding to <name> · N items", with an add button on every event row. It switches itself off after a day unused. |
 | **Private beta** | Hidden unless the browser is a beta member (came in through a `/beta/` link) **and** beta is switched on for this visit (the `/beta/` link does that; members also get a "Beta" switch in the header; the plain address in a new tab starts with it off). See [`README.md`](README.md) → "Private beta". |
@@ -64,8 +68,12 @@ can edit it**.
   "one vote per browser", which collections are *yours*, and which changes
   were *yours*.
 - The API **never returns a client id**. It returns yes/no answers instead:
-  `canvas.yours`, `canvas.claimed`, `vote.mine`, `comment.mine`, `log[].mine`,
-  `removed[].removed_by_you`.
+  `canvas.yours`, `canvas.claimed`, `canvas.solo`, `vote.mine`,
+  `comment.mine`, `log[].mine`, `removed[].removed_by_you`.
+- **Owner devices** are the creating browser plus those added by a device
+  link (`owner_clients`). Only they can show a collection, make device links,
+  and write to a shown collection; only their comments appear on the
+  view-only page. The view-only link never reveals the collection's id.
 - **Names are self-declared** ("What's your name?", asked once, the first time
   it matters) and stored per browser. Nothing verifies them.
 - **IP addresses** are only used for rate limits, as a salted hash; never
@@ -80,20 +88,24 @@ self-expiring rows, point-in-time recovery on prod (35 days).
 
 | PK | SK | Row | Fields |
 |---|---|---|---|
-| `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: "This is mine" browsers). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
+| `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: browsers added by a device link), `planning` (bool; absent = on, for collections made before it existed), `view_id` + `show_as` (while shown), `copied_from` (`{view_id, name, show_as}` on copies made from a view-only page). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
 | `C#<id>` | `ITEM#<itemId>` | an item | `id`, `kind` (`event` / `custom`), `added_by_name`, `added_by_client`, `added_at`. **event:** `event` = {`id`, `title`, `start_time`, `location`, `url`, `image_url`, `sources`} copied when added. **custom:** `title`, `start_time`, `url`, `note`, `category` (`food`, `drinks`, `outdoors`, `travel`, `other`). **removed:** `removed_at`, `removed_by_name`, `removed_by_client`. |
 | `C#<id>` | `VOTE#<itemId>#<clientId>` | one 👍 Interested | `name`, `at` |
-| `C#<id>` | `CMT#<itemId>#<commentId>` | a comment | `id`, `name`, `client_id`, `text`, `at`, `removed_at` if deleted |
+| `C#<id>` | `CMT#<itemId>#<commentId>` | a comment | `id`, `name`, `client_id`, `text`, `at`, `removed_at` if deleted; `from_curator` (and no `client_id`) on comments carried into a copy from a view-only page |
 | `L#<id>` | `<ms, 13 digits>#<6 hex>` | an activity entry | `action`, `actor_name`, `client_id`, `at`, and as relevant `item_id`, `item_title`, `name`, `fields` |
+| `V#<viewId>` | `VIEW` | a view-only link | `canvas_id`, `created_at`, `stopped_at` once stopped (kept so old links can say so) |
+| `D#<token>` | `DEVICE` | a device link | `canvas_id`, `made_by_client`, `ttl` (15 minutes; deleted when used) |
 | `RL#<ipHash>#<kind>#<bucket>` | `RL` | a rate-limit counter | `count`, `ttl` |
 
 **Item ids.** An Agora event's item id is `ev_<eventId>`, so adding the same
 event twice finds the existing item (and restores it if removed). Your own
 items get `c_<random>`.
 
-**Activity actions:** `created`, `duplicated`, `renamed`, `edited_note`,
-`set_dates`, `added`, `edited`, `removed`, `restored`, `voted`, `commented`,
-`deleted_comment`, `added_to_plan`, `removed_from_plan`, `moved_in_plan`; and,
+**Activity actions:** `created`, `duplicated`, `copied_from_view`, `renamed`,
+`edited_note`, `set_dates`, `added`, `edited`, `removed`, `restored`, `voted`,
+`commented`, `deleted_comment`, `added_to_plan`, `removed_from_plan`,
+`moved_in_plan`, `planning_on`, `planning_off`, `shown`, `renamed_show`,
+`stopped_showing`; and,
 from before plans had steps, `picked_winner` and `cleared_winner`. Un-voting
 writes no entry.
 
@@ -101,8 +113,10 @@ writes no entry.
 items, votes, comments; strongly consistent) and the newest 50 rows of
 `L#<id>`. `handler._view` assembles the response: live items (sorted by time,
 undated last) with their votes and comments, removed items, the plan
-(filtered to live items), activity, and the "people" count that decides
-personal vs shared.
+(filtered to live items), activity, the "people" count (for "Added by"
+names) and `solo` (no browser but the owner's devices has written: decides
+whether planning can be switched off and whether it can be shown). With
+planning off, votes and the plan are left out of the view, not deleted.
 
 **Every write is one transaction**: the change + `META.version += 1` (+
 `updated_at`) + usually an activity row. So:
@@ -131,24 +145,31 @@ shown in Activity.
 | `POST /canvases` | `name`, `note?`, `date_from?`, `date_to?` | `201` the full view |
 | `GET /canvases/{id}` | — | the full view: `canvas`, `items[]`, `removed[]`, `log[]` |
 | `GET /canvases/{id}?if_version=N` | — | `{unchanged: true, version}` or the full view |
-| `PATCH /canvases/{id}` | any of `name`, `note`, `date_from`, `date_to` | `{canvas}` |
-| `POST /canvases/{id}/duplicate` | `name?` | `201` the new collection's full view |
-| `POST` / `DELETE /canvases/{id}/claim` | — | the full view ("This is mine" / "Not mine") |
+| `PATCH /canvases/{id}` | any of `name`, `note`, `date_from`, `date_to`, `planning` | `{canvas}`; `planning: false` only while solo, `true` not while shown (`409`) |
+| `POST /canvases/{id}/duplicate` | `name?` | `201` the new collection's full view (planning off) |
+| `POST` / `PATCH` / `DELETE /canvases/{id}/show` | `show_as` (POST, PATCH) | owner devices: start showing (solo, planning off; returns `{view_id}`), rename, stop |
+| `GET /views/{viewId}` (`?if_version=`) | — | the view-only page's data; `410` once stopped |
+| `POST /views/{viewId}/copy` | `name?`, `planning` | `201` the new copy's full view (Plan with friends / Save a copy) |
+| `POST /canvases/{id}/device-link` | — | owner devices: `201 {token, expires_at}` |
+| `POST /device-links/{token}` | — | makes this browser an owner device: `{canvas_id}`; `404` if used or expired |
+| `DELETE /canvases/{id}/claim` | — | the full view ("Not mine") |
 | `POST /canvases/{id}/plan` | `op` (`add`, `remove`, `move`), `item_id`, `to?` (position, 0 first) | `{plan: [itemId…]}` |
 | `POST /canvases/{id}/items` | `event_id`, or `custom: {title, start_time?, url?, note?, category?}` | `201 {item, created: true}`; `200 … created: false` if already there |
 | `PATCH /canvases/{id}/items/{itemId}` | `custom: {…}`: only the fields that change; empty clears one (not the title) | `{item}`; your own items only |
 | `DELETE /canvases/{id}/items/{itemId}` | — | soft delete (also leaves the plan) |
 | `POST /canvases/{id}/items/{itemId}/restore` | — | restore (not back into the plan) |
 | `PUT` / `DELETE /canvases/{id}/items/{itemId}/vote` | `name` (PUT) | Interested / undo |
-| `POST /canvases/{id}/items/{itemId}/comments` | `name`, `text` | `201 {comment}` |
+| `POST /canvases/{id}/items/{itemId}/comments` | `name?`, `text` | `201 {comment}` |
 | `DELETE /canvases/{id}/items/{itemId}/comments/{commentId}` | — | soft delete |
 
 **Where a plan step goes when added:** before the first step that starts
 later, so a dated plan starts in time order; undated steps go last.
 
-**Errors:** `400` invalid input (message says which field), `404` unknown
-collection/item/event (or an event that has left the manifest), `409` a cap
-or a conflict that survived retries, `413` body over 16 KB, `429` rate limit
+**Errors:** `400` invalid input (message says which field), `403` a write to
+a shown collection from a non-owner (or an owner-only action), `404` unknown
+collection/item/event (or an event that has left the manifest), `409` a cap,
+a conflict that survived retries, planning off (votes, the plan) or a
+sharing rule, `410` a stopped view-only link, `413` body over 16 KB, `429` rate limit
 (with `Retry-After`), `503` the manifest couldn't be fetched.
 
 **Limits:** 100 live items, 20 plan steps, 1,000 comments per collection;
@@ -169,21 +190,22 @@ data refresh). The copy is never updated afterwards (see the gaps below).
 
 | File | Role |
 |---|---|
-| `frontend/canvas-client.js` | Shared by both pages, as `window.AgoraCanvas`: API calls, client id, name prompt, dialogs (form, choice), toasts, share sheet, the browser's lists (`mine`, `shared`, default, active collection), the beta gate. |
-| `frontend/canvas.html` | One collection (`?c=`), or "Your collections" (no `?c=`). Renders everything from the `GET` view; every action is a write, then a refresh. |
+| `frontend/canvas-client.js` | Shared by both pages, as `window.AgoraCanvas`: API calls, client id, name prompt, dialogs (form, choice), toasts, share sheet, the browser's lists (`mine`, `shared`, `following`, default, active collection), link builders (`canvasUrl`, `viewUrl`, `deviceUrl`), the beta gate. |
+| `frontend/canvas.html` | One collection (`?c=`), a view-only page (`?v=`), a device link landing (`?device=`), or "Your collections" (none). Renders everything from the API's response; every action is a write, then a refresh. |
 | `frontend/index.html` | Collecting mode: the tray and the per-row add buttons (`canvasMode`, `canvasAddHtml`, `toggleInCanvas`). |
 | `frontend/beta/` | `/beta/` entry pages: set the beta flag and redirect. Keep them forever: beta-era links point there. |
 
 **What the browser stores** (`localStorage`, keys `agora.canvas.*`):
 `client` (the id), `name`, `mine` (collections opened here, ≤ 100, with
-`yours`), `shared` (shared as-is from here), `default`, `active` (collecting
+`yours`), `shared` (shared to plan from here), `following` (view-only links opened here), `default`, `active` (collecting
 mode, expires after 24 h unused), `api` (override), `beta` (membership);
 and in `sessionStorage`, `agora.beta.on` (beta switched on this visit). Clearing site
 data loses the list, the name and the default, not the collections.
 
 **Page behaviour worth knowing:** polling never re-renders while you are
 typing in a field or dragging a plan step (it waits); a step being dragged is
-moved on screen first and saved after; while the beta gate is on, collection
+moved on screen first and saved after; tapping a plan step (or Enter on it)
+scrolls to its event and flashes it; while the beta gate is on, collection
 pages keep `?beta=1` in the address bar so a copied link works.
 
 ## 7. Tests and checks
@@ -193,7 +215,7 @@ pages keep `?beta=1` in the address bar so a copied link works.
 | API (routes, validation, store, plan concurrency, privacy) | `cd canvas && python -m pytest` (moto, no AWS) | yes, before every deploy |
 | Infrastructure (CDK assertions) | same suite, `tests/test_infra.py` | yes |
 | After deploy | `scripts/smoke.py` against the dev URL | yes, on branch deploys |
-| Pages end to end (three browsers: beta gate, collecting mode, sharing, Interested, comments, plan drag, edit, remove/restore, duplicate, claim/default) | `CHROMIUM_PATH=… python canvas/scripts/e2e_frontend.py [--shots DIR]` | **no**, run it by hand |
+| Pages end to end (several browsers: beta gate, collecting mode, notes, Plan it together, Interested, comments, plan drag and tap, edit, remove/restore, duplicate, Show it, the view-only page, Plan with friends, Stop showing, device links, default, Your collections) | `CHROMIUM_PATH=… python canvas/scripts/e2e_frontend.py [--shots DIR]` | **no**, run it by hand |
 
 ## 8. Changing things: where to look
 

@@ -1,7 +1,7 @@
 # Collection sharing: show it, or plan it together
 
-**Status: spec, not started (2026-10-13). Must ship before collections leave
-the beta.** Decisions below were settled with the owner on 2026-10-13. UI
+**Status: built (2026-10-13), in review; must ship before collections leave
+the beta.** How it works now: [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md). Decisions below were settled with the owner on 2026-10-13. UI
 mocks: the "Collections: lists and plans" design canvas (the Hybrid row).
 How collections work today: [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md).
 
