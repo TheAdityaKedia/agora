@@ -56,11 +56,12 @@
   //   link) or the switch turns it on. The plain address in a new tab starts
   //   with it off.
   //
-  // LAUNCH: set BETA_GATE = false (and MAP_BETA_GATE in index.html).
-  // Everything shows for everyone, the switch goes, new links drop /beta/,
-  // and the /beta/ pages keep redirecting, so links shared during the beta
-  // still open. A soft gate: it hides UI, it doesn't secure the API.
-  const BETA_GATE = true;
+  // Collections launched 2026-10-13: BETA_GATE is false, so they show for
+  // everyone, new links drop /beta/, and the /beta/ pages keep redirecting
+  // (links shared during the beta still open). The map is still gated
+  // (MAP_BETA_GATE in index.html), so members keep the switch there.
+  // A soft gate: it hides UI, it doesn't secure the API.
+  const BETA_GATE = false;
   const BETA_ON = "agora.beta.on";  // sessionStorage; index.html reads it too
   const session = {
     get() { try { return sessionStorage.getItem(BETA_ON); } catch { return memory[BETA_ON] || null; } },
@@ -78,17 +79,17 @@
     if (on) u.searchParams.set("beta", "1"); else u.searchParams.delete("beta");
     location.replace(u.href);
   }
-  // The "Beta" switch, for members while the gate is on; null otherwise.
-  function betaToggle() {
-    if (!BETA_GATE || !betaMember()) return null;
+  // The "Beta" switch, for members while something is still gated (pass
+  // the page's own gates, e.g. the map's); null otherwise.
+  function betaToggle(gated = BETA_GATE) {
+    if (!gated || !betaMember()) return null;
     const on = betaEnabled();
     const b = document.createElement("button");
     b.type = "button";
     b.className = "ac-beta";
     b.setAttribute("role", "switch");
     b.setAttribute("aria-checked", String(on));
-    b.title = on ? "Beta features are on: collections, the map. Tap to turn them off."
-      : "Turn on beta features: collections, the map.";
+    b.title = on ? "Beta features are on. Tap to turn them off." : "Turn on beta features.";
     b.innerHTML = '<span class="ac-beta-label">Beta</span><span class="ac-beta-track" aria-hidden="true"></span>';
     b.addEventListener("click", () => setBeta(!on));
     return b;

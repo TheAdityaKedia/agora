@@ -29,9 +29,9 @@ here.
 - **Collections (event canvases)** — save events for yourself, or share a
   collection so friends add events, vote 👍 by name, comment and pick a plan;
   duplicate / share a copy. Agora's first live backend (AWS Lambda +
-  DynamoDB). **Built, in review before launch:** show or plan — view-only
-  links for curators, planning as a per-collection setting, comments
-  everywhere, copies "From Mira's collection", device links; spec
+  DynamoDB). Launched 2026-10-13 with show or plan — view-only links for
+  curators, planning as a per-collection setting, comments everywhere,
+  copies "From Mira's collection", device links; spec
   [`feature-specs/collection-sharing.md`](../feature-specs/collection-sharing.md).
   Next: a one-tap ☆ Save on every event card.
   Spec: [`feature-specs/event-canvases.md`](../feature-specs/event-canvases.md);

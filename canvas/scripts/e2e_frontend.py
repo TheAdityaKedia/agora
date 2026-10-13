@@ -95,14 +95,13 @@ def run(shots):
         adi = hermetic(browser.new_context(**phone))
         a = adi.new_page()
         watch(a, errors)
-        # Private beta: without the flag, no collections UI anywhere...
-        a.goto(f"{WEB}/?api={API}")
-        expect(a.locator(".event").first).to_be_visible()
-        expect(a.locator("#plan-btn")).to_be_hidden()
-        a.goto(f"{WEB}/canvas.html")
-        expect(a.locator("h1")).to_have_text("Collections are in private beta")
-        # ...and the /beta/ invite link lets this browser in.
+        # Launched: collections show for everyone, with no beta flag; the
+        # old /beta/ invite still lands on the site.
+        a.goto(f"{WEB}/canvas.html?api={API}")
+        expect(a.locator("h1")).to_have_text("Your collections")
         a.goto(f"{WEB}/beta/?api={API}")
+        expect(a.locator(".event").first).to_be_visible()
+        a.goto(f"{WEB}/")
         expect(a.locator(".event").first).to_be_visible()
         expect(a.locator("#plan-btn")).to_be_visible()
         a.click("#plan-btn")
@@ -158,16 +157,13 @@ def run(shots):
         sam = hermetic(browser.new_context(**phone))
         s = sam.new_page()
         watch(s, errors)
-        # Links made during the beta go through /beta/, which lets Sam in;
-        # the bare page link would show the beta notice instead.
+        # Links are plain page links now; a link shared during the beta
+        # (through /beta/) still opens.
         cid0 = canvas_url.split("c=")[1].split("&")[0]
         share_url = a.evaluate(f"AgoraCanvas.canvasUrl('{cid0}')")
-        assert "/beta/canvas.html?c=" in share_url, share_url
-        # Adi's address bar carries ?beta=1 too, so a copied link works; a
-        # bare page link (beta=1 dropped) shows the beta notice instead.
-        assert "beta=1" in canvas_url, canvas_url
-        s.goto(f"{WEB}/canvas.html?c={cid0}&api={API}")
-        expect(s.locator("h1")).to_have_text("Collections are in private beta")
+        assert "/beta/" not in share_url and "/canvas.html?c=" in share_url, share_url
+        s.goto(f"{WEB}/beta/canvas.html?c={cid0}&api={API}")
+        expect(s.locator(".cv-name")).to_have_text("Adi & Sam hangout")
         s.goto(share_url + f"&api={API}")
         expect(s.locator(".item")).to_have_count(2)
         expect(s.locator(".cv-name")).to_have_text("Adi & Sam hangout")
@@ -317,8 +313,7 @@ def run(shots):
         expect(a.locator('[data-act="vote"]')).to_have_count(3)
         a.click(".plan-switch")
         expect(a.locator('[data-act="vote"]')).to_have_count(0)
-        # A link copied from the address bar lets a new browser in.
-        assert "beta=1" in dup_url, dup_url
+        # A link copied from the address bar works in a new browser.
         jo = hermetic(browser.new_context(**phone))
         j = jo.new_page()
         watch(j, errors)
@@ -352,7 +347,7 @@ def run(shots):
         expect(a.locator(".shown")).to_contain_text("Shown with a view-only link, as @adi")
         expect(a.locator(".plan-switch")).to_have_count(0)
         view_url = a.evaluate(f"AgoraCanvas.viewUrl('{vid}')")
-        assert "/beta/canvas.html?v=" in view_url and dup_id not in view_url, view_url
+        assert "/canvas.html?v=" in view_url and dup_id not in view_url, view_url
         if shots:
             a.screenshot(path=f"{shots}/4-shown.png", full_page=True)
         # Sam opens it: read-only, the curator's comment-free picks, Following.

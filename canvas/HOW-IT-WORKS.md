@@ -36,7 +36,7 @@ separate view-only link that changes nothing. Sharing is spelled out in
 | **Your other devices** | **Use on another device** (owners) makes a one-time link, valid 15 minutes (`canvas.html?device=<token>`); the browser that opens it becomes one of your devices (they count as one person). **Not mine** undoes it. Lost every device: `scripts/admin.py add-owner`. |
 | **Default collection** | Per browser: where a future one-tap ☆ Save will add events. |
 | **Collecting mode** | On the main page, "Start a collection" (or a collection's **Add events**) turns on a tray, "Adding to <name> · N items", with an add button on every event row. It switches itself off after a day unused. |
-| **Private beta** | Hidden unless the browser is a beta member (came in through a `/beta/` link) **and** beta is switched on for this visit (the `/beta/` link does that; members also get a "Beta" switch in the header; the plain address in a new tab starts with it off). See [`README.md`](README.md) → "Private beta". |
+| **Private beta** | Over: collections launched 2026-10-13 (`BETA_GATE = false`). Links shared during the beta (`/beta/…`) still open. The map is still gated the same way. See [`README.md`](README.md) → "Private beta". |
 
 ## 2. The moving parts
 

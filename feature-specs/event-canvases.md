@@ -6,7 +6,7 @@
 > the owner) to also cover saving events for yourself — see
 > "Collections for yourself" below.
 
-**Status: shipped, in private beta.** For how it works *now* (features,
+**Status: shipped; launched to everyone 2026-10-13.** For how it works *now* (features,
 data model, API, frontend) read [`canvas/HOW-IT-WORKS.md`](../canvas/HOW-IT-WORKS.md);
 this spec keeps the original decisions and their reasons (settled with the
 owner, 2026-10-02, and amended since) and may lag the code in detail. Known

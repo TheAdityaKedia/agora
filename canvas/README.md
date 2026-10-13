@@ -23,10 +23,13 @@ scripts/admin.py          operator show / hard-delete a canvas
 tests/              pytest + moto (API) and CDK assertions (infra)
 ```
 
-## Private beta (collections are gated)
+## Private beta (over for collections)
 
-Collections ship behind a soft gate: `BETA_GATE = true` in
-`frontend/canvas-client.js`. With it on:
+**Collections launched on 2026-10-13:** `BETA_GATE = false` in
+`frontend/canvas-client.js`. Everyone sees them, new links drop `/beta/`, and
+`frontend/beta/` stays so links shared during the beta still open. The map
+view is still gated (`MAP_BETA_GATE`, below), so beta members keep the Beta
+switch on the main page. How the gate worked while it was on:
 
 - **Invite link:** `https://theadityakedia.github.io/agora/beta/`. Opening it
   makes that browser a **beta member** and lands on the normal site with beta

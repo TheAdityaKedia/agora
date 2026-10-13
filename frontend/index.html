@@ -914,9 +914,9 @@
         && sessionStorage.getItem("agora.beta.on") === "1";
     } catch { return false; }
   })();
-  // The "Beta" switch, for beta members (canvas-client.js).
+  // The "Beta" switch, for beta members while anything here is gated.
   if (AC && AC.betaToggle) {
-    const t = AC.betaToggle();
+    const t = AC.betaToggle(MAP_BETA_GATE || AC.BETA_GATE);
     if (t) document.getElementById("beta-slot").appendChild(t);
   }
 
