@@ -74,6 +74,10 @@ separate view-only link that changes nothing. Sharing is spelled out in
   link (`owner_clients`). Only they can show a collection, make device links,
   and write to a shown collection; only their comments appear on the
   view-only page. The view-only link never reveals the collection's id.
+  They count as one person: on any of them, comments, removals and activity
+  from the others read as "You" (`mine`); votes stay one per browser. Anyone
+  else who opens a shown collection by its editable address gets it
+  read-only (nothing to change is offered; the API would refuse it anyway).
 - **Names are self-declared** ("What's your name?", asked once, the first time
   it matters) and stored per browser. Nothing verifies them.
 - **IP addresses** are only used for rate limits, as a salted hash; never

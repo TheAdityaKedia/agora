@@ -114,6 +114,29 @@ def test_owner_devices_count_as_solo(api):
     assert view(api, cid)["canvas"]["solo"] is True
 
 
+def test_owner_devices_see_each_others_changes_as_yours(api):
+    cid = new(api)
+    pc = Api(client="client-mira-pc01")
+    token = api("POST", f"/canvases/{cid}/device-link")["json"]["token"]
+    pc("POST", f"/device-links/{token}")
+    add(api, cid, E1)
+    api("POST", f"/canvases/{cid}/items/ev_{E1}/comments", {"text": "sit left"})
+    add(api, cid, E2)
+    api("DELETE", f"/canvases/{cid}/items/ev_{E2}")
+    v = view(pc, cid)
+    assert v["items"][0]["comments"][0]["mine"] is True
+    assert v["removed"][0]["removed_by_you"] is True
+    assert all(e["mine"] for e in v["log"] if "mine" in e)
+    # Not for a friend, and votes stay per browser (one per browser).
+    sam = Api(**SAM)
+    api("PATCH", f"/canvases/{cid}", {"planning": True})
+    api("PUT", f"/canvases/{cid}/items/ev_{E1}/vote", {"name": "Mira"})
+    assert view(pc, cid)["items"][0]["you_voted"] is False
+    v = view(sam, cid)
+    assert v["items"][0]["comments"][0]["mine"] is False
+    assert not any(e.get("mine") for e in v["log"])
+
+
 def test_planning_must_be_a_boolean(api):
     cid = new(api)
     assert api("PATCH", f"/canvases/{cid}", {"planning": "yes"})["statusCode"] == 400
