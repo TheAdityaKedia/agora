@@ -36,8 +36,8 @@ def test_new_collections_start_as_lists(api):
     assert api("PUT", f"/canvases/{cid}/items/ev_{E1}/vote", {"name": "Mira"})["statusCode"] == 409
     assert api("POST", f"/canvases/{cid}/plan", {"op": "add", "item_id": f"ev_{E1}"})["statusCode"] == 409
     # Comments work everywhere: notes to yourself.
-    r = api("POST", f"/canvases/{cid}/items/ev_{E1}/comments", {"name": "Mira", "text": "sit left"})
-    assert r["statusCode"] == 201
+    r = api("POST", f"/canvases/{cid}/items/ev_{E1}/comments", {"text": "sit left"})
+    assert r["statusCode"] == 201 and r["json"]["comment"]["name"] == ""
 
 
 def test_legacy_collections_count_as_planning_on(api):

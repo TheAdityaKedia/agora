@@ -673,7 +673,8 @@ def delete_vote(req, cid, iid):
 def add_comment(req, cid, iid):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
-    name = _clean(req["body"].get("name"), "name", LIMITS["name"])
+    # Optional: a note on your own list doesn't need a name (shown as "You").
+    name = _clean(req["body"].get("name"), "name", LIMITS["name"], required=False)
     text = _clean(req["body"].get("text"), "text", LIMITS["comment"], multiline=True)
     _writable(cid, client)
     row = _item_or_404(cid, iid)

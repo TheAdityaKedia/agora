@@ -479,11 +479,12 @@ def test_names_are_optional_for_curating(canvas):
     assert item["added_by_name"] == ""
     assert me("DELETE", f"/canvases/{cid}/items/{item['id']}")["statusCode"] == 200
     assert me("PATCH", f"/canvases/{cid}", {"note": "x"})["statusCode"] == 200
-    # votes and comments are seen by others, so they still need a name
+    # A vote is seen by others, so it needs a name; a comment can be a note
+    # to yourself (the page asks for a name once others are involved).
     me("POST", f"/canvases/{cid}/items/{item['id']}/restore")
     assert me("PUT", f"/canvases/{cid}/items/{item['id']}/vote", {})["statusCode"] == 400
     r = me("POST", f"/canvases/{cid}/items/{item['id']}/comments", {"text": "hi"})
-    assert r["statusCode"] == 400
+    assert r["statusCode"] == 201
 
 
 def test_yours_and_people(api, canvas):
