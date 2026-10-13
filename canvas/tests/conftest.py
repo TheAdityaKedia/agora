@@ -70,4 +70,8 @@ def canvas(api):
     r = api("POST", "/canvases", {"name": "Adi & Sam hangout", "actor_name": "Adi",
                                   "date_from": "2026-10-10", "date_to": "2026-10-12"})
     assert r["statusCode"] == 201, r["json"]
-    return r["json"]["canvas"]["id"]
+    cid = r["json"]["canvas"]["id"]
+    # Most tests are about planning together: switch it on (new collections
+    # start as plain lists; test_sharing.py covers that).
+    assert api("PATCH", f"/canvases/{cid}", {"planning": True})["statusCode"] == 200
+    return cid
