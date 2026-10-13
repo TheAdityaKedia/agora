@@ -605,7 +605,12 @@ def test_device_links(api, canvas, monkeypatch):
 def test_claim_cap_and_404(api, canvas, monkeypatch):
     monkeypatch.setattr(store, "OWNER_CAP", 1)
     assert claim(api, Api(client="client-dev-00001"), canvas)["statusCode"] == 200
-    assert claim(api, Api(client="client-dev-00002"), canvas)["statusCode"] == 409
+    third = Api(client="client-dev-00002")
+    token = api("POST", f"/canvases/{canvas}/device-link")["json"]["token"]
+    assert third("POST", f"/device-links/{token}")["statusCode"] == 409
+    # The refusal doesn't use the link up: free a place and it works.
+    Api(client="client-dev-00001")("DELETE", f"/canvases/{canvas}/claim")
+    assert third("POST", f"/device-links/{token}")["statusCode"] == 200
     assert api("POST", "/canvases/" + "a" * 22 + "/device-link")["statusCode"] == 404
     assert api("POST", "/device-links/" + "a" * 22)["statusCode"] == 404
 

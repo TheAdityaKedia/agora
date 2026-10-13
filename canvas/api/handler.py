@@ -167,8 +167,15 @@ def _writable(cid, client):
     """META for a write, refusing writes to a shown collection from anyone
     but its owner's devices (a leaked editable address can't change it)."""
     meta = _meta_or_404(cid)
-    if meta.get("view_id") and not _is_owner(meta, client):
+    if _is_owner(meta, client):
+        return meta
+    if meta.get("view_id"):
         raise ApiError(403, "Only " + (meta.get("show_as") or "its owner") + " can change this collection")
+    if client not in (meta.get("joined_clients") or ()):
+        # Someone else is joining in: record it before their write lands, so
+        # the collection stops being solo for good (planning stays on).
+        store.note_joined(cid, client)
+        meta = _meta_or_404(cid)
     return meta
 
 
@@ -179,8 +186,11 @@ def _need_planning(meta):
 
 def _others(meta, rows):
     """Browsers other than the owner's devices that have written anything
-    (added, removed, voted, commented). None of them: the collection is solo."""
-    owners, seen = _owners(meta), set()
+    (added, removed, voted, commented, renamed, …). None of them: the
+    collection is solo. `joined_clients` records every such writer, even when
+    their row is gone (an un-vote, a restore); the rows cover collections
+    from before it was recorded."""
+    owners, seen = _owners(meta), set(meta.get("joined_clients") or ())
     for r in rows:
         kind, rest = r["SK"].split("#", 1)
         if kind == "ITEM":
@@ -363,10 +373,17 @@ def make_device_link(req, cid):
 def use_device_link(req, token):
     client = _require_client(req)
     _rate_limit(req, WRITE_LIMIT)
-    cid = store.use_device_link(token)
+    gone = ApiError(404, "this link has been used or has expired")
+    # Check the device cap before using the link up, so a refusal leaves it
+    # usable (e.g. after "Not mine" on an old device frees a place).
+    cid = store.peek_device_link(token)
     if cid is None:
-        raise ApiError(404, "this link has been used or has expired")
+        raise gone
     meta = _meta_or_404(cid)
+    if not _is_owner(meta, client) and len(meta.get("owner_clients") or ()) >= store.OWNER_CAP:
+        raise ApiError(409, f"a collection can have at most {store.OWNER_CAP} owner devices")
+    if store.use_device_link(token) is None:
+        raise gone
     if meta.get("created_by_client") != client:
         try:
             store.set_owner(cid, client, True)
@@ -609,6 +626,7 @@ def post_plan(req, cid):
     to = b.get("to")
     if op == "move" and not (isinstance(to, int) and not isinstance(to, bool)):
         raise ApiError(400, "to must be a position (0 is first)")
+    _writable(cid, client)
 
     def attempt():
         loaded = store.load_canvas(cid)

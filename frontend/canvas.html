@@ -365,8 +365,9 @@
   // Comments are on everywhere (on your own list they're notes to yourself).
   // Interested and the plan follow the collection's `planning` setting
   // (feature-specs/collection-sharing.md). Names ("Added by Sam") show once
-  // more than one person is involved.
-  const crowd = (c) => !c.yours || c.people > 1 || AC.isShared(c.id);
+  // more than one person is involved, or will be: shared to plan together
+  // (maybe from another of your devices) means it isn't solo any more.
+  const crowd = (c) => !c.yours || !c.solo || c.people > 1 || AC.isShared(c.id);
   // The name on a write. "" is fine: curating never asks who you are.
   const me = () => AC.currentName();
   let view = null;               // last full GET response
@@ -876,23 +877,32 @@
     return n || null;
   }
 
+  const COPY_OPTION = {value: "copy", label: "Send a copy instead",
+    desc: "They get their own copy to change. Yours stays just as it is."};
+
   // Share, by the collection's state (feature-specs/collection-sharing.md):
   // - shown (yours): copy the view-only link, rename, stop, or plan in a copy;
   // - planned together (shared to plan, or others joined; or someone
-  //   else's): just send the editable link;
+  //   else's): the editable link, or send a copy;
   // - just yours: Show it (view-only), Plan it together, or send a copy.
   async function shareFlow() {
     const c = view.canvas;
     if (c.shown && c.shown.view_id) return shownFlow(c);
-    if (!c.yours || !c.solo) {
+    const legacyShared = c.yours && c.solo && c.planning && AC.isShared(c.id);
+    if (!c.yours || !c.solo || legacyShared) {
+      // Planned together: send the editable link to more friends, or a copy.
+      const how = await AC.choiceDialog({
+        title: "Share “" + c.name + "”",
+        options: [
+          {value: "this", label: "Share this collection",
+           desc: "Friends can add events, mark what they’re interested in, comment, and build the plan with you."},
+          COPY_OPTION,
+        ]});
+      if (how === "copy") return sendCopy();
+      if (how !== "this") return;
       if (!await named()) return;  // friends see who's who
-      return AC.share(AC.canvasUrl(c.id), c.name);
-    }
-    if (c.planning && AC.isShared(c.id)) {
-      // Shared to plan before that was recorded on the collection: record
-      // it now, and just send the link again.
-      if (!await named()) return;
-      await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
+      // Shared to plan before that was recorded on the collection: record it.
+      if (legacyShared) await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
       return AC.share(AC.canvasUrl(c.id), c.name);
     }
     const how = await AC.choiceDialog({
@@ -903,20 +913,23 @@
          desc: "Anyone with the link sees your picks and your comments. Only you can change it."},
         {value: "plan", label: "Plan it together",
          desc: "Friends can add events, mark what they’re interested in, comment, and build the plan with you."},
-        {value: "copy", label: "Send a copy instead",
-         desc: "They get their own copy to change. Yours stays just as it is."},
+        COPY_OPTION,
       ]});
     if (how === "show") return showIt(c);
     if (how === "plan") {
       if (!await named()) return;
-      // Marks it planned together for good: from now on Share just hands
-      // out this link, and planning stays on.
+      // Marks it planned together for good: from now on Share offers this
+      // link (or a copy), and planning stays on.
       await act(() => AC.api("PATCH", P(), {together: true, actor_name: me()}));
       AC.markShared(c.id);
       render();
       return AC.share(AC.canvasUrl(c.id), c.name);
     }
-    if (how !== "copy") return;
+    if (how === "copy") return sendCopy();
+  }
+
+  // "Send a copy instead": a duplicate that's theirs to change.
+  async function sendCopy() {
     let copy;
     try {
       copy = (await AC.api("POST", P("/duplicate"), {actor_name: me()})).canvas;
@@ -936,17 +949,23 @@
   // "Show it": asks once how to sign it, then hands out the view-only link.
   async function showIt(c) {
     const out = await AC.formDialog({title: "Show “" + c.name + "”",
-      text: "Anyone with the link sees your picks and your comments. Only you can change it.",
+      text: "Anyone with the link sees your picks and your comments. Only you can change it."
+        + (c.planning ? " Planning (Interested and the plan) turns off while it’s shown; nothing is deleted." : ""),
       fields: [{name: "show_as", label: "Show as", value: AC.currentName(), required: true, max: 40,
                 placeholder: "Your name or @handle", hint: "Shown as “By …” on the page. You can change it later."}],
       submit: "Get the link"});
     if (!out) return;
-    let r;
+    let r, switchedOff = false;
     try {
-      if (c.planning) await AC.api("PATCH", P(), {planning: false, actor_name: me()});
+      if (c.planning) {
+        await AC.api("PATCH", P(), {planning: false, actor_name: me()});
+        switchedOff = true;
+      }
       r = await AC.api("POST", P("/show"), {show_as: out.show_as, actor_name: me()});
     } catch (e) {
       AC.toast(e.message);
+      // Not shown after all: put planning back as it was.
+      if (switchedOff) await AC.api("PATCH", P(), {planning: true, actor_name: me()}).catch(() => {});
       return refresh();
     }
     await refresh();

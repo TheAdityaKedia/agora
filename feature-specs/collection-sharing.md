@@ -66,8 +66,8 @@ The Share sheet depends on the state (mock: board "1 · Share").
   **Plan with friends** (below), which plans in a copy and leaves the shown
   collection untouched. Managing the showing is on the Shown strip's
   **Manage**: **Change "Show as"** and **Stop showing**.
-- **Planned:** Share just sends the editable link (for more friends); no
-  choices, no "Show it".
+- **Planned:** **Share this collection** (the editable link, for more
+  friends) and *Send a copy instead*. No "Show it".
 
 A shown collection's page says so in a strip under its note: "Shown with a
 view-only link, as Mira · Copy link · Manage" (mock: "Hybrid · Mira's
@@ -149,8 +149,15 @@ On copied comments: `from_curator: true` and `name = show_as`.
 
 - `together` (true) — set by **Plan it together**; never cleared.
 
-"Solo" is computed: no `together`, and no item, vote or comment row
-(removed ones included) written by a client outside the owner set.
+- `joined_clients` (string set) — every browser outside the owner set that
+  has written to the collection, recorded before its write lands. Un-votes,
+  restores, renames and plan changes leave no row of their own, so rows alone
+  can't tell.
+
+"Solo" is computed: no `together`, and no client outside the owner set in
+`joined_clients` or on an item, vote or comment row (removed ones included;
+the rows cover collections from before `joined_clients`). A browser that
+later becomes an owner device stops counting.
 
 ## API
 

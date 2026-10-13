@@ -142,10 +142,13 @@ def run(shots):
         a.locator("dialog .ac-choice", has_text="Plan it together").click()
         answer_dialog(a, name="Adi")
         # Planned together from now on, before anyone has joined: no
-        # switch, and Share just sends the link (no Show it / Plan it again).
+        # switch, and Share offers the link or a copy (no Show it / Plan it again).
         expect(a.locator(".plan-switch")).to_have_count(0)
         expect(a.locator(".cv-kickrow")).to_contain_text("Planning together")
         a.click('[data-act="share"]')
+        expect(a.locator("dialog .ac-choice", has_text="Send a copy instead")).to_have_count(1)
+        expect(a.locator("dialog .ac-choice", has_text="Show it")).to_have_count(0)
+        a.locator("dialog .ac-choice", has_text="Share this collection").click()
         expect(a.locator("dialog[open]")).to_have_count(0)
         expect(a.locator(".ac-toast")).to_contain_text("Link copied")
         a.locator(".item").first.locator('[data-act="vote"]').click()
