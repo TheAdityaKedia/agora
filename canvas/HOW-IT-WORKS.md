@@ -88,7 +88,7 @@ self-expiring rows, point-in-time recovery on prod (35 days).
 
 | PK | SK | Row | Fields |
 |---|---|---|---|
-| `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: browsers added by a device link), `planning` (bool; absent = on, for collections made before it existed), `view_id` + `show_as` (while shown), `copied_from` (`{view_id, name, show_as}` on copies made from a view-only page). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
+| `C#<id>` | `META` | the collection (one) | `id`, `name`, `note`, `date_from`, `date_to` (`YYYY-MM-DD`), `plan` (ordered list of item ids), `version` (number), `item_count`, `comment_count`, `created_at`, `updated_at`, `created_by_name`, `created_by_client`, `owner_clients` (string set, ≤ 20: browsers added by a device link), `planning` (bool; absent = on, for collections made before it existed), `view_id` + `show_as` (while shown), `together` (true once **Plan it together** handed out the editable link; never cleared), `copied_from` (`{view_id, name, show_as}` on copies made from a view-only page). Old collections may have `winner_item_id` instead of `plan` (read as a one-step plan, replaced on the next plan change). |
 | `C#<id>` | `ITEM#<itemId>` | an item | `id`, `kind` (`event` / `custom`), `added_by_name`, `added_by_client`, `added_at`. **event:** `event` = {`id`, `title`, `start_time`, `location`, `url`, `image_url`, `sources`} copied when added. **custom:** `title`, `start_time`, `url`, `note`, `category` (`food`, `drinks`, `outdoors`, `travel`, `other`). **removed:** `removed_at`, `removed_by_name`, `removed_by_client`. |
 | `C#<id>` | `VOTE#<itemId>#<clientId>` | one 👍 Interested | `name`, `at` |
 | `C#<id>` | `CMT#<itemId>#<commentId>` | a comment | `id`, `name`, `client_id`, `text`, `at`, `removed_at` if deleted; `from_curator` (and no `client_id`) on comments carried into a copy from a view-only page |
@@ -104,7 +104,7 @@ items get `c_<random>`.
 **Activity actions:** `created`, `duplicated`, `copied_from_view`, `renamed`,
 `edited_note`, `set_dates`, `added`, `edited`, `removed`, `restored`, `voted`,
 `commented`, `deleted_comment`, `added_to_plan`, `removed_from_plan`,
-`moved_in_plan`, `planning_on`, `planning_off`, `shown`, `renamed_show`,
+`moved_in_plan`, `planning_on`, `planning_off`, `plan_together`, `shown`, `renamed_show`,
 `stopped_showing`; and,
 from before plans had steps, `picked_winner` and `cleared_winner`. Un-voting
 writes no entry.
@@ -114,7 +114,7 @@ items, votes, comments; strongly consistent) and the newest 50 rows of
 `L#<id>`. `handler._view` assembles the response: live items (sorted by time,
 undated last) with their votes and comments, removed items, the plan
 (filtered to live items), activity, the "people" count (for "Added by"
-names) and `solo` (no browser but the owner's devices has written: decides
+names) and `solo` (not shared to plan together, and no browser but the owner's devices has written: decides
 whether planning can be switched off and whether it can be shown). With
 planning off, votes and the plan are left out of the view, not deleted.
 
@@ -145,7 +145,7 @@ shown in Activity.
 | `POST /canvases` | `name`, `note?`, `date_from?`, `date_to?` | `201` the full view |
 | `GET /canvases/{id}` | — | the full view: `canvas`, `items[]`, `removed[]`, `log[]` |
 | `GET /canvases/{id}?if_version=N` | — | `{unchanged: true, version}` or the full view |
-| `PATCH /canvases/{id}` | any of `name`, `note`, `date_from`, `date_to`, `planning` | `{canvas}`; `planning: false` only while solo, `true` not while shown (`409`) |
+| `PATCH /canvases/{id}` | any of `name`, `note`, `date_from`, `date_to`, `planning`, `together` | `{canvas}`; `planning: false` only while solo, `true` not while shown (`409`); `together: true` (Plan it together) turns planning on and keeps it on: Share then only sends the link |
 | `POST /canvases/{id}/duplicate` | `name?` | `201` the new collection's full view (planning off) |
 | `POST` / `PATCH` / `DELETE /canvases/{id}/show` | `show_as` (POST, PATCH) | owner devices: start showing (solo, planning off; returns `{view_id}`), rename, stop |
 | `GET /views/{viewId}` (`?if_version=`) | — | the view-only page's data; `410` once stopped |

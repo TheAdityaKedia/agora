@@ -33,10 +33,11 @@ Rules that make the states hold:
 
 - **More than one person editing means planning is on.** The only way to hand
   out the editable link is **Plan it together**, which switches planning on.
-- **Planning can only be switched off while the collection is solo**: no
-  browser other than the owner's devices has ever written to it (added,
-  removed, voted, commented, …). Once someone else has joined, the switch
-  goes away and planning stays on. Switching it off while solo **hides** any
+- **Planning can only be switched off while the collection is solo**: it
+  hasn't been shared with **Plan it together**, and no browser other than
+  the owner's devices has ever written to it (added, removed, voted,
+  commented, …). Once the link has gone out to plan together, the switch
+  goes away and planning stays on, even before a friend opens it. Switching it off while solo **hides** any
   votes and plan; switching back on shows them again (nothing is deleted).
 - **Only solo collections with planning off can be shown.** A group that
   wants to show what it planned duplicates the collection and shows the copy.
@@ -64,8 +65,8 @@ The Share sheet depends on the state (mock: board "1 · Share").
 - **Shown:** **Copy link** (the view-only link), **Change "Show as"**, and
   **Stop showing**. To plan around it: **Plan with friends** (below), which
   leaves the shown collection untouched.
-- **Planned:** **Copy link** (the editable link, for more friends), and
-  *Send a copy instead*. No "Show it".
+- **Planned:** Share just sends the editable link (for more friends); no
+  choices, no "Show it".
 
 A shown collection's page says so in a strip under its note: "Shown with a
 view-only link · Copy link" (mock: "Hybrid · Mira's collection").
@@ -144,14 +145,17 @@ New rows:
 
 On copied comments: `from_curator: true` and `name = show_as`.
 
-"Solo" is computed, not stored: no item, vote or comment row (removed ones
-included) written by a client outside the owner set.
+- `together` (true) — set by **Plan it together**; never cleared.
+
+"Solo" is computed: no `together`, and no item, vote or comment row
+(removed ones included) written by a client outside the owner set.
 
 ## API
 
 | Method and path | Who | What |
 |---|---|---|
 | `PATCH /canvases/{id}` with `planning` | anyone who can edit | `true`: always allowed. `false`: `409` unless solo. |
+| `PATCH /canvases/{id}` with `together: true` | anyone who can edit | Plan it together: planning on, for good (`409` while shown) |
 | `POST /canvases/{id}/show` `{show_as}` | owner devices | starts showing (`409` unless solo with planning off); returns `{view_id}`; already shown: returns the current one |
 | `PATCH /canvases/{id}/show` `{show_as}` | owner devices | changes the curator name |
 | `DELETE /canvases/{id}/show` | owner devices | stops showing |
@@ -165,7 +169,7 @@ included) written by a client outside the owner set.
 - On a shown collection, every write from a non-owner client answers `403`.
 - The full view (`GET /canvases/{id}`) adds `planning`, `solo`, `shown`
   (`{view_id, show_as}` for owner devices only) and `copied_from`.
-- Activity gains `planning_on`, `planning_off`, `shown`, `stopped_showing`,
+- Activity gains `planning_on`, `planning_off`, `plan_together`, `shown`, `stopped_showing`,
   `copied_from_view` (on the copy). Viewers never see activity.
 
 ## Frontend
