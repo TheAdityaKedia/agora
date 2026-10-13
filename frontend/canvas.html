@@ -356,6 +356,21 @@
                  travel: ["🚗", "Getting there"], other: ["📌", "Other"]};
   const kindOf = (it) => KINDS[it.custom && it.custom.category] || KINDS.other;
   const linkOf = (it) => safeUrl(it.event ? it.event.url : it.custom && it.custom.url);
+  // A card's title (a link to the event or your link), note and thumbnail.
+  function titleHtml(it) {
+    const url = linkOf(it);
+    return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
+      : esc(titleOf(it));
+  }
+  const noteHtml = (it) => it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
+  function thumbHtml(it) {
+    if (!it.event) return '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>";
+    if (!safeUrl(it.event.image_url)) return "";
+    const url = linkOf(it);
+    return (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
+      + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
+      + (url ? "</a>" : "</div>");
+  }
   const params = new URLSearchParams(location.search);
   if (params.get("device")) { useDeviceLink(params.get("device")); return; }
   if (params.get("v")) { initView(params.get("v")); return; }
@@ -367,9 +382,15 @@
   // (feature-specs/collection-sharing.md). Names ("Added by Sam") show once
   // more than one person is involved, or will be: shared to plan together
   // (maybe from another of your devices) means it isn't solo any more.
-  const crowd = (c) => !c.yours || !c.solo || c.people > 1 || AC.isShared(c.id);
+  const withOthers = (c) => !c.yours || !c.solo || c.people > 1 || AC.isShared(c.id);
+  // Someone else's shown collection, opened by its editable address: the
+  // API refuses their writes, so the page offers nothing to change.
+  const isLocked = (c) => !!c.shown && !c.yours;
   // The name on a write. "" is fine: curating never asks who you are.
   const me = () => AC.currentName();
+  // The name on a write others will see: asked for once others are involved
+  // (null if they cancel); on your own list, whatever you've set, or "".
+  const writerName = async () => withOthers(view.canvas) ? named() : me();
   let view = null;               // last full GET response
   let drag = null, press = null, pressTimer = 0, suppressClickUntil = 0;  // plan reordering (below)
   let pendingRender = false;     // a poll arrived while someone was typing
@@ -431,11 +452,9 @@
     const dates = datesText(c);
     const plan = (c.plan || []).map(id => v.items.find(i => i.id === id)).filter(Boolean);
     const name = AC.currentName();
-    const many = crowd(c);
+    const many = withOthers(c);
     const isDefault = AC.defaultCanvasId() === c.id;
-    // Someone else's shown collection, opened by its editable address: the
-    // API refuses their writes, so offer nothing to change.
-    const locked = !!c.shown && !c.yours;
+    const locked = isLocked(c);
     // The Planning switch: only while the collection is just yours and not
     // shown (shown ones stay plain lists; once others join it stays on).
     const planSwitch = c.solo && !c.shown
@@ -470,7 +489,7 @@
       + "</div>")
       + (c.planning && plan.length ? planHtml(plan) : "")
       + '<h2 class="section-h">' + (c.planning ? "Options" : "Events") + (v.items.length ? " (" + v.items.length + ")" : "") + "</h2>"
-      + (v.items.length ? v.items.map(it => itemHtml(it, locked)).join("")
+      + (v.items.length ? v.items.map(itemHtml).join("")
         : '<p class="empty-items">Nothing here yet. Use <b>Add events</b> to pick from what’s on, or <b>Add your own</b> for anything else.</p>')
       + activityHtml(v)
       // Your devices and default. "Use on another device" makes a one-time
@@ -495,30 +514,22 @@
       + "</p>";
   }
 
-
-
-  function itemHtml(it, locked) {
+  function itemHtml(it) {
+    const locked = isLocked(view.canvas);
     const start = startOf(it);
     const past = start && start < new Date();
-    const url = linkOf(it);
-    const title = url
-      ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
-      : esc(titleOf(it));
+    const title = titleHtml(it);
     let where = "";
     if (it.event) {
       const bits = [it.event.location, (it.event.sources || []).length ? "Listed by " + it.event.sources.join(", ") : ""].filter(Boolean);
       where = bits.length ? '<div class="it-where">' + esc(bits.join(" · ")) + "</div>" : "";
     }
-    const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
+    const note = noteHtml(it);
     const own = !it.event;
-    const img = own ? '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>"
-      : it.event && safeUrl(it.event.image_url)
-      ? (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
-        + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
-        + (url ? "</a>" : "</div>") : "";
+    const img = thumbHtml(it);
     const voters = it.votes.map(v => v.name);
     const planning = view.canvas.planning;
-    const many = crowd(view.canvas);
+    const many = withOthers(view.canvas);
     const cmtOpen = openComments.has(it.id);
     const inPlan = planning && (view.canvas.plan || []).includes(it.id);
     // Your own items say so: "Added by Sam" once others are involved, else "Your own".
@@ -539,11 +550,12 @@
         : '<button type="button" class="linkish" data-act="plan-add">Add to plan</button>')
       + (own && !locked ? '<button type="button" class="linkish" data-act="edit-custom">Edit</button>' : "")
       + (locked ? "" : '<button type="button" class="linkish" data-act="remove">Remove</button>') + "</div>"
-      + (cmtOpen ? commentsHtml(it, locked) : "")
+      + (cmtOpen ? commentsHtml(it) : "")
       + "</div>" + img + "</article>";
   }
 
-  function commentsHtml(it, locked) {
+  function commentsHtml(it) {
+    const locked = isLocked(view.canvas);
     // A curator's comments carried into a copy say whose they were; an
     // unnamed note is yours (or "Someone"'s).
     const who = (c) => c.from_curator ? c.name + ", on their collection"
@@ -877,6 +889,7 @@
     return n || null;
   }
 
+  const PLAN_DESC = "Friends can add events, mark what they’re interested in, comment, and build the plan with you.";
   const COPY_OPTION = {value: "copy", label: "Send a copy instead",
     desc: "They get their own copy to change. Yours stays just as it is."};
 
@@ -895,7 +908,7 @@
         title: "Share “" + c.name + "”",
         options: [
           {value: "this", label: "Share this collection",
-           desc: "Friends can add events, mark what they’re interested in, comment, and build the plan with you."},
+           desc: PLAN_DESC},
           COPY_OPTION,
         ]});
       if (how === "copy") return sendCopy();
@@ -912,7 +925,7 @@
         {value: "show", label: "Show it",
          desc: "Anyone with the link sees your picks and your comments. Only you can change it."},
         {value: "plan", label: "Plan it together",
-         desc: "Friends can add events, mark what they’re interested in, comment, and build the plan with you."},
+         desc: PLAN_DESC},
         COPY_OPTION,
       ]});
     if (how === "show") return showIt(c);
@@ -1132,8 +1145,8 @@
         if (!it) return;
         if (!await confirmRemove(it)) return;
         // Removing from a shared collection says who did it, so ask for a name.
-        const who = crowd(view.canvas) ? await named() : me();
-        if (crowd(view.canvas) && !who) return;
+        const who = await writerName();
+        if (who === null) return;
         await act(() => AC.api("DELETE", itemP(id), {actor_name: who}));
         AC.toast("Removed “" + titleOf(it) + "”", {label: "Undo",
           run: () => act(() => AC.api("POST", itemP(id, "/restore"), {actor_name: who}))});
@@ -1173,8 +1186,8 @@
     if (!text) return;
     const id = form.closest(".item").dataset.id;
     // A note on your own list needs no name; others see who said what.
-    const who = crowd(view.canvas) ? await named() : me();
-    if (crowd(view.canvas) && !who) return;
+    const who = await writerName();
+    if (who === null) return;
     input.disabled = true;
     try {
       await AC.api("POST", itemP(id, "/comments"), {name: who, text});
@@ -1323,22 +1336,14 @@
   }
 
   function viewItemHtml(it) {
-    const start = startOf(it), url = linkOf(it), own = !it.event;
-    const title = url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc">' + esc(titleOf(it)) + "</a>"
-      : esc(titleOf(it));
+    const start = startOf(it), own = !it.event;
     const where = it.event && it.event.location ? '<div class="it-where">' + esc(it.event.location) + "</div>" : "";
-    const note = it.custom && it.custom.note ? '<div class="it-note">' + esc(it.custom.note) + "</div>" : "";
-    const img = own ? '<div class="thumb kind" role="img" aria-label="' + esc(kindOf(it)[1]) + '">' + kindOf(it)[0] + "</div>"
-      : safeUrl(it.event.image_url)
-        ? (url ? '<a class="thumb" href="' + esc(url) + '" target="_blank" rel="noopener nofollow ugc" tabindex="-1" aria-hidden="true">' : '<div class="thumb">')
-          + '<img loading="lazy" alt="" src="' + esc(it.event.image_url) + '" onerror="this.parentNode.remove()">'
-          + (url ? "</a>" : "</div>") : "";
     const cmts = (it.comments || []).length ? '<div class="cmts">' + it.comments.map(c =>
       '<div class="cmt"><b>' + esc(c.name) + '</b> <span class="txt">' + esc(c.text) + "</span></div>").join("") + "</div>" : "";
     return '<article class="item' + (own ? " custom" : "") + '"><div class="main">'
       + '<div class="when">' + (start ? esc(whenFmt.format(start)) : "Any time") + "</div>"
-      + '<div class="it-title">' + title + "</div>" + where + note + cmts
-      + "</div>" + img + "</article>";
+      + '<div class="it-title">' + titleHtml(it) + "</div>" + where + noteHtml(it) + cmts
+      + "</div>" + thumbHtml(it) + "</article>";
   }
 
   // Plan with friends (planning on) / Save a copy (off) from a shown
