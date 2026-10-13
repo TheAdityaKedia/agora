@@ -3820,6 +3820,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "le-mils": {
+      "added": "2026-10-13",
+      "address": "1330 Polk St, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1330;1334;1336;1338 in San Francisco County (building, way/254910857)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.78932,
+      "lng": -122.420223,
+      "name": "Le Mil's",
+      "osm": "way/254910857",
+      "possible_duplicates": [
+        "el-lopo",
+        "mayes-oyster-house",
+        "xex"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "lines-dance-center": {
       "added": "2026-10-02",
       "address": "26 7th Street, San Francisco, CA 94103",
@@ -7647,6 +7668,26 @@
       ],
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "thorough-bread-and-pastry": {
+      "added": "2026-10-13",
+      "address": "248 Church Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Thorough Bread and Pastry in San Francisco County (building, node/2187987263)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.766612,
+      "lng": -122.429057,
+      "name": "Thorough Bread and Pastry",
+      "osm": "node/2187987263",
+      "possible_duplicates": [
+        "the-detour"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "three-restaurant": {
