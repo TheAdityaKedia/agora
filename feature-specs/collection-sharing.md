@@ -62,14 +62,16 @@ The Share sheet depends on the state (mock: board "1 · Share").
     interested in, comment, and build the plan with you. Switches planning
     on, then opens the system share sheet with the editable link.
   - *Send them a copy instead* (today's "Share a copy").
-- **Shown:** **Copy link** (the view-only link), **Change "Show as"**, and
-  **Stop showing**. To plan around it: **Plan with friends** (below), which
-  leaves the shown collection untouched.
+- **Shown:** Share offers ways to share: **Share the view-only link**, and
+  **Plan with friends** (below), which plans in a copy and leaves the shown
+  collection untouched. Managing the showing is on the Shown strip's
+  **Manage**: **Change "Show as"** and **Stop showing**.
 - **Planned:** Share just sends the editable link (for more friends); no
   choices, no "Show it".
 
 A shown collection's page says so in a strip under its note: "Shown with a
-view-only link · Copy link" (mock: "Hybrid · Mira's collection").
+view-only link, as Mira · Copy link · Manage" (mock: "Hybrid · Mira's
+collection").
 
 **Stop showing** turns the view-only link off. Old links then say "This
 collection isn't shown anymore". Showing again makes a **new** link.

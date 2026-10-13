@@ -349,8 +349,14 @@ def run(shots):
         expect(s.locator('[data-act="vote"]')).to_have_count(3)
         a.goto(dup_url)
         expect(a.locator(".item")).to_have_count(3)  # Adi's list is untouched
-        # Stop showing: the link stops working.
+        # Share offers only ways to share; Manage holds Show as / Stop showing.
         a.click('[data-act="share"]')
+        expect(a.locator("dialog .ac-choice")).to_have_count(2)
+        expect(a.locator("dialog[open]")).not_to_contain_text("Stop showing")
+        a.keyboard.press("Escape")
+        # Stop showing: the link stops working.
+        a.click('[data-act="manage-show"]')
+        expect(a.locator("dialog .ac-choice", has_text="Change “Show as”")).to_be_visible()
         a.locator("dialog .ac-choice", has_text="Stop showing").click()
         a.locator("dialog .ac-choice", has_text="Stop showing").click()
         expect(a.locator(".shown")).to_have_count(0)

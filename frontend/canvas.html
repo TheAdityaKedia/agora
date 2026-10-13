@@ -431,7 +431,7 @@
       : c.shown.view_id
         ? '<div class="shown"><span>Shown with a view-only link, as <b>' + esc(c.shown.show_as) + "</b></span>"
           + '<span class="shown-acts"><button type="button" class="linkish" data-act="copy-view">Copy link</button>'
-          + '<button type="button" class="linkish" data-act="share">More</button></span></div>'
+          + '<button type="button" class="linkish" data-act="manage-show">Manage</button></span></div>'
         : '<div class="shown"><span>Shown by <b>' + esc(c.shown.show_as) + "</b>. Only they can change it.</span></div>";
     return '<div class="cv-kickrow"><p class="cv-kicker">' + kicker + "</p>" + planSwitch + "</div>"
       + '<h1 class="cv-name editable" data-act="edit-name" title="Rename">' + esc(c.name) + "</h1>"
@@ -933,6 +933,8 @@
     if (go) AC.share(AC.viewUrl(r.view_id), c.name);
   }
 
+  // Share on a shown collection: ways to share it. Managing the showing
+  // itself (its name, stopping it) is under "Manage" on the Shown strip.
   async function shownFlow(c) {
     const how = await AC.choiceDialog({
       title: "Share “" + c.name + "”",
@@ -941,12 +943,20 @@
         {value: "share", label: "Share the view-only link"},
         {value: "plan", label: "Plan with friends",
          desc: "Make a copy to plan in. This collection stays as it is."},
+      ]});
+    if (how === "share") return AC.share(AC.viewUrl(c.shown.view_id), c.name);
+    if (how === "plan") return planFromView(c.shown.view_id, c.name, c.shown.show_as);
+  }
+
+  async function manageShow(c) {
+    const how = await AC.choiceDialog({
+      title: "Manage showing",
+      text: "Shown with a view-only link, as " + c.shown.show_as + ".",
+      options: [
         {value: "rename", label: "Change “Show as”"},
         {value: "stop", label: "Stop showing",
          desc: "The link stops working. Showing it again makes a new link."},
       ]});
-    if (how === "share") return AC.share(AC.viewUrl(c.shown.view_id), c.name);
-    if (how === "plan") return planFromView(c.shown.view_id, c.name, c.shown.show_as);
     if (how === "rename") {
       const out = await AC.formDialog({title: "Show as", fields: [
         {name: "show_as", label: "Show as", value: c.shown.show_as, required: true, max: 40}]});
@@ -1002,6 +1012,8 @@
       }
       case "copy-view":
         return AC.share(AC.viewUrl(view.canvas.shown.view_id), view.canvas.name);
+      case "manage-show":
+        return manageShow(view.canvas);
       case "device-link":
         return deviceLink();
       case "share":
