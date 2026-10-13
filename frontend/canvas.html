@@ -396,19 +396,34 @@
   }
 
   // Don't redraw under someone's cursor: a poll that lands while a comment
-  // is being typed waits until the field loses focus.
+  // is being typed waits until the field loses focus, and while a finger or
+  // button is down (tapping Post blurs the field first; redrawing then would
+  // swallow the tap). Half-written comments survive a redraw.
+  let pointerDown = false;
   function render() {
     const typing = document.activeElement && app.contains(document.activeElement)
       && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
-    if (typing || drag) { pendingRender = true; return; }
+    if (typing || drag || pointerDown) { pendingRender = true; return; }
     pendingRender = false;
     const scroll = window.scrollY;
     const focusedStep = document.activeElement && document.activeElement.matches(".step") && document.activeElement.dataset.id;
+    // (A disabled one is being posted: it isn't a draft any more.)
+    const drafts = [...app.querySelectorAll(".cmt-form input")].filter(i => i.value && !i.disabled)
+      .map(i => [i.closest(".item").dataset.id, i.value]);
     app.innerHTML = canvasHtml(view);
+    for (const [id, text] of drafts) {
+      const input = app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input');
+      if (input) input.value = text;
+    }
     window.scrollTo(0, scroll);
     if (focusedStep) app.querySelector('.step[data-id="' + CSS.escape(focusedStep) + '"]')?.focus({preventScroll: true});
   }
-  app.addEventListener("focusout", () => setTimeout(() => { if (pendingRender) render(); }, 0));
+  const renderIfPending = () => setTimeout(() => { if (pendingRender) render(); }, 0);
+  app.addEventListener("focusout", renderIfPending);
+  app.addEventListener("pointerdown", () => { pointerDown = true; });
+  for (const type of ["pointerup", "pointercancel"]) {
+    document.addEventListener(type, () => { pointerDown = false; renderIfPending(); });
+  }
 
   function canvasHtml(v) {
     const c = v.canvas;
@@ -1135,6 +1150,9 @@
       input.value = "";
     } catch (err) {
       AC.toast(err.message);
+      // A redraw meanwhile made a new field: put the text back there.
+      const now = app.querySelector('.item[data-id="' + CSS.escape(id) + '"] .cmt-form input');
+      if (now && now !== input && !now.value) now.value = text;
     }
     input.disabled = false;
     input.blur();

@@ -209,6 +209,24 @@ def run(shots):
         expect(s.locator(".item")).to_have_count(3)
         s.locator("details.fold summary", has_text="Activity").click()
         expect(s.locator("details.fold li").first).to_contain_text("Adi added “Dinner at Nopa”")
+        # A change that lands while Sam types waits; tapping Post (a press,
+        # then a release) still posts, and the redraw keeps no stale draft.
+        sf = s.locator(".item").first
+        sf.locator(".cmt-form input").fill("running late")
+        sf.locator(".cmt-form input").focus()
+        a.locator(".item").nth(1).locator('[data-act="vote"]').click()  # and back
+        expect(a.locator(".item").nth(1).locator(".voters")).to_have_text("Adi")
+        a.locator(".item").nth(1).locator('[data-act="vote"]').click()
+        expect(a.locator(".item").nth(1).locator(".voters")).to_have_count(0)
+        s.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+        s.wait_for_timeout(500)
+        box = sf.locator(".cmt-form button").bounding_box()
+        s.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+        s.mouse.down()
+        s.wait_for_timeout(150)
+        s.mouse.up()
+        expect(sf.locator(".cmt", has_text="running late")).to_have_count(1)
+        expect(sf.locator(".cmt-form input")).to_have_value("")
 
         # --- The plan has steps in order: dinner (undated, so last) moves first.
         a.locator(".item", has_text="Dinner at Nopa").locator('[data-act="plan-add"]').click()
