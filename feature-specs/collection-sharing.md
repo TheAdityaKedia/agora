@@ -66,8 +66,8 @@ The Share sheet depends on the state (mock: board "1 · Share").
   **Plan with friends** (below), which plans in a copy and leaves the shown
   collection untouched. Managing the showing is on the Shown strip's
   **Manage**: **Change "Show as"** and **Stop showing**.
-- **Planned:** Share just sends the editable link (for more friends); no
-  choices, no "Show it".
+- **Planned:** **Share this collection** (the editable link, for more
+  friends) and *Send a copy instead*. No "Show it".
 
 A shown collection's page says so in a strip under its note: "Shown with a
 view-only link, as Mira · Copy link · Manage" (mock: "Hybrid · Mira's
