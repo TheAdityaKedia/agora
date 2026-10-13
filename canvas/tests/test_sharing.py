@@ -75,6 +75,50 @@ def test_planning_locks_on_once_someone_else_joins(api):
     assert api("PATCH", f"/canvases/{cid}", {"planning": False})["statusCode"] == 409
 
 
+def test_joining_sticks_even_when_it_leaves_no_row(api):
+    # Writes that leave no row of their own behind (an un-vote, a restore,
+    # a rename, a plan change) still make the collection not solo.
+    def joined(write):
+        cid = new(api)
+        add(api, cid, E1)
+        api("PATCH", f"/canvases/{cid}", {"planning": True})
+        write(Api(**SAM), cid)
+        assert view(api, cid)["canvas"]["solo"] is False, write.__name__
+        assert api("PATCH", f"/canvases/{cid}", {"planning": False})["statusCode"] == 409
+        assert show(api, cid)["statusCode"] == 409
+
+    def vote_then_unvote(sam, cid):
+        sam("PUT", f"/canvases/{cid}/items/ev_{E1}/vote", {"name": "Sam"})
+        sam("DELETE", f"/canvases/{cid}/items/ev_{E1}/vote")
+
+    def remove_then_restore(sam, cid):
+        sam("DELETE", f"/canvases/{cid}/items/ev_{E1}", {})
+        sam("POST", f"/canvases/{cid}/items/ev_{E1}/restore", {})
+
+    def rename(sam, cid):
+        assert sam("PATCH", f"/canvases/{cid}", {"name": "Sam's now"})["statusCode"] == 200
+
+    def plan(sam, cid):
+        assert sam("POST", f"/canvases/{cid}/plan", {"op": "add", "item_id": f"ev_{E1}"})["statusCode"] == 200
+
+    for write in (vote_then_unvote, remove_then_restore, rename, plan):
+        joined(write)
+
+
+def test_joining_before_becoming_an_owner_device_stays_solo(api):
+    # Your laptop wrote before it was linked as one of your devices: once
+    # it is, it's you, and the collection is solo again.
+    cid = new(api)
+    pc = Api(client="client-mira-pc01")
+    add(pc, cid, E1)
+    assert view(api, cid)["canvas"]["solo"] is False
+    token = api("POST", f"/canvases/{cid}/device-link")["json"]["token"]
+    pc("POST", f"/device-links/{token}")
+    assert view(api, cid)["canvas"]["solo"] is True
+    # Who joined is never returned.
+    assert "joined_clients" not in view(api, cid)["canvas"]
+
+
 def test_plan_it_together_locks_planning_on_before_anyone_joins(api):
     # "Plan it together" hands out the editable link: from then on it's a
     # planned collection, even while no friend has done anything yet.

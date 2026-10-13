@@ -274,6 +274,28 @@ def set_owner(cid, client_id, on):
         raise CapReached(f"a collection can have at most {OWNER_CAP} owner devices") from None
 
 
+JOINED_CAP = 20
+
+
+def note_joined(cid, client_id):
+    """Record that a browser outside the owner set is writing to the canvas
+    (META.joined_clients, a string set), before its write lands. "Solo" then
+    survives what leaves no row behind: an un-vote, a restore, a rename or a
+    plan change. Bumps the version, so a show or planning-off that read the
+    canvas before this fails its version check and re-checks. A few clients
+    are enough to tell; past the cap (or if the canvas is gone) it's a no-op."""
+    try:
+        table().update_item(
+            Key={"PK": _pk(cid), "SK": "META"},
+            UpdateExpression="ADD joined_clients :c, version :one",
+            ConditionExpression="attribute_exists(PK) AND (attribute_not_exists(joined_clients)"
+                                " OR size(joined_clients) < :cap)",
+            ExpressionAttributeValues={":c": {client_id}, ":one": 1, ":cap": JOINED_CAP})
+    except ClientError as e:
+        if e.response["Error"]["Code"] != "ConditionalCheckFailedException":
+            raise
+
+
 def update_canvas(cid, fields, actor_name, client_id=None):
     """`fields` holds only keys being changed; a None value clears that key."""
     names, sets, removes, values, ops = {}, [], [], {}, []
@@ -374,6 +396,14 @@ def make_device_link(cid, client_id):
     table().put_item(Item={"PK": f"D#{token}", "SK": "DEVICE", "canvas_id": cid,
                            "made_by_client": client_id, "ttl": expires})
     return token, expires
+
+
+def peek_device_link(token):
+    """A device link's canvas id without using it up; None if unknown or expired."""
+    row = table().get_item(Key={"PK": f"D#{token}", "SK": "DEVICE"}, ConsistentRead=True).get("Item")
+    if not row or int(row.get("ttl", 0)) < time.time():
+        return None
+    return row.get("canvas_id")
 
 
 def use_device_link(token):
