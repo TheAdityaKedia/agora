@@ -4431,6 +4431,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "mission-branch-library": {
+      "added": "2026-10-14",
+      "address": "300 Bartlett Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Mission Branch Library in San Francisco County (building, way/192123864)",
+        "source home: sf",
+        "name matches"
+      ],
+      "lat": 37.751966,
+      "lng": -122.419843,
+      "name": "Mission Branch Library",
+      "osm": "way/192123864",
+      "possible_duplicates": [
+        "et-al-gallery-and-bookshop",
+        "2831-mission-st",
+        "society-of-thumbs"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "mission-hill-saloon": {
       "added": "2026-10-02",
       "address": "491 Potrero Avenue, San Francisco, CA 94110",
