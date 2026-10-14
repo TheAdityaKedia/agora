@@ -22462,6 +22462,24 @@
         ]
       ]
     },
+    "Green Apple Books\u001f9th Ave: Gerardo Sámano Córdova": {
+      "classified_at": "2026-10-14T17:27:26.457156+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "9th Ave: Gerardo Sámano Córdova",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Green Apple Books\u001f9th Ave: Jefferson Elementary Sip & Shop": {
       "classified_at": "2026-10-07T17:32:23.372626+00:00",
       "cost": "unknown",
@@ -22509,6 +22527,25 @@
       "title": "9th Ave: Joey Clift",
       "topics": [
         "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Joey Clift with Jackie Keliiaa": {
+      "classified_at": "2026-10-14T17:27:26.586312+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "9th Ave: Joey Clift with Jackie Keliiaa",
+      "topics": [
+        "books-authors",
+        "history",
+        "comedy"
       ],
       "types": [
         [
@@ -22693,6 +22730,27 @@
         ]
       ]
     },
+    "Green Apple Books\u001f9th Ave: Scott Lambridis, Martha Conway, and Yance Wyatt": {
+      "classified_at": "2026-10-14T17:27:26.549019+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "9th Ave: Scott Lambridis, Martha Conway, and Yance Wyatt",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Green Apple Books\u001f9th Ave: T.S. Leonard with Mukethe Kawinzi and Maw Shein Win": {
       "classified_at": "2026-10-03T01:22:13.780920+00:00",
       "cost": "free",
@@ -22829,6 +22887,24 @@
       "taxonomy_version": 2,
       "title": "Offsite: Barbara Kingsolver with Steven Winn",
       "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001fOffsite: Douglas Stuart with Matthew Clark Davison": {
+      "classified_at": "2026-10-14T17:27:26.570306+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "Offsite: Douglas Stuart with Matthew Clark Davison",
+      "topics": [
+        "fiction",
         "books-authors"
       ],
       "types": [

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T15:27:04.247623+00:00",
+  "generated_at": "2026-10-14T17:27:30.107197+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -2735,6 +2735,14 @@
       "lat": 37.76379,
       "lng": -122.47514,
       "neighborhood": "inner-sunset"
+    },
+    "swedish-american-hall": {
+      "name": "Swedish American Hall",
+      "region": "sf",
+      "address": "2174 Market Street, San Francisco, CA 94114",
+      "lat": 37.76652,
+      "lng": -122.43047,
+      "neighborhood": "castro-upper-market"
     },
     "sweeties-art-bar": {
       "name": "Sweeties Art Bar",
@@ -52270,6 +52278,32 @@
       "more": true
     },
     {
+      "id": "858ea0e2-89f1-4a20-9d84-5fb93e0985f9",
+      "title": "Offsite: Douglas Stuart with Matthew Clark Davison",
+      "start_time": "2026-10-29T02:00:00+00:00",
+      "location": "Swedish American Hall, 2174 Market St, San Francisco, CA 94114",
+      "url": "https://greenapplebooks.com/event/2026-10-28/offsite-douglas-stuart-matthew-clark-davison",
+      "image_url": "https://greenapplebooks.com/sites/default/files/styles/event_image/public/image/2026/09/17/stuart.png?itok=m88_sIAj",
+      "sources": [
+        "Green Apple Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "cost": "free",
+      "venue": "swedish-american-hall",
+      "region": "sf",
+      "summary": "VENUE CHANGE: This event will now be held at Swedish American Hall (2174 Market St), though it was previously scheduled to be held at our store's Inner Sunset location.",
+      "more": true
+    },
+    {
       "id": "85f4f62c-c359-46b2-ae04-7a516e2b3ae7",
       "title": "9th Ave: Douglas Stuart with Matthew Clark Davison",
       "start_time": "2026-10-29T02:00:00+00:00",
@@ -87332,6 +87366,35 @@
       "more": true
     },
     {
+      "id": "eb700ee2-4f20-4efc-ac01-8755d2bde6b2",
+      "title": "9th Ave: Scott Lambridis, Martha Conway, and Yance Wyatt",
+      "start_time": "2026-11-13T03:00:00+00:00",
+      "location": "Books on the Park on 9th Avenue, 1231 9th Ave., San Francisco, CA 94122",
+      "url": "https://greenapplebooks.com/event/2026-11-12/9th-ave-scott-lambridis-martha-conway-and-yance-wyatt",
+      "image_url": "https://greenapplebooks.com/sites/default/files/styles/event_image/public/image/2026/10/12/weirdscienceevent11-12.png?itok=fdOR1f_8",
+      "sources": [
+        "Green Apple Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "cost": "free",
+      "venue": "books-on-the-park-on-9th-avenue",
+      "region": "sf",
+      "summary": "Join us on Thursday, November 12 at 7pm for Weird Science, Strange Beliefs, and the Impossible, an evening with authors Scott Lambridis, Martha Conway, and Yance Wyatt at 9th Ave!",
+      "more": true
+    },
+    {
       "id": "06b8ff04-ab15-4e66-a82c-89c13ed77627",
       "title": "JACKIEM JOYNER",
       "start_time": "2026-11-13T03:30:00+00:00",
@@ -95416,6 +95479,33 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Fri, Oct 23, 2026 – Sun, Nov 29, 2026 · A daughter digs into her mother’s unfinished feminist revolution in this bitingly funny, intensely relevant play on freedom and inheritance."
+    },
+    {
+      "id": "4353ee64-9d99-4988-964d-6ef4a8073770",
+      "title": "9th Ave: Joey Clift with Jackie Keliiaa",
+      "start_time": "2026-11-18T03:00:00+00:00",
+      "location": "Books on the Park on 9th Avenue, 1231 9th Ave., San Francisco, CA 94122",
+      "url": "https://greenapplebooks.com/event/2026-11-17/9th-ave-joey-clift-jackie-keliiaa",
+      "image_url": "https://greenapplebooks.com/sites/default/files/styles/event_image/public/image/2026/10/13/clift.png?itok=7vZk8YUg",
+      "sources": [
+        "Green Apple Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "history",
+        "comedy"
+      ],
+      "cost": "free",
+      "venue": "books-on-the-park-on-9th-avenue",
+      "region": "sf",
+      "summary": "Join us on Tuesday, November 17 at 7pm when we welcome Joey Clift for the release of his book, We've Been Here the Whole Time!: A Note So Sacred Guide to All Things Native",
+      "more": true
     },
     {
       "id": "45918658-c973-4fb0-8282-cc829b05a500",
@@ -145145,6 +145235,32 @@
       "cost": "unknown",
       "venue": "540-laguna-st",
       "region": "sf"
+    },
+    {
+      "id": "457cd605-a9fd-479c-9d34-bdcce3e97871",
+      "title": "9th Ave: Gerardo Sámano Córdova",
+      "start_time": "2027-03-11T03:00:00+00:00",
+      "location": "Books on the Park on 9th Avenue, 1231 9th Ave., San Francisco, CA 94122",
+      "url": "https://greenapplebooks.com/event/2027-03-10/9th-ave-gerardo-samano-cordova",
+      "image_url": null,
+      "sources": [
+        "Green Apple Books"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ],
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "cost": "unknown",
+      "venue": "books-on-the-park-on-9th-avenue",
+      "region": "sf",
+      "summary": "More details to come, watch this space!",
+      "more": true
     },
     {
       "id": "6b37ca04-3306-49ee-b0ad-91d3a0089ccf",
