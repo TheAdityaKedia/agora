@@ -1,5 +1,27 @@
 {
   "entries": {
+    "4-Star Theater\u001f\"Dazed and Confused: Movies Minute by Minute\" (Film Screening plus Discussion with Author Colin Winnette)": {
+      "classified_at": "2026-10-15T15:27:49.106577+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "\"Dazed and Confused: Movies Minute by Minute\" (Film Screening plus Discussion with Author Colin Winnette)",
+      "topics": [
+        "film",
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "4-Star Theater\u001f4-Star Halloween Cartoon Special": {
       "classified_at": "2026-10-03T05:09:42.881557+00:00",
       "cost": "free",
@@ -14,6 +36,26 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fA Bronx Tale (plus Q&A with \"C\" Lillo Brancato presented by BIBO Events)": {
+      "classified_at": "2026-10-15T15:27:44.673792+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "A Bronx Tale (plus Q&A with \"C\" Lillo Brancato presented by BIBO Events)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -1328,6 +1370,39 @@
         ]
       ]
     },
+    "A.C.T. (American Conservatory Theater)\u001fBD in the YUniverse": {
+      "classified_at": "2026-10-15T15:26:33.548799+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "A.C.T. (American Conservatory Theater)",
+      "taxonomy_version": 2,
+      "title": "BD in the YUniverse",
+      "topics": [
+        "theater",
+        "fiction"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "A.C.T. (American Conservatory Theater)\u001fEva Noblezada & Reeve Carney": {
+      "classified_at": "2026-10-15T15:26:33.141522+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "A.C.T. (American Conservatory Theater)",
+      "taxonomy_version": 2,
+      "title": "Eva Noblezada & Reeve Carney",
+      "topics": [
+        "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "A.C.T. (American Conservatory Theater)\u001fEvery Saturday Night": {
       "classified_at": "2026-10-03T01:17:32.543912+00:00",
       "cost": "unknown",
@@ -2188,6 +2263,23 @@
         ]
       ]
     },
+    "Artists' Television Access\u001fCine+Mas: Bonds of Belonging Shorts Program": {
+      "classified_at": "2026-10-15T15:26:32.939032+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Cine+Mas: Bonds of Belonging Shorts Program",
+      "topics": [
+        "film",
+        "latino"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Artists' Television Access\u001fCine+Mas: Carmela and the Walkers (Carmela y los caminantes)": {
       "classified_at": "2026-10-11T16:33:05.903489+00:00",
       "cost": "paid",
@@ -2197,6 +2289,24 @@
       "title": "Cine+Mas: Carmela and the Walkers (Carmela y los caminantes)",
       "topics": [
         "documentary",
+        "latino"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fCine+Mas: Family & Resilience Short Film Program": {
+      "classified_at": "2026-10-15T15:26:33.085146+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Cine+Mas: Family & Resilience Short Film Program",
+      "topics": [
+        "film",
+        "family-kids",
         "latino"
       ],
       "types": [
@@ -4027,6 +4137,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fThe Room": {
+      "classified_at": "2026-10-15T15:27:42.634632+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "The Room",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fThe Room @ 11 PM": {
       "classified_at": "2026-10-03T04:49:50.408007+00:00",
       "cost": "unknown",
@@ -4131,6 +4257,22 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 2,
       "title": "Vibeland Ep. 2",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fWild Horse Nine": {
+      "classified_at": "2026-10-15T15:27:41.023451+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Wild Horse Nine",
       "topics": [
         "film"
       ],
@@ -6802,6 +6944,22 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fAlvon Johnson": {
+      "classified_at": "2026-10-15T15:26:31.360862+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Alvon Johnson",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fAn Evening with Jonn Del Toro Richardson": {
       "classified_at": "2026-10-03T05:04:06.377391+00:00",
       "cost": "paid",
@@ -7033,6 +7191,22 @@
       "title": "Gunhild Carling",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fHarrison Flynn": {
+      "classified_at": "2026-10-15T15:26:31.276399+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Harrison Flynn",
+      "topics": [
+        "blues"
       ],
       "types": [
         [
@@ -7412,6 +7586,22 @@
       "topics": [
         "blues",
         "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fThe Funky Jazz All-Stars": {
+      "classified_at": "2026-10-15T15:26:31.494779+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "The Funky Jazz All-Stars",
+      "topics": [
+        "jazz"
       ],
       "types": [
         [
@@ -9801,6 +9991,28 @@
         ]
       ]
     },
+    "Book Passage\u001fLocal Government Night with Jim Schutz, Mai-Ling Garcia, & Tonia Lediju": {
+      "classified_at": "2026-10-15T15:26:32.297049+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Local Government Night with Jim Schutz, Mai-Ling Garcia, & Tonia Lediju",
+      "topics": [
+        "poetry",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Book Passage\u001fLouie Mensinger - Crochet Goomis": {
       "classified_at": "2026-09-25T06:06:10.985906+00:00",
       "cost": "unknown",
@@ -10265,6 +10477,24 @@
         ]
       ]
     },
+    "Book Passage\u001fNathaniel Philbrick - The Rush [Meet & Greet Signing Event]": {
+      "classified_at": "2026-10-15T15:26:31.515068+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Nathaniel Philbrick - The Rush [Meet & Greet Signing Event]",
+      "topics": [
+        "nonfiction",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fNichole Accettola - Scandinavian Everyday": {
       "classified_at": "2026-09-25T06:07:09.285152+00:00",
       "cost": "free",
@@ -10395,6 +10625,24 @@
         "nonfiction",
         "politics",
         "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Book Passage\u001fPOSTPONED: Marina Richie - Feathered Forest": {
+      "classified_at": "2026-10-15T15:26:32.134528+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "POSTPONED: Marina Richie - Feathered Forest",
+      "topics": [
+        "nonfiction",
+        "nature-outdoors"
       ],
       "types": [
         [
@@ -15642,6 +15890,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fThe MF Function": {
+      "classified_at": "2026-10-15T15:26:32.968602+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "The MF Function",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fTokyo Kanpai Boys (in Japanese)": {
       "classified_at": "2026-10-05T19:55:40.404306+00:00",
       "cost": "unknown",
@@ -15704,6 +15968,28 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001f'Traces' Documentary Film Screening and Q&A": {
+      "classified_at": "2026-10-15T15:26:31.390513+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "'Traces' Documentary Film Screening and Q&A",
+      "topics": [
+        "documentary",
+        "politics",
+        "women"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -20571,6 +20857,28 @@
         ]
       ]
     },
+    "GLBT Historical Society\u001fPerformance & Talkback | How to Live in a House on Fire (Staged Reading Series)": {
+      "classified_at": "2026-10-15T15:26:33.183825+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "GLBT Historical Society",
+      "taxonomy_version": 2,
+      "title": "Performance & Talkback | How to Live in a House on Fire (Staged Reading Series)",
+      "topics": [
+        "theater",
+        "lgbtq",
+        "history"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "GLBT Historical Society\u001fQueer Home on Film: A Shorts Program": {
       "classified_at": "2026-10-05T19:55:43.957126+00:00",
       "cost": "paid",
@@ -20676,6 +20984,22 @@
       "title": "*CANCELLED*  King of Drag",
       "topics": [
         "drag"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001f*CANCELLED* PRAYERS": {
+      "classified_at": "2026-10-15T15:26:33.764903+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "*CANCELLED* PRAYERS",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
@@ -32451,6 +32775,27 @@
         ]
       ]
     },
+    "Oakland Theater Project\u001f2027 Season Announcement Fundraiser": {
+      "classified_at": "2026-10-15T15:26:33.162422+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Theater Project",
+      "taxonomy_version": 2,
+      "title": "2027 Season Announcement Fundraiser",
+      "topics": [
+        "theater",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Oakland Theater Project\u001fA Night of Songs and Stories from \"Least of My Children\" with Dean Linnard": {
       "classified_at": "2026-10-05T19:56:12.773957+00:00",
       "cost": "unknown",
@@ -33251,6 +33596,24 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001f826 Valencia Fundraiser: Writer's Block Party": {
+      "classified_at": "2026-10-15T15:26:32.298563+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "826 Valencia Fundraiser: Writer's Block Party",
+      "topics": [
+        "writing",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
         ]
       ]
     },
@@ -34081,6 +34444,23 @@
         ]
       ]
     },
+    "Partiful\u001fFigure & Form Class": {
+      "classified_at": "2026-10-15T15:26:32.277412+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Figure & Form Class",
+      "topics": [
+        "visual-art",
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Partiful\u001fFigure Drawing": {
       "classified_at": "2026-10-03T05:16:54.211474+00:00",
       "cost": "unknown",
@@ -34751,6 +35131,28 @@
         ]
       ]
     },
+    "Partiful\u001fMahjong After Dark: Spooky Edition": {
+      "classified_at": "2026-10-15T15:26:32.401539+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Mahjong After Dark: Spooky Edition",
+      "topics": [
+        "games",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Partiful\u001fMahjong and Bites w/ Cloud & Crumb": {
       "classified_at": "2026-10-03T05:10:24.432942+00:00",
       "cost": "paid",
@@ -35277,6 +35679,28 @@
         ]
       ]
     },
+    "Partiful\u001fPop Up Mixer!": {
+      "classified_at": "2026-10-15T15:26:32.357788+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Pop Up Mixer!",
+      "topics": [
+        "club-night",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Partiful\u001fQueer Coin-Op Night": {
       "classified_at": "2026-10-03T05:11:07.940631+00:00",
       "cost": "free",
@@ -35367,6 +35791,23 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fSF Artist’s Circle": {
+      "classified_at": "2026-10-15T15:26:32.619291+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "SF Artist’s Circle",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -35749,6 +36190,22 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fTHERANOS THEATER NIGHT": {
+      "classified_at": "2026-10-15T15:26:32.119270+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "THERANOS THEATER NIGHT",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -46337,6 +46794,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001f20 Feet from Stardom": {
+      "classified_at": "2026-10-15T15:27:38.833235+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "20 Feet from Stardom",
+      "topics": [
+        "documentary",
+        "music"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Advanced Tai Chi with Patrick Lau": {
       "classified_at": "2026-10-03T01:24:58.765292+00:00",
       "cost": "free",
@@ -46435,6 +46909,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fActivity: Birding with Golden Gate Bird Alliance": {
+      "classified_at": "2026-10-15T15:26:34.617086+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Birding with Golden Gate Bird Alliance",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -46710,6 +47201,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: Crafternoon Explores Furoshiki": {
+      "classified_at": "2026-10-15T15:27:46.059994+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Crafternoon Explores Furoshiki",
+      "topics": [
+        "craft",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Crafternoon at Excelsior Open House": {
       "classified_at": "2026-09-23T20:03:06.808888+00:00",
       "cost": "free",
@@ -46798,6 +47306,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: Crochet Club": {
+      "classified_at": "2026-10-15T15:27:50.159600+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Crochet Club",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Crochet Club – Autumn Theme": {
       "classified_at": "2026-10-03T01:31:31.536011+00:00",
       "cost": "free",
@@ -46847,6 +47372,26 @@
         [
           "social",
           "book-club"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fActivity: Drawing From Film—Night of the Hunter": {
+      "classified_at": "2026-10-15T15:26:36.245539+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Drawing From Film—Night of the Hunter",
+      "topics": [
+        "film",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "screening"
         ]
       ]
     },
@@ -46993,6 +47538,25 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: Filipino Snack Trials": {
+      "classified_at": "2026-10-15T15:26:33.934625+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Filipino Snack Trials",
+      "topics": [
+        "family-kids",
+        "asian-american",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Fit for Life": {
       "classified_at": "2026-10-03T01:30:41.606775+00:00",
       "cost": "free",
@@ -47040,6 +47604,21 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fActivity: Get Stuff Done at Admin Night": {
+      "classified_at": "2026-10-15T15:27:05.140482+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Get Stuff Done at Admin Night",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -47288,6 +47867,40 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: Monopoly Board Game 大富翁桌遊": {
+      "classified_at": "2026-10-15T15:27:53.318862+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Monopoly Board Game 大富翁桌遊",
+      "topics": [
+        "games",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fActivity: New Year's Reflective Writing": {
+      "classified_at": "2026-10-15T15:27:47.063132+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: New Year's Reflective Writing",
+      "topics": [
+        "writing"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Noe Valley Knitting Circle": {
       "classified_at": "2026-10-03T01:24:20.966590+00:00",
       "cost": "free",
@@ -47404,6 +48017,27 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: SF Ballet's Nutcracker Oral History and Chair Dance Class": {
+      "classified_at": "2026-10-15T15:27:28.346634+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: SF Ballet's Nutcracker Oral History and Chair Dance Class",
+      "topics": [
+        "dance",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Scandinavian Paper Hearts": {
       "classified_at": "2026-10-14T15:26:57.084726+00:00",
       "cost": "free",
@@ -47451,6 +48085,23 @@
         [
           "social",
           "games-hobby"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fActivity: Scrapbook Holiday Cards": {
+      "classified_at": "2026-10-15T15:27:20.648388+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Scrapbook Holiday Cards",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -47707,6 +48358,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: Watercoloring": {
+      "classified_at": "2026-10-15T15:27:12.614448+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Watercoloring",
+      "topics": [
+        "visual-art",
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Wild Goose Qigong": {
       "classified_at": "2026-10-03T01:23:39.549297+00:00",
       "cost": "free",
@@ -47895,6 +48563,42 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fAuthor: Bosze Hadleigh, 492 Great Things about Being Italian": {
+      "classified_at": "2026-10-15T15:26:34.372010+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: Bosze Hadleigh, 492 Great Things about Being Italian",
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fAuthor: Camille Cusumano, Mystique of the Last Cannoli": {
+      "classified_at": "2026-10-15T15:26:34.075717+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: Camille Cusumano, Mystique of the Last Cannoli",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fAuthor: Cynthia Li, MD, The Medicine of Flow": {
       "classified_at": "2026-10-03T01:26:14.788079+00:00",
       "cost": "free",
@@ -47911,6 +48615,25 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fAuthor: David Schmidt, San Francisco Bay Area": {
+      "classified_at": "2026-10-15T15:26:36.365387+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: David Schmidt, San Francisco Bay Area",
+      "topics": [
+        "history",
+        "nature-outdoors",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
         ]
       ]
     },
@@ -48006,6 +48729,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fAuthor: Joan Steinau Lester in Conversation with Jewelle Gomez": {
+      "classified_at": "2026-10-15T15:26:44.593299+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: Joan Steinau Lester in Conversation with Jewelle Gomez",
+      "topics": [
+        "nonfiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fAuthor: Josie Iselin—Art & Algae": {
       "classified_at": "2026-10-03T01:30:08.456513+00:00",
       "cost": "free",
@@ -48016,6 +48757,24 @@
       "topics": [
         "nature-outdoors",
         "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fAuthor: Lindsay Marie Morris, Beneath the Sicilian Stars": {
+      "classified_at": "2026-10-15T15:26:33.929588+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: Lindsay Marie Morris, Beneath the Sicilian Stars",
+      "topics": [
+        "books-authors",
+        "history"
       ],
       "types": [
         [
@@ -48534,6 +49293,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fBook Club: Mission Bay Reader's Choice": {
+      "classified_at": "2026-10-15T15:27:07.658748+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Book Club: Mission Bay Reader's Choice",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fBook Club: Mission Bay Reads Flesh by David Szalay": {
       "classified_at": "2026-10-14T15:26:56.174950+00:00",
       "cost": "free",
@@ -48772,6 +49548,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fBook Club: The Antidote": {
+      "classified_at": "2026-10-15T15:27:18.088520+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Book Club: The Antidote",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fBook Club: Ulloa Reading Corner": {
       "classified_at": "2026-10-03T01:30:48.151410+00:00",
       "cost": "free",
@@ -48839,6 +49633,23 @@
       "topics": [
         "books-authors",
         "fiction"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fBook Club: World Literature, Ngugi wa Thiong'o’s Weep not, Child": {
+      "classified_at": "2026-10-15T15:26:35.537006+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Book Club: World Literature, Ngugi wa Thiong'o’s Weep not, Child",
+      "topics": [
+        "books-authors"
       ],
       "types": [
         [
@@ -49023,6 +49834,26 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fCelebration: Kwanzaa 2026—Ujima": {
+      "classified_at": "2026-10-15T15:27:34.488773+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Celebration: Kwanzaa 2026—Ujima",
+      "topics": [
+        "black-diaspora",
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fCelebration: Made in SF: Handcrafted to High-Tech Manufacturing in Dogpatch": {
       "classified_at": "2026-10-03T01:25:18.731358+00:00",
       "cost": "free",
@@ -49043,6 +49874,23 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fCelebration: New Year's Balloon Drop": {
+      "classified_at": "2026-10-15T15:27:50.840689+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Celebration: New Year's Balloon Drop",
+      "topics": [
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -49086,6 +49934,42 @@
         ],
         [
           "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fCelebration: Phil Kline's Unsilent Night": {
+      "classified_at": "2026-10-15T15:27:11.349633+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Celebration: Phil Kline's Unsilent Night",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fCelebration: Polk Street Small Business Stroll": {
+      "classified_at": "2026-10-15T15:26:36.306181+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Celebration: Polk Street Small Business Stroll",
+      "topics": [
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -49609,6 +50493,40 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fFilm: A Christmas Story": {
+      "classified_at": "2026-10-15T15:27:19.806233+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: A Christmas Story",
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: A Muppet Christmas Carol": {
+      "classified_at": "2026-10-15T15:26:42.693453+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: A Muppet Christmas Carol",
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fFilm: Children of a Lesser God": {
       "classified_at": "2026-10-03T01:31:10.768461+00:00",
       "cost": "free",
@@ -49616,6 +50534,22 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 2,
       "title": "Film: Children of a Lesser God",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Christmas in Connecticut": {
+      "classified_at": "2026-10-15T15:27:32.551922+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Christmas in Connecticut",
       "topics": [
         "film"
       ],
@@ -49642,6 +50576,22 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Comfort and Joy": {
+      "classified_at": "2026-10-15T15:27:26.808287+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Comfort and Joy",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -49677,6 +50627,32 @@
           "screening"
         ]
       ]
+    },
+    "San Francisco Public Library\u001fFilm: Family Plot": {
+      "classified_at": "2026-10-15T15:26:35.503408+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Family Plot",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Gather": {
+      "classified_at": "2026-10-15T15:26:36.055417+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Gather",
+      "topics": [],
+      "types": []
     },
     "San Francisco Public Library\u001fFilm: Gerald": {
       "classified_at": "2026-10-03T01:26:41.745488+00:00",
@@ -49828,6 +50804,28 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fFilm: Living Harriet Tubman with Post-Film Discussion and Q&A": {
+      "classified_at": "2026-10-15T15:27:16.524089+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Living Harriet Tubman with Post-Film Discussion and Q&A",
+      "topics": [
+        "documentary",
+        "history",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fFilm: Maxita": {
       "classified_at": "2026-10-10T02:03:48.399857+00:00",
       "cost": "free",
@@ -49846,6 +50844,22 @@
         [
           "talk",
           "panel"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Mildred Pierce": {
+      "classified_at": "2026-10-15T15:27:06.780122+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Mildred Pierce",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -49952,6 +50966,38 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Project Hail Mary": {
+      "classified_at": "2026-10-15T15:27:35.380715+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Project Hail Mary",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Repeat Performance": {
+      "classified_at": "2026-10-15T15:27:36.106004+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Repeat Performance",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -50192,6 +51238,22 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 2,
       "title": "Film: True Grit",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: Vertigo": {
+      "classified_at": "2026-10-15T15:26:35.551614+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Vertigo",
       "topics": [
         "film"
       ],
@@ -50589,6 +51651,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPerformance: Aurora Mandolin Orchestra and Guests": {
+      "classified_at": "2026-10-15T15:26:54.227920+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Aurora Mandolin Orchestra and Guests",
+      "topics": [
+        "folk-americana",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPerformance: Bay Beats Launch Party": {
       "classified_at": "2026-10-03T01:28:34.840383+00:00",
       "cost": "free",
@@ -50599,6 +51678,40 @@
       "topics": [
         "music",
         "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: Blue Bear College of Music All Star Band Concert": {
+      "classified_at": "2026-10-15T15:27:29.000714+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Blue Bear College of Music All Star Band Concert",
+      "topics": [
+        "music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: Blue Bear School of Music All Stars Band Concert": {
+      "classified_at": "2026-10-15T15:27:22.193041+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Blue Bear School of Music All Stars Band Concert",
+      "topics": [
+        "music",
+        "family-kids"
       ],
       "types": [
         [
@@ -50654,6 +51767,40 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPerformance: Holiday Concert by San Francisco Forest Choir": {
+      "classified_at": "2026-10-15T15:26:36.029093+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Holiday Concert by San Francisco Forest Choir",
+      "topics": [
+        "music",
+        "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: Khachapuri Trio": {
+      "classified_at": "2026-10-15T15:27:30.594345+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Khachapuri Trio",
+      "topics": [
+        "jazz",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPerformance: Kim Shuck's Poem Jam Celebrates Janice Gould's This Music": {
       "classified_at": "2026-10-03T01:30:51.717037+00:00",
       "cost": "free",
@@ -50664,6 +51811,27 @@
       "topics": [
         "poetry",
         "books-authors",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: Kim Shuck's Poem Jam Celebrates November Dance Shirt": {
+      "classified_at": "2026-10-15T15:26:51.145818+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Kim Shuck's Poem Jam Celebrates November Dance Shirt",
+      "topics": [
+        "poetry",
         "spoken-word"
       ],
       "types": [
@@ -50690,6 +51858,28 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: MARS Project Exhibition Concert with Downtown High School": {
+      "classified_at": "2026-10-15T15:26:43.706193+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: MARS Project Exhibition Concert with Downtown High School",
+      "topics": [
+        "rock-indie",
+        "film",
+        "politics",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "screening"
         ]
       ]
     },
@@ -50872,6 +52062,27 @@
       "types": [
         [
           "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: Poets on Jen Siraganian’s Everything Has Been Moved, Even The Dead": {
+      "classified_at": "2026-10-15T15:27:23.447096+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Poets on Jen Siraganian’s Everything Has Been Moved, Even The Dead",
+      "topics": [
+        "poetry",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ],
         [
           "performance"
@@ -51134,6 +52345,28 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: An Afternoon with Cafe Ohlone": {
+      "classified_at": "2026-10-15T15:26:47.504868+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: An Afternoon with Cafe Ohlone",
+      "topics": [
+        "history",
+        "nature-outdoors",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "talk"
+        ],
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Art Skool with Sturdy Bridge": {
       "classified_at": "2026-10-03T01:30:17.927895+00:00",
       "cost": "free",
@@ -51175,15 +52408,14 @@
       ]
     },
     "San Francisco Public Library\u001fPresentation: Balancing Record and Art in Photography": {
-      "classified_at": "2026-09-23T19:59:35.930426+00:00",
+      "classified_at": "2026-10-15T15:26:41.562276+00:00",
       "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "San Francisco Public Library",
-      "taxonomy_version": 1,
+      "taxonomy_version": 2,
       "title": "Presentation: Balancing Record and Art in Photography",
       "topics": [
-        "photography",
-        "visual-art"
+        "photography"
       ],
       "types": [
         [
@@ -51247,6 +52479,22 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentation: Bruschetta and Home Canning": {
+      "classified_at": "2026-10-15T15:26:33.675303+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Bruschetta and Home Canning",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -51422,6 +52670,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: Eugene O’Neill—51 Plays in 51 Minutes": {
+      "classified_at": "2026-10-15T15:26:40.024390+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Eugene O’Neill—51 Plays in 51 Minutes",
+      "topics": [
+        "theater",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Explore Union Construction Apprenticeships with CTWI": {
       "classified_at": "2026-10-03T01:27:43.248362+00:00",
       "cost": "free",
@@ -51566,6 +52832,42 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: Hollywood North—Alfred Hitchcock in the San Francisco Bay Area": {
+      "classified_at": "2026-10-15T15:26:35.948255+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Hollywood North—Alfred Hitchcock in the San Francisco Bay Area",
+      "topics": [
+        "film",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentation: How to Recognize and Report Workplace Discrimination & Harassment": {
+      "classified_at": "2026-10-15T15:26:50.310873+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: How to Recognize and Report Workplace Discrimination & Harassment",
+      "topics": [
+        "education",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Job Match with SF ReServe First Impressions": {
       "classified_at": "2026-10-03T01:31:35.099725+00:00",
       "cost": "free",
@@ -51696,6 +52998,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: Mediterranean Diet and Regional Italian Recipes": {
+      "classified_at": "2026-10-15T15:26:34.082769+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Mediterranean Diet and Regional Italian Recipes",
+      "topics": [
+        "food-drink",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Moving Image and Memory: Keeping Film Alive": {
       "classified_at": "2026-10-03T01:25:50.157025+00:00",
       "cost": "free",
@@ -51753,6 +53073,45 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: OPUS (N)ONE": {
+      "classified_at": "2026-10-15T15:27:37.775721+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: OPUS (N)ONE",
+      "topics": [
+        "music",
+        "visual-art",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentation: OWLs Poetry Reading": {
+      "classified_at": "2026-10-15T15:26:59.626559+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: OWLs Poetry Reading",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Ocean View, Merced Heights, and Ingleside History Day": {
       "classified_at": "2026-10-03T01:27:19.656557+00:00",
       "cost": "free",
@@ -51798,6 +53157,25 @@
       "topics": [
         "opera",
         "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentation: Opera in the Latin World": {
+      "classified_at": "2026-10-15T15:26:35.148487+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Opera in the Latin World",
+      "topics": [
+        "opera",
+        "latino",
+        "music"
       ],
       "types": [
         [
@@ -52118,6 +53496,44 @@
       "title": "Presentation: The Mid-Career Reset",
       "topics": [
         "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentation: The Velvet Underground": {
+      "classified_at": "2026-10-15T15:27:13.625618+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: The Velvet Underground",
+      "topics": [
+        "rock-indie",
+        "music",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentation: Timeless Traditions": {
+      "classified_at": "2026-10-15T15:26:35.184274+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Timeless Traditions",
+      "topics": [
+        "visual-art",
+        "history",
+        "asian-american"
       ],
       "types": [
         [
@@ -52961,6 +54377,21 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fSocial: Gift Wrap Paper Swap": {
+      "classified_at": "2026-10-15T15:27:40.183279+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Social: Gift Wrap Paper Swap",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fSocial: Halloween Costume Swap": {
       "classified_at": "2026-10-03T01:27:24.574480+00:00",
       "cost": "free",
@@ -53241,6 +54672,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fSocial: Plant Swap 植物交換會": {
+      "classified_at": "2026-10-15T15:26:58.473478+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Social: Plant Swap 植物交換會",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fSocial: Puppy Dog Tales": {
       "classified_at": "2026-10-03T01:24:53.421917+00:00",
       "cost": "free",
@@ -53275,6 +54723,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fSocial: Recipe and Cookie Swap": {
+      "classified_at": "2026-10-15T15:26:56.749777+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Social: Recipe and Cookie Swap",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fSocial: San Francisco Correspondence Co-op": {
       "classified_at": "2026-10-03T01:27:31.009224+00:00",
       "cost": "free",
@@ -53286,6 +54751,21 @@
         "craft",
         "writing"
       ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fSocial: Speed Friending": {
+      "classified_at": "2026-10-15T15:26:37.214880+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Social: Speed Friending",
+      "topics": [],
       "types": [
         [
           "social",
@@ -53914,6 +55394,39 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Air Dry Pottery": {
+      "classified_at": "2026-10-15T15:26:36.197132+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Air Dry Pottery",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Basic Budgeting with Study Smart Tutors": {
+      "classified_at": "2026-10-15T15:26:34.839958+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Basic Budgeting with Study Smart Tutors",
+      "topics": [
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Basic Watercolor Painting for Adults": {
       "classified_at": "2026-10-03T01:28:00.274121+00:00",
       "cost": "free",
@@ -54346,6 +55859,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Cork Keychains": {
+      "classified_at": "2026-10-15T15:27:25.847387+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Cork Keychains",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Crafting in the Castro": {
       "classified_at": "2026-10-03T01:30:39.921198+00:00",
       "cost": "free",
@@ -54519,6 +56048,23 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 2,
       "title": "Workshop: Day of Dead origami skulls",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Decorate a Wreath": {
+      "classified_at": "2026-10-15T15:27:01.487584+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Decorate a Wreath",
       "topics": [
         "craft",
         "family-kids"
@@ -54747,6 +56293,73 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Guided Visualization": {
+      "classified_at": "2026-10-15T15:27:43.755296+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Guided Visualization",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Hanji Lantern Crafting": {
+      "classified_at": "2026-10-15T15:26:55.738208+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Hanji Lantern Crafting",
+      "topics": [
+        "craft",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Healing with Art through Collage": {
+      "classified_at": "2026-10-15T15:26:33.826917+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Healing with Art through Collage",
+      "topics": [
+        "visual-art",
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Healthier Living (Chronic Disease Self-Management Program)": {
+      "classified_at": "2026-10-15T15:26:35.940403+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Healthier Living (Chronic Disease Self-Management Program)",
+      "topics": [
+        "wellness",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Healthier Living—Chronic Disease Self-Management Program": {
       "classified_at": "2026-10-03T01:30:26.580003+00:00",
       "cost": "free",
@@ -54773,6 +56386,38 @@
       "title": "Workshop: Help You Help Others",
       "topics": [
         "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Hojalata Ornaments": {
+      "classified_at": "2026-10-15T15:26:34.790262+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Hojalata Ornaments",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Holiday Greeting Cards": {
+      "classified_at": "2026-10-15T15:26:52.834147+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Holiday Greeting Cards",
+      "topics": [
+        "craft"
       ],
       "types": [
         [
@@ -54831,6 +56476,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Ilocano Weaving with Rachel Lozada": {
+      "classified_at": "2026-10-15T15:26:34.547295+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Ilocano Weaving with Rachel Lozada",
+      "topics": [
+        "craft",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Improv Theatre": {
       "classified_at": "2026-10-03T01:28:38.778753+00:00",
       "cost": "free",
@@ -54841,6 +56503,22 @@
       "topics": [
         "theater",
         "comedy"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Interview Skills with Study Smart Tutors": {
+      "classified_at": "2026-10-15T15:26:34.379551+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Interview Skills with Study Smart Tutors",
+      "topics": [
+        "education"
       ],
       "types": [
         [
@@ -54874,6 +56552,23 @@
       "title": "Workshop: Introduction to Music Production",
       "topics": [
         "music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Iris Folding Style Greeting Card": {
+      "classified_at": "2026-10-15T15:27:17.397846+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Iris Folding Style Greeting Card",
+      "topics": [
+        "craft",
         "family-kids"
       ],
       "types": [
@@ -55001,6 +56696,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Memoir Writing with Jing Li": {
+      "classified_at": "2026-10-15T15:26:38.942569+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Memoir Writing with Jing Li",
+      "topics": [
+        "writing",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Metal Key Pendants with Jeanie Low": {
       "classified_at": "2026-10-03T01:28:46.738408+00:00",
       "cost": "free",
@@ -55035,6 +56747,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Mexican Terracotta Candles": {
+      "classified_at": "2026-10-15T15:27:14.597971+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Mexican Terracotta Candles",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Microsoft Excel for Beginners": {
       "classified_at": "2026-10-03T01:26:50.873785+00:00",
       "cost": "free",
@@ -55044,6 +56772,23 @@
       "title": "Workshop: Microsoft Excel for Beginners",
       "topics": [
         "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Mindful Budgeting—Aligning Spending with Your Values": {
+      "classified_at": "2026-10-15T15:26:35.311435+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Mindful Budgeting—Aligning Spending with Your Values",
+      "topics": [
+        "education",
+        "wellness"
       ],
       "types": [
         [
@@ -55211,6 +56956,40 @@
       "topics": [
         "craft",
         "asian-american"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Painting Parol Christmas Cards": {
+      "classified_at": "2026-10-15T15:27:24.207383+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Painting Parol Christmas Cards",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Painting Tropical Fruit Friends with Watercolor": {
+      "classified_at": "2026-10-15T15:26:34.808565+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Painting Tropical Fruit Friends with Watercolor",
+      "topics": [
+        "craft",
+        "visual-art"
       ],
       "types": [
         [
@@ -55571,6 +57350,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Seasonal Greeting Cards": {
+      "classified_at": "2026-10-15T15:27:00.353366+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Seasonal Greeting Cards",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Self-Portraits for Frida Kahlo": {
       "classified_at": "2026-10-03T01:28:18.931675+00:00",
       "cost": "free",
@@ -55597,6 +57392,22 @@
       "title": "Workshop: Senior Fitness",
       "topics": [
         "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Sew a Drawstring Bag": {
+      "classified_at": "2026-10-15T15:27:09.418055+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Sew a Drawstring Bag",
+      "topics": [
+        "craft"
       ],
       "types": [
         [
@@ -55731,6 +57542,39 @@
       "topics": [
         "visual-art",
         "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Spot the Scam": {
+      "classified_at": "2026-10-15T15:26:46.254035+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Spot the Scam",
+      "topics": [
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: StopScams SF—Listen and Learn": {
+      "classified_at": "2026-10-15T15:27:10.501175+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: StopScams SF—Listen and Learn",
+      "topics": [
+        "education",
+        "business"
       ],
       "types": [
         [
@@ -55938,6 +57782,38 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Washi Tape Gift Box": {
+      "classified_at": "2026-10-15T15:27:03.853332+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Washi Tape Gift Box",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Washi Tape Holiday Cards": {
+      "classified_at": "2026-10-15T15:26:52.117018+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Washi Tape Holiday Cards",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Watercolor Tape Painting": {
       "classified_at": "2026-10-03T04:49:48.184377+00:00",
       "cost": "free",
@@ -55955,6 +57831,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Wax Resist Holiday Cards and Stamped Gift Wrap": {
+      "classified_at": "2026-10-15T15:26:36.628450+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Wax Resist Holiday Cards and Stamped Gift Wrap",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: West Portal Adults' Craft Club": {
       "classified_at": "2026-10-03T01:30:42.442557+00:00",
       "cost": "free",
@@ -55962,6 +57854,38 @@
       "source": "San Francisco Public Library",
       "taxonomy_version": 2,
       "title": "Workshop: West Portal Adults' Craft Club",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Will Writing with Stuart Bronstein": {
+      "classified_at": "2026-10-15T15:26:35.271084+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Will Writing with Stuart Bronstein",
+      "topics": [
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Winter Craft": {
+      "classified_at": "2026-10-15T15:27:03.057845+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Winter Craft",
       "topics": [
         "craft"
       ],
@@ -56119,6 +58043,25 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001f作家: 刘宗坤, 异乡故人": {
+      "classified_at": "2026-10-15T15:27:31.975003+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "作家: 刘宗坤, 异乡故人",
+      "topics": [
+        "nonfiction",
+        "books-authors",
+        "writing"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001f教程: 基本科技協助 (中文和英文) / Tutorial: English and Chinese Tech Drop-In": {
       "classified_at": "2026-09-23T19:58:22.264967+00:00",
       "cost": "free",
@@ -56132,6 +58075,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001f粵語講座: 防範及識別詐騙騙局": {
+      "classified_at": "2026-10-15T15:26:49.341066+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "粵語講座: 防範及識別詐騙騙局",
+      "topics": [
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
         ]
       ]
     },
@@ -59850,6 +61810,23 @@
         ]
       ]
     },
+    "The Castro Theatre\u001fSmall Town Gay Bar": {
+      "classified_at": "2026-10-15T15:26:33.150810+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Castro Theatre",
+      "taxonomy_version": 2,
+      "title": "Small Town Gay Bar",
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "The Castro Theatre\u001fSyd": {
       "classified_at": "2026-10-07T21:22:52.978785+00:00",
       "cost": "unknown",
@@ -60269,6 +62246,28 @@
         "business"
       ],
       "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fChill Discussions - Impact of Social Media & Big Tech": {
+      "classified_at": "2026-10-15T15:26:31.489707+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Chill Discussions - Impact of Social Media & Big Tech",
+      "topics": [
+        "tech",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
         [
           "social",
           "mixer-meetup"
@@ -61498,15 +63497,15 @@
       ]
     },
     "The Commons (SF)\u001f📚 Short Story Symposium": {
-      "classified_at": "2026-09-24T07:03:17.241387+00:00",
-      "cost": "unknown",
+      "classified_at": "2026-10-15T15:26:31.800094+00:00",
+      "cost": "free",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "The Commons (SF)",
-      "taxonomy_version": 1,
+      "taxonomy_version": 2,
       "title": "📚 Short Story Symposium",
       "topics": [
         "fiction",
-        "science"
+        "books-authors"
       ],
       "types": [
         [
@@ -66836,6 +68835,24 @@
       "title": "ACOUSTIC ALCHEMY",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fALVON JOHNSON": {
+      "classified_at": "2026-10-15T15:26:31.383651+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 2,
+      "title": "ALVON JOHNSON",
+      "topics": [
+        "blues",
+        "jazz",
+        "soul-funk"
       ],
       "types": [
         [
