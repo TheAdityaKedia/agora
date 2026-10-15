@@ -4196,6 +4196,26 @@
       "region": "sf",
       "status": "auto"
     },
+    "marina-theatre": {
+      "added": "2026-10-15",
+      "address": "2149 Chestnut St, San Francisco, CA 94123",
+      "evidence": [
+        "map: Cinema 21 in San Francisco County (building, way/197423597)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.800253,
+      "lng": -122.438525,
+      "name": "Marina Theatre",
+      "osm": "way/197423597",
+      "possible_duplicates": [
+        "rick-roxys",
+        "books-inc-in-the-marina"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "martunis": {
       "added": "2026-10-02",
       "address": "4 Valencia Street, San Francisco, CA 94103",
@@ -6291,6 +6311,23 @@
       ],
       "precision": "building",
       "region": "southbay",
+      "status": "auto"
+    },
+    "southern-pacific-brewing": {
+      "added": "2026-10-15",
+      "address": "620 Treat Avenue, San Francisco, CA 94110",
+      "evidence": [
+        "map: Southern Pacific Brewing in San Francisco County (building, node/1805750179)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.760131,
+      "lng": -122.41399,
+      "name": "Southern Pacific Brewing",
+      "osm": "node/1805750179",
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "spark-social-sf": {
