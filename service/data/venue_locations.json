@@ -69,6 +69,9 @@
     "2200 broadway, redwood city, ca": {
       "venue": "2200-broadway"
     },
+    "2270 broadway, oakland, ca": {
+      "venue": "2270-broadway"
+    },
     "2300 chestnut st, san francisco, ca": {
       "venue": "2300-chestnut-st"
     },
@@ -87,14 +90,23 @@
     "26th ave & cabrillo st, san francisco, ca": {
       "venue": "26th-ave-cabrillo-st"
     },
+    "2727 california st, berkeley, ca": {
+      "venue": "2727-california-street"
+    },
     "2831 mission st, san francisco, ca": {
       "venue": "2831-mission-st"
+    },
+    "299 bonview st, san francisco, ca": {
+      "venue": "299-bonview-st"
     },
     "301 great hwy, san francisco, ca": {
       "venue": "301-great-hwy"
     },
     "3150 18th st, san francisco, ca": {
       "venue": "zore-law"
+    },
+    "316 11th st, san francisco, ca": {
+      "venue": "audio-nightclub"
     },
     "32 west portal ave. san francisco, ca": {
       "venue": "hardware-coffee-company"
@@ -123,11 +135,17 @@
     "376 grand ave, oakland, ca": {
       "venue": "bay-grape"
     },
+    "377 geary st, san francisco, ca": {
+      "venue": "377-geary-st"
+    },
     "39 grant ave, san francisco, ca": {
       "venue": "39-grant-ave"
     },
     "4-star theater, 2200 clement st, san francisco, ca": {
       "venue": "4-star-theater"
+    },
+    "4114 judah st, san francisco, ca": {
+      "venue": "4114-judah-st"
     },
     "419 georgia st, vallejo, ca": {
       "venue": "419-georgia-st"
@@ -145,6 +163,9 @@
       "venue": "4425-linden-st"
     },
     "447 minna st, 447 minna street, san francisco, ca 94103, san francisco, ca": {
+      "venue": "447-minna"
+    },
+    "447 minna st, san francisco, ca": {
       "venue": "447-minna"
     },
     "447 minna, 447 minna st, san francisco": {
@@ -228,6 +249,9 @@
     "931 pacific ave, santa cruz, ca": {
       "place": "outside"
     },
+    "945 apgar st, emeryville, ca": {
+      "venue": "945-apgar-st"
+    },
     "968 valencia st, san francisco, ca": {
       "venue": "big-time-vintage"
     },
@@ -245,6 +269,9 @@
       "venue": "alamo-drafthouse-cinema"
     },
     "alamo square park": {
+      "venue": "alamo-square"
+    },
+    "alamo square park, hayes st & steiner st, san francisco, ca": {
       "venue": "alamo-square"
     },
     "alamo square, hayes st & steiner st, san francisco, ca": {
@@ -271,6 +298,9 @@
     },
     "arc gallery, 1246 folsom st, san francisco": {
       "venue": "arc-gallery-studios"
+    },
+    "arcana, 2512 mission st, san francisco, ca": {
+      "venue": "arcana"
     },
     "art@archer, 431 13th street, oakland": {
       "venue": "art-archer"
@@ -425,6 +455,28 @@
     "buzzworks, 365 11th st, san francisco, ca": {
       "venue": "buzzworks"
     },
+    "cafe con leche con amor, 1759 technology dr, ste 10, san jose, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-24",
+          "title": "café con depop",
+          "url": "https://partiful.com/e/bPdjFlXE1Mx0Ia8nlEBL"
+        },
+        "first_seen": "2026-10-16",
+        "last_tried": "2026-10-16",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Jose",
+          "kind": "venue",
+          "name": "Cafe Con Leche Con Amor",
+          "street_address": "1759 Technology Dr, Ste 10"
+        }
+      }
+    },
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
     },
@@ -445,6 +497,9 @@
     },
     "cat club, 1190 folsom st, san francisco, ca": {
       "venue": "cat-club"
+    },
+    "cataldi park, cataldi dr & morrill ave, san jose, ca": {
+      "venue": "cataldi-park"
     },
     "chapter 510, 546 9th st, oakland, ca": {
       "venue": "chapter-510"
@@ -537,6 +592,9 @@
       "venue": "decentered-arts-studio"
     },
     "decentered arts, 1175 folsom st, san francisco": {
+      "venue": "decentered-arts-studio"
+    },
+    "decentered arts, 1175 folsom st, suite 2a, san francisco, ca": {
       "venue": "decentered-arts-studio"
     },
     "decker theatre, 25 van ness avenue, san francisco, ca": {
@@ -739,6 +797,13 @@
     },
     "glbt historical society, 4127 18th street san francisco": {
       "venue": "glbt-historical-society"
+    },
+    "golden eye social, 311 3rd st, san francisco, ca": {
+      "venue": "golden-eye-social"
+    },
+    "golden gate park - polo field, john f. kennedy drive and middle drive w, san francisco, ca": {
+      "room": "Polo Field",
+      "venue": "golden-gate-park"
     },
     "golden gate park, 501 stanyan st, san francisco, ca": {
       "venue": "golden-gate-park"
@@ -958,6 +1023,9 @@
     "marcus books, 3900 martin luther king jr way, oakland, ca": {
       "venue": "marcus-books"
     },
+    "marina green triangle, 200 marina blvd, san francisco, ca": {
+      "venue": "marina-green-triangle"
+    },
     "marina green, 411-401 marina blvd, san francisco, ca": {
       "venue": "marina-green"
     },
@@ -1011,6 +1079,27 @@
     },
     "mission bowling club, 3176 17th street, san francisco, 94110, san francisco, ca": {
       "venue": "mission-bowling-club"
+    },
+    "mission district, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-23",
+          "title": "Launch Party for CHUMI",
+          "url": "https://partiful.com/e/zs7sG61no26W7Mz9cyFx"
+        },
+        "first_seen": "2026-10-16",
+        "last_tried": "2026-10-16",
+        "reason": "map result 'San Francisco, CA - Salesforce Plaza (SFC)' doesn't match the name or street number",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "not_a_place",
+          "name": "Mission District"
+        }
+      }
     },
     "mission dolores park, 566 dolores st, san francisco, ca": {
       "venue": "dolores-park"
@@ -1184,6 +1273,9 @@
     "ocean ale house, 1314 ocean avenue, san francisco, 94112, san francisco, ca": {
       "venue": "ocean-ale-house"
     },
+    "ocean beach parking, san francisco, ca": {
+      "venue": "ocean-beach-parking-lot"
+    },
     "ocean beach, san francisco, ca": {
       "place": "region",
       "region": "sf"
@@ -1192,6 +1284,9 @@
       "place": "none"
     },
     "omca campus, 1000 oak st,, oakland": {
+      "venue": "oakland-museum-of-california"
+    },
+    "omca great hall, 1000 oak, oakland": {
       "venue": "oakland-museum-of-california"
     },
     "omnivore books on food, 3885a cesar chavez st, san francisco, ca": {
@@ -1921,6 +2016,34 @@
     "werkshack, 481 25th street, oakland": {
       "venue": "werkshack"
     },
+    "west bluff picnic area, long avenue, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-18",
+          "title": "Pancakes and Sauna",
+          "url": "https://partiful.com/e/wdA0sgHvOWBd731amxyJ"
+        },
+        "first_seen": "2026-10-16",
+        "last_tried": "2026-10-16",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "map": {
+            "label": "Long Avenue",
+            "lat": 37.807011,
+            "lng": -122.470775,
+            "osm": "way/419755784"
+          },
+          "name": "West Bluff Picnic Area",
+          "street_address": "Long Avenue"
+        }
+      }
+    },
     "westwood, 2036 lombard st, san francisco, ca": {
       "venue": "westwood"
     },
@@ -1938,6 +2061,9 @@
     },
     "xex, 1131 polk st, san francisco, ca": {
       "venue": "xex"
+    },
+    "yancy's saloon, 734 irving st, san francisco, ca": {
+      "venue": "yancys-saloon"
     },
     "ybca screening room": {
       "room": "Screening Room",

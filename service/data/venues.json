@@ -364,6 +364,29 @@
       "region": "peninsula",
       "status": "verified"
     },
+    "2270-broadway": {
+      "added": "2026-10-16",
+      "address": "2270 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "map: 2270 in Alameda County (building, way/417728681)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.81194,
+      "lng": -122.266643,
+      "name": "2270 Broadway",
+      "osm": "way/417728681",
+      "possible_duplicates": [
+        "drakes-dealership",
+        "mighty-mighty-studio",
+        "johansson-projects",
+        "thee-stork-club",
+        "new-parkway-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "2300-chestnut-st": {
       "added": "2026-10-03",
       "address": "2300 Chestnut St, San Francisco, CA 94123",
@@ -413,6 +436,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "2727-california-street": {
+      "added": "2026-10-16",
+      "address": "2727 California Street, Berkeley, CA 94703",
+      "evidence": [
+        "map: 2727 California Street in Alameda County (building, node/9880060255)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.858027,
+      "lng": -122.277687,
+      "name": "2727 California Street",
+      "osm": "node/9880060255",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "2831-mission-st": {
       "added": "2026-10-02",
       "address": "2831 Mission Street, San Francisco, CA 94110",
@@ -428,6 +467,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "299-bonview-st": {
+      "added": "2026-10-16",
+      "address": "299 Bonview Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 299 in San Francisco County (building, way/797226923)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.739605,
+      "lng": -122.419001,
+      "name": "299 Bonview St",
+      "osm": "way/797226923",
+      "possible_duplicates": [
+        "wild-side-west"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "301-great-hwy": {
       "added": "2026-10-09",
@@ -494,6 +552,35 @@
       "region": "peninsula",
       "status": "verified"
     },
+    "377-geary-st": {
+      "added": "2026-10-16",
+      "address": "377 Geary Street, San Francisco, CA 94108",
+      "evidence": [
+        "map: 377 in San Francisco County (building, way/274592035)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.786983,
+      "lng": -122.409383,
+      "name": "377 Geary St",
+      "osm": "way/274592035",
+      "possible_duplicates": [
+        "biscuits-blues",
+        "august-hall",
+        "a-c-t",
+        "the-westin-st-francis",
+        "curran-theatre",
+        "feinsteins-at-the-nikko",
+        "san-francisco-playhouse",
+        "the-redwood-room",
+        "cheaper-than-therapy",
+        "starlite-room",
+        "the-felix"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "39-grant-ave": {
       "added": "2026-10-02",
       "address": "39 Grant Avenue, San Francisco, CA 94108",
@@ -529,6 +616,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "4114-judah-st": {
+      "added": "2026-10-16",
+      "address": "4114 Judah St, San Francisco, CA 94122",
+      "evidence": [
+        "map: 4110;4114 in San Francisco County (building, way/277830589)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.760654,
+      "lng": -122.506283,
+      "name": "4114 Judah St",
+      "osm": "way/277830589",
+      "possible_duplicates": [
+        "black-bird-bookstore",
+        "pittsburghs-pub"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "419-georgia-st": {
       "added": "2026-10-07",
@@ -694,6 +801,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "945-apgar-st": {
+      "added": "2026-10-16",
+      "address": "945 Apgar Street, Oakland, CA 94609",
+      "evidence": [
+        "map: 945 in Alameda County (building, way/426678884)",
+        "text: Emeryville",
+        "street number matches"
+      ],
+      "lat": 37.829039,
+      "lng": -122.27565,
+      "name": "945 Apgar St",
+      "osm": "way/426678884",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "a-c-t": {
       "added": "2026-10-02",
@@ -946,6 +1069,29 @@
       "region": "sf",
       "status": "verified"
     },
+    "arcana": {
+      "added": "2026-10-16",
+      "address": "2512 Mission Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Arcana in San Francisco County (building, node/13765410525)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.756665,
+      "lng": -122.419081,
+      "name": "Arcana",
+      "osm": "node/13765410525",
+      "possible_duplicates": [
+        "alamo-drafthouse-cinema",
+        "make-out-room",
+        "artists-television-access",
+        "big-time-vintage"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "art-archer": {
       "added": "2026-10-02",
       "address": "431 13th Street, Oakland, CA 94612",
@@ -1013,6 +1159,28 @@
       "osm": "way/515898408",
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "audio-nightclub": {
+      "added": "2026-10-16",
+      "address": "316 11th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Audio Nightclub in San Francisco County (building, way/148175384)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.771371,
+      "lng": -122.413808,
+      "name": "Audio Nightclub",
+      "osm": "way/148175384",
+      "possible_duplicates": [
+        "buzzworks",
+        "oasis",
+        "the-foundry-sf",
+        "eagle-tavern"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "august-hall": {
@@ -1823,6 +1991,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "cataldi-park": {
+      "added": "2026-10-16",
+      "address": "San Jose, CA",
+      "evidence": [
+        "map: Cataldi Park in Santa Clara County (building, way/23977992)",
+        "text: San Jose",
+        "name matches"
+      ],
+      "lat": 37.401862,
+      "lng": -121.870117,
+      "name": "Cataldi Park",
+      "osm": "way/23977992",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "chapter-510": {
       "added": "2026-10-02",
@@ -2982,6 +3166,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "golden-eye-social": {
+      "added": "2026-10-16",
+      "address": "311 3rd Street, San Francisco, CA 94105",
+      "evidence": [
+        "map: 311 in San Francisco County (building, way/149102133)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.783656,
+      "lng": -122.3984,
+      "name": "Golden Eye Social",
+      "osm": "way/149102133",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "golden-gate-park": {
       "added": "2026-10-02",
@@ -4196,6 +4396,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "marina-green-triangle": {
+      "added": "2026-10-16",
+      "address": "200 Marina Boulevard, San Francisco, CA 94123",
+      "evidence": [
+        "map: 200 in San Francisco County (building, way/1497167835)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.806339,
+      "lng": -122.435649,
+      "name": "Marina Green Triangle",
+      "osm": "way/1497167835",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "marina-theatre": {
       "added": "2026-10-15",
       "address": "2149 Chestnut St, San Francisco, CA 94123",
@@ -5023,6 +5239,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "ocean-beach-parking-lot": {
+      "added": "2026-10-16",
+      "address": "The Esplanade, San Francisco, CA 94121",
+      "evidence": [
+        "map: Ocean Beach Parking Lot in San Francisco County (building, way/28691582)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.767645,
+      "lng": -122.510786,
+      "name": "Ocean Beach Parking Lot",
+      "osm": "way/28691582",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "ocean-view-branch-library": {
       "added": "2026-10-02",
@@ -8268,6 +8500,29 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "yancys-saloon": {
+      "added": "2026-10-16",
+      "address": "734 Irving Street, San Francisco, CA 94122",
+      "evidence": [
+        "map: Yancy's Saloon in San Francisco County (building, node/3634308480)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.764199,
+      "lng": -122.465864,
+      "name": "Yancy's Saloon",
+      "osm": "node/3634308480",
+      "possible_duplicates": [
+        "underdogs-tres",
+        "green-apple-books-on-the-park",
+        "books-on-the-park-on-9th-avenue",
+        "the-red-tail"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "ybca-screening-room": {
       "added": "2026-10-02",
