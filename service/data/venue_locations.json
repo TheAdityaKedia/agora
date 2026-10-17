@@ -9,6 +9,9 @@
     "103 kennedy dr, capitola, ca": {
       "place": "outside"
     },
+    "1059 market st, san francisco, ca": {
+      "venue": "1059-market-st"
+    },
     "1070 bryant st, san francisco, ca": {
       "venue": "1070-bryant-st"
     },
@@ -45,11 +48,17 @@
     "1645 park st, alameda, ca": {
       "venue": "1645-park-st"
     },
+    "1815 balboa st, san francisco, ca": {
+      "venue": "1815-balboa-st"
+    },
     "191 warriors way, suite 102, san francisco, ca": {
       "venue": "dumpling-time-thrive-city"
     },
     "1919 fourth st, berkeley, ca": {
       "venue": "1919-fourth-st"
+    },
+    "1923 33rd ave, san francisco, ca": {
+      "venue": "1923-33rd-ave"
     },
     "200 gate five rd, sausalito, ca": {
       "venue": "the-art-bloc"
@@ -65,6 +74,9 @@
     },
     "215 washington st, oakland, ca": {
       "venue": "215-washington-st"
+    },
+    "2151 harrison st, san francisco, ca": {
+      "venue": "2151-harrison-st"
     },
     "2200 broadway, redwood city, ca": {
       "venue": "2200-broadway"
@@ -137,6 +149,28 @@
     },
     "377 geary st, san francisco, ca": {
       "venue": "377-geary-st"
+    },
+    "37th ave & ortega st stop, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-17",
+          "title": "“Secondhand Saturday” w/ Sunset Mercantile",
+          "url": "https://partiful.com/e/ge2A0lf4OeheZRPDRBr1"
+        },
+        "first_seen": "2026-10-17",
+        "last_tried": "2026-10-17",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "name": "37th Ave & Ortega St Stop",
+          "street_address": "37th Avenue and Ortega Street"
+        }
+      }
     },
     "39 grant ave, san francisco, ca": {
       "venue": "39-grant-ave"
@@ -228,6 +262,9 @@
     "660 stanford shopping center, palo alto, ca": {
       "venue": "stanford-shopping-center"
     },
+    "700 alemany blvd, san francisco, ca": {
+      "venue": "alemany-farm"
+    },
     "703 sutter st, folsom, ca": {
       "place": "outside"
     },
@@ -283,6 +320,9 @@
     },
     "alchemy springs, 939 post st, san francisco, ca": {
       "venue": "alchemy-springs"
+    },
+    "alemany farmers market, 100 alemany blvd, san francisco, ca": {
+      "venue": "alemany-farmers-market"
     },
     "all out comedy theater, 2550 telegraph ave, oakland, ca": {
       "venue": "all-out-comedy-theater"
@@ -492,6 +532,9 @@
     "calvin simmons theatre, henry j. kaiser center for the arts, 10 10th st, oakland, ca": {
       "venue": "calvin-simmons-theater"
     },
+    "candlestick park, 602 jamestown ave, san francisco, ca": {
+      "venue": "candlestick-park"
+    },
     "cassa jam, 37729 niles blvd, fremont, ca": {
       "venue": "cassa-jam"
     },
@@ -657,6 +700,12 @@
     "elixir, 3200 mission street, san francisco, ca": {
       "venue": "elixir"
     },
+    "environmental volunteers' ecocenter, 2560 embarcadero rd, palo alto, ca": {
+      "venue": "environmental-volunteers-ecocenter"
+    },
+    "equator coffees, 2 marina blvd, san francisco, ca": {
+      "venue": "equator-coffees"
+    },
     "era lounge, 386 s 1st st, san jose, ca": {
       "venue": "era-lounge"
     },
@@ -747,6 +796,10 @@
     },
     "frontier tower @ 15th floor annex": {
       "room": "15th Floor Annex",
+      "venue": "frontier-tower-berlinhouse"
+    },
+    "frontier tower @ 15th floor annex - other minds 995 market street, san francisco": {
+      "room": "15th Floor Annex - Other Minds",
       "venue": "frontier-tower-berlinhouse"
     },
     "frontier tower @ 16 floor teahouse": {
@@ -854,6 +907,9 @@
     "guildhouse, 420 first st, san jose, ca": {
       "venue": "guildhouse"
     },
+    "haight-ashbury, san francisco, ca": {
+      "venue": "haight-ashbury"
+    },
     "harry's bar, 2020 fillmore st, san francisco, ca": {
       "venue": "harrys-bar"
     },
@@ -883,6 +939,9 @@
     },
     "instudio with empowerment avenue, 473 25th st., suite a, oakland": {
       "venue": "instudio-with-empowerment-avenue"
+    },
+    "international hotel manilatown center, 868 kearny st, san francisco, ca": {
+      "venue": "international-hotel-manilatown-center"
     },
     "iris + emerson, 790 arguello blvd, san francisco, ca": {
       "venue": "iris-emerson"
@@ -968,6 +1027,9 @@
     },
     "lion's den lounge and bar, 57 wentworth place, san francisco, ca": {
       "venue": "lions-den-bar-lounge"
+    },
+    "little green a plant bar, 1101 main st, redwood city, ca": {
+      "venue": "little-green-a-plant-bar"
     },
     "lookout, 3600 16th st, san francisco, ca": {
       "venue": "lookout"
@@ -1144,6 +1206,9 @@
     "muddy waters coffee & lounge, 521 valencia street, san francisco, ca": {
       "venue": "muddy-waters-coffee-lounge"
     },
+    "muddy waters coffee house, 521 valencia st, san francisco, ca": {
+      "venue": "muddy-waters-coffee-lounge"
+    },
     "multiple locations, mission district, san francisco": {
       "place": "none"
     },
@@ -1161,6 +1226,9 @@
     },
     "nob hill yoga, 1106 pacific ave, san francisco, ca": {
       "venue": "nob-hill-yoga"
+    },
+    "noe valley books 3957 24th street san francisco, ca": {
+      "venue": "noe-valley-books"
     },
     "noe valley books, 3899 24th st, san francisco, ca": {
       "venue": "noe-valley-books"
@@ -1337,6 +1405,9 @@
     "pandora karaoke & bar, 50 mason street, san francisco, 94102, san francisco, ca": {
       "venue": "pandora-karaoke-bar"
     },
+    "panhandle, san francisco, ca": {
+      "venue": "panhandle"
+    },
     "paramount theatre, 2025 broadway, oakland, ca": {
       "venue": "paramount-theater"
     },
@@ -1348,6 +1419,9 @@
     },
     "pegasus books, 2349 shattuck ave, berkeley, ca": {
       "venue": "pegasus-books"
+    },
+    "pickleball city, 39161 farwell dr, fremont, ca": {
+      "venue": "pickleball-city"
     },
     "pier 23 cafe, pier 23 the embarcadero, san francisco, ca": {
       "venue": "pier-23-cafe"
@@ -1387,6 +1461,10 @@
     },
     "rick & roxy's, 2131 lombard street, san francisco, 94123, san francisco, ca": {
       "venue": "rick-roxys"
+    },
+    "ritch st, san francisco, ca": {
+      "place": "region",
+      "region": "sf"
     },
     "roble arts gym, 375 santa teresa st, stanford, ca": {
       "venue": "roble-arts-gym"
@@ -1461,6 +1539,9 @@
     },
     "sausalito books by the bay, 100 bay st, sausalito": {
       "venue": "sausalito-books-by-the-bay"
+    },
+    "sausalito cruising club, 1610 bridgeway, sausalito, ca": {
+      "venue": "sausalito-cruising-club"
     },
     "scopo divino, 2800 california st, san francisco, ca": {
       "venue": "scopo-divino"
@@ -1638,6 +1719,9 @@
     "southern pacific brewing, 620 treat ave, san francisco, ca": {
       "venue": "southern-pacific-brewing"
     },
+    "spark social sf, 601 mission bay blvd n, san francisco, ca": {
+      "venue": "spark-social-sf"
+    },
     "spark social sf, 601 mission bay blvd north, san francisco, ca": {
       "venue": "spark-social-sf"
     },
@@ -1733,6 +1817,9 @@
     "temple san francisco, 540 howard st, san francisco, ca": {
       "venue": "temple-nightclub-san-francisco"
     },
+    "the ameswell hotel, 800 moffett blvd, mountain view, ca": {
+      "venue": "the-ameswell-hotel"
+    },
     "the art bloc sausalito, 200 gate five rd, suite 110, sausalito, ca": {
       "venue": "the-art-bloc"
     },
@@ -1814,6 +1901,9 @@
     },
     "the dubliner, 3838 24th street, san francisco, 94114, san francisco, ca": {
       "venue": "the-dubliner"
+    },
+    "the faight collective, 473a haight st, san francisco, ca": {
+      "venue": "the-faight-collective"
     },
     "the faight collective, 475 haight st, san francisco, ca": {
       "venue": "the-faight-collective"
@@ -1949,11 +2039,20 @@
     "thriller social club, san francisco, ca, san francisco, ca": {
       "venue": "thriller-social-club"
     },
+    "thrive city, 1725 3rd street, san francisco": {
+      "venue": "dumpling-time-thrive-city"
+    },
+    "tiat place, 151 powell st, san francisco, ca": {
+      "venue": "tiat-place"
+    },
     "timeout tavern, 1750 divisadero street, san francisco, 94115, san francisco, ca": {
       "venue": "timeout-tavern"
     },
     "to be announced, oakland theater project at flax art & design, 1501 martin luther king jr way, oakland, ca": {
       "place": "none"
+    },
+    "tokyo futon & tea, 924 valencia st, san francisco, ca": {
+      "venue": "tokyo-futon-tea"
     },
     "torch bar, 1630 san pablo ave, oakland, ca": {
       "venue": "torch-bar"
@@ -1966,6 +2065,9 @@
     },
     "tupelo, 1337 grant avenue, san francisco, 94133, san francisco, ca": {
       "venue": "tupelo"
+    },
+    "twelvemonth, 330 lorton ave, burlingame, ca": {
+      "venue": "twelvemonth"
     },
     "udon mugizo, 1072 saratoga ave, san jose, ca": {
       "venue": "udon-mugizo"
