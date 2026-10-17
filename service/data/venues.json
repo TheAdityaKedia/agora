@@ -88,6 +88,28 @@
     "Z Space": "sf"
   },
   "venues": {
+    "1059-market-st": {
+      "added": "2026-10-17",
+      "address": "1059 Market St, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1059;1061 in San Francisco County (building, way/256035269)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.780929,
+      "lng": -122.411289,
+      "name": "1059 Market St",
+      "osm": "way/256035269",
+      "possible_duplicates": [
+        "lines-dance-center",
+        "golden-gate-theater",
+        "frontier-tower-berlinhouse",
+        "warfield-theatre"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1070-bryant-st": {
       "added": "2026-10-02",
       "address": "1070 Bryant Street, San Francisco, CA 94103",
@@ -275,6 +297,22 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "1815-balboa-st": {
+      "added": "2026-10-17",
+      "address": "1815 Balboa St, San Francisco, CA 94121",
+      "evidence": [
+        "map: 1801;1805;1807;1809;1811;1815;1817;1819;1821 in San Francisco County (building, way/278746615)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.776442,
+      "lng": -122.478325,
+      "name": "1815 Balboa St",
+      "osm": "way/278746615",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1919-fourth-st": {
       "added": "2026-10-02",
       "address": "1919 Fourth Street, Berkeley, CA 94710",
@@ -290,6 +328,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "1923-33rd-ave": {
+      "added": "2026-10-17",
+      "address": "1923 33rd Avenue, San Francisco, CA 94166",
+      "evidence": [
+        "map: 1923 in San Francisco County (building, way/284423247)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.751219,
+      "lng": -122.491567,
+      "name": "1923 33rd Ave",
+      "osm": "way/284423247",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "201-washington-st": {
       "added": "2026-10-02",
@@ -346,6 +400,27 @@
       ],
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "2151-harrison-st": {
+      "added": "2026-10-17",
+      "address": "2151 Harrison Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 2151 in San Francisco County (building, way/27028861)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.762,
+      "lng": -122.412717,
+      "name": "2151 Harrison St",
+      "osm": "way/27028861",
+      "possible_duplicates": [
+        "zore-law",
+        "z-space",
+        "southern-pacific-brewing"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "2200-broadway": {
@@ -920,6 +995,38 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "alemany-farm": {
+      "added": "2026-10-17",
+      "address": "700 Alemany Boulevard, San Francisco, CA 94110",
+      "evidence": [
+        "map: Alemany Farm in San Francisco County (building, relation/6061041)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.733106,
+      "lng": -122.419722,
+      "name": "Alemany Farm",
+      "osm": "relation/6061041",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "alemany-farmers-market": {
+      "added": "2026-10-17",
+      "address": "100 Alemany Boulevard, San Francisco, CA 94110",
+      "evidence": [
+        "map: 100 in San Francisco County (building, way/397268716)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.736938,
+      "lng": -122.408922,
+      "name": "Alemany Farmers Market",
+      "osm": "way/397268716",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "all-out-comedy-theater": {
       "added": "2026-10-07",
@@ -1920,6 +2027,22 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "candlestick-park": {
+      "added": "2026-10-17",
+      "address": "602 Jamestown Avenue, San Francisco, CA 94124",
+      "evidence": [
+        "map: 602 in San Francisco County (building, way/427963640)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.711358,
+      "lng": -122.386553,
+      "name": "Candlestick Park",
+      "osm": "way/427963640",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "cassa-jam": {
       "added": "2026-10-02",
       "address": "37729 Niles Boulevard, Fremont, CA 94536",
@@ -2650,6 +2773,43 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "environmental-volunteers-ecocenter": {
+      "added": "2026-10-17",
+      "address": "2560 Embarcadero Road, Palo Alto, CA 94303",
+      "evidence": [
+        "map: Sea Scout Base in Santa Clara County (building, way/231170774)",
+        "text: Palo Alto",
+        "street number matches"
+      ],
+      "lat": 37.456406,
+      "lng": -122.10845,
+      "name": "Environmental Volunteers’ EcoCenter",
+      "osm": "way/231170774",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
+    "equator-coffees": {
+      "added": "2026-10-17",
+      "address": "2 Marina Boulevard, San Francisco, CA 94123",
+      "evidence": [
+        "map: Greens Restaurant in San Francisco County (building, node/2653235898)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.806886,
+      "lng": -122.432207,
+      "name": "Equator Coffees",
+      "osm": "node/2653235898",
+      "possible_duplicates": [
+        "fort-mason-center-for-arts-culture",
+        "bats-improv",
+        "the-magic-theatre"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "era-lounge": {
       "added": "2026-10-02",
@@ -3384,6 +3544,18 @@
       "region": "southbay",
       "status": "verified"
     },
+    "haight-ashbury": {
+      "added": "2026-10-17",
+      "address": "",
+      "evidence": [
+        "map: Haight-Ashbury in San Francisco County (city, node/140982670)",
+        "text: San Francisco"
+      ],
+      "name": "Haight-Ashbury",
+      "precision": "city",
+      "region": "sf",
+      "status": "auto"
+    },
     "hardware-coffee-company": {
       "added": "2026-10-02",
       "address": "32 West Portal Avenue, San Francisco, CA 94127",
@@ -3614,6 +3786,36 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "international-hotel-manilatown-center": {
+      "added": "2026-10-17",
+      "address": "868 Kearny Street, San Francisco, CA 94113",
+      "evidence": [
+        "map: International Hotel Manilatown Center in San Francisco County (building, node/3976445301)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.796164,
+      "lng": -122.404978,
+      "name": "International Hotel Manilatown Center",
+      "osm": "node/3976445301",
+      "possible_duplicates": [
+        "great-star-theater",
+        "lions-den-bar-lounge",
+        "the-cigar-bar-grill",
+        "specs-bar",
+        "kearny-st-clay-st",
+        "mabuhay-gardens",
+        "paris-75",
+        "kerouac-alley",
+        "160-waverly-pl",
+        "city-lights-booksellers",
+        "keys-jazz-bistro"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "internet-archive": {
       "added": "2026-10-02",
@@ -4087,6 +4289,22 @@
       "precision": "building",
       "region": "southbay",
       "status": "verified"
+    },
+    "little-green-a-plant-bar": {
+      "added": "2026-10-17",
+      "address": "1101 Main Street, Redwood City, CA 94063",
+      "evidence": [
+        "map: 1101 in San Mateo County (building, node/2479620472)",
+        "text: Redwood City",
+        "street number matches"
+      ],
+      "lat": 37.483157,
+      "lng": -122.225732,
+      "name": "Little Green A Plant Bar",
+      "osm": "node/2479620472",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
     },
     "lookout": {
       "added": "2026-10-02",
@@ -5706,6 +5924,25 @@
       "region": "sf",
       "status": "verified"
     },
+    "panhandle": {
+      "added": "2026-10-17",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: Panhandle in San Francisco County (building, way/16751151)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.772403,
+      "lng": -122.446959,
+      "name": "Panhandle",
+      "osm": "way/16751151",
+      "possible_duplicates": [
+        "karma-cafe"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "paramount-theater": {
       "added": "2026-10-03",
       "address": "2025 Broadway, Oakland, CA 94612",
@@ -5822,6 +6059,22 @@
       "precision": "building",
       "region": "northbay",
       "status": "verified"
+    },
+    "pickleball-city": {
+      "added": "2026-10-17",
+      "address": "39161 Farwell Drive, Fremont, CA 94538",
+      "evidence": [
+        "map: 39161 in Alameda County (building, way/1104357054)",
+        "text: Fremont",
+        "street number matches"
+      ],
+      "lat": 37.531708,
+      "lng": -121.997792,
+      "name": "Pickleball City",
+      "osm": "way/1104357054",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "pier-23-cafe": {
       "added": "2026-10-02",
@@ -6391,6 +6644,22 @@
       "precision": "building",
       "region": "northbay",
       "status": "verified"
+    },
+    "sausalito-cruising-club": {
+      "added": "2026-10-17",
+      "address": "Public Shore, Sausalito, CA 94965",
+      "evidence": [
+        "map: Sausalito Cruising Club in Marin County (building, node/12116738734)",
+        "text: Sausalito",
+        "name matches"
+      ],
+      "lat": 37.861928,
+      "lng": -122.487901,
+      "name": "Sausalito Cruising Club",
+      "osm": "node/12116738734",
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
     },
     "scopo-divino": {
       "added": "2026-10-03",
@@ -7057,6 +7326,23 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "the-ameswell-hotel": {
+      "added": "2026-10-17",
+      "address": "800 Moffett Boulevard, Mountain View, CA 94043",
+      "evidence": [
+        "map: The Ameswell Hotel in Santa Clara County (building, way/731230136)",
+        "text: Mountain View",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.407035,
+      "lng": -122.067151,
+      "name": "The Ameswell Hotel",
+      "osm": "way/731230136",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "the-art-bloc": {
       "added": "2026-10-02",
@@ -8036,6 +8322,32 @@
       "region": "sf",
       "status": "verified"
     },
+    "tiat-place": {
+      "added": "2026-10-17",
+      "address": "151 Powell St, San Francisco, CA 94102",
+      "evidence": [
+        "map: Herbert Hotel in San Francisco County (building, way/35024390)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.786168,
+      "lng": -122.408335,
+      "name": "Tiat Place",
+      "osm": "way/35024390",
+      "possible_duplicates": [
+        "feinsteins-at-the-nikko",
+        "377-geary-st",
+        "the-felix",
+        "the-westin-st-francis",
+        "a-c-t",
+        "biscuits-blues",
+        "august-hall",
+        "curran-theatre"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "timeout-tavern": {
       "added": "2026-10-02",
       "address": "1750 Divisadero Street, San Francisco, CA 94115",
@@ -8051,6 +8363,27 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "tokyo-futon-tea": {
+      "added": "2026-10-17",
+      "address": "924 Valencia St, San Francisco, CA 94110",
+      "evidence": [
+        "map: 920;922;924 in San Francisco County (building, way/258967208)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.758063,
+      "lng": -122.42148,
+      "name": "Tokyo Futon & Tea",
+      "osm": "way/258967208",
+      "possible_duplicates": [
+        "big-time-vintage",
+        "artists-television-access",
+        "etcetera-wine-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "torch-bar": {
       "added": "2026-10-02",
@@ -8103,6 +8436,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "twelvemonth": {
+      "added": "2026-10-17",
+      "address": "330 Lorton Avenue, Burlingame, CA 94010",
+      "evidence": [
+        "map: 330 in San Mateo County (building, way/573409485)",
+        "text: Burlingame",
+        "street number matches"
+      ],
+      "lat": 37.57986,
+      "lng": -122.346685,
+      "name": "Twelvemonth",
+      "osm": "way/573409485",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
     },
     "udon-mugizo": {
       "added": "2026-10-03",
