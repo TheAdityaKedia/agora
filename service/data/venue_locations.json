@@ -42,6 +42,9 @@
     "160 waverly pl, san francisco, ca": {
       "venue": "160-waverly-pl"
     },
+    "1625 broadway, oakland, ca": {
+      "venue": "1625-broadway"
+    },
     "1640 18th st ste a, oakland, ca": {
       "venue": "almanac-west-oakland-clubhouse"
     },
@@ -241,6 +244,9 @@
     "540 laguna st, san francisco, ca": {
       "venue": "540-laguna-st"
     },
+    "55 harrison st, oakland, ca": {
+      "venue": "jack-london-market"
+    },
     "550 laguna st, san francisco + full studio": {
       "venue": "550-laguna-st"
     },
@@ -270,6 +276,9 @@
     },
     "721 texas st, fairfield, ca": {
       "venue": "three-restaurant"
+    },
+    "724 brazil ave, san francisco, ca": {
+      "venue": "724-brazil-ave"
     },
     "828 harrison st, oakland, ca": {
       "venue": "828-harrison-st"
@@ -758,6 +767,9 @@
       "room": "Sanctuary",
       "venue": "first-presbyterian-church-of-oakland"
     },
+    "fisherman's wharf, san francisco, ca": {
+      "venue": "fishermans-wharf"
+    },
     "fly bar, 762 divisadero st, san francisco, ca": {
       "venue": "fly-bar-restaurant"
     },
@@ -844,6 +856,9 @@
     },
     "gilman brewing, 912 gilman st, berkeley": {
       "venue": "gilman-brewing-company"
+    },
+    "glass rice, 808 sutter st, san francisco, ca": {
+      "venue": "glass-rice"
     },
     "glbt historical society, 4127 18th st, san francisco, ca": {
       "venue": "glbt-historical-society"
@@ -1121,6 +1136,9 @@
     "melifolla studio, 1339 mission st, san francisco, ca": {
       "venue": "melifolla-studio"
     },
+    "mellow & barbers cow hollow, 2185 union st, san francisco, ca": {
+      "venue": "mellow-barbers-cow-hollow"
+    },
     "memorial auditorium, 551 jane stanford way, stanford, ca": {
       "venue": "memorial-auditorium-stanford"
     },
@@ -1187,6 +1205,9 @@
     },
     "mountain view center for the performing arts, 500 castro street, mountain view, ca": {
       "venue": "mountain-view-center-for-the-performing-arts"
+    },
+    "mr t's barber shop, 1064 kiely blvd, santa clara, ca": {
+      "venue": "mr-ts-barber-shop"
     },
     "mr. mahjong's, 260 kearny st, san francisco, ca": {
       "venue": "mr-mahjong"
@@ -1766,6 +1787,9 @@
     "starlite, 450 powell street, san francisco, ca": {
       "venue": "starlite-room"
     },
+    "studio aurora, 302 valencia st, san francisco, ca": {
+      "venue": "studio-aurora"
+    },
     "sunnyvale theatre, 550 e remington dr, sunnyvale, ca": {
       "venue": "sunnyvale-theatre"
     },
@@ -1795,6 +1819,27 @@
     },
     "sydney goldstein theater, 275 hayes st, san francisco, ca": {
       "venue": "sydney-goldstein-theater"
+    },
+    "tally ho! books": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-11-18",
+          "title": "An Evening with Paulina Borsook and Jonathan Weber",
+          "url": "https://tallyhobookstore.com/events/6582420261118"
+        },
+        "first_seen": "2026-10-18",
+        "last_tried": "2026-10-18",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Tally Ho! Books"
+        ],
+        "suggestion": {
+          "city": "Oakland",
+          "kind": "venue",
+          "name": "Tally Ho! Books"
+        }
+      }
     },
     "tally ho! books, 3941 piedmont ave, oakland, ca": {
       "venue": "tally-ho-books"
@@ -1863,6 +1908,9 @@
     },
     "the booksmith, 1727 haight st, san francisco, ca": {
       "venue": "the-booksmith"
+    },
+    "the brixton, 2140 union st, san francisco, ca": {
+      "venue": "the-brixton"
     },
     "the cafe, 2369 market st, san francisco, ca, san francisco, ca": {
       "venue": "the-caf"

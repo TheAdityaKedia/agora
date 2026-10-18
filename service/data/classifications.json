@@ -1982,6 +1982,23 @@
         ]
       ]
     },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fThe Jinkx & DeLa Holiday Show": {
+      "classified_at": "2026-10-18T14:22:10.863271+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "The Jinkx & DeLa Holiday Show",
+      "topics": [
+        "musical-theater",
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "ATG (Curran, Orpheum, Golden Gate)\u001fThe Music of Queen": {
       "classified_at": "2026-10-03T01:17:18.357845+00:00",
       "cost": "paid",
@@ -15780,6 +15797,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fChisme with DoKnow & Jakarta": {
+      "classified_at": "2026-10-18T14:22:12.511576+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Chisme with DoKnow & Jakarta",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fCobb's Comedy Showcase": {
       "classified_at": "2026-10-05T19:55:53.158573+00:00",
       "cost": "unknown",
@@ -15964,6 +15997,22 @@
       "source": "Cobb's Comedy Club",
       "taxonomy_version": 2,
       "title": "JT Parr",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fJenny Tian: Ripe": {
+      "classified_at": "2026-10-18T14:22:12.537533+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Jenny Tian: Ripe",
       "topics": [
         "comedy"
       ],
@@ -24262,6 +24311,50 @@
         ]
       ]
     },
+    "JCCSF\u001fFRAME [ITALY] Film Festival – December 5": {
+      "classified_at": "2026-10-18T14:22:12.605469+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "FRAME [ITALY] Film Festival – December 5",
+      "topics": [
+        "film",
+        "world-music",
+        "food-drink",
+        "jewish"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "JCCSF\u001fFRAME [ITALY] Film Festival – December 6": {
+      "classified_at": "2026-10-18T14:22:12.659680+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "FRAME [ITALY] Film Festival – December 6",
+      "topics": [
+        "film",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "JCCSF\u001fFall Hoops Night": {
       "classified_at": "2026-10-05T19:54:36.456156+00:00",
       "cost": "unknown",
@@ -29287,6 +29380,24 @@
       "source": "Mrs. Dalloway's",
       "taxonomy_version": 2,
       "title": "Marina Richie's \"FEATHERED FOREST\"",
+      "topics": [
+        "nonfiction",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Mrs. Dalloway's\u001fMarina Richie's \"Feathered Forest\" -- CANCELED WITH APOLOGIES": {
+      "classified_at": "2026-10-18T14:22:10.966624+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mrs. Dalloway's",
+      "taxonomy_version": 2,
+      "title": "Marina Richie's \"Feathered Forest\" -- CANCELED WITH APOLOGIES",
       "topics": [
         "nonfiction",
         "nature-outdoors"
@@ -34585,6 +34696,41 @@
         ]
       ]
     },
+    "Partiful\u001fAURORA WINE \nCLOSEOUT: DAY 2": {
+      "classified_at": "2026-10-18T14:22:11.688616+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "AURORA WINE \nCLOSEOUT: DAY 2",
+      "topics": [
+        "wine"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001fAURORA WINE CLOSEOUT: DAY 3": {
+      "classified_at": "2026-10-18T14:22:12.419844+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "AURORA WINE CLOSEOUT: DAY 3",
+      "topics": [
+        "wine",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fAfter Dark: Halloween Market": {
       "classified_at": "2026-10-03T05:10:43.942036+00:00",
       "cost": "free",
@@ -35029,6 +35175,43 @@
         ]
       ]
     },
+    "Partiful\u001fCaffiends x Studio Aurora": {
+      "classified_at": "2026-10-18T14:22:11.680228+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Caffiends x Studio Aurora",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001fCaffè Okej Pop-Up": {
+      "classified_at": "2026-10-18T14:22:11.692858+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Caffè Okej Pop-Up",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fCamp Scrap: an upcycling day camp": {
       "classified_at": "2026-10-03T05:10:54.182786+00:00",
       "cost": "unknown",
@@ -35149,6 +35332,23 @@
       "types": [
         [
           "exhibition"
+        ]
+      ]
+    },
+    "Partiful\u001fClam Chowder Festival": {
+      "classified_at": "2026-10-18T14:22:11.796281+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Clam Chowder Festival",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -35389,6 +35589,24 @@
       "title": "Donuts & Coffee",
       "topics": [
         "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fDrink & Draw - SF Doodle Club": {
+      "classified_at": "2026-10-18T14:22:12.514712+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Drink & Draw - SF Doodle Club",
+      "topics": [
+        "visual-art",
+        "craft"
       ],
       "types": [
         [
@@ -35733,6 +35951,28 @@
         ]
       ]
     },
+    "Partiful\u001fHOLY MOLY! Winter Market at the real Princess Diaries House": {
+      "classified_at": "2026-10-18T14:22:11.814090+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "HOLY MOLY! Winter Market at the real Princess Diaries House",
+      "topics": [
+        "craft",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fHOWL-O-WEEN (CUTEST🎃 Party!)\n🐶 🎃 👻 🐶": {
       "classified_at": "2026-10-08T17:48:23.617309+00:00",
       "cost": "free",
@@ -36063,6 +36303,21 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fJust a Random: Sunday Brunch": {
+      "classified_at": "2026-10-18T14:22:12.341037+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Just a Random: Sunday Brunch",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -36692,6 +36947,24 @@
         ]
       ]
     },
+    "Partiful\u001fNightmare on Broadway": {
+      "classified_at": "2026-10-18T14:22:11.734362+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Nightmare on Broadway",
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Partiful\u001fNiu Lai screening at TIAT": {
       "classified_at": "2026-10-17T14:04:07.109111+00:00",
       "cost": "unknown",
@@ -36706,6 +36979,24 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "Partiful\u001fOP @ the F8": {
+      "classified_at": "2026-10-18T14:22:12.472692+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "OP @ the F8",
+      "topics": [
+        "electronic",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -38221,6 +38512,23 @@
         ]
       ]
     },
+    "Partiful\u001ffall matcha popup @ mellow  🍵🍁": {
+      "classified_at": "2026-10-18T14:22:11.627507+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "fall matcha popup @ mellow  🍵🍁",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001ffall pastry pop-up!": {
       "classified_at": "2026-10-07T17:56:16.178792+00:00",
       "cost": "paid",
@@ -38427,6 +38735,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001f‘Recollection’ Group Exhibition Curated by Pamplemousse Mag @ Glass Rice": {
+      "classified_at": "2026-10-18T14:22:11.652801+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "‘Recollection’ Group Exhibition Curated by Pamplemousse Mag @ Glass Rice",
+      "topics": [
+        "photography",
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -39644,6 +39969,22 @@
       "source": "Punch Line San Francisco",
       "taxonomy_version": 2,
       "title": "Mo Welch",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fNicole Aimee Schreiber": {
+      "classified_at": "2026-10-18T14:22:13.021207+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Nicole Aimee Schreiber",
       "topics": [
         "comedy"
       ],
@@ -45705,6 +46046,22 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fThe Kelly Mantle Show Live at Oasis SF": {
+      "classified_at": "2026-10-18T14:22:10.866485+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "The Kelly Mantle Show Live at Oasis SF",
+      "topics": [
+        "drag"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -52612,6 +52969,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFilm: 20 Feet from Stardom": {
+      "classified_at": "2026-10-18T14:22:10.893425+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: 20 Feet from Stardom",
+      "topics": [
+        "documentary",
+        "music"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -61588,6 +61962,23 @@
         ]
       ]
     },
+    "Sunset Trivia\u001fTrivia Night at Dave & Busters (Oakland)": {
+      "classified_at": "2026-10-18T14:22:10.868126+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 2,
+      "title": "Trivia Night at Dave & Busters (Oakland)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "Sunset Trivia\u001fTrivia Night at El Dorado Saloon & Grill (El Dorado Hills)": {
       "classified_at": "2026-10-03T04:57:45.086818+00:00",
       "cost": "unknown",
@@ -61873,6 +62264,25 @@
         [
           "social",
           "games-hobby"
+        ]
+      ]
+    },
+    "Tally Ho! Books\u001fAn Evening with Paulina Borsook and Jonathan Weber": {
+      "classified_at": "2026-10-18T14:22:10.984464+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Tally Ho! Books",
+      "taxonomy_version": 2,
+      "title": "An Evening with Paulina Borsook and Jonathan Weber",
+      "topics": [
+        "tech",
+        "politics",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -66994,6 +67404,22 @@
         ]
       ]
     },
+    "The Fillmore\u001fDeath Angel - Another 11th Annual Death Angel Xmas Show": {
+      "classified_at": "2026-10-18T14:22:10.879871+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Death Angel - Another 11th Annual Death Angel Xmas Show",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Fillmore\u001fDilated Peoples": {
       "classified_at": "2026-10-03T01:20:07.636354+00:00",
       "cost": "unknown",
@@ -70656,6 +71082,22 @@
       "title": "Goldenvoice Presents Q Comes Q Goes / 2026 Sunset Rollercoaster US & Canada Tour Sunset Rollercoaster with CLOUDRIVER",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents Smithereens 2027 Foil Arms and Hog": {
+      "classified_at": "2026-10-18T14:22:10.833241+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents Smithereens 2027 Foil Arms and Hog",
+      "topics": [
+        "comedy"
       ],
       "types": [
         [

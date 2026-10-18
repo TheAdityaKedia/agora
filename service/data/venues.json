@@ -281,6 +281,28 @@
       "region": "sf",
       "status": "verified"
     },
+    "1625-broadway": {
+      "added": "2026-10-18",
+      "address": "1625 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "map: 1625 in Alameda County (building, node/12621024934)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.80644,
+      "lng": -122.270078,
+      "name": "1625 Broadway",
+      "osm": "node/12621024934",
+      "possible_duplicates": [
+        "golden-ratio",
+        "torch-bar",
+        "fox-oakland-theater",
+        "sweets-ballroom"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "1645-park-st": {
       "added": "2026-10-02",
       "address": "1645 Park Street, Alameda, CA 94501",
@@ -857,6 +879,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "724-brazil-ave": {
+      "added": "2026-10-18",
+      "address": "724 Brazil Avenue, San Francisco, CA 94112",
+      "evidence": [
+        "map: 724 in San Francisco County (building, way/276309604)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.72169,
+      "lng": -122.42889,
+      "name": "724 Brazil Ave",
+      "osm": "way/276309604",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "828-harrison-st": {
       "added": "2026-10-02",
@@ -3061,6 +3099,18 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "fishermans-wharf": {
+      "added": "2026-10-18",
+      "address": "",
+      "evidence": [
+        "map: Fisherman's Wharf in San Francisco County (city, node/11283438662)",
+        "text: San Francisco"
+      ],
+      "name": "Fisherman's Wharf",
+      "precision": "city",
+      "region": "sf",
+      "status": "auto"
+    },
     "flax-art-and-design": {
       "added": "2026-10-05",
       "address": "1501 Martin Luther King Junior Way, Oakland, CA 94612",
@@ -3288,6 +3338,23 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "glass-rice": {
+      "added": "2026-10-18",
+      "address": "808 Sutter Street, San Francisco, CA 94164",
+      "evidence": [
+        "map: Glass Rice in San Francisco County (building, node/9849528031)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.788672,
+      "lng": -122.413852,
+      "name": "Glass Rice",
+      "osm": "node/9849528031",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "glbt-historical-society": {
       "added": "2026-10-02",
@@ -3864,6 +3931,25 @@
       "lng": -122.299201,
       "name": "Ivy Room",
       "osm": "node/343611002",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "jack-london-market": {
+      "added": "2026-10-18",
+      "address": "55 Harrison Street, Oakland, CA 94607",
+      "evidence": [
+        "map: Jack London Market in Alameda County (building, way/47386642)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.79379,
+      "lng": -122.273939,
+      "name": "Jack London Market",
+      "osm": "way/47386642",
+      "possible_duplicates": [
+        "oakland-united-beerworks"
+      ],
       "precision": "building",
       "region": "eastbay",
       "status": "auto"
@@ -4746,6 +4832,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "mellow-barbers-cow-hollow": {
+      "added": "2026-10-18",
+      "address": "2185 Union St, San Francisco, CA 94123",
+      "evidence": [
+        "map: Coffee Roastery in San Francisco County (building, way/259106335)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.796997,
+      "lng": -122.435219,
+      "name": "Mellow & Barbers Cow Hollow",
+      "osm": "way/259106335",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "memorial-auditorium-stanford": {
       "added": "2026-10-07",
       "address": "551 Jane Stanford Way, Stanford, CA 94305",
@@ -5078,6 +5180,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "mr-ts-barber-shop": {
+      "added": "2026-10-18",
+      "address": "1064 Kiely Boulevard, Santa Clara, CA 95051",
+      "evidence": [
+        "map: Mr.T’s Barbershop in Santa Clara County (building, node/10290100412)",
+        "text: Santa Clara",
+        "street number matches"
+      ],
+      "lat": 37.345824,
+      "lng": -121.97859,
+      "name": "Mr T's Barber Shop",
+      "osm": "node/10290100412",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
     },
     "mrs-dalloways": {
       "added": "2026-10-02",
@@ -7063,6 +7181,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "studio-aurora": {
+      "added": "2026-10-18",
+      "address": "302 Valencia Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: Studio Aurora in San Francisco County (building, node/13816382324)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.767975,
+      "lng": -122.42235,
+      "name": "Studio Aurora",
+      "osm": "node/13816382324",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "sunnyvale-theatre": {
       "added": "2026-10-06",
       "address": "550 East Remington Drive, Sunnyvale, CA 94088",
@@ -7437,6 +7572,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "the-brixton": {
+      "added": "2026-10-18",
+      "address": "2140 Union Street, San Francisco, CA 94123",
+      "evidence": [
+        "map: The Brixton in San Francisco County (building, node/3799946959)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.797307,
+      "lng": -122.434579,
+      "name": "The Brixton",
+      "osm": "node/3799946959",
+      "possible_duplicates": [
+        "mellow-barbers-cow-hollow"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "the-caf": {
       "added": "2026-10-02",
