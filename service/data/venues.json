@@ -484,6 +484,22 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "23-the-embarcadero": {
+      "added": "2026-10-19",
+      "address": "23 The Embarcadero, San Francisco, CA 94107",
+      "evidence": [
+        "map: 23 in San Francisco County (building, way/417400768)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.786576,
+      "lng": -122.38815,
+      "name": "23 The Embarcadero",
+      "osm": "way/417400768",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "2300-chestnut-st": {
       "added": "2026-10-03",
       "address": "2300 Chestnut St, San Francisco, CA 94123",
@@ -2676,6 +2692,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "dylans-tours": {
+      "added": "2026-10-19",
+      "address": "782 Columbus Avenue, San Francisco, CA 94133",
+      "evidence": [
+        "map: Dylan's Tours in San Francisco County (building, node/3148249592)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.801867,
+      "lng": -122.412225,
+      "name": "Dylan's Tours",
+      "osm": "node/3148249592",
+      "possible_duplicates": [
+        "north-beach-branch-library",
+        "cobbs-comedy-club",
+        "washington-square-park"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "eagle-tavern": {
       "added": "2026-10-02",
       "address": "398 12th Street, San Francisco, CA 94103",
@@ -3305,6 +3342,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "gallery-house": {
+      "added": "2026-10-19",
+      "address": "826 Santa Cruz Avenue, Menlo Park, CA 94025",
+      "evidence": [
+        "map: 826 in San Mateo County (building, node/13440547692)",
+        "text: Menlo Park",
+        "street number matches"
+      ],
+      "lat": 37.450891,
+      "lng": -122.185564,
+      "name": "Gallery House",
+      "osm": "node/13440547692",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
     },
     "gearbox-gallery": {
       "added": "2026-10-02",
@@ -6024,6 +6077,36 @@
       "osm": "way/231246591",
       "precision": "building",
       "region": "southbay",
+      "status": "auto"
+    },
+    "paname": {
+      "added": "2026-10-19",
+      "address": "523 Broadway, San Francisco, CA 94113",
+      "evidence": [
+        "map: Paname in San Francisco County (building, node/2166014723)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.797828,
+      "lng": -122.405942,
+      "name": "Paname",
+      "osm": "node/2166014723",
+      "possible_duplicates": [
+        "paris-75",
+        "specs-bar",
+        "kerouac-alley",
+        "keys-jazz-bistro",
+        "city-lights-booksellers",
+        "mabuhay-gardens",
+        "great-star-theater",
+        "international-hotel-manilatown-center",
+        "tupelo",
+        "lions-den-bar-lounge",
+        "the-cigar-bar-grill"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "pandora-karaoke-bar": {
