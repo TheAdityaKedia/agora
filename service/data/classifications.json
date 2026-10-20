@@ -14529,6 +14529,23 @@
         ]
       ]
     },
+    "City Arts & Lectures\u001fZOE KAZAN & FLORENCE PUGH": {
+      "classified_at": "2026-10-20T17:25:00.865135+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Arts & Lectures",
+      "taxonomy_version": 2,
+      "title": "ZOE KAZAN & FLORENCE PUGH",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "City Arts & Lectures\u001fZadie Smith": {
       "classified_at": "2026-10-03T01:17:56.585805+00:00",
       "cost": "unknown",
@@ -23727,6 +23744,23 @@
       "topics": [
         "books-authors",
         "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Green Apple Books\u001f9th Ave: Jake Adelstein": {
+      "classified_at": "2026-10-20T17:25:00.917914+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Green Apple Books",
+      "taxonomy_version": 2,
+      "title": "9th Ave: Jake Adelstein",
+      "topics": [
+        "books-authors"
       ],
       "types": [
         [
@@ -69929,6 +69963,24 @@
       "topics": [
         "theater",
         "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Marsh\u001fJoyful Raven Studios - Solo Stories Fall 2026": {
+      "classified_at": "2026-10-20T17:25:00.851631+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Marsh",
+      "taxonomy_version": 2,
+      "title": "Joyful Raven Studios - Solo Stories Fall 2026",
+      "topics": [
+        "comedy",
+        "spoken-word",
+        "theater"
       ],
       "types": [
         [
