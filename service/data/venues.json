@@ -931,6 +931,29 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "833-market-st": {
+      "added": "2026-10-20",
+      "address": "833 Market Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 833 in San Francisco County (building, way/619979110)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.784925,
+      "lng": -122.406725,
+      "name": "833 Market St",
+      "osm": "way/619979110",
+      "possible_duplicates": [
+        "tiat-place",
+        "jollibee",
+        "the-felix",
+        "press-club",
+        "pandora-karaoke-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "945-apgar-st": {
       "added": "2026-10-16",
       "address": "945 Apgar Street, Oakland, CA 94609",
@@ -5121,6 +5144,22 @@
       ],
       "precision": "building",
       "region": "southbay",
+      "status": "auto"
+    },
+    "mosswood-chapel": {
+      "added": "2026-10-20",
+      "address": "3630 Telegraph Avenue, Oakland, CA 94609",
+      "evidence": [
+        "map: Mosswood Chapel in Alameda County (building, way/330734634)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.82512,
+      "lng": -122.265194,
+      "name": "Mosswood Chapel",
+      "osm": "way/330734634",
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "mosswood-park": {
