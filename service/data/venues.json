@@ -600,6 +600,20 @@
       "region": "sf",
       "status": "auto"
     },
+    "2nd-st": {
+      "added": "2026-10-22",
+      "address": "",
+      "evidence": [
+        "map: 2nd Street in San Francisco County (street, way/397097608)",
+        "text: San Francisco"
+      ],
+      "lat": 37.779843,
+      "lng": -122.38958,
+      "name": "2nd St",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
+    },
     "301-great-hwy": {
       "added": "2026-10-09",
       "address": "301 Great Hwy, San Francisco, CA 94121",
@@ -2669,6 +2683,23 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "double-black": {
+      "added": "2026-10-22",
+      "address": "925 Cole Street, San Francisco, CA 94117",
+      "evidence": [
+        "map: Double Black in San Francisco County (building, node/3790822672)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.765374,
+      "lng": -122.450038,
+      "name": "Double Black",
+      "osm": "node/3790822672",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "drakes-barrel-house": {
       "added": "2026-10-08",
       "address": "1933 Davis St, San Leandro, CA 94577",
@@ -2751,6 +2782,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "east-avenue-park": {
+      "added": "2026-10-22",
+      "address": "3221 East Ave, Hayward, CA 94541",
+      "evidence": [
+        "map: East Avenue Park in Alameda County (building, way/43985793)",
+        "text: Hayward",
+        "name matches"
+      ],
+      "lat": 37.666894,
+      "lng": -122.044408,
+      "name": "East Avenue Park",
+      "osm": "way/43985793",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "easterbrook-discovery-school": {
       "added": "2026-10-07",
@@ -7318,6 +7365,29 @@
       "osm": "node/13816382324",
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "studios-11": {
+      "added": "2026-10-22",
+      "address": "560 2nd Street, Oakland, CA 94607",
+      "evidence": [
+        "map: Studios 11 in Alameda County (building, node/8579954522)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.797428,
+      "lng": -122.278924,
+      "name": "Studios 11",
+      "osm": "node/8579954522",
+      "possible_duplicates": [
+        "the-grand-gallery",
+        "215-washington-st",
+        "201-washington-st",
+        "yoshis-oakland"
+      ],
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "sunnyvale-theatre": {

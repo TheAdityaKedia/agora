@@ -1063,6 +1063,39 @@
         ]
       ]
     },
+    "4-Star Theater\u001fPALESTINE CINEMA DAYS: Return to Haifa (Presented by FILMLAB PALESTINE)": {
+      "classified_at": "2026-10-22T15:53:26.739833+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "PALESTINE CINEMA DAYS: Return to Haifa (Presented by FILMLAB PALESTINE)",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fPopcorn on VHS (Presented by BASEMENT VHS)": {
+      "classified_at": "2026-10-22T15:53:26.563593+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Popcorn on VHS (Presented by BASEMENT VHS)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fRoll Fog (Preview Screening Fundraiser with Q&A)": {
       "classified_at": "2026-10-03T04:50:18.806370+00:00",
       "cost": "paid",
@@ -1073,6 +1106,28 @@
       "topics": [
         "documentary",
         "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fRuna Simi (Presented by CiNEOLA plus Filmmaker Q&A)": {
+      "classified_at": "2026-10-22T15:53:26.771116+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Runa Simi (Presented by CiNEOLA plus Filmmaker Q&A)",
+      "topics": [
+        "film",
+        "language",
+        "family-kids"
       ],
       "types": [
         [
@@ -3818,6 +3873,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fKen Russell's The Devils": {
+      "classified_at": "2026-10-22T15:53:25.773979+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Ken Russell's The Devils",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fKiller of Sheep": {
       "classified_at": "2026-10-03T04:49:51.022462+00:00",
       "cost": "paid",
@@ -3940,6 +4011,23 @@
       "title": "Mean Girls",
       "topics": [
         "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fNaza": {
+      "classified_at": "2026-10-22T15:53:25.695332+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Naza",
+      "topics": [
+        "documentary",
+        "politics"
       ],
       "types": [
         [
@@ -5022,11 +5110,11 @@
       ]
     },
     "Big Brain Lectures — Bay Area\u001fWhat Poetry Can Teach Us About Being Human": {
-      "classified_at": "2026-09-23T19:40:20.713708+00:00",
+      "classified_at": "2026-10-22T15:53:25.884547+00:00",
       "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Big Brain Lectures — Bay Area",
-      "taxonomy_version": 1,
+      "taxonomy_version": 2,
       "title": "What Poetry Can Teach Us About Being Human",
       "topics": [
         "poetry"
@@ -5529,6 +5617,26 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Bird & Beckett\u001fA celebration of poet Ronald Sauer – POETS! First Thursdays featured poets plus open mic": {
+      "classified_at": "2026-10-22T15:53:26.902173+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "A celebration of poet Ronald Sauer – POETS! First Thursdays featured poets plus open mic",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
         ]
       ]
     },
@@ -6651,6 +6759,27 @@
         ]
       ]
     },
+    "Bird & Beckett\u001fPoet Michael Schuffler / Prose Writer Yates Cessna with Andrew Joron + Solomon Rino": {
+      "classified_at": "2026-10-22T15:53:26.889197+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Poet Michael Schuffler / Prose Writer Yates Cessna with Andrew Joron + Solomon Rino",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Bird & Beckett\u001fPoets Milo Starr Johnson & Tim Xonnelly": {
       "classified_at": "2026-10-03T04:50:57.927427+00:00",
       "cost": "free",
@@ -6759,6 +6888,22 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Bird & Beckett\u001fSaxophone Master Class, with the Joe Warner Trio": {
+      "classified_at": "2026-10-22T15:53:26.820194+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Saxophone Master Class, with the Joe Warner Trio",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -7036,6 +7181,23 @@
         ]
       ]
     },
+    "Bird & Beckett\u001fpoets Lucille Lang Day & Lisa Rosenberg": {
+      "classified_at": "2026-10-22T15:53:26.862139+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "poets Lucille Lang Day & Lisa Rosenberg",
+      "topics": [
+        "poetry"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fA Christmas Swingin’ Spectacular with Lavay Smith and Her Red Hot Skillet Lickers": {
       "classified_at": "2026-10-03T05:04:55.841197+00:00",
       "cost": "paid",
@@ -7233,6 +7395,22 @@
       "source": "Biscuits & Blues",
       "taxonomy_version": 2,
       "title": "Dennis Jones",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fEJ Mathews": {
+      "classified_at": "2026-10-22T15:53:29.699037+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "EJ Mathews",
       "topics": [
         "blues"
       ],
@@ -7710,6 +7888,23 @@
       "title": "Sean \"Mack\" McDonald",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fStratocaster Masters Tribute with AC Myles": {
+      "classified_at": "2026-10-22T15:53:29.838100+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Stratocaster Masters Tribute with AC Myles",
+      "topics": [
+        "blues",
+        "soul-funk"
       ],
       "types": [
         [
@@ -11537,6 +11732,23 @@
         ]
       ]
     },
+    "Book Passage\u001fThe Memoir Writer's Workout with Melissa Cistaro": {
+      "classified_at": "2026-10-22T15:53:29.849658+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "The Memoir Writer's Workout with Melissa Cistaro",
+      "topics": [
+        "writing",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Book Passage\u001fThe Power of Imagery with Nina Schuyler": {
       "classified_at": "2026-10-13T17:49:41.034166+00:00",
       "cost": "unknown",
@@ -13485,6 +13697,28 @@
         "spoken-word"
       ],
       "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Brava Theater Center\u001fRefusing Erasure:Indigenous Women, Memory, & the Future of Story": {
+      "classified_at": "2026-10-22T15:53:26.080613+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Brava Theater Center",
+      "taxonomy_version": 2,
+      "title": "Refusing Erasure:Indigenous Women, Memory, & the Future of Story",
+      "topics": [
+        "writing",
+        "books-authors",
+        "women"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
         [
           "performance"
         ]
@@ -20417,6 +20651,27 @@
         ]
       ]
     },
+    "Feinstein's at the Nikko\u001fMimosas & Motown: Sunday Brunch, Brunch in Anzu at 11:30 AM / Show at 12:45 PM": {
+      "classified_at": "2026-10-22T15:53:31.272487+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Feinstein's at the Nikko",
+      "taxonomy_version": 2,
+      "title": "Mimosas & Motown: Sunday Brunch, Brunch in Anzu at 11:30 AM / Show at 12:45 PM",
+      "topics": [
+        "soul-funk",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Feinstein's at the Nikko\u001fOpen Mic at the Nikko Friday October 16 with Russell Deason": {
       "classified_at": "2026-10-07T20:59:50.639820+00:00",
       "cost": "unknown",
@@ -20841,6 +21096,23 @@
       "title": "Brit Floyd",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Fox Theater Oakland\u001fCHVRCHES": {
+      "classified_at": "2026-10-22T15:53:30.809822+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fox Theater Oakland",
+      "taxonomy_version": 2,
+      "title": "CHVRCHES",
+      "topics": [
+        "electronic",
+        "pop"
       ],
       "types": [
         [
@@ -21895,6 +22167,23 @@
         ]
       ]
     },
+    "Frontier Tower\u001fWeekly Accountabili-tea Circle: Reflection & Planning #38 - Members Only": {
+      "classified_at": "2026-10-22T15:53:30.718909+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Weekly Accountabili-tea Circle: Reflection & Planning #38 - Members Only",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Frontier Tower\u001fWhat Can We Fairly Assume About Alien Minds?": {
       "classified_at": "2026-10-17T14:04:09.588661+00:00",
       "cost": "free",
@@ -22262,6 +22551,22 @@
       "topics": [
         "world-music",
         "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fAmigo the Devil [SOLO]": {
+      "classified_at": "2026-10-22T15:53:25.802945+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "Amigo the Devil [SOLO]",
+      "topics": [
+        "folk-americana"
       ],
       "types": [
         [
@@ -25493,6 +25798,23 @@
         ]
       ]
     },
+    "JCCSF\u001fPaint Kanbar Violet: A Valkyries Family Watch Party": {
+      "classified_at": "2026-10-22T15:53:30.777594+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Paint Kanbar Violet: A Valkyries Family Watch Party",
+      "topics": [
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "JCCSF\u001fPapercut Workshop: Tradition Takes Shape": {
       "classified_at": "2026-10-05T19:54:52.926540+00:00",
       "cost": "unknown",
@@ -26134,6 +26456,38 @@
         ]
       ]
     },
+    "Keys Jazz Bistro\u001fKenny Washington Quartet-A Keys Birthday Celebration!": {
+      "classified_at": "2026-10-22T15:53:28.693460+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Kenny Washington Quartet-A Keys Birthday Celebration!",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Keys Jazz Bistro\u001fLara Louise-A Keys Birthday Celebration!": {
+      "classified_at": "2026-10-22T15:53:28.972291+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Lara Louise-A Keys Birthday Celebration!",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Keys Jazz Bistro\u001fLate Set: Simon Rowe Organ Trio": {
       "classified_at": "2026-10-03T05:03:27.176039+00:00",
       "cost": "unknown",
@@ -26345,6 +26699,22 @@
         ]
       ]
     },
+    "Keys Jazz Bistro\u001fPaula West-A Keys Birthday Celebration!": {
+      "classified_at": "2026-10-22T15:53:28.790331+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Paula West-A Keys Birthday Celebration!",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Keys Jazz Bistro\u001fRay Obiedo’s Latin Jazz Ensemble": {
       "classified_at": "2026-10-03T05:03:15.580795+00:00",
       "cost": "unknown",
@@ -26406,6 +26776,22 @@
       "topics": [
         "jazz",
         "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Keys Jazz Bistro\u001fRitmo y Voz: Afro-Cuban Jazz Ignited-     A Keys Birthday Celebration": {
+      "classified_at": "2026-10-22T15:53:28.953260+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Ritmo y Voz: Afro-Cuban Jazz Ignited-     A Keys Birthday Celebration",
+      "topics": [
+        "jazz"
       ],
       "types": [
         [
@@ -30774,6 +31160,22 @@
         ]
       ]
     },
+    "Noe Valley Books\u001fVoting Day!!! Vote 4 Books!!!": {
+      "classified_at": "2026-10-22T15:53:29.828832+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Noe Valley Books",
+      "taxonomy_version": 2,
+      "title": "Voting Day!!! Vote 4 Books!!!",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001f2026 FM Annual: “I Left My Heart In Oakland”": {
       "classified_at": "2026-10-10T16:04:48.557956+00:00",
       "cost": "free",
@@ -30858,6 +31260,26 @@
         "visual-art"
       ],
       "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fArtist Reception with Julia M. Starr  “Chinatowns”": {
+      "classified_at": "2026-10-22T15:53:28.716957+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Artist Reception with Julia M. Starr  “Chinatowns”",
+      "topics": [
+        "photography",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social"
+        ],
         [
           "exhibition"
         ]
@@ -33314,6 +33736,22 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fMake Your Own Seasonal Soaps": {
+      "classified_at": "2026-10-22T15:53:31.762668+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Make Your Own Seasonal Soaps",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fMaking Sense of Medicare": {
       "classified_at": "2026-10-08T01:11:15.245222+00:00",
       "cost": "free",
@@ -33714,6 +34152,24 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fPuzzle Challenge / Desafío de  Rompecabezas": {
+      "classified_at": "2026-10-22T15:53:34.427563+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Puzzle Challenge / Desafío de  Rompecabezas",
+      "topics": [
+        "games",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -34746,6 +35202,56 @@
         ]
       ]
     },
+    "Oakland United Beerworks\u001fHalloween Trivia with Head Brewer, Stephen Ruddy!": {
+      "classified_at": "2026-10-22T15:53:39.388021+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Halloween Trivia with Head Brewer, Stephen Ruddy!",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland United Beerworks\u001fLive Music: Bay Area Jazz & Soul": {
+      "classified_at": "2026-10-22T15:53:33.338736+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Live Music: Bay Area Jazz & Soul",
+      "topics": [
+        "jazz",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Oakland United Beerworks\u001fLive Music: Gnarlymen": {
+      "classified_at": "2026-10-22T15:53:35.834405+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Live Music: Gnarlymen",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Oakland United Beerworks\u001fPaint Your Pet at OUB": {
       "classified_at": "2026-10-08T01:12:33.302222+00:00",
       "cost": "paid",
@@ -34813,6 +35319,23 @@
         [
           "social",
           "gala-fundraiser"
+        ]
+      ]
+    },
+    "Oakland United Beerworks\u001fTrivia Night with Nick Corlett": {
+      "classified_at": "2026-10-22T15:53:37.426608+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Trivia Night with Nick Corlett",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -36546,6 +37069,29 @@
         ]
       ]
     },
+    "Partiful\u001fDowntown SF Block Party": {
+      "classified_at": "2026-10-22T15:53:30.074789+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Downtown SF Block Party",
+      "topics": [
+        "dance-party",
+        "club-night",
+        "drag",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fDrink & Draw - SF Doodle Club": {
       "classified_at": "2026-10-18T14:22:12.514712+00:00",
       "cost": "free",
@@ -37470,6 +38016,24 @@
         ]
       ]
     },
+    "Partiful\u001fLive Reggae Season Finale": {
+      "classified_at": "2026-10-22T15:53:30.009010+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Live Reggae Season Finale",
+      "topics": [
+        "club-night",
+        "world-music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Partiful\u001fLlamaIndex x Corgi: Doc Chai Launch Party 🦙🌟": {
       "classified_at": "2026-10-03T05:16:11.825355+00:00",
       "cost": "free",
@@ -38319,6 +38883,27 @@
         ]
       ]
     },
+    "Partiful\u001fPilates & Coffee at the park": {
+      "classified_at": "2026-10-22T15:53:29.999741+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Pilates & Coffee at the park",
+      "topics": [
+        "wellness",
+        "women"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fPilates at Dolores": {
       "classified_at": "2026-10-03T05:12:20.529402+00:00",
       "cost": "unknown",
@@ -38980,6 +39565,23 @@
         ]
       ]
     },
+    "Partiful\u001fSurfrider Foundation Dune Revegetation": {
+      "classified_at": "2026-10-22T15:53:30.073336+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Surfrider Foundation Dune Revegetation",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fSuver + Lightweight Champion + Friday Harbor @ The Knockout": {
       "classified_at": "2026-10-03T05:11:26.942474+00:00",
       "cost": "paid",
@@ -39454,6 +40056,24 @@
         ],
         [
           "social"
+        ]
+      ]
+    },
+    "Partiful\u001fZEST FILM FEST": {
+      "classified_at": "2026-10-22T15:53:30.773800+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "ZEST FILM FEST",
+      "topics": [
+        "film",
+        "black-diaspora",
+        "latino"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -42996,6 +43616,22 @@
         ]
       ]
     },
+    "Roxie Theater\u001fRock Ross: Go Like This (16mm)": {
+      "classified_at": "2026-10-22T15:53:30.976286+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Rock Ross: Go Like This (16mm)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Roxie Theater\u001fRoy’s World: Barry Gifford’s Chicago": {
       "classified_at": "2026-10-07T21:02:37.522585+00:00",
       "cost": "unknown",
@@ -43085,6 +43721,108 @@
         "film",
         "documentary",
         "latino"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fSFTFF 2026 – ADULT (18+)": {
+      "classified_at": "2026-10-22T15:53:31.750139+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "SFTFF 2026 – ADULT (18+)",
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fSFTFF 2026 – COMEDY": {
+      "classified_at": "2026-10-22T15:53:31.594535+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "SFTFF 2026 – COMEDY",
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fSFTFF 2026 – DOCUMENTARY": {
+      "classified_at": "2026-10-22T15:53:31.641187+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "SFTFF 2026 – DOCUMENTARY",
+      "topics": [
+        "documentary",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fSFTFF 2026 – GRAB BAG": {
+      "classified_at": "2026-10-22T15:53:31.673387+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "SFTFF 2026 – GRAB BAG",
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fSFTFF 2026 – HORROR": {
+      "classified_at": "2026-10-22T15:53:31.692178+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "SFTFF 2026 – HORROR",
+      "topics": [
+        "film",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fSFTFF 2026 – SPECULATIVE FICTION": {
+      "classified_at": "2026-10-22T15:53:31.672121+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "SFTFF 2026 – SPECULATIVE FICTION",
+      "topics": [
+        "film",
+        "lgbtq"
       ],
       "types": [
         [
@@ -43344,6 +44082,22 @@
       "source": "Roxie Theater",
       "taxonomy_version": 2,
       "title": "The Scout",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fThe Witches": {
+      "classified_at": "2026-10-22T15:53:30.844638+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "The Witches",
       "topics": [
         "film"
       ],
@@ -52204,6 +52958,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fAuthor: Boze Hadleigh, 492 Great Things about Being Italian": {
+      "classified_at": "2026-10-22T15:53:25.801878+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: Boze Hadleigh, 492 Great Things about Being Italian",
+      "topics": [
+        "books-authors",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fAuthor: Camille Cusumano, Mystique of the Last Cannoli": {
       "classified_at": "2026-10-15T15:26:34.075717+00:00",
       "cost": "free",
@@ -56106,6 +56878,24 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPresentación: Cómo atraer y fidelizar a clientes con discapacidades": {
+      "classified_at": "2026-10-22T15:53:25.981889+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentación: Cómo atraer y fidelizar a clientes con discapacidades",
+      "topics": [
+        "business",
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
         ]
       ]
     },
@@ -67696,6 +68486,25 @@
         ]
       ]
     },
+    "The Commons (SF)\u001f🪩 TOMORROW NEVER HAPPENED": {
+      "classified_at": "2026-10-22T15:53:28.875512+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "🪩 TOMORROW NEVER HAPPENED",
+      "topics": [
+        "electronic",
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "The Dawn Club\u001fAdam Klipple Soul Jazz Quintet": {
       "classified_at": "2026-10-03T05:03:40.256864+00:00",
       "cost": "unknown",
@@ -68173,6 +68982,22 @@
       "source": "The Dawn Club",
       "taxonomy_version": 2,
       "title": "Tomoko funaki",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Dawn Club\u001fVerve Quintet": {
+      "classified_at": "2026-10-22T15:53:29.013746+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Dawn Club",
+      "taxonomy_version": 2,
+      "title": "Verve Quintet",
       "topics": [
         "jazz"
       ],
@@ -71452,6 +72277,40 @@
         ]
       ]
     },
+    "The Riptide\u001fCalifornia Turnaround": {
+      "classified_at": "2026-10-22T15:53:28.599648+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "California Turnaround",
+      "topics": [
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fDJ Andre's Halloween Weekend Kickoff": {
+      "classified_at": "2026-10-22T15:53:27.636382+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "DJ Andre's Halloween Weekend Kickoff",
+      "topics": [
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "The Riptide\u001fDJ Damon 80s nite @20thcenturygoth": {
       "classified_at": "2026-10-03T04:53:23.127470+00:00",
       "cost": "free",
@@ -71507,6 +72366,24 @@
         ]
       ]
     },
+    "The Riptide\u001fDJ Tophzilla - Spins 80s Vinyl - He's scary.": {
+      "classified_at": "2026-10-22T15:53:27.069188+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "DJ Tophzilla - Spins 80s Vinyl - He's scary.",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "The Riptide\u001fDJ Veesh Maria's Brazilian Disco": {
       "classified_at": "2026-10-03T01:26:53.488717+00:00",
       "cost": "free",
@@ -71545,6 +72422,22 @@
         ]
       ]
     },
+    "The Riptide\u001fFinnian's Call": {
+      "classified_at": "2026-10-22T15:53:27.751658+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Finnian's Call",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fFossil Farm": {
       "classified_at": "2026-10-03T04:53:48.980377+00:00",
       "cost": "free",
@@ -71552,6 +72445,22 @@
       "source": "The Riptide",
       "taxonomy_version": 2,
       "title": "Fossil Farm",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Riptide\u001fGhost Pine": {
+      "classified_at": "2026-10-22T15:53:27.831192+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Ghost Pine",
       "topics": [
         "rock-indie"
       ],
@@ -71579,6 +72488,22 @@
         ]
       ]
     },
+    "The Riptide\u001fJosh Brough Band": {
+      "classified_at": "2026-10-22T15:53:27.985225+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Josh Brough Band",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fJunk Parlor": {
       "classified_at": "2026-10-05T23:07:00.706815+00:00",
       "cost": "free",
@@ -71588,6 +72513,22 @@
       "title": "Junk Parlor",
       "topics": [
         "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Riptide\u001fLeavy, Gates, Appelman & Sharpe": {
+      "classified_at": "2026-10-22T15:53:28.073640+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Leavy, Gates, Appelman & Sharpe",
+      "topics": [
+        "folk-americana"
       ],
       "types": [
         [
@@ -71607,6 +72548,27 @@
         "music"
       ],
       "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "The Riptide\u001fLong Tall Dan & the Foogie Boogies - Riptide Holiday Party": {
+      "classified_at": "2026-10-22T15:53:28.110676+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Long Tall Dan & the Foogie Boogies - Riptide Holiday Party",
+      "topics": [
+        "blues",
+        "club-night"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
         [
           "social",
           "party-club"
@@ -71824,6 +72786,22 @@
         ]
       ]
     },
+    "The Riptide\u001fThe Indestructibles": {
+      "classified_at": "2026-10-22T15:53:27.600860+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "The Indestructibles",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fThe Porkchop Express": {
       "classified_at": "2026-10-03T04:53:39.344712+00:00",
       "cost": "free",
@@ -71926,6 +72904,22 @@
         ]
       ]
     },
+    "The Riptide\u001fTwang Peaks": {
+      "classified_at": "2026-10-22T15:53:27.921634+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Twang Peaks",
+      "topics": [
+        "country"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fUnamaz": {
       "classified_at": "2026-10-03T04:54:08.742549+00:00",
       "cost": "free",
@@ -71983,6 +72977,22 @@
       "title": "Aterciopelados La Pipa de La Paz Tour - 30th Anniversary",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The UC Theatre\u001fBMG Presents Alborosie": {
+      "classified_at": "2026-10-22T15:53:31.018110+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The UC Theatre",
+      "taxonomy_version": 2,
+      "title": "BMG Presents Alborosie",
+      "topics": [
+        "world-music"
       ],
       "types": [
         [
@@ -72598,6 +73608,22 @@
       "topics": [
         "hiphop-rnb",
         "club-night"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents Origin Tour Calema": {
+      "classified_at": "2026-10-22T15:53:25.762558+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents Origin Tour Calema",
+      "topics": [
+        "world-music"
       ],
       "types": [
         [
