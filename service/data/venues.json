@@ -2504,6 +2504,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "crissy-field": {
+      "added": "2026-10-23",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: Crissy Field in San Francisco County (building, way/32649967)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.804596,
+      "lng": -122.466607,
+      "name": "Crissy Field",
+      "osm": "way/32649967",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "curran-theatre": {
       "added": "2026-10-02",
       "address": "445 Geary Street, San Francisco, CA 94102",
@@ -3235,6 +3251,26 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "florecita-panaderia": {
+      "added": "2026-10-23",
+      "address": "2050 Bryant Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Christine’s Bakery in San Francisco County (building, node/13568431404)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.76114,
+      "lng": -122.410593,
+      "name": "Florecita Panaderia",
+      "osm": "node/13568431404",
+      "possible_duplicates": [
+        "kqed-commons",
+        "2151-harrison-st"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "fly-bar-restaurant": {
       "added": "2026-10-02",
       "address": "762 Divisadero Street, San Francisco, CA 94117",
@@ -3619,6 +3655,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "grattan-tennis-court": {
+      "added": "2026-10-23",
+      "address": "1192 Stanyan Street, San Francisco, CA 94117",
+      "evidence": [
+        "map: 1192 in San Francisco County (building, way/32928950)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.762446,
+      "lng": -122.452048,
+      "name": "Grattan Tennis Court",
+      "osm": "way/32928950",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "gray-area": {
       "added": "2026-10-02",
@@ -6072,6 +6124,22 @@
       "region": "southbay",
       "status": "auto"
     },
+    "outer-sunset-farmers-market-mercantile": {
+      "added": "2026-10-23",
+      "address": "1994 37th Avenue, San Francisco, CA 94116",
+      "evidence": [
+        "map: 1994 in San Francisco County (building, way/437538522)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.749856,
+      "lng": -122.49541,
+      "name": "Outer Sunset Farmers Market & Mercantile",
+      "osm": "way/437538522",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "pacific-pipe": {
       "added": "2026-10-02",
       "address": "2140 Mandela Parkway, Oakland, CA 94607",
@@ -6994,6 +7062,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "shakespeare-garden": {
+      "added": "2026-10-23",
+      "address": "335 Martin Luther King Junior Drive, San Francisco, CA 94118",
+      "evidence": [
+        "map: 335 in San Francisco County (building, way/32928798)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.768569,
+      "lng": -122.468148,
+      "name": "Shakespeare Garden",
+      "osm": "way/32928798",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "shark-boy-fish-and-chips": {
       "added": "2026-10-07",

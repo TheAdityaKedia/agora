@@ -184,6 +184,28 @@
         }
       }
     },
+    "37th ave & ortega st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-11-21",
+          "title": "Second Saturdays",
+          "url": "https://partiful.com/e/nEvPGBuYBd1MWBE8BQkr"
+        },
+        "first_seen": "2026-10-23",
+        "last_tried": "2026-10-23",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "name": "37th Ave & Ortega St",
+          "street_address": "37th Avenue and Ortega Street"
+        }
+      }
+    },
     "39 grant ave, san francisco, ca": {
       "venue": "39-grant-ave"
     },
@@ -531,7 +553,7 @@
           "url": "https://partiful.com/e/bPdjFlXE1Mx0Ia8nlEBL"
         },
         "first_seen": "2026-10-16",
-        "last_tried": "2026-10-16",
+        "last_tried": "2026-10-23",
         "reason": "no map result in the Bay Area",
         "sources": [
           "Partiful"
@@ -639,6 +661,9 @@
     },
     "crepe myrtle garden, yerba buena gardens, 750 howard st, san francisco, ca": {
       "venue": "crepe-myrtle-garden"
+    },
+    "crissy field, airstrip overlook trail, san francisco, ca": {
+      "venue": "crissy-field"
     },
     "curran theatre": {
       "venue": "curran-theatre"
@@ -794,6 +819,9 @@
     "fisherman's wharf, san francisco, ca": {
       "venue": "fishermans-wharf"
     },
+    "florecita panaderia, 2050 bryant st, san francisco, ca": {
+      "venue": "florecita-panaderia"
+    },
     "fly bar, 762 divisadero st, san francisco, ca": {
       "venue": "fly-bar-restaurant"
     },
@@ -934,6 +962,9 @@
     },
     "grace cathedral, 1100 california st, san francisco": {
       "venue": "grace-cathedral"
+    },
+    "grattan tennis court, 1192 stanyan st, san francisco, ca": {
+      "venue": "grattan-tennis-court"
     },
     "gray area theater, 2665 mission st, san francisco": {
       "venue": "gray-area"
@@ -1214,7 +1245,7 @@
           "url": "https://partiful.com/e/zs7sG61no26W7Mz9cyFx"
         },
         "first_seen": "2026-10-16",
-        "last_tried": "2026-10-16",
+        "last_tried": "2026-10-23",
         "reason": "map result 'San Francisco, CA - Salesforce Plaza (SFC)' doesn't match the name or street number",
         "sources": [
           "Partiful"
@@ -1449,6 +1480,9 @@
     },
     "oub taproom, 262 2nd street, oakland": {
       "venue": "oakland-united-beerworks"
+    },
+    "outer sunset farmers market & mercantile, 1994 37th ave, san francisco, ca": {
+      "venue": "outer-sunset-farmers-market-mercantile"
     },
     "pacific pipe, 2140 mandela pkwy, oakland, ca": {
       "venue": "pacific-pipe"
@@ -1766,6 +1800,9 @@
     "sfpl — western addition": {
       "room": "Western Addition",
       "venue": "western-addition-branch-library"
+    },
+    "shakespeare garden, 335 martin luther king jr dr, san francisco, ca": {
+      "venue": "shakespeare-garden"
     },
     "shark boy fish & chips, 1100 n first st, san jose, ca": {
       "venue": "shark-boy-fish-and-chips"
