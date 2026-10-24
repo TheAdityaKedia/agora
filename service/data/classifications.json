@@ -9494,6 +9494,24 @@
         ]
       ]
     },
+    "Book Passage\u001fDr. Giulietta Octavio, DACM - Code Calm": {
+      "classified_at": "2026-10-24T14:15:31.884003+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Dr. Giulietta Octavio, DACM - Code Calm",
+      "topics": [
+        "books-authors",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fDr. Shefali - Raising Conscious Daughters & Raising Conscious Sons": {
       "classified_at": "2026-10-03T05:05:05.652328+00:00",
       "cost": "unknown",
@@ -11535,6 +11553,24 @@
         ]
       ]
     },
+    "Book Passage\u001fSaree Makdisi & Ussama Makdisi - Anti-Palestinianism": {
+      "classified_at": "2026-10-24T14:15:30.130866+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Saree Makdisi & Ussama Makdisi - Anti-Palestinianism",
+      "topics": [
+        "books-authors",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Book Passage\u001fSarita Sarvate - Midnight's Daughter": {
       "classified_at": "2026-10-07T17:56:13.913141+00:00",
       "cost": "unknown",
@@ -12192,6 +12228,25 @@
       "title": "CHERYL RODRIGUES: HAZEL & FLUFF",
       "topics": [
         "books-authors",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Books Inc.\u001fDEBBIE RAPHAEL: CARRY MY STRENGTH": {
+      "classified_at": "2026-10-24T14:15:30.166486+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "DEBBIE RAPHAEL: CARRY MY STRENGTH",
+      "topics": [
+        "books-authors",
+        "wellness",
         "family-kids"
       ],
       "types": [
@@ -13596,6 +13651,27 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Brava Theater Center\u001f2026 San Francisco Dance Film Festival": {
+      "classified_at": "2026-10-24T14:15:29.336492+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Brava Theater Center",
+      "taxonomy_version": 2,
+      "title": "2026 San Francisco Dance Film Festival",
+      "topics": [
+        "film",
+        "dance",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -17433,6 +17509,42 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fJohn Fullerton and Kim Stanley Robinson: Revolutionary Thinking for a World in Crisis": {
+      "classified_at": "2026-10-24T14:15:29.327957+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "John Fullerton and Kim Stanley Robinson: Revolutionary Thinking for a World in Crisis",
+      "topics": [
+        "politics",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fJon Haveman: The Economics of Immigration": {
+      "classified_at": "2026-10-24T14:15:29.318571+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "Jon Haveman: The Economics of Immigration",
+      "topics": [
+        "politics",
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
         ]
       ]
     },
@@ -21750,6 +21862,22 @@
         ]
       ]
     },
+    "Fox Theater Oakland\u001fTwo Door Cinema Club": {
+      "classified_at": "2026-10-24T14:15:30.792948+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fox Theater Oakland",
+      "taxonomy_version": 2,
+      "title": "Two Door Cinema Club",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Fox Theater Oakland\u001fTyla": {
       "classified_at": "2026-10-16T15:09:32.703462+00:00",
       "cost": "paid",
@@ -22683,6 +22811,22 @@
       "source": "Great American Music Hall",
       "taxonomy_version": 2,
       "title": "*POSTPONED* Ali Amran",
+      "topics": [
+        "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001f*RESCHEDULED TO 3/28/27* Ali Amran": {
+      "classified_at": "2026-10-24T14:15:29.334946+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "*RESCHEDULED TO 3/28/27* Ali Amran",
       "topics": [
         "folk-americana"
       ],
@@ -25940,6 +26084,24 @@
         ]
       ]
     },
+    "JCCSF\u001fIllustrious Jewish Performers: Kennedy Center Honorees": {
+      "classified_at": "2026-10-24T14:15:30.803154+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Illustrious Jewish Performers: Kennedy Center Honorees",
+      "topics": [
+        "jewish",
+        "film"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "JCCSF\u001fItamar Srulovich & Sarit Packer with Samin Nosrat – Honey & Co. Daily": {
       "classified_at": "2026-10-05T19:54:35.076587+00:00",
       "cost": "unknown",
@@ -26128,6 +26290,40 @@
         [
           "social",
           "dance-social"
+        ]
+      ]
+    },
+    "JCCSF\u001fSan Francisco Jewish Film Festival Encore – Nov 14": {
+      "classified_at": "2026-10-24T14:15:30.673194+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "San Francisco Jewish Film Festival Encore – Nov 14",
+      "topics": [
+        "film",
+        "jewish"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "JCCSF\u001fSan Francisco Jewish Film Festival Encore – Nov 15": {
+      "classified_at": "2026-10-24T14:15:30.689309+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "San Francisco Jewish Film Festival Encore – Nov 15",
+      "topics": [
+        "film",
+        "jewish"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -31842,6 +32038,64 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fGearBox Gallery Artists’ Talks with Caleb Dowdell, TaVee McAllister Lee and Monica Valdez Harb": {
+      "classified_at": "2026-10-24T14:15:30.102901+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "GearBox Gallery Artists’ Talks with Caleb Dowdell, TaVee McAllister Lee and Monica Valdez Harb",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fGearBox Gallery Presents: SECOND SIGHT:  Views of the Natural World, Joy Every": {
+      "classified_at": "2026-10-24T14:15:30.122727+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "GearBox Gallery Presents: SECOND SIGHT:  Views of the Natural World, Joy Every",
+      "topics": [
+        "photography",
+        "visual-art",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fGearBox Gallery Presents: Tilt Toward Joy, Jenny Hacker and Maricris Briones Hansen": {
+      "classified_at": "2026-10-24T14:15:30.334994+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "GearBox Gallery Presents: Tilt Toward Joy, Jenny Hacker and Maricris Briones Hansen",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -39000,6 +39254,25 @@
         ]
       ]
     },
+    "Partiful\u001fOh, Rocky! Rocky Horror Club Night": {
+      "classified_at": "2026-10-24T14:15:30.668117+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Oh, Rocky! Rocky Horror Club Night",
+      "topics": [
+        "club-night",
+        "drag",
+        "theater"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Partiful\u001fOpen Studio @ root division": {
       "classified_at": "2026-10-07T20:55:57.598499+00:00",
       "cost": "free",
@@ -43068,6 +43341,22 @@
         ]
       ]
     },
+    "Roxie Theater\u001fFatherland": {
+      "classified_at": "2026-10-24T14:15:30.924973+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Fatherland",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Roxie Theater\u001fFilipiñana": {
       "classified_at": "2026-10-07T21:01:33.488728+00:00",
       "cost": "unknown",
@@ -43897,6 +44186,23 @@
       "title": "Office Killer",
       "topics": [
         "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fOnce Upon a Time in Harlem": {
+      "classified_at": "2026-10-24T14:15:30.827872+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Once Upon a Time in Harlem",
+      "topics": [
+        "film",
+        "documentary"
       ],
       "types": [
         [
@@ -53641,6 +53947,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fAuthor: Making the Best of the Rest of Your Life With Shulamit Sofia, MSW": {
+      "classified_at": "2026-10-24T14:15:29.331441+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Author: Making the Best of the Rest of Your Life With Shulamit Sofia, MSW",
+      "topics": [
+        "nonfiction",
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fAuthor: Michelle Tea in conversation with Brontez Purnell": {
       "classified_at": "2026-10-03T05:16:46.311386+00:00",
       "cost": "free",
@@ -54823,6 +55147,26 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fCelebration: Mission Branch Library Grand Reopening": {
+      "classified_at": "2026-10-24T14:15:29.362472+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Celebration: Mission Branch Library Grand Reopening",
+      "topics": [
+        "family-kids",
+        "music"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -61289,6 +61633,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Dream Catcher": {
+      "classified_at": "2026-10-24T14:15:29.220075+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Dream Catcher",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Découpage Pumpkins": {
       "classified_at": "2026-10-03T01:26:15.717102+00:00",
       "cost": "free",
@@ -64642,6 +65003,23 @@
         ]
       ]
     },
+    "Sunset Trivia\u001fTrivia Night at Nu-Rays (Martinez)": {
+      "classified_at": "2026-10-24T14:15:29.927621+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 2,
+      "title": "Trivia Night at Nu-Rays (Martinez)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "Sunset Trivia\u001fTrivia Night at O'Neills Irish Pub (San Mateo)": {
       "classified_at": "2026-10-03T04:57:24.858410+00:00",
       "cost": "unknown",
@@ -67489,6 +67867,23 @@
         [
           "talk",
           "panel"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fAsk a Recruiter | Fireside Chat": {
+      "classified_at": "2026-10-24T14:15:30.048014+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Ask a Recruiter | Fireside Chat",
+      "topics": [
+        "business"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -74350,6 +74745,22 @@
       "title": "Goldenvoice Presents Origin Tour Calema",
       "topics": [
         "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Warfield\u001fGoldenvoice Presents Pursuit of Anything Tour Vacations with Twen": {
+      "classified_at": "2026-10-24T14:15:29.320923+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents Pursuit of Anything Tour Vacations with Twen",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
