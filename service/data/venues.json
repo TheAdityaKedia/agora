@@ -5649,6 +5649,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "nu-rays": {
+      "added": "2026-10-24",
+      "address": "709 Ferry Street, Martinez, CA 94553",
+      "evidence": [
+        "map: Nu-Rays in Contra Costa County (building, node/5749875493)",
+        "text: Martinez",
+        "street number matches"
+      ],
+      "lat": 38.017548,
+      "lng": -122.135443,
+      "name": "Nu-Rays",
+      "osm": "node/5749875493",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "oakland-asian-cultural-center": {
       "added": "2026-10-08",
       "address": "388 9th St #290, Oakland, CA 94607",
