@@ -4262,6 +4262,26 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fTank Girl": {
+      "classified_at": "2026-10-25T14:42:04.509557+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Tank Girl",
+      "topics": [
+        "film",
+        "drag"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fTeen Witch": {
       "classified_at": "2026-10-03T04:50:19.395383+00:00",
       "cost": "paid",
@@ -4399,6 +4419,38 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 2,
       "title": "They Live",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fToo Much": {
+      "classified_at": "2026-10-25T14:42:04.542949+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Too Much",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fTwilight: New Moon": {
+      "classified_at": "2026-10-25T14:42:04.540378+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Twilight: New Moon",
       "topics": [
         "film"
       ],
@@ -7143,6 +7195,46 @@
         "jazz"
       ],
       "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Bird & Beckett\u001fVirtual Poets: Kim Shuck hosts": {
+      "classified_at": "2026-10-25T14:42:04.514835+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Virtual Poets: Kim Shuck hosts",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Bird & Beckett\u001fVirtual Poets: Kim Shuck hosts featured readers TBA + open mic": {
+      "classified_at": "2026-10-25T14:42:04.612880+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Virtual Poets: Kim Shuck hosts featured readers TBA + open mic",
+      "topics": [
+        "poetry",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "social"
+        ],
         [
           "performance"
         ]
@@ -16696,6 +16788,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fGet It?! Gameshow": {
+      "classified_at": "2026-10-25T14:42:05.211621+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Get It?! Gameshow",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fGiulio Gallarotti": {
       "classified_at": "2026-10-05T19:55:54.409952+00:00",
       "cost": "unknown",
@@ -16849,6 +16957,23 @@
       "title": "Ray Lau",
       "topics": [
         "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fReally Funny Comedians (Who Happen to Be Women) with Mary Houlihan": {
+      "classified_at": "2026-10-25T14:42:05.229544+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Really Funny Comedians (Who Happen to Be Women) with Mary Houlihan",
+      "topics": [
+        "comedy",
+        "women"
       ],
       "types": [
         [
@@ -22651,6 +22776,23 @@
         ],
         [
           "exhibition"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fXenobiology: Could life have evolved via an alternative route? - Members +3": {
+      "classified_at": "2026-10-25T14:42:05.321815+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Xenobiology: Could life have evolved via an alternative route? - Members +3",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
         ]
       ]
     },
@@ -32472,6 +32614,27 @@
         [
           "talk",
           "conversation"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fThe Tiny Monster Show ~ Closing Party Costume Contest": {
+      "classified_at": "2026-10-25T14:42:04.516914+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "The Tiny Monster Show ~ Closing Party Costume Contest",
+      "topics": [
+        "visual-art",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ],
         [
           "exhibition"
@@ -42434,6 +42597,22 @@
         ]
       ]
     },
+    "Punch Line San Francisco\u001fJoe Klocek & Friends": {
+      "classified_at": "2026-10-25T14:42:05.258426+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Joe Klocek & Friends",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Punch Line San Francisco\u001fLaurie Kilmartin": {
       "classified_at": "2026-10-05T23:06:59.957292+00:00",
       "cost": "paid",
@@ -45342,6 +45521,25 @@
       "title": "Beer Bust at Eagle Tavern",
       "topics": [
         "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fBig Top Saturday Drag & Dance Party at Beaux": {
+      "classified_at": "2026-10-25T14:42:04.599135+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Big Top Saturday Drag & Dance Party at Beaux",
+      "topics": [
+        "drag",
+        "dance-party",
+        "club-night"
       ],
       "types": [
         [
@@ -64751,6 +64949,23 @@
         ]
       ]
     },
+    "Stanford Live\u001fWinter Holiday Concert with the Stanford Medicine Chorus and Orchestra": {
+      "classified_at": "2026-10-25T14:42:05.307666+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Stanford Live",
+      "taxonomy_version": 2,
+      "title": "Winter Holiday Concert with the Stanford Medicine Chorus and Orchestra",
+      "topics": [
+        "classical",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Stanford Live\u001fYasmin Williams": {
       "classified_at": "2026-10-07T20:56:16.999280+00:00",
       "cost": "unknown",
@@ -70836,6 +71051,22 @@
       "title": "Dilated Peoples",
       "topics": [
         "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fDogs In A Pile": {
+      "classified_at": "2026-10-25T14:42:04.484713+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Dogs In A Pile",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
