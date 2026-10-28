@@ -6,6 +6,9 @@
     "1001 center st, santa cruz, ca": {
       "place": "outside"
     },
+    "101 2nd st, san francisco, ca": {
+      "venue": "101-2nd-st"
+    },
     "103 kennedy dr, capitola, ca": {
       "place": "outside"
     },
@@ -39,6 +42,9 @@
     "1430 cole st, san francisco, ca": {
       "venue": "1430-cole-st"
     },
+    "1560 mission st, san francisco, ca": {
+      "venue": "1560-mission-st"
+    },
     "160 waverly pl, san francisco, ca": {
       "venue": "160-waverly-pl"
     },
@@ -51,8 +57,14 @@
     "1645 park st, alameda, ca": {
       "venue": "1645-park-st"
     },
+    "165 page st, san francisco, ca": {
+      "venue": "165-page-st"
+    },
     "1815 balboa st, san francisco, ca": {
       "venue": "1815-balboa-st"
+    },
+    "1870 fillmore st, san francisco, ca": {
+      "venue": "1870-fillmore-st"
     },
     "191 warriors way, suite 102, san francisco, ca": {
       "venue": "dumpling-time-thrive-city"
@@ -62,6 +74,9 @@
     },
     "1923 33rd ave, san francisco, ca": {
       "venue": "1923-33rd-ave"
+    },
+    "200 channels, 111 6th st, san francisco, ca": {
+      "venue": "200-channels"
     },
     "200 gate five rd, sausalito, ca": {
       "venue": "the-art-bloc"
@@ -251,6 +266,9 @@
     "504 balboa st, san francisco, ca": {
       "venue": "504-balboa-st"
     },
+    "507 55th st, oakland, ca": {
+      "venue": "east-bay-community-space"
+    },
     "5200 coast hwy, pacifica, ca": {
       "venue": "taco-bell-cantina-pacifica"
     },
@@ -326,6 +344,9 @@
     "833 market st, san francisco, ca": {
       "venue": "833-market-st"
     },
+    "840 cole st, san francisco, ca": {
+      "venue": "840-cole-st"
+    },
     "87 n san pedro st, san jose, ca": {
       "venue": "el-dorado-building"
     },
@@ -376,8 +397,14 @@
     "alemany farmers market, 100 alemany blvd, san francisco, ca": {
       "venue": "alemany-farmers-market"
     },
+    "alkali rye, 3256 grand ave, oakland, ca": {
+      "venue": "alkali-rye"
+    },
     "all out comedy theater, 2550 telegraph ave, oakland, ca": {
       "venue": "all-out-comedy-theater"
+    },
+    "alta vina, 420 3rd st, oakland, ca": {
+      "venue": "alta-vina"
     },
     "amelie wine bar, 1754 polk st, san francisco, ca": {
       "venue": "amelie-wine-bar"
@@ -465,6 +492,9 @@
     },
     "black bird bookstore, 4033 judah st, san francisco, ca": {
       "venue": "black-bird-bookstore"
+    },
+    "blackbird, 2124 market st, san francisco, ca": {
+      "venue": "blackbird"
     },
     "book club of california, 47 kearny st, san francisco, ca": {
       "venue": "book-club-of-california"
@@ -674,8 +704,33 @@
     "curran theatre, 445 geary st, san francisco": {
       "venue": "curran-theatre"
     },
+    "dalva, 3121 16th st, san francisco, ca": {
+      "venue": "dalva"
+    },
     "dance boulevard, 1824 hillsdale ave, san jose, ca": {
       "venue": "dance-boulevard"
+    },
+    "dark matter salon, 660 market st, ste 205, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-12-03",
+          "title": "Dark Matter Salon Sip & Shop + Opening Party",
+          "url": "https://partiful.com/e/4uaYV0Ze1tUNjlT0TK8k"
+        },
+        "first_seen": "2026-10-28",
+        "last_tried": "2026-10-28",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "name": "Dark Matter Salon",
+          "street_address": "660 Market St, Ste 205"
+        }
+      }
     },
     "davies symphony hall, 201 van ness ave., san francisco": {
       "venue": "louise-m-davies-symphony-hall"
@@ -697,6 +752,9 @@
     },
     "decker theatre, 25 van ness avenue, san francisco, ca": {
       "venue": "decker-theatre"
+    },
+    "decodance, 1160 polk st, san francisco, ca": {
+      "venue": "decodance-bar"
     },
     "detour, 2200 market st, san francisco, ca": {
       "venue": "the-detour"
@@ -828,6 +886,9 @@
     "fly bar, 762 divisadero st, san francisco, ca": {
       "venue": "fly-bar-restaurant"
     },
+    "flying figs wine bar, 1870 fillmore st, san francisco, ca": {
+      "venue": "1870-fillmore-st"
+    },
     "flywheel coffee roasters, 672 stanyan st, san francisco, ca": {
       "venue": "flywheel-coffee-roasters"
     },
@@ -848,6 +909,12 @@
     },
     "frankie's java house sf, pier 40, san francisco, ca": {
       "venue": "frankies-java-house"
+    },
+    "frenchie wine bar, 1007 guerrero st, san francisco, ca": {
+      "venue": "frenchie-wine-bar"
+    },
+    "friend of a friend, 705 columbus ave, san francisco, ca": {
+      "venue": "friend-of-a-friend"
     },
     "frontier tower @ 10th floor annex 995 market street, san francisco": {
       "room": "10th Floor Annex",
@@ -918,6 +985,9 @@
     },
     "gearbox gallery, 770 west grand avenue, oakland": {
       "venue": "gearbox-gallery"
+    },
+    "gilman brewing company, 912 gilman st, berkeley, ca": {
+      "venue": "gilman-brewing-company"
     },
     "gilman brewing, 912 gilman st, berkeley": {
       "venue": "gilman-brewing-company"
@@ -1002,6 +1072,15 @@
     "harvey milk photo center, 50 scott st, san francisco, ca": {
       "venue": "harvey-milk-photo-center"
     },
+    "hawthorn sf nightclub and lounge, 46 geary st, san francisco, ca": {
+      "venue": "hawthorn-sf-nightclub-and-lounge"
+    },
+    "hearst field annex, 2575 bancroft way, berkeley, ca": {
+      "venue": "hearst-field-annex"
+    },
+    "hella bees, 2340 harrison st, oakland, ca": {
+      "venue": "hella-bees"
+    },
     "henry j kaiser center arena, henry j. kaiser center for the arts, 10 10th st, oakland, ca": {
       "venue": "calvin-simmons-theater"
     },
@@ -1045,6 +1124,9 @@
     "james moore theater, 1000 oak st,, oakland": {
       "venue": "james-moore-theater"
     },
+    "japanese tea garden, 75 hagiwara tea garden dr, san francisco, ca": {
+      "venue": "japanese-tea-garden"
+    },
     "jcc east bay community campus, 5957 chabot rd, oakland, ca": {
       "venue": "jcc-east-bay"
     },
@@ -1056,6 +1138,9 @@
     },
     "jccsf, 3200 california street, san francisco": {
       "venue": "jccsf-kanbar-hall"
+    },
+    "joey the cat, 3252 19th st, san francisco, ca": {
+      "venue": "joey-the-cat"
     },
     "johansson projects, 2300 telegraph ave, oakland": {
       "venue": "johansson-projects"
@@ -1099,6 +1184,9 @@
     },
     "la reyna bakery, 3114 24th st, san francisco": {
       "venue": "la-reyna-bakery"
+    },
+    "lafayette park, san francisco, ca": {
+      "venue": "lafayette-park"
     },
     "lafayette public library, lafayette": {
       "venue": "lafayette-library-and-learning-center"
@@ -1224,6 +1312,9 @@
     "mercury 20 gallery, 475 25th street, oakland": {
       "venue": "mercury-20-gallery"
     },
+    "meski, 1000 larkin st, san francisco, ca": {
+      "venue": "meski"
+    },
     "mighty mighty studio, 480 23rd st, oakland, ca": {
       "venue": "mighty-mighty-studio"
     },
@@ -1265,6 +1356,9 @@
     },
     "mission hill saloon, 491 potrero ave, san francisco, ca, san francisco, ca": {
       "venue": "mission-hill-saloon"
+    },
+    "moka & co, 40667 fremont blvd, fremont, ca": {
+      "venue": "moka-co"
     },
     "monarch, 101 6th st, san francisco, california (ca) 94103, san francisco, california (ca), san francisco, ca": {
       "venue": "monarch"
@@ -1318,6 +1412,9 @@
     "neck of the woods, 406 clement street, san francisco, 94118, san francisco, ca": {
       "venue": "neck-of-the-woods"
     },
+    "nickie's, 466 haight st, san francisco, ca": {
+      "venue": "nickies-bar-and-restaurant"
+    },
     "nirvana soul coffee, 315 s 1st st, san jose, ca": {
       "venue": "nirvana-soul"
     },
@@ -1338,6 +1435,9 @@
     },
     "nook, 1500 hyde st, san francisco, ca": {
       "venue": "cafe-nook"
+    },
+    "north beach, san francisco, ca": {
+      "venue": "north-beach"
     },
     "north stage ballroom, henry j. kaiser center for the arts, 10 10th st, oakland, ca": {
       "venue": "calvin-simmons-theater"
@@ -1541,6 +1641,9 @@
     "potrero del sol park (la raza), portrero avenue and 25th street, san francisco, ca": {
       "venue": "potrero-del-sol-park"
     },
+    "presidio terrace, san francisco, ca": {
+      "venue": "presidio-terrace"
+    },
     "presidio theatre, 99 moraga ave, san francisco, ca": {
       "venue": "presidio-theatre"
     },
@@ -1549,6 +1652,9 @@
     },
     "press club, 20 yerba buena lane, san francisco, ca": {
       "venue": "press-club"
+    },
+    "propagation, 895 post st, san francisco, ca": {
+      "venue": "propagation"
     },
     "public works, 161 erie st, san francisco, ca": {
       "venue": "public-works"
@@ -1561,6 +1667,9 @@
     },
     "red tail, 545 irving st, san francisco, ca": {
       "venue": "the-red-tail"
+    },
+    "reinhardt redwood regional park, 7867 redwood rd, oakland, ca": {
+      "venue": "reinhardt-redwood-regional-park"
     },
     "revival hall, 4799 shattuck ave, oakland, ca": {
       "venue": "revival-hall"
@@ -1592,6 +1701,9 @@
     },
     "roxie theater, 3117 16th street, san francisco": {
       "venue": "roxie-theater"
+    },
+    "royale, 800 post street, san francisco, ca": {
+      "venue": "the-royale"
     },
     "russian hill bookstore, 2162 polk street, san francisco, ca 94109, san francisco, ca": {
       "venue": "russian-hill-bookstore"
@@ -1840,6 +1952,9 @@
     "specs', 12 saroyan place, san francisco, ca": {
       "venue": "specs-bar"
     },
+    "sports basement berkeley, 2727 milvia st, berkeley, ca": {
+      "venue": "sports-basement-berkeley"
+    },
     "sports basement presidio, 610 old mason street, san francisco, ca": {
       "venue": "sports-basement-presidio"
     },
@@ -2021,6 +2136,9 @@
     "the community room, sports basement berkeley, 2727 milvia st, berkeley, ca": {
       "room": "The Community Room",
       "venue": "sports-basement-berkeley"
+    },
+    "the crossing at east cut, 250 main st, san francisco, ca": {
+      "venue": "the-crossing-at-east-cut"
     },
     "the crown, 2523 broadway, oakland": {
       "venue": "the-crown"
@@ -2330,6 +2448,9 @@
       "venue": "z-space"
     },
     "z space": {
+      "venue": "z-space"
+    },
+    "z space lobby": {
       "venue": "z-space"
     },
     "z space's steindler stage": {
