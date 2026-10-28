@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T16:57:07.140453+00:00",
+  "generated_at": "2026-10-28T17:25:34.907945+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -1131,6 +1131,13 @@
       "lng": -122.41022,
       "neighborhood": "chinatown"
     },
+    "citadel-art-studios": {
+      "name": "Citadel Art Studios",
+      "region": "southbay",
+      "address": "199 Martha Street, San Jose, CA 95112",
+      "lat": 37.32459,
+      "lng": -121.87661
+    },
     "city-lights-booksellers": {
       "name": "City Lights Booksellers",
       "region": "sf",
@@ -1838,6 +1845,14 @@
       "lng": -122.42046,
       "neighborhood": "hayes-valley"
     },
+    "lower-polk-cbd": {
+      "name": "Lower Polk CBD",
+      "region": "sf",
+      "address": "1170 Sutter St, San Francisco, CA 94109",
+      "lat": 37.7878,
+      "lng": -122.41986,
+      "approx": true
+    },
     "luna-del-soul": {
       "name": "Luna del Soul",
       "region": "peninsula",
@@ -2406,6 +2421,14 @@
       "address": "3301 Lyon Street, San Francisco, CA 94123",
       "lat": 37.80233,
       "lng": -122.44923,
+      "neighborhood": "marina"
+    },
+    "palm-house": {
+      "name": "Palm House",
+      "region": "sf",
+      "address": "2032 Union Street, San Francisco, CA 94123",
+      "lat": 37.79756,
+      "lng": -122.43248,
       "neighborhood": "marina"
     },
     "palo-alto-childrens-theatre": {
@@ -3230,6 +3253,14 @@
       "address": "190 Lenox Way, San Francisco, CA 94127",
       "lat": 37.7414,
       "lng": -122.46615,
+      "neighborhood": "west-of-twin-peaks"
+    },
+    "west-portal-gallery": {
+      "name": "West Portal Gallery",
+      "region": "sf",
+      "address": "320 W Portal Ave, San Francisco, CA 94127",
+      "lat": 37.73779,
+      "lng": -122.46973,
       "neighborhood": "west-of-twin-peaks"
     },
     "western-addition-branch-library": {
@@ -15102,8 +15133,8 @@
         "electronic"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "palm-house",
+      "region": "sf",
       "summary": "Hey Party people, we are putting it down in Palm House on Halloween.",
       "more": true
     },
@@ -28065,8 +28096,8 @@
         "visual-art"
       ],
       "cost": "free",
-      "venue": null,
-      "region": null,
+      "venue": "lower-polk-cbd",
+      "region": "sf",
       "summary": "The Lower Polk art walk opens up Art Space at Lower Polk for an evening of local art and neighborhood wandering.",
       "more": true
     },
@@ -31433,8 +31464,8 @@
       ],
       "topics": [],
       "cost": "unknown",
-      "venue": null,
-      "region": null
+      "venue": "citadel-art-studios",
+      "region": "southbay"
     },
     {
       "id": "14f25439-e3fa-431d-938c-c6a0b75d9d30",
@@ -71888,8 +71919,8 @@
         "music"
       ],
       "cost": "unknown",
-      "venue": null,
-      "region": null,
+      "venue": "west-portal-gallery",
+      "region": "sf",
       "summary": "A night of Bay Area photography, music, drinks & community—bringing emerging artists and creative people together in San Francisco.",
       "more": true
     },
