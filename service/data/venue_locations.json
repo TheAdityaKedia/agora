@@ -641,6 +641,9 @@
     "church of zouk, 345 7th st., san francisco": {
       "venue": "st-michaels-ukrainian-orthodox-church"
     },
+    "citadel art studios, 199 martha st, san jose, ca": {
+      "venue": "citadel-art-studios"
+    },
     "city lights booksellers, 261 columbus ave, san francisco, ca": {
       "venue": "city-lights-booksellers"
     },
@@ -806,6 +809,9 @@
     },
     "eclectic box sf, 446 valencia street, san francisco, ca": {
       "venue": "eclectic-box"
+    },
+    "el chato, 2301 bryant st, san francisco, ca": {
+      "venue": "el-chato"
     },
     "el lopo, 1327 polk st, san francisco, ca, san francisco, ca": {
       "venue": "el-lopo"
@@ -1225,6 +1231,9 @@
     "lost marbles brewpub, 2202 de la vina street, san francisco, ca": {
       "venue": "lost-marbles-brewpub"
     },
+    "lower polk cbd, 1170 sutter st, san francisco, ca": {
+      "venue": "lower-polk-cbd"
+    },
     "luna del soul, 822 cassia st, redwood city, ca": {
       "venue": "luna-del-soul"
     },
@@ -1602,6 +1611,9 @@
     "palace of fine arts, 3601 lyon street, san francisco, ca": {
       "venue": "palace-of-fine-arts"
     },
+    "palm house, 2032 union st, san francisco, ca": {
+      "venue": "palm-house"
+    },
     "palo alto children's theatre, 1305 middlefield rd, palo alto, ca": {
       "venue": "palo-alto-childrens-theatre"
     },
@@ -1673,6 +1685,34 @@
     },
     "revival hall, 4799 shattuck ave, oakland, ca": {
       "venue": "revival-hall"
+    },
+    "richard gamble memorial park, carl st & cole st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-30",
+          "title": "Cameras & Carbs: Halloween Photo Hike",
+          "url": "https://partiful.com/e/Gew3BQY9gwMV6FTLJtPF"
+        },
+        "first_seen": "2026-10-28",
+        "last_tried": "2026-10-28",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "map": {
+            "label": "Carl Street & Cole Street",
+            "lat": 37.765808,
+            "lng": -122.449975,
+            "osm": "node/6352715499"
+          },
+          "name": "Richard Gamble Memorial Park",
+          "street_address": "Carl St & Cole St"
+        }
+      }
     },
     "rick & roxy's, 2131 lombard street, san francisco, 94123, san francisco, ca": {
       "venue": "rick-roxys"
@@ -2402,6 +2442,9 @@
           "street_address": "Long Avenue"
         }
       }
+    },
+    "west portal gallery, 320 w portal ave, san francisco, ca": {
+      "venue": "west-portal-gallery"
     },
     "westwood, 2036 lombard st, san francisco, ca": {
       "venue": "westwood"

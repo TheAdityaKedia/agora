@@ -2471,6 +2471,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "citadel-art-studios": {
+      "added": "2026-10-28",
+      "address": "199 Martha Street, San Jose, CA 95112",
+      "evidence": [
+        "map: 199 in Santa Clara County (building, node/9514636415)",
+        "text: San Jose",
+        "street number matches"
+      ],
+      "lat": 37.324592,
+      "lng": -121.876614,
+      "name": "Citadel Art Studios",
+      "osm": "node/9514636415",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "city-lights-booksellers": {
       "added": "2026-10-02",
       "address": "261 Columbus Avenue, San Francisco, CA 94133",
@@ -3117,6 +3133,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "el-chato": {
+      "added": "2026-10-28",
+      "address": "2301 Bryant Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: El Chato in San Francisco County (building, node/10635824452)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.757512,
+      "lng": -122.409439,
+      "name": "El Chato",
+      "osm": "node/10635824452",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "el-dorado-building": {
       "added": "2026-10-02",
@@ -5067,6 +5100,20 @@
       "region": "sf",
       "status": "verified"
     },
+    "lower-polk-cbd": {
+      "added": "2026-10-28",
+      "address": "1170 Sutter St, San Francisco, CA 94109",
+      "evidence": [
+        "map: Sutter Street in San Francisco County (street, way/1030275360)",
+        "text: San Francisco"
+      ],
+      "lat": 37.787802,
+      "lng": -122.419857,
+      "name": "Lower Polk CBD",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
+    },
     "luna-del-soul": {
       "added": "2026-10-08",
       "address": "822 Cassia Street, Redwood City, CA 94063",
@@ -6708,6 +6755,27 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "palm-house": {
+      "added": "2026-10-28",
+      "address": "2032 Union Street, San Francisco, CA 94123",
+      "evidence": [
+        "map: 2032 in San Francisco County (building, way/717618720)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.797555,
+      "lng": -122.432485,
+      "name": "Palm House",
+      "osm": "way/717618720",
+      "possible_duplicates": [
+        "the-blue-light",
+        "the-brixton",
+        "mellow-barbers-cow-hollow"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "palo-alto-childrens-theatre": {
       "added": "2026-10-07",
@@ -9735,6 +9803,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "west-portal-gallery": {
+      "added": "2026-10-28",
+      "address": "320 W Portal Ave, San Francisco, CA 94127",
+      "evidence": [
+        "map: 320;324;328 in San Francisco County (building, way/215472848)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.737793,
+      "lng": -122.469732,
+      "name": "West Portal Gallery",
+      "osm": "way/215472848",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "western-addition-branch-library": {
       "added": "2026-10-02",
