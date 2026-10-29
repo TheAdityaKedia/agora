@@ -545,6 +545,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "22-41st-ave": {
+      "added": "2026-10-29",
+      "address": "22 West 41st Avenue, San Mateo, CA 94403",
+      "evidence": [
+        "map: 22 in San Mateo County (building, way/8934219)",
+        "text: San Mateo",
+        "street number matches"
+      ],
+      "lat": 37.530571,
+      "lng": -122.291295,
+      "name": "22 41st Ave",
+      "osm": "way/8934219",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
+    },
     "2200-broadway": {
       "added": "2026-10-02",
       "address": "2200 Broadway, Redwood City, CA 94063",
@@ -1315,6 +1331,26 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "amelie": {
+      "added": "2026-10-29",
+      "address": "1754 Polk Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Amélie in San Francisco County (building, node/3018753922)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.793101,
+      "lng": -122.421082,
+      "name": "Amélie",
+      "osm": "node/3018753922",
+      "possible_duplicates": [
+        "amelie-wine-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "amelie-wine-bar": {
       "added": "2026-10-07",
       "address": "1754 Polk St, San Francisco, CA 94109",
@@ -1500,6 +1536,27 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "asian-art-museum-of-san-francisco": {
+      "added": "2026-10-29",
+      "address": "200 Larkin Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: Asian Art Museum of San Francisco in San Francisco County (building, way/24588037)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.780315,
+      "lng": -122.415992,
+      "name": "Asian Art Museum of San Francisco",
+      "osm": "way/24588037",
+      "possible_duplicates": [
+        "san-francisco-public-library-main-library",
+        "orpheum-theatre"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "athletic-playground": {
       "added": "2026-10-08",
       "address": "4770 San Pablo Avenue, Emeryville, CA 94608",
@@ -1581,6 +1638,22 @@
       "precision": "building",
       "region": "peninsula",
       "status": "verified"
+    },
+    "balboa-park": {
+      "added": "2026-10-29",
+      "address": "Geneva Avenue, San Francisco, CA 94112",
+      "evidence": [
+        "map: Balboa Park in San Francisco County (building, node/6133371923)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.721427,
+      "lng": -122.447547,
+      "name": "Balboa Park",
+      "osm": "node/6133371923",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "balboa-theatre": {
       "added": "2026-10-02",
@@ -3552,6 +3625,29 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "fluid510": {
+      "added": "2026-10-29",
+      "address": "1544 Broadway, Oakland, CA 94612",
+      "evidence": [
+        "map: Fluid510 in Alameda County (building, node/11028058875)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.805941,
+      "lng": -122.269944,
+      "name": "Fluid510",
+      "osm": "node/11028058875",
+      "possible_duplicates": [
+        "1625-broadway",
+        "golden-ratio",
+        "torch-bar",
+        "fox-oakland-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "fly-bar-restaurant": {
@@ -5935,6 +6031,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "muttville": {
+      "added": "2026-10-29",
+      "address": "750 Florida Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Muttville in San Francisco County (building, node/12627811445)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.759665,
+      "lng": -122.411241,
+      "name": "Muttville",
+      "osm": "node/12627811445",
+      "possible_duplicates": [
+        "florecita-panaderia",
+        "southern-pacific-brewing"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "national-maritime-museum": {
       "added": "2026-10-05",
       "address": "900 Beach St, San Francisco, CA 94109",
@@ -6337,6 +6454,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "ocean-view-stables": {
+      "added": "2026-10-29",
+      "address": "2152 Olympic Way, Daly City, CA 94015",
+      "evidence": [
+        "map: Ocean View Stables in San Mateo County (building, node/13737221019)",
+        "text: Daly City",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.700308,
+      "lng": -122.49672,
+      "name": "Ocean View Stables",
+      "osm": "node/13737221019",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
     },
     "omnivore-books-on-food": {
       "added": "2026-10-02",
@@ -7794,6 +7928,18 @@
       ],
       "precision": "building",
       "region": "southbay",
+      "status": "auto"
+    },
+    "soma": {
+      "added": "2026-10-29",
+      "address": "",
+      "evidence": [
+        "map: South of Market in San Francisco County (city, relation/21356021)",
+        "text: San Francisco"
+      ],
+      "name": "SOMA",
+      "precision": "city",
+      "region": "sf",
       "status": "auto"
     },
     "southern-pacific-brewing": {

@@ -76,6 +76,23 @@
         ]
       ]
     },
+    "4-Star Theater\u001fA Charlie Brown Thanksgiving": {
+      "classified_at": "2026-10-29T17:09:34.589419+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "A Charlie Brown Thanksgiving",
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fA Chinese Ghost Story": {
       "classified_at": "2026-10-04T15:33:51.501811+00:00",
       "cost": "paid",
@@ -89,6 +106,28 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fBegotten (New Restoration - Presented by TRASH & TREASURES)": {
+      "classified_at": "2026-10-29T17:09:35.119347+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Begotten (New Restoration - Presented by TRASH & TREASURES)",
+      "topics": [
+        "film",
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -171,6 +210,22 @@
       "topics": [
         "film",
         "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fChronovisor": {
+      "classified_at": "2026-10-29T17:09:34.429727+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Chronovisor",
+      "topics": [
+        "film"
       ],
       "types": [
         [
@@ -261,6 +316,28 @@
         ]
       ]
     },
+    "4-Star Theater\u001fElectric Dreams (Presented by HI NRG)": {
+      "classified_at": "2026-10-29T17:09:34.633559+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Electric Dreams (Presented by HI NRG)",
+      "topics": [
+        "film",
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "4-Star Theater\u001fElephant Gym: More Real Than Dreams (with Band Member Q&A)": {
       "classified_at": "2026-10-03T04:50:23.272528+00:00",
       "cost": "unknown",
@@ -316,6 +393,23 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fFantastic Mr. Fox": {
+      "classified_at": "2026-10-29T17:09:34.585398+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Fantastic Mr. Fox",
+      "topics": [
+        "film",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
         ]
       ]
     },
@@ -1115,6 +1209,23 @@
         ]
       ]
     },
+    "4-Star Theater\u001fMC5: A True Testimonial (Presented by CHUCK PROPHET'S CINEMA DISCOTHEQUE)": {
+      "classified_at": "2026-10-29T17:09:35.040547+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "MC5: A True Testimonial (Presented by CHUCK PROPHET'S CINEMA DISCOTHEQUE)",
+      "topics": [
+        "documentary",
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "4-Star Theater\u001fMy Neighbor Totoro": {
       "classified_at": "2026-09-23T20:10:29.671837+00:00",
       "cost": "free",
@@ -1161,6 +1272,23 @@
       "topics": [
         "film",
         "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fPonyo": {
+      "classified_at": "2026-10-29T17:09:35.106665+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "Ponyo",
+      "topics": [
+        "film",
+        "family-kids"
       ],
       "types": [
         [
@@ -1473,6 +1601,42 @@
       "topics": [
         "film",
         "family-kids"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fThe Chinese Feast (Presented by HI NRG)": {
+      "classified_at": "2026-10-29T17:09:35.104835+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "The Chinese Feast (Presented by HI NRG)",
+      "topics": [
+        "film",
+        "club-night"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "4-Star Theater\u001fThe Grand Budapest Hotel": {
+      "classified_at": "2026-10-29T17:09:34.497570+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "4-Star Theater",
+      "taxonomy_version": 2,
+      "title": "The Grand Budapest Hotel",
+      "topics": [
+        "film"
       ],
       "types": [
         [
@@ -3041,6 +3205,22 @@
         ]
       ]
     },
+    "August Hall\u001fElefante - Tour 30 Aniversario": {
+      "classified_at": "2026-10-29T17:09:47.037016+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "August Hall",
+      "taxonomy_version": 2,
+      "title": "Elefante - Tour 30 Aniversario",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "August Hall\u001fFrench Police": {
       "classified_at": "2026-10-07T20:58:41.174684+00:00",
       "cost": "unknown",
@@ -4155,6 +4335,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fLoving Vincent": {
+      "classified_at": "2026-10-29T17:09:34.476547+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Loving Vincent",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fMad God": {
       "classified_at": "2026-10-03T04:49:53.472094+00:00",
       "cost": "paid",
@@ -4308,6 +4504,22 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 2,
       "title": "Nirvanna the Band the Show the Movie on 35mm",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fPlanes, Trains and Automobiles": {
+      "classified_at": "2026-10-29T17:09:33.867790+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Planes, Trains and Automobiles",
       "topics": [
         "film"
       ],
@@ -4500,6 +4712,38 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fThe Lady From Shanghai": {
+      "classified_at": "2026-10-29T17:09:33.869883+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "The Lady From Shanghai",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fThe Monkey": {
+      "classified_at": "2026-10-29T17:09:34.421491+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "The Monkey",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fThe Rocky Horror Picture Show": {
       "classified_at": "2026-10-03T04:50:56.280827+00:00",
       "cost": "paid",
@@ -4548,6 +4792,22 @@
         ]
       ]
     },
+    "Balboa Theatre\u001fThe Super Shangri-La Show": {
+      "classified_at": "2026-10-29T17:09:34.425396+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "The Super Shangri-La Show",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Balboa Theatre\u001fThe Vourdalak": {
       "classified_at": "2026-10-03T04:49:52.136380+00:00",
       "cost": "paid",
@@ -4571,6 +4831,22 @@
       "source": "Balboa Theatre",
       "taxonomy_version": 2,
       "title": "They Live",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Balboa Theatre\u001fTokyo Drifter": {
+      "classified_at": "2026-10-29T17:09:33.900839+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Balboa Theatre",
+      "taxonomy_version": 2,
+      "title": "Tokyo Drifter",
       "topics": [
         "film"
       ],
@@ -8333,6 +8609,23 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fRudy Parris": {
+      "classified_at": "2026-10-29T17:09:36.662478+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Rudy Parris",
+      "topics": [
+        "country",
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Biscuits & Blues\u001fRyan Allay": {
       "classified_at": "2026-10-03T05:04:13.384963+00:00",
       "cost": "paid",
@@ -10425,6 +10718,23 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Book Passage\u001fHave Fun Falling with Matthew Felix: 12 Meetings": {
+      "classified_at": "2026-10-29T17:09:36.868898+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Book Passage",
+      "taxonomy_version": 2,
+      "title": "Have Fun Falling with Matthew Felix: 12 Meetings",
+      "topics": [
+        "wellness",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -12764,6 +13074,25 @@
         ]
       ]
     },
+    "Books Inc.\u001fELAINE HSIEH YU: UGLY DUMPLING": {
+      "classified_at": "2026-10-29T17:09:37.111906+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "ELAINE HSIEH YU: UGLY DUMPLING",
+      "topics": [
+        "books-authors",
+        "nonfiction",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Books Inc.\u001fFIRST SATURDAY STORYTIME: TALA ROOH": {
       "classified_at": "2026-10-03T05:08:33.065891+00:00",
       "cost": "free",
@@ -13254,6 +13583,29 @@
       "topics": [
         "fiction",
         "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Books Inc.\u001fMIKE TRIGG: OUTAGE": {
+      "classified_at": "2026-10-29T17:09:37.024524+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "MIKE TRIGG: OUTAGE",
+      "topics": [
+        "fiction",
+        "books-authors",
+        "writing"
       ],
       "types": [
         [
@@ -21438,6 +21790,25 @@
         ]
       ]
     },
+    "Fabulosa Books\u001fECO25: The Year's Best Speculative Fiction — Syr Beker, TK Rex and Íde Hennessy": {
+      "classified_at": "2026-10-29T17:09:37.187711+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fabulosa Books",
+      "taxonomy_version": 2,
+      "title": "ECO25: The Year's Best Speculative Fiction — Syr Beker, TK Rex and Íde Hennessy",
+      "topics": [
+        "fiction",
+        "nature-outdoors",
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Fabulosa Books\u001fSWANA Dykes — Sinister Wisdom": {
       "classified_at": "2026-10-03T05:09:08.412308+00:00",
       "cost": "unknown",
@@ -27187,6 +27558,24 @@
         ]
       ]
     },
+    "JCCSF\u001fReb Zalman’s Fragments of a Future Scroll: Hasidism for the Aquarian Age": {
+      "classified_at": "2026-10-29T17:09:41.316510+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "JCCSF",
+      "taxonomy_version": 2,
+      "title": "Reb Zalman’s Fragments of a Future Scroll: Hasidism for the Aquarian Age",
+      "topics": [
+        "jewish",
+        "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "JCCSF\u001fRikud By The Bay Israeli Dance": {
       "classified_at": "2026-10-05T19:54:36.706745+00:00",
       "cost": "unknown",
@@ -27510,6 +27899,16 @@
           "performance"
         ]
       ]
+    },
+    "Keys Jazz Bistro\u001fCLOSED FOR THANKSGIVING": {
+      "classified_at": "2026-10-29T17:09:36.471518+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "CLOSED FOR THANKSGIVING",
+      "topics": [],
+      "types": []
     },
     "Keys Jazz Bistro\u001fClairdee": {
       "classified_at": "2026-10-03T05:03:00.414128+00:00",
@@ -28080,6 +28479,22 @@
       "source": "Keys Jazz Bistro",
       "taxonomy_version": 2,
       "title": "Patrick Wolff Quartet ft. Anthony Wilson",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Keys Jazz Bistro\u001fPatrick Wolff’s “Swinging Organ” Quartet": {
+      "classified_at": "2026-10-29T17:09:36.414870+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Patrick Wolff’s “Swinging Organ” Quartet",
       "topics": [
         "jazz"
       ],
@@ -31056,6 +31471,28 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001f!Medicine For Nightmares Birthdia Pachanga!": {
+      "classified_at": "2026-10-29T17:09:35.714296+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "!Medicine For Nightmares Birthdia Pachanga!",
+      "topics": [
+        "poetry",
+        "music",
+        "latino",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001f!Poetry on la VeintiCuatro!(Litquake evento)": {
       "classified_at": "2026-10-03T04:52:09.429595+00:00",
       "cost": "free",
@@ -31074,6 +31511,23 @@
         ],
         [
           "social"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fAfternoon Art Platcia with Eugene Rodriguez and Richard Rodriguez": {
+      "classified_at": "2026-10-29T17:09:35.278763+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Afternoon Art Platcia with Eugene Rodriguez and Richard Rodriguez",
+      "topics": [
+        "visual-art",
+        "latino"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -31212,6 +31666,49 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fCatalog of Shadows: San Francisco Release Party": {
+      "classified_at": "2026-10-29T17:09:36.030446+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Catalog of Shadows: San Francisco Release Party",
+      "topics": [
+        "poetry",
+        "spoken-word",
+        "latino"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fClosing event/reading for Shizue Seigel's “Burden of Imagination”": {
+      "classified_at": "2026-10-29T17:09:33.925336+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Closing event/reading for Shizue Seigel's “Burden of Imagination”",
+      "topics": [
+        "poetry",
+        "visual-art",
+        "latino"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fCrate To Canvas Closing Night Celebration": {
       "classified_at": "2026-09-24T21:48:38.432391+00:00",
       "cost": "unknown",
@@ -31229,6 +31726,23 @@
           "social",
           "party-club"
         ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fDaryl Smith pop up art show": {
+      "classified_at": "2026-10-29T17:09:36.314535+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Daryl Smith pop up art show",
+      "topics": [
+        "visual-art",
+        "latino"
+      ],
+      "types": [
         [
           "exhibition"
         ]
@@ -31294,6 +31808,67 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fFriend Seekers book release with Siamak Vossoughi": {
+      "classified_at": "2026-10-29T17:09:36.475656+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Friend Seekers book release with Siamak Vossoughi",
+      "topics": [
+        "books-authors",
+        "latino"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fHyperscale: Paris Marx in conversation with Wendy Liu": {
+      "classified_at": "2026-10-29T17:09:35.747723+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Hyperscale: Paris Marx in conversation with Wendy Liu",
+      "topics": [
+        "tech",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fKaya Press Bay Area Gathering and Kulhar Books Launch Featuring Poet Ansley Moon": {
+      "classified_at": "2026-10-29T17:09:34.004793+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Kaya Press Bay Area Gathering and Kulhar Books Launch Featuring Poet Ansley Moon",
+      "topics": [
+        "poetry",
+        "books-authors",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fLalo Guerrero Listening Party and Platica with Jesse \"Chuy\" Varela": {
       "classified_at": "2026-10-03T04:52:33.495688+00:00",
       "cost": "unknown",
@@ -31337,6 +31912,51 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fMIXED ROOTS: AN INTERACTIVE READING Hosted by Anne Liu Kellor and Interwoven": {
+      "classified_at": "2026-10-29T17:09:35.833355+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "MIXED ROOTS: AN INTERACTIVE READING Hosted by Anne Liu Kellor and Interwoven",
+      "topics": [
+        "books-authors",
+        "writing",
+        "asian-american",
+        "latino"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fMai-Linh Hong and Maw Shein Win: Poetry and Conversation": {
+      "classified_at": "2026-10-29T17:09:35.238809+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Mai-Linh Hong and Maw Shein Win: Poetry and Conversation",
+      "topics": [
+        "poetry",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fMolcajete Poets": {
       "classified_at": "2026-09-23T23:09:07.619297+00:00",
       "cost": "free",
@@ -31358,6 +31978,23 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fMystery School": {
+      "classified_at": "2026-10-29T17:09:35.890156+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Mystery School",
+      "topics": [
+        "music",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fNo Kings No Queens Chess Club": {
       "classified_at": "2026-10-03T04:51:56.344642+00:00",
       "cost": "free",
@@ -31366,6 +32003,24 @@
       "taxonomy_version": 2,
       "title": "No Kings No Queens Chess Club",
       "topics": [],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fNo Kings, No Queens Ches Club": {
+      "classified_at": "2026-10-29T17:09:35.139462+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "No Kings, No Queens Ches Club",
+      "topics": [
+        "games",
+        "latino"
+      ],
       "types": [
         [
           "social",
@@ -31424,6 +32079,25 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fOther Dimensions in Sound presents DJ Z4K vs. Black Edgar": {
+      "classified_at": "2026-10-29T17:09:35.773636+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Other Dimensions in Sound presents DJ Z4K vs. Black Edgar",
+      "topics": [
+        "club-night",
+        "electronic",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fOther Dimensions in Sound presents Dr Bob & The Out Patients / Eye-Full FilmsLOOK, LISTEN! - a Concert for Peace": {
       "classified_at": "2026-10-03T04:52:06.470061+00:00",
       "cost": "unknown",
@@ -31434,6 +32108,40 @@
       "topics": [
         "music",
         "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fOther Dimensions in Sound presents Exquisite Corpse(Isabel Arizmendi-guitar, Edan-soprano sax & efx)": {
+      "classified_at": "2026-10-29T17:09:36.275088+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Other Dimensions in Sound presents Exquisite Corpse(Isabel Arizmendi-guitar, Edan-soprano sax & efx)",
+      "topics": [
+        "music",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fOther Dimensions in Sound presents Kulintaikotron(1st set) & Free/Wong/Boyce Sax Trio(2nd set)": {
+      "classified_at": "2026-10-29T17:09:35.840666+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Other Dimensions in Sound presents Kulintaikotron(1st set) & Free/Wong/Boyce Sax Trio(2nd set)",
+      "topics": [
+        "jazz",
+        "latino"
       ],
       "types": [
         [
@@ -31491,6 +32199,23 @@
         [
           "screening"
         ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fOther Dimensions in Sound presentsTaqsim.": {
+      "classified_at": "2026-10-29T17:09:35.197825+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Other Dimensions in Sound presentsTaqsim.",
+      "topics": [
+        "world-music",
+        "latino"
+      ],
+      "types": [
         [
           "performance"
         ]
@@ -31626,6 +32351,29 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fThe Pomegranate is a Grenade Book Launch": {
+      "classified_at": "2026-10-29T17:09:33.940414+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "The Pomegranate is a Grenade Book Launch",
+      "topics": [
+        "poetry",
+        "books-authors",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fWorkshop: Visual Histories with Zefania sponsored by the SFPL": {
       "classified_at": "2026-09-23T23:09:12.278846+00:00",
       "cost": "free",
@@ -31640,6 +32388,24 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001f“A flor de piel” pop up photgraphy exhibit by Lorena Jiminez": {
+      "classified_at": "2026-10-29T17:09:35.799955+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "“A flor de piel” pop up photgraphy exhibit by Lorena Jiminez",
+      "topics": [
+        "photography",
+        "women",
+        "latino"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -33805,6 +34571,23 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Oakland Museum of California\u001fMember Bonus Reciprocity Week at Asian Art Museum": {
+      "classified_at": "2026-10-29T17:09:54.754927+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Museum of California",
+      "taxonomy_version": 2,
+      "title": "Member Bonus Reciprocity Week at Asian Art Museum",
+      "topics": [
+        "visual-art",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -38716,6 +39499,23 @@
         ]
       ]
     },
+    "Partiful\u001fCommunity Book Swap!": {
+      "classified_at": "2026-10-29T17:09:37.717102+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Community Book Swap!",
+      "topics": [
+        "books-authors"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "Partiful\u001fCommunity Gratitude: Meet Your Neighbors": {
       "classified_at": "2026-10-07T17:56:17.905828+00:00",
       "cost": "free",
@@ -39069,6 +39869,23 @@
         ]
       ]
     },
+    "Partiful\u001fElevated Vintage: A Curated Home Debut & Styling Session": {
+      "classified_at": "2026-10-29T17:09:40.648917+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Elevated Vintage: A Curated Home Debut & Styling Session",
+      "topics": [
+        "design"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fFUN FUN CLUB": {
       "classified_at": "2026-10-07T17:56:28.306817+00:00",
       "cost": "paid",
@@ -39307,6 +40124,24 @@
         ]
       ]
     },
+    "Partiful\u001fFriendsgiving: The Afterparty": {
+      "classified_at": "2026-10-29T17:09:37.083870+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Friendsgiving: The Afterparty",
+      "topics": [
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "Partiful\u001fFright Night at Figs": {
       "classified_at": "2026-10-28T16:55:11.443873+00:00",
       "cost": "unknown",
@@ -39322,6 +40157,42 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fGirls 4K | 2.5 mi run": {
+      "classified_at": "2026-10-29T17:09:39.825711+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Girls 4K | 2.5 mi run",
+      "topics": [
+        "women",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fGolden Gate Park East End FREE Walking Tour (SF City Guides)": {
+      "classified_at": "2026-10-29T17:09:37.776185+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Golden Gate Park East End FREE Walking Tour (SF City Guides)",
+      "topics": [
+        "history",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -39617,6 +40488,23 @@
         ]
       ]
     },
+    "Partiful\u001fHalloweenies 🌭": {
+      "classified_at": "2026-10-29T17:09:43.002329+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Halloweenies 🌭",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fHallows Gate: THE NIGHT BEFORE HALLOWEEN": {
       "classified_at": "2026-10-03T05:10:48.713505+00:00",
       "cost": "unknown",
@@ -39688,6 +40576,22 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fHoliday Projection Arts Festival": {
+      "classified_at": "2026-10-29T17:09:37.707957+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Holiday Projection Arts Festival",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -39947,6 +40851,24 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fKismat Diwali": {
+      "classified_at": "2026-10-29T17:09:37.124360+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Kismat Diwali",
+      "topics": [
+        "club-night",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -40582,6 +41504,23 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fMuttville Cleanup": {
+      "classified_at": "2026-10-29T17:09:37.110163+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Muttville Cleanup",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -42848,6 +43787,24 @@
         ]
       ]
     },
+    "Partiful\u001ffind your five dinner series: female founders": {
+      "classified_at": "2026-10-29T17:09:37.287863+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "find your five dinner series: female founders",
+      "topics": [
+        "business",
+        "women"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001ffrauds & (nathan) fielder": {
       "classified_at": "2026-10-07T17:56:54.678016+00:00",
       "cost": "unknown",
@@ -43062,6 +44019,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001fsandlot saturday in SF": {
+      "classified_at": "2026-10-29T17:09:45.203229+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "sandlot saturday in SF",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -43326,6 +44300,24 @@
         ]
       ]
     },
+    "Partiful\u001f🌊🌾Open Barn Event @ Ocean View Stables! 🐴☀️": {
+      "classified_at": "2026-10-29T17:09:37.605867+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "🌊🌾Open Barn Event @ Ocean View Stables! 🐴☀️",
+      "topics": [
+        "nature-outdoors",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001f🌎🥟 World of Dumplings Meetup! 🥟🌎": {
       "classified_at": "2026-10-03T05:10:21.423131+00:00",
       "cost": "free",
@@ -43454,6 +44446,23 @@
       "source": "Partiful",
       "taxonomy_version": 2,
       "title": "🧵Crafting in Dolores Park (BYOC) 🎨",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001f🧵Crafting in Dolores Park (BYOC) 🎨 Vol 2 - Holiday Edition!🎄": {
+      "classified_at": "2026-10-29T17:09:37.649558+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "🧵Crafting in Dolores Park (BYOC) 🎨 Vol 2 - Holiday Edition!🎄",
       "topics": [
         "craft"
       ],
@@ -45100,6 +46109,27 @@
         ]
       ]
     },
+    "Roxie Theater\u001fAmerican Pachuco: The Legend of Luis Valdez": {
+      "classified_at": "2026-10-29T17:09:43.940140+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "American Pachuco: The Legend of Luis Valdez",
+      "topics": [
+        "documentary",
+        "latino"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Roxie Theater\u001fAn Evening with Jane Schoenbrun: Public Access Afterworld + I Saw the TV Glow": {
       "classified_at": "2026-10-07T21:03:20.835795+00:00",
       "cost": "unknown",
@@ -45248,6 +46278,23 @@
       "title": "Cameron Winter at Carnegie Hall (35mm)",
       "topics": [
         "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fCarol": {
+      "classified_at": "2026-10-29T17:09:52.359496+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Carol",
+      "topics": [
+        "film",
+        "lgbtq"
       ],
       "types": [
         [
@@ -46400,6 +47447,22 @@
         ]
       ]
     },
+    "Roxie Theater\u001fOn the Road (En el Camino)": {
+      "classified_at": "2026-10-29T17:09:48.610252+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "On the Road (En el Camino)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Roxie Theater\u001fOnce Upon a Time in Harlem": {
       "classified_at": "2026-10-24T14:15:30.827872+00:00",
       "cost": "unknown",
@@ -46502,6 +47565,27 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fRemake": {
+      "classified_at": "2026-10-29T17:09:45.975118+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Remake",
+      "topics": [
+        "documentary",
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -46852,6 +47936,27 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fStudio 8 2026: Babeth Mondini VanLoo (Studio 8 Legacy Award)": {
+      "classified_at": "2026-10-29T17:09:49.515120+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "Studio 8 2026: Babeth Mondini VanLoo (Studio 8 Legacy Award)",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -64639,6 +65744,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: LEGO Robotics": {
+      "classified_at": "2026-10-29T17:09:33.862359+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: LEGO Robotics",
+      "topics": [
+        "family-kids",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: LinkedIn for Job Search, Part 3": {
       "classified_at": "2026-09-23T19:58:31.198548+00:00",
       "cost": "free",
@@ -68488,6 +69610,27 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fPlatonism and the History of Consciousness in the West with Earl Fontainelle and Erik Davis": {
+      "classified_at": "2026-10-29T17:09:51.293944+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Platonism and the History of Consciousness in the West with Earl Fontainelle and Erik Davis",
+      "topics": [
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fPrimal Gestures - How Direct Perception Reshapes The Way We Think with Liz Koch": {
       "classified_at": "2026-10-03T05:13:18.725258+00:00",
       "cost": "paid",
@@ -70922,6 +72065,23 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fDeveloper meetup with Wavelabs": {
+      "classified_at": "2026-10-29T17:09:36.436304+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Developer meetup with Wavelabs",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -73621,6 +74781,22 @@
         ]
       ]
     },
+    "The Fillmore\u001fIbeyi": {
+      "classified_at": "2026-10-29T17:09:33.852500+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Ibeyi",
+      "topics": [
+        "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Fillmore\u001fJACK WHITE LIVE 2026": {
       "classified_at": "2026-09-23T19:53:20.690867+00:00",
       "cost": "paid",
@@ -74277,6 +75453,23 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fHYPROV – Improv Under Hypnosis Meet & Greet": {
+      "classified_at": "2026-10-29T17:09:53.139855+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "HYPROV – Improv Under Hypnosis Meet & Greet",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -79094,6 +80287,23 @@
         ],
         [
           "workshop"
+        ]
+      ]
+    },
+    "Yoshi's\u001fRAQUEL JETÉ": {
+      "classified_at": "2026-10-29T17:09:36.459892+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 2,
+      "title": "RAQUEL JETÉ",
+      "topics": [
+        "jazz",
+        "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
