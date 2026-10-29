@@ -96,6 +96,9 @@
     "2151 harrison st, san francisco, ca": {
       "venue": "2151-harrison-st"
     },
+    "22 41st ave, san mateo, ca": {
+      "venue": "22-41st-ave"
+    },
     "2200 broadway, redwood city, ca": {
       "venue": "2200-broadway"
     },
@@ -409,6 +412,9 @@
     "amelie wine bar, 1754 polk st, san francisco, ca": {
       "venue": "amelie-wine-bar"
     },
+    "amelie, 1754 polk st, san francisco, ca": {
+      "venue": "amelie"
+    },
     "american bookbinders museum, 355 clementina st, san francisco": {
       "venue": "american-bookbinders-museum"
     },
@@ -433,6 +439,9 @@
     "artogether center, 1200 harrison street, oakland": {
       "venue": "artogether"
     },
+    "asian art museum, 200 larkin st, san francisco": {
+      "venue": "asian-art-museum-of-san-francisco"
+    },
     "athletic playground, 4770 san pablo ave, emeryville, ca": {
       "venue": "athletic-playground"
     },
@@ -442,6 +451,9 @@
     "bach dancing & dynamite society (douglas beach house), 311 mirada rd, half moon bay, ca": {
       "room": "Douglas Beach House",
       "venue": "bach-dancing-dynamite-society"
+    },
+    "balboa park, san jose ave & ocean ave, san francisco, ca": {
+      "venue": "balboa-park"
     },
     "balboa theatre, 3630 balboa st, san francisco, ca": {
       "venue": "balboa-theatre"
@@ -889,6 +901,9 @@
     "florecita panaderia, 2050 bryant st, san francisco, ca": {
       "venue": "florecita-panaderia"
     },
+    "fluid510, 1544 broadway, oakland, ca": {
+      "venue": "fluid510"
+    },
     "fly bar, 762 divisadero st, san francisco, ca": {
       "venue": "fly-bar-restaurant"
     },
@@ -1231,6 +1246,27 @@
     "lost marbles brewpub, 2202 de la vina street, san francisco, ca": {
       "venue": "lost-marbles-brewpub"
     },
+    "lower guadalupe river trail, san jose, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-10-31",
+          "title": "Girls 4K | 2.5 mi run",
+          "url": "https://partiful.com/e/ppMKzmWjsNUqx4KmrQGV"
+        },
+        "first_seen": "2026-10-29",
+        "last_tried": "2026-10-29",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Jose",
+          "kind": "not_a_place",
+          "name": "Lower Guadalupe River Trail"
+        }
+      }
+    },
     "lower polk cbd, 1170 sutter st, san francisco, ca": {
       "venue": "lower-polk-cbd"
     },
@@ -1418,6 +1454,9 @@
     "museum of the african diaspora, 685 mission st, san francisco": {
       "venue": "museum-of-the-african-diaspora"
     },
+    "muttville, 750 florida st, san francisco, ca": {
+      "venue": "muttville"
+    },
     "neck of the woods, 406 clement street, san francisco, 94118, san francisco, ca": {
       "venue": "neck-of-the-woods"
     },
@@ -1557,6 +1596,9 @@
       "place": "region",
       "region": "sf"
     },
+    "ocean view stables, 2152 olympic way, daly city, ca": {
+      "venue": "ocean-view-stables"
+    },
     "off-site (see event page) · presented by omnivore books": {
       "place": "none"
     },
@@ -1601,6 +1643,10 @@
     },
     "pacifica state beach, 5116—5246 coast hwy, pacifica, ca": {
       "venue": "pacifica-state-beach"
+    },
+    "page st, san francisco, ca": {
+      "place": "region",
+      "region": "sf"
     },
     "page street co-writing, 297 page st, san francisco": {
       "venue": "page-street-co-writing"
@@ -1976,6 +2022,9 @@
     },
     "sofa pocket park, 540 s first st, san jose, ca": {
       "venue": "sofa-pocket-park"
+    },
+    "soma, san francisco, ca": {
+      "venue": "soma"
     },
     "southern pacific brewing, 620 treat ave, san francisco, ca": {
       "venue": "southern-pacific-brewing"
