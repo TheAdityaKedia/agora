@@ -341,6 +341,22 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "1632-centre-pointe-dr": {
+      "added": "2026-10-30",
+      "address": "1632 Centre Pointe Drive, Milpitas, CA 95035",
+      "evidence": [
+        "map: 1632 in Santa Clara County (building, way/722347770)",
+        "text: Milpitas",
+        "street number matches"
+      ],
+      "lat": 37.408923,
+      "lng": -121.896611,
+      "name": "1632 Centre Pointe Dr",
+      "osm": "way/722347770",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "1645-park-st": {
       "added": "2026-10-02",
       "address": "1645 Park Street, Alameda, CA 94501",
@@ -6199,6 +6215,27 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "noe-valley-ministry": {
+      "added": "2026-10-30",
+      "address": "1021 Sanchez Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Noe Valley Ministry in San Francisco County (building, way/258770089)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.752823,
+      "lng": -122.429449,
+      "name": "Noe Valley Ministry",
+      "osm": "way/258770089",
+      "possible_duplicates": [
+        "the-dubliner",
+        "noe-valley-books"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "noe-valley-sally-brunn-branch-library": {
       "added": "2026-10-02",

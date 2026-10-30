@@ -51,6 +51,9 @@
     "1625 broadway, oakland, ca": {
       "venue": "1625-broadway"
     },
+    "1632 centre pointe dr, milpitas, ca": {
+      "venue": "1632-centre-pointe-dr"
+    },
     "1640 18th st ste a, oakland, ca": {
       "venue": "almanac-west-oakland-clubhouse"
     },
@@ -211,16 +214,13 @@
           "url": "https://partiful.com/e/nEvPGBuYBd1MWBE8BQkr"
         },
         "first_seen": "2026-10-23",
-        "last_tried": "2026-10-23",
+        "last_tried": "2026-10-30",
         "reason": "no map result in the Bay Area",
         "sources": [
           "Partiful"
         ],
         "suggestion": {
-          "city": "San Francisco",
-          "kind": "venue",
-          "name": "37th Ave & Ortega St",
-          "street_address": "37th Avenue and Ortega Street"
+          "kind": "not_a_place"
         }
       }
     },
@@ -1477,6 +1477,9 @@
     },
     "noe valley books, 3899 24th st, san francisco, ca": {
       "venue": "noe-valley-books"
+    },
+    "noe valley ministry 1021 sanchez street san francisco, ca": {
+      "venue": "noe-valley-ministry"
     },
     "noisebridge, 272 capp st, san francisco, ca": {
       "venue": "noisebridge"
