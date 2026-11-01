@@ -446,6 +446,27 @@
       "region": "sf",
       "status": "auto"
     },
+    "1906-union-st": {
+      "added": "2026-11-01",
+      "address": "1906 Union Street, San Francisco, CA 94123",
+      "evidence": [
+        "map: 1906 in San Francisco County (building, way/717666274)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.797769,
+      "lng": -122.430798,
+      "name": "1906 Union St",
+      "osm": "way/717666274",
+      "possible_duplicates": [
+        "the-blue-light",
+        "palm-house",
+        "golden-gate-valley-branch-library"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1919-fourth-st": {
       "added": "2026-10-02",
       "address": "1919 Fourth Street, Berkeley, CA 94710",
@@ -665,6 +686,20 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "2310-marinship-way": {
+      "added": "2026-11-01",
+      "address": "2310 Marinship Way, Sausalito, CA 94965",
+      "evidence": [
+        "map: Marinship Way in Marin County (street, way/749991646)",
+        "text: Sausalito"
+      ],
+      "lat": 37.864008,
+      "lng": -122.496481,
+      "name": "2310 Marinship Way",
+      "precision": "street",
+      "region": "northbay",
       "status": "auto"
     },
     "2428-whipple-rd": {
