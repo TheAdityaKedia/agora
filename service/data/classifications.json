@@ -2110,6 +2110,22 @@
         ]
       ]
     },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fHadestown": {
+      "classified_at": "2026-11-02T20:36:15.028594+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "Hadestown",
+      "topics": [
+        "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "ATG (Curran, Orpheum, Golden Gate)\u001fLaurie Anderson": {
       "classified_at": "2026-09-23T19:52:03.844431+00:00",
       "cost": "paid",
@@ -2771,6 +2787,22 @@
         ],
         [
           "screening"
+        ]
+      ]
+    },
+    "Artists' Television Access\u001fKent Howie a selection (opening)": {
+      "classified_at": "2026-11-02T20:36:15.682326+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Artists' Television Access",
+      "taxonomy_version": 2,
+      "title": "Kent Howie a selection (opening)",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -8069,6 +8101,22 @@
       "title": "Alvon Johnson",
       "topics": [
         "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fAn Adam Hawley Christmas": {
+      "classified_at": "2026-11-02T20:36:14.958611+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "An Adam Hawley Christmas",
+      "topics": [
+        "jazz"
       ],
       "types": [
         [
@@ -21145,6 +21193,25 @@
         ]
       ]
     },
+    "El Rio\u001fOpen for Election Night!": {
+      "classified_at": "2026-11-02T20:36:15.018195+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Open for Election Night!",
+      "topics": [
+        "club-night",
+        "lgbtq",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fPapi n Friends: Global Club Music Takeover ($5 Cover)": {
       "classified_at": "2026-09-28T18:16:10.744201+00:00",
       "cost": "paid",
@@ -21730,6 +21797,24 @@
         ]
       ]
     },
+    "F8\u001fClub Triste: DJ Paypal &amp; Cakedog": {
+      "classified_at": "2026-11-02T20:36:16.319876+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Club Triste: DJ Paypal &amp; Cakedog",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "F8\u001fCrash Course presents J.Espinosa": {
       "classified_at": "2026-10-07T20:56:00.219381+00:00",
       "cost": "free",
@@ -21759,6 +21844,24 @@
         "club-night",
         "electronic",
         "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fDVALITY PRESENTS INSOMNIA FEATURING EGODEATH ALL NIGHT LONG": {
+      "classified_at": "2026-11-02T20:36:16.253399+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "DVALITY PRESENTS INSOMNIA FEATURING EGODEATH ALL NIGHT LONG",
+      "topics": [
+        "club-night",
+        "electronic"
       ],
       "types": [
         [
@@ -21833,6 +21936,42 @@
         "club-night",
         "electronic",
         "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fMOMENTUM: TECHNO 4 LESS": {
+      "classified_at": "2026-11-02T20:36:16.261441+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "MOMENTUM: TECHNO 4 LESS",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fMusic Is The Answer's First Thursdays presents Navii's Bday Takeover": {
+      "classified_at": "2026-11-02T20:36:16.193354+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Music Is The Answer's First Thursdays presents Navii's Bday Takeover",
+      "topics": [
+        "club-night",
+        "electronic"
       ],
       "types": [
         [
@@ -25479,6 +25618,22 @@
       "title": "Rusty Chains - A Tribute to Chris Cornell",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Great American Music Hall\u001fSampa the Great": {
+      "classified_at": "2026-11-02T20:36:15.001285+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Great American Music Hall",
+      "taxonomy_version": 2,
+      "title": "Sampa the Great",
+      "topics": [
+        "hiphop-rnb"
       ],
       "types": [
         [
@@ -29521,11 +29676,11 @@
       ]
     },
     "Keys Jazz Bistro\u001f“Emily Day & Cosmo Alleycats”": {
-      "classified_at": "2026-09-24T22:58:53.987757+00:00",
-      "cost": "paid",
+      "classified_at": "2026-11-02T20:36:15.002945+00:00",
+      "cost": "unknown",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "Keys Jazz Bistro",
-      "taxonomy_version": 1,
+      "taxonomy_version": 2,
       "title": "“Emily Day & Cosmo Alleycats”",
       "topics": [
         "jazz"
@@ -31802,6 +31957,23 @@
         ]
       ]
     },
+    "Mechanics' Institute\u001f4th Shipman Memorial Tournament": {
+      "classified_at": "2026-11-02T20:36:15.861414+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "4th Shipman Memorial Tournament",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "Mechanics' Institute\u001fBagels and Ballot Measures with the League of Women Voters": {
       "classified_at": "2026-10-10T02:03:47.373306+00:00",
       "cost": "free",
@@ -32157,6 +32329,42 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fGM Daniel “Danya” Naroditsky Memorial Blitz": {
+      "classified_at": "2026-11-02T20:36:15.704099+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "GM Daniel “Danya” Naroditsky Memorial Blitz",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "Mechanics' Institute\u001fHow to Use AI Safely": {
+      "classified_at": "2026-11-02T20:36:15.726354+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Mechanics' Institute",
+      "taxonomy_version": 2,
+      "title": "How to Use AI Safely",
+      "topics": [
+        "tech",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -37072,6 +37280,23 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fHerbal Tea Blending Workshop": {
+      "classified_at": "2026-11-02T20:36:16.361316+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Herbal Tea Blending Workshop",
+      "topics": [
+        "wellness",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fHitched and Financially Fit": {
       "classified_at": "2026-10-16T15:09:20.353658+00:00",
       "cost": "free",
@@ -37087,6 +37312,22 @@
         [
           "talk",
           "lecture"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fHoliday Wreath Making Workshop": {
+      "classified_at": "2026-11-02T20:36:16.778738+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Holiday Wreath Making Workshop",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
         ]
       ]
     },
@@ -37240,6 +37481,26 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fLunar New Year Celebration!": {
+      "classified_at": "2026-11-02T20:36:17.032893+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Lunar New Year Celebration!",
+      "topics": [
+        "family-kids",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -38690,6 +38951,27 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fWood Street: Film screening and discussion": {
+      "classified_at": "2026-11-02T20:36:16.516784+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Wood Street: Film screening and discussion",
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fZumba at Dimond Branch": {
       "classified_at": "2026-10-14T15:26:59.405635+00:00",
       "cost": "free",
@@ -38779,6 +39061,22 @@
         ]
       ]
     },
+    "Oakland United Beerworks\u001fCrafts & Drafts, November": {
+      "classified_at": "2026-11-02T20:36:16.837188+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Crafts & Drafts, November",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Oakland United Beerworks\u001fCrafts & Drafts, October": {
       "classified_at": "2026-10-08T01:12:27.106242+00:00",
       "cost": "free",
@@ -38845,6 +39143,22 @@
         ]
       ]
     },
+    "Oakland United Beerworks\u001fPaint Your Pet Leash Holders @ OUB": {
+      "classified_at": "2026-11-02T20:36:16.915640+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Paint Your Pet Leash Holders @ OUB",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Oakland United Beerworks\u001fPaint Your Pet at OUB": {
       "classified_at": "2026-10-08T01:12:33.302222+00:00",
       "cost": "paid",
@@ -38894,6 +39208,23 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Oakland United Beerworks\u001fPints with Purpose Benefitting Embracing Autism Collaborative Services": {
+      "classified_at": "2026-11-02T20:36:16.854270+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Pints with Purpose Benefitting Embracing Autism Collaborative Services",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
         ]
       ]
     },
@@ -40549,6 +40880,27 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001fCalifornia Dirt Holiday Popup": {
+      "classified_at": "2026-11-02T20:36:15.565973+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "California Dirt Holiday Popup",
+      "topics": [
+        "craft",
+        "design"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "exhibition"
         ]
       ]
     },
@@ -43770,6 +44122,21 @@
         ]
       ]
     },
+    "Partiful\u001fSF Chess Club - Pre Thanksgiving - Potluck!": {
+      "classified_at": "2026-11-02T20:36:15.604445+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "SF Chess Club - Pre Thanksgiving - Potluck!",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "Partiful\u001fSF Chess Club - World Freedom Day!": {
       "classified_at": "2026-10-28T16:55:39.520113+00:00",
       "cost": "free",
@@ -44684,6 +45051,28 @@
         ]
       ]
     },
+    "Partiful\u001fUnwrapped by Queer Tattoo Alliance": {
+      "classified_at": "2026-11-02T20:36:15.765658+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Unwrapped by Queer Tattoo Alliance",
+      "topics": [
+        "punk-metal",
+        "club-night",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fV0 Ceramix Photoshoot": {
       "classified_at": "2026-10-28T16:55:51.156712+00:00",
       "cost": "free",
@@ -44916,6 +45305,27 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "Partiful\u001fbay bridge picnic & watercolor workshop": {
+      "classified_at": "2026-11-02T20:36:15.619143+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "bay bridge picnic & watercolor workshop",
+      "topics": [
+        "craft",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -47041,6 +47451,22 @@
       "source": "Punch Line San Francisco",
       "taxonomy_version": 2,
       "title": "Santi Espinosa - ME Time (English/Spanish Show)",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fScott Capurro Has Friends": {
+      "classified_at": "2026-11-02T20:36:15.280972+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Scott Capurro Has Friends",
       "topics": [
         "comedy"
       ],
@@ -71904,6 +72330,23 @@
         ]
       ]
     },
+    "The Castro Theatre\u001fBoy Throb": {
+      "classified_at": "2026-11-02T20:36:16.313609+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Castro Theatre",
+      "taxonomy_version": 2,
+      "title": "Boy Throb",
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Castro Theatre\u001fCameron Winter at Carnegie Hall": {
       "classified_at": "2026-10-07T21:22:52.289848+00:00",
       "cost": "unknown",
@@ -74145,6 +74588,22 @@
       "source": "The Commons (SF)",
       "taxonomy_version": 2,
       "title": "Reflect, Release, & Reset: Create Your Vision for 2027",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fReset Day": {
+      "classified_at": "2026-11-02T20:36:15.032136+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Reset Day",
       "topics": [
         "wellness"
       ],
@@ -79288,6 +79747,23 @@
         ]
       ]
     },
+    "The Riptide\u001fBrain Fog": {
+      "classified_at": "2026-11-02T20:36:15.081944+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Riptide",
+      "taxonomy_version": 2,
+      "title": "Brain Fog",
+      "topics": [
+        "blues",
+        "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Riptide\u001fCalifornia Turnaround": {
       "classified_at": "2026-10-22T15:53:28.599648+00:00",
       "cost": "free",
@@ -80307,6 +80783,22 @@
       "source": "The UC Theatre",
       "taxonomy_version": 2,
       "title": "Ozomatli",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The UC Theatre\u001fPepper": {
+      "classified_at": "2026-11-02T20:36:16.333640+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The UC Theatre",
+      "taxonomy_version": 2,
+      "title": "Pepper",
       "topics": [
         "rock-indie"
       ],
