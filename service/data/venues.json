@@ -7413,6 +7413,25 @@
       "region": "sf",
       "status": "auto"
     },
+    "problem-library": {
+      "added": "2026-11-02",
+      "address": "1288 15th Avenue, San Francisco, CA 94122",
+      "evidence": [
+        "map: Problem Library in San Francisco County (building, node/4071080492)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.76406,
+      "lng": -122.472683,
+      "name": "Problem Library",
+      "osm": "node/4071080492",
+      "possible_duplicates": [
+        "sunset-commons"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "propagation": {
       "added": "2026-10-28",
       "address": "895 Post Street, San Francisco, CA 94164",
@@ -7553,6 +7572,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "rincon-park": {
+      "added": "2026-11-02",
+      "address": "289 Steuart Ln, San Francisco, CA 94105",
+      "evidence": [
+        "map: Rincon Park in San Francisco County (building, way/32862802)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.791195,
+      "lng": -122.389541,
+      "name": "Rincon Park",
+      "osm": "way/32862802",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "roble-arts-gym": {
       "added": "2026-10-11",
