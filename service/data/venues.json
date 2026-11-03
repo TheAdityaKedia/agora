@@ -251,6 +251,26 @@
       "region": "sf",
       "status": "auto"
     },
+    "1250-fell-st": {
+      "added": "2026-11-03",
+      "address": "1250 Fell St, San Francisco, CA 94117",
+      "evidence": [
+        "map: 1250;1252 in San Francisco County (building, way/261462612)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.774127,
+      "lng": -122.438542,
+      "name": "1250 Fell St",
+      "osm": "way/261462612",
+      "possible_duplicates": [
+        "madrone-art-bar",
+        "the-independent"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1250-thomas-ave": {
       "added": "2026-10-02",
       "address": "1250 Thomas Avenue, San Francisco, CA 94188",
@@ -279,6 +299,31 @@
       "lng": -122.448799,
       "name": "1430 Cole St",
       "osm": "way/265674117",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "144-taylor-st": {
+      "added": "2026-11-03",
+      "address": "144 Taylor Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: 144 in San Francisco County (building, node/5167702928)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.78375,
+      "lng": -122.410722,
+      "name": "144 Taylor St",
+      "osm": "node/5167702928",
+      "possible_duplicates": [
+        "warfield-theatre",
+        "golden-gate-theater",
+        "pandora-karaoke-bar",
+        "the-felix",
+        "jollibee",
+        "frontier-tower-berlinhouse",
+        "san-francisco-magic-theater"
+      ],
       "precision": "building",
       "region": "sf",
       "status": "auto"
@@ -392,6 +437,22 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "1767-12th-st": {
+      "added": "2026-11-03",
+      "address": "1767 12th St, Oakland, CA 94607",
+      "evidence": [
+        "map: 1765;1767 in Alameda County (building, way/473389190)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.81192,
+      "lng": -122.299592,
+      "name": "1767 12th St",
+      "osm": "way/473389190",
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "1815-balboa-st": {
@@ -1127,6 +1188,28 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "828-valencia-st": {
+      "added": "2026-11-03",
+      "address": "828 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 828 in San Francisco County (building, node/13731317559)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.759473,
+      "lng": -122.421521,
+      "name": "828 Valencia St",
+      "osm": "node/13731317559",
+      "possible_duplicates": [
+        "etcetera-wine-bar",
+        "tokyo-futon-tea",
+        "big-time-vintage",
+        "teeth"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "833-market-st": {
       "added": "2026-10-20",
@@ -2363,6 +2446,20 @@
       "region": "sf",
       "status": "verified"
     },
+    "bret-harte-terr": {
+      "added": "2026-11-03",
+      "address": "",
+      "evidence": [
+        "map: Bret Harte Terrace in San Francisco County (street, way/8920548)",
+        "text: San Francisco"
+      ],
+      "lat": 37.804617,
+      "lng": -122.417577,
+      "name": "Bret Harte Terr",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
+    },
     "buzzworks": {
       "added": "2026-10-07",
       "address": "365 11th Street, San Francisco, CA 94103",
@@ -2398,6 +2495,22 @@
       "lng": -122.41801,
       "name": "Cafe Nook",
       "osm": "node/1478460133",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "california-college-of-the-arts": {
+      "added": "2026-11-03",
+      "address": "145 Hooper Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: California College of the Arts in San Francisco County (building, way/1427026192)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.768054,
+      "lng": -122.398504,
+      "name": "California College of the Arts",
+      "osm": "way/1427026192",
       "precision": "building",
       "region": "sf",
       "status": "auto"
@@ -2745,6 +2858,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "connecticut-yankee": {
+      "added": "2026-11-03",
+      "address": "100 Connecticut Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: 100 in San Francisco County (building, way/29482560)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.764943,
+      "lng": -122.397829,
+      "name": "Connecticut Yankee",
+      "osm": "way/29482560",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "conservatory-of-flowers": {
       "added": "2026-10-02",
@@ -7180,6 +7309,20 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "perine-pl": {
+      "added": "2026-11-03",
+      "address": "",
+      "evidence": [
+        "map: Perine Place in San Francisco County (street, way/8921291)",
+        "text: San Francisco"
+      ],
+      "lat": 37.789073,
+      "lng": -122.436419,
+      "name": "Perine Pl",
+      "precision": "street",
+      "region": "sf",
+      "status": "auto"
+    },
     "phoenix-theater": {
       "added": "2026-10-02",
       "address": "201 Washington Street, Petaluma, CA 94952",
@@ -9694,6 +9837,28 @@
         "biscuits-blues",
         "august-hall",
         "curran-theatre"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "timebeing-teahouse": {
+      "added": "2026-11-03",
+      "address": "438 Haight Street, San Francisco, CA 94117",
+      "evidence": [
+        "map: Timebeing Teahouse in San Francisco County (building, node/5182462008)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.772345,
+      "lng": -122.429489,
+      "name": "Timebeing Teahouse",
+      "osm": "node/5182462008",
+      "possible_duplicates": [
+        "nickies-bar-and-restaurant",
+        "the-faight-collective-2",
+        "the-faight-collective"
       ],
       "precision": "building",
       "region": "sf",
