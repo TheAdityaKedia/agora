@@ -328,6 +328,25 @@
       "region": "sf",
       "status": "auto"
     },
+    "1550-mission-st": {
+      "added": "2026-11-04",
+      "address": "1550 Mission Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1550 in San Francisco County (building, way/1418586059)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.773322,
+      "lng": -122.41806,
+      "name": "1550 Mission St",
+      "osm": "way/1418586059",
+      "possible_duplicates": [
+        "1560-mission-st"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1560-mission-st": {
       "added": "2026-10-28",
       "address": "1560 Mission Street, San Francisco, CA 94103",
@@ -690,6 +709,27 @@
       "precision": "building",
       "region": "peninsula",
       "status": "verified"
+    },
+    "2266-chestnut-st": {
+      "added": "2026-11-04",
+      "address": "2266 Chestnut St, San Francisco, CA 94123",
+      "evidence": [
+        "map: 2250;2252;2258;2260;2262;2266;2268 in San Francisco County (building, way/272691788)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.800427,
+      "lng": -122.440607,
+      "name": "2266 Chestnut St",
+      "osm": "way/272691788",
+      "possible_duplicates": [
+        "books-inc-in-the-marina",
+        "2300-chestnut-st",
+        "marina-theatre"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "2270-broadway": {
       "added": "2026-10-16",
@@ -1899,6 +1939,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "bayview-opera-house-ruth-williams-memorial-theatre": {
+      "added": "2026-11-04",
+      "address": "4705 3rd Street, San Francisco, CA 94124",
+      "evidence": [
+        "map: Bayview Opera House Ruth Williams Memorial Theatre in San Francisco County (building, way/288836717)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.735147,
+      "lng": -122.390167,
+      "name": "Bayview Opera House Ruth Williams Memorial Theatre",
+      "osm": "way/288836717",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "beaux": {
       "added": "2026-10-02",
       "address": "2344 Market Street, San Francisco, CA 94114",
@@ -2914,6 +2971,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "corona-heights-park": {
+      "added": "2026-11-04",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: Corona Heights Park in San Francisco County (building, way/225182880)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.764776,
+      "lng": -122.439343,
+      "name": "Corona Heights Park",
+      "osm": "way/225182880",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "coyote-hills-regional-park": {
       "added": "2026-10-02",
       "address": "8000 Patterson Ranch Road, Fremont, CA 94555",
@@ -3915,6 +3988,26 @@
       ],
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "fort-mason": {
+      "added": "2026-11-04",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: Fort Mason in San Francisco County (building, way/82207054)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.806281,
+      "lng": -122.428988,
+      "name": "Fort Mason",
+      "osm": "way/82207054",
+      "possible_duplicates": [
+        "the-magic-theatre",
+        "bats-improv"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "fort-mason-center-for-arts-culture": {
@@ -5086,6 +5179,29 @@
         "muddy-waters-coffee-lounge",
         "lore-speakeasy-and-escape-room",
         "the-drawing-room-annex"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "kindred-studio": {
+      "added": "2026-11-04",
+      "address": "1910 Bryant Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 1910 in San Francisco County (building, way/254759910)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.762796,
+      "lng": -122.410325,
+      "name": "Kindred Studio",
+      "osm": "way/254759910",
+      "possible_duplicates": [
+        "kqed-commons",
+        "z-space",
+        "florecita-panaderia",
+        "verdi-club",
+        "2151-harrison-st"
       ],
       "precision": "building",
       "region": "sf",
@@ -6380,6 +6496,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "noe-cafe": {
+      "added": "2026-11-04",
+      "address": "1299 Sanchez Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Noe Cafe in San Francisco County (building, node/360463558)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.748497,
+      "lng": -122.429217,
+      "name": "Noe Cafe",
+      "osm": "node/360463558",
+      "possible_duplicates": [
+        "omnivore-books-on-food"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "noe-valley-books": {
       "added": "2026-10-02",
       "address": "3899 24th Street, San Francisco, CA 94110",
@@ -7205,6 +7341,22 @@
       "possible_duplicates": [
         "karma-cafe"
       ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "paper-son-coffee-dogpatch": {
+      "added": "2026-11-04",
+      "address": "2343 3rd Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: Paper Son Coffee - Dogpatch in San Francisco County (building, node/13322191826)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.759597,
+      "lng": -122.388188,
+      "name": "Paper Son Coffee - Dogpatch",
+      "osm": "node/13322191826",
       "precision": "building",
       "region": "sf",
       "status": "auto"
@@ -8351,6 +8503,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "st-marks-square": {
+      "added": "2026-11-04",
+      "address": "1031 Franklin Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1031 in San Francisco County (building, way/761313525)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.783796,
+      "lng": -122.422793,
+      "name": "St Mark's Square",
+      "osm": "way/761313525",
+      "possible_duplicates": [
+        "1117-geary-blvd"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "st-michaels-ukrainian-orthodox-church": {
       "added": "2026-10-07",

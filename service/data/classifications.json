@@ -8272,6 +8272,16 @@
         ]
       ]
     },
+    "Biscuits & Blues\u001fClosed for Thanksgiving": {
+      "classified_at": "2026-11-04T18:26:03.957686+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "Closed for Thanksgiving",
+      "topics": [],
+      "types": []
+    },
     "Biscuits & Blues\u001fClosed for a Private Event": {
       "classified_at": "2026-10-03T05:04:36.546435+00:00",
       "cost": "unknown",
@@ -13691,6 +13701,28 @@
         ]
       ]
     },
+    "Books Inc.\u001fKISS & TELL LITERARY SALON: MEREDITH DURAN & MARA WILLIAMS": {
+      "classified_at": "2026-11-04T18:26:04.174691+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "KISS & TELL LITERARY SALON: MEREDITH DURAN & MARA WILLIAMS",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "Books Inc.\u001fLOUIE MENSINGER: CROCHET GOOMIS": {
       "classified_at": "2026-09-25T06:10:47.501811+00:00",
       "cost": "unknown",
@@ -14002,6 +14034,25 @@
         ]
       ]
     },
+    "Books Inc.\u001fQUEERLY BELOVED BOOK CLUB: FRUITFLY": {
+      "classified_at": "2026-11-04T18:26:04.157560+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "QUEERLY BELOVED BOOK CLUB: FRUITFLY",
+      "topics": [
+        "books-authors",
+        "fiction",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ]
+    },
     "Books Inc.\u001fREAD BETWEEN THE SPINE BOOK CLUB: SHATTER ME": {
       "classified_at": "2026-10-03T05:08:18.964445+00:00",
       "cost": "free",
@@ -14187,6 +14238,24 @@
         ],
         [
           "workshop"
+        ]
+      ]
+    },
+    "Books Inc.\u001fTO THE MOON & BACK BOOK CLUB: FRANKENSTEIN": {
+      "classified_at": "2026-11-04T18:26:04.050638+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "TO THE MOON & BACK BOOK CLUB: FRANKENSTEIN",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
         ]
       ]
     },
@@ -14804,6 +14873,22 @@
         ]
       ]
     },
+    "Brava Theater Center\u001fBallet of Lights: Sleeping Beauty in a Sparkling Show  (Copy)": {
+      "classified_at": "2026-11-04T18:26:02.654550+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Brava Theater Center",
+      "taxonomy_version": 2,
+      "title": "Ballet of Lights: Sleeping Beauty in a Sparkling Show  (Copy)",
+      "topics": [
+        "dance"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Brava Theater Center\u001fBeyond the A Word: Reproductive Life Stories": {
       "classified_at": "2026-09-23T19:54:20.026319+00:00",
       "cost": "paid",
@@ -14939,6 +15024,22 @@
         [
           "talk",
           "podcast"
+        ]
+      ]
+    },
+    "Brava Theater Center\u001fKimbra: Vows Reimagined": {
+      "classified_at": "2026-11-04T18:26:02.711358+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Brava Theater Center",
+      "taxonomy_version": 2,
+      "title": "Kimbra: Vows Reimagined",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -20709,6 +20810,29 @@
         ]
       ]
     },
+    "El Rio\u001fCocktails for Community: Benefit for the Alliance for Social & Economic Justice (Free)": {
+      "classified_at": "2026-11-04T18:26:03.439339+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Cocktails for Community: Benefit for the Alliance for Social & Economic Justice (Free)",
+      "topics": [
+        "club-night",
+        "latino",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
     "El Rio\u001fCrisis Hotline Happy Hour (Free)": {
       "classified_at": "2026-10-03T04:58:47.685151+00:00",
       "cost": "free",
@@ -20738,6 +20862,29 @@
       "topics": [
         "drag",
         "club-night",
+        "lgbtq",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "El Rio\u001fDigital Frequency, 1HEXX, Elephant Garden, Electric Ex ($10)": {
+      "classified_at": "2026-11-04T18:26:03.458625+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Digital Frequency, 1HEXX, Elephant Garden, Electric Ex ($10)",
+      "topics": [
+        "club-night",
+        "electronic",
         "lgbtq",
         "latino"
       ],
@@ -21506,6 +21653,25 @@
         ]
       ]
     },
+    "El Rio\u001fSanctuary Happy Hour Benefit for SFUSD Students (Free)": {
+      "classified_at": "2026-11-04T18:26:03.390017+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "Sanctuary Happy Hour Benefit for SFUSD Students (Free)",
+      "topics": [
+        "lgbtq",
+        "latino",
+        "education"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fSketchboard Co. Mini Marathon ($15)": {
       "classified_at": "2026-10-03T04:58:53.931166+00:00",
       "cost": "paid",
@@ -21625,6 +21791,26 @@
         "dance-party",
         "club-night",
         "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "El Rio\u001fThe Place to Be: A Benefit for Mission Meals- presented by Know ID and Club Jinx 9 ($5 - $10)": {
+      "classified_at": "2026-11-04T18:26:03.381932+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "The Place to Be: A Benefit for Mission Meals- presented by Know ID and Club Jinx 9 ($5 - $10)",
+      "topics": [
+        "club-night",
+        "electronic",
+        "lgbtq",
+        "latino"
       ],
       "types": [
         [
@@ -21782,6 +21968,26 @@
       "topics": [
         "club-night",
         "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "El Rio\u001f[ESC]AVATION with DJ Alice Stribling (Free)": {
+      "classified_at": "2026-11-04T18:26:03.477282+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "[ESC]AVATION with DJ Alice Stribling (Free)",
+      "topics": [
+        "club-night",
+        "electronic",
+        "lgbtq",
+        "latino"
       ],
       "types": [
         [
@@ -22530,6 +22736,21 @@
         ]
       ]
     },
+    "Feinstein's at the Nikko\u001fFriends of Feinstein's - New & Renewing Members": {
+      "classified_at": "2026-11-04T18:26:06.534298+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Feinstein's at the Nikko",
+      "taxonomy_version": 2,
+      "title": "Friends of Feinstein's - New & Renewing Members",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
     "Feinstein's at the Nikko\u001fHoliday Test Drive XIV: Warm & Cozy": {
       "classified_at": "2026-10-07T21:00:06.171862+00:00",
       "cost": "paid",
@@ -23017,6 +23238,22 @@
         ]
       ]
     },
+    "Fox Theater Oakland\u001fAkira Yamaoka": {
+      "classified_at": "2026-11-04T18:26:06.308396+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fox Theater Oakland",
+      "taxonomy_version": 2,
+      "title": "Akira Yamaoka",
+      "topics": [
+        "electronic"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Fox Theater Oakland\u001fAli Siddiq: The Custom Fit Tour": {
       "classified_at": "2026-10-07T20:57:43.285445+00:00",
       "cost": "paid",
@@ -23428,6 +23665,23 @@
       "title": "Ocean Alley",
       "topics": [
         "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Fox Theater Oakland\u001fPoison The Well & Alexisonfire": {
+      "classified_at": "2026-11-04T18:26:06.427253+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fox Theater Oakland",
+      "taxonomy_version": 2,
+      "title": "Poison The Well & Alexisonfire",
+      "topics": [
+        "rock-indie",
+        "punk-metal"
       ],
       "types": [
         [
@@ -24014,6 +24268,23 @@
         ]
       ]
     },
+    "Frontier Tower\u001fOther Minds Present: Alien Minds and Alien Oceans - Members +3": {
+      "classified_at": "2026-11-04T18:26:05.780517+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Other Minds Present: Alien Minds and Alien Oceans - Members +3",
+      "topics": [
+        "science"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Frontier Tower\u001fOtherminds Lab Presents: Open Hours - Members +3": {
       "classified_at": "2026-10-03T05:12:16.213059+00:00",
       "cost": "unknown",
@@ -24379,6 +24650,23 @@
       "source": "Frontier Tower",
       "taxonomy_version": 2,
       "title": "Weekly Accountabili-tea Circle: Reflection & Planning #39 - Members Only",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fWeekly Accountabili-tea Circle: Reflection & Planning #40 - Members Only": {
+      "classified_at": "2026-11-04T18:26:05.692888+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Weekly Accountabili-tea Circle: Reflection & Planning #40 - Members Only",
       "topics": [
         "wellness"
       ],
@@ -28985,6 +29273,23 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Keys Jazz Bistro\u001fConversation Corner at Keys\n\nThe Election Hangover Cure: Community Coffee Chat with Peter and Romalyn": {
+      "classified_at": "2026-11-04T18:26:03.807253+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Keys Jazz Bistro",
+      "taxonomy_version": 2,
+      "title": "Conversation Corner at Keys\n\nThe Election Hangover Cure: Community Coffee Chat with Peter and Romalyn",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
         ]
       ]
     },
@@ -40655,6 +40960,43 @@
         ]
       ]
     },
+    "Partiful\u001fAmigas con Purpose: Paint + Puff": {
+      "classified_at": "2026-11-04T18:26:04.992294+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Amigas con Purpose: Paint + Puff",
+      "topics": [
+        "craft",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001fAn Afternoon of Nchọ": {
+      "classified_at": "2026-11-04T18:26:06.583285+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "An Afternoon of Nchọ",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "Partiful\u001fAnalog Evening: Cozy Cubs in Cozy Pubs": {
       "classified_at": "2026-10-16T15:09:09.202955+00:00",
       "cost": "free",
@@ -41006,6 +41348,29 @@
         ]
       ]
     },
+    "Partiful\u001fBerkeley Art Club: Winter Wonder Market": {
+      "classified_at": "2026-11-04T18:26:05.223418+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Berkeley Art Club: Winter Wonder Market",
+      "topics": [
+        "design",
+        "food-drink",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "social",
+          "gala-fundraiser"
+        ]
+      ]
+    },
     "Partiful\u001fBetter Than TV Sketch Show": {
       "classified_at": "2026-10-16T15:09:10.621452+00:00",
       "cost": "free",
@@ -41094,6 +41459,28 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fBreakfast and Blooms": {
+      "classified_at": "2026-11-04T18:26:04.950756+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Breakfast and Blooms",
+      "topics": [
+        "craft",
+        "family-kids",
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "workshop"
         ]
       ]
     },
@@ -41703,6 +42090,22 @@
         ]
       ]
     },
+    "Partiful\u001fDebug Your Body II: Yoga + Strength + Diagnostic | Longevity Posture Clinic": {
+      "classified_at": "2026-11-04T18:26:05.229971+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Debug Your Body II: Yoga + Strength + Diagnostic | Longevity Posture Clinic",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Partiful\u001fDecentred Arts Fashion Show": {
       "classified_at": "2026-10-03T05:10:40.513094+00:00",
       "cost": "unknown",
@@ -41739,6 +42142,26 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fDiem Attire Pop up": {
+      "classified_at": "2026-11-04T18:26:04.644587+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Diem Attire Pop up",
+      "topics": [
+        "design",
+        "craft"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "workshop"
         ]
       ]
     },
@@ -42099,6 +42522,29 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001fFort Mason Night Market": {
+      "classified_at": "2026-11-04T18:26:04.273305+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Fort Mason Night Market",
+      "topics": [
+        "craft",
+        "food-drink",
+        "music",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -42597,6 +43043,23 @@
         ]
       ]
     },
+    "Partiful\u001fHej Hej Pop up": {
+      "classified_at": "2026-11-04T18:26:04.450622+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Hej Hej Pop up",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fHey Diva x Dot’s Pizza Popup Pt. 2": {
       "classified_at": "2026-10-03T05:11:11.249280+00:00",
       "cost": "free",
@@ -42906,6 +43369,23 @@
         ]
       ]
     },
+    "Partiful\u001fKULE at Paper Son: TCM Coffee Popup": {
+      "classified_at": "2026-11-04T18:26:04.807723+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "KULE at Paper Son: TCM Coffee Popup",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fKismat Diwali": {
       "classified_at": "2026-10-29T17:09:37.124360+00:00",
       "cost": "paid",
@@ -43052,6 +43532,23 @@
         ]
       ]
     },
+    "Partiful\u001fLegos in the park": {
+      "classified_at": "2026-11-04T18:26:07.907930+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Legos in the park",
+      "topics": [
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fLine dance (badly) together 👯‍♀️": {
       "classified_at": "2026-10-28T16:55:17.559496+00:00",
       "cost": "free",
@@ -43066,6 +43563,27 @@
         [
           "social",
           "dance-social"
+        ]
+      ]
+    },
+    "Partiful\u001fLine dance (badly) together 👯‍♀️ round 2": {
+      "classified_at": "2026-11-04T18:26:05.537209+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Line dance (badly) together 👯‍♀️ round 2",
+      "topics": [
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -43513,6 +44031,28 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fMerry on Fourth": {
+      "classified_at": "2026-11-04T18:26:04.814399+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Merry on Fourth",
+      "topics": [
+        "family-kids",
+        "craft"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -44203,6 +44743,22 @@
         ]
       ]
     },
+    "Partiful\u001fPerfume Tin Craft Workshop": {
+      "classified_at": "2026-11-04T18:26:05.492155+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Perfume Tin Craft Workshop",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Partiful\u001fPermission to Lose It — a Somatic Tantrum Ritual for Women (SF)": {
       "classified_at": "2026-09-28T18:16:29.336478+00:00",
       "cost": "unknown",
@@ -44337,6 +44893,26 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001fPoetry➕Ceramics": {
+      "classified_at": "2026-11-04T18:26:04.798906+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Poetry➕Ceramics",
+      "topics": [
+        "poetry",
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social"
         ]
       ]
     },
@@ -44766,6 +45342,27 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fSFIMP Diwali jam @ SF": {
+      "classified_at": "2026-11-04T18:26:04.868278+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "SFIMP Diwali jam @ SF",
+      "topics": [
+        "music",
+        "world-music",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -45847,6 +46444,23 @@
         ],
         [
           "social"
+        ]
+      ]
+    },
+    "Partiful\u001fYori Mori Midori Pop up": {
+      "classified_at": "2026-11-04T18:26:04.156332+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Yori Mori Midori Pop up",
+      "topics": [
+        "design"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
         ]
       ]
     },
@@ -47818,6 +48432,22 @@
       "source": "Punch Line San Francisco",
       "taxonomy_version": 2,
       "title": "Frankie Marcos",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Punch Line San Francisco\u001fGreg Fitzsimmons": {
+      "classified_at": "2026-11-04T18:26:06.144174+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Punch Line San Francisco",
+      "taxonomy_version": 2,
+      "title": "Greg Fitzsimmons",
       "topics": [
         "comedy"
       ],
@@ -62204,6 +62834,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fFilm: Just Getting Started": {
+      "classified_at": "2026-11-04T18:26:02.596438+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Film: Just Getting Started",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fFilm: Kansas City Confidential, Screening and Discussion": {
       "classified_at": "2026-10-03T01:27:39.737572+00:00",
       "cost": "free",
@@ -63315,6 +63961,23 @@
       "title": "Performance: FREEDOM COMES WHEN ONE WALKS THROUGH IT",
       "topics": [
         "dance"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fPerformance: Free Press Music": {
+      "classified_at": "2026-11-04T18:26:02.662487+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Performance: Free Press Music",
+      "topics": [
+        "music",
+        "asian-american"
       ],
       "types": [
         [
@@ -67025,6 +67688,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: A Crash Course in Photography": {
+      "classified_at": "2026-11-04T18:26:02.597617+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: A Crash Course in Photography",
+      "topics": [
+        "photography"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: A Day at the Beach": {
       "classified_at": "2026-09-23T19:56:37.325118+00:00",
       "cost": "free",
@@ -67102,6 +67781,23 @@
       "topics": [
         "dance-party",
         "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Basic AI Usage for Older Adults": {
+      "classified_at": "2026-11-04T18:26:02.710039+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Basic AI Usage for Older Adults",
+      "topics": [
+        "tech",
+        "education"
       ],
       "types": [
         [
@@ -68394,6 +69090,22 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Making Decorative Gift Boxes": {
+      "classified_at": "2026-11-04T18:26:03.192800+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Making Decorative Gift Boxes",
+      "topics": [
+        "craft"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Medicare 101 - Clear and Easy": {
       "classified_at": "2026-09-23T19:59:04.396865+00:00",
       "cost": "free",
@@ -69443,6 +70155,22 @@
         "tech",
         "education",
         "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Teneriffe Lace Pear Shaped Pendants with Linda Hagen": {
+      "classified_at": "2026-11-04T18:26:02.637746+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Teneriffe Lace Pear Shaped Pendants with Linda Hagen",
+      "topics": [
+        "craft"
       ],
       "types": [
         [
@@ -71603,6 +72331,25 @@
         ]
       ]
     },
+    "Tally Ho! Books\u001fLeah Steinberg and Rickey Vincent discuss Clyde Stubblefield: Rhythms of the Funky Drummer": {
+      "classified_at": "2026-11-04T18:26:04.152284+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Tally Ho! Books",
+      "taxonomy_version": 2,
+      "title": "Leah Steinberg and Rickey Vincent discuss Clyde Stubblefield: Rhythms of the Funky Drummer",
+      "topics": [
+        "books-authors",
+        "soul-funk",
+        "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Tally Ho! Books\u001fObi Kaufmann - California Inside Out": {
       "classified_at": "2026-10-05T23:07:01.516839+00:00",
       "cost": "unknown",
@@ -72129,6 +72876,26 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fMagical Guide to Surviving the Holidays: A Grounding Ritual for the Holiday Season with Maritza Schäfer": {
+      "classified_at": "2026-11-04T18:26:05.888193+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Magical Guide to Surviving the Holidays: A Grounding Ritual for the Holiday Season with Maritza Schäfer",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fMarigold Revels: An Alembic Celebration of Community & Practice": {
       "classified_at": "2026-10-03T05:13:44.066462+00:00",
       "cost": "unknown",
@@ -72384,6 +73151,26 @@
         ]
       ]
     },
+    "The Berkeley Alembic\u001fSacred Music Fellowship's 2nd Annual Interfaith Holiday Concert": {
+      "classified_at": "2026-11-04T18:26:05.914362+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "Sacred Music Fellowship's 2nd Annual Interfaith Holiday Concert",
+      "topics": [
+        "music",
+        "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
     "The Berkeley Alembic\u001fSomatic Breathwork Journey: Emotional Release & Nervous System Reset with Anna Bolender": {
       "classified_at": "2026-10-06T17:02:01.218914+00:00",
       "cost": "unknown",
@@ -72560,6 +73347,28 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "The Berkeley Alembic\u001fThe Psychedelic Guide: Book Launch & Conversation with Valeria McCarroll": {
+      "classified_at": "2026-11-04T18:26:06.257440+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Berkeley Alembic",
+      "taxonomy_version": 2,
+      "title": "The Psychedelic Guide: Book Launch & Conversation with Valeria McCarroll",
+      "topics": [
+        "books-authors",
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ],
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -74774,6 +75583,25 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fElectric Nights: A beat experience": {
+      "classified_at": "2026-11-04T18:26:03.329321+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Electric Nights: A beat experience",
+      "topics": [
+        "club-night",
+        "electronic",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fEmergence - a Relational Mindfulness Practice": {
       "classified_at": "2026-10-03T05:10:25.336713+00:00",
       "cost": "unknown",
@@ -75906,6 +76734,24 @@
         [
           "talk",
           "lecture"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fthe mystical hearth 🔥 ft. Matt Segall of CIIS": {
+      "classified_at": "2026-11-04T18:26:03.377948+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "the mystical hearth 🔥 ft. Matt Segall of CIIS",
+      "topics": [],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ],
+        [
+          "social"
         ]
       ]
     },
@@ -78066,6 +78912,22 @@
       "source": "The Fillmore",
       "taxonomy_version": 2,
       "title": "The Mountain Goats - SIX (6) Show Ticket",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fThe Return of Jackie and Judy - New Year's Eve San Francisco": {
+      "classified_at": "2026-11-04T18:26:02.585785+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "The Return of Jackie and Judy - New Year's Eve San Francisco",
       "topics": [
         "rock-indie"
       ],
@@ -81741,6 +82603,22 @@
       "topics": [
         "rock-indie",
         "punk-metal"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The UC Theatre\u001fThe Chats US TOUR": {
+      "classified_at": "2026-11-04T18:26:06.512539+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The UC Theatre",
+      "taxonomy_version": 2,
+      "title": "The Chats US TOUR",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
