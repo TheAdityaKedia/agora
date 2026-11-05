@@ -232,6 +232,31 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "1175-folsom-st": {
+      "added": "2026-11-05",
+      "address": "1175 Folsom Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1175 in San Francisco County (building, way/243357060)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.775321,
+      "lng": -122.409174,
+      "name": "1175 Folsom St",
+      "osm": "way/243357060",
+      "possible_duplicates": [
+        "decentered-arts-studio",
+        "cat-club",
+        "f8-nightclub",
+        "the-stud",
+        "nosh-box",
+        "arc-gallery-studios",
+        "st-michaels-ukrainian-orthodox-church"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "123-main-st": {
       "added": "2026-10-03",
       "address": "123 Main Street, San Francisco, CA 94105",
@@ -2025,6 +2050,23 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "berkeley-yacht-club": {
+      "added": "2026-11-05",
+      "address": "1 Seawall Drive, Berkeley, CA 94710",
+      "evidence": [
+        "map: Berkeley Yacht Club in Alameda County (building, way/117767449)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.866198,
+      "lng": -122.317492,
+      "name": "Berkeley Yacht Club",
+      "osm": "way/117767449",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "berkeley-yoga-center": {
       "added": "2026-10-08",
