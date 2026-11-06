@@ -328,6 +328,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "1435-webster-st": {
+      "added": "2026-11-06",
+      "address": "1435 Webster Street, Alameda, CA 94501",
+      "evidence": [
+        "map: 1435 in Alameda County (building, way/417401481)",
+        "text: Alameda",
+        "street number matches"
+      ],
+      "lat": 37.772533,
+      "lng": -122.276991,
+      "name": "1435 Webster St",
+      "osm": "way/417401481",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "144-taylor-st": {
       "added": "2026-11-03",
       "address": "144 Taylor Street, San Francisco, CA 94102",
@@ -1113,6 +1129,27 @@
       "region": "sf",
       "status": "auto"
     },
+    "425-broderick-st": {
+      "added": "2026-11-06",
+      "address": "425 Broderick Street, San Francisco, CA 94177",
+      "evidence": [
+        "map: 425 in San Francisco County (building, way/261542509)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.774236,
+      "lng": -122.439646,
+      "name": "425 Broderick St",
+      "osm": "way/261542509",
+      "possible_duplicates": [
+        "1250-fell-st",
+        "madrone-art-bar",
+        "the-independent"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "4425-linden-st": {
       "added": "2026-10-07",
       "address": "4425 Linden Street, Oakland, CA 94608",
@@ -1693,6 +1730,28 @@
         "make-out-room",
         "artists-television-access",
         "big-time-vintage"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "arsicault": {
+      "added": "2026-11-06",
+      "address": "87 McAllister Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: Arsicault Bakery in San Francisco County (building, node/8869142329)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.780787,
+      "lng": -122.413376,
+      "name": "Arsicault",
+      "osm": "node/8869142329",
+      "possible_duplicates": [
+        "1059-market-st",
+        "lines-dance-center",
+        "orpheum-theatre",
+        "asian-art-museum-of-san-francisco"
       ],
       "precision": "building",
       "region": "sf",
@@ -3182,6 +3241,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "de-anza-high-school": {
+      "added": "2026-11-06",
+      "address": "5000 Valley View Road, Richmond, CA 94803",
+      "evidence": [
+        "map: 5000 in Contra Costa County (building, way/866214461)",
+        "text: Richmond",
+        "street number matches"
+      ],
+      "lat": 37.970325,
+      "lng": -122.287651,
+      "name": "De Anza High School",
+      "osm": "way/866214461",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "dear-john": {
       "added": "2026-10-07",
       "address": "3807 Macarthur Blvd, Oakland",
@@ -3601,6 +3676,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "embarcadero": {
+      "added": "2026-11-06",
+      "address": "Market Street, San Francisco, CA 94111",
+      "evidence": [
+        "map: Embarcadero in San Francisco County (building, node/2150077198)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.792855,
+      "lng": -122.396899,
+      "name": "Embarcadero",
+      "osm": "node/2150077198",
+      "possible_duplicates": [
+        "whack-donuts"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "environmental-volunteers-ecocenter": {
       "added": "2026-10-17",
@@ -4406,6 +4500,31 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "grand-coffee-too": {
+      "added": "2026-11-06",
+      "address": "2544 Mission Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Grand Coffee Too in San Francisco County (building, node/10069609135)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.756282,
+      "lng": -122.419038,
+      "name": "Grand Coffee Too",
+      "osm": "node/10069609135",
+      "possible_duplicates": [
+        "arcana",
+        "alamo-drafthouse-cinema",
+        "make-out-room",
+        "gray-area",
+        "artists-television-access",
+        "big-time-vintage"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "grattan-tennis-court": {
       "added": "2026-10-23",
@@ -7845,6 +7964,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "refined-interiors": {
+      "added": "2026-11-06",
+      "address": "800 Delaware Street, Berkeley, CA 94710",
+      "evidence": [
+        "map: 800 in Alameda County (building, way/187167702)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.870293,
+      "lng": -122.299492,
+      "name": "Refined Interiors",
+      "osm": "way/187167702",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "reinhardt-redwood-regional-park": {
       "added": "2026-10-28",
       "address": "7867 Redwood Road, Oakland, CA 94619",
@@ -8173,6 +8308,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "san-francisco-state-university": {
+      "added": "2026-11-06",
+      "address": "1600 Holloway Avenue, San Francisco, CA 94132",
+      "evidence": [
+        "map: San Francisco State University in San Francisco County (building, way/28965902)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.724517,
+      "lng": -122.479996,
+      "name": "San Francisco State University",
+      "osm": "way/28965902",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "san-pablo-park": {
       "added": "2026-10-07",
       "address": "2800 Park Street, Berkeley, CA 94702",
@@ -8400,6 +8552,23 @@
       "name": "SOMA",
       "precision": "city",
       "region": "sf",
+      "status": "auto"
+    },
+    "soul-grind-coffee-roasters": {
+      "added": "2026-11-06",
+      "address": "5400 Cabrillo Highway, Pacifica, CA 94044",
+      "evidence": [
+        "map: Soul Grind Coffee Roasters in San Mateo County (building, way/123528850)",
+        "text: Pacifica",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.595156,
+      "lng": -122.506101,
+      "name": "Soul Grind Coffee Roasters",
+      "osm": "way/123528850",
+      "precision": "building",
+      "region": "peninsula",
       "status": "auto"
     },
     "southern-pacific-brewing": {
@@ -8758,6 +8927,25 @@
       "osm": "node/13015863377",
       "possible_duplicates": [
         "sunset-branch-library"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "sunshine-art-house": {
+      "added": "2026-11-06",
+      "address": "4338 California St, San Francisco, CA 94118",
+      "evidence": [
+        "map: 4334;4336;4338 in San Francisco County (building, way/274658806)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.785263,
+      "lng": -122.464109,
+      "name": "Sunshine Art House",
+      "osm": "way/274658806",
+      "possible_duplicates": [
+        "neck-of-the-woods"
       ],
       "precision": "building",
       "region": "sf",
@@ -9744,6 +9932,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-progress": {
+      "added": "2026-11-06",
+      "address": "1525 Fillmore St, San Francisco, CA 94115",
+      "evidence": [
+        "map: 1525;1527;1529;1539 in San Francisco County (building, way/261268624)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.783663,
+      "lng": -122.43308,
+      "name": "The Progress",
+      "osm": "way/261268624",
+      "possible_duplicates": [
+        "the-fillmore",
+        "festa-wine-cocktail-lounge"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "the-realreal": {
       "added": "2026-10-02",
       "address": "253 Post Street, San Francisco, CA 94108",
@@ -9969,6 +10177,38 @@
         "instudio-with-empowerment-avenue",
         "manna-gallery",
         "mercury-20-gallery"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "there-there": {
+      "added": "2026-11-06",
+      "address": "468 25th Street, Oakland, CA 94612",
+      "evidence": [
+        "map: There/There in Alameda County (building, node/4049345786)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.814543,
+      "lng": -122.26698,
+      "name": "There/There",
+      "osm": "node/4049345786",
+      "possible_duplicates": [
+        "mercury-20-gallery",
+        "instudio-with-empowerment-avenue",
+        "manna-gallery",
+        "werkshack",
+        "fm-gallery",
+        "new-parkway-theater",
+        "all-out-comedy-theater",
+        "the-double-standard",
+        "the-crown",
+        "thee-stork-club",
+        "drakes-dealership",
+        "first-presbyterian-church-of-oakland",
+        "mighty-mighty-studio"
       ],
       "precision": "building",
       "region": "eastbay",
