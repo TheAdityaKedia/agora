@@ -5489,6 +5489,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "le-beau-market": {
+      "added": "2026-11-07",
+      "address": "1263 Leavenworth Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Le Beau Market in San Francisco County (building, node/1350484814)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.792884,
+      "lng": -122.416234,
+      "name": "Le Beau Market",
+      "osm": "node/1350484814",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "le-mils": {
       "added": "2026-10-13",
       "address": "1330 Polk St, San Francisco, CA 94109",
@@ -10995,6 +11012,22 @@
       "osm": "way/135841800",
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "zinz-wine-bar": {
+      "added": "2026-11-07",
+      "address": "207 Corte Madera Avenue, Corte Madera, CA 94925",
+      "evidence": [
+        "map: Zinz Wine Bar in Marin County (building, node/4969374447)",
+        "text: Corte Madera",
+        "street number matches"
+      ],
+      "lat": 37.925889,
+      "lng": -122.530145,
+      "name": "Zinz Wine Bar",
+      "osm": "node/4969374447",
+      "precision": "building",
+      "region": "northbay",
       "status": "auto"
     },
     "zo": {

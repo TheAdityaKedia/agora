@@ -2551,6 +2551,22 @@
         ]
       ]
     },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fWicked: Part One in Concert": {
+      "classified_at": "2026-11-07T16:42:11.264645+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "Wicked: Part One in Concert",
+      "topics": [
+        "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "ATG (Curran, Orpheum, Golden Gate)\u001fWorld Ballet Company: Swan Lake": {
       "classified_at": "2026-10-03T01:16:57.490975+00:00",
       "cost": "paid",
@@ -2574,6 +2590,22 @@
       "source": "ATG (Curran, Orpheum, Golden Gate)",
       "taxonomy_version": 2,
       "title": "World Ballet Company: The Nutcracker",
+      "topics": [
+        "dance"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Alonzo King LINES Ballet\u001fBFA Fall Showcase 2026": {
+      "classified_at": "2026-11-07T16:42:11.893505+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Alonzo King LINES Ballet",
+      "taxonomy_version": 2,
+      "title": "BFA Fall Showcase 2026",
       "topics": [
         "dance"
       ],
@@ -17888,6 +17920,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fChloe Radcliffe": {
+      "classified_at": "2026-11-07T16:42:12.474148+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Chloe Radcliffe",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fCobb's Comedy Allstars": {
       "classified_at": "2026-10-23T15:40:28.950326+00:00",
       "cost": "paid",
@@ -18104,6 +18152,22 @@
       "source": "Cobb's Comedy Club",
       "taxonomy_version": 2,
       "title": "JT Parr",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fJamie Wolf": {
+      "classified_at": "2026-11-07T16:42:12.417428+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Jamie Wolf",
       "topics": [
         "comedy"
       ],
@@ -19239,6 +19303,23 @@
         ]
       ]
     },
+    "Commonwealth Club\u001fMedia as Civic Infrastructure: Building the Culture and Communities We Need": {
+      "classified_at": "2026-11-07T16:42:11.880920+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "Media as Civic Infrastructure: Building the Culture and Communities We Need",
+      "topics": [
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ]
+      ]
+    },
     "Commonwealth Club\u001fMelissa  King: The Girl Who Became King": {
       "classified_at": "2026-10-03T04:52:40.829415+00:00",
       "cost": "unknown",
@@ -19624,6 +19705,24 @@
         [
           "talk",
           "conversation"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fSam Wasson: Frank Capra's Own Wondrous Life": {
+      "classified_at": "2026-11-07T16:42:11.345967+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "Sam Wasson: Frank Capra's Own Wondrous Life",
+      "topics": [
+        "film",
+        "history"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
         ]
       ]
     },
@@ -24236,6 +24335,23 @@
           "talk",
           "lecture"
         ],
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fCypherpunk Society: December Meeting - Members +1": {
+      "classified_at": "2026-11-07T16:42:12.476258+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Cypherpunk Society: December Meeting - Members +1",
+      "topics": [
+        "tech"
+      ],
+      "types": [
         [
           "social",
           "mixer-meetup"
@@ -34036,6 +34152,23 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fKinam y Sabiduría Tolteca": {
+      "classified_at": "2026-11-07T16:42:11.337712+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Kinam y Sabiduría Tolteca",
+      "topics": [
+        "wellness",
+        "latino"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fLalo Guerrero Listening Party and Platica with Jesse \"Chuy\" Varela": {
       "classified_at": "2026-10-03T04:52:33.495688+00:00",
       "cost": "unknown",
@@ -34131,6 +34264,27 @@
       "source": "Medicine for Nightmares",
       "taxonomy_version": 1,
       "title": "Molcajete Poets",
+      "topics": [
+        "poetry",
+        "spoken-word",
+        "latino"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Medicine for Nightmares\u001fMolcajete Poets Reading & Open Mic": {
+      "classified_at": "2026-11-07T16:42:11.323283+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Molcajete Poets Reading & Open Mic",
       "topics": [
         "poetry",
         "spoken-word",
@@ -37988,6 +38142,23 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fFree Technology Help": {
+      "classified_at": "2026-11-07T16:42:12.502818+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Free Technology Help",
+      "topics": [
+        "tech",
+        "education"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fFruitvale TAB Presents: Halloween 3D figurine Painting": {
       "classified_at": "2026-10-08T01:12:34.678427+00:00",
       "cost": "free",
@@ -38531,6 +38702,24 @@
         [
           "talk",
           "lecture"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fMeet Me At The Intersection: A Celebration of Queer Black Life by Photographer  Lenn Keller": {
+      "classified_at": "2026-11-07T16:42:13.016900+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Meet Me At The Intersection: A Celebration of Queer Black Life by Photographer  Lenn Keller",
+      "topics": [
+        "photography",
+        "lgbtq",
+        "black-diaspora"
+      ],
+      "types": [
+        [
+          "exhibition"
         ]
       ]
     },
@@ -41834,6 +42023,23 @@
         ]
       ]
     },
+    "Partiful\u001fBernice Ye: Wuhan Clan Ain't Nuthin' Ta Duck Wit": {
+      "classified_at": "2026-11-07T16:42:12.485164+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Bernice Ye: Wuhan Clan Ain't Nuthin' Ta Duck Wit",
+      "topics": [
+        "comedy",
+        "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fBetter Than TV Sketch Show": {
       "classified_at": "2026-10-16T15:09:10.621452+00:00",
       "cost": "free",
@@ -45061,6 +45267,23 @@
         ]
       ]
     },
+    "Partiful\u001fNob Hill Monthly Street Sweeps": {
+      "classified_at": "2026-11-07T16:42:12.477508+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Nob Hill Monthly Street Sweeps",
+      "topics": [
+        "nature-outdoors"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Partiful\u001fNovember Hiking/Book Club": {
       "classified_at": "2026-10-28T16:56:04.851968+00:00",
       "cost": "free",
@@ -45722,6 +45945,24 @@
       "topics": [
         "club-night",
         "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fRe:wind @ Amelie": {
+      "classified_at": "2026-11-07T16:42:11.916146+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Re:wind @ Amelie",
+      "topics": [
+        "club-night",
+        "wine"
       ],
       "types": [
         [
@@ -51033,6 +51274,23 @@
         ]
       ]
     },
+    "Roxie Theater\u001fNew People: Filipiñana": {
+      "classified_at": "2026-11-07T16:42:12.508199+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "New People: Filipiñana",
+      "topics": [
+        "film",
+        "asian-american"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
     "Roxie Theater\u001fNew People: First They Came for My College": {
       "classified_at": "2026-10-07T21:02:19.874560+00:00",
       "cost": "unknown",
@@ -51108,6 +51366,22 @@
       "source": "Roxie Theater",
       "taxonomy_version": 2,
       "title": "New People: Man of Marble (4K Restoration)",
+      "topics": [
+        "film"
+      ],
+      "types": [
+        [
+          "screening"
+        ]
+      ]
+    },
+    "Roxie Theater\u001fNew People: Minotaur": {
+      "classified_at": "2026-11-07T16:42:12.449132+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Roxie Theater",
+      "taxonomy_version": 2,
+      "title": "New People: Minotaur",
       "topics": [
         "film"
       ],
@@ -59318,6 +59592,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fActivity: Air Dry Pottery": {
+      "classified_at": "2026-11-07T16:42:11.324295+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Air Dry Pottery",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fActivity: Art Studio": {
       "classified_at": "2026-10-03T01:25:45.701292+00:00",
       "cost": "free",
@@ -60535,6 +60826,23 @@
       "title": "Activity: Pinecone Turkey",
       "topics": [
         "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fActivity: Print Kwanimals with Arion Press": {
+      "classified_at": "2026-11-07T16:42:11.320691+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Activity: Print Kwanimals with Arion Press",
+      "topics": [
+        "craft",
+        "visual-art"
       ],
       "types": [
         [
@@ -63214,6 +63522,23 @@
       "topics": [
         "education",
         "language"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fFULL: Tutorial: Tech Savvy at 60+ (Cantonese)": {
+      "classified_at": "2026-11-07T16:42:11.311313+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "FULL: Tutorial: Tech Savvy at 60+ (Cantonese)",
+      "topics": [
+        "education",
+        "tech"
       ],
       "types": [
         [
@@ -73234,6 +73559,23 @@
         ]
       ]
     },
+    "Sunset Trivia\u001fTrivia Night at Zinz Wine Bar (Corte Madera)": {
+      "classified_at": "2026-11-07T16:42:11.852481+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Sunset Trivia",
+      "taxonomy_version": 2,
+      "title": "Trivia Night at Zinz Wine Bar (Corte Madera)",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "Tally Ho! Books\u001fAn Evening with Paulina Borsook and Jonathan Weber": {
       "classified_at": "2026-10-18T14:22:10.984464+00:00",
       "cost": "unknown",
@@ -76109,6 +76451,22 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fAnalog Circuits Rebooted": {
+      "classified_at": "2026-11-07T16:42:11.846294+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Analog Circuits Rebooted",
+      "topics": [
+        "tech"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fAnti-Debate || The Billionaire Tax": {
       "classified_at": "2026-10-16T15:09:07.605575+00:00",
       "cost": "unknown",
@@ -76986,6 +77344,26 @@
       "topics": [
         "wellness",
         "writing"
+      ],
+      "types": [
+        [
+          "workshop"
+        ],
+        [
+          "social"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fMeaning-Making: A Creative Relief Practice": {
+      "classified_at": "2026-11-07T16:42:11.934872+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Meaning-Making: A Creative Relief Practice",
+      "topics": [
+        "writing",
+        "wellness"
       ],
       "types": [
         [
@@ -80282,6 +80660,24 @@
         ],
         [
           "screening"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001fNavidad en Mexico": {
+      "classified_at": "2026-11-07T16:42:11.917511+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "Navidad en Mexico",
+      "topics": [
+        "dance",
+        "family-kids",
+        "latino"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -83919,6 +84315,22 @@
         ]
       ]
     },
+    "The Warfield\u001fGoldenvoice Presents HENRY": {
+      "classified_at": "2026-11-07T16:42:11.276855+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Warfield",
+      "taxonomy_version": 2,
+      "title": "Goldenvoice Presents HENRY",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "The Warfield\u001fGoldenvoice Presents Harmony US Tour 2026 Brutalismus 3000 with Eurohead, ali rq, deBasement, techno pagan": {
       "classified_at": "2026-10-03T05:16:17.447307+00:00",
       "cost": "paid",
@@ -85559,6 +85971,24 @@
       "title": "OTTMAR LIEBERT & LUNA NEGRA",
       "topics": [
         "world-music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Yoshi's\u001fPACIFIC MAMBO ORCHESTRA": {
+      "classified_at": "2026-11-07T16:42:11.941016+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Yoshi's",
+      "taxonomy_version": 2,
+      "title": "PACIFIC MAMBO ORCHESTRA",
+      "topics": [
+        "jazz",
+        "world-music",
+        "soul-funk"
       ],
       "types": [
         [
