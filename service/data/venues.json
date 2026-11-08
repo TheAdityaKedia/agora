@@ -1390,6 +1390,28 @@
       "region": "sf",
       "status": "verified"
     },
+    "a-p-giannini-plaza": {
+      "added": "2026-11-08",
+      "address": "450 Kearny Street, San Francisco, CA 94108",
+      "evidence": [
+        "map: 450 in San Francisco County (building, way/397269730)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.792144,
+      "lng": -122.40442,
+      "name": "A. P. Giannini Plaza",
+      "osm": "way/397269730",
+      "possible_duplicates": [
+        "mr-mahjong",
+        "nightingale",
+        "kalw",
+        "corgi-cafe"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "abbey-tavern": {
       "added": "2026-10-02",
       "address": "4100 Geary Boulevard, San Francisco, CA 94118",
@@ -4325,6 +4347,25 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "ghirardelli-square": {
+      "added": "2026-11-08",
+      "address": "900 North Point Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Barrio in San Francisco County (building, node/9875708649)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.806106,
+      "lng": -122.422335,
+      "name": "Ghirardelli Square",
+      "osm": "node/9875708649",
+      "possible_duplicates": [
+        "national-maritime-museum"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "gilman-brewing-company": {
       "added": "2026-10-02",
