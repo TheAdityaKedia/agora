@@ -809,7 +809,7 @@
           "url": "https://partiful.com/e/4uaYV0Ze1tUNjlT0TK8k"
         },
         "first_seen": "2026-10-28",
-        "last_tried": "2026-11-04",
+        "last_tried": "2026-11-11",
         "reason": "no map result in the Bay Area",
         "sources": [
           "Partiful"
@@ -1106,6 +1106,9 @@
     },
     "glass rice, 808 sutter st, san francisco, ca": {
       "venue": "glass-rice"
+    },
+    "glbt historical society museum, 4127 18th st, san francisco, ca": {
+      "venue": "glbt-historical-society"
     },
     "glbt historical society, 4127 18th st, san francisco, ca": {
       "venue": "glbt-historical-society"
@@ -1711,6 +1714,9 @@
     "omca campus, 1000 oak st,, oakland": {
       "venue": "oakland-museum-of-california"
     },
+    "omca gallery of california history, 1000 oak st, oakland": {
+      "venue": "oakland-museum-of-california"
+    },
     "omca great hall, 1000 oak, oakland": {
       "venue": "oakland-museum-of-california"
     },
@@ -1789,6 +1795,9 @@
     },
     "paris 75, 515 broadway, san francisco, ca": {
       "venue": "paris-75"
+    },
+    "patricia's green in hayes valley, 499 octavia st, san francisco, ca": {
+      "venue": "patricias-green-in-hayes-valley"
     },
     "patriot house pub, 2 embarcadero center, san francisco, 94111, san francisco, ca": {
       "venue": "patriot-house-pub"
@@ -1939,6 +1948,33 @@
     },
     "san francisco center for the book, 375 rhode island st, san francisco, ca": {
       "venue": "san-francisco-center-for-the-book-sfcb"
+    },
+    "san francisco international airport, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-11-21",
+          "title": "BashBash",
+          "url": "https://partiful.com/e/O4N5DmEIGqNaIciUvxKG"
+        },
+        "first_seen": "2026-11-11",
+        "last_tried": "2026-11-11",
+        "reason": "text says San Francisco (San Francisco County), map result 'San Francisco International Airport' is in San Mateo County",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "map": {
+            "label": "San Francisco International Airport",
+            "lat": 37.622452,
+            "lng": -122.383989,
+            "osm": "way/545819287"
+          },
+          "name": "San Francisco International Airport"
+        }
+      }
     },
     "san francisco magic theater @ the marrakech, 419 o'farrell street, san francisco, 94102, san francisco, ca": {
       "room": "the Marrakech",
