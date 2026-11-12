@@ -369,6 +369,27 @@
       "region": "sf",
       "status": "auto"
     },
+    "1469-webster-st": {
+      "added": "2026-11-12",
+      "address": "1469 Webster Street, San Francisco, CA 94115",
+      "evidence": [
+        "map: 1469 in San Francisco County (building, way/1043663159)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.784141,
+      "lng": -122.431295,
+      "name": "1469 Webster St",
+      "osm": "way/1043663159",
+      "possible_duplicates": [
+        "festa-wine-cocktail-lounge",
+        "the-fillmore",
+        "the-progress"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1550-mission-st": {
       "added": "2026-11-04",
       "address": "1550 Mission Street, San Francisco, CA 94103",
@@ -402,6 +423,22 @@
       "osm": "way/766805266",
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "1569-fourth-st": {
+      "added": "2026-11-12",
+      "address": "1569 Fourth Street, San Rafael, CA 94901",
+      "evidence": [
+        "map: 1569 in Marin County (building, way/1172054398)",
+        "text: San Rafael",
+        "street number matches"
+      ],
+      "lat": 37.973802,
+      "lng": -122.535693,
+      "name": "1569 Fourth St",
+      "osm": "way/1172054398",
+      "precision": "building",
+      "region": "northbay",
       "status": "auto"
     },
     "160-waverly-pl": {
@@ -953,6 +990,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "303-2nd-st": {
+      "added": "2026-11-12",
+      "address": "303 2nd Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: 303 in San Francisco County (building, node/3894030734)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.784789,
+      "lng": -122.395484,
+      "name": "303 2nd St",
+      "osm": "node/3894030734",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "3227-telegraph-ave": {
       "added": "2026-10-02",
       "address": "3227 Telegraph Avenue, Oakland, CA 94609",
@@ -1031,6 +1084,34 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "3819-crofton-way": {
+      "added": "2026-11-12",
+      "address": "3819 Crofton Way, South San Francisco, CA 94080",
+      "evidence": [
+        "map: 3819 in San Mateo County (building, way/351192570)",
+        "text: South San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.647855,
+      "lng": -122.462104,
+      "name": "3819 Crofton Way",
+      "osm": "way/351192570",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
+    },
+    "387-s-first-st": {
+      "added": "2026-11-12",
+      "address": "387 S First St, San Jose, CA 95113",
+      "evidence": [
+        "map: The Maxwell in Santa Clara County (city, way/358297113)",
+        "text: San Jose"
+      ],
+      "name": "387 S First St",
+      "precision": "city",
+      "region": "southbay",
       "status": "auto"
     },
     "39-grant-ave": {
@@ -1182,6 +1263,26 @@
       "region": "sf",
       "status": "verified"
     },
+    "4935-shattuck-ave": {
+      "added": "2026-11-12",
+      "address": "4935 Shattuck Ave, Oakland, CA 94609",
+      "evidence": [
+        "map: 4925;4927;4929;4931;4935 in Alameda County (building, way/475143977)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.83659,
+      "lng": -122.264228,
+      "name": "4935 Shattuck Ave",
+      "osm": "way/475143977",
+      "possible_duplicates": [
+        "revival-hall",
+        "opl-temescal-branch"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "504-balboa-st": {
       "added": "2026-10-02",
       "address": "504 Balboa Street, San Francisco, CA 94118",
@@ -1268,6 +1369,29 @@
       "lng": -122.42889,
       "name": "724 Brazil Ave",
       "osm": "way/276309604",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "826-valencia-st": {
+      "added": "2026-11-12",
+      "address": "826 Valencia Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 826 in San Francisco County (building, way/260123559)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.759559,
+      "lng": -122.421634,
+      "name": "826 Valencia St",
+      "osm": "way/260123559",
+      "possible_duplicates": [
+        "828-valencia-st",
+        "etcetera-wine-bar",
+        "tokyo-futon-tea",
+        "teeth",
+        "big-time-vintage"
+      ],
       "precision": "building",
       "region": "sf",
       "status": "auto"
@@ -3358,6 +3482,22 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "dictee-art-exhibitions": {
+      "added": "2026-11-12",
+      "address": "2117 11th Avenue, Oakland, CA 94606",
+      "evidence": [
+        "map: 2117 in Alameda County (building, way/473175051)",
+        "text: Oakland",
+        "street number matches"
+      ],
+      "lat": 37.796375,
+      "lng": -122.242191,
+      "name": "Dictée Art & Exhibitions",
+      "osm": "way/473175051",
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "dinkelspiel-auditorium": {
@@ -5727,6 +5867,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "love-and-light-yoga": {
+      "added": "2026-11-12",
+      "address": "4877 Mission St, San Francisco, CA 94112",
+      "evidence": [
+        "map: 4877;4879 in San Francisco County (building, way/290615822)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.72021,
+      "lng": -122.437777,
+      "name": "Love and Light Yoga",
+      "osm": "way/290615822",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "lower-polk-cbd": {
       "added": "2026-10-28",
       "address": "1170 Sutter St, San Francisco, CA 94109",
@@ -5770,6 +5926,36 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "macys-union-square": {
+      "added": "2026-11-12",
+      "address": "170 O'Farrell Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: Starbucks in San Francisco County (building, node/9518764060)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.787325,
+      "lng": -122.407567,
+      "name": "Macy’s Union Square",
+      "osm": "node/9518764060",
+      "possible_duplicates": [
+        "the-westin-st-francis",
+        "tiat-place",
+        "377-geary-st",
+        "the-realreal",
+        "san-francisco-playhouse",
+        "starlite-room",
+        "august-hall",
+        "39-grant-ave",
+        "biscuits-blues",
+        "feinsteins-at-the-nikko",
+        "cheaper-than-therapy",
+        "a-c-t"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "mad-oak-bar-n-yard": {
       "added": "2026-10-07",
@@ -6860,6 +7046,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "nosso": {
+      "added": "2026-11-12",
+      "address": "532 8th Street, Oakland, CA 94607",
+      "evidence": [
+        "map: Nosso in Alameda County (building, node/10797686871)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.801114,
+      "lng": -122.275722,
+      "name": "Nosso",
+      "osm": "node/10797686871",
+      "possible_duplicates": [
+        "chapter-510"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "nu-rays": {
       "added": "2026-10-24",
@@ -8029,6 +8235,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "quarter-note-bar-grill": {
+      "added": "2026-11-12",
+      "address": "1214 Apollo Way, Sunnyvale, CA 94085",
+      "evidence": [
+        "map: Urban Grill Indian Cuisine and Bar in Santa Clara County (building, node/13711582975)",
+        "text: Sunnyvale",
+        "street number matches"
+      ],
+      "lat": 37.378839,
+      "lng": -121.995005,
+      "name": "Quarter Note Bar & Grill",
+      "osm": "node/13711582975",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "question-mark-tavern": {
       "added": "2026-10-02",
       "address": "312 Harriet Street, San Francisco, CA 94107",
@@ -8139,6 +8361,18 @@
       "name": "Rincon Park",
       "osm": "way/32862802",
       "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "robin-williams-meadow": {
+      "added": "2026-11-12",
+      "address": "",
+      "evidence": [
+        "map: Robin Williams Meadow in San Francisco County (city, way/417414585)",
+        "text: San Francisco"
+      ],
+      "name": "Robin Williams Meadow",
+      "precision": "city",
       "region": "sf",
       "status": "auto"
     },
@@ -8297,6 +8531,33 @@
         "Wetland Garden"
       ],
       "status": "verified"
+    },
+    "saluhall": {
+      "added": "2026-11-12",
+      "address": "945 Market Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 945 in San Francisco County (building, way/619979105)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.782856,
+      "lng": -122.40928,
+      "name": "Saluhall",
+      "osm": "way/619979105",
+      "possible_duplicates": [
+        "frontier-tower-berlinhouse",
+        "warfield-theatre",
+        "pandora-karaoke-bar",
+        "jollibee",
+        "144-taylor-st",
+        "golden-gate-theater",
+        "the-felix",
+        "monarch",
+        "200-channels"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "san-francisco-center-for-the-book-sfcb": {
       "added": "2026-10-02",
@@ -8919,6 +9180,23 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "sticky-art-lab": {
+      "added": "2026-11-12",
+      "address": "1682 University Avenue, Berkeley, CA 94702",
+      "evidence": [
+        "map: Sticky Art Lab in Alameda County (building, node/12835126483)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.870762,
+      "lng": -122.278046,
+      "name": "Sticky Art Lab",
+      "osm": "node/12835126483",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "studio-aurora": {
       "added": "2026-10-18",
@@ -9823,6 +10101,20 @@
       "name": "The Liberties",
       "osm": "node/2069104070",
       "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "the-loft-by-common-space": {
+      "added": "2026-11-12",
+      "address": "3108 B Fillmore St, San Francisco, CA 94123",
+      "evidence": [
+        "map: Fillmore Street in San Francisco County (street, way/8921221)",
+        "text: San Francisco"
+      ],
+      "lat": 37.80155,
+      "lng": -122.436411,
+      "name": "The Loft by Common Space",
+      "precision": "street",
       "region": "sf",
       "status": "auto"
     },
@@ -10840,6 +11132,25 @@
       "possible_duplicates": [
         "san-francisco-ferry-building",
         "book-passage-ferry-building"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "wheel-house-clay": {
+      "added": "2026-11-12",
+      "address": "2201 Sutter Street, San Francisco, CA 94115",
+      "evidence": [
+        "map: Wheel House Clay in San Francisco County (building, node/13121923503)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.785528,
+      "lng": -122.436709,
+      "name": "Wheel House Clay",
+      "osm": "node/13121923503",
+      "possible_duplicates": [
+        "western-addition-branch-library"
       ],
       "precision": "building",
       "region": "sf",
