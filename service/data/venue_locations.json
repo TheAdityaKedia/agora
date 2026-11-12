@@ -60,11 +60,17 @@
     "145 hooper st, san francisco, ca": {
       "venue": "california-college-of-the-arts"
     },
+    "1469 webster st, san francisco, ca": {
+      "venue": "1469-webster-st"
+    },
     "1550 mission st, san francisco, ca": {
       "venue": "1550-mission-st"
     },
     "1560 mission st, san francisco, ca": {
       "venue": "1560-mission-st"
+    },
+    "1569 fourth st, san rafael, ca": {
+      "venue": "1569-fourth-st"
     },
     "160 waverly pl, san francisco, ca": {
       "venue": "160-waverly-pl"
@@ -138,6 +144,9 @@
     "2200 broadway, redwood city, ca": {
       "venue": "2200-broadway"
     },
+    "2201 sutter st, san francisco, ca": {
+      "venue": "wheel-house-clay"
+    },
     "2266 chestnut st, san francisco, ca": {
       "venue": "2266-chestnut-st"
     },
@@ -168,6 +177,9 @@
     "26th ave & cabrillo st, san francisco, ca": {
       "venue": "26th-ave-cabrillo-st"
     },
+    "27 the embarcadero, san francisco, ca": {
+      "venue": "23-the-embarcadero"
+    },
     "2727 california st, berkeley, ca": {
       "venue": "2727-california-street"
     },
@@ -182,6 +194,9 @@
     },
     "301 great hwy, san francisco, ca": {
       "venue": "301-great-hwy"
+    },
+    "303 2nd st, san francisco, ca": {
+      "venue": "303-2nd-st"
     },
     "3150 18th st, san francisco, ca": {
       "venue": "zore-law"
@@ -263,6 +278,12 @@
         }
       }
     },
+    "3819 crofton way, south san francisco, ca": {
+      "venue": "3819-crofton-way"
+    },
+    "387 s first st, san jose, ca": {
+      "venue": "387-s-first-st"
+    },
     "39 grant ave, san francisco, ca": {
       "venue": "39-grant-ave"
     },
@@ -304,6 +325,9 @@
     },
     "4835 doyle rd, san jose, ca": {
       "venue": "easterbrook-discovery-school"
+    },
+    "4935 shattuck ave, oakland, ca": {
+      "venue": "4935-shattuck-ave"
     },
     "49a municipal wharf, santa cruz, ca": {
       "place": "outside"
@@ -385,6 +409,9 @@
     },
     "782 columbus ave, san francisco, ca": {
       "venue": "dylans-tours"
+    },
+    "826 valencia st, san francisco, ca": {
+      "venue": "826-valencia-st"
     },
     "828 harrison st, oakland, ca": {
       "venue": "828-harrison-st"
@@ -852,6 +879,9 @@
     "detour, 2200 market st, san francisco, ca": {
       "venue": "the-detour"
     },
+    "dictée art & exhibitions, 2117 11th avenue, oakland": {
+      "venue": "dictee-art-exhibitions"
+    },
     "dinkelspiel auditorium, 471 lagunita dr, stanford, ca": {
       "venue": "dinkelspiel-auditorium"
     },
@@ -1214,6 +1244,25 @@
     "hi tops san francisco, 2247 market street, san francisco, 94114, san francisco, ca": {
       "venue": "hi-tops"
     },
+    "hyde st & filbert st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-11-14",
+          "title": "Russian Hill Neighbors Cleanup",
+          "url": "https://partiful.com/e/GJ3zR5bABEscnz1to2au"
+        },
+        "first_seen": "2026-11-12",
+        "last_tried": "2026-11-12",
+        "reason": "map result 'Hyde Street & Filbert Street' doesn't match the name or street number",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "kind": "not_a_place"
+        }
+      }
+    },
     "impossible stage, 2033 university ave, berkeley, ca": {
       "venue": "impossible-stage"
     },
@@ -1349,6 +1398,9 @@
     "lost marbles brewpub, 2202 de la vina street, san francisco, ca": {
       "venue": "lost-marbles-brewpub"
     },
+    "love and light yoga, 4877 mission st, san francisco, ca": {
+      "venue": "love-and-light-yoga"
+    },
     "lower guadalupe river trail, san jose, ca": {
       "pending": {
         "events": 1,
@@ -1375,6 +1427,9 @@
     },
     "luna del soul, 822 cassia st, redwood city, ca": {
       "venue": "luna-del-soul"
+    },
+    "macy's union square, 170 o'farrell st, san francisco, ca": {
+      "venue": "macys-union-square"
     },
     "mad oak": {
       "venue": "mad-oak-bar-n-yard"
@@ -1601,6 +1656,9 @@
     },
     "nosh box, 1116 folsom st, san francisco": {
       "venue": "nosh-box"
+    },
+    "nosso, 532 8th st, oakland, ca": {
+      "venue": "nosso"
     },
     "o'reilly's pub, 1840 haight st, san francisco, ca": {
       "venue": "oreillys-pub"
@@ -1844,6 +1902,9 @@
     "punch line comedy club, 444 battery st, san francisco, ca": {
       "venue": "punch-line-comedy-club"
     },
+    "quarter note bar & grill, 1214 apollo way, sunnyvale, ca": {
+      "venue": "quarter-note-bar-grill"
+    },
     "question mark tavern, 312 harriet street, san francisco, ca": {
       "venue": "question-mark-tavern"
     },
@@ -1897,6 +1958,9 @@
       "place": "region",
       "region": "sf"
     },
+    "robin williams meadow, kezar drive and bowling green drive, san francisco, ca": {
+      "venue": "robin-williams-meadow"
+    },
     "roble arts gym, 375 santa teresa st, stanford, ca": {
       "venue": "roble-arts-gym"
     },
@@ -1938,6 +2002,9 @@
     },
     "salesforce park, san francisco": {
       "venue": "salesforce-park"
+    },
+    "saluhall, 945 market st, san francisco, ca": {
+      "venue": "saluhall"
     },
     "san francisco": {
       "place": "region",
@@ -1986,6 +2053,9 @@
     "san francisco public library - main branch 100 larkin street san francisco, ca": {
       "room": "Main Branch",
       "venue": "san-francisco-public-library-main-library"
+    },
+    "san francisco public library - parkside branch, 1200 taraval st, san francisco, ca": {
+      "venue": "parkside-branch-library"
     },
     "san francisco state university, 1600 holloway ave, san francisco, ca": {
       "venue": "san-francisco-state-university"
@@ -2245,6 +2315,13 @@
     "starlite, 450 powell street, san francisco, ca": {
       "venue": "starlite-room"
     },
+    "sticky art lab, 1682 university ave, berkeley, ca": {
+      "venue": "sticky-art-lab"
+    },
+    "stockton st, san francisco, ca": {
+      "place": "region",
+      "region": "sf"
+    },
     "studio aurora, 302 valencia st, san francisco, ca": {
       "venue": "studio-aurora"
     },
@@ -2470,6 +2547,9 @@
     },
     "the liberties, 998 guerrero street, san francisco, 94110, san francisco, ca": {
       "venue": "the-liberties"
+    },
+    "the loft by common space, 3108 b fillmore st, san francisco, ca": {
+      "venue": "the-loft-by-common-space"
     },
     "the lost church sf, 988 columbus ave, san francisco": {
       "venue": "the-lost-church"
