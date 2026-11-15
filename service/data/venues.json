@@ -461,6 +461,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "1605-church-st": {
+      "added": "2026-11-15",
+      "address": "1605 Church Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 1605 in San Francisco County (building, way/269974776)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.745123,
+      "lng": -122.426594,
+      "name": "1605 Church St",
+      "osm": "way/269974776",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1625-broadway": {
       "added": "2026-10-18",
       "address": "1625 Broadway, Oakland, CA 94612",
@@ -10705,6 +10721,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "toast-novato": {
+      "added": "2026-11-15",
+      "address": "5800 Nave Drive, Novato, CA 94949",
+      "evidence": [
+        "map: Toast in Marin County (building, node/5331506529)",
+        "text: Novato",
+        "street number matches"
+      ],
+      "lat": 38.063572,
+      "lng": -122.53333,
+      "name": "Toast Novato",
+      "osm": "node/5331506529",
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
     },
     "tokyo-futon-tea": {
       "added": "2026-10-17",
