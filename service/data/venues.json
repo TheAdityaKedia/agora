@@ -5297,6 +5297,26 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "japanese-cultural-and-community-center-of-northern-california": {
+      "added": "2026-11-16",
+      "address": "1840 Sutter Street, San Francisco, CA 95115",
+      "evidence": [
+        "map: Japanese Cultural and Community Center of Northern California in San Francisco County (building, way/257974849)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.786734,
+      "lng": -122.430933,
+      "name": "Japanese Cultural and Community Center of Northern California",
+      "osm": "way/257974849",
+      "possible_duplicates": [
+        "festa-wine-cocktail-lounge",
+        "1870-fillmore-st"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "japanese-tea-garden": {
       "added": "2026-10-28",
       "address": "75 Hagiwara Tea Garden Drive, San Francisco, CA 94118",
@@ -7266,6 +7286,29 @@
       "region": "peninsula",
       "status": "auto"
     },
+    "oko-designs": {
+      "added": "2026-11-16",
+      "address": "420 Sutter St, San Francisco, CA 94108",
+      "evidence": [
+        "map: 414;418;420;424;428;432 in San Francisco County (building, way/32946790)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.789586,
+      "lng": -122.407485,
+      "name": "OKO Designs",
+      "osm": "way/32946790",
+      "possible_duplicates": [
+        "starlite-room",
+        "cheaper-than-therapy",
+        "the-realreal",
+        "san-francisco-playhouse",
+        "the-westin-st-francis"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "omnivore-books-on-food": {
       "added": "2026-10-02",
       "address": "3885A Cesar Chavez Street, San Francisco, CA 94131",
@@ -9227,6 +9270,23 @@
       "lng": -122.42235,
       "name": "Studio Aurora",
       "osm": "node/13816382324",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "studio-sumi": {
+      "added": "2026-11-16",
+      "address": "5031 Geary Boulevard, San Francisco, CA 94118",
+      "evidence": [
+        "map: Studio Sumi in San Francisco County (building, node/6501291360)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.780425,
+      "lng": -122.473465,
+      "name": "Studio Sumi",
+      "osm": "node/6501291360",
       "precision": "building",
       "region": "sf",
       "status": "auto"
