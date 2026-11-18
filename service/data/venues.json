@@ -1279,6 +1279,33 @@
       "region": "sf",
       "status": "verified"
     },
+    "455-valencia-st": {
+      "added": "2026-11-18",
+      "address": "455 Valencia Street, San Francisco, CA 94143",
+      "evidence": [
+        "map: 455 in San Francisco County (building, way/256436205)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.765653,
+      "lng": -122.421682,
+      "name": "455 Valencia St",
+      "osm": "way/256436205",
+      "possible_duplicates": [
+        "eclectic-box",
+        "mannys",
+        "lore-speakeasy-and-escape-room",
+        "dalva",
+        "muddy-waters-coffee-lounge",
+        "roxie-theater",
+        "kilowatt",
+        "the-drawing-room-annex",
+        "elixir"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "4935-shattuck-ave": {
       "added": "2026-11-12",
       "address": "4935 Shattuck Ave, Oakland, CA 94609",
@@ -2802,6 +2829,25 @@
       "region": "sf",
       "status": "auto"
     },
+    "cafe-meuse": {
+      "added": "2026-11-18",
+      "address": "1400 Pacific Avenue, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1400 in San Francisco County (building, way/399142440)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.795526,
+      "lng": -122.418463,
+      "name": "Cafe Meuse",
+      "osm": "way/399142440",
+      "possible_duplicates": [
+        "cafe-nook"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "cafe-nook": {
       "added": "2026-10-07",
       "address": "1500 Hyde Street, San Francisco, CA 94109",
@@ -3838,6 +3884,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "elevate-salon": {
+      "added": "2026-11-18",
+      "address": "615 West Orange Avenue, South San Francisco, CA 94080",
+      "evidence": [
+        "map: 615 in San Mateo County (building, way/389509134)",
+        "text: South San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.649825,
+      "lng": -122.431268,
+      "name": "Elevate Salon",
+      "osm": "way/389509134",
+      "precision": "building",
+      "region": "peninsula",
+      "status": "auto"
+    },
     "elixir": {
       "added": "2026-10-02",
       "address": "3200 16th Street, San Francisco, CA 94143",
@@ -3854,6 +3916,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "elk-glen-picnic-area": {
+      "added": "2026-11-18",
+      "address": "1017 Martin Luther King Junior Drive, San Francisco, CA 94122",
+      "evidence": [
+        "map: 1017 in San Francisco County (building, way/133856259)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.766991,
+      "lng": -122.48584,
+      "name": "Elk Glen Picnic Area",
+      "osm": "way/133856259",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "embarcadero": {
       "added": "2026-11-06",
@@ -4865,6 +4943,26 @@
       "region": "sf",
       "status": "auto"
     },
+    "hall-of-the-above": {
+      "added": "2026-11-18",
+      "address": "199 Petaluma Boulevard North, Petaluma, CA 94952",
+      "evidence": [
+        "map: Hall of the Above in Sonoma County (building, node/14094459353)",
+        "text: Petaluma",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 38.235532,
+      "lng": -122.641319,
+      "name": "Hall of the Above",
+      "osm": "node/14094459353",
+      "possible_duplicates": [
+        "phoenix-theater"
+      ],
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
+    },
     "hardware-coffee-company": {
       "added": "2026-10-02",
       "address": "32 West Portal Avenue, San Francisco, CA 94127",
@@ -5585,6 +5683,28 @@
       "region": "sf",
       "status": "auto"
     },
+    "kinfolx": {
+      "added": "2026-11-18",
+      "address": "1951 Telegraph Avenue, Oakland, CA 94612",
+      "evidence": [
+        "map: Kinfolx in Alameda County (building, node/4287030163)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.809499,
+      "lng": -122.269846,
+      "name": "Kinfolx",
+      "osm": "node/4287030163",
+      "possible_duplicates": [
+        "paramount-theater",
+        "sweets-ballroom",
+        "fox-oakland-theater"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "kqed-commons": {
       "added": "2026-10-02",
       "address": "2601 Mariposa Street, San Francisco, CA 94110",
@@ -5706,6 +5826,32 @@
       "region": "sf",
       "status": "verified"
     },
+    "laszlo": {
+      "added": "2026-11-18",
+      "address": "2526 Mission Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Laszlo in San Francisco County (building, node/13176381001)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.756458,
+      "lng": -122.419027,
+      "name": "Laszlo",
+      "osm": "node/13176381001",
+      "possible_duplicates": [
+        "grand-coffee-too",
+        "arcana",
+        "alamo-drafthouse-cinema",
+        "make-out-room",
+        "artists-television-access",
+        "big-time-vintage",
+        "gray-area"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "le-beau-market": {
       "added": "2026-11-07",
       "address": "1263 Leavenworth Street, San Francisco, CA 94109",
@@ -5805,6 +5951,28 @@
       "osm": "node/2479620472",
       "precision": "building",
       "region": "peninsula",
+      "status": "auto"
+    },
+    "little-mission-studio": {
+      "added": "2026-11-18",
+      "address": "445 Hampshire Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 445 in San Francisco County (building, way/260986966)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.763747,
+      "lng": -122.408047,
+      "name": "Little Mission Studio",
+      "osm": "way/260986966",
+      "possible_duplicates": [
+        "verdi-club",
+        "mission-hill-saloon",
+        "kqed-commons",
+        "kindred-studio"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "lookout": {
@@ -6078,6 +6246,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "mango": {
+      "added": "2026-11-18",
+      "address": "1602 Redwood Highway, Corte Madera, CA 94925",
+      "evidence": [
+        "map: 1602 in Marin County (building, way/394150392)",
+        "text: Corte Madera",
+        "street number matches"
+      ],
+      "lat": 37.928729,
+      "lng": -122.515245,
+      "name": "Mango",
+      "osm": "way/394150392",
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
+    },
     "manna-gallery": {
       "added": "2026-10-02",
       "address": "473 25th Street, Oakland, CA 94612",
@@ -6097,6 +6281,22 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "mannakin-theater-and-dance": {
+      "added": "2026-11-18",
+      "address": "1625 Bush Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: 1625 in San Francisco County (building, way/619378868)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.788137,
+      "lng": -122.424058,
+      "name": "Mannakin Theater and Dance",
+      "osm": "way/619378868",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "mannys": {
       "added": "2026-10-11",
@@ -7982,6 +8182,23 @@
       "region": "sf",
       "status": "auto"
     },
+    "philz-coffee": {
+      "added": "2026-11-18",
+      "address": "500 Marina Boulevard, San Francisco, CA 94123",
+      "evidence": [
+        "map: Philz Coffee in San Francisco County (building, node/13841677801)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.806341,
+      "lng": -122.442249,
+      "name": "Philz Coffee",
+      "osm": "node/13841677801",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "phoenix-theater": {
       "added": "2026-10-02",
       "address": "201 Washington Street, Petaluma, CA 94952",
@@ -8870,6 +9087,29 @@
       "region": "sf",
       "status": "verified"
     },
+    "sin-miedo-gallery": {
+      "added": "2026-11-18",
+      "address": "2831 Mission Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Sin Miedo Gallery in San Francisco County (building, node/14240947865)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.751667,
+      "lng": -122.418243,
+      "name": "Sin Miedo Gallery",
+      "osm": "node/14240947865",
+      "possible_duplicates": [
+        "et-al-gallery-and-bookshop",
+        "2831-mission-st",
+        "mission-branch-library",
+        "society-of-thumbs"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "six-flags-discovery-kingdom": {
       "added": "2026-10-02",
       "address": "1001 Fairgrounds Drive, Vallejo, CA 94589",
@@ -9255,6 +9495,43 @@
       "osm": "node/12835126483",
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "stone-gold-pottery": {
+      "added": "2026-11-18",
+      "address": "1920 Polk Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Gallery-O-Rama in San Francisco County (building, node/11511552469)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.794467,
+      "lng": -122.421344,
+      "name": "Stone Gold Pottery",
+      "osm": "node/11511552469",
+      "possible_duplicates": [
+        "amelie-wine-bar",
+        "amelie",
+        "russian-hill-bookstore"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "stray-dog": {
+      "added": "2026-11-18",
+      "address": "2545 24th Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: 2545 in San Francisco County (building, way/24444478)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.753012,
+      "lng": -122.404806,
+      "name": "Stray Dog",
+      "osm": "way/24444478",
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "studio-aurora": {
@@ -11296,6 +11573,23 @@
       "lng": -122.256076,
       "name": "Willard Park",
       "osm": "way/6362542",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "wondrous-brewing-company": {
+      "added": "2026-11-18",
+      "address": "1306 65th Street, Emeryville, CA 94608",
+      "evidence": [
+        "map: Wondrous Brewing Company in Alameda County (building, node/9573813190)",
+        "text: Emeryville",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.847152,
+      "lng": -122.290925,
+      "name": "Wondrous Brewing Company",
+      "osm": "node/9573813190",
       "precision": "building",
       "region": "eastbay",
       "status": "auto"
