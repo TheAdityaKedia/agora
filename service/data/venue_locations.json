@@ -3,6 +3,9 @@
     "1 ferry building, san francisco, ca": {
       "venue": "san-francisco-ferry-building"
     },
+    "100 john f kennedy dr, san francisco, ca": {
+      "venue": "conservatory-of-flowers"
+    },
     "1001 center st, santa cruz, ca": {
       "place": "outside"
     },
@@ -195,6 +198,34 @@
     "299 bonview st, san francisco, ca": {
       "venue": "299-bonview-st"
     },
+    "29th st & diamond st, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-12-19",
+          "title": "Meetup & Yap: \nNymphet Alumni",
+          "url": "https://partiful.com/e/ySWqxNHmAptnZZjRplcr"
+        },
+        "first_seen": "2026-11-18",
+        "last_tried": "2026-11-18",
+        "reason": "map result 'Diamond Street & 29th Street' doesn't match the name or street number",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "map": {
+            "label": "Diamond Street & 29th Street",
+            "lat": 37.743065,
+            "lng": -122.435487,
+            "osm": "node/6389800602"
+          },
+          "name": "29th St & Diamond St",
+          "street_address": "29th Street and Diamond Street"
+        }
+      }
+    },
     "2nd st, san francisco, ca": {
       "venue": "2nd-st"
     },
@@ -326,6 +357,9 @@
     "447 minna, 447 minna st, san francisco": {
       "venue": "447-minna"
     },
+    "455 valencia st, san francisco, ca": {
+      "venue": "455-valencia-st"
+    },
     "473a haight st, san francisco, ca": {
       "venue": "the-faight-collective-2"
     },
@@ -391,6 +425,9 @@
     },
     "579 howard st, san francisco, ca": {
       "venue": "zo"
+    },
+    "599 valencia st, san francisco, ca": {
+      "venue": "the-drawing-room-annex"
     },
     "660 stanford shopping center, palo alto, ca": {
       "venue": "stanford-shopping-center"
@@ -713,6 +750,9 @@
         }
       }
     },
+    "cafe meuse, 1400 pacific ave, san francisco, ca": {
+      "venue": "cafe-meuse"
+    },
     "calvary presbyterian 2515 fillmore st san francisco, ca": {
       "venue": "calvary-presbyterian"
     },
@@ -842,7 +882,7 @@
           "url": "https://partiful.com/e/4uaYV0Ze1tUNjlT0TK8k"
         },
         "first_seen": "2026-10-28",
-        "last_tried": "2026-11-11",
+        "last_tried": "2026-11-18",
         "reason": "no map result in the Bay Area",
         "sources": [
           "Partiful"
@@ -948,8 +988,14 @@
     "el rio, 3158 mission st, san francisco, ca, san francisco, ca": {
       "venue": "el-rio"
     },
+    "elevate salon, 615 w orange ave, south san francisco, ca": {
+      "venue": "elevate-salon"
+    },
     "elixir, 3200 mission street, san francisco, ca": {
       "venue": "elixir"
+    },
+    "elk glen picnic area, 1017 martin luther king jr dr, san francisco, ca": {
+      "venue": "elk-glen-picnic-area"
     },
     "embarcadero, san francisco, ca": {
       "venue": "embarcadero"
@@ -962,6 +1008,9 @@
     },
     "era lounge, 386 s 1st st, san jose, ca": {
       "venue": "era-lounge"
+    },
+    "eria marina, 2300 chestnut st, san francisco, ca": {
+      "venue": "2300-chestnut-st"
     },
     "et al., 2831a mission st, san francisco": {
       "venue": "et-al-gallery-and-bookshop"
@@ -1220,6 +1269,9 @@
     "haight-ashbury, san francisco, ca": {
       "venue": "haight-ashbury"
     },
+    "hall of the above, 199 petaluma blvd n, petaluma, ca": {
+      "venue": "hall-of-the-above"
+    },
     "harry's bar, 2020 fillmore st, san francisco, ca": {
       "venue": "harrys-bar"
     },
@@ -1352,6 +1404,9 @@
     "kindred studio, 1910 bryant st, san francisco, ca": {
       "venue": "kindred-studio"
     },
+    "kinfolx, 1951 telegraph ave, ste 4, oakland, ca": {
+      "venue": "kinfolx"
+    },
     "kqed commons, 2601 mariposa st, san francisco, ca": {
       "venue": "kqed-commons"
     },
@@ -1377,6 +1432,9 @@
       "place": "region",
       "region": "sf"
     },
+    "laszlo, 2526 mission st, san francisco, ca": {
+      "venue": "laszlo"
+    },
     "le beau market, 1263 leavenworth st, san francisco, ca": {
       "venue": "le-beau-market"
     },
@@ -1391,6 +1449,9 @@
     },
     "little green a plant bar, 1101 main st, redwood city, ca": {
       "venue": "little-green-a-plant-bar"
+    },
+    "little mission studio, 445 hampshire st, san francisco, ca": {
+      "venue": "little-mission-studio"
     },
     "lookout, 3600 16th st, san francisco, ca": {
       "venue": "lookout"
@@ -1434,6 +1495,9 @@
     "luna del soul, 822 cassia st, redwood city, ca": {
       "venue": "luna-del-soul"
     },
+    "mabuhay gardens, 443 broadway, san francisco, ca": {
+      "venue": "mabuhay-gardens"
+    },
     "macy's union square, 170 o'farrell st, san francisco, ca": {
       "venue": "macys-union-square"
     },
@@ -1467,8 +1531,14 @@
     "maker studio, 600a octavia blvd, san francisco, ca": {
       "venue": "maker-studio"
     },
+    "mango, 1602 redwood hwy, corte madera, ca": {
+      "venue": "mango"
+    },
     "manna gallery, 473 25th st., oakland": {
       "venue": "manna-gallery"
+    },
+    "mannakin theater and dance, 1625 bush st, san francisco, ca": {
+      "venue": "mannakin-theater-and-dance"
     },
     "manny's, 3092 16th st, san francisco, ca": {
       "venue": "mannys"
@@ -1543,12 +1613,12 @@
       "pending": {
         "events": 1,
         "example": {
-          "date": "2026-10-23",
-          "title": "Launch Party for CHUMI",
-          "url": "https://partiful.com/e/zs7sG61no26W7Mz9cyFx"
+          "date": "2026-11-28",
+          "title": "SMALL BUSINESS SATURDAY STROLL",
+          "url": "https://partiful.com/e/WKPvwrbqJ0y5elquyRyn"
         },
         "first_seen": "2026-10-16",
-        "last_tried": "2026-10-23",
+        "last_tried": "2026-11-18",
         "reason": "map result 'San Francisco, CA - Salesforce Plaza (SFC)' doesn't match the name or street number",
         "sources": [
           "Partiful"
@@ -1568,6 +1638,9 @@
     },
     "moka & co, 40667 fremont blvd, fremont, ca": {
       "venue": "moka-co"
+    },
+    "monarch, 101 6th st, san francisco, ca": {
+      "venue": "monarch"
     },
     "monarch, 101 6th st, san francisco, california (ca) 94103, san francisco, california (ca), san francisco, ca": {
       "venue": "monarch"
@@ -1820,6 +1893,34 @@
     "outer sunset farmers market & mercantile, 1994 37th ave, san francisco, ca": {
       "venue": "outer-sunset-farmers-market-mercantile"
     },
+    "outerknown, 1009 larkspur landing cir, unit 5a, larkspur, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-12-13",
+          "title": "Outdoor Colour Collective 2026/27 WINTER SEASON KICKOFF",
+          "url": "https://partiful.com/e/l5kWbYNRoxuIdixy6Z89"
+        },
+        "first_seen": "2026-11-18",
+        "last_tried": "2026-11-18",
+        "reason": "text says Larkspur (Marin County), map result 'Outerknown' is in Santa Clara County",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "Larkspur",
+          "kind": "venue",
+          "map": {
+            "label": "Larkspur Landing Circle",
+            "lat": 37.947757,
+            "lng": -122.510792,
+            "osm": "way/1073032096"
+          },
+          "name": "Outerknown",
+          "street_address": "1009 Larkspur Landing Cir, Unit 5A"
+        }
+      }
+    },
     "pacific pipe, 2140 mandela pkwy, oakland, ca": {
       "venue": "pacific-pipe"
     },
@@ -1874,6 +1975,9 @@
     },
     "perine pl, san francisco, ca": {
       "venue": "perine-pl"
+    },
+    "philz coffee truck, 500 marina blvd, san francisco, ca": {
+      "venue": "philz-coffee"
     },
     "pickleball city, 39161 farwell dr, fremont, ca": {
       "venue": "pickleball-city"
@@ -2034,7 +2138,7 @@
           "url": "https://partiful.com/e/O4N5DmEIGqNaIciUvxKG"
         },
         "first_seen": "2026-11-11",
-        "last_tried": "2026-11-11",
+        "last_tried": "2026-11-18",
         "reason": "text says San Francisco (San Francisco County), map result 'San Francisco International Airport' is in San Mateo County",
         "sources": [
           "Partiful"
@@ -2065,6 +2169,9 @@
     },
     "san francisco public library - parkside branch, 1200 taraval st, san francisco, ca": {
       "venue": "parkside-branch-library"
+    },
+    "san francisco public library, 100 larkin st, san francisco, ca": {
+      "venue": "san-francisco-public-library-main-library"
     },
     "san francisco state university, 1600 holloway ave, san francisco, ca": {
       "venue": "san-francisco-state-university"
@@ -2250,6 +2357,9 @@
     "silver cloud restaurant & karaoke bar, 1994 lombard street, san francisco, 94123, san francisco, ca": {
       "venue": "silver-cloud-restaurant-karaoke-bar"
     },
+    "sin miedo gallery, 2831 mission st, san francisco, ca": {
+      "venue": "sin-miedo-gallery"
+    },
     "six flags discovery kingdom, 1001 fairgrounds dr sw, vallejo, ca": {
       "venue": "six-flags-discovery-kingdom"
     },
@@ -2330,6 +2440,12 @@
     "stockton st, san francisco, ca": {
       "place": "region",
       "region": "sf"
+    },
+    "stone gold pottery, 1920 polk st, san francisco, ca": {
+      "venue": "stone-gold-pottery"
+    },
+    "stray dog, 2545 24th st, san francisco, ca": {
+      "venue": "stray-dog"
     },
     "studio aurora, 302 valencia st, san francisco, ca": {
       "venue": "studio-aurora"
@@ -2789,6 +2905,9 @@
     },
     "willard park, 2730 hillegass ave, berkeley, ca": {
       "venue": "willard-park"
+    },
+    "wondrous brewing company, 1306 65th st, emeryville, ca": {
+      "venue": "wondrous-brewing-company"
     },
     "xex, 1131 polk st, san francisco, ca": {
       "venue": "xex"
