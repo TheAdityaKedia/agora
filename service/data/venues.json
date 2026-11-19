@@ -913,6 +913,22 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "2440-leghorn-st": {
+      "added": "2026-11-19",
+      "address": "2440 Leghorn Street, Mountain View, CA 94043",
+      "evidence": [
+        "map: 2440 in Santa Clara County (building, way/415366768)",
+        "text: Mountain View",
+        "street number matches"
+      ],
+      "lat": 37.419271,
+      "lng": -122.097985,
+      "name": "2440 Leghorn St",
+      "osm": "way/415366768",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "26th-ave-cabrillo-st": {
       "added": "2026-10-08",
       "address": "26th Ave & Cabrillo St, San Francisco, CA 94121",
@@ -958,6 +974,22 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "2946-turk-blvd": {
+      "added": "2026-11-19",
+      "address": "2946 Turk Boulevard, San Francisco, CA 94118",
+      "evidence": [
+        "map: 2946 in San Francisco County (building, way/31148622)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.777816,
+      "lng": -122.454166,
+      "name": "2946 Turk Blvd",
+      "osm": "way/31148622",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "299-bonview-st": {
       "added": "2026-10-16",
@@ -1517,6 +1549,26 @@
       "osm": "way/264535661",
       "possible_duplicates": [
         "double-black"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "847-sansome-st": {
+      "added": "2026-11-19",
+      "address": "847 Sansome Street, San Francisco, CA 94113",
+      "evidence": [
+        "map: 847 in San Francisco County (building, way/206591568)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.79803,
+      "lng": -122.402493,
+      "name": "847 Sansome St",
+      "osm": "way/206591568",
+      "possible_duplicates": [
+        "the-cigar-bar-grill",
+        "mabuhay-gardens"
       ],
       "precision": "building",
       "region": "sf",
@@ -2742,6 +2794,30 @@
       "region": "sf",
       "status": "verified"
     },
+    "bow-hon-restaurant": {
+      "added": "2026-11-19",
+      "address": "850 Grant Avenue, San Francisco, CA 94108",
+      "evidence": [
+        "map: 850 in San Francisco County (building, way/1041363478)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.794696,
+      "lng": -122.406284,
+      "name": "Bow Hon Restaurant",
+      "osm": "way/1041363478",
+      "possible_duplicates": [
+        "160-waverly-pl",
+        "on-waverly",
+        "lions-den-bar-lounge",
+        "kearny-st-clay-st",
+        "great-star-theater",
+        "international-hotel-manilatown-center"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "bow-n-arrow-clothing": {
       "added": "2026-10-08",
       "address": "2200 Petaluma Blvd N, Unit 600, Petaluma, CA 94952",
@@ -2863,6 +2939,26 @@
       "osm": "node/1478460133",
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "cafenated-coffee-co": {
+      "added": "2026-11-19",
+      "address": "2085 Vine Street, Berkeley, CA 94709",
+      "evidence": [
+        "map: Cafenated Coffee Co. in Alameda County (building, node/9830192820)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.88026,
+      "lng": -122.269888,
+      "name": "Cafenated Coffee Co.",
+      "osm": "node/9830192820",
+      "possible_duplicates": [
+        "vintage-berkeley-wine-shop"
+      ],
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "california-college-of-the-arts": {
@@ -3292,6 +3388,28 @@
       "lng": -122.439343,
       "name": "Corona Heights Park",
       "osm": "way/225182880",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "county-fair-building": {
+      "added": "2026-11-19",
+      "address": "1199 9th Avenue, San Francisco, CA 94122",
+      "evidence": [
+        "map: County Fair Building in San Francisco County (building, way/25822470)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.766593,
+      "lng": -122.467277,
+      "name": "County Fair Building",
+      "osm": "way/25822470",
+      "possible_duplicates": [
+        "books-on-the-park-on-9th-avenue",
+        "green-apple-books-on-the-park",
+        "underdogs-tres",
+        "shakespeare-garden"
+      ],
       "precision": "building",
       "region": "sf",
       "status": "auto"
@@ -4190,6 +4308,23 @@
       "region": "sf",
       "status": "verified"
     },
+    "firehouse-coffee": {
+      "added": "2026-11-19",
+      "address": "317 Johnson Street, Sausalito, CA 94965",
+      "evidence": [
+        "map: Firehouse Coffee in Marin County (building, way/306018332)",
+        "text: Sausalito",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.858542,
+      "lng": -122.483966,
+      "name": "Firehouse Coffee",
+      "osm": "way/306018332",
+      "precision": "building",
+      "region": "northbay",
+      "status": "auto"
+    },
     "first-congregational-church-of-berkeley": {
       "added": "2026-10-07",
       "address": "2345 Channing Way, Berkeley, CA 94701",
@@ -4433,6 +4568,23 @@
         "torch-bar",
         "paramount-theater"
       ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "frank-bette-center-for-the-arts": {
+      "added": "2026-11-19",
+      "address": "1601 Paru Street, Alameda, CA 94501",
+      "evidence": [
+        "map: Frank Bette Center for the Arts in Alameda County (building, node/4386449948)",
+        "text: Alameda",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.773656,
+      "lng": -122.25711,
+      "name": "Frank Bette Center for the Arts",
+      "osm": "node/4386449948",
       "precision": "building",
       "region": "eastbay",
       "status": "auto"
@@ -5236,6 +5388,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "inside-line-equipment": {
+      "added": "2026-11-19",
+      "address": "1717 Fourth Street, Berkeley, CA 94710",
+      "evidence": [
+        "map: Inside line equipment in Alameda County (building, node/10177232202)",
+        "text: Berkeley",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.871704,
+      "lng": -122.300908,
+      "name": "Inside line equipment",
+      "osm": "node/10177232202",
+      "possible_duplicates": [
+        "refined-interiors"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "instudio-with-empowerment-avenue": {
       "added": "2026-10-02",
@@ -6359,6 +6531,18 @@
       "region": "sf",
       "status": "verified"
     },
+    "marina-district": {
+      "added": "2026-11-19",
+      "address": "",
+      "evidence": [
+        "map: Marina District in San Francisco County (city, node/140982615)",
+        "text: San Francisco"
+      ],
+      "name": "Marina District",
+      "precision": "city",
+      "region": "sf",
+      "status": "auto"
+    },
     "marina-green": {
       "added": "2026-10-07",
       "address": "San Francisco, CA",
@@ -6784,6 +6968,26 @@
       "region": "southbay",
       "status": "auto"
     },
+    "moody-goose-vintage": {
+      "added": "2026-11-19",
+      "address": "2036 Polk St, San Francisco, CA 94109",
+      "evidence": [
+        "map: 2032;2034;2036;2038;2040;2042;2044;2046;2048;2050;2052;2054;2056;2058;2060;2062;2064 in San Francisco County (building, relation/3505475)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.795685,
+      "lng": -122.421519,
+      "name": "Moody Goose Vintage",
+      "osm": "relation/3505475",
+      "possible_duplicates": [
+        "russian-hill-bookstore",
+        "stone-gold-pottery"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "mosswood-chapel": {
       "added": "2026-10-20",
       "address": "3630 Telegraph Avenue, Oakland, CA 94609",
@@ -6962,6 +7166,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "musee-mecanique": {
+      "added": "2026-11-19",
+      "address": "Pier 45 The Embarcadero, San Francisco, CA 94133",
+      "evidence": [
+        "map: Musée Mécanique in San Francisco County (building, node/368166365)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.809246,
+      "lng": -122.415794,
+      "name": "Musée Mécanique",
+      "osm": "node/368166365",
+      "possible_duplicates": [
+        "pier-45"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "museum-of-the-african-diaspora": {
       "added": "2026-10-02",
@@ -7524,6 +7748,30 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "on-waverly": {
+      "added": "2026-11-19",
+      "address": "162 Waverly Place, San Francisco, CA 94113",
+      "evidence": [
+        "map: On Waverly in San Francisco County (building, node/12245702946)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.795011,
+      "lng": -122.406922,
+      "name": "On Waverly",
+      "osm": "node/12245702946",
+      "possible_duplicates": [
+        "160-waverly-pl",
+        "lions-den-bar-lounge",
+        "great-star-theater",
+        "kearny-st-clay-st",
+        "international-hotel-manilatown-center"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "opl-81st-avenue-branch": {
       "added": "2026-10-08",
@@ -8575,6 +8823,23 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "restaurant-gish": {
+      "added": "2026-11-19",
+      "address": "1998 Homestead Road, Santa Clara, CA 95050",
+      "evidence": [
+        "map: Restaurant Gish in Santa Clara County (building, node/8540278059)",
+        "text: Santa Clara",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.343318,
+      "lng": -121.959034,
+      "name": "Restaurant Gish",
+      "osm": "node/8540278059",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "revival-hall": {
       "added": "2026-10-08",
       "address": "4799 Shattuck Avenue, Oakland, CA 94609",
@@ -9021,6 +9286,30 @@
       "precision": "street",
       "region": "sf",
       "status": "verified"
+    },
+    "sf-moma": {
+      "added": "2026-11-19",
+      "address": "151 3rd Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: San Francisco Museum of Modern Art in San Francisco County (building, way/41692824)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.785915,
+      "lng": -122.400736,
+      "name": "SF MoMA",
+      "osm": "way/41692824",
+      "possible_duplicates": [
+        "museum-of-the-african-diaspora",
+        "great-lawn",
+        "yerba-buena-center-for-the-arts",
+        "ybca-screening-room",
+        "crepe-myrtle-garden",
+        "111-minna-gallery"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "sfjazz-center": {
       "added": "2026-10-02",
@@ -9825,6 +10114,27 @@
       "region": "sf",
       "status": "verified"
     },
+    "telve-cafe": {
+      "added": "2026-11-19",
+      "address": "2163 Union St, San Francisco, CA 94123",
+      "evidence": [
+        "map: 2159;2161;2163 in San Francisco County (building, way/259106350)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.796933,
+      "lng": -122.434798,
+      "name": "Telve Cafe",
+      "osm": "way/259106350",
+      "possible_duplicates": [
+        "mellow-barbers-cow-hollow",
+        "the-brixton",
+        "palm-house"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "temescal-brewing": {
       "added": "2026-10-03",
       "address": "4115 Telegraph Avenue, Oakland, CA 94609",
@@ -9904,6 +10214,27 @@
       "precision": "building",
       "region": "northbay",
       "status": "verified"
+    },
+    "the-back-room": {
+      "added": "2026-11-19",
+      "address": "1984 Bonita Avenue, Berkeley, CA 94704",
+      "evidence": [
+        "map: The Backroom in Alameda County (building, node/4516076705)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.87208,
+      "lng": -122.272054,
+      "name": "The Back Room",
+      "osm": "node/4516076705",
+      "possible_duplicates": [
+        "impossible-stage",
+        "the-uc-theatre",
+        "berkeley-rep"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "the-bitter-end": {
       "added": "2026-10-02",
@@ -10121,6 +10452,27 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "the-deluxe": {
+      "added": "2026-11-19",
+      "address": "1511 Haight Street, San Francisco, CA 94117",
+      "evidence": [
+        "map: 1511 in San Francisco County (building, node/61677472)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.769873,
+      "lng": -122.447276,
+      "name": "The Deluxe",
+      "osm": "node/61677472",
+      "possible_duplicates": [
+        "the-green-heron",
+        "the-mellow-haight",
+        "magnolia-sf"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "the-detour": {
       "added": "2026-10-02",
@@ -11592,6 +11944,28 @@
       "osm": "node/9573813190",
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "x": {
+      "added": "2026-11-19",
+      "address": "1355 Market Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: X in San Francisco County (building, way/507749022)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.776542,
+      "lng": -122.416807,
+      "name": "X",
+      "osm": "way/507749022",
+      "possible_duplicates": [
+        "bar-bean-fusion",
+        "the-function-sf-comedy-club-cocktail-lounge",
+        "mr-tipples-recording-studio",
+        "melifolla-studio"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "xex": {
