@@ -5226,6 +5226,28 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "hedge-coffee": {
+      "added": "2026-11-20",
+      "address": "434 Shotwell Street, San Francisco, CA 94110",
+      "evidence": [
+        "map: Hedge Coffee in San Francisco County (building, node/14271447001)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.761292,
+      "lng": -122.416195,
+      "name": "Hedge Coffee",
+      "osm": "node/14271447001",
+      "possible_duplicates": [
+        "joey-the-cat",
+        "zore-law",
+        "southern-pacific-brewing"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "hella-bees": {
       "added": "2026-10-28",
       "address": "2340 Harrison Street, Oakland, CA 94612",
