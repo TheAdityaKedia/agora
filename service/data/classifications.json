@@ -2767,11 +2767,11 @@
       ]
     },
     "ATG (Curran, Orpheum, Golden Gate)\u001fThee Phantom & The Illharmonic Orchestra": {
-      "classified_at": "2026-09-23T19:52:10.114876+00:00",
+      "classified_at": "2026-11-22T18:04:44.894770+00:00",
       "cost": "paid",
       "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
       "source": "ATG (Curran, Orpheum, Golden Gate)",
-      "taxonomy_version": 1,
+      "taxonomy_version": 2,
       "title": "Thee Phantom & The Illharmonic Orchestra",
       "topics": [
         "musical-theater"
@@ -8180,6 +8180,22 @@
         ]
       ]
     },
+    "Bird & Beckett\u001fBen Goldberg": {
+      "classified_at": "2026-11-22T18:04:44.932322+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Ben Goldberg",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Bird & Beckett\u001fBenny Amon’s New Orleans Pearls Mardi Gras Show": {
       "classified_at": "2026-10-03T04:52:07.866492+00:00",
       "cost": "unknown",
@@ -8954,6 +8970,22 @@
         ]
       ]
     },
+    "Bird & Beckett\u001fLisa Mezzacappa Quintet": {
+      "classified_at": "2026-11-22T18:04:44.929858+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Lisa Mezzacappa Quintet",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Bird & Beckett\u001fMacy Blackman & the Mighty Fines": {
       "classified_at": "2026-10-03T04:51:22.840564+00:00",
       "cost": "paid",
@@ -8963,6 +8995,23 @@
       "title": "Macy Blackman & the Mighty Fines",
       "topics": [
         "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Bird & Beckett\u001fMaurice Tani": {
+      "classified_at": "2026-11-22T18:04:44.946837+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Bird & Beckett",
+      "taxonomy_version": 2,
+      "title": "Maurice Tani",
+      "topics": [
+        "folk-americana",
+        "music"
       ],
       "types": [
         [
@@ -20440,6 +20489,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fISMO: Live!": {
+      "classified_at": "2026-11-22T18:04:45.504603+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "ISMO: Live!",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fIan Fidance": {
       "classified_at": "2026-11-14T16:52:50.213458+00:00",
       "cost": "unknown",
@@ -20880,6 +20945,22 @@
       "source": "Cobb's Comedy Club",
       "taxonomy_version": 2,
       "title": "Sammy Obeid",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Cobb's Comedy Club\u001fSammy Obeid - 13+ with Parental Supervision": {
+      "classified_at": "2026-11-22T18:04:45.478324+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Sammy Obeid - 13+ with Parental Supervision",
       "topics": [
         "comedy"
       ],
@@ -21427,6 +21508,23 @@
       "topics": [
         "tech",
         "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
+    "Commonwealth Club\u001fGeorge Hammond: Reading Others' Personalities": {
+      "classified_at": "2026-11-22T18:04:44.909636+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "George Hammond: Reading Others' Personalities",
+      "topics": [
+        "business"
       ],
       "types": [
         [
@@ -28403,6 +28501,23 @@
       "source": "Frontier Tower",
       "taxonomy_version": 2,
       "title": "Weekly Accountabili-tea Circle: Reflection & Planning #41 - Members Only",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fWeekly Accountabili-tea Circle: Reflection & Planning #42 - Members Only": {
+      "classified_at": "2026-11-22T18:04:45.604244+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Weekly Accountabili-tea Circle: Reflection & Planning #42 - Members Only",
       "topics": [
         "wellness"
       ],
@@ -38873,6 +38988,24 @@
         ]
       ]
     },
+    "Medicine for Nightmares\u001fTatreez Circle": {
+      "classified_at": "2026-11-22T18:04:44.960373+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Medicine for Nightmares",
+      "taxonomy_version": 2,
+      "title": "Tatreez Circle",
+      "topics": [
+        "craft",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "Medicine for Nightmares\u001fThe Pomegranate is a Grenade Book Launch": {
       "classified_at": "2026-10-29T17:09:33.940414+00:00",
       "cost": "unknown",
@@ -40356,6 +40489,25 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fClosing Reception: Hindsight is 20/20 – Wayne Armstrong, Patrick Crotty, Gina Gaiser, Pam Jue, Sandra Wong Orloff, Alexander Yoshikawa": {
+      "classified_at": "2026-11-22T18:04:45.515011+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Closing Reception: Hindsight is 20/20 – Wayne Armstrong, Patrick Crotty, Gina Gaiser, Pam Jue, Sandra Wong Orloff, Alexander Yoshikawa",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "social"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fDana DeKalb: No Lifeguard on Duty": {
       "classified_at": "2026-11-11T18:09:16.806220+00:00",
       "cost": "free",
@@ -40684,6 +40836,22 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fMercury 20 at 20": {
+      "classified_at": "2026-11-22T18:04:45.446568+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Mercury 20 at 20",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fNEXUS Event at GearBox Gallery": {
       "classified_at": "2026-10-03T04:58:45.035360+00:00",
       "cost": "free",
@@ -40898,6 +41066,22 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fOpening Reception – Mercury 20 at 20": {
+      "classified_at": "2026-11-22T18:04:45.471976+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Opening Reception – Mercury 20 at 20",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fOpening Reception – Pat O’Connor, K.C. Rosenberg, Emily Shepard: Material Messages": {
       "classified_at": "2026-10-03T05:17:26.602187+00:00",
       "cost": "free",
@@ -40963,6 +41147,23 @@
       "types": [
         [
           "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fPanel Discussion – Mercury 20 at 20": {
+      "classified_at": "2026-11-22T18:04:45.527901+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Panel Discussion – Mercury 20 at 20",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
         ]
       ]
     },
@@ -44927,6 +45128,24 @@
         ]
       ]
     },
+    "Oakland Theater Project\u001fSHE SE PUEDE (a chorus of Huertas)": {
+      "classified_at": "2026-11-22T18:04:45.513527+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Theater Project",
+      "taxonomy_version": 2,
+      "title": "SHE SE PUEDE (a chorus of Huertas)",
+      "topics": [
+        "theater",
+        "latino",
+        "women"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Oakland Theater Project\u001fShe Se Puede": {
       "classified_at": "2026-10-05T19:56:11.132752+00:00",
       "cost": "paid",
@@ -45062,6 +45281,23 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Oakland United Beerworks\u001fMagic The Gathering, Casual Commander Open Play": {
+      "classified_at": "2026-11-22T18:04:45.954934+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland United Beerworks",
+      "taxonomy_version": 2,
+      "title": "Magic The Gathering, Casual Commander Open Play",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -56271,6 +56507,23 @@
         [
           "talk",
           "reading"
+        ]
+      ]
+    },
+    "Presidio Theatre\u001fSeussical": {
+      "classified_at": "2026-11-22T18:04:44.937137+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Presidio Theatre",
+      "taxonomy_version": 2,
+      "title": "Seussical",
+      "topics": [
+        "musical-theater",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -90546,6 +90799,22 @@
       "title": "Gillian Welch & David Rawlings",
       "topics": [
         "folk-americana"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "The Fillmore\u001fHaken - In A Fever Dream Tour": {
+      "classified_at": "2026-11-22T18:04:44.947976+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Fillmore",
+      "taxonomy_version": 2,
+      "title": "Haken - In A Fever Dream Tour",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
