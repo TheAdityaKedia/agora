@@ -12,6 +12,9 @@
     "101 2nd st, san francisco, ca": {
       "venue": "101-2nd-st"
     },
+    "101 california plaza, san francisco, ca": {
+      "venue": "101-california"
+    },
     "103 kennedy dr, capitola, ca": {
       "place": "outside"
     },
@@ -372,6 +375,9 @@
     "455 valencia st, san francisco, ca": {
       "venue": "455-valencia-st"
     },
+    "46 minna, 46 minna street, san francisco, ca": {
+      "venue": "madarae"
+    },
     "473a haight st, san francisco, ca": {
       "venue": "the-faight-collective-2"
     },
@@ -590,6 +596,9 @@
     "athletic playground, 4770 san pablo ave, emeryville, ca": {
       "venue": "athletic-playground"
     },
+    "audio sf, 316 11th street, san francisco, ca": {
+      "venue": "audio-nightclub"
+    },
     "august hall, 420 mason st, san francisco, ca": {
       "venue": "august-hall"
     },
@@ -631,6 +640,9 @@
     "berkeley yoga center, 2121 bonar st, berkeley, ca": {
       "venue": "berkeley-yoga-center"
     },
+    "bill graham civic auditorium, 99 grove street, san francisco, ca": {
+      "venue": "bill-graham-civic-auditorium"
+    },
     "bimbo's 365 club, 1025 columbus ave, san francisco, ca": {
       "venue": "bimbos-365-club"
     },
@@ -658,6 +670,9 @@
     },
     "blackbird, 2124 market st, san francisco, ca": {
       "venue": "blackbird"
+    },
+    "blondie's, 540 valencia street, san francisco, ca": {
+      "venue": "blondies"
     },
     "book club of california, 47 kearny st, san francisco, ca": {
       "venue": "book-club-of-california"
@@ -718,6 +733,9 @@
     },
     "bookshop west portal 80 west portal ave san francisco, ca": {
       "venue": "bookshop-west-portal"
+    },
+    "boom boom room, 1601 fillmore street, san francisco, ca": {
+      "venue": "boom-boom-room"
     },
     "bottom's up, 4704 mission st., san francisco, ca": {
       "venue": "bottoms-up"
@@ -795,6 +813,9 @@
     "cassa jam, 37729 niles blvd, fremont, ca": {
       "venue": "cassa-jam"
     },
+    "castro theatre, 429 castro street, san francisco, ca": {
+      "venue": "castro-theatre"
+    },
     "cat club, 1190 folsom st, san francisco, ca": {
       "venue": "cat-club"
     },
@@ -824,6 +845,9 @@
     },
     "city lights, 261 columbus ave, san francisco": {
       "venue": "city-lights-booksellers"
+    },
+    "city nights, 715 harrison street, san francisco, ca": {
+      "venue": "city-nights"
     },
     "clarion alley mural project, between 17th & 18th st/ mission and valencia st, san francisco, ca": {
       "venue": "clarion-alley-mural-project"
@@ -1260,6 +1284,9 @@
     "golden ratio, 1517 franklin st, oakland, ca": {
       "venue": "golden-ratio"
     },
+    "gospel sf, 229 9th street, san francisco, ca 94103, san francisco, ca, san francisco, ca": {
+      "venue": "gospel-sf"
+    },
     "grace cathedral": {
       "venue": "grace-cathedral"
     },
@@ -1334,6 +1361,10 @@
     },
     "hi tops san francisco, 2247 market street, san francisco, 94114, san francisco, ca": {
       "venue": "hi-tops"
+    },
+    "holey moley - san francisco, 1096 south van ness avenue, san francisco, ca 94110, san francisco, ca, san francisco, ca": {
+      "room": "San Francisco",
+      "venue": "holey-moley"
     },
     "hyde st & filbert st, san francisco, ca": {
       "pending": {
@@ -1532,6 +1563,9 @@
       "venue": "luna-del-soul"
     },
     "mabuhay gardens, 443 broadway, san francisco, ca": {
+      "venue": "mabuhay-gardens"
+    },
+    "mabuhay gardens, 443 broadway, san francisco, ca 94133, san francisco, ca, san francisco, ca": {
       "venue": "mabuhay-gardens"
     },
     "macy's union square, 170 o'farrell st, san francisco, ca": {
@@ -1766,6 +1800,9 @@
     "noe valley books, 3899 24th st, san francisco, ca": {
       "venue": "noe-valley-books"
     },
+    "noe valley farms, 1828 castro st, san francisco, ca 94131, san francisco, ca, san francisco, ca": {
+      "venue": "1828-castro-st"
+    },
     "noe valley ministry 1021 sanchez street san francisco, ca": {
       "venue": "noe-valley-ministry"
     },
@@ -1789,6 +1826,9 @@
     },
     "o'reilly's pub, 1840 haight st, san francisco, ca": {
       "venue": "oreillys-pub"
+    },
+    "oakland arena, 7000 coliseum way, oakland, ca": {
+      "venue": "oakland-arena"
     },
     "oakland asian cultural center, 388 9th st #290, oakland, ca": {
       "venue": "oakland-asian-cultural-center"
@@ -1876,6 +1916,10 @@
     },
     "oakland united beerworks, 262 2nd st, oakland, ca": {
       "venue": "oakland-united-beerworks"
+    },
+    "oakland, ca": {
+      "place": "region",
+      "region": "eastbay"
     },
     "oasis sf, 298 11th st, san francisco, ca": {
       "venue": "oasis"
@@ -2000,6 +2044,9 @@
     "paname sf, 523 broadway, san francisco, ca": {
       "venue": "paname"
     },
+    "paname sf, 523 broadway, san francisco, ca 94133, san francisco, ca, san francisco, ca": {
+      "venue": "paname"
+    },
     "pandora karaoke & bar, 50 mason street, san francisco, 94102, san francisco, ca": {
       "venue": "pandora-karaoke-bar"
     },
@@ -2039,6 +2086,28 @@
     "pier 45, san francisco, ca": {
       "venue": "pier-45"
     },
+    "pier 48's shed a, 48 pier 48, san francisco, ca": {
+      "pending": {
+        "events": 1,
+        "example": {
+          "date": "2026-11-28",
+          "title": "Porter Robinson | Live @ Pier 48’s Shed A, San Francisco",
+          "url": "https://partiful.com/e/0884jVjDTCJ1oklX3k9L"
+        },
+        "first_seen": "2026-11-23",
+        "last_tried": "2026-11-23",
+        "reason": "no map result in the Bay Area",
+        "sources": [
+          "Partiful"
+        ],
+        "suggestion": {
+          "city": "San Francisco",
+          "kind": "venue",
+          "name": "Pier 48's Shed A",
+          "street_address": "48 Pier 48"
+        }
+      }
+    },
     "polish club, 3040 22nd st, san francisco, ca": {
       "venue": "polish-club-of-san-francisco"
     },
@@ -2065,6 +2134,9 @@
     },
     "punch line comedy club, 444 battery st, san francisco, ca": {
       "venue": "punch-line-comedy-club"
+    },
+    "pure night club, 146 south murphy avenue, sunnyvale, ca": {
+      "venue": "pure-night-club"
     },
     "quarter note bar & grill, 1214 apollo way, sunnyvale, ca": {
       "venue": "quarter-note-bar-grill"
@@ -2117,6 +2189,9 @@
     },
     "rick & roxy's, 2131 lombard street, san francisco, 94123, san francisco, ca": {
       "venue": "rick-roxys"
+    },
+    "rickshaw stop, 155 fell st., san francisco, ca": {
+      "venue": "rickshaw-stop"
     },
     "rincon park, 289 steuart ln, san francisco, ca": {
       "venue": "rincon-park"
@@ -2237,6 +2312,9 @@
     "san francisco, california": {
       "place": "region",
       "region": "sf"
+    },
+    "san jose civic, 135 west san carlos street, san jose, ca": {
+      "venue": "san-jose-civic"
     },
     "san pablo park, 2800 park st, berkeley, ca": {
       "venue": "san-pablo-park"
@@ -2434,6 +2512,9 @@
     },
     "soul grind coffee roasters, 5400 coast hwy, pacifica, ca": {
       "venue": "soul-grind-coffee-roasters"
+    },
+    "soundtrack, 3192 16th street, san francisco, 94103, san francisco, ca": {
+      "venue": "soundtrack"
     },
     "southern pacific brewing, 620 treat ave, san francisco, ca": {
       "venue": "southern-pacific-brewing"
@@ -2829,11 +2910,17 @@
     "the uc theatre, 2036 university ave, berkeley, ca": {
       "venue": "the-uc-theatre"
     },
+    "the uc theatre, 2036 university avenue, berkeley, ca": {
+      "venue": "the-uc-theatre"
+    },
     "the warfield, 982 market st, san francisco, ca": {
       "venue": "warfield-theatre"
     },
     "the westin st. francis, 335 powell street san francisco, ca": {
       "venue": "the-westin-st-francis"
+    },
+    "the willows, 1582 folsom street, san francisco, 94103, san francisco, ca": {
+      "venue": "the-willows"
     },
     "thee stork club, 2330 telegraph ave, oakland, ca": {
       "venue": "thee-stork-club"
@@ -2981,6 +3068,9 @@
     "willard park, 2730 hillegass ave, berkeley, ca": {
       "venue": "willard-park"
     },
+    "wine down, 1100 howard st, san francisco, ca": {
+      "venue": "wine-down"
+    },
     "wondrous brewing company, 1306 65th st, emeryville, ca": {
       "venue": "wondrous-brewing-company"
     },
@@ -3022,6 +3112,9 @@
     "z space's steindler stage": {
       "room": "Steindler Stage",
       "venue": "z-space"
+    },
+    "zeki's bar, 1319 california st, san francisco, ca": {
+      "venue": "zekis-bar"
     },
     "zellerbach hall, uc berkeley, berkeley, ca": {
       "venue": "zellerbach-hall"
