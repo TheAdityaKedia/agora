@@ -2588,6 +2588,22 @@
         ]
       ]
     },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fThe Bodyguard": {
+      "classified_at": "2026-11-23T22:20:53.729303+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "The Bodyguard",
+      "topics": [
+        "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "ATG (Curran, Orpheum, Golden Gate)\u001fThe Carpenters Songbook": {
       "classified_at": "2026-10-03T01:17:03.147159+00:00",
       "cost": "paid",
@@ -2727,6 +2743,22 @@
       "title": "The Rocky Horror Picture Show",
       "topics": [
         "musical-theater"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "ATG (Curran, Orpheum, Golden Gate)\u001fThe Sleeping Beauty": {
+      "classified_at": "2026-11-23T22:20:53.667777+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "ATG (Curran, Orpheum, Golden Gate)",
+      "taxonomy_version": 2,
+      "title": "The Sleeping Beauty",
+      "topics": [
+        "dance"
       ],
       "types": [
         [
@@ -10833,6 +10865,22 @@
       "topics": [
         "blues",
         "soul-funk"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Biscuits & Blues\u001fThe Cold Stares": {
+      "classified_at": "2026-11-23T22:20:57.265884+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Biscuits & Blues",
+      "taxonomy_version": 2,
+      "title": "The Cold Stares",
+      "topics": [
+        "blues"
       ],
       "types": [
         [
@@ -20280,6 +20328,22 @@
         ]
       ]
     },
+    "Cobb's Comedy Club\u001fComedy Allstars featuring Taylor Williamson": {
+      "classified_at": "2026-11-23T22:21:24.196077+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Cobb's Comedy Club",
+      "taxonomy_version": 2,
+      "title": "Comedy Allstars featuring Taylor Williamson",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Cobb's Comedy Club\u001fComedy Allstars ft. Anthony Locascio": {
       "classified_at": "2026-10-07T17:56:52.351024+00:00",
       "cost": "paid",
@@ -22869,6 +22933,27 @@
         ]
       ]
     },
+    "Commonwealth Club\u001f‘Steal This Story, Please!’ Film Screening and Q&A with Amy Goodman and Carl Deal": {
+      "classified_at": "2026-11-23T22:20:53.817477+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Commonwealth Club",
+      "taxonomy_version": 2,
+      "title": "‘Steal This Story, Please!’ Film Screening and Q&A with Amy Goodman and Carl Deal",
+      "topics": [
+        "documentary",
+        "politics"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Commonwealth Club\u001f‘Steal This Story, Please!’ Film Screening and Q&A with Amy Goodman and Tia Lessin": {
       "classified_at": "2026-10-19T17:12:40.031019+00:00",
       "cost": "unknown",
@@ -24705,6 +24790,27 @@
         ]
       ]
     },
+    "El Rio\u001fMANGO!": {
+      "classified_at": "2026-11-23T22:20:58.836333+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "MANGO!",
+      "topics": [
+        "dance-party",
+        "club-night",
+        "lgbtq",
+        "latino",
+        "women"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fMANGO! Every 4th Saturday 2-8pm!": {
       "classified_at": "2026-10-03T04:59:01.609424+00:00",
       "cost": "free",
@@ -25139,6 +25245,25 @@
         ]
       ]
     },
+    "El Rio\u001fThe Cut Up x Psyched Radio Presents: Sucia with XTCEMI, Lobottomy, and Rose Thorns ($5)": {
+      "classified_at": "2026-11-23T22:21:21.640765+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "El Rio",
+      "taxonomy_version": 2,
+      "title": "The Cut Up x Psyched Radio Presents: Sucia with XTCEMI, Lobottomy, and Rose Thorns ($5)",
+      "topics": [
+        "club-night",
+        "electronic",
+        "latino"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "El Rio\u001fThe Dandy Lions, Squadda B, Glove Department, and Silverset ($10 Cover)": {
       "classified_at": "2026-10-03T05:17:53.895616+00:00",
       "cost": "paid",
@@ -25467,6 +25592,44 @@
         "club-night",
         "electronic",
         "black-diaspora"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fBLIZZARD, BITCH! A Bad Asstronauts and GlamCocks fundraiser": {
+      "classified_at": "2026-11-23T22:21:32.675212+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "BLIZZARD, BITCH! A Bad Asstronauts and GlamCocks fundraiser",
+      "topics": [
+        "club-night",
+        "electronic",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fCONNECT X WIP PRESENTS: HARD HOLIDAY": {
+      "classified_at": "2026-11-23T22:21:26.663449+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "CONNECT X WIP PRESENTS: HARD HOLIDAY",
+      "topics": [
+        "club-night",
+        "electronic",
+        "lgbtq"
       ],
       "types": [
         [
@@ -25824,6 +25987,24 @@
         ]
       ]
     },
+    "F8\u001fSpin And Destroy and Work In Progress Presents: BLACKOUT ft WATERSPIRIT": {
+      "classified_at": "2026-11-23T22:21:21.007815+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Spin And Destroy and Work In Progress Presents: BLACKOUT ft WATERSPIRIT",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "F8\u001fStamina Drum &amp; Bass": {
       "classified_at": "2026-10-07T20:56:00.178351+00:00",
       "cost": "free",
@@ -25934,6 +26115,61 @@
         ]
       ]
     },
+    "F8\u001fStrut SF and F8 present Thanksgiving Eve Feat. Ardalan": {
+      "classified_at": "2026-11-23T22:21:17.494261+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Strut SF and F8 present Thanksgiving Eve Feat. Ardalan",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fTeego and Nile present The Annual Thanksgiving Night Party": {
+      "classified_at": "2026-11-23T22:21:31.074645+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "Teego and Nile present The Annual Thanksgiving Night Party",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fThe Benthouse Records x Run it Back present Bent for the Holidays": {
+      "classified_at": "2026-11-23T22:21:35.279800+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "The Benthouse Records x Run it Back present Bent for the Holidays",
+      "topics": [
+        "club-night",
+        "electronic",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "F8\u001fWayward (Backroom)": {
       "classified_at": "2026-11-16T20:45:37.809253+00:00",
       "cost": "paid",
@@ -25945,6 +26181,24 @@
         "club-night",
         "electronic",
         "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "F8\u001fprogram audio: Carlos Souffront": {
+      "classified_at": "2026-11-23T22:21:29.858798+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "F8",
+      "taxonomy_version": 2,
+      "title": "program audio: Carlos Souffront",
+      "topics": [
+        "club-night",
+        "electronic"
       ],
       "types": [
         [
@@ -27427,6 +27681,22 @@
       "title": "Sylvan Esso",
       "topics": [
         "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Fox Theater Oakland\u001fThe Rap Show Live": {
+      "classified_at": "2026-11-23T22:21:25.014733+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Fox Theater Oakland",
+      "taxonomy_version": 2,
+      "title": "The Rap Show Live",
+      "topics": [
+        "hiphop-rnb"
       ],
       "types": [
         [
@@ -40528,6 +40798,42 @@
         ]
       ]
     },
+    "Oakland Art Murmur\u001fElena Godina – The Shape of Blooming": {
+      "classified_at": "2026-11-23T22:21:06.380547+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Elena Godina – The Shape of Blooming",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
+    "Oakland Art Murmur\u001fErik Friedman – Azurescens": {
+      "classified_at": "2026-11-23T22:21:04.852664+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Art Murmur",
+      "taxonomy_version": 2,
+      "title": "Erik Friedman – Azurescens",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Oakland Art Murmur\u001fFear Not – William Rhodes Artist’s Talk with Gospel Choir Performance": {
       "classified_at": "2026-10-03T04:58:32.327130+00:00",
       "cost": "free",
@@ -43291,6 +43597,24 @@
         ]
       ]
     },
+    "Oakland Public Library\u001fHitched and Financially Fit-- Session #2": {
+      "classified_at": "2026-11-23T22:21:33.549695+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Hitched and Financially Fit-- Session #2",
+      "topics": [
+        "business",
+        "education"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "Oakland Public Library\u001fHoliday Craft Fair": {
       "classified_at": "2026-11-11T18:09:26.265192+00:00",
       "cost": "free",
@@ -44172,6 +44496,22 @@
       "title": "Sewing Machine Basics for Teens",
       "topics": [
         "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "Oakland Public Library\u001fSkateboard Class & Giveaway": {
+      "classified_at": "2026-11-23T22:21:27.679346+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Public Library",
+      "taxonomy_version": 2,
+      "title": "Skateboard Class & Giveaway",
+      "topics": [
         "family-kids"
       ],
       "types": [
@@ -45087,6 +45427,22 @@
         [
           "social",
           "games-hobby"
+        ]
+      ]
+    },
+    "Oakland Theater Project\u001f2026 Fall Fellowship Showcase": {
+      "classified_at": "2026-11-23T22:21:29.116602+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Oakland Theater Project",
+      "taxonomy_version": 2,
+      "title": "2026 Fall Fellowship Showcase",
+      "topics": [
+        "theater"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -48734,6 +49090,22 @@
         ]
       ]
     },
+    "Partiful\u001fDusky | Live @ Audio SF, San Francisco": {
+      "classified_at": "2026-11-23T22:21:14.176403+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Dusky | Live @ Audio SF, San Francisco",
+      "topics": [
+        "electronic"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fDía De Los Muertos Community Run": {
       "classified_at": "2026-10-16T15:09:10.668036+00:00",
       "cost": "unknown",
@@ -48806,6 +49178,22 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fEmancipator | Live @ Rickshaw Stop, San Francisco": {
+      "classified_at": "2026-11-23T22:20:59.909705+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Emancipator | Live @ Rickshaw Stop, San Francisco",
+      "topics": [
+        "electronic"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -49413,6 +49801,22 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001fGracie Abrams | Live @ Oakland Arena, Oakland": {
+      "classified_at": "2026-11-23T22:21:12.256484+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Gracie Abrams | Live @ Oakland Arena, Oakland",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -50204,6 +50608,23 @@
         ]
       ]
     },
+    "Partiful\u001fJohn Summit | Live @ Oakland Arena, Oakland": {
+      "classified_at": "2026-11-23T22:21:07.410083+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "John Summit | Live @ Oakland Arena, Oakland",
+      "topics": [
+        "electronic",
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fJonny Wild - Who Let The Zoo Out": {
       "classified_at": "2026-10-10T02:03:49.609762+00:00",
       "cost": "unknown",
@@ -50285,6 +50706,22 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001fKamasi Washington | Live @ The UC Theatre, Berkeley": {
+      "classified_at": "2026-11-23T22:21:02.747046+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Kamasi Washington | Live @ The UC Theatre, Berkeley",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -50694,6 +51131,22 @@
       "title": "Love in the Wild",
       "topics": [
         "comedy"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fLucius | Live @ Castro Theatre, San Francisco": {
+      "classified_at": "2026-11-23T22:21:36.328799+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Lucius | Live @ Castro Theatre, San Francisco",
+      "topics": [
+        "folk-americana"
       ],
       "types": [
         [
@@ -51728,6 +52181,22 @@
         ]
       ]
     },
+    "Partiful\u001fOlivia Rodrigo | Live @ Oakland Arena, Oakland": {
+      "classified_at": "2026-11-23T22:21:08.148912+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Olivia Rodrigo | Live @ Oakland Arena, Oakland",
+      "topics": [
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fOne Day Choir - Song: “Let It Go” ❄️☃️": {
       "classified_at": "2026-11-18T19:13:44.198087+00:00",
       "cost": "free",
@@ -51816,6 +52285,22 @@
         ],
         [
           "workshop"
+        ]
+      ]
+    },
+    "Partiful\u001fO’Flynn | Live @ The Independent, San Francisco": {
+      "classified_at": "2026-11-23T22:21:01.349125+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "O’Flynn | Live @ The Independent, San Francisco",
+      "topics": [
+        "electronic"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -52242,6 +52727,23 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "Partiful\u001fPorter Robinson | Live @ Pier 48’s Shed A, San Francisco": {
+      "classified_at": "2026-11-23T22:21:03.440128+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Porter Robinson | Live @ Pier 48’s Shed A, San Francisco",
+      "topics": [
+        "electronic",
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -52844,6 +53346,22 @@
           "social",
           "party-club"
         ],
+        [
+          "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fSIDEQUEST | Live @ Pure Night Club, Sunnyvale": {
+      "classified_at": "2026-11-23T22:21:15.792779+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "SIDEQUEST | Live @ Pure Night Club, Sunnyvale",
+      "topics": [
+        "music"
+      ],
+      "types": [
         [
           "performance"
         ]
@@ -53562,6 +54080,22 @@
         ]
       ]
     },
+    "Partiful\u001fSyd | Live @ Castro Theatre, San Francisco": {
+      "classified_at": "2026-11-23T22:21:10.778699+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Syd | Live @ Castro Theatre, San Francisco",
+      "topics": [
+        "hiphop-rnb"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Partiful\u001fTEA TIME WITH BIG TIME VINTAGE": {
       "classified_at": "2026-10-07T17:56:15.326875+00:00",
       "cost": "free",
@@ -53890,6 +54424,23 @@
         ]
       ]
     },
+    "Partiful\u001fThe Mini Bliss Experience": {
+      "classified_at": "2026-11-23T22:21:22.916039+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "The Mini Bliss Experience",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ]
+      ]
+    },
     "Partiful\u001fThe Museum of (Extra)Ordinary Things": {
       "classified_at": "2026-11-12T18:39:45.695739+00:00",
       "cost": "unknown",
@@ -53902,6 +54453,23 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fThe Neighbourhood | Live @ Bill Graham Civic Auditorium, San Francisco": {
+      "classified_at": "2026-11-23T22:21:20.146446+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "The Neighbourhood | Live @ Bill Graham Civic Auditorium, San Francisco",
+      "topics": [
+        "rock-indie",
+        "pop"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -54174,6 +54742,22 @@
         [
           "social",
           "food-drink"
+        ]
+      ]
+    },
+    "Partiful\u001fVirtual Riot | Live @ San Jose Civic, San Jose": {
+      "classified_at": "2026-11-23T22:21:12.896485+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Virtual Riot | Live @ San Jose Civic, San Jose",
+      "topics": [
+        "electronic"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -60731,6 +61315,27 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fAbout Last Night: Dating Disaster Stories! at Make-Out Room": {
+      "classified_at": "2026-11-23T22:20:56.451972+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "About Last Night: Dating Disaster Stories! at Make-Out Room",
+      "topics": [
+        "spoken-word",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fAerial Hoop at Pier 23 Cafe": {
       "classified_at": "2026-10-03T05:14:46.823623+00:00",
       "cost": "unknown",
@@ -60951,6 +61556,29 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fBlack Ass Weekend: Black Queer Burlesque + Drag at Oasis SF": {
+      "classified_at": "2026-11-23T22:20:55.092151+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Black Ass Weekend: Black Queer Burlesque + Drag at Oasis SF",
+      "topics": [
+        "drag",
+        "club-night",
+        "lgbtq",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fBoard Game Night at Detour": {
       "classified_at": "2026-10-03T04:52:22.066750+00:00",
       "cost": "free",
@@ -61067,6 +61695,26 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fCHERRYBOMB: Woman Crush Wednesday at Make-Out Room": {
+      "classified_at": "2026-11-23T22:20:56.425751+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "CHERRYBOMB: Woman Crush Wednesday at Make-Out Room",
+      "topics": [
+        "dance-party",
+        "club-night",
+        "lgbtq",
+        "women"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fCOOL as FUCK! at Make-Out Room": {
       "classified_at": "2026-10-03T04:57:31.748678+00:00",
       "cost": "unknown",
@@ -61081,6 +61729,27 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fCat's Corner at Mabuhay Gardens": {
+      "classified_at": "2026-11-23T22:20:57.058292+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Cat's Corner at Mabuhay Gardens",
+      "topics": [
+        "swing",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -61154,6 +61823,25 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fClub X at City Nights": {
+      "classified_at": "2026-11-23T22:20:56.930850+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Club X at City Nights",
+      "topics": [
+        "club-night",
+        "electronic",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fClutch the Pearls at Make-Out Room": {
       "classified_at": "2026-10-03T04:57:22.385881+00:00",
       "cost": "unknown",
@@ -61169,6 +61857,21 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fCo-working Hours at Tantara": {
+      "classified_at": "2026-11-23T22:20:56.916110+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Co-working Hours at Tantara",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -61219,6 +61922,22 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fCompassion Forum at Mabuhay Gardens": {
+      "classified_at": "2026-11-23T22:20:57.034282+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Compassion Forum at Mabuhay Gardens",
+      "topics": [
+        "wellness"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fCosmic Comedy Wednesdays at The Orbit Room": {
       "classified_at": "2026-10-03T01:29:10.773471+00:00",
       "cost": "free",
@@ -61265,6 +61984,24 @@
       "topics": [
         "club-night",
         "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fCuban Jam at Boom Boom Room": {
+      "classified_at": "2026-11-23T22:20:57.545668+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Cuban Jam at Boom Boom Room",
+      "topics": [
+        "world-music",
+        "club-night"
       ],
       "types": [
         [
@@ -61610,6 +62347,27 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fFree Irish Music + Pogues Singalong at The Riptide": {
+      "classified_at": "2026-11-23T22:20:55.633933+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Free Irish Music + Pogues Singalong at The Riptide",
+      "topics": [
+        "folk-americana",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fFree Pool Monday at Columbus Cafe": {
       "classified_at": "2026-10-03T04:55:28.254813+00:00",
       "cost": "free",
@@ -61800,6 +62558,23 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fGrateful First Fridays on Haight Street - Playing The Dead at O'Reilly's Pub": {
+      "classified_at": "2026-11-23T22:20:54.454528+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Grateful First Fridays on Haight Street - Playing The Dead at O'Reilly's Pub",
+      "topics": [
+        "rock-indie",
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fGreat Cocktails: An Introduction To Mixology at Elixir": {
       "classified_at": "2026-10-03T01:28:07.318281+00:00",
       "cost": "unknown",
@@ -61920,6 +62695,27 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fHoliday Dinner Dance Party w/ Halsey & The Hi-Hats at Verdi Club": {
+      "classified_at": "2026-11-23T22:20:54.415188+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Holiday Dinner Dance Party w/ Halsey & The Hi-Hats at Verdi Club",
+      "topics": [
+        "jazz",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fHot Einstein at Tupelo": {
       "classified_at": "2026-10-03T05:09:49.517943+00:00",
       "cost": "unknown",
@@ -61929,6 +62725,25 @@
       "title": "Hot Einstein at Tupelo",
       "topics": [
         "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fHouse of Her at Blondie's": {
+      "classified_at": "2026-11-23T22:20:53.778998+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "House of Her at Blondie's",
+      "topics": [
+        "club-night",
+        "electronic",
+        "lgbtq"
       ],
       "types": [
         [
@@ -61969,6 +62784,24 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fIRL Dating Show at Silver Cloud Restaurant & Karaoke Bar": {
+      "classified_at": "2026-11-23T22:20:55.661276+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "IRL Dating Show at Silver Cloud Restaurant & Karaoke Bar",
+      "topics": [
+        "club-night",
+        "karaoke"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -62019,6 +62852,22 @@
         [
           "social",
           "games-hobby"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fJOS ECKERT | KEVITO Y LOS BRAVOS | TMI | MIKKO JERVOSO at O'Reilly's Pub": {
+      "classified_at": "2026-11-23T22:20:54.274916+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "JOS ECKERT | KEVITO Y LOS BRAVOS | TMI | MIKKO JERVOSO at O'Reilly's Pub",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -62379,6 +63228,28 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fLegends In The Making Showcase at Mayes Oyster House": {
+      "classified_at": "2026-11-23T22:20:55.568239+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Legends In The Making Showcase at Mayes Oyster House",
+      "topics": [
+        "music",
+        "comedy",
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fLips & Lashes Drag Brunch at Lookout": {
       "classified_at": "2026-10-03T04:55:00.188543+00:00",
       "cost": "unknown",
@@ -62458,6 +63329,25 @@
       "title": "Live DJ at Roxy's Nightclub at Rick & Roxy's",
       "topics": [
         "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fLive DJs at Soundtrack": {
+      "classified_at": "2026-11-23T22:20:55.756070+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Live DJs at Soundtrack",
+      "topics": [
+        "club-night",
+        "hiphop-rnb",
+        "electronic"
       ],
       "types": [
         [
@@ -62667,6 +63557,25 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fM.A.D. (Madarae After Dark) at 46 Minna": {
+      "classified_at": "2026-11-23T22:20:55.711000+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "M.A.D. (Madarae After Dark) at 46 Minna",
+      "topics": [
+        "club-night",
+        "electronic",
+        "dance-party"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fMae Powell Jazz Quartet at Specs'": {
       "classified_at": "2026-10-03T05:14:50.175921+00:00",
       "cost": "unknown",
@@ -62714,6 +63623,22 @@
         [
           "social",
           "games-hobby"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fMaking Movies 'Una Vida' Tour 2026 at The Great Northern": {
+      "classified_at": "2026-11-23T22:20:55.140268+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Making Movies 'Una Vida' Tour 2026 at The Great Northern",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -62865,6 +63790,22 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fMirthquake: Monday Live Comedy at Abbey Tavern": {
+      "classified_at": "2026-11-23T22:20:54.853155+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Mirthquake: Monday Live Comedy at Abbey Tavern",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -63168,6 +64109,24 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fPRINCESS W/ BOSCO · 2026 WRAPPED! at Oasis SF": {
+      "classified_at": "2026-11-23T22:20:55.032637+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "PRINCESS W/ BOSCO · 2026 WRAPPED! at Oasis SF",
+      "topics": [
+        "drag",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fPTD Presents: Grateful First Fridays on Haight Street at O'Reilly's Pub": {
       "classified_at": "2026-10-03T05:14:08.662344+00:00",
       "cost": "free",
@@ -63178,6 +64137,24 @@
       "topics": [
         "club-night",
         "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fPUMPS Sundays at Beaux": {
+      "classified_at": "2026-11-23T22:20:53.740817+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "PUMPS Sundays at Beaux",
+      "topics": [
+        "drag",
+        "lgbtq"
       ],
       "types": [
         [
@@ -63290,6 +64267,40 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fPop Culture Trivia at Wine Down": {
+      "classified_at": "2026-11-23T22:20:54.965851+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Pop Culture Trivia at Wine Down",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fPopozuda at City Nights": {
+      "classified_at": "2026-11-23T22:20:56.708441+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Popozuda at City Nights",
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fPopper Slut Disco (Underwear Dance Party) at Beaux": {
       "classified_at": "2026-10-03T04:54:55.468249+00:00",
       "cost": "free",
@@ -63301,6 +64312,25 @@
         "dance-party",
         "club-night",
         "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fPrincess: MAGIC The Gathering at Oasis SF": {
+      "classified_at": "2026-11-23T22:20:55.102428+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Princess: MAGIC The Gathering at Oasis SF",
+      "topics": [
+        "drag",
+        "games",
+        "club-night"
       ],
       "types": [
         [
@@ -63361,6 +64391,25 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fREPARATIONS: DREAMGIRLS! at Oasis SF": {
+      "classified_at": "2026-11-23T22:20:55.049030+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "REPARATIONS: DREAMGIRLS! at Oasis SF",
+      "topics": [
+        "drag",
+        "club-night",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fRedwood Room After Dark Live Jazz at The Redwood Room": {
       "classified_at": "2026-10-03T05:11:00.872402+00:00",
       "cost": "unknown",
@@ -63387,6 +64436,25 @@
       "topics": [
         "club-night",
         "world-music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fRitmo Latino at City Nights": {
+      "classified_at": "2026-11-23T22:20:56.778589+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Ritmo Latino at City Nights",
+      "topics": [
+        "salsa",
+        "club-night",
+        "latino"
       ],
       "types": [
         [
@@ -63462,6 +64530,40 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fSAAAANNTTTTAAAAA-con 2026 at Paname SF": {
+      "classified_at": "2026-11-23T22:20:56.280104+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "SAAAANNTTTTAAAAA-con 2026 at Paname SF",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fSAN FRANCISCO ALTERNAFEST! at O'Reilly's Pub": {
+      "classified_at": "2026-11-23T22:20:54.295795+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "SAN FRANCISCO ALTERNAFEST! at O'Reilly's Pub",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fSET with WOO YORK [Live] at The Great Northern": {
       "classified_at": "2026-10-03T05:14:12.356934+00:00",
       "cost": "unknown",
@@ -63471,6 +64573,22 @@
       "title": "SET with WOO YORK [Live] at The Great Northern",
       "topics": [
         "music"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fSF ALTERNAFEST! at O'Reilly's Pub": {
+      "classified_at": "2026-11-23T22:20:54.378013+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "SF ALTERNAFEST! at O'Reilly's Pub",
+      "topics": [
+        "rock-indie"
       ],
       "types": [
         [
@@ -63513,6 +64631,23 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fSF FEMMEROCK FEST - All Female Fronted Bands at O'Reilly's Pub": {
+      "classified_at": "2026-11-23T22:20:54.397511+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "SF FEMMEROCK FEST - All Female Fronted Bands at O'Reilly's Pub",
+      "topics": [
+        "rock-indie",
+        "women"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fSQREAM at Oasis SF": {
       "classified_at": "2026-10-03T05:14:10.821590+00:00",
       "cost": "unknown",
@@ -63540,6 +64675,24 @@
       "title": "Safe Words Comedy & Hot Dogs at Eagle Tavern",
       "topics": [
         "comedy"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fSaints & Sinners Drag Brunch at Gospel SF": {
+      "classified_at": "2026-11-23T22:21:09.685395+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Saints & Sinners Drag Brunch at Gospel SF",
+      "topics": [
+        "drag",
+        "lgbtq"
       ],
       "types": [
         [
@@ -63717,6 +64870,23 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fSan Francisco Comedy Underground at Noe Valley Farms": {
+      "classified_at": "2026-11-23T22:20:57.386412+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "San Francisco Comedy Underground at Noe Valley Farms",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fSan Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech": {
       "classified_at": "2026-10-03T04:56:23.047691+00:00",
       "cost": "unknown",
@@ -63726,6 +64896,27 @@
       "title": "San Francisco Magic Theater Live Show at San Francisco Magic Theater @ the Marrakech",
       "topics": [],
       "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fSanta Skivvies Run & Drag Show at Lookout": {
+      "classified_at": "2026-11-23T22:20:54.518492+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Santa Skivvies Run & Drag Show at Lookout",
+      "topics": [
+        "drag",
+        "lgbtq"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
         [
           "performance"
         ]
@@ -63780,6 +64971,23 @@
         [
           "social",
           "dance-social"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fSecret Guest List: \"Get it?!\" Gameshow at Cobb's Comedy Club": {
+      "classified_at": "2026-11-23T22:20:54.917139+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Secret Guest List: \"Get it?!\" Gameshow at Cobb's Comedy Club",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -63970,6 +65178,24 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fStarlite Record & Tape Fair at Starlite": {
+      "classified_at": "2026-11-23T22:20:54.456521+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Starlite Record & Tape Fair at Starlite",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fStripped Tuesdays (Underwear Party) at Beaux": {
       "classified_at": "2026-10-03T04:54:29.530526+00:00",
       "cost": "free",
@@ -63985,6 +65211,22 @@
         [
           "social",
           "party-club"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fSummer Concerts on the Plaza at 101 California Plaza": {
+      "classified_at": "2026-11-23T22:20:56.248319+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Summer Concerts on the Plaza at 101 California Plaza",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -64070,6 +65312,24 @@
         ],
         [
           "performance"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fTECHNO TUESDAY at Make-Out Room": {
+      "classified_at": "2026-11-23T22:20:56.343069+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "TECHNO TUESDAY at Make-Out Room",
+      "topics": [
+        "club-night",
+        "electronic"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -64211,6 +65471,24 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fTexas Tuesdays Line Dancing at The Cigar Bar & Grill": {
+      "classified_at": "2026-11-23T22:20:56.284090+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Texas Tuesdays Line Dancing at The Cigar Bar & Grill",
+      "topics": [
+        "dance-party",
+        "country"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fThe BOAT Improv Jam at Eclectic Box SF": {
       "classified_at": "2026-10-03T04:54:04.012382+00:00",
       "cost": "free",
@@ -64340,6 +65618,22 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fThe West Coast Blues Revue at Biscuits & Blues": {
+      "classified_at": "2026-11-23T22:20:56.159576+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "The West Coast Blues Revue at Biscuits & Blues",
+      "topics": [
+        "blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fThe Woodchopper's Ball at Verdi Club": {
       "classified_at": "2026-10-03T04:55:07.549470+00:00",
       "cost": "free",
@@ -64403,6 +65697,39 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fTrio Cotier at Pier 23 Cafe": {
+      "classified_at": "2026-11-23T22:20:56.047267+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Trio Cotier at Pier 23 Cafe",
+      "topics": [
+        "jazz"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fTrivia Night & $1 Wings at Holey Moley - San Francisco": {
+      "classified_at": "2026-11-23T22:20:56.949652+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Trivia Night & $1 Wings at Holey Moley - San Francisco",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
         ]
       ]
     },
@@ -64518,6 +65845,23 @@
       "types": [
         [
           "social"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fTrivia Night at Pier 23 Cafe": {
+      "classified_at": "2026-11-23T22:20:55.788556+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Trivia Night at Pier 23 Cafe",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -64739,6 +66083,24 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fTrivia at Silver Cloud Restaurant & Karaoke Bar": {
+      "classified_at": "2026-11-23T22:20:55.667928+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Trivia at Silver Cloud Restaurant & Karaoke Bar",
+      "topics": [
+        "trivia",
+        "karaoke"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fTrivia at The Riptide": {
       "classified_at": "2026-10-03T04:56:19.061191+00:00",
       "cost": "unknown",
@@ -64746,6 +66108,23 @@
       "source": "SF Bar Guide",
       "taxonomy_version": 2,
       "title": "Trivia at The Riptide",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fTrivia at The Willows": {
+      "classified_at": "2026-11-23T22:20:55.475488+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Trivia at The Willows",
       "topics": [
         "trivia"
       ],
@@ -64769,6 +66148,39 @@
       "types": [
         [
           "social"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fTrivia at Zeki's Bar": {
+      "classified_at": "2026-11-23T22:20:57.544246+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Trivia at Zeki's Bar",
+      "topics": [
+        "trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fValue Culture Boom Boom Comedy Showcase at Boom Boom Room": {
+      "classified_at": "2026-11-23T22:20:57.478747+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "Value Culture Boom Boom Comedy Showcase at Boom Boom Room",
+      "topics": [
+        "comedy"
+      ],
+      "types": [
+        [
+          "performance"
         ]
       ]
     },
@@ -65001,6 +66413,22 @@
         ]
       ]
     },
+    "SF Bar Guide\u001fYOUR STRAY DOG | DAMN, SIRE | KILONOVA at O'Reilly's Pub": {
+      "classified_at": "2026-11-23T22:20:53.743054+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "YOUR STRAY DOG | DAMN, SIRE | KILONOVA at O'Reilly's Pub",
+      "topics": [
+        "rock-indie"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "SF Bar Guide\u001fYoungHearts at Eagle Tavern": {
       "classified_at": "2026-10-03T04:56:55.613941+00:00",
       "cost": "unknown",
@@ -65035,6 +66463,26 @@
         ],
         [
           "exhibition"
+        ]
+      ]
+    },
+    "SF Bar Guide\u001fZinggFlower Mondays at Mabuhay Gardens": {
+      "classified_at": "2026-11-23T22:20:57.036547+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "SF Bar Guide",
+      "taxonomy_version": 2,
+      "title": "ZinggFlower Mondays at Mabuhay Gardens",
+      "topics": [
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -79452,6 +80900,23 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fWorkshop: Faux Stained Glass Bookmark": {
+      "classified_at": "2026-11-23T22:20:53.777026+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Faux Stained Glass Bookmark",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fWorkshop: Felt Holiday Baubles": {
       "classified_at": "2026-10-03T01:31:55.613393+00:00",
       "cost": "free",
@@ -79909,6 +81374,23 @@
       "topics": [
         "business",
         "tech"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ]
+    },
+    "San Francisco Public Library\u001fWorkshop: Little Muses": {
+      "classified_at": "2026-11-23T22:20:53.673569+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Workshop: Little Muses",
+      "topics": [
+        "music",
+        "family-kids"
       ],
       "types": [
         [
@@ -89687,6 +91169,28 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "The Faight Collective\u001fBack In Town: Black Friday Fest": {
+      "classified_at": "2026-11-23T22:21:18.929940+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "Back In Town: Black Friday Fest",
+      "topics": [
+        "comedy",
+        "club-night",
+        "music"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ],
+        [
+          "performance"
         ]
       ]
     },

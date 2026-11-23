@@ -110,6 +110,28 @@
       "region": "sf",
       "status": "auto"
     },
+    "101-california": {
+      "added": "2026-11-23",
+      "address": "101 California Street, San Francisco, CA 94111",
+      "evidence": [
+        "map: 101 California in San Francisco County (building, way/1279505488)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches",
+        "ai: proposed 101 California Plaza, 101 California Street, San Francisco"
+      ],
+      "lat": 37.792905,
+      "lng": -122.398113,
+      "name": "101 California",
+      "osm": "way/1279505488",
+      "possible_duplicates": [
+        "embarcadero",
+        "patriot-house-pub"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1059-market-st": {
       "added": "2026-10-17",
       "address": "1059 Market St, San Francisco, CA 94103",
@@ -2421,6 +2443,30 @@
       "region": "sf",
       "status": "auto"
     },
+    "bill-graham-civic-auditorium": {
+      "added": "2026-11-23",
+      "address": "99 Grove Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: Bill Graham Civic Auditorium in San Francisco County (building, way/25759141)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.77805,
+      "lng": -122.417308,
+      "name": "Bill Graham Civic Auditorium",
+      "osm": "way/25759141",
+      "possible_duplicates": [
+        "bar-bean-fusion",
+        "x",
+        "san-francisco-public-library-main-library",
+        "the-function-sf-comedy-club-cocktail-lounge",
+        "mr-tipples-recording-studio"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "bimbos-365-club": {
       "added": "2026-10-07",
       "address": "1025 Columbus Avenue, San Francisco, CA 94133",
@@ -2531,6 +2577,36 @@
         "thorough-bread-and-pastry",
         "swedish-american-hall",
         "the-detour"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "blondies": {
+      "added": "2026-11-23",
+      "address": "540 Valencia Street, San Francisco, CA",
+      "evidence": [
+        "map: 540;542 in San Francisco County (building, way/260361501)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.764215,
+      "lng": -122.422104,
+      "name": "Blondie's",
+      "osm": "way/260361501",
+      "possible_duplicates": [
+        "muddy-waters-coffee-lounge",
+        "roxie-theater",
+        "dalva",
+        "the-drawing-room-annex",
+        "mannys",
+        "lore-speakeasy-and-escape-room",
+        "kilowatt",
+        "455-valencia-st",
+        "eclectic-box",
+        "soundtrack",
+        "clarion-alley-mural-project",
+        "elixir"
       ],
       "precision": "building",
       "region": "sf",
@@ -2777,6 +2853,30 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "boom-boom-room": {
+      "added": "2026-11-23",
+      "address": "1601 Fillmore Street, San Francisco, CA 95115",
+      "evidence": [
+        "map: Boom Boom Room in San Francisco County (building, node/4419680995)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.784602,
+      "lng": -122.433137,
+      "name": "Boom Boom Room",
+      "osm": "node/4419680995",
+      "possible_duplicates": [
+        "the-fillmore",
+        "the-progress",
+        "festa-wine-cocktail-lounge",
+        "1469-webster-st",
+        "1870-fillmore-st"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "bottoms-up": {
       "added": "2026-10-02",
@@ -3222,6 +3322,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "city-nights": {
+      "added": "2026-11-23",
+      "address": "715 Harrison Street, San Francisco, CA 94105",
+      "evidence": [
+        "map: 715 in San Francisco County (building, way/151980056)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.782054,
+      "lng": -122.397649,
+      "name": "City Nights",
+      "osm": "way/151980056",
+      "possible_duplicates": [
+        "golden-eye-social"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "clarion-alley-mural-project": {
       "added": "2026-10-03",
@@ -4912,6 +5031,29 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "gospel-sf": {
+      "added": "2026-11-23",
+      "address": "229 9th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 229 in San Francisco County (building, node/1880218676)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.774705,
+      "lng": -122.412583,
+      "name": "Gospel SF",
+      "osm": "node/1880218676",
+      "possible_duplicates": [
+        "arc-gallery-studios",
+        "st-josephs-art-society",
+        "f8-nightclub",
+        "melifolla-studio",
+        "cat-club"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "grace-cathedral": {
       "added": "2026-10-02",
       "address": "The Great Stairs at Grace Cathedral, San Francisco, CA 94108",
@@ -5340,6 +5482,31 @@
       "precision": "building",
       "region": "peninsula",
       "status": "verified"
+    },
+    "holey-moley": {
+      "added": "2026-11-23",
+      "address": "1096 South Van Ness Avenue, San Francisco, CA 94110",
+      "evidence": [
+        "map: Holey Moley in San Francisco County (building, node/2841317401)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.755713,
+      "lng": -122.416745,
+      "name": "Holey Moley",
+      "osm": "node/2841317401",
+      "possible_duplicates": [
+        "polish-club-of-san-francisco",
+        "grand-coffee-too",
+        "gray-area",
+        "laszlo",
+        "arcana",
+        "make-out-room"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "hotel-utah-saloon": {
       "added": "2026-10-02",
@@ -6369,6 +6536,29 @@
       "precision": "building",
       "region": "eastbay",
       "status": "verified"
+    },
+    "madarae": {
+      "added": "2026-11-23",
+      "address": "46 Minna Street, San Francisco, CA 94105",
+      "evidence": [
+        "map: Madarae in San Francisco County (building, node/1613924529)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.788548,
+      "lng": -122.398145,
+      "name": "Madarae",
+      "osm": "node/1613924529",
+      "possible_duplicates": [
+        "temple-nightclub-san-francisco",
+        "101-2nd-st",
+        "salesforce-park",
+        "111-minna-gallery",
+        "zo"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "madrone-art-bar": {
       "added": "2026-10-02",
@@ -7561,6 +7751,23 @@
       "lng": -122.135443,
       "name": "Nu-Rays",
       "osm": "node/5749875493",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
+    "oakland-arena": {
+      "added": "2026-11-23",
+      "address": "7000 Coliseum Way, Oakland, CA 94621",
+      "evidence": [
+        "map: Oakland Arena in Alameda County (building, way/23426633)",
+        "text: Oakland",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.750273,
+      "lng": -122.202932,
+      "name": "Oakland Arena",
+      "osm": "way/23426633",
       "precision": "building",
       "region": "eastbay",
       "status": "auto"
@@ -8781,6 +8988,22 @@
       "region": "sf",
       "status": "auto"
     },
+    "pure-night-club": {
+      "added": "2026-11-23",
+      "address": "146 South Murphy Avenue, Sunnyvale, CA 94086",
+      "evidence": [
+        "map: Pure Nightclub in Santa Clara County (building, way/30908080)",
+        "text: Sunnyvale",
+        "street number matches"
+      ],
+      "lat": 37.376803,
+      "lng": -122.029769,
+      "name": "Pure Night Club",
+      "osm": "way/30908080",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "quarter-note-bar-grill": {
       "added": "2026-11-12",
       "address": "1214 Apollo Way, Sunnyvale, CA 94085",
@@ -8910,6 +9133,32 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "rickshaw-stop": {
+      "added": "2026-11-23",
+      "address": "155 Fell Street, San Francisco, CA 94102",
+      "evidence": [
+        "map: Rickshaw Stop in San Francisco County (building, way/172111611)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.77599,
+      "lng": -122.420475,
+      "name": "Rickshaw Stop",
+      "osm": "way/172111611",
+      "possible_duplicates": [
+        "decker-theatre",
+        "sfjazz-center",
+        "sydney-goldstein-theater",
+        "mr-tipples-recording-studio",
+        "louise-m-davies-symphony-hall",
+        "the-function-sf-comedy-club-cocktail-lounge",
+        "bar-bean-fusion"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "rincon-park": {
       "added": "2026-11-02",
@@ -9230,6 +9479,27 @@
       "region": "sf",
       "status": "auto"
     },
+    "san-jose-civic": {
+      "added": "2026-11-23",
+      "address": "135 West San Carlos Street, San Jose, CA 95113",
+      "evidence": [
+        "map: San Jose Civic in Santa Clara County (building, node/9115664372)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.330794,
+      "lng": -121.889701,
+      "name": "San Jose Civic",
+      "osm": "node/9115664372",
+      "possible_duplicates": [
+        "montgomery-theater",
+        "nirvana-soul"
+      ],
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "san-pablo-park": {
       "added": "2026-10-07",
       "address": "2800 Park Street, Berkeley, CA 94702",
@@ -9521,6 +9791,33 @@
       "osm": "way/123528850",
       "precision": "building",
       "region": "peninsula",
+      "status": "auto"
+    },
+    "soundtrack": {
+      "added": "2026-11-23",
+      "address": "3192 16th Street, San Francisco, 94103, San Francisco, CA",
+      "evidence": [
+        "map: 3190;3192 in San Francisco County (building, way/260955953)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.764995,
+      "lng": -122.423827,
+      "name": "Soundtrack",
+      "osm": "way/260955953",
+      "possible_duplicates": [
+        "elixir",
+        "kilowatt",
+        "dalva",
+        "roxie-theater",
+        "eclectic-box",
+        "mannys",
+        "muddy-waters-coffee-lounge",
+        "455-valencia-st",
+        "lore-speakeasy-and-escape-room"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "southern-pacific-brewing": {
@@ -11255,6 +11552,30 @@
       "region": "sf",
       "status": "auto"
     },
+    "the-willows": {
+      "added": "2026-11-23",
+      "address": "1582 Folsom Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: The Willows in San Francisco County (building, node/3595467593)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.771088,
+      "lng": -122.415053,
+      "name": "The Willows",
+      "osm": "node/3595467593",
+      "possible_duplicates": [
+        "oasis",
+        "audio-nightclub",
+        "buzzworks",
+        "eagle-tavern",
+        "the-foundry-sf"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "thee-stork-club": {
       "added": "2026-10-07",
       "address": "2330 Telegraph Avenue, Oakland, CA 94612",
@@ -11951,6 +12272,27 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "wine-down": {
+      "added": "2026-11-23",
+      "address": "1100 Howard Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: 1100 in San Francisco County (building, way/91181771)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.777948,
+      "lng": -122.409571,
+      "name": "Wine Down",
+      "osm": "way/91181771",
+      "possible_duplicates": [
+        "root-division",
+        "nosh-box",
+        "the-stud"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "wondrous-brewing-company": {
       "added": "2026-11-18",
       "address": "1306 65th Street, Emeryville, CA 94608",
@@ -12119,6 +12461,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "zekis-bar": {
+      "added": "2026-11-23",
+      "address": "1319 California Street, San Francisco, CA 94164",
+      "evidence": [
+        "map: Zeki's Bar in San Francisco County (building, node/9401048618)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.791018,
+      "lng": -122.41619,
+      "name": "Zeki's Bar",
+      "osm": "node/9401048618",
+      "possible_duplicates": [
+        "le-beau-market"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "zellerbach-hall": {
       "added": "2026-10-07",
