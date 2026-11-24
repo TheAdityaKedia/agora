@@ -8726,6 +8726,18 @@
       "region": "sf",
       "status": "verified"
     },
+    "pier-39": {
+      "added": "2026-11-24",
+      "address": "",
+      "evidence": [
+        "map: Pier 39 in San Francisco County (city, way/199829618)",
+        "text: San Francisco"
+      ],
+      "name": "Pier 39",
+      "precision": "city",
+      "region": "sf",
+      "status": "auto"
+    },
     "pier-45": {
       "added": "2026-10-05",
       "address": "Pier 45, San Francisco, CA 94133",
@@ -11689,6 +11701,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "thrive-city": {
+      "added": "2026-11-24",
+      "address": "1 Warriors Way, San Francisco, CA 94158",
+      "evidence": [
+        "map: Chase Center in San Francisco County (building, way/579646390)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.7679,
+      "lng": -122.387422,
+      "name": "Thrive City",
+      "osm": "way/579646390",
+      "possible_duplicates": [
+        "dumpling-time-thrive-city"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "tiat-place": {
       "added": "2026-10-17",
