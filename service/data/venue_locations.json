@@ -6,6 +6,9 @@
     "100 john f kennedy dr, san francisco, ca": {
       "venue": "conservatory-of-flowers"
     },
+    "100 larkin st, san francisco, ca": {
+      "venue": "san-francisco-public-library-main-library"
+    },
     "1001 center st, santa cruz, ca": {
       "place": "outside"
     },
@@ -14,6 +17,9 @@
     },
     "101 california plaza, san francisco, ca": {
       "venue": "101-california"
+    },
+    "1018 valencia st, san francisco, ca": {
+      "venue": "1018-valencia-st"
     },
     "103 kennedy dr, capitola, ca": {
       "place": "outside"
@@ -59,6 +65,9 @@
     },
     "1355 market st, san francisco, ca": {
       "venue": "x"
+    },
+    "1397 46th ave, san francisco, ca": {
+      "venue": "1397-46th-ave"
     },
     "1430 cole st, san francisco, ca": {
       "venue": "1430-cole-st"
@@ -120,6 +129,9 @@
     "1870 fillmore st, san francisco, ca": {
       "venue": "1870-fillmore-st"
     },
+    "19 clementina st, san francisco, ca": {
+      "venue": "19-clementina-st"
+    },
     "1906 union st, san francisco, ca": {
       "venue": "1906-union-st"
     },
@@ -143,6 +155,9 @@
     },
     "201 washington st, oakland, ca": {
       "venue": "201-washington-st"
+    },
+    "2036 polk st, san francisco, ca": {
+      "venue": "moody-goose-vintage"
     },
     "207 corte madera ave, corte madera, ca": {
       "venue": "zinz-wine-bar"
@@ -222,7 +237,7 @@
           "url": "https://partiful.com/e/ySWqxNHmAptnZZjRplcr"
         },
         "first_seen": "2026-11-18",
-        "last_tried": "2026-11-18",
+        "last_tried": "2026-11-25",
         "reason": "map result 'Diamond Street & 29th Street' doesn't match the name or street number",
         "sources": [
           "Partiful"
@@ -232,9 +247,9 @@
           "kind": "venue",
           "map": {
             "label": "Diamond Street & 29th Street",
-            "lat": 37.743065,
-            "lng": -122.435487,
-            "osm": "node/6389800602"
+            "lat": 37.743293,
+            "lng": -122.435681,
+            "osm": "node/6389800603"
           },
           "name": "29th St & Diamond St",
           "street_address": "29th Street and Diamond Street"
@@ -264,6 +279,9 @@
     },
     "3227 telegraph ave, oakland, ca": {
       "venue": "3227-telegraph-ave"
+    },
+    "3252 19th st, san francisco, ca": {
+      "venue": "joey-the-cat"
     },
     "3295 castro valley blvd b100, castro valley, ca": {
       "venue": "castro-valley-marketplace"
@@ -507,6 +525,9 @@
     "968 valencia st, san francisco, ca": {
       "venue": "big-time-vintage"
     },
+    "991 oak st, san francisco, ca": {
+      "venue": "991-oak-st"
+    },
     "a. p. giannini plaza, 450 kearny st, san francisco, ca": {
       "venue": "a-p-giannini-plaza"
     },
@@ -548,8 +569,14 @@
     "all out comedy theater, 2550 telegraph ave, oakland, ca": {
       "venue": "all-out-comedy-theater"
     },
+    "alma community center, 136 w alma ave, san jose, ca": {
+      "venue": "alma-community-center"
+    },
     "alta vina, 420 3rd st, oakland, ca": {
       "venue": "alta-vina"
+    },
+    "amc metreon 16, 135 4th st, unit 3000, san francisco, ca": {
+      "venue": "amc-loews-metreon-16"
     },
     "amelie wine bar, 1754 polk st, san francisco, ca": {
       "venue": "amelie-wine-bar"
@@ -673,6 +700,9 @@
     },
     "blondie's, 540 valencia street, san francisco, ca": {
       "venue": "blondies"
+    },
+    "bluestream wines, 555 grant ave, san francisco, ca": {
+      "venue": "bluestream-wines"
     },
     "book club of california, 47 kearny st, san francisco, ca": {
       "venue": "book-club-of-california"
@@ -927,7 +957,7 @@
           "url": "https://partiful.com/e/4uaYV0Ze1tUNjlT0TK8k"
         },
         "first_seen": "2026-10-28",
-        "last_tried": "2026-11-18",
+        "last_tried": "2026-11-25",
         "reason": "no map result in the Bay Area",
         "sources": [
           "Partiful"
@@ -1044,6 +1074,9 @@
     },
     "embarcadero, san francisco, ca": {
       "venue": "embarcadero"
+    },
+    "emotion potion, 591 guerrero st, san francisco, ca": {
+      "venue": "emotion-potion"
     },
     "environmental volunteers' ecocenter, 2560 embarcadero rd, palo alto, ca": {
       "venue": "environmental-volunteers-ecocenter"
@@ -1440,6 +1473,9 @@
     "johansson projects, 2300 telegraph ave, oakland": {
       "venue": "johansson-projects"
     },
+    "jolene's, 2700 16th st, san francisco, ca": {
+      "venue": "jolenes"
+    },
     "jollibee, 934 market st, san francisco, ca": {
       "venue": "jollibee"
     },
@@ -1458,6 +1494,9 @@
     },
     "karma cafe, 1901 hayes st, san francisco, ca": {
       "venue": "karma-cafe"
+    },
+    "kash cafe, 2480 bancroft way, berkeley, ca": {
+      "venue": "kash-cafe"
     },
     "kearny st & clay st, san francisco, ca": {
       "venue": "kearny-st-clay-st"
@@ -1562,6 +1601,9 @@
     "lower polk cbd, 1170 sutter st, san francisco, ca": {
       "venue": "lower-polk-cbd"
     },
+    "lumen labs, 905 parker st, berkeley, ca": {
+      "venue": "lumen-labs"
+    },
     "luna del soul, 822 cassia st, redwood city, ca": {
       "venue": "luna-del-soul"
     },
@@ -1634,6 +1676,9 @@
     "maritime museum, 900 beach st, san francisco, ca": {
       "venue": "national-maritime-museum"
     },
+    "martin luther king jr. civic center park, 2151 martin luther king jr way, berkeley, ca": {
+      "venue": "martin-luther-king-jr-civic-center-park"
+    },
     "martuni's, 4 valencia st, san francisco, ca": {
       "venue": "martunis"
     },
@@ -1685,6 +1730,9 @@
     "mirage tattoo, 687 mcallister st, san francisco, ca": {
       "venue": "mirage-tattoo"
     },
+    "mission bowling club, 3176 17th st, san francisco, ca": {
+      "venue": "mission-bowling-club"
+    },
     "mission bowling club, 3176 17th street, san francisco, 94110, san francisco, ca": {
       "venue": "mission-bowling-club"
     },
@@ -1697,7 +1745,7 @@
           "url": "https://partiful.com/e/WKPvwrbqJ0y5elquyRyn"
         },
         "first_seen": "2026-10-16",
-        "last_tried": "2026-11-18",
+        "last_tried": "2026-11-25",
         "reason": "map result 'San Francisco, CA - Salesforce Plaza (SFC)' doesn't match the name or street number",
         "sources": [
           "Partiful"
@@ -1927,6 +1975,9 @@
     "oasis sf, 298 11th st, san francisco, ca": {
       "venue": "oasis"
     },
+    "ocean ale house, 1314 ocean ave, san francisco, ca": {
+      "venue": "ocean-ale-house"
+    },
     "ocean ale house, 1314 ocean avenue, san francisco, 94112, san francisco, ca": {
       "venue": "ocean-ale-house"
     },
@@ -2000,7 +2051,7 @@
           "url": "https://partiful.com/e/l5kWbYNRoxuIdixy6Z89"
         },
         "first_seen": "2026-11-18",
-        "last_tried": "2026-11-18",
+        "last_tried": "2026-11-25",
         "reason": "text says Larkspur (Marin County), map result 'Outerknown' is in Santa Clara County",
         "sources": [
           "Partiful"
@@ -2010,9 +2061,9 @@
           "kind": "venue",
           "map": {
             "label": "Larkspur Landing Circle",
-            "lat": 37.947757,
-            "lng": -122.510792,
-            "osm": "way/1073032096"
+            "lat": 37.946892,
+            "lng": -122.512018,
+            "osm": "way/1073032098"
           },
           "name": "Outerknown",
           "street_address": "1009 Larkspur Landing Cir, Unit 5A"
@@ -2507,11 +2558,17 @@
     "slate contemporary gallery, 5510 college ave, oakland": {
       "venue": "slate-contemporary-gallery"
     },
+    "snibspace, 1088 branham ln, san jose, ca": {
+      "venue": "snibspace"
+    },
     "society of thumbs, 1398 valencia st, san francisco, ca": {
       "venue": "society-of-thumbs"
     },
     "sofa pocket park, 540 s first st, san jose, ca": {
       "venue": "sofa-pocket-park"
+    },
+    "sohn, 2535 3rd st, san francisco, ca": {
+      "venue": "sohn"
     },
     "soma, san francisco, ca": {
       "venue": "soma"
@@ -2806,6 +2863,9 @@
     "the function sf: comedy club & cocktail lounge, 1414 market street, san francisco, ca": {
       "venue": "the-function-sf-comedy-club-cocktail-lounge"
     },
+    "the gateway, 2300 hearst avenue, berkeley, ca": {
+      "venue": "the-gateway"
+    },
     "the grand gallery, 560 2nd street, oakland": {
       "venue": "the-grand-gallery"
     },
@@ -3006,6 +3066,9 @@
     },
     "vogue theater, 3290 sacramento st, san francisco": {
       "venue": "vogue-theatre"
+    },
+    "volcano kimchi, 1074 illinois st, san francisco, ca": {
+      "venue": "volcano-kimchi"
     },
     "walker theatre, 25 van ness avenue, san francisco, ca": {
       "venue": "decker-theatre"

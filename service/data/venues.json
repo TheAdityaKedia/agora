@@ -132,6 +132,34 @@
       "region": "sf",
       "status": "auto"
     },
+    "1018-valencia-st": {
+      "added": "2026-11-25",
+      "address": "1018 Valencia St, San Francisco, CA 94110",
+      "evidence": [
+        "map: 1014;1016;1018;1020;1022;1024 in San Francisco County (building, way/258956341)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.756546,
+      "lng": -122.421386,
+      "name": "1018 Valencia St",
+      "osm": "way/258956341",
+      "possible_duplicates": [
+        "artists-television-access",
+        "big-time-vintage",
+        "alamo-drafthouse-cinema",
+        "tokyo-futon-tea",
+        "arcana",
+        "laszlo",
+        "grand-coffee-too",
+        "the-liberties",
+        "make-out-room",
+        "frenchie-wine-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "1059-market-st": {
       "added": "2026-10-17",
       "address": "1059 Market St, San Francisco, CA 94103",
@@ -333,6 +361,27 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "1397-46th-ave": {
+      "added": "2026-11-25",
+      "address": "1397 46th Avenue, San Francisco, CA 94122",
+      "evidence": [
+        "map: 1397 in San Francisco County (building, way/225840353)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.760576,
+      "lng": -122.506042,
+      "name": "1397 46th Ave",
+      "osm": "way/225840353",
+      "possible_duplicates": [
+        "4114-judah-st",
+        "black-bird-bookstore",
+        "pittsburghs-pub"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "1430-cole-st": {
       "added": "2026-10-07",
@@ -637,6 +686,27 @@
       "possible_duplicates": [
         "harrys-bar",
         "festa-wine-cocktail-lounge"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "19-clementina-st": {
+      "added": "2026-11-25",
+      "address": "19 Clementina Street, San Francisco, CA 94105",
+      "evidence": [
+        "map: 19 in San Francisco County (building, way/136694409)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.787185,
+      "lng": -122.395485,
+      "name": "19 Clementina St",
+      "osm": "way/136694409",
+      "possible_duplicates": [
+        "temple-nightclub-san-francisco",
+        "zo",
+        "salesforce-park"
       ],
       "precision": "building",
       "region": "sf",
@@ -1612,6 +1682,26 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "991-oak-st": {
+      "added": "2026-11-25",
+      "address": "991 Oak St, San Francisco, CA 94117",
+      "evidence": [
+        "map: 985;987;989;991;999 in San Francisco County (building, way/261430168)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.773224,
+      "lng": -122.435489,
+      "name": "991 Oak St",
+      "osm": "way/261430168",
+      "possible_duplicates": [
+        "scott-st-page-st",
+        "madrone-art-bar"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "a-c-t": {
       "added": "2026-10-02",
       "address": "415 Geary Street, San Francisco, CA 94102",
@@ -1811,6 +1901,23 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "alma-community-center": {
+      "added": "2026-11-25",
+      "address": "136 West Alma Avenue, San Jose, CA 95110",
+      "evidence": [
+        "map: Alma Community Center in Santa Clara County (building, way/841565269)",
+        "text: San Jose",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.314386,
+      "lng": -121.875922,
+      "name": "Alma Community Center",
+      "osm": "way/841565269",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "almanac-west-oakland-clubhouse": {
       "added": "2026-10-02",
       "address": "1640 18th Street, Oakland, CA 94607",
@@ -1844,6 +1951,31 @@
       ],
       "precision": "building",
       "region": "eastbay",
+      "status": "auto"
+    },
+    "amc-loews-metreon-16": {
+      "added": "2026-11-25",
+      "address": "135 4th Street, San Francisco, CA 94103",
+      "evidence": [
+        "map: AMC Loews Metreon 16 in San Francisco County (building, node/302742486)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.784464,
+      "lng": -122.403707,
+      "name": "AMC Loews Metreon 16",
+      "osm": "node/302742486",
+      "possible_duplicates": [
+        "crepe-myrtle-garden",
+        "childrens-garden",
+        "press-club",
+        "ybca-screening-room",
+        "yerba-buena-center-for-the-arts",
+        "great-lawn"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "amelie": {
@@ -2607,6 +2739,25 @@
         "soundtrack",
         "clarion-alley-mural-project",
         "elixir"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "bluestream-wines": {
+      "added": "2026-11-25",
+      "address": "555 Grant Avenue, San Francisco, CA 94108",
+      "evidence": [
+        "map: Blue Stream Gallery & Wine in San Francisco County (building, node/13762262896)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.792195,
+      "lng": -122.40599,
+      "name": "Bluestream Wines",
+      "osm": "node/13762262896",
+      "possible_duplicates": [
+        "a-p-giannini-plaza"
       ],
       "precision": "building",
       "region": "sf",
@@ -4184,6 +4335,26 @@
       "osm": "node/2150077198",
       "possible_duplicates": [
         "whack-donuts"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "emotion-potion": {
+      "added": "2026-11-25",
+      "address": "591 Guerrero Street, San Francisco, CA 94143",
+      "evidence": [
+        "map: Emotion Potion in San Francisco County (building, node/14368863776)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.761847,
+      "lng": -122.423689,
+      "name": "Emotion Potion",
+      "osm": "node/14368863776",
+      "possible_duplicates": [
+        "dolores-park"
       ],
       "precision": "building",
       "region": "sf",
@@ -5868,6 +6039,22 @@
       "region": "eastbay",
       "status": "auto"
     },
+    "jolenes": {
+      "added": "2026-11-25",
+      "address": "2700 16th Street, San Francisco, CA 94143",
+      "evidence": [
+        "map: Jolenes Bar in San Francisco County (building, node/10635345334)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.765597,
+      "lng": -122.413332,
+      "name": "Jolene's",
+      "osm": "node/10635345334",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "jollibee": {
       "added": "2026-10-02",
       "address": "934 Market Street, San Francisco, CA 94108",
@@ -5943,6 +6130,28 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "kash-cafe": {
+      "added": "2026-11-25",
+      "address": "2480 Bancroft Way, Berkeley, CA 94704",
+      "evidence": [
+        "map: 2480 in Alameda County (building, way/679682614)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.868576,
+      "lng": -122.259698,
+      "name": "Kash Cafe",
+      "osm": "way/679682614",
+      "possible_duplicates": [
+        "zellerbach-hall",
+        "zellerbach-playhouse",
+        "hearst-field-annex",
+        "first-congregational-church-of-berkeley"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
     },
     "kearny-st-clay-st": {
       "added": "2026-10-10",
@@ -6462,6 +6671,25 @@
       "region": "sf",
       "status": "auto"
     },
+    "lumen-labs": {
+      "added": "2026-11-25",
+      "address": "905 Parker Street, Berkeley, CA 94710",
+      "evidence": [
+        "map: 905 in Alameda County (building, way/30910541)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.858567,
+      "lng": -122.293329,
+      "name": "Lumen Labs",
+      "osm": "way/30910541",
+      "possible_duplicates": [
+        "wildcat-studio"
+      ],
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "luna-del-soul": {
       "added": "2026-10-08",
       "address": "822 Cassia Street, Redwood City, CA 94063",
@@ -6805,6 +7033,25 @@
       ],
       "precision": "building",
       "region": "sf",
+      "status": "auto"
+    },
+    "martin-luther-king-jr-civic-center-park": {
+      "added": "2026-11-25",
+      "address": "2151 Martin Luther King Junior Way, Berkeley, CA 94704",
+      "evidence": [
+        "map: 2151 in Alameda County (building, way/415876799)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.870154,
+      "lng": -122.272722,
+      "name": "Martin Luther King Jr. Civic Center Park",
+      "osm": "way/415876799",
+      "possible_duplicates": [
+        "the-back-room"
+      ],
+      "precision": "building",
+      "region": "eastbay",
       "status": "auto"
     },
     "martunis": {
@@ -9736,6 +9983,22 @@
       "region": "eastbay",
       "status": "verified"
     },
+    "snibspace": {
+      "added": "2026-11-25",
+      "address": "1088 Branham Lane, San Jose, CA 95136",
+      "evidence": [
+        "map: 1088 in Santa Clara County (building, way/192565889)",
+        "text: San Jose",
+        "street number matches"
+      ],
+      "lat": 37.262823,
+      "lng": -121.875542,
+      "name": "Snibspace",
+      "osm": "way/192565889",
+      "precision": "building",
+      "region": "southbay",
+      "status": "auto"
+    },
     "society-of-thumbs": {
       "added": "2026-10-07",
       "address": "1398 Valencia Street, San Francisco, CA 94110",
@@ -9774,6 +10037,26 @@
       ],
       "precision": "building",
       "region": "southbay",
+      "status": "auto"
+    },
+    "sohn": {
+      "added": "2026-11-25",
+      "address": "2535 3rd Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: Sohn in San Francisco County (building, node/7949061196)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.757357,
+      "lng": -122.388036,
+      "name": "Sohn",
+      "osm": "node/7949061196",
+      "possible_duplicates": [
+        "paper-son-coffee-dogpatch"
+      ],
+      "precision": "building",
+      "region": "sf",
       "status": "auto"
     },
     "soma": {
@@ -11012,6 +11295,22 @@
       "region": "sf",
       "status": "verified"
     },
+    "the-gateway": {
+      "added": "2026-11-25",
+      "address": "2300 Hearst Avenue, Berkeley, CA 94709",
+      "evidence": [
+        "map: 2300 in Alameda County (building, way/766144280)",
+        "text: Berkeley",
+        "street number matches"
+      ],
+      "lat": 37.874611,
+      "lng": -122.262889,
+      "name": "The Gateway",
+      "osm": "way/766144280",
+      "precision": "building",
+      "region": "eastbay",
+      "status": "auto"
+    },
     "the-grand-gallery": {
       "added": "2026-10-02",
       "address": "560 2nd Street, Oakland, CA 94607",
@@ -12027,6 +12326,26 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "volcano-kimchi": {
+      "added": "2026-11-25",
+      "address": "1074 Illinois Street, San Francisco, CA 94107",
+      "evidence": [
+        "map: Olivier's in San Francisco County (building, node/2297205771)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.758384,
+      "lng": -122.387484,
+      "name": "Volcano Kimchi",
+      "osm": "node/2297205771",
+      "possible_duplicates": [
+        "sohn",
+        "paper-son-coffee-dogpatch"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "walt-disney-family-museum-theater": {
       "added": "2026-10-02",
