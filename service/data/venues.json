@@ -2555,6 +2555,28 @@
       "region": "sf",
       "status": "verified"
     },
+    "big-rec-ball-field": {
+      "added": "2026-11-26",
+      "address": "100 Martin Luther King Junior Drive, San Francisco, CA 94122",
+      "evidence": [
+        "map: 100 in San Francisco County (building, way/162799068)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.766604,
+      "lng": -122.466333,
+      "name": "Big Rec Ball Field",
+      "osm": "way/162799068",
+      "possible_duplicates": [
+        "county-fair-building",
+        "underdogs-tres",
+        "green-apple-books-on-the-park",
+        "books-on-the-park-on-9th-avenue"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "big-time-vintage": {
       "added": "2026-10-07",
       "address": "968 Valencia Street, San Francisco, CA 94110",
@@ -5478,6 +5500,26 @@
       "lng": -122.43448,
       "name": "Harvey Milk Photo Center",
       "osm": "node/13233207936",
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "harvey-milk-recreational-arts-center": {
+      "added": "2026-11-26",
+      "address": "50 Scott Street, San Francisco, CA 94114",
+      "evidence": [
+        "map: Harvey Milk Recreational Arts Center in San Francisco County (building, way/112073353)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.769542,
+      "lng": -122.434562,
+      "name": "Harvey Milk Recreational Arts Center",
+      "osm": "way/112073353",
+      "possible_duplicates": [
+        "harvey-milk-photo-center"
+      ],
       "precision": "building",
       "region": "sf",
       "status": "auto"
@@ -9205,6 +9247,31 @@
         "the-royale",
         "meski",
         "moth-belly-gallery"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
+    "providence": {
+      "added": "2026-11-26",
+      "address": "1351 Polk Street, San Francisco, CA 94109",
+      "evidence": [
+        "map: Providence in San Francisco County (building, node/825914928)",
+        "text: San Francisco",
+        "name matches",
+        "street number matches"
+      ],
+      "lat": 37.789508,
+      "lng": -122.420617,
+      "name": "Providence",
+      "osm": "node/825914928",
+      "possible_duplicates": [
+        "le-mils",
+        "el-lopo",
+        "mayes-oyster-house",
+        "lower-polk-cbd",
+        "decodance-bar",
+        "xex"
       ],
       "precision": "building",
       "region": "sf",
