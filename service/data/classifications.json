@@ -15901,6 +15901,24 @@
         ]
       ]
     },
+    "Books Inc.\u001fLUCY JANE BLEDSOE: All Hands on Deck": {
+      "classified_at": "2026-11-26T19:50:20.198308+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "LUCY JANE BLEDSOE: All Hands on Deck",
+      "topics": [
+        "fiction",
+        "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
     "Books Inc.\u001fMARCUS THOMPSON II: GAME CHANGERS": {
       "classified_at": "2026-10-03T05:07:49.903266+00:00",
       "cost": "unknown",
@@ -16336,6 +16354,23 @@
       "topics": [
         "fiction",
         "books-authors"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "Books Inc.\u001fSERRA SWIFT: The Last Queen of Faerie": {
+      "classified_at": "2026-11-26T19:50:20.218146+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Books Inc.",
+      "taxonomy_version": 2,
+      "title": "SERRA SWIFT: The Last Queen of Faerie",
+      "topics": [
+        "fiction"
       ],
       "types": [
         [
@@ -18824,6 +18859,24 @@
         ]
       ]
     },
+    "City Lights Booksellers\u001fCatherine Foulkrod in conversation with Rita Bullwinkel": {
+      "classified_at": "2026-11-26T19:50:20.233616+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Lights Booksellers",
+      "taxonomy_version": 2,
+      "title": "Catherine Foulkrod in conversation with Rita Bullwinkel",
+      "topics": [
+        "books-authors",
+        "fiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "City Lights Booksellers\u001fChloe Aridjis": {
       "classified_at": "2026-10-03T01:16:51.938740+00:00",
       "cost": "unknown",
@@ -18999,6 +19052,24 @@
       "topics": [
         "books-authors",
         "nonfiction"
+      ],
+      "types": [
+        [
+          "talk",
+          "reading"
+        ]
+      ]
+    },
+    "City Lights Booksellers\u001fJenny Lederer / App Chat: The Science of Computer-Mediated Communication": {
+      "classified_at": "2026-11-26T19:50:20.205182+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Lights Booksellers",
+      "taxonomy_version": 2,
+      "title": "Jenny Lederer / App Chat: The Science of Computer-Mediated Communication",
+      "topics": [
+        "tech",
+        "science"
       ],
       "types": [
         [
@@ -19286,6 +19357,27 @@
         [
           "talk",
           "panel"
+        ]
+      ]
+    },
+    "City Lights Booksellers\u001fProject Censored / State Of The Free Press 2027": {
+      "classified_at": "2026-11-26T19:50:20.203175+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "City Lights Booksellers",
+      "taxonomy_version": 2,
+      "title": "Project Censored / State Of The Free Press 2027",
+      "topics": [
+        "nonfiction",
+        "politics"
+      ],
+      "types": [
+        [
+          "talk",
+          "panel"
+        ],
+        [
+          "performance"
         ]
       ]
     },
@@ -23553,6 +23645,48 @@
         ]
       ]
     },
+    "Diaspora Arts Connection\u001fScreening of \"The Friend’s House Is Here\"": {
+      "classified_at": "2026-11-26T19:50:21.308168+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Diaspora Arts Connection",
+      "taxonomy_version": 2,
+      "title": "Screening of \"The Friend’s House Is Here\"",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
+    "Diaspora Arts Connection\u001fScreening of \"The Friend’s House Is Here\" | Q&amp;A with Co-director Hossein Keshavarz": {
+      "classified_at": "2026-11-26T19:50:21.354164+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Diaspora Arts Connection",
+      "taxonomy_version": 2,
+      "title": "Screening of \"The Friend’s House Is Here\" | Q&amp;A with Co-director Hossein Keshavarz",
+      "topics": [
+        "film",
+        "documentary"
+      ],
+      "types": [
+        [
+          "screening"
+        ],
+        [
+          "talk",
+          "conversation"
+        ]
+      ]
+    },
     "Diaspora Arts Connection\u001fStorytelling Workshop": {
       "classified_at": "2026-10-07T20:56:00.995967+00:00",
       "cost": "unknown",
@@ -26907,6 +27041,24 @@
         ]
       ]
     },
+    "Feinstein's at the Nikko\u001fLou Cooper": {
+      "classified_at": "2026-11-26T19:50:21.333583+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Feinstein's at the Nikko",
+      "taxonomy_version": 2,
+      "title": "Lou Cooper",
+      "topics": [
+        "musical-theater",
+        "lgbtq",
+        "spoken-word"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ]
+    },
     "Feinstein's at the Nikko\u001fMimosas & Motown: Sunday Brunch January 10th Brunch in Anzu at 11:30 AM / Show at 12:45 PM": {
       "classified_at": "2026-10-07T20:59:59.362040+00:00",
       "cost": "paid",
@@ -28162,6 +28314,29 @@
         ]
       ]
     },
+    "Frontier Tower\u001fBenchmark: Haus Accelerator Science Showcase - Members +3": {
+      "classified_at": "2026-11-26T19:50:22.276319+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Benchmark: Haus Accelerator Science Showcase - Members +3",
+      "topics": [
+        "science",
+        "tech",
+        "business"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "Frontier Tower\u001fBiohackathon: Haus F26 - Members +3": {
       "classified_at": "2026-10-03T05:17:24.920976+00:00",
       "cost": "free",
@@ -28360,6 +28535,21 @@
         [
           "talk",
           "lecture"
+        ]
+      ]
+    },
+    "Frontier Tower\u001fFounders Rooftop BBQ": {
+      "classified_at": "2026-11-26T19:50:20.766546+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Frontier Tower",
+      "taxonomy_version": 2,
+      "title": "Founders Rooftop BBQ",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
         ]
       ]
     },
@@ -47183,6 +47373,27 @@
         ]
       ]
     },
+    "Partiful\u001f2026 Holiday Craft Fair: Handmade Gifts + Free Hot Cider": {
+      "classified_at": "2026-11-26T19:50:20.807544+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "2026 Holiday Craft Fair: Handmade Gifts + Free Hot Cider",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "workshop"
+        ]
+      ]
+    },
     "Partiful\u001f2ND ANNUAL FRIENDS FILM FEST": {
       "classified_at": "2026-10-28T16:55:40.294936+00:00",
       "cost": "paid",
@@ -47329,6 +47540,23 @@
       "types": [
         [
           "performance"
+        ]
+      ]
+    },
+    "Partiful\u001fA Very Merry Karaoke": {
+      "classified_at": "2026-11-26T19:50:20.782629+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "A Very Merry Karaoke",
+      "topics": [
+        "karaoke"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -47626,6 +47854,23 @@
       "source": "Partiful",
       "taxonomy_version": 2,
       "title": "All Sports Turkey Bowl Tournament | Berkeley",
+      "topics": [
+        "games"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fAll Sports Turkey Bowl Tournament | SF": {
+      "classified_at": "2026-11-26T19:50:20.805196+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "All Sports Turkey Bowl Tournament | SF",
       "topics": [
         "games"
       ],
@@ -50830,6 +51075,27 @@
         ]
       ]
     },
+    "Partiful\u001fHoliday Craft Fair, Harvey Milk Center for the Arts": {
+      "classified_at": "2026-11-26T19:50:20.850105+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "Holiday Craft Fair, Harvey Milk Center for the Arts",
+      "topics": [
+        "craft",
+        "family-kids"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "Partiful\u001fHoliday Drink & Draw Watch Along - The Preacher's Wife": {
       "classified_at": "2026-11-18T19:13:44.869653+00:00",
       "cost": "paid",
@@ -53729,6 +53995,24 @@
         [
           "social",
           "mixer-meetup"
+        ]
+      ]
+    },
+    "Partiful\u001fSATURDAY SANTA SIPS // a sunday rose party": {
+      "classified_at": "2026-11-26T19:50:20.712681+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "Partiful",
+      "taxonomy_version": 2,
+      "title": "SATURDAY SANTA SIPS // a sunday rose party",
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -78535,6 +78819,24 @@
         ]
       ]
     },
+    "San Francisco Public Library\u001fPresentation: Latinx History Night": {
+      "classified_at": "2026-11-26T19:50:20.195896+00:00",
+      "cost": "free",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "San Francisco Public Library",
+      "taxonomy_version": 2,
+      "title": "Presentation: Latinx History Night",
+      "topics": [
+        "history",
+        "latino"
+      ],
+      "types": [
+        [
+          "talk",
+          "lecture"
+        ]
+      ]
+    },
     "San Francisco Public Library\u001fPresentation: Listen to Your Elders—An Elder Project Get-Together & Reading": {
       "classified_at": "2026-10-03T01:27:42.300797+00:00",
       "cost": "free",
@@ -90567,6 +90869,21 @@
         ]
       ]
     },
+    "The Commons (SF)\u001fIC Meetup": {
+      "classified_at": "2026-11-26T19:50:20.134854+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "IC Meetup",
+      "topics": [],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ]
+    },
     "The Commons (SF)\u001fIdeation Workshop": {
       "classified_at": "2026-11-19T19:19:22.793301+00:00",
       "cost": "unknown",
@@ -90611,6 +90928,23 @@
       "types": [
         [
           "workshop"
+        ]
+      ]
+    },
+    "The Commons (SF)\u001fKaraoke [HOLD]": {
+      "classified_at": "2026-11-26T19:50:20.170417+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Commons (SF)",
+      "taxonomy_version": 2,
+      "title": "Karaoke [HOLD]",
+      "topics": [
+        "karaoke"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
         ]
       ]
     },
@@ -92991,6 +93325,22 @@
         ]
       ]
     },
+    "The Faight Collective\u001fIn Dreams ART GALLERY": {
+      "classified_at": "2026-11-26T19:50:20.729828+00:00",
+      "cost": "unknown",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Faight Collective",
+      "taxonomy_version": 2,
+      "title": "In Dreams ART GALLERY",
+      "topics": [
+        "visual-art"
+      ],
+      "types": [
+        [
+          "exhibition"
+        ]
+      ]
+    },
     "The Faight Collective\u001fJady Headline Show": {
       "classified_at": "2026-10-03T05:18:03.252578+00:00",
       "cost": "paid",
@@ -94644,6 +94994,23 @@
       "types": [
         [
           "screening"
+        ]
+      ]
+    },
+    "The Henry J. Kaiser Center for the Arts\u001f2027 SF Beer Opening Gala": {
+      "classified_at": "2026-11-26T19:50:21.325527+00:00",
+      "cost": "paid",
+      "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "source": "The Henry J. Kaiser Center for the Arts",
+      "taxonomy_version": 2,
+      "title": "2027 SF Beer Opening Gala",
+      "topics": [
+        "food-drink"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
         ]
       ]
     },
