@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T19:50:36.797465+00:00",
+  "generated_at": "2026-11-27T19:40:13.945005+00:00",
   "taxonomy": {
     "version": 2,
     "axes": {
@@ -1164,14 +1164,6 @@
       "lng": -122.40842,
       "neighborhood": "north-beach"
     },
-    "conservatory-of-flowers": {
-      "name": "Conservatory of Flowers",
-      "region": "sf",
-      "address": "100 John F. Kennedy Promenade, San Francisco, CA 94118",
-      "lat": 37.77261,
-      "lng": -122.46023,
-      "neighborhood": "golden-gate-park"
-    },
     "county-fair-building": {
       "name": "County Fair Building",
       "region": "sf",
@@ -1845,6 +1837,14 @@
       "lng": -122.44519,
       "neighborhood": "haight-ashbury"
     },
+    "maiden-lane-association": {
+      "name": "Maiden Lane Association",
+      "region": "sf",
+      "address": "222 Stockton St, San Francisco, CA 94108",
+      "lat": 37.78796,
+      "lng": -122.40643,
+      "neighborhood": "financial-district-south-beach"
+    },
     "make-out-room": {
       "name": "Make Out Room",
       "region": "sf",
@@ -1902,6 +1902,14 @@
       "lat": 37.78831,
       "lng": -122.4204,
       "neighborhood": "nob-hill"
+    },
+    "mccoppin-square": {
+      "name": "McCoppin Square",
+      "region": "sf",
+      "address": "San Francisco, CA",
+      "lat": 37.74357,
+      "lng": -122.48005,
+      "neighborhood": "sunset-parkside"
     },
     "mechanics-institute-library-and-chess-room": {
       "name": "Mechanics' Institute Library and Chess Room",
@@ -3198,6 +3206,14 @@
       "lng": -122.40957,
       "neighborhood": "soma"
     },
+    "x": {
+      "name": "X",
+      "region": "sf",
+      "address": "1355 Market Street, San Francisco, CA 94103",
+      "lat": 37.77654,
+      "lng": -122.41681,
+      "neighborhood": "soma"
+    },
     "xex": {
       "name": "XeX",
       "region": "sf",
@@ -3260,1499 +3276,6 @@
     }
   },
   "events": [
-    {
-      "id": "ddd8f5b1-bd32-41f6-a8ba-78513be885ac",
-      "title": "CLOSED FOR THE HOLIDAY!",
-      "start_time": "2026-11-26T08:00:00+00:00",
-      "location": "El Rio, 3158 Mission St, San Francisco, CA",
-      "url": "https://tockify.com/elriosf2/detail/4428/1795680000000",
-      "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/6a97696f63d625a39d0f14a8/square_272x272.png",
-      "sources": [
-        "El Rio"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "el-rio",
-      "region": "sf",
-      "summary": "CLOSED FOR THE HOLIDAY!"
-    },
-    {
-      "id": "e8d7a04c-5eae-4b24-a877-386db4dde3ee",
-      "title": "Embodiment Practice: Mindful Movement + Stillness with Suzanne (Zan) Beahrs",
-      "start_time": "2026-11-26T16:30:00+00:00",
-      "location": "The Berkeley Alembic (Luna), 2820 Seventh Street, Berkeley, CA",
-      "url": "https://momence.com/s/141550652",
-      "image_url": "https://images.momence.com/h/71603/session-template-banner/82a2b918-a505-4beb-8035-dfcc2b59bb0f.jpeg",
-      "sources": [
-        "The Berkeley Alembic"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness",
-        "dance"
-      ],
-      "cost": "unknown",
-      "venue": "the-alembic",
-      "region": "eastbay",
-      "room": "Luna",
-      "summary": "Embodiment Practices is an invitation to practice giving ourselves permission to arrive fully to where we are, and gently explore movement and stillness to care for our bodies and",
-      "more": true
-    },
-    {
-      "id": "dba4194d-aa1a-48dd-9d4f-87909710994b",
-      "title": "Free (ish) Turkey Trot",
-      "start_time": "2026-11-26T17:00:00+00:00",
-      "location": "Conservatory of Flowers, 100 John F Kennedy Dr, San Francisco, CA 94118",
-      "url": "https://partiful.com/e/z4r2khhVoL1uiFnYEXyn",
-      "image_url": "https://partiful.imgix.net/external/user/oSTYICVMjaTifdQrhmV46kpgnXt1/jmYWN09TCYN53tElWEFM0?w=800&fit=clip",
-      "sources": [
-        "Partiful"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "nature-outdoors"
-      ],
-      "cost": "free",
-      "venue": "conservatory-of-flowers",
-      "region": "sf",
-      "summary": "Missed the sign up for SF turkey trot?",
-      "more": true
-    },
-    {
-      "id": "12e8a3ba-6202-43ca-8fe1-e12b711af8d1",
-      "title": "Co-working Hours at Tantara",
-      "start_time": "2026-11-26T18:00:00+00:00",
-      "location": "Tantara, 914 Pacific Ave, San Francisco, CA 94133, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/tantara",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [],
-      "cost": "free",
-      "venue": "tantara",
-      "region": "sf",
-      "summary": "Co-working Hours at Tantara.",
-      "more": true
-    },
-    {
-      "id": "2f89781b-292c-4ae0-bf04-fcfb7f6a854d",
-      "title": "45 Minute Silent Unguided Holiday Meditation Sit",
-      "start_time": "2026-11-26T18:00:00+00:00",
-      "location": "The Berkeley Alembic, 2820 Seventh Street, Berkeley, CA",
-      "url": "https://momence.com/s/145779541",
-      "image_url": "https://images.momence.com/h/71603/session-template-banner/2ea64b1c-1f66-4c29-aa28-0e887ddbb75b.jpeg",
-      "sources": [
-        "The Berkeley Alembic"
-      ],
-      "types": [
-        [
-          "workshop"
-        ]
-      ],
-      "topics": [
-        "wellness"
-      ],
-      "cost": "free",
-      "venue": "the-alembic",
-      "region": "eastbay",
-      "summary": "We are providing a meditation space for the holiday.",
-      "more": true
-    },
-    {
-      "id": "93c19d48-9c1e-4e8e-9c53-cc9ad9570ae3",
-      "title": "Adult Needlework Circle",
-      "start_time": "2026-11-26T21:00:00+00:00",
-      "location": "Oakland Public Library Rockridge Branch, 5366 College Avenue, Oakland, CA 94618",
-      "url": "https://oaklandlibrary.bibliocommons.com/events/6968101ca0dcc142c979e4a5",
-      "image_url": "https://oaklandlibrary.bibliocommons.com/events/uploads/images/full/35e26373f5320e2b41590c4cade4b990/KnitattheLibraryWeb(760x230px).png",
-      "sources": [
-        "Oakland Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "craft"
-      ],
-      "cost": "free",
-      "venue": "opl-rockridge-branch",
-      "region": "eastbay",
-      "summary": "Join us every Thursday afternoon for creativity and conversation in a warm and inviting space.",
-      "more": true
-    },
-    {
-      "id": "32d1c0ed-154d-4d24-9533-77c120d0a512",
-      "title": "Dimond Knitting Club",
-      "start_time": "2026-11-26T22:00:00+00:00",
-      "location": "Oakland Public Library Dimond Branch, 3565 Fruitvale Avenue, Oakland, CA 94602",
-      "url": "https://oaklandlibrary.bibliocommons.com/events/6944450f7ed7c62f00ab12fb",
-      "image_url": "https://oaklandlibrary.bibliocommons.com/events/uploads/images/full/35e26373f5320e2b41590c4cade4b990/KnitattheLibraryWeb(760x230px).png",
-      "sources": [
-        "Oakland Public Library"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "craft"
-      ],
-      "cost": "free",
-      "venue": "opl-dimond-branch",
-      "region": "eastbay",
-      "summary": "Come to the Dimond Library to knit in community.",
-      "more": true
-    },
-    {
-      "id": "1f0fd0f7-23bb-4336-ad34-0fa84acca068",
-      "title": "Karaoke & Beats at ZOË",
-      "start_time": "2026-11-27T00:00:00+00:00",
-      "location": "ZOË, 579 Howard Street, San Francisco, CA 94105, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/zoe",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke",
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "zo",
-      "region": "sf",
-      "summary": "Karaoke & Beats at ZOË.",
-      "more": true
-    },
-    {
-      "id": "acb5ae00-c6da-43d3-8c5e-1c4f74b8e283",
-      "title": "Live Jazz & Burlesque at Paris 75",
-      "start_time": "2026-11-27T00:30:00+00:00",
-      "location": "Paris 75, 515 Broadway, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/paris-75",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ],
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "jazz",
-        "drag"
-      ],
-      "cost": "unknown",
-      "venue": "paris-75",
-      "region": "sf",
-      "summary": "Live Jazz & Burlesque at Paris 75.",
-      "more": true
-    },
-    {
-      "id": "a686b7f2-96b3-4879-a79c-04b9d78a2d71",
-      "title": "FLOOR21 with Juanita MORE! at Starlite",
-      "start_time": "2026-11-27T01:00:00+00:00",
-      "location": "Starlite, 450 Powell Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/starlite",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "starlite-room",
-      "region": "sf",
-      "summary": "FLOOR21 with Juanita MORE!",
-      "more": true
-    },
-    {
-      "id": "a6901f18-8ecc-474c-a462-35ed8762f2eb",
-      "title": "CLOSED FOR THANKSGIVING",
-      "start_time": "2026-11-27T01:00:00+00:00",
-      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
-      "url": "https://keysjazzbistro.com/event/closed-for-thanksgiving-2/",
-      "image_url": null,
-      "sources": [
-        "Keys Jazz Bistro"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "keys-jazz-bistro",
-      "region": "sf"
-    },
-    {
-      "id": "be58deb3-2617-433b-9146-2fff952a350e",
-      "title": "Closed For Thanksgiving",
-      "start_time": "2026-11-27T01:00:00+00:00",
-      "location": "The Dawn Club, San Francisco",
-      "url": "https://www.dawnclub.com/music/closed-for-a-private-event-35f2f-wzyan-s55l9-6p9xk-cegh4-akynk-yehpj-kdlha-l3sen-j7ew4-zzpc6-w84de",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/63eebdb2b5694835bdac5b67/1792704192615-I05S4VQN1FWGPUKBYXZW/230527-WJA-DawnClub-070.jpg",
-      "sources": [
-        "The Dawn Club"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "dawn-club",
-      "region": "sf"
-    },
-    {
-      "id": "2af3dac2-287a-42d9-8183-fa94e5288acd",
-      "title": "Trivia Night at Zinz Wine Bar (Corte Madera)",
-      "start_time": "2026-11-27T02:00:00+00:00",
-      "location": "207 Corte Madera Ave, Corte Madera, CA 94925",
-      "url": "http://www.zinzwinebar.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "zinz-wine-bar",
-      "region": "northbay",
-      "summary": "Uncork your inner trivia master at Zinz Wine Bar in Corte Madera!",
-      "more": true
-    },
-    {
-      "id": "33c392ac-736e-4612-a21a-3003587e7962",
-      "title": "Trivia Night at Cordial Cellar and Lounge (Castro Valley)",
-      "start_time": "2026-11-27T02:00:00+00:00",
-      "location": " 3295 Castro Valley Blvd B100, Castro Valley, CA 94546",
-      "url": "https://www.cordialbottleshop.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "castro-valley-marketplace",
-      "region": "eastbay",
-      "summary": "Think you're a genius?",
-      "more": true
-    },
-    {
-      "id": "8ec558d7-fb98-4a2b-a902-e1fd60cee85e",
-      "title": "Live DJ at Rick's Bar at Rick & Roxy's",
-      "start_time": "2026-11-27T02:00:00+00:00",
-      "location": "Rick & Roxy's, 2131 Lombard Street, San Francisco, 94123, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/rick-roxys",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "rick-roxys",
-      "region": "sf",
-      "summary": "Live DJ at Rick's Bar at Rick & Roxy's.",
-      "more": true
-    },
-    {
-      "id": "c4464add-e35a-400a-9bcf-49d3dc8e530a",
-      "title": "Theater Closed: Nov. 26",
-      "start_time": "2026-11-27T02:00:00+00:00",
-      "location": "Roxie Theater, 3117 16th St, San Francisco, CA 94103",
-      "url": "https://roxie.com/?post_type=wp_theatre_prod&p=34648",
-      "image_url": "https://roxie.com/wp-content/uploads/2026/11/Untitled-Design-3.jpg",
-      "sources": [
-        "Roxie Theater"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "roxie-theater",
-      "region": "sf",
-      "summary": "The Roxie is closed today.",
-      "more": true
-    },
-    {
-      "id": "d4184ce1-a806-492a-b8b5-a9a6600ed754",
-      "title": "Game Night! at Mission Bowling Club",
-      "start_time": "2026-11-27T02:00:00+00:00",
-      "location": "Mission Bowling Club, 3176 17th Street, San Francisco, 94110, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mission-bowling-club",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "games"
-      ],
-      "cost": "unknown",
-      "venue": "mission-bowling-club",
-      "region": "sf",
-      "summary": "Game Night!",
-      "more": true
-    },
-    {
-      "id": "1f872767-32ea-473d-b406-4efa013763cb",
-      "title": "Trivia Night at Almanac Beer Co. (Oakland)",
-      "start_time": "2026-11-27T02:30:00+00:00",
-      "location": "1640 18th St Ste A, Oakland, CA 94607",
-      "url": "https://almanacbeer.com/pages/west-oakland-hours",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "free",
-      "venue": "almanac-west-oakland-clubhouse",
-      "region": "eastbay",
-      "summary": "Calling all Oakland trivia titans!",
-      "more": true
-    },
-    {
-      "id": "319c69cc-ae20-4790-a4b5-7e08c9702c70",
-      "title": "Beauty & The Brew",
-      "start_time": "2026-11-27T02:30:00+00:00",
-      "location": "Drake’s Dealership, 2325 Broadway, Oakland",
-      "url": "https://events.drinkdrakes.com/event/beauty-the-brew-4/2026-11-26/",
-      "image_url": "https://events.drinkdrakes.com/wp-content/uploads/2025/02/Beauty-and-the-Brew-Drag-Bingo-1920x1080-1.jpg",
-      "sources": [
-        "Drake's Brewing"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "drag",
-        "bingo"
-      ],
-      "cost": "unknown",
-      "venue": "drakes-dealership",
-      "region": "eastbay",
-      "summary": "Shantay let’s play!",
-      "more": true
-    },
-    {
-      "id": "624f972f-c1f8-4cde-871c-668cab828248",
-      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
-      "start_time": "2026-11-27T02:30:00+00:00",
-      "location": "1001 Center St, Santa Cruz, CA 95060",
-      "url": "https://www.11thhourcoffee.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": null,
-      "region": null,
-      "summary": "Sharpen your wits and gather your team!",
-      "more": true
-    },
-    {
-      "id": "dfeebfcd-fea3-47b6-9de7-5ad4c235f92b",
-      "title": "Trivia Night at Bay Grape (Oakland)",
-      "start_time": "2026-11-27T02:30:00+00:00",
-      "location": "376 Grand Ave, Oakland, CA 94610",
-      "url": "http://www.baygrapewine.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "bay-grape",
-      "region": "eastbay",
-      "summary": "Challenge your brain and claim victory at Trivia Night!",
-      "more": true
-    },
-    {
-      "id": "e696eb4c-17db-4e53-a84a-2189abab1fbc",
-      "title": "Closed for Thanksgiving",
-      "start_time": "2026-11-27T02:30:00+00:00",
-      "location": "Biscuits & Blues, 401 Mason St, San Francisco, CA 94102",
-      "url": "https://www.biscuitsandblues.com/find-a-show/20261126thanksgiving",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/6689c36c4afcd30b4b37d2bb/1789964159204-WF2VAV3VHCTBV6BRR43P/bb-venue-exterior.jpg",
-      "sources": [
-        "Biscuits & Blues"
-      ],
-      "types": [],
-      "topics": [],
-      "cost": "unknown",
-      "venue": "biscuits-blues",
-      "region": "sf",
-      "summary": "Happy Thanksgiving from all of us at Biscuits and Blues!",
-      "more": true
-    },
-    {
-      "id": "fc1b5215-5913-4c3e-8511-54b50433f880",
-      "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
-      "start_time": "2026-11-27T02:30:00+00:00",
-      "location": "Festa Wine & Cocktail Lounge - Karaoke, 1825 Post Street, San Francisco, 94115, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/festa-wine-cocktail-lounge-karaoke",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "unknown",
-      "venue": "festa-wine-cocktail-lounge",
-      "region": "sf",
-      "room": "Karaoke",
-      "summary": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke.",
-      "more": true
-    },
-    {
-      "id": "39807384-40f6-4db9-96c7-034d8778d0db",
-      "title": "Live Jazz at Mr. Tipple's Recording Studio",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "free",
-      "venue": "mr-tipples-recording-studio",
-      "region": "sf",
-      "summary": "Live Jazz at Mr.",
-      "more": true
-    },
-    {
-      "id": "3c370539-e936-4739-8b7f-679ddab8352b",
-      "title": "Clement St Comedy at Neck of the Woods",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "Neck of the Woods, 406 Clement Street, San Francisco, 94118, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/neck-of-the-woods",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "free",
-      "venue": "neck-of-the-woods",
-      "region": "sf",
-      "summary": "Clement St Comedy at Neck of the Woods.",
-      "more": true
-    },
-    {
-      "id": "72bea614-7ece-4781-bd9e-6d3cb01d3583",
-      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "4330 Olympic Ave, San Mateo, CA 94403",
-      "url": "https://belmateobowl.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "bel-mateo-bowl",
-      "region": "peninsula",
-      "summary": "Ready to prove your genius?",
-      "more": true
-    },
-    {
-      "id": "89b42641-1778-4b56-b3f9-ffdf8f8c585e",
-      "title": "Trivia Night at Question Mark Tavern",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "Question Mark Tavern, 312 Harriet Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/question-mark-tavern",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "question-mark-tavern",
-      "region": "sf",
-      "summary": "Trivia Night at Question Mark Tavern.",
-      "more": true
-    },
-    {
-      "id": "b22cde4c-86b4-4f2d-9055-1f78bfb34a22",
-      "title": "Redwood Room After Dark Live Jazz at The Redwood Room",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "The Redwood Room, 495 Geary St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-redwood-room",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "jazz"
-      ],
-      "cost": "unknown",
-      "venue": "the-redwood-room",
-      "region": "sf",
-      "summary": "Redwood Room After Dark Live Jazz at The Redwood Room.",
-      "more": true
-    },
-    {
-      "id": "ba9a395a-d4b3-4e77-a4e6-999ba9c5e8f4",
-      "title": "Trivia Night at The Double Standard (Oakland)",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "2424 Telegraph Avenue, Oakland, CA 94612",
-      "url": "http://www.doublestandardbar.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "the-double-standard",
-      "region": "eastbay",
-      "summary": "Think you're the smartest in the room?",
-      "more": true
-    },
-    {
-      "id": "cf1fbfdf-fc4d-4ec7-9e7c-6e126184e930",
-      "title": "Orbit Room Investigations at The Orbit Room",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "The Orbit Room, 1900 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-orbit-room",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "the-orbit-room",
-      "region": "sf",
-      "summary": "Orbit Room Investigations at The Orbit Room.",
-      "more": true
-    },
-    {
-      "id": "dab32374-48a2-45a3-abd0-22721f274095",
-      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "201 Washington St, Oakland, CA 94607",
-      "url": "https://thefatladyrestaurant.com/",
-      "image_url": null,
-      "sources": [
-        "Sunset Trivia"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "201-washington-st",
-      "region": "eastbay",
-      "summary": "Ready to prove your genius?",
-      "more": true
-    },
-    {
-      "id": "e5ff8fdd-4114-4143-b319-1e0a61266a75",
-      "title": "Trivia Night at The Blue Light",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "The Blue Light, 1979 Union Street, San Francisco, 94123, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-blue-light",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "the-blue-light",
-      "region": "sf",
-      "summary": "Trivia Night at The Blue Light.",
-      "more": true
-    },
-    {
-      "id": "e6617da5-1ae2-4fef-ba46-fb27821da4ed",
-      "title": "Trivia Thursday at Underdogs Tres",
-      "start_time": "2026-11-27T03:00:00+00:00",
-      "location": "Underdogs Tres, 1224 9th Avenue, San Francisco, 94122, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/underdogs-tres",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "free",
-      "venue": "underdogs-tres",
-      "region": "sf",
-      "summary": "Trivia Thursday at Underdogs Tres.",
-      "more": true
-    },
-    {
-      "id": "1730dd11-67e4-45c4-afb9-163c8611e6c2",
-      "title": "Trivia Night at Detour",
-      "start_time": "2026-11-27T03:30:00+00:00",
-      "location": "Detour, 2200 Market St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/detour",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "the-detour",
-      "region": "sf",
-      "summary": "Trivia Night at Detour.",
-      "more": true
-    },
-    {
-      "id": "175939e8-5b5e-4ac5-9f78-bbf58df28466",
-      "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
-      "start_time": "2026-11-27T03:30:00+00:00",
-      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "unknown",
-      "venue": "the-function-sf-comedy-club-cocktail-lounge",
-      "region": "sf",
-      "summary": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
-      "more": true
-    },
-    {
-      "id": "1f0e6ad4-ab0b-425d-8b83-b297024af0ee",
-      "title": "Trivia Night at Abbey Tavern",
-      "start_time": "2026-11-27T03:30:00+00:00",
-      "location": "Abbey Tavern, 4100 Geary Blvd, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/abbey-tavern",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "mixer-meetup"
-        ]
-      ],
-      "topics": [
-        "trivia"
-      ],
-      "cost": "unknown",
-      "venue": "abbey-tavern",
-      "region": "sf",
-      "summary": "Trivia Night at Abbey Tavern.",
-      "more": true
-    },
-    {
-      "id": "2548584d-f82a-45fd-adac-849c67541b75",
-      "title": "She Se Puede",
-      "start_time": "2026-11-27T03:30:00+00:00",
-      "location": "Oakland Theater Project at FLAX art & design, 1501 Martin Luther King Jr Way, Oakland, CA 94612",
-      "url": "https://ci.ovationtix.com/35459/production/1267301",
-      "image_url": "https://web.ovationtix.com/trs/api/rest/ClientFile(636374)",
-      "sources": [
-        "Oakland Theater Project"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "theater",
-        "latino"
-      ],
-      "cost": "paid",
-      "venue": "flax-art-and-design",
-      "region": "eastbay",
-      "summary": "World Premiere She Se Puede (a chorus of Huertas) by Lisa Ramirez directed by Karina Gutiérrez Dates : Nov 20–Dec 6 Times: Thu–Sat + Sunday Nov 22 @ 7:30 p.m. Sunday Nov 29 + Dec",
-      "more": true
-    },
-    {
-      "id": "6e3933c9-2f61-4269-865f-e37f4f8ad528",
-      "title": "Bingo at The Green Heron",
-      "start_time": "2026-11-27T03:30:00+00:00",
-      "location": "The Green Heron, 1601 Haight Street, San Francisco, 94117, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-green-heron",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "games-hobby"
-        ]
-      ],
-      "topics": [
-        "bingo"
-      ],
-      "cost": "unknown",
-      "venue": "the-green-heron",
-      "region": "sf",
-      "summary": "Bingo at The Green Heron.",
-      "more": true
-    },
-    {
-      "id": "7b35d9df-1972-4ff1-942d-581c7501817e",
-      "title": "Mellow Nights at The Mellow Haight",
-      "start_time": "2026-11-27T03:30:00+00:00",
-      "location": "The Mellow Haight, 1401 Haight Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-mellow-haight",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "the-mellow-haight",
-      "region": "sf",
-      "summary": "Mellow Nights at The Mellow Haight.",
-      "more": true
-    },
-    {
-      "id": "64c302e9-2f1c-4f52-aba4-03f428213136",
-      "title": "Stand-Up Comedy Show at Cheaper Than Therapy",
-      "start_time": "2026-11-27T03:45:00+00:00",
-      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "comedy"
-      ],
-      "cost": "unknown",
-      "venue": "cheaper-than-therapy",
-      "region": "sf",
-      "summary": "Stand-Up Comedy Show at Cheaper Than Therapy.",
-      "more": true
-    },
-    {
-      "id": "0b3fa834-30bf-4cd4-9c0b-7dd9e2213a50",
-      "title": "Thursday Night \"Sing Along\" at Rocks Den",
-      "start_time": "2026-11-27T04:00:00+00:00",
-      "location": "Rocks Den, 4753 Mission Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/rocks-den",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "unknown",
-      "venue": "rocks-den",
-      "region": "sf",
-      "summary": "Thursday Night \"Sing Along\" at Rocks Den.",
-      "more": true
-    },
-    {
-      "id": "7531fd58-e0df-4d8f-aae4-f9e7a6ed5bc4",
-      "title": "Karaoke Lounge at Pandora Karaoke & Bar",
-      "start_time": "2026-11-27T04:00:00+00:00",
-      "location": "Pandora Karaoke & Bar, 50 Mason Street, San Francisco, 94102, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/pandora-karaoke-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "unknown",
-      "venue": "pandora-karaoke-bar",
-      "region": "sf",
-      "summary": "Karaoke Lounge at Pandora Karaoke & Bar.",
-      "more": true
-    },
-    {
-      "id": "9e0ea24b-6d12-46bd-8e76-6d677b7d3b96",
-      "title": "Milonga Malevaje at Verdi Club",
-      "start_time": "2026-11-27T04:00:00+00:00",
-      "location": "Verdi Club, 2424 Mariposa Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/verdi-club",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "dance-social"
-        ]
-      ],
-      "topics": [
-        "tango"
-      ],
-      "cost": "unknown",
-      "venue": "verdi-club",
-      "region": "sf",
-      "summary": "Milonga Malevaje at Verdi Club.",
-      "more": true
-    },
-    {
-      "id": "bf7689be-fde5-4e55-b4f0-bd2f31c131bb",
-      "title": "Live Music: DJs at Mr. Mahjong's",
-      "start_time": "2026-11-27T04:00:00+00:00",
-      "location": "Mr. Mahjong's, 260 Kearny Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/mr-mahjongs",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "mr-mahjong",
-      "region": "sf",
-      "summary": "Live Music: DJs at Mr.",
-      "more": true
-    },
-    {
-      "id": "dc81cd97-0dc1-4ce9-9a59-217ed1da3206",
-      "title": "Live Music at Lion's Den Lounge and Bar",
-      "start_time": "2026-11-27T04:00:00+00:00",
-      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "performance"
-        ]
-      ],
-      "topics": [
-        "music"
-      ],
-      "cost": "unknown",
-      "venue": "lions-den-bar-lounge",
-      "region": "sf",
-      "summary": "Live Music at Lion's Den Lounge and Bar.",
-      "more": true
-    },
-    {
-      "id": "0c31f81e-539e-4e90-a3a0-63d8f6dd5a54",
-      "title": "1984 at Cat Club",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "Cat Club, 1190 Folsom St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/cat-club",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "cat-club",
-      "region": "sf",
-      "summary": "1984 at Cat Club.",
-      "more": true
-    },
-    {
-      "id": "40a35c38-efe1-4057-987f-9870222eafa3",
-      "title": "Karaoke at Silver Cloud Restaurant & Karaoke Bar",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "Silver Cloud Restaurant & Karaoke Bar, 1994 Lombard Street, San Francisco, 94123, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/silver-cloud-restaurant-karaoke-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "free",
-      "venue": "silver-cloud-restaurant-karaoke-bar",
-      "region": "sf",
-      "summary": "Karaoke at Silver Cloud Restaurant & Karaoke Bar.",
-      "more": true
-    },
-    {
-      "id": "5db1f595-bb21-45f7-b844-38e596d1ae11",
-      "title": "Teego and Nile present The Annual Thanksgiving Night Party",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "F8, 1192 Folsom, San Francisco",
-      "url": "https://www.feightsf.com/new-events/teego-and-nile-present-the-annual-thanksgiving-night-party",
-      "image_url": "https://images.squarespace-cdn.com/content/v1/5ade5a27266c079e2ebfecd4/1795391116647-4D8CF9F7J8F8TEAGSPGM/Afro+Thursdays_+Thanksgiving+Edition.png",
-      "sources": [
-        "F8"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "electronic"
-      ],
-      "cost": "free",
-      "venue": "f8-nightclub",
-      "region": "sf",
-      "summary": "FREE W/ RSVP B4 11PM"
-    },
-    {
-      "id": "7b93f1a4-fd7c-4079-94da-71bf67bca998",
-      "title": "Set Dancing at The Plough and the Stars",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "The Plough and the Stars, 116 Clement St, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-plough-and-the-stars",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "dance-social"
-        ]
-      ],
-      "topics": [
-        "dance-party"
-      ],
-      "cost": "free",
-      "venue": "the-plough-and-the-stars",
-      "region": "sf",
-      "summary": "Set Dancing at The Plough and the Stars.",
-      "more": true
-    },
-    {
-      "id": "97bc3360-8d8a-4907-9ba1-551d578a7c83",
-      "title": "Karaokiki at El Rio",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "El Rio, 3158 Mission St, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/el-rio",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke",
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "el-rio",
-      "region": "sf",
-      "summary": "Karaokiki at El Rio.",
-      "more": true
-    },
-    {
-      "id": "a57f005f-c69a-46a6-9c8d-79f78d6077a8",
-      "title": "Party Night at The Bitter End",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "The Bitter End, 441 Clement Street, San Francisco, 94118, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-bitter-end",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "the-bitter-end",
-      "region": "sf",
-      "summary": "Party Night at The Bitter End.",
-      "more": true
-    },
-    {
-      "id": "cd67bc9c-9dd4-4d8c-93c6-c93e7d481187",
-      "title": "KARAOKIKI WITH YOUR HOSTS DULCE DE LECHE ++ LAMBERT ++ MOJO CARTER ++ FRISCOPINK (FREE)",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "El Rio, 3158 Mission St, San Francisco, CA",
-      "url": "https://tockify.com/elriosf2/detail/1444/1795755600000",
-      "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/6733ab7c71d46c65667f87f5/square_272x272.jpg",
-      "sources": [
-        "El Rio"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke",
-        "lgbtq",
-        "latino"
-      ],
-      "cost": "free",
-      "venue": "el-rio",
-      "region": "sf",
-      "summary": "KARAOKIKI!",
-      "more": true
-    },
-    {
-      "id": "e831907e-5051-4e9a-ae72-47fb9fc5af3b",
-      "title": "Throwback Thursdays with DJ BeatsMe & DJ ChillWill",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
-      "url": "https://www.riptidesf.com/",
-      "image_url": null,
-      "sources": [
-        "The Riptide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "hiphop-rnb",
-        "soul-funk"
-      ],
-      "cost": "free",
-      "venue": "the-riptide",
-      "region": "sf",
-      "summary": "Every 4th Thursday we have DJ BeatsMe & DJ ChillWill running Hip-Hop, Funk, R&B, and Classic Rock for your enjoyment!",
-      "more": true
-    },
-    {
-      "id": "e93f002c-f0cd-4827-bd5c-bd359f978845",
-      "title": "Locker Room Thursdays (Oil Wrestling) at Beaux",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "Beaux, 2344 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/beaux",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night",
-        "lgbtq"
-      ],
-      "cost": "free",
-      "venue": "beaux",
-      "region": "sf",
-      "summary": "Locker Room Thursdays (Oil Wrestling) at Beaux.",
-      "more": true
-    },
-    {
-      "id": "f0fefee2-f157-4844-9215-f01cdbbaeb96",
-      "title": "Karaoke & Beats at ZOË",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "ZOË, 579 Howard Street, San Francisco, CA 94105, San Francisco, CA, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/zoe",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke",
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "zo",
-      "region": "sf",
-      "summary": "Karaoke & Beats at ZOË.",
-      "more": true
-    },
-    {
-      "id": "ff859ae3-4041-4bc5-8ab1-106a89c77414",
-      "title": "Arcade Karaoke at The Function SF: Comedy Club & Cocktail Lounge",
-      "start_time": "2026-11-27T05:00:00+00:00",
-      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke",
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "the-function-sf-comedy-club-cocktail-lounge",
-      "region": "sf",
-      "summary": "Arcade Karaoke at The Function SF: Comedy Club & Cocktail Lounge.",
-      "more": true
-    },
-    {
-      "id": "3bc7cde6-7df2-4731-993a-62851516a320",
-      "title": "Solar Fusion",
-      "start_time": "2026-11-27T05:15:00+00:00",
-      "location": "Luna del Soul, 822 Cassia St, Redwood City, CA",
-      "url": "https://bayareafusioncal.com/event/lhhAp5H4?date=2026-11-26",
-      "image_url": "https://jlnrqvmjswwyufjekiha.supabase.co/storage/v1/object/public/event-images/banners/58fada75-6417-4167-bce4-7153e8669f5e.png",
-      "sources": [
-        "Bay Area Fusion Calendar"
-      ],
-      "types": [
-        [
-          "social",
-          "dance-social"
-        ]
-      ],
-      "topics": [
-        "dance-party"
-      ],
-      "cost": "paid",
-      "venue": "luna-del-soul",
-      "region": "peninsula",
-      "summary": "Solar Fusion in the West Bay Come dance with us on 2nd and 4th Thursdays at Luna del Soul dance studio in Redwood City.",
-      "more": true
-    },
-    {
-      "id": "4035ee0c-16a2-47ef-8af6-79f28fde69af",
-      "title": "Karaoke Night at Bottom's Up",
-      "start_time": "2026-11-27T06:00:00+00:00",
-      "location": "Bottom's Up, 4704 Mission St., San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/bottoms-up",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "karaoke"
-      ],
-      "cost": "free",
-      "venue": "bottoms-up",
-      "region": "sf",
-      "summary": "Karaoke Night at Bottom's Up.",
-      "more": true
-    },
-    {
-      "id": "cbb229ac-fb5a-4e2b-8552-0ff7af6141b3",
-      "title": "Gym Class at Hi Tops San Francisco",
-      "start_time": "2026-11-27T06:00:00+00:00",
-      "location": "Hi Tops San Francisco, 2247 Market Street, San Francisco, 94114, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/hi-tops-san-francisco",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "unknown",
-      "venue": "hi-tops",
-      "region": "sf",
-      "summary": "Gym Class at Hi Tops San Francisco.",
-      "more": true
-    },
-    {
-      "id": "da963cda-0a3b-4901-9286-df66a74dd9d4",
-      "title": "Popozuda at City Nights",
-      "start_time": "2026-11-27T06:00:00+00:00",
-      "location": "City Nights, 715 Harrison Street, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/city-nights",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "dance-party",
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "city-nights",
-      "region": "sf",
-      "summary": "Popozuda at City Nights.",
-      "more": true
-    },
-    {
-      "id": "e968e27d-8fcb-40e4-a1e3-f13a2164676a",
-      "title": "Live DJ at Lion's Den Lounge and Bar",
-      "start_time": "2026-11-27T07:00:00+00:00",
-      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
-      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
-      "image_url": null,
-      "sources": [
-        "SF Bar Guide"
-      ],
-      "types": [
-        [
-          "social",
-          "party-club"
-        ]
-      ],
-      "topics": [
-        "club-night"
-      ],
-      "cost": "free",
-      "venue": "lions-den-bar-lounge",
-      "region": "sf",
-      "summary": "Live DJ at Lion's Den Lounge and Bar.",
-      "more": true
-    },
     {
       "id": "e8e24db0-ab2e-4ed2-8f38-24fc36f10063",
       "title": "Late Night Set: Max Ehrhardt",
@@ -7536,6 +6059,31 @@
       "venue": "opl-fruitvale-branch",
       "region": "eastbay",
       "summary": "Come hang out with other teens and take part in a popular role playing game!",
+      "more": true
+    },
+    {
+      "id": "00f09f0a-2f20-48a4-9bc5-dcc1e1aebd1f",
+      "title": "Conversation Corner with Dr Kylie Rowe",
+      "start_time": "2026-11-28T20:00:00+00:00",
+      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
+      "url": "https://keysjazzbistro.com/event/conversation-corner-with-dr-kylie-rowe-5/",
+      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2026/11/GROUNDED-FEET-Hips-Back-dr-Kylie-Rowe-PT-1.png?fit=384%2C480&ssl=1",
+      "sources": [
+        "Keys Jazz Bistro"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "unknown",
+      "venue": "keys-jazz-bistro",
+      "region": "sf",
+      "summary": "CONVERSATION CORNER with Dr Kylie Rowe \"OUCH!!MY KNEE HURTS\" with Dr. Kylie Rowe, PT, DPT At Keys Jazz Bistro, North Beach, San Francisco 🕛 12–1pm · 📍 498 Broadway, San Francisco",
       "more": true
     },
     {
@@ -31117,6 +29665,30 @@
       "more": true
     },
     {
+      "id": "b8227641-cd53-48d2-9d25-a66d99cf1f0e",
+      "title": "Tiffany Austin- “Miles, Mingus and                    Monk!",
+      "start_time": "2026-12-06T05:00:00+00:00",
+      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
+      "url": "https://keysjazzbistro.com/event/tiffany-austin-miles-mingus-and-monk/",
+      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2024/06/Screenshot-2024-06-15-at-8.14.31%E2%80%AFPM.png?fit=910%2C732&ssl=1",
+      "sources": [
+        "Keys Jazz Bistro"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "keys-jazz-bistro",
+      "region": "sf",
+      "summary": "A night of bebop adventures through the legendary music of Miles Davis, Thelonious Monk and Charles Mingus!",
+      "more": true
+    },
+    {
       "id": "c04d3217-47cc-436d-8b10-a42dd7b36773",
       "title": "`Get Busy! Every First Saturday ($10 cover)",
       "start_time": "2026-12-06T05:00:00+00:00",
@@ -38868,6 +37440,36 @@
       "more": true
     },
     {
+      "id": "1f7d4ff5-74c1-4ca5-9a21-010fc304216b",
+      "title": "Winter Walk, Union Square",
+      "start_time": "2026-12-09T19:00:00+00:00",
+      "location": "Maiden Lane Association, 222 Stockton St, San Francisco, CA 94108",
+      "url": "https://partiful.com/e/pUWNBQ2r0ncV2v61vTXq",
+      "image_url": "https://partiful.imgix.net/external/user/lUhnyEHcfYI5QdsMnnOj/QiVPoHzZSCh_D6wWeMTn2?w=800&fit=clip",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "design",
+        "craft",
+        "food-drink"
+      ],
+      "cost": "free",
+      "venue": "maiden-lane-association",
+      "region": "sf",
+      "summary": "Winter Walk returns to Union Square as a European-style holiday market on two blocks of Maiden Lane.",
+      "more": true
+    },
+    {
       "id": "33b89b53-8fe5-4fec-918e-a13c32d6bcd8",
       "title": "Performance: MARS Project Exhibition Concert with Downtown High School",
       "start_time": "2026-12-09T19:00:00+00:00",
@@ -45785,6 +44387,36 @@
       "more": true
     },
     {
+      "id": "d6cc980e-a13b-4931-b773-d9cd826dbab6",
+      "title": "Holidays on Taraval",
+      "start_time": "2026-12-12T00:00:00+00:00",
+      "location": "McCoppin Square, 24th and Taraval, San Francisco, CA 94116",
+      "url": "https://partiful.com/e/2ofWAz5VnmJT8QWlP9hH",
+      "image_url": "https://partiful.imgix.net/external/user/UWqdwVEOgEspoAGNuRyR/ubcedycWFE_FEoqTzqo5x?w=800&fit=clip",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ],
+        [
+          "exhibition"
+        ]
+      ],
+      "topics": [
+        "craft",
+        "design",
+        "music"
+      ],
+      "cost": "free",
+      "venue": "mccoppin-square",
+      "region": "sf",
+      "summary": "Holidays on Taraval is a one-block holiday market at McCoppin Square, with the annual tree lighting, makers and merchants, performances, and arts and crafts.",
+      "more": true
+    },
+    {
       "id": "6cb56753-3cf6-4cdf-8a97-c79adc3c7ef4",
       "title": "Hanukkah Candle Lighting",
       "start_time": "2026-12-12T00:30:00+00:00",
@@ -48176,6 +46808,35 @@
       "venue": "mabuhay-gardens",
       "region": "sf",
       "summary": "Compassion Forum at Mabuhay Gardens.",
+      "more": true
+    },
+    {
+      "id": "f15bd8c5-ecd1-4e1e-abad-18a8db8f9ea9",
+      "title": "Black-owned Businesses Holiday Market",
+      "start_time": "2026-12-12T17:00:00+00:00",
+      "location": "1 Ferry Building, San Francisco, CA 94111",
+      "url": "https://partiful.com/e/51WJ7bsanSlUZ8nFJ4Ds",
+      "image_url": "https://partiful.imgix.net/external/user/UWqdwVEOgEspoAGNuRyR/jG_N5YCuNp2nSfcB6By6U?w=800&fit=clip",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "social",
+          "food-drink"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "food-drink",
+        "black-diaspora"
+      ],
+      "cost": "free",
+      "venue": "san-francisco-ferry-building",
+      "region": "sf",
+      "summary": "Celebrate local Black-owned businesses at the Ferry Plaza Farmers Market, with 20 Bay Area food makers and designers in the Ferry Building's south arcade.",
       "more": true
     },
     {
@@ -59089,6 +57750,31 @@
       "more": true
     },
     {
+      "id": "41fbbfbd-eb73-415f-9568-8ec2febb5c74",
+      "title": "Silent Book Club + Holiday Book Swap",
+      "start_time": "2026-12-17T01:30:00+00:00",
+      "location": "1355 Market St, San Francisco, CA 94103",
+      "url": "https://partiful.com/e/axtRDq8nbN8l6Xg3Jh2a",
+      "image_url": "https://media1.giphy.com/media/WoWm8YzFQJg5i/giphy.gif?cid=c00e53c6r25fgepctnv2xktvufmkdhka5g6ey85im9z9yz1b&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+      "sources": [
+        "Partiful"
+      ],
+      "types": [
+        [
+          "social",
+          "book-club"
+        ]
+      ],
+      "topics": [
+        "books-authors"
+      ],
+      "cost": "unknown",
+      "venue": "x",
+      "region": "sf",
+      "summary": "Read and discuss books at Sol Botanica.",
+      "more": true
+    },
+    {
       "id": "62f4dc22-5379-41c8-9796-f2cd91aae4dc",
       "title": "Book Club: Silent Book Club at Sol Botanica",
       "start_time": "2026-12-17T01:30:00+00:00",
@@ -69334,6 +68020,35 @@
       "more": true
     },
     {
+      "id": "62ceb720-8efd-41a3-a27d-e929f3174cf0",
+      "title": "Seasonal Living Salon: How to Live Well in Winter",
+      "start_time": "2026-12-20T21:00:00+00:00",
+      "location": "550 Laguna St, San Francisco + Full Studio",
+      "url": "https://luma.com/the-wr0f",
+      "image_url": "https://images.lumacdn.com/uploads/y0/2331918d-7829-4b4c-859b-aaf25b0ca41b.webp",
+      "sources": [
+        "The Commons (SF)"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness",
+        "education"
+      ],
+      "cost": "unknown",
+      "venue": "550-laguna-st",
+      "region": "sf",
+      "summary": "Join us for an intimate afternoon of feeling good... through a special Winter Solstice edition of our Seasonal Living Salon — exploring the ancient Chinese art of nourishing life",
+      "more": true
+    },
+    {
       "id": "e93ddb91-36ff-49c6-b698-4f0ea184cd69",
       "title": "Graham Lustig's The Nutcracker",
       "start_time": "2026-12-20T21:00:00+00:00",
@@ -75204,6 +73919,30 @@
       "more": true
     },
     {
+      "id": "88f8d479-6ac8-4fa0-b4bb-8ad7ff661106",
+      "title": "Secret Guest List: Cobb's Comedy Showcase at Cobb's Comedy Club",
+      "start_time": "2026-12-24T03:30:00+00:00",
+      "location": "Cobb's Comedy Club, 915 Columbus Ave, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cobbs-comedy-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "free",
+      "venue": "cobbs-comedy-club",
+      "region": "sf",
+      "summary": "Secret Guest List: Cobb's Comedy Showcase at Cobb's Comedy Club.",
+      "more": true
+    },
+    {
       "id": "8eb9dca1-f64e-47a5-8959-bb33ac77ab80",
       "title": "Trivia Night at Surf City Billiards (Santa Cruz)",
       "start_time": "2026-12-24T03:30:00+00:00",
@@ -76078,6 +74817,61 @@
       "more": true
     },
     {
+      "id": "a5a05d6f-b827-471f-89b9-4ffcfeae52ab",
+      "title": "Karaoke & Beats at ZOË",
+      "start_time": "2026-12-25T00:00:00+00:00",
+      "location": "ZOË, 579 Howard Street, San Francisco, CA 94105, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/zoe",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke",
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "zo",
+      "region": "sf",
+      "summary": "Karaoke & Beats at ZOË.",
+      "more": true
+    },
+    {
+      "id": "93cafb4f-91c0-47b3-b5cd-b26e2754a25c",
+      "title": "Live Jazz & Burlesque at Paris 75",
+      "start_time": "2026-12-25T00:30:00+00:00",
+      "location": "Paris 75, 515 Broadway, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/paris-75",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ],
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "jazz",
+        "drag"
+      ],
+      "cost": "unknown",
+      "venue": "paris-75",
+      "region": "sf",
+      "summary": "Live Jazz & Burlesque at Paris 75.",
+      "more": true
+    },
+    {
       "id": "6ad0d489-f134-48d5-afa2-9af382692768",
       "title": "Social: French Conversation",
       "start_time": "2026-12-25T01:00:00+00:00",
@@ -76155,6 +74949,105 @@
       "more": true
     },
     {
+      "id": "09116afa-99ad-477c-8c75-d68023a68d65",
+      "title": "Live DJ at Rick's Bar at Rick & Roxy's",
+      "start_time": "2026-12-25T02:00:00+00:00",
+      "location": "Rick & Roxy's, 2131 Lombard Street, San Francisco, 94123, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/rick-roxys",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "rick-roxys",
+      "region": "sf",
+      "summary": "Live DJ at Rick's Bar at Rick & Roxy's.",
+      "more": true
+    },
+    {
+      "id": "20a39238-733b-4e01-8803-5fdb5840833a",
+      "title": "Trivia Night at Zinz Wine Bar (Corte Madera)",
+      "start_time": "2026-12-25T02:00:00+00:00",
+      "location": "207 Corte Madera Ave, Corte Madera, CA 94925",
+      "url": "http://www.zinzwinebar.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "zinz-wine-bar",
+      "region": "northbay",
+      "summary": "Uncork your inner trivia master at Zinz Wine Bar in Corte Madera!",
+      "more": true
+    },
+    {
+      "id": "adda06ed-c6cf-45ac-bd57-a41d9773b172",
+      "title": "Game Night! at Mission Bowling Club",
+      "start_time": "2026-12-25T02:00:00+00:00",
+      "location": "Mission Bowling Club, 3176 17th Street, San Francisco, 94110, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mission-bowling-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "games"
+      ],
+      "cost": "unknown",
+      "venue": "mission-bowling-club",
+      "region": "sf",
+      "summary": "Game Night!",
+      "more": true
+    },
+    {
+      "id": "0e9af0a5-e680-41fe-9c9e-b46657672e84",
+      "title": "Trivia Night at 11th Hour Coffee (Santa Cruz)",
+      "start_time": "2026-12-25T02:30:00+00:00",
+      "location": "1001 Center St, Santa Cruz, CA 95060",
+      "url": "https://www.11thhourcoffee.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": null,
+      "region": null,
+      "summary": "Sharpen your wits and gather your team!",
+      "more": true
+    },
+    {
       "id": "1a0bea55-54cc-409c-9ebf-1fd8402e11e2",
       "title": "A Christmas Swingin’ Spectacular with Lavay Smith and Her Red Hot Skillet Lickers",
       "start_time": "2026-12-25T02:30:00+00:00",
@@ -76177,6 +75070,32 @@
       "venue": "biscuits-blues",
       "region": "sf",
       "summary": "A Christmas Swingin' Spectacular with Lavay Smith and Her Red Hot Skillet Lickers Experience world-class blues, dinner, and drinks — all in one intimate setting.",
+      "more": true
+    },
+    {
+      "id": "9ec5ace9-130b-4829-bfb6-4950256faff1",
+      "title": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke",
+      "start_time": "2026-12-25T02:30:00+00:00",
+      "location": "Festa Wine & Cocktail Lounge - Karaoke, 1825 Post Street, San Francisco, 94115, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/festa-wine-cocktail-lounge-karaoke",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "festa-wine-cocktail-lounge",
+      "region": "sf",
+      "room": "Karaoke",
+      "summary": "Karaoke at Festa Wine & Cocktail Lounge - Karaoke.",
       "more": true
     },
     {
@@ -76206,6 +75125,30 @@
       "more": true
     },
     {
+      "id": "009d7f77-ee26-496c-b628-1b48d4080132",
+      "title": "Trivia Night at The Blue Light",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "The Blue Light, 1979 Union Street, San Francisco, 94123, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-blue-light",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "the-blue-light",
+      "region": "sf",
+      "summary": "Trivia Night at The Blue Light.",
+      "more": true
+    },
+    {
       "id": "17795dce-0797-494e-a45b-8ccfea2d574c",
       "title": "Oakland Interfaith Gospel Choir [EARLY SHOW]",
       "start_time": "2026-12-25T03:00:00+00:00",
@@ -76229,6 +75172,353 @@
       "venue": "great-american-music-hall",
       "region": "sf",
       "summary": "37th Annual Christmas Eve Concert · Gospel"
+    },
+    {
+      "id": "22f8c857-2985-461c-9c9f-fabaf50b9b0d",
+      "title": "Trivia Night at Question Mark Tavern",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "Question Mark Tavern, 312 Harriet Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/question-mark-tavern",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "question-mark-tavern",
+      "region": "sf",
+      "summary": "Trivia Night at Question Mark Tavern.",
+      "more": true
+    },
+    {
+      "id": "40276c56-b49a-42d5-a268-4177708f81f9",
+      "title": "Trivia Night at Bel Mateo Bowl (San Mateo)",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "4330 Olympic Ave, San Mateo, CA 94403",
+      "url": "https://belmateobowl.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "bel-mateo-bowl",
+      "region": "peninsula",
+      "summary": "Ready to prove your genius?",
+      "more": true
+    },
+    {
+      "id": "67a317a0-3e92-4029-8445-8f8702ba3e34",
+      "title": "Redwood Room After Dark Live Jazz at The Redwood Room",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "The Redwood Room, 495 Geary St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-redwood-room",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "the-redwood-room",
+      "region": "sf",
+      "summary": "Redwood Room After Dark Live Jazz at The Redwood Room.",
+      "more": true
+    },
+    {
+      "id": "760b1248-94f7-4e95-9002-eed9538e962b",
+      "title": "Trivia Thursday at Underdogs Tres",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "Underdogs Tres, 1224 9th Avenue, San Francisco, 94122, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/underdogs-tres",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free",
+      "venue": "underdogs-tres",
+      "region": "sf",
+      "summary": "Trivia Thursday at Underdogs Tres.",
+      "more": true
+    },
+    {
+      "id": "8f7c5410-4589-47a8-893c-8e71ca18a75d",
+      "title": "Orbit Room Investigations at The Orbit Room",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "The Orbit Room, 1900 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-orbit-room",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "the-orbit-room",
+      "region": "sf",
+      "summary": "Orbit Room Investigations at The Orbit Room.",
+      "more": true
+    },
+    {
+      "id": "9161093a-dc7a-4f40-be63-c461e747030c",
+      "title": "Trivia Night at The Fat Lady Restaurant & Bar (Oakland)",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "201 Washington St, Oakland, CA 94607",
+      "url": "https://thefatladyrestaurant.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "201-washington-st",
+      "region": "eastbay",
+      "summary": "Ready to prove your genius?",
+      "more": true
+    },
+    {
+      "id": "b075f313-3fdb-4144-bb45-c9b41b2ac6f2",
+      "title": "Trivia Night at The Double Standard (Oakland)",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "2424 Telegraph Avenue, Oakland, CA 94612",
+      "url": "http://www.doublestandardbar.com/",
+      "image_url": null,
+      "sources": [
+        "Sunset Trivia"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "the-double-standard",
+      "region": "eastbay",
+      "summary": "Think you're the smartest in the room?",
+      "more": true
+    },
+    {
+      "id": "d8f08c44-8fff-41b0-99d7-0fabc9527804",
+      "title": "Live Jazz at Mr. Tipple's Recording Studio",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "Mr. Tipple's Recording Studio, 39 Fell St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-tipples-recording-studio",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "free",
+      "venue": "mr-tipples-recording-studio",
+      "region": "sf",
+      "summary": "Live Jazz at Mr.",
+      "more": true
+    },
+    {
+      "id": "dfeebef0-75b2-4600-84c8-7909f0a92c71",
+      "title": "Clement St Comedy at Neck of the Woods",
+      "start_time": "2026-12-25T03:00:00+00:00",
+      "location": "Neck of the Woods, 406 Clement Street, San Francisco, 94118, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/neck-of-the-woods",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "free",
+      "venue": "neck-of-the-woods",
+      "region": "sf",
+      "summary": "Clement St Comedy at Neck of the Woods.",
+      "more": true
+    },
+    {
+      "id": "4b1efe15-0534-44bd-b8fb-4d8c054ae56f",
+      "title": "Trivia Night at Abbey Tavern",
+      "start_time": "2026-12-25T03:30:00+00:00",
+      "location": "Abbey Tavern, 4100 Geary Blvd, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/abbey-tavern",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "mixer-meetup"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "abbey-tavern",
+      "region": "sf",
+      "summary": "Trivia Night at Abbey Tavern.",
+      "more": true
+    },
+    {
+      "id": "ada2e0e2-0b8d-411a-a806-998fd8512e70",
+      "title": "Mellow Nights at The Mellow Haight",
+      "start_time": "2026-12-25T03:30:00+00:00",
+      "location": "The Mellow Haight, 1401 Haight Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-mellow-haight",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "the-mellow-haight",
+      "region": "sf",
+      "summary": "Mellow Nights at The Mellow Haight.",
+      "more": true
+    },
+    {
+      "id": "df734ddc-f11c-44a1-8b3f-a9e715581e9f",
+      "title": "Bingo at The Green Heron",
+      "start_time": "2026-12-25T03:30:00+00:00",
+      "location": "The Green Heron, 1601 Haight Street, San Francisco, 94117, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-green-heron",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "bingo"
+      ],
+      "cost": "unknown",
+      "venue": "the-green-heron",
+      "region": "sf",
+      "summary": "Bingo at The Green Heron.",
+      "more": true
+    },
+    {
+      "id": "e51d6c68-b34d-401d-9d1f-2477412b2058",
+      "title": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-12-25T03:30:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Hayes Valley Comedy Night at The Function SF: Comedy Club & Cocktail Lounge.",
+      "more": true
+    },
+    {
+      "id": "eb06d435-f8e1-4cc4-b051-d5ff62e6b3d2",
+      "title": "Trivia Night at Detour",
+      "start_time": "2026-12-25T03:30:00+00:00",
+      "location": "Detour, 2200 Market St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/detour",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "unknown",
+      "venue": "the-detour",
+      "region": "sf",
+      "summary": "Trivia Night at Detour.",
+      "more": true
     },
     {
       "id": "ececc128-4bc4-46f0-96b5-a9bc717b86a7",
@@ -76257,6 +75547,154 @@
       "more": true
     },
     {
+      "id": "f05b159f-bbc3-4425-a9b6-62481669f997",
+      "title": "Stand-Up Comedy Show at Cheaper Than Therapy",
+      "start_time": "2026-12-25T03:45:00+00:00",
+      "location": "Cheaper Than Therapy, 533 Sutter Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cheaper-than-therapy",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "comedy"
+      ],
+      "cost": "unknown",
+      "venue": "cheaper-than-therapy",
+      "region": "sf",
+      "summary": "Stand-Up Comedy Show at Cheaper Than Therapy.",
+      "more": true
+    },
+    {
+      "id": "77fbedb7-d898-4c00-8a64-975dae523836",
+      "title": "Thursday Night \"Sing Along\" at Rocks Den",
+      "start_time": "2026-12-25T04:00:00+00:00",
+      "location": "Rocks Den, 4753 Mission Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/rocks-den",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "rocks-den",
+      "region": "sf",
+      "summary": "Thursday Night \"Sing Along\" at Rocks Den.",
+      "more": true
+    },
+    {
+      "id": "9a58c1b5-533c-4841-a6b0-c426cb95b2fe",
+      "title": "Karaoke Lounge at Pandora Karaoke & Bar",
+      "start_time": "2026-12-25T04:00:00+00:00",
+      "location": "Pandora Karaoke & Bar, 50 Mason Street, San Francisco, 94102, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/pandora-karaoke-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "unknown",
+      "venue": "pandora-karaoke-bar",
+      "region": "sf",
+      "summary": "Karaoke Lounge at Pandora Karaoke & Bar.",
+      "more": true
+    },
+    {
+      "id": "a4153a1f-7c4c-4652-b9ec-8ff6cef8dac8",
+      "title": "Milonga Malevaje at Verdi Club",
+      "start_time": "2026-12-25T04:00:00+00:00",
+      "location": "Verdi Club, 2424 Mariposa Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/verdi-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "tango"
+      ],
+      "cost": "unknown",
+      "venue": "verdi-club",
+      "region": "sf",
+      "summary": "Milonga Malevaje at Verdi Club.",
+      "more": true
+    },
+    {
+      "id": "ae6fa4bf-6a75-4c35-ab25-ffc2a4a7700c",
+      "title": "Live Music: DJs at Mr. Mahjong's",
+      "start_time": "2026-12-25T04:00:00+00:00",
+      "location": "Mr. Mahjong's, 260 Kearny Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/mr-mahjongs",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "mr-mahjong",
+      "region": "sf",
+      "summary": "Live Music: DJs at Mr.",
+      "more": true
+    },
+    {
+      "id": "d14fdd75-cf8d-4c9f-aaea-1f28032c60ea",
+      "title": "Live Music at Lion's Den Lounge and Bar",
+      "start_time": "2026-12-25T04:00:00+00:00",
+      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "music"
+      ],
+      "cost": "unknown",
+      "venue": "lions-den-bar-lounge",
+      "region": "sf",
+      "summary": "Live Music at Lion's Den Lounge and Bar.",
+      "more": true
+    },
+    {
       "id": "edc3e259-2c83-4209-bc7a-de9c9e1bb62c",
       "title": "San Francisco Gay Men’s Chorus",
       "start_time": "2026-12-25T04:00:00+00:00",
@@ -76279,6 +75717,58 @@
       "venue": "castro-theatre",
       "region": "sf",
       "summary": "1 Night, 3 Shows!",
+      "more": true
+    },
+    {
+      "id": "436b4d8d-2763-4643-9443-4e3f66730d64",
+      "title": "Locker Room Thursdays (Oil Wrestling) at Beaux",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "Beaux, 2344 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/beaux",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night",
+        "lgbtq"
+      ],
+      "cost": "free",
+      "venue": "beaux",
+      "region": "sf",
+      "summary": "Locker Room Thursdays (Oil Wrestling) at Beaux.",
+      "more": true
+    },
+    {
+      "id": "44f9c2c9-c056-40c2-b7c2-94cc74e20c36",
+      "title": "Karaoke & Beats at ZOË",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "ZOË, 579 Howard Street, San Francisco, CA 94105, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/zoe",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke",
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "zo",
+      "region": "sf",
+      "summary": "Karaoke & Beats at ZOË.",
       "more": true
     },
     {
@@ -76309,6 +75799,57 @@
       "more": true
     },
     {
+      "id": "7727c358-74b7-4c23-9d8c-dd640f81c0c7",
+      "title": "Set Dancing at The Plough and the Stars",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "The Plough and the Stars, 116 Clement St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-plough-and-the-stars",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "dance-party"
+      ],
+      "cost": "free",
+      "venue": "the-plough-and-the-stars",
+      "region": "sf",
+      "summary": "Set Dancing at The Plough and the Stars.",
+      "more": true
+    },
+    {
+      "id": "8a96282f-3931-4dab-892e-e252e07ad08d",
+      "title": "Arcade Karaoke at The Function SF: Comedy Club & Cocktail Lounge",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "The Function SF: Comedy Club & Cocktail Lounge, 1414 Market Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-function-sf-comedy-club-cocktail-lounge",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke",
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "the-function-sf-comedy-club-cocktail-lounge",
+      "region": "sf",
+      "summary": "Arcade Karaoke at The Function SF: Comedy Club & Cocktail Lounge.",
+      "more": true
+    },
+    {
       "id": "911bf473-c974-4e7f-a280-190306b96cd1",
       "title": "Throwback Thursdays with DJ BeatsMe & DJ ChillWill",
       "start_time": "2026-12-25T05:00:00+00:00",
@@ -76336,6 +75877,107 @@
       "more": true
     },
     {
+      "id": "9d6d310f-19d8-4e2f-8f86-ca784a18da21",
+      "title": "Karaokiki at El Rio",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "El Rio, 3158 Mission St, San Francisco, CA, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/el-rio",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke",
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "el-rio",
+      "region": "sf",
+      "summary": "Karaokiki at El Rio.",
+      "more": true
+    },
+    {
+      "id": "dd83c9bb-ecdb-4308-877f-a6c0fb2d618f",
+      "title": "Party Night at The Bitter End",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "The Bitter End, 441 Clement Street, San Francisco, 94118, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/the-bitter-end",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "the-bitter-end",
+      "region": "sf",
+      "summary": "Party Night at The Bitter End.",
+      "more": true
+    },
+    {
+      "id": "e25ba755-c5ad-49b0-befb-ef8ef383ee7f",
+      "title": "1984 at Cat Club",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "Cat Club, 1190 Folsom St, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/cat-club",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "cat-club",
+      "region": "sf",
+      "summary": "1984 at Cat Club.",
+      "more": true
+    },
+    {
+      "id": "face8934-dc46-4665-bd43-02b510f7ee1f",
+      "title": "Karaoke at Silver Cloud Restaurant & Karaoke Bar",
+      "start_time": "2026-12-25T05:00:00+00:00",
+      "location": "Silver Cloud Restaurant & Karaoke Bar, 1994 Lombard Street, San Francisco, 94123, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/silver-cloud-restaurant-karaoke-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "free",
+      "venue": "silver-cloud-restaurant-karaoke-bar",
+      "region": "sf",
+      "summary": "Karaoke at Silver Cloud Restaurant & Karaoke Bar.",
+      "more": true
+    },
+    {
       "id": "d282872a-5567-498f-b4f3-d19c5b7f83a1",
       "title": "Oakland Interfaith Gospel Choir [LATE SHOW]",
       "start_time": "2026-12-25T05:30:00+00:00",
@@ -76358,6 +76000,107 @@
       "venue": "great-american-music-hall",
       "region": "sf",
       "summary": "37th Annual Christmas Eve Concert · Gospel"
+    },
+    {
+      "id": "0334819d-789e-4d82-bd90-a1e11e350711",
+      "title": "Karaoke Night at Bottom's Up",
+      "start_time": "2026-12-25T06:00:00+00:00",
+      "location": "Bottom's Up, 4704 Mission St., San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/bottoms-up",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke"
+      ],
+      "cost": "free",
+      "venue": "bottoms-up",
+      "region": "sf",
+      "summary": "Karaoke Night at Bottom's Up.",
+      "more": true
+    },
+    {
+      "id": "38ace785-69ac-4b4b-ac0c-757ffcaef1a7",
+      "title": "Gym Class at Hi Tops San Francisco",
+      "start_time": "2026-12-25T06:00:00+00:00",
+      "location": "Hi Tops San Francisco, 2247 Market Street, San Francisco, 94114, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/hi-tops-san-francisco",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "unknown",
+      "venue": "hi-tops",
+      "region": "sf",
+      "summary": "Gym Class at Hi Tops San Francisco.",
+      "more": true
+    },
+    {
+      "id": "f18b761b-4aa4-4853-b358-5d4951bb2745",
+      "title": "Popozuda at City Nights",
+      "start_time": "2026-12-25T06:00:00+00:00",
+      "location": "City Nights, 715 Harrison Street, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/city-nights",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "dance-party",
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "city-nights",
+      "region": "sf",
+      "summary": "Popozuda at City Nights.",
+      "more": true
+    },
+    {
+      "id": "70be55f6-7c06-4b1e-b61d-a1ab9974c019",
+      "title": "Live DJ at Lion's Den Lounge and Bar",
+      "start_time": "2026-12-25T07:00:00+00:00",
+      "location": "Lion's Den Lounge and Bar, 57 Wentworth Place, San Francisco, CA",
+      "url": "https://www.sfbarguide.com/bar/lions-den-lounge-and-bar",
+      "image_url": null,
+      "sources": [
+        "SF Bar Guide"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "club-night"
+      ],
+      "cost": "free",
+      "venue": "lions-den-bar-lounge",
+      "region": "sf",
+      "summary": "Live DJ at Lion's Den Lounge and Bar.",
+      "more": true
     },
     {
       "id": "b869723f-b565-49a3-8d7f-de8b4e13299d",
@@ -79916,6 +79659,30 @@
       "cost": "unknown",
       "venue": "540-laguna-st",
       "region": "sf"
+    },
+    {
+      "id": "4ae375a2-c11d-4e02-9721-962c87e2ed1c",
+      "title": "Patrick Wolff Quartet feat. Noel Jewkes",
+      "start_time": "2026-12-31T03:00:00+00:00",
+      "location": "Keys Jazz Bistro, 498 Broadway, San Francisco, CA",
+      "url": "https://keysjazzbistro.com/event/patrick-wolff-quartet-feat-noel-jewkes/",
+      "image_url": "https://i0.wp.com/keysjazzbistro.com/wp-content/uploads/2024/11/Patrick-Noel.jpg?fit=342%2C512&ssl=1",
+      "sources": [
+        "Keys Jazz Bistro"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "keys-jazz-bistro",
+      "region": "sf",
+      "summary": "Patrick Wolff is a jazz saxophone and clarinet player with a long history in the jazz scenes of New York City and San Francisco.",
+      "more": true
     },
     {
       "id": "544e3f7f-4337-477d-a62c-5368fe36ef63",
@@ -90495,6 +90262,31 @@
       "more": true
     },
     {
+      "id": "ddc3dd7b-a394-4694-a804-9c0171cb3245",
+      "title": "The Bobby Young Project",
+      "start_time": "2027-01-15T02:30:00+00:00",
+      "location": "Biscuits & Blues, 401 Mason St, San Francisco, CA 94102",
+      "url": "https://www.biscuitsandblues.com/find-a-show/20270114thebobbyyoungproject",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/6689c36c4afcd30b4b37d2bb/1791338694234-A7WV88IAMBW2LABVXMRQ/bobby-young-project.jpg",
+      "sources": [
+        "Biscuits & Blues"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "blues",
+        "soul-funk"
+      ],
+      "cost": "paid",
+      "venue": "biscuits-blues",
+      "region": "sf",
+      "summary": "Live at Biscuits and Blues The Bobby Young Project Dinner, drinks, 100-seat room Show 6:30 PM Doors 5:15 PM From $23.11 incl. fees About the show For more than fifty years,",
+      "more": true
+    },
+    {
       "id": "2854f269-1f52-4252-b3af-40e48fb557a9",
       "title": "JIM EMISON: MURDER ON THE HATCHIE",
       "start_time": "2027-01-15T03:00:00+00:00",
@@ -95950,6 +95742,31 @@
       "more": true
     },
     {
+      "id": "f5fcc956-4595-4ad9-9fbe-acc35cbc82b7",
+      "title": "Wisdom Healing Qigong, with Hiromi Vardy",
+      "start_time": "2027-01-22T17:00:00+00:00",
+      "location": "The Berkeley Alembic (Luna), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/145174529",
+      "image_url": "https://images.momence.com/h/71603/session-template-banner/325c416a-d168-432f-9c1f-226de5855f93.jpg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "paid",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Luna",
+      "summary": "Experience the deep benefits of Zhineng (Wisdom Healing) Qigong.",
+      "more": true
+    },
+    {
       "id": "513a7629-9921-4860-9a7a-0badfef5234a",
       "title": "Activity: Watercolor Community of San Francisco",
       "start_time": "2027-01-22T21:00:00+00:00",
@@ -98582,6 +98399,31 @@
       "venue": null,
       "region": "online",
       "summary": "If you enjoy any genre of fiction from literary to science fiction to horror to pulp, spend an hour discussing this month's genre fiction selection: George Orwell's Animal",
+      "more": true
+    },
+    {
+      "id": "62cb8839-2446-457f-8f1d-c973021ff3e6",
+      "title": "GOLDINGS, BERNSTEIN AND STEWART ORGAN TRIO",
+      "start_time": "2027-01-25T00:30:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=215684&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/215684_event_lg_744.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "paid",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "In the mid-1990s, The New York Times described Larry Goldings, Peter Bernstein, and Bill Stewart as “the best organ trio of the last decade.” More than 35 years later, the trio",
       "more": true
     },
     {
@@ -103672,6 +103514,31 @@
       "more": true
     },
     {
+      "id": "d4169991-3e2b-43fa-8bf5-b12885d61152",
+      "title": "THE COOKERS – 20th ANNIVERSARY",
+      "start_time": "2027-02-01T00:30:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=215690&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/215690_event_lg_425.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "At more than 20 years together, The Cookers, who “embody the serious-as-death commitment that it took to thrive on the New York scene some four decades ago” (The Boston Globe),",
+      "more": true
+    },
+    {
       "id": "fcdb998b-8950-4fc9-af2c-3a30660eb885",
       "title": "Jam Session w/ Vince Lateano Trio",
       "start_time": "2027-02-01T01:00:00+00:00",
@@ -106687,6 +106554,31 @@
       "more": true
     },
     {
+      "id": "eb7ab229-4fb3-4198-960d-a0f85ab285f6",
+      "title": "KENNY BARRON TRIO",
+      "start_time": "2027-02-08T00:30:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=215693&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/215693_event_lg_895.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "2010 NEA Jazz Master and fourteen-time GRAMMY nominee Kenny Barron has an unmatched ability to mesmerize audiences with his elegant playing, sensitive melodies, and infectious",
+      "more": true
+    },
+    {
       "id": "65ded661-46f8-45d0-a836-97be4010d49c",
       "title": "Next Gen Jam w/ Armaan Mishra Quartet",
       "start_time": "2027-02-08T01:00:00+00:00",
@@ -109109,6 +109001,29 @@
       "venue": "the-uc-theatre",
       "region": "eastbay",
       "summary": "Rock"
+    },
+    {
+      "id": "08bd8402-3b28-4cee-bbc2-60e055226a19",
+      "title": "Fast Disaster",
+      "start_time": "2027-02-14T05:30:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "rock-indie"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "The mighty return of Fast Disaster the Riptide"
     },
     {
       "id": "2e04729f-0112-4aba-a751-fa17c423ab6f",
@@ -111860,6 +111775,37 @@
       "region": "sf"
     },
     {
+      "id": "2b345fa5-374a-40f0-b67b-bf3bd59deeda",
+      "title": "7th Annual Fundraiser - Celebrate Jazz by the Sea",
+      "start_time": "2027-02-21T23:00:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=214339&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/214339_event_lg_508.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "social",
+          "gala-fundraiser"
+        ],
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz",
+        "soul-funk",
+        "dance-party"
+      ],
+      "cost": "paid",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "THE BACH’S 7th ANNUAL FUNDRAISER A Dance Party & Afternoon of Giving Featuring Martin Luther Mccoy Location: 311 Mirada Rd., Half Moon Bay, California 94019 Time: 3:00 pm - 7:00",
+      "more": true
+    },
+    {
       "id": "c80104ce-803f-4053-89ee-03f2c9ecf285",
       "title": "Danish String Quartet",
       "start_time": "2027-02-21T23:00:00+00:00",
@@ -112980,6 +112926,31 @@
       "venue": "melifolla-studio",
       "region": "sf",
       "summary": "The Fusion Dance Academy is the place for high-quality leveled fusion classes in the SF Bay.",
+      "more": true
+    },
+    {
+      "id": "d3203ed5-482c-4f04-af20-167dc03903e4",
+      "title": "Bar Trivia with @SFTrivia",
+      "start_time": "2027-02-25T03:00:00+00:00",
+      "location": "The Riptide, 3639 Taraval St, San Francisco, CA 94116",
+      "url": "https://www.riptidesf.com/",
+      "image_url": null,
+      "sources": [
+        "The Riptide"
+      ],
+      "types": [
+        [
+          "social",
+          "games-hobby"
+        ]
+      ],
+      "topics": [
+        "trivia"
+      ],
+      "cost": "free",
+      "venue": "the-riptide",
+      "region": "sf",
+      "summary": "Wednesday nights we're here to help reinforce how smart you are or remind you otherwise.",
       "more": true
     },
     {
@@ -114549,6 +114520,31 @@
       "venue": "hertz-hall",
       "region": "eastbay",
       "summary": "In its second concert of the season, Cal Performances' Ensemble in Residence celebrates John Adams' 80th birthday."
+    },
+    {
+      "id": "4c2853ed-13db-4156-8b03-60eb56360d3e",
+      "title": "TYREEK MCDOLE",
+      "start_time": "2027-03-01T00:30:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=215698&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/215698_event_lg_463.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "He first gained national recognition as Outstanding Vocalist at the Essentially Ellington Competition at Lincoln Center in 2018 and later won first place at the Sarah Vaughan",
+      "more": true
     },
     {
       "id": "76eb05b5-1c13-4662-a17d-22d7ed611c70",
@@ -117340,6 +117336,31 @@
       "more": true
     },
     {
+      "id": "950e4ba7-8b4d-4604-848d-36e6bdec9c8a",
+      "title": "AMBROSE AKINMUSIRE QUARTET",
+      "start_time": "2027-03-08T00:30:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=215699&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/215699_event_lg_767.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "Akinmusire’s acclaimed discography includes multiple grammy-nominated albums, including On the Tender Spot of Every Calloused Moment (2020) and Owl Song (2024).",
+      "more": true
+    },
+    {
       "id": "a690205d-0eef-4407-8a00-ca646b0f44a1",
       "title": "Next Gen Jam w/ Bishop O’Dowd Jazz Ensemble",
       "start_time": "2027-03-08T01:00:00+00:00",
@@ -120080,6 +120101,31 @@
       "summary": "David Finckel and Wu Han return to Berkeley with an all-Russian program featuring works by Prokofiev, Rachmaninoff, and Myakovsky."
     },
     {
+      "id": "4b7785a8-4b38-46ad-8e37-dc655394b8fc",
+      "title": "EMILY DAY & COSMO ALLEYCATS",
+      "start_time": "2027-03-14T23:30:00+00:00",
+      "location": "Bach Dancing & Dynamite Society (Douglas Beach House), 311 Mirada Rd, Half Moon Bay, CA 94019",
+      "url": "https://bachddsoc.org/calendar/?pg=selectevent&eid=215702&edid=0",
+      "image_url": "https://vboblobprod-cdn-01-cjcngvarcqfja3gw.a03.azurefd.net/awsvboticketscom/_images/events/215702_event_lg_982.jpg",
+      "sources": [
+        "Bach Dancing & Dynamite Society"
+      ],
+      "types": [
+        [
+          "performance"
+        ]
+      ],
+      "topics": [
+        "jazz"
+      ],
+      "cost": "unknown",
+      "venue": "bach-dancing-dynamite-society",
+      "region": "peninsula",
+      "room": "Douglas Beach House",
+      "summary": "A favorite of the San Francisco music scene since 2010, the band is led by jazz vocalist Emily Day, called “one of the major singers in her field” by critic Scott Yanow.",
+      "more": true
+    },
+    {
       "id": "9b34b07d-a2c5-4361-bf05-5b02dae58c95",
       "title": "Mitch Polzak & the Royal Deuces",
       "start_time": "2027-03-15T00:00:00+00:00",
@@ -121616,6 +121662,33 @@
       "venue": "berkeley-rep",
       "region": "eastbay",
       "summary": "Sun, Jan 31, 2027 – Sun, Mar 21, 2027 · Over the course of decades, ambition, love, friendship, and success reshape the trajectories of six childhood friends who dream of leading",
+      "more": true
+    },
+    {
+      "id": "2df4fc69-82e5-4434-a75f-d68ba1aade86",
+      "title": "KARAOKIKI WITH YOUR HOSTS DULCE DE LECHE ++ LAMBERT ++ MOJO CARTER ++ FRISCOPINK (FREE)",
+      "start_time": "2027-03-19T04:00:00+00:00",
+      "location": "El Rio, 3158 Mission St, San Francisco, CA",
+      "url": "https://tockify.com/elriosf2/detail/1444/1805428800000",
+      "image_url": "https://d3flpus5evl89n.cloudfront.net/5ecdc94bdf82fe44f68247b5/6733ab7c71d46c65667f87f5/square_272x272.jpg",
+      "sources": [
+        "El Rio"
+      ],
+      "types": [
+        [
+          "social",
+          "party-club"
+        ]
+      ],
+      "topics": [
+        "karaoke",
+        "lgbtq",
+        "latino"
+      ],
+      "cost": "free",
+      "venue": "el-rio",
+      "region": "sf",
+      "summary": "KARAOKIKI!",
       "more": true
     },
     {
@@ -130011,6 +130084,35 @@
       "region": "eastbay",
       "room": "TeenZone",
       "summary": "Join us for movie night at the Main TeenZone!",
+      "more": true
+    },
+    {
+      "id": "461e3b59-6b71-488f-ba77-bfc24d9e8356",
+      "title": "Deconstructing Yourself, with Michael Taft",
+      "start_time": "2027-04-16T01:30:00+00:00",
+      "location": "The Berkeley Alembic (Sol), 2820 Seventh Street, Berkeley, CA",
+      "url": "https://momence.com/s/147882106",
+      "image_url": "https://images.momence.com/h/71603/session-template-banner/e3239469-8a7e-4d32-a31c-4f552ac84c64.jpeg",
+      "sources": [
+        "The Berkeley Alembic"
+      ],
+      "types": [
+        [
+          "talk",
+          "conversation"
+        ],
+        [
+          "workshop"
+        ]
+      ],
+      "topics": [
+        "wellness"
+      ],
+      "cost": "free",
+      "venue": "the-alembic",
+      "region": "eastbay",
+      "room": "Sol",
+      "summary": "Deconstructing Yourself is a weekly drop-in guided meditation (approximately one hour) plus Q & A with Berkeley Alembic founding teacher Michael Taft.",
       "more": true
     },
     {
@@ -156623,6 +156725,32 @@
       "venue": "luna-del-soul",
       "region": "peninsula",
       "summary": "Solar Fusion in the West Bay Come dance with us on 2nd and 4th Thursdays at Luna del Soul dance studio in Redwood City.",
+      "more": true
+    },
+    {
+      "id": "feb9bfcd-14d7-499b-81e9-ac6efacddc19",
+      "title": "Nested Micro",
+      "start_time": "2027-11-27T03:00:00+00:00",
+      "location": "Berkeley Yoga Center, 2121 Bonar St, Berkeley, CA",
+      "url": "https://bayareafusioncal.com/event/B09UR42I?date=2027-11-26",
+      "image_url": "https://jlnrqvmjswwyufjekiha.supabase.co/storage/v1/object/public/event-images/banners/cea3ab6d-11ab-411b-8472-51ff15bdcc77.png",
+      "sources": [
+        "Bay Area Fusion Calendar"
+      ],
+      "types": [
+        [
+          "social",
+          "dance-social"
+        ]
+      ],
+      "topics": [
+        "zouk",
+        "dance-party"
+      ],
+      "cost": "paid",
+      "venue": "berkeley-yoga-center",
+      "region": "eastbay",
+      "summary": "Nested Micro is an intentional space for Micro Fusion Dancers.",
       "more": true
     }
   ]

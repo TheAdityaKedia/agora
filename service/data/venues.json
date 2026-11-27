@@ -6869,6 +6869,32 @@
       "region": "sf",
       "status": "verified"
     },
+    "maiden-lane-association": {
+      "added": "2026-11-27",
+      "address": "222 Stockton St, San Francisco, CA 94108",
+      "evidence": [
+        "map: 218;222 in San Francisco County (building, way/35536844)",
+        "text: San Francisco",
+        "street number matches"
+      ],
+      "lat": 37.787961,
+      "lng": -122.406426,
+      "name": "Maiden Lane Association",
+      "osm": "way/35536844",
+      "possible_duplicates": [
+        "the-realreal",
+        "macys-union-square",
+        "39-grant-ave",
+        "hawthorn-sf-nightclub-and-lounge",
+        "starlite-room",
+        "oko-designs",
+        "book-club-of-california",
+        "the-westin-st-francis"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
+    },
     "make-out-room": {
       "added": "2026-10-02",
       "address": "3225 22nd Street, San Francisco, CA 94110",
@@ -7133,6 +7159,25 @@
       "precision": "building",
       "region": "sf",
       "status": "verified"
+    },
+    "mccoppin-square": {
+      "added": "2026-11-27",
+      "address": "San Francisco, CA",
+      "evidence": [
+        "map: McCoppin Square in San Francisco County (building, way/16750270)",
+        "text: San Francisco",
+        "name matches"
+      ],
+      "lat": 37.743568,
+      "lng": -122.480055,
+      "name": "McCoppin Square",
+      "osm": "way/16750270",
+      "possible_duplicates": [
+        "parkside-branch-library"
+      ],
+      "precision": "building",
+      "region": "sf",
+      "status": "auto"
     },
     "mechanics-institute-library-and-chess-room": {
       "added": "2026-10-02",
